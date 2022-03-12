@@ -1,6 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 import { NzCascaderComponent } from 'ng-zorro-antd/cascader';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDatePickerComponent } from 'ng-zorro-antd/date-picker';
 import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
 import { NzSelectComponent } from 'ng-zorro-antd/select';
@@ -26,8 +27,8 @@ export interface FormControlOptions {
   span: number;
   label?: string;
   mapper?: {
-    input: (value?: any) => any,
-    output: (value?: any) => any,
+    input: (value?: NzSafeAny) => NzSafeAny,
+    output: (value?: NzSafeAny) => NzSafeAny,
   };
   required?: boolean;
   disabled?: boolean;
@@ -134,11 +135,11 @@ export interface SelectControlOptions extends FormControlOptions {
   /** 使单选模式可搜索 */
   search?: boolean;
   options: {
-    data: Record<string, any>,
+    data: Record<string, NzSafeAny>,
     label?: string;
     value?: string;
   };
-  change?: (value: any | any[], options: SelectControlOptions) => void;
+  change?: (value: NzSafeAny | NzSafeAny[], options: SelectControlOptions) => void;
 }
 
 export interface CascaderControlOptions extends FormControlOptions {
@@ -149,12 +150,12 @@ export interface CascaderControlOptions extends FormControlOptions {
   /** 是否支持搜索，默认情况下对 label 进行全匹配搜索，不能和 [nzLoadData] 同时使用 */
   search?: boolean;
   options: {
-    data?: Record<string, any>[],
+    data?: Record<string, NzSafeAny>[],
     label?: string;
     value?: string;
     load?: NzCascaderComponent['nzLoadData']
   };
-  change?: (value: any[], options: CascaderControlOptions) => void;
+  change?: (value: NzSafeAny[], options: CascaderControlOptions) => void;
 }
 
 export interface SliderControlOptions extends FormControlOptions {
@@ -173,19 +174,19 @@ export interface RadioControlOptions extends FormControlOptions {
   /** 单选框样式 */
   style?: 'outline' | 'solid';
   options: {
-    data: Record<string, any>[],
+    data: Record<string, NzSafeAny>[],
     label?: string;
     value?: string;
   };
-  change?: (value: any, options: RadioControlOptions) => void;
+  change?: (value: NzSafeAny, options: RadioControlOptions) => void;
 }
 
 export interface CheckboxControlOptions extends FormControlOptions {
   type: 'checkbox';
   options: {
-    data: Record<string, any>[],
+    data: Record<string, NzSafeAny>[],
     label?: string;
     value?: string;
   };
-  change?: (value: any[], options: CheckboxControlOptions) => void;
+  change?: (value: NzSafeAny[], options: CheckboxControlOptions) => void;
 }

@@ -1,0 +1,156 @@
+<nz-spin nzTip="Loading..." [nzSpinning]="spinning" nzSize="large">
+  <ng-container *ngTemplateOutlet="formTemplate; context: { form: form, schema: schema }"></ng-container>
+
+  <ng-container *ngIf="canSave">
+    <nz-divider [style.margin-bottom.px]="12"></nz-divider>
+    <div nz-row nzJustify="end" [style.margin-bottom.px]="-3">
+      <button nz-button [style.margin-right.px]="12" (click)="onCancel()">取消</button>
+      <button nz-button nzType="primary" [disabled]="form.invalid" (click)="onSubmit()">保存</button>
+    </div>
+  </ng-container>
+</nz-spin>
+
+<ng-template #formTemplate let-form="form" let-schema="schema" let-embed="embed">
+  <form nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" nz-form nzLayout="vertical" [formGroup]="form">
+    <div *ngIf="!embed && addOnBefore" nz-col>
+      <nz-form-item>
+        <nz-form-control>
+          <ng-container *ngTemplateOutlet="addOnBefore; context: { form: form }"></ng-container>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div *ngFor="let control of schema" nz-col [nzSpan]="control.span">
+      <ng-container *ngIf="control.type === 'embed'" [formGroupName]="control.name">
+        <!-- <div [style.padding-left.px]="control.type === 'embed' ? 30 : 0"> -->
+        <nz-divider [nzText]="control.label"></nz-divider>
+        <ng-container
+                      *ngTemplateOutlet="formTemplate; context: { form: form.get(control.name), schema: control.schema, embed: true }">
+        </ng-container>
+        <!-- </div> -->
+      </ng-container>
+
+      <nz-form-item *ngIf="control.type !== 'embed'">
+        <nz-form-label *ngIf="control.label" [nzRequired]="control.required">{{ control.label }}</nz-form-label>
+        <nz-form-control [nzErrorTip]="control.errorTip">
+          <ng-container [ngSwitch]="control.type">
+            <ng-template #inputTemplate let-control="control">
+              <nz-input-group [nzAddOnBefore]="control.before?.template" [nzAddOnAfter]="control.after?.template"
+                              [nzAddOnBeforeIcon]="control.before?.icon" [nzAddOnAfterIcon]="control.after?.icon"
+                              [nzPrefix]="control.prefix" [nzSuffix]="control.suffix">
+                <input nz-input [formControlName]="control.name" [placeholder]="control.placeholder ?? ''"
+                       (ngModelChange)="control.change?.($event, control)" />
+              </nz-input-group>
+            </ng-template>
+
+            <ng-container *ngSwitchCase="'text'">
+              <ng-container *ngTemplateOutlet="inputTemplate; context: { control: control }">
+              </ng-container>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'email'">
+              <ng-container *ngTemplateOutlet="inputTemplate; context: { control: control }">
+              </ng-container>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'password'">
+              <ng-container *ngTemplateOutlet="inputTemplate; context: { control: control }">
+              </ng-container>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'textarea'">
+              <textarea nz-input [formControlName]="control.name" [placeholder]="control.placeholder ?? ''" [rows]="control.rows"
+                        [nzAutosize]="control.autosize ?? {}" (ngModelChange)="control.change?.($event, control)"></textarea>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'number'">
+              <nz-input-number [formControlName]="control.name" [nzPlaceHolder]="control.placeholder"
+                               [nzMin]="control.min ?? -9999999999" [nzMax]="control.max ?? 9999999999"
+                               [nzPrecision]="control.precision ?? ''" [nzPrecisionMode]="control.precisionMode"
+                               [nzStep]="control.step ?? 1" (ngModelChange)="control.change?.($event, control)">
+              </nz-input-number>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'date'">
+              <nz-date-picker [formControlName]="control.name" [nzPlaceHolder]="control.placeholder" [nzMode]="control.mode"
+                              [nzAllowClear]="control.clear" [nzShowTime]="control.showTime" [nzFormat]="control.format"
+                              [nzShowTime]="control.time" (ngModelChange)="control.change?.($event, control)"></nz-date-picker>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'range'">
+              <nz-range-picker [formControlName]="control.name" [nzPlaceHolder]="control.placeholder" [nzMode]="control.mode"
+                               [nzAllowClear]="control.clear" [nzShowTime]="control.showTime" [nzFormat]="control.format"
+                               (ngModelChange)="control.change?.($event, control)"></nz-range-picker>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'time'">
+              <nz-time-picker [formControlName]="control.name" [nzPlaceHolder]="control.placeholder"
+                              [nzAllowEmpty]="control.clear" [nzFormat]="control.format ?? 'HH:mm:ss'"
+                              [nzHourStep]="control.step?.hour" [nzMinuteStep]="control.step?.minute"
+                              [nzSecondStep]="control.step?.second" (ngModelChange)="control.change?.($event, control)">
+              </nz-time-picker>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'switch'">
+              <nz-switch [formControlName]="control.name" [nzCheckedChildren]="control.placeholder?.[0]"
+                         [nzUnCheckedChildren]="control.placeholder?.[1]" (ngModelChange)="control.change?.($event, control)">
+              </nz-switch>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'select'">
+              <nz-select [formControlName]="control.name" [nzPlaceHolder]="control.placeholder" [nzAllowClear]="control.clear"
+                         [nzMode]="control.mode ?? 'default'" [nzMaxMultipleCount]="control.limit ?? 999"
+                         [nzShowSearch]="control.search" (ngModelChange)="control.change?.($event, control)">
+                <nz-option *ngFor="let option of control.options.data" [nzValue]="option[control.options.value ?? 'value']"
+                           [nzLabel]="option[control.options.label ?? 'label']"></nz-option>
+              </nz-select>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'cascader'">
+              <nz-cascader [formControlName]="control.name" [nzPlaceHolder]="control.placeholder" [nzAllowClear]="control.clear"
+                           [nzExpandTrigger]="control.trigger" [nzShowSearch]="control.search" [nzOptions]="control.options.data"
+                           [nzLoadData]="control.options.load" [nzValueProperty]="control.options.value ?? 'value'"
+                           [nzLabelProperty]="control.options.label ?? 'label'"
+                           (ngModelChange)="control.change?.($event, control)">
+              </nz-cascader>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'slider'">
+              <nz-slider [formControlName]="control.name" [nzIncluded]="control.included" [nzMax]="control.max ?? 100"
+                         [nzMin]="control.min" [nzRange]="control.range" [nzStep]="control.step ?? 1"
+                         (ngModelChange)="control.change?.($event, control)">
+              </nz-slider>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'radio'">
+              <nz-radio-group [formControlName]="control.name" [nzButtonStyle]="control.style"
+                              (ngModelChange)="control.change?.($event, control)">
+                <ng-container *ngFor="let option of control.options.data">
+                  <label *ngIf="!control.style" nz-radio [nzValue]="option[control.options.value ?? 'value']">
+                    {{ option[control.options.label ?? 'label'] }}
+                  </label>
+                  <label *ngIf="control.style" nz-radio-button [nzValue]="option[control.options.value ?? 'value']">
+                    {{ option[control.options.label ?? 'label'] }}
+                  </label>
+                </ng-container>
+              </nz-radio-group>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'checkbox'">
+              <nz-checkbox-group [formControlName]="control.name" (ngModelChange)="control.change?.($event, control)">
+              </nz-checkbox-group>
+            </ng-container>
+          </ng-container>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div *ngIf="!embed && addOnAfter" nz-col>
+      <nz-form-item>
+        <nz-form-control>
+          <ng-container *ngTemplateOutlet="addOnAfter; context: { form: form }"></ng-container>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </form>
+</ng-template>

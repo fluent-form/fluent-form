@@ -92,9 +92,11 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
   private model2form(model: T, form: FormGroup, schema: AnyControlOptions[]) {
     schema.forEach(option => {
       // 如果是双字段模式，value 也将会是一个数组
-      let value = Array.isArray(option.name) ? [model?.[option.name[0]], model?.[option.name[1]]] : model?.[option.name]
+      let value = Array.isArray(option.name) ? option.name.map(property => model?.[property]) : model?.[option.name]
 
-      if (option.mapper) {
+      if (option.type === 'embed') {
+        return this.model2form(value, form.controls[option.name] as FormGroup, option.schema);
+      } else if (option.mapper) {
         value = option.mapper.input(value);
       } else if (['date', 'time'].includes(option.type)) {
         value = value ? new Date(value) : null;
@@ -109,8 +111,6 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
           value: o[option.options.value ?? 'value'],
           checked: (value as unknown[])?.includes(o[option.options.value ?? 'value'])
         })) as NzCheckBoxOptionInterface[];
-      } else if (option.type === 'embed') {
-        return this.model2form(value, form.controls[option.name] as FormGroup, option.schema);
       }
 
       const controlName = option.name.toString();
@@ -129,32 +129,30 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
       const controlName = option.name.toString();
       let value = form[controlName];
 
-      if (option.mapper) {
+      if (option.type === 'embed') {
+        return this.form2model(value, model[option.name] ??= {}, option.schema);
+      } else if (option.mapper) {
         value = option.mapper.output(value);
       } else if (['date', 'time'].includes(option.type)) {
         value = (value as Date)?.getTime();
       } else if (option.type === 'range') {
-        const [startValue, endValue] = (value ?? []) as [Date, Date];
-        // 如果是双字段模式，将数组拆分并分别赋值到两个字段中去
+        // 如果是双字段模式，将数组分别赋值到两个字段中去
         if (Array.isArray(option.name)) {
-          model[option.name[0]] = startValue?.getTime();
-          model[option.name[1]] = endValue?.getTime();
-          return;
+          return option.name.forEach((property: string, index: number) => {
+            model[property] = value?.[index]?.getTime();
+          });
         }
 
-        value = [startValue?.getTime(), endValue?.getTime()];
+        value = value?.map((o: Date) => o?.getTime());
       } else if (option.type === 'slider') {
-        // 如果是双字段模式，将数组拆分并分别赋值到两个字段中去
+        // 如果是双字段模式，将数组并分别赋值到两个字段中去
         if (Array.isArray(option.name)) {
-          const [startValue, endValue] = (value ?? []) as [number, number];
-          model[option.name[0]] = startValue;
-          model[option.name[1]] = endValue;
-          return;
+          return option.name.forEach((property: string, index: number) => {
+            model[property] = value?.[index];
+          });
         }
       } else if (option.type === 'checkbox') {
         value = (value as NzCheckBoxOptionInterface[])?.filter(o => o.checked).map(o => o.value);
-      } else if (option.type === 'embed') {
-        return this.form2model(value, model[option.name] ??= {}, option.schema);
       }
 
       model[option.name as string] = value;

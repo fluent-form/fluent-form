@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build --configuration production",
     "publish": "npm run build && npm publish ./dist/ngx-fluent-form",
-    "docs": "compodoc -p tsconfig.docs.json --theme=laravel",
+    "docs": "compodoc -p tsconfig.docs.json --theme=laravel --output=docs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

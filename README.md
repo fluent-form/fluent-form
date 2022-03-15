@@ -14,6 +14,8 @@ Building dynamic form in Angular with Fluent API.
 - Support using Fluent API and JSON.
 - Support for nested forms.
 - Type-safe form configuration.
+- Built on top of Angular Reactive Forms.
+- Form controls and grid layout based on `ng-zorro-antd`.
 
 ## Prerequisites
 
@@ -26,13 +28,14 @@ Building dynamic form in Angular with Fluent API.
 npm i ngx-fluent-form
 ```
 
-## API
+## Docs
 
-For the full API definition, please visit [https://hyperlife1119.github.io/ngx-fluent-form](https://hyperlife1119.github.io/ngx-fluent-form).
+- For the full API definition, please visit [https://hyperlife1119.github.io/ngx-fluent-form](https://hyperlife1119.github.io/ngx-fluent-form).
+- [Online examples](https://hyperlife1119.github.io/ngx-fluent-form/demo), and [sample code](https://github.dev/HyperLife1119/ngx-fluent-form/tree/main/projects/demo/src/app/app.component.ts).
 
 ## Usage
 
-Import the `FluentFormModule`:
+Import the `FluentFormModule` into your module:
 
 ```ts
 import { FluentFormModule } from 'ngx-fluent-form';
@@ -126,7 +129,7 @@ export class Component {
 Use the `mapper 'option for values that need to be mapped both ways. For example, the date control expects and outputs a'Date 'object, while we expect a date string from the date control output:
 
 ```ts
-import { date, form, number, text, embed, switcher } from 'ngx-fluent-form';
+import { date, form } from 'ngx-fluent-form';
 
 @Component(...)
 export class Component {
@@ -146,7 +149,7 @@ export class Component {
 For range selection controls, such as the `range` control, it outputs an array with two elements. Suppose we want to map these two elements to two properties:
 
 ```ts
-import { date, form, number, text, embed, switcher } from 'ngx-fluent-form';
+import { form, range } from 'ngx-fluent-form';
 
 @Component(...)
 export class Component {

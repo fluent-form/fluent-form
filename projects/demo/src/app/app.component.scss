@@ -1,4 +1,51 @@
+.layout {
+  min-height: 100vh;
+}
+
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+nz-header {
+  background: #fff;
+  padding: 0;
+}
+
+nz-content {
+  margin: 16px 16px 0;
+}
+
+.inner-content {
+  padding: 24px;
+  background: #fff;
+  min-height: 360px;
+}
+
+nz-footer {
+  text-align: center;
+}
+
 :host {
-  display: block;
-  padding: 25px;
+  nz-content > h1 {
+    margin-bottom: 15px;
+    line-height: 1;
+    font-weight: bold;
+  }
+}
+
+.ant-table-cell-with-append::ng-deep > .ant-table-row-expand-icon {
+  margin: 0 2.5px;
+}
+
+.ant-table-expanded-row::ng-deep > td {
+  padding: 15px !important;
+  border: 0.5px solid var(--color-primary) !important;
+}
+
+.search-form-wrapper {
+  padding: 15px 15px 7.5px;
+  background: white;
+  margin-bottom: 15px;
 }

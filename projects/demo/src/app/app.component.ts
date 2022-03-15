@@ -1,5 +1,20 @@
 import { Component } from '@angular/core';
-import { checkbox, date, datetime, embed, form, number, radio, range, select, switcher, text, textarea, time } from 'projects/ngx-fluent-form/src/public-api';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { date, embed, form, number, switcher, text, textarea } from 'projects/ngx-fluent-form/src/public-api';
+
+class User {
+  id!: number;
+  fullName!: string;
+  nickname!: string;
+  birthday!: number;
+  enabled: boolean = true;
+  age!: number;
+  detail!: UserDetail;
+}
+
+class UserDetail {
+  intro!: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -7,66 +22,98 @@ import { checkbox, date, datetime, embed, form, number, radio, range, select, sw
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  schema = form(
-    text('text')
-      .placeholder('placeholder')
-      .span(6)
-      .label('label')
-      .after({ icon: 'setting', template: 'setting' })
-      .change((o, ctrl) => console.log('字段变更', o, ctrl))
-      .required(true).errorTip('不不不'),
-    number('number').label('label').placeholder('placeholder').span(6).max(100),
-    date('date').label('label').placeholder('placeholder').span(6),
-    range(['start', 'end']).label('label').placeholder(['place', 'holder']).span(6),
-    time('time').label('label').placeholder('placeholder').span(6),
-    switcher('switch').label('label').span(2),
-    select('select').label('label').placeholder('placeholder').span(4).options({
-      data: [{ id: 1, name: 'A' }, { id: 2, name: 'B' }, { id: 3, name: 'C' }],
-      label: 'name',
-      value: 'id'
-    }),
-    textarea('content').label('内容').span(12).rows(5),
-    embed('group').label('详情').span(24).schema(form(
-      datetime('datetime')
-        .placeholder('placeholder')
-        .span(6)
-        .label('label'),
-      switcher('switch').label('label').span(2),
-      radio('radio').label('单选').span(4).options({
-        data: [{ id: 1, name: 'A' }, { id: 2, name: 'B' }, { id: 3, name: 'C' }],
-        label: 'name',
-        value: 'id'
-      }),
-      date('date').label('label').span(6),
+  expandId?: number;
 
-      embed('group').label('详情的详情').span(24).schema(form(
-        checkbox('checkbox').label('label').span(4).options({
-          data: [{ id: 1, name: 'A' }, { id: 2, name: 'B' }, { id: 3, name: 'C' }],
-          label: 'name',
-          value: 'id'
-        }),
-        switcher('switch').label('label').span(2),
-      ))
+  searchSchema = form(
+    text('fullName').span(6).placeholder('请输入'),
+    date('birthday').span(6),
+    switcher('enabled').span(2).placeholder(['有效', '无效'])
+  );
+  searchModel: User;
+
+  schema = form(
+    text('fullName').span(6).placeholder('请输入').label('全称').required(true),
+    text('nickname').span(6).placeholder('请输入').label('昵称'),
+    date('birthday').span(6).label('生日'),
+    switcher('enabled').span(2).placeholder(['有效', '无效']).label('状态'),
+    number('age').span(4).placeholder('请输入').label('年龄'),
+    embed('detail').span(24).label('详情').schema(form(
+      textarea('intro').rows(5).span(12).placeholder('请输入').label('简介'),
     ))
   );
 
-  model = {
-    text: 'hhh',
-    date: 1665360000000,
-    switch: true,
-    number: 50,
-    start: new Date('2000-11-19').getTime(),
-    end: new Date('2010-11-19').getTime(),
-    group: {
-      date: 1665360000000,
-      group: {
-        text: '123',
-        checkbox: [2]
+  data: any[] = [
+    {
+      id: 1,
+      fullName: 'AAA',
+      nickname: 'AAA昵称',
+      birthday: Date.now(),
+      enabled: true,
+      age: 30,
+      detail: {
+        intro: '简介咖啡机按钮可点击饭卡喀什酱豆腐咖啡机'
       }
-    }
-  };
+    },
+    {
+      id: 2,
+      fullName: 'BBB',
+      nickname: 'BBB昵称',
+      birthday: Date.now(),
+      age: 25,
+      enabled: true,
+    },
+    {
+      id: 3,
+      fullName: 'CCC',
+      nickname: 'CCC昵称',
+      birthday: Date.now(),
+      age: 20,
+      enabled: true,
+    },
+  ];
 
-  onChange(event: any) {
-    console.log(event);
+  formSpinning = false;
+
+  constructor(private msg: NzMessageService) {
+    this.searchModel = new User();
+    this.searchModel.detail = new UserDetail();
+  }
+
+  ngOnInit(): void { }
+
+  onExpandChange(id: number, checked: boolean): void {
+    if (checked) {
+      this.expandId = id;
+    } else {
+      this.expandId = 0;
+    }
+  }
+
+  onAdd() {
+    if (this.data[0]?.id) {
+      this.data = [new User()].concat(this.data)
+    }
+    this.expandId = undefined
+  }
+
+  onSubmit(entity: User, model: User) {
+    this.formSpinning = true;
+
+    setTimeout(() => {
+      this.formSpinning = false;
+      console.log(entity);
+      Object.assign(entity, model);
+      entity.id ??= this.data.length;
+      this.msg.success('保存成功')
+      this.expandId = 0
+    }, 500);
+  }
+
+  onCancel() {
+    if (!this.data[0]?.id) {
+      this.data.shift();
+      this.data = this.data.slice();
+    }
+    this.expandId = 0
   }
 }

@@ -14,6 +14,8 @@
 - 支持使用 Fluent API 与 JSON。
 - 支持嵌套表单。
 - 类型安全的表单配置。
+- 建立在 Angular 响应式表单之上。
+- 基于 `ng-zorro-antd` 的表单控件与栅格布局。
 
 ## 先决条件
 
@@ -26,13 +28,14 @@
 npm i ngx-fluent-form
 ```
 
-## API
+## 文档
 
-有关完整的 API 定义，请访问 [https://hyperlife1119.github.io/ngx-fluent-form](https://hyperlife1119.github.io/ngx-fluent-form)。
+- 有关完整的 API 定义，请访问 [https://hyperlife1119.github.io/ngx-fluent-form](https://hyperlife1119.github.io/ngx-fluent-form)。
+- [在线示例](https://hyperlife1119.github.io/ngx-fluent-form/demo)，及[示例代码](https://github.dev/HyperLife1119/ngx-fluent-form/tree/main/projects/demo/src/app/app.component.ts)。
 
 ## 用法
 
-导入 `FluentFormModule`:
+导入 `FluentFormModule` 到你的模块:
 
 ```ts
 import { FluentFormModule } from 'ngx-fluent-form';
@@ -127,7 +130,7 @@ export class Component {
 <!-- *（注意：`ngx-fluent-form` 默认会将日期控件输出的 `Date` 对象转为时间戳，要覆盖此行为，可以使用 `mapper` 选项。）* -->
 
 ```ts
-import { date, form, number, text, embed, switcher } from 'ngx-fluent-form';
+import { date, form } from 'ngx-fluent-form';
 
 @Component(...)
 export class Component {
@@ -147,7 +150,7 @@ export class Component {
 对于区间选择控件，例如 `range` 控件，它会输出一个包含两个元素的数组。假如我们想要将这两个元素分别映射到两个属性：
 
 ```ts
-import { date, form, number, text, embed, switcher } from 'ngx-fluent-form';
+import { form, range } from 'ngx-fluent-form';
 
 @Component(...)
 export class Component {

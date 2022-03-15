@@ -4,6 +4,7 @@ import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
 import { AnyControlOptions } from './fluent-form.interface';
+import { FluentFormControlNamePipe } from './fluent-form.pipe';
 
 @Component({
   selector: 'fluent-form',
@@ -16,27 +17,26 @@ import { AnyControlOptions } from './fluent-form.interface';
   }]
 })
 export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements OnInit {
-
   private onValueChange = (value: T) => { };
-  private destroy$: Subject<void> = new Subject<void>()
+  private destroy$: Subject<void> = new Subject<void>();
   private _model!: T;
 
+  get model(): T { return this._model; }
   set model(value: T) {
     this._model = value;
     this.onValueChange(value);
   }
-  get model(): T { return this._model; }
 
   private _schema!: AnyControlOptions[];
 
   @Input()
+  get schema() { return this._schema; }
   set schema(value: AnyControlOptions[]) {
     this.clearFormControls(this.form);
     this.initFormControl(this.form, value);
 
     this._schema = value;
   }
-  get schema() { return this._schema; }
 
   form: FormGroup = new FormGroup({});
 
@@ -48,7 +48,7 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
   @Output() submit: EventEmitter<T> = new EventEmitter<T>();
   @Output() cancel: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor() { }
+  constructor(private controlNamePipe: FluentFormControlNamePipe) { }
 
   ngOnInit(): void {
     this.form.valueChanges.pipe(
@@ -56,6 +56,7 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
       takeUntil(this.destroy$)
     ).subscribe((form: T) => {
       this.form2model(form, this.model, this.schema);
+      this.model = this.model;
     });
   }
 
@@ -65,7 +66,7 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
   }
 
   writeValue(value: T): void {
-    this._model = value;
+    this.model = value;
     value && this.model2form(value, this.form, this.schema);
   }
 
@@ -73,8 +74,7 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
     this.onValueChange = fn;
   }
 
-  registerOnTouched(fn: NzSafeAny): void {
-  }
+  registerOnTouched(fn: NzSafeAny): void { }
 
   onSubmit() {
     this.submit.emit(this.model);
@@ -92,12 +92,18 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
    */
   private model2form(model: T, form: FormGroup, schema: AnyControlOptions[]) {
     schema.forEach(option => {
-      let value = model?.[option.name];
+      // 如果是双字段模式，value 也将会是一个数组
+      let value = Array.isArray(option.name) ? [model?.[option.name[0]], model?.[option.name[1]]] : model?.[option.name]
 
       if (option.mapper) {
         value = option.mapper.input(value);
-      } else if (option.type === 'date') {
+      } else if (['date', 'time'].includes(option.type)) {
         value = value ? new Date(value) : null;
+      } else if (option.type === 'range') {
+        // 如果是双字段模式
+        if (Array.isArray(option.name)) {
+          value = value.map((o: string | number | Date) => o && new Date(o));
+        }
       } else if (option.type === 'checkbox') {
         value = option.options.data.map(o => ({
           label: o[option.options.label ?? 'label'],
@@ -108,7 +114,8 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
         return this.model2form(value, form.controls[option.name] as FormGroup, option.schema);
       }
 
-      form.controls[option.name].setValue(value);
+      const controlName = this.parseControlName(option);
+      form.controls[controlName].setValue(value);
     });
   }
 
@@ -120,19 +127,38 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
    */
   private form2model(form: Record<string, NzSafeAny>, model: Record<string, NzSafeAny>, schema: AnyControlOptions[]) {
     schema.forEach(option => {
-      let value = form[option.name];
+      const controlName = this.parseControlName(option);
+      let value = form[controlName];
 
       if (option.mapper) {
         value = option.mapper.output(value);
-      } else if (option.type === 'date') {
+      } else if (['date', 'time'].includes(option.type)) {
         value = (value as Date)?.getTime();
+      } else if (option.type === 'range') {
+        const [startValue, endValue] = (value ?? []) as [Date, Date];
+        // 如果是双字段模式，将数组拆分并分别赋值到两个字段中去
+        if (Array.isArray(option.name)) {
+          model[option.name[0]] = startValue?.getTime();
+          model[option.name[1]] = endValue?.getTime();
+          return;
+        }
+
+        value = [startValue?.getTime(), endValue?.getTime()];
+      } else if (option.type === 'slider') {
+        // 如果是双字段模式，将数组拆分并分别赋值到两个字段中去
+        if (Array.isArray(option.name)) {
+          const [startValue, endValue] = (value ?? []) as [number, number];
+          model[option.name[0]] = startValue;
+          model[option.name[1]] = endValue;
+          return;
+        }
       } else if (option.type === 'checkbox') {
         value = (value as NzCheckBoxOptionInterface[])?.filter(o => o.checked).map(o => o.value);
       } else if (option.type === 'embed') {
         return this.form2model(value, model[option.name] ??= {}, option.schema);
       }
 
-      model[option.name] = value;
+      model[option.name as string] = value;
     });
   }
 
@@ -158,7 +184,8 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
         }
       }
 
-      form.setControl(option.name, control);
+      const controlName = this.parseControlName(option);
+      form.setControl(controlName, control);
     });
   }
 
@@ -168,5 +195,7 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
     });
   }
 
-
+  private parseControlName(option: AnyControlOptions) {
+    return this.controlNamePipe.transform(option.name);
+  }
 }

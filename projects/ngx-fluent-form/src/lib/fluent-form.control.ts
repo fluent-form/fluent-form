@@ -13,18 +13,21 @@ export const password = (name: string) => builder<InputControlOptions>().type('p
 export const textarea = (name: string) => builder<TextareaControlOptions>().type('textarea').name(name);
 export const number = (name: string) => builder<NumberInputControlOptions>().type('number').name(name);
 export const date = (name: string) => builder<DatePickerControlOptions>().type('date').name(name);
-export const datetime = (name: string) => date(name).format('yyyy-MM-dd HH:mm:ss').time(true);
-export const range = (name: string) => builder<RangePickerControlOptions>().type('range').name(name);
+export const datetime = (name: string) => date(name).format('yyyy-MM-dd HH:mm:ss').showTime(true);
+export const range = (name: string | [string, string]) => builder<RangePickerControlOptions>().type('range').name(name);
 export const time = (name: string) => builder<TimePickerControlOptions>().type('time').name(name);
 export const switcher = (name: string) => builder<SwitchControlOptions>().type('switch').name(name);
 export const select = (name: string) => builder<SelectControlOptions>().type('select').name(name);
 export const cascader = (name: string) => builder<CascaderControlOptions>().type('cascader').name(name);
-export const slider = (name: string) => builder<SliderControlOptions>().type('slider').name(name);
+export const slider = (name: string | [string, string]) => builder<SliderControlOptions>().type('slider').name(name);
 export const radio = (name: string) => builder<RadioControlOptions>().type('radio').name(name);
 export const checkbox = (name: string) => builder<CheckboxControlOptions>().type('checkbox').name(name);
 
 export const embed = (name: string) => builder<EmbeddedFormOptions>().type('embed').name(name);
 
+/**
+ * @ignore
+ */
 function builder<T>(): Builder<T> {
   const builder = new Proxy({} as Record<string, unknown>, {
     get(target, prop: string) {

@@ -1,26 +1,26 @@
 # ngx-fluent-form
 
-Building dynamic form in Angular with Fluent API.
+在 Angular 中使用 Fluent API 构建动态表单。
 
 [![npm version](https://img.shields.io/npm/v/ngx-fluent-form/latest.svg)](https://npmjs.com/package/ngx-fluent-form)
 ![Node.js CI](https://github.com/HyperLife1119/ngx-fluent-form/workflows/Node.js%20CI/badge.svg)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 [![Angular](https://img.shields.io/badge/Build%20with-Angular%20CLI-red?logo=angular)](https://www.github.com/angular/angular)
 [![CodeFactor](https://www.codefactor.io/repository/github/hyperlife1119/ngx-fluent-form/badge)](https://www.codefactor.io/repository/github/hyperlife1119/ngx-fluent-form)
-[![简体中文](https://img.shields.io/static/v1?label=简体中文&message=zh-CN&color=212121)](https://github.com/HyperLife1119/ngx-fluent-form/blob/main/README.zh-CN.md)
+[![English](https://img.shields.io/static/v1?label=English&message=en-US&color=212121)](https://github.com/HyperLife1119/ngx-fluent-form/blob/main/README.md)
 
-## Features
+## 特性
 
-- Support using Fluent API and JSON.
-- Support for nested forms.
-- Type-safe form configuration.
+- 支持使用 Fluent API 与 JSON。
+- 支持嵌套表单。
+- 类型安全的表单配置。
 
-## Prerequisites
+## 先决条件
 
 - [Angular](https://angular.io) >= 13.0.0
 - [ng-zorro-antd](https://ng.ant.design) >= 13.0.0
 
-## Install
+## 安装
 
 ```shell
 npm i ngx-fluent-form
@@ -28,11 +28,11 @@ npm i ngx-fluent-form
 
 ## API
 
-For the full API definition, please visit [https://](https://).
+有关完整的 API 定义，请访问 [https://](https://)。
 
-## Usage
+## 用法
 
-Import the `FluentFormModule`:
+导入 `FluentFormModule`:
 
 ```ts
 import { FluentFormModule } from 'ngx-fluent-form';
@@ -45,7 +45,7 @@ import { FluentFormModule } from 'ngx-fluent-form';
 export class YourModule { }
 ```
 
-Build the form using the Fluent API:
+使用 Fluent API 构建表单:
 
 ```ts
 import { date, form, number, text } from 'ngx-fluent-form';
@@ -68,7 +68,7 @@ export class Component {
 }
 ```
 
-You can also use JSON to build the form:
+你还可以使用 JSON 来构建表单:
 
 ```ts
 import { AnyControlOptions } from 'ngx-fluent-form';
@@ -81,7 +81,7 @@ export class Component {
 }
 ```
 
-You can also mix Fluent API and JSON:
+你还可以混合使用 Fluent API 和 JSON:
 
 ```ts
 import { AnyControlOptions, number } from 'ngx-fluent-form';
@@ -95,7 +95,7 @@ export class Component {
 }
 ```
 
-For nested forms, you can use the `embed` control:
+对于嵌套表单，可以使用 `embed` 控件:
 
 ```ts
 import { date, form, number, text, embed, switcher } from 'ngx-fluent-form';
@@ -123,7 +123,8 @@ export class Component {
 }
 ```
 
-Use the `mapper 'option for values that need to be mapped both ways. For example, the date control expects and outputs a'Date 'object, while we expect a date string from the date control output:
+对于需要双向映射的值，可以使用 `mapper` 选项。例如日期控件期望得到且输出 `Date` 对象，而我们期望从日期控件输出中得到日期字符串：
+<!-- *（注意：`ngx-fluent-form` 默认会将日期控件输出的 `Date` 对象转为时间戳，要覆盖此行为，可以使用 `mapper` 选项。）* -->
 
 ```ts
 import { date, form, number, text, embed, switcher } from 'ngx-fluent-form';
@@ -143,7 +144,7 @@ export class Component {
 }
 ```
 
-For range selection controls, such as the `range` control, it outputs an array with two elements. Suppose we want to map these two elements to two properties:
+对于区间选择控件，例如 `range` 控件，它会输出一个包含两个元素的数组。假如我们想要将这两个元素分别映射到两个属性：
 
 ```ts
 import { date, form, number, text, embed, switcher } from 'ngx-fluent-form';

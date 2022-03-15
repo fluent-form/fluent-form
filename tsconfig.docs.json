@@ -1,0 +1,9 @@
+{
+  "include": [
+    "projects/ngx-fluent-form/src/**/*.ts"
+  ],
+  "exclude": [
+    "projects/ngx-fluent-form/src/test.ts",
+    "projects/ngx-fluent-form/src/**/*.spec.ts"
+  ]
+}

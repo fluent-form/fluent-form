@@ -1,0 +1,231 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ngx-fluent-form documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
+        <link rel="stylesheet" href="./styles/laravel.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">ngx-fluent-form documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1 id="ngx-fluent-form">ngx-fluent-form</h1>
+<p>Building dynamic form in Angular with Fluent API.</p>
+<p><a href="https://npmjs.com/package/ngx-fluent-form"><img src="https://img.shields.io/npm/v/ngx-fluent-form/latest.svg" alt="npm version" class="img-responsive"></a>
+<img src="https://github.com/HyperLife1119/ngx-fluent-form/workflows/Node.js%20CI/badge.svg" alt="Node.js CI" class="img-responsive">
+<img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License" class="img-responsive">
+<a href="https://www.github.com/angular/angular"><img src="https://img.shields.io/badge/Build%20with-Angular%20CLI-red?logo=angular" alt="Angular" class="img-responsive"></a>
+<a href="https://www.codefactor.io/repository/github/hyperlife1119/ngx-fluent-form"><img src="https://www.codefactor.io/repository/github/hyperlife1119/ngx-fluent-form/badge" alt="CodeFactor" class="img-responsive"></a>
+<a href="https://github.com/HyperLife1119/ngx-fluent-form/blob/main/README.zh-CN.md"><img src="https://img.shields.io/static/v1?label=简体中文&message=zh-CN&color=212121" alt="简体中文" class="img-responsive"></a></p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Support using Fluent API and JSON.</li>
+<li>Support for nested forms.</li>
+<li>Type-safe form configuration.</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li><a href="https://angular.io">Angular</a> &gt;= 13.0.0</li>
+<li><a href="https://ng.ant.design">ng-zorro-antd</a> &gt;= 13.0.0</li>
+</ul>
+<h2 id="install">Install</h2>
+<div><pre class="line-numbers"><code class="language-shell">npm i ngx-fluent-form</code></pre></div><h2 id="api">API</h2>
+<p>For the full API definition, please visit <a href="https://">https://</a>.</p>
+<h2 id="usage">Usage</h2>
+<p>Import the <code>FluentFormModule</code>:</p>
+<div><pre class="line-numbers"><code class="language-ts">import { FluentFormModule } from &#39;ngx-fluent-form&#39;;
+
+&#64;NgModule({
+  imports: [
+    FluentFormModule
+  ]
+})
+export class YourModule { }</code></pre></div><p>Build the form using the Fluent API:</p>
+<div><pre class="line-numbers"><code class="language-ts">import { date, form, number, text } from &#39;ngx-fluent-form&#39;;
+
+&#64;Component({
+  template: `&lt;fluent-form [(ngModel)]=&quot;model&quot; [schema]=&quot;schema&quot;&gt;&lt;/fluent-form&gt;`
+})
+export class Component {
+  schema = form(
+    text(&#39;text&#39;).label(&#39;label&#39;).placeholder(&#39;placeholder&#39;).span(6),
+    number(&#39;number&#39;).label(&#39;label&#39;).placeholder(&#39;placeholder&#39;).span(3).max(100),
+    date(&#39;date&#39;).label(&#39;label&#39;).placeholder(&#39;placeholder&#39;).span(6)
+  );
+
+  model = {
+    text: &#39;fluent-form&#39;,
+    number: 10,
+    date: Date.now()
+  };
+}</code></pre></div><p>You can also use JSON to build the form:</p>
+<div><pre class="line-numbers"><code class="language-ts">import { AnyControlOptions } from &#39;ngx-fluent-form&#39;;
+
+&#64;Component(...)
+export class Component {
+  schema: AnyControlOptions[] = [
+    { type: &#39;text&#39;, name: &#39;text&#39;, label: &#39;label&#39;, span: 6 }
+  ];
+}</code></pre></div><p>You can also mix Fluent API and JSON:</p>
+<div><pre class="line-numbers"><code class="language-ts">import { AnyControlOptions, number } from &#39;ngx-fluent-form&#39;;
+
+&#64;Component(...)
+export class Component {
+  schema: AnyControlOptions[] = [
+    { type: &#39;text&#39;, name: &#39;text&#39;, label: &#39;label&#39;, span: 6 },
+    number(&#39;number&#39;).label(&#39;label&#39;).placeholder(&#39;placeholder&#39;).span(3).build(),
+  ];
+}</code></pre></div><p>For nested forms, you can use the <code>embed</code> control:</p>
+<div><pre class="line-numbers"><code class="language-ts">import { date, form, number, text, embed, switcher } from &#39;ngx-fluent-form&#39;;
+
+&#64;Component(...)
+export class Component {
+  schema = form(
+    text(&#39;text&#39;).label(&#39;label&#39;).placeholder(&#39;placeholder&#39;).span(6),
+    number(&#39;number&#39;).label(&#39;label&#39;).placeholder(&#39;placeholder&#39;).span(3).max(100),
+
+    embed(&#39;detail&#39;).label(&#39;detail&#39;).span(24).schema(form(
+      date(&#39;date&#39;).label(&#39;label&#39;).placeholder(&#39;placeholder&#39;).span(6),
+      switcher(&#39;switch&#39;).label(&#39;label&#39;).span(2),
+    ))
+  );
+
+  model = {
+    text: &#39;fluent-form&#39;,
+    number: 10,
+    detail: {
+      date: Date.now(),
+      switch: true
+    }
+  };
+}</code></pre></div><p>Use the `mapper &#39;option for values that need to be mapped both ways. For example, the date control expects and outputs a&#39;Date &#39;object, while we expect a date string from the date control output:</p>
+<div><pre class="line-numbers"><code class="language-ts">import { date, form, number, text, embed, switcher } from &#39;ngx-fluent-form&#39;;
+
+&#64;Component(...)
+export class Component {
+  schema = form(
+    date(&#39;date&#39;).label(&#39;label&#39;).placeholder(&#39;placeholder&#39;).span(6).mapper({
+      input: (o: string) =&gt; new Date(o),
+      output: (o: Date) =&gt; [o.getFullYear(), o.getMonth() + 1, o.getDate()].join(&#39;-&#39;)
+    })
+  );
+
+  model = {
+    date: &#39;2022-2-22&#39;
+  };
+}</code></pre></div><p>For range selection controls, such as the <code>range</code> control, it outputs an array with two elements. Suppose we want to map these two elements to two properties:</p>
+<div><pre class="line-numbers"><code class="language-ts">import { date, form, number, text, embed, switcher } from &#39;ngx-fluent-form&#39;;
+
+&#64;Component(...)
+export class Component {
+  schema = form(
+    range([&#39;start&#39;, &#39;end&#39;]).label(&#39;label&#39;).span(6),
+  );
+
+  model = {
+    start: null,
+    end: null
+  };
+}</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+
+       <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

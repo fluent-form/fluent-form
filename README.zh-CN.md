@@ -28,7 +28,7 @@ npm i ngx-fluent-form
 
 ## API
 
-有关完整的 API 定义，请访问 [https://](https://)。
+有关完整的 API 定义，请访问 [https://hyperlife1119.github.io/ngx-fluent-form](https://hyperlife1119.github.io/ngx-fluent-form)。
 
 ## 用法
 

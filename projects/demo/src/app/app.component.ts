@@ -17,7 +17,7 @@ export class AppComponent {
       .required(true).errorTip('不不不'),
     number('number').label('label').placeholder('placeholder').span(6).max(100),
     date('date').label('label').placeholder('placeholder').span(6),
-    range('range').label('label').placeholder(['place', 'holder']).span(6),
+    range(['start', 'end']).label('label').placeholder(['place', 'holder']).span(6),
     time('time').label('label').placeholder('placeholder').span(6),
     switcher('switch').label('label').span(2),
     select('select').label('label').placeholder('placeholder').span(4).options({
@@ -55,6 +55,8 @@ export class AppComponent {
     date: 1665360000000,
     switch: true,
     number: 50,
+    start: new Date('2000-11-19').getTime(),
+    end: new Date('2010-11-19').getTime(),
     group: {
       date: 1665360000000,
       group: {
@@ -63,4 +65,8 @@ export class AppComponent {
       }
     }
   };
+
+  onChange(event: any) {
+    console.log(event);
+  }
 }

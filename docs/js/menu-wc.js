@@ -64,62 +64,21 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/FluentFormModule.html" data-type="entity-link" >FluentFormModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-FluentFormModule-de185acc862c8db50a39ce7d5b8b20a4d16958dc934de3167330d126defe17fd8faea564db772233673409ece75c518894c45f73c93ac772ae6c81470443f4a2"' : 'data-target="#xs-components-links-module-FluentFormModule-de185acc862c8db50a39ce7d5b8b20a4d16958dc934de3167330d126defe17fd8faea564db772233673409ece75c518894c45f73c93ac772ae6c81470443f4a2"' }>
+                                            'data-target="#components-links-module-FluentFormModule-44acde2f745368947dee2de8c66f1edc872d548ff75c7ba4b8ce4a6c651f6ddad843b660c328a36f7b98ed4a3a19bae13288dee08c1688814360f14fc7c91d98"' : 'data-target="#xs-components-links-module-FluentFormModule-44acde2f745368947dee2de8c66f1edc872d548ff75c7ba4b8ce4a6c651f6ddad843b660c328a36f7b98ed4a3a19bae13288dee08c1688814360f14fc7c91d98"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-FluentFormModule-de185acc862c8db50a39ce7d5b8b20a4d16958dc934de3167330d126defe17fd8faea564db772233673409ece75c518894c45f73c93ac772ae6c81470443f4a2"' :
-                                            'id="xs-components-links-module-FluentFormModule-de185acc862c8db50a39ce7d5b8b20a4d16958dc934de3167330d126defe17fd8faea564db772233673409ece75c518894c45f73c93ac772ae6c81470443f4a2"' }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-FluentFormModule-44acde2f745368947dee2de8c66f1edc872d548ff75c7ba4b8ce4a6c651f6ddad843b660c328a36f7b98ed4a3a19bae13288dee08c1688814360f14fc7c91d98"' :
+                                            'id="xs-components-links-module-FluentFormModule-44acde2f745368947dee2de8c66f1edc872d548ff75c7ba4b8ce4a6c651f6ddad843b660c328a36f7b98ed4a3a19bae13288dee08c1688814360f14fc7c91d98"' }>
                                             <li class="link">
                                                 <a href="components/FluentFormComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >FluentFormComponent</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                <li class="chapter inner">
-                                    <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#injectables-links-module-FluentFormModule-de185acc862c8db50a39ce7d5b8b20a4d16958dc934de3167330d126defe17fd8faea564db772233673409ece75c518894c45f73c93ac772ae6c81470443f4a2"' : 'data-target="#xs-injectables-links-module-FluentFormModule-de185acc862c8db50a39ce7d5b8b20a4d16958dc934de3167330d126defe17fd8faea564db772233673409ece75c518894c45f73c93ac772ae6c81470443f4a2"' }>
-                                        <span class="icon ion-md-arrow-round-down"></span>
-                                        <span>Injectables</span>
-                                        <span class="icon ion-ios-arrow-down"></span>
-                                    </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-FluentFormModule-de185acc862c8db50a39ce7d5b8b20a4d16958dc934de3167330d126defe17fd8faea564db772233673409ece75c518894c45f73c93ac772ae6c81470443f4a2"' :
-                                        'id="xs-injectables-links-module-FluentFormModule-de185acc862c8db50a39ce7d5b8b20a4d16958dc934de3167330d126defe17fd8faea564db772233673409ece75c518894c45f73c93ac772ae6c81470443f4a2"' }>
-                                        <li class="link">
-                                            <a href="injectables/FluentFormControlNamePipe.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >FluentFormControlNamePipe</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                    <li class="chapter inner">
-                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#pipes-links-module-FluentFormModule-de185acc862c8db50a39ce7d5b8b20a4d16958dc934de3167330d126defe17fd8faea564db772233673409ece75c518894c45f73c93ac772ae6c81470443f4a2"' : 'data-target="#xs-pipes-links-module-FluentFormModule-de185acc862c8db50a39ce7d5b8b20a4d16958dc934de3167330d126defe17fd8faea564db772233673409ece75c518894c45f73c93ac772ae6c81470443f4a2"' }>
-                                            <span class="icon ion-md-add"></span>
-                                            <span>Pipes</span>
-                                            <span class="icon ion-ios-arrow-down"></span>
-                                        </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="pipes-links-module-FluentFormModule-de185acc862c8db50a39ce7d5b8b20a4d16958dc934de3167330d126defe17fd8faea564db772233673409ece75c518894c45f73c93ac772ae6c81470443f4a2"' :
-                                            'id="xs-pipes-links-module-FluentFormModule-de185acc862c8db50a39ce7d5b8b20a4d16958dc934de3167330d126defe17fd8faea564db772233673409ece75c518894c45f73c93ac772ae6c81470443f4a2"' }>
-                                            <li class="link">
-                                                <a href="pipes/FluentFormControlNamePipe.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >FluentFormControlNamePipe</a>
                                             </li>
                                         </ul>
                                     </li>
                             </li>
                 </ul>
                 </li>
-                        <li class="chapter">
-                            <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ? 'data-target="#injectables-links"' :
-                                'data-target="#xs-injectables-links"' }>
-                                <span class="icon ion-md-arrow-round-down"></span>
-                                <span>Injectables</span>
-                                <span class="icon ion-ios-arrow-down"></span>
-                            </div>
-                            <ul class="links collapse " ${ isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"' }>
-                                <li class="link">
-                                    <a href="injectables/FluentFormControlNamePipe.html" data-type="entity-link" >FluentFormControlNamePipe</a>
-                                </li>
-                            </ul>
-                        </li>
                     <li class="chapter">
                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ? 'data-target="#interfaces-links"' :
                             'data-target="#xs-interfaces-links"' }>

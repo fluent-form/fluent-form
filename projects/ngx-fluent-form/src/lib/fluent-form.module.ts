@@ -16,12 +16,10 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { FluentFormComponent } from './fluent-form.component';
-import { FluentFormControlNamePipe } from './fluent-form.pipe';
 
 @NgModule({
   declarations: [
-    FluentFormComponent,
-    FluentFormControlNamePipe
+    FluentFormComponent
   ],
   imports: [
     CommonModule,
@@ -40,9 +38,6 @@ import { FluentFormControlNamePipe } from './fluent-form.pipe';
     NzTimePickerModule,
     NzSliderModule,
     NzRadioModule
-  ],
-  providers: [
-    FluentFormControlNamePipe
   ],
   exports: [
     FluentFormComponent

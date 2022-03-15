@@ -4,7 +4,6 @@ import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
 import { AnyControlOptions } from './fluent-form.interface';
-import { FluentFormControlNamePipe } from './fluent-form.pipe';
 
 @Component({
   selector: 'fluent-form',
@@ -48,7 +47,7 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
   @Output() submit: EventEmitter<T> = new EventEmitter<T>();
   @Output() cancel: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private controlNamePipe: FluentFormControlNamePipe) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.form.valueChanges.pipe(
@@ -114,7 +113,7 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
         return this.model2form(value, form.controls[option.name] as FormGroup, option.schema);
       }
 
-      const controlName = this.parseControlName(option);
+      const controlName = option.name.toString();
       form.controls[controlName].setValue(value);
     });
   }
@@ -127,7 +126,7 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
    */
   private form2model(form: Record<string, NzSafeAny>, model: Record<string, NzSafeAny>, schema: AnyControlOptions[]) {
     schema.forEach(option => {
-      const controlName = this.parseControlName(option);
+      const controlName = option.name.toString();
       let value = form[controlName];
 
       if (option.mapper) {
@@ -184,7 +183,7 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
         }
       }
 
-      const controlName = this.parseControlName(option);
+      const controlName = option.name.toString();
       form.setControl(controlName, control);
     });
   }
@@ -195,7 +194,4 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
     });
   }
 
-  private parseControlName(option: AnyControlOptions) {
-    return this.controlNamePipe.transform(option.name);
-  }
 }

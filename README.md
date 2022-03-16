@@ -12,7 +12,6 @@ Building dynamic form in Angular with Fluent API.
 ## Features
 
 - Support using Fluent API and JSON.
-- Support for nested forms.
 - Type-safe form configuration.
 - Built on top of Angular Reactive Forms.
 - Form controls and grid layout based on `ng-zorro-antd`.
@@ -30,7 +29,7 @@ npm i ngx-fluent-form
 
 ## Docs
 
-- For the full API definition, please visit [https://hyperlife1119.github.io/ngx-fluent-form](https://hyperlife1119.github.io/ngx-fluent-form).
+- For the full API definition, please visit [here](https://hyperlife1119.github.io/ngx-fluent-form).
 - [Online examples](https://hyperlife1119.github.io/ngx-fluent-form/demo), and [sample code](https://github.dev/HyperLife1119/ngx-fluent-form/tree/main/projects/demo/src/app/app.component.ts).
 
 ## Usage
@@ -71,7 +70,7 @@ export class Component {
 }
 ```
 
-You can also use JSON to build the form:
+You can use JSON to build the form:
 
 ```ts
 import { AnyControlOptions } from 'ngx-fluent-form';
@@ -98,7 +97,7 @@ export class Component {
 }
 ```
 
-For nested forms, you can use the `embed` control:
+For nested forms, you can use the `embed` control (supports infinite nesting):
 
 ```ts
 import { date, form, number, text, embed, switcher } from 'ngx-fluent-form';
@@ -126,7 +125,7 @@ export class Component {
 }
 ```
 
-Use the `mapper 'option for values that need to be mapped both ways. For example, the date control expects and outputs a'Date 'object, while we expect a date string from the date control output:
+For values that require bidirectional mapping, the `mapper` option can be used. For example, the date control expects and will output a `Date` object, and we expect a date string from the date control output:
 
 ```ts
 import { date, form } from 'ngx-fluent-form';
@@ -146,7 +145,7 @@ export class Component {
 }
 ```
 
-For range selection controls, such as the `range` control, it outputs an array with two elements. Suppose we want to map these two elements to two properties:
+For range selection controls, such as the `range` control, it will output an array of two elements, and we expect to map the two elements of the array to two properties:
 
 ```ts
 import { form, range } from 'ngx-fluent-form';

@@ -43,7 +43,6 @@
 <h2 id="features">Features</h2>
 <ul>
 <li>Support using Fluent API and JSON.</li>
-<li>Support for nested forms.</li>
 <li>Type-safe form configuration.</li>
 <li>Built on top of Angular Reactive Forms.</li>
 <li>Form controls and grid layout based on <code>ng-zorro-antd</code>.</li>
@@ -56,7 +55,7 @@
 <h2 id="install">Install</h2>
 <div><pre class="line-numbers"><code class="language-shell">npm i ngx-fluent-form</code></pre></div><h2 id="docs">Docs</h2>
 <ul>
-<li>For the full API definition, please visit <a href="https://hyperlife1119.github.io/ngx-fluent-form">https://hyperlife1119.github.io/ngx-fluent-form</a>.</li>
+<li>For the full API definition, please visit <a href="https://hyperlife1119.github.io/ngx-fluent-form">here</a>.</li>
 <li><a href="https://hyperlife1119.github.io/ngx-fluent-form/demo">Online examples</a>, and <a href="https://github.dev/HyperLife1119/ngx-fluent-form/tree/main/projects/demo/src/app/app.component.ts">sample code</a>.</li>
 </ul>
 <h2 id="usage">Usage</h2>
@@ -86,7 +85,7 @@ export class Component {
     number: 10,
     date: Date.now()
   };
-}</code></pre></div><p>You can also use JSON to build the form:</p>
+}</code></pre></div><p>You can use JSON to build the form:</p>
 <div><pre class="line-numbers"><code class="language-ts">import { AnyControlOptions } from &#39;ngx-fluent-form&#39;;
 
 &#64;Component(...)
@@ -103,7 +102,7 @@ export class Component {
     { type: &#39;text&#39;, name: &#39;text&#39;, label: &#39;label&#39;, span: 6 },
     number(&#39;number&#39;).label(&#39;label&#39;).placeholder(&#39;placeholder&#39;).span(3).build(),
   ];
-}</code></pre></div><p>For nested forms, you can use the <code>embed</code> control:</p>
+}</code></pre></div><p>For nested forms, you can use the <code>embed</code> control (supports infinite nesting):</p>
 <div><pre class="line-numbers"><code class="language-ts">import { date, form, number, text, embed, switcher } from &#39;ngx-fluent-form&#39;;
 
 &#64;Component(...)
@@ -126,7 +125,7 @@ export class Component {
       switch: true
     }
   };
-}</code></pre></div><p>Use the `mapper &#39;option for values that need to be mapped both ways. For example, the date control expects and outputs a&#39;Date &#39;object, while we expect a date string from the date control output:</p>
+}</code></pre></div><p>For values that require bidirectional mapping, the <code>mapper</code> option can be used. For example, the date control expects and will output a <code>Date</code> object, and we expect a date string from the date control output:</p>
 <div><pre class="line-numbers"><code class="language-ts">import { date, form } from &#39;ngx-fluent-form&#39;;
 
 &#64;Component(...)
@@ -141,7 +140,7 @@ export class Component {
   model = {
     date: &#39;2022-2-22&#39;
   };
-}</code></pre></div><p>For range selection controls, such as the <code>range</code> control, it outputs an array with two elements. Suppose we want to map these two elements to two properties:</p>
+}</code></pre></div><p>For range selection controls, such as the <code>range</code> control, it will output an array of two elements, and we expect to map the two elements of the array to two properties:</p>
 <div><pre class="line-numbers"><code class="language-ts">import { form, range } from &#39;ngx-fluent-form&#39;;
 
 &#64;Component(...)

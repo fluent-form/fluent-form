@@ -76,6 +76,7 @@
     </p>
     <p class="comment">
                     <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/forms/ControlValueAccessor" target="_blank" >ControlValueAccessor</a></code>
     </p>
 
 
@@ -144,6 +145,7 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Private</span>
+                                    <span class="modifier">Optional</span>
                                 <a href="#_model" >_model</a>
                             </li>
                             <li>
@@ -159,6 +161,7 @@
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
+                                    <span class="modifier">Optional</span>
                                 <a href="#onValueChange" >onValueChange</a>
                             </li>
                         </ul>
@@ -183,7 +186,7 @@
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#initFormControl" >initFormControl</a>
+                                <a href="#initializeForm" >initializeForm</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -498,8 +501,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="191"
-                            class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:191</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="188"
+                            class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:188</a></div>
                 </td>
             </tr>
 
@@ -569,8 +572,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="127"
-                            class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:127</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="126"
+                            class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:126</a></div>
                 </td>
             </tr>
 
@@ -648,26 +651,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="initFormControl"></a>
+                    <a name="initializeForm"></a>
                     <span class="name">
                         <span class="modifier">Private</span>
-                        <span ><b>initFormControl</b></span>
-                        <a href="#initFormControl"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>initializeForm</b></span>
+                        <a href="#initializeForm"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>initFormControl(form: <a href="https://angular.io/api/forms/FormGroup" target="_blank">FormGroup</a>, schema: <a href="../undefineds/AnyControlOptions.html" target="_self">AnyControlOptions[]</a>)</code>
+                    <code>initializeForm(form: <a href="https://angular.io/api/forms/FormGroup" target="_blank">FormGroup</a>, schema: <a href="../undefineds/AnyControlOptions.html" target="_self">AnyControlOptions[]</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="164"
-                            class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:164</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="161"
+                            class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:161</a></div>
                 </td>
             </tr>
 
@@ -749,8 +752,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="92"
-                            class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:92</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="91"
+                            class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:91</a></div>
                 </td>
             </tr>
 
@@ -918,8 +921,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="82"
-                            class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:82</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="81"
+                            class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:81</a></div>
                 </td>
             </tr>
 
@@ -955,8 +958,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="78"
-                            class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:78</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="77"
+                            class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:77</a></div>
                 </td>
             </tr>
 
@@ -985,15 +988,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>registerOnChange(fn: NzSafeAny)</code>
+<code>registerOnChange(fn: (value: T) => void)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="72"
-                            class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:72</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="71"
+                            class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:71</a></div>
                 </td>
             </tr>
 
@@ -1016,7 +1019,7 @@
                                 <tr>
                                     <td>fn</td>
                                     <td>
-                                            <code>NzSafeAny</code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
                                     </td>
 
                                     <td>
@@ -1061,8 +1064,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="76"
-                            class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:76</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="75"
+                            class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:75</a></div>
                 </td>
             </tr>
 
@@ -1123,7 +1126,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>writeValue(value: T)</code>
+<code>writeValue(value?: T)</code>
                 </td>
             </tr>
 
@@ -1158,7 +1161,7 @@
                                     </td>
 
                                     <td>
-                                        No
+                                        Yes
                                     </td>
 
 
@@ -1192,6 +1195,7 @@
                     <a name="_model"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
+                            <span class="modifier">Optional</span>
                         <span ><b>_model</b></span>
                         <a href="#_model"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -1205,7 +1209,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:22</a></div>
                         </td>
                     </tr>
 
@@ -1232,7 +1236,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:21</a></div>
                         </td>
                     </tr>
 
@@ -1309,6 +1313,7 @@
                     <a name="onValueChange"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
+                            <span class="modifier">Optional</span>
                         <span ><b>onValueChange</b></span>
                         <a href="#onValueChange"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -1316,7 +1321,8 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+
                     </td>
                 </tr>
                     <tr>
@@ -1350,18 +1356,18 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:23</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:24</a></div>
                                 </td>
                             </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <span class="accessor"><b>set</b><code>model(value: T)</code></span>
+                        <span class="accessor"><b>set</b><code>model(value: T | undefined)</code></span>
                     </td>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">projects/ngx-fluent-form/src/lib/fluent-form.component.ts:25</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1382,7 +1388,7 @@
                                                             <td>value</td>
                                                     
                                                             <td>
-                                                                        <code>T</code>
+                                                                        <code>T | undefined</code>
                                                             </td>
                                                     
                                                         <td>
@@ -1478,7 +1484,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, forwardRef, Input, OnInit, Output, TemplateRef } from &#x27;@angular/core&#x27;;
-import { AbstractControl, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from &#x27;@angular/forms&#x27;;
+import { AbstractControl, ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from &#x27;@angular/forms&#x27;;
 import { NzCheckBoxOptionInterface } from &#x27;ng-zorro-antd/checkbox&#x27;;
 import { NzSafeAny } from &#x27;ng-zorro-antd/core/types&#x27;;
 import { debounceTime, Subject, takeUntil } from &#x27;rxjs&#x27;;
@@ -1494,24 +1500,24 @@ import { AnyControlOptions } from &#x27;./fluent-form.interface&#x27;;
     multi: true
   }]
 })
-export class FluentFormComponent&lt;T extends Record&lt;string, NzSafeAny&gt;&gt; implements OnInit {
-  private onValueChange &#x3D; (value: T) &#x3D;&gt; { };
+export class FluentFormComponent&lt;T extends Record&lt;string, NzSafeAny&gt;&gt; implements OnInit, ControlValueAccessor {
+  private onValueChange?: (value?: T) &#x3D;&gt; void;
   private destroy$: Subject&lt;void&gt; &#x3D; new Subject&lt;void&gt;();
-  private _model!: T;
-
-  get model(): T { return this._model; }
-  set model(value: T) {
-    this._model &#x3D; value;
-    this.onValueChange(value);
-  }
-
   private _schema!: AnyControlOptions[];
+  private _model?: T;
+
+  get model(): T | undefined { return this._model; }
+  set model(value: T | undefined) {
+    this._model &#x3D; value;
+    value &amp;&amp; this.model2form(value, this.form, this.schema);
+    this.onValueChange?.(value);
+  }
 
   @Input()
   get schema() { return this._schema; }
   set schema(value: AnyControlOptions[]) {
     this.clearFormControls(this.form);
-    this.initFormControl(this.form, value);
+    this.initializeForm(this.form, value);
 
     this._schema &#x3D; value;
   }
@@ -1533,8 +1539,8 @@ export class FluentFormComponent&lt;T extends Record&lt;string, NzSafeAny&gt;&gt
       debounceTime(50),
       takeUntil(this.destroy$)
     ).subscribe((form: T) &#x3D;&gt; {
-      this.form2model(form, this.model, this.schema);
-      this.model &#x3D; this.model;
+      this.form2model(form, this.model ??&#x3D; {} as T, this.schema);
+      this.onValueChange?.(this.model);
     });
   }
 
@@ -1543,12 +1549,11 @@ export class FluentFormComponent&lt;T extends Record&lt;string, NzSafeAny&gt;&gt
     this.destroy$.complete();
   }
 
-  writeValue(value: T): void {
+  writeValue(value?: T): void {
     this.model &#x3D; value;
-    value &amp;&amp; this.model2form(value, this.form, this.schema);
   }
 
-  registerOnChange(fn: NzSafeAny): void {
+  registerOnChange(fn: (value?: T) &#x3D;&gt; void): void {
     this.onValueChange &#x3D; fn;
   }
 
@@ -1571,9 +1576,11 @@ export class FluentFormComponent&lt;T extends Record&lt;string, NzSafeAny&gt;&gt
   private model2form(model: T, form: FormGroup, schema: AnyControlOptions[]) {
     schema.forEach(option &#x3D;&gt; {
       // 如果是双字段模式，value 也将会是一个数组
-      let value &#x3D; Array.isArray(option.name) ? [model?.[option.name[0]], model?.[option.name[1]]] : model?.[option.name]
+      let value &#x3D; Array.isArray(option.name) ? option.name.map(property &#x3D;&gt; model?.[property]) : model?.[option.name]
 
-      if (option.mapper) {
+      if (option.type &#x3D;&#x3D;&#x3D; &#x27;embed&#x27;) {
+        return this.model2form(value, form.controls[option.name] as FormGroup, option.schema);
+      } else if (option.mapper) {
         value &#x3D; option.mapper.input(value);
       } else if ([&#x27;date&#x27;, &#x27;time&#x27;].includes(option.type)) {
         value &#x3D; value ? new Date(value) : null;
@@ -1588,8 +1595,6 @@ export class FluentFormComponent&lt;T extends Record&lt;string, NzSafeAny&gt;&gt
           value: o[option.options.value ?? &#x27;value&#x27;],
           checked: (value as unknown[])?.includes(o[option.options.value ?? &#x27;value&#x27;])
         })) as NzCheckBoxOptionInterface[];
-      } else if (option.type &#x3D;&#x3D;&#x3D; &#x27;embed&#x27;) {
-        return this.model2form(value, form.controls[option.name] as FormGroup, option.schema);
       }
 
       const controlName &#x3D; option.name.toString();
@@ -1608,44 +1613,42 @@ export class FluentFormComponent&lt;T extends Record&lt;string, NzSafeAny&gt;&gt
       const controlName &#x3D; option.name.toString();
       let value &#x3D; form[controlName];
 
-      if (option.mapper) {
+      if (option.type &#x3D;&#x3D;&#x3D; &#x27;embed&#x27;) {
+        return this.form2model(value, model[option.name] ??&#x3D; {}, option.schema);
+      } else if (option.mapper) {
         value &#x3D; option.mapper.output(value);
       } else if ([&#x27;date&#x27;, &#x27;time&#x27;].includes(option.type)) {
         value &#x3D; (value as Date)?.getTime();
       } else if (option.type &#x3D;&#x3D;&#x3D; &#x27;range&#x27;) {
-        const [startValue, endValue] &#x3D; (value ?? []) as [Date, Date];
-        // 如果是双字段模式，将数组拆分并分别赋值到两个字段中去
+        // 如果是双字段模式，将数组分别赋值到两个字段中去
         if (Array.isArray(option.name)) {
-          model[option.name[0]] &#x3D; startValue?.getTime();
-          model[option.name[1]] &#x3D; endValue?.getTime();
-          return;
+          return option.name.forEach((property: string, index: number) &#x3D;&gt; {
+            model[property] &#x3D; value?.[index]?.getTime() ?? null;
+          });
         }
 
-        value &#x3D; [startValue?.getTime(), endValue?.getTime()];
+        value &#x3D; value?.map((o: Date) &#x3D;&gt; o?.getTime());
       } else if (option.type &#x3D;&#x3D;&#x3D; &#x27;slider&#x27;) {
-        // 如果是双字段模式，将数组拆分并分别赋值到两个字段中去
+        // 如果是双字段模式，将数组并分别赋值到两个字段中去
         if (Array.isArray(option.name)) {
-          const [startValue, endValue] &#x3D; (value ?? []) as [number, number];
-          model[option.name[0]] &#x3D; startValue;
-          model[option.name[1]] &#x3D; endValue;
-          return;
+          return option.name.forEach((property: string, index: number) &#x3D;&gt; {
+            model[property] &#x3D; value?.[index] ?? null;
+          });
         }
       } else if (option.type &#x3D;&#x3D;&#x3D; &#x27;checkbox&#x27;) {
         value &#x3D; (value as NzCheckBoxOptionInterface[])?.filter(o &#x3D;&gt; o.checked).map(o &#x3D;&gt; o.value);
-      } else if (option.type &#x3D;&#x3D;&#x3D; &#x27;embed&#x27;) {
-        return this.form2model(value, model[option.name] ??&#x3D; {}, option.schema);
       }
 
       model[option.name as string] &#x3D; value;
     });
   }
 
-  private initFormControl(form: FormGroup, schema: AnyControlOptions[]) {
+  private initializeForm(form: FormGroup, schema: AnyControlOptions[]) {
     schema.forEach(option &#x3D;&gt; {
       let control!: AbstractControl;
 
       if (option.type &#x3D;&#x3D;&#x3D; &#x27;embed&#x27;) {
-        this.initFormControl(control &#x3D; new FormGroup({}), option.schema);
+        this.initializeForm(control &#x3D; new FormGroup({}), option.schema);
       } else {
         control &#x3D; new FormControl(
           { value: null, disabled: option.disabled },

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, forwardRef, Input, OnInit, Output, TemplateRef } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
@@ -15,18 +15,18 @@ import { AnyControlOptions } from './fluent-form.interface';
     multi: true
   }]
 })
-export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements OnInit {
-  private onValueChange = (value: T) => { };
+export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements OnInit, ControlValueAccessor {
+  private onValueChange?: (value?: T) => void;
   private destroy$: Subject<void> = new Subject<void>();
-  private _model!: T;
-
-  get model(): T { return this._model; }
-  set model(value: T) {
-    this._model = value;
-    this.onValueChange(value);
-  }
-
   private _schema!: AnyControlOptions[];
+  private _model?: T;
+
+  get model(): T | undefined { return this._model; }
+  set model(value: T | undefined) {
+    this._model = value;
+    value && this.model2form(value, this.form, this.schema);
+    this.onValueChange?.(value);
+  }
 
   @Input()
   get schema() { return this._schema; }
@@ -54,8 +54,8 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
       debounceTime(50),
       takeUntil(this.destroy$)
     ).subscribe((form: T) => {
-      this.form2model(form, this.model, this.schema);
-      this.model = this.model;
+      this.form2model(form, this.model ??= {} as T, this.schema);
+      this.onValueChange?.(this.model);
     });
   }
 
@@ -64,12 +64,11 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
     this.destroy$.complete();
   }
 
-  writeValue(value: T): void {
+  writeValue(value?: T): void {
     this.model = value;
-    value && this.model2form(value, this.form, this.schema);
   }
 
-  registerOnChange(fn: NzSafeAny): void {
+  registerOnChange(fn: (value?: T) => void): void {
     this.onValueChange = fn;
   }
 
@@ -139,7 +138,7 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
         // 如果是双字段模式，将数组分别赋值到两个字段中去
         if (Array.isArray(option.name)) {
           return option.name.forEach((property: string, index: number) => {
-            model[property] = value?.[index]?.getTime();
+            model[property] = value?.[index]?.getTime() ?? null;
           });
         }
 
@@ -148,7 +147,7 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
         // 如果是双字段模式，将数组并分别赋值到两个字段中去
         if (Array.isArray(option.name)) {
           return option.name.forEach((property: string, index: number) => {
-            model[property] = value?.[index];
+            model[property] = value?.[index] ?? null;
           });
         }
       } else if (option.type === 'checkbox') {

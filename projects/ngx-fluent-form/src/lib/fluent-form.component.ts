@@ -32,7 +32,7 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
   get schema() { return this._schema; }
   set schema(value: AnyControlOptions[]) {
     this.clearFormControls(this.form);
-    this.initFormControl(this.form, value);
+    this.initializeForm(this.form, value);
 
     this._schema = value;
   }
@@ -158,12 +158,12 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
     });
   }
 
-  private initFormControl(form: FormGroup, schema: AnyControlOptions[]) {
+  private initializeForm(form: FormGroup, schema: AnyControlOptions[]) {
     schema.forEach(option => {
       let control!: AbstractControl;
 
       if (option.type === 'embed') {
-        this.initFormControl(control = new FormGroup({}), option.schema);
+        this.initializeForm(control = new FormGroup({}), option.schema);
       } else {
         control = new FormControl(
           { value: null, disabled: option.disabled },

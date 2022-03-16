@@ -9,7 +9,7 @@
     "publish": "npm run build && npm publish ./dist/ngx-fluent-form",
     "docs": "compodoc -p tsconfig.docs.json --theme=laravel --output=docs",
     "test:watch": "ng test",
-    "test": "ng test --watch=false --no-progress"
+    "test": "ng test --watch=false --no-progress --browsers=ChromeHeadless"
   },
   "private": true,
   "dependencies": {

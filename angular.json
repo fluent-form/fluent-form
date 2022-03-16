@@ -30,6 +30,14 @@
             "main": "projects/ngx-fluent-form/src/test.ts",
             "tsConfig": "projects/ngx-fluent-form/tsconfig.spec.json",
             "karmaConfig": "projects/ngx-fluent-form/karma.conf.js"
+          },
+          "configurations": {
+            "production": {
+              "watch": false,
+              "progress": false,
+              "browsers": "ChromeHeadlessCI",
+              "codeCoverage": true
+            }
           }
         }
       }

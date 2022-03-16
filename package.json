@@ -8,8 +8,8 @@
     "build:demo": "ng build --configuration production --project=demo",
     "publish": "npm run build && npm publish ./dist/ngx-fluent-form",
     "docs": "compodoc -p tsconfig.docs.json --theme=laravel --output=docs",
-    "test:watch": "ng test",
-    "test": "ng test --watch=false --progress=false --browsers=ChromeHeadlessCI --code-coverage"
+    "test:watch": "ng test ngx-fluent-form",
+    "test": "ng test ngx-fluent-form --configuration production"
   },
   "private": true,
   "dependencies": {

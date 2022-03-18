@@ -9,7 +9,8 @@
   "peerDependencies": {
     "@angular/common": ">=13.0.0",
     "@angular/core": ">=13.0.0",
-    "ng-zorro-antd": ">=13.0.0"
+    "ng-zorro-antd": ">=13.0.0",
+    "@ngify/types": ">=1.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

@@ -32,9 +32,17 @@ export class AppComponent {
   searchModel: User;
 
   schema = form(
-    text('fullName').span(6).placeholder('请输入').label('全称').required(true),
+    text('fullName').span(6).placeholder('请输入').label('全称').required(true).listener({
+      input: console.log
+    }).property({
+      id: 'id'
+    }),
     text('nickname').span(6).placeholder('请输入').label('昵称'),
-    date('birthday').span(6).label('生日'),
+    date('birthday').span(6).label('生日').listener({
+      nzOnOpenChange: () => console.log(111),
+    }).property({
+      nzId: 'id'
+    }),
     switcher('enabled').span(2).placeholder(['有效', '无效']).label('状态'),
     number('age').span(4).placeholder('请输入').label('年龄'),
     embed('detail').span(24).label('详情').schema(form(

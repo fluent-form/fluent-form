@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "projects/ngx-fluent-form",
       "sourceRoot": "projects/ngx-fluent-form/src",
-      "prefix": "lib",
+      "prefix": "fluent",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",

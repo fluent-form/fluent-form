@@ -164,7 +164,7 @@ export class Component {
 }
 ```
 
-对于需要绑定额外的属性或事件侦听，可以使用 `property` 和 `listener` 选项：
+对于额外的属性绑定或事件侦听，可以使用 `property` 和 `listener` 选项：
 
 ```ts
 import { form, time } from 'ngx-fluent-form';

@@ -163,7 +163,7 @@ export class Component {
 }
 ```
 
-For binding additional properties or event listeners, the `property` and `listener` options can be used：
+For additional property binding or event listening, the `property` and `listener` options can be used：
 
 ```ts
 import { form, time } from 'ngx-fluent-form';

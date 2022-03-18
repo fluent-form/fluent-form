@@ -4,9 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build:lib": "ng build --configuration production",
+    "build:lib": "ng build --configuration production && node ./scripts/copy.mjs",
     "build:demo": "ng build --configuration production --project=demo",
-    "publish": "npm run build && npm publish ./dist/ngx-fluent-form",
+    "publish": "npm run build:lib && npm publish ./dist/ngx-fluent-form",
     "docs": "compodoc -p tsconfig.docs.json --theme=laravel --output=docs",
     "test:watch": "ng test ngx-fluent-form",
     "test": "ng test ngx-fluent-form --configuration production"

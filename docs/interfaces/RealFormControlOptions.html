@@ -48,7 +48,7 @@
   <li>Interfaces</li>
   <li
   >
-  RadioControlOptions</li>
+  RealFormControlOptions</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -75,7 +75,7 @@
                 <h3>Extends</h3>
             </p>
             <p class="comment">
-                        <code><a href="../interfaces/RealFormControlOptions.html" target="_self" >RealFormControlOptions</a></code>
+                        <code><a href="../interfaces/BaseFormControlOptions.html" target="_self" >BaseFormControlOptions</a></code>
             </p>
 
         <section>
@@ -92,48 +92,44 @@
                             <ul class="index-list">
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#change" 
+                                        <a href="#asyncValidator" 
 >
-                                            change
+                                            asyncValidator
                                         </a>
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#listener" 
+                                        <a href="#disabled" 
 >
-                                            listener
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#name" 
->
-                                            name
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#options" 
->
-                                            options
+                                            disabled
                                         </a>
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#property" 
+                                        <a href="#errorTip" 
 >
-                                            property
+                                            errorTip
                                         </a>
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#style" 
+                                        <a href="#mapper" 
 >
-                                            style
+                                            mapper
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#type" 
+                                            <span class="modifier">Optional</span>
+                                        <a href="#required" 
 >
-                                            type
+                                            required
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#validator" 
+>
+                                            validator
                                         </a>
                                 </li>
                             </ul>
@@ -151,9 +147,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="change"></a>
-                                        <span class="name "><b>change</b>
-                                            <a href="#change">
+                                        <a name="asyncValidator"></a>
+                                        <span class="name "><b>asyncValidator</b>
+                                            <a href="#asyncValidator">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -161,7 +157,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>change:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                        <code>asyncValidator:     <code>AsyncValidatorFn | AsyncValidatorFn[]</code>
 </code>
                                     </td>
                                 </tr>
@@ -169,7 +165,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                            <i>Type : </i>    <code>AsyncValidatorFn | AsyncValidatorFn[]</code>
 
                                         </td>
                                     </tr>
@@ -185,7 +181,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Control value change callback</p>
+                                    <div class="io-description"><p>Async validators for control</p>
 </div>
                                 </td>
                             </tr>
@@ -195,9 +191,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="listener"></a>
-                                        <span class="name "><b>listener</b>
-                                            <a href="#listener">
+                                        <a name="disabled"></a>
+                                        <span class="name "><b>disabled</b>
+                                            <a href="#disabled">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -205,7 +201,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>listener:         <code><a href="../interfaces/RadioControlOptions.html" target="_self" >ComponentEventListener&lt;NzRadioGroupComponent | RadioControlOptions&gt;</a></code>
+                                        <code>disabled:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -213,7 +209,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="../interfaces/RadioControlOptions.html" target="_self" >ComponentEventListener&lt;NzRadioGroupComponent | RadioControlOptions&gt;</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                                         </td>
                                     </tr>
@@ -229,7 +225,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>event listeners</p>
+                                    <div class="io-description"><p>Whether to disable control</p>
 </div>
                                 </td>
                             </tr>
@@ -239,9 +235,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="name"></a>
-                                        <span class="name "><b>name</b>
-                                            <a href="#name">
+                                        <a name="errorTip"></a>
+                                        <span class="name "><b>errorTip</b>
+                                            <a href="#errorTip">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -249,7 +245,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>name:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>errorTip:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -262,13 +258,18 @@
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
 
 
 
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Field name for control</p>
+                                    <div class="io-description"><p>Error message for control</p>
 </div>
                                 </td>
                             </tr>
@@ -278,9 +279,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="options"></a>
-                                        <span class="name "><b>options</b>
-                                            <a href="#options">
+                                        <a name="mapper"></a>
+                                        <span class="name "><b>mapper</b>
+                                            <a href="#mapper">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -288,7 +289,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>options:     <code>literal type</code>
+                                        <code>mapper:     <code>literal type</code>
 </code>
                                     </td>
                                 </tr>
@@ -301,19 +302,30 @@
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
 
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>I/O mapper for control</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="property"></a>
-                                        <span class="name "><b>property</b>
-                                            <a href="#property">
+                                        <a name="required"></a>
+                                        <span class="name "><b>required</b>
+                                            <a href="#required">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -321,7 +333,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>property:         <code><a href="../miscellaneous/typealiases.html#ComponentInput" target="_self" >ComponentInput&lt;NzRadioGroupComponent&gt;</a></code>
+                                        <code>required:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -329,7 +341,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ComponentInput" target="_self" >ComponentInput&lt;NzRadioGroupComponent&gt;</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                                         </td>
                                     </tr>
@@ -345,7 +357,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Other properties that need to be bound</p>
+                                    <div class="io-description"><p>Is it a required control</p>
 </div>
                                 </td>
                             </tr>
@@ -355,9 +367,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="style"></a>
-                                        <span class="name "><b>style</b>
-                                            <a href="#style">
+                                        <a name="validator"></a>
+                                        <span class="name "><b>validator</b>
+                                            <a href="#validator">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -365,7 +377,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>style:     <code>&quot;outline&quot; | &quot;solid&quot;</code>
+                                        <code>validator:     <code>ValidatorFn | ValidatorFn[]</code>
 </code>
                                     </td>
                                 </tr>
@@ -373,7 +385,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code>&quot;outline&quot; | &quot;solid&quot;</code>
+                                            <i>Type : </i>    <code>ValidatorFn | ValidatorFn[]</code>
 
                                         </td>
                                     </tr>
@@ -389,37 +401,10 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Radio control style</p>
+                                    <div class="io-description"><p>Validator for the control</p>
 </div>
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="type"></a>
-                                        <span class="name "><b>type</b>
-                                            <a href="#type">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>type:     <code></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-
-
-
-
-
                         </tbody>
                     </table>
             </section>
@@ -826,7 +811,7 @@ export interface CheckboxControlOptions extends RealFormControlOptions {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'RadioControlOptions.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'RealFormControlOptions.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

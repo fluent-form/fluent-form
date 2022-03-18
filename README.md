@@ -162,3 +162,20 @@ export class Component {
   };
 }
 ```
+
+For binding additional properties or event listeners, the `property` and `listener` options can be used：
+
+```ts
+import { form, time } from 'ngx-fluent-form';
+
+@Component(...)
+export class Component {
+  schema = form(
+    time('time').label('label').span(6).property({
+      nzNowText: 'Now'
+    }).listener({
+      nzOpenChange: (event, options) => console.log(event, options)
+    }),
+  );
+}
+```

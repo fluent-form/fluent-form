@@ -64,18 +64,35 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/FluentFormModule.html" data-type="entity-link" >FluentFormModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-FluentFormModule-44acde2f745368947dee2de8c66f1edc872d548ff75c7ba4b8ce4a6c651f6ddad843b660c328a36f7b98ed4a3a19bae13288dee08c1688814360f14fc7c91d98"' : 'data-target="#xs-components-links-module-FluentFormModule-44acde2f745368947dee2de8c66f1edc872d548ff75c7ba4b8ce4a6c651f6ddad843b660c328a36f7b98ed4a3a19bae13288dee08c1688814360f14fc7c91d98"' }>
+                                            'data-target="#components-links-module-FluentFormModule-68e37e0eaf149d2da1d4e5dbed47802c68b5d1964f42dd319f7052fe0436e40069cf687131dd43f4809d06a525bac3200d6f99b7edbc2e2fbd155fc1764f611e"' : 'data-target="#xs-components-links-module-FluentFormModule-68e37e0eaf149d2da1d4e5dbed47802c68b5d1964f42dd319f7052fe0436e40069cf687131dd43f4809d06a525bac3200d6f99b7edbc2e2fbd155fc1764f611e"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-FluentFormModule-44acde2f745368947dee2de8c66f1edc872d548ff75c7ba4b8ce4a6c651f6ddad843b660c328a36f7b98ed4a3a19bae13288dee08c1688814360f14fc7c91d98"' :
-                                            'id="xs-components-links-module-FluentFormModule-44acde2f745368947dee2de8c66f1edc872d548ff75c7ba4b8ce4a6c651f6ddad843b660c328a36f7b98ed4a3a19bae13288dee08c1688814360f14fc7c91d98"' }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-FluentFormModule-68e37e0eaf149d2da1d4e5dbed47802c68b5d1964f42dd319f7052fe0436e40069cf687131dd43f4809d06a525bac3200d6f99b7edbc2e2fbd155fc1764f611e"' :
+                                            'id="xs-components-links-module-FluentFormModule-68e37e0eaf149d2da1d4e5dbed47802c68b5d1964f42dd319f7052fe0436e40069cf687131dd43f4809d06a525bac3200d6f99b7edbc2e2fbd155fc1764f611e"' }>
                                             <li class="link">
                                                 <a href="components/FluentFormComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >FluentFormComponent</a>
                                             </li>
                                         </ul>
                                     </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                        'data-target="#directives-links-module-FluentFormModule-68e37e0eaf149d2da1d4e5dbed47802c68b5d1964f42dd319f7052fe0436e40069cf687131dd43f4809d06a525bac3200d6f99b7edbc2e2fbd155fc1764f611e"' : 'data-target="#xs-directives-links-module-FluentFormModule-68e37e0eaf149d2da1d4e5dbed47802c68b5d1964f42dd319f7052fe0436e40069cf687131dd43f4809d06a525bac3200d6f99b7edbc2e2fbd155fc1764f611e"' }>
+                                        <span class="icon ion-md-code-working"></span>
+                                        <span>Directives</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-FluentFormModule-68e37e0eaf149d2da1d4e5dbed47802c68b5d1964f42dd319f7052fe0436e40069cf687131dd43f4809d06a525bac3200d6f99b7edbc2e2fbd155fc1764f611e"' :
+                                        'id="xs-directives-links-module-FluentFormModule-68e37e0eaf149d2da1d4e5dbed47802c68b5d1964f42dd319f7052fe0436e40069cf687131dd43f4809d06a525bac3200d6f99b7edbc2e2fbd155fc1764f611e"' }>
+                                        <li class="link">
+                                            <a href="directives/FluentEventBinderDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >FluentEventBinderDirective</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="directives/FluentPropertyBinderDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >FluentPropertyBinderDirective</a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </li>
                 </ul>
                 </li>
@@ -87,6 +104,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <span class="icon ion-ios-arrow-down"></span>
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
+                            <li class="link">
+                                <a href="interfaces/BaseFormControlOptions.html" data-type="entity-link" >BaseFormControlOptions</a>
+                            </li>
                             <li class="link">
                                 <a href="interfaces/CascaderControlOptions.html" data-type="entity-link" >CascaderControlOptions</a>
                             </li>
@@ -103,9 +123,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/EmbeddedFormOptions.html" data-type="entity-link" >EmbeddedFormOptions</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/FormControlOptions.html" data-type="entity-link" >FormControlOptions</a>
-                            </li>
-                            <li class="link">
                                 <a href="interfaces/InputControlOptions.html" data-type="entity-link" >InputControlOptions</a>
                             </li>
                             <li class="link">
@@ -116,6 +133,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/RangePickerControlOptions.html" data-type="entity-link" >RangePickerControlOptions</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/RealFormControlOptions.html" data-type="entity-link" >RealFormControlOptions</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/SelectControlOptions.html" data-type="entity-link" >SelectControlOptions</a>

@@ -75,7 +75,7 @@
                 <h3>Extends</h3>
             </p>
             <p class="comment">
-                        <code><a href="../interfaces/FormControlOptions.html" target="_self" >FormControlOptions</a></code>
+                        <code><a href="../interfaces/RealFormControlOptions.html" target="_self" >RealFormControlOptions</a></code>
             </p>
 
         <section>
@@ -105,6 +105,13 @@
                                         </a>
                                 </li>
                                 <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#listener" 
+>
+                                            listener
+                                        </a>
+                                </li>
+                                <li>
                                         <a href="#name" 
 >
                                             name
@@ -121,6 +128,13 @@
                                         <a href="#placeholder" 
 >
                                             placeholder
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#property" 
+>
+                                            property
                                         </a>
                                 </li>
                                 <li>
@@ -246,6 +260,50 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
+                                        <a name="listener"></a>
+                                        <span class="name "><b>listener</b>
+                                            <a href="#listener">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>listener:         <code><a href="../interfaces/CascaderControlOptions.html" target="_self" >ComponentEventListener&lt;NzCascaderComponent | CascaderControlOptions&gt;</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/CascaderControlOptions.html" target="_self" >ComponentEventListener&lt;NzCascaderComponent | CascaderControlOptions&gt;</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>event listeners</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
                                         <a name="name"></a>
                                         <span class="name "><b>name</b>
                                             <a href="#name">
@@ -273,6 +331,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Field name for control</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -347,6 +411,50 @@
                             <tr>
                                 <td class="col-md-4">
                                     <div class="io-description"><p>Placeholder text</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="property"></a>
+                                        <span class="name "><b>property</b>
+                                            <a href="#property">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>property:         <code><a href="../miscellaneous/typealiases.html#ComponentInput" target="_self" >ComponentInput&lt;NzCascaderComponent&gt;</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ComponentInput" target="_self" >ComponentInput&lt;NzCascaderComponent&gt;</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Other properties that need to be bound</p>
 </div>
                                 </td>
                             </tr>
@@ -466,13 +574,19 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { TemplateRef } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { EventEmitter, TemplateRef } from &#x27;@angular/core&#x27;;
 import { AsyncValidatorFn, ValidatorFn } from &#x27;@angular/forms&#x27;;
+import { Property } from &#x27;@ngify/types&#x27;;
 import { NzCascaderComponent, NzCascaderOption } from &#x27;ng-zorro-antd/cascader&#x27;;
+import { NzCheckboxGroupComponent } from &#x27;ng-zorro-antd/checkbox&#x27;;
 import { NzSafeAny } from &#x27;ng-zorro-antd/core/types&#x27;;
-import { NzDatePickerComponent } from &#x27;ng-zorro-antd/date-picker&#x27;;
+import { NzDatePickerComponent, NzRangePickerComponent } from &#x27;ng-zorro-antd/date-picker&#x27;;
 import { NzInputNumberComponent } from &#x27;ng-zorro-antd/input-number&#x27;;
+import { NzRadioGroupComponent } from &#x27;ng-zorro-antd/radio&#x27;;
 import { NzSelectComponent } from &#x27;ng-zorro-antd/select&#x27;;
+import { NzSliderComponent } from &#x27;ng-zorro-antd/slider&#x27;;
+import { NzSwitchComponent } from &#x27;ng-zorro-antd/switch&#x27;;
+import { NzTimePickerComponent } from &#x27;ng-zorro-antd/time-picker&#x27;;
 
 export type AnyControlOptions &#x3D;
   EmbeddedFormOptions
@@ -489,15 +603,38 @@ export type AnyControlOptions &#x3D;
   | RadioControlOptions
   | CheckboxControlOptions;
 
-export interface FormControlOptions {
+/** HTML 元素的事件侦听器对象 */
+export type HTMLElementEventListener&lt;O extends AnyControlOptions&gt; &#x3D; {
+  [K in keyof HTMLElementEventMap]?: (event: HTMLElementEventMap[K], options: O) &#x3D;&gt; void
+};
+
+/** 组件的事件名 */
+type ComponentEventName&lt;C&gt; &#x3D; Exclude&lt;{
+  [K in keyof C]: C[K] extends EventEmitter&lt;any&gt; ? K : never
+}[keyof C], undefined&gt;;
+
+/** 组件的事件侦听器对象 */
+export type ComponentEventListener&lt;C, O extends AnyControlOptions&gt; &#x3D; {
+  [K in ComponentEventName&lt;C&gt;]?: (event: C[K] extends EventEmitter&lt;infer E&gt; ? E : never, options: O) &#x3D;&gt; void
+}
+
+/** 组件属性 */
+type ComponentProperty&lt;C&gt; &#x3D; Omit&lt;Property&lt;C&gt;, ComponentEventName&lt;C&gt;&gt;;
+/** NZ 组件的 Input 名字 */
+type ComponentInputName&lt;C&gt; &#x3D; Extract&lt;keyof ComponentProperty&lt;C&gt;, &#x60;nz${Capitalize&lt;string&gt;}&#x60;&gt;;
+/** NZ 组件的 Input Map */
+type ComponentInput&lt;C&gt; &#x3D; Partial&lt;{ [P in ComponentInputName&lt;C&gt;]: C[P] }&gt;;
+
+export interface BaseFormControlOptions {
   /** Type of control */
   type: string;
-  /** Field name for control */
-  name: string | [string, string];
   /** Span of the control in grid layout */
   span: number;
   /** Label for control */
   label?: string;
+}
+
+export interface RealFormControlOptions extends BaseFormControlOptions {
   /** I/O mapper for control */
   mapper?: {
     /** An input mapper that maps from a model&#x27;s value to a form control&#x27;s value */
@@ -517,46 +654,17 @@ export interface FormControlOptions {
   asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[];
 }
 
-export interface EmbeddedFormOptions extends FormControlOptions {
+export interface EmbeddedFormOptions extends BaseFormControlOptions {
   type: &#x27;embed&#x27;;
+  /** Field name for control */
   name: string;
   /** Schema for embedded form */
   schema: AnyControlOptions[];
-  // Disable the following properties
-  /**
-   * @ignore
-   * @deprecated
-   */
-  mapper?: never;
-  /**
-   * @ignore
-   * @deprecated
-   */
-  required?: never;
-  /**
-   * @ignore
-   * @deprecated
-   */
-  disabled?: never;
-  /**
-   * @ignore
-   * @deprecated
-   */
-  errorTip?: never;
-  /**
-   * @ignore
-   * @deprecated
-   */
-  validators?: never;
-  /**
-   * @ignore
-   * @deprecated
-   */
-  asyncValidator?: never;
 }
 
-export interface InputControlOptions extends FormControlOptions {
+export interface InputControlOptions extends RealFormControlOptions {
   type: &#x27;text&#x27; | &#x27;email&#x27; | &#x27;password&#x27;;
+  /** Field name for control */
   name: string;
   /** Placeholder text */
   placeholder?: string;
@@ -576,10 +684,15 @@ export interface InputControlOptions extends FormControlOptions {
   suffix?: string | TemplateRef&lt;void&gt;;
   /** Control value change callback */
   change?: (value: string, options: InputControlOptions) &#x3D;&gt; void;
+  /** event listeners */
+  listener?: HTMLElementEventListener&lt;InputControlOptions&gt;;
+  /** Other properties that need to be bound */
+  property?: Partial&lt;Property&lt;HTMLInputElement&gt;&gt;;
 }
 
-export interface TextareaControlOptions extends FormControlOptions {
+export interface TextareaControlOptions extends RealFormControlOptions {
   type: &#x27;textarea&#x27;;
+  /** Field name for control */
   name: string;
   /** Placeholder text */
   placeholder?: string;
@@ -589,10 +702,15 @@ export interface TextareaControlOptions extends FormControlOptions {
   autosize?: boolean | { minRows: number, maxRows: number };
   /** Control value change callback */
   change?: (value: string, options: TextareaControlOptions) &#x3D;&gt; void;
+  /** event listeners */
+  listener?: HTMLElementEventListener&lt;TextareaControlOptions&gt;;
+  /** Other properties that need to be bound */
+  property?: Partial&lt;Property&lt;HTMLTextAreaElement&gt;&gt;;
 }
 
-export interface NumberInputControlOptions extends FormControlOptions {
+export interface NumberInputControlOptions extends RealFormControlOptions {
   type: &#x27;number&#x27;;
+  /** Field name for control */
   name: string;
   /** Placeholder text */
   placeholder?: string;
@@ -608,6 +726,10 @@ export interface NumberInputControlOptions extends FormControlOptions {
   step?: number;
   /** Control value change callback */
   change?: (value: number, options: NumberInputControlOptions) &#x3D;&gt; void;
+  /** event listeners */
+  listener?: ComponentEventListener&lt;NzInputNumberComponent, NumberInputControlOptions&gt;;
+  /** Other properties that need to be bound */
+  property?: ComponentInput&lt;NzInputNumberComponent&gt;;
 }
 
 interface DateControlOptions {
@@ -623,26 +745,37 @@ interface DateControlOptions {
   inline?: boolean;
 }
 
-export interface DatePickerControlOptions extends FormControlOptions, DateControlOptions {
+export interface DatePickerControlOptions extends RealFormControlOptions, DateControlOptions {
   type: &#x27;date&#x27;;
+  /** Field name for control */
   name: string;
   /** Placeholder text */
   placeholder?: string;
   /** Control value change callback */
   change?: (value: Date, options: DatePickerControlOptions) &#x3D;&gt; void;
+  /** event listeners */
+  listener?: ComponentEventListener&lt;NzDatePickerComponent, DatePickerControlOptions&gt;;
+  /** Other properties that need to be bound */
+  property?: ComponentInput&lt;NzDatePickerComponent&gt;;
 }
 
-export interface RangePickerControlOptions extends FormControlOptions, DateControlOptions {
+export interface RangePickerControlOptions extends RealFormControlOptions, DateControlOptions {
   type: &#x27;range&#x27;;
+  /** Field name for control */
   name: string | [string, string];
   /** Placeholder text */
   placeholder?: [string, string];
   /** Control value change callback */
   change?: (value: [Date, Date], options: DatePickerControlOptions) &#x3D;&gt; void;
+  /** event listeners */
+  listener?: ComponentEventListener&lt;NzRangePickerComponent, RangePickerControlOptions&gt;;
+  /** Other properties that need to be bound */
+  property?: ComponentInput&lt;NzRangePickerComponent&gt;;
 }
 
-export interface TimePickerControlOptions extends FormControlOptions {
+export interface TimePickerControlOptions extends RealFormControlOptions {
   type: &#x27;time&#x27;;
+  /** Field name for control */
   name: string;
   /** Placeholder text */
   placeholder?: string;
@@ -658,19 +791,29 @@ export interface TimePickerControlOptions extends FormControlOptions {
   };
   /** Control value change callback */
   change?: (value: Date, options: TimePickerControlOptions) &#x3D;&gt; void;
+  /** event listeners */
+  listener?: ComponentEventListener&lt;NzTimePickerComponent, TimePickerControlOptions&gt;;
+  /** Other properties that need to be bound */
+  property?: ComponentInput&lt;NzTimePickerComponent&gt;;
 }
 
-export interface SwitchControlOptions extends FormControlOptions {
+export interface SwitchControlOptions extends RealFormControlOptions {
   type: &#x27;switch&#x27;;
+  /** Field name for control */
   name: string;
   /** Placeholder text */
   placeholder?: [string | TemplateRef&lt;void&gt;, string | TemplateRef&lt;void&gt;];
   /** Control value change callback */
   change?: (value: boolean, options: SwitchControlOptions) &#x3D;&gt; void;
+  /** event listeners */
+  listener?: ComponentEventListener&lt;NzSwitchComponent, SwitchControlOptions&gt;;
+  /** Other properties that need to be bound */
+  property?: ComponentInput&lt;NzSwitchComponent&gt;;
 }
 
-export interface SelectControlOptions extends FormControlOptions {
+export interface SelectControlOptions extends RealFormControlOptions {
   type: &#x27;select&#x27;;
+  /** Field name for control */
   name: string;
   /** Placeholder text */
   placeholder?: string;
@@ -692,10 +835,15 @@ export interface SelectControlOptions extends FormControlOptions {
   };
   /** Control value change callback */
   change?: (value: NzSafeAny | NzSafeAny[], options: SelectControlOptions) &#x3D;&gt; void;
+  /** event listeners */
+  listener?: ComponentEventListener&lt;NzSelectComponent, SelectControlOptions&gt;;
+  /** Other properties that need to be bound */
+  property?: ComponentInput&lt;NzSelectComponent&gt;;
 }
 
-export interface CascaderControlOptions extends FormControlOptions {
+export interface CascaderControlOptions extends RealFormControlOptions {
   type: &#x27;cascader&#x27;;
+  /** Field name for control */
   name: string;
   /** Placeholder text */
   placeholder?: string;
@@ -717,10 +865,15 @@ export interface CascaderControlOptions extends FormControlOptions {
   };
   /** Control value change callback */
   change?: (value: NzSafeAny[], options: CascaderControlOptions) &#x3D;&gt; void;
+  /** event listeners */
+  listener?: ComponentEventListener&lt;NzCascaderComponent, CascaderControlOptions&gt;;
+  /** Other properties that need to be bound */
+  property?: ComponentInput&lt;NzCascaderComponent&gt;;
 }
 
-export interface SliderControlOptions extends FormControlOptions {
+export interface SliderControlOptions extends RealFormControlOptions {
   type: &#x27;slider&#x27;;
+  /** Field name for control */
   name: string | [string, string];
   /** Placeholder text */
   placeholder?: never;
@@ -736,10 +889,15 @@ export interface SliderControlOptions extends FormControlOptions {
   step?: number;
   /** Control value change callback */
   change?: (value: number | number[], options: SliderControlOptions) &#x3D;&gt; void;
+  /** event listeners */
+  listener?: ComponentEventListener&lt;NzSliderComponent, SliderControlOptions&gt;;
+  /** Other properties that need to be bound */
+  property?: ComponentInput&lt;NzSliderComponent&gt;;
 }
 
-export interface RadioControlOptions extends FormControlOptions {
+export interface RadioControlOptions extends RealFormControlOptions {
   type: &#x27;radio&#x27;;
+  /** Field name for control */
   name: string;
   /** Radio control style */
   style?: &#x27;outline&#x27; | &#x27;solid&#x27;;
@@ -753,10 +911,15 @@ export interface RadioControlOptions extends FormControlOptions {
   };
   /** Control value change callback */
   change?: (value: NzSafeAny, options: RadioControlOptions) &#x3D;&gt; void;
+  /** event listeners */
+  listener?: ComponentEventListener&lt;NzRadioGroupComponent, RadioControlOptions&gt;;
+  /** Other properties that need to be bound */
+  property?: ComponentInput&lt;NzRadioGroupComponent&gt;;
 }
 
-export interface CheckboxControlOptions extends FormControlOptions {
+export interface CheckboxControlOptions extends RealFormControlOptions {
   type: &#x27;checkbox&#x27;;
+  /** Field name for control */
   name: string;
   options: {
     /** Options data array */
@@ -768,6 +931,10 @@ export interface CheckboxControlOptions extends FormControlOptions {
   };
   /** Control value change callback */
   change?: (value: NzSafeAny[], options: CheckboxControlOptions) &#x3D;&gt; void;
+  /** event listeners */
+  listener?: ComponentEventListener&lt;NzCheckboxGroupComponent, CheckboxControlOptions&gt;;
+  /** Other properties that need to be bound */
+  property?: ComponentInput&lt;NzCheckboxGroupComponent&gt;;
 }
 </code></pre>
     </div>

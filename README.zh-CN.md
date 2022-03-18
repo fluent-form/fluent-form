@@ -163,3 +163,20 @@ export class Component {
   };
 }
 ```
+
+对于需要绑定额外的属性或事件侦听，可以使用 `property` 和 `listener` 选项：
+
+```ts
+import { form, time } from 'ngx-fluent-form';
+
+@Component(...)
+export class Component {
+  schema = form(
+    time('time').label('label').span(6).property({
+      nzNowText: '现在'
+    }).listener({
+      nzOpenChange: (event, options) => console.log(event, options)
+    }),
+  );
+}
+```

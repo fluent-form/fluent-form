@@ -1,7 +1,7 @@
 import { Component, EventEmitter, forwardRef, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { SafeAny } from '@ngify/types';
 import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
 import { AnyControlOptions } from './fluent-form.interface';
 
@@ -15,7 +15,7 @@ import { AnyControlOptions } from './fluent-form.interface';
     multi: true
   }]
 })
-export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements OnInit, ControlValueAccessor {
+export class FluentFormComponent<T extends Record<string, SafeAny>> implements OnInit, ControlValueAccessor {
   private onValueChange?: (value?: T) => void;
   private destroy$: Subject<void> = new Subject<void>();
   private _schema!: AnyControlOptions[];
@@ -72,7 +72,7 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
     this.onValueChange = fn;
   }
 
-  registerOnTouched(fn: NzSafeAny): void { }
+  registerOnTouched(fn: SafeAny): void { }
 
   onSubmit() {
     this.submit.emit(this.model);
@@ -123,7 +123,7 @@ export class FluentFormComponent<T extends Record<string, NzSafeAny>> implements
    * @param model
    * @param schema
    */
-  private form2model(form: Record<string, NzSafeAny>, model: Record<string, NzSafeAny>, schema: AnyControlOptions[]) {
+  private form2model(form: Record<string, SafeAny>, model: Record<string, SafeAny>, schema: AnyControlOptions[]) {
     schema.forEach(option => {
       const controlName = option.name.toString();
       let value = form[controlName];

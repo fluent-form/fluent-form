@@ -1,9 +1,8 @@
 import { EventEmitter, TemplateRef } from '@angular/core';
 import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
-import { Property } from '@ngify/types';
+import { Property, SafeAny } from '@ngify/types';
 import { NzCascaderComponent, NzCascaderOption } from 'ng-zorro-antd/cascader';
 import { NzCheckboxGroupComponent } from 'ng-zorro-antd/checkbox';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDatePickerComponent, NzRangePickerComponent } from 'ng-zorro-antd/date-picker';
 import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
 import { NzRadioGroupComponent } from 'ng-zorro-antd/radio';
@@ -34,7 +33,7 @@ export type HTMLElementEventListener<O extends AnyControlOptions> = {
 
 /** 组件的事件名 */
 type ComponentEventName<C> = Exclude<{
-  [K in keyof C]: C[K] extends EventEmitter<any> ? K : never
+  [K in keyof C]: C[K] extends EventEmitter<SafeAny> ? K : never
 }[keyof C], undefined>;
 
 /** 组件的事件侦听器对象 */
@@ -62,9 +61,9 @@ export interface RealFormControlOptions extends BaseFormControlOptions {
   /** I/O mapper for control */
   mapper?: {
     /** An input mapper that maps from a model's value to a form control's value */
-    input: (value?: NzSafeAny) => NzSafeAny,
+    input: (value?: SafeAny) => SafeAny,
     /** An output mapper that maps from a form control's value to a model's value */
-    output: (value?: NzSafeAny) => NzSafeAny,
+    output: (value?: SafeAny) => SafeAny,
   };
   /** Is it a required control */
   required?: boolean;
@@ -251,14 +250,14 @@ export interface SelectControlOptions extends RealFormControlOptions {
   search?: boolean;
   options: {
     /** Options data array */
-    data: Record<string, NzSafeAny>,
+    data: Record<string, SafeAny>,
     /** In the options object, the property name corresponding to the label */
     label?: string;
     /** In the options object, the property name corresponding to the value */
     value?: string;
   };
   /** Control value change callback */
-  change?: (value: NzSafeAny | NzSafeAny[], options: SelectControlOptions) => void;
+  change?: (value: SafeAny | SafeAny[], options: SelectControlOptions) => void;
   /** event listeners */
   listener?: ComponentEventListener<NzSelectComponent, SelectControlOptions>;
   /** Other properties that need to be bound */
@@ -288,7 +287,7 @@ export interface CascaderControlOptions extends RealFormControlOptions {
     value?: string;
   };
   /** Control value change callback */
-  change?: (value: NzSafeAny[], options: CascaderControlOptions) => void;
+  change?: (value: SafeAny[], options: CascaderControlOptions) => void;
   /** event listeners */
   listener?: ComponentEventListener<NzCascaderComponent, CascaderControlOptions>;
   /** Other properties that need to be bound */
@@ -327,14 +326,14 @@ export interface RadioControlOptions extends RealFormControlOptions {
   style?: 'outline' | 'solid';
   options: {
     /** Options data array */
-    data: Record<string, NzSafeAny>[],
+    data: Record<string, SafeAny>[],
     /** In the options object, the property name corresponding to the label */
     label?: string;
     /** In the options object, the property name corresponding to the value */
     value?: string;
   };
   /** Control value change callback */
-  change?: (value: NzSafeAny, options: RadioControlOptions) => void;
+  change?: (value: SafeAny, options: RadioControlOptions) => void;
   /** event listeners */
   listener?: ComponentEventListener<NzRadioGroupComponent, RadioControlOptions>;
   /** Other properties that need to be bound */
@@ -347,14 +346,14 @@ export interface CheckboxControlOptions extends RealFormControlOptions {
   name: string;
   options: {
     /** Options data array */
-    data: Record<string, NzSafeAny>[],
+    data: Record<string, SafeAny>[],
     /** In the options object, the property name corresponding to the label */
     label?: string;
     /** In the options object, the property name corresponding to the value */
     value?: string;
   };
   /** Control value change callback */
-  change?: (value: NzSafeAny[], options: CheckboxControlOptions) => void;
+  change?: (value: SafeAny[], options: CheckboxControlOptions) => void;
   /** event listeners */
   listener?: ComponentEventListener<NzCheckboxGroupComponent, CheckboxControlOptions>;
   /** Other properties that need to be bound */

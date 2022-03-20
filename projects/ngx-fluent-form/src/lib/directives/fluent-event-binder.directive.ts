@@ -1,5 +1,5 @@
 import { Directive, EventEmitter, Input, OnInit } from '@angular/core';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { SafeAny } from '@ngify/types';
 import { AnyControlOptions, ComponentEventListener, EmbeddedFormOptions, HTMLElementEventListener } from '../fluent-form.interface';
 
 @Directive({
@@ -15,13 +15,13 @@ export class FluentEventBinderDirective<H extends object, O extends Exclude<AnyC
 
     options.listener && Object.keys(options.listener).forEach(eventName => {
       if (host instanceof HTMLElement) {
-        host.addEventListener(eventName, (event: NzSafeAny) => {
+        host.addEventListener(eventName, (event: SafeAny) => {
           (options.listener as HTMLElementEventListener<O>)![
             eventName as keyof HTMLElementEventListener<O>
           ]!(event, options);
         });
       } else {
-        (host[eventName as keyof H] as unknown as EventEmitter<unknown>).subscribe((event: NzSafeAny) => {
+        (host[eventName as keyof H] as unknown as EventEmitter<unknown>).subscribe((event: SafeAny) => {
           (options.listener as ComponentEventListener<H, O>)![
             eventName as keyof ComponentEventListener<H, O>
           ]!(event, options);

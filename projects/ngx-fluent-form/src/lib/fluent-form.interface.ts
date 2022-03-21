@@ -6,6 +6,7 @@ import { NzCheckboxGroupComponent } from 'ng-zorro-antd/checkbox';
 import { NzDatePickerComponent, NzRangePickerComponent } from 'ng-zorro-antd/date-picker';
 import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
 import { NzRadioGroupComponent } from 'ng-zorro-antd/radio';
+import { NzRateComponent } from 'ng-zorro-antd/rate';
 import { NzSelectComponent } from 'ng-zorro-antd/select';
 import { NzSliderComponent } from 'ng-zorro-antd/slider';
 import { NzSwitchComponent } from 'ng-zorro-antd/switch';
@@ -24,7 +25,8 @@ export type AnyControlOptions =
   | CascaderControlOptions
   | SliderControlOptions
   | RadioControlOptions
-  | CheckboxControlOptions;
+  | CheckboxControlOptions
+  | RateControlOptions;
 
 /** HTML 元素的事件侦听器对象 */
 export type HTMLElementEventListener<O extends AnyControlOptions> = {
@@ -358,4 +360,26 @@ export interface CheckboxControlOptions extends RealFormControlOptions {
   listener?: ComponentEventListener<NzCheckboxGroupComponent, CheckboxControlOptions>;
   /** Other properties that need to be bound */
   property?: ComponentInput<NzCheckboxGroupComponent>;
+}
+
+export interface RateControlOptions extends RealFormControlOptions {
+  type: 'rate';
+  /** Field name for control */
+  name: string;
+  /** Show clean button */
+  clear?: boolean;
+  /** whether to allow semi selection */
+  half?: boolean;
+  /** star count */
+  count?: number;
+  /** custom character of rate */
+  character?: TemplateRef<void>;
+  /** Customize tooltip by each character */
+  tooltips?: string[];
+  /** Control value change callback */
+  change?: (value: number, options: RateControlOptions) => void;
+  /** event listeners */
+  listener?: ComponentEventListener<NzRateComponent, RateControlOptions>;
+  /** Other properties that need to be bound */
+  property?: ComponentInput<NzRateComponent>;
 }

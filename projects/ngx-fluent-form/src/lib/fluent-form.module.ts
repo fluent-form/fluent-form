@@ -18,6 +18,7 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { FluentEventBinderDirective } from './directives/fluent-event-binder.directive';
 import { FluentPropertyBinderDirective } from './directives/fluent-property-binder.directive';
 import { FluentFormComponent } from './fluent-form.component';
+import { NzRateModule } from 'ng-zorro-antd/rate';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { FluentFormComponent } from './fluent-form.component';
     NzSelectModule,
     NzTimePickerModule,
     NzSliderModule,
-    NzRadioModule
+    NzRadioModule,
+    NzRateModule
   ],
   exports: [
     FluentFormComponent

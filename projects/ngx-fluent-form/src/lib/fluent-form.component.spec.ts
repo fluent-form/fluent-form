@@ -18,6 +18,7 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { FluentFormComponent } from './fluent-form.component';
 import { embed, form, range, text } from './fluent-form.control';
 import { AnyControlOptions } from './fluent-form.interface';
+import { NzRateModule } from 'ng-zorro-antd/rate';
 
 describe('FluentFormComponent', () => {
   let component: FluentFormComponent<{}>;
@@ -42,7 +43,8 @@ describe('FluentFormComponent', () => {
         NzSelectModule,
         NzTimePickerModule,
         NzSliderModule,
-        NzRadioModule
+        NzRadioModule,
+        NzRateModule
       ]
     }).compileComponents();
   });

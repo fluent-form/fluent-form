@@ -1,4 +1,4 @@
-import { AnyControlOptions, CascaderControlOptions, CheckboxControlOptions, DatePickerControlOptions, EmbeddedFormOptions, InputControlOptions, NumberInputControlOptions, RadioControlOptions, RangePickerControlOptions, SelectControlOptions, SliderControlOptions, SwitchControlOptions, TextareaControlOptions, TimePickerControlOptions } from './fluent-form.interface';
+import { AnyControlOptions, CascaderControlOptions, CheckboxControlOptions, DatePickerControlOptions, EmbeddedFormOptions, InputControlOptions, NumberInputControlOptions, RadioControlOptions, RangePickerControlOptions, RateControlOptions, SelectControlOptions, SliderControlOptions, SwitchControlOptions, TextareaControlOptions, TimePickerControlOptions } from './fluent-form.interface';
 
 export const form = (...controls: Builder<AnyControlOptions, AnyControlOptions, {}>[]) => (
   controls.map(o => o.build())
@@ -19,6 +19,7 @@ export const cascader = (name: string) => builder<CascaderControlOptions>().type
 export const slider = (name: string | [string, string]) => builder<SliderControlOptions>().type('slider').name(name);
 export const radio = (name: string) => builder<RadioControlOptions>().type('radio').name(name);
 export const checkbox = (name: string) => builder<CheckboxControlOptions>().type('checkbox').name(name);
+export const rate = (name: string) => builder<RateControlOptions>().type('rate').name(name);
 
 export const embed = (name: string) => builder<EmbeddedFormOptions>().type('embed').name(name);
 

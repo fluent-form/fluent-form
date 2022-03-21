@@ -50,16 +50,18 @@ type ComponentInputName<C> = Extract<keyof ComponentProperty<C>, `nz${Capitalize
 /** NZ 组件的 Input Map */
 type ComponentInput<C> = Partial<{ [P in ComponentInputName<C>]: C[P] }>;
 
-export interface BaseFormControlOptions {
+export interface BaseFormControlOptions<Name extends string | [string, string] = string> {
   /** Type of control */
   type: string;
+  /** Field name for control */
+  name: Name;
   /** Span of the control in grid layout */
   span: number;
   /** Label for control */
   label?: string;
 }
 
-export interface RealFormControlOptions extends BaseFormControlOptions {
+export interface RealFormControlOptions<Name extends string | [string, string] = string> extends BaseFormControlOptions<Name> {
   /** I/O mapper for control */
   mapper?: {
     /** An input mapper that maps from a model's value to a form control's value */
@@ -81,16 +83,12 @@ export interface RealFormControlOptions extends BaseFormControlOptions {
 
 export interface EmbeddedFormOptions extends BaseFormControlOptions {
   type: 'embed';
-  /** Field name for control */
-  name: string;
   /** Schema for embedded form */
   schema: AnyControlOptions[];
 }
 
 export interface InputControlOptions extends RealFormControlOptions {
   type: 'text' | 'email' | 'password';
-  /** Field name for control */
-  name: string;
   /** Placeholder text */
   placeholder?: string;
   /** The pre-label of the input box */
@@ -117,8 +115,6 @@ export interface InputControlOptions extends RealFormControlOptions {
 
 export interface TextareaControlOptions extends RealFormControlOptions {
   type: 'textarea';
-  /** Field name for control */
-  name: string;
   /** Placeholder text */
   placeholder?: string;
   /** The number of lines in the text field */
@@ -135,8 +131,6 @@ export interface TextareaControlOptions extends RealFormControlOptions {
 
 export interface NumberInputControlOptions extends RealFormControlOptions {
   type: 'number';
-  /** Field name for control */
-  name: string;
   /** Placeholder text */
   placeholder?: string;
   /** Maximum value */
@@ -172,8 +166,6 @@ interface DateControlOptions {
 
 export interface DatePickerControlOptions extends RealFormControlOptions, DateControlOptions {
   type: 'date';
-  /** Field name for control */
-  name: string;
   /** Placeholder text */
   placeholder?: string;
   /** Control value change callback */
@@ -184,10 +176,8 @@ export interface DatePickerControlOptions extends RealFormControlOptions, DateCo
   property?: ComponentInput<NzDatePickerComponent>;
 }
 
-export interface RangePickerControlOptions extends RealFormControlOptions, DateControlOptions {
+export interface RangePickerControlOptions extends RealFormControlOptions<string | [string, string]>, DateControlOptions {
   type: 'range';
-  /** Field name for control */
-  name: string | [string, string];
   /** Placeholder text */
   placeholder?: [string, string];
   /** Control value change callback */
@@ -200,8 +190,6 @@ export interface RangePickerControlOptions extends RealFormControlOptions, DateC
 
 export interface TimePickerControlOptions extends RealFormControlOptions {
   type: 'time';
-  /** Field name for control */
-  name: string;
   /** Placeholder text */
   placeholder?: string;
   /** Show clean button */
@@ -224,8 +212,6 @@ export interface TimePickerControlOptions extends RealFormControlOptions {
 
 export interface SwitchControlOptions extends RealFormControlOptions {
   type: 'switch';
-  /** Field name for control */
-  name: string;
   /** Placeholder text */
   placeholder?: [string | TemplateRef<void>, string | TemplateRef<void>];
   /** Control value change callback */
@@ -238,8 +224,6 @@ export interface SwitchControlOptions extends RealFormControlOptions {
 
 export interface SelectControlOptions extends RealFormControlOptions {
   type: 'select';
-  /** Field name for control */
-  name: string;
   /** Placeholder text */
   placeholder?: string;
   /** Show clean button */
@@ -268,8 +252,6 @@ export interface SelectControlOptions extends RealFormControlOptions {
 
 export interface CascaderControlOptions extends RealFormControlOptions {
   type: 'cascader';
-  /** Field name for control */
-  name: string;
   /** Placeholder text */
   placeholder?: string;
   /** Show clean button */
@@ -296,10 +278,8 @@ export interface CascaderControlOptions extends RealFormControlOptions {
   property?: ComponentInput<NzCascaderComponent>;
 }
 
-export interface SliderControlOptions extends RealFormControlOptions {
+export interface SliderControlOptions extends RealFormControlOptions<string | [string, string]> {
   type: 'slider';
-  /** Field name for control */
-  name: string | [string, string];
   /** Placeholder text */
   placeholder?: never;
   /** Containment relationship */
@@ -322,8 +302,6 @@ export interface SliderControlOptions extends RealFormControlOptions {
 
 export interface RadioControlOptions extends RealFormControlOptions {
   type: 'radio';
-  /** Field name for control */
-  name: string;
   /** Radio control style */
   style?: 'outline' | 'solid';
   options: {
@@ -344,8 +322,6 @@ export interface RadioControlOptions extends RealFormControlOptions {
 
 export interface CheckboxControlOptions extends RealFormControlOptions {
   type: 'checkbox';
-  /** Field name for control */
-  name: string;
   options: {
     /** Options data array */
     data: Record<string, SafeAny>[],
@@ -364,8 +340,6 @@ export interface CheckboxControlOptions extends RealFormControlOptions {
 
 export interface RateControlOptions extends RealFormControlOptions {
   type: 'rate';
-  /** Field name for control */
-  name: string;
   /** Show clean button */
   clear?: boolean;
   /** whether to allow semi selection */

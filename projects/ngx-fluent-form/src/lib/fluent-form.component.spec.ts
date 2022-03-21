@@ -166,4 +166,28 @@ describe('FluentFormComponent', () => {
 
     expect(component.form.getRawValue()).toEqual({ 'start,end': [null, null] });
   });
+
+  it('mapper should work fine', () => {
+    const initialValue = 'hello', newValue = 'world';
+
+    component.schema = form(
+      text('text').span(1).mapper({
+        input: (o: string[]) => o.join(''),
+        output: (o: string) => o.split('')
+      })
+    );
+    component.model = { text: initialValue.split('') };
+
+    expect(component.form.getRawValue()).toEqual({ text: initialValue });
+
+    component.form.controls['text'].setValue(newValue);
+
+    component['form2model'](
+      component.form.getRawValue(),
+      component.model ??= {},
+      component.schema
+    );
+
+    expect(component.model).toEqual({ text: newValue.split('') });
+  });
 });

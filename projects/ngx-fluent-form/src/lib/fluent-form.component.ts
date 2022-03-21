@@ -2,6 +2,7 @@ import { Component, EventEmitter, forwardRef, Input, OnInit, Output, TemplateRef
 import { AbstractControl, ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
+import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
 import { AnyControlOptions } from './fluent-form.interface';
 
@@ -39,6 +40,10 @@ export class FluentFormComponent<T extends Record<string, SafeAny>> implements O
 
   form: FormGroup = new FormGroup({});
 
+  /** Form layout */
+  @Input() layout: NzFormLayoutType = 'vertical';
+  /** Whether or not to display the colon after the label */
+  @Input() noColon: boolean = false;
   @Input() canSave: boolean = true;
   @Input() addOnBefore: TemplateRef<{ form: FormGroup }> | null = null;
   @Input() addOnAfter: TemplateRef<{ form: FormGroup }> | null = null;

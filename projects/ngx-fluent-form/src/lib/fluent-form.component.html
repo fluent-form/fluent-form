@@ -11,7 +11,8 @@
 </nz-spin>
 
 <ng-template #formTemplate let-form="form" let-schema="schema" let-embed="embed">
-  <form nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" nz-form nzLayout="vertical" [formGroup]="form">
+  <form nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" nz-form [nzLayout]="layout" [nzNoColon]="noColon"
+        [formGroup]="form">
     <div *ngIf="!embed && addOnBefore" nz-col>
       <nz-form-item>
         <nz-form-control>

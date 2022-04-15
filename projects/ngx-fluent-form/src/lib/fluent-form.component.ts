@@ -38,7 +38,8 @@ export class FluentFormComponent<T extends Record<string, SafeAny>> implements O
     this._schema = value;
   }
 
-  form: FormGroup = new FormGroup({});
+  readonly form: FormGroup = new FormGroup({});
+  readonly infinity: number = Infinity;
 
   /** Form layout */
   @Input() layout: NzFormLayoutType = 'vertical';
@@ -49,8 +50,8 @@ export class FluentFormComponent<T extends Record<string, SafeAny>> implements O
   @Input() addOnAfter: TemplateRef<{ form: FormGroup }> | null = null;
   @Input() spinning?: boolean;
 
-  @Output() submit: EventEmitter<T> = new EventEmitter<T>();
-  @Output() cancel: EventEmitter<void> = new EventEmitter<void>();
+  @Output() readonly submit: EventEmitter<T> = new EventEmitter<T>();
+  @Output() readonly cancel: EventEmitter<void> = new EventEmitter<void>();
 
   constructor() { }
 

@@ -70,8 +70,8 @@
             <ng-container *ngSwitchCase="'number'">
               <nz-input-number #ref [fluentPropertyBinder]="{ host: ref, options: options }"
                                [fluentEventBinder]="{ host: ref, options: options }" [formControlName]="options.name"
-                               [nzPlaceHolder]="options.placeholder" [nzMin]="options.min ?? -9999999999"
-                               [nzMax]="options.max ?? 9999999999" [nzPrecision]="options.precision ?? ''"
+                               [nzPlaceHolder]="options.placeholder" [nzMin]="options.min ?? -infinity"
+                               [nzMax]="options.max ?? infinity" [nzPrecision]="options.precision ?? ''"
                                [nzPrecisionMode]="options.precisionMode" [nzStep]="options.step ?? 1"
                                (ngModelChange)="options.change?.($event, options)">
               </nz-input-number>

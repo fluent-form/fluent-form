@@ -1,49 +1,22 @@
-import { AnyControlOptions, CascaderControlOptions, CheckboxControlOptions, DatePickerControlOptions, EmbeddedFormOptions, InputControlOptions, NumberInputControlOptions, RadioControlOptions, RangePickerControlOptions, RateControlOptions, SelectControlOptions, SliderControlOptions, SwitchControlOptions, TextareaControlOptions, TimePickerControlOptions } from './fluent-form.interface';
+import { ArraySchema, CascaderControlSchema, CheckboxControlSchema, ControlName, DatePickerControlSchema, GroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from './models/schema.model';
+import { builder } from './utils/builder.utils';
 
-export const form = (...controls: Builder<AnyControlOptions, AnyControlOptions, {}>[]) => (
-  controls.map(o => o.build())
-);
+export const text = (name: string | number) => builder<InputControlSchema>().type('text').name(name);
+export const email = (name: string | number) => builder<InputControlSchema>().type('email').name(name);
+export const password = (name: string | number) => builder<InputControlSchema>().type('password').name(name);
+export const textarea = (name: string | number) => builder<TextareaControlSchema>().type('textarea').name(name);
+export const number = (name: string | number) => builder<NumberInputControlSchema>().type('number').name(name);
+export const date = (name: string | number) => builder<DatePickerControlSchema>().type('date').name(name);
+export const datetime = (name: string | number) => date(name).format('yyyy-MM-dd HH:mm:ss').showTime(true);
+export const time = (name: string | number) => builder<TimePickerControlSchema>().type('time').name(name);
+export const switcher = (name: string | number) => builder<SwitchControlSchema>().type('switch').name(name);
+export const select = (name: string | number) => builder<SelectControlSchema>().type('select').name(name);
+export const cascader = (name: string | number) => builder<CascaderControlSchema>().type('cascader').name(name);
+export const radio = (name: string | number) => builder<RadioControlSchema>().type('radio').name(name);
+export const checkbox = (name: string | number) => builder<CheckboxControlSchema>().type('checkbox').name(name);
+export const rate = (name: string | number) => builder<RateControlSchema>().type('rate').name(name);
+export const slider = (name: ControlName) => builder<SliderControlSchema>().type('slider').name(name);
+export const range = (name: ControlName) => builder<RangePickerControlSchema>().type('range').name(name);
 
-export const text = (name: string) => builder<InputControlOptions>().type('text').name(name);
-export const email = (name: string) => builder<InputControlOptions>().type('email').name(name);
-export const password = (name: string) => builder<InputControlOptions>().type('password').name(name);
-export const textarea = (name: string) => builder<TextareaControlOptions>().type('textarea').name(name);
-export const number = (name: string) => builder<NumberInputControlOptions>().type('number').name(name);
-export const date = (name: string) => builder<DatePickerControlOptions>().type('date').name(name);
-export const datetime = (name: string) => date(name).format('yyyy-MM-dd HH:mm:ss').showTime(true);
-export const range = (name: string | [string, string]) => builder<RangePickerControlOptions>().type('range').name(name);
-export const time = (name: string) => builder<TimePickerControlOptions>().type('time').name(name);
-export const switcher = (name: string) => builder<SwitchControlOptions>().type('switch').name(name);
-export const select = (name: string) => builder<SelectControlOptions>().type('select').name(name);
-export const cascader = (name: string) => builder<CascaderControlOptions>().type('cascader').name(name);
-export const slider = (name: string | [string, string]) => builder<SliderControlOptions>().type('slider').name(name);
-export const radio = (name: string) => builder<RadioControlOptions>().type('radio').name(name);
-export const checkbox = (name: string) => builder<CheckboxControlOptions>().type('checkbox').name(name);
-export const rate = (name: string) => builder<RateControlOptions>().type('rate').name(name);
-
-export const embed = (name: string) => builder<EmbeddedFormOptions>().type('embed').name(name);
-
-/**
- * @ignore
- */
-function builder<T>(): Builder<T> {
-  const builder = new Proxy({} as Record<string, unknown>, {
-    get(target, prop: string) {
-      if ('build' === prop) {
-        return () => target;
-      }
-
-      return (args: unknown): unknown => {
-        target[prop] = args;
-        return builder as Builder<T>;
-      };
-    }
-  });
-
-  return builder as Builder<T>;
-}
-
-/** T 原型，B 已选，U 未选 */
-type Builder<T, B = unknown, U = T> = (B extends T ? Record<'build', () => T> : unknown) & {
-  [P in keyof U]-?: (o: U[P]) => Builder<T, B & Record<P, U[P]>, Omit<U, P>>
-};
+export const group = (name: string | number) => builder<GroupSchema>().type('group').name(name);
+export const array = (name: string | number) => builder<ArraySchema>().type('array').name(name);

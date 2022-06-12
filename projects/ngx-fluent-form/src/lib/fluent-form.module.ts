@@ -10,6 +10,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
@@ -18,7 +19,6 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { FluentEventBinderDirective } from './directives/fluent-event-binder.directive';
 import { FluentPropertyBinderDirective } from './directives/fluent-property-binder.directive';
 import { FluentFormComponent } from './fluent-form.component';
-import { NzRateModule } from 'ng-zorro-antd/rate';
 
 @NgModule({
   declarations: [

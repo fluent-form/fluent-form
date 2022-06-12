@@ -1,185 +1,284 @@
-<nz-spin nzTip="Loading..." [nzSpinning]="spinning" nzSize="large">
-  <ng-container *ngTemplateOutlet="formTemplate; context: { form: form, schema: schema }"></ng-container>
-
-  <ng-container *ngIf="canSave">
-    <nz-divider [style.margin-bottom.px]="12"></nz-divider>
-    <div nz-row nzJustify="end" [style.margin-bottom.px]="-3">
-      <button nz-button [style.margin-right.px]="12" (click)="onCancel()">取消</button>
-      <button nz-button nzType="primary" [disabled]="form.invalid" (click)="onSubmit()">保存</button>
-    </div>
-  </ng-container>
+<nz-spin [nzTip]="spinTip" [nzSpinning]="spinning" [nzSize]="spinSize">
+  <ng-container *ngTemplateOutlet="formTemplate; context: { form: fluent.form, schemas: fluent.schemas }"></ng-container>
 </nz-spin>
 
-<ng-template #formTemplate let-form="form" let-schema="schema" let-embed="embed">
-  <form nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" nz-form [nzLayout]="layout" [nzNoColon]="noColon"
-        [formGroup]="form">
-    <div *ngIf="!embed && addOnBefore" nz-col>
-      <nz-form-item>
-        <nz-form-control>
-          <ng-container *ngTemplateOutlet="addOnBefore; context: { form: form }"></ng-container>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
+<!-- 输入框控件的模板 -->
+<!-- @param control FormControl -->
+<!-- @param schema 控件的图示 -->
+<ng-template #inputControlTemplate let-control="control" let-schema="schema">
+  <nz-input-group
+    [nzAddOnBefore]="schema.before?.template"
+    [nzAddOnAfter]="schema.after?.template"
+    [nzAddOnBeforeIcon]="schema.before?.icon"
+    [nzAddOnAfterIcon]="schema.after?.icon"
+    [nzPrefix]="schema.prefix"
+    [nzSuffix]="schema.suffix">
+    <input
+      #ref
+      nz-input
+      [fluentPropertyBinder]="{ host: ref, schema: schema }"
+      [fluentEventBinder]="{ host: ref, schema: schema }"
+      [formControl]="control"
+      [placeholder]="schema.placeholder ?? ''"
+      (ngModelChange)="schema.change?.($event, schema)" />
+  </nz-input-group>
+</ng-template>
 
-    <div *ngFor="let options of schema" nz-col [nzSpan]="options.span">
-      <ng-container *ngIf="options.type === 'embed'" [formGroupName]="options.name">
-        <!-- <div [style.padding-left.px]="options.type === 'embed' ? 30 : 0"> -->
-        <nz-divider [nzText]="options.label"></nz-divider>
-        <ng-container
-                      *ngTemplateOutlet="formTemplate; context: { form: form.get(options.name), schema: options.schema, embed: true }">
-        </ng-container>
-        <!-- </div> -->
+<!-- 控件模板 -->
+<!-- 根据 schema.type 来输出不同的控件 -->
+<!-- @param control FormControl -->
+<!-- @param schema 控件的图示 -->
+<ng-template #controlTemplate let-control="control" let-schema="schema">
+  <ng-container [ngSwitch]="schema.type">
+    <ng-container *ngSwitchCase="'text'">
+      <ng-container *ngTemplateOutlet="inputControlTemplate; context: { control, schema }">
       </ng-container>
+    </ng-container>
 
-      <nz-form-item *ngIf="options.type !== 'embed'">
-        <nz-form-label *ngIf="options.label" [nzRequired]="options.required">{{ options.label }}</nz-form-label>
-        <nz-form-control [nzErrorTip]="options.errorTip">
-          <ng-container [ngSwitch]="options.type">
-            <ng-template #inputTemplate let-options="options">
-              <nz-input-group [nzAddOnBefore]="options.before?.template" [nzAddOnAfter]="options.after?.template"
-                              [nzAddOnBeforeIcon]="options.before?.icon" [nzAddOnAfterIcon]="options.after?.icon"
-                              [nzPrefix]="options.prefix" [nzSuffix]="options.suffix">
-                <input #ref [fluentPropertyBinder]="{ host: ref, options: options }"
-                       [fluentEventBinder]="{ host: ref, options: options }" nz-input [formControlName]="options.name"
-                       [placeholder]="options.placeholder ?? ''" (ngModelChange)="options.change?.($event, options)" />
-              </nz-input-group>
-            </ng-template>
+    <ng-container *ngSwitchCase="'email'">
+      <ng-container *ngTemplateOutlet="inputControlTemplate; context: { control, schema }">
+      </ng-container>
+    </ng-container>
 
-            <ng-container *ngSwitchCase="'text'">
-              <ng-container *ngTemplateOutlet="inputTemplate; context: { options: options }">
-              </ng-container>
-            </ng-container>
+    <ng-container *ngSwitchCase="'password'">
+      <ng-container *ngTemplateOutlet="inputControlTemplate; context: { control, schema }">
+      </ng-container>
+    </ng-container>
 
-            <ng-container *ngSwitchCase="'email'">
-              <ng-container *ngTemplateOutlet="inputTemplate; context: { options: options }">
-              </ng-container>
-            </ng-container>
+    <ng-container *ngSwitchCase="'textarea'">
+      <textarea
+        #ref
+        nz-input
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [placeholder]="schema.placeholder ?? ''"
+        [rows]="schema.rows"
+        [nzAutosize]="schema.autosize ?? {}"
+        (ngModelChange)="schema.change?.($event, schema)"></textarea>
+    </ng-container>
 
-            <ng-container *ngSwitchCase="'password'">
-              <ng-container *ngTemplateOutlet="inputTemplate; context: { options: options }">
-              </ng-container>
-            </ng-container>
+    <ng-container *ngSwitchCase="'number'">
+      <nz-input-number
+        #ref
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [nzPlaceHolder]="schema.placeholder ?? ''"
+        [nzMin]="schema.min ?? -infinity"
+        [nzMax]="schema.max ?? infinity"
+        [nzPrecision]="schema.precision ?? ''"
+        [nzPrecisionMode]="schema.precisionMode"
+        [nzStep]="schema.step ?? 1"
+        (ngModelChange)="schema.change?.($event, schema)">
+      </nz-input-number>
+    </ng-container>
 
-            <ng-container *ngSwitchCase="'textarea'">
-              <textarea #ref [fluentPropertyBinder]="{ host: ref, options: options }"
-                        [fluentEventBinder]="{ host: ref, options: options }" nz-input [formControlName]="options.name"
-                        [placeholder]="options.placeholder ?? ''" [rows]="options.rows" [nzAutosize]="options.autosize ?? {}"
-                        (ngModelChange)="options.change?.($event, options)"></textarea>
-            </ng-container>
+    <ng-container *ngSwitchCase="'date'">
+      <nz-date-picker
+        #ref
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [nzPlaceHolder]="schema.placeholder"
+        [nzMode]="schema.mode"
+        [nzAllowClear]="schema.clear"
+        [nzShowTime]="schema.showTime"
+        [nzFormat]="schema.format"
+        [nzInline]="schema.inline"
+        (ngModelChange)="schema.change?.($event, schema)"></nz-date-picker>
+    </ng-container>
 
-            <ng-container *ngSwitchCase="'number'">
-              <nz-input-number #ref [fluentPropertyBinder]="{ host: ref, options: options }"
-                               [fluentEventBinder]="{ host: ref, options: options }" [formControlName]="options.name"
-                               [nzPlaceHolder]="options.placeholder" [nzMin]="options.min ?? -infinity"
-                               [nzMax]="options.max ?? infinity" [nzPrecision]="options.precision ?? ''"
-                               [nzPrecisionMode]="options.precisionMode" [nzStep]="options.step ?? 1"
-                               (ngModelChange)="options.change?.($event, options)">
-              </nz-input-number>
-            </ng-container>
+    <ng-container *ngSwitchCase="'range'">
+      <nz-range-picker
+        #ref
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [nzPlaceHolder]="schema.placeholder"
+        [nzMode]="schema.mode"
+        [nzAllowClear]="schema.clear"
+        [nzShowTime]="schema.showTime"
+        [nzFormat]="schema.format"
+        [nzInline]="schema.inline"
+        (ngModelChange)="schema.change?.($event, schema)"></nz-range-picker>
+    </ng-container>
 
-            <ng-container *ngSwitchCase="'date'">
-              <nz-date-picker #ref [fluentPropertyBinder]="{ host: ref, options: options }"
-                              [fluentEventBinder]="{ host: ref, options: options }" [formControlName]="options.name"
-                              [nzPlaceHolder]="options.placeholder" [nzMode]="options.mode" [nzAllowClear]="options.clear"
-                              [nzShowTime]="options.showTime" [nzFormat]="options.format" [nzInline]="options.inline"
-                              (ngModelChange)="options.change?.($event, options)"></nz-date-picker>
-            </ng-container>
+    <ng-container *ngSwitchCase="'time'">
+      <nz-time-picker
+        #ref
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [nzPlaceHolder]="schema.placeholder"
+        [nzAllowEmpty]="schema.clear"
+        [nzFormat]="schema.format ?? 'HH:mm:ss'"
+        [nzHourStep]="schema.step?.hour"
+        [nzMinuteStep]="schema.step?.minute"
+        [nzSecondStep]="schema.step?.second"
+        (ngModelChange)="schema.change?.($event, schema)">
+      </nz-time-picker>
+    </ng-container>
 
-            <ng-container *ngSwitchCase="'range'">
-              <nz-range-picker #ref [fluentPropertyBinder]="{ host: ref, options: options }"
-                               [fluentEventBinder]="{ host: ref, options: options }" [formControlName]="options.name"
-                               [nzPlaceHolder]="options.placeholder" [nzMode]="options.mode" [nzAllowClear]="options.clear"
-                               [nzShowTime]="options.showTime" [nzFormat]="options.format" [nzInline]="options.inline"
-                               (ngModelChange)="options.change?.($event, options)"></nz-range-picker>
-            </ng-container>
+    <ng-container *ngSwitchCase="'switch'">
+      <nz-switch
+        #ref
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [nzCheckedChildren]="schema.placeholder?.[0]"
+        [nzUnCheckedChildren]="schema.placeholder?.[1]"
+        (ngModelChange)="schema.change?.($event, schema)">
+      </nz-switch>
+    </ng-container>
 
-            <ng-container *ngSwitchCase="'time'">
-              <nz-time-picker #ref [fluentPropertyBinder]="{ host: ref, options: options }"
-                              [fluentEventBinder]="{ host: ref, options: options }" [formControlName]="options.name"
-                              [nzPlaceHolder]="options.placeholder" [nzAllowEmpty]="options.clear"
-                              [nzFormat]="options.format ?? 'HH:mm:ss'" [nzHourStep]="options.step?.hour"
-                              [nzMinuteStep]="options.step?.minute" [nzSecondStep]="options.step?.second"
-                              (ngModelChange)="options.change?.($event, options)">
-              </nz-time-picker>
-            </ng-container>
+    <ng-container *ngSwitchCase="'select'">
+      <nz-select
+        #ref
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [nzPlaceHolder]="schema.placeholder"
+        [nzAllowClear]="schema.clear"
+        [nzMode]="schema.mode ?? 'default'"
+        [nzMaxMultipleCount]="schema.limit ?? infinity"
+        [nzShowSearch]="schema.search"
+        (ngModelChange)="schema.change?.($event, schema)">
+        <nz-option
+          *ngFor="let option of schema.options"
+          [nzValue]="option[schema.config?.valueProperty ?? 'value']"
+          [nzLabel]="option[schema.config?.labelProperty ?? 'label']"></nz-option>
+      </nz-select>
+    </ng-container>
 
-            <ng-container *ngSwitchCase="'switch'">
-              <nz-switch #ref [fluentPropertyBinder]="{ host: ref, options: options }"
-                         [fluentEventBinder]="{ host: ref, options: options }" [formControlName]="options.name"
-                         [nzCheckedChildren]="options.placeholder?.[0]" [nzUnCheckedChildren]="options.placeholder?.[1]"
-                         (ngModelChange)="options.change?.($event, options)">
-              </nz-switch>
-            </ng-container>
+    <ng-container *ngSwitchCase="'cascader'">
+      <nz-cascader
+        #ref
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [nzPlaceHolder]="schema.placeholder"
+        [nzAllowClear]="schema.clear"
+        [nzExpandTrigger]="schema.trigger"
+        [nzShowSearch]="schema.search"
+        [nzOptions]="schema.options"
+        [nzValueProperty]="schema.config?.valueProperty ?? 'value'"
+        [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
+        (ngModelChange)="schema.change?.($event, schema)">
+      </nz-cascader>
+    </ng-container>
 
-            <ng-container *ngSwitchCase="'select'">
-              <nz-select #ref [fluentPropertyBinder]="{ host: ref, options: options }"
-                         [fluentEventBinder]="{ host: ref, options: options }" [formControlName]="options.name"
-                         [nzPlaceHolder]="options.placeholder" [nzAllowClear]="options.clear" [nzMode]="options.mode ?? 'default'"
-                         [nzMaxMultipleCount]="options.limit ?? 999" [nzShowSearch]="options.search"
-                         (ngModelChange)="options.change?.($event, options)">
-                <nz-option *ngFor="let option of options.options.data" [nzValue]="option[options.options.value ?? 'value']"
-                           [nzLabel]="option[options.options.label ?? 'label']"></nz-option>
-              </nz-select>
-            </ng-container>
+    <ng-container *ngSwitchCase="'slider'">
+      <nz-slider
+        #ref
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [nzIncluded]="schema.included"
+        [nzMax]="schema.max ?? 100"
+        [nzMin]="schema.min"
+        [nzRange]="schema.range"
+        [nzStep]="schema.step ?? 1"
+        (ngModelChange)="schema.change?.($event, schema)">
+      </nz-slider>
+    </ng-container>
 
-            <ng-container *ngSwitchCase="'cascader'">
-              <nz-cascader #ref [fluentPropertyBinder]="{ host: ref, options: options }"
-                           [fluentEventBinder]="{ host: ref, options: options }" [formControlName]="options.name"
-                           [nzPlaceHolder]="options.placeholder" [nzAllowClear]="options.clear"
-                           [nzExpandTrigger]="options.trigger" [nzShowSearch]="options.search" [nzOptions]="options.options.data"
-                           [nzLoadData]="options.options.load" [nzValueProperty]="options.options.value ?? 'value'"
-                           [nzLabelProperty]="options.options.label ?? 'label'"
-                           (ngModelChange)="options.change?.($event, options)">
-              </nz-cascader>
-            </ng-container>
+    <ng-container *ngSwitchCase="'radio'">
+      <nz-radio-group
+        #ref
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [nzButtonStyle]="schema.style"
+        (ngModelChange)="schema.change?.($event, schema)">
+        <ng-container *ngFor="let option of schema.options">
+          <label *ngIf="!schema.style" nz-radio [nzValue]="option[schema.config?.valueProperty ?? 'value']">
+            {{ option[schema.config?.labelProperty ?? 'label'] }}
+          </label>
+          <label *ngIf="schema.style" nz-radio-button [nzValue]="option[schema.config?.valueProperty ?? 'value']">
+            {{ option[schema.config?.labelProperty ?? 'label'] }}
+          </label>
+        </ng-container>
+      </nz-radio-group>
+    </ng-container>
 
-            <ng-container *ngSwitchCase="'slider'">
-              <nz-slider #ref [fluentPropertyBinder]="{ host: ref, options: options }"
-                         [fluentEventBinder]="{ host: ref, options: options }" [formControlName]="options.name"
-                         [nzIncluded]="options.included" [nzMax]="options.max ?? 100" [nzMin]="options.min"
-                         [nzRange]="options.range" [nzStep]="options.step ?? 1"
-                         (ngModelChange)="options.change?.($event, options)">
-              </nz-slider>
-            </ng-container>
+    <ng-container *ngSwitchCase="'checkbox'">
+      <nz-checkbox-group
+        #ref
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        (ngModelChange)="schema.change?.($event, schema)">
+      </nz-checkbox-group>
+    </ng-container>
 
-            <ng-container *ngSwitchCase="'radio'">
-              <nz-radio-group #ref [fluentPropertyBinder]="{ host: ref, options: options }"
-                              [fluentEventBinder]="{ host: ref, options: options }" [formControlName]="options.name"
-                              [nzButtonStyle]="options.style" (ngModelChange)="options.change?.($event, options)">
-                <ng-container *ngFor="let option of options.options.data">
-                  <label *ngIf="!options.style" nz-radio [nzValue]="option[options.options.value ?? 'value']">
-                    {{ option[options.options.label ?? 'label'] }}
-                  </label>
-                  <label *ngIf="options.style" nz-radio-button [nzValue]="option[options.options.value ?? 'value']">
-                    {{ option[options.options.label ?? 'label'] }}
-                  </label>
-                </ng-container>
-              </nz-radio-group>
-            </ng-container>
+    <ng-container *ngSwitchCase="'rate'">
+      <nz-rate #ref
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [nzAllowClear]="schema.clear ?? true"
+        [nzAllowHalf]="schema.half"
+        [nzCharacter]="schema.character"
+        [nzCount]="schema.count ?? 5"
+        [nzTooltips]="schema.tooltips ?? []"
+        (ngModelChange)="schema.change?.($event, schema)"></nz-rate>
+    </ng-container>
+  </ng-container>
+</ng-template>
 
-            <ng-container *ngSwitchCase="'checkbox'">
-              <nz-checkbox-group #ref [fluentPropertyBinder]="{ host: ref, options: options }"
-                                 [fluentEventBinder]="{ host: ref, options: options }" [formControlName]="options.name"
-                                 (ngModelChange)="options.change?.($event, options)">
-              </nz-checkbox-group>
-            </ng-container>
+<!-- 关于为什么使用 `AbstractControl.get([name])` 而不是 `AbstractControl.get(name)` ？ -->
+<!-- 由于 NG 没有提供 FormArrayDirective，查阅源码后发现其实 FormGroupDirective 是兼容传入 FormArray 对象的。 -->
+<!-- 需要注意的就是 AbstractControl#get() 方法，由于 FormGroupDirective 原本是为 FormGroup 服务的， -->
+<!-- 而 FormGroup 的控件名为字符串，AbstractControl#get() 方法的参数自然也只处理字符串类型（调用了 String#split()）， -->
+<!-- 但 FormArray 的控件名为数字，此时如果参数传入的是数字，就会出问题，因此这里将参数一律转为数组来绕开此问题。 -->
+<ng-template #formTemplate let-form="form" let-schemas="schemas">
+  <form
+    nz-row
+    nz-form
+    [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }"
+    [nzLayout]="layout"
+    [nzNoColon]="noColon"
+    [formGroup]="form">
 
-            <ng-container *ngSwitchCase="'rate'">
-              <nz-rate #ref [fluentPropertyBinder]="{ host: ref, options: options }"
-                       [fluentEventBinder]="{ host: ref, options: options }" [formControlName]="options.name"
-                       [nzAllowClear]="options.clear ?? true" [nzAllowHalf]="options.half" [nzCharacter]="options.character"
-                       [nzCount]="options.count ?? 5" [nzTooltips]="options.tooltips ?? []"
-                       (ngModelChange)="options.change?.($event, options)"></nz-rate>
-            </ng-container>
-          </ng-container>
+    <div *ngIf="addOnBefore" nz-col>
+      <nz-form-item>
+        <nz-form-control>
+          <ng-container *ngTemplateOutlet="addOnBefore; context: { form }"></ng-container>
         </nz-form-control>
       </nz-form-item>
     </div>
 
-    <div *ngIf="!embed && addOnAfter" nz-col>
+    <div *ngFor="let schema of schemas; index as index" nz-col [nzSpan]="schema.span ?? null">
+      <ng-container [ngSwitch]="schema.type">
+        <ng-container *ngSwitchCase="'group'">
+          <nz-divider [nzText]="schema.label"></nz-divider>
+          <ng-container *ngTemplateOutlet="formTemplate; context: { form: form.get([schema.name]), schemas: schema.schemas }">
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'array'">
+          <nz-divider [nzText]="schema.label"></nz-divider>
+          <ng-container *ngTemplateOutlet="formTemplate; context: { form: form.get([schema.name]), schemas: schema.schemas }">
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+          <nz-form-item>
+            <nz-form-label *ngIf="schema.label" [nzRequired]="schema.required">{{ schema.label }}</nz-form-label>
+            <nz-form-control [nzErrorTip]="schema.errorTip">
+              <ng-container *ngTemplateOutlet="controlTemplate; context: { control: form.get([schema.name]), schema: schema }">
+              </ng-container>
+            </nz-form-control>
+          </nz-form-item>
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <div *ngIf="addOnAfter" nz-col>
       <nz-form-item>
         <nz-form-control>
-          <ng-container *ngTemplateOutlet="addOnAfter; context: { form: form }"></ng-container>
+          <ng-container *ngTemplateOutlet="addOnAfter; context: { form }"></ng-container>
         </nz-form-control>
       </nz-form-item>
     </div>

@@ -1,30 +1,31 @@
 import { Directive, EventEmitter, Input, OnInit } from '@angular/core';
 import { SafeAny } from '@ngify/types';
-import { AnyControlOptions, ComponentEventListener, EmbeddedFormOptions, HTMLElementEventListener } from '../fluent-form.interface';
+import { ComponentEventListenerMap, HTMLElementEventListenerMap } from '../fluent-form.type';
+import { RealControlSchema } from '../models/schema.model';
 
 @Directive({
   selector: '[fluentEventBinder]'
 })
-export class FluentEventBinderDirective<H extends object, O extends Exclude<AnyControlOptions, EmbeddedFormOptions>> implements OnInit {
-  @Input() fluentEventBinder!: { host: H, options: O };
+export class FluentEventBinderDirective<H extends object, S extends RealControlSchema> implements OnInit {
+  @Input() fluentEventBinder!: { host: H, schema: S };
 
   constructor() { }
 
   ngOnInit() {
-    const { host, options } = this.fluentEventBinder;
+    const { host, schema } = this.fluentEventBinder;
 
-    options.listener && Object.keys(options.listener).forEach(eventName => {
+    schema.listener && Object.keys(schema.listener).forEach(eventName => {
       if (host instanceof HTMLElement) {
         host.addEventListener(eventName, (event: SafeAny) => {
-          (options.listener as HTMLElementEventListener<O>)![
-            eventName as keyof HTMLElementEventListener<O>
-          ]!(event, options);
+          (schema.listener as HTMLElementEventListenerMap<S>)![
+            eventName as keyof HTMLElementEventListenerMap<S>
+          ]!(event, schema);
         });
       } else {
         (host[eventName as keyof H] as unknown as EventEmitter<unknown>).subscribe((event: SafeAny) => {
-          (options.listener as ComponentEventListener<H, O>)![
-            eventName as keyof ComponentEventListener<H, O>
-          ]!(event, options);
+          (schema.listener as ComponentEventListenerMap<H, S>)![
+            eventName as keyof ComponentEventListenerMap<H, S>
+          ]!(event, schema);
         });
       }
     });

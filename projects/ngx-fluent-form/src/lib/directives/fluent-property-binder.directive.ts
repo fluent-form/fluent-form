@@ -1,22 +1,20 @@
 import { Directive, Input, OnInit } from '@angular/core';
-import { AnyControlOptions, EmbeddedFormOptions } from '../fluent-form.interface';
+import { RealControlSchema } from '../models/schema.model';
 
 @Directive({
   selector: '[fluentPropertyBinder]'
 })
-export class FluentPropertyBinderDirective<H extends object, O extends Exclude<AnyControlOptions, EmbeddedFormOptions>> implements OnInit {
-  @Input() fluentPropertyBinder!: { host: H, options: O };
+export class FluentPropertyBinderDirective<H extends object, S extends RealControlSchema> implements OnInit {
+  @Input() fluentPropertyBinder!: { host: H, schema: S };
 
   constructor() { }
 
   ngOnInit() {
-    const { host, options } = this.fluentPropertyBinder;
+    const { host, schema } = this.fluentPropertyBinder;
 
-    options.property && Object.keys(options.property).forEach(property => {
-      (options.property as O['property'])![property as keyof O['property']];
-      host[property as keyof H] = (options.property as O['property'])![
-        property as keyof O['property']
-      ] as unknown as H[keyof H];
+    schema.property && Object.keys(schema.property).forEach(property => {
+      const value = (schema.property as S['property'])![property as keyof S['property']];
+      host[property as keyof H] = value as unknown as H[keyof H];
     });
   }
 

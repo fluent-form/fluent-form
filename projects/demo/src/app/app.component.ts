@@ -1,20 +1,6 @@
 import { Component } from '@angular/core';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { date, embed, form, number, switcher, text, textarea } from 'projects/ngx-fluent-form/src/public-api';
-
-class User {
-  id!: number;
-  fullName!: string;
-  nickname!: string;
-  birthday!: number;
-  enabled: boolean = true;
-  age!: number;
-  detail!: UserDetail;
-}
-
-class UserDetail {
-  intro!: string;
-}
+import { form } from 'projects/ngx-fluent-form/src/lib/models/fluent-form.model';
+import { array, group, switcher, text, textarea } from 'projects/ngx-fluent-form/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -22,106 +8,41 @@ class UserDetail {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  expandId?: number;
+  constructor() { }
 
-  searchSchema = form(
-    text('fullName').span(6).placeholder('请输入'),
-    date('birthday').span(6),
-    switcher('enabled').span(2).placeholder(['有效', '无效'])
-  );
-  searchModel: User;
+  value = {
+    enabled: 'true',
+    age: 44,
+    details: [
+      'aaa'
+    ]
+  }
 
-  schema = form(
-    text('fullName').span(6).placeholder('请输入').label('全称').required(true).listener({
-      input: console.log
-    }).property({
-      id: 'id'
+  fluent = form(
+    switcher('enabled').placeholder(['有效', '无效']).label('状态').mapper({
+      input: (o: string) => o?.includes('true'),
+      output: (o: boolean) => o + ' is boolean value'
     }),
-    text('nickname').span(6).placeholder('请输入').label('昵称'),
-    date('birthday').span(6).label('生日').listener({
-      nzOnOpenChange: () => console.log(111),
-    }).property({
-      nzId: 'id'
-    }),
-    switcher('enabled').span(2).placeholder(['有效', '无效']).label('状态'),
-    number('age').span(4).placeholder('请输入').label('年龄'),
-    embed('detail').span(24).label('详情').schema(form(
-      textarea('intro').rows(5).span(12).placeholder('请输入').label('简介'),
-    ))
-  );
+    { type: 'number', label: '年龄', name: 'age', value: 99 },
+    group('info').label('信息').span(24).schemas([
+      text('intro').placeholder('请输入').label('简介'),
+    ]),
+    array('details').label('一级列表').span(24).schemas([
+      { type: 'text', label: '标题', name: 0, value: '啊哈哈' },
+      group(1).label('一级列表里的组').schemas([
+        { type: 'text', label: '标题', name: 'title' },
+        textarea('intro').rows(3).placeholder('请输入').label('简介'),
+      ]),
+      array(2).label('二级列表').span(24).schemas([
+        group(0).label('二级列表里的组').schemas([
+          { type: 'text', label: '标题', name: 'title' },
+          textarea('intro').rows(3).placeholder('请输入').label('简介'),
+        ])
+      ])
+    ])
+  )
 
-  data: any[] = [
-    {
-      id: 1,
-      fullName: 'AAA',
-      nickname: 'AAA昵称',
-      birthday: Date.now(),
-      enabled: true,
-      age: 30,
-      detail: {
-        intro: '简介咖啡机按钮可点击饭卡喀什酱豆腐咖啡机'
-      }
-    },
-    {
-      id: 2,
-      fullName: 'BBB',
-      nickname: 'BBB昵称',
-      birthday: Date.now(),
-      age: 25,
-      enabled: true,
-    },
-    {
-      id: 3,
-      fullName: 'CCC',
-      nickname: 'CCC昵称',
-      birthday: Date.now(),
-      age: 20,
-      enabled: true,
-    },
-  ];
-
-  formSpinning = false;
-
-  constructor(private msg: NzMessageService) {
-    this.searchModel = new User();
-    this.searchModel.detail = new UserDetail();
-  }
-
-  ngOnInit(): void { }
-
-  onExpandChange(id: number, checked: boolean): void {
-    if (checked) {
-      this.expandId = id;
-    } else {
-      this.expandId = 0;
-    }
-  }
-
-  onAdd() {
-    if (this.data[0]?.id) {
-      this.data = [new User()].concat(this.data)
-    }
-    this.expandId = undefined
-  }
-
-  onSubmit(entity: User, model: User) {
-    this.formSpinning = true;
-
-    setTimeout(() => {
-      this.formSpinning = false;
-      console.log(entity);
-      Object.assign(entity, model);
-      entity.id ??= this.data.length;
-      this.msg.success('保存成功')
-      this.expandId = 0
-    }, 500);
-  }
-
-  onCancel() {
-    if (!this.data[0]?.id) {
-      this.data.shift();
-      this.data = this.data.slice();
-    }
-    this.expandId = 0
+  ngOnInit(): void {
+    console.log(this.fluent);
   }
 }

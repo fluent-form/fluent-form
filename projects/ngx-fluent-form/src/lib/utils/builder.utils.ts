@@ -24,6 +24,10 @@ export type Builder<T, B = unknown, U = T> = (B extends T ? Record<'build', () =
   [P in keyof U]-?: (o: U[P]) => Builder<T, B & Record<P, U[P]>, Omit<U, P>>
 };
 
+/**
+ * 是否为一个构建器
+ * @param builder
+ */
 export const isBuilder = <T = unknown>(builder: any): builder is Builder<T> => (
   typeof builder.build === 'function'
 );

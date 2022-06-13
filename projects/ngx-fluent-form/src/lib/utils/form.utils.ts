@@ -13,7 +13,7 @@ export function assignModelToForm<T extends Record<string, unknown>>(model: Reco
 export function assignModelToForm<T extends unknown[]>(model: T, form: FormArray, schemas: (AnyControlSchema | AnyControlBuilder)[]): void;
 export function assignModelToForm<T extends Record<string, unknown> | unknown[]>(model: T, form: FormGroup | FormArray, schemas: (AnyControlSchema | AnyControlBuilder)[]): void {
   standardSchemas(schemas).forEach(schema => {
-    // 如果是双字段模式，value 也将会是一个数组
+    // 如果是双字段模式，从模型中取得的 value 也将会是一个数组
     let value = Array.isArray(schema.name) ?
       schema.name.map(property => model[property as keyof T] ?? null) :
       model[schema.name as keyof T] ?? null as unknown | unknown[] | null;

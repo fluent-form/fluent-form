@@ -3,8 +3,10 @@ import { FormGroup } from '@angular/forms';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { Subject, takeUntil } from 'rxjs';
-import { FluentGroup } from './models/fluent-form.model';
+import { FluentSchema } from './models/fluent-form.model';
 import { assignFormToModel, assignModelToForm } from './utils/form.utils';
+import { convertSchemasToGroup } from './utils/schema.utils';
+
 @Component({
   selector: 'fluent-form',
   templateUrl: './fluent-form.component.html',
@@ -13,7 +15,7 @@ import { assignFormToModel, assignModelToForm } from './utils/form.utils';
 })
 export class FluentFormComponent<T extends Record<string, unknown>> implements OnInit {
   private destroy$: Subject<void> = new Subject<void>();
-  private _fluent!: FluentGroup;
+  private _fluent!: FluentSchema;
   private _model!: T;
 
   readonly infinity: number = Infinity;
@@ -22,13 +24,14 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
   get model(): T { return this._model; }
   set model(value: T) {
     this._model = value;
-    this.fluent && assignModelToForm(value, this.fluent.form, this.fluent.schemas);
+    this.fluent && assignModelToForm(value, this.form, this.fluent.schemas);
   }
 
   @Input()
   get fluent() { return this._fluent; }
-  set fluent(value: FluentGroup) {
+  set fluent(value: FluentSchema) {
     this._fluent = value;
+    this.form = convertSchemasToGroup(this.fluent.schemas);
   }
 
   /** Form layout */
@@ -41,13 +44,15 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
   @Input() spinTip: string = 'Loading...';
   @Input() spinSize: NzSizeLDSType = 'large';
 
+  form!: FormGroup;
+
   constructor() { }
 
   ngOnInit(): void {
-    assignModelToForm(this.model, this.fluent.form, this.fluent.schemas);
+    assignModelToForm(this.model, this.form, this.fluent.schemas);
 
-    this.fluent.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      assignFormToModel(this.fluent.form, this.model, this.fluent.schemas);
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      assignFormToModel(this.form, this.model, this.fluent.schemas);
     });
   }
 

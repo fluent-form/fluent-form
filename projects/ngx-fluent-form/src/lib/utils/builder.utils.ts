@@ -16,9 +16,9 @@ export function builder<T>(): Builder<T> {
 }
 
 /**
- * @generics T 原型
- * @generics B 已选
- * @generics U 未选
+ * @template T 原型
+ * @template B 已选
+ * @template U 未选
  */
 export type Builder<T, B = unknown, U = T> = (B extends T ? Record<'build', () => T> : unknown) & {
   [P in keyof U]-?: (o: U[P]) => Builder<T, B & Record<P, U[P]>, Omit<U, P>>

@@ -7,7 +7,7 @@ import { AnyControlSchema } from './models/schema.model';
  * ```ts
  * { click: (event, schema) => void, ... }
  * ```
- * @generics S 各种控件的图示
+ * @template S 各种控件的图示
  */
 export type HTMLElementEventListenerMap<S extends AnyControlSchema> = {
   [K in keyof HTMLElementEventMap]?: (event: HTMLElementEventMap[K], schema: S) => void
@@ -15,7 +15,7 @@ export type HTMLElementEventListenerMap<S extends AnyControlSchema> = {
 
 /**
  * 组件的事件名
- * @generics C 组件的类类型
+ * @template C 组件的类类型
  */
 type ComponentEventName<C> = Exclude<{
   [K in keyof C]: C[K] extends EventEmitter<SafeAny> ? K : never
@@ -26,8 +26,8 @@ type ComponentEventName<C> = Exclude<{
  * ```ts
  * { nzChange: (event, schema) => void, ... }
  * ```
- * @generics C 组件的类类型
- * @generics S 各种控件的图示
+ * @template C 组件的类类型
+ * @template S 各种控件的图示
  */
 export type ComponentEventListenerMap<C, S extends AnyControlSchema> = {
   [K in ComponentEventName<C>]?: (event: C[K] extends EventEmitter<infer E> ? E : never, schema: S) => void
@@ -35,18 +35,18 @@ export type ComponentEventListenerMap<C, S extends AnyControlSchema> = {
 
 /**
  * 组件属性的联合类型
- * @generics C 组件的类类型
+ * @template C 组件的类类型
  */
 type ComponentProperty<C> = Omit<Property<C>, ComponentEventName<C>>;
 
 /**
  * NZ 组件的 @Input 名字的联合类型
- * @generics C 组件的类类型
+ * @template C 组件的类类型
  */
 type ComponentInputName<C> = Extract<keyof ComponentProperty<C>, `nz${Capitalize<string>}`>;
 
 /**
  * NZ 组件的 Input Map
- * @generics C 组件的类类型
+ * @template C 组件的类类型
  */
 export type ComponentInput<C> = Partial<{ [P in ComponentInputName<C>]: C[P] }>;

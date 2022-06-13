@@ -66,7 +66,7 @@ describe('FluentFormComponent', () => {
       text('text')
     );
 
-    assignFormToModel(component.fluent.form, component.model ??= {}, component.fluent.schemas);
+    assignFormToModel(component.form, component.model ??= {}, component.fluent.schemas);
 
     expect(component.model).toEqual({ text: null });
   });
@@ -78,7 +78,7 @@ describe('FluentFormComponent', () => {
       ])
     );
 
-    assignFormToModel(component.fluent.form, component.model ??= {}, component.fluent.schemas);
+    assignFormToModel(component.form, component.model ??= {}, component.fluent.schemas);
 
     expect(component.model).toEqual({ group: { text: null } });
   });
@@ -90,7 +90,7 @@ describe('FluentFormComponent', () => {
       ])
     );
 
-    assignFormToModel(component.fluent.form, component.model ??= {}, component.fluent.schemas);
+    assignFormToModel(component.form, component.model ??= {}, component.fluent.schemas);
 
     expect(component.model).toEqual({ array: [null] });
   });
@@ -104,7 +104,7 @@ describe('FluentFormComponent', () => {
       ])
     );
 
-    assignFormToModel(component.fluent.form, component.model ??= {}, component.fluent.schemas);
+    assignFormToModel(component.form, component.model ??= {}, component.fluent.schemas);
 
     expect(component.model).toEqual({ array: [[null]] });
   });
@@ -114,7 +114,7 @@ describe('FluentFormComponent', () => {
       range(['start', 'end']).span(1)
     );
 
-    assignFormToModel(component.fluent.form, component.model ??= {}, component.fluent.schemas);
+    assignFormToModel(component.form, component.model ??= {}, component.fluent.schemas);
 
     expect(component.model).toEqual({ start: null, end: null });
   });
@@ -125,7 +125,7 @@ describe('FluentFormComponent', () => {
     );
     component.model = { text: 'test' };
 
-    expect(component.fluent.form.getRawValue()).toEqual({ text: 'test' });
+    expect(component.form.getRawValue()).toEqual({ text: 'test' });
   });
 
   it('模型应该能正确赋值表单（多级模型）', () => {
@@ -136,7 +136,7 @@ describe('FluentFormComponent', () => {
     );
     component.model = { group: { text: 'test' } };
 
-    expect(component.fluent.form.getRawValue()).toEqual({ group: { text: 'test' } });
+    expect(component.form.getRawValue()).toEqual({ group: { text: 'test' } });
   });
 
   it('模型应该能正确赋值表单（数组）', () => {
@@ -147,7 +147,7 @@ describe('FluentFormComponent', () => {
     );
     component.model = { array: ['test'] };
 
-    expect(component.fluent.form.getRawValue()).toEqual({ array: ['test'] });
+    expect(component.form.getRawValue()).toEqual({ array: ['test'] });
   });
 
   it('模型应该能正确赋值表单（多级数组）', () => {
@@ -160,7 +160,7 @@ describe('FluentFormComponent', () => {
     );
     component.model = { array: [['test']] };
 
-    expect(component.fluent.form.getRawValue()).toEqual({ array: [['test']] });
+    expect(component.form.getRawValue()).toEqual({ array: [['test']] });
   });
 
   it('模型应该能正确赋值表单（双字段模式）', () => {
@@ -170,7 +170,7 @@ describe('FluentFormComponent', () => {
     );
     component.model = { start: 0, end: 1 };
 
-    expect(component.fluent.form.getRawValue()).toEqual({ [fields.toString()]: [0, 1] });
+    expect(component.form.getRawValue()).toEqual({ [fields.toString()]: [0, 1] });
   });
 
   it('应该能正确应用映射器', () => {
@@ -184,11 +184,11 @@ describe('FluentFormComponent', () => {
     );
     component.model = { text: initialValue.split('') };
 
-    expect(component.fluent.form.getRawValue()).toEqual({ text: initialValue });
+    expect(component.form.getRawValue()).toEqual({ text: initialValue });
 
-    component.fluent.form.controls['text'].setValue(newValue);
+    component.form.controls['text'].setValue(newValue);
 
-    assignFormToModel(component.fluent.form, component.model, component.fluent.schemas);
+    assignFormToModel(component.form, component.model, component.fluent.schemas);
 
     expect(component.model).toEqual({ text: newValue.split('') });
   });

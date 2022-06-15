@@ -1,6 +1,6 @@
-import { array, group, text } from '../fluent-form.control';
+import { array, group, slider, text } from '../fluent-form.control';
 import { AnyControlSchema } from '../models/schema.model';
-import { standardSchemas } from './schema.utils';
+import { findSchema, standardSchema, standardSchemas } from './schema.utils';
 
 describe('schema.utils', () => {
   it('应该能正确标准化不同的图示', () => {
@@ -50,5 +50,89 @@ describe('schema.utils', () => {
     ]);
 
     expect(schemas).toEqual(value);
+  });
+
+  it('应该能在图示列表中找到目标图示', () => {
+    const target = standardSchema(text('name'));
+    const schemas = [target];
+    const schema = findSchema(schemas, 'name');
+
+    expect(schema).toBe(target);
+  });
+
+  it('应该能在图示列表中找到目标图示（一级）', () => {
+    const target = standardSchema(text('name'));
+    const schemas = standardSchemas([
+      group('group').schemas([target])
+    ]);
+    const schema = findSchema(schemas, ['group', 'name']);
+
+    expect(schema).toBe(target);
+  });
+
+  it('应该能在图示列表中找到目标图示（多级）', () => {
+    const target = standardSchema(text('name'));
+    const schemas = standardSchemas([
+      group('group').schemas([
+        group('group').schemas([target])
+      ])
+    ]);
+    const schema = findSchema(schemas, ['group', 'group', 'name']);
+
+    expect(schema).toBe(target);
+  });
+
+  it('应该能在图示列表中找到目标图示（一维数组）', () => {
+    const target = standardSchema(text(0));
+    const schemas = standardSchemas([
+      array('array').schemas([target])
+    ]);
+    const schema = findSchema(schemas, ['array', 0]);
+
+    expect(schema).toBe(target);
+  });
+
+  it('应该能在图示列表中找到目标图示（多维数组）', () => {
+    const target = standardSchema(text(0));
+    const schemas = standardSchemas([
+      array('array').schemas([
+        array('array').schemas([target])
+      ])
+    ]);
+    const schema = findSchema(schemas, ['array', 'array', 0]);
+
+    expect(schema).toBe(target);
+  });
+
+  it('应该能在图示列表中找到目标图示（对象嵌套数组）', () => {
+    const target = standardSchema(text(0));
+    const schemas = standardSchemas([
+      group('group').schemas([
+        array('array').schemas([target])
+      ])
+    ]);
+    const schema = findSchema(schemas, ['group', 'array', 0]);
+
+    expect(schema).toBe(target);
+  });
+
+  it('应该能在图示列表中找到目标图示（数组嵌套对象）', () => {
+    const target = standardSchema(text('name'));
+    const schemas = standardSchemas([
+      array('array').schemas([
+        group(0).schemas([target])
+      ])
+    ]);
+    const schema = findSchema(schemas, ['array', 0, 'name']);
+
+    expect(schema).toBe(target);
+  });
+
+  it('应该能在图示列表中找到目标图示（双字段）', () => {
+    const target = standardSchema(slider(['begin', 'end']));
+    const schemas = [target];
+    const schema = findSchema(schemas, [['begin', 'end']]);
+
+    expect(schema).toBe(target);
   });
 });

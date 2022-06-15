@@ -153,8 +153,7 @@ export function findSchema<T extends AnyControlSchema = AnyControlSchema>(schema
     schemas = beforePath.reduceRight((schemas, name) => (
       (schemas.find(o => o.name === name) as VirtualControlSchema).schemas as AnyControlSchema[]
     ), schemas as AnyControlSchema[]);
-
-    return findSchema(schemas, endPath);
+    path = endPath;
   }
 
   return schemas.find(o => {

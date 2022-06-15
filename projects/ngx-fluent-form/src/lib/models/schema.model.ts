@@ -56,7 +56,7 @@ export interface AbstractControlSchema<N extends AnyControlName> {
   /** Type of control */
   type: string;
   /** Field name for control */
-  readonly name: N;
+  name: N;
   /** Span of the control in grid layout */
   span?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24;
   /** Label for control */

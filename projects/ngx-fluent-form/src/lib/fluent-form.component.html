@@ -1,5 +1,5 @@
 <nz-spin [nzTip]="spinTip" [nzSpinning]="spinning" [nzSize]="spinSize">
-  <ng-container *ngTemplateOutlet="formTemplate; context: { form: form, schemas: fluent.schemas }"></ng-container>
+  <ng-container *ngTemplateOutlet="formTemplate; context: { form, schemas }"></ng-container>
 </nz-spin>
 
 <!-- 输入框控件的模板 -->
@@ -29,7 +29,7 @@
 <!-- @param control FormControl -->
 <!-- @param schema 控件的图示 -->
 <ng-template #controlTemplate let-control="control" let-schema="schema">
-  <ng-container [ngSwitch]="schema.type">
+  <ng-container *ngIf="control" [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'text'">
       <ng-container *ngTemplateOutlet="inputControlTemplate; context: { control, schema }">
       </ng-container>

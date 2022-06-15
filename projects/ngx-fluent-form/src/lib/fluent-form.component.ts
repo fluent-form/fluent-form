@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { Subject, takeUntil } from 'rxjs';
-import { FluentSchema } from './models/fluent-form.model';
+import { AnyControlSchema } from './models/schema.model';
 import { assignFormToModel, assignModelToForm } from './utils/form.utils';
 import { convertSchemasToGroup } from './utils/schema.utils';
 
@@ -15,23 +15,30 @@ import { convertSchemasToGroup } from './utils/schema.utils';
 })
 export class FluentFormComponent<T extends Record<string, unknown>> implements OnInit {
   private destroy$: Subject<void> = new Subject<void>();
-  private _fluent!: FluentSchema;
+  private _schemas!: AnyControlSchema[];
+  private _form!: FormGroup;
   private _model!: T;
 
   readonly infinity: number = Infinity;
+
+  get form(): FormGroup { return this._form; }
+  set form(value: FormGroup) {
+    this._form = value;
+    this.formChange.emit(value);
+  }
 
   @Input()
   get model(): T { return this._model; }
   set model(value: T) {
     this._model = value;
-    this.fluent && assignModelToForm(value, this.form, this.fluent.schemas);
+    this.schemas && assignModelToForm(value, this.form, this.schemas);
   }
 
   @Input()
-  get fluent() { return this._fluent; }
-  set fluent(value: FluentSchema) {
-    this._fluent = value;
-    this.form = convertSchemasToGroup(this.fluent.schemas);
+  get schemas() { return this._schemas; }
+  set schemas(value: AnyControlSchema[]) {
+    this._schemas = value;
+    this.form = convertSchemasToGroup(value);
   }
 
   /** Form layout */
@@ -44,15 +51,15 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
   @Input() spinTip: string = 'Loading...';
   @Input() spinSize: NzSizeLDSType = 'large';
 
-  form!: FormGroup;
+  @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
-    assignModelToForm(this.model, this.form, this.fluent.schemas);
+    assignModelToForm(this.model, this.form, this.schemas);
 
     this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      assignFormToModel(this.form, this.model, this.fluent.schemas);
+      assignFormToModel(this.form, this.model, this.schemas);
     });
   }
 
@@ -60,7 +67,5 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
     this.destroy$.next();
     this.destroy$.complete();
   }
-
-  log(o: any) { console.log('LOG', o) }
 
 }

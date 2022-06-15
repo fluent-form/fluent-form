@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { form } from 'projects/ngx-fluent-form/src/lib/models/fluent-form.model';
-import { array, group, switcher, text, textarea } from 'projects/ngx-fluent-form/src/public-api';
+import { array, form, group, switcher, text, textarea } from 'projects/ngx-fluent-form/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +17,7 @@ export class AppComponent {
     ]
   }
 
-  fluent = form(
+  schemas = form(
     switcher('enabled').placeholder(['有效', '无效']).label('状态').mapper({
       input: (o: string) => o?.includes('true'),
       output: (o: boolean) => o + ' is boolean value'
@@ -42,7 +41,5 @@ export class AppComponent {
     ])
   )
 
-  ngOnInit(): void {
-    console.log(this.fluent);
-  }
+  ngOnInit(): void { }
 }

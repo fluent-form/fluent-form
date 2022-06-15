@@ -1,5 +1,5 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { AnyControlBuilder, AnyControlSchema, RealControlBuilder, RealControlSchema, VirtualControlSchema } from '../models/schema.model';
+import { AnyControlBuilder, AnyControlName, AnyControlSchema, RealControlBuilder, RealControlSchema, SingleKeyControlName, VirtualControlSchema } from '../models/schema.model';
 import { Builder, isBuilder } from './builder.utils';
 
 const VIRTUAL_CONTROL_TYPES = ['group', 'array'];
@@ -17,11 +17,11 @@ const isVirtualControlSchema = (schema: AnyControlSchema): schema is VirtualCont
  * @param schema
  * @param validator
  */
-const addValidatorToSchema = (schema: RealControlSchema, ...validator: ValidatorFn[]) => {
+const addValidatorToSchema = (schema: RealControlSchema, validator: ValidatorFn) => {
   if (schema.validator) {
-    schema.validator.push(...validator);
+    schema.validator.push(validator);
   } else {
-    schema.validator = [...validator];
+    schema.validator = [validator];
   }
 }
 
@@ -29,7 +29,7 @@ const addValidatorToSchema = (schema: RealControlSchema, ...validator: Validator
  * 标准化图示
  * @param schema
  */
-const standardSchema = <T extends AnyControlSchema>(schema: T | Builder<T, T, {}>): T => {
+export const standardSchema = <T extends AnyControlSchema>(schema: T | Builder<T, T, {}>): T => {
   const _schema = (isBuilder(schema) ? schema.build() : schema) as T;
 
   if (isVirtualControlSchema(_schema)) {
@@ -77,18 +77,19 @@ export function convertSchemasToGroup(schemas: (AnyControlSchema | AnyControlBui
   return new FormGroup(
     schemas.reduce((controls, schema) => {
       const _schema = isBuilder(schema) ? schema.build() : schema;
+      const name = _schema.name.toString();
 
       switch (_schema.type) {
         case 'group':
-          controls[_schema.name.toString()] = convertSchemasToGroup(_schema.schemas);
+          controls[name] = convertSchemasToGroup(_schema.schemas);
           break;
 
         case 'array':
-          controls[_schema.name.toString()] = convertSchemasToArray(_schema.schemas);
+          controls[name] = convertSchemasToArray(_schema.schemas);
           break;
 
         default:
-          controls[_schema.name.toString()] = convertSchemaToControl(_schema);
+          controls[name] = convertSchemaToControl(_schema);
       }
 
       return controls;
@@ -117,4 +118,51 @@ export function convertSchemasToArray(schemas: (AnyControlSchema | AnyControlBui
       }
     })
   );
+}
+
+/**
+ * 如果数组是同一个对象，或者如果它们具有相同的长度和相同的元素，那么它们是相等的。
+ * @param {unknown[]} a - unknown[] - 要比较的第一个数组。
+ * @param {unknown[]} b - 未知[]
+ * @returns 真的
+ */
+function arraysEqual(a: unknown[], b: unknown[]): boolean {
+  if (a === b) return true;
+  if (a === null || b === null) return false;
+  if (a.length !== b.length) return false;
+
+  for (var i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) return false;
+  }
+
+  return true;
+}
+
+/**
+ * 从图示列表中搜寻子图示
+ * @param schemas
+ * @param name
+ */
+export function findSchema<T extends AnyControlSchema = AnyControlSchema>(schemas: AnyControlSchema[], name: AnyControlName): T | undefined;
+export function findSchema<T extends AnyControlSchema = AnyControlSchema>(schemas: AnyControlSchema[], path: [...SingleKeyControlName[], AnyControlName]): T | undefined;
+export function findSchema<T extends AnyControlSchema = AnyControlSchema>(schemas: AnyControlSchema[], path: AnyControlName | [...SingleKeyControlName[], AnyControlName]): T | undefined;
+export function findSchema<T extends AnyControlSchema = AnyControlSchema>(schemas: AnyControlSchema[], path: AnyControlName | [...SingleKeyControlName[], AnyControlName]): T | undefined {
+  // 如果是数组，那么除了最后一个元素，其他元素所对应的 schema 一定是 group/array schema
+  if (Array.isArray(path)) {
+    const [endPath, ...beforePath] = path.reverse() as [AnyControlName, ...SingleKeyControlName[]];
+    schemas = beforePath.reduceRight((schemas, name) => (
+      (schemas.find(o => o.name === name) as VirtualControlSchema).schemas as AnyControlSchema[]
+    ), schemas as AnyControlSchema[]);
+
+    return findSchema(schemas, endPath);
+  }
+
+  return schemas.find(o => {
+    // 处理双字段模式
+    if (Array.isArray(o.name) && Array.isArray(path)) {
+      return arraysEqual(o.name, path);
+    }
+
+    return o.name === path;
+  }) as T | undefined;
 }

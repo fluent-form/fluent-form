@@ -1,5 +1,8 @@
-import { AnyControlName, ArraySchema, CascaderControlSchema, CheckboxControlSchema, DatePickerControlSchema, GroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SingleKeyControlName, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from './models/schema.model';
+import { AnyControlBuilder, AnyControlName, AnyControlSchema, ArraySchema, CascaderControlSchema, CheckboxControlSchema, DatePickerControlSchema, GroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SingleKeyControlName, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from './models/schema.model';
 import { builder } from './utils/builder.utils';
+import { standardSchemas } from './utils/schema.utils';
+
+export const form = (...schemas: (AnyControlSchema | AnyControlBuilder)[]) => standardSchemas(schemas);
 
 export const text = (name: SingleKeyControlName) => builder<InputControlSchema>().type('text').name(name);
 export const email = (name: SingleKeyControlName) => builder<InputControlSchema>().type('email').name(name);

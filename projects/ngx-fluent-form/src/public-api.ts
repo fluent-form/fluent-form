@@ -7,6 +7,4 @@ export * from './lib/directives/fluent-property-binder.directive';
 export * from './lib/fluent-form.component';
 export * from './lib/fluent-form.control';
 export * from './lib/fluent-form.module';
-export * from './lib/models/fluent-form.model';
 export * from './lib/models/schema.model';
-

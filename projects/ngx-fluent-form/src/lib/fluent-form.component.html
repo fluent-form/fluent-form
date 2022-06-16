@@ -2,47 +2,30 @@
   <ng-container *ngTemplateOutlet="formTemplate; context: { form, schemas }"></ng-container>
 </nz-spin>
 
-<!-- 输入框控件的模板 -->
-<!-- @param control FormControl -->
-<!-- @param schema 控件的图示 -->
-<ng-template #inputControlTemplate let-control="control" let-schema="schema">
-  <nz-input-group
-    [nzAddOnBefore]="schema.before?.template"
-    [nzAddOnAfter]="schema.after?.template"
-    [nzAddOnBeforeIcon]="schema.before?.icon"
-    [nzAddOnAfterIcon]="schema.after?.icon"
-    [nzPrefix]="schema.prefix"
-    [nzSuffix]="schema.suffix">
-    <input
-      #ref
-      nz-input
-      [fluentPropertyBinder]="{ host: ref, schema: schema }"
-      [fluentEventBinder]="{ host: ref, schema: schema }"
-      [formControl]="control"
-      [placeholder]="schema.placeholder ?? ''"
-      (ngModelChange)="schema.change?.($event, schema)" />
-  </nz-input-group>
-</ng-template>
-
 <!-- 控件模板 -->
 <!-- 根据 schema.type 来输出不同的控件 -->
 <!-- @param control FormControl -->
 <!-- @param schema 控件的图示 -->
 <ng-template #controlTemplate let-control="control" let-schema="schema">
   <ng-container *ngIf="control" [ngSwitch]="schema.type">
-    <ng-container *ngSwitchCase="'text'">
-      <ng-container *ngTemplateOutlet="inputControlTemplate; context: { control, schema }">
-      </ng-container>
-    </ng-container>
-
-    <ng-container *ngSwitchCase="'email'">
-      <ng-container *ngTemplateOutlet="inputControlTemplate; context: { control, schema }">
-      </ng-container>
-    </ng-container>
-
-    <ng-container *ngSwitchCase="'password'">
-      <ng-container *ngTemplateOutlet="inputControlTemplate; context: { control, schema }">
-      </ng-container>
+    <ng-container *ngSwitchCase="'input'">
+      <nz-input-group
+        [nzAddOnBefore]="schema.before?.template"
+        [nzAddOnAfter]="schema.after?.template"
+        [nzAddOnBeforeIcon]="schema.before?.icon"
+        [nzAddOnAfterIcon]="schema.after?.icon"
+        [nzPrefix]="schema.prefix"
+        [nzSuffix]="schema.suffix">
+        <input
+          #ref
+          nz-input
+          [type]="schema.subtype ?? 'text'"
+          [fluentPropertyBinder]="{ host: ref, schema: schema }"
+          [fluentEventBinder]="{ host: ref, schema: schema }"
+          [formControl]="control"
+          [placeholder]="schema.placeholder ?? ''"
+          (ngModelChange)="schema.change?.($event, schema)" />
+      </nz-input-group>
     </ng-container>
 
     <ng-container *ngSwitchCase="'textarea'">

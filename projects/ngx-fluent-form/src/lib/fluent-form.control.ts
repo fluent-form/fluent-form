@@ -4,9 +4,7 @@ import { standardSchemas } from './utils/schema.utils';
 
 export const form = (...schemas: (AnyControlSchema | AnyControlBuilder)[]) => standardSchemas(schemas);
 
-export const text = (name: SingleKeyControlName) => builder<InputControlSchema>().type('text').name(name);
-export const email = (name: SingleKeyControlName) => builder<InputControlSchema>().type('email').name(name);
-export const password = (name: SingleKeyControlName) => builder<InputControlSchema>().type('password').name(name);
+export const input = (name: SingleKeyControlName) => builder<InputControlSchema>().type('input').name(name);
 export const textarea = (name: SingleKeyControlName) => builder<TextareaControlSchema>().type('textarea').name(name);
 export const number = (name: SingleKeyControlName) => builder<NumberInputControlSchema>().type('number').name(name);
 export const date = (name: SingleKeyControlName) => builder<DatePickerControlSchema>().type('date').name(name);

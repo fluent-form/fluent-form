@@ -54,7 +54,7 @@ export const standardSchemas = <T extends AnyControlSchema[]>(schemas: (T[number
 export function convertSchemaToControl(schema: RealControlSchema | RealControlBuilder): FormControl {
   const _schema = isBuilder(schema) ? schema.build() : schema;
 
-  if (_schema.type === 'email') {
+  if (_schema.type === 'input' && _schema.subtype === 'email') {
     addValidatorToSchema(_schema, Validators.email);
   }
 

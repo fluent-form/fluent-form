@@ -17,7 +17,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { FluentFormComponent } from './fluent-form.component';
-import { array, form, group, range, slider, text } from './fluent-form.control';
+import { array, form, group, input, range, slider } from './fluent-form.control';
 import { assignFormToModel } from './utils/form.utils';
 
 describe('FluentFormComponent', () => {
@@ -61,9 +61,7 @@ describe('FluentFormComponent', () => {
   });
 
   it('模型的值应该与图示匹配', () => {
-    component.schemas = form(
-      text('text')
-    );
+    component.schemas = form(input('text'));
 
     assignFormToModel(component.form, component.model ??= {}, component.schemas);
 
@@ -73,7 +71,7 @@ describe('FluentFormComponent', () => {
   it('模型的值应该与图示匹配（多级模型）', () => {
     component.schemas = form(
       group('group').schemas([
-        text('text')
+        input('text')
       ])
     );
 
@@ -85,7 +83,7 @@ describe('FluentFormComponent', () => {
   it('模型的值应该与图示匹配（数组）', () => {
     component.schemas = form(
       array('array').schemas([
-        text(0)
+        input(0)
       ])
     );
 
@@ -98,7 +96,7 @@ describe('FluentFormComponent', () => {
     component.schemas = form(
       array('array').schemas([
         array(0).schemas([
-          text(0)
+          input(0)
         ])
       ])
     );
@@ -120,7 +118,7 @@ describe('FluentFormComponent', () => {
 
   it('模型应该能正确赋值表单', () => {
     component.schemas = form(
-      text('text').span(1)
+      input('text').span(1)
     );
     component.model = { text: 'test' };
 
@@ -130,7 +128,7 @@ describe('FluentFormComponent', () => {
   it('模型应该能正确赋值表单（多级模型）', () => {
     component.schemas = form(
       group('group').schemas([
-        text('text')
+        input('text')
       ])
     );
     component.model = { group: { text: 'test' } };
@@ -141,7 +139,7 @@ describe('FluentFormComponent', () => {
   it('模型应该能正确赋值表单（数组）', () => {
     component.schemas = form(
       array('array').schemas([
-        text(0)
+        input(0)
       ])
     );
     component.model = { array: ['test'] };
@@ -153,7 +151,7 @@ describe('FluentFormComponent', () => {
     component.schemas = form(
       array('array').schemas([
         array(0).schemas([
-          text(0)
+          input(0)
         ])
       ])
     );
@@ -176,7 +174,7 @@ describe('FluentFormComponent', () => {
     const initialValue = 'hello', newValue = 'world';
 
     component.schemas = form(
-      text('text').mapper({
+      input('text').mapper({
         input: (o: string[]) => o.join(''),
         output: (o: string) => o.split('')
       })

@@ -97,7 +97,8 @@ export interface ArraySchema<N extends SingleKeyControlName = SingleKeyControlNa
 }
 
 export interface InputControlSchema<N extends SingleKeyControlName = SingleKeyControlName> extends AbstractRealControlSchema<N> {
-  type: 'text' | 'email' | 'password';
+  type: 'input';
+  subtype?: 'text' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
   /** Placeholder text */
   placeholder?: string;
   /** The pre-label of the input box */

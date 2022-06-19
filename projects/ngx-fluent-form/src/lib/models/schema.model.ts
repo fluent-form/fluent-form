@@ -21,13 +21,18 @@ export type SingleKeyControlName = number | string;
 /** 双字段控件的名称 */
 export type DoubleKeyControlName = readonly [string, string];
 
+/** 任意图示 */
+export type AnySchema = VirtualControlSchema | RealControlSchema | ComponentSchema;
+/** 任意图示构建器 */
+export type AnyBuilder = Builder<AnySchema, AnySchema, {}>;
+
 /** 控件图示 */
 export type AnyControlSchema = VirtualControlSchema | RealControlSchema;
 /** 控件图示构建器 */
 export type AnyControlBuilder = Builder<AnyControlSchema, AnyControlSchema, {}>;
 
 /** 虚拟控件图示 */
-export type VirtualControlSchema<N extends SingleKeyControlName = SingleKeyControlName> = GroupSchema<N> | ArraySchema<N>;
+export type VirtualControlSchema<N extends SingleKeyControlName = SingleKeyControlName> = FormGroupSchema<N> | FormArraySchema<N>;
 /** 虚拟控件构建器 */
 export type VirtualControlBuilder<N extends SingleKeyControlName = SingleKeyControlName> = Builder<VirtualControlSchema<N>, VirtualControlSchema<N>, {}>;
 
@@ -35,6 +40,11 @@ export type VirtualControlBuilder<N extends SingleKeyControlName = SingleKeyCont
 export type RealControlSchema = SingleKeyRealControlSchema | DoubleKeyRealControlSchema;
 /** 真实控件构建器 */
 export type RealControlBuilder = Builder<RealControlSchema, RealControlSchema, {}>;
+
+/** 普通组件图示 */
+export type ComponentSchema = InputGroupComponentSchema;
+/** 普通组件图示构建器 */
+export type ComponentBuilder = Builder<ComponentSchema, ComponentSchema, {}>;
 
 /** 单字段的真实控件图示 */
 export type SingleKeyRealControlSchema<N extends SingleKeyControlName = SingleKeyControlName> =
@@ -52,7 +62,7 @@ export type SingleKeyRealControlSchema<N extends SingleKeyControlName = SingleKe
 /** 双字段的真实控件图示 */
 export type DoubleKeyRealControlSchema<N extends AnyControlName = AnyControlName> = RangePickerControlSchema<N> | SliderControlSchema<N>;
 
-export interface AbstractControlSchema<N extends AnyControlName> {
+export interface AbstractSchema<N extends AnyControlName> {
   /** Type of control */
   type: string;
   /** Field name for control */
@@ -63,7 +73,7 @@ export interface AbstractControlSchema<N extends AnyControlName> {
   label?: string;
 }
 
-export interface AbstractRealControlSchema<N extends AnyControlName, Value = any> extends AbstractControlSchema<N> {
+export interface AbstractRealControlSchema<N extends AnyControlName, Value = any> extends AbstractSchema<N> {
   /** I/O mapper for control */
   mapper?: {
     /** An input mapper that maps from a model's value to a form control's value */
@@ -84,16 +94,16 @@ export interface AbstractRealControlSchema<N extends AnyControlName, Value = any
   asyncValidator?: AsyncValidatorFn[];
 }
 
-export interface GroupSchema<N extends SingleKeyControlName = SingleKeyControlName> extends AbstractControlSchema<N> {
+export interface FormGroupSchema<N extends SingleKeyControlName = SingleKeyControlName> extends AbstractSchema<N> {
   type: 'group';
   /** Schema for form group */
-  schemas: (AnyControlSchema | Builder<AnyControlSchema, AnyControlSchema, {}>)[];
+  schemas: (AnySchema | AnyBuilder)[];
 }
 
-export interface ArraySchema<N extends SingleKeyControlName = SingleKeyControlName> extends AbstractControlSchema<N> {
+export interface FormArraySchema<N extends SingleKeyControlName = SingleKeyControlName> extends AbstractSchema<N> {
   type: 'array';
   /** Schema for form array */
-  schemas: (AnyControlSchema | Builder<AnyControlSchema, AnyControlSchema, {}>)[];
+  schemas: (AnyControlSchema | AnyControlBuilder)[];
 }
 
 export interface InputControlSchema<N extends SingleKeyControlName = SingleKeyControlName> extends AbstractRealControlSchema<N> {
@@ -352,4 +362,10 @@ export interface RateControlSchema<N extends SingleKeyControlName = SingleKeyCon
   listener?: ComponentEventListenerMap<NzRateComponent, RateControlSchema>;
   /** Other properties that need to be bound */
   property?: ComponentInput<NzRateComponent>;
+}
+
+export interface InputGroupComponentSchema<N extends string = string> extends AbstractSchema<N> {
+  type: 'input-group',
+  required?: boolean;
+  schemas: (RealControlSchema | RealControlBuilder)[];
 }

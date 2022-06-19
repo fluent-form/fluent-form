@@ -1,5 +1,5 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { AnyControlBuilder, AnyControlName, AnyControlSchema, RealControlBuilder, RealControlSchema, SingleKeyControlName, VirtualControlSchema } from '../models/schema.model';
+import { AnyControlName, AnyControlSchema, AnySchema, RealControlBuilder, RealControlSchema, SingleKeyControlName, VirtualControlSchema } from '../models/schema.model';
 import { Builder, isBuilder } from './builder.utils';
 
 const VIRTUAL_CONTROL_TYPES = ['group', 'array'];
@@ -8,7 +8,7 @@ const VIRTUAL_CONTROL_TYPES = ['group', 'array'];
  * 是否为虚拟控件
  * @param schema
  */
-const isVirtualControlSchema = (schema: AnyControlSchema): schema is VirtualControlSchema => (
+const isVirtualControlSchema = (schema: AnySchema): schema is VirtualControlSchema => (
   VIRTUAL_CONTROL_TYPES.includes(schema.type)
 );
 
@@ -29,7 +29,7 @@ const addValidatorToSchema = (schema: RealControlSchema, validator: ValidatorFn)
  * 标准化图示
  * @param schema
  */
-export const standardSchema = <T extends AnyControlSchema>(schema: T | Builder<T, T, {}>): T => {
+export const standardSchema = <T extends AnySchema>(schema: T | Builder<T, T, {}>): T => {
   const _schema = (isBuilder(schema) ? schema.build() : schema) as T;
 
   if (isVirtualControlSchema(_schema)) {
@@ -43,9 +43,9 @@ export const standardSchema = <T extends AnyControlSchema>(schema: T | Builder<T
  * 标准化所有图示
  * @param schemas
  */
-export const standardSchemas = <T extends AnyControlSchema[]>(schemas: (T[number] | Builder<T[number], T[number], {}>)[]): T => (
+export const standardSchemas = <T extends AnySchema>(schemas: (T | Builder<T, T, {}>)[]): T[] => (
   schemas.map(schema => standardSchema(schema))
-) as T;
+);
 
 /**
  * 将图示转换为控件
@@ -73,23 +73,31 @@ export function convertSchemaToControl(schema: RealControlSchema | RealControlBu
  * 将图示组转换为表单组
  * @param schemas
  */
-export function convertSchemasToGroup(schemas: (AnyControlSchema | AnyControlBuilder)[]): FormGroup {
+export function convertSchemasToGroup(schemas: AnySchema[]): FormGroup {
   return new FormGroup(
     schemas.reduce((controls, schema) => {
-      const _schema = isBuilder(schema) ? schema.build() : schema;
-      const name = _schema.name.toString();
 
-      switch (_schema.type) {
+      switch (schema.type) {
         case 'group':
-          controls[name] = convertSchemasToGroup(_schema.schemas);
+          controls[schema.name.toString()] = convertSchemasToGroup(
+            standardSchemas(schema.schemas)
+          );
           break;
 
         case 'array':
-          controls[name] = convertSchemasToArray(_schema.schemas);
+          controls[schema.name.toString()] = convertSchemasToArray(
+            standardSchemas(schema.schemas)
+          );
+          break;
+
+        case 'input-group':
+          standardSchemas(schema.schemas).forEach(schema => {
+            controls[schema.name.toString()] = convertSchemaToControl(schema);
+          });
           break;
 
         default:
-          controls[name] = convertSchemaToControl(_schema);
+          controls[schema.name.toString()] = convertSchemaToControl(schema);
       }
 
       return controls;
@@ -101,31 +109,27 @@ export function convertSchemasToGroup(schemas: (AnyControlSchema | AnyControlBui
  * 将图示组转换为表单数组
  * @param schemas
  */
-export function convertSchemasToArray(schemas: (AnyControlSchema | AnyControlBuilder)[]): FormArray {
+export function convertSchemasToArray(schemas: AnyControlSchema[]): FormArray {
   return new FormArray(
     schemas.map(schema => {
-      const _schema = isBuilder(schema) ? schema.build() : schema;
-
-      switch (_schema.type) {
+      switch (schema.type) {
         case 'group':
-          return convertSchemasToGroup(_schema.schemas);
+          return convertSchemasToGroup(
+            standardSchemas(schema.schemas)
+          );
 
         case 'array':
-          return convertSchemasToArray(_schema.schemas);
+          return convertSchemasToArray(
+            standardSchemas(schema.schemas)
+          );
 
         default:
-          return convertSchemaToControl(_schema);
+          return convertSchemaToControl(schema);
       }
     })
   );
 }
 
-/**
- * 如果数组是同一个对象，或者如果它们具有相同的长度和相同的元素，那么它们是相等的。
- * @param {unknown[]} a - unknown[] - 要比较的第一个数组。
- * @param {unknown[]} b - 未知[]
- * @returns 真的
- */
 function arraysEqual(a: unknown[], b: unknown[]): boolean {
   if (a === b) return true;
   if (a === null || b === null) return false;
@@ -143,10 +147,10 @@ function arraysEqual(a: unknown[], b: unknown[]): boolean {
  * @param schemas
  * @param name
  */
-export function findSchema<T extends AnyControlSchema = AnyControlSchema>(schemas: AnyControlSchema[], name: AnyControlName): T | undefined;
-export function findSchema<T extends AnyControlSchema = AnyControlSchema>(schemas: AnyControlSchema[], path: [...SingleKeyControlName[], AnyControlName]): T | undefined;
-export function findSchema<T extends AnyControlSchema = AnyControlSchema>(schemas: AnyControlSchema[], path: AnyControlName | [...SingleKeyControlName[], AnyControlName]): T | undefined;
-export function findSchema<T extends AnyControlSchema = AnyControlSchema>(schemas: AnyControlSchema[], path: AnyControlName | [...SingleKeyControlName[], AnyControlName]): T | undefined {
+export function findSchema<T extends AnySchema = AnySchema>(schemas: AnySchema[], name: AnyControlName): T | undefined;
+export function findSchema<T extends AnySchema = AnySchema>(schemas: AnySchema[], path: [...SingleKeyControlName[], AnyControlName]): T | undefined;
+export function findSchema<T extends AnySchema = AnySchema>(schemas: AnySchema[], path: AnyControlName | [...SingleKeyControlName[], AnyControlName]): T | undefined;
+export function findSchema<T extends AnySchema = AnySchema>(schemas: AnySchema[], path: AnyControlName | [...SingleKeyControlName[], AnyControlName]): T | undefined {
   // 如果是数组，那么除了最后一个元素，其他元素所对应的 schema 一定是 group/array schema
   if (Array.isArray(path)) {
     const [endPath, ...beforePath] = path.reverse() as [AnyControlName, ...SingleKeyControlName[]];

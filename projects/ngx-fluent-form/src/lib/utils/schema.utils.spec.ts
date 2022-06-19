@@ -1,17 +1,17 @@
 import { array, group, input, slider } from '../fluent-form.control';
-import { AnyControlSchema } from '../models/schema.model';
+import { AnyBuilder, AnySchema } from '../models/schema.model';
 import { findSchema, standardSchema, standardSchemas } from './schema.utils';
 
 describe('schema.utils', () => {
   it('应该能正确标准化不同的图示', () => {
-    const value: AnyControlSchema[] = [{ type: 'input', name: 'name' }];
-    const schemas = standardSchemas([input('name')]);
+    const value: AnySchema[] = [{ type: 'input', name: 'name' }];
+    const schemas = standardSchemas([input('name')] as AnyBuilder[]);
 
     expect(schemas).toEqual(value);
   });
 
   it('应该能正确标准化嵌套图示（group）', () => {
-    const value: AnyControlSchema[] = [{
+    const value: AnySchema[] = [{
       type: 'group',
       name: 'name',
       schemas: [
@@ -23,13 +23,13 @@ describe('schema.utils', () => {
       group('name').schemas([
         input('name')
       ])
-    ]);
+    ] as AnyBuilder[]);
 
     expect(schemas).toEqual(value);
   });
 
   it('应该能正确标准化嵌套图示（array）', () => {
-    const value: AnyControlSchema[] = [{
+    const value: AnySchema[] = [{
       type: 'array',
       name: 'name',
       schemas: [{
@@ -47,7 +47,7 @@ describe('schema.utils', () => {
           input('name')
         ])
       ])
-    ]);
+    ] as AnyBuilder[]);
 
     expect(schemas).toEqual(value);
   });

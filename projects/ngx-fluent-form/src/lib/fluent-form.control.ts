@@ -1,8 +1,8 @@
-import { AnyControlBuilder, AnyControlName, AnyControlSchema, ArraySchema, CascaderControlSchema, CheckboxControlSchema, DatePickerControlSchema, GroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SingleKeyControlName, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from './models/schema.model';
+import { AnyBuilder, AnyControlName, AnySchema, CascaderControlSchema, CheckboxControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, InputGroupComponentSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SingleKeyControlName, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from './models/schema.model';
 import { builder } from './utils/builder.utils';
 import { standardSchemas } from './utils/schema.utils';
 
-export const form = (...schemas: (AnyControlSchema | AnyControlBuilder)[]) => standardSchemas(schemas);
+export const form = (...schemas: (AnySchema | AnyBuilder)[]) => standardSchemas(schemas);
 
 export const input = (name: SingleKeyControlName) => builder<InputControlSchema>().type('input').name(name);
 export const textarea = (name: SingleKeyControlName) => builder<TextareaControlSchema>().type('textarea').name(name);
@@ -19,5 +19,7 @@ export const rate = (name: SingleKeyControlName) => builder<RateControlSchema>()
 export const slider = (name: AnyControlName) => builder<SliderControlSchema>().type('slider').name(name);
 export const range = (name: AnyControlName) => builder<RangePickerControlSchema>().type('range').name(name);
 
-export const group = (name: SingleKeyControlName) => builder<GroupSchema>().type('group').name(name);
-export const array = (name: SingleKeyControlName) => builder<ArraySchema>().type('array').name(name);
+export const inputGroup = (name: string) => builder<InputGroupComponentSchema>().type('input-group').name(name);
+
+export const group = (name: SingleKeyControlName) => builder<FormGroupSchema>().type('group').name(name);
+export const array = (name: SingleKeyControlName) => builder<FormArraySchema>().type('array').name(name);

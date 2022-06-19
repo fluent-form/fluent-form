@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { Subject, takeUntil } from 'rxjs';
-import { AnyControlSchema } from './models/schema.model';
+import { AnySchema } from './models/schema.model';
 import { assignFormToModel, assignModelToForm } from './utils/form.utils';
 import { convertSchemasToGroup } from './utils/schema.utils';
 
@@ -15,7 +15,7 @@ import { convertSchemasToGroup } from './utils/schema.utils';
 })
 export class FluentFormComponent<T extends Record<string, unknown>> implements OnInit {
   private destroy$: Subject<void> = new Subject<void>();
-  private _schemas!: AnyControlSchema[];
+  private _schemas!: AnySchema[];
   private _form!: FormGroup;
   private _model!: T;
 
@@ -36,7 +36,7 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
 
   @Input()
   get schemas() { return this._schemas; }
-  set schemas(value: AnyControlSchema[]) {
+  set schemas(value: AnySchema[]) {
     this._schemas = value;
     this.form = convertSchemasToGroup(value);
   }

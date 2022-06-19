@@ -246,6 +246,13 @@
           </ng-container>
         </ng-container>
 
+        <ng-container *ngSwitchCase="'input-group'">
+          <nz-form-label *ngIf="schema.label" [nzRequired]="schema.required">{{ schema.label }}</nz-form-label>
+          <nz-input-group nzCompact nz-row>
+            <!-- TODO -->
+          </nz-input-group>
+        </ng-container>
+
         <ng-container *ngSwitchDefault>
           <nz-form-item>
             <nz-form-label *ngIf="schema.label" [nzRequired]="schema.required">{{ schema.label }}</nz-form-label>

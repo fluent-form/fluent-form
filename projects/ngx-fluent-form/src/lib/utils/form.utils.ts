@@ -1,6 +1,6 @@
 import { FormArray, FormGroup } from '@angular/forms';
 import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
-import { AnyControlBuilder, AnyControlSchema } from '../models/schema.model';
+import { AnyBuilder, AnySchema } from '../models/schema.model';
 import { standardSchemas } from './schema.utils';
 
 /**
@@ -9,9 +9,9 @@ import { standardSchemas } from './schema.utils';
  * @param form
  * @param schemas
  */
-export function assignModelToForm<T extends Record<string, unknown>>(model: Record<string, unknown>, form: FormGroup, schemas: (AnyControlSchema | AnyControlBuilder)[]): void;
-export function assignModelToForm<T extends unknown[]>(model: T, form: FormArray, schemas: (AnyControlSchema | AnyControlBuilder)[]): void;
-export function assignModelToForm<T extends Record<string, unknown> | unknown[]>(model: T, form: FormGroup | FormArray, schemas: (AnyControlSchema | AnyControlBuilder)[]): void {
+export function assignModelToForm<T extends Record<string, unknown>>(model: Record<string, unknown>, form: FormGroup, schemas: (AnySchema | AnyBuilder)[]): void;
+export function assignModelToForm<T extends unknown[]>(model: T, form: FormArray, schemas: (AnySchema | AnyBuilder)[]): void;
+export function assignModelToForm<T extends Record<string, unknown> | unknown[]>(model: T, form: FormGroup | FormArray, schemas: (AnySchema | AnyBuilder)[]): void {
   standardSchemas(schemas).forEach(schema => {
     // 如果是双字段模式，从模型中取得的 value 也将会是一个数组
     let value = Array.isArray(schema.name) ?
@@ -30,6 +30,8 @@ export function assignModelToForm<T extends Record<string, unknown> | unknown[]>
         form.get([schema.name]) as FormArray,
         schema.schemas
       );
+    } else if (schema.type === 'input-group') {
+      assignModelToForm(model as Record<string, unknown>, form as FormGroup, schema.schemas);
     } else if (schema.mapper) {
       value = schema.mapper.input(value);
     } else if (['date', 'time'].includes(schema.type)) {
@@ -54,9 +56,9 @@ export function assignModelToForm<T extends Record<string, unknown> | unknown[]>
  * @param model
  * @param schemas
  */
-export function assignFormToModel<T extends Record<string, unknown>>(form: FormGroup, model: T, schemas: (AnyControlSchema | AnyControlBuilder)[]): void;
-export function assignFormToModel<T extends unknown[]>(form: FormArray, model: T, schemas: (AnyControlSchema | AnyControlBuilder)[]): void;
-export function assignFormToModel<T extends Record<string, unknown> | unknown[]>(form: FormGroup | FormArray, model: T, schemas: (AnyControlSchema | AnyControlBuilder)[]): void {
+export function assignFormToModel<T extends Record<string, unknown>>(form: FormGroup, model: T, schemas: (AnySchema | AnyBuilder)[]): void;
+export function assignFormToModel<T extends unknown[]>(form: FormArray, model: T, schemas: (AnySchema | AnyBuilder)[]): void;
+export function assignFormToModel<T extends Record<string, unknown> | unknown[]>(form: FormGroup | FormArray, model: T, schemas: (AnySchema | AnyBuilder)[]): void {
   standardSchemas(schemas).forEach(schema => {
     const control = form.get([schema.name.toString()]);
     let value = control?.value as unknown | unknown[] | null;
@@ -73,6 +75,8 @@ export function assignFormToModel<T extends Record<string, unknown> | unknown[]>
         (model[schema.name as keyof T] ??= ([] as unknown as T[keyof T])) as unknown as unknown[],
         schema.schemas
       );
+    } else if (schema.type === 'input-group') {
+      assignFormToModel(form as FormGroup, model as Record<string, unknown>, schema.schemas);
     } else if (schema.mapper) {
       value = schema.mapper.output(value);
     } else if (['date', 'time'].includes(schema.type)) {

@@ -31,7 +31,7 @@ export function assignModelToForm<T extends Record<string, unknown> | unknown[]>
         schema.schemas
       );
     } else if (schema.type === 'input-group') {
-      assignModelToForm(model as Record<string, unknown>, form as FormGroup, schema.schemas);
+      return assignModelToForm(model as Record<string, unknown>, form as FormGroup, schema.schemas);
     } else if (schema.mapper) {
       value = schema.mapper.input(value);
     } else if (['date', 'time'].includes(schema.type)) {
@@ -76,7 +76,7 @@ export function assignFormToModel<T extends Record<string, unknown> | unknown[]>
         schema.schemas
       );
     } else if (schema.type === 'input-group') {
-      assignFormToModel(form as FormGroup, model as Record<string, unknown>, schema.schemas);
+      return assignFormToModel(form as FormGroup, model as Record<string, unknown>, schema.schemas);
     } else if (schema.mapper) {
       value = schema.mapper.output(value);
     } else if (['date', 'time'].includes(schema.type)) {

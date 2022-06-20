@@ -1,5 +1,5 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { AnyControlName, AnyControlSchema, AnySchema, RealControlBuilder, RealControlSchema, SingleKeyControlName, VirtualControlSchema } from '../models/schema.model';
+import { AnyBuilder, AnyControlBuilder, AnyControlName, AnyControlSchema, AnySchema, RealControlBuilder, RealControlSchema, SingleKeyControlName, VirtualControlSchema } from '../models/schema.model';
 import { Builder, isBuilder } from './builder.utils';
 
 const VIRTUAL_CONTROL_TYPES = ['group', 'array'];
@@ -52,7 +52,7 @@ export const standardSchemas = <T extends AnySchema>(schemas: (T | Builder<T, T,
  * @param schema
  */
 export function convertSchemaToControl(schema: RealControlSchema | RealControlBuilder): FormControl {
-  const _schema = isBuilder(schema) ? schema.build() : schema;
+  const _schema = standardSchema(schema);
 
   if (_schema.type === 'input' && _schema.subtype === 'email') {
     addValidatorToSchema(_schema, Validators.email);
@@ -73,21 +73,16 @@ export function convertSchemaToControl(schema: RealControlSchema | RealControlBu
  * 将图示组转换为表单组
  * @param schemas
  */
-export function convertSchemasToGroup(schemas: AnySchema[]): FormGroup {
+export function convertSchemasToGroup(schemas: (AnySchema | AnyBuilder)[]): FormGroup {
   return new FormGroup(
-    schemas.reduce((controls, schema) => {
-
+    standardSchemas(schemas).reduce((controls, schema) => {
       switch (schema.type) {
         case 'group':
-          controls[schema.name.toString()] = convertSchemasToGroup(
-            standardSchemas(schema.schemas)
-          );
+          controls[schema.name.toString()] = convertSchemasToGroup(schema.schemas);
           break;
 
         case 'array':
-          controls[schema.name.toString()] = convertSchemasToArray(
-            standardSchemas(schema.schemas)
-          );
+          controls[schema.name.toString()] = convertSchemasToArray(schema.schemas);
           break;
 
         case 'input-group':
@@ -109,19 +104,15 @@ export function convertSchemasToGroup(schemas: AnySchema[]): FormGroup {
  * 将图示组转换为表单数组
  * @param schemas
  */
-export function convertSchemasToArray(schemas: AnyControlSchema[]): FormArray {
+export function convertSchemasToArray(schemas: (AnyControlSchema | AnyControlBuilder)[]): FormArray {
   return new FormArray(
-    schemas.map(schema => {
+    standardSchemas(schemas).map(schema => {
       switch (schema.type) {
         case 'group':
-          return convertSchemasToGroup(
-            standardSchemas(schema.schemas)
-          );
+          return convertSchemasToGroup(schema.schemas);
 
         case 'array':
-          return convertSchemasToArray(
-            standardSchemas(schema.schemas)
-          );
+          return convertSchemasToArray(schema.schemas);
 
         default:
           return convertSchemaToControl(schema);

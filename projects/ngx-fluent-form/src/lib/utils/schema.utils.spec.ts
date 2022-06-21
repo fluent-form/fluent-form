@@ -1,4 +1,4 @@
-import { array, group, input, slider } from '../fluent-form.control';
+import { array, group, input, inputGroup, slider } from '../fluent-form.control';
 import { AnyBuilder, AnySchema } from '../models/schema.model';
 import { findSchema, standardSchema, standardSchemas } from './schema.utils';
 
@@ -46,6 +46,24 @@ describe('schema.utils', () => {
         group('name').schemas([
           input('name')
         ])
+      ])
+    ] as AnyBuilder[]);
+
+    expect(schemas).toEqual(value);
+  });
+
+  it('应该能正确标准化图示（input-group）', () => {
+    const value: AnySchema[] = [{
+      type: 'input-group',
+      name: 'name',
+      schemas: [
+        { type: 'input', name: 'name' }
+      ]
+    }];
+
+    const schemas = standardSchemas([
+      inputGroup('name').schemas([
+        input('name')
       ])
     ] as AnyBuilder[]);
 

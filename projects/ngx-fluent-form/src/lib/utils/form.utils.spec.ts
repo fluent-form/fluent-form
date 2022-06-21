@@ -1,4 +1,4 @@
-import { array, checkbox, date, group, number, range, slider, time } from '../fluent-form.control';
+import { array, checkbox, date, group, inputGroup, number, range, slider, time } from '../fluent-form.control';
 import { assignFormToModel, assignModelToForm } from './form.utils';
 import { convertSchemasToGroup, standardSchemas } from './schema.utils';
 
@@ -7,6 +7,21 @@ describe('form.utils', () => {
     it('应该能正确处理一级对象', () => {
       const model = { o: 1 };
       const schemas = standardSchemas([number('o')]);
+      const form = convertSchemasToGroup(schemas);
+
+      assignModelToForm(model, form, schemas);
+
+      expect(form.getRawValue()).toEqual(model);
+    });
+
+    it('应该能正确处理一级对象（input-group）', () => {
+      const model = { one: 1, two: 2 };
+      const schemas = standardSchemas([
+        inputGroup('ig').schemas([
+          number('one'),
+          number('two'),
+        ])
+      ]);
       const form = convertSchemasToGroup(schemas);
 
       assignModelToForm(model, form, schemas);

@@ -17,7 +17,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { FluentFormComponent } from './fluent-form.component';
-import { array, form, group, input, range, slider } from './fluent-form.control';
+import { array, form, group, input, inputGroup, range, slider } from './fluent-form.control';
 import { assignFormToModel } from './utils/form.utils';
 
 describe('FluentFormComponent', () => {
@@ -66,6 +66,19 @@ describe('FluentFormComponent', () => {
     assignFormToModel(component.form, component.model ??= {}, component.schemas);
 
     expect(component.model).toEqual({ text: null });
+  });
+
+  it('模型的值应该与图示匹配（input-group）', () => {
+    component.schemas = form(
+      inputGroup('ig').schemas([
+        input('text1'),
+        input('text2'),
+      ])
+    );
+
+    assignFormToModel(component.form, component.model ??= {}, component.schemas);
+
+    expect(component.model).toEqual({ text1: null, text2: null });
   });
 
   it('模型的值应该与图示匹配（多级模型）', () => {

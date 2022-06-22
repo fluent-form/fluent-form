@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { array, form, group, input, switcher, textarea } from 'projects/ngx-fluent-form/src/public-api';
+import { array, form, group, input, inputGroup, switcher, textarea } from 'projects/ngx-fluent-form/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -18,11 +18,15 @@ export class AppComponent {
   }
 
   schemas = form(
-    switcher('enabled').placeholder(['有效', '无效']).label('状态').mapper({
+    switcher('enabled').span(8).placeholder(['有效', '无效']).label('状态').mapper({
       input: (o: string) => o?.includes('true'),
       output: (o: boolean) => o + ' is boolean value'
     }),
-    { type: 'number', label: '年龄', name: 'age', value: 99 },
+    { type: 'number', label: '年龄', name: 'age', value: 99, span: 8 },
+    inputGroup('ig').label('输入组').span(8).schemas([
+      input('text1').placeholder('请输入').span(12),
+      input('text2').placeholder('请输入').span(12),
+    ]),
     group('info').label('信息').span(24).schemas([
       input('intro').placeholder('请输入').label('简介'),
     ]),

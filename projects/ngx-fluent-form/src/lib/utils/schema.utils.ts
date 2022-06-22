@@ -1,15 +1,15 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { AnyBuilder, AnyControlBuilder, AnyControlName, AnyControlSchema, AnySchema, RealControlBuilder, RealControlSchema, SingleKeyControlName, VirtualControlSchema } from '../models/schema.model';
+import { AnyBuilder, AnyControlBuilder, AnyControlSchema, AnySchema, AnySchemaName, ContainerSchema, RealControlBuilder, RealControlSchema, SingleKeySchemaName } from '../models/schema.model';
 import { Builder, isBuilder } from './builder.utils';
 
-const VIRTUAL_CONTROL_TYPES = ['group', 'array'];
+const CONTAINER_SCHEMA_TYPES = ['group', 'array', 'input-group'];
 
 /**
- * 是否为虚拟控件
+ * 是否为容器图示
  * @param schema
  */
-const isVirtualControlSchema = (schema: AnySchema): schema is VirtualControlSchema => (
-  VIRTUAL_CONTROL_TYPES.includes(schema.type)
+const isContainerSchema = (schema: AnySchema): schema is ContainerSchema => (
+  CONTAINER_SCHEMA_TYPES.includes(schema.type)
 );
 
 /**
@@ -32,7 +32,7 @@ const addValidatorToSchema = (schema: RealControlSchema, validator: ValidatorFn)
 export const standardSchema = <T extends AnySchema>(schema: T | Builder<T, T, {}>): T => {
   const _schema = (isBuilder(schema) ? schema.build() : schema) as T;
 
-  if (isVirtualControlSchema(_schema)) {
+  if (isContainerSchema(_schema)) {
     _schema.schemas = standardSchemas(_schema.schemas);
   }
 
@@ -138,15 +138,15 @@ function arraysEqual(a: unknown[], b: unknown[]): boolean {
  * @param schemas
  * @param name
  */
-export function findSchema<T extends AnySchema = AnySchema>(schemas: AnySchema[], name: AnyControlName): T | undefined;
-export function findSchema<T extends AnySchema = AnySchema>(schemas: AnySchema[], path: [...SingleKeyControlName[], AnyControlName]): T | undefined;
-export function findSchema<T extends AnySchema = AnySchema>(schemas: AnySchema[], path: AnyControlName | [...SingleKeyControlName[], AnyControlName]): T | undefined;
-export function findSchema<T extends AnySchema = AnySchema>(schemas: AnySchema[], path: AnyControlName | [...SingleKeyControlName[], AnyControlName]): T | undefined {
+export function findSchema<T extends AnySchema = AnySchema>(schemas: AnySchema[], name: AnySchemaName): T | undefined;
+export function findSchema<T extends AnySchema = AnySchema>(schemas: AnySchema[], path: [...SingleKeySchemaName[], AnySchemaName]): T | undefined;
+export function findSchema<T extends AnySchema = AnySchema>(schemas: AnySchema[], path: AnySchemaName | [...SingleKeySchemaName[], AnySchemaName]): T | undefined;
+export function findSchema<T extends AnySchema = AnySchema>(schemas: AnySchema[], path: AnySchemaName | [...SingleKeySchemaName[], AnySchemaName]): T | undefined {
   // 如果是数组，那么除了最后一个元素，其他元素所对应的 schema 一定是 group/array schema
   if (Array.isArray(path)) {
-    const [endPath, ...beforePath] = path.reverse() as [AnyControlName, ...SingleKeyControlName[]];
+    const [endPath, ...beforePath] = path.reverse() as [AnySchemaName, ...SingleKeySchemaName[]];
     schemas = beforePath.reduceRight((schemas, name) => (
-      (schemas.find(o => o.name === name) as VirtualControlSchema).schemas as AnyControlSchema[]
+      (schemas.find(o => o.name === name) as ContainerSchema).schemas as AnyControlSchema[]
     ), schemas as AnyControlSchema[]);
     path = endPath;
   }

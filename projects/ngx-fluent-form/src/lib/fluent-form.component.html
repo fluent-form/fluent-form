@@ -9,23 +9,15 @@
 <ng-template #controlTemplate let-control="control" let-schema="schema">
   <ng-container *ngIf="control" [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
-      <nz-input-group
-        [nzAddOnBefore]="schema.before?.template"
-        [nzAddOnAfter]="schema.after?.template"
-        [nzAddOnBeforeIcon]="schema.before?.icon"
-        [nzAddOnAfterIcon]="schema.after?.icon"
-        [nzPrefix]="schema.prefix"
-        [nzSuffix]="schema.suffix">
-        <input
-          #ref
-          nz-input
-          [type]="schema.subtype ?? 'text'"
-          [fluentPropertyBinder]="{ host: ref, schema: schema }"
-          [fluentEventBinder]="{ host: ref, schema: schema }"
-          [formControl]="control"
-          [placeholder]="schema.placeholder ?? ''"
-          (ngModelChange)="schema.change?.($event, schema)" />
-      </nz-input-group>
+      <input
+        #ref
+        nz-input
+        [type]="schema.subtype ?? 'text'"
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [placeholder]="schema.placeholder ?? ''"
+        (ngModelChange)="schema.change?.($event, schema)" />
     </ng-container>
 
     <ng-container *ngSwitchCase="'textarea'">
@@ -210,6 +202,153 @@
   </ng-container>
 </ng-template>
 
+<!-- 输入系列控件模板 -->
+<!-- 根据 schema.type 来输出不同的控件 -->
+<!-- @param control FormControl -->
+<!-- @param schema 控件的图示 -->
+<ng-template #inputSeriesControlTemplate let-control="control" let-schema="schema">
+  <ng-container *ngIf="control" [ngSwitch]="schema.type">
+    <ng-container *ngSwitchCase="'input'">
+      <input
+        #ref
+        nz-col
+        [nzSpan]="schema.span ?? null"
+        nz-input
+        [type]="schema.subtype ?? 'text'"
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [placeholder]="schema.placeholder ?? ''"
+        (ngModelChange)="schema.change?.($event, schema)" />
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'textarea'">
+      <textarea
+        #ref
+        nz-col
+        [nzSpan]="schema.span ?? null"
+        nz-input
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [placeholder]="schema.placeholder ?? ''"
+        [rows]="schema.rows"
+        [nzAutosize]="schema.autosize ?? {}"
+        (ngModelChange)="schema.change?.($event, schema)"></textarea>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'number'">
+      <nz-input-number
+        #ref
+        nz-col
+        [nzSpan]="schema.span ?? null"
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [nzPlaceHolder]="schema.placeholder ?? ''"
+        [nzMin]="schema.min ?? -infinity"
+        [nzMax]="schema.max ?? infinity"
+        [nzPrecision]="schema.precision ?? ''"
+        [nzPrecisionMode]="schema.precisionMode"
+        [nzStep]="schema.step ?? 1"
+        (ngModelChange)="schema.change?.($event, schema)">
+      </nz-input-number>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'date'">
+      <nz-date-picker
+        #ref
+        nz-col
+        [nzSpan]="schema.span ?? null"
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [nzPlaceHolder]="schema.placeholder"
+        [nzMode]="schema.mode"
+        [nzAllowClear]="schema.clear"
+        [nzShowTime]="schema.showTime"
+        [nzFormat]="schema.format"
+        [nzInline]="schema.inline"
+        (ngModelChange)="schema.change?.($event, schema)"></nz-date-picker>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'range'">
+      <nz-range-picker
+        #ref
+        nz-col
+        [nzSpan]="schema.span ?? null"
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [nzPlaceHolder]="schema.placeholder"
+        [nzMode]="schema.mode"
+        [nzAllowClear]="schema.clear"
+        [nzShowTime]="schema.showTime"
+        [nzFormat]="schema.format"
+        [nzInline]="schema.inline"
+        (ngModelChange)="schema.change?.($event, schema)"></nz-range-picker>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'time'">
+      <nz-time-picker
+        #ref
+        nz-col
+        [nzSpan]="schema.span ?? null"
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [nzPlaceHolder]="schema.placeholder"
+        [nzAllowEmpty]="schema.clear"
+        [nzFormat]="schema.format ?? 'HH:mm:ss'"
+        [nzHourStep]="schema.step?.hour"
+        [nzMinuteStep]="schema.step?.minute"
+        [nzSecondStep]="schema.step?.second"
+        (ngModelChange)="schema.change?.($event, schema)">
+      </nz-time-picker>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'select'">
+      <nz-select
+        #ref
+        nz-col
+        [nzSpan]="schema.span ?? null"
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [nzPlaceHolder]="schema.placeholder"
+        [nzAllowClear]="schema.clear"
+        [nzMode]="schema.mode ?? 'default'"
+        [nzMaxMultipleCount]="schema.limit ?? infinity"
+        [nzShowSearch]="schema.search"
+        (ngModelChange)="schema.change?.($event, schema)">
+        <nz-option
+          *ngFor="let option of schema.options"
+          [nzValue]="option[schema.config?.valueProperty ?? 'value']"
+          [nzLabel]="option[schema.config?.labelProperty ?? 'label']"></nz-option>
+      </nz-select>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'cascader'">
+      <nz-cascader
+        #ref
+        nz-col
+        [nzSpan]="schema.span ?? null"
+        [fluentPropertyBinder]="{ host: ref, schema: schema }"
+        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [formControl]="control"
+        [nzPlaceHolder]="schema.placeholder"
+        [nzAllowClear]="schema.clear"
+        [nzExpandTrigger]="schema.trigger"
+        [nzShowSearch]="schema.search"
+        [nzOptions]="schema.options"
+        [nzValueProperty]="schema.config?.valueProperty ?? 'value'"
+        [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
+        (ngModelChange)="schema.change?.($event, schema)">
+      </nz-cascader>
+    </ng-container>
+  </ng-container>
+</ng-template>
+
 <!-- 关于为什么使用 `AbstractControl.get([name])` 而不是 `AbstractControl.get(name)` ？ -->
 <!-- 由于 NG 没有提供 FormArrayDirective，查阅源码后发现其实 FormGroupDirective 是兼容传入 FormArray 对象的。 -->
 <!-- 需要注意的就是 AbstractControl#get() 方法，由于 FormGroupDirective 原本是为 FormGroup 服务的， -->
@@ -232,7 +371,7 @@
       </nz-form-item>
     </div>
 
-    <div *ngFor="let schema of schemas; index as index" nz-col [nzSpan]="schema.span ?? null">
+    <div *ngFor="let schema of schemas" nz-col [nzSpan]="schema.span ?? null">
       <ng-container [ngSwitch]="schema.type">
         <ng-container *ngSwitchCase="'group'">
           <nz-divider [nzText]="schema.label"></nz-divider>
@@ -247,10 +386,26 @@
         </ng-container>
 
         <ng-container *ngSwitchCase="'input-group'">
-          <nz-form-label *ngIf="schema.label" [nzRequired]="schema.required">{{ schema.label }}</nz-form-label>
-          <nz-input-group nzCompact nz-row>
-            <!-- TODO -->
-          </nz-input-group>
+          <nz-form-item>
+            <nz-form-label *ngIf="schema.label" [nzRequired]="schema.required">{{ schema.label }}</nz-form-label>
+            <nz-form-control [nzErrorTip]="schema.errorTip">
+              <nz-input-group
+                nz-row
+                nzCompact
+                [nzAddOnBefore]="schema.before?.template"
+                [nzAddOnAfter]="schema.after?.template"
+                [nzAddOnBeforeIcon]="schema.before?.icon"
+                [nzAddOnAfterIcon]="schema.after?.icon"
+                [nzPrefix]="schema.prefix"
+                [nzSuffix]="schema.suffix">
+                <ng-container *ngFor="let subschema of schema.schemas">
+                  <ng-container
+                    *ngTemplateOutlet="inputSeriesControlTemplate; context: { control: form.get([subschema.name]), schema: subschema }">
+                  </ng-container>
+                </ng-container>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
         </ng-container>
 
         <ng-container *ngSwitchDefault>

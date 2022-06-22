@@ -1,4 +1,4 @@
-import { array, checkbox, date, group, inputGroup, number, range, slider, time } from '../fluent-form.control';
+import { array, checkbox, date, group, inputGroup, number, range, slider, time } from '../fluent-form.builder';
 import { assignFormToModel, assignModelToForm } from './form.utils';
 import { convertSchemasToGroup, standardSchemas } from './schema.utils';
 

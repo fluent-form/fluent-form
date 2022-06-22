@@ -16,8 +16,8 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { array, form, group, input, inputGroup, range, slider } from './fluent-form.builder';
 import { FluentFormComponent } from './fluent-form.component';
-import { array, form, group, input, inputGroup, range, slider } from './fluent-form.control';
 import { assignFormToModel } from './utils/form.utils';
 
 describe('FluentFormComponent', () => {

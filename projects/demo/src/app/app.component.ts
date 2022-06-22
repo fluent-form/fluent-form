@@ -23,6 +23,7 @@ export class AppComponent {
       output: (o: boolean) => o + ' is boolean value'
     }),
     { type: 'number', label: '年龄', name: 'age', value: 99, span: 8 },
+    { type: 'number', label: 'hidden', name: 'hidden', value: 99, span: 8, hidden: true },
     inputGroup('ig').label('输入组').span(8).schemas([
       input('text1').placeholder('请输入').span(12),
       input('text2').placeholder('请输入').span(12),

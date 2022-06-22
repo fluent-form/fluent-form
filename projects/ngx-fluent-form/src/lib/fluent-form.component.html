@@ -207,7 +207,7 @@
 <!-- @param control FormControl -->
 <!-- @param schema 控件的图示 -->
 <ng-template #inputSeriesControlTemplate let-control="control" let-schema="schema">
-  <ng-container *ngIf="control" [ngSwitch]="schema.type">
+  <ng-container *ngIf="control && !schema.hidden" [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
       <input
         #ref
@@ -371,54 +371,56 @@
       </nz-form-item>
     </div>
 
-    <div *ngFor="let schema of schemas" nz-col [nzSpan]="schema.span ?? null">
-      <ng-container [ngSwitch]="schema.type">
-        <ng-container *ngSwitchCase="'group'">
-          <nz-divider [nzText]="schema.label"></nz-divider>
-          <ng-container *ngTemplateOutlet="formTemplate; context: { form: form.get([schema.name]), schemas: schema.schemas }">
+    <ng-container *ngFor="let schema of schemas">
+      <div *ngIf="!schema.hidden" nz-col [nzSpan]="schema.span ?? null">
+        <ng-container [ngSwitch]="schema.type">
+          <ng-container *ngSwitchCase="'group'">
+            <nz-divider [nzText]="schema.label"></nz-divider>
+            <ng-container *ngTemplateOutlet="formTemplate; context: { form: form.get([schema.name]), schemas: schema.schemas }">
+            </ng-container>
           </ng-container>
-        </ng-container>
 
-        <ng-container *ngSwitchCase="'array'">
-          <nz-divider [nzText]="schema.label"></nz-divider>
-          <ng-container *ngTemplateOutlet="formTemplate; context: { form: form.get([schema.name]), schemas: schema.schemas }">
+          <ng-container *ngSwitchCase="'array'">
+            <nz-divider [nzText]="schema.label"></nz-divider>
+            <ng-container *ngTemplateOutlet="formTemplate; context: { form: form.get([schema.name]), schemas: schema.schemas }">
+            </ng-container>
           </ng-container>
-        </ng-container>
 
-        <ng-container *ngSwitchCase="'input-group'">
-          <nz-form-item>
-            <nz-form-label *ngIf="schema.label" [nzRequired]="schema.required">{{ schema.label }}</nz-form-label>
-            <nz-form-control [nzErrorTip]="schema.errorTip">
-              <nz-input-group
-                nz-row
-                nzCompact
-                [nzAddOnBefore]="schema.before?.template"
-                [nzAddOnAfter]="schema.after?.template"
-                [nzAddOnBeforeIcon]="schema.before?.icon"
-                [nzAddOnAfterIcon]="schema.after?.icon"
-                [nzPrefix]="schema.prefix"
-                [nzSuffix]="schema.suffix">
-                <ng-container *ngFor="let subschema of schema.schemas">
-                  <ng-container
-                    *ngTemplateOutlet="inputSeriesControlTemplate; context: { control: form.get([subschema.name]), schema: subschema }">
+          <ng-container *ngSwitchCase="'input-group'">
+            <nz-form-item>
+              <nz-form-label *ngIf="schema.label" [nzRequired]="schema.required">{{ schema.label }}</nz-form-label>
+              <nz-form-control [nzErrorTip]="schema.errorTip">
+                <nz-input-group
+                  nz-row
+                  nzCompact
+                  [nzAddOnBefore]="schema.before?.template"
+                  [nzAddOnAfter]="schema.after?.template"
+                  [nzAddOnBeforeIcon]="schema.before?.icon"
+                  [nzAddOnAfterIcon]="schema.after?.icon"
+                  [nzPrefix]="schema.prefix"
+                  [nzSuffix]="schema.suffix">
+                  <ng-container *ngFor="let subschema of schema.schemas">
+                    <ng-container
+                      *ngTemplateOutlet="inputSeriesControlTemplate; context: { control: form.get([subschema.name]), schema: subschema }">
+                    </ng-container>
                   </ng-container>
-                </ng-container>
-              </nz-input-group>
-            </nz-form-control>
-          </nz-form-item>
-        </ng-container>
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+          </ng-container>
 
-        <ng-container *ngSwitchDefault>
-          <nz-form-item>
-            <nz-form-label *ngIf="schema.label" [nzRequired]="schema.required">{{ schema.label }}</nz-form-label>
-            <nz-form-control [nzErrorTip]="schema.errorTip">
-              <ng-container *ngTemplateOutlet="controlTemplate; context: { control: form.get([schema.name]), schema: schema }">
-              </ng-container>
-            </nz-form-control>
-          </nz-form-item>
+          <ng-container *ngSwitchDefault>
+            <nz-form-item>
+              <nz-form-label *ngIf="schema.label" [nzRequired]="schema.required">{{ schema.label }}</nz-form-label>
+              <nz-form-control [nzErrorTip]="schema.errorTip">
+                <ng-container *ngTemplateOutlet="controlTemplate; context: { control: form.get([schema.name]), schema: schema }">
+                </ng-container>
+              </nz-form-control>
+            </nz-form-item>
+          </ng-container>
         </ng-container>
-      </ng-container>
-    </div>
+      </div>
+    </ng-container>
 
     <div *ngIf="addOnAfter" nz-col>
       <nz-form-item>

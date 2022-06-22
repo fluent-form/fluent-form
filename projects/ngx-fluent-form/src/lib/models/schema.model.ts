@@ -34,7 +34,7 @@ export type AnyControlBuilder = Builder<AnyControlSchema, AnyControlSchema, {}>;
 /** 容器图示 */
 export type ContainerSchema = FormSchema | InputGroupComponentSchema;
 /** 容器构建器 */
-export type ContainerBuilder = FormSchema | InputGroupComponentSchema;
+export type ContainerBuilder = Builder<ContainerSchema, ContainerSchema, {}>;
 
 /** 表单图示 */
 export type FormSchema = FormGroupSchema | FormArraySchema;

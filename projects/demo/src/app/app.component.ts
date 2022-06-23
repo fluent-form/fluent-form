@@ -24,7 +24,7 @@ export class AppComponent {
     }),
     { type: 'number', label: '年龄', name: 'age', value: 99, span: 8 },
     { type: 'number', label: 'hidden', name: 'hidden', value: 99, span: 8, hidden: true },
-    inputGroup('ig').label('输入组').span(8).schemas([
+    inputGroup().label('输入组').span(8).schemas([
       input('text1').placeholder('请输入').span(12),
       input('text2').placeholder('请输入').span(12),
     ]),
@@ -32,13 +32,13 @@ export class AppComponent {
       input('intro').placeholder('请输入').label('简介').value('6666'),
     ]),
     array('details').label('一级列表').span(24).schemas([
-      { type: 'input', label: '标题', name: 0, value: '啊哈哈' },
-      group(1).label('一级列表里的组').schemas([
+      { type: 'input', label: '标题', value: '啊哈哈' },
+      group().label('一级列表里的组').schemas([
         { type: 'input', label: '标题', name: 'title' },
         textarea('intro').rows(3).placeholder('请输入').label('简介'),
       ]),
-      array(2).label('二级列表').span(24).schemas([
-        group(0).label('二级列表里的组').schemas([
+      array().label('二级列表').span(24).schemas([
+        group().label('二级列表里的组').schemas([
           { type: 'input', label: '标题', name: 'title' },
           textarea('intro').rows(3).placeholder('请输入').label('简介'),
         ])

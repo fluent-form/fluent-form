@@ -13,10 +13,14 @@ export function assignModelToForm<T extends Record<string, unknown>>(model: Reco
 export function assignModelToForm<T extends unknown[]>(model: T, form: FormArray, schemas: (AnySchema | AnyBuilder)[]): void;
 export function assignModelToForm<T extends Record<string, unknown> | unknown[]>(model: T, form: FormGroup | FormArray, schemas: (AnySchema | AnyBuilder)[]): void {
   standardSchemas(schemas).forEach(schema => {
+    if (schema.type === 'input-group') {
+      return assignModelToForm(model as Record<string, unknown>, form as FormGroup, schema.schemas);
+    }
+
     if (schema.type === 'group') {
       return assignModelToForm(
         (model[schema.name as keyof T] ??= {} as unknown as T[keyof T]) as unknown as Record<string, unknown>,
-        form.get([schema.name]) as FormGroup,
+        form.get([schema.name!]) as FormGroup,
         schema.schemas
       );
     }
@@ -24,13 +28,9 @@ export function assignModelToForm<T extends Record<string, unknown> | unknown[]>
     if (schema.type === 'array') {
       return assignModelToForm(
         (model[schema.name as keyof T] ??= [] as unknown as T[keyof T]) as unknown as unknown[],
-        form.get([schema.name]) as FormArray,
+        form.get([schema.name!]) as FormArray,
         schema.schemas
       );
-    }
-
-    if (schema.type === 'input-group') {
-      return assignModelToForm(model as Record<string, unknown>, form as FormGroup, schema.schemas);
     }
 
     // 如果是双字段模式，则需要从模型中分别取得这两个字段的值作为一个数组
@@ -52,7 +52,7 @@ export function assignModelToForm<T extends Record<string, unknown> | unknown[]>
       })) as NzCheckBoxOptionInterface[];
     }
 
-    form.get([schema.name.toString()])!.setValue(value);
+    form.get([schema.name!.toString()])!.setValue(value);
   });
 }
 
@@ -66,7 +66,11 @@ export function assignFormToModel<T extends Record<string, unknown>>(form: FormG
 export function assignFormToModel<T extends unknown[]>(form: FormArray, model: T, schemas: (AnySchema | AnyBuilder)[]): void;
 export function assignFormToModel<T extends Record<string, unknown> | unknown[]>(form: FormGroup | FormArray, model: T, schemas: (AnySchema | AnyBuilder)[]): void {
   standardSchemas(schemas).forEach(schema => {
-    const control = form.get([schema.name.toString()]);
+    if (schema.type === 'input-group') {
+      return assignFormToModel(form as FormGroup, model as Record<string, unknown>, schema.schemas);
+    }
+
+    const control = form.get([schema.name!.toString()]);
 
     if (schema.type === 'group') {
       return assignFormToModel(
@@ -82,10 +86,6 @@ export function assignFormToModel<T extends Record<string, unknown> | unknown[]>
         (model[schema.name as keyof T] ??= ([] as unknown as T[keyof T])) as unknown as unknown[],
         schema.schemas
       );
-    }
-
-    if (schema.type === 'input-group') {
-      return assignFormToModel(form as FormGroup, model as Record<string, unknown>, schema.schemas);
     }
 
     let value = control!.value as unknown | unknown[] | null;

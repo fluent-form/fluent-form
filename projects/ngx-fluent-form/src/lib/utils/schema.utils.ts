@@ -78,21 +78,21 @@ export function convertSchemasToGroup(schemas: (AnySchema | AnyBuilder)[]): Form
     standardSchemas(schemas).reduce((controls, schema) => {
       switch (schema.type) {
         case 'group':
-          controls[schema.name.toString()] = convertSchemasToGroup(schema.schemas);
+          controls[schema.name!.toString()] = convertSchemasToGroup(schema.schemas);
           break;
 
         case 'array':
-          controls[schema.name.toString()] = convertSchemasToArray(schema.schemas);
+          controls[schema.name!.toString()] = convertSchemasToArray(schema.schemas);
           break;
 
         case 'input-group':
           standardSchemas(schema.schemas).forEach(schema => {
-            controls[schema.name.toString()] = convertSchemaToControl(schema);
+            controls[schema.name!.toString()] = convertSchemaToControl(schema);
           });
           break;
 
         default:
-          controls[schema.name.toString()] = convertSchemaToControl(schema);
+          controls[schema.name!.toString()] = convertSchemaToControl(schema);
       }
 
       return controls;
@@ -106,7 +106,9 @@ export function convertSchemasToGroup(schemas: (AnySchema | AnyBuilder)[]): Form
  */
 export function convertSchemasToArray(schemas: (AnyControlSchema | AnyControlBuilder)[]): FormArray {
   return new FormArray(
-    standardSchemas(schemas).map(schema => {
+    standardSchemas(schemas).map((schema, index) => {
+      schema.name = index;
+
       switch (schema.type) {
         case 'group':
           return convertSchemasToGroup(schema.schemas);

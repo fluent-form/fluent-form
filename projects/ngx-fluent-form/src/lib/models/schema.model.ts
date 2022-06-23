@@ -17,7 +17,7 @@ import { Builder } from '../utils/builder.utils';
 /** 任意字段控件名称 */
 export type AnySchemaName = SingleKeySchemaName | DoubleKeySchemaName;
 /** 单字段图示名称 */
-export type SingleKeySchemaName = number | string;
+export type SingleKeySchemaName = string | number;
 /** 双字段图示名称 */
 export type DoubleKeySchemaName = readonly [string, string];
 
@@ -37,9 +37,9 @@ export type ContainerSchema = FormSchema | InputGroupComponentSchema;
 export type ContainerBuilder = Builder<ContainerSchema, ContainerSchema, {}>;
 
 /** 表单图示 */
-export type FormSchema = FormGroupSchema | FormArraySchema;
+export type FormSchema<N extends SingleKeySchemaName = SingleKeySchemaName> = FormGroupSchema<N> | FormArraySchema<N>;
 /** 表单构建器 */
-export type FormBuilder = Builder<FormSchema, FormSchema, {}>;
+export type FormBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = Builder<FormSchema<N>, FormSchema<N>, {}>;
 
 /** 真实控件图示 */
 export type RealControlSchema = SingleKeyRealControlSchema | DoubleKeyRealControlSchema;
@@ -47,9 +47,9 @@ export type RealControlSchema = SingleKeyRealControlSchema | DoubleKeyRealContro
 export type RealControlBuilder = Builder<RealControlSchema, RealControlSchema, {}>;
 
 /** 普通组件图示 */
-export type ComponentSchema = InputGroupComponentSchema;
+export type ComponentSchema<N extends SingleKeySchemaName = SingleKeySchemaName> = InputGroupComponentSchema<N>;
 /** 普通组件构建器 */
-export type ComponentBuilder = Builder<ComponentSchema, ComponentSchema, {}>;
+export type ComponentBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = Builder<ComponentSchema<N>, ComponentSchema<N>, {}>;
 
 /** 输入系列控件图示 */
 export type InputSeriesControlSchema =
@@ -65,27 +65,36 @@ export type InputSeriesControlSchema =
 export type InputSeriesControlBuilder = Builder<InputSeriesControlSchema, InputSeriesControlSchema, {}>;
 
 /** 单字段的真实控件图示 */
-export type SingleKeyRealControlSchema =
-  InputControlSchema |
-  TextareaControlSchema |
-  NumberInputControlSchema |
-  DatePickerControlSchema |
-  TimePickerControlSchema |
-  SwitchControlSchema |
-  SelectControlSchema |
-  CascaderControlSchema |
-  RadioControlSchema |
-  CheckboxControlSchema |
-  RateControlSchema;
+export type SingleKeyRealControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> =
+  InputControlSchema<N> |
+  TextareaControlSchema<N> |
+  NumberInputControlSchema<N> |
+  DatePickerControlSchema<N> |
+  TimePickerControlSchema<N> |
+  SwitchControlSchema<N> |
+  SelectControlSchema<N> |
+  CascaderControlSchema<N> |
+  RadioControlSchema<N> |
+  CheckboxControlSchema<N> |
+  RateControlSchema<N> |
+  RangePickerControlSchema<N> |
+  SliderControlSchema<N>;
+/** 单字段的真实控件构建器 */
+export type SingleKeyRealControlBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = Builder<SingleKeyRealControlSchema<N>, SingleKeyRealControlSchema<N>, {}>;
+
 /** 双字段的真实控件图示 */
-export type DoubleKeyRealControlSchema = RangePickerControlSchema | SliderControlSchema;
+export type DoubleKeyRealControlSchema<N extends AnySchemaName = AnySchemaName> =
+  RangePickerControlSchema<N> |
+  SliderControlSchema<N>;
+/** 双字段的真实控件构建器 */
+export type DoubleKeyRealControlBuilder<N extends DoubleKeySchemaName = DoubleKeySchemaName> = Builder<DoubleKeyRealControlSchema<N>, DoubleKeyRealControlSchema<N>, {}>;
 
 /** 抽象图示 */
 interface AbstractSchema<N extends AnySchemaName> {
   /** Type of control */
   type: string;
   /** Field name for control */
-  name: N;
+  name?: N;
   /** Span of the control in grid layout */
   span?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24;
   /** Label for control */
@@ -115,17 +124,17 @@ interface AbstractRealControlSchema<N extends AnySchemaName, Value = any> extend
   asyncValidator?: AsyncValidatorFn[];
 }
 
-export interface FormGroupSchema extends AbstractSchema<SingleKeySchemaName> {
+export interface FormGroupSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<N> {
   type: 'group';
   schemas: (AnySchema | AnyBuilder)[];
 }
 
-export interface FormArraySchema extends AbstractSchema<SingleKeySchemaName> {
+export interface FormArraySchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<N> {
   type: 'array';
   schemas: (AnyControlSchema | AnyControlBuilder)[];
 }
 
-export interface InputControlSchema extends AbstractRealControlSchema<SingleKeySchemaName> {
+export interface InputControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractRealControlSchema<N> {
   type: 'input';
   subtype?: 'text' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
   /** Placeholder text */
@@ -138,7 +147,7 @@ export interface InputControlSchema extends AbstractRealControlSchema<SingleKeyS
   property?: Partial<Property<HTMLInputElement>>;
 }
 
-export interface TextareaControlSchema extends AbstractRealControlSchema<SingleKeySchemaName> {
+export interface TextareaControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractRealControlSchema<N> {
   type: 'textarea';
   /** Placeholder text */
   placeholder?: string;
@@ -154,7 +163,7 @@ export interface TextareaControlSchema extends AbstractRealControlSchema<SingleK
   property?: Partial<Property<HTMLTextAreaElement>>;
 }
 
-export interface NumberInputControlSchema extends AbstractRealControlSchema<SingleKeySchemaName> {
+export interface NumberInputControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractRealControlSchema<N> {
   type: 'number';
   /** Placeholder text */
   placeholder?: string;
@@ -189,7 +198,7 @@ interface AbstractDateControlSchema {
   inline?: boolean;
 }
 
-export interface DatePickerControlSchema extends AbstractRealControlSchema<SingleKeySchemaName>, AbstractDateControlSchema {
+export interface DatePickerControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractRealControlSchema<N>, AbstractDateControlSchema {
   type: 'date';
   /** Placeholder text */
   placeholder?: string;
@@ -201,7 +210,7 @@ export interface DatePickerControlSchema extends AbstractRealControlSchema<Singl
   property?: ComponentInput<NzDatePickerComponent>;
 }
 
-export interface RangePickerControlSchema extends AbstractRealControlSchema<AnySchemaName>, AbstractDateControlSchema {
+export interface RangePickerControlSchema<N extends AnySchemaName = AnySchemaName> extends AbstractRealControlSchema<N>, AbstractDateControlSchema {
   type: 'range';
   /** Placeholder text */
   placeholder?: [string, string];
@@ -213,7 +222,7 @@ export interface RangePickerControlSchema extends AbstractRealControlSchema<AnyS
   property?: ComponentInput<NzRangePickerComponent>;
 }
 
-export interface TimePickerControlSchema extends AbstractRealControlSchema<SingleKeySchemaName> {
+export interface TimePickerControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractRealControlSchema<N> {
   type: 'time';
   /** Placeholder text */
   placeholder?: string;
@@ -235,7 +244,7 @@ export interface TimePickerControlSchema extends AbstractRealControlSchema<Singl
   property?: ComponentInput<NzTimePickerComponent>;
 }
 
-export interface SwitchControlSchema extends AbstractRealControlSchema<SingleKeySchemaName> {
+export interface SwitchControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractRealControlSchema<N> {
   type: 'switch';
   /** Placeholder text */
   placeholder?: [string | TemplateRef<void>, string | TemplateRef<void>];
@@ -247,7 +256,7 @@ export interface SwitchControlSchema extends AbstractRealControlSchema<SingleKey
   property?: ComponentInput<NzSwitchComponent>;
 }
 
-export interface SelectControlSchema extends AbstractRealControlSchema<SingleKeySchemaName> {
+export interface SelectControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractRealControlSchema<N> {
   type: 'select';
   /** Placeholder text */
   placeholder?: string;
@@ -272,7 +281,7 @@ export interface SelectControlSchema extends AbstractRealControlSchema<SingleKey
   property?: ComponentInput<NzSelectComponent>;
 }
 
-export interface CascaderControlSchema extends AbstractRealControlSchema<SingleKeySchemaName> {
+export interface CascaderControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractRealControlSchema<N> {
   type: 'cascader';
   /** Placeholder text */
   placeholder?: string;
@@ -295,7 +304,7 @@ export interface CascaderControlSchema extends AbstractRealControlSchema<SingleK
   property?: ComponentInput<NzCascaderComponent>;
 }
 
-export interface SliderControlSchema extends AbstractRealControlSchema<AnySchemaName> {
+export interface SliderControlSchema<N extends AnySchemaName = AnySchemaName> extends AbstractRealControlSchema<N> {
   type: 'slider';
   /** Placeholder text */
   placeholder?: never;
@@ -317,7 +326,7 @@ export interface SliderControlSchema extends AbstractRealControlSchema<AnySchema
   property?: ComponentInput<NzSliderComponent>;
 }
 
-export interface RadioControlSchema extends AbstractRealControlSchema<SingleKeySchemaName> {
+export interface RadioControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractRealControlSchema<N> {
   type: 'radio';
   /** Radio control style */
   style?: 'outline' | 'solid';
@@ -334,7 +343,7 @@ export interface RadioControlSchema extends AbstractRealControlSchema<SingleKeyS
   property?: ComponentInput<NzRadioGroupComponent>;
 }
 
-export interface CheckboxControlSchema extends AbstractRealControlSchema<SingleKeySchemaName> {
+export interface CheckboxControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractRealControlSchema<N> {
   type: 'checkbox';
   options: Record<string, unknown>[];
   config?: {
@@ -349,7 +358,7 @@ export interface CheckboxControlSchema extends AbstractRealControlSchema<SingleK
   property?: ComponentInput<NzCheckboxGroupComponent>;
 }
 
-export interface RateControlSchema extends AbstractRealControlSchema<SingleKeySchemaName> {
+export interface RateControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractRealControlSchema<N> {
   type: 'rate';
   /** Show clean button */
   clear?: boolean;
@@ -369,7 +378,7 @@ export interface RateControlSchema extends AbstractRealControlSchema<SingleKeySc
   property?: ComponentInput<NzRateComponent>;
 }
 
-export interface InputGroupComponentSchema extends AbstractSchema<string> {
+export interface InputGroupComponentSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<N> {
   type: 'input-group';
   schemas: (InputSeriesControlSchema | InputSeriesControlBuilder)[];
   required?: boolean;

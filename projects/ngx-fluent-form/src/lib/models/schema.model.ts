@@ -131,7 +131,7 @@ export interface FormGroupSchema<N extends SingleKeySchemaName = SingleKeySchema
 
 export interface FormArraySchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<N> {
   type: 'array';
-  schemas: (AnyControlSchema | AnyControlBuilder)[];
+  schemas: (SingleKeyRealControlSchema<number> | SingleKeyRealControlBuilder<number> | FormSchema<number> | FormBuilder<number>)[];
 }
 
 export interface InputControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractRealControlSchema<N> {

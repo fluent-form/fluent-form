@@ -7,7 +7,7 @@ export function builder<T>(): Builder<T> {
 
       return (arg: unknown): unknown => {
         target[prop] = arg;
-        return builder as Builder<T>;
+        return builder;
       };
     }
   });
@@ -20,9 +20,15 @@ export function builder<T>(): Builder<T> {
  * @template B 已选
  * @template U 未选
  */
-export type Builder<T, B = unknown, U = T> = (B extends T ? Record<'build', () => T> : unknown) & {
+export type Builder<T, B = {}, U = T> = (B extends T ? { build: () => T } : unknown) & {
   [P in keyof U]-?: (o: U[P]) => Builder<T, B & Record<P, U[P]>, Omit<U, P>>
 };
+
+/**
+ * @template T 原型
+ * @template K 已填字段
+ */
+export type UnstableBuilder<T, K extends keyof T> = Builder<T, Pick<T, K>, Omit<T, K>>;
 
 /**
  * 是否为一个构建器

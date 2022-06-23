@@ -34,7 +34,7 @@ describe('schema.utils', () => {
       name: 'name',
       schemas: [{
         type: 'group',
-        name: 'name',
+        name: 0,
         schemas: [
           { type: 'input', name: 'name' }
         ]
@@ -43,7 +43,7 @@ describe('schema.utils', () => {
 
     const schemas = standardSchemas([
       array('name').schemas([
-        group('name').schemas([
+        group().schemas([
           input('name')
         ])
       ])
@@ -114,10 +114,10 @@ describe('schema.utils', () => {
     const target = standardSchema(input(0));
     const schemas = standardSchemas([
       array('array').schemas([
-        array('array').schemas([target])
+        array().schemas([target])
       ])
     ]);
-    const schema = findSchema(schemas, ['array', 'array', 0]);
+    const schema = findSchema(schemas, ['array', 0, 0]);
 
     expect(schema).toBe(target);
   });

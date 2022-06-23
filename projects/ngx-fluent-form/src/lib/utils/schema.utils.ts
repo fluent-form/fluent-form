@@ -33,7 +33,14 @@ export const standardSchema = <T extends AnySchema>(schema: T | Builder<T, T, {}
   const _schema = (isBuilder(schema) ? schema.build() : schema) as T;
 
   if (isContainerSchema(_schema)) {
-    _schema.schemas = standardSchemas(_schema.schemas);
+    const tmp = standardSchemas(_schema.schemas);
+
+    // 如果是数组表单图示，自动补充子图示的名称为索引值
+    if (_schema.type === 'array') {
+      tmp.forEach((schema, index) => schema.name = index);
+    }
+
+    _schema.schemas = tmp;
   }
 
   return _schema;
@@ -106,9 +113,7 @@ export function convertSchemasToGroup(schemas: (AnySchema | AnyBuilder)[]): Form
  */
 export function convertSchemasToArray(schemas: (AnyControlSchema | AnyControlBuilder)[]): FormArray {
   return new FormArray(
-    standardSchemas(schemas).map((schema, index) => {
-      schema.name = index;
-
+    standardSchemas(schemas).map(schema => {
       switch (schema.type) {
         case 'group':
           return convertSchemasToGroup(schema.schemas);

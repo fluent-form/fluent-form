@@ -93,11 +93,6 @@ interface AbstractSchema<N extends AnySchemaName> {
   hidden?: boolean;
 }
 
-/** 抽象的容器图示（可容纳子图示的图示） */
-interface AbstractContainerSchema<S extends AnySchema | AnyBuilder> {
-  schemas: S[];
-}
-
 /** 抽象的真实控件图示 */
 interface AbstractRealControlSchema<N extends AnySchemaName, Value = any> extends AbstractSchema<N> {
   /** I/O mapper for control */
@@ -120,12 +115,14 @@ interface AbstractRealControlSchema<N extends AnySchemaName, Value = any> extend
   asyncValidator?: AsyncValidatorFn[];
 }
 
-export interface FormGroupSchema extends AbstractSchema<SingleKeySchemaName>, AbstractContainerSchema<AnySchema | AnyBuilder> {
+export interface FormGroupSchema extends AbstractSchema<SingleKeySchemaName> {
   type: 'group';
+  schemas: (AnySchema | AnyBuilder)[];
 }
 
-export interface FormArraySchema extends AbstractSchema<SingleKeySchemaName>, AbstractContainerSchema<AnyControlSchema | AnyControlBuilder> {
+export interface FormArraySchema extends AbstractSchema<SingleKeySchemaName> {
   type: 'array';
+  schemas: (AnyControlSchema | AnyControlBuilder)[];
 }
 
 export interface InputControlSchema extends AbstractRealControlSchema<SingleKeySchemaName> {
@@ -372,8 +369,9 @@ export interface RateControlSchema extends AbstractRealControlSchema<SingleKeySc
   property?: ComponentInput<NzRateComponent>;
 }
 
-export interface InputGroupComponentSchema extends AbstractSchema<string>, AbstractContainerSchema<InputSeriesControlSchema | InputSeriesControlBuilder> {
-  type: 'input-group',
+export interface InputGroupComponentSchema extends AbstractSchema<string> {
+  type: 'input-group';
+  schemas: (InputSeriesControlSchema | InputSeriesControlBuilder)[];
   required?: boolean;
   /** The pre-label of the input box */
   before?: {

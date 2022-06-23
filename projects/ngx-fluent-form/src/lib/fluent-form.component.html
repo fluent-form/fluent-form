@@ -363,14 +363,6 @@
     [nzNoColon]="noColon"
     [formGroup]="form">
 
-    <div *ngIf="addOnBefore" nz-col>
-      <nz-form-item>
-        <nz-form-control>
-          <ng-container *ngTemplateOutlet="addOnBefore; context: { form }"></ng-container>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-
     <ng-container *ngFor="let schema of schemas">
       <div *ngIf="!schema.hidden" nz-col [nzSpan]="schema.span ?? null">
         <ng-container [ngSwitch]="schema.type">
@@ -422,12 +414,5 @@
       </div>
     </ng-container>
 
-    <div *ngIf="addOnAfter" nz-col>
-      <nz-form-item>
-        <nz-form-control>
-          <ng-container *ngTemplateOutlet="addOnAfter; context: { form }"></ng-container>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
   </form>
 </ng-template>

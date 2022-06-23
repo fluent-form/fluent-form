@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
@@ -13,11 +13,10 @@ import { convertSchemasToGroup } from './utils/schema.utils';
   styleUrls: ['./fluent-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FluentFormComponent<T extends Record<string, unknown>> implements OnInit {
+export class FluentFormComponent<T extends Record<string, unknown>> implements OnInit, OnChanges {
   private destroy$: Subject<void> = new Subject<void>();
   private _schemas!: AnySchema[];
   private _form!: FormGroup;
-  private _model!: T;
 
   readonly infinity: number = Infinity;
 
@@ -28,25 +27,17 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
   }
 
   @Input()
-  get model(): T { return this._model; }
-  set model(value: T) {
-    this._model = value;
-    this.schemas && assignModelToForm(value, this.form, this.schemas);
-  }
-
-  @Input()
   get schemas() { return this._schemas; }
   set schemas(value: AnySchema[]) {
     this._schemas = value;
     this.form = convertSchemasToGroup(value);
   }
 
+  @Input() model!: T;
   /** Form layout */
   @Input() layout: NzFormLayoutType = 'vertical';
   /** Whether or not to display the colon after the label */
   @Input() noColon: boolean = false;
-  @Input() addOnBefore: TemplateRef<{ form: FormGroup }> | null = null;
-  @Input() addOnAfter: TemplateRef<{ form: FormGroup }> | null = null;
   @Input() spinning?: boolean;
   @Input() spinTip: string = 'Loading...';
   @Input() spinSize: NzSizeLDSType = 'large';
@@ -61,6 +52,16 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
     this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
       assignFormToModel(this.form, this.model, this.schemas);
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['model']) {
+      this.schemas && assignModelToForm(this.model, this.form, this.schemas);
+    }
+
+    if (changes['schemas']) {
+      this.model && assignFormToModel(this.form, this.model, this.schemas);
+    }
   }
 
   ngOnDestroy(): void {

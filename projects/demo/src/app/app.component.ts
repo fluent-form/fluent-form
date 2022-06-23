@@ -29,7 +29,7 @@ export class AppComponent {
       input('text2').placeholder('请输入').span(12),
     ]),
     group('info').label('信息').span(24).schemas([
-      input('intro').placeholder('请输入').label('简介'),
+      input('intro').placeholder('请输入').label('简介').value('6666'),
     ]),
     array('details').label('一级列表').span(24).schemas([
       { type: 'input', label: '标题', name: 0, value: '啊哈哈' },
@@ -44,7 +44,7 @@ export class AppComponent {
         ])
       ])
     ])
-  )
+  );
 
   ngOnInit(): void { }
 }

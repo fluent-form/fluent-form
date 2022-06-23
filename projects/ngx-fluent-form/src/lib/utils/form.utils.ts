@@ -13,26 +13,32 @@ export function assignModelToForm<T extends Record<string, unknown>>(model: Reco
 export function assignModelToForm<T extends unknown[]>(model: T, form: FormArray, schemas: (AnySchema | AnyBuilder)[]): void;
 export function assignModelToForm<T extends Record<string, unknown> | unknown[]>(model: T, form: FormGroup | FormArray, schemas: (AnySchema | AnyBuilder)[]): void {
   standardSchemas(schemas).forEach(schema => {
-    // 如果是双字段模式，从模型中取得的 value 也将会是一个数组
-    let value = Array.isArray(schema.name) ?
-      schema.name.map(property => model[property as keyof T] ?? null) :
-      model[schema.name as keyof T] ?? null as unknown | unknown[] | null;
-
     if (schema.type === 'group') {
       return assignModelToForm(
         (model[schema.name as keyof T] ??= {} as unknown as T[keyof T]) as unknown as Record<string, unknown>,
         form.get([schema.name]) as FormGroup,
         schema.schemas
       );
-    } else if (schema.type === 'array') {
+    }
+
+    if (schema.type === 'array') {
       return assignModelToForm(
         (model[schema.name as keyof T] ??= [] as unknown as T[keyof T]) as unknown as unknown[],
         form.get([schema.name]) as FormArray,
         schema.schemas
       );
-    } else if (schema.type === 'input-group') {
+    }
+
+    if (schema.type === 'input-group') {
       return assignModelToForm(model as Record<string, unknown>, form as FormGroup, schema.schemas);
-    } else if (schema.mapper) {
+    }
+
+    // 如果是双字段模式，则需要从模型中分别取得这两个字段的值作为一个数组
+    let value: unknown = Array.isArray(schema.name) ?
+      schema.name.map((property, index) => model[property as keyof T] ?? schema.value?.[index] ?? null) :
+      model[schema.name as keyof T] ?? schema.value ?? null;
+
+    if (schema.mapper) {
       value = schema.mapper.input(value);
     } else if (['date', 'time'].includes(schema.type)) {
       value = value ? new Date(value as string | number | Date) : null;
@@ -61,7 +67,6 @@ export function assignFormToModel<T extends unknown[]>(form: FormArray, model: T
 export function assignFormToModel<T extends Record<string, unknown> | unknown[]>(form: FormGroup | FormArray, model: T, schemas: (AnySchema | AnyBuilder)[]): void {
   standardSchemas(schemas).forEach(schema => {
     const control = form.get([schema.name.toString()]);
-    let value = control?.value as unknown | unknown[] | null;
 
     if (schema.type === 'group') {
       return assignFormToModel(
@@ -69,15 +74,23 @@ export function assignFormToModel<T extends Record<string, unknown> | unknown[]>
         (model[schema.name as keyof T] ??= ({} as T[keyof T])) as unknown as Record<string, unknown>,
         schema.schemas
       );
-    } else if (schema.type === 'array') {
+    }
+
+    if (schema.type === 'array') {
       return assignFormToModel(
         control as FormArray,
         (model[schema.name as keyof T] ??= ([] as unknown as T[keyof T])) as unknown as unknown[],
         schema.schemas
       );
-    } else if (schema.type === 'input-group') {
+    }
+
+    if (schema.type === 'input-group') {
       return assignFormToModel(form as FormGroup, model as Record<string, unknown>, schema.schemas);
-    } else if (schema.mapper) {
+    }
+
+    let value = control!.value as unknown | unknown[] | null;
+
+    if (schema.mapper) {
       value = schema.mapper.output(value);
     } else if (['date', 'time'].includes(schema.type)) {
       value = (value as Date)?.getTime() ?? null;

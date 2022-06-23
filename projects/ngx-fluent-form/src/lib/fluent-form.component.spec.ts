@@ -1,56 +1,33 @@
-import { CommonModule } from '@angular/common';
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzCascaderModule } from 'ng-zorro-antd/cascader';
-import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
-import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-import { NzRadioModule } from 'ng-zorro-antd/radio';
-import { NzRateModule } from 'ng-zorro-antd/rate';
-import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzSliderModule } from 'ng-zorro-antd/slider';
-import { NzSpinModule } from 'ng-zorro-antd/spin';
-import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { array, form, group, input, inputGroup, range, slider } from './fluent-form.builder';
 import { FluentFormComponent } from './fluent-form.component';
+import { FluentFormModule } from './fluent-form.module';
+import { AnySchema } from './models/schema.model';
 import { assignFormToModel } from './utils/form.utils';
 
+@Component({
+  template: `<fluent-form [schemas]="schemas" [model]="model"></fluent-form>`,
+})
+class TestWarpperComponent<T extends Record<string, unknown>> {
+  @ViewChild(FluentFormComponent) target!: FluentFormComponent<T>;
+  schemas!: AnySchema[];
+  model: T = {} as T;
+}
+
 describe('FluentFormComponent', () => {
-  let component: FluentFormComponent<{}>;
-  let fixture: ComponentFixture<FluentFormComponent<{}>>;
+  let component: TestWarpperComponent<{}>;
+  let fixture: ComponentFixture<TestWarpperComponent<{}>>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FluentFormComponent],
-      imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        NzSpinModule,
-        NzButtonModule,
-        NzInputModule,
-        NzInputNumberModule,
-        NzCascaderModule,
-        NzDatePickerModule,
-        NzFormModule,
-        NzCheckboxModule,
-        NzSwitchModule,
-        NzDividerModule,
-        NzSelectModule,
-        NzTimePickerModule,
-        NzSliderModule,
-        NzRadioModule,
-        NzRateModule
-      ]
+      declarations: [TestWarpperComponent],
+      imports: [FluentFormModule]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FluentFormComponent);
+    fixture = TestBed.createComponent(TestWarpperComponent);
     component = fixture.componentInstance;
     component.schemas = form();
     fixture.detectChanges();
@@ -62,8 +39,7 @@ describe('FluentFormComponent', () => {
 
   it('模型的值应该与图示匹配', () => {
     component.schemas = form(input('text'));
-
-    assignFormToModel(component.form, component.model ??= {}, component.schemas);
+    fixture.detectChanges();
 
     expect(component.model).toEqual({ text: null });
   });
@@ -75,8 +51,7 @@ describe('FluentFormComponent', () => {
         input('text2'),
       ])
     );
-
-    assignFormToModel(component.form, component.model ??= {}, component.schemas);
+    fixture.detectChanges();
 
     expect(component.model).toEqual({ text1: null, text2: null });
   });
@@ -87,8 +62,7 @@ describe('FluentFormComponent', () => {
         input('text')
       ])
     );
-
-    assignFormToModel(component.form, component.model ??= {}, component.schemas);
+    fixture.detectChanges();
 
     expect(component.model).toEqual({ group: { text: null } });
   });
@@ -99,8 +73,7 @@ describe('FluentFormComponent', () => {
         input(0)
       ])
     );
-
-    assignFormToModel(component.form, component.model ??= {}, component.schemas);
+    fixture.detectChanges();
 
     expect(component.model).toEqual({ array: [null] });
   });
@@ -113,8 +86,7 @@ describe('FluentFormComponent', () => {
         ])
       ])
     );
-
-    assignFormToModel(component.form, component.model ??= {}, component.schemas);
+    fixture.detectChanges();
 
     expect(component.model).toEqual({ array: [[null]] });
   });
@@ -123,8 +95,7 @@ describe('FluentFormComponent', () => {
     component.schemas = form(
       range(['start', 'end']).span(1)
     );
-
-    assignFormToModel(component.form, component.model ??= {}, component.schemas);
+    fixture.detectChanges();
 
     expect(component.model).toEqual({ start: null, end: null });
   });
@@ -134,8 +105,9 @@ describe('FluentFormComponent', () => {
       input('text').span(1)
     );
     component.model = { text: 'test' };
+    fixture.detectChanges();
 
-    expect(component.form.getRawValue()).toEqual({ text: 'test' });
+    expect(component.target.form.getRawValue()).toEqual({ text: 'test' });
   });
 
   it('模型应该能正确赋值表单（多级模型）', () => {
@@ -145,8 +117,9 @@ describe('FluentFormComponent', () => {
       ])
     );
     component.model = { group: { text: 'test' } };
+    fixture.detectChanges();
 
-    expect(component.form.getRawValue()).toEqual({ group: { text: 'test' } });
+    expect(component.target.form.getRawValue()).toEqual({ group: { text: 'test' } });
   });
 
   it('模型应该能正确赋值表单（数组）', () => {
@@ -156,8 +129,9 @@ describe('FluentFormComponent', () => {
       ])
     );
     component.model = { array: ['test'] };
+    fixture.detectChanges();
 
-    expect(component.form.getRawValue()).toEqual({ array: ['test'] });
+    expect(component.target.form.getRawValue()).toEqual({ array: ['test'] });
   });
 
   it('模型应该能正确赋值表单（多级数组）', () => {
@@ -169,18 +143,20 @@ describe('FluentFormComponent', () => {
       ])
     );
     component.model = { array: [['test']] };
+    fixture.detectChanges();
 
-    expect(component.form.getRawValue()).toEqual({ array: [['test']] });
+    expect(component.target.form.getRawValue()).toEqual({ array: [['test']] });
   });
 
   it('模型应该能正确赋值表单（双字段模式）', () => {
     const fields = ['start', 'end'] as const;
     component.schemas = form(
-      slider(fields)
+      slider(fields).range(true)
     );
     component.model = { start: 0, end: 1 };
+    fixture.detectChanges();
 
-    expect(component.form.getRawValue()).toEqual({ [fields.toString()]: [0, 1] });
+    expect(component.target.form.getRawValue()).toEqual({ [fields.toString()]: [0, 1] });
   });
 
   it('应该能正确应用映射器', () => {
@@ -193,12 +169,12 @@ describe('FluentFormComponent', () => {
       })
     );
     component.model = { text: initialValue.split('') };
+    fixture.detectChanges();
 
-    expect(component.form.getRawValue()).toEqual({ text: initialValue });
+    expect(component.target.form.getRawValue()).toEqual({ text: initialValue });
 
-    component.form.controls['text'].setValue(newValue);
-
-    assignFormToModel(component.form, component.model, component.schemas);
+    component.target.form.controls['text'].setValue(newValue);
+    assignFormToModel(component.target.form, component.target.model, component.schemas);
 
     expect(component.model).toEqual({ text: newValue.split('') });
   });

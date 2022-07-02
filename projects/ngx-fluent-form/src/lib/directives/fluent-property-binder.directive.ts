@@ -1,10 +1,10 @@
 import { Directive, Input, OnInit } from '@angular/core';
-import { RealControlSchema } from '../models/schema.model';
+import { ControlSchema } from '../models/schema.model';
 
 @Directive({
   selector: '[fluentPropertyBinder]'
 })
-export class FluentPropertyBinderDirective<H extends object, S extends RealControlSchema> implements OnInit {
+export class FluentPropertyBinderDirective<H extends object, S extends ControlSchema> implements OnInit {
   @Input() fluentPropertyBinder!: { host: H, schema: S };
 
   constructor() { }

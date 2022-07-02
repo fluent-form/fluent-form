@@ -1,5 +1,5 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { AnyBuilder, AnyControlBuilder, AnyControlSchema, AnySchema, AnySchemaName, ContainerSchema, RealControlBuilder, RealControlSchema, SingleKeySchemaName } from '../models/schema.model';
+import { AnyBuilder, AnyControlBuilder, AnyControlSchema, AnySchema, AnySchemaName, ContainerSchema, ControlBuilder, ControlSchema, SingleKeySchemaName } from '../models/schema.model';
 import { Builder, isBuilder } from './builder.utils';
 
 const CONTAINER_SCHEMA_TYPES = ['group', 'array', 'input-group'];
@@ -17,7 +17,7 @@ const isContainerSchema = (schema: AnySchema): schema is ContainerSchema => (
  * @param schema
  * @param validator
  */
-const addValidatorToSchema = (schema: RealControlSchema, validator: ValidatorFn) => {
+const addValidatorToSchema = (schema: ControlSchema, validator: ValidatorFn) => {
   if (schema.validator) {
     schema.validator.push(validator);
   } else {
@@ -58,7 +58,7 @@ export const standardSchemas = <T extends AnySchema>(schemas: (T | Builder<T, T,
  * 将图示转换为控件
  * @param schema
  */
-export function convertSchemaToControl(schema: RealControlSchema | RealControlBuilder): FormControl {
+export function convertSchemaToControl(schema: ControlSchema | ControlBuilder): FormControl {
   const _schema = standardSchema(schema);
 
   if (_schema.type === 'input' && _schema.subtype === 'email') {

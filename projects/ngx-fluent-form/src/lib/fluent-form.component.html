@@ -10,115 +10,107 @@
   <ng-container *ngIf="control" [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
       <input
-        #ref
+        #host
         nz-input
         [type]="schema.subtype ?? 'text'"
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
-        [placeholder]="schema.placeholder ?? ''"
-        (ngModelChange)="schema.change?.($event)" />
+        [placeholder]="schema.placeholder ?? ''" />
     </ng-container>
 
     <ng-container *ngSwitchCase="'textarea'">
       <textarea
-        #ref
+        #host
         nz-input
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
-        [nzAutosize]="schema.autosize ?? {}"
-        (ngModelChange)="schema.change?.($event)"></textarea>
+        [nzAutosize]="schema.autosize ?? {}"></textarea>
     </ng-container>
 
     <ng-container *ngSwitchCase="'number'">
       <nz-input-number
-        #ref
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        #host
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder ?? ''"
         [nzMin]="schema.min ?? -infinity"
         [nzMax]="schema.max ?? infinity"
         [nzPrecision]="schema.precision ?? ''"
         [nzPrecisionMode]="schema.precisionMode"
-        [nzStep]="schema.step ?? 1"
-        (ngModelChange)="schema.change?.($event)">
+        [nzStep]="schema.step ?? 1">
       </nz-input-number>
     </ng-container>
 
     <ng-container *ngSwitchCase="'date'">
       <nz-date-picker
-        #ref
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        #host
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder"
         [nzMode]="schema.mode"
         [nzAllowClear]="schema.clear"
         [nzShowTime]="schema.showTime"
         [nzFormat]="schema.format"
-        [nzInline]="schema.inline"
-        (ngModelChange)="schema.change?.($event)"></nz-date-picker>
+        [nzInline]="schema.inline"></nz-date-picker>
     </ng-container>
 
     <ng-container *ngSwitchCase="'range'">
       <nz-range-picker
-        #ref
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        #host
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder"
         [nzMode]="schema.mode"
         [nzAllowClear]="schema.clear"
         [nzShowTime]="schema.showTime"
         [nzFormat]="schema.format"
-        [nzInline]="schema.inline"
-        (ngModelChange)="schema.change?.($event)"></nz-range-picker>
+        [nzInline]="schema.inline"></nz-range-picker>
     </ng-container>
 
     <ng-container *ngSwitchCase="'time'">
       <nz-time-picker
-        #ref
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        #host
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder"
         [nzAllowEmpty]="schema.clear"
         [nzFormat]="schema.format ?? 'HH:mm:ss'"
         [nzHourStep]="schema.step?.hour"
         [nzMinuteStep]="schema.step?.minute"
-        [nzSecondStep]="schema.step?.second"
-        (ngModelChange)="schema.change?.($event)">
+        [nzSecondStep]="schema.step?.second">
       </nz-time-picker>
     </ng-container>
 
     <ng-container *ngSwitchCase="'switch'">
       <nz-switch
-        #ref
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        #host
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
         [nzCheckedChildren]="schema.placeholder?.[0]"
-        [nzUnCheckedChildren]="schema.placeholder?.[1]"
-        (ngModelChange)="schema.change?.($event)">
+        [nzUnCheckedChildren]="schema.placeholder?.[1]">
       </nz-switch>
     </ng-container>
 
     <ng-container *ngSwitchCase="'select'">
       <nz-select
-        #ref
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        #host
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder"
         [nzAllowClear]="schema.clear"
         [nzMode]="schema.mode ?? 'default'"
         [nzMaxMultipleCount]="schema.limit ?? infinity"
-        [nzShowSearch]="schema.search"
-        (ngModelChange)="schema.change?.($event)">
+        [nzShowSearch]="schema.search">
         <nz-option
           *ngFor="let option of schema.options"
           [nzValue]="option[schema.config?.valueProperty ?? 'value']"
@@ -128,9 +120,9 @@
 
     <ng-container *ngSwitchCase="'cascader'">
       <nz-cascader
-        #ref
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        #host
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder"
         [nzAllowClear]="schema.clear"
@@ -138,34 +130,31 @@
         [nzShowSearch]="schema.search"
         [nzOptions]="schema.options"
         [nzValueProperty]="schema.config?.valueProperty ?? 'value'"
-        [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
-        (ngModelChange)="schema.change?.($event)">
+        [nzLabelProperty]="schema.config?.labelProperty ?? 'label'">
       </nz-cascader>
     </ng-container>
 
     <ng-container *ngSwitchCase="'slider'">
       <nz-slider
-        #ref
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        #host
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
         [nzIncluded]="schema.included"
         [nzMax]="schema.max ?? 100"
         [nzMin]="schema.min"
         [nzRange]="schema.range"
-        [nzStep]="schema.step ?? 1"
-        (ngModelChange)="schema.change?.($event)">
+        [nzStep]="schema.step ?? 1">
       </nz-slider>
     </ng-container>
 
     <ng-container *ngSwitchCase="'radio'">
       <nz-radio-group
-        #ref
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        #host
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
-        [nzButtonStyle]="schema.style"
-        (ngModelChange)="schema.change?.($event)">
+        [nzButtonStyle]="schema.style">
         <ng-container *ngFor="let option of schema.options">
           <label *ngIf="!schema.style" nz-radio [nzValue]="option[schema.config?.valueProperty ?? 'value']">
             {{ option[schema.config?.labelProperty ?? 'label'] }}
@@ -179,25 +168,23 @@
 
     <ng-container *ngSwitchCase="'checkbox'">
       <nz-checkbox-group
-        #ref
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
-        [formControl]="control"
-        (ngModelChange)="schema.change?.($event)">
+        #host
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
+        [formControl]="control">
       </nz-checkbox-group>
     </ng-container>
 
     <ng-container *ngSwitchCase="'rate'">
-      <nz-rate #ref
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+      <nz-rate #host
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
         [nzAllowClear]="schema.clear ?? true"
         [nzAllowHalf]="schema.half"
         [nzCharacter]="schema.character"
         [nzCount]="schema.count ?? 5"
-        [nzTooltips]="schema.tooltips ?? []"
-        (ngModelChange)="schema.change?.($event)"></nz-rate>
+        [nzTooltips]="schema.tooltips ?? []"></nz-rate>
     </ng-container>
   </ng-container>
 </ng-template>
@@ -210,117 +197,110 @@
   <ng-container *ngIf="control && !schema.hidden" [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
       <input
-        #ref
+        #host
         nz-col
         [nzSpan]="schema.span ?? null"
         nz-input
         [type]="schema.subtype ?? 'text'"
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
-        [placeholder]="schema.placeholder ?? ''"
-        (ngModelChange)="schema.change?.($event)" />
+        [placeholder]="schema.placeholder ?? ''" />
     </ng-container>
 
     <ng-container *ngSwitchCase="'textarea'">
       <textarea
-        #ref
+        #host
         nz-col
         [nzSpan]="schema.span ?? null"
         nz-input
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
-        [nzAutosize]="schema.autosize ?? {}"
-        (ngModelChange)="schema.change?.($event)"></textarea>
+        [nzAutosize]="schema.autosize ?? {}"></textarea>
     </ng-container>
 
     <ng-container *ngSwitchCase="'number'">
       <nz-input-number
-        #ref
+        #host
         nz-col
         [nzSpan]="schema.span ?? null"
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder ?? ''"
         [nzMin]="schema.min ?? -infinity"
         [nzMax]="schema.max ?? infinity"
         [nzPrecision]="schema.precision ?? ''"
         [nzPrecisionMode]="schema.precisionMode"
-        [nzStep]="schema.step ?? 1"
-        (ngModelChange)="schema.change?.($event)">
+        [nzStep]="schema.step ?? 1">
       </nz-input-number>
     </ng-container>
 
     <ng-container *ngSwitchCase="'date'">
       <nz-date-picker
-        #ref
+        #host
         nz-col
         [nzSpan]="schema.span ?? null"
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder"
         [nzMode]="schema.mode"
         [nzAllowClear]="schema.clear"
         [nzShowTime]="schema.showTime"
         [nzFormat]="schema.format"
-        [nzInline]="schema.inline"
-        (ngModelChange)="schema.change?.($event)"></nz-date-picker>
+        [nzInline]="schema.inline"></nz-date-picker>
     </ng-container>
 
     <ng-container *ngSwitchCase="'range'">
       <nz-range-picker
-        #ref
+        #host
         nz-col
         [nzSpan]="schema.span ?? null"
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder"
         [nzMode]="schema.mode"
         [nzAllowClear]="schema.clear"
         [nzShowTime]="schema.showTime"
         [nzFormat]="schema.format"
-        [nzInline]="schema.inline"
-        (ngModelChange)="schema.change?.($event)"></nz-range-picker>
+        [nzInline]="schema.inline"></nz-range-picker>
     </ng-container>
 
     <ng-container *ngSwitchCase="'time'">
       <nz-time-picker
-        #ref
+        #host
         nz-col
         [nzSpan]="schema.span ?? null"
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder"
         [nzAllowEmpty]="schema.clear"
         [nzFormat]="schema.format ?? 'HH:mm:ss'"
         [nzHourStep]="schema.step?.hour"
         [nzMinuteStep]="schema.step?.minute"
-        [nzSecondStep]="schema.step?.second"
-        (ngModelChange)="schema.change?.($event)">
+        [nzSecondStep]="schema.step?.second">
       </nz-time-picker>
     </ng-container>
 
     <ng-container *ngSwitchCase="'select'">
       <nz-select
-        #ref
+        #host
         nz-col
         [nzSpan]="schema.span ?? null"
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder"
         [nzAllowClear]="schema.clear"
         [nzMode]="schema.mode ?? 'default'"
         [nzMaxMultipleCount]="schema.limit ?? infinity"
-        [nzShowSearch]="schema.search"
-        (ngModelChange)="schema.change?.($event)">
+        [nzShowSearch]="schema.search">
         <nz-option
           *ngFor="let option of schema.options"
           [nzValue]="option[schema.config?.valueProperty ?? 'value']"
@@ -330,11 +310,11 @@
 
     <ng-container *ngSwitchCase="'cascader'">
       <nz-cascader
-        #ref
+        #host
         nz-col
         [nzSpan]="schema.span ?? null"
-        [fluentPropertyBinder]="{ host: ref, schema: schema }"
-        [fluentEventBinder]="{ host: ref, schema: schema }"
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder"
         [nzAllowClear]="schema.clear"
@@ -342,8 +322,7 @@
         [nzShowSearch]="schema.search"
         [nzOptions]="schema.options"
         [nzValueProperty]="schema.config?.valueProperty ?? 'value'"
-        [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
-        (ngModelChange)="schema.change?.($event)">
+        [nzLabelProperty]="schema.config?.labelProperty ?? 'label'">
       </nz-cascader>
     </ng-container>
   </ng-container>

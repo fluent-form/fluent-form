@@ -1,4 +1,5 @@
 import { Directive, EventEmitter, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
 import { ComponentEventListenerMap, HTMLElementEventListenerMap } from '../fluent-form.type';
@@ -8,14 +9,14 @@ import { ControlSchema } from '../schemas/index.schema';
   selector: '[fluentEventBinder]'
 })
 export class FluentEventBinderDirective<H extends object, S extends ControlSchema> implements OnInit, OnDestroy {
-  @Input() fluentEventBinder!: { host: H, schema: S };
+  @Input() fluentEventBinder!: { host: H, schema: S, control: FormControl };
 
   private destory$: Subject<void> = new Subject<void>();
 
   constructor() { }
 
   ngOnInit() {
-    const { host, schema } = this.fluentEventBinder;
+    const { host, schema, control } = this.fluentEventBinder;
 
     schema.listener && Object.keys(schema.listener).forEach(eventName => {
       if (host instanceof HTMLElement) {
@@ -34,6 +35,8 @@ export class FluentEventBinderDirective<H extends object, S extends ControlSchem
         });
       }
     });
+
+    schema.change && control.valueChanges.pipe(takeUntil(this.destory$)).subscribe(schema.change);
   }
 
   ngOnDestroy() {

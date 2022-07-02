@@ -1,5 +1,5 @@
 import { array, group, input, inputGroup, slider } from '../fluent-form.builder';
-import { AnyBuilder, AnySchema } from '../models/schema.model';
+import { AnyBuilder, AnySchema } from '../schemas/index.schema';
 import { findSchema, standardSchema, standardSchemas } from './schema.utils';
 
 describe('schema.utils', () => {

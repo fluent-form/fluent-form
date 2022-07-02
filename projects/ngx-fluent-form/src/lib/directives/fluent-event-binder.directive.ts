@@ -1,7 +1,7 @@
 import { Directive, EventEmitter, Input, OnInit } from '@angular/core';
 import { SafeAny } from '@ngify/types';
 import { ComponentEventListenerMap, HTMLElementEventListenerMap } from '../fluent-form.type';
-import { ControlSchema } from '../models/schema.model';
+import { ControlSchema } from '../schemas/index.schema';
 
 @Directive({
   selector: '[fluentEventBinder]'

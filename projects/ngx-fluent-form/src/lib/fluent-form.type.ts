@@ -1,6 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { Property, SafeAny } from '@ngify/types';
-import { AnyControlSchema } from './models/schema.model';
+import { AnyControlSchema } from './schemas/index.schema';
 
 /**
  * HTML 元素的事件侦听器对象

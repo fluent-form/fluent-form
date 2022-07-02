@@ -1,4 +1,8 @@
-import { AnyBuilder, AnySchema, AnySchemaName, CascaderControlSchema, CheckboxControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, InputGroupComponentSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SingleKeySchemaName, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from './models/schema.model';
+import { AnySchemaName, SingleKeySchemaName } from './schemas/abstract.schema';
+import { InputGroupComponentSchema } from './schemas/component.schema';
+import { CascaderControlSchema, CheckboxControlSchema, DatePickerControlSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from './schemas/control.schema';
+import { FormArraySchema, FormGroupSchema } from './schemas/form.schema';
+import { AnyBuilder, AnySchema } from './schemas/index.schema';
 import { builder, UnstableBuilder } from './utils/builder.utils';
 import { standardSchemas } from './utils/schema.utils';
 

@@ -1,5 +1,5 @@
 import { Directive, Input, OnInit } from '@angular/core';
-import { ControlSchema } from '../models/schema.model';
+import { ControlSchema } from '../schemas/index.schema';
 
 @Directive({
   selector: '[fluentPropertyBinder]'

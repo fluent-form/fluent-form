@@ -1,5 +1,4 @@
 import { TemplateRef } from '@angular/core';
-import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 import { Property, SafeAny } from '@ngify/types';
 import { NzCascaderComponent, NzCascaderOption } from 'ng-zorro-antd/cascader';
 import { NzCheckboxGroupComponent } from 'ng-zorro-antd/checkbox';
@@ -12,127 +11,7 @@ import { NzSliderComponent } from 'ng-zorro-antd/slider';
 import { NzSwitchComponent } from 'ng-zorro-antd/switch';
 import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
 import { ComponentEventListenerMap, ComponentInput, HTMLElementEventListenerMap } from '../fluent-form.type';
-import { Builder } from '../utils/builder.utils';
-
-/** 任意字段控件名称 */
-export type AnySchemaName = SingleKeySchemaName | DoubleKeySchemaName;
-/** 单字段图示名称 */
-export type SingleKeySchemaName = string | number;
-/** 双字段图示名称 */
-export type DoubleKeySchemaName = readonly [string, string];
-
-/** 任意图示 */
-export type AnySchema = FormSchema | ControlSchema | ComponentSchema;
-/** 任意构建器 */
-export type AnyBuilder = Builder<AnySchema, AnySchema, {}>;
-
-/** 控件图示 */
-export type AnyControlSchema = FormSchema | ControlSchema;
-/** 控件构建器 */
-export type AnyControlBuilder = Builder<AnyControlSchema, AnyControlSchema, {}>;
-
-/** 容器图示 */
-export type ContainerSchema = FormSchema | InputGroupComponentSchema;
-/** 容器构建器 */
-export type ContainerBuilder = Builder<ContainerSchema, ContainerSchema, {}>;
-
-/** 表单图示 */
-export type FormSchema<N extends SingleKeySchemaName = SingleKeySchemaName> = FormGroupSchema<N> | FormArraySchema<N>;
-/** 表单构建器 */
-export type FormBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = Builder<FormSchema<N>, FormSchema<N>, {}>;
-
-/** 真实控件图示 */
-export type ControlSchema = SingleKeyControlSchema | DoubleKeyControlSchema;
-/** 真实控件构建器 */
-export type ControlBuilder = Builder<ControlSchema, ControlSchema, {}>;
-
-/** 普通组件图示 */
-export type ComponentSchema<N extends SingleKeySchemaName = SingleKeySchemaName> = InputGroupComponentSchema<N>;
-/** 普通组件构建器 */
-export type ComponentBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = Builder<ComponentSchema<N>, ComponentSchema<N>, {}>;
-
-/** 输入系列控件图示 */
-export type InputSeriesControlSchema =
-  InputControlSchema |
-  TextareaControlSchema |
-  NumberInputControlSchema |
-  DatePickerControlSchema |
-  TimePickerControlSchema |
-  RangePickerControlSchema |
-  SelectControlSchema |
-  CascaderControlSchema;
-/** 输入系列控件构建器 */
-export type InputSeriesControlBuilder = Builder<InputSeriesControlSchema, InputSeriesControlSchema, {}>;
-
-/** 单字段的真实控件图示 */
-export type SingleKeyControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> =
-  InputControlSchema<N> |
-  TextareaControlSchema<N> |
-  NumberInputControlSchema<N> |
-  DatePickerControlSchema<N> |
-  TimePickerControlSchema<N> |
-  SwitchControlSchema<N> |
-  SelectControlSchema<N> |
-  CascaderControlSchema<N> |
-  RadioControlSchema<N> |
-  CheckboxControlSchema<N> |
-  RateControlSchema<N> |
-  RangePickerControlSchema<N> |
-  SliderControlSchema<N>;
-/** 单字段的真实控件构建器 */
-export type SingleKeyControlBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = Builder<SingleKeyControlSchema<N>, SingleKeyControlSchema<N>, {}>;
-
-/** 双字段的真实控件图示 */
-export type DoubleKeyControlSchema<N extends AnySchemaName = AnySchemaName> =
-  RangePickerControlSchema<N> |
-  SliderControlSchema<N>;
-/** 双字段的真实控件构建器 */
-export type DoubleKeyControlBuilder<N extends DoubleKeySchemaName = DoubleKeySchemaName> = Builder<DoubleKeyControlSchema<N>, DoubleKeyControlSchema<N>, {}>;
-
-/** 抽象图示 */
-interface AbstractSchema<N extends AnySchemaName> {
-  /** Type of control */
-  type: string;
-  /** Field name for control */
-  name?: N;
-  /** Span of the control in grid layout */
-  span?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24;
-  /** Label for control */
-  label?: string;
-  hidden?: boolean;
-}
-
-/** 抽象的真实控件图示 */
-interface AbstractControlSchema<N extends AnySchemaName, Value = any> extends AbstractSchema<N> {
-  /** I/O mapper for control */
-  mapper?: {
-    /** An input mapper that maps from a model's value to a form control's value */
-    input: (value?: SafeAny) => SafeAny,
-    /** An output mapper that maps from a form control's value to a model's value */
-    output: (value?: SafeAny) => SafeAny,
-  };
-  value?: Value;
-  /** Is it a required control */
-  required?: boolean;
-  /** Whether to disable control */
-  disabled?: boolean;
-  /** Error message for control */
-  errorTip?: string;
-  /** Validator for the control */
-  validator?: ValidatorFn[];
-  /** Async validators for control */
-  asyncValidator?: AsyncValidatorFn[];
-}
-
-export interface FormGroupSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<N> {
-  type: 'group';
-  schemas: (AnySchema | AnyBuilder)[];
-}
-
-export interface FormArraySchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<N> {
-  type: 'array';
-  schemas: (SingleKeyControlSchema<number> | SingleKeyControlBuilder<number> | FormSchema<number> | FormBuilder<number>)[];
-}
+import { AbstractControlSchema, AnySchemaName, SingleKeySchemaName } from './abstract.schema';
 
 export interface InputControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractControlSchema<N> {
   type: 'input';
@@ -376,24 +255,4 @@ export interface RateControlSchema<N extends SingleKeySchemaName = SingleKeySche
   listener?: ComponentEventListenerMap<NzRateComponent, RateControlSchema>;
   /** Other properties that need to be bound */
   property?: ComponentInput<NzRateComponent>;
-}
-
-export interface InputGroupComponentSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<N> {
-  type: 'input-group';
-  schemas: (InputSeriesControlSchema | InputSeriesControlBuilder)[];
-  required?: boolean;
-  /** The pre-label of the input box */
-  before?: {
-    icon?: string,
-    template?: string | TemplateRef<void>
-  };
-  /** The back label of the input box */
-  after?: {
-    icon?: string,
-    template?: string | TemplateRef<void>
-  };
-  /** The prefix of the input box */
-  prefix?: string | TemplateRef<void>;
-  /** The suffix of the input box */
-  suffix?: string | TemplateRef<void>;
 }

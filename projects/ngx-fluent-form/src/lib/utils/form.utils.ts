@@ -1,6 +1,6 @@
 import { FormArray, FormGroup } from '@angular/forms';
 import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
-import { AnyBuilder, AnySchema } from '../models/schema.model';
+import { AnyBuilder, AnySchema } from '../schemas/index.schema';
 import { standardSchemas } from './schema.utils';
 
 /**

@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { array, form, group, input, inputGroup, range, slider } from './fluent-form.builder';
 import { FluentFormComponent } from './fluent-form.component';
 import { FluentFormModule } from './fluent-form.module';
-import { AnySchema } from './models/schema.model';
+import { AnySchema } from './schemas/index.schema';
 import { assignFormToModel } from './utils/form.utils';
 
 @Component({

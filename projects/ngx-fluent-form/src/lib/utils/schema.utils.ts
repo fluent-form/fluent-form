@@ -1,5 +1,6 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { AnyBuilder, AnyControlBuilder, AnyControlSchema, AnySchema, AnySchemaName, ContainerSchema, ControlBuilder, ControlSchema, SingleKeySchemaName } from '../models/schema.model';
+import { AnySchemaName, SingleKeySchemaName } from '../schemas/abstract.schema';
+import { AnyBuilder, AnyControlBuilder, AnyControlSchema, AnySchema, ContainerSchema, ControlBuilder, ControlSchema } from '../schemas/index.schema';
 import { Builder, isBuilder } from './builder.utils';
 
 const CONTAINER_SCHEMA_TYPES = ['group', 'array', 'input-group'];

@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { Subject, takeUntil } from 'rxjs';
-import { AnySchema } from './models/schema.model';
+import { AnySchema } from './schemas';
 import { assignFormToModel, assignModelToForm } from './utils/form.utils';
 import { convertSchemasToGroup } from './utils/schema.utils';
 

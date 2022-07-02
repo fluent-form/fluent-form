@@ -22,7 +22,7 @@ export interface AbstractSchema<N extends AnySchemaName> {
 }
 
 /** 抽象的真实控件图示 */
-export interface AbstractControlSchema<N extends AnySchemaName, Value = any> extends AbstractSchema<N> {
+export interface AbstractControlSchema<N extends AnySchemaName, V = any> extends AbstractSchema<N> {
   /** I/O mapper for control */
   mapper?: {
     /** An input mapper that maps from a model's value to a form control's value */
@@ -30,7 +30,7 @@ export interface AbstractControlSchema<N extends AnySchemaName, Value = any> ext
     /** An output mapper that maps from a form control's value to a model's value */
     output: (value?: SafeAny) => SafeAny,
   };
-  value?: Value;
+  value?: V;
   /** Is it a required control */
   required?: boolean;
   /** Whether to disable control */
@@ -41,4 +41,5 @@ export interface AbstractControlSchema<N extends AnySchemaName, Value = any> ext
   validator?: ValidatorFn[];
   /** Async validators for control */
   asyncValidator?: AsyncValidatorFn[];
+  change?: (value: V) => void;
 }

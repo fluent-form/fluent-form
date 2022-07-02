@@ -1,6 +1,5 @@
 import { EventEmitter } from '@angular/core';
 import { Property, SafeAny } from '@ngify/types';
-import { AnyControlSchema } from './schemas/index.schema';
 
 /**
  * HTML 元素的事件侦听器对象
@@ -9,8 +8,8 @@ import { AnyControlSchema } from './schemas/index.schema';
  * ```
  * @template S 各种控件的图示
  */
-export type HTMLElementEventListenerMap<S extends AnyControlSchema> = {
-  [K in keyof HTMLElementEventMap]?: (event: HTMLElementEventMap[K], schema: S) => void
+export type HTMLElementEventListenerMap = {
+  [K in keyof HTMLElementEventMap]?: (event: HTMLElementEventMap[K]) => void
 };
 
 /**
@@ -29,8 +28,8 @@ type ComponentEventName<C> = Exclude<{
  * @template C 组件的类类型
  * @template S 各种控件的图示
  */
-export type ComponentEventListenerMap<C, S extends AnyControlSchema> = {
-  [K in ComponentEventName<C>]?: (event: C[K] extends EventEmitter<infer E> ? E : never, schema: S) => void
+export type ComponentEventListenerMap<C> = {
+  [K in ComponentEventName<C>]?: (event: C[K] extends EventEmitter<infer E> ? E : never) => void
 }
 
 /**

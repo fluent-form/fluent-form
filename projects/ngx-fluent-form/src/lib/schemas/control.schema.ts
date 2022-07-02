@@ -1,5 +1,5 @@
 import { TemplateRef } from '@angular/core';
-import { Property, SafeAny } from '@ngify/types';
+import { Property } from '@ngify/types';
 import { NzCascaderComponent, NzCascaderOption } from 'ng-zorro-antd/cascader';
 import { NzCheckboxGroupComponent } from 'ng-zorro-antd/checkbox';
 import { NzDateMode, NzDatePickerComponent, NzRangePickerComponent } from 'ng-zorro-antd/date-picker';
@@ -18,10 +18,8 @@ export interface InputControlSchema<N extends SingleKeySchemaName = SingleKeySch
   subtype?: 'text' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
   /** Placeholder text */
   placeholder?: string;
-  /** Control value change callback */
-  change?: (value: string, schema: InputControlSchema) => void;
   /** event listeners */
-  listener?: HTMLElementEventListenerMap<InputControlSchema>;
+  listener?: HTMLElementEventListenerMap;
   /** Other properties that need to be bound */
   property?: Partial<Property<HTMLInputElement>>;
 }
@@ -34,10 +32,8 @@ export interface TextareaControlSchema<N extends SingleKeySchemaName = SingleKey
   rows?: number;
   /** Whether to adapt the content height */
   autosize?: boolean | { minRows: number, maxRows: number };
-  /** Control value change callback */
-  change?: (value: string, schema: TextareaControlSchema) => void;
   /** event listeners */
-  listener?: HTMLElementEventListenerMap<TextareaControlSchema>;
+  listener?: HTMLElementEventListenerMap;
   /** Other properties that need to be bound */
   property?: Partial<Property<HTMLTextAreaElement>>;
 }
@@ -56,10 +52,8 @@ export interface NumberInputControlSchema<N extends SingleKeySchemaName = Single
   precisionMode?: NzInputNumberComponent['nzPrecisionMode'];
   /** Step length */
   step?: number;
-  /** Control value change callback */
-  change?: (value: number, schema: NumberInputControlSchema) => void;
   /** event listeners */
-  listener?: ComponentEventListenerMap<NzInputNumberComponent, NumberInputControlSchema>;
+  listener?: ComponentEventListenerMap<NzInputNumberComponent>;
   /** Other properties that need to be bound */
   property?: ComponentInput<NzInputNumberComponent>;
 }
@@ -81,10 +75,8 @@ export interface DatePickerControlSchema<N extends SingleKeySchemaName = SingleK
   type: 'date';
   /** Placeholder text */
   placeholder?: string;
-  /** Control value change callback */
-  change?: (value: Date, schema: DatePickerControlSchema) => void;
   /** event listeners */
-  listener?: ComponentEventListenerMap<NzDatePickerComponent, DatePickerControlSchema>;
+  listener?: ComponentEventListenerMap<NzDatePickerComponent>;
   /** Other properties that need to be bound */
   property?: ComponentInput<NzDatePickerComponent>;
 }
@@ -93,10 +85,8 @@ export interface RangePickerControlSchema<N extends AnySchemaName = AnySchemaNam
   type: 'range';
   /** Placeholder text */
   placeholder?: [string, string];
-  /** Control value change callback */
-  change?: (value: [Date, Date], schema: DatePickerControlSchema) => void;
   /** event listeners */
-  listener?: ComponentEventListenerMap<NzRangePickerComponent, RangePickerControlSchema>;
+  listener?: ComponentEventListenerMap<NzRangePickerComponent>;
   /** Other properties that need to be bound */
   property?: ComponentInput<NzRangePickerComponent>;
 }
@@ -115,10 +105,8 @@ export interface TimePickerControlSchema<N extends SingleKeySchemaName = SingleK
     minute?: number;
     second?: number;
   };
-  /** Control value change callback */
-  change?: (value: Date, schema: TimePickerControlSchema) => void;
   /** event listeners */
-  listener?: ComponentEventListenerMap<NzTimePickerComponent, TimePickerControlSchema>;
+  listener?: ComponentEventListenerMap<NzTimePickerComponent>;
   /** Other properties that need to be bound */
   property?: ComponentInput<NzTimePickerComponent>;
 }
@@ -127,10 +115,8 @@ export interface SwitchControlSchema<N extends SingleKeySchemaName = SingleKeySc
   type: 'switch';
   /** Placeholder text */
   placeholder?: [string | TemplateRef<void>, string | TemplateRef<void>];
-  /** Control value change callback */
-  change?: (value: boolean, schema: SwitchControlSchema) => void;
   /** event listeners */
-  listener?: ComponentEventListenerMap<NzSwitchComponent, SwitchControlSchema>;
+  listener?: ComponentEventListenerMap<NzSwitchComponent>;
   /** Other properties that need to be bound */
   property?: ComponentInput<NzSwitchComponent>;
 }
@@ -152,10 +138,8 @@ export interface SelectControlSchema<N extends SingleKeySchemaName = SingleKeySc
     labelProperty?: string;
     valueProperty?: string;
   };
-  /** Control value change callback */
-  change?: (value: SafeAny | SafeAny[], schema: SelectControlSchema) => void;
   /** event listeners */
-  listener?: ComponentEventListenerMap<NzSelectComponent, SelectControlSchema>;
+  listener?: ComponentEventListenerMap<NzSelectComponent>;
   /** Other properties that need to be bound */
   property?: ComponentInput<NzSelectComponent>;
 }
@@ -175,10 +159,8 @@ export interface CascaderControlSchema<N extends SingleKeySchemaName = SingleKey
     labelProperty?: string;
     valueProperty?: string;
   };
-  /** Control value change callback */
-  change?: (value: SafeAny[], schema: CascaderControlSchema) => void;
   /** event listeners */
-  listener?: ComponentEventListenerMap<NzCascaderComponent, CascaderControlSchema>;
+  listener?: ComponentEventListenerMap<NzCascaderComponent>;
   /** Other properties that need to be bound */
   property?: ComponentInput<NzCascaderComponent>;
 }
@@ -197,10 +179,8 @@ export interface SliderControlSchema<N extends AnySchemaName = AnySchemaName> ex
   range?: boolean;
   /** Step length */
   step?: number;
-  /** Control value change callback */
-  change?: (value: number | number[], schema: SliderControlSchema) => void;
   /** event listeners */
-  listener?: ComponentEventListenerMap<NzSliderComponent, SliderControlSchema>;
+  listener?: ComponentEventListenerMap<NzSliderComponent>;
   /** Other properties that need to be bound */
   property?: ComponentInput<NzSliderComponent>;
 }
@@ -214,10 +194,8 @@ export interface RadioControlSchema<N extends SingleKeySchemaName = SingleKeySch
     labelProperty?: string;
     valueProperty?: string;
   };
-  /** Control value change callback */
-  change?: (value: SafeAny, schema: RadioControlSchema) => void;
   /** event listeners */
-  listener?: ComponentEventListenerMap<NzRadioGroupComponent, RadioControlSchema>;
+  listener?: ComponentEventListenerMap<NzRadioGroupComponent>;
   /** Other properties that need to be bound */
   property?: ComponentInput<NzRadioGroupComponent>;
 }
@@ -229,10 +207,8 @@ export interface CheckboxControlSchema<N extends SingleKeySchemaName = SingleKey
     labelProperty?: string;
     valueProperty?: string;
   };
-  /** Control value change callback */
-  change?: (value: SafeAny[], schema: CheckboxControlSchema) => void;
   /** event listeners */
-  listener?: ComponentEventListenerMap<NzCheckboxGroupComponent, CheckboxControlSchema>;
+  listener?: ComponentEventListenerMap<NzCheckboxGroupComponent>;
   /** Other properties that need to be bound */
   property?: ComponentInput<NzCheckboxGroupComponent>;
 }
@@ -249,10 +225,8 @@ export interface RateControlSchema<N extends SingleKeySchemaName = SingleKeySche
   character?: TemplateRef<void>;
   /** Customize tooltip by each character */
   tooltips?: string[];
-  /** Control value change callback */
-  change?: (value: number, schema: RateControlSchema) => void;
   /** event listeners */
-  listener?: ComponentEventListenerMap<NzRateComponent, RateControlSchema>;
+  listener?: ComponentEventListenerMap<NzRateComponent>;
   /** Other properties that need to be bound */
   property?: ComponentInput<NzRateComponent>;
 }

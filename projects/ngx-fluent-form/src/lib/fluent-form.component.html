@@ -17,7 +17,7 @@
         [fluentEventBinder]="{ host: ref, schema: schema }"
         [formControl]="control"
         [placeholder]="schema.placeholder ?? ''"
-        (ngModelChange)="schema.change?.($event, schema)" />
+        (ngModelChange)="schema.change?.($event)" />
     </ng-container>
 
     <ng-container *ngSwitchCase="'textarea'">
@@ -30,7 +30,7 @@
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
         [nzAutosize]="schema.autosize ?? {}"
-        (ngModelChange)="schema.change?.($event, schema)"></textarea>
+        (ngModelChange)="schema.change?.($event)"></textarea>
     </ng-container>
 
     <ng-container *ngSwitchCase="'number'">
@@ -45,7 +45,7 @@
         [nzPrecision]="schema.precision ?? ''"
         [nzPrecisionMode]="schema.precisionMode"
         [nzStep]="schema.step ?? 1"
-        (ngModelChange)="schema.change?.($event, schema)">
+        (ngModelChange)="schema.change?.($event)">
       </nz-input-number>
     </ng-container>
 
@@ -61,7 +61,7 @@
         [nzShowTime]="schema.showTime"
         [nzFormat]="schema.format"
         [nzInline]="schema.inline"
-        (ngModelChange)="schema.change?.($event, schema)"></nz-date-picker>
+        (ngModelChange)="schema.change?.($event)"></nz-date-picker>
     </ng-container>
 
     <ng-container *ngSwitchCase="'range'">
@@ -76,7 +76,7 @@
         [nzShowTime]="schema.showTime"
         [nzFormat]="schema.format"
         [nzInline]="schema.inline"
-        (ngModelChange)="schema.change?.($event, schema)"></nz-range-picker>
+        (ngModelChange)="schema.change?.($event)"></nz-range-picker>
     </ng-container>
 
     <ng-container *ngSwitchCase="'time'">
@@ -91,7 +91,7 @@
         [nzHourStep]="schema.step?.hour"
         [nzMinuteStep]="schema.step?.minute"
         [nzSecondStep]="schema.step?.second"
-        (ngModelChange)="schema.change?.($event, schema)">
+        (ngModelChange)="schema.change?.($event)">
       </nz-time-picker>
     </ng-container>
 
@@ -103,7 +103,7 @@
         [formControl]="control"
         [nzCheckedChildren]="schema.placeholder?.[0]"
         [nzUnCheckedChildren]="schema.placeholder?.[1]"
-        (ngModelChange)="schema.change?.($event, schema)">
+        (ngModelChange)="schema.change?.($event)">
       </nz-switch>
     </ng-container>
 
@@ -118,7 +118,7 @@
         [nzMode]="schema.mode ?? 'default'"
         [nzMaxMultipleCount]="schema.limit ?? infinity"
         [nzShowSearch]="schema.search"
-        (ngModelChange)="schema.change?.($event, schema)">
+        (ngModelChange)="schema.change?.($event)">
         <nz-option
           *ngFor="let option of schema.options"
           [nzValue]="option[schema.config?.valueProperty ?? 'value']"
@@ -139,7 +139,7 @@
         [nzOptions]="schema.options"
         [nzValueProperty]="schema.config?.valueProperty ?? 'value'"
         [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
-        (ngModelChange)="schema.change?.($event, schema)">
+        (ngModelChange)="schema.change?.($event)">
       </nz-cascader>
     </ng-container>
 
@@ -154,7 +154,7 @@
         [nzMin]="schema.min"
         [nzRange]="schema.range"
         [nzStep]="schema.step ?? 1"
-        (ngModelChange)="schema.change?.($event, schema)">
+        (ngModelChange)="schema.change?.($event)">
       </nz-slider>
     </ng-container>
 
@@ -165,7 +165,7 @@
         [fluentEventBinder]="{ host: ref, schema: schema }"
         [formControl]="control"
         [nzButtonStyle]="schema.style"
-        (ngModelChange)="schema.change?.($event, schema)">
+        (ngModelChange)="schema.change?.($event)">
         <ng-container *ngFor="let option of schema.options">
           <label *ngIf="!schema.style" nz-radio [nzValue]="option[schema.config?.valueProperty ?? 'value']">
             {{ option[schema.config?.labelProperty ?? 'label'] }}
@@ -183,7 +183,7 @@
         [fluentPropertyBinder]="{ host: ref, schema: schema }"
         [fluentEventBinder]="{ host: ref, schema: schema }"
         [formControl]="control"
-        (ngModelChange)="schema.change?.($event, schema)">
+        (ngModelChange)="schema.change?.($event)">
       </nz-checkbox-group>
     </ng-container>
 
@@ -197,7 +197,7 @@
         [nzCharacter]="schema.character"
         [nzCount]="schema.count ?? 5"
         [nzTooltips]="schema.tooltips ?? []"
-        (ngModelChange)="schema.change?.($event, schema)"></nz-rate>
+        (ngModelChange)="schema.change?.($event)"></nz-rate>
     </ng-container>
   </ng-container>
 </ng-template>
@@ -219,7 +219,7 @@
         [fluentEventBinder]="{ host: ref, schema: schema }"
         [formControl]="control"
         [placeholder]="schema.placeholder ?? ''"
-        (ngModelChange)="schema.change?.($event, schema)" />
+        (ngModelChange)="schema.change?.($event)" />
     </ng-container>
 
     <ng-container *ngSwitchCase="'textarea'">
@@ -234,7 +234,7 @@
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
         [nzAutosize]="schema.autosize ?? {}"
-        (ngModelChange)="schema.change?.($event, schema)"></textarea>
+        (ngModelChange)="schema.change?.($event)"></textarea>
     </ng-container>
 
     <ng-container *ngSwitchCase="'number'">
@@ -251,7 +251,7 @@
         [nzPrecision]="schema.precision ?? ''"
         [nzPrecisionMode]="schema.precisionMode"
         [nzStep]="schema.step ?? 1"
-        (ngModelChange)="schema.change?.($event, schema)">
+        (ngModelChange)="schema.change?.($event)">
       </nz-input-number>
     </ng-container>
 
@@ -269,7 +269,7 @@
         [nzShowTime]="schema.showTime"
         [nzFormat]="schema.format"
         [nzInline]="schema.inline"
-        (ngModelChange)="schema.change?.($event, schema)"></nz-date-picker>
+        (ngModelChange)="schema.change?.($event)"></nz-date-picker>
     </ng-container>
 
     <ng-container *ngSwitchCase="'range'">
@@ -286,7 +286,7 @@
         [nzShowTime]="schema.showTime"
         [nzFormat]="schema.format"
         [nzInline]="schema.inline"
-        (ngModelChange)="schema.change?.($event, schema)"></nz-range-picker>
+        (ngModelChange)="schema.change?.($event)"></nz-range-picker>
     </ng-container>
 
     <ng-container *ngSwitchCase="'time'">
@@ -303,7 +303,7 @@
         [nzHourStep]="schema.step?.hour"
         [nzMinuteStep]="schema.step?.minute"
         [nzSecondStep]="schema.step?.second"
-        (ngModelChange)="schema.change?.($event, schema)">
+        (ngModelChange)="schema.change?.($event)">
       </nz-time-picker>
     </ng-container>
 
@@ -320,7 +320,7 @@
         [nzMode]="schema.mode ?? 'default'"
         [nzMaxMultipleCount]="schema.limit ?? infinity"
         [nzShowSearch]="schema.search"
-        (ngModelChange)="schema.change?.($event, schema)">
+        (ngModelChange)="schema.change?.($event)">
         <nz-option
           *ngFor="let option of schema.options"
           [nzValue]="option[schema.config?.valueProperty ?? 'value']"
@@ -343,7 +343,7 @@
         [nzOptions]="schema.options"
         [nzValueProperty]="schema.config?.valueProperty ?? 'value'"
         [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
-        (ngModelChange)="schema.change?.($event, schema)">
+        (ngModelChange)="schema.change?.($event)">
       </nz-cascader>
     </ng-container>
   </ng-container>

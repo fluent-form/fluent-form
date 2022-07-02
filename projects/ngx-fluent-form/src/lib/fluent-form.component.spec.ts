@@ -46,10 +46,10 @@ describe('FluentFormComponent', () => {
 
   it('模型的值应该与图示匹配（input-group）', () => {
     component.schemas = form(
-      inputGroup('ig').schemas([
+      inputGroup('ig').schemas(
         input('text1'),
         input('text2'),
-      ])
+      )
     );
     fixture.detectChanges();
 
@@ -58,9 +58,9 @@ describe('FluentFormComponent', () => {
 
   it('模型的值应该与图示匹配（多级模型）', () => {
     component.schemas = form(
-      group('group').schemas([
+      group('group').schemas(
         input('text')
-      ])
+      )
     );
     fixture.detectChanges();
 
@@ -69,9 +69,9 @@ describe('FluentFormComponent', () => {
 
   it('模型的值应该与图示匹配（数组）', () => {
     component.schemas = form(
-      array('array').schemas([
+      array('array').schemas(
         input(0)
-      ])
+      )
     );
     fixture.detectChanges();
 
@@ -80,11 +80,11 @@ describe('FluentFormComponent', () => {
 
   it('模型的值应该与图示匹配（多维数组）', () => {
     component.schemas = form(
-      array('array').schemas([
-        array(0).schemas([
+      array('array').schemas(
+        array(0).schemas(
           input(0)
-        ])
-      ])
+        )
+      )
     );
     fixture.detectChanges();
 
@@ -112,9 +112,9 @@ describe('FluentFormComponent', () => {
 
   it('模型应该能正确赋值表单（多级模型）', () => {
     component.schemas = form(
-      group('group').schemas([
+      group('group').schemas(
         input('text')
-      ])
+      )
     );
     component.model = { group: { text: 'test' } };
     fixture.detectChanges();
@@ -124,9 +124,9 @@ describe('FluentFormComponent', () => {
 
   it('模型应该能正确赋值表单（数组）', () => {
     component.schemas = form(
-      array('array').schemas([
+      array('array').schemas(
         input(0)
-      ])
+      )
     );
     component.model = { array: ['test'] };
     fixture.detectChanges();
@@ -136,11 +136,11 @@ describe('FluentFormComponent', () => {
 
   it('模型应该能正确赋值表单（多级数组）', () => {
     component.schemas = form(
-      array('array').schemas([
-        array(0).schemas([
+      array('array').schemas(
+        array(0).schemas(
           input(0)
-        ])
-      ])
+        )
+      )
     );
     component.model = { array: [['test']] };
     fixture.detectChanges();

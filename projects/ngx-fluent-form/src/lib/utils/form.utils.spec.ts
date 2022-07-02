@@ -17,10 +17,10 @@ describe('form.utils', () => {
     it('应该能正确处理一级对象（input-group）', () => {
       const model = { one: 1, two: 2 };
       const schemas = standardSchemas([
-        inputGroup('ig').schemas([
+        inputGroup('ig').schemas(
           number('one'),
           number('two'),
-        ])
+        )
       ]);
       const form = convertSchemasToGroup(schemas);
 
@@ -32,9 +32,9 @@ describe('form.utils', () => {
     it('应该能正确处理多级对象', () => {
       const model = { detail: { o: 1 } };
       const schemas = standardSchemas([
-        group('detail').schemas([
+        group('detail').schemas(
           number('o')
-        ])
+        )
       ]);
       const form = convertSchemasToGroup(schemas);
 
@@ -46,9 +46,9 @@ describe('form.utils', () => {
     it('应该能正确处理一级数组', () => {
       const model = { details: [1] };
       const schemas = standardSchemas([
-        array('details').schemas([
+        array('details').schemas(
           number(0)
-        ])
+        )
       ]);
       const form = convertSchemasToGroup(schemas);
 
@@ -60,11 +60,11 @@ describe('form.utils', () => {
     it('应该能正确处理多级数组', () => {
       const model = { details: [[1]] };
       const schemas = standardSchemas([
-        array('details').schemas([
-          array(0).schemas([
+        array('details').schemas(
+          array(0).schemas(
             number(0)
-          ])
-        ])
+          )
+        )
       ]);
       const form = convertSchemasToGroup(schemas);
 
@@ -185,9 +185,9 @@ describe('form.utils', () => {
     it('应该能正确处理多级对象', () => {
       const model = {};
       const schemas = standardSchemas([
-        group('detail').schemas([
+        group('detail').schemas(
           number('o').value(1)
-        ])
+        )
       ]);
       const form = convertSchemasToGroup(schemas);
 
@@ -199,9 +199,9 @@ describe('form.utils', () => {
     it('应该能正确处理一级数组', () => {
       const model = {};
       const schemas = standardSchemas([
-        array('details').schemas([
+        array('details').schemas(
           number(0).value(1)
-        ])
+        )
       ]);
       const form = convertSchemasToGroup(schemas);
 
@@ -213,11 +213,11 @@ describe('form.utils', () => {
     it('应该能正确处理多级数组', () => {
       const model = {};
       const schemas = standardSchemas([
-        array('details').schemas([
-          array(0).schemas([
+        array('details').schemas(
+          array(0).schemas(
             number(0).value(1)
-          ])
-        ])
+          )
+        )
       ]);
       const form = convertSchemasToGroup(schemas);
 

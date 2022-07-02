@@ -5,6 +5,13 @@ export function builder<T>(): Builder<T> {
         return () => target;
       }
 
+      if ('schemas' === prop) {
+        return (...args: unknown[]): unknown => {
+          target[prop] = args;
+          return builder;
+        };
+      }
+
       return (arg: unknown): unknown => {
         target[prop] = arg;
         return builder;
@@ -19,9 +26,15 @@ export function builder<T>(): Builder<T> {
  * @template T 原型
  * @template B 已选
  * @template U 未选
+ * @template R 需要 Rest 参数的属性名
  */
-export type Builder<T, B = {}, U = T> = (B extends T ? { build: () => T } : unknown) & {
-  [P in keyof U]-?: (o: U[P]) => Builder<T, B & Record<P, U[P]>, Omit<U, P>>
+export type Builder<T, B = {}, U = T, R extends string = 'schemas'> = (B extends T ? { build: () => T } : unknown) & {
+  [P in keyof U]-?: (
+    P extends R ? (
+      U[P] extends any[] ? (...o: U[P]) => Builder<T, B & Record<P, U[P]>, Omit<U, P>, R> : never
+    ) :
+    (o: U[P]) => Builder<T, B & Record<P, U[P]>, Omit<U, P>, R>
+  )
 };
 
 /**

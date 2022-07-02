@@ -20,9 +20,9 @@ describe('schema.utils', () => {
     }];
 
     const schemas = standardSchemas([
-      group('name').schemas([
+      group('name').schemas(
         input('name')
-      ])
+      )
     ] as AnyBuilder[]);
 
     expect(schemas).toEqual(value);
@@ -42,11 +42,11 @@ describe('schema.utils', () => {
     }];
 
     const schemas = standardSchemas([
-      array('name').schemas([
-        group().schemas([
+      array('name').schemas(
+        group().schemas(
           input('name')
-        ])
-      ])
+        )
+      )
     ] as AnyBuilder[]);
 
     expect(schemas).toEqual(value);
@@ -62,9 +62,9 @@ describe('schema.utils', () => {
     }];
 
     const schemas = standardSchemas([
-      inputGroup('name').schemas([
+      inputGroup('name').schemas(
         input('name')
-      ])
+      )
     ] as AnyBuilder[]);
 
     expect(schemas).toEqual(value);
@@ -81,7 +81,7 @@ describe('schema.utils', () => {
   it('应该能在图示列表中找到目标图示（一级）', () => {
     const target = standardSchema(input('name'));
     const schemas = standardSchemas([
-      group('group').schemas([target])
+      group('group').schemas(target)
     ]);
     const schema = findSchema(schemas, ['group', 'name']);
 
@@ -91,9 +91,9 @@ describe('schema.utils', () => {
   it('应该能在图示列表中找到目标图示（多级）', () => {
     const target = standardSchema(input('name'));
     const schemas = standardSchemas([
-      group('group').schemas([
-        group('group').schemas([target])
-      ])
+      group('group').schemas(
+        group('group').schemas(target)
+      )
     ]);
     const schema = findSchema(schemas, ['group', 'group', 'name']);
 
@@ -103,7 +103,7 @@ describe('schema.utils', () => {
   it('应该能在图示列表中找到目标图示（一维数组）', () => {
     const target = standardSchema(input(0));
     const schemas = standardSchemas([
-      array('array').schemas([target])
+      array('array').schemas(target)
     ]);
     const schema = findSchema(schemas, ['array', 0]);
 
@@ -113,9 +113,9 @@ describe('schema.utils', () => {
   it('应该能在图示列表中找到目标图示（多维数组）', () => {
     const target = standardSchema(input(0));
     const schemas = standardSchemas([
-      array('array').schemas([
-        array().schemas([target])
-      ])
+      array('array').schemas(
+        array().schemas(target)
+      )
     ]);
     const schema = findSchema(schemas, ['array', 0, 0]);
 
@@ -125,9 +125,9 @@ describe('schema.utils', () => {
   it('应该能在图示列表中找到目标图示（对象嵌套数组）', () => {
     const target = standardSchema(input(0));
     const schemas = standardSchemas([
-      group('group').schemas([
-        array('array').schemas([target])
-      ])
+      group('group').schemas(
+        array('array').schemas(target)
+      )
     ]);
     const schema = findSchema(schemas, ['group', 'array', 0]);
 
@@ -137,9 +137,9 @@ describe('schema.utils', () => {
   it('应该能在图示列表中找到目标图示（数组嵌套对象）', () => {
     const target = standardSchema(input('name'));
     const schemas = standardSchemas([
-      array('array').schemas([
-        group(0).schemas([target])
-      ])
+      array('array').schemas(
+        group(0).schemas(target)
+      )
     ]);
     const schema = findSchema(schemas, ['array', 0, 'name']);
 

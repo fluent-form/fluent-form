@@ -19,7 +19,11 @@ export class FluentEventBinderDirective<H extends object, S extends ControlSchem
     const { host, schema, control } = this.fluentEventBinder;
 
     schema.listener && Object.keys(schema.listener).forEach(eventName => {
-      if (host instanceof HTMLElement) {
+      if (eventName === 'valueChange') {
+        control.valueChanges.pipe(takeUntil(this.destory$)).subscribe(schema.listener![eventName]!);
+      } else if (eventName === 'statusChange') {
+        control.statusChanges.pipe(takeUntil(this.destory$)).subscribe(schema.listener![eventName]!);
+      } else if (host instanceof HTMLElement) {
         fromEvent(host, eventName).pipe(
           takeUntil(this.destory$)
         ).subscribe(event => (schema.listener as HTMLElementEventListenerMap)![
@@ -35,8 +39,6 @@ export class FluentEventBinderDirective<H extends object, S extends ControlSchem
         });
       }
     });
-
-    schema.change && control.valueChanges.pipe(takeUntil(this.destory$)).subscribe(schema.change);
   }
 
   ngOnDestroy() {

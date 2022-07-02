@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build:lib": "ng build --configuration production && node ./scripts/copy.mjs",
-    "publish": "npm run build:lib && npm publish ./dist/ngx-fluent-form",
+    "dev": "ng build --watch",
+    "build": "ng build --configuration production && node ./scripts/copy.mjs",
     "test:watch": "ng test ngx-fluent-form",
-    "test": "ng test ngx-fluent-form --configuration production"
+    "test": "ng test ngx-fluent-form --configuration production",
+    "publish": "npm run build:lib && npm publish ./dist/ngx-fluent-form"
   },
   "private": true,
   "dependencies": {

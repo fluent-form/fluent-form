@@ -13,7 +13,6 @@
     "sourceMap": true,
     "paths": {
       "ngx-fluent-form": [
-        "dist/ngx-fluent-form/ngx-fluent-form",
         "dist/ngx-fluent-form"
       ]
     },

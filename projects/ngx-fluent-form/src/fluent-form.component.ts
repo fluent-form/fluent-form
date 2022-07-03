@@ -31,6 +31,9 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
   set schemas(value: AnySchema[]) {
     this._schemas = value;
     this.form = convertSchemasToGroup(value);
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      assignFormToModel(this.form, this.model, this.schemas);
+    });
   }
 
   @Input() model!: T;
@@ -48,10 +51,6 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
 
   ngOnInit(): void {
     assignModelToForm(this.model, this.form, this.schemas);
-
-    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      assignFormToModel(this.form, this.model, this.schemas);
-    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -60,14 +59,6 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
     }
 
     if (changes['schemas']) {
-      if (changes['schemas'].previousValue) {
-        this.form = convertSchemasToGroup(this.schemas);
-
-        this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-          assignFormToModel(this.form, this.model, this.schemas);
-        });
-      }
-
       this.model && assignFormToModel(this.form, this.model, this.schemas);
     }
   }

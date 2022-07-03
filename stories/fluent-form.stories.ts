@@ -112,7 +112,8 @@ NestedFormGroup.args = {
       input('cellphone').subtype('tel').label('手机号').span(12),
       input('email').subtype('email').label('邮箱').span(12),
     )
-  )
+  ),
+  model: {}
 };
 
 export const NestedFormArray = Template.bind({});

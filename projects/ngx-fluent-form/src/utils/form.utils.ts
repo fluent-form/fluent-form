@@ -43,7 +43,7 @@ export function assignModelToForm<T extends Record<string, unknown> | unknown[]>
     } else if (['date', 'time'].includes(schema.type)) {
       value = value ? new Date(value as string | number | Date) : null;
     } else if (schema.type === 'range') {
-      value = (value as [string | number | Date, string | number | Date]).map(o => o ? new Date(o) : null);
+      value = (value as [string | number | Date, string | number | Date])?.map(o => o ? new Date(o) : null);
     } else if (schema.type === 'checkbox') {
       value = schema.options.map(o => ({
         label: o[schema.config?.labelProperty ?? 'label'],
@@ -114,8 +114,6 @@ export function assignFormToModel<T extends Record<string, unknown> | unknown[]>
           ) as unknown as T[keyof T];
         });
       }
-
-      value = (value as [number?, number?])?.map(o => o ?? null);
     } else if (schema.type === 'checkbox') {
       value = (value as NzCheckBoxOptionInterface[])?.filter(o => o.checked).map(o => o.value);
     }

@@ -143,6 +143,7 @@ export interface SelectControlSchema<N extends SingleKeySchemaName = SingleKeySc
   config?: {
     labelProperty?: string;
     valueProperty?: string;
+    disabledProperty?: string;
   };
   /** event listeners */
   listener?: ComponentEventListenerMap<NzSelectComponent> & ControlEventListenerMap<V>;
@@ -191,11 +192,11 @@ export interface SliderControlSchema<N extends AnySchemaName = AnySchemaName, V 
   property?: ComponentInput<NzSliderComponent>;
 }
 
-export interface RadioControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName, V = Record<string, unknown>> extends AbstractControlSchema<N, V> {
+export interface RadioControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName, V = SafeAny> extends AbstractControlSchema<N, V> {
   type: 'radio';
   /** Radio control style */
   style?: 'outline' | 'solid';
-  options: V[];
+  options: Record<string, unknown>[];
   config?: {
     labelProperty?: string;
     valueProperty?: string;

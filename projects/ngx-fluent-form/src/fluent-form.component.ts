@@ -37,7 +37,7 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
   /** Form layout */
   @Input() layout: NzFormLayoutType = 'vertical';
   /** Whether or not to display the colon after the label */
-  @Input() noColon: boolean = false;
+  @Input() colon: boolean = true;
   @Input() spinning?: boolean;
   @Input() spinTip: string = 'Loading...';
   @Input() spinSize: NzSizeLDSType = 'large';
@@ -60,6 +60,14 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
     }
 
     if (changes['schemas']) {
+      if (changes['schemas'].previousValue) {
+        this.form = convertSchemasToGroup(this.schemas);
+
+        this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+          assignFormToModel(this.form, this.model, this.schemas);
+        });
+      }
+
       this.model && assignFormToModel(this.form, this.model, this.schemas);
     }
   }

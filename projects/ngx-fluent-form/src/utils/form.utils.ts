@@ -8,20 +8,27 @@ import { standardSchemas } from './schema.utils';
  * @param model
  * @param form
  * @param schemas
+ * @param emitEvent
  */
-export function assignModelToForm<T extends Record<string, unknown>>(model: Record<string, unknown>, form: FormGroup, schemas: (AnySchema | AnyBuilder)[]): void;
-export function assignModelToForm<T extends unknown[]>(model: T, form: FormArray, schemas: (AnySchema | AnyBuilder)[]): void;
-export function assignModelToForm<T extends Record<string, unknown> | unknown[]>(model: T, form: FormGroup | FormArray, schemas: (AnySchema | AnyBuilder)[]): void {
+export function assignModelToForm<T extends Record<string, unknown>>(model: Record<string, unknown>, form: FormGroup, schemas: (AnySchema | AnyBuilder)[], emitEvent?: boolean): void;
+export function assignModelToForm<T extends unknown[]>(model: T, form: FormArray, schemas: (AnySchema | AnyBuilder)[], emitEvent?: boolean): void;
+export function assignModelToForm<T extends Record<string, unknown> | unknown[]>(model: T, form: FormGroup | FormArray, schemas: (AnySchema | AnyBuilder)[], emitEvent: boolean = true): void {
   standardSchemas(schemas).forEach(schema => {
     if (schema.type === 'input-group') {
-      return assignModelToForm(model as Record<string, unknown>, form as FormGroup, schema.schemas);
+      return assignModelToForm(
+        model as Record<string, unknown>,
+        form as FormGroup,
+        schema.schemas,
+        false
+      );
     }
 
     if (schema.type === 'group') {
       return assignModelToForm(
         (model[schema.name as keyof T] ??= {} as unknown as T[keyof T]) as unknown as Record<string, unknown>,
         form.get([schema.name!]) as FormGroup,
-        schema.schemas
+        schema.schemas,
+        false
       );
     }
 
@@ -29,7 +36,8 @@ export function assignModelToForm<T extends Record<string, unknown> | unknown[]>
       return assignModelToForm(
         (model[schema.name as keyof T] ??= [] as unknown as T[keyof T]) as unknown as unknown[],
         form.get([schema.name!]) as FormArray,
-        schema.schemas
+        schema.schemas,
+        false
       );
     }
 
@@ -52,8 +60,10 @@ export function assignModelToForm<T extends Record<string, unknown> | unknown[]>
       })) as NzCheckBoxOptionInterface[];
     }
 
-    form.get([schema.name!.toString()])!.setValue(value);
+    form.get([schema.name!.toString()])!.setValue(value, { emitEvent: false });
   });
+
+  emitEvent && form.updateValueAndValidity();
 }
 
 /**

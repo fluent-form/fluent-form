@@ -1,7 +1,7 @@
 import { Directive, EventEmitter, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
-import { fromEvent, Subject, takeUntil } from 'rxjs';
+import { asapScheduler, fromEvent, observeOn, Subject, takeUntil } from 'rxjs';
 import { ComponentEventListenerMap, HTMLElementEventListenerMap } from '../fluent-form.type';
 import { ControlSchema } from '../schemas/index.schema';
 
@@ -20,9 +20,15 @@ export class FluentEventBinderDirective<H extends object, S extends ControlSchem
 
     schema.listener && Object.keys(schema.listener).forEach(eventName => {
       if (eventName === 'valueChange') {
-        control.valueChanges.pipe(takeUntil(this.destory$)).subscribe(schema.listener![eventName]!);
+        control.valueChanges.pipe(
+          observeOn(asapScheduler), // 微任务调度，确保顶层事件先发射
+          takeUntil(this.destory$),
+        ).subscribe(schema.listener![eventName]!);
       } else if (eventName === 'statusChange') {
-        control.statusChanges.pipe(takeUntil(this.destory$)).subscribe(schema.listener![eventName]!);
+        control.statusChanges.pipe(
+          observeOn(asapScheduler),
+          takeUntil(this.destory$),
+        ).subscribe(schema.listener![eventName]!);
       } else if (host instanceof HTMLElement) {
         fromEvent(host, eventName).pipe(
           takeUntil(this.destory$)

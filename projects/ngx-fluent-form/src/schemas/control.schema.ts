@@ -12,11 +12,22 @@ import { NzSliderComponent } from 'ng-zorro-antd/slider';
 import { NzSwitchComponent } from 'ng-zorro-antd/switch';
 import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
 import { ComponentEventListenerMap, ComponentInput, HTMLElementEventListenerMap } from '../fluent-form.type';
-import { AbstractControlSchema, AnySchemaName, SingleKeySchemaName } from './abstract.schema';
+import { AbstractControlSchema, AbstractSchema, AnySchemaName, SingleKeySchemaName } from './abstract.schema';
+import { AnyBuilder, AnySchema, FormBuilder, FormSchema, SingleKeyControlBuilder, SingleKeyControlSchema } from './index.schema';
 
 interface ControlEventListenerMap<V> {
   valueChange?: (value: V) => void;
   statusChange?: (status: FormControlStatus) => void;
+}
+
+export interface FormGroupSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<N> {
+  type: 'group';
+  schemas: (AnySchema | AnyBuilder)[];
+}
+
+export interface FormArraySchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<N> {
+  type: 'array';
+  schemas: (SingleKeyControlSchema<number> | SingleKeyControlBuilder<number> | FormSchema<number> | FormBuilder<number>)[];
 }
 
 export interface InputControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName, V = string> extends AbstractControlSchema<N, V> {

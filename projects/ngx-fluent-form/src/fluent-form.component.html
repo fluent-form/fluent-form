@@ -1,4 +1,4 @@
-<nz-spin [nzTip]="spinTip" [nzSpinning]="spinning" [nzSize]="spinSize">
+<nz-spin *ngIf="form" [nzTip]="spinTip" [nzSpinning]="spinning" [nzSize]="spinSize">
   <ng-container *ngTemplateOutlet="formTemplate; context: { form, schemas }"></ng-container>
 </nz-spin>
 

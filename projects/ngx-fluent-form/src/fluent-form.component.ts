@@ -15,7 +15,6 @@ import { convertSchemasToGroup } from './utils/schema.utils';
 })
 export class FluentFormComponent<T extends Record<string, unknown>> implements OnInit, OnChanges {
   private destroy$: Subject<void> = new Subject<void>();
-  private _schemas!: AnySchema[];
   private _form!: FormGroup;
 
   readonly infinity: number = Infinity;
@@ -26,20 +25,9 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
     this.formChange.emit(value);
   }
 
-  @Input()
-  get schemas() { return this._schemas; }
-  set schemas(value: AnySchema[]) {
-    this._schemas = value;
-    this.form = convertSchemasToGroup(value);
-    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      assignFormToModel(this.form, this.model, this.schemas);
-    });
-  }
-
+  @Input() schemas!: AnySchema[];
   @Input() model!: T;
-  /** Form layout */
   @Input() layout: NzFormLayoutType = 'vertical';
-  /** Whether or not to display the colon after the label */
   @Input() colon: boolean = true;
   @Input() spinning?: boolean;
   @Input() spinTip: string = 'Loading...';
@@ -49,17 +37,25 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
 
   constructor() { }
 
-  ngOnInit(): void {
-    assignModelToForm(this.model, this.form, this.schemas);
-  }
+  ngOnInit(): void { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['model']) {
-      this.schemas && assignModelToForm(this.model, this.form, this.schemas);
+  ngOnChanges({ schemas: schemasChange, model: modelChange }: SimpleChanges): void {
+    if (schemasChange) {
+      this.form = convertSchemasToGroup(this.schemas);
+
+      // 先把模型赋值到表单（使用模型初始化表单）
+      assignModelToForm(this.model, this.form, this.schemas);
+      // 此时表单已就绪，把表单赋值到模型
+      assignFormToModel(this.form, this.model, this.schemas);
+
+      this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+        assignFormToModel(this.form, this.model, this.schemas);
+      });
     }
 
-    if (changes['schemas']) {
-      this.model && assignFormToModel(this.form, this.model, this.schemas);
+    // 忽略模型的首次变更（首次的初始化已在上面处理了）
+    if (modelChange && !modelChange.firstChange) {
+      assignModelToForm(this.model, this.form, this.schemas);
     }
   }
 

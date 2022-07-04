@@ -1,6 +1,6 @@
 {
   "livePreview.defaultPreviewPath": "/documentation/index.html",
   "conventionalCommits.scopes": [
-    "story"
+    "storybook"
   ]
 }

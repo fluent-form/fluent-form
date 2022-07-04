@@ -13,7 +13,7 @@
     "sourceMap": true,
     "paths": {
       "ngx-fluent-form": [
-        "dist/ngx-fluent-form"
+        "projects/ngx-fluent-form/src"
       ]
     },
     "declaration": false,

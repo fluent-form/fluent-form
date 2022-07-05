@@ -200,8 +200,8 @@
       <input
         #host
         nz-col
-        [nzSpan]="schema.span ?? null"
         nz-input
+        [nzSpan]="schema.span ?? null"
         [type]="schema.subtype ?? 'text'"
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
@@ -361,7 +361,7 @@
           <ng-container *ngSwitchCase="'input-group'">
             <nz-form-item>
               <nz-form-label *ngIf="schema.label" [nzRequired]="schema.required">{{ schema.label }}</nz-form-label>
-              <nz-form-control [nzErrorTip]="schema.errorTip">
+              <nz-form-control>
                 <nz-input-group
                   nz-row
                   nzCompact
@@ -384,7 +384,15 @@
           <ng-container *ngSwitchDefault>
             <nz-form-item>
               <nz-form-label *ngIf="schema.label" [nzRequired]="schema.required">{{ schema.label }}</nz-form-label>
-              <nz-form-control [nzErrorTip]="schema.errorTip">
+              <nz-form-control
+                [nzHasFeedback]="schema.feedback"
+                [nzValidateStatus]="form.get([schema.name])"
+                [nzSuccessTip]="schema.tips?.success"
+                [nzWarningTip]="schema.tips?.warning"
+                [nzErrorTip]="schema.tips?.error"
+                [nzValidatingTip]="schema.tips?.validating"
+                [nzExtra]="schema.tips?.extra"
+                [nzAutoTips]="schema.tips?.auto ?? {}">
                 <ng-container *ngTemplateOutlet="controlTemplate; context: { control: form.get([schema.name]), schema: schema }">
                 </ng-container>
               </nz-form-control>

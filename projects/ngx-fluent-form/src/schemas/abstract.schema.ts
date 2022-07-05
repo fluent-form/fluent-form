@@ -1,4 +1,5 @@
-import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
+import { TemplateRef } from '@angular/core';
+import { AsyncValidatorFn, FormControl, ValidatorFn } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 
 /** 任意字段控件名称 */
@@ -35,8 +36,16 @@ export interface AbstractControlSchema<N extends AnySchemaName, V> extends Abstr
   required?: boolean;
   /** Whether to disable control */
   disabled?: boolean;
+  feedback?: boolean;
   /** Error message for control */
-  errorTip?: string;
+  tips?: {
+    success?: string | TemplateRef<{ $implicit: FormControl }>;
+    warning?: string | TemplateRef<{ $implicit: FormControl }>;
+    error?: string | TemplateRef<{ $implicit: FormControl }>;
+    validating?: string | TemplateRef<{ $implicit: FormControl }>;
+    extra?: string | TemplateRef<void>;
+    auto?: Record<'default' | (string & {}), Record<string, string>>;
+  };
   /** Validator for the control */
   validator?: ValidatorFn[];
   /** Async validators for control */

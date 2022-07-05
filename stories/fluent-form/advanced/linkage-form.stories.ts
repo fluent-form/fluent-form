@@ -1,12 +1,11 @@
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { form, input, radio, select } from 'ngx-fluent-form';
+import { FluentFormComponent, form, input, radio, select } from 'ngx-fluent-form';
 import { findSchema } from 'projects/ngx-fluent-form/src/utils/schema.utils';
-import { AbstractFluentFormWrapperComponent } from './components/abstract-fluent-form-wrapper.component';
-import { SELECT_OPTIONS } from './control.options';
-import { createMeta, createStory } from './storybook.utils';
+import { AbstractFluentFormWrapperComponent } from '../../components/abstract-fluent-form-wrapper.component';
+import { SELECT_OPTIONS } from '../../control.options';
+import { createMeta, createStory } from '../../storybook.utils';
 
 registerLocaleData(zh);
 
@@ -23,7 +22,7 @@ registerLocaleData(zh);
       [spinSize]="spinSize"></fluent-form>
     <pre>{{ model | json }}</pre>
   `,
-  styleUrls: ['./components/abstract-fluent-form-wrapper.component.scss'],
+  styleUrls: ['../../components/abstract-fluent-form-wrapper.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
@@ -58,47 +57,4 @@ export default createMeta({
   component: FluentFormWrapperComponent,
 });
 
-export const LinkageForm = createStory<FluentFormWrapperComponent>({});
-
-export const FormValidation = createStory<FluentFormWrapperComponent>({
-  args: {
-    schemas: form(
-      input('username')
-        .label('Username')
-        .required(true)
-        .span(12)
-        .feedback(true)
-        .tips({
-          auto: {
-            default: {
-              required: 'Please enter your username!'
-            }
-          }
-        }),
-      input('email')
-        .label('Email')
-        .subtype('email')
-        .required(true)
-        .validator([Validators.email])
-        .span(12)
-        .feedback(true)
-        .tips({
-          auto: {
-            default: {
-              required: 'Please enter your Email!',
-              email: 'The enter is not valid E-mail!',
-            }
-          }
-        }),
-      input('password')
-        .label('Password')
-        .subtype('password')
-        .required(true)
-        .span(12)
-        .feedback(true)
-        .tips({
-          error: 'Please enter your password!'
-        }),
-    )
-  }
-});
+export const LinkageForm = createStory<FluentFormComponent<{}>>({});

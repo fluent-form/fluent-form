@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, Input, OnDestroy, OnInit } from '@angular/core';
+import { Directive, EventEmitter, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { asapScheduler, fromEvent, observeOn, Subject, takeUntil } from 'rxjs';
@@ -8,16 +8,19 @@ import { ControlSchema } from '../schemas/index.schema';
 @Directive({
   selector: '[fluentEventBinder]'
 })
-export class FluentEventBinderDirective<H extends object, S extends ControlSchema> implements OnInit, OnDestroy {
+export class FluentEventBinderDirective<H extends object, S extends ControlSchema> implements OnChanges, OnDestroy {
   @Input() fluentEventBinder!: { host: H, schema: S, control: FormControl };
 
   private destory$: Subject<void> = new Subject<void>();
 
   constructor() { }
 
-  ngOnInit() {
-    const { host, schema, control } = this.fluentEventBinder;
+  ngOnChanges({ fluentEventBinder }: SimpleChanges): void {
+    if (!fluentEventBinder.firstChange) {
+      this.destory$.next();
+    }
 
+    const { host, schema, control } = this.fluentEventBinder;
     schema.listener && Object.keys(schema.listener).forEach(eventName => {
       if (eventName === 'valueChange') {
         control.valueChanges.pipe(

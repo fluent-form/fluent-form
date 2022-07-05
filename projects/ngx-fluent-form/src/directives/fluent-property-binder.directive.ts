@@ -1,15 +1,15 @@
-import { Directive, Input, OnInit } from '@angular/core';
+import { Directive, Input, OnChanges } from '@angular/core';
 import { ControlSchema } from '../schemas/index.schema';
 
 @Directive({
   selector: '[fluentPropertyBinder]'
 })
-export class FluentPropertyBinderDirective<H extends object, S extends ControlSchema> implements OnInit {
+export class FluentPropertyBinderDirective<H extends object, S extends ControlSchema> implements OnChanges {
   @Input() fluentPropertyBinder!: { host: H, schema: S };
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges() {
     const { host, schema } = this.fluentPropertyBinder;
 
     schema.property && Object.keys(schema.property).forEach(property => {

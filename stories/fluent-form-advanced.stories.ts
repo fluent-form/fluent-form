@@ -43,6 +43,7 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
       ]).value(false).listener({
         valueChange: value => {
           findSchema(this.schemas, 'text')!.hidden = value;
+          this.schemas = [...this.schemas];
         }
       }),
       input('text').label('文本输入框').span(8),

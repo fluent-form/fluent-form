@@ -11,7 +11,7 @@ registerLocaleData(zh);
   template: `
     <fluent-form
       [schemas]="schemas"
-      [model]="model"
+      [(model)]="model"
       [layout]="layout"
       [colon]="colon"
       [spinning]="spinning"
@@ -33,3 +33,4 @@ export * from './grid-layout.story';
 export * from './input-group.story';
 export * from './nested-form-array.story';
 export * from './nested-form-group.story';
+

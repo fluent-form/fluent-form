@@ -13,7 +13,7 @@ registerLocaleData(zh);
   template: `
     <fluent-form
       [schemas]="schemas"
-      [model]="model"
+      [(model)]="model"
       [layout]="layout"
       [colon]="colon"
       [spinning]="spinning"

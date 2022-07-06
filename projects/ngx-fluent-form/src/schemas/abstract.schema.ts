@@ -1,6 +1,7 @@
 import { TemplateRef } from '@angular/core';
-import { AsyncValidatorFn, FormControl, ValidatorFn } from '@angular/forms';
-import { SafeAny } from '@ngify/types';
+import { AsyncValidatorFn, FormControl, FormControlStatus, ValidatorFn } from '@angular/forms';
+import { Property, SafeAny } from '@ngify/types';
+import { ComponentInputMap, ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../fluent-form.type';
 
 /** 任意字段控件名称 */
 export type AnySchemaName = SingleKeySchemaName | DoubleKeySchemaName;
@@ -10,11 +11,11 @@ export type SingleKeySchemaName = string | number;
 export type DoubleKeySchemaName = readonly [string, string];
 
 /** 抽象图示 */
-export interface AbstractSchema<N extends AnySchemaName> {
+export interface AbstractSchema<Name extends AnySchemaName> {
   /** Type of control */
   type: string;
   /** Field name for control */
-  name?: N;
+  name?: Name;
   /** Span of the control in grid layout */
   span?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24;
   /** Label for control */
@@ -23,7 +24,7 @@ export interface AbstractSchema<N extends AnySchemaName> {
 }
 
 /** 抽象的真实控件图示 */
-export interface AbstractControlSchema<N extends AnySchemaName, V> extends AbstractSchema<N> {
+export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends AbstractSchema<Name> {
   /** I/O mapper for control */
   mapper?: {
     /** An input mapper that maps from a model's value to a form control's value */
@@ -31,7 +32,7 @@ export interface AbstractControlSchema<N extends AnySchemaName, V> extends Abstr
     /** An output mapper that maps from a form control's value to a model's value */
     output: (value?: SafeAny) => SafeAny,
   };
-  value?: V;
+  value?: Val;
   /** Is it a required control */
   required?: boolean;
   /** Whether to disable control */
@@ -50,4 +51,21 @@ export interface AbstractControlSchema<N extends AnySchemaName, V> extends Abstr
   validator?: ValidatorFn[];
   /** Async validators for control */
   asyncValidator?: AsyncValidatorFn[];
+}
+
+interface ControlChangeListenerMap<Val> {
+  valueChange?: (value: Val) => void;
+  statusChange?: (status: FormControlStatus) => void;
+}
+
+/** 抽象的组件控件 */
+export interface AbstractComponentControlSchema<Cmp, Val> {
+  listener?: ComponentOutputListenerMap<Cmp> & ControlChangeListenerMap<Val>;
+  property?: ComponentInputMap<Cmp>;
+}
+
+/** 抽象的元素控件 */
+export interface AbstractElementControlSchema<Ele extends HTMLElement, Val> {
+  listener?: HTMLElementEventListenerMap & ControlChangeListenerMap<Val>;
+  property?: Partial<Property<Ele>>;
 }

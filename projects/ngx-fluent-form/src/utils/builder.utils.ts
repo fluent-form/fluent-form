@@ -1,3 +1,5 @@
+import { SafeAny } from '@ngify/types';
+
 export function builder<T>(): Builder<T> {
   const builder = new Proxy({} as Record<string, unknown>, {
     get(target, prop: string) {
@@ -31,7 +33,7 @@ export function builder<T>(): Builder<T> {
 export type Builder<T, B = {}, U = T, R extends string = 'schemas'> = (B extends T ? { build: () => T } : unknown) & {
   [P in keyof U]-?: (
     P extends R ? (
-      U[P] extends any[] ? (...o: U[P]) => Builder<T, B & Record<P, U[P]>, Omit<U, P>, R> : never
+      U[P] extends SafeAny[] ? (...o: U[P]) => Builder<T, B & Record<P, U[P]>, Omit<U, P>, R> : never
     ) :
     (o: U[P]) => Builder<T, B & Record<P, U[P]>, Omit<U, P>, R>
   )
@@ -47,6 +49,6 @@ export type UnstableBuilder<T, K extends keyof T> = Builder<T, Pick<T, K>, Omit<
  * 是否为一个构建器
  * @param builder
  */
-export const isBuilder = <T = unknown>(builder: any): builder is Builder<T> => (
+export const isBuilder = <T = unknown>(builder: SafeAny): builder is Builder<T> => (
   typeof builder.build === 'function'
 );

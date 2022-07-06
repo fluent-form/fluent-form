@@ -2,7 +2,7 @@ import { Directive, EventEmitter, Input, OnChanges, OnDestroy, SimpleChanges } f
 import { FormControl } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { asapScheduler, fromEvent, observeOn, Subject, takeUntil } from 'rxjs';
-import { ComponentEventListenerMap, HTMLElementEventListenerMap } from '../fluent-form.type';
+import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../fluent-form.type';
 import { ControlSchema } from '../schemas/index.schema';
 
 @Directive({
@@ -42,8 +42,8 @@ export class FluentEventBinderDirective<H extends object, S extends ControlSchem
         (host[eventName as keyof H] as unknown as EventEmitter<unknown>).pipe(
           takeUntil(this.destory$)
         ).subscribe((event: SafeAny) => {
-          (schema.listener as ComponentEventListenerMap<H>)![
-            eventName as keyof ComponentEventListenerMap<H>
+          (schema.listener as ComponentOutputListenerMap<H>)![
+            eventName as keyof ComponentOutputListenerMap<H>
           ]!(event);
         });
       }

@@ -78,6 +78,80 @@ export function assignModelToForm<T extends Obj | Arr>(model: T, form: FormGroup
 }
 
 /**
+ * 通过图示分配表单值到模型
+ * @param form
+ * @param model
+ * @param schemas
+ */
+export function assignFormToModel<T extends Obj>(form: FormGroup, model: T, schemas: (AnySchema | AnyBuilder)[]): T;
+export function assignFormToModel<T extends Arr>(form: FormArray, model: T, schemas: (AnySchema | AnyBuilder)[]): T;
+export function assignFormToModel<T extends Obj | Arr>(form: FormGroup | FormArray, model: T, schemas: (AnySchema | AnyBuilder)[]) {
+  if (Array.isArray(model)) {
+    model.length = 0;
+  } else {
+    Object.keys(model).forEach(property => delete model[property]);
+  }
+
+  standardSchemas(schemas).forEach(schema => {
+    if (schema.type === 'input-group') {
+      return getFormValueBySchemas(form as FormGroup, schema.schemas, model as Obj);
+    }
+
+    const control = form.get([schema.name!.toString()])!;
+
+    if (schema.type === 'group') {
+      return assignFormToModel(
+        control as FormGroup,
+        (model[schema.name as keyof T] ??= ({} as T[keyof T])) as unknown as Obj,
+        schema.schemas,
+      );
+    }
+
+    if (schema.type === 'array') {
+      return assignFormToModel(
+        control as FormArray,
+        (model[schema.name as keyof T] ??= ([] as unknown as T[keyof T])) as unknown as Arr,
+        schema.schemas,
+      );
+    }
+
+    let value: unknown = control.value;
+
+    if (schema.mapper) {
+      value = schema.mapper.output(value);
+    } else if (['date', 'time'].includes(schema.type)) {
+      value = (value as Date | null)?.getTime() ?? null;
+    } else if (schema.type === 'range') {
+      // 如果是双字段模式，值为一个元组，将元组元素分别赋值到两个字段中去
+      if (isDoubleKeySchemaName(schema.name!)) {
+        return schema.name.forEach((property, index) => {
+          model[property as keyof T] = (
+            (value as [Date | null, Date | null])?.[index]?.getTime() ?? null
+          ) as unknown as T[keyof T];
+        });
+      }
+
+      value = (value as [Date | null, Date | null])?.map(o => o?.getTime() ?? null);
+    } else if (schema.type === 'slider') {
+      // 如果是双字段模式，将数组并分别赋值到两个字段中去
+      if (isDoubleKeySchemaName(schema.name!)) {
+        return schema.name.forEach((property, index) => {
+          model[property as keyof T] = (
+            (value as [number | null, number | null])?.[index] ?? null
+          ) as unknown as T[keyof T];
+        });
+      }
+    } else if (schema.type === 'checkbox') {
+      value = (value as NzCheckBoxOptionInterface[])?.filter(o => o.checked).map(o => o.value);
+    }
+
+    model[schema.name as keyof T] = value as T[keyof T];
+  });
+
+  return model;
+}
+
+/**
  * 通过 schemas 来获取表单值
  * @param form
  * @param schemas

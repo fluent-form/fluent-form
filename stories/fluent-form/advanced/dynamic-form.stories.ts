@@ -1,8 +1,7 @@
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { array, FluentFormComponent, form, FormArraySchema, input } from 'ngx-fluent-form';
-import { findSchema } from 'projects/ngx-fluent-form/src/utils/schema.utils';
+import { array, findSchema, FluentFormComponent, form, FormArraySchema, input } from 'ngx-fluent-form';
 import { AbstractFluentFormWrapperComponent } from '../../components/abstract-fluent-form-wrapper.component';
 import { createMeta, createStory } from '../../storybook.utils';
 
@@ -13,7 +12,7 @@ registerLocaleData(zh);
   template: `
     <fluent-form
       [schemas]="schemas"
-      [(model)]="model"
+      [model]="model"
       [layout]="layout"
       [colon]="colon"
       [spinning]="spinning"

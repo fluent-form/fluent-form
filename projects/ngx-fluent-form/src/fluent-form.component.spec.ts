@@ -4,10 +4,9 @@ import { array, form, group, input, inputGroup, range, slider } from './fluent-f
 import { FluentFormComponent } from './fluent-form.component';
 import { FluentFormModule } from './fluent-form.module';
 import { AnySchema } from './schemas/index.schema';
-import { assignFormToModel } from './utils/form.utils';
 
 @Component({
-  template: `<fluent-form [schemas]="schemas" [model]="model"></fluent-form>`,
+  template: `<fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>`,
 })
 class TestWarpperComponent<T extends Record<string, unknown>> {
   @ViewChild(FluentFormComponent) target!: FluentFormComponent<T>;
@@ -46,7 +45,7 @@ describe('FluentFormComponent', () => {
 
   it('模型的值应该与图示匹配（input-group）', () => {
     component.schemas = form(
-      inputGroup('ig').schemas(
+      inputGroup().schemas(
         input('text1'),
         input('text2'),
       )
@@ -174,7 +173,7 @@ describe('FluentFormComponent', () => {
     expect(component.target.form.getRawValue()).toEqual({ text: initialValue });
 
     component.target.form.controls['text'].setValue(newValue);
-    assignFormToModel(component.target.form, component.target.model, component.schemas);
+    fixture.detectChanges();
 
     expect(component.model).toEqual({ text: newValue.split('') });
   });

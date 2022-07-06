@@ -4,7 +4,7 @@ import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { Subject, takeUntil } from 'rxjs';
 import { AnySchema } from './schemas';
-import { assignFormToModel, assignModelToForm } from './utils/form.utils';
+import { assignModelToForm, getFormValueBySchemas } from './utils/form.utils';
 import { convertSchemasToGroup } from './utils/schema.utils';
 
 @Component({
@@ -34,6 +34,7 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
   @Input() spinSize: NzSizeLDSType = 'large';
 
   @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
+  @Output() modelChange: EventEmitter<T> = new EventEmitter<T>();
 
   constructor() { }
 
@@ -46,10 +47,10 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
       // 先把模型赋值到表单（使用模型初始化表单）
       assignModelToForm(this.model, this.form, this.schemas);
       // 此时表单已就绪，把表单赋值到模型
-      assignFormToModel(this.form, this.model, this.schemas);
+      this.modelChange.emit(getFormValueBySchemas<T>(this.form, this.schemas));
 
       this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-        assignFormToModel(this.form, this.model, this.schemas);
+        this.modelChange.emit(getFormValueBySchemas<T>(this.form, this.schemas));
       });
     }
 

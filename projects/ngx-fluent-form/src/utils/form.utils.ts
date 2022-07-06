@@ -1,22 +1,25 @@
 import { FormArray, FormGroup } from '@angular/forms';
 import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
 import { AnyBuilder, AnySchema } from '../schemas/index.schema';
-import { standardSchemas } from './schema.utils';
+import { isDoubleKeySchemaName, standardSchemas } from './schema.utils';
+
+type Obj = Record<string, unknown>;
+type Arr = unknown[];
 
 /**
  * 从模型赋值到表单
  * @param model
  * @param form
  * @param schemas
- * @param emitEvent
+ * @param emitEvent 是否发射事件，函数内部递归调用的时候将置为false，保证只会触发一次事件
  */
-export function assignModelToForm<T extends Record<string, unknown>>(model: Record<string, unknown>, form: FormGroup, schemas: (AnySchema | AnyBuilder)[], emitEvent?: boolean): void;
-export function assignModelToForm<T extends unknown[]>(model: T, form: FormArray, schemas: (AnySchema | AnyBuilder)[], emitEvent?: boolean): void;
-export function assignModelToForm<T extends Record<string, unknown> | unknown[]>(model: T, form: FormGroup | FormArray, schemas: (AnySchema | AnyBuilder)[], emitEvent: boolean = true): void {
+export function assignModelToForm<T extends Obj>(model: T, form: FormGroup, schemas: (AnySchema | AnyBuilder)[], emitEvent?: boolean): void;
+export function assignModelToForm<T extends Arr>(model: T, form: FormArray, schemas: (AnySchema | AnyBuilder)[], emitEvent?: boolean): void;
+export function assignModelToForm<T extends Obj | Arr>(model: T, form: FormGroup | FormArray, schemas: (AnySchema | AnyBuilder)[], emitEvent: boolean = true): void {
   standardSchemas(schemas).forEach(schema => {
     if (schema.type === 'input-group') {
       return assignModelToForm(
-        model as Record<string, unknown>,
+        model as Obj,
         form as FormGroup,
         schema.schemas,
         false
@@ -25,7 +28,7 @@ export function assignModelToForm<T extends Record<string, unknown> | unknown[]>
 
     if (schema.type === 'group') {
       return assignModelToForm(
-        (model[schema.name as keyof T] ??= {} as unknown as T[keyof T]) as unknown as Record<string, unknown>,
+        (model[schema.name as keyof T] ??= {} as T[keyof T]) as unknown as Obj,
         form.get([schema.name!]) as FormGroup,
         schema.schemas,
         false
@@ -34,17 +37,22 @@ export function assignModelToForm<T extends Record<string, unknown> | unknown[]>
 
     if (schema.type === 'array') {
       return assignModelToForm(
-        (model[schema.name as keyof T] ??= [] as unknown as T[keyof T]) as unknown as unknown[],
+        (model[schema.name as keyof T] ??= [] as unknown as T[keyof T]) as unknown as Arr,
         form.get([schema.name!]) as FormArray,
         schema.schemas,
         false
       );
     }
 
-    // 如果是双字段模式，则需要从模型中分别取得这两个字段的值作为一个数组
-    let value: unknown = Array.isArray(schema.name) ?
-      schema.name.map((property, index) => model[property as keyof T] ?? schema.value?.[index] ?? null) :
-      model[schema.name as keyof T] ?? schema.value ?? null;
+    let value: unknown;
+    // 如果是双字段模式，则需要从模型中分别取得这两个字段的值组为一个元组
+    if (isDoubleKeySchemaName(schema.name!)) {
+      value = schema.name.map((property, index) => (
+        (model as Obj)[property] ?? schema.value?.[index] ?? null
+      ));
+    } else {
+      value = model[schema.name as keyof T] ?? schema.value ?? null;
+    }
 
     if (schema.mapper) {
       value = schema.mapper.input(value);
@@ -53,10 +61,13 @@ export function assignModelToForm<T extends Record<string, unknown> | unknown[]>
     } else if (schema.type === 'range') {
       value = (value as [string | number | Date, string | number | Date])?.map(o => o ? new Date(o) : null);
     } else if (schema.type === 'checkbox') {
+      const labelProperty = schema.config?.labelProperty ?? 'label';
+      const valueProperty = schema.config?.valueProperty ?? 'value';
+
       value = schema.options.map(o => ({
-        label: o[schema.config?.labelProperty ?? 'label'],
-        value: o[schema.config?.valueProperty ?? 'value'],
-        checked: (value as unknown[])?.includes(o[schema.config?.valueProperty ?? 'value'])
+        label: o[labelProperty],
+        value: o[valueProperty],
+        checked: (value as unknown[])?.includes(o[valueProperty])
       })) as NzCheckBoxOptionInterface[];
     }
 
@@ -67,60 +78,60 @@ export function assignModelToForm<T extends Record<string, unknown> | unknown[]>
 }
 
 /**
- * 从表单赋值到模型
+ * 通过 schemas 来获取表单值
  * @param form
- * @param model
  * @param schemas
+ * @param model 函数内部使用的参数，外部调用不需要传
  */
-export function assignFormToModel<T extends Record<string, unknown>>(form: FormGroup, model: T, schemas: (AnySchema | AnyBuilder)[]): void;
-export function assignFormToModel<T extends unknown[]>(form: FormArray, model: T, schemas: (AnySchema | AnyBuilder)[]): void;
-export function assignFormToModel<T extends Record<string, unknown> | unknown[]>(form: FormGroup | FormArray, model: T, schemas: (AnySchema | AnyBuilder)[]): void {
+export function getFormValueBySchemas<T extends Obj>(form: FormGroup, schemas: (AnySchema | AnyBuilder)[], model?: T): T
+export function getFormValueBySchemas<T extends Arr>(form: FormArray, schemas: (AnySchema | AnyBuilder)[], model?: T): T;
+export function getFormValueBySchemas<T extends Obj | Arr>(form: FormGroup | FormArray, schemas: (AnySchema | AnyBuilder)[], model: T = ({} as T)): T {
   standardSchemas(schemas).forEach(schema => {
     if (schema.type === 'input-group') {
-      return assignFormToModel(form as FormGroup, model as Record<string, unknown>, schema.schemas);
+      return getFormValueBySchemas(form as FormGroup, schema.schemas, model as Obj);
     }
 
-    const control = form.get([schema.name!.toString()]);
+    const control = form.get([schema.name!.toString()])!;
 
     if (schema.type === 'group') {
-      return assignFormToModel(
+      return getFormValueBySchemas(
         control as FormGroup,
-        (model[schema.name as keyof T] ??= ({} as T[keyof T])) as unknown as Record<string, unknown>,
-        schema.schemas
+        schema.schemas,
+        (model[schema.name as keyof T] ??= ({} as T[keyof T])) as unknown as Obj
       );
     }
 
     if (schema.type === 'array') {
-      return assignFormToModel(
+      return getFormValueBySchemas(
         control as FormArray,
-        (model[schema.name as keyof T] ??= ([] as unknown as T[keyof T])) as unknown as unknown[],
-        schema.schemas
+        schema.schemas,
+        (model[schema.name as keyof T] ??= ([] as unknown as T[keyof T])) as unknown as Arr
       );
     }
 
-    let value = control!.value as unknown | unknown[] | null;
+    let value: unknown = control.value;
 
     if (schema.mapper) {
       value = schema.mapper.output(value);
     } else if (['date', 'time'].includes(schema.type)) {
-      value = (value as Date)?.getTime() ?? null;
+      value = (value as Date | null)?.getTime() ?? null;
     } else if (schema.type === 'range') {
-      // 如果是双字段模式，将数组分别赋值到两个字段中去
-      if (Array.isArray(schema.name)) {
-        return schema.name.forEach((property: string | number, index: number) => {
+      // 如果是双字段模式，值为一个元组，将元组元素分别赋值到两个字段中去
+      if (isDoubleKeySchemaName(schema.name!)) {
+        return schema.name.forEach((property, index) => {
           model[property as keyof T] = (
-            (value as [Date?, Date?])?.[index]?.getTime() ?? null
+            (value as [Date | null, Date | null])?.[index]?.getTime() ?? null
           ) as unknown as T[keyof T];
         });
       }
 
-      value = (value as [Date?, Date?])?.map(o => o?.getTime() ?? null);
+      value = (value as [Date | null, Date | null])?.map(o => o?.getTime() ?? null);
     } else if (schema.type === 'slider') {
       // 如果是双字段模式，将数组并分别赋值到两个字段中去
-      if (Array.isArray(schema.name)) {
-        return schema.name.forEach((property: string | number, index: number) => {
+      if (isDoubleKeySchemaName(schema.name!)) {
+        return schema.name.forEach((property, index) => {
           model[property as keyof T] = (
-            (value as [number?, number?])?.[index] ?? null
+            (value as [number | null, number | null])?.[index] ?? null
           ) as unknown as T[keyof T];
         });
       }
@@ -130,4 +141,6 @@ export function assignFormToModel<T extends Record<string, unknown> | unknown[]>
 
     model[schema.name as keyof T] = value as T[keyof T];
   });
+
+  return model;
 }

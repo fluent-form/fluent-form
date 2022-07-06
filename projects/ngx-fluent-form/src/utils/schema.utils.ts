@@ -1,5 +1,5 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { AnySchemaName, SingleKeySchemaName } from '../schemas/abstract.schema';
+import { AnySchemaName, DoubleKeySchemaName, SingleKeySchemaName } from '../schemas/abstract.schema';
 import { AnyBuilder, AnyControlBuilder, AnyControlSchema, AnySchema, ContainerSchema, ControlBuilder, ControlSchema } from '../schemas/index.schema';
 import { Builder, isBuilder } from './builder.utils';
 
@@ -9,8 +9,16 @@ const CONTAINER_SCHEMA_TYPES = ['group', 'array', 'input-group'];
  * 是否为容器图示
  * @param schema
  */
-const isContainerSchema = (schema: AnySchema): schema is ContainerSchema => (
+export const isContainerSchema = (schema: AnySchema): schema is ContainerSchema => (
   CONTAINER_SCHEMA_TYPES.includes(schema.type)
+);
+
+/**
+ * 是否为双字段
+ * @param name
+ */
+export const isDoubleKeySchemaName = (name: AnySchemaName): name is DoubleKeySchemaName => (
+  Array.isArray(name)
 );
 
 /**
@@ -150,7 +158,7 @@ export function findSchema<T extends AnySchema = AnySchema>(schemas: AnySchema[]
 export function findSchema<T extends AnySchema = AnySchema>(schemas: AnySchema[], path: [...SingleKeySchemaName[], AnySchemaName]): T | undefined;
 export function findSchema<T extends AnySchema = AnySchema>(schemas: AnySchema[], path: AnySchemaName | [...SingleKeySchemaName[], AnySchemaName]): T | undefined;
 export function findSchema<T extends AnySchema = AnySchema>(schemas: AnySchema[], path: AnySchemaName | [...SingleKeySchemaName[], AnySchemaName]): T | undefined {
-  // 如果是数组，那么除了最后一个元素，其他元素所对应的 schema 一定是 group/array schema
+  // 如果是数组，那么除了最后一个元素，其他元素所对应的 schema 一定是 container schema
   if (Array.isArray(path)) {
     const [endPath, ...beforePath] = path.reverse() as [AnySchemaName, ...SingleKeySchemaName[]];
     schemas = beforePath.reduceRight((schemas, name) => (

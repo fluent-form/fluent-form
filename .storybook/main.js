@@ -25,10 +25,10 @@ module.exports = {
     builder: '@storybook/builder-webpack5'
   },
   features: {
-    // storyStoreV7: true,
-    // buildStoriesJson: true,
-    // babelModeV7: true,
-    // modernInlineRender: true,
-    // previewMdx2: true,
+    storyStoreV7: true,
+    buildStoriesJson: true,
+    babelModeV7: true,
+    modernInlineRender: true,
+    previewMdx2: true,
   }
 }

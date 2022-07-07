@@ -1,7 +1,7 @@
 module.exports = {
   stories: [
-    '../stories/**/*.stories.mdx',
-    '../stories/**/*.stories.@(js|jsx|ts|tsx)'
+    '../stories/**/*.(story|stories).mdx',
+    '../stories/**/*.(story|stories).@(js|jsx|ts|tsx)'
   ],
   addons: [
     '@storybook/addon-links',
@@ -23,5 +23,12 @@ module.exports = {
   framework: '@storybook/angular',
   core: {
     builder: '@storybook/builder-webpack5'
+  },
+  features: {
+    // storyStoreV7: true,
+    // buildStoriesJson: true,
+    // babelModeV7: true,
+    // modernInlineRender: true,
+    // previewMdx2: true,
   }
 }

@@ -11,10 +11,16 @@ export const parameters = {
       date: /Date$/,
     },
   },
-  docs: { inlineStories: true },
+  docs: {
+    inlineStories: true,
+  },
   options: {
     storySort: {
-      order: ['FluentForm', ['Basic']],
+      order: ['FluentForm', ['Introduce', 'Basic']],
     },
+  },
+  viewMode: 'docs',
+  previewTabs: {
+    'storybook/docs/panel': { index: -1 }
   },
 }

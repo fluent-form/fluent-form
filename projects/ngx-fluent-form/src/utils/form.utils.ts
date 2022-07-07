@@ -131,7 +131,7 @@ export function assignFormToModel<T extends Obj | Arr>(form: FormGroup | FormArr
         });
       }
 
-      value = (value as [Date | null, Date | null])?.map(o => o?.getTime() ?? null);
+      value = (value as [Date | null, Date | null])?.map(o => o?.getTime() ?? null) ?? null;
     } else if (schema.type === 'slider') {
       // 如果是双字段模式，将数组并分别赋值到两个字段中去
       if (isDoubleKeySchemaName(schema.name!)) {

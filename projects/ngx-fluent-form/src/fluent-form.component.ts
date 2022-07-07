@@ -16,7 +16,7 @@ import { convertSchemasToGroup } from './utils/schema.utils';
 export class FluentFormComponent<T extends Record<string, unknown>> implements OnInit, OnChanges {
   private destroy$: Subject<void> = new Subject<void>();
   private _form!: FormGroup;
-
+  /** @internal */
   readonly infinity: number = Infinity;
 
   get form(): FormGroup { return this._form; }

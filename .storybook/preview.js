@@ -21,6 +21,6 @@ export const parameters = {
   },
   viewMode: 'docs',
   previewTabs: {
-    'storybook/docs/panel': { index: -1 }
+    // 'storybook/docs/panel': { index: -1 }
   },
 }

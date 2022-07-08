@@ -175,6 +175,16 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="'checkbox'">
+      <label
+        #host
+        nz-checkbox
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema, control }"
+        [formControl]="control"
+        [nzId]="schema.id">{{ schema.content }}</label>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'checkbox-group'">
       <nz-checkbox-group
         #host
         [fluentPropertyBinder]="{ host, schema }"

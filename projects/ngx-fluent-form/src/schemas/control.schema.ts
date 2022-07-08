@@ -1,7 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { SafeAny } from '@ngify/types';
 import { NzCascaderComponent, NzCascaderOption } from 'ng-zorro-antd/cascader';
-import { NzCheckboxGroupComponent } from 'ng-zorro-antd/checkbox';
+import { NzCheckboxComponent, NzCheckboxGroupComponent } from 'ng-zorro-antd/checkbox';
 import { NzDateMode, NzDatePickerComponent, NzRangePickerComponent } from 'ng-zorro-antd/date-picker';
 import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
 import { NzRadioGroupComponent } from 'ng-zorro-antd/radio';
@@ -167,8 +167,15 @@ export interface RadioControlSchema<Name extends SingleKeySchemaName = SingleKey
   };
 }
 
-export interface CheckboxControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = SafeAny> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzCheckboxGroupComponent, Val> {
+export interface CheckboxControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = boolean> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzCheckboxComponent, Val> {
   type: 'checkbox';
+  content?: string;
+  autoFocus?: boolean;
+  indeterminate?: boolean;
+}
+
+export interface CheckboxGroupControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = SafeAny> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzCheckboxGroupComponent, Val> {
+  type: 'checkbox-group';
   options: Record<string, unknown>[];
   config?: {
     labelProperty?: string;

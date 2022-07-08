@@ -1,5 +1,5 @@
-import { array, checkbox, date, group, inputGroup, number, range, slider, time } from '../fluent-form.builder';
-import { assignFormToModel, assignModelToForm, getFormValueBySchemas } from './form.utils';
+import { array, checkboxGroup, date, group, inputGroup, number, range, slider, time } from '../fluent-form.builder';
+import { assignFormToModel, assignModelToForm } from './form.utils';
 import { convertSchemasToGroup, standardSchemas } from './schema.utils';
 
 describe('form.utils', () => {
@@ -136,7 +136,7 @@ describe('form.utils', () => {
     it('应该能正确处理多选框控件', () => {
       const model = { active: [1] };
       const schemas = standardSchemas([
-        checkbox('active').options([
+        checkboxGroup('active').options([
           { label: 'one', value: 1 },
           { label: 'two', value: 2 },
         ])
@@ -276,7 +276,7 @@ describe('form.utils', () => {
 
     it('应该能正确处理多选框控件', () => {
       const schemas = standardSchemas([
-        checkbox('active').value([
+        checkboxGroup('active').value([
           { label: 'one', value: 1, checked: true },
           { label: 'two', value: 2 },
         ]).options([
@@ -300,140 +300,6 @@ describe('form.utils', () => {
       ]);
       const form = convertSchemasToGroup(schemas);
       const model = assignFormToModel(form, {}, schemas);
-
-      expect(model).toEqual({ date: dateStr });
-    });
-  });
-
-  describe('get form value by schemas', () => {
-    it('应该能正确处理一级对象', () => {
-      const schemas = standardSchemas([number('o').value(1)]);
-      const form = convertSchemasToGroup(schemas);
-      const model = getFormValueBySchemas(form, schemas);
-
-      expect(model).toEqual({ o: 1 });
-    });
-
-    it('应该能正确处理多级对象', () => {
-      const schemas = standardSchemas([
-        group('detail').schemas(
-          number('o').value(1)
-        )
-      ]);
-      const form = convertSchemasToGroup(schemas);
-      const model = getFormValueBySchemas(form, schemas);
-
-      expect(model).toEqual({ detail: { o: 1 } });
-    });
-
-    it('应该能正确处理一级数组', () => {
-      const schemas = standardSchemas([
-        array('details').schemas(
-          number(0).value(1)
-        )
-      ]);
-      const form = convertSchemasToGroup(schemas);
-      const model = getFormValueBySchemas(form, schemas);
-
-      expect(model).toEqual({ details: [1] });
-    });
-
-    it('应该能正确处理多级数组', () => {
-      const schemas = standardSchemas([
-        array('details').schemas(
-          array(0).schemas(
-            number(0).value(1)
-          )
-        )
-      ]);
-      const form = convertSchemasToGroup(schemas);
-      const model = getFormValueBySchemas(form, schemas);
-
-      expect(model).toEqual({ details: [[1]] });
-    });
-
-    it('应该能正确处理双字段模式', () => {
-      const schemas = standardSchemas([
-        slider(['begin', 'end']).value([0, 1])
-      ]);
-      const form = convertSchemasToGroup(schemas);
-      const model = getFormValueBySchemas(form, schemas);
-
-      expect(model).toEqual({ begin: 0, end: 1 });
-    });
-
-    it('应该能正确处理日期控件', () => {
-      const d = new Date();
-      const schemas = standardSchemas([
-        date('date').value(d)
-      ]);
-      const form = convertSchemasToGroup(schemas);
-      const model = getFormValueBySchemas(form, schemas);
-
-      expect(model).toEqual({ date: d.getTime() });
-    });
-
-    it('应该能正确处理时间控件', () => {
-      const d = new Date();
-      const schemas = standardSchemas([
-        time('time').value(d)
-      ]);
-      const form = convertSchemasToGroup(schemas);
-      const model = getFormValueBySchemas(form, schemas);
-
-      expect(model).toEqual({ time: d.getTime() });
-    });
-
-    it('应该能正确处理时间区间控件（单字段）', () => {
-      const begin = new Date();
-      const end = new Date();
-      const schemas = standardSchemas([
-        range('range').value([begin, end])
-      ]);
-      const form = convertSchemasToGroup(schemas);
-      const model = getFormValueBySchemas(form, schemas);
-
-      expect(model).toEqual({ range: [begin.getTime(), end.getTime()] });
-    });
-
-    it('应该能正确处理时间区间控件（双字段）', () => {
-      const begin = new Date();
-      const end = new Date();
-      const schemas = standardSchemas([
-        range(['begin', 'end']).value([begin, end])
-      ]);
-      const form = convertSchemasToGroup(schemas);
-      const model = getFormValueBySchemas(form, schemas);
-
-      expect(model).toEqual({ begin: begin.getTime(), end: end.getTime() });
-    });
-
-    it('应该能正确处理多选框控件', () => {
-      const schemas = standardSchemas([
-        checkbox('active').value([
-          { label: 'one', value: 1, checked: true },
-          { label: 'two', value: 2 },
-        ]).options([
-          { label: 'one', value: 1 },
-          { label: 'two', value: 2 },
-        ])
-      ]);
-      const form = convertSchemasToGroup(schemas);
-      const model = getFormValueBySchemas(form, schemas);
-
-      expect(model).toEqual({ active: [1] });
-    });
-
-    it('应该能正确应用映射器', () => {
-      const dateStr = '2022-2-22';
-      const schemas = standardSchemas([
-        date('date').value(new Date(dateStr)).mapper({
-          input: (o: string) => new Date(o),
-          output: (o: Date) => [o.getFullYear(), o.getMonth() + 1, o.getDate()].join('-')
-        })
-      ]);
-      const form = convertSchemasToGroup(schemas);
-      const model = getFormValueBySchemas(form, schemas);
 
       expect(model).toEqual({ date: dateStr });
     });

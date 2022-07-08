@@ -1,6 +1,6 @@
 import { AnySchemaName, SingleKeySchemaName } from './schemas/abstract.schema';
 import { InputGroupComponentSchema } from './schemas/component.schema';
-import { CascaderControlSchema, CheckboxControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from './schemas/control.schema';
+import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from './schemas/control.schema';
 import { AnyBuilder, AnySchema } from './schemas/index.schema';
 import { builder, UnstableBuilder } from './utils/builder.utils';
 import { standardSchemas } from './utils/schema.utils';
@@ -75,6 +75,12 @@ export function checkbox(): UnstableBuilder<CheckboxControlSchema<number>, TypeA
 export function checkbox<N extends SingleKeySchemaName>(name?: N): UnstableBuilder<CheckboxControlSchema<N>, TypeAndName>;
 export function checkbox<N extends SingleKeySchemaName>(name?: N) {
   return builder<CheckboxControlSchema<N>>().type('checkbox').name(name);
+}
+
+export function checkboxGroup(): UnstableBuilder<CheckboxGroupControlSchema<number>, TypeAndName>;
+export function checkboxGroup<N extends SingleKeySchemaName>(name?: N): UnstableBuilder<CheckboxGroupControlSchema<N>, TypeAndName>;
+export function checkboxGroup<N extends SingleKeySchemaName>(name?: N) {
+  return builder<CheckboxGroupControlSchema<N>>().type('checkbox-group').name(name);
 }
 
 export function rate(): UnstableBuilder<RateControlSchema<number>, TypeAndName>;

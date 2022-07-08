@@ -1,7 +1,7 @@
 import { Builder } from '../utils/builder.utils';
 import { AnySchemaName, DoubleKeySchemaName, SingleKeySchemaName } from './abstract.schema';
 import { InputGroupComponentSchema } from './component.schema';
-import { CascaderControlSchema, CheckboxControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from './control.schema';
+import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from './control.schema';
 
 /** 任意图示 */
 export type AnySchema = FormSchema | ControlSchema | ComponentSchema;
@@ -58,6 +58,7 @@ export type SingleKeyControlSchema<N extends SingleKeySchemaName = SingleKeySche
   CascaderControlSchema<N> |
   RadioControlSchema<N> |
   CheckboxControlSchema<N> |
+  CheckboxGroupControlSchema<N> |
   RateControlSchema<N> |
   RangePickerControlSchema<N> |
   SliderControlSchema<N>;

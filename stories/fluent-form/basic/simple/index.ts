@@ -6,7 +6,7 @@ import dedent from 'ts-dedent';
 export const story = defineStory({
   args: {
     schemas: form(
-      input('text').label('文本输入框').span(24).id('ipt'),
+      input('text').label({ value: '文本输入框', tooltip: '小贴士' }).span(24).id('ipt'),
       textarea('textarea').label('文本框').span(24),
       number('number').label('数字输入框').span(24),
       date('date').label('日期录入框').span(24),
@@ -36,7 +36,7 @@ export const source = dedent`
   })
   export class ExampleComponent {
     schemas = form(
-      input('text').label('文本输入框').span(24),
+      input('text').label({ value: '文本输入框', tooltip: '小贴士' }).span(24).id('ipt'),
       textarea('textarea').label('文本框').span(24),
       number('number').label('数字输入框').span(24),
       date('date').label('日期录入框').span(24),

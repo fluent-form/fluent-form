@@ -2,6 +2,25 @@
   <ng-container *ngTemplateOutlet="formTemplate; context: { form, schemas }"></ng-container>
 </nz-spin>
 
+<!-- label 模板 -->
+<!-- @param schema 控件的图示 -->
+<ng-template #labelTemplate let-schema="schema">
+  <!-- 如果 schema.label 是 label 对象 -->
+  <nz-form-label
+    *ngIf="schema.label.value"
+    [nzSpan]="schema.label.span"
+    [nzTooltipTitle]="schema.label.tooltip?.title ?? schema.label.tooltip"
+    [nzTooltipIcon]="schema.label.tooltip?.icon"
+    [nzFor]="schema.id"
+    [nzRequired]="schema.required">
+    {{ schema.label.value }}
+  </nz-form-label>
+  <!-- 否则 schema.label 就是字符串 -->
+  <nz-form-label *ngIf="!schema.label.value" [nzFor]="schema.id" [nzRequired]="schema.required">
+    {{ schema.label }}
+  </nz-form-label>
+</ng-template>
+
 <!-- 控件模板 -->
 <!-- 根据 schema.type 来输出不同的控件 -->
 <!-- @param control FormControl -->
@@ -401,7 +420,10 @@
 
           <ng-container *ngSwitchCase="'input-group'">
             <nz-form-item>
-              <nz-form-label *ngIf="schema.label" [nzRequired]="schema.required">{{ schema.label }}</nz-form-label>
+              <ng-container *ngIf="schema.label">
+                <ng-container *ngTemplateOutlet="labelTemplate; context: { schema }"></ng-container>
+              </ng-container>
+
               <nz-form-control>
                 <nz-input-group
                   nz-row
@@ -424,9 +446,10 @@
 
           <ng-container *ngSwitchDefault>
             <nz-form-item>
-              <nz-form-label *ngIf="schema.label" [nzFor]="schema.id" [nzRequired]="schema.required">
-                {{ schema.label }}
-              </nz-form-label>
+              <ng-container *ngIf="schema.label">
+                <ng-container *ngTemplateOutlet="labelTemplate; context: { schema }"></ng-container>
+              </ng-container>
+
               <nz-form-control
                 [nzHasFeedback]="schema.feedback"
                 [nzValidateStatus]="form.get([schema.name])"

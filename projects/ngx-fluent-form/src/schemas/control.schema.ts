@@ -15,11 +15,13 @@ import { AnyBuilder, AnySchema, FormBuilder, FormSchema, SingleKeyControlBuilder
 
 export interface FormGroupSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<N> {
   type: 'group';
+  label?: string;
   schemas: (AnySchema | AnyBuilder)[];
 }
 
 export interface FormArraySchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<N> {
   type: 'array';
+  label?: string;
   schemas: (SingleKeyControlSchema<number> | SingleKeyControlBuilder<number> | FormSchema<number> | FormBuilder<number>)[];
 }
 

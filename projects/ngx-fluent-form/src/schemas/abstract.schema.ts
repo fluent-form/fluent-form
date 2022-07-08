@@ -1,6 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { AsyncValidatorFn, FormControl, FormControlStatus, ValidatorFn } from '@angular/forms';
 import { Property, SafeAny } from '@ngify/types';
+import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { ComponentInputMap, ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../fluent-form.type';
 
 /** 任意字段控件名称 */
@@ -10,6 +11,19 @@ export type SingleKeySchemaName = string | number;
 /** 双字段图示名称 */
 export type DoubleKeySchemaName = readonly [string, string];
 
+type Cell = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24;
+
+interface Label {
+  value: string;
+  span?: Cell;
+  tooltip?: string | Tooltip;
+}
+
+interface Tooltip {
+  title: string | TemplateRef<void>;
+  icon: string | NzFormTooltipIcon;
+}
+
 /** 抽象图示 */
 export interface AbstractSchema<Name extends AnySchemaName> {
   /** Type of control */
@@ -17,11 +31,11 @@ export interface AbstractSchema<Name extends AnySchemaName> {
   /** Field name for control */
   name?: Name;
   /** Span of the control in grid layout */
-  span?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24;
-  offset?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24;
+  span?: Cell;
+  offset?: Cell;
   flex?: number | string;
   /** Label for control */
-  label?: string;
+  label?: string | Label;
   hidden?: boolean;
 }
 

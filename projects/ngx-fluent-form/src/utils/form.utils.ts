@@ -50,6 +50,10 @@ export function assignModelToForm<T extends Obj | Arr>(model: T, form: FormGroup
       value = schema.name.map((property, index) => (
         (model as Obj)[property] ?? schema.value?.[index] ?? null
       ));
+      // 如果数组元素都是 null，那就直接赋值 null
+      if ((value as []).every(o => o === null)) {
+        value = null;
+      }
     } else {
       value = model[schema.name as keyof T] ?? schema.value ?? null;
     }
@@ -59,7 +63,7 @@ export function assignModelToForm<T extends Obj | Arr>(model: T, form: FormGroup
     } else if (['date', 'time'].includes(schema.type)) {
       value = value ? new Date(value as string | number | Date) : null;
     } else if (schema.type === 'range') {
-      value = (value as [string | number | Date, string | number | Date])?.map(o => o ? new Date(o) : null);
+      value = (value as [string | number | Date, string | number | Date])?.map(o => o ? new Date(o) : null) ?? null;
     } else if (schema.type === 'checkbox') {
       const labelProperty = schema.config?.labelProperty ?? 'label';
       const valueProperty = schema.config?.valueProperty ?? 'value';

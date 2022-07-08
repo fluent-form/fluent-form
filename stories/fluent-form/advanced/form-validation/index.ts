@@ -94,7 +94,7 @@ export const source = dedent`
         .tips({
           error: 'Please enter your password!'
         }),
-    ),
+    );
 
     model = {};
   }

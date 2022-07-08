@@ -22,7 +22,7 @@ export const source = dedent`
   export class ExampleComponent {
     schemas: form(
       range(['start', 'end']).label('日期区间控件').span(12),
-    ),
+    );
 
     model = {};
   }

@@ -28,7 +28,7 @@ export const source = dedent`
         input: (o: string) => new Date(o),
         output: (o: Date) => [o.getFullYear(), o.getMonth() + 1, o.getDate()].join('/')
       })
-    ),
+    );
 
     model = { date: '2022/2/22' };
   }

@@ -12,6 +12,7 @@
       <input
         #host
         nz-input
+        [id]="schema.id ?? ''"
         [type]="schema.subtype ?? 'text'"
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
@@ -23,6 +24,7 @@
       <textarea
         #host
         nz-input
+        [id]="schema.id ?? ''"
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
@@ -37,6 +39,7 @@
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
+        [nzId]="schema.id ?? ''"
         [nzPlaceHolder]="schema.placeholder ?? ''"
         [nzMin]="schema.min ?? -infinity"
         [nzMax]="schema.max ?? infinity"
@@ -52,6 +55,7 @@
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
+        [nzId]="schema.id ?? ''"
         [nzPlaceHolder]="schema.placeholder"
         [nzMode]="schema.mode"
         [nzAllowClear]="schema.clear"
@@ -66,6 +70,7 @@
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
+        [nzId]="schema.id ?? ''"
         [nzPlaceHolder]="schema.placeholder"
         [nzMode]="schema.mode"
         [nzAllowClear]="schema.clear"
@@ -80,6 +85,7 @@
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
+        [nzId]="schema.id ?? ''"
         [nzPlaceHolder]="schema.placeholder"
         [nzAllowEmpty]="schema.clear"
         [nzFormat]="schema.format ?? 'HH:mm:ss'"
@@ -106,6 +112,7 @@
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
+        [nzId]="schema.id ?? ''"
         [nzPlaceHolder]="schema.placeholder"
         [nzAllowClear]="schema.clear"
         [nzMode]="schema.mode ?? 'default'"
@@ -177,7 +184,8 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="'rate'">
-      <nz-rate #host
+      <nz-rate
+        #host
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
@@ -201,6 +209,7 @@
         #host
         nz-col
         nz-input
+        [id]="schema.id ?? ''"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
@@ -216,6 +225,7 @@
         #host
         nz-col
         nz-input
+        [id]="schema.id ?? ''"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
@@ -231,6 +241,7 @@
       <nz-input-number
         #host
         nz-col
+        [nzId]="schema.id ?? ''"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
@@ -250,6 +261,7 @@
       <nz-date-picker
         #host
         nz-col
+        [nzId]="schema.id ?? ''"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
@@ -268,6 +280,7 @@
       <nz-range-picker
         #host
         nz-col
+        [nzId]="schema.id ?? ''"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
@@ -286,6 +299,7 @@
       <nz-time-picker
         #host
         nz-col
+        [nzId]="schema.id ?? ''"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
@@ -305,6 +319,7 @@
       <nz-select
         #host
         nz-col
+        [nzId]="schema.id ?? ''"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
@@ -399,7 +414,9 @@
 
           <ng-container *ngSwitchDefault>
             <nz-form-item>
-              <nz-form-label *ngIf="schema.label" [nzRequired]="schema.required">{{ schema.label }}</nz-form-label>
+              <nz-form-label *ngIf="schema.label" [nzFor]="schema.id" [nzRequired]="schema.required">
+                {{ schema.label }}
+              </nz-form-label>
               <nz-form-control
                 [nzHasFeedback]="schema.feedback"
                 [nzValidateStatus]="form.get([schema.name])"

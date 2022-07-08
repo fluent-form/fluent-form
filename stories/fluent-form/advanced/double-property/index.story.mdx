@@ -1,0 +1,21 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { meta } from '../../';
+import { story, source } from './';
+import { FluentFormComponent } from 'ngx-fluent-form';
+
+<Meta
+  title="FluentForm/Advanced"
+  component={meta.component}
+  decorators={meta.decorators}
+  argTypes={meta.argTypes}
+  parameters={meta.parameters} />
+
+# Double Property
+
+对于区间选择控件，例如 `range` 控件，它将输出一个包含**两个元素**的数组，我们可能期望将数组里的这**两个元素**分别映射到模型里的**两个属性**：
+
+<Canvas withToolbar mdxSource={source}>
+  <Story name="Double Property">{story}</Story>
+</Canvas>
+
+<ArgsTable of={FluentFormComponent} />

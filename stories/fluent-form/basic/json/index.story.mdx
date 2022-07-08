@@ -1,0 +1,35 @@
+import { Canvas, Meta, Story, Source, ArgsTable } from '@storybook/addon-docs';
+import { meta } from '../../';
+import { story, jsonSource, jsonAndFluentSource, fluentAndJsonSource } from './';
+import { FluentFormComponent } from 'ngx-fluent-form';
+
+<Meta
+  title="FluentForm/Basic"
+  component={meta.component}
+  decorators={meta.decorators}
+  argTypes={meta.argTypes}
+  parameters={meta.parameters} />
+
+# Fluent API & JSON
+
+> 为了方便展示，文档中将使用字面量对象（`object literal`）替代 JSON。
+
+你可以使用 JSON 来构建表单：
+
+<Canvas withToolbar mdxSource={jsonSource}>
+  <Story name="Fluent API & JSON" description="你可以使用 JSON 来构建表单：">{story}</Story>
+</Canvas>
+
+你还可以混合使用 Fluent API 和 JSON：
+
+<Source
+  language="typescript"
+  dark={true}
+  code={jsonAndFluentSource} />
+
+<Source
+  language="typescript"
+  dark={true}
+  code={fluentAndJsonSource} />
+
+<ArgsTable of={FluentFormComponent} />

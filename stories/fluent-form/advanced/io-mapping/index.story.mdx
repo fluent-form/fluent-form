@@ -1,0 +1,23 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { meta } from '../../';
+import { story, source } from './';
+import { FluentFormComponent } from 'ngx-fluent-form';
+
+<Meta
+  title="FluentForm/Advanced"
+  component={meta.component}
+  decorators={meta.decorators}
+  argTypes={meta.argTypes}
+  parameters={meta.parameters} />
+
+# I/O Mapping
+
+对于需要双向映射的值，可以使用 `mapper` 选项。
+
+例如日期控件期望**得到**且将**输出** `Date` 对象，而我们期望从日期控件的**输出**中**得到**日期字符串：
+
+<Canvas withToolbar mdxSource={source}>
+  <Story name="I/O Mapping">{story}</Story>
+</Canvas>
+
+<ArgsTable of={FluentFormComponent} />

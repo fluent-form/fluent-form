@@ -1,9 +1,11 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { InputControlSchema, TextareaControlSchema } from '../schemas';
 import { AnySchemaName, DoubleKeySchemaName, SingleKeySchemaName } from '../schemas/abstract.schema';
 import { AnyBuilder, AnyControlBuilder, AnyControlSchema, AnySchema, ContainerSchema, ControlBuilder, ControlSchema } from '../schemas/index.schema';
 import { Builder, isBuilder } from './builder.utils';
 
 const CONTAINER_SCHEMA_TYPES = ['group', 'array', 'input-group'];
+const TEXT_CONTROL_SCHEMA_TYPES = ['input', 'textarea'];
 
 /**
  * 是否为容器图示
@@ -11,6 +13,14 @@ const CONTAINER_SCHEMA_TYPES = ['group', 'array', 'input-group'];
  */
 export const isContainerSchema = (schema: AnySchema): schema is ContainerSchema => (
   CONTAINER_SCHEMA_TYPES.includes(schema.type)
+);
+
+/**
+ * 是否为文本图示
+ * @param schema
+ */
+export const isTextControlSchema = (schema: AnySchema): schema is InputControlSchema | TextareaControlSchema => (
+  TEXT_CONTROL_SCHEMA_TYPES.includes(schema.type)
 );
 
 /**
@@ -26,12 +36,56 @@ export const isDoubleKeySchemaName = (name: AnySchemaName): name is DoubleKeySch
  * @param schema
  * @param validator
  */
-const addValidatorToSchema = (schema: ControlSchema, validator: ValidatorFn) => {
+const addValidatorToSchema = (schema: ControlSchema, validator: ValidatorFn | ValidatorFn[]) => {
+  const validators = Array.isArray(validator) ? validator : [validator]
+
   if (schema.validator) {
-    schema.validator.push(validator);
+    schema.validator = schema.validator.concat(validators);
   } else {
-    schema.validator = [validator];
+    schema.validator = validators;
   }
+}
+
+/**
+ * 标准化容器图示
+ * @param schema
+ */
+const standardContainerSchema = <T extends ContainerSchema>(schema: T): T => {
+  const schemas = standardSchemas(schema.schemas);
+
+  // 如果是数组表单图示，自动补充子图示的名称为索引值
+  if (schema.type === 'array') {
+    schemas.forEach((schema, index) => schema.name = index);
+  }
+
+  schema.schemas = schemas;
+
+  return schema;
+}
+
+/**
+ * 标准化文本控件图示
+ * @param schema
+ */
+const standardTextControlSchema = <T extends InputControlSchema | TextareaControlSchema>(schema: T): T => {
+  if (schema.type === 'input' && schema.subtype === 'email') {
+    addValidatorToSchema(schema, Validators.email);
+  }
+
+  if (schema.length) {
+    if (typeof schema.length === 'number') {
+      addValidatorToSchema(schema, [
+        Validators.minLength(schema.length),
+        Validators.maxLength(schema.length)
+      ]);
+    } else {
+      const { min, max } = schema.length as { max?: number, min?: number };
+      min && addValidatorToSchema(schema, Validators.minLength(min));
+      max && addValidatorToSchema(schema, Validators.maxLength(max));
+    }
+  }
+
+  return schema;
 }
 
 /**
@@ -39,20 +93,21 @@ const addValidatorToSchema = (schema: ControlSchema, validator: ValidatorFn) => 
  * @param schema
  */
 export const standardSchema = <T extends AnySchema>(schema: T | Builder<T, T, {}>): T => {
-  const _schema = (isBuilder(schema) ? schema.build() : schema) as T;
+  let _schema = (isBuilder(schema) ? schema.build() : schema) as AnySchema;
 
   if (isContainerSchema(_schema)) {
-    const tmp = standardSchemas(_schema.schemas);
-
-    // 如果是数组表单图示，自动补充子图示的名称为索引值
-    if (_schema.type === 'array') {
-      tmp.forEach((schema, index) => schema.name = index);
-    }
-
-    _schema.schemas = tmp;
+    return standardContainerSchema(_schema) as T;
   }
 
-  return _schema;
+  if (isTextControlSchema(_schema)) {
+    standardTextControlSchema(_schema);
+  }
+
+  if ('required' in _schema && _schema.required) {
+    addValidatorToSchema(_schema as ControlSchema, Validators.required);
+  }
+
+  return _schema as T;
 };
 
 /**
@@ -69,14 +124,6 @@ export const standardSchemas = <T extends AnySchema>(schemas: (T | Builder<T, T,
  */
 export function convertSchemaToControl(schema: ControlSchema | ControlBuilder): FormControl {
   const _schema = standardSchema(schema);
-
-  if (_schema.type === 'input' && _schema.subtype === 'email') {
-    addValidatorToSchema(_schema, Validators.email);
-  }
-
-  if (_schema.required) {
-    addValidatorToSchema(_schema, Validators.required);
-  }
 
   return new FormControl(
     { value: _schema.value ?? null, disabled: _schema.disabled },
@@ -102,8 +149,8 @@ export function convertSchemasToGroup(schemas: (AnySchema | AnyBuilder)[]): Form
           break;
 
         case 'input-group':
-          standardSchemas(schema.schemas).forEach(schema => {
-            controls[schema.name!.toString()] = convertSchemaToControl(schema);
+          standardSchemas(schema.schemas).forEach(subschema => {
+            controls[subschema.name!.toString()] = convertSchemaToControl(subschema);
           });
           break;
 

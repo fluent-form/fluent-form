@@ -60,3 +60,11 @@ type ComponentInputName<C> = Extract<keyof ComponentProperty<C>, `nz${Capitalize
  * @template C 组件的类类型
  */
 export type ComponentInputMap<C> = Partial<{ [P in ComponentInputName<C>]: C[P] }>;
+
+/**
+ * 必填单个属性或者全部属性
+ * ```
+ * SingleOrAll<{ a: string, b: number }> -> { a: string } | { b: number } | { a: string, b: number }
+ * ```
+ */
+export type SingleOrAll<T> = { [P in keyof T]: { [K in P]-?: T[P] } }[keyof T] | Required<T>;

@@ -10,6 +10,7 @@ import { NzSelectComponent, NzSelectModeType } from 'ng-zorro-antd/select';
 import { NzSliderComponent } from 'ng-zorro-antd/slider';
 import { NzSwitchComponent } from 'ng-zorro-antd/switch';
 import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
+import { SingleOrAll } from '../fluent-form.type';
 import { AbstractComponentControlSchema, AbstractControlSchema, AbstractElementControlSchema, AbstractSchema, AnySchemaName, SingleKeySchemaName } from './abstract.schema';
 import { AnyBuilder, AnySchema, FormBuilder, FormSchema, SingleKeyControlBuilder, SingleKeyControlSchema } from './index.schema';
 
@@ -25,14 +26,19 @@ export interface FormArraySchema<N extends SingleKeySchemaName = SingleKeySchema
   schemas: (SingleKeyControlSchema<number> | SingleKeyControlBuilder<number> | FormSchema<number> | FormBuilder<number>)[];
 }
 
-export interface InputControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = string> extends AbstractControlSchema<Name, Val>, AbstractElementControlSchema<HTMLInputElement, Val> {
+/** 抽象的文本控件图示 */
+interface AbstractTextControlSchema {
+  length?: number | SingleOrAll<{ max: number, min: number }>;
+}
+
+export interface InputControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = string> extends AbstractControlSchema<Name, Val>, AbstractElementControlSchema<HTMLInputElement, Val>, AbstractTextControlSchema {
   type: 'input';
   subtype?: 'text' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
   /** Placeholder text */
   placeholder?: string;
 }
 
-export interface TextareaControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = string> extends AbstractControlSchema<Name, Val>, AbstractElementControlSchema<HTMLTextAreaElement, Val> {
+export interface TextareaControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = string> extends AbstractControlSchema<Name, Val>, AbstractElementControlSchema<HTMLTextAreaElement, Val>, AbstractTextControlSchema {
   type: 'textarea';
   /** Placeholder text */
   placeholder?: string;

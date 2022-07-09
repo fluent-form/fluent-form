@@ -9,11 +9,14 @@ export const story = defineStory({
       input('username')
         .label('Username')
         .required(true)
+        .length({ min: 3, max: 10 })
         .span(12)
         .feedback(true)
         .tips({
           auto: {
             default: {
+              minlength: 'Username is too short!',
+              maxlength: 'Username is too long!',
               required: 'Please enter your username!'
             }
           }

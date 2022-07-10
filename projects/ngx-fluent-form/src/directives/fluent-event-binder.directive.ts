@@ -2,8 +2,8 @@ import { Directive, EventEmitter, Input, OnChanges, OnDestroy, SimpleChanges } f
 import { FormControl } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { asapScheduler, fromEvent, observeOn, Subject, takeUntil } from 'rxjs';
-import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../fluent-form.type';
 import { ControlSchema } from '../schemas/index.schema';
+import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../type';
 
 @Directive({
   selector: '[fluentEventBinder]'

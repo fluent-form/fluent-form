@@ -2,7 +2,7 @@ import { TemplateRef } from '@angular/core';
 import { AsyncValidatorFn, FormControl, FormControlStatus, ValidatorFn } from '@angular/forms';
 import { Property, SafeAny } from '@ngify/types';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
-import { ComponentInputMap, ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../fluent-form.type';
+import { ComponentInputMap, ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../type';
 
 /** 任意字段控件名称 */
 export type AnySchemaName = SingleKeySchemaName | DoubleKeySchemaName;

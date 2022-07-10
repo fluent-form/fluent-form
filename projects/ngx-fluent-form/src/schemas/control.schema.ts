@@ -10,7 +10,7 @@ import { NzSelectComponent, NzSelectModeType } from 'ng-zorro-antd/select';
 import { NzSliderComponent } from 'ng-zorro-antd/slider';
 import { NzSwitchComponent } from 'ng-zorro-antd/switch';
 import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
-import { SingleOrAll } from '../fluent-form.type';
+import { SingleOrAll } from '../type';
 import { AbstractComponentControlSchema, AbstractControlSchema, AbstractElementControlSchema, AbstractSchema, AnySchemaName, SingleKeySchemaName } from './abstract.schema';
 import { AnyBuilder, AnySchema, FormBuilder, FormSchema, SingleKeyControlBuilder, SingleKeyControlSchema } from './index.schema';
 

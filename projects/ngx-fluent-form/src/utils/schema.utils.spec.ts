@@ -75,7 +75,7 @@ describe('schema.utils', () => {
     const schemas = [target];
     const schema = findSchema(schemas, 'name');
 
-    expect(schema).toBe(target);
+    expect(schema).toEqual(target);
   });
 
   it('应该能在图示列表中找到目标图示（一级）', () => {
@@ -85,7 +85,7 @@ describe('schema.utils', () => {
     ]);
     const schema = findSchema(schemas, ['group', 'name']);
 
-    expect(schema).toBe(target);
+    expect(schema).toEqual(target);
   });
 
   it('应该能在图示列表中找到目标图示（多级）', () => {
@@ -97,7 +97,7 @@ describe('schema.utils', () => {
     ]);
     const schema = findSchema(schemas, ['group', 'group', 'name']);
 
-    expect(schema).toBe(target);
+    expect(schema).toEqual(target);
   });
 
   it('应该能在图示列表中找到目标图示（一维数组）', () => {
@@ -107,7 +107,7 @@ describe('schema.utils', () => {
     ]);
     const schema = findSchema(schemas, ['array', 0]);
 
-    expect(schema).toBe(target);
+    expect(schema).toEqual(target);
   });
 
   it('应该能在图示列表中找到目标图示（多维数组）', () => {
@@ -119,7 +119,7 @@ describe('schema.utils', () => {
     ]);
     const schema = findSchema(schemas, ['array', 0, 0]);
 
-    expect(schema).toBe(target);
+    expect(schema).toEqual(target);
   });
 
   it('应该能在图示列表中找到目标图示（对象嵌套数组）', () => {
@@ -131,7 +131,7 @@ describe('schema.utils', () => {
     ]);
     const schema = findSchema(schemas, ['group', 'array', 0]);
 
-    expect(schema).toBe(target);
+    expect(schema).toEqual(target);
   });
 
   it('应该能在图示列表中找到目标图示（数组嵌套对象）', () => {
@@ -143,7 +143,7 @@ describe('schema.utils', () => {
     ]);
     const schema = findSchema(schemas, ['array', 0, 'name']);
 
-    expect(schema).toBe(target);
+    expect(schema).toEqual(target);
   });
 
   it('应该能在图示列表中找到目标图示（双字段）', () => {
@@ -151,6 +151,6 @@ describe('schema.utils', () => {
     const schemas = [target];
     const schema = findSchema(schemas, [['begin', 'end']]);
 
-    expect(schema).toBe(target);
+    expect(schema).toEqual(target);
   });
 });

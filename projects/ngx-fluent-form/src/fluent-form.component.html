@@ -31,7 +31,7 @@
       <input
         #host
         nz-input
-        [id]="schema.id ?? ''"
+        [attr.id]="schema.id"
         [type]="schema.subtype ?? 'text'"
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
@@ -43,7 +43,7 @@
       <textarea
         #host
         nz-input
-        [id]="schema.id ?? ''"
+        [attr.id]="schema.id"
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
@@ -58,7 +58,7 @@
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
-        [nzId]="schema.id ?? ''"
+        [nzId]="schema.id"
         [nzPlaceHolder]="schema.placeholder ?? ''"
         [nzMin]="schema.min ?? -infinity"
         [nzMax]="schema.max ?? infinity"
@@ -74,7 +74,7 @@
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
-        [nzId]="schema.id ?? ''"
+        [nzId]="schema.id"
         [nzPlaceHolder]="schema.placeholder"
         [nzMode]="schema.mode"
         [nzAllowClear]="schema.clear"
@@ -89,7 +89,7 @@
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
-        [nzId]="schema.id ?? ''"
+        [nzId]="schema.id"
         [nzPlaceHolder]="schema.placeholder"
         [nzMode]="schema.mode"
         [nzAllowClear]="schema.clear"
@@ -104,7 +104,7 @@
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
-        [nzId]="schema.id ?? ''"
+        [nzId]="schema.id"
         [nzPlaceHolder]="schema.placeholder"
         [nzAllowEmpty]="schema.clear"
         [nzFormat]="schema.format ?? 'HH:mm:ss'"
@@ -131,7 +131,7 @@
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
-        [nzId]="schema.id ?? ''"
+        [nzId]="schema.id"
         [nzPlaceHolder]="schema.placeholder"
         [nzAllowClear]="schema.clear"
         [nzMode]="schema.mode ?? 'default'"
@@ -238,7 +238,7 @@
         #host
         nz-col
         nz-input
-        [id]="schema.id ?? ''"
+        [attr.id]="schema.id"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
@@ -254,7 +254,7 @@
         #host
         nz-col
         nz-input
-        [id]="schema.id ?? ''"
+        [attr.id]="schema.id"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
@@ -270,7 +270,7 @@
       <nz-input-number
         #host
         nz-col
-        [nzId]="schema.id ?? ''"
+        [nzId]="schema.id"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
@@ -290,7 +290,7 @@
       <nz-date-picker
         #host
         nz-col
-        [nzId]="schema.id ?? ''"
+        [nzId]="schema.id"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
@@ -309,7 +309,7 @@
       <nz-range-picker
         #host
         nz-col
-        [nzId]="schema.id ?? ''"
+        [nzId]="schema.id"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
@@ -328,7 +328,7 @@
       <nz-time-picker
         #host
         nz-col
-        [nzId]="schema.id ?? ''"
+        [nzId]="schema.id"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
@@ -348,7 +348,7 @@
       <nz-select
         #host
         nz-col
-        [nzId]="schema.id ?? ''"
+        [nzId]="schema.id"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"

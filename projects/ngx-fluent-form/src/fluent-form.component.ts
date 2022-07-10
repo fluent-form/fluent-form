@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
@@ -13,7 +13,7 @@ import { convertSchemasToGroup, standardSchemas } from './utils/schema.utils';
   styleUrls: ['./fluent-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FluentFormComponent<T extends Record<string, unknown>> implements OnInit, OnChanges {
+export class FluentFormComponent<T extends Record<string, unknown>> implements OnChanges, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   private _form!: FormGroup;
   private _schemas!: AnySchema[];
@@ -42,8 +42,6 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
   @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
 
   constructor() { }
-
-  ngOnInit(): void { }
 
   ngOnChanges({ schemas: schemasChange, model: modelChange }: SimpleChanges): void {
     if (schemasChange) {

@@ -32,6 +32,8 @@
         #host
         nz-input
         [attr.id]="schema.id"
+        [attr.minlength]="schema.length ?? schema.length?.min"
+        [attr.maxlength]="schema.length ?? schema.length?.max"
         [type]="schema.subtype ?? 'text'"
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
@@ -44,6 +46,8 @@
         #host
         nz-input
         [attr.id]="schema.id"
+        [attr.minlength]="schema.length ?? schema.length?.min"
+        [attr.maxlength]="schema.length ?? schema.length?.max"
         [fluentPropertyBinder]="{ host, schema }"
         [fluentEventBinder]="{ host, schema, control }"
         [formControl]="control"
@@ -239,6 +243,8 @@
         nz-col
         nz-input
         [attr.id]="schema.id"
+        [attr.minlength]="schema.length ?? schema.length?.min"
+        [attr.maxlength]="schema.length ?? schema.length?.max"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
@@ -255,6 +261,8 @@
         nz-col
         nz-input
         [attr.id]="schema.id"
+        [attr.minlength]="schema.length ?? schema.length?.min"
+        [attr.maxlength]="schema.length ?? schema.length?.max"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"

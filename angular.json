@@ -52,6 +52,15 @@
           "options": {
             "browserTarget": "angular-cli:build"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-fluent-form/**/*.ts",
+              "projects/ngx-fluent-form/**/*.html"
+            ]
+          }
         }
       }
     },

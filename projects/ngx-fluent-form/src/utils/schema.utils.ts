@@ -1,7 +1,7 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { InputControlSchema, TextareaControlSchema } from '../schemas';
 import { AnySchemaName, DoubleKeySchemaName, SingleKeySchemaName } from '../schemas/abstract.schema';
-import { AnyBuilder, AnyControlBuilder, AnyControlSchema, AnySchema, ContainerSchema, ControlBuilder, ControlSchema } from '../schemas/index.schema';
+import { AnyControlSchema, AnySchema, ContainerSchema, ControlBuilder, ControlSchema, InputSeriesControlSchema } from '../schemas/index.schema';
 import { Builder, isBuilder } from './builder.utils';
 
 const CONTAINER_SCHEMA_TYPES = ['group', 'array', 'input-group'];
@@ -36,14 +36,16 @@ export const isDoubleKeySchemaName = (name: AnySchemaName): name is DoubleKeySch
  * @param schema
  * @param validator
  */
-const addValidatorToSchema = (schema: ControlSchema, validator: ValidatorFn | ValidatorFn[]) => {
-  const validators = Array.isArray(validator) ? validator : [validator]
+const addValidatorToSchema = <T extends ControlSchema>(schema: T, validator: ValidatorFn | ValidatorFn[]) => {
+  const validators = Array.isArray(validator) ? validator : [validator];
 
   if (schema.validator) {
     schema.validator = schema.validator.concat(validators);
   } else {
     schema.validator = validators;
   }
+
+  return schema;
 }
 
 /**
@@ -69,19 +71,24 @@ const standardContainerSchema = <T extends ContainerSchema>(schema: T): T => {
  */
 const standardTextControlSchema = <T extends InputControlSchema | TextareaControlSchema>(schema: T): T => {
   if (schema.type === 'input' && schema.subtype === 'email') {
-    addValidatorToSchema(schema, Validators.email);
+    schema = addValidatorToSchema(schema, Validators.email);
   }
 
   if (schema.length) {
     if (typeof schema.length === 'number') {
-      addValidatorToSchema(schema, [
+      schema = addValidatorToSchema(schema, [
         Validators.minLength(schema.length),
         Validators.maxLength(schema.length)
       ]);
     } else {
       const { min, max } = schema.length as { max?: number, min?: number };
-      min && addValidatorToSchema(schema, Validators.minLength(min));
-      max && addValidatorToSchema(schema, Validators.maxLength(max));
+      if (min) {
+        schema = addValidatorToSchema(schema, Validators.minLength(min));
+      }
+
+      if (max) {
+        schema = addValidatorToSchema(schema, Validators.maxLength(max));
+      }
     }
   }
 
@@ -93,18 +100,16 @@ const standardTextControlSchema = <T extends InputControlSchema | TextareaContro
  * @param schema
  */
 export const standardSchema = <T extends AnySchema>(schema: T | Builder<T, T, {}>): T => {
-  let _schema = (isBuilder(schema) ? schema.build() : schema) as AnySchema;
+  let _schema = (isBuilder(schema) ? schema.build() : { ...schema }) as AnySchema;
 
   if (isContainerSchema(_schema)) {
-    return standardContainerSchema(_schema) as T;
-  }
-
-  if (isTextControlSchema(_schema)) {
-    standardTextControlSchema(_schema);
+    _schema = standardContainerSchema(_schema);
+  } else if (isTextControlSchema(_schema)) {
+    _schema = standardTextControlSchema(_schema);
   }
 
   if ('required' in _schema && _schema.required) {
-    addValidatorToSchema(_schema as ControlSchema, Validators.required);
+    _schema = addValidatorToSchema(_schema as ControlSchema, Validators.required);
   }
 
   return _schema as T;
@@ -134,22 +139,22 @@ export function convertSchemaToControl(schema: ControlSchema | ControlBuilder): 
 
 /**
  * 将图示组转换为表单组
- * @param schemas
+ * @param schemas 标准化后的图示
  */
-export function convertSchemasToGroup(schemas: (AnySchema | AnyBuilder)[]): FormGroup {
+export function convertSchemasToGroup(schemas: AnySchema[]): FormGroup {
   return new FormGroup(
-    standardSchemas(schemas).reduce((controls, schema) => {
+    schemas.reduce((controls, schema) => {
       switch (schema.type) {
         case 'group':
-          controls[schema.name!.toString()] = convertSchemasToGroup(schema.schemas);
+          controls[schema.name!.toString()] = convertSchemasToGroup(schema.schemas as AnySchema[]);
           break;
 
         case 'array':
-          controls[schema.name!.toString()] = convertSchemasToArray(schema.schemas);
+          controls[schema.name!.toString()] = convertSchemasToArray(schema.schemas as AnyControlSchema[]);
           break;
 
         case 'input-group':
-          standardSchemas(schema.schemas).forEach(subschema => {
+          (schema.schemas as InputSeriesControlSchema[]).forEach(subschema => {
             controls[subschema.name!.toString()] = convertSchemaToControl(subschema);
           });
           break;
@@ -165,17 +170,17 @@ export function convertSchemasToGroup(schemas: (AnySchema | AnyBuilder)[]): Form
 
 /**
  * 将图示组转换为表单数组
- * @param schemas
+ * @param schemas 标准化后的图示
  */
-export function convertSchemasToArray(schemas: (AnyControlSchema | AnyControlBuilder)[]): FormArray {
+export function convertSchemasToArray(schemas: AnyControlSchema[]): FormArray {
   return new FormArray(
-    standardSchemas(schemas).map(schema => {
+    schemas.map(schema => {
       switch (schema.type) {
         case 'group':
-          return convertSchemasToGroup(schema.schemas);
+          return convertSchemasToGroup(schema.schemas as AnySchema[]);
 
         case 'array':
-          return convertSchemasToArray(schema.schemas);
+          return convertSchemasToArray(schema.schemas as AnyControlSchema[]);
 
         default:
           return convertSchemaToControl(schema);

@@ -1,7 +1,7 @@
 import { FormArray, FormGroup } from '@angular/forms';
 import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
-import { AnyBuilder, AnySchema } from '../schemas/index.schema';
-import { isDoubleKeySchemaName, standardSchemas } from './schema.utils';
+import { AnySchema } from '../schemas/index.schema';
+import { isDoubleKeySchemaName } from './schema.utils';
 
 type Obj = Record<string, unknown>;
 type Arr = unknown[];
@@ -10,18 +10,18 @@ type Arr = unknown[];
  * 从模型赋值到表单
  * @param model
  * @param form
- * @param schemas
+ * @param schemas 标准化后的图示
  * @param emitEvent 是否发射事件，函数内部递归调用的时候将置为false，保证只会触发一次事件
  */
-export function assignModelToForm<T extends Obj>(model: T, form: FormGroup, schemas: (AnySchema | AnyBuilder)[], emitEvent?: boolean): void;
-export function assignModelToForm<T extends Arr>(model: T, form: FormArray, schemas: (AnySchema | AnyBuilder)[], emitEvent?: boolean): void;
-export function assignModelToForm<T extends Obj | Arr>(model: T, form: FormGroup | FormArray, schemas: (AnySchema | AnyBuilder)[], emitEvent: boolean = true): void {
-  standardSchemas(schemas).forEach(schema => {
+export function assignModelToForm<T extends Obj>(model: T, form: FormGroup, schemas: AnySchema[], emitEvent?: boolean): void;
+export function assignModelToForm<T extends Arr>(model: T, form: FormArray, schemas: AnySchema[], emitEvent?: boolean): void;
+export function assignModelToForm<T extends Obj | Arr>(model: T, form: FormGroup | FormArray, schemas: AnySchema[], emitEvent: boolean = true): void {
+  schemas.forEach(schema => {
     if (schema.type === 'input-group') {
       return assignModelToForm(
         model as Obj,
         form as FormGroup,
-        schema.schemas,
+        schema.schemas as AnySchema[],
         false
       );
     }
@@ -30,7 +30,7 @@ export function assignModelToForm<T extends Obj | Arr>(model: T, form: FormGroup
       return assignModelToForm(
         (model[schema.name as keyof T] ??= {} as T[keyof T]) as unknown as Obj,
         form.get([schema.name!]) as FormGroup,
-        schema.schemas,
+        schema.schemas as AnySchema[],
         false
       );
     }
@@ -39,7 +39,7 @@ export function assignModelToForm<T extends Obj | Arr>(model: T, form: FormGroup
       return assignModelToForm(
         (model[schema.name as keyof T] ??= [] as unknown as T[keyof T]) as unknown as Arr,
         form.get([schema.name!]) as FormArray,
-        schema.schemas,
+        schema.schemas as AnySchema[],
         false
       );
     }
@@ -82,23 +82,37 @@ export function assignModelToForm<T extends Obj | Arr>(model: T, form: FormGroup
 }
 
 /**
+ * 清空对象但保持引用
+ * @param obj
+ */
+function empty<T extends object>(obj: T): T {
+  if (Array.isArray(obj)) {
+    obj.length = 0;
+  } else {
+    Object.keys(obj).forEach(property => delete obj[property as keyof T]);
+  }
+
+  return obj;
+}
+
+/**
  * 通过图示分配表单值到模型
  * @param form
  * @param model
- * @param schemas
+ * @param schemas 标准化后的图示
  */
-export function assignFormToModel<T extends Obj>(form: FormGroup, model: T, schemas: (AnySchema | AnyBuilder)[]): T;
-export function assignFormToModel<T extends Arr>(form: FormArray, model: T, schemas: (AnySchema | AnyBuilder)[]): T;
-export function assignFormToModel<T extends Obj | Arr>(form: FormGroup | FormArray, model: T, schemas: (AnySchema | AnyBuilder)[]) {
-  if (Array.isArray(model)) {
-    model.length = 0;
-  } else {
-    Object.keys(model).forEach(property => delete model[property]);
-  }
+export function assignFormToModel<T extends Obj>(form: FormGroup, model: T, schemas: AnySchema[]): T;
+export function assignFormToModel<T extends Arr>(form: FormArray, model: T, schemas: AnySchema[]): T;
+export function assignFormToModel<T extends Obj | Arr>(form: FormGroup | FormArray, model: T, schemas: AnySchema[]) {
+  model = empty(model);
 
-  standardSchemas(schemas).forEach(schema => {
+  schemas.forEach(schema => {
     if (schema.type === 'input-group') {
-      return assignFormToModel(form as FormGroup, model as Obj, schema.schemas);
+      return assignFormToModel(
+        form as FormGroup,
+        model as Obj,
+        schema.schemas as AnySchema[]
+      );
     }
 
     const control = form.get([schema.name!.toString()])!;
@@ -107,7 +121,7 @@ export function assignFormToModel<T extends Obj | Arr>(form: FormGroup | FormArr
       return assignFormToModel(
         control as FormGroup,
         (model[schema.name as keyof T] ??= ({} as T[keyof T])) as unknown as Obj,
-        schema.schemas,
+        schema.schemas as AnySchema[],
       );
     }
 
@@ -115,7 +129,7 @@ export function assignFormToModel<T extends Obj | Arr>(form: FormGroup | FormArr
       return assignFormToModel(
         control as FormArray,
         (model[schema.name as keyof T] ??= ([] as unknown as T[keyof T])) as unknown as Arr,
-        schema.schemas,
+        schema.schemas as AnySchema[],
       );
     }
 

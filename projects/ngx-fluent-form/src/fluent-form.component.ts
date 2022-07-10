@@ -5,7 +5,7 @@ import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { Subject, takeUntil } from 'rxjs';
 import { AnySchema } from './schemas';
 import { assignFormToModel, assignModelToForm } from './utils/form.utils';
-import { convertSchemasToGroup } from './utils/schema.utils';
+import { convertSchemasToGroup, standardSchemas } from './utils/schema.utils';
 
 @Component({
   selector: 'fluent-form',
@@ -16,6 +16,7 @@ import { convertSchemasToGroup } from './utils/schema.utils';
 export class FluentFormComponent<T extends Record<string, unknown>> implements OnInit, OnChanges {
   private destroy$: Subject<void> = new Subject<void>();
   private _form!: FormGroup;
+  private _schemas!: AnySchema[];
   /** @internal */
   readonly infinity: number = Infinity;
 
@@ -25,7 +26,12 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
     this.formChange.emit(value);
   }
 
-  @Input() schemas!: AnySchema[];
+  @Input()
+  get schemas(): AnySchema[] { return this._schemas; }
+  set schemas(value: AnySchema[]) {
+    this._schemas = standardSchemas(value);
+  }
+
   @Input() model!: T;
   @Input() layout: NzFormLayoutType = 'vertical';
   @Input() colon: boolean = true;

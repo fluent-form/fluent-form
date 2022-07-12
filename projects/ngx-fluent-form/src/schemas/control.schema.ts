@@ -13,13 +13,13 @@ import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
 import { AbstractComponentControlSchema, AbstractControlSchema, AbstractDateControlSchema, AbstractElementControlSchema, AbstractSchema, AbstractTextControlSchema, AnySchemaName, SingleKeySchemaName } from './abstract.schema';
 import { AnyBuilder, AnySchema, FormBuilder, FormSchema, SingleKeyControlBuilder, SingleKeyControlSchema } from './index.schema';
 
-export interface FormGroupSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<N> {
+export interface FormGroupSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name> {
   type: 'group';
   label?: string;
   schemas: (AnySchema | AnyBuilder)[];
 }
 
-export interface FormArraySchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<N> {
+export interface FormArraySchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name> {
   type: 'array';
   label?: string;
   schemas: (SingleKeyControlSchema<number> | SingleKeyControlBuilder<number> | FormSchema<number> | FormBuilder<number>)[];

@@ -9,7 +9,7 @@ import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../type
   selector: '[fluentEventBinder]'
 })
 export class FluentEventBinderDirective<H extends object, S extends ControlSchema> implements OnChanges, OnDestroy {
-  @Input() fluentEventBinder!: { host: H, schema: S, control: FormControl };
+  @Input() fluentEventBinder!: { host: H, schema: S, control?: FormControl };
 
   private destory$: Subject<void> = new Subject<void>();
 
@@ -23,12 +23,12 @@ export class FluentEventBinderDirective<H extends object, S extends ControlSchem
     const { host, schema, control } = this.fluentEventBinder;
     schema.listener && Object.keys(schema.listener).forEach(eventName => {
       if (eventName === 'valueChange') {
-        control.valueChanges.pipe(
+        control!.valueChanges.pipe(
           observeOn(asapScheduler), // 微任务调度，确保顶层事件先发射
           takeUntil(this.destory$),
         ).subscribe(schema.listener![eventName]!);
       } else if (eventName === 'statusChange') {
-        control.statusChanges.pipe(
+        control!.statusChanges.pipe(
           observeOn(asapScheduler),
           takeUntil(this.destory$),
         ).subscribe(schema.listener![eventName]!);

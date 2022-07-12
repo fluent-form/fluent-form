@@ -1,8 +1,18 @@
 import { TemplateRef } from '@angular/core';
-import { AbstractSchema, SingleKeySchemaName } from './abstract.schema';
+import { ThemeType } from '@ant-design/icons-angular';
+import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
+import { NzInputGroupComponent } from 'ng-zorro-antd/input';
+import { AbstractComponentSchema, AbstractElementSchema, AbstractSchema, SingleKeySchemaName } from './abstract.schema';
 import { ComposableComponentBuilder, ComposableComponentSchema } from './index.schema';
 
-export interface InputGroupComponentSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<N> {
+interface Icon {
+  type: string;
+  theme?: ThemeType;
+  spin?: boolean;
+  rotate?: number;
+}
+
+export interface InputGroupComponentSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzInputGroupComponent> {
   type: 'input-group';
   schemas: (ComposableComponentSchema | ComposableComponentBuilder)[];
   required?: boolean;
@@ -20,4 +30,18 @@ export interface InputGroupComponentSchema<N extends SingleKeySchemaName = Singl
   prefix?: string | TemplateRef<void>;
   /** The suffix of the input box */
   suffix?: string | TemplateRef<void>;
+}
+
+export interface ButtonComponentSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name>, AbstractElementSchema<HTMLButtonElement> {
+  type: 'button';
+  subtype?: NzButtonType;
+  disabled?: boolean;
+  ghost?: boolean;
+  danger?: boolean;
+  loading?: boolean;
+  shape?: NzButtonShape;
+  size?: NzButtonSize;
+  block?: boolean;
+  icon?: string | Icon;
+  content?: string | TemplateRef<void>;
 }

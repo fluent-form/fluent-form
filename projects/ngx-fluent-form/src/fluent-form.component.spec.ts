@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { array, form, group, input, inputGroup, range, slider } from './fluent-form.builder';
+import { array, form, group, input, inputGroup, range, slider } from './builders';
 import { FluentFormComponent } from './fluent-form.component';
 import { FluentFormModule } from './fluent-form.module';
 import { AnySchema } from './schemas/index.schema';

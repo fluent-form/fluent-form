@@ -1,4 +1,4 @@
-import { array, checkboxGroup, date, group, inputGroup, number, range, slider, time } from '../fluent-form.builder';
+import { array, checkboxGroup, date, group, inputGroup, number, range, slider, time } from '../builders';
 import { assignFormToModel, assignModelToForm } from './form.utils';
 import { convertSchemasToGroup, standardSchemas } from './schema.utils';
 
@@ -17,7 +17,7 @@ describe('form.utils', () => {
     it('应该能正确处理一级对象（input-group）', () => {
       const model = { one: 1, two: 2 };
       const schemas = standardSchemas([
-        inputGroup('ig').schemas(
+        inputGroup().schemas(
           number('one'),
           number('two'),
         )

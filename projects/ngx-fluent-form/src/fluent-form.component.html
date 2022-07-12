@@ -15,12 +15,12 @@
   </nz-form-label>
 </ng-template>
 
-<!-- 控件模板 -->
+<!-- 组件模板 -->
 <!-- 根据 schema.type 来输出不同的控件 -->
 <!-- @param control FormControl -->
 <!-- @param schema 控件的图示 -->
-<ng-template #controlTemplate let-control="control" let-schema="schema">
-  <ng-container *ngIf="control" [ngSwitch]="schema.type">
+<ng-template #componentTemplate let-control="control" let-schema="schema">
+  <ng-container [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
       <input
         #host
@@ -222,15 +222,40 @@
         [nzCount]="schema.count ?? 5"
         [nzTooltips]="schema.tooltips ?? []"></nz-rate>
     </ng-container>
+
+    <ng-container *ngSwitchCase="'button'">
+      <button
+        #host
+        nz-button
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema }"
+        [disabled]="schema.disabled"
+        [nzType]="schema.subtype"
+        [nzGhost]="schema.ghost"
+        [nzLoading]="schema.loading"
+        [nzShape]="schema.shape"
+        [nzSize]="schema.size"
+        [nzBlock]="schema.block"
+        [nzDanger]="schema.danger">
+        <i
+          *ngIf="schema.icon"
+          nz-icon
+          [nzType]="schema.icon.type ?? schema.icon"
+          [nzTheme]="schema.icon.theme"
+          [nzSpin]="schema.icon.spin"
+          [nzRotate]="schema.icon.rotate"></i>
+        <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
+      </button>
+    </ng-container>
   </ng-container>
 </ng-template>
 
-<!-- 输入系列控件模板 -->
+<!-- 可组合的组件模板 -->
 <!-- 根据 schema.type 来输出不同的控件 -->
 <!-- @param control FormControl -->
-<!-- @param schema 控件的图示 -->
-<ng-template #inputSeriesControlTemplate let-control="control" let-schema="schema">
-  <ng-container *ngIf="control && !schema.hidden" [ngSwitch]="schema.type">
+<!-- @param schema 组件的图示 -->
+<ng-template #composableComponentTemplate let-control="control" let-schema="schema">
+  <ng-container *ngIf="!schema.hidden" [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
       <input
         #host
@@ -389,6 +414,35 @@
         [nzLabelProperty]="schema.config?.labelProperty ?? 'label'">
       </nz-cascader>
     </ng-container>
+
+    <ng-container *ngSwitchCase="'button'">
+      <button
+        #host
+        nz-col
+        nz-button
+        [nzSpan]="schema.span ?? null"
+        [nzOffset]="schema.offset"
+        [nzFlex]="schema.flex"
+        [fluentPropertyBinder]="{ host, schema }"
+        [fluentEventBinder]="{ host, schema }"
+        [disabled]="schema.disabled"
+        [nzType]="schema.subtype"
+        [nzGhost]="schema.ghost"
+        [nzLoading]="schema.loading"
+        [nzShape]="schema.shape"
+        [nzSize]="schema.size"
+        [nzBlock]="schema.block"
+        [nzDanger]="schema.danger">
+        <i
+          *ngIf="schema.icon"
+          nz-icon
+          [nzType]="schema.icon.type ?? schema.icon"
+          [nzTheme]="schema.icon.theme"
+          [nzSpin]="schema.icon.spin"
+          [nzRotate]="schema.icon.rotate"></i>
+        <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
+      </button>
+    </ng-container>
   </ng-container>
 </ng-template>
 
@@ -428,8 +482,11 @@
 
               <nz-form-control>
                 <nz-input-group
+                  #host
                   nz-row
                   nzCompact
+                  [fluentPropertyBinder]="{ host, schema }"
+                  [fluentEventBinder]="{ host, schema }"
                   [nzAddOnBefore]="schema.before?.template"
                   [nzAddOnAfter]="schema.after?.template"
                   [nzAddOnBeforeIcon]="schema.before?.icon"
@@ -438,7 +495,7 @@
                   [nzSuffix]="schema.suffix">
                   <ng-container *ngFor="let subschema of schema.schemas">
                     <ng-container
-                      *ngTemplateOutlet="inputSeriesControlTemplate; context: { control: form.get([subschema.name]), schema: subschema }">
+                      *ngTemplateOutlet="composableComponentTemplate; context: { control: form.get([subschema.name]), schema: subschema }">
                     </ng-container>
                   </ng-container>
                 </nz-input-group>
@@ -461,7 +518,8 @@
                 [nzValidatingTip]="schema.tips?.validating"
                 [nzExtra]="schema.tips?.extra"
                 [nzAutoTips]="schema.tips?.auto ?? {}">
-                <ng-container *ngTemplateOutlet="controlTemplate; context: { control: form.get([schema.name]), schema: schema }">
+                <ng-container
+                  *ngTemplateOutlet="componentTemplate; context: { control: form.get([schema.name]), schema: schema }">
                 </ng-container>
               </nz-form-control>
             </nz-form-item>

@@ -15,7 +15,9 @@ export function builder<T>(): Builder<T> {
       }
 
       return (arg: unknown): unknown => {
-        target[prop] = arg;
+        if (arg !== target[prop]) {
+          target[prop] = arg;
+        }
         return builder;
       };
     }

@@ -1,7 +1,7 @@
 import { FormArray, FormGroup } from '@angular/forms';
 import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
 import { AnySchema } from '../schemas/index.schema';
-import { isDoubleKeySchemaName } from './schema.utils';
+import { isComponentSchema, isDoubleKeySchemaName } from './schema.utils';
 
 type Obj = Record<string, unknown>;
 type Arr = unknown[];
@@ -17,6 +17,8 @@ export function assignModelToForm<T extends Obj>(model: T, form: FormGroup, sche
 export function assignModelToForm<T extends Arr>(model: T, form: FormArray, schemas: AnySchema[], emitEvent?: boolean): void;
 export function assignModelToForm<T extends Obj | Arr>(model: T, form: FormGroup | FormArray, schemas: AnySchema[], emitEvent: boolean = true): void {
   schemas.forEach(schema => {
+    if (isComponentSchema(schema)) { return; }
+
     if (schema.type === 'input-group') {
       return assignModelToForm(
         model as Obj,
@@ -100,18 +102,22 @@ function empty<T extends object>(obj: T): T {
  * @param form
  * @param model
  * @param schemas 标准化后的图示
+ * @param clear 是否清空模型，函数内部递归调用的时候将置为false，保证只会清空一次
  */
-export function assignFormToModel<T extends Obj>(form: FormGroup, model: T, schemas: AnySchema[]): T;
-export function assignFormToModel<T extends Arr>(form: FormArray, model: T, schemas: AnySchema[]): T;
-export function assignFormToModel<T extends Obj | Arr>(form: FormGroup | FormArray, model: T, schemas: AnySchema[]) {
-  model = empty(model);
+export function assignFormToModel<T extends Obj>(form: FormGroup, model: T, schemas: AnySchema[], clear?: boolean): T;
+export function assignFormToModel<T extends Arr>(form: FormArray, model: T, schemas: AnySchema[], clear?: boolean): T;
+export function assignFormToModel<T extends Obj | Arr>(form: FormGroup | FormArray, model: T, schemas: AnySchema[], clear: boolean = true) {
+  clear && empty(model);
 
   schemas.forEach(schema => {
+    if (isComponentSchema(schema)) { return; }
+
     if (schema.type === 'input-group') {
       return assignFormToModel(
         form as FormGroup,
         model as Obj,
-        schema.schemas as AnySchema[]
+        schema.schemas as AnySchema[],
+        false
       );
     }
 
@@ -122,6 +128,7 @@ export function assignFormToModel<T extends Obj | Arr>(form: FormGroup | FormArr
         control as FormGroup,
         (model[schema.name as keyof T] ??= ({} as T[keyof T])) as unknown as Obj,
         schema.schemas as AnySchema[],
+        false
       );
     }
 
@@ -130,6 +137,7 @@ export function assignFormToModel<T extends Obj | Arr>(form: FormGroup | FormArr
         control as FormArray,
         (model[schema.name as keyof T] ??= ([] as unknown as T[keyof T])) as unknown as Arr,
         schema.schemas as AnySchema[],
+        false
       );
     }
 

@@ -4,9 +4,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCascaderModule } from 'ng-zorro-antd/cascader';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
@@ -43,7 +45,9 @@ import { FluentFormComponent } from './fluent-form.component';
     NzTimePickerModule,
     NzSliderModule,
     NzRadioModule,
-    NzRateModule
+    NzRateModule,
+    NzIconModule,
+    NzOutletModule
   ],
   exports: [
     FluentFormComponent

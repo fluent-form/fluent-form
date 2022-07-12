@@ -27,15 +27,11 @@ interface Tooltip {
 
 /** 抽象图示 */
 export interface AbstractSchema<Name extends AnySchemaName> {
-  /** Type of control */
   type: string;
-  /** Field name for control */
   name?: Name;
-  /** Span of the control in grid layout */
   span?: Cell;
   offset?: Cell;
   flex?: number | string;
-  /** Label for control */
   label?: string | Label;
   hidden?: boolean;
 }
@@ -76,16 +72,26 @@ interface ControlChangeListenerMap<Val> {
   statusChange?: (status: FormControlStatus) => void;
 }
 
-/** 抽象的组件控件 */
-export interface AbstractComponentControlSchema<Cmp, Val> {
-  listener?: ComponentOutputListenerMap<Cmp> & ControlChangeListenerMap<Val>;
+/** 抽象的组件图示 */
+export interface AbstractComponentSchema<Cmp> {
+  listener?: ComponentOutputListenerMap<Cmp>;
   property?: ComponentInputMap<Cmp>;
 }
 
-/** 抽象的元素控件 */
-export interface AbstractElementControlSchema<Ele extends HTMLElement, Val> {
-  listener?: HTMLElementEventListenerMap & ControlChangeListenerMap<Val>;
+/** 抽象的元素图示 */
+export interface AbstractElementSchema<Ele extends HTMLElement> {
+  listener?: HTMLElementEventListenerMap;
   property?: Partial<Property<Ele>>;
+}
+
+/** 抽象的组件控件图示 */
+export interface AbstractComponentControlSchema<Cmp, Val> extends AbstractComponentSchema<Cmp> {
+  listener?: ComponentOutputListenerMap<Cmp> & ControlChangeListenerMap<Val>;
+}
+
+/** 抽象的元素控件图示 */
+export interface AbstractElementControlSchema<Ele extends HTMLElement, Val> extends AbstractElementSchema<Ele> {
+  listener?: HTMLElementEventListenerMap & ControlChangeListenerMap<Val>;
 }
 
 /** 抽象的文本控件图示 */

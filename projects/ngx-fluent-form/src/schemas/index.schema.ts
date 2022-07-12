@@ -1,10 +1,10 @@
 import { Builder } from '../utils/builder.utils';
 import { AnySchemaName, DoubleKeySchemaName, SingleKeySchemaName } from './abstract.schema';
-import { InputGroupComponentSchema } from './component.schema';
+import { ButtonComponentSchema, InputGroupComponentSchema } from './component.schema';
 import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from './control.schema';
 
 /** 任意图示 */
-export type AnySchema = FormSchema | ControlSchema | ComponentSchema;
+export type AnySchema = ControlSchema | ContainerSchema | ComponentSchema;
 /** 任意构建器 */
 export type AnyBuilder = Builder<AnySchema, AnySchema, {}>;
 
@@ -29,7 +29,7 @@ export type ControlSchema = SingleKeyControlSchema | DoubleKeyControlSchema;
 export type ControlBuilder = Builder<ControlSchema, ControlSchema, {}>;
 
 /** 普通组件图示 */
-export type ComponentSchema<N extends SingleKeySchemaName = SingleKeySchemaName> = InputGroupComponentSchema<N>;
+export type ComponentSchema<N extends SingleKeySchemaName = SingleKeySchemaName> = ButtonComponentSchema<N>;
 /** 普通组件构建器 */
 export type ComponentBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = Builder<ComponentSchema<N>, ComponentSchema<N>, {}>;
 
@@ -42,7 +42,8 @@ export type ComposableComponentSchema =
   TimePickerControlSchema |
   RangePickerControlSchema |
   SelectControlSchema |
-  CascaderControlSchema;
+  CascaderControlSchema |
+  ButtonComponentSchema;
 /** 可组合组件构建器 */
 export type ComposableComponentBuilder = Builder<ComposableComponentSchema, ComposableComponentSchema, {}>;
 

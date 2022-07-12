@@ -1,11 +1,12 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { InputControlSchema, TextareaControlSchema } from '../schemas';
 import { AnySchemaName, DoubleKeySchemaName, SingleKeySchemaName } from '../schemas/abstract.schema';
-import { AnyControlSchema, AnySchema, ComposableComponentSchema, ContainerSchema, ControlBuilder, ControlSchema } from '../schemas/index.schema';
+import { AnyControlSchema, AnySchema, ComponentSchema, ComposableComponentSchema, ContainerSchema, ControlSchema } from '../schemas/index.schema';
 import { Builder, isBuilder } from './builder.utils';
 
 const CONTAINER_SCHEMA_TYPES = ['group', 'array', 'input-group'];
 const TEXT_CONTROL_SCHEMA_TYPES = ['input', 'textarea'];
+const COMPONENT_SCHEMA_TYPES = ['button'];
 
 /**
  * 是否为容器图示
@@ -21,6 +22,14 @@ export const isContainerSchema = (schema: AnySchema): schema is ContainerSchema 
  */
 export const isTextControlSchema = (schema: AnySchema): schema is InputControlSchema | TextareaControlSchema => (
   TEXT_CONTROL_SCHEMA_TYPES.includes(schema.type)
+);
+
+/**
+ * 是否为组件图示
+ * @param schema
+ */
+export const isComponentSchema = (schema: AnySchema): schema is ComponentSchema => (
+  COMPONENT_SCHEMA_TYPES.includes(schema.type)
 );
 
 /**
@@ -127,13 +136,11 @@ export const standardSchemas = <T extends AnySchema>(schemas: (T | Builder<T, T,
  * 将图示转换为控件
  * @param schema
  */
-export function convertSchemaToControl(schema: ControlSchema | ControlBuilder): FormControl {
-  const _schema = standardSchema(schema);
-
+export function convertSchemaToControl(schema: ControlSchema): FormControl {
   return new FormControl(
-    { value: _schema.value ?? null, disabled: _schema.disabled },
-    _schema.validator,
-    _schema.asyncValidator
+    { value: schema.value ?? null, disabled: schema.disabled },
+    schema.validator,
+    schema.asyncValidator
   );
 }
 
@@ -143,7 +150,7 @@ export function convertSchemaToControl(schema: ControlSchema | ControlBuilder): 
  */
 export function convertSchemasToGroup(schemas: AnySchema[]): FormGroup {
   return new FormGroup(
-    schemas.reduce((controls, schema) => {
+    schemas.filter(o => !isComponentSchema(o)).reduce((controls, schema) => {
       switch (schema.type) {
         case 'group':
           controls[schema.name!.toString()] = convertSchemasToGroup(schema.schemas as AnySchema[]);
@@ -154,13 +161,13 @@ export function convertSchemasToGroup(schemas: AnySchema[]): FormGroup {
           break;
 
         case 'input-group':
-          (schema.schemas as ComposableComponentSchema[]).forEach(subschema => {
-            controls[subschema.name!.toString()] = convertSchemaToControl(subschema);
+          (schema.schemas as ComposableComponentSchema[]).filter(o => !isComponentSchema(o)).forEach(subschema => {
+            controls[subschema.name!.toString()] = convertSchemaToControl(subschema as ControlSchema);
           });
           break;
 
         default:
-          controls[schema.name!.toString()] = convertSchemaToControl(schema);
+          controls[schema.name!.toString()] = convertSchemaToControl(schema as ControlSchema);
       }
 
       return controls;

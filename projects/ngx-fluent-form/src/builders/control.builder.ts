@@ -1,9 +1,8 @@
-import { AnySchemaName, SingleKeySchemaName } from './schemas/abstract.schema';
-import { InputGroupComponentSchema } from './schemas/component.schema';
-import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from './schemas/control.schema';
-import { AnyBuilder, AnySchema } from './schemas/index.schema';
-import { builder, UnstableBuilder } from './utils/builder.utils';
-import { standardSchemas } from './utils/schema.utils';
+import { AnySchemaName, SingleKeySchemaName } from '../schemas/abstract.schema';
+import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from '../schemas/control.schema';
+import { AnyBuilder, AnySchema } from '../schemas/index.schema';
+import { builder, UnstableBuilder } from '../utils/builder.utils';
+import { standardSchemas } from '../utils/schema.utils';
 
 export const form = (...schemas: (AnySchema | AnyBuilder)[]) => standardSchemas(schemas);
 
@@ -99,12 +98,6 @@ export function range(): UnstableBuilder<RangePickerControlSchema<number>, TypeA
 export function range<N extends AnySchemaName>(name?: N): UnstableBuilder<RangePickerControlSchema<N>, TypeAndName>;
 export function range<N extends AnySchemaName>(name?: N) {
   return builder<RangePickerControlSchema<N>>().type('range').name(name);
-}
-
-export function inputGroup(): UnstableBuilder<InputGroupComponentSchema<number>, TypeAndName>;
-export function inputGroup<N extends SingleKeySchemaName>(name?: N): UnstableBuilder<InputGroupComponentSchema<N>, TypeAndName>;
-export function inputGroup<N extends SingleKeySchemaName>(name?: N) {
-  return builder<InputGroupComponentSchema<N>>().type('input-group').name(name);
 }
 
 export function group(): UnstableBuilder<FormGroupSchema<number>, TypeAndName>;

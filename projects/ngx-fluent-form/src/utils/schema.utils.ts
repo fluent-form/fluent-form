@@ -1,7 +1,7 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { InputControlSchema, TextareaControlSchema } from '../schemas';
 import { AnySchemaName, DoubleKeySchemaName, SingleKeySchemaName } from '../schemas/abstract.schema';
-import { AnyControlSchema, AnySchema, ContainerSchema, ControlBuilder, ControlSchema, InputSeriesControlSchema } from '../schemas/index.schema';
+import { AnyControlSchema, AnySchema, ComposableComponentSchema, ContainerSchema, ControlBuilder, ControlSchema } from '../schemas/index.schema';
 import { Builder, isBuilder } from './builder.utils';
 
 const CONTAINER_SCHEMA_TYPES = ['group', 'array', 'input-group'];
@@ -154,7 +154,7 @@ export function convertSchemasToGroup(schemas: AnySchema[]): FormGroup {
           break;
 
         case 'input-group':
-          (schema.schemas as InputSeriesControlSchema[]).forEach(subschema => {
+          (schema.schemas as ComposableComponentSchema[]).forEach(subschema => {
             controls[subschema.name!.toString()] = convertSchemaToControl(subschema);
           });
           break;

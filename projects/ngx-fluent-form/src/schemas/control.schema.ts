@@ -2,7 +2,7 @@ import { TemplateRef } from '@angular/core';
 import { SafeAny } from '@ngify/types';
 import { NzCascaderComponent, NzCascaderOption } from 'ng-zorro-antd/cascader';
 import { NzCheckboxComponent, NzCheckboxGroupComponent } from 'ng-zorro-antd/checkbox';
-import { NzDateMode, NzDatePickerComponent, NzRangePickerComponent } from 'ng-zorro-antd/date-picker';
+import { NzDatePickerComponent, NzRangePickerComponent } from 'ng-zorro-antd/date-picker';
 import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
 import { NzRadioGroupComponent } from 'ng-zorro-antd/radio';
 import { NzRateComponent } from 'ng-zorro-antd/rate';
@@ -10,8 +10,7 @@ import { NzSelectComponent, NzSelectModeType } from 'ng-zorro-antd/select';
 import { NzSliderComponent } from 'ng-zorro-antd/slider';
 import { NzSwitchComponent } from 'ng-zorro-antd/switch';
 import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
-import { SingleOrAll } from '../type';
-import { AbstractComponentControlSchema, AbstractControlSchema, AbstractElementControlSchema, AbstractSchema, AnySchemaName, SingleKeySchemaName } from './abstract.schema';
+import { AbstractComponentControlSchema, AbstractControlSchema, AbstractDateControlSchema, AbstractElementControlSchema, AbstractSchema, AbstractTextControlSchema, AnySchemaName, SingleKeySchemaName } from './abstract.schema';
 import { AnyBuilder, AnySchema, FormBuilder, FormSchema, SingleKeyControlBuilder, SingleKeyControlSchema } from './index.schema';
 
 export interface FormGroupSchema<N extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<N> {
@@ -26,19 +25,14 @@ export interface FormArraySchema<N extends SingleKeySchemaName = SingleKeySchema
   schemas: (SingleKeyControlSchema<number> | SingleKeyControlBuilder<number> | FormSchema<number> | FormBuilder<number>)[];
 }
 
-/** 抽象的文本控件图示 */
-interface AbstractTextControlSchema {
-  length?: number | SingleOrAll<{ max: number, min: number }>;
-}
-
-export interface InputControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = string> extends AbstractControlSchema<Name, Val>, AbstractElementControlSchema<HTMLInputElement, Val>, AbstractTextControlSchema {
+export interface InputControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = string> extends AbstractTextControlSchema<Name, Val>, AbstractElementControlSchema<HTMLInputElement, Val> {
   type: 'input';
   subtype?: 'text' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
   /** Placeholder text */
   placeholder?: string;
 }
 
-export interface TextareaControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = string> extends AbstractControlSchema<Name, Val>, AbstractElementControlSchema<HTMLTextAreaElement, Val>, AbstractTextControlSchema {
+export interface TextareaControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = string> extends AbstractTextControlSchema<Name, Val>, AbstractElementControlSchema<HTMLTextAreaElement, Val> {
   type: 'textarea';
   /** Placeholder text */
   placeholder?: string;
@@ -64,26 +58,13 @@ export interface NumberInputControlSchema<Name extends SingleKeySchemaName = Sin
   step?: number;
 }
 
-interface AbstractDateControlSchema {
-  /** Mode of date picker control */
-  mode?: NzDateMode;
-  /** Show clean button */
-  clear?: boolean;
-  /** Show time picker in date picker */
-  showTime?: boolean;
-  /** Date display format */
-  format?: string;
-  /** Inline mode */
-  inline?: boolean;
-}
-
-export interface DatePickerControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = Date> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzDatePickerComponent, Val>, AbstractDateControlSchema {
+export interface DatePickerControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = Date> extends AbstractDateControlSchema<Name, Val>, AbstractComponentControlSchema<NzDatePickerComponent, Val> {
   type: 'date';
   /** Placeholder text */
   placeholder?: string;
 }
 
-export interface RangePickerControlSchema<Name extends AnySchemaName = AnySchemaName, Val = [Date, Date]> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzRangePickerComponent, Val>, AbstractDateControlSchema {
+export interface RangePickerControlSchema<Name extends AnySchemaName = AnySchemaName, Val = [Date, Date]> extends AbstractDateControlSchema<Name, Val>, AbstractComponentControlSchema<NzRangePickerComponent, Val> {
   type: 'range';
   /** Placeholder text */
   placeholder?: [string, string];

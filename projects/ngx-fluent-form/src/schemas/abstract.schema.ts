@@ -1,8 +1,9 @@
 import { TemplateRef } from '@angular/core';
 import { AsyncValidatorFn, FormControl, FormControlStatus, ValidatorFn } from '@angular/forms';
 import { Property, SafeAny } from '@ngify/types';
+import { NzDateMode } from 'ng-zorro-antd/date-picker';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
-import { ComponentInputMap, ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../type';
+import { ComponentInputMap, ComponentOutputListenerMap, HTMLElementEventListenerMap, SingleOrAll } from '../type';
 
 /** 任意字段控件名称 */
 export type AnySchemaName = SingleKeySchemaName | DoubleKeySchemaName;
@@ -85,4 +86,23 @@ export interface AbstractComponentControlSchema<Cmp, Val> {
 export interface AbstractElementControlSchema<Ele extends HTMLElement, Val> {
   listener?: HTMLElementEventListenerMap & ControlChangeListenerMap<Val>;
   property?: Partial<Property<Ele>>;
+}
+
+/** 抽象的文本控件图示 */
+export interface AbstractTextControlSchema<Name extends AnySchemaName, Val> extends AbstractControlSchema<Name, Val> {
+  length?: number | SingleOrAll<{ max: number, min: number }>;
+}
+
+/** 抽象的日期控件图示 */
+export interface AbstractDateControlSchema<Name extends AnySchemaName, Val> extends AbstractControlSchema<Name, Val> {
+  /** Mode of date picker control */
+  mode?: NzDateMode;
+  /** Show clean button */
+  clear?: boolean;
+  /** Show time picker in date picker */
+  showTime?: boolean;
+  /** Date display format */
+  format?: string;
+  /** Inline mode */
+  inline?: boolean;
 }

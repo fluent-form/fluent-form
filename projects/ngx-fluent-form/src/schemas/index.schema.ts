@@ -33,8 +33,8 @@ export type ComponentSchema<N extends SingleKeySchemaName = SingleKeySchemaName>
 /** 普通组件构建器 */
 export type ComponentBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = Builder<ComponentSchema<N>, ComponentSchema<N>, {}>;
 
-/** 输入系列控件图示 */
-export type InputSeriesControlSchema =
+/** 可组合组件图示 */
+export type ComposableComponentSchema =
   InputControlSchema |
   TextareaControlSchema |
   NumberInputControlSchema |
@@ -43,8 +43,8 @@ export type InputSeriesControlSchema =
   RangePickerControlSchema |
   SelectControlSchema |
   CascaderControlSchema;
-/** 输入系列控件构建器 */
-export type InputSeriesControlBuilder = Builder<InputSeriesControlSchema, InputSeriesControlSchema, {}>;
+/** 可组合组件构建器 */
+export type ComposableComponentBuilder = Builder<ComposableComponentSchema, ComposableComponentSchema, {}>;
 
 /** 单字段的真实控件图示 */
 export type SingleKeyControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> =

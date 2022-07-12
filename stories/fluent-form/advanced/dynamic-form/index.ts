@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { array, findSchema, form, FormArraySchema, input } from 'ngx-fluent-form';
+import { array, button, buttonGroup, findSchema, form, FormArraySchema, input } from 'ngx-fluent-form';
 import { AbstractFluentFormWrapperComponent, defineMeta, defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
@@ -17,15 +17,9 @@ import dedent from 'ts-dedent';
         [spinning]="spinning"
         [spinTip]="spinTip"
         [spinSize]="spinSize"></fluent-form>
-
       <div nz-col nzFlex="1">
         <pre>{{ model | json }}</pre>
       </div>
-
-      <nz-button-group nz-col nzSpan="24">
-        <button nz-button nzType="primary" (click)="add()">添加控件</button>
-        <button nz-button nzType="default" (click)="remove()">移除控件</button>
-      </nz-button-group>
     </div>
   `,
   styles: [`
@@ -39,6 +33,14 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
     this.schemas = form(
       array('passengers').span(24).schemas(
         input().label('乘客').span(12),
+      ),
+      buttonGroup().schemas(
+        button().subtype('primary').content('添加控件').listener({
+          click: () => this.add()
+        }),
+        button().content('移除控件').listener({
+          click: () => this.remove()
+        }),
       )
     );
 
@@ -70,23 +72,26 @@ export const story = defineStory();
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { array, findSchema, form, FormArraySchema, input } from 'ngx-fluent-form';
+  import { array, button, buttonGroup, findSchema, form, FormArraySchema, input } from 'ngx-fluent-form';
 
   @Component({
     selector: 'example-component',
     template: \`
       <fluent-form [schemas]="schemas" [model]="model"></fluent-form>
-
-      <nz-button-group>
-        <button nz-button nzType="primary" (click)="add()">添加控件</button>
-        <button nz-button nzType="default" (click)="remove()">移除控件</button>
-      </nz-button-group>
     \`
   })
   export class ExampleComponent {
     schemas = form(
       array('passengers').span(24).schemas(
         input().label('乘客').span(12),
+      ),
+      buttonGroup().schemas(
+        button().subtype('primary').content('添加控件').listener({
+          click: () => this.add()
+        }),
+        button().content('移除控件').listener({
+          click: () => this.remove()
+        }),
       )
     );
 

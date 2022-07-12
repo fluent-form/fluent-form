@@ -1,4 +1,4 @@
-import { form, input, inputGroup, number } from 'ngx-fluent-form';
+import { button, form, input, inputGroup, number } from 'ngx-fluent-form';
 import { defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
@@ -12,6 +12,10 @@ export const story = defineStory({
       inputGroup().label('个人信息').span(8).schemas(
         input('name').placeholder('姓名').span(15),
         number('age').placeholder('年龄').min(1).max(100).span(9),
+      ),
+      inputGroup().span(10).schemas(
+        input('keyword').subtype('search').placeholder('请输入搜索关键字').span(18),
+        button().subtype('primary').content('提交').flex('auto'),
       )
     ),
     model: {}
@@ -20,7 +24,7 @@ export const story = defineStory({
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { form, input, inputGroup, number } from 'ngx-fluent-form';
+  import { button, form, input, inputGroup, number } from 'ngx-fluent-form';
 
   @Component({
     selector: 'example-component',
@@ -35,6 +39,10 @@ export const source = dedent`
       inputGroup().label('个人信息').span(8).schemas(
         input('name').placeholder('姓名').span(15),
         number('age').placeholder('年龄').min(1).max(100).span(9),
+      ),
+      inputGroup().span(10).schemas(
+        input('keyword').subtype('search').placeholder('请输入搜索关键字').span(18),
+        button().subtype('primary').content('提交').flex('auto'),
       )
     );
 

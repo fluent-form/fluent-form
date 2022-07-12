@@ -1,4 +1,4 @@
-import { cascader, checkbox, checkboxGroup, date, datetime, form, input, number, radio, range, rate, select, slider, switcher, textarea, time } from 'ngx-fluent-form';
+import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, datetime, form, input, number, radio, range, rate, select, slider, switcher, textarea, time } from 'ngx-fluent-form';
 import { CASCADER_OPTIONS, CHECKBOX_OPTIONS, RADIO_OPTIONS, SELECT_OPTIONS } from 'stories/options';
 import { defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
@@ -21,6 +21,13 @@ export const story = defineStory({
       cascader('cascader').label('联级选择器').options(CASCADER_OPTIONS).span(24),
       rate('rate').label('评分').value(2.5).span(24),
       slider('slider').label('滑动条').value(30).span(24),
+      button().subtype('primary').content('普通按钮'),
+      button().subtype('primary').content('带图标的按钮').icon('check'),
+      button().content('危险按钮').danger(true),
+      buttonGroup().schemas(
+        button().subtype('primary').content('确认'),
+        button().content('取消'),
+      )
     ),
     model: {}
   }
@@ -28,7 +35,7 @@ export const story = defineStory({
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { cascader, checkbox, checkboxGroup, date, datetime, form, input, number, radio, range, rate, select, slider, switcher, textarea, time } from 'ngx-fluent-form';
+  import { button, cascader, checkbox, checkboxGroup, date, datetime, form, input, number, radio, range, rate, select, slider, switcher, textarea, time } from 'ngx-fluent-form';
 
   @Component({
     selector: 'example-component',
@@ -51,6 +58,9 @@ export const source = dedent`
       cascader('cascader').label('联级选择器').options(CASCADER_OPTIONS).span(24),
       rate('rate').label('评分').value(2.5).span(24),
       slider('slider').label('滑动条').value(30).span(24),
+      button().subtype('primary').content('普通按钮'),
+      button().subtype('primary').content('带图标的按钮').icon('check'),
+      button().content('危险按钮').danger(true),
     );
 
     model = {};

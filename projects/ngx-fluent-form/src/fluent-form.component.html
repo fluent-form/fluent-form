@@ -23,27 +23,25 @@
   <ng-container [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
       <input
-        #host
         nz-input
         [attr.id]="schema.id"
         [attr.minlength]="schema.length ?? schema.length?.min"
         [attr.maxlength]="schema.length ?? schema.length?.max"
         [type]="schema.subtype ?? 'text'"
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        [fluentPropertyBinder]="{ schema }"
+        [fluentEventBinder]="{ schema, control }"
         [formControl]="control"
         [placeholder]="schema.placeholder ?? ''" />
     </ng-container>
 
     <ng-container *ngSwitchCase="'textarea'">
       <textarea
-        #host
         nz-input
         [attr.id]="schema.id"
         [attr.minlength]="schema.length ?? schema.length?.min"
         [attr.maxlength]="schema.length ?? schema.length?.max"
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        [fluentPropertyBinder]="{ schema }"
+        [fluentEventBinder]="{ schema, control }"
         [formControl]="control"
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
@@ -52,9 +50,9 @@
 
     <ng-container *ngSwitchCase="'number'">
       <nz-input-number
-        #host
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        #cmp
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control"
         [nzId]="schema.id"
         [nzPlaceHolder]="schema.placeholder ?? ''"
@@ -68,9 +66,9 @@
 
     <ng-container *ngSwitchCase="'date'">
       <nz-date-picker
-        #host
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        #cmp
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control"
         [nzId]="schema.id"
         [nzPlaceHolder]="schema.placeholder"
@@ -83,9 +81,9 @@
 
     <ng-container *ngSwitchCase="'range'">
       <nz-range-picker
-        #host
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        #cmp
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control"
         [nzId]="schema.id"
         [nzPlaceHolder]="schema.placeholder"
@@ -98,9 +96,9 @@
 
     <ng-container *ngSwitchCase="'time'">
       <nz-time-picker
-        #host
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        #cmp
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control"
         [nzId]="schema.id"
         [nzPlaceHolder]="schema.placeholder"
@@ -114,9 +112,9 @@
 
     <ng-container *ngSwitchCase="'switch'">
       <nz-switch
-        #host
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        #cmp
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control"
         [nzCheckedChildren]="schema.placeholder?.[0]"
         [nzUnCheckedChildren]="schema.placeholder?.[1]">
@@ -125,9 +123,9 @@
 
     <ng-container *ngSwitchCase="'select'">
       <nz-select
-        #host
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        #cmp
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control"
         [nzId]="schema.id"
         [nzPlaceHolder]="schema.placeholder"
@@ -145,9 +143,9 @@
 
     <ng-container *ngSwitchCase="'cascader'">
       <nz-cascader
-        #host
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        #cmp
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder"
         [nzAllowClear]="schema.clear"
@@ -161,9 +159,9 @@
 
     <ng-container *ngSwitchCase="'slider'">
       <nz-slider
-        #host
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        #cmp
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control"
         [nzIncluded]="schema.included ?? true"
         [nzMax]="schema.max ?? 100"
@@ -175,9 +173,9 @@
 
     <ng-container *ngSwitchCase="'radio'">
       <nz-radio-group
-        #host
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        #cmp
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control"
         [nzButtonStyle]="schema.style">
         <ng-container *ngFor="let option of schema.options">
@@ -193,28 +191,28 @@
 
     <ng-container *ngSwitchCase="'checkbox'">
       <label
-        #host
+        #cmp
         nz-checkbox
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control"
         [nzId]="schema.id">{{ schema.content }}</label>
     </ng-container>
 
     <ng-container *ngSwitchCase="'checkbox-group'">
       <nz-checkbox-group
-        #host
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        #cmp
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control">
       </nz-checkbox-group>
     </ng-container>
 
     <ng-container *ngSwitchCase="'rate'">
       <nz-rate
-        #host
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        #cmp
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control"
         [nzAllowClear]="schema.clear ?? true"
         [nzAllowHalf]="schema.half"
@@ -223,12 +221,25 @@
         [nzTooltips]="schema.tooltips ?? []"></nz-rate>
     </ng-container>
 
+    <ng-container *ngSwitchCase="'button-group'">
+      <nz-button-group
+        #cmp
+        [nzSize]="schema.size"
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema }">
+        <ng-container *ngFor="let subschema of schema.schemas">
+          <ng-container
+            *ngTemplateOutlet="componentTemplate; context: { schema: subschema }">
+          </ng-container>
+        </ng-container>
+      </nz-button-group>
+    </ng-container>
+
     <ng-container *ngSwitchCase="'button'">
       <button
-        #host
         nz-button
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema }"
+        [fluentPropertyBinder]="{ schema }"
+        [fluentEventBinder]="{ schema }"
         [disabled]="schema.disabled"
         [nzType]="schema.subtype"
         [nzGhost]="schema.ghost"
@@ -258,7 +269,6 @@
   <ng-container *ngIf="!schema.hidden" [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
       <input
-        #host
         nz-col
         nz-input
         [attr.id]="schema.id"
@@ -268,15 +278,14 @@
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
         [type]="schema.subtype ?? 'text'"
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        [fluentPropertyBinder]="{ schema }"
+        [fluentEventBinder]="{ schema, control }"
         [formControl]="control"
         [placeholder]="schema.placeholder ?? ''" />
     </ng-container>
 
     <ng-container *ngSwitchCase="'textarea'">
       <textarea
-        #host
         nz-col
         nz-input
         [attr.id]="schema.id"
@@ -285,8 +294,8 @@
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        [fluentPropertyBinder]="{ schema }"
+        [fluentEventBinder]="{ schema, control }"
         [formControl]="control"
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
@@ -295,14 +304,14 @@
 
     <ng-container *ngSwitchCase="'number'">
       <nz-input-number
-        #host
+        #cmp
         nz-col
         [nzId]="schema.id"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder ?? ''"
         [nzMin]="schema.min ?? -infinity"
@@ -315,14 +324,14 @@
 
     <ng-container *ngSwitchCase="'date'">
       <nz-date-picker
-        #host
+        #cmp
         nz-col
         [nzId]="schema.id"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder"
         [nzMode]="schema.mode"
@@ -334,14 +343,14 @@
 
     <ng-container *ngSwitchCase="'range'">
       <nz-range-picker
-        #host
+        #cmp
         nz-col
         [nzId]="schema.id"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder"
         [nzMode]="schema.mode"
@@ -353,14 +362,14 @@
 
     <ng-container *ngSwitchCase="'time'">
       <nz-time-picker
-        #host
+        #cmp
         nz-col
         [nzId]="schema.id"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder"
         [nzAllowEmpty]="schema.clear"
@@ -373,14 +382,14 @@
 
     <ng-container *ngSwitchCase="'select'">
       <nz-select
-        #host
+        #cmp
         nz-col
         [nzId]="schema.id"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder"
         [nzAllowClear]="schema.clear"
@@ -397,13 +406,13 @@
 
     <ng-container *ngSwitchCase="'cascader'">
       <nz-cascader
-        #host
+        #cmp
         nz-col
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [fluentEventBinder]="{ cmp, schema, control }"
         [formControl]="control"
         [nzPlaceHolder]="schema.placeholder"
         [nzAllowClear]="schema.clear"
@@ -417,14 +426,13 @@
 
     <ng-container *ngSwitchCase="'button'">
       <button
-        #host
         nz-col
         nz-button
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
-        [fluentPropertyBinder]="{ host, schema }"
-        [fluentEventBinder]="{ host, schema }"
+        [fluentPropertyBinder]="{ schema }"
+        [fluentEventBinder]="{ schema }"
         [disabled]="schema.disabled"
         [nzType]="schema.subtype"
         [nzGhost]="schema.ghost"
@@ -482,11 +490,11 @@
 
               <nz-form-control>
                 <nz-input-group
-                  #host
+                  #cmp
                   nz-row
                   nzCompact
-                  [fluentPropertyBinder]="{ host, schema }"
-                  [fluentEventBinder]="{ host, schema }"
+                  [fluentPropertyBinder]="{ cmp, schema }"
+                  [fluentEventBinder]="{ cmp, schema }"
                   [nzAddOnBefore]="schema.before?.template"
                   [nzAddOnAfter]="schema.after?.template"
                   [nzAddOnBeforeIcon]="schema.before?.icon"

@@ -1,19 +1,24 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { COMPONENT_CONTAINER_SCHEMA_TYPES, COMPONENT_SCHEMA_TYPES, CONTROL_CONTAINER_SCHEMA_TYPES, TEXT_CONTROL_SCHEMA_TYPES } from '../constants';
 import { InputControlSchema, TextareaControlSchema } from '../schemas';
 import { AnySchemaName, DoubleKeySchemaName, SingleKeySchemaName } from '../schemas/abstract.schema';
-import { AnyControlSchema, AnySchema, ComponentSchema, ComposableComponentSchema, ContainerSchema, ControlSchema } from '../schemas/index.schema';
+import { AnyContainerSchema, AnyControlSchema, AnySchema, ComponentContainerSchema, ComponentSchema, ComposableComponentSchema, ControlContainerSchema, ControlSchema } from '../schemas/index.schema';
 import { Builder, isBuilder } from './builder.utils';
 
-const CONTAINER_SCHEMA_TYPES = ['group', 'array', 'input-group'];
-const TEXT_CONTROL_SCHEMA_TYPES = ['input', 'textarea'];
-const COMPONENT_SCHEMA_TYPES = ['button'];
-
 /**
- * 是否为容器图示
+ * 是否为控件容器图示
  * @param schema
  */
-export const isContainerSchema = (schema: AnySchema): schema is ContainerSchema => (
-  CONTAINER_SCHEMA_TYPES.includes(schema.type)
+export const isControlContainerSchema = (schema: AnySchema): schema is ControlContainerSchema => (
+  CONTROL_CONTAINER_SCHEMA_TYPES.includes(schema.type)
+);
+
+/**
+ * 是否为组件容器图示
+ * @param schema
+ */
+export const isComponentContainerSchema = (schema: AnySchema): schema is ComponentContainerSchema => (
+  COMPONENT_CONTAINER_SCHEMA_TYPES.includes(schema.type)
 );
 
 /**
@@ -61,7 +66,7 @@ const addValidatorToSchema = <T extends ControlSchema>(schema: T, validator: Val
  * 标准化容器图示
  * @param schema
  */
-const standardContainerSchema = <T extends ContainerSchema>(schema: T): T => {
+const standardContainerSchema = <T extends AnyContainerSchema>(schema: T): T => {
   const schemas = standardSchemas(schema.schemas);
 
   // 如果是数组表单图示，自动补充子图示的名称为索引值
@@ -111,7 +116,7 @@ const standardTextControlSchema = <T extends InputControlSchema | TextareaContro
 export const standardSchema = <T extends AnySchema>(schema: T | Builder<T, T, {}>): T => {
   let _schema = (isBuilder(schema) ? schema.build() : { ...schema }) as AnySchema;
 
-  if (isContainerSchema(_schema)) {
+  if (isControlContainerSchema(_schema) || isComponentContainerSchema(_schema)) {
     _schema = standardContainerSchema(_schema);
   } else if (isTextControlSchema(_schema)) {
     _schema = standardTextControlSchema(_schema);
@@ -150,7 +155,8 @@ export function convertSchemaToControl(schema: ControlSchema): FormControl {
  */
 export function convertSchemasToGroup(schemas: AnySchema[]): FormGroup {
   return new FormGroup(
-    schemas.filter(o => !isComponentSchema(o)).reduce((controls, schema) => {
+    // 过滤掉组件图示和组件容器图示
+    schemas.filter(o => !isComponentSchema(o) && !isComponentContainerSchema(o)).reduce((controls, schema) => {
       switch (schema.type) {
         case 'group':
           controls[schema.name!.toString()] = convertSchemasToGroup(schema.schemas as AnySchema[]);
@@ -221,7 +227,7 @@ export function findSchema<T extends AnySchema = AnySchema>(schemas: AnySchema[]
   if (Array.isArray(path)) {
     const [endPath, ...beforePath] = path.reverse() as [AnySchemaName, ...SingleKeySchemaName[]];
     schemas = beforePath.reduceRight((schemas, name) => (
-      (schemas.find(o => o.name === name) as ContainerSchema).schemas as AnyControlSchema[]
+      (schemas.find(o => o.name === name) as AnyContainerSchema).schemas as AnyControlSchema[]
     ), schemas as AnyControlSchema[]);
     path = endPath;
   }

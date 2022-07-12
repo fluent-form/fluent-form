@@ -1,7 +1,8 @@
 import { TemplateRef } from '@angular/core';
 import { ThemeType } from '@ant-design/icons-angular';
-import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
+import { NzButtonComponent, NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzInputGroupComponent } from 'ng-zorro-antd/input';
+import { Builder } from '../utils/builder.utils';
 import { AbstractComponentSchema, AbstractElementSchema, AbstractSchema, SingleKeySchemaName } from './abstract.schema';
 import { ComposableComponentBuilder, ComposableComponentSchema } from './index.schema';
 
@@ -44,4 +45,10 @@ export interface ButtonComponentSchema<Name extends SingleKeySchemaName = Single
   block?: boolean;
   icon?: string | Icon;
   content?: string | TemplateRef<void>;
+}
+
+export interface ButtonGroupComponentSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzButtonComponent> {
+  type: 'button-group';
+  schemas: (ButtonComponentSchema | Builder<ButtonComponentSchema, ButtonComponentSchema, {}>)[];
+  size?: NzButtonSize;
 }

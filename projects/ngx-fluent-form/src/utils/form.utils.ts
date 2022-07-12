@@ -1,7 +1,7 @@
 import { FormArray, FormGroup } from '@angular/forms';
 import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
 import { AnySchema } from '../schemas/index.schema';
-import { isComponentSchema, isDoubleKeySchemaName } from './schema.utils';
+import { isComponentContainerSchema, isComponentSchema, isDoubleKeySchemaName } from './schema.utils';
 
 type Obj = Record<string, unknown>;
 type Arr = unknown[];
@@ -17,7 +17,8 @@ export function assignModelToForm<T extends Obj>(model: T, form: FormGroup, sche
 export function assignModelToForm<T extends Arr>(model: T, form: FormArray, schemas: AnySchema[], emitEvent?: boolean): void;
 export function assignModelToForm<T extends Obj | Arr>(model: T, form: FormGroup | FormArray, schemas: AnySchema[], emitEvent: boolean = true): void {
   schemas.forEach(schema => {
-    if (isComponentSchema(schema)) { return; }
+    // 这些图示不包含控件图示，直接跳过
+    if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
 
     if (schema.type === 'input-group') {
       return assignModelToForm(
@@ -110,7 +111,8 @@ export function assignFormToModel<T extends Obj | Arr>(form: FormGroup | FormArr
   clear && empty(model);
 
   schemas.forEach(schema => {
-    if (isComponentSchema(schema)) { return; }
+    // 这些图示不包含控件图示，直接跳过
+    if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
 
     if (schema.type === 'input-group') {
       return assignFormToModel(

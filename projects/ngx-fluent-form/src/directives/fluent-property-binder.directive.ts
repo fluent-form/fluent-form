@@ -1,20 +1,24 @@
-import { Directive, Input, OnChanges } from '@angular/core';
-import { ControlSchema } from '../schemas/index.schema';
+import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
+import { AbstractComponentSchema, AbstractElementSchema } from '../schemas';
 
 @Directive({
   selector: '[fluentPropertyBinder]'
 })
-export class FluentPropertyBinderDirective<H extends object, S extends ControlSchema> implements OnChanges {
-  @Input() fluentPropertyBinder!: { host: H, schema: S };
+export class FluentPropertyBinderDirective<E extends HTMLElement, C extends object, S extends AbstractElementSchema<E> | AbstractComponentSchema<C>> implements OnChanges {
+  @Input() fluentPropertyBinder!: { cmp?: C, schema: S };
 
-  constructor() { }
+  private get host() {
+    return this.fluentPropertyBinder.cmp ?? this.elementRef.nativeElement;
+  }
+
+  constructor(private elementRef: ElementRef<E>) { }
 
   ngOnChanges() {
-    const { host, schema } = this.fluentPropertyBinder;
+    const { schema } = this.fluentPropertyBinder;
 
     schema.property && Object.keys(schema.property).forEach(property => {
       const value = (schema.property as S['property'])![property as keyof S['property']];
-      host[property as keyof H] = value as unknown as H[keyof H];
+      (this.host as E | C)[property as keyof (E | C)] = value as unknown as (E | C)[keyof (E | C)];
     });
   }
 

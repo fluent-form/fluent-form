@@ -12,6 +12,11 @@ export type HTMLElementEventListenerMap = {
 };
 
 /**
+ * HTML 元素的属性对象
+ */
+export type HTMLElementPropertyMap<E extends HTMLElement> = Partial<WritableMap<Property<E>>>;
+
+/**
  * 组件的 Ouput 名
  * ```ts
  * nzChange | nzVisibleChange
@@ -68,3 +73,14 @@ export type ComponentInputMap<C> = Partial<{ [P in ComponentInputName<C>]: C[P] 
  * ```
  */
 export type SingleOrAll<T> = { [P in keyof T]: { [K in P]-?: T[P] } }[keyof T] | Required<T>;
+
+type IfEquals<X, Y, T = X, F = never> =
+  (<T>() => T extends X ? true : false) extends
+  (<T>() => T extends Y ? true : false) ? T : F;
+
+/**
+ * 过滤出可写的键值对
+ */
+type WritableMap<T> = {
+  [P in keyof T]-?: IfEquals<{ [K in P]: T[P] }, { -readonly [K in P]: T[P] }>
+};

@@ -1,9 +1,9 @@
 import { TemplateRef } from '@angular/core';
 import { AsyncValidatorFn, FormControl, FormControlStatus, ValidatorFn } from '@angular/forms';
-import { Property, SafeAny } from '@ngify/types';
+import { SafeAny } from '@ngify/types';
 import { NzDateMode } from 'ng-zorro-antd/date-picker';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
-import { ComponentInputMap, ComponentOutputListenerMap, HTMLElementEventListenerMap, SingleOrAll } from '../type';
+import { ComponentInputMap, ComponentOutputListenerMap, HTMLElementEventListenerMap, HTMLElementPropertyMap, SingleOrAll } from '../type';
 
 /** 任意字段控件名称 */
 export type AnySchemaName = SingleKeySchemaName | DoubleKeySchemaName;
@@ -81,7 +81,7 @@ export interface AbstractComponentSchema<Cmp> {
 /** 抽象的元素图示 */
 export interface AbstractElementSchema<Ele extends HTMLElement> {
   listener?: HTMLElementEventListenerMap;
-  property?: Partial<Property<Ele>>;
+  property?: HTMLElementPropertyMap<Ele>;
 }
 
 /** 抽象的组件控件图示 */

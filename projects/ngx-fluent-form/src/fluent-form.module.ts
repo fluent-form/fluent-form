@@ -26,7 +26,7 @@ import { FluentFormComponent } from './fluent-form.component';
   declarations: [
     FluentFormComponent,
     FluentEventBinderDirective,
-    FluentPropertyBinderDirective
+    FluentPropertyBinderDirective,
   ],
   imports: [
     CommonModule,

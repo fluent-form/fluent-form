@@ -18,15 +18,15 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
-import { FluentEventBinderDirective } from './directives/fluent-event-binder.directive';
-import { FluentPropertyBinderDirective } from './directives/fluent-property-binder.directive';
+import { EventBinderDirective } from './directives/event-binder.directive';
+import { PropertyBinderDirective } from './directives/property-binder.directive';
 import { FluentFormComponent } from './fluent-form.component';
 
 @NgModule({
   declarations: [
     FluentFormComponent,
-    FluentEventBinderDirective,
-    FluentPropertyBinderDirective,
+    EventBinderDirective,
+    PropertyBinderDirective,
   ],
   imports: [
     CommonModule,

@@ -8,7 +8,7 @@ import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../type
 @Directive({
   selector: '[fluentEventBinder]'
 })
-export class FluentEventBinderDirective<E extends HTMLElement, C extends object, S extends ControlSchema> implements OnChanges, OnDestroy {
+export class EventBinderDirective<E extends HTMLElement, C extends object, S extends ControlSchema> implements OnChanges, OnDestroy {
   @Input() fluentEventBinder!: { cmp?: C, schema: S, control?: FormControl };
 
   private get host() {

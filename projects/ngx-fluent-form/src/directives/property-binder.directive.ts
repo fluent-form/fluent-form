@@ -4,7 +4,7 @@ import { AbstractComponentSchema, AbstractElementSchema } from '../schemas';
 @Directive({
   selector: '[fluentPropertyBinder]'
 })
-export class FluentPropertyBinderDirective<E extends HTMLElement, C extends object, S extends AbstractElementSchema<E> | AbstractComponentSchema<C>> implements OnChanges {
+export class PropertyBinderDirective<E extends HTMLElement, C extends object, S extends AbstractElementSchema<E> | AbstractComponentSchema<C>> implements OnChanges {
   @Input() fluentPropertyBinder!: { cmp?: C, schema: S };
 
   private get host() {

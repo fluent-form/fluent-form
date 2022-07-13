@@ -1,4 +1,4 @@
-import { array, checkboxGroup, date, group, inputGroup, number, range, slider, time } from '../builders';
+import { array, button, buttonGroup, checkboxGroup, date, group, input, inputGroup, number, range, slider, time } from '../builders';
 import { assignFormToModel, assignModelToForm } from './form.utils';
 import { convertSchemasToGroup, standardSchemas } from './schema.utils';
 
@@ -29,12 +29,10 @@ describe('form.utils', () => {
       expect(form.getRawValue()).toEqual(model);
     });
 
-    it('应该能正确处理多级对象', () => {
-      const model = { detail: { o: 1 } };
+    it('应该能正确处理空对象（button-group）', () => {
+      const model = {};
       const schemas = standardSchemas([
-        group('detail').schemas(
-          number('o')
-        )
+        buttonGroup().schemas(button(),)
       ]);
       const form = convertSchemasToGroup(schemas);
 
@@ -43,34 +41,81 @@ describe('form.utils', () => {
       expect(form.getRawValue()).toEqual(model);
     });
 
-    it('应该能正确处理一级数组', () => {
-      const model = { details: [1] };
-      const schemas = standardSchemas([
-        array('details').schemas(
-          number(0)
-        )
-      ]);
-      const form = convertSchemasToGroup(schemas);
+    describe('应该能正确处理多级对象', () => {
+      it('空模型', () => {
+        const schemas = standardSchemas([
+          group('detail').schemas(
+            number('o')
+          )
+        ]);
+        const form = convertSchemasToGroup(schemas);
 
-      assignModelToForm(model, form, schemas);
+        assignModelToForm({}, form, schemas);
 
-      expect(form.getRawValue()).toEqual(model);
+        expect(form.getRawValue()).toEqual({ detail: { o: null } });
+      });
+
+      it('非空模型', () => {
+        const model = { detail: { o: 1 } };
+        const schemas = standardSchemas([
+          group('detail').schemas(
+            number('o')
+          )
+        ]);
+        const form = convertSchemasToGroup(schemas);
+
+        assignModelToForm(model, form, schemas);
+
+        expect(form.getRawValue()).toEqual(model);
+      });
     });
 
-    it('应该能正确处理多级数组', () => {
-      const model = { details: [[1]] };
-      const schemas = standardSchemas([
-        array('details').schemas(
-          array(0).schemas(
+    describe('应该能正确处理一级数组', () => {
+      it('空模型', () => {
+        const schemas = standardSchemas([
+          array('details').schemas(
+            number()
+          )
+        ]);
+        const form = convertSchemasToGroup(schemas);
+
+        assignModelToForm({}, form, schemas);
+
+        expect(form.getRawValue()).toEqual({ details: [null] });
+      });
+
+      it('非空模型', () => {
+        const model = { details: [1] };
+        const schemas = standardSchemas([
+          array('details').schemas(
             number(0)
+          )
+        ]);
+        const form = convertSchemasToGroup(schemas);
+
+        assignModelToForm(model, form, schemas);
+
+        expect(form.getRawValue()).toEqual(model);
+      });
+    });
+
+    it('应该能正确处理数组嵌套对象', () => {
+      const schemas = standardSchemas([
+        array('details').schemas(
+          group().schemas(
+            input('name')
           )
         )
       ]);
       const form = convertSchemasToGroup(schemas);
 
-      assignModelToForm(model, form, schemas);
+      assignModelToForm({}, form, schemas);
 
-      expect(form.getRawValue()).toEqual(model);
+      expect(form.getRawValue()).toEqual({
+        details: [
+          { name: null }
+        ]
+      });
     });
 
     it('应该能正确处理双字段模式', () => {
@@ -178,6 +223,28 @@ describe('form.utils', () => {
       const model = assignFormToModel(form, {}, schemas);
 
       expect(model).toEqual({ o: 1 });
+    });
+
+    it('应该能正确处理一级对象（input-group）', () => {
+      const schemas = standardSchemas([
+        inputGroup().schemas(
+          number('o').value(1)
+        )
+      ]);
+      const form = convertSchemasToGroup(schemas);
+      const model = assignFormToModel(form, {}, schemas);
+
+      expect(model).toEqual({ o: 1 });
+    });
+
+    it('应该能正确处理一级对象（button-group）', () => {
+      const schemas = standardSchemas([
+        buttonGroup().schemas(button())
+      ]);
+      const form = convertSchemasToGroup(schemas);
+      const model = assignFormToModel(form, {}, schemas);
+
+      expect(model).toEqual({});
     });
 
     it('应该能正确处理多级对象', () => {

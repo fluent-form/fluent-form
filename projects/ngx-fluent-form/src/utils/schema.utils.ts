@@ -133,7 +133,7 @@ export const standardSchema = <T extends AnySchema>(schema: T | Builder<T, T, {}
  * 标准化所有图示
  * @param schemas
  */
-export const standardSchemas = <T extends AnySchema>(schemas: (T | Builder<T, T, {}>)[]): T[] => (
+export const standardSchemas = (schemas: (AnySchema | Builder<AnySchema, AnySchema, {}>)[]) => (
   schemas.map(schema => standardSchema(schema))
 );
 

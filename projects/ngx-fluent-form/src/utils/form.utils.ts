@@ -88,13 +88,8 @@ export function assignModelToForm<T extends Obj | Arr>(model: T, form: FormGroup
  * 清空对象但保持引用
  * @param obj
  */
-function empty<T extends object>(obj: T): T {
-  if (Array.isArray(obj)) {
-    obj.length = 0;
-  } else {
-    Object.keys(obj).forEach(property => delete obj[property as keyof T]);
-  }
-
+function emptyObject<T extends object>(obj: T): T {
+  Object.keys(obj).forEach(property => delete obj[property as keyof T]);
   return obj;
 }
 
@@ -108,7 +103,7 @@ function empty<T extends object>(obj: T): T {
 export function assignFormToModel<T extends Obj>(form: FormGroup, model: T, schemas: AnySchema[], clear?: boolean): T;
 export function assignFormToModel<T extends Arr>(form: FormArray, model: T, schemas: AnySchema[], clear?: boolean): T;
 export function assignFormToModel<T extends Obj | Arr>(form: FormGroup | FormArray, model: T, schemas: AnySchema[], clear: boolean = true) {
-  clear && empty(model);
+  clear && emptyObject(model);
 
   schemas.forEach(schema => {
     // 这些图示不包含控件图示，直接跳过
@@ -128,7 +123,7 @@ export function assignFormToModel<T extends Obj | Arr>(form: FormGroup | FormArr
     if (schema.type === 'group') {
       return assignFormToModel(
         control as FormGroup,
-        (model[schema.name as keyof T] ??= ({} as T[keyof T])) as unknown as Obj,
+        (model[schema.name as keyof T] = ({} as T[keyof T])) as unknown as Obj,
         schema.schemas as AnySchema[],
         false
       );
@@ -137,7 +132,7 @@ export function assignFormToModel<T extends Obj | Arr>(form: FormGroup | FormArr
     if (schema.type === 'array') {
       return assignFormToModel(
         control as FormArray,
-        (model[schema.name as keyof T] ??= ([] as unknown as T[keyof T])) as unknown as Arr,
+        (model[schema.name as keyof T] = ([] as unknown as T[keyof T])) as unknown as Arr,
         schema.schemas as AnySchema[],
         false
       );

@@ -33,7 +33,7 @@ export const meta = defineMeta({
 });
 
 // TODO: move to ./index.story.mdx
-export const source = dedent`
+export const moduleSource = dedent`
   import { FluentFormModule } from 'ngx-fluent-form';
 
   @NgModule({
@@ -42,4 +42,25 @@ export const source = dedent`
     ]
   })
   export class YourModule { }
+`;
+
+export const cmpSource = dedent`
+  import { date, form, number, text } from 'ngx-fluent-form';
+
+  @Component({
+    template: \`<fluent-form [model]="model" [schemas]="schemas"></fluent-form>\`
+  })
+  export class Component {
+    schemas = form(
+      text('text').label('文本').span(6),
+      number('number').label('数字').span(3).max(100),
+      date('date').label('日期').span(6)
+    );
+
+    model = {
+      text: 'fluent-form',
+      number: 10,
+      date: Date.now()
+    };
+  }
 `;

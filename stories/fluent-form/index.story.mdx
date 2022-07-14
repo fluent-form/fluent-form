@@ -1,5 +1,5 @@
 import { Meta, Source } from '@storybook/addon-docs';
-import { source } from './';
+import { cmpSource, moduleSource } from './';
 
 <Meta title="FluentForm/Introduce" />
 
@@ -31,8 +31,7 @@ import { source } from './';
 <Source
   language="shell"
   dark={true}
-  code="npm i ngx-fluent-form"
- />
+  code="npm i ngx-fluent-form" />
 
 ## 用法
 
@@ -41,5 +40,21 @@ import { source } from './';
 <Source
   language="ts"
   dark={true}
-  code={source}
- />
+  code={moduleSource} />
+
+配置 `schemas` 参数，构建你的表单：
+
+<Source
+  language="ts"
+  dark={true}
+  code={cmpSource} />
+
+喜欢 ngx-fluent-form ？为该项目点星⭐！
+
+<iframe
+  src="https://ghbtns.com/github-btn.html?user=HyperLife1119&repo=ngx-fluent-form&type=star&count=true"
+  scrolling="0"
+  width="150"
+  height="20"
+  title="GitHub"
+  style={{ border: 'none' }}></iframe>

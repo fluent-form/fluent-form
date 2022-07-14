@@ -1,7 +1,7 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 import { meta } from '../../';
-import { story, source } from './';
-import { FluentFormComponent } from 'ngx-fluent-form';
+import { story, source, o } from './';
+import { FluentFormComponent, AbstractComponentControlSchema } from 'ngx-fluent-form';
 
 <Meta
   title="FluentForm/Basic"
@@ -10,7 +10,11 @@ import { FluentFormComponent } from 'ngx-fluent-form';
   argTypes={meta.argTypes}
   parameters={meta.parameters} />
 
-# Input Group
+# Input Group - 输入框组合
+
+主要功能：
+- 增强输入框，为其添加前后缀/标签。
+- 将多个输入框或将输入框与按钮组合起来。
 
 <Canvas withToolbar mdxSource={source}>
   <Story name="Input Group">{story}</Story>

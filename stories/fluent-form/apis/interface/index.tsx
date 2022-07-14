@@ -4,6 +4,36 @@ import { interfaces } from 'documentation.json';
 import Md from 'markdown-to-jsx';
 import * as React from 'react';
 
+interface Method {
+  name: string;
+  optional: boolean;
+  description: string;
+  returnType: string;
+  line: number;
+  args: {
+    name: string;
+    type: string;
+    optional: boolean;
+  }[];
+  jsdoctags: {
+    type: string;
+    name: {
+      escapedText: string;
+    };
+    comment: string;
+  }[];
+}
+
+interface Property {
+  name: string;
+  deprecated: boolean;
+  deprecationMessage: string;
+  type: string;
+  optional: boolean;
+  description: string;
+  line: number;
+}
+
 const Required = styled.span(({ theme }) => ({
   color: theme.color.negative,
   fontFamily: theme.typography.fonts.mono,
@@ -50,7 +80,7 @@ export const Interfaces = () => (
 
           <tbody>
             {
-              o.methods.map(method => (
+              o.methods.map((method: Method) => (
                 <tr key={method.line}>
                   <td>
                     <Name>
@@ -94,7 +124,7 @@ export const Interfaces = () => (
 
           <tbody>
             {
-              o.properties.map(prop => (
+              o.properties.map((prop: Property) => (
                 <tr key={prop.line}>
                   <td>
                     <Spaced col={1}>

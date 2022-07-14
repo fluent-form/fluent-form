@@ -47,6 +47,7 @@ export const isDoubleKeySchemaName = (name: AnySchemaName): name is DoubleKeySch
 
 /**
  * 添加验证器到图示中
+ * @internal
  * @param schema
  * @param validator
  */
@@ -64,6 +65,7 @@ const addValidatorToSchema = <T extends ControlSchema>(schema: T, validator: Val
 
 /**
  * 标准化容器图示
+ * @internal
  * @param schema
  */
 const standardContainerSchema = <T extends AnyContainerSchema>(schema: T): T => {
@@ -81,6 +83,7 @@ const standardContainerSchema = <T extends AnyContainerSchema>(schema: T): T => 
 
 /**
  * 标准化文本控件图示
+ * @internal
  * @param schema
  */
 const standardTextControlSchema = <T extends InputControlSchema | TextareaControlSchema>(schema: T): T => {
@@ -202,6 +205,7 @@ export function convertSchemasToArray(schemas: AnyControlSchema[]): FormArray {
   );
 }
 
+/** @internal */
 function arraysEqual(a: unknown[], b: unknown[]): boolean {
   if (a === b) return true;
   if (a === null || b === null) return false;

@@ -4,27 +4,65 @@ import { interfaces } from 'documentation.json';
 import Md from 'markdown-to-jsx';
 import * as React from 'react';
 
-interface Method {
+export interface Interface {
   name: string;
-  optional: boolean;
+  id: string;
+  file: string;
+  deprecated: boolean;
+  deprecationMessage: string;
+  type: string;
+  sourceCode: string;
+  properties: Property[];
+  indexSignatures: any[];
+  kind: number;
   description: string;
-  returnType: string;
-  line: number;
-  args: {
-    name: string;
-    type: string;
-    optional: boolean;
-  }[];
-  jsdoctags: {
-    type: string;
-    name: {
-      escapedText: string;
-    };
-    comment: string;
-  }[];
+  rawdescription: string;
+  methods: Method[];
+  extends: string;
 }
 
-interface Property {
+export interface Method {
+  name: string;
+  args: Arg[];
+  optional: boolean;
+  returnType: string;
+  typeParameters: any[];
+  line: number;
+  deprecated: boolean;
+  deprecationMessage: string;
+  rawdescription: string;
+  description: string;
+  jsdoctags: Jsdoctag[];
+}
+
+export interface Arg {
+  name: string;
+  type: string;
+  deprecated: boolean;
+  deprecationMessage: string;
+  optional: boolean;
+}
+
+export interface Jsdoctag {
+  name: Name;
+  type: string;
+  deprecated: boolean;
+  deprecationMessage: string;
+  tagName: Name;
+  comment: string;
+}
+
+export interface Name {
+  pos: number;
+  end: number;
+  flags: number;
+  modifierFlagsCache: number;
+  transformFlags: number;
+  kind: number;
+  escapedText: string;
+}
+
+export interface Property {
   name: string;
   deprecated: boolean;
   deprecationMessage: string;
@@ -40,7 +78,6 @@ const Required = styled.span(({ theme }) => ({
   cursor: 'help',
 }));
 
-const Title = styled.div({ fontWeight: 'bold' });
 const Name = styled.span({ fontWeight: 'bold' });
 
 function scrollIntoView(id: string) {
@@ -48,14 +85,11 @@ function scrollIntoView(id: string) {
 }
 
 export const Interfaces = () => (
-  interfaces.map(o => (
+  (interfaces as Interface[]).map(o => (
     <React.Fragment key={o.id}>
       <H3 id={o.name}>
         <Spaced col={1}>
-          <Span>
-            {o.deprecated ? <del>{o.name}</del> : o.name}
-          </Span>
-
+          <span>{o.deprecated ? <del>{o.name}</del> : o.name}</span>
           {o.deprecated ? <Badge status='negative'>deprecated</Badge> : <Badge status='positive'>stable</Badge>}
         </Spaced>
       </H3>
@@ -83,9 +117,9 @@ export const Interfaces = () => (
           </thead>
           <tbody>
             {
-              o.methods.map((method: Method) => {
+              o.methods.map(method => {
                 const methodArgs = method.args.map(arg => `${arg.name}${arg.optional ? '?' : ''}: ${arg.type}`).join(', ');
-                const methodSign = `${method.name}${method.optional ? '?' : ''}(${methodArgs}): ${method.returnType}`
+                const methodSign = `${method.name}${method.optional ? '?' : ''}(${methodArgs}): ${method.returnType}`;
 
                 return (
                   <tr key={method.line}>
@@ -98,14 +132,18 @@ export const Interfaces = () => (
                     <td>
                       <UL style={{ margin: 0, paddingLeft: '16px' }}>
                         {
-                          method.jsdoctags.map((tag, i) => (
-                            <LI key={i}>
-                              <Spaced col={1}>
-                                <Code>{tag.name.escapedText}: {tag.type}</Code>
-                                <Md style={{ display: 'inline' }}>{tag.comment}</Md>
-                              </Spaced>
-                            </LI>
-                          ))
+                          method.args.map((arg, i) => {
+                            const description = method.jsdoctags.find(tag => tag.name.escapedText === arg.name)?.comment;
+
+                            return (
+                              <LI key={i}>
+                                <Spaced col={1}>
+                                  <Code>{arg.name}: {arg.type}</Code>
+                                  {description && <Md style={{ display: 'inline' }}>{description}</Md>}
+                                </Spaced>
+                              </LI>
+                            );
+                          })
                         }
                       </UL>
                     </td>
@@ -130,7 +168,7 @@ export const Interfaces = () => (
           </thead>
           <tbody>
             {
-              o.properties.map((prop: Property) => (
+              o.properties.map(prop => (
                 <tr key={prop.line}>
                   <td>
                     <Spaced col={1}>

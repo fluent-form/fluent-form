@@ -52,13 +52,15 @@ export const Interfaces = () => (
     <React.Fragment key={o.id}>
       <H3 id={o.name}>
         <Spaced col={1}>
-          <Span>{o.name}</Span>
+          <Span>
+            {o.deprecated ? <del>{o.name}</del> : o.name}
+          </Span>
 
-          <Badge status='positive'>{o.type}</Badge>
-          {o.deprecated ? <Badge status='negative'>deprecated</Badge> : <Badge status='neutral'>stable</Badge>}
+          {o.deprecated ? <Badge status='negative'>deprecated</Badge> : <Badge status='positive'>stable</Badge>}
         </Spaced>
       </H3>
 
+      {/* 父接口 */}
       {
         o.extends && <>
           <Span>↳ extends </Span>
@@ -66,8 +68,10 @@ export const Interfaces = () => (
         </>
       }
 
+      {/* 接口描述 */}
       {o.description && <Md style={{ marginTop: '10px' }}>{o.description}</Md>}
 
+      {/* 方法表格 */}
       {
         o.methods.length > 0 && <TableWrapper>
           <thead>
@@ -77,41 +81,44 @@ export const Interfaces = () => (
               <th>Description</th>
             </tr>
           </thead>
-
           <tbody>
             {
-              o.methods.map((method: Method) => (
-                <tr key={method.line}>
-                  <td>
-                    <Name>
-                      {method.name}
-                      {method.optional ? '?' : ''}
-                      ({method.args.map(arg => `${arg.name}${arg.optional ? '?' : ''}: ${arg.type}`).join(', ')}): {method.returnType}
-                    </Name>
-                    {o.deprecated && <Badge status='negative'>deprecated</Badge>}
-                  </td>
-                  <td>
-                    <UL style={{ margin: 0, paddingLeft: '16px' }}>
-                      {
-                        method.jsdoctags.map((tag, i) => (
-                          <LI key={i}>
-                            <Spaced col={1}>
-                              <Code>{tag.name.escapedText}: {tag.type}</Code>
-                              <Md style={{ display: 'inline' }}>{tag.comment}</Md>
-                            </Spaced>
-                          </LI>
-                        ))
-                      }
-                    </UL>
-                  </td>
-                  <td><Md>{method.description || '-'}</Md></td>
-                </tr>
-              ))
+              o.methods.map((method: Method) => {
+                const methodArgs = method.args.map(arg => `${arg.name}${arg.optional ? '?' : ''}: ${arg.type}`).join(', ');
+                const methodSign = `${method.name}${method.optional ? '?' : ''}(${methodArgs}): ${method.returnType}`
+
+                return (
+                  <tr key={method.line}>
+                    <td>
+                      <Name>
+                        {o.deprecated ? <del>{methodSign}</del> : methodSign}
+                      </Name>
+                      {o.deprecated && <Badge status='negative'>deprecated</Badge>}
+                    </td>
+                    <td>
+                      <UL style={{ margin: 0, paddingLeft: '16px' }}>
+                        {
+                          method.jsdoctags.map((tag, i) => (
+                            <LI key={i}>
+                              <Spaced col={1}>
+                                <Code>{tag.name.escapedText}: {tag.type}</Code>
+                                <Md style={{ display: 'inline' }}>{tag.comment}</Md>
+                              </Spaced>
+                            </LI>
+                          ))
+                        }
+                      </UL>
+                    </td>
+                    <td><Md>{method.description || '-'}</Md></td>
+                  </tr>
+                );
+              })
             }
           </tbody>
         </TableWrapper>
       }
 
+      {/* 参数表格 */}
       {
         o.properties.length > 0 && <TableWrapper>
           <thead>
@@ -121,7 +128,6 @@ export const Interfaces = () => (
               <th>Description</th>
             </tr>
           </thead>
-
           <tbody>
             {
               o.properties.map((prop: Property) => (
@@ -129,11 +135,11 @@ export const Interfaces = () => (
                   <td>
                     <Spaced col={1}>
                       <Name>
-                        {prop.name}
+                        {prop.deprecated ? <del>{prop.name}</del> : prop.name}
                         {prop.optional || <Required title="Required">*</Required>}
                       </Name>
 
-                      {o.deprecated && <Badge status='negative'>deprecated</Badge>}
+                      {prop.deprecated && <Badge status='negative'>deprecated</Badge>}
                     </Spaced>
                   </td>
                   <td><Code>{prop.type || '?'}</Code></td>

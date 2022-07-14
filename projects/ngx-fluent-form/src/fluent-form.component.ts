@@ -32,6 +32,7 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
     this._schemas = standardSchemas(value);
   }
 
+  /** 模型 */
   @Input() model!: T;
   @Input() layout: NzFormLayoutType = 'vertical';
   @Input() colon: boolean = true;

@@ -6,6 +6,7 @@ import { Builder } from '../utils/builder.utils';
 import { AbstractComponentSchema, AbstractElementSchema, AbstractSchema, SingleKeySchemaName } from './abstract.schema';
 import { ComposableComponentBuilder, ComposableComponentSchema } from './index.schema';
 
+/** @internal */
 interface Icon {
   type: string;
   theme?: ThemeType;

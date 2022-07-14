@@ -14,12 +14,14 @@ export type DoubleKeySchemaName = readonly [string, string];
 
 type Cell = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24;
 
+/** @internal */
 interface Label {
   value: string;
   span?: Cell;
   tooltip?: string | Tooltip;
 }
 
+/** @internal */
 interface Tooltip {
   title: string | TemplateRef<void>;
   icon: string | NzFormTooltipIcon;
@@ -67,6 +69,7 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
   asyncValidator?: AsyncValidatorFn[];
 }
 
+/** @internal */
 interface ControlChangeListenerMap<Val> {
   valueChange?: (value: Val) => void;
   statusChange?: (status: FormControlStatus) => void;

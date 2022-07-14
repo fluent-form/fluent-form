@@ -49,7 +49,7 @@ export interface Name {
 const Name = styled.span({ fontWeight: 'bold' });
 
 /** 分组后的 */
-const builderMap = (miscellaneous.functions as Fn[])
+const fnMap = (miscellaneous.functions as Fn[])
   .filter(fn => fn.file.endsWith('builder.ts'))
   .reduce((acc, cur) => {
     acc[cur.name] ??= [];
@@ -58,8 +58,11 @@ const builderMap = (miscellaneous.functions as Fn[])
   }, {} as { [name: string]: Fn[] });
 
 export const ControlBuilders = () => (
-  Object.keys(builderMap).map(name => {
-    const builder = builderMap[name];
+  Object.keys(fnMap).map(name => {
+    // 函数的重载数组
+    const fns = fnMap[name];
+    // 如果有重载，则需要把最后一个剔除，因为最后一个是函数的最终签名，对用户是不可见的
+    fns.length > 1 && fns.pop();
 
     return (
       <React.Fragment key={name}>
@@ -80,7 +83,7 @@ export const ControlBuilders = () => (
           </thead>
           <tbody>
             {
-              builder.map((fn, i) => {
+              fns.map((fn, i) => {
                 const fnArgs = fn.args.map(arg => `${arg.name}${arg.optional ? '?' : ''}: ${arg.type}`).join(', ');
                 const fnSign = `${name}(${fnArgs}): Builder`;
 

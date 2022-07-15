@@ -1,10 +1,10 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
-import { meta } from '../../';
+import { meta } from '../../../';
 import { story, source } from './';
 import { FluentFormComponent } from 'ngx-fluent-form';
 
 <Meta
-  title="FluentForm/Basic"
+  title="FluentForm/Basic/Nested Form"
   component={meta.component}
   decorators={meta.decorators}
   argTypes={meta.argTypes}
@@ -12,10 +12,10 @@ import { FluentFormComponent } from 'ngx-fluent-form';
 
 # Nested Form Array - 嵌套表单数组
 
-使用 `array` 控件来配置嵌套的表单数组，支持多级嵌套。
+可以使用 `array` 控件来配置嵌套的表单数组（嵌套数组），支持多级嵌套。
 
 <Canvas withToolbar mdxSource={source}>
-  <Story name="Nested Form Array">{story}</Story>
+  <Story name="Nested Array">{story}</Story>
 </Canvas>
 
 <ArgsTable of={FluentFormComponent} />

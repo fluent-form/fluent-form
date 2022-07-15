@@ -16,6 +16,9 @@ export const story = defineStory({
       inputGroup().span(10).schemas(
         input('keyword').subtype('search').placeholder('请输入搜索关键字').span(18),
         button().subtype('primary').content('提交').flex('auto'),
+      ),
+      inputGroup().span(6).before({ template: '@' }).schemas(
+        input('at').placeholder('请输入'),
       )
     ),
     model: {}
@@ -43,6 +46,9 @@ export const source = dedent`
       inputGroup().span(10).schemas(
         input('keyword').subtype('search').placeholder('请输入搜索关键字').span(18),
         button().subtype('primary').content('提交').flex('auto'),
+      ),
+      inputGroup().span(8).before({ template: '@' }).schemas(
+        input('at').placeholder('请输入搜索'),
       )
     );
 

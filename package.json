@@ -10,7 +10,7 @@
     "coverage": "ng test ngx-fluent-form --no-watch --code-coverage",
     "lint": "ng lint",
     "publish": "npm run build:lib && npm publish ./dist/ngx-fluent-form",
-    "docs:json": "compodoc --disablePrivate --disableInternal --disableLifeCycleHooks -p ./tsconfig.json -e json -d .",
+    "docs:json": "compodoc --config=./compodoc.json",
     "storybook": "npm run docs:json && start-storybook -p 6006",
     "build-storybook": "npm run docs:json && build-storybook"
   },

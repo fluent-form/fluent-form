@@ -1,0 +1,8 @@
+{
+  "disablePrivate": true,
+  "disableInternal": true,
+  "disableLifeCycleHooks": true,
+  "tsconfig": "./projects/ngx-fluent-form/tsconfig.lib.prod.json",
+  "exportFormat": "json",
+  "output": "."
+}

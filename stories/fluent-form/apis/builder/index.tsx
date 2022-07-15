@@ -46,6 +46,7 @@ export interface Name {
 }
 
 
+const Title = styled.div({ fontWeight: 'bold' });
 const Name = styled.span({ fontWeight: 'bold' });
 
 /** 分组后的 */
@@ -60,9 +61,11 @@ const fnMap = (miscellaneous.functions as Fn[])
 export const ControlBuilders = () => (
   Object.keys(fnMap).map(name => {
     // 函数的重载数组
-    const fns = fnMap[name];
+    let fns = fnMap[name];
     // 如果有重载，则需要把最后一个剔除，因为最后一个是函数的最终签名，对用户是不可见的
-    fns.length > 1 && fns.pop();
+    if (fns.length > 1) {
+      fns = fns.slice(0, fns.length - 1);
+    }
 
     return (
       <React.Fragment key={name}>
@@ -78,21 +81,21 @@ export const ControlBuilders = () => (
             <tr>
               <th>Funtion</th>
               <th>Parameters</th>
-              <th>Description</th>
             </tr>
           </thead>
           <tbody>
             {
               fns.map((fn, i) => {
                 const fnArgs = fn.args.map(arg => `${arg.name}${arg.optional ? '?' : ''}: ${arg.type}`).join(', ');
-                const fnSign = `${name}(${fnArgs}): Builder`;
+                const fnSign = `${name}(${fnArgs}): ${fn.returnType ?? 'Builder<?>'}`;
 
                 return (
                   <tr key={i}>
                     <td>
-                      <Name>
+                      <Title>
                         {fn.deprecated ? <del>{fnSign}</del> : fnSign}
-                      </Name>
+                      </Title>
+                      {fn.description && <Md>{fn.description}</Md>}
                     </td>
                     <td>
                       <UL style={{ margin: 0, paddingLeft: '16px' }}>
@@ -112,7 +115,6 @@ export const ControlBuilders = () => (
                         }
                       </UL>
                     </td>
-                    <td><Md>{fn.description || '-'}</Md></td>
                   </tr>
                 );
               })

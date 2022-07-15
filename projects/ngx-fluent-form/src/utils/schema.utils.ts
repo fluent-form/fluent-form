@@ -1,8 +1,8 @@
 import { ValidatorFn, Validators } from '@angular/forms';
 import { COMPONENT_CONTAINER_SCHEMA_TYPES, COMPONENT_SCHEMA_TYPES, CONTROL_CONTAINER_SCHEMA_TYPES, TEXT_CONTROL_SCHEMA_TYPES } from '../constants';
 import { InputControlSchema, TextareaControlSchema } from '../schemas';
-import { AnySchemaName, DoubleKeySchemaName, SingleKeySchemaName } from '../schemas/abstract.schema';
-import { AnyContainerSchema, AnyControlSchema, AnySchema, ComponentContainerSchema, ComponentSchema, ControlContainerSchema, ControlSchema } from '../schemas/index.schema';
+import { AnySchemaName, SingleKeySchemaName } from '../schemas/abstract.schema';
+import { AnyContainerSchema, AnyControlSchema, AnySchema, ComponentContainerSchema, ComponentSchema, ControlContainerSchema, ControlSchema, DoubleKeyControlSchema } from '../schemas/index.schema';
 import { Builder, isBuilder } from './builder.utils';
 
 /**
@@ -38,11 +38,11 @@ export const isComponentSchema = (schema: AnySchema): schema is ComponentSchema 
 );
 
 /**
- * 是否为双字段
- * @param name
+ * 是否为双字段图示
+ * @param schema
  */
-export const isDoubleKeySchemaName = (name: AnySchemaName): name is DoubleKeySchemaName => (
-  Array.isArray(name)
+export const isDoubleKeySchema = (schema: AnySchema): schema is DoubleKeyControlSchema => (
+  Array.isArray(schema.name)
 );
 
 /**

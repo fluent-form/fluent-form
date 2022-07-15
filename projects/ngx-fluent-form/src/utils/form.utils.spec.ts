@@ -1,5 +1,6 @@
-import { assignFormToModel, assignModelToForm, createFormGroup, standardSchemas } from '.';
+import { createFormGroup, standardSchemas } from '.';
 import { array, button, buttonGroup, checkboxGroup, date, group, input, inputGroup, number, range, slider, time } from '../builders';
+import { formUtils, modelUtils } from './form.utils';
 
 describe('form.utils', () => {
   describe('model to form', () => {
@@ -7,8 +8,7 @@ describe('form.utils', () => {
       const model = { o: 1 };
       const schemas = standardSchemas([number('o')]);
       const form = createFormGroup(schemas);
-
-      assignModelToForm(model, form, schemas);
+      modelUtils(model, schemas).assign(form);
 
       expect(form.getRawValue()).toEqual(model);
     });
@@ -23,7 +23,7 @@ describe('form.utils', () => {
       ]);
       const form = createFormGroup(schemas);
 
-      assignModelToForm(model, form, schemas);
+      modelUtils(model, schemas).assign(form);
 
       expect(form.getRawValue()).toEqual(model);
     });
@@ -35,7 +35,7 @@ describe('form.utils', () => {
       ]);
       const form = createFormGroup(schemas);
 
-      assignModelToForm(model, form, schemas);
+      modelUtils(model, schemas).assign(form);
 
       expect(form.getRawValue()).toEqual(model);
     });
@@ -48,8 +48,7 @@ describe('form.utils', () => {
           )
         ]);
         const form = createFormGroup(schemas);
-
-        assignModelToForm({}, form, schemas);
+        modelUtils({}, schemas).assign(form);
 
         expect(form.getRawValue()).toEqual({ detail: { o: null } });
       });
@@ -63,7 +62,7 @@ describe('form.utils', () => {
         ]);
         const form = createFormGroup(schemas);
 
-        assignModelToForm(model, form, schemas);
+        modelUtils(model, schemas).assign(form);
 
         expect(form.getRawValue()).toEqual(model);
       });
@@ -78,7 +77,7 @@ describe('form.utils', () => {
         ]);
         const form = createFormGroup(schemas);
 
-        assignModelToForm({}, form, schemas);
+        modelUtils({}, schemas).assign(form);
 
         expect(form.getRawValue()).toEqual({ details: [null] });
       });
@@ -92,7 +91,7 @@ describe('form.utils', () => {
         ]);
         const form = createFormGroup(schemas);
 
-        assignModelToForm(model, form, schemas);
+        modelUtils(model, schemas).assign(form);
 
         expect(form.getRawValue()).toEqual(model);
       });
@@ -108,7 +107,7 @@ describe('form.utils', () => {
       ]);
       const form = createFormGroup(schemas);
 
-      assignModelToForm({}, form, schemas);
+      modelUtils({}, schemas).assign(form);
 
       expect(form.getRawValue()).toEqual({
         details: [
@@ -123,7 +122,7 @@ describe('form.utils', () => {
       const schemas = standardSchemas([slider(fields)]);
       const form = createFormGroup(schemas);
 
-      assignModelToForm(model, form, schemas);
+      modelUtils(model, schemas).assign(form);
 
       expect(form.getRawValue()).toEqual({
         [fields.toString()]: [0, 1]
@@ -136,7 +135,7 @@ describe('form.utils', () => {
       const schemas = standardSchemas([date('date')]);
       const form = createFormGroup(schemas);
 
-      assignModelToForm(model, form, schemas);
+      modelUtils(model, schemas).assign(form);
 
       expect(form.getRawValue()).toEqual({ date: d });
     });
@@ -147,7 +146,7 @@ describe('form.utils', () => {
       const schemas = standardSchemas([time('time')]);
       const form = createFormGroup(schemas);
 
-      assignModelToForm(model, form, schemas);
+      modelUtils(model, schemas).assign(form);
 
       expect(form.getRawValue()).toEqual({ time: d });
     });
@@ -159,7 +158,7 @@ describe('form.utils', () => {
       const schemas = standardSchemas([range('range')]);
       const form = createFormGroup(schemas);
 
-      assignModelToForm(model, form, schemas);
+      modelUtils(model, schemas).assign(form);
 
       expect(form.getRawValue()).toEqual({ range: [begin, end] });
     });
@@ -172,7 +171,7 @@ describe('form.utils', () => {
       const schemas = standardSchemas([range(fields)]);
       const form = createFormGroup(schemas);
 
-      assignModelToForm(model, form, schemas);
+      modelUtils(model, schemas).assign(form);
 
       expect(form.getRawValue()).toEqual({ [fields.toString()]: [begin, end] });
     });
@@ -187,7 +186,7 @@ describe('form.utils', () => {
       ]);
       const form = createFormGroup(schemas);
 
-      assignModelToForm(model, form, schemas);
+      modelUtils(model, schemas).assign(form);
 
       expect(form.getRawValue()).toEqual({
         active: [
@@ -207,7 +206,7 @@ describe('form.utils', () => {
       ]);
       const form = createFormGroup(schemas);
 
-      assignModelToForm(model, form, schemas);
+      modelUtils(model, schemas).assign(form);
 
       expect(form.getRawValue()).toEqual({
         date: new Date(model.date)
@@ -219,7 +218,7 @@ describe('form.utils', () => {
     it('应该能正确处理一级对象', () => {
       const schemas = standardSchemas([number('o').value(1)]);
       const form = createFormGroup(schemas);
-      const model = assignFormToModel(form, {}, schemas);
+      const model = formUtils(form, schemas).assign({});
 
       expect(model).toEqual({ o: 1 });
     });
@@ -231,7 +230,7 @@ describe('form.utils', () => {
         )
       ]);
       const form = createFormGroup(schemas);
-      const model = assignFormToModel(form, {}, schemas);
+      const model = formUtils(form, schemas).assign({});
 
       expect(model).toEqual({ o: 1 });
     });
@@ -241,7 +240,7 @@ describe('form.utils', () => {
         buttonGroup().schemas(button())
       ]);
       const form = createFormGroup(schemas);
-      const model = assignFormToModel(form, {}, schemas);
+      const model = formUtils(form, schemas).assign({});
 
       expect(model).toEqual({});
     });
@@ -253,7 +252,7 @@ describe('form.utils', () => {
         )
       ]);
       const form = createFormGroup(schemas);
-      const model = assignFormToModel(form, {}, schemas);
+      const model = formUtils(form, schemas).assign({});
 
       expect(model).toEqual({ detail: { o: 1 } });
     });
@@ -265,7 +264,7 @@ describe('form.utils', () => {
         )
       ]);
       const form = createFormGroup(schemas);
-      const model = assignFormToModel(form, {}, schemas);
+      const model = formUtils(form, schemas).assign({});
 
       expect(model).toEqual({ details: [1] });
     });
@@ -279,7 +278,7 @@ describe('form.utils', () => {
         )
       ]);
       const form = createFormGroup(schemas);
-      const model = assignFormToModel(form, {}, schemas);
+      const model = formUtils(form, schemas).assign({});
 
       expect(model).toEqual({ details: [[1]] });
     });
@@ -289,7 +288,7 @@ describe('form.utils', () => {
         slider(['begin', 'end']).value([0, 1])
       ]);
       const form = createFormGroup(schemas);
-      const model = assignFormToModel(form, {}, schemas);
+      const model = formUtils(form, schemas).assign({});
 
       expect(model).toEqual({ begin: 0, end: 1 });
     });
@@ -300,7 +299,7 @@ describe('form.utils', () => {
         date('date').value(d)
       ]);
       const form = createFormGroup(schemas);
-      const model = assignFormToModel(form, {}, schemas);
+      const model = formUtils(form, schemas).assign({});
 
       expect(model).toEqual({ date: d.getTime() });
     });
@@ -311,7 +310,7 @@ describe('form.utils', () => {
         time('time').value(d)
       ]);
       const form = createFormGroup(schemas);
-      const model = assignFormToModel(form, {}, schemas);
+      const model = formUtils(form, schemas).assign({});
 
       expect(model).toEqual({ time: d.getTime() });
     });
@@ -323,7 +322,7 @@ describe('form.utils', () => {
         range('range').value([begin, end])
       ]);
       const form = createFormGroup(schemas);
-      const model = assignFormToModel(form, {}, schemas);
+      const model = formUtils(form, schemas).assign({});
 
       expect(model).toEqual({ range: [begin.getTime(), end.getTime()] });
     });
@@ -335,7 +334,7 @@ describe('form.utils', () => {
         range(['begin', 'end']).value([begin, end])
       ]);
       const form = createFormGroup(schemas);
-      const model = assignFormToModel(form, {}, schemas);
+      const model = formUtils(form, schemas).assign({});
 
       expect(model).toEqual({ begin: begin.getTime(), end: end.getTime() });
     });
@@ -351,7 +350,7 @@ describe('form.utils', () => {
         ])
       ]);
       const form = createFormGroup(schemas);
-      const model = assignFormToModel(form, {}, schemas);
+      const model = formUtils(form, schemas).assign({});
 
       expect(model).toEqual({ active: [1] });
     });
@@ -365,7 +364,7 @@ describe('form.utils', () => {
         })
       ]);
       const form = createFormGroup(schemas);
-      const model = assignFormToModel(form, {}, schemas);
+      const model = formUtils(form, schemas).assign({});
 
       expect(model).toEqual({ date: dateStr });
     });

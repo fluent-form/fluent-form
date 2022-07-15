@@ -4,7 +4,7 @@ import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { Subject, takeUntil } from 'rxjs';
 import { AnySchema } from '../../schemas';
-import { assignFormToModel, assignModelToForm, createFormGroup, standardSchemas } from '../../utils';
+import { createFormGroup, formUtils, modelUtils, standardSchemas } from '../../utils';
 
 @Component({
   selector: 'fluent-form',
@@ -50,20 +50,21 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
       }
 
       this.form = createFormGroup(this.schemas);
+      const utils = formUtils(this.form, this.schemas);
 
       // 先把模型赋值到表单（使用模型初始化表单）
-      assignModelToForm(this.model, this.form, this.schemas);
+      modelUtils(this.model as Record<string, unknown>, this.schemas).assign(this.form);
       // 此时表单已就绪，把表单赋值到模型
-      assignFormToModel(this.form, this.model, this.schemas);
+      utils.assign(this.model);
 
       this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-        assignFormToModel(this.form, this.model, this.schemas);
+        utils.assign(this.model);
       });
     }
 
     // 忽略模型的首次变更（首次的初始化已在上面处理了）
     if (modelChange && !modelChange.firstChange) {
-      assignModelToForm(this.model, this.form, this.schemas);
+      modelUtils(this.model as Record<string, unknown>, this.schemas).assign(this.form);
     }
   }
 

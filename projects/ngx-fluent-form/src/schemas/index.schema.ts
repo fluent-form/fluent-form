@@ -49,7 +49,7 @@ export type FormSchema<N extends SingleKeySchemaName = SingleKeySchemaName> = Fo
 export type FormBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = Builder<FormSchema<N>, FormSchema<N>, {}>;
 
 /** 真实控件图示 */
-export type ControlSchema = SingleKeyControlSchema | DoubleKeyControlSchema;
+export type ControlSchema = SingleKeyControlSchema | DoubleKeyControlSchema | AnyKeyControlSchema;
 /** 真实控件构建器 */
 export type ControlBuilder = Builder<ControlSchema, ControlSchema, {}>;
 
@@ -70,7 +70,8 @@ export type ComposableComponentSchema =
   NumberInputControlSchema |
   DatePickerControlSchema |
   TimePickerControlSchema |
-  RangePickerControlSchema |
+  RangePickerControlSchema<SingleKeySchemaName> |
+  RangePickerControlSchema<DoubleKeySchemaName> |
   SelectControlSchema |
   CascaderControlSchema |
   ButtonComponentSchema;
@@ -97,8 +98,15 @@ export type SingleKeyControlSchema<N extends SingleKeySchemaName = SingleKeySche
 export type SingleKeyControlBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = Builder<SingleKeyControlSchema<N>, SingleKeyControlSchema<N>, {}>;
 
 /** 双字段的真实控件图示 */
-export type DoubleKeyControlSchema<N extends AnySchemaName = AnySchemaName> =
+export type DoubleKeyControlSchema<N extends DoubleKeySchemaName = DoubleKeySchemaName> =
   RangePickerControlSchema<N> |
   SliderControlSchema<N>;
 /** 双字段的真实控件构建器 */
 export type DoubleKeyControlBuilder<N extends DoubleKeySchemaName = DoubleKeySchemaName> = Builder<DoubleKeyControlSchema<N>, DoubleKeyControlSchema<N>, {}>;
+
+/** 任意键的真实控件图示 */
+export type AnyKeyControlSchema<N extends AnySchemaName = AnySchemaName> =
+  RangePickerControlSchema<N> |
+  SliderControlSchema<N>;
+/** 任意键的真实控件构建器 */
+export type AnyKeyControlBuilder<N extends AnySchemaName = AnySchemaName> = Builder<AnyKeyControlSchema<N>, AnyKeyControlSchema<N>, {}>;

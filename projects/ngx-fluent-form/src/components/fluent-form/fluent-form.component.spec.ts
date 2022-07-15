@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { form, input } from './builders';
+import { form, input } from '../../builders';
+import { FluentFormModule } from '../../fluent-form.module';
+import { AnySchema } from '../../schemas/index.schema';
 import { FluentFormComponent } from './fluent-form.component';
-import { FluentFormModule } from './fluent-form.module';
-import { AnySchema } from './schemas/index.schema';
 
 @Component({
   template: `<fluent-form [schemas]="schemas" [model]="model"></fluent-form>`,

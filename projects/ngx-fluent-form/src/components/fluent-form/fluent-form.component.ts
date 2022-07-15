@@ -3,9 +3,9 @@ import { FormGroup } from '@angular/forms';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { Subject, takeUntil } from 'rxjs';
-import { AnySchema } from './schemas';
-import { assignFormToModel, assignModelToForm } from './utils/form.utils';
-import { convertSchemasToGroup, standardSchemas } from './utils/schema.utils';
+import { AnySchema } from '../../schemas';
+import { assignFormToModel, assignModelToForm } from '../../utils/form.utils';
+import { convertSchemasToGroup, standardSchemas } from '../../utils/schema.utils';
 
 @Component({
   selector: 'fluent-form',

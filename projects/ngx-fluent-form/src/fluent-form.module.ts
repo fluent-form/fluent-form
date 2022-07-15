@@ -18,9 +18,9 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { FluentFormComponent } from './components/fluent-form/fluent-form.component';
 import { EventBinderDirective } from './directives/event-binder.directive';
 import { PropertyBinderDirective } from './directives/property-binder.directive';
-import { FluentFormComponent } from './fluent-form.component';
 
 @NgModule({
   declarations: [

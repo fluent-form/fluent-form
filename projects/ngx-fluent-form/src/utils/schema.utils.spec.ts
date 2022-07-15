@@ -1,7 +1,7 @@
 import { Validators } from '@angular/forms';
+import { findSchema, standardSchema, standardSchemas } from '.';
 import { array, group, input, inputGroup, slider } from '../builders';
 import { AnySchema } from '../schemas/index.schema';
-import { findSchema, standardSchema, standardSchemas } from './schema.utils';
 
 describe('schema.utils', () => {
   describe('应该能正确标准化图示', () => {

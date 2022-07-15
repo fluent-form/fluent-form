@@ -1,6 +1,6 @@
 import { SafeAny } from '@ngify/types';
 import { ButtonComponentSchema } from '../schemas';
-import { standardSchema } from '../utils/schema.utils';
+import { standardSchema } from '../utils';
 import { button, buttonGroup, inputGroup } from './component.builder';
 
 describe('component.builder', () => {

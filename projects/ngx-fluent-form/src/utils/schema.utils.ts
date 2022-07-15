@@ -1,8 +1,8 @@
-import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { ValidatorFn, Validators } from '@angular/forms';
 import { COMPONENT_CONTAINER_SCHEMA_TYPES, COMPONENT_SCHEMA_TYPES, CONTROL_CONTAINER_SCHEMA_TYPES, TEXT_CONTROL_SCHEMA_TYPES } from '../constants';
 import { InputControlSchema, TextareaControlSchema } from '../schemas';
 import { AnySchemaName, DoubleKeySchemaName, SingleKeySchemaName } from '../schemas/abstract.schema';
-import { AnyContainerSchema, AnyControlSchema, AnySchema, ComponentContainerSchema, ComponentSchema, ComposableComponentSchema, ControlContainerSchema, ControlSchema } from '../schemas/index.schema';
+import { AnyContainerSchema, AnyControlSchema, AnySchema, ComponentContainerSchema, ComponentSchema, ControlContainerSchema, ControlSchema } from '../schemas/index.schema';
 import { Builder, isBuilder } from './builder.utils';
 
 /**
@@ -139,71 +139,6 @@ export const standardSchema = <T extends AnySchema>(schema: T | Builder<T, T, {}
 export const standardSchemas = (schemas: (AnySchema | Builder<AnySchema, AnySchema, {}>)[]) => (
   schemas.map(schema => standardSchema(schema))
 );
-
-/**
- * 将图示转换为控件
- * @param schema
- */
-export function convertSchemaToControl(schema: ControlSchema): FormControl {
-  return new FormControl(
-    { value: schema.value ?? null, disabled: schema.disabled },
-    schema.validator,
-    schema.asyncValidator
-  );
-}
-
-/**
- * 将图示组转换为表单组
- * @param schemas 标准化后的图示
- */
-export function convertSchemasToGroup(schemas: AnySchema[]): FormGroup {
-  return new FormGroup(
-    // 过滤掉组件图示和组件容器图示
-    schemas.filter(o => !isComponentSchema(o) && !isComponentContainerSchema(o)).reduce((controls, schema) => {
-      switch (schema.type) {
-        case 'group':
-          controls[schema.name!.toString()] = convertSchemasToGroup(schema.schemas as AnySchema[]);
-          break;
-
-        case 'array':
-          controls[schema.name!.toString()] = convertSchemasToArray(schema.schemas as AnyControlSchema[]);
-          break;
-
-        case 'input-group':
-          (schema.schemas as ComposableComponentSchema[]).filter(o => !isComponentSchema(o)).forEach(subschema => {
-            controls[subschema.name!.toString()] = convertSchemaToControl(subschema as ControlSchema);
-          });
-          break;
-
-        default:
-          controls[schema.name!.toString()] = convertSchemaToControl(schema as ControlSchema);
-      }
-
-      return controls;
-    }, {} as Record<string, AbstractControl>)
-  );
-}
-
-/**
- * 将图示组转换为表单数组
- * @param schemas 标准化后的图示
- */
-export function convertSchemasToArray(schemas: AnyControlSchema[]): FormArray {
-  return new FormArray(
-    schemas.map(schema => {
-      switch (schema.type) {
-        case 'group':
-          return convertSchemasToGroup(schema.schemas as AnySchema[]);
-
-        case 'array':
-          return convertSchemasToArray(schema.schemas as AnyControlSchema[]);
-
-        default:
-          return convertSchemaToControl(schema);
-      }
-    })
-  );
-}
 
 /** @internal */
 function arraysEqual(a: unknown[], b: unknown[]): boolean {

@@ -4,8 +4,7 @@ import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { Subject, takeUntil } from 'rxjs';
 import { AnySchema } from '../../schemas';
-import { assignFormToModel, assignModelToForm } from '../../utils/form.utils';
-import { convertSchemasToGroup, standardSchemas } from '../../utils/schema.utils';
+import { assignFormToModel, assignModelToForm, createFormGroup, standardSchemas } from '../../utils';
 
 @Component({
   selector: 'fluent-form',
@@ -50,7 +49,7 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
         this.destroy$.next();
       }
 
-      this.form = convertSchemasToGroup(this.schemas);
+      this.form = createFormGroup(this.schemas);
 
       // 先把模型赋值到表单（使用模型初始化表单）
       assignModelToForm(this.model, this.form, this.schemas);

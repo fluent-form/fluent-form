@@ -1,7 +1,72 @@
-import { FormArray, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
 import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
-import { AnySchema } from '../schemas/index.schema';
-import { isComponentContainerSchema, isComponentSchema, isDoubleKeySchemaName } from './schema.utils';
+import { isComponentContainerSchema, isComponentSchema, isDoubleKeySchemaName } from '.';
+import { AnyControlSchema, AnySchema, ComposableComponentSchema, ControlSchema } from '../schemas/index.schema';
+
+/**
+ * 将图示转换为控件
+ * @param schema
+ */
+export function createFormControl(schema: ControlSchema): FormControl {
+  return new FormControl(
+    { value: schema.value ?? null, disabled: schema.disabled },
+    schema.validator,
+    schema.asyncValidator
+  );
+}
+
+/**
+ * 将图示组转换为表单组
+ * @param schemas 标准化后的图示
+ */
+export function createFormGroup(schemas: AnySchema[]): FormGroup {
+  return new FormGroup(
+    // 过滤掉组件图示和组件容器图示
+    schemas.filter(o => !isComponentSchema(o) && !isComponentContainerSchema(o)).reduce((controls, schema) => {
+      switch (schema.type) {
+        case 'group':
+          controls[schema.name!.toString()] = createFormGroup(schema.schemas as AnySchema[]);
+          break;
+
+        case 'array':
+          controls[schema.name!.toString()] = createFormArray(schema.schemas as AnyControlSchema[]);
+          break;
+
+        case 'input-group':
+          (schema.schemas as ComposableComponentSchema[]).filter(o => !isComponentSchema(o)).forEach(subschema => {
+            controls[subschema.name!.toString()] = createFormControl(subschema as ControlSchema);
+          });
+          break;
+
+        default:
+          controls[schema.name!.toString()] = createFormControl(schema as ControlSchema);
+      }
+
+      return controls;
+    }, {} as Record<string, AbstractControl>)
+  );
+}
+
+/**
+ * 将图示组转换为表单数组
+ * @param schemas 标准化后的图示
+ */
+export function createFormArray(schemas: AnyControlSchema[]): FormArray {
+  return new FormArray(
+    schemas.map(schema => {
+      switch (schema.type) {
+        case 'group':
+          return createFormGroup(schema.schemas as AnySchema[]);
+
+        case 'array':
+          return createFormArray(schema.schemas as AnyControlSchema[]);
+
+        default:
+          return createFormControl(schema);
+      }
+    })
+  );
+}
 
 type Obj = Record<string, unknown>;
 type Arr = unknown[];

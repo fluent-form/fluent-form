@@ -1,6 +1,6 @@
 import { SafeAny } from '@ngify/types';
 import { CheckboxControlSchema, DatePickerControlSchema, InputControlSchema, NumberInputControlSchema, RangePickerControlSchema, RateControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from '../schemas';
-import { standardSchema } from '../utils/schema.utils';
+import { standardSchema } from '../utils';
 import { array, cascader, checkbox, checkboxGroup, date, datetime, group, input, number, radio, range, rate, select, slider, switcher, textarea, time } from './control.builder';
 
 describe('control.builder', () => {

@@ -1,8 +1,8 @@
 import { AnySchemaName, SingleKeySchemaName } from '../schemas/abstract.schema';
 import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from '../schemas/control.schema';
 import { AnyBuilder, AnySchema } from '../schemas/index.schema';
+import { standardSchemas } from '../utils';
 import { builder, UnstableBuilder } from '../utils/builder.utils';
-import { standardSchemas } from '../utils/schema.utils';
 
 export const form = (...schemas: (AnySchema | AnyBuilder)[]) => standardSchemas(schemas);
 

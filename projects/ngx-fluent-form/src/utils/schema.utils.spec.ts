@@ -1,7 +1,9 @@
-import { Validators } from '@angular/forms';
-import { findSchema, standardSchema, standardSchemas } from '.';
+import { AbstractControl, AsyncValidatorFn, Validators } from '@angular/forms';
+import { of } from 'rxjs';
+import { schemasUtils, standardSchema, standardSchemas } from '.';
 import { array, group, input, inputGroup, slider } from '../builders';
 import { AnySchema } from '../schemas/index.schema';
+import { controlSchemaUtils } from './schema.utils';
 
 describe('schema.utils', () => {
   describe('应该能正确标准化图示', () => {
@@ -109,11 +111,38 @@ describe('schema.utils', () => {
     });
   });
 
+  describe('使用 ControlUtils 添加验证器', () => {
+    it('同步验证器', () => {
+      const schema = standardSchema(input('name'));
+      controlSchemaUtils(schema).addValidator(Validators.required);
+
+      expect(schema.validator?.length).toEqual(1);
+
+      controlSchemaUtils(schema).addValidator([Validators.email]);
+
+      expect(schema.validator?.length).toEqual(2);
+    });
+
+    it('异步验证器', () => {
+      const validator1: AsyncValidatorFn = (ctrl: AbstractControl) => of(null);
+      const validator2: AsyncValidatorFn = (ctrl: AbstractControl) => Promise.resolve(null);
+      const schema = standardSchema(input('name'));
+      controlSchemaUtils(schema).addAsyncValidator(validator1);
+
+      expect(schema.asyncValidator?.length).toEqual(1);
+
+      controlSchemaUtils(schema).addAsyncValidator([validator2]);
+
+      expect(schema.asyncValidator?.length).toEqual(2);
+    });
+  });
+
   describe('应该能在图示列表中找到目标图示', () => {
     it('普通图示', () => {
       const target = standardSchema(input('name'));
       const schemas = [target];
-      const schema = findSchema(schemas, 'name');
+      schemasUtils(schemas).find('name');
+      const schema = schemasUtils(schemas).find('name');
 
       expect(schema).toEqual(target);
     });
@@ -123,7 +152,7 @@ describe('schema.utils', () => {
       const schemas = standardSchemas([
         group('group').schemas(target)
       ]);
-      const schema = findSchema(schemas, ['group', 'name']);
+      const schema = schemasUtils(schemas).find(['group', 'name']);
 
       expect(schema).toEqual(target);
     });
@@ -135,7 +164,7 @@ describe('schema.utils', () => {
           group('group').schemas(target)
         )
       ]);
-      const schema = findSchema(schemas, ['group', 'group', 'name']);
+      const schema = schemasUtils(schemas).find(['group', 'group', 'name']);
 
       expect(schema).toEqual(target);
     });
@@ -145,7 +174,7 @@ describe('schema.utils', () => {
       const schemas = standardSchemas([
         array('array').schemas(target)
       ]);
-      const schema = findSchema(schemas, ['array', 0]);
+      const schema = schemasUtils(schemas).find(['array', 0]);
 
       expect(schema).toEqual(target);
     });
@@ -157,7 +186,7 @@ describe('schema.utils', () => {
           array().schemas(target)
         )
       ]);
-      const schema = findSchema(schemas, ['array', 0, 0]);
+      const schema = schemasUtils(schemas).find(['array', 0, 0]);
 
       expect(schema).toEqual(target);
     });
@@ -169,7 +198,8 @@ describe('schema.utils', () => {
           array('array').schemas(target)
         )
       ]);
-      const schema = findSchema(schemas, ['group', 'array', 0]);
+      const schema = schemasUtils(schemas).find(['group', 'array', 0]);
+
 
       expect(schema).toEqual(target);
     });
@@ -181,7 +211,7 @@ describe('schema.utils', () => {
           group(0).schemas(target)
         )
       ]);
-      const schema = findSchema(schemas, ['array', 0, 'name']);
+      const schema = schemasUtils(schemas).find(['array', 0, 'name']);
 
       expect(schema).toEqual(target);
     });
@@ -189,21 +219,21 @@ describe('schema.utils', () => {
     it('双字段图示', () => {
       const target = standardSchema(slider(['begin', 'end']));
       const schemas = [target];
-      const schema = findSchema(schemas, [['begin', 'end']]);
+      const schema = schemasUtils(schemas).find([['begin', 'end']]);
 
       expect(schema).toEqual(target);
     });
 
     it('不存在的图示', () => {
       const schemas = standardSchemas([input('name')]);
-      const schema = findSchema(schemas, 'n');
+      const schema = schemasUtils(schemas).find('n');
 
       expect(schema).toBe(undefined);
     });
 
     it('不存在的双字段图示', () => {
       const schemas = standardSchemas([slider(['begin', 'end'])]);
-      const schema = findSchema(schemas, [['begin', 'e']]);
+      const schema = schemasUtils(schemas).find([['begin', 'e']]);
 
       expect(schema).toBe(undefined);
     });

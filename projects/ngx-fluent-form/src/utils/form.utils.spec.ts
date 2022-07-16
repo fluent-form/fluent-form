@@ -129,6 +129,19 @@ describe('form.utils', () => {
       });
     });
 
+    it('应该能正确处理双字段模式（空模型）', () => {
+      const model = {};
+      const fields = ['begin', 'end'] as const;
+      const schemas = standardSchemas([range(fields)]);
+      const form = createFormGroup(schemas);
+
+      modelUtils(model, schemas).assign(form);
+
+      expect(form.getRawValue()).toEqual({
+        [fields.toString()]: null
+      });
+    });
+
     it('应该能正确处理日期控件', () => {
       const d = new Date();
       const model = { date: d.getTime() };
@@ -291,6 +304,16 @@ describe('form.utils', () => {
       const model = formUtils(form, schemas).assign({});
 
       expect(model).toEqual({ begin: 0, end: 1 });
+    });
+
+    it('应该能正确处理双字段模式（空模型）', () => {
+      const schemas = standardSchemas([
+        range(['begin', 'end'])
+      ]);
+      const form = createFormGroup(schemas);
+      const model = formUtils(form, schemas).assign({});
+
+      expect(model).toEqual({ begin: null, end: null });
     });
 
     it('应该能正确处理日期控件', () => {

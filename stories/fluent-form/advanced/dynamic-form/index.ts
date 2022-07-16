@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { array, button, buttonGroup, findSchema, form, FormArraySchema, input } from 'ngx-fluent-form';
+import { array, button, buttonGroup, form, FormArraySchema, input, schemasUtils } from 'ngx-fluent-form';
 import { AbstractFluentFormWrapperComponent, defineMeta, defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
@@ -48,7 +48,7 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
   }
 
   add() {
-    const array = findSchema<FormArraySchema>(this.schemas, 'passengers')!;
+    const array = schemasUtils(this.schemas).find<FormArraySchema>('passengers')!;
     array.schemas.push(
       input().label('乘客').span(12).build()
     );
@@ -57,7 +57,7 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
   }
 
   remove() {
-    const array = findSchema<FormArraySchema>(this.schemas, 'passengers')!;
+    const array = schemasUtils(this.schemas).find<FormArraySchema>('passengers')!;
     array.schemas.pop();
     array.schemas = [...array.schemas];
     this.schemas = [...this.schemas];
@@ -72,7 +72,7 @@ export const story = defineStory();
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { array, button, buttonGroup, findSchema, form, FormArraySchema, input } from 'ngx-fluent-form';
+  import { array, button, buttonGroup, form, FormArraySchema, input, schemasUtils } from 'ngx-fluent-form';
 
   @Component({
     selector: 'example-component',
@@ -98,7 +98,7 @@ export const source = dedent`
     model = {};
 
     add() {
-      const array = findSchema<FormArraySchema>(this.schemas, 'passengers')!;
+      const array = schemasUtils(this.schemas).find<FormArraySchema>('passengers')!;
       array.schemas.push(
         input().label('乘客').span(12).build()
       );
@@ -107,7 +107,7 @@ export const source = dedent`
     }
 
     remove() {
-      const array = findSchema<FormArraySchema>(this.schemas, 'passengers')!;
+      const array = schemasUtils(this.schemas).find<FormArraySchema>('passengers')!;
       array.schemas.pop();
       array.schemas = [...array.schemas];
       this.schemas = [...this.schemas];

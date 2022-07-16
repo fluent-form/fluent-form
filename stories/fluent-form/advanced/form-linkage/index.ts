@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { findSchema, form, input, radio, select } from 'ngx-fluent-form';
+import { form, input, radio, schemasUtils, select } from 'ngx-fluent-form';
 import { AbstractFluentFormWrapperComponent, defineMeta, defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
@@ -49,7 +49,7 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
         { label: '隐藏', value: true },
       ]).value(false).listener({
         valueChange: value => {
-          findSchema(this.schemas, 'text')!.hidden = value;
+          schemasUtils(this.schemas).find('text')!.hidden = value;
           this.schemas = [...this.schemas];
         }
       }),
@@ -68,7 +68,7 @@ export const story = defineStory();
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { findSchema, form, input, radio, select } from 'ngx-fluent-form';
+  import { form, input, radio, schemasUtils, select } from 'ngx-fluent-form';
 
   const SELECT_OPTIONS = [
     { label: 'Jack', value: 'jack' },
@@ -93,7 +93,7 @@ export const source = dedent`
         { label: '隐藏', value: true },
       ]).value(false).listener({
         valueChange: value => {
-          findSchema(this.schemas, 'text')!.hidden = value;
+          schemasUtils(this.schemas).find('text')!.hidden = value;
           this.schemas = [...this.schemas];
         }
       }),

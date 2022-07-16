@@ -43,6 +43,16 @@ describe('FluentFormComponent', () => {
     component.model = { text: 'test' };
     fixture.detectChanges();
 
-    expect(component.target.form.getRawValue()).toEqual({ text: 'test' });
+    expect(component.target.form.getRawValue()).toEqual(component.model);
+  });
+
+  it('表单应该能正确赋值模型', () => {
+    component.schemas = form(
+      input('text').span(1).value('test')
+    );
+    component.model = {};
+    fixture.detectChanges();
+
+    expect(component.model).toEqual({ text: 'test' });
   });
 });

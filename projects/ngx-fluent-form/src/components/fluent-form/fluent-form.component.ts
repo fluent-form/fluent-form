@@ -15,6 +15,11 @@ import { createFormGroup, formUtils, modelUtils, standardSchemas } from '../../u
 export class FluentFormComponent<T extends Record<string, unknown>> implements OnChanges, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   private _form!: FormGroup;
+  /**
+   * 内部的模型值，用来跟公开的模型值进行引用比较，
+   * 判断变更是内部发出的还是外部传入的，如果引用一致，则为内部变更，直接忽略
+   */
+  private _model!: T;
   private _schemas!: AnySchema[];
   /** @internal */
   readonly infinity: number = Infinity;
@@ -40,6 +45,7 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
   @Input() spinSize: NzSizeLDSType = 'large';
 
   @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
+  @Output() modelChange: EventEmitter<T> = new EventEmitter();
 
   constructor() { }
 
@@ -56,14 +62,17 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
       modelUtils(this.model as Record<string, unknown>, this.schemas).assign(this.form);
       // 此时表单已就绪，把表单赋值到模型
       utils.assign(this.model);
+      this.modelChange.emit(this._model = utils.assign({} as T));
 
       this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
         utils.assign(this.model);
+        this.modelChange.emit(this._model = utils.assign({} as T));
       });
     }
 
-    // 忽略模型的首次变更（首次的初始化已在上面处理了）
-    if (modelChange && !modelChange.firstChange) {
+    // 如果是首次变更（首次的初始化已在上面处理了）
+    // 并且当前模型值与内部的模型值不一致
+    if (modelChange && !modelChange.firstChange && modelChange.currentValue !== this._model) {
       modelUtils(this.model as Record<string, unknown>, this.schemas).assign(this.form);
     }
   }

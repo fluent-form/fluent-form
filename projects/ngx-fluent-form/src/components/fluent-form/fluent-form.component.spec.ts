@@ -6,7 +6,7 @@ import { AnySchema } from '../../schemas/index.schema';
 import { FluentFormComponent } from './fluent-form.component';
 
 @Component({
-  template: `<fluent-form [schemas]="schemas" [model]="model"></fluent-form>`,
+  template: `<fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>`,
 })
 class TestWarpperComponent<T extends Record<string, unknown>> {
   @ViewChild(FluentFormComponent) target!: FluentFormComponent<T>;

@@ -1,7 +1,7 @@
-import dedent from 'ts-dedent';
-
 import { Component } from '@angular/core';
 import { AbstractFluentFormWrapperComponent, defineMeta } from 'stories/storybook';
+import dedent from 'ts-dedent';
+
 
 @Component({
   selector: 'fluent-form-wrapper',
@@ -11,7 +11,7 @@ import { AbstractFluentFormWrapperComponent, defineMeta } from 'stories/storyboo
         nz-col
         nzFlex="2"
         [schemas]="schemas"
-        [model]="model"
+        [(model)]="model"
         [layout]="layout"
         [colon]="colon"
         [spinning]="spinning"
@@ -48,7 +48,7 @@ export const cmpSource = dedent`
   import { date, form, number, text } from 'ngx-fluent-form';
 
   @Component({
-    template: \`<fluent-form [model]="model" [schemas]="schemas"></fluent-form>\`
+    template: \`<fluent-form [(model)]="model" [schemas]="schemas"></fluent-form>\`
   })
   export class Component {
     schemas = form(

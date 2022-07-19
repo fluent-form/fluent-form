@@ -42,7 +42,7 @@ export const source = dedent`
 
   @Component({
     selector: 'example-component',
-    template: \`<fluent-form [schemas]="schemas" [model]="model" layout="horizontal"></fluent-form>\`
+    template: \`<fluent-form [schemas]="schemas" [(model)]="model" layout="horizontal"></fluent-form>\`
   })
   export class ExampleComponent {
     schemas = form(

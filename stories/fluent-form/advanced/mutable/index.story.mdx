@@ -1,0 +1,35 @@
+import { Canvas, Meta, Story, ArgsTable, Source } from '@storybook/addon-docs';
+import { meta } from '../../';
+import { story, source, mutableSource, immutableSource } from './';
+import { FluentFormComponent } from 'ngx-fluent-form';
+
+<Meta
+  title="FluentForm/Advanced"
+  component={meta.component}
+  decorators={meta.decorators}
+  argTypes={meta.argTypes}
+  parameters={meta.parameters} />
+
+# Mutable & Immutable - 可变与不可变
+
+对于表单值变更导致的模型值变更，`ngx-fluent-form` 同时提供了可变模型与不可变模型：
+
+1. 对于可变模型，在模型值变更后，模型对象的引用将保持不变，需要使用单向绑定 `[model]`：
+
+<Source
+  language="html"
+  dark={true}
+  code={mutableSource} />
+
+2. 对于不可变模型，在模型值变更后，模型对象的引用将发生改变，每次变更都将返回一个全新的模型对象，需要使用双向绑定 `[(model)]`：
+
+<Source
+  language="html"
+  dark={true}
+  code={immutableSource} />
+
+<Canvas hidden={true} withToolbar mdxSource={source}>
+  <Story name="Mutable & Immutable">{story}</Story>
+</Canvas>
+
+<ArgsTable of={FluentFormComponent} />

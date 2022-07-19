@@ -17,7 +17,7 @@ const SELECT_OPTIONS = [
         nz-col
         nzFlex="2"
         [schemas]="schemas"
-        [model]="model"
+        [(model)]="model"
         [layout]="layout"
         [colon]="colon"
         [spinning]="spinning"
@@ -78,7 +78,7 @@ export const source = dedent`
 
   @Component({
     selector: 'example-component',
-    template: \`<fluent-form [schemas]="schemas" [model]="model"></fluent-form>\`
+    template: \`<fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>\`
   })
   export class ExampleComponent {
     schemas = form(

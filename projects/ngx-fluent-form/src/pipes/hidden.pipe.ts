@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class HiddenPipe implements PipeTransform {
 
-  transform(value: boolean | ((model: unknown) => boolean), model: unknown): boolean {
+  transform<T>(value: boolean | ((model: T) => boolean), model: T): boolean {
     if (typeof value === 'function') {
       return value(model);
     }

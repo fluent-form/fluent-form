@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { Subject, takeUntil } from 'rxjs';
+import { COMPONENT_TEMPLATE_REF_PROVIDER } from '../../providers';
 import { AnySchema } from '../../schemas';
 import { createFormGroup, FormUtils, formUtils, modelUtils, standardSchemas } from '../../utils';
 
@@ -10,7 +11,8 @@ import { createFormGroup, FormUtils, formUtils, modelUtils, standardSchemas } fr
   selector: 'fluent-form',
   templateUrl: './fluent-form.component.html',
   styleUrls: ['./fluent-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [COMPONENT_TEMPLATE_REF_PROVIDER]
 })
 export class FluentFormComponent<T extends Record<string, unknown>> implements OnChanges, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();

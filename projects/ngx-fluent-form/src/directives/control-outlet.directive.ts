@@ -1,6 +1,7 @@
-import { Directive, Input, OnInit, ViewContainerRef } from '@angular/core';
+import { Directive, Inject, Input, OnInit, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { FluentTemplateComponent } from '../components/fluent-template/fluent-template.component';
+import { ComponentTemplateRef } from '../components/fluent-template/fluent-template.component';
+import { COMPONENT_TEMPLATE_REF_TOKEN } from '../providers';
 import { ComponentSchema, ControlSchema } from '../schemas';
 
 @Directive({
@@ -11,11 +12,14 @@ export class ControlOutletDirective<T extends Record<string, unknown>> implement
   @Input('fluentControlOutletSchema') schema!: ControlSchema | ComponentSchema;
   @Input('fluentControlOutletModel') model!: T;
 
-  constructor(private viewContainerRef: ViewContainerRef) { }
+  constructor(
+    @Inject(COMPONENT_TEMPLATE_REF_TOKEN)
+    private componentTemplate: ComponentTemplateRef<T>,
+    private viewContainerRef: ViewContainerRef,
+  ) { }
 
   ngOnInit() {
-    const { instance } = this.viewContainerRef.createComponent(FluentTemplateComponent);
-    this.viewContainerRef.createEmbeddedView(instance.componentTemplate, this);
+    this.viewContainerRef.createEmbeddedView(this.componentTemplate, this);
   }
 
 }

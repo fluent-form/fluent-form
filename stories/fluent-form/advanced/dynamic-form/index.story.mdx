@@ -1,6 +1,5 @@
-import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
 import { meta, story, source } from './';
-import { FluentFormComponent } from 'ngx-fluent-form';
 
 <Meta
   title="FluentForm/Advanced"
@@ -16,5 +15,3 @@ import { FluentFormComponent } from 'ngx-fluent-form';
 <Canvas withToolbar mdxSource={source}>
   <Story name="Dynamic Form">{story}</Story>
 </Canvas>
-
-<ArgsTable of={FluentFormComponent} />

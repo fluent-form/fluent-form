@@ -7,14 +7,14 @@ import { mutableSource, immutableSource } from './';
 
 对于表单值变更导致的模型值变更，`ngx-fluent-form` 同时提供了可变模型与不可变模型：
 
-1. 对于可变模型，在模型值变更后，模型对象的引用将保持不变，需要使用单向绑定 `[model]`：
+1. 对于可变模型，使用单向绑定 `[model]`，在模型值变更后，模型对象的引用将保持不变：
 
 <Source
   language="html"
   dark={true}
   code={mutableSource} />
 
-2. 对于不可变模型，在模型值变更后，模型对象的引用将发生改变，每次变更都将返回一个全新的模型对象，需要使用双向绑定 `[(model)]`：
+2. 对于不可变模型，使用双向绑定 `[(model)]`，在模型值变更后，模型对象的引用将发生改变，每次变更都将返回一个全新的模型对象：
 
 <Source
   language="html"

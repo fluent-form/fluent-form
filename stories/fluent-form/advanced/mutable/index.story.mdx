@@ -1,14 +1,7 @@
-import { Canvas, Meta, Story, ArgsTable, Source } from '@storybook/addon-docs';
-import { meta } from '../../';
-import { story, source, mutableSource, immutableSource } from './';
-import { FluentFormComponent } from 'ngx-fluent-form';
+import { Meta, Source } from '@storybook/addon-docs';
+import { mutableSource, immutableSource } from './';
 
-<Meta
-  title="FluentForm/Advanced"
-  component={meta.component}
-  decorators={meta.decorators}
-  argTypes={meta.argTypes}
-  parameters={meta.parameters} />
+<Meta title="FluentForm/Advanced/Mutable & Immutable" />
 
 # Mutable & Immutable - 可变与不可变
 
@@ -27,9 +20,3 @@ import { FluentFormComponent } from 'ngx-fluent-form';
   language="html"
   dark={true}
   code={immutableSource} />
-
-<Canvas hidden={true} withToolbar mdxSource={source}>
-  <Story name="Mutable & Immutable">{story}</Story>
-</Canvas>
-
-<ArgsTable of={FluentFormComponent} />

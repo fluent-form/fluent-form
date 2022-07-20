@@ -12,11 +12,11 @@ import { ComponentSchema, ComposableComponentSchema, ControlSchema } from '../..
   styleUrls: ['./fluent-template.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FluentTemplateComponent {
+export class FluentTemplateComponent<T extends Record<string, unknown>> {
   @ViewChild('componentTemplate', { static: true })
-  componentTemplate!: TemplateRef<{ control: AbstractControl, schema: ComponentSchema | ControlSchema }>;
+  componentTemplate!: TemplateRef<{ control: AbstractControl, schema: ComponentSchema | ControlSchema, model: T }>;
   @ViewChild('composableComponentTemplate', { static: true })
-  composableComponentTemplate!: TemplateRef<{ control: AbstractControl, schema: ComposableComponentSchema }>;
+  composableComponentTemplate!: TemplateRef<{ control: AbstractControl, schema: ComposableComponentSchema, model: T }>;
 
   /** @internal */
   readonly infinity: number = Infinity;

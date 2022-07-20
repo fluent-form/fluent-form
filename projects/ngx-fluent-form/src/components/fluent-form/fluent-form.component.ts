@@ -4,7 +4,7 @@ import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { Subject, takeUntil } from 'rxjs';
 import { AnySchema } from '../../schemas';
-import { createFormGroup, formUtils, modelUtils, standardSchemas } from '../../utils';
+import { createFormGroup, FormUtils, formUtils, modelUtils, standardSchemas } from '../../utils';
 
 @Component({
   selector: 'fluent-form',
@@ -16,15 +16,15 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
   private destroy$: Subject<void> = new Subject<void>();
   private _form!: FormGroup;
   /**
-   * 内部的模型值，用来跟公开的模型值进行引用比较，
+   * 内部的不可变模型，用来跟公开的模型值进行引用比较，
    * 判断变更是内部发出的还是外部传入的，如果引用一致，则为内部变更，直接忽略
    */
   private _model!: T;
   private _schemas!: AnySchema[];
-  /** @internal */
-  readonly infinity: number = Infinity;
 
+  /** @internal */
   get form(): FormGroup { return this._form; }
+  /** @internal */
   set form(value: FormGroup) {
     this._form = value;
     this.formChange.emit(value);
@@ -56,17 +56,15 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
       }
 
       this.form = createFormGroup(this.schemas);
-      const utils = formUtils(this.form, this.schemas);
 
       // 先把模型赋值到表单（使用模型初始化表单）
       modelUtils(this.model as Record<string, unknown>, this.schemas).assign(this.form);
       // 此时表单已就绪，把表单赋值到模型
-      utils.assign(this.model);
-      this.modelChange.emit(this._model = utils.assign({} as T));
+      const utils = formUtils(this.form, this.schemas);
+      this.updateModel(utils);
 
       this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-        utils.assign(this.model);
-        this.modelChange.emit(this._model = utils.assign({} as T));
+        this.updateModel(utils);
       });
     }
 
@@ -75,6 +73,15 @@ export class FluentFormComponent<T extends Record<string, unknown>> implements O
     if (modelChange && !modelChange.firstChange && modelChange.currentValue !== this._model) {
       modelUtils(this.model as Record<string, unknown>, this.schemas).assign(this.form);
     }
+  }
+
+  /**
+   * 更新模型
+   * @param utils
+   */
+  private updateModel(utils: FormUtils<FormGroup>) {
+    utils.assign(this.model);
+    this.modelChange.emit(this._model = utils.assign({} as T));
   }
 
   ngOnDestroy(): void {

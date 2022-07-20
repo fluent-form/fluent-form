@@ -1,8 +1,9 @@
 <!-- 组件模板 -->
 <!-- 根据 schema.type 来输出不同的控件 -->
 <!-- @param control FormControl -->
-<!-- @param schema 组件的图示 -->
-<ng-template #componentTemplate let-control="control" let-schema="schema">
+<!-- @param schema  组件的图示 -->
+<!-- @param model   模型值 -->
+<ng-template #componentTemplate let-control="control" let-schema="schema" let-model="model">
   <ng-container [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
       <input
@@ -219,7 +220,7 @@
         [nzSuffix]="schema.suffix">
         <ng-container *ngFor="let subschema of schema.schemas">
           <ng-container
-            *ngTemplateOutlet="composableComponentTemplate; context: { control: control.get([subschema.name]), schema: subschema }">
+            *ngTemplateOutlet="composableComponentTemplate; context: { control: control.get([subschema.name]), schema: subschema, model: model }">
           </ng-container>
         </ng-container>
       </nz-input-group>
@@ -233,7 +234,7 @@
         [fluentEventBinder]="{ cmp, schema }">
         <ng-container *ngFor="let subschema of schema.schemas">
           <ng-container
-            *ngTemplateOutlet="componentTemplate; context: { schema: subschema }">
+            *ngTemplateOutlet="componentTemplate; context: { schema: subschema, model: model }">
           </ng-container>
         </ng-container>
       </nz-button-group>
@@ -241,6 +242,7 @@
 
     <ng-container *ngSwitchCase="'button'">
       <button
+        *ngIf="!(schema.hidden | hidden: model)"
         nz-button
         [fluentPropertyBinder]="{ schema }"
         [fluentEventBinder]="{ schema }"
@@ -268,9 +270,10 @@
 <!-- 可组合的组件模板 -->
 <!-- 根据 schema.type 来输出不同的控件 -->
 <!-- @param control FormControl -->
-<!-- @param schema 组件的图示 -->
-<ng-template #composableComponentTemplate let-control="control" let-schema="schema">
-  <ng-container *ngIf="!schema.hidden" [ngSwitch]="schema.type">
+<!-- @param schema  组件的图示 -->
+<!-- @param model   模型值 -->
+<ng-template #composableComponentTemplate let-control="control" let-schema="schema" let-model="model">
+  <ng-container *ngIf="!(schema.hidden | hidden: model)" [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
       <input
         nz-col

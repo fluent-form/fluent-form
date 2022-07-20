@@ -92,7 +92,7 @@ export function valueUtils<S extends Obj | Arr | AbstractControl>(source: S, sch
   return new ValueUtils(source, schema);
 }
 
-class FormUtils<F extends FormGroup | FormArray> {
+export class FormUtils<F extends FormGroup | FormArray> {
   constructor(
     private readonly form: F,
     private readonly schemas: AnySchema[],
@@ -151,7 +151,7 @@ class FormUtils<F extends FormGroup | FormArray> {
 
 }
 
-class ValueUtils<S extends Obj | Arr | AbstractControl> {
+export class ValueUtils<S extends Obj | Arr | AbstractControl> {
   constructor(
     private readonly source: S,
     private readonly schema: ControlSchema
@@ -229,7 +229,7 @@ class ValueUtils<S extends Obj | Arr | AbstractControl> {
   }
 }
 
-class ModelUtils<M extends Arr | Obj> {
+export class ModelUtils<M extends Arr | Obj> {
   constructor(
     private readonly model: M,
     private readonly schemas: AnySchema[],

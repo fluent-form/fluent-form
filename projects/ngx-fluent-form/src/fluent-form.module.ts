@@ -23,6 +23,8 @@ import { FluentTemplateComponent } from './components/fluent-template/fluent-tem
 import { ControlOutletDirective } from './directives/control-outlet.directive';
 import { EventBinderDirective } from './directives/event-binder.directive';
 import { PropertyBinderDirective } from './directives/property-binder.directive';
+import { HiddenPipe } from './pipes/hidden.pipe';
+import { TypeofPipe } from './pipes/typeof.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { PropertyBinderDirective } from './directives/property-binder.directive'
     EventBinderDirective,
     PropertyBinderDirective,
     ControlOutletDirective,
+    TypeofPipe,
+    HiddenPipe
   ],
   imports: [
     CommonModule,

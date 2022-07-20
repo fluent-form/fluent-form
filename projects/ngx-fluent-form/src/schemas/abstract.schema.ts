@@ -35,7 +35,7 @@ export interface AbstractSchema<Name extends AnySchemaName> {
   offset?: Cell;
   flex?: number | string;
   label?: string | Label;
-  hidden?: boolean;
+  hidden?: boolean | ((model: SafeAny) => boolean);
 }
 
 /** 抽象的真实控件图示 */

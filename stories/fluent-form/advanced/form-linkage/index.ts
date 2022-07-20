@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { form, input, radio, schemasUtils, select } from 'ngx-fluent-form';
+import { form, input, radio, select } from 'ngx-fluent-form';
 import { AbstractFluentFormWrapperComponent, defineMeta, defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
@@ -44,16 +44,11 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
           this.model = { ...this.model };
         }
       }),
-      radio('radio').label('控制显隐').span(8).options([
-        { label: '显示', value: false },
-        { label: '隐藏', value: true },
-      ]).value(false).listener({
-        valueChange: value => {
-          schemasUtils(this.schemas).find('text')!.hidden = value;
-          this.schemas = [...this.schemas];
-        }
-      }),
-      input('text').label('文本输入框').span(8),
+      radio('radio').label('控制显隐').span(8).value(true).options([
+        { label: '显示', value: true },
+        { label: '隐藏', value: false },
+      ]),
+      input('text').label('文本输入框').span(8).hidden((model: { radio: boolean }) => !model.radio),
     );
 
     this.model = {}
@@ -68,7 +63,7 @@ export const story = defineStory();
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { form, input, radio, schemasUtils, select } from 'ngx-fluent-form';
+  import { form, input, radio, select } from 'ngx-fluent-form';
 
   const SELECT_OPTIONS = [
     { label: 'Jack', value: 'jack' },
@@ -88,16 +83,11 @@ export const source = dedent`
           this.model = { ...this.model };
         }
       }),
-      radio('radio').label('控制显隐').span(8).options([
-        { label: '显示', value: false },
-        { label: '隐藏', value: true },
-      ]).value(false).listener({
-        valueChange: value => {
-          schemasUtils(this.schemas).find('text')!.hidden = value;
-          this.schemas = [...this.schemas];
-        }
-      }),
-      input('text').label('文本输入框').span(8),
+      radio('radio').label('控制显隐').span(8).value(true).options([
+        { label: '显示', value: true },
+        { label: '隐藏', value: false },
+      ]),
+      input('text').label('文本输入框').span(8).hidden((model: { radio: boolean }) => !model.radio),
     );
 
     model = {};

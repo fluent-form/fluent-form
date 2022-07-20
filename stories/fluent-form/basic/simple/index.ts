@@ -27,6 +27,8 @@ export const story = defineStory({
       buttonGroup().schemas(
         button().subtype('primary').content('确认'),
         button().content('取消'),
+        button().content('看不见我').hidden(() => true),
+        button().content('动态').hidden((model: any) => model.slider < 50),
       )
     ),
     model: {}

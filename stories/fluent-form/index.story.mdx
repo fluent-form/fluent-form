@@ -49,6 +49,12 @@ import { cmpSource, moduleSource } from './';
   dark={true}
   code={cmpSource} />
 
+## 注意
+
+为了获得更好的性能，`ngx-fluent-form` 所有组件都运行在 [OnPush](https://angular.io/api/core/ChangeDetectionStrategy) 模式下，这意味着对 `@Input()` 数据的 mutate 操作将不会生效，请使用 immutable 方式操作数组或者对象。
+
+## 支持
+
 喜欢 ngx-fluent-form ？为该项目点星⭐！
 
 <iframe

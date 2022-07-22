@@ -1,6 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { ThemeType } from '@ant-design/icons-angular';
 import { NzButtonComponent, NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
+import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzInputGroupComponent } from 'ng-zorro-antd/input';
 import { Builder } from '../utils/builder.utils';
 import { AbstractComponentSchema, AbstractElementSchema, AbstractSchema, SingleKeySchemaName } from './abstract.schema';
@@ -32,6 +33,7 @@ export interface InputGroupComponentSchema<Name extends SingleKeySchemaName = Si
   prefix?: string | TemplateRef<void>;
   /** The suffix of the input box */
   suffix?: string | TemplateRef<void>;
+  size?: NzSizeLDSType;
 }
 
 export interface ButtonComponentSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name>, AbstractElementSchema<HTMLButtonElement> {

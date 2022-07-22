@@ -217,7 +217,8 @@
         [nzAddOnBeforeIcon]="schema.before?.icon"
         [nzAddOnAfterIcon]="schema.after?.icon"
         [nzPrefix]="schema.prefix"
-        [nzSuffix]="schema.suffix">
+        [nzSuffix]="schema.suffix"
+        [nzSize]="schema.size">
         <ng-container *ngFor="let subschema of schema.schemas">
           <ng-container
             *ngTemplateOutlet="composableComponentTemplate; context: { control: control.get([subschema.name]), schema: subschema, model: model }">

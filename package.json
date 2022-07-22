@@ -7,6 +7,7 @@
     "build": "ng build --configuration production && node ./scripts/copy.mjs",
     "test:watch": "ng test ngx-fluent-form",
     "test": "ng test ngx-fluent-form --configuration production",
+    "coverage:watch": "ng test ngx-fluent-form --code-coverage",
     "coverage": "ng test ngx-fluent-form --no-watch --code-coverage",
     "lint": "ng lint",
     "publish": "npm run build:lib && npm publish ./dist/ngx-fluent-form",

@@ -1,6 +1,7 @@
 import { createFormGroup, standardSchemas } from '.';
 import { array, button, buttonGroup, checkboxGroup, date, group, input, inputGroup, number, range, slider, time } from '../builders';
-import { formUtils, modelUtils } from './form.utils';
+import { formUtils } from './form.utils';
+import { modelUtils } from './model.utils';
 
 describe('form.utils', () => {
   describe('model to form', () => {

@@ -3,12 +3,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { form, input } from '../../builders';
 import { FluentFormModule } from '../../fluent-form.module';
 import { AnySchema } from '../../schemas/index.schema';
+import { Obj } from '../../type';
 import { FluentFormComponent } from './fluent-form.component';
 
 @Component({
   template: `<fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>`,
 })
-class TestWarpperComponent<T extends Record<string, unknown>> {
+class TestWarpperComponent<T extends Obj> {
   @ViewChild(FluentFormComponent) target!: FluentFormComponent<T>;
   schemas!: AnySchema[];
   model: T = {} as T;

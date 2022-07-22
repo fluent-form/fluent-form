@@ -1,7 +1,8 @@
 import { SafeAny } from '@ngify/types';
+import { Obj } from '../type';
 
 export function builder<T>(): Builder<T> {
-  const builder = new Proxy({} as Record<string, unknown>, {
+  const builder = new Proxy({} as Obj, {
     get(target, prop: string) {
       if ('build' === prop) {
         return () => target;

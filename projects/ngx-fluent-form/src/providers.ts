@@ -1,8 +1,9 @@
 import { InjectionToken, Provider, ViewContainerRef } from '@angular/core';
 import { ComponentTemplateRef, FluentTemplateComponent } from './components/fluent-template/fluent-template.component';
+import { Obj } from './type';
 
 /** 组件模板实例注入令牌 */
-export const COMPONENT_TEMPLATE_REF_TOKEN = new InjectionToken<ComponentTemplateRef<Record<string, unknown>>>('ComponentTemplate');
+export const COMPONENT_TEMPLATE_REF_TOKEN = new InjectionToken<ComponentTemplateRef<Obj>>('ComponentTemplate');
 
 /** 组件模板实例提供者 */
 export const COMPONENT_TEMPLATE_REF_PROVIDER: Provider = {

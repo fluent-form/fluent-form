@@ -84,3 +84,8 @@ type IfEquals<X, Y, T = X, F = never> =
 type WritableMap<T> = {
   [P in keyof T]-?: IfEquals<{ [K in P]: T[P] }, { -readonly [K in P]: T[P] }>
 };
+
+/** Any Object */
+export type Obj = Record<string, unknown>;
+/** Any Array */
+export type Arr = unknown[];

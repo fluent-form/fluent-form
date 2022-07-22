@@ -10,6 +10,7 @@ import { NzSelectComponent, NzSelectModeType } from 'ng-zorro-antd/select';
 import { NzSliderComponent } from 'ng-zorro-antd/slider';
 import { NzSwitchComponent } from 'ng-zorro-antd/switch';
 import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
+import { Obj } from '../type';
 import { AbstractComponentControlSchema, AbstractControlSchema, AbstractDateControlSchema, AbstractElementControlSchema, AbstractSchema, AbstractTextControlSchema, AnySchemaName, SingleKeySchemaName } from './abstract.schema';
 import { AnyBuilder, AnySchema, FormBuilder, FormSchema, SingleKeyControlBuilder, SingleKeyControlSchema } from './index.schema';
 
@@ -104,7 +105,7 @@ export interface SelectControlSchema<Name extends SingleKeySchemaName = SingleKe
   limit?: number;
   /** Support search */
   search?: boolean;
-  options: Record<string, unknown>[];
+  options: Obj[];
   config?: {
     labelProperty?: string;
     valueProperty?: string;
@@ -149,7 +150,7 @@ export interface RadioControlSchema<Name extends SingleKeySchemaName = SingleKey
   type: 'radio';
   /** Radio control style */
   style?: 'outline' | 'solid';
-  options: Record<string, unknown>[];
+  options: Obj[];
   config?: {
     labelProperty?: string;
     valueProperty?: string;
@@ -165,7 +166,7 @@ export interface CheckboxControlSchema<Name extends SingleKeySchemaName = Single
 
 export interface CheckboxGroupControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = SafeAny> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzCheckboxGroupComponent, Val> {
   type: 'checkbox-group';
-  options: Record<string, unknown>[];
+  options: Obj[];
   config?: {
     labelProperty?: string;
     valueProperty?: string;

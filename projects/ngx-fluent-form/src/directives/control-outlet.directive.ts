@@ -3,11 +3,12 @@ import { AbstractControl } from '@angular/forms';
 import { ComponentTemplateRef } from '../components/fluent-template/fluent-template.component';
 import { COMPONENT_TEMPLATE_REF_TOKEN } from '../providers';
 import { ComponentSchema, ControlSchema } from '../schemas';
+import { Obj } from '../type';
 
 @Directive({
   selector: '[fluentControlOutlet]'
 })
-export class ControlOutletDirective<T extends Record<string, unknown>> implements OnInit {
+export class ControlOutletDirective<T extends Obj> implements OnInit {
   @Input('fluentControlOutlet') control!: AbstractControl;
   @Input('fluentControlOutletSchema') schema!: ControlSchema | ComponentSchema;
   @Input('fluentControlOutletModel') model!: T;

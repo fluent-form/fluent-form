@@ -1,7 +1,8 @@
 import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
-import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
 import { isComponentContainerSchema, isComponentSchema, isDoubleKeySchema } from '.';
 import { AnyControlSchema, AnySchema, ComposableComponentSchema, ControlSchema } from '../schemas/index.schema';
+import { Arr, Obj } from '../type';
+import { valueUtils } from './value.utils';
 
 /**
  * 将图示转换为控件
@@ -68,9 +69,6 @@ export function createFormArray(schemas: AnyControlSchema[]): FormArray {
   );
 }
 
-type Obj = Record<string, unknown>;
-type Arr = unknown[];
-
 /**
  * 删除模型的字段
  * @param model
@@ -78,9 +76,7 @@ type Arr = unknown[];
  */
 function deleteProperty<T>(model: T, schema: AnyControlSchema): T {
   if (isDoubleKeySchema(schema)) {
-    schema.name!.forEach(name => {
-      delete model[name as keyof T];
-    })
+    schema.name!.forEach(name => delete model[name as keyof T]);
   } else {
     delete model[schema.name!.toString() as keyof T];
   }
@@ -90,14 +86,6 @@ function deleteProperty<T>(model: T, schema: AnyControlSchema): T {
 
 export function formUtils<F extends FormGroup | FormArray>(form: F, schemas: AnySchema[]) {
   return new FormUtils(form, schemas);
-}
-
-export function modelUtils<M extends Arr | Obj>(model: M, schemas: AnySchema[]) {
-  return new ModelUtils(model, schemas);
-}
-
-export function valueUtils<S extends Obj | Arr | AbstractControl>(source: S, schema: ControlSchema) {
-  return new ValueUtils(source, schema);
 }
 
 export class FormUtils<F extends FormGroup | FormArray> {
@@ -157,131 +145,4 @@ export class FormUtils<F extends FormGroup | FormArray> {
     return model;
   }
 
-}
-
-export class ValueUtils<S extends Obj | Arr | AbstractControl> {
-  constructor(
-    private readonly source: S,
-    private readonly schema: ControlSchema
-  ) { }
-
-  getValue(): unknown {
-    return this.source instanceof AbstractControl ? this.getControlValue() : this.getModelValue();
-  }
-
-  private getModelValue(): unknown {
-    let value: unknown;
-    // 如果是双字段模式，则需要从模型中分别取得这两个字段的值组为一个元组
-    if (isDoubleKeySchema(this.schema)) {
-      value = this.schema.name!.map((prop, index) => (
-        this.source[prop as keyof S] ?? this.schema.value?.[index] ?? null
-      ));
-      // 如果数组元素都是 null，那就直接赋值 null
-      if ((value as []).every(o => o === null)) {
-        value = null;
-      }
-    } else {
-      value = this.source[this.schema.name as keyof S] ?? this.schema.value ?? null;
-    }
-
-    if (this.schema.mapper) {
-      return this.schema.mapper.input(value);
-    }
-
-    if (['date', 'time'].includes(this.schema.type)) {
-      return value ? new Date(value as string | number | Date) : null;
-    }
-
-    if (this.schema.type === 'range') {
-      return (value as [string | number | Date, string | number | Date])?.map(o => o ? new Date(o) : null) ?? null;
-    }
-
-    if (this.schema.type === 'checkbox-group') {
-      const labelProperty = this.schema.config?.labelProperty ?? 'label';
-      const valueProperty = this.schema.config?.valueProperty ?? 'value';
-
-      return this.schema.options.map(o => ({
-        label: o[labelProperty],
-        value: o[valueProperty],
-        checked: (value as unknown[])?.includes(o[valueProperty])
-      })) as NzCheckBoxOptionInterface[];
-    }
-
-    return value;
-  }
-
-  private getControlValue(): unknown {
-    const value = (this.source as AbstractControl).value as unknown;
-
-    if (this.schema.mapper) {
-      return this.schema.mapper.output(value);
-    }
-
-    if (['date', 'time'].includes(this.schema.type)) {
-      return (value as Date | null)?.getTime() ?? null;
-    }
-
-    if (this.schema.type === 'range') {
-      return (value as [Date | null, Date | null])?.map(o => o?.getTime() ?? null) ?? null;
-    }
-
-    if (this.schema.type === 'slider') {
-      return value as [number, number] ?? null;
-    }
-
-    if (this.schema.type === 'checkbox-group') {
-      return (value as NzCheckBoxOptionInterface[])?.filter(o => o.checked).map(o => o.value);
-    }
-
-    return value;
-  }
-}
-
-export class ModelUtils<M extends Arr | Obj> {
-  constructor(
-    private readonly model: M,
-    private readonly schemas: AnySchema[],
-  ) { }
-
-  /**
-   * 将模型的值赋值到表单
-   * @param form
-   * @param emitEvent 是否发射事件，函数内部递归调用的时候将置为false，保证只会触发一次事件
-   * @returns form
-   */
-  assign<F extends (M extends Obj ? FormGroup : FormArray)>(form: F, emitEvent: boolean = true): F {
-    this.schemas.forEach(schema => {
-      // 这些图示不包含控件图示，直接跳过
-      if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
-
-      if (schema.type === 'input-group') {
-        modelUtils(this.model as Obj, schema.schemas as AnySchema[]).assign(form as FormGroup, false);
-        return;
-      }
-
-      if (schema.type === 'group') {
-        modelUtils(
-          (this.model[schema.name as keyof M] ??= {} as M[keyof M]) as unknown as Obj,
-          schema.schemas as AnySchema[]
-        ).assign(form.get([schema.name!]) as FormGroup, false);
-        return;
-      }
-
-      if (schema.type === 'array') {
-        modelUtils(
-          (this.model[schema.name as keyof M] ??= [] as unknown as M[keyof M]) as unknown as Arr,
-          schema.schemas as AnySchema[]
-        ).assign(form.get([schema.name!]) as FormArray, false);
-        return;
-      }
-
-      const value = valueUtils(this.model, schema).getValue();
-
-      form.get([schema.name!.toString()])!.setValue(value, { emitEvent: false });
-    });
-
-    emitEvent && form.updateValueAndValidity();
-
-    return form;
-  }
 }

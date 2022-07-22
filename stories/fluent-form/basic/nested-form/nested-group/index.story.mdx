@@ -12,10 +12,11 @@ import { FluentFormComponent } from 'ngx-fluent-form';
 
 # Nested Form Group - 嵌套表单组
 
-可以使用 `group` 控件来配置嵌套的表单组（嵌套对象），支持多级嵌套。
+要构建复杂的表单，[FormGroup](https://angular.cn/api/forms/FormGroup) 可以把大型表单组织成一些稍小的、易管理的分组。
+可以使用 `group` 控件来配置嵌套的表单组（嵌套对象），支持多级混合嵌套：
 
-<Canvas withToolbar mdxSource={source}>
-  <Story name="Nested Object">{story}</Story>
+<Canvas withToolbar isExpanded mdxSource={source}>
+  <Story name="Nested Group">{story}</Story>
 </Canvas>
 
 <ArgsTable of={FluentFormComponent} />

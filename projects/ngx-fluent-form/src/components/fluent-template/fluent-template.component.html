@@ -208,16 +208,17 @@
     <ng-container *ngSwitchCase="'input-group'">
       <nz-input-group
         #cmp
-        nz-row
         nzCompact
         [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema }"
-        [nzAddOnBefore]="schema.before?.template"
-        [nzAddOnAfter]="schema.after?.template"
+        [nzAddOnBefore]="schema.before?.icon ? null : schema.before"
+        [nzAddOnAfter]="schema.after?.icon ? null : schema.after"
         [nzAddOnBeforeIcon]="schema.before?.icon"
         [nzAddOnAfterIcon]="schema.after?.icon"
-        [nzPrefix]="schema.prefix"
-        [nzSuffix]="schema.suffix"
+        [nzPrefix]="schema.prefix?.icon ? null : schema.prefix"
+        [nzSuffix]="schema.suffix?.icon ? null : schema.suffix"
+        [nzPrefixIcon]="schema.prefix?.icon"
+        [nzSuffixIcon]="schema.suffix?.icon"
         [nzSize]="schema.size">
         <ng-container *ngFor="let subschema of schema.schemas">
           <ng-container

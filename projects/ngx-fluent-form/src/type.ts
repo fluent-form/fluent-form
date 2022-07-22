@@ -67,12 +67,20 @@ type ComponentInputName<C> = Extract<keyof ComponentProperty<C>, `nz${Capitalize
 export type ComponentInputMap<C> = Partial<{ [P in ComponentInputName<C>]: C[P] }>;
 
 /**
+ * 必填单个属性
+ * ```
+ * Single<{ a: string, b: number }> -> { a: string } | { b: number }
+ * ```
+ */
+export type Single<T> = { [P in keyof T]: { [K in P]-?: T[P] } }[keyof T];
+
+/**
  * 必填单个属性或者全部属性
  * ```
  * SingleOrAll<{ a: string, b: number }> -> { a: string } | { b: number } | { a: string, b: number }
  * ```
  */
-export type SingleOrAll<T> = { [P in keyof T]: { [K in P]-?: T[P] } }[keyof T] | Required<T>;
+export type SingleOrAll<T> = Single<T> | Required<T>;
 
 type IfEquals<X, Y, T = X, F = never> =
   (<T>() => T extends X ? true : false) extends

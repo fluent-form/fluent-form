@@ -19,20 +19,10 @@ export interface InputGroupComponentSchema<Name extends SingleKeySchemaName = Si
   type: 'input-group';
   schemas: (ComposableComponentSchema | ComposableComponentBuilder)[];
   required?: boolean;
-  /** The pre-label of the input box */
-  before?: {
-    icon?: string,
-    template?: string | TemplateRef<void>
-  };
-  /** The back label of the input box */
-  after?: {
-    icon?: string,
-    template?: string | TemplateRef<void>
-  };
-  /** The prefix of the input box */
-  prefix?: string | TemplateRef<void>;
-  /** The suffix of the input box */
-  suffix?: string | TemplateRef<void>;
+  before?: string | TemplateRef<void> | { icon: string };
+  after?: string | TemplateRef<void> | { icon: string };
+  prefix?: string | TemplateRef<void> | { icon: string };
+  suffix?: string | TemplateRef<void> | { icon: string };
   size?: NzSizeLDSType;
 }
 

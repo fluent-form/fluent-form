@@ -72,12 +72,20 @@ type Obj = Record<string, unknown>;
 type Arr = unknown[];
 
 /**
- * 清空对象但保持引用
- * @param obj
+ * 删除模型的字段
+ * @param model
+ * @param schema
  */
-function emptyObject<T extends object>(obj: T): T {
-  Object.keys(obj).forEach(property => delete obj[property as keyof T]);
-  return obj;
+function deleteProperty<T>(model: T, schema: AnyControlSchema): T {
+  if (isDoubleKeySchema(schema)) {
+    schema.name!.forEach(name => {
+      delete model[name as keyof T];
+    })
+  } else {
+    delete model[schema.name!.toString() as keyof T];
+  }
+
+  return model;
 }
 
 export function formUtils<F extends FormGroup | FormArray>(form: F, schemas: AnySchema[]) {
@@ -105,8 +113,6 @@ export class FormUtils<F extends FormGroup | FormArray> {
    * @returns model
    */
   assign<T extends (F extends FormGroup ? Obj : Arr)>(model: T, clear: boolean = true): T {
-    clear && emptyObject(model);
-
     this.schemas.forEach(schema => {
       // 这些图示不包含控件图示，直接跳过
       if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
@@ -133,6 +139,8 @@ export class FormUtils<F extends FormGroup | FormArray> {
         );
         return;
       }
+
+      clear && deleteProperty(model, schema);
 
       const value = valueUtils(control, schema).getValue();
 

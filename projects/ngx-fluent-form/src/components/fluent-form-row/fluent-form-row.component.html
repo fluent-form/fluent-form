@@ -1,0 +1,3 @@
+<td *ngFor="let schema of schemas" [formGroup]="form">
+  <ng-container *fluentControlOutlet="form.get([$any(schema.name)]) ?? form; schema: $any(schema); model: model"></ng-container>
+</td>

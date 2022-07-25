@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { form, input, radio, select } from 'ngx-fluent-form';
+import { form, input, radio, select, switcher } from 'ngx-fluent-form';
 import { AbstractFluentFormWrapperComponent, defineMeta, defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
@@ -38,17 +38,22 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
     super();
 
     this.schemas = form(
-      select('select').label('控制内容').options(SELECT_OPTIONS).span(8).listener({
+      select('select').label('控制内容').options(SELECT_OPTIONS).span(6).listener({
         valueChange: value => {
           this.model.text = value;
           this.model = { ...this.model };
         }
       }),
-      radio('radio').label('控制显隐').span(8).value(true).options([
+      radio('show').label('控制显隐').span(7).value(true).options([
         { label: '显示', value: true },
         { label: '隐藏', value: false },
       ]),
-      input('text').label('文本输入框').span(8).hidden((model: { radio: boolean }) => !model.radio),
+      switcher('state').label('状态').span(4).placeholder(['启用', '禁用']),
+      input('text')
+        .label('文本输入框')
+        .span(6)
+        .hidden((model: { show: boolean }) => !model.show)
+        .disabled((model: { state: boolean }) => !model.state),
     );
 
     this.model = {}
@@ -63,7 +68,7 @@ export const story = defineStory();
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { form, input, radio, select } from 'ngx-fluent-form';
+  import { form, input, radio, select, switcher } from 'ngx-fluent-form';
 
   const SELECT_OPTIONS = [
     { label: 'Jack', value: 'jack' },
@@ -77,17 +82,22 @@ export const source = dedent`
   })
   export class ExampleComponent {
     schemas = form(
-      select('select').label('控制内容').options(SELECT_OPTIONS).span(8).listener({
+      select('select').label('控制内容').options(SELECT_OPTIONS).span(6).listener({
         valueChange: value => {
           this.model.text = value;
           this.model = { ...this.model };
         }
       }),
-      radio('radio').label('控制显隐').span(8).value(true).options([
+      radio('show').label('控制显隐').span(7).value(true).options([
         { label: '显示', value: true },
         { label: '隐藏', value: false },
       ]),
-      input('text').label('文本输入框').span(8).hidden((model: { radio: boolean }) => !model.radio),
+      switcher('state').label('状态').span(4).placeholder(['启用', '禁用']),
+      input('text')
+        .label('文本输入框')
+        .span(6)
+        .hidden((model: { show: boolean }) => !model.show)
+        .disabled((model: { state: boolean }) => !model.state),
     );
 
     model = {};

@@ -55,13 +55,14 @@ export class FluentFormComponent<T extends Obj> implements OnChanges {
 
       // 先把模型赋值到表单（使用模型初始化表单）
       modelUtils(this.model as Obj, this.schemas).assign(this.form);
-      // 此时表单已就绪，把表单赋值到模型
+
       const utils = formUtils(this.form, this.schemas);
-      this.updateModel(utils);
 
       this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-        this.updateModel(utils);
+        this.onValueChanges(utils);
       });
+
+      modelUtils(this.model as Obj, this.schemas).assign(this.form);
     }
 
     // 如果是首次变更（首次的初始化已在上面处理了）
@@ -72,11 +73,12 @@ export class FluentFormComponent<T extends Obj> implements OnChanges {
   }
 
   /**
-   * 更新模型
+   * 表单值更新时
    * @param utils
    */
-  private updateModel(utils: FormUtils<FormGroup>) {
+  private onValueChanges(utils: FormUtils<FormGroup>) {
     utils.assign(this.model);
+    utils.change(this.model);
     this.modelChange.emit(this._model = utils.assign({} as T));
   }
 

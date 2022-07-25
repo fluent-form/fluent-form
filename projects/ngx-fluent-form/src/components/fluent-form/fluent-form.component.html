@@ -43,7 +43,7 @@
                 [nzTooltipTitle]="schema.label.tooltip?.title ?? schema.label.tooltip"
                 [nzTooltipIcon]="schema.label.tooltip?.icon"
                 [nzFor]="schema.id"
-                [nzRequired]="schema.required">
+                [nzRequired]="schema.required | hidden: model">
                 {{ schema.label.value ?? schema.label }}
               </nz-form-label>
             </ng-container>

@@ -50,9 +50,9 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
   };
   value?: Val;
   /** Is it a required control */
-  required?: boolean;
+  required?: boolean | ((model: SafeAny) => boolean);
   /** Whether to disable control */
-  disabled?: boolean;
+  disabled?: boolean | ((model: SafeAny) => boolean);
   feedback?: boolean;
   /** Error message for control */
   tips?: {

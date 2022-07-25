@@ -10,7 +10,7 @@ import { valueUtils } from './value.utils';
  */
 export function createFormControl(schema: ControlSchema): FormControl {
   return new FormControl(
-    { value: schema.value ?? null, disabled: schema.disabled },
+    schema.value,
     schema.validator,
     schema.asyncValidator
   );
@@ -143,6 +143,38 @@ export class FormUtils<F extends FormGroup | FormArray> {
     });
 
     return model;
+  }
+
+  /**
+   * 更新表单控件状态，目前只有 disabled 选项
+   * @param model
+   */
+  change<T>(model: T) {
+    this.schemas.forEach(schema => {
+      // 这些图示不包含控件图示，直接跳过
+      if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
+
+      if (schema.type === 'input-group') {
+        formUtils(this.form, schema.schemas as AnySchema[]).change(model);
+        return;
+      }
+
+      const control = this.form.get([schema.name!.toString()])!;
+
+      if (schema.type === 'group') {
+        return formUtils(control as FormGroup, schema.schemas as AnySchema[]).change(model);
+      }
+
+      if (schema.type === 'array') {
+        return formUtils(control as FormArray, schema.schemas as AnySchema[]).change(model);
+      }
+
+      if (typeof schema.disabled === 'function') {
+        const disabled = schema.disabled(model);
+        const options = { emitEvent: false };
+        disabled ? control.disable(options) : control.enable(options);
+      }
+    });
   }
 
 }

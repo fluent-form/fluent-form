@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { ComponentSchema, ControlSchema } from '../../schemas';
-import { Obj } from '../../type';
+import { Arr, Obj } from '../../type';
 
-export type ComponentTemplateRef<T extends Obj> = TemplateRef<{ control: AbstractControl, schema: ComponentSchema | ControlSchema, model: T }>;
+export type ComponentTemplateRef<T extends Obj | Arr> = TemplateRef<{ control: AbstractControl, schema: ComponentSchema | ControlSchema, model: T }>;
 
 /**
  * 这个组件专门用来放可复用的模板
@@ -15,7 +15,7 @@ export type ComponentTemplateRef<T extends Obj> = TemplateRef<{ control: Abstrac
   styleUrls: ['./fluent-template.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FluentTemplateComponent<T extends Obj> {
+export class FluentTemplateComponent<T extends Obj | Arr> {
   @ViewChild('componentTemplate', { static: true }) componentTemplate!: ComponentTemplateRef<T>;
 
   /** @internal */

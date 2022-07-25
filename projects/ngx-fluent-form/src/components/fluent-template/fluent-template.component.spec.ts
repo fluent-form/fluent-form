@@ -1,11 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Obj } from '../../type';
+import { Arr, Obj } from '../../type';
 import { FluentTemplateComponent } from './fluent-template.component';
 
-
 describe('FluentTemplateComponent', () => {
-  let component: FluentTemplateComponent<Obj>;
-  let fixture: ComponentFixture<FluentTemplateComponent<Obj>>;
+  let component: FluentTemplateComponent<Obj | Arr>;
+  let fixture: ComponentFixture<FluentTemplateComponent<Obj | Arr>>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

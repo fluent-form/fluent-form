@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
-import { Subject, takeUntil } from 'rxjs';
+import { takeUntil } from 'rxjs';
 import { AnySchema } from '../../schemas';
+import { Destroyer } from '../../services/destroyer.service';
 import { Obj } from '../../type';
 import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchemas } from '../../utils';
 
@@ -11,10 +12,10 @@ import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchemas } fr
   selector: 'fluent-form',
   templateUrl: './fluent-form.component.html',
   styleUrls: ['./fluent-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [Destroyer]
 })
-export class FluentFormComponent<T extends Obj> implements OnChanges, OnDestroy {
-  private destroy$: Subject<void> = new Subject<void>();
+export class FluentFormComponent<T extends Obj> implements OnChanges {
   /**
    * 内部的不可变模型，用来跟公开的模型值进行引用比较，
    * 判断变更是内部发出的还是外部传入的，如果引用一致，则为内部变更，直接忽略
@@ -44,14 +45,13 @@ export class FluentFormComponent<T extends Obj> implements OnChanges, OnDestroy 
   @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
   @Output() modelChange: EventEmitter<T> = new EventEmitter();
 
+  constructor(private destroy$: Destroyer) { }
+
   ngOnChanges({ schemas: schemasChange, model: modelChange }: SimpleChanges): void {
     if (schemasChange) {
-      if (!schemasChange.firstChange) {
-        this.destroy$.next();
-      }
+      schemasChange.firstChange || this.destroy$.next();
 
-      this.form = createFormGroup(this.schemas);
-      this.formChange.emit(this.form);
+      this.formChange.emit(this.form = createFormGroup(this.schemas));
 
       // 先把模型赋值到表单（使用模型初始化表单）
       modelUtils(this.model as Obj, this.schemas).assign(this.form);
@@ -78,11 +78,6 @@ export class FluentFormComponent<T extends Obj> implements OnChanges, OnDestroy 
   private updateModel(utils: FormUtils<FormGroup>) {
     utils.assign(this.model);
     this.modelChange.emit(this._model = utils.assign({} as T));
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
 }

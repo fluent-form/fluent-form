@@ -7,6 +7,7 @@ import { Arr, Obj } from '../type';
 import { ControlContainer } from './control-container';
 
 @Directive({
+  // eslint-disable-next-line
   selector: 'fluent-control-outlet'
 })
 export class FluentControlOutletDirective<T extends Obj | Arr> implements OnInit, OnChanges, OnDestroy {

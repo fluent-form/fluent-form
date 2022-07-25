@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, forwardRef, Input, Output, SimpleChanges } from '@angular/core';
+import { Directive, EventEmitter, forwardRef, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { takeUntil } from 'rxjs';
 import { AnySchema, ComponentSchema, ControlSchema } from '../schemas';
@@ -19,7 +19,7 @@ import { FluentFormNameDirective } from './fluent-form-name.directive';
     }
   ]
 })
-export class FluentFormDirective<T extends Obj> extends ControlContainer {
+export class FluentFormDirective<T extends Obj> extends ControlContainer implements OnChanges {
   private _model!: T;
   private _schemas!: AnySchema[];
   private directives: FluentControlOutletDirective<Obj | Arr>[] = [];

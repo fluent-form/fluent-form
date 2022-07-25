@@ -19,9 +19,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { FluentFormComponent, FluentTemplateComponent } from './components';
-import { ControlOutletDirective } from './directives/control-outlet.directive';
-import { EventBinderDirective } from './directives/event-binder.directive';
-import { PropertyBinderDirective } from './directives/property-binder.directive';
+import { ControlOutletDirective, EventBinderDirective, FluentControlOutletDirective, FluentFormDirective, FluentFormNameDirective, PropertyBinderDirective } from './directives';
 import { HiddenPipe } from './pipes/hidden.pipe';
 import { TypeofPipe } from './pipes/typeof.pipe';
 
@@ -29,6 +27,9 @@ import { TypeofPipe } from './pipes/typeof.pipe';
   declarations: [
     FluentFormComponent,
     FluentTemplateComponent,
+    FluentFormDirective,
+    FluentFormNameDirective,
+    FluentControlOutletDirective,
     EventBinderDirective,
     PropertyBinderDirective,
     ControlOutletDirective,
@@ -57,7 +58,10 @@ import { TypeofPipe } from './pipes/typeof.pipe';
     NzOutletModule
   ],
   exports: [
-    FluentFormComponent
+    FluentFormComponent,
+    FluentFormDirective,
+    FluentFormNameDirective,
+    FluentControlOutletDirective,
   ]
 })
 export class FluentFormModule { }

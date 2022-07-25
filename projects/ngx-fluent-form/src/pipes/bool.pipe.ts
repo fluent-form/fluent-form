@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'hidden'
+  name: 'bool'
 })
-export class HiddenPipe implements PipeTransform {
+export class BoolPipe implements PipeTransform {
 
   transform<T>(value: boolean | ((model: T) => boolean), model: T): boolean {
     if (typeof value === 'function') {

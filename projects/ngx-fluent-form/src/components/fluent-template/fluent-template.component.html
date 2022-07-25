@@ -244,7 +244,7 @@
 
     <ng-container *ngSwitchCase="'button'">
       <button
-        *ngIf="!(schema.hidden | hidden: model)"
+        *ngIf="!(schema.hidden | bool: model)"
         nz-button
         [fluentPropertyBinder]="{ schema }"
         [fluentEventBinder]="{ schema }"
@@ -275,7 +275,7 @@
 <!-- @param schema  组件的图示 -->
 <!-- @param model   模型值 -->
 <ng-template #composableComponentTemplate let-control="control" let-schema="schema" let-model="model">
-  <ng-container *ngIf="!(schema.hidden | hidden: model)" [ngSwitch]="schema.type">
+  <ng-container *ngIf="!(schema.hidden | bool: model)" [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
       <input
         nz-col

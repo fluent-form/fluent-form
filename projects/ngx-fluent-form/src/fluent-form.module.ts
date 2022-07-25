@@ -20,7 +20,7 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { FluentFormComponent, FluentTemplateComponent } from './components';
 import { ControlOutletDirective, EventBinderDirective, FluentControlOutletDirective, FluentFormDirective, FluentFormNameDirective, PropertyBinderDirective } from './directives';
-import { HiddenPipe } from './pipes/hidden.pipe';
+import { BoolPipe } from './pipes/bool.pipe';
 import { TypeofPipe } from './pipes/typeof.pipe';
 
 @NgModule({
@@ -34,7 +34,7 @@ import { TypeofPipe } from './pipes/typeof.pipe';
     PropertyBinderDirective,
     ControlOutletDirective,
     TypeofPipe,
-    HiddenPipe,
+    BoolPipe,
   ],
   imports: [
     CommonModule,

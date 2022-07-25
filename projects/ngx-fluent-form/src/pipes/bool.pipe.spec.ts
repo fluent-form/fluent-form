@@ -1,15 +1,15 @@
-import { HiddenPipe } from './hidden.pipe';
+import { BoolPipe } from './bool.pipe';
 
 describe('HiddenPipe', () => {
   interface Model {
     value: boolean;
   }
 
-  let pipe: HiddenPipe;
+  let pipe: BoolPipe;
   const model: Model = { value: true };
 
   beforeEach(() => {
-    pipe = new HiddenPipe();
+    pipe = new BoolPipe();
   });
 
   it('create an instance', () => {

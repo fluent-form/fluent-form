@@ -50,8 +50,8 @@ export const source = dedent`
         input('keyword').subtype('search').placeholder('请输入搜索关键字').span(18),
         button().subtype('primary').content('提交').flex('auto'),
       ),
-      inputGroup().span(8).before({ template: '@' }).schemas(
-        input('at').placeholder('请输入搜索'),
+      inputGroup().span(6).before('@').schemas(
+        input('at').placeholder('请输入'),
       ),
       inputGroup().span(8).suffix({ icon: 'info-circle' }).schemas(
         input('info').placeholder('图标后缀'),

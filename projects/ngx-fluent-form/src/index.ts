@@ -3,9 +3,8 @@
  */
 
 export * from './builders';
-export * from './components/fluent-form/fluent-form.component';
-export * from './directives/event-binder.directive';
-export * from './directives/property-binder.directive';
+export * from './components';
+export * from './directives';
 export * from './fluent-form.module';
 export * from './schemas';
 export * from './utils';

@@ -1,5 +1,5 @@
 import { Directive, EventEmitter, forwardRef, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 import { takeUntil } from 'rxjs';
 import { AnySchema, ComponentSchema, ControlSchema } from '../schemas';
 import { Destroyer } from '../services/destroyer.service';
@@ -19,30 +19,28 @@ import { FluentFormNameDirective } from './fluent-form-name.directive';
     }
   ]
 })
-export class FluentFormDirective<T extends Obj> extends ControlContainer implements OnChanges {
+export class FluentFormDirective<T extends Obj | Arr> extends ControlContainer<T> implements OnChanges {
   private _model!: T;
-  private _schemas!: AnySchema[];
-  private directives: FluentControlOutletDirective<Obj | Arr>[] = [];
+  private directives: FluentControlOutletDirective<T>[] = [];
 
-  /** @internal */
-  form!: FormGroup;
+  override form!: FormGroup;
 
   @Input('fluentForm')
-  get schemas(): AnySchema[] {
+  override get schemas(): AnySchema[] {
     return this._schemas;
   }
-  set schemas(value: AnySchema[]) {
+  override set schemas(value: AnySchema[]) {
     this._schemas = standardSchemas(value);
   }
 
   /** 模型 */
-  @Input() model!: T;
+  @Input() override model!: T;
 
   @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
   @Output() modelChange: EventEmitter<T> = new EventEmitter();
 
-  override get directive(): FluentFormDirective<Obj> | FluentFormNameDirective<Obj> | null {
-    return this as FluentFormDirective<Obj>;
+  override get directive(): FluentFormDirective<T> | FluentFormNameDirective<T> | null {
+    return this;
   }
 
   constructor(private destroy$: Destroyer) {
@@ -55,20 +53,15 @@ export class FluentFormDirective<T extends Obj> extends ControlContainer impleme
 
       this.formChange.emit(this.form = createFormGroup(this.schemas));
 
-      this.directives.forEach(directive => {
-        directive.control = this.form.get([directive.name])!;
-        directive.schema = schemasUtils(this.schemas).find<ComponentSchema | ControlSchema>(directive.name)!;
-      });
+      this.directives.forEach(directive => this.assignDirective(directive));
 
-      // 先把模型赋值到表单（使用模型初始化表单）
-      modelUtils(this.model as Obj, this.schemas).assign(this.form);
-      // 此时表单已就绪，把表单赋值到模型
       const utils = formUtils(this.form, this.schemas);
-      this.updateModel(utils);
 
       this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-        this.updateModel(utils);
+        this.onValueChanges(utils);
       });
+      // 使用模型初始化表单
+      modelUtils(this.model as Obj, this.schemas).assign(this.form);
     }
 
     // 如果是首次变更（首次的初始化已在上面处理了）
@@ -78,17 +71,29 @@ export class FluentFormDirective<T extends Obj> extends ControlContainer impleme
     }
   }
 
-  addDirective(directive: FluentControlOutletDirective<Obj | Arr>) {
-    this.updateDirective(directive);
+  /**
+   * 添加子指令
+   * @param directive
+   */
+  addDirective(directive: FluentControlOutletDirective<T>) {
+    this.assignDirective(directive);
     this.directives = this.directives.concat(directive);
   }
 
-  updateDirective(directive: FluentControlOutletDirective<Obj | Arr>) {
+  /**
+   * 分配参数到子指令
+   * @param directive
+   */
+  assignDirective(directive: FluentControlOutletDirective<T>) {
     directive.control = this.form.get([directive.name])!;
     directive.schema = schemasUtils(this.schemas).find<ComponentSchema | ControlSchema>(directive.name)!;
   }
 
-  removeDirective(directive: FluentControlOutletDirective<Obj | Arr>) {
+  /**
+   * 移除子指令
+   * @param directive
+   */
+  removeDirective(directive: FluentControlOutletDirective<T>) {
     this.directives = this.directives.filter(o => o !== directive);
   }
 
@@ -96,8 +101,9 @@ export class FluentFormDirective<T extends Obj> extends ControlContainer impleme
    * 更新模型
    * @param utils
    */
-  private updateModel(utils: FormUtils<FormGroup>) {
+  private onValueChanges(utils: FormUtils<FormGroup | FormArray>) {
     utils.assign(this.model);
+    utils.change(this.model);
     this.modelChange.emit(this._model = utils.assign({} as T));
   }
 }

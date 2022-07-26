@@ -25,7 +25,7 @@ export class FluentControlOutletDirective<T extends Obj | Arr> implements OnInit
     @Inject(COMPONENT_TEMPLATE_REF_TOKEN)
     private componentTemplate: ComponentTemplateRef<T>,
     @Host() @SkipSelf()
-    private controlContainer: ControlContainer,
+    private controlContainer: ControlContainer<T>,
   ) { }
 
   ngOnInit() {
@@ -34,7 +34,7 @@ export class FluentControlOutletDirective<T extends Obj | Arr> implements OnInit
   }
 
   ngOnChanges() {
-    this.controlContainer.directive!.updateDirective(this);
+    this.controlContainer.directive!.assignDirective(this);
   }
 
   ngOnDestroy() {

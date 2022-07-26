@@ -53,15 +53,12 @@ export class FluentFormComponent<T extends Obj> implements OnChanges {
 
       this.formChange.emit(this.form = createFormGroup(this.schemas));
 
-      // 先把模型赋值到表单（使用模型初始化表单）
-      modelUtils(this.model as Obj, this.schemas).assign(this.form);
-
       const utils = formUtils(this.form, this.schemas);
 
       this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
         this.onValueChanges(utils);
       });
-
+      // 使用模型初始化表单
       modelUtils(this.model as Obj, this.schemas).assign(this.form);
     }
 

@@ -1,28 +1,29 @@
-import { Directive, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
-import { asapScheduler, fromEvent, observeOn, Subject, takeUntil } from 'rxjs';
+import { asapScheduler, fromEvent, observeOn, takeUntil } from 'rxjs';
 import { ControlSchema } from '../schemas/index.schema';
+import { Destroyer } from '../services/destroyer.service';
 import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../type';
 
 @Directive({
-  selector: '[fluentEventBinder]'
+  selector: '[fluentEventBinder]',
+  providers: [Destroyer]
 })
-export class EventBinderDirective<E extends HTMLElement, C extends object, S extends ControlSchema> implements OnChanges, OnDestroy {
+export class EventBinderDirective<E extends HTMLElement, C extends object, S extends ControlSchema> implements OnChanges {
   @Input() fluentEventBinder!: { cmp?: C, schema: S, control?: FormControl };
 
   private get host() {
     return this.fluentEventBinder.cmp ?? this.elementRef.nativeElement;
   }
 
-  private destory$: Subject<void> = new Subject<void>();
-
-  constructor(private elementRef: ElementRef<E>) { }
+  constructor(
+    private elementRef: ElementRef<E>,
+    private destory$: Destroyer
+  ) { }
 
   ngOnChanges({ fluentEventBinder }: SimpleChanges): void {
-    if (!fluentEventBinder.firstChange) {
-      this.destory$.next();
-    }
+    fluentEventBinder.firstChange || this.destory$.next();
 
     const { schema, control } = this.fluentEventBinder;
 
@@ -53,10 +54,5 @@ export class EventBinderDirective<E extends HTMLElement, C extends object, S ext
         });
       }
     });
-  }
-
-  ngOnDestroy() {
-    this.destory$.next();
-    this.destory$.complete();
   }
 }

@@ -155,8 +155,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
       if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
 
       if (schema.type === 'input-group') {
-        formUtils(this.form, schema.schemas as AnySchema[]).change(model);
-        return;
+        return formUtils(this.form, schema.schemas as AnySchema[]).change(model);
       }
 
       const control = this.form.get([schema.name!.toString()])!;
@@ -169,10 +168,13 @@ export class FormUtils<F extends FormGroup | FormArray> {
         return formUtils(control as FormArray, schema.schemas as AnySchema[]).change(model);
       }
 
+      const options = { emitEvent: false };
+
       if (typeof schema.disabled === 'function') {
         const disabled = schema.disabled(model);
-        const options = { emitEvent: false };
         disabled ? control.disable(options) : control.enable(options);
+      } else {
+        schema.disabled ? control.disable(options) : control.enable(options);
       }
     });
   }

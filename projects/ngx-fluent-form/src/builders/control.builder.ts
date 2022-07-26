@@ -33,12 +33,12 @@ export function date<N extends SingleKeySchemaName>(name?: N) {
   return builder<DatePickerControlSchema<N>>().type('date').name(name);
 }
 
-type TypeAndNameAndShowTime = TypeAndName | 'showTime';
+type TypeAndNameAndTime = TypeAndName | 'time';
 
-export function datetime(): UnstableBuilder<DatePickerControlSchema<number>, TypeAndNameAndShowTime>;
-export function datetime<N extends SingleKeySchemaName>(name?: N): UnstableBuilder<DatePickerControlSchema<N>, TypeAndNameAndShowTime>;
+export function datetime(): UnstableBuilder<DatePickerControlSchema<number>, TypeAndNameAndTime>;
+export function datetime<N extends SingleKeySchemaName>(name?: N): UnstableBuilder<DatePickerControlSchema<N>, TypeAndNameAndTime>;
 export function datetime<N extends SingleKeySchemaName>(name?: N) {
-  return date<N>(name).format('yyyy-MM-dd HH:mm:ss').showTime(true);
+  return date<N>(name).format('yyyy-MM-dd HH:mm:ss').time(true);
 }
 
 export function time(): UnstableBuilder<TimePickerControlSchema<number>, TypeAndName>;

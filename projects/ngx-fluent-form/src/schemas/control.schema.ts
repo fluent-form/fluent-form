@@ -10,7 +10,7 @@ import { NzSelectComponent, NzSelectModeType } from 'ng-zorro-antd/select';
 import { NzSliderComponent } from 'ng-zorro-antd/slider';
 import { NzSwitchComponent } from 'ng-zorro-antd/switch';
 import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
-import { Obj } from '../type';
+import { Obj, SingleOrAll } from '../type';
 import { AbstractComponentControlSchema, AbstractControlSchema, AbstractDateControlSchema, AbstractElementControlSchema, AbstractSchema, AbstractTextControlSchema, AnySchemaName, SingleKeySchemaName } from './abstract.schema';
 import { AnyBuilder, AnySchema, FormBuilder, FormSchema, SingleKeyControlBuilder, SingleKeyControlSchema } from './index.schema';
 
@@ -52,9 +52,7 @@ export interface NumberInputControlSchema<Name extends SingleKeySchemaName = Sin
   /** Minimum value */
   min?: number;
   /** Decimal precision */
-  precision?: number;
-  /** Decimal precision mode */
-  precisionMode?: NzInputNumberComponent['nzPrecisionMode'];
+  precision?: number | SingleOrAll<{ value: number, mode: NzInputNumberComponent['nzPrecisionMode'] }>;
   /** Step length */
   step?: number;
 }

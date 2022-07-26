@@ -83,13 +83,9 @@ const standardTextControlSchema = <T extends InputControlSchema | TextareaContro
       ]);
     } else {
       const { min, max } = schema.length as { max?: number, min?: number };
-      if (min) {
-        utils.addValidator(Validators.minLength(min));
-      }
 
-      if (max) {
-        utils.addValidator(Validators.maxLength(max));
-      }
+      min && utils.addValidator(Validators.minLength(min));
+      max && utils.addValidator(Validators.maxLength(max));
     }
   }
 
@@ -104,9 +100,9 @@ export const standardSchema = <T extends AnySchema>(schema: T | Builder<T, T, {}
   let _schema = (isBuilder(schema) ? schema.build() : { ...schema }) as AnySchema;
 
   if (isControlContainerSchema(_schema) || isComponentContainerSchema(_schema)) {
-    _schema = standardContainerSchema(_schema);
+    standardContainerSchema(_schema);
   } else if (isTextControlSchema(_schema)) {
-    _schema = standardTextControlSchema(_schema);
+    standardTextControlSchema(_schema);
   }
 
   if ('required' in _schema && _schema.required) {

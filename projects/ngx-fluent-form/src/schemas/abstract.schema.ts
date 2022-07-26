@@ -109,7 +109,7 @@ export interface AbstractDateControlSchema<Name extends AnySchemaName, Val> exte
   /** Show clean button */
   clear?: boolean;
   /** Show time picker in date picker */
-  showTime?: boolean;
+  time?: boolean;
   /** Date display format */
   format?: string;
   /** Inline mode */

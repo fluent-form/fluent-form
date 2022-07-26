@@ -42,8 +42,8 @@
         [nzPlaceHolder]="schema.placeholder ?? ''"
         [nzMin]="schema.min ?? -infinity"
         [nzMax]="schema.max ?? infinity"
-        [nzPrecision]="schema.precision ?? ''"
-        [nzPrecisionMode]="schema.precisionMode"
+        [nzPrecision]="schema.precision?.value ?? (schema.precision | typeof: 'number') ? schema.precision : ''"
+        [nzPrecisionMode]="schema.precision?.mode"
         [nzStep]="schema.step ?? 1">
       </nz-input-number>
     </ng-container>
@@ -58,7 +58,7 @@
         [nzPlaceHolder]="schema.placeholder"
         [nzMode]="schema.mode"
         [nzAllowClear]="schema.clear"
-        [nzShowTime]="schema.showTime"
+        [nzShowTime]="schema.time"
         [nzFormat]="schema.format"
         [nzInline]="schema.inline"></nz-date-picker>
     </ng-container>
@@ -73,7 +73,7 @@
         [nzPlaceHolder]="schema.placeholder"
         [nzMode]="schema.mode"
         [nzAllowClear]="schema.clear"
-        [nzShowTime]="schema.showTime"
+        [nzShowTime]="schema.time"
         [nzFormat]="schema.format"
         [nzInline]="schema.inline"></nz-range-picker>
     </ng-container>
@@ -345,7 +345,7 @@
         [nzPlaceHolder]="schema.placeholder"
         [nzMode]="schema.mode"
         [nzAllowClear]="schema.clear"
-        [nzShowTime]="schema.showTime"
+        [nzShowTime]="schema.time"
         [nzFormat]="schema.format"
         [nzInline]="schema.inline"></nz-date-picker>
     </ng-container>
@@ -364,7 +364,7 @@
         [nzPlaceHolder]="schema.placeholder"
         [nzMode]="schema.mode"
         [nzAllowClear]="schema.clear"
-        [nzShowTime]="schema.showTime"
+        [nzShowTime]="schema.time"
         [nzFormat]="schema.format"
         [nzInline]="schema.inline"></nz-range-picker>
     </ng-container>

@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'bool'
+  name: 'call'
 })
-export class BoolPipe implements PipeTransform {
+export class CallPipe implements PipeTransform {
 
   transform<T>(value: boolean | ((model: T) => boolean), model: T): boolean {
     if (typeof value === 'function') {

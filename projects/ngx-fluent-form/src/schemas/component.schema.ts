@@ -1,5 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { ThemeType } from '@ant-design/icons-angular';
+import { SafeAny } from '@ngify/types';
 import { NzButtonComponent, NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzInputGroupComponent } from 'ng-zorro-antd/input';
@@ -18,7 +19,6 @@ interface Icon {
 export interface InputGroupComponentSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzInputGroupComponent> {
   type: 'input-group';
   schemas: (ComposableComponentSchema | ComposableComponentBuilder)[];
-  required?: boolean;
   before?: string | TemplateRef<void> | { icon: string };
   after?: string | TemplateRef<void> | { icon: string };
   prefix?: string | TemplateRef<void> | { icon: string };
@@ -29,10 +29,10 @@ export interface InputGroupComponentSchema<Name extends SingleKeySchemaName = Si
 export interface ButtonComponentSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name>, AbstractElementSchema<HTMLButtonElement> {
   type: 'button';
   subtype?: NzButtonType;
-  disabled?: boolean;
-  ghost?: boolean;
-  danger?: boolean;
-  loading?: boolean;
+  disabled?: boolean | ((model: SafeAny) => boolean);
+  ghost?: boolean | ((model: SafeAny) => boolean);
+  danger?: boolean | ((model: SafeAny) => boolean);
+  loading?: boolean | ((model: SafeAny) => boolean);
   shape?: NzButtonShape;
   size?: NzButtonSize;
   block?: boolean;

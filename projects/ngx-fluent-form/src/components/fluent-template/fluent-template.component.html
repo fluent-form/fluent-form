@@ -2,7 +2,7 @@
 <!-- 根据 schema.type 来输出不同的控件 -->
 <!-- @param control FormControl -->
 <!-- @param schema  组件的图示 -->
-<!-- @param model   模型值 -->
+<!-- @param model   顶级模型值 -->
 <ng-template #componentTemplate let-control="control" let-schema="schema" let-model="model">
   <ng-container [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
@@ -244,18 +244,18 @@
 
     <ng-container *ngSwitchCase="'button'">
       <button
-        *ngIf="!(schema.hidden | bool: model)"
+        *ngIf="!(schema.hidden | call: model)"
         nz-button
         [fluentPropertyBinder]="{ schema }"
         [fluentEventBinder]="{ schema }"
-        [disabled]="schema.disabled"
+        [disabled]="schema.disabled | call: model"
         [nzType]="schema.subtype"
-        [nzGhost]="schema.ghost"
-        [nzLoading]="schema.loading"
+        [nzGhost]="schema.ghost | call: model"
+        [nzLoading]="schema.loading | call: model"
         [nzShape]="schema.shape"
         [nzSize]="schema.size"
         [nzBlock]="schema.block"
-        [nzDanger]="schema.danger">
+        [nzDanger]="schema.danger | call: model">
         <i
           *ngIf="schema.icon"
           nz-icon
@@ -275,7 +275,7 @@
 <!-- @param schema  组件的图示 -->
 <!-- @param model   模型值 -->
 <ng-template #composableComponentTemplate let-control="control" let-schema="schema" let-model="model">
-  <ng-container *ngIf="!(schema.hidden | bool: model)" [ngSwitch]="schema.type">
+  <ng-container *ngIf="!(schema.hidden | call: model)" [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
       <input
         nz-col

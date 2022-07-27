@@ -25,7 +25,7 @@ export class ModelUtils<M extends Arr | Obj> {
       // 这些图示不包含控件图示，直接跳过
       if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
 
-      if (schema.type === 'input-group') {
+      if (schema.type === 'input-group' || schema.type === 'steps' || schema.type === 'step') {
         modelUtils(this.model as Obj, schema.schemas as AnySchema[]).assign(form as FormGroup, false);
         return;
       }

@@ -1,6 +1,6 @@
 import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
 import { isComponentContainerSchema, isComponentSchema, isDoubleKeySchema } from '.';
-import { AnyControlSchema, AnySchema, ComposableComponentSchema, ControlSchema } from '../schemas/index.schema';
+import { AnyControlSchema, AnySchema, ControlSchema } from '../schemas/index.schema';
 import { Arr, Obj } from '../type';
 import { valueUtils } from './value.utils';
 
@@ -17,35 +17,42 @@ export function createFormControl(schema: ControlSchema): FormControl {
 }
 
 /**
+ * 创建 FormGroup 的 FormControl 配置
+ * @internal
+ * @param schemas
+ * @param controls
+ */
+function createFormControls(schemas: AnySchema[], controls: Record<string, AbstractControl> = {}) {
+  return schemas.filter(o => !isComponentSchema(o) && !isComponentContainerSchema(o)).reduce((controls, schema) => {
+    switch (schema.type) {
+      case 'group':
+        controls[schema.name!.toString()] = createFormGroup(schema.schemas as AnySchema[]);
+        break;
+
+      case 'array':
+        controls[schema.name!.toString()] = createFormArray(schema.schemas as AnyControlSchema[]);
+        break;
+
+      case 'step':
+      case 'steps':
+      case 'input-group':
+        createFormControls(schema.schemas as AnySchema[], controls);
+        break;
+
+      default:
+        controls[schema.name!.toString()] = createFormControl(schema as ControlSchema);
+    }
+
+    return controls;
+  }, controls);
+}
+
+/**
  * 将图示组转换为表单组
  * @param schemas 标准化后的图示
  */
 export function createFormGroup(schemas: AnySchema[]): FormGroup {
-  return new FormGroup(
-    // 过滤掉组件图示和组件容器图示
-    schemas.filter(o => !isComponentSchema(o) && !isComponentContainerSchema(o)).reduce((controls, schema) => {
-      switch (schema.type) {
-        case 'group':
-          controls[schema.name!.toString()] = createFormGroup(schema.schemas as AnySchema[]);
-          break;
-
-        case 'array':
-          controls[schema.name!.toString()] = createFormArray(schema.schemas as AnyControlSchema[]);
-          break;
-
-        case 'input-group':
-          (schema.schemas as ComposableComponentSchema[]).filter(o => !isComponentSchema(o)).forEach(subschema => {
-            controls[subschema.name!.toString()] = createFormControl(subschema as ControlSchema);
-          });
-          break;
-
-        default:
-          controls[schema.name!.toString()] = createFormControl(schema as ControlSchema);
-      }
-
-      return controls;
-    }, {} as Record<string, AbstractControl>)
-  );
+  return new FormGroup(createFormControls(schemas));
 }
 
 /**
@@ -105,7 +112,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
       // 这些图示不包含控件图示，直接跳过
       if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
 
-      if (schema.type === 'input-group') {
+      if (schema.type === 'input-group' || schema.type === 'steps' || schema.type === 'step') {
         formUtils(this.form, schema.schemas as AnySchema[]).assign(model, false);
         return;
       }
@@ -154,7 +161,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
       // 这些图示不包含控件图示，直接跳过
       if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
 
-      if (schema.type === 'input-group') {
+      if (schema.type === 'input-group' || schema.type === 'steps' || schema.type === 'step') {
         return formUtils(this.form, schema.schemas as AnySchema[]).change(model);
       }
 

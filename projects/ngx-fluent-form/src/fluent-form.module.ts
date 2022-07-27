@@ -16,6 +16,7 @@ import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { FluentFormComponent, FluentTemplateComponent } from './components';
@@ -55,7 +56,8 @@ import { TypeofPipe } from './pipes/typeof.pipe';
     NzRadioModule,
     NzRateModule,
     NzIconModule,
-    NzOutletModule
+    NzOutletModule,
+    NzStepsModule
   ],
   exports: [
     FluentFormComponent,

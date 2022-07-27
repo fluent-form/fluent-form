@@ -2,11 +2,12 @@ import { TemplateRef } from '@angular/core';
 import { ThemeType } from '@ant-design/icons-angular';
 import { SafeAny } from '@ngify/types';
 import { NzButtonComponent, NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
-import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
+import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzInputGroupComponent } from 'ng-zorro-antd/input';
+import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
 import { Builder } from '../utils/builder.utils';
 import { AbstractComponentSchema, AbstractElementSchema, AbstractSchema, SingleKeySchemaName } from './abstract.schema';
-import { ComposableComponentBuilder, ComposableComponentSchema } from './index.schema';
+import { AnyBuilder, AnySchema, ComposableComponentBuilder, ComposableComponentSchema } from './index.schema';
 
 /** @internal */
 interface Icon {
@@ -44,4 +45,26 @@ export interface ButtonGroupComponentSchema<Name extends SingleKeySchemaName = S
   type: 'button-group';
   schemas: (ButtonComponentSchema | Builder<ButtonComponentSchema, ButtonComponentSchema, {}>)[];
   size?: NzButtonSize;
+}
+
+export interface StepsComponentSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzStepsComponent> {
+  type: 'steps';
+  subtype?: 'default' | 'navigation';
+  current?: number;
+  placement?: 'vertical' | 'horizontal';
+  dot?: boolean;
+  size?: NzSizeDSType;
+  status?: NzStatusType;
+  start?: number;
+  schemas: (StepComponentSchema | Builder<StepComponentSchema, StepComponentSchema, {}>)[];
+}
+
+export interface StepComponentSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzStepComponent> {
+  type: 'step';
+  title: string | TemplateRef<void>;
+  subtitle?: string | TemplateRef<void>;
+  description?: string | TemplateRef<void>;
+  disabled?: boolean | ((model: SafeAny) => boolean);
+  status?: 'wait' | 'process' | 'finish' | 'error';
+  schemas: (AnySchema | AnyBuilder)[];
 }

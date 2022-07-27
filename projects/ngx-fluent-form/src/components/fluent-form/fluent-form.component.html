@@ -15,7 +15,12 @@
     [nzLayout]="layout"
     [nzNoColon]="!colon"
     [formGroup]="form">
-    <ng-container *ngFor="let schema of schemas">
+
+    <!-- 表单项模板 -->
+    <!-- @param schema  当前图示 -->
+    <!-- @param control 当前控件 -->
+    <!-- @param model   顶层模型 -->
+    <ng-template #formItemTemplate let-schema="schema" let-control="control" let-model="model">
       <div
         nz-col
         [nzSpan]="schema.span ?? null"
@@ -25,13 +30,48 @@
         [hidden]="schema.hidden | call: model">
         <ng-container *ngSwitchCase="'group'">
           <nz-divider *ngIf="schema.label" [nzText]="schema.label"></nz-divider>
-          <ng-container *ngTemplateOutlet="formTemplate; context: { form: form.get([schema.name]), schemas: schema.schemas }">
+          <ng-container *ngTemplateOutlet="formTemplate; context: { form: control, schemas: schema.schemas }">
           </ng-container>
         </ng-container>
 
         <ng-container *ngSwitchCase="'array'">
           <nz-divider *ngIf="schema.label" [nzText]="schema.label"></nz-divider>
-          <ng-container *ngTemplateOutlet="formTemplate; context: { form: form.get([schema.name]), schemas: schema.schemas }">
+          <ng-container *ngTemplateOutlet="formTemplate; context: { form: control, schemas: schema.schemas }">
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'steps'">
+          <nz-steps
+            [nzType]="schema.subtype"
+            [nzCurrent]="schema.current ?? 0"
+            [nzLabelPlacement]="schema.placement"
+            [nzProgressDot]="schema.dot"
+            [nzSize]="schema.size"
+            [nzStatus]="schema.status ?? 'process'"
+            [nzStartIndex]="schema.start ?? 0"
+            (nzIndexChange)="schema.current = $event">
+            <ng-container *ngFor="let subschema of schema.schemas">
+              <nz-step
+                [nzTitle]="subschema.title"
+                [nzSubtitle]="subschema.subtitle"
+                [nzDescription]="subschema.description"
+                [nzDisabled]="subschema.disabled"
+                [nzStatus]="subschema.status ?? schema.current === subschema.name ? 'process' : 'wait'"></nz-step>
+            </ng-container>
+          </nz-steps>
+
+          <ng-container *ngFor="let stepSchema of schema.schemas">
+            <div
+              *ngIf="schema.current === stepSchema.name"
+              nz-row
+              [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }"
+              [style.margin-top.px]="16">
+              <ng-container *ngFor="let subschema of stepSchema.schemas">
+                <ng-container
+                  *ngTemplateOutlet="formItemTemplate; context: { control: form.get([subschema.name]) ?? form, schema: subschema, model: model }">
+                </ng-container>
+              </ng-container>
+            </div>
           </ng-container>
         </ng-container>
 
@@ -50,20 +90,25 @@
 
             <nz-form-control
               [nzHasFeedback]="schema.feedback"
-              [nzValidateStatus]="form.get([schema.name])"
+              [nzValidateStatus]="control"
               [nzSuccessTip]="schema.tips?.success"
               [nzWarningTip]="schema.tips?.warning"
               [nzErrorTip]="schema.tips?.error"
               [nzValidatingTip]="schema.tips?.validating"
               [nzExtra]="schema.tips?.extra"
               [nzAutoTips]="schema.tips?.auto ?? {}">
-              <ng-container *fluentControlOutlet="form.get([schema.name]) ?? form; schema: schema; model: model">
+              <ng-container *fluentControlOutlet="control; schema: schema; model: model">
               </ng-container>
             </nz-form-control>
           </nz-form-item>
         </ng-container>
       </div>
-    </ng-container>
+    </ng-template>
 
+    <ng-container *ngFor="let schema of schemas">
+      <ng-container
+        *ngTemplateOutlet="formItemTemplate; context: { control: form.get([schema.name]) ?? form, schema: schema, model: model }">
+      </ng-container>
+    </ng-container>
   </form>
 </ng-template>

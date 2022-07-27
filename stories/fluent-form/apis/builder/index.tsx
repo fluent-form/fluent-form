@@ -79,7 +79,7 @@ export const ControlBuilders = () => (
         <TableWrapper>
           <thead>
             <tr>
-              <th>Funtion</th>
+              <th>Function</th>
               <th>Parameters</th>
             </tr>
           </thead>

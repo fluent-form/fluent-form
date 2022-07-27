@@ -76,7 +76,14 @@
             "styles": [
               "node_modules/ng-zorro-antd/ng-zorro-antd.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
+            ]
           }
         },
         "storybook": {

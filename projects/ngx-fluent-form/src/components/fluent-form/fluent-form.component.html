@@ -50,19 +50,19 @@
             [nzStatus]="schema.status ?? 'process'"
             [nzStartIndex]="schema.start ?? 0"
             (nzIndexChange)="schema.current = $event">
-            <ng-container *ngFor="let subschema of schema.schemas">
+            <ng-container *ngFor="let subschema of schema.schemas; index as index">
               <nz-step
                 [nzTitle]="subschema.title"
                 [nzSubtitle]="subschema.subtitle"
                 [nzDescription]="subschema.description"
                 [nzDisabled]="subschema.disabled"
-                [nzStatus]="subschema.status ?? schema.current === subschema.name ? 'process' : 'wait'"></nz-step>
+                [nzStatus]="subschema.status ?? schema.current === index ? 'process' : 'wait'"></nz-step>
             </ng-container>
           </nz-steps>
 
-          <ng-container *ngFor="let stepSchema of schema.schemas">
+          <ng-container *ngFor="let stepSchema of schema.schemas; index as stepIndex">
             <div
-              *ngIf="schema.current === stepSchema.name"
+              *ngIf="schema.current === stepIndex"
               nz-row
               [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }"
               [style.margin-top.px]="16">

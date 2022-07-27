@@ -35,14 +35,14 @@ export const story = defineStory({
         button().content('动态').hidden((model: any) => model.slider < 50),
       ),
       steps().span(24).current(0).schemas(
-        step(0).title('第一步').schemas(
+        step().title('第一步').schemas(
           input('text1InStep1').label('文本输入框').placeholder('第一步的输入框').span(12),
           input('text2InStep1').label('文本输入框').placeholder('第一步的输入框').span(12),
         ),
-        step(1).title('第二步').schemas(
+        step().title('第二步').schemas(
           input('textInStep2').label('文本输入框').placeholder('第二步的输入框'),
         ),
-        step(2).title('第三步').schemas(
+        step().title('第三步').schemas(
           input('textInStep3').label('文本输入框').placeholder('第三步的输入框'),
         )
       )
@@ -90,14 +90,14 @@ export const source = dedent`
         button().content('动态').hidden((model: any) => model.slider < 50),
       ),
       steps().span(24).current(0).schemas(
-        step(0).title('第一步').schemas(
+        step().title('第一步').schemas(
           input('text1InStep1').label('文本输入框').placeholder('第一步的输入框').span(12),
           input('text2InStep1').label('文本输入框').placeholder('第一步的输入框').span(12),
         ),
-        step(1).title('第二步').schemas(
+        step().title('第二步').schemas(
           input('textInStep2').label('文本输入框').placeholder('第二步的输入框'),
         ),
-        step(2).title('第三步').schemas(
+        step().title('第三步').schemas(
           input('textInStep3').label('文本输入框').placeholder('第三步的输入框'),
         )
       )

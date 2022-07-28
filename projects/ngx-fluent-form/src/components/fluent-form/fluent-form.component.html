@@ -2,11 +2,6 @@
   <ng-container *ngTemplateOutlet="formTemplate; context: { form, schemas }"></ng-container>
 </nz-spin>
 
-<!-- 关于为什么使用 `AbstractControl.get([name])` 而不是 `AbstractControl.get(name)` ？ -->
-<!-- 由于 NG 没有提供 FormArrayDirective，查阅源码后发现其实 FormGroupDirective 是兼容传入 FormArray 对象的。 -->
-<!-- 需要注意的就是 AbstractControl#get() 方法，由于 FormGroupDirective 原本是为 FormGroup 服务的， -->
-<!-- 而 FormGroup 的控件名为字符串，AbstractControl#get() 方法的参数自然也只处理字符串类型（调用了 String#split()）， -->
-<!-- 但 FormArray 的控件名为数字，此时如果参数传入的是数字，就会出问题，因此这里将参数一律转为数组来绕开此问题。 -->
 <ng-template #formTemplate let-form="form" let-schemas="schemas">
   <form
     nz-row
@@ -68,7 +63,7 @@
               [style.margin-top.px]="16">
               <ng-container *ngFor="let subschema of stepSchema.schemas">
                 <ng-container
-                  *ngTemplateOutlet="formItemTemplate; context: { control: form.get([subschema.name]) ?? form, schema: subschema, model: model }">
+                  *ngTemplateOutlet="formItemTemplate; context: { control: (subschema.name | control: form) ?? form, schema: subschema, model: model }">
                 </ng-container>
               </ng-container>
             </div>
@@ -107,7 +102,7 @@
 
     <ng-container *ngFor="let schema of schemas">
       <ng-container
-        *ngTemplateOutlet="formItemTemplate; context: { control: form.get([schema.name]) ?? form, schema: schema, model: model }">
+        *ngTemplateOutlet="formItemTemplate; context: { control: (schema.name | control: form) ?? form, schema: schema, model: model }">
       </ng-container>
     </ng-container>
   </form>

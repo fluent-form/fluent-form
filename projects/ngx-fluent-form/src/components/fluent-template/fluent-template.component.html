@@ -246,10 +246,11 @@
       <button
         *ngIf="!(schema.hidden | call: model)"
         nz-button
+        [type]="schema.subtype"
         [fluentPropertyBinder]="{ schema }"
         [fluentEventBinder]="{ schema }"
         [disabled]="schema.disabled | call: model"
-        [nzType]="schema.subtype"
+        [nzType]="schema.style"
         [nzGhost]="schema.ghost | call: model"
         [nzLoading]="schema.loading | call: model"
         [nzShape]="schema.shape"

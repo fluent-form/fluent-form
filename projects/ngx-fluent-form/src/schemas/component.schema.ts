@@ -29,7 +29,8 @@ export interface InputGroupComponentSchema<Name extends SingleKeySchemaName = Si
 
 export interface ButtonComponentSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name>, AbstractElementSchema<HTMLButtonElement> {
   type: 'button';
-  subtype?: NzButtonType;
+  subtype?: 'submit' | 'reset' | 'menu';
+  style?: NzButtonType;
   disabled?: boolean | ((model: SafeAny) => boolean);
   ghost?: boolean | ((model: SafeAny) => boolean);
   danger?: boolean | ((model: SafeAny) => boolean);

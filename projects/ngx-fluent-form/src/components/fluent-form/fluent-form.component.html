@@ -55,7 +55,7 @@
                 [nzTitle]="subschema.title"
                 [nzSubtitle]="subschema.subtitle"
                 [nzDescription]="subschema.description"
-                [nzDisabled]="subschema.disabled"
+                [nzDisabled]="subschema.disabled | call: model"
                 [nzStatus]="subschema.status ?? schema.current === index ? 'process' : 'wait'"></nz-step>
             </ng-container>
           </nz-steps>

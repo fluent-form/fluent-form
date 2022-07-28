@@ -49,11 +49,11 @@ export const source = dedent`
           group('step3').span(24).schemas(
             textarea('textareaInStep3').label('文本域').span(24),
           ),
-          button().subtype('primary').content('提交').block(true).span(24)
+          button().subtype('submit').subtype('primary').content('提交').block(true).span(24)
         )
       )
     );
 
-    model = { date: '2022/2/22' };
+    model = {};
   }
 `;

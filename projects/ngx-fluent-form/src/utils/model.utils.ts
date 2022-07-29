@@ -1,7 +1,7 @@
 import { FormArray, FormGroup } from '@angular/forms';
 import { AnySchema } from '../schemas';
 import { Arr, Obj } from '../type';
-import { isComponentContainerSchema, isComponentSchema } from './schema.utils';
+import { isComponentContainerSchema, isComponentSchema, isControlContainerSchema } from './schema.utils';
 import { valueUtils } from './value.utils';
 
 export function modelUtils<M extends Arr | Obj>(model: M, schemas: AnySchema[]) {
@@ -25,11 +25,6 @@ export class ModelUtils<M extends Arr | Obj> {
       // 这些图示不包含控件图示，直接跳过
       if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
 
-      if (schema.type === 'input-group' || schema.type === 'steps' || schema.type === 'step') {
-        modelUtils(this.model as Obj, schema.schemas as AnySchema[]).assign(form as FormGroup, false);
-        return;
-      }
-
       if (schema.type === 'group') {
         modelUtils(
           (this.model[schema.name as keyof M] ??= {} as M[keyof M]) as unknown as Obj,
@@ -43,6 +38,11 @@ export class ModelUtils<M extends Arr | Obj> {
           (this.model[schema.name as keyof M] ??= [] as unknown as M[keyof M]) as unknown as Arr,
           schema.schemas as AnySchema[]
         ).assign(form.get([schema.name!]) as FormArray, false);
+        return;
+      }
+
+      if (isControlContainerSchema(schema)) {
+        modelUtils(this.model as Obj, schema.schemas as AnySchema[]).assign(form as FormGroup, false);
         return;
       }
 

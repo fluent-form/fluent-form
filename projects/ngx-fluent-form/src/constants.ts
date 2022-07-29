@@ -1,5 +1,13 @@
 /** 控件容器图示类型 */
-export const CONTROL_CONTAINER_SCHEMA_TYPES = ['group', 'array', 'input-group', 'steps', 'step'];
+export const CONTROL_CONTAINER_SCHEMA_TYPES = [
+  'group',
+  'array',
+  'input-group',
+  'steps',
+  'step',
+  'tabset',
+  'tab'
+];
 /** 文本控件图示类型 */
 export const TEXT_CONTROL_SCHEMA_TYPES = ['input', 'textarea'];
 /** 组件容器图示类型 */

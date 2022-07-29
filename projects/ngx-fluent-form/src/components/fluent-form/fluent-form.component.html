@@ -38,20 +38,20 @@
         <ng-container *ngSwitchCase="'steps'">
           <nz-steps
             [nzType]="schema.subtype"
-            [nzCurrent]="schema.current ?? 0"
+            [nzCurrent]="schema.active ?? 0"
             [nzLabelPlacement]="schema.placement"
             [nzProgressDot]="schema.dot"
             [nzSize]="schema.size"
             [nzStatus]="schema.status ?? 'process'"
             [nzStartIndex]="schema.start ?? 0"
-            (nzIndexChange)="schema.current = $event">
+            (nzIndexChange)="schema.active = $event">
             <ng-container *ngFor="let subschema of schema.schemas; index as index">
               <nz-step
                 [nzTitle]="subschema.title"
                 [nzSubtitle]="subschema.subtitle"
                 [nzDescription]="subschema.description"
                 [nzDisabled]="subschema.disabled | call: model"
-                [nzStatus]="subschema.status ?? schema.current === index ? 'process' : 'wait'"></nz-step>
+                [nzStatus]="subschema.status ?? schema.active === index ? 'process' : 'wait'"></nz-step>
             </ng-container>
           </nz-steps>
 
@@ -59,7 +59,7 @@
             <div
               nz-row
               [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }"
-              [hidden]="schema.current !== stepIndex"
+              [hidden]="schema.active !== stepIndex"
               [style.margin-top.px]="16">
               <ng-container *ngFor="let subschema of stepSchema.schemas">
                 <ng-container
@@ -68,6 +68,30 @@
               </ng-container>
             </div>
           </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'tabset'">
+          <nz-tabset
+            [nzSelectedIndex]="schema.active"
+            [nzType]="schema.subtype ?? 'line'"
+            [nzSize]="schema.size"
+            [nzAnimated]="schema.animate ?? schema.subtype !== 'card'"
+            [nzTabPosition]="schema.position ?? 'top'"
+            [nzTabBarGutter]="schema.gutter"
+            [nzCentered]="schema.center">
+            <nz-tab
+              *ngFor="let tabSchema of schema.schemas"
+              [nzTitle]="tabSchema.title"
+              [nzDisabled]="tabSchema.disabled | call: model">
+              <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+                <ng-container *ngFor="let subschema of tabSchema.schemas">
+                  <ng-container
+                    *ngTemplateOutlet="formItemTemplate; context: { control: (subschema.name | control: form) ?? form, schema: subschema, model: model }">
+                  </ng-container>
+                </ng-container>
+              </div>
+            </nz-tab>
+          </nz-tabset>
         </ng-container>
 
         <ng-container *ngSwitchDefault>

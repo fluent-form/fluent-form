@@ -5,6 +5,7 @@ import { NzButtonComponent, NzButtonShape, NzButtonSize, NzButtonType } from 'ng
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzInputGroupComponent } from 'ng-zorro-antd/input';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
+import { NzTabComponent, NzTabPositionMode, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
 import { Builder } from '../utils/builder.utils';
 import { AbstractComponentSchema, AbstractElementSchema, AbstractSchema, SingleKeySchemaName } from './abstract.schema';
 import { AnyBuilder, AnySchema, ComposableComponentBuilder, ComposableComponentSchema } from './index.schema';
@@ -51,7 +52,7 @@ export interface ButtonGroupComponentSchema<Name extends SingleKeySchemaName = S
 export interface StepsComponentSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzStepsComponent> {
   type: 'steps';
   subtype?: 'default' | 'navigation';
-  current?: number;
+  active?: number;
   placement?: 'vertical' | 'horizontal';
   dot?: boolean;
   size?: NzSizeDSType;
@@ -67,5 +68,24 @@ export interface StepComponentSchema<Name extends SingleKeySchemaName = SingleKe
   description?: string | TemplateRef<void>;
   disabled?: boolean | ((model: SafeAny) => boolean);
   status?: 'wait' | 'process' | 'finish' | 'error';
+  schemas: (AnySchema | AnyBuilder)[];
+}
+
+export interface TabsetComponentSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzTabSetComponent> {
+  type: 'tabset';
+  subtype?: NzTabType;
+  active?: number;
+  animate?: boolean;
+  size?: NzSizeLDSType;
+  position?: NzTabPositionMode;
+  gutter?: number;
+  center?: boolean;
+  schemas: (TabComponentSchema | Builder<TabComponentSchema, TabComponentSchema, {}>)[];
+}
+
+export interface TabComponentSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzTabComponent> {
+  type: 'tab';
+  title: string;
+  disabled?: boolean | ((model: SafeAny) => boolean);
   schemas: (AnySchema | AnyBuilder)[];
 }

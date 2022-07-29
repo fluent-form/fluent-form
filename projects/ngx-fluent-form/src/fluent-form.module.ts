@@ -18,6 +18,7 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { FluentFormComponent, FluentTemplateComponent } from './components';
 import { ControlOutletDirective, EventBinderDirective, FluentControlOutletDirective, FluentFormDirective, FluentFormNameDirective, PropertyBinderDirective } from './directives';
@@ -59,7 +60,8 @@ import { TypeofPipe } from './pipes/typeof.pipe';
     NzRateModule,
     NzIconModule,
     NzOutletModule,
-    NzStepsModule
+    NzStepsModule,
+    NzTabsModule
   ],
   exports: [
     FluentFormComponent,

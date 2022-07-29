@@ -1,5 +1,5 @@
 import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
-import { isComponentContainerSchema, isComponentSchema, isDoubleKeySchema } from '.';
+import { isComponentContainerSchema, isComponentSchema, isControlContainerSchema, isDoubleKeySchema } from '.';
 import { AnyControlSchema, AnySchema, ControlSchema } from '../schemas/index.schema';
 import { Arr, Obj } from '../type';
 import { valueUtils } from './value.utils';
@@ -35,6 +35,8 @@ function createFormControls(schemas: AnySchema[], controls: Record<string, Abstr
 
       case 'step':
       case 'steps':
+      case 'tabset':
+      case 'tab':
       case 'input-group':
         createFormControls(schema.schemas as AnySchema[], controls);
         break;
@@ -112,12 +114,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
       // 这些图示不包含控件图示，直接跳过
       if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
 
-      if (schema.type === 'input-group' || schema.type === 'steps' || schema.type === 'step') {
-        formUtils(this.form, schema.schemas as AnySchema[]).assign(model, false);
-        return;
-      }
-
-      const control = this.form.get([schema.name!.toString()])!;
+      const control = this.form.get([schema.name?.toString()!])!;
 
       if (schema.type === 'group') {
         formUtils(control as FormGroup, schema.schemas as AnySchema[]).assign(
@@ -132,6 +129,11 @@ export class FormUtils<F extends FormGroup | FormArray> {
           (model[schema.name as keyof T] = ([] as unknown as T[keyof T])) as unknown as Arr,
           false
         );
+        return;
+      }
+
+      if (isControlContainerSchema(schema)) {
+        formUtils(this.form, schema.schemas as AnySchema[]).assign(model, false);
         return;
       }
 
@@ -161,11 +163,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
       // 这些图示不包含控件图示，直接跳过
       if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
 
-      if (schema.type === 'input-group' || schema.type === 'steps' || schema.type === 'step') {
-        return formUtils(this.form, schema.schemas as AnySchema[]).change(model);
-      }
-
-      const control = this.form.get([schema.name!.toString()])!;
+      const control = this.form.get([schema.name?.toString()!])!;
 
       if (schema.type === 'group') {
         return formUtils(control as FormGroup, schema.schemas as AnySchema[]).change(model);
@@ -173,6 +171,10 @@ export class FormUtils<F extends FormGroup | FormArray> {
 
       if (schema.type === 'array') {
         return formUtils(control as FormArray, schema.schemas as AnySchema[]).change(model);
+      }
+
+      if (isControlContainerSchema(schema)) {
+        return formUtils(this.form, schema.schemas as AnySchema[]).change(model);
       }
 
       const options = { emitEvent: false };

@@ -5,7 +5,7 @@ import dedent from 'ts-dedent';
 export const story = defineStory({
   args: {
     schemas: form(
-      steps().span(24).current(0).schemas(
+      steps().span(24).active(0).schemas(
         step().title('第一步').schemas(
           input('input1InStep1').label('文本输入框').span(12),
           input('input2InStep1').label('文本输入框').span(12),
@@ -36,7 +36,7 @@ export const source = dedent`
   })
   export class ExampleComponent {
     schemas: form(
-      steps().span(24).current(0).schemas(
+      steps().span(24).active(0).schemas(
         step().title('第一步').schemas(
           input('input1InStep1').label('文本输入框').span(12),
           input('input2InStep1').label('文本输入框').span(12),
@@ -49,7 +49,7 @@ export const source = dedent`
           group('step3').span(24).schemas(
             textarea('textareaInStep3').label('文本域').span(24),
           ),
-          button().subtype('submit').subtype('primary').content('提交').block(true).span(24)
+          button().subtype('submit').style('primary').content('提交').block(true).span(24)
         )
       )
     );

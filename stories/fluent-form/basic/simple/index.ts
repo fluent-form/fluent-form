@@ -1,4 +1,4 @@
-import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, datetime, form, input, inputGroup, number, radio, range, rate, select, slider, step, steps, switcher, textarea, time } from 'ngx-fluent-form';
+import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, datetime, form, input, inputGroup, number, radio, range, rate, select, slider, step, steps, switcher, tab, tabset, textarea, time } from 'ngx-fluent-form';
 import { CASCADER_OPTIONS, CHECKBOX_OPTIONS, RADIO_OPTIONS, SELECT_OPTIONS } from 'stories/options';
 import { defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
@@ -34,7 +34,7 @@ export const story = defineStory({
         button().content('看不见我').hidden(() => true),
         button().content('动态').hidden((model: any) => model.slider < 50),
       ),
-      steps().span(24).current(0).schemas(
+      steps().span(24).active(0).schemas(
         step().title('第一步').schemas(
           input('text1InStep1').label('文本输入框').placeholder('第一步的输入框').span(12),
           input('text2InStep1').label('文本输入框').placeholder('第一步的输入框').span(12),
@@ -44,6 +44,17 @@ export const story = defineStory({
         ),
         step().title('第三步').schemas(
           input('textInStep3').label('文本输入框').placeholder('第三步的输入框'),
+        )
+      ),
+      tabset().span(24).schemas(
+        tab().title('账号').schemas(
+          input('textInTab1').label('账号').span(12),
+        ),
+        tab().title('手机号').schemas(
+          input('textInTab2').label('手机号'),
+        ),
+        tab().title('禁用').disabled(true).schemas(
+          input('textInTab3'),
         )
       )
     ),
@@ -89,7 +100,7 @@ export const source = dedent`
         button().content('看不见我').hidden(() => true),
         button().content('动态').hidden((model: any) => model.slider < 50),
       ),
-      steps().span(24).current(0).schemas(
+      steps().span(24).active(0).schemas(
         step().title('第一步').schemas(
           input('text1InStep1').label('文本输入框').placeholder('第一步的输入框').span(12),
           input('text2InStep1').label('文本输入框').placeholder('第一步的输入框').span(12),

@@ -30,7 +30,7 @@ npm i ngx-fluent-form
 
 ## Docs
 
-For documentation and examples visit [https://hyperlife1119.github.io/ngx-fluent-form](https://hyperlife1119.github.io/ngx-fluent-form).
+For documentation and examples please visit [https://hyperlife1119.github.io/ngx-fluent-form](https://hyperlife1119.github.io/ngx-fluent-form).
 
 ## Usage
 
@@ -76,4 +76,4 @@ For better performance, all components of `ngx-fluent-form` run in [OnPush](http
 
 ## Support
 
-Like `ngx-fluent-form`? ⭐Star for this project!
+Like `ngx-fluent-form` ? ⭐Star for this project!

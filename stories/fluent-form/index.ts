@@ -52,9 +52,9 @@ export const cmpSource = dedent`
   })
   export class Component {
     schemas = form(
-      text('text').label('文本').span(6),
-      number('number').label('数字').span(3).max(100),
-      date('date').label('日期').span(6)
+      text('text').label('文本'),
+      number('number').label('数字').max(100),
+      date('date').label('日期')
     );
 
     model = {

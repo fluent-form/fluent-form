@@ -1,7 +1,7 @@
 import { SafeAny } from '@ngify/types';
-import { ButtonComponentSchema, StepsComponentSchema } from '../schemas';
+import { ButtonComponentSchema, StepsComponentSchema, TabsetComponentSchema } from '../schemas';
 import { standardSchema } from '../utils';
-import { button, buttonGroup, inputGroup, step, steps } from './component.builder';
+import { button, buttonGroup, inputGroup, step, steps, tab, tabset } from './component.builder';
 import { input } from './control.builder';
 
 describe('component.builder', () => {
@@ -43,6 +43,29 @@ describe('component.builder', () => {
         }
       ]
     } as StepsComponentSchema;
+    expect(schema).toEqual(value);
+  });
+
+  it('tabset', () => {
+    const schema = standardSchema(
+      tabset().schemas(
+        tab().title('title').schemas(
+          input('ipt')
+        )
+      )
+    );
+    const value = {
+      type: 'tabset',
+      schemas: [
+        {
+          type: 'tab',
+          title: 'title',
+          schemas: [
+            { type: 'input', name: 'ipt' }
+          ]
+        }
+      ]
+    } as TabsetComponentSchema;
     expect(schema).toEqual(value);
   });
 });

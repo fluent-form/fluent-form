@@ -438,13 +438,14 @@
       <button
         nz-col
         nz-button
+        [type]="schema.subtype"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
         [fluentPropertyBinder]="{ schema }"
         [fluentEventBinder]="{ schema }"
         [disabled]="schema.disabled"
-        [nzType]="schema.subtype"
+        [nzType]="schema.style"
         [nzGhost]="schema.ghost"
         [nzLoading]="schema.loading"
         [nzShape]="schema.shape"

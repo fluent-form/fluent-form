@@ -74,7 +74,7 @@
           <nz-tabset
             [nzSelectedIndex]="schema.active"
             [nzType]="schema.subtype ?? 'line'"
-            [nzSize]="schema.size"
+            [nzSize]="schema.size ?? 'default'"
             [nzAnimated]="schema.animate ?? schema.subtype !== 'card'"
             [nzTabPosition]="schema.position ?? 'top'"
             [nzTabBarGutter]="schema.gutter"

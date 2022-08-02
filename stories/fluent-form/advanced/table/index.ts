@@ -146,7 +146,7 @@ export const source = dedent`
     \`
   })
   export class ExampleComponent {
-    schemas: form(
+    schemas = form(
       input('name'),
       number('age'),
       textarea('address'),

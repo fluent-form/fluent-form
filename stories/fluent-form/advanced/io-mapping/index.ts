@@ -23,7 +23,7 @@ export const source = dedent`
     template: \`<fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>\`
   })
   export class ExampleComponent {
-    schemas: form(
+    schemas = form(
       date('date').label('日期控件').span(8).mapper({
         input: (o: string) => new Date(o),
         output: (o: Date) => [o.getFullYear(), o.getMonth() + 1, o.getDate()].join('/')

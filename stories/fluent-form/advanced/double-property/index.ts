@@ -20,7 +20,7 @@ export const source = dedent`
     template: \`<fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>\`
   })
   export class ExampleComponent {
-    schemas: form(
+    schemas = form(
       range(['start', 'end']).label('日期区间控件').span(12),
     );
 

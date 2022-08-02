@@ -60,7 +60,7 @@ export const source = dedent`
     template: \`<fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>\`
   })
   export class ExampleComponent {
-    schemas: form(
+    schemas = form(
       input('username')
         .label('Username')
         .required(true)

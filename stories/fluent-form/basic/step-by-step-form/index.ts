@@ -35,7 +35,7 @@ export const source = dedent`
     template: \`<fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>\`
   })
   export class ExampleComponent {
-    schemas: form(
+    schemas = form(
       steps().span(24).active(0).schemas(
         step().title('第一步').schemas(
           input('input1InStep1').label('文本输入框').span(12),

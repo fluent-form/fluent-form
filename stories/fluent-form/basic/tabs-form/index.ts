@@ -33,7 +33,7 @@ export const source = dedent`
     template: \`<fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>\`
   })
   export class ExampleComponent {
-    schemas: form(
+    schemas = form(
       tabset().span(24).schemas(
         tab().title('用户名').schemas(
           input('username').label('用户名').span(24),

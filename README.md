@@ -8,13 +8,14 @@ Building dynamic form in Angular with Fluent API.
 [![Angular](https://img.shields.io/badge/Build%20with-Angular%20CLI-red?logo=angular)](https://www.github.com/angular/angular)
 [![CodeFactor](https://www.codefactor.io/repository/github/hyperlife1119/ngx-fluent-form/badge)](https://www.codefactor.io/repository/github/hyperlife1119/ngx-fluent-form)
 [![简体中文](https://img.shields.io/static/v1?label=简体中文&message=zh-CN&color=212121)](https://github.com/HyperLife1119/ngx-fluent-form/blob/main/README.zh-CN.md)
+[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://hyperlife1119.github.io/ngx-fluent-form)
 
 ## Features
 
 - Support using Fluent API and JSON.
 - Type-safe form configuration.
 - Built on top of Angular Reactive Forms.
-- Form controls and grid layout based on `ng-zorro-antd`.
+- Form components and grid layout based on `ng-zorro-antd`.
 
 ## Prerequisites
 
@@ -29,8 +30,7 @@ npm i ngx-fluent-form
 
 ## Docs
 
-- For the full API definition, please visit [here](https://hyperlife1119.github.io/ngx-fluent-form).
-- [Online examples](https://hyperlife1119.github.io/ngx-fluent-form/demo), and [sample code](https://github.dev/HyperLife1119/ngx-fluent-form/tree/main/projects/demo/src/app/app.component.ts).
+For documentation and examples visit [https://hyperlife1119.github.io/ngx-fluent-form](https://hyperlife1119.github.io/ngx-fluent-form).
 
 ## Usage
 
@@ -47,19 +47,19 @@ import { FluentFormModule } from 'ngx-fluent-form';
 export class YourModule { }
 ```
 
-Build the form using the Fluent API:
+Configure `schemas` parameter to build your form::
 
 ```ts
 import { date, form, number, text } from 'ngx-fluent-form';
 
 @Component({
-  template: `<fluent-form [(ngModel)]="model" [schema]="schema"></fluent-form>`
+  template: `<fluent-form [(model)]="model" [schema]="schema"></fluent-form>`
 })
 export class Component {
   schema = form(
-    text('text').label('label').placeholder('placeholder').span(6),
-    number('number').label('label').placeholder('placeholder').span(3).max(100),
-    date('date').label('label').placeholder('placeholder').span(6)
+    text('text').label('label'),
+    number('number').label('label').max(100),
+    date('date').label('label')
   );
 
   model = {
@@ -70,112 +70,10 @@ export class Component {
 }
 ```
 
-You can use JSON to build the form:
+## Notice
 
-```ts
-import { AnyControlOptions } from 'ngx-fluent-form';
+For better performance, all components of `ngx-fluent-form` run in [OnPush](https://angular.io/api/core/ChangeDetectionStrategy) mode, this means that `mutate` operations on @Input() data will not take effect, please use `immutable` methods to manipulate arrays or objects.
 
-@Component(...)
-export class Component {
-  schema: AnyControlOptions[] = [
-    { type: 'text', name: 'text', label: 'label', span: 6 }
-  ];
-}
-```
+## Support
 
-You can also mix Fluent API and JSON:
-
-```ts
-import { AnyControlOptions, number } from 'ngx-fluent-form';
-
-@Component(...)
-export class Component {
-  schema: AnyControlOptions[] = [
-    { type: 'text', name: 'text', label: 'label', span: 6 },
-    number('number').label('label').placeholder('placeholder').span(3).build(),
-  ];
-}
-```
-
-For nested forms, you can use the `embed` control (supports infinite nesting):
-
-```ts
-import { date, form, number, text, embed, switcher } from 'ngx-fluent-form';
-
-@Component(...)
-export class Component {
-  schema = form(
-    text('text').label('label').placeholder('placeholder').span(6),
-    number('number').label('label').placeholder('placeholder').span(3).max(100),
-
-    embed('detail').label('detail').span(24).schema(form(
-      date('date').label('label').placeholder('placeholder').span(6),
-      switcher('switch').label('label').span(2),
-    ))
-  );
-
-  model = {
-    text: 'fluent-form',
-    number: 10,
-    detail: {
-      date: Date.now(),
-      switch: true
-    }
-  };
-}
-```
-
-For values that require bidirectional mapping, the `mapper` option can be used. For example, the date control expects and will output a `Date` object, and we expect a date string from the date control output:
-
-```ts
-import { date, form } from 'ngx-fluent-form';
-
-@Component(...)
-export class Component {
-  schema = form(
-    date('date').label('label').placeholder('placeholder').span(6).mapper({
-      input: (o: string) => new Date(o),
-      output: (o: Date) => [o.getFullYear(), o.getMonth() + 1, o.getDate()].join('-')
-    })
-  );
-
-  model = {
-    date: '2022-2-22'
-  };
-}
-```
-
-For range selection controls, such as the `range` control, it will output an array of two elements, and we expect to map the two elements of the array to two properties:
-
-```ts
-import { form, range } from 'ngx-fluent-form';
-
-@Component(...)
-export class Component {
-  schema = form(
-    range(['start', 'end']).label('label').span(6),
-  );
-
-  model = {
-    start: null,
-    end: null
-  };
-}
-```
-
-For additional property binding or event listening, the `property` and `listener` options can be used：
-
-```ts
-import { form, time } from 'ngx-fluent-form';
-
-@Component(...)
-export class Component {
-  schema = form(
-    time('time').label('label').span(6).property({
-      nzNowText: 'Now'
-    }).listener({
-      nzOpenChange: (event, options) => console.log(event, options)
-    }),
-  );
-}
-```
+Like `ngx-fluent-form`? ⭐Star for this project!

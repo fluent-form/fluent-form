@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "dev": "ng build --watch",
-    "build": "ng build --configuration production",
+    "build": "ng build --configuration production & node ./scripts/copy.mjs",
     "test:watch": "ng test ngx-fluent-form",
     "test": "ng test ngx-fluent-form --configuration production",
     "coverage:watch": "ng test ngx-fluent-form --code-coverage",

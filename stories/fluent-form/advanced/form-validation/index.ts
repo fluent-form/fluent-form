@@ -1,4 +1,3 @@
-import { Validators } from '@angular/forms';
 import { form, input } from 'ngx-fluent-form';
 import { defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
@@ -25,7 +24,6 @@ export const story = defineStory({
         .label('Email')
         .subtype('email')
         .required(true)
-        .validator([Validators.email])
         .span(12)
         .feedback(true)
         .tips({
@@ -80,7 +78,6 @@ export const source = dedent`
         .label('Email')
         .subtype('email')
         .required(true)
-        .validator([Validators.email])
         .span(12)
         .feedback(true)
         .tips({

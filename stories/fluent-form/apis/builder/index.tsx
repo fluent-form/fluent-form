@@ -58,7 +58,7 @@ const fnMap = (miscellaneous.functions as Fn[])
     return acc;
   }, {} as { [name: string]: Fn[] });
 
-export const ControlBuilders = () => (
+export const Builders = () => (
   Object.keys(fnMap).map(name => {
     // 函数的重载数组
     let fns = fnMap[name];

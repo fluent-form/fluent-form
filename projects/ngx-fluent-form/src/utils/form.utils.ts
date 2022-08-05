@@ -166,11 +166,11 @@ export class FormUtils<F extends FormGroup | FormArray> {
       const control = this.form.get([schema.name?.toString()!])!;
 
       if (schema.type === 'group') {
-        return formUtils(control as FormGroup, schema.schemas as AnySchema[]).change(model);
+        return formUtils(control as FormGroup, schema.schemas as AnySchema[]).change(model[schema.name as keyof T]);
       }
 
       if (schema.type === 'array') {
-        return formUtils(control as FormArray, schema.schemas as AnySchema[]).change(model);
+        return formUtils(control as FormArray, schema.schemas as AnySchema[]).change(model[schema.name as keyof T]);
       }
 
       if (isControlContainerSchema(schema)) {

@@ -9,8 +9,11 @@ import { Arr, Obj } from '../type';
   selector: '[fluentControlOutlet]'
 })
 export class ControlOutletDirective<T extends Obj | Arr> implements OnInit {
+  /** 当前控件 */
   @Input('fluentControlOutlet') control!: AbstractControl;
+  /** 当前图示 */
   @Input('fluentControlOutletSchema') schema!: ControlSchema | ComponentSchema;
+  /** 当前模型 */
   @Input('fluentControlOutletModel') model!: T;
 
   constructor(

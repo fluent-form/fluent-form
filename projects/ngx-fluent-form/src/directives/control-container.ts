@@ -16,12 +16,12 @@ export abstract class ControlContainer<T extends Obj | Arr> {
     this._schemas = value;
   }
 
+  /** 当前表单 */
   form!: AbstractControl;
+  /** 当前模型 */
   model!: T;
 
   /** 当前容器的指令 */
-  get directive(): FluentFormDirective<T> | FluentFormNameDirective<T> | null {
-    return null;
-  }
+  abstract get directive(): FluentFormDirective<T> | FluentFormNameDirective<T>;
 
 }

@@ -25,7 +25,7 @@ export class FluentFormNameDirective<T extends Obj | Arr> extends ControlContain
 
   @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
 
-  override get directive(): FluentFormDirective<T> | FluentFormNameDirective<T> | null {
+  get directive(): FluentFormDirective<T> | FluentFormNameDirective<T> {
     return this;
   }
 
@@ -37,13 +37,13 @@ export class FluentFormNameDirective<T extends Obj | Arr> extends ControlContain
   }
 
   ngOnInit() {
-    this.controlContainer.directive!.formChange.pipe(
-      startWith(this.controlContainer.directive!.form),
+    this.controlContainer.directive.formChange.pipe(
+      startWith(this.controlContainer.directive.form),
       takeUntil(this.destroy$)
     ).subscribe(() => {
-      this.form = this.controlContainer.directive!.form.get([this.name])!;
-      this.schemas = schemasUtils(this.controlContainer.directive!.schemas).find<ControlContainerSchema>(this.name)!.schemas as AnySchema[];
-      this.model = this.controlContainer.directive!.model[this.name as keyof (Obj | Arr)] as T;
+      this.form = this.controlContainer.directive.form.get([this.name])!;
+      this.schemas = schemasUtils(this.controlContainer.directive.schemas).find<ControlContainerSchema>(this.name)!.schemas as AnySchema[];
+      this.model = this.controlContainer.directive.model[this.name as keyof (Obj | Arr)] as T;
 
       this.directives.forEach(directive => this.assignDirective(directive));
     });

@@ -1,8 +1,12 @@
 <nz-spin *ngIf="form" [nzTip]="spinTip" [nzSpinning]="spinning" [nzSize]="spinSize">
-  <ng-container *ngTemplateOutlet="formTemplate; context: { form, schemas }"></ng-container>
+  <ng-container *ngTemplateOutlet="formTemplate; context: { form, schemas, model }"></ng-container>
 </nz-spin>
 
-<ng-template #formTemplate let-form="form" let-schemas="schemas">
+<!-- 表单模板 -->
+<!-- @param schema 当前图示 -->
+<!-- @param form   当前表单 -->
+<!-- @param model  当前模型 -->
+<ng-template #formTemplate let-form="form" let-schemas="schemas" let-model="model">
   <form
     nz-row
     nz-form
@@ -14,7 +18,7 @@
     <!-- 表单项模板 -->
     <!-- @param schema  当前图示 -->
     <!-- @param control 当前控件 -->
-    <!-- @param model   顶层模型 -->
+    <!-- @param model   当前模型 -->
     <ng-template #formItemTemplate let-schema="schema" let-control="control" let-model="model">
       <div
         nz-col
@@ -25,13 +29,17 @@
         [hidden]="schema.hidden | call: model">
         <ng-container *ngSwitchCase="'group'">
           <nz-divider *ngIf="schema.label" [nzText]="schema.label"></nz-divider>
-          <ng-container *ngTemplateOutlet="formTemplate; context: { form: control, schemas: schema.schemas }">
+          <ng-container
+            [ngTemplateOutlet]="formTemplate"
+            [ngTemplateOutletContext]="{ form: control, schemas: schema.schemas, model: model[schema.name] }">
           </ng-container>
         </ng-container>
 
         <ng-container *ngSwitchCase="'array'">
           <nz-divider *ngIf="schema.label" [nzText]="schema.label"></nz-divider>
-          <ng-container *ngTemplateOutlet="formTemplate; context: { form: control, schemas: schema.schemas }">
+          <ng-container
+            [ngTemplateOutlet]="formTemplate"
+            [ngTemplateOutletContext]="{ form: control, schemas: schema.schemas, model: model[schema.name] }">
           </ng-container>
         </ng-container>
 
@@ -63,7 +71,8 @@
               [style.margin-top.px]="16">
               <ng-container *ngFor="let subschema of stepSchema.schemas">
                 <ng-container
-                  *ngTemplateOutlet="formItemTemplate; context: { control: (subschema.name | control: form) ?? form, schema: subschema, model: model }">
+                  [ngTemplateOutlet]="formItemTemplate"
+                  [ngTemplateOutletContext]="{ control: (subschema.name | control: form) ?? form, schema: subschema, model: model }">
                 </ng-container>
               </ng-container>
             </div>
@@ -86,7 +95,8 @@
               <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
                 <ng-container *ngFor="let subschema of tabSchema.schemas">
                   <ng-container
-                    *ngTemplateOutlet="formItemTemplate; context: { control: (subschema.name | control: form) ?? form, schema: subschema, model: model }">
+                    [ngTemplateOutlet]="formItemTemplate"
+                    [ngTemplateOutletContext]="{ control: (subschema.name | control: form) ?? form, schema: subschema, model: model }">
                   </ng-container>
                 </ng-container>
               </div>
@@ -116,8 +126,7 @@
               [nzValidatingTip]="schema.tips?.validating"
               [nzExtra]="schema.tips?.extra"
               [nzAutoTips]="schema.tips?.auto ?? {}">
-              <ng-container *fluentControlOutlet="control; schema: schema; model: model">
-              </ng-container>
+              <ng-container *fluentControlOutlet="control; schema: schema; model: model"></ng-container>
             </nz-form-control>
           </nz-form-item>
         </ng-container>
@@ -126,7 +135,8 @@
 
     <ng-container *ngFor="let schema of schemas">
       <ng-container
-        *ngTemplateOutlet="formItemTemplate; context: { control: (schema.name | control: form) ?? form, schema: schema, model: model }">
+        [ngTemplateOutlet]="formItemTemplate"
+        [ngTemplateOutletContext]="{ control: (schema.name | control: form) ?? form, schema: schema, model: model }">
       </ng-container>
     </ng-container>
   </form>

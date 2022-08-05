@@ -17,7 +17,7 @@ export class FluentControlOutletDirective<T extends Obj | Arr> implements OnInit
   control!: AbstractControl;
 
   get model(): T {
-    return this.controlContainer.directive!.model as T;
+    return this.controlContainer.directive.model as T;
   }
 
   constructor(
@@ -29,16 +29,16 @@ export class FluentControlOutletDirective<T extends Obj | Arr> implements OnInit
   ) { }
 
   ngOnInit() {
-    this.controlContainer.directive!.addDirective(this);
+    this.controlContainer.directive.addDirective(this);
     this.viewContainerRef.createEmbeddedView(this.componentTemplate, this);
   }
 
   ngOnChanges() {
-    this.controlContainer.directive!.assignDirective(this);
+    this.controlContainer.directive.assignDirective(this);
   }
 
   ngOnDestroy() {
-    this.controlContainer.directive!.removeDirective(this);
+    this.controlContainer.directive.removeDirective(this);
   }
 
 }

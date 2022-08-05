@@ -39,7 +39,7 @@ export class FluentFormDirective<T extends Obj | Arr> extends ControlContainer<T
   @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
   @Output() modelChange: EventEmitter<T> = new EventEmitter();
 
-  override get directive(): FluentFormDirective<T> | FluentFormNameDirective<T> | null {
+  get directive(): FluentFormDirective<T> | FluentFormNameDirective<T> {
     return this;
   }
 

@@ -3,7 +3,14 @@ import { AbstractControl } from '@angular/forms';
 import { ComponentSchema, ControlSchema } from '../../schemas';
 import { Arr, Obj } from '../../type';
 
-export type ComponentTemplateRef<T extends Obj | Arr> = TemplateRef<{ control: AbstractControl, schema: ComponentSchema | ControlSchema, model: T }>;
+export type ComponentTemplateRef<T extends Obj | Arr> = TemplateRef<{
+  /** 当前控件 */
+  control: AbstractControl,
+  /** 当前图示 */
+  schema: ComponentSchema | ControlSchema,
+  /** 当前模型值 */
+  model: T
+}>;
 
 /**
  * 这个组件专门用来放可复用的模板

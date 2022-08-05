@@ -2,7 +2,7 @@
 <!-- 根据 schema.type 来输出不同的控件 -->
 <!-- @param control FormControl -->
 <!-- @param schema  组件的图示 -->
-<!-- @param model   顶级模型值 -->
+<!-- @param model   当前模型值 -->
 <ng-template #componentTemplate let-control="control" let-schema="schema" let-model="model">
   <ng-container [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
@@ -274,7 +274,7 @@
 <!-- 根据 schema.type 来输出不同的控件 -->
 <!-- @param control FormControl -->
 <!-- @param schema  组件的图示 -->
-<!-- @param model   顶层模型值 -->
+<!-- @param model   当前模型值 -->
 <ng-template #composableComponentTemplate let-control="control" let-schema="schema" let-model="model">
   <ng-container *ngIf="!(schema.hidden | call: model)" [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">

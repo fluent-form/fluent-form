@@ -10,13 +10,13 @@ export const story = defineStory({
           input('username').label('用户名').span(24),
           input('password').subtype('password').label('密码').span(24),
           checkbox('remember').content('记住我'),
-          button().subtype('submit').style('primary').content('立即登录').block(true).span(24)
+          button().subtype('primary').mode('submit').content('立即登录').block(true).span(24)
         ),
         tab().title('手机号').schemas(
           input('cellphone').subtype('tel').label('手机号').span(24),
           input('password').subtype('password').label('密码').span(24),
           checkbox('remember').content('记住我'),
-          button().subtype('submit').style('primary').content('立即登录').block(true).span(24)
+          button().subtype('primary').mode('submit').content('立即登录').block(true).span(24)
         ),
       )
     ),
@@ -39,13 +39,13 @@ export const source = dedent`
           input('username').label('用户名').span(24),
           input('password').subtype('password').label('密码').span(24),
           checkbox('remember').content('记住我'),
-          button().subtype('submit').style('primary').content('立即登录').block(true).span(24)
+          button().subtype('primary').mode('submit').content('立即登录').block(true).span(24)
         ),
         tab().title('手机号').schemas(
           input('cellphone').subtype('tel').label('手机号').span(24),
           input('password').subtype('password').label('密码').span(24),
           checkbox('remember').content('记住我'),
-          button().subtype('submit').style('primary').content('立即登录').block(true).span(24)
+          button().subtype('primary').mode('submit').content('立即登录').block(true).span(24)
         ),
       )
     );

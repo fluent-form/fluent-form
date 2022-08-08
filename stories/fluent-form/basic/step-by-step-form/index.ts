@@ -18,7 +18,7 @@ export const story = defineStory({
           group('step3').span(24).schemas(
             textarea('textareaInStep3').label('文本域').span(24),
           ),
-          button().subtype('submit').style('primary').content('提交').block(true).span(24)
+          button().subtype('primary').mode('submit').content('提交').block(true).span(24)
         )
       )
     ),
@@ -49,7 +49,7 @@ export const source = dedent`
           group('step3').span(24).schemas(
             textarea('textareaInStep3').label('文本域').span(24),
           ),
-          button().subtype('submit').style('primary').content('提交').block(true).span(24)
+          button().subtype('primary').mode('submit').content('提交').block(true).span(24)
         )
       )
     );

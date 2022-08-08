@@ -1,13 +1,12 @@
 import { TemplateRef } from '@angular/core';
 import { ThemeType } from '@ant-design/icons-angular';
-import { SafeAny } from '@ngify/types';
 import { NzButtonComponent, NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzInputGroupComponent } from 'ng-zorro-antd/input';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
 import { NzTabComponent, NzTabPositionMode, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
 import { Builder } from '../utils/builder.utils';
-import { AbstractComponentSchema, AbstractElementSchema, AbstractSchema, SingleKeySchemaName } from './abstract.schema';
+import { AbstractComponentSchema, AbstractElementSchema, AbstractSchema, CallbackArg, SingleKeySchemaName } from './abstract.schema';
 import { AnyBuilder, AnySchema, ComposableComponentBuilder, ComposableComponentSchema } from './index.schema';
 
 /** @internal */
@@ -32,10 +31,10 @@ export interface ButtonComponentSchema<Name extends SingleKeySchemaName = Single
   type: 'button';
   subtype?: 'submit' | 'reset' | 'menu';
   style?: NzButtonType;
-  disabled?: boolean | ((model: SafeAny) => boolean) | string;
-  ghost?: boolean | ((model: SafeAny) => boolean) | string;
-  danger?: boolean | ((model: SafeAny) => boolean) | string;
-  loading?: boolean | ((model: SafeAny) => boolean) | string;
+  disabled?: boolean | ((arg: CallbackArg) => boolean) | string;
+  ghost?: boolean | ((arg: CallbackArg) => boolean) | string;
+  danger?: boolean | ((arg: CallbackArg) => boolean) | string;
+  loading?: boolean | ((arg: CallbackArg) => boolean) | string;
   shape?: NzButtonShape;
   size?: NzButtonSize;
   block?: boolean;
@@ -66,7 +65,7 @@ export interface StepComponentSchema<Name extends SingleKeySchemaName = SingleKe
   title: string | TemplateRef<void>;
   subtitle?: string | TemplateRef<void>;
   description?: string | TemplateRef<void>;
-  disabled?: boolean | ((model: SafeAny) => boolean) | string;
+  disabled?: boolean | ((arg: CallbackArg) => boolean) | string;
   status?: 'wait' | 'process' | 'finish' | 'error';
   schemas: (AnySchema | AnyBuilder)[];
 }
@@ -86,6 +85,6 @@ export interface TabsetComponentSchema<Name extends SingleKeySchemaName = Single
 export interface TabComponentSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzTabComponent> {
   type: 'tab';
   title: string;
-  disabled?: boolean | ((model: SafeAny) => boolean) | string;
+  disabled?: boolean | ((arg: CallbackArg) => boolean) | string;
   schemas: (AnySchema | AnyBuilder)[];
 }

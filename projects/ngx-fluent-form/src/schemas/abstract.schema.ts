@@ -1,9 +1,10 @@
 import { TemplateRef } from '@angular/core';
-import { AsyncValidatorFn, FormControl, FormControlStatus, ValidatorFn } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormControl, FormControlStatus, ValidatorFn } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { NzDateMode } from 'ng-zorro-antd/date-picker';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { ComponentInputMap, ComponentOutputListenerMap, HTMLElementEventListenerMap, HTMLElementPropertyMap, SingleOrAll } from '../type';
+import { ComponentSchema, ControlSchema } from './index.schema';
 
 /** 任意字段控件名称 */
 export type AnySchemaName = SingleKeySchemaName | DoubleKeySchemaName;
@@ -27,6 +28,13 @@ interface Tooltip {
   icon: string | NzFormTooltipIcon;
 }
 
+export interface CallbackArg {
+  schema: ComponentSchema | ControlSchema;
+  /** 如果当前没有对应的 control，会返回上一级的 control，这时候一般是 form group/array */
+  control: AbstractControl;
+  model: SafeAny;
+}
+
 /** 抽象图示 */
 export interface AbstractSchema<Name extends AnySchemaName> {
   type: string;
@@ -35,7 +43,7 @@ export interface AbstractSchema<Name extends AnySchemaName> {
   offset?: Cell;
   flex?: number | string;
   label?: string | Label;
-  hidden?: boolean | ((model: SafeAny) => boolean) | string;
+  hidden?: boolean | ((arg: CallbackArg) => boolean) | string;
 }
 
 /** 抽象的真实控件图示 */
@@ -50,9 +58,9 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
   };
   value?: Val;
   /** Is it a required control */
-  required?: boolean | ((model: SafeAny) => boolean) | string;
+  required?: boolean | ((arg: CallbackArg) => boolean) | string;
   /** Whether to disable control */
-  disabled?: boolean | ((model: SafeAny) => boolean) | string;
+  disabled?: boolean | ((arg: CallbackArg) => boolean) | string;
   feedback?: boolean;
   /** Error message for control */
   tips?: {

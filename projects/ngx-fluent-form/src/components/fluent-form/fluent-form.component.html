@@ -26,7 +26,7 @@
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
         [ngSwitch]="schema.type"
-        [hidden]="schema.hidden | call: model">
+        [hidden]="schema.hidden | call: { model, control, schema }">
         <ng-container *ngSwitchCase="'group'">
           <nz-divider *ngIf="schema.label" [nzText]="schema.label"></nz-divider>
           <ng-container
@@ -58,7 +58,7 @@
                 [nzTitle]="subschema.title"
                 [nzSubtitle]="subschema.subtitle"
                 [nzDescription]="subschema.description"
-                [nzDisabled]="subschema.disabled | call: model"
+                [nzDisabled]="subschema.disabled | call: { model, control, schema: subschema }"
                 [nzStatus]="subschema.status ?? schema.active === index ? 'process' : 'wait'"></nz-step>
             </ng-container>
           </nz-steps>
@@ -91,7 +91,7 @@
             <nz-tab
               *ngFor="let tabSchema of schema.schemas"
               [nzTitle]="tabSchema.title"
-              [nzDisabled]="tabSchema.disabled | call: model">
+              [nzDisabled]="tabSchema.disabled | call: { model, control, schema: tabSchema }">
               <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
                 <ng-container *ngFor="let subschema of tabSchema.schemas">
                   <ng-container
@@ -112,7 +112,7 @@
                 [nzTooltipTitle]="schema.label.tooltip?.title ?? schema.label.tooltip"
                 [nzTooltipIcon]="schema.label.tooltip?.icon"
                 [nzFor]="schema.id"
-                [nzRequired]="schema.required | call: model">
+                [nzRequired]="schema.required | call: { model, control, schema }">
                 {{ schema.label.value ?? schema.label }}
               </nz-form-label>
             </ng-container>

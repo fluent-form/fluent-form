@@ -244,19 +244,19 @@
 
     <ng-container *ngSwitchCase="'button'">
       <button
-        *ngIf="!(schema.hidden | call: model)"
+        *ngIf="!(schema.hidden | call: { model, control, schema })"
         nz-button
         [type]="schema.subtype"
         [fluentPropertyBinder]="{ schema }"
         [fluentEventBinder]="{ schema }"
-        [disabled]="schema.disabled | call: model"
+        [disabled]="schema.disabled | call: { model, control, schema }"
         [nzType]="schema.style"
-        [nzGhost]="schema.ghost | call: model"
-        [nzLoading]="schema.loading | call: model"
+        [nzGhost]="schema.ghost | call: { model, control, schema }"
+        [nzLoading]="schema.loading | call: { model, control, schema }"
         [nzShape]="schema.shape"
         [nzSize]="schema.size"
         [nzBlock]="schema.block"
-        [nzDanger]="schema.danger | call: model">
+        [nzDanger]="schema.danger | call: { model, control, schema }">
         <i
           *ngIf="schema.icon"
           nz-icon
@@ -276,7 +276,7 @@
 <!-- @param schema  组件的图示 -->
 <!-- @param model   当前模型值 -->
 <ng-template #composableComponentTemplate let-control="control" let-schema="schema" let-model="model">
-  <ng-container *ngIf="!(schema.hidden | call: model)" [ngSwitch]="schema.type">
+  <ng-container *ngIf="!(schema.hidden | call: { model, control, schema })" [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
       <input
         nz-col

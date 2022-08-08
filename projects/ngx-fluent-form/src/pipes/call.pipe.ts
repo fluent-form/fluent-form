@@ -1,22 +1,24 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Obj } from '../type';
 
+const RETURN_STR = 'return ';
+
 @Pipe({
   name: 'call'
 })
 export class CallPipe implements PipeTransform {
 
-  transform<T>(value: boolean | ((model: T) => boolean) | string | undefined, model: T): boolean {
+  transform<T>(value: boolean | ((arg: T) => boolean) | string | undefined, arg: T): boolean {
     if (typeof value === 'function') {
-      return value(model);
+      return value(arg);
     }
 
     if (typeof value === 'string') {
-      if (!value.includes('return ')) {
-        value = 'return ' + value;
+      if (!value.includes(RETURN_STR)) {
+        value = RETURN_STR + value;
       }
 
-      return compileCode(value)({ model });
+      return compileCode(value)(arg as Obj);
     }
 
     return value ?? false;

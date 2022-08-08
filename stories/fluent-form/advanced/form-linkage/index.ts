@@ -52,8 +52,8 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
       input('text')
         .label('文本输入框')
         .span(6)
-        .hidden((model: { show: boolean }) => !model.show)
-        .disabled((model: { state: boolean }) => !model.state),
+        .hidden(({ model }) => !model.show)
+        .disabled(({ model }) => !model.state),
     );
 
     this.model = {}
@@ -96,8 +96,8 @@ export const source = dedent`
       input('text')
         .label('文本输入框')
         .span(6)
-        .hidden((model: { show: boolean }) => !model.show)
-        .disabled((model: { state: boolean }) => !model.state),
+        .hidden(({ model }) => !model.show)
+        .disabled(({ model }) => !model.state),
     );
 
     model = {};

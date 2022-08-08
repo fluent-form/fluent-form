@@ -35,9 +35,9 @@ import { story, jsonSource, jsonAndFluentSource, fluentAndJsonSource, expression
 
 ### 介绍
 
-组件图示的部分入参类型为**布尔值**的参数允许布尔值，或传入一个返回布尔值的函数；
+组件图示的部分入参类型为**布尔值**的参数允许传入一个布尔值，或一个返回布尔值的函数；
 
-但在 JSON 下是无法编写函数的，这时候可以传入一个字符串类型的静态表达式，该表达式的执行上下文为 `{ model: model }` 。在字符串中可以编写一些简单的 JS 表达式。
+但在 JSON 下是无法编写函数的，这时候可以传入一个字符串类型的静态表达式，该表达式的执行上下文为 `{ model, control, schema }` 。在字符串中可以编写一些简单的 JS 表达式。
 
 <Source
   language="typescript"

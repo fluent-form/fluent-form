@@ -7,7 +7,7 @@ export const story = defineStory({
   args: {
     schemas: form(
       input('text').label({ value: '文本输入框', tooltip: '小贴士' }).span(8).id('ipt').disabled('false'),
-      number('number').label('数字输入框').span(8),
+      number('number').label('数字输入框').span(8).disabled(o => (console.log(o), false)),
       inputGroup().label('姓与名称').span(8).schemas(
         input('first').placeholder('姓').span(8),
         input('last').placeholder('名').span(16),
@@ -32,7 +32,7 @@ export const story = defineStory({
         button().style('primary').content('确认'),
         button().content('取消'),
         button().content('看不见我').hidden(() => true),
-        button().content('动态').hidden((model: any) => model.slider < 50),
+        button().content('动态').hidden(({ model }) => model.slider < 50),
       ),
       steps().span(24).active(0).schemas(
         step().title('第一步').schemas(
@@ -98,7 +98,7 @@ export const source = dedent`
         button().style('primary').content('确认'),
         button().content('取消'),
         button().content('看不见我').hidden(() => true),
-        button().content('动态').hidden((model: any) => model.slider < 50),
+        button().content('动态').hidden(({ model }) => model.slider < 50),
       ),
       steps().span(24).active(0).schemas(
         step().title('第一步').schemas(

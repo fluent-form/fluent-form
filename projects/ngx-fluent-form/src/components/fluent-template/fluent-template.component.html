@@ -246,11 +246,11 @@
       <button
         *ngIf="!(schema.hidden | call: { model, control, schema })"
         nz-button
-        [type]="schema.subtype"
+        [type]="schema.mode"
         [fluentPropertyBinder]="{ schema }"
         [fluentEventBinder]="{ schema }"
         [disabled]="schema.disabled | call: { model, control, schema }"
-        [nzType]="schema.style"
+        [nzType]="schema.subtype"
         [nzGhost]="schema.ghost | call: { model, control, schema }"
         [nzLoading]="schema.loading | call: { model, control, schema }"
         [nzShape]="schema.shape"
@@ -438,14 +438,14 @@
       <button
         nz-col
         nz-button
-        [type]="schema.subtype"
+        [type]="schema.mode"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
         [fluentPropertyBinder]="{ schema }"
         [fluentEventBinder]="{ schema }"
         [disabled]="schema.disabled"
-        [nzType]="schema.style"
+        [nzType]="schema.subtype"
         [nzGhost]="schema.ghost"
         [nzLoading]="schema.loading"
         [nzShape]="schema.shape"

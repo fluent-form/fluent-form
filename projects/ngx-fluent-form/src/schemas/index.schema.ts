@@ -18,7 +18,7 @@
  * - 可组合图示（可被 InputGroup 包裹）
  */
 
-import { Builder } from '../utils/builder.utils';
+import { StableBuilder } from '../utils/builder.utils';
 import { AnySchemaName, DoubleKeySchemaName, SingleKeySchemaName } from './abstract.schema';
 import { ButtonComponentSchema, ButtonGroupComponentSchema, InputGroupComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsetComponentSchema } from './component.schema';
 import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from './control.schema';
@@ -26,42 +26,42 @@ import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchem
 /** 任意图示 */
 export type AnySchema = ControlSchema | AnyContainerSchema | ComponentSchema;
 /** 任意构建器 */
-export type AnyBuilder = Builder<AnySchema, AnySchema, {}>;
+export type AnyBuilder = StableBuilder<AnySchema>;
 
 /** 控件图示 */
 export type AnyControlSchema = FormSchema | ControlSchema;
 /** 控件构建器 */
-export type AnyControlBuilder = Builder<AnyControlSchema, AnyControlSchema, {}>;
+export type AnyControlBuilder = StableBuilder<AnyControlSchema>;
 
 /** 任意容器图示 */
 export type AnyContainerSchema = ControlContainerSchema | ComponentContainerSchema;
 /** 任意容器构建器 */
-export type AnyContainerBuilder = Builder<AnyContainerSchema, AnyContainerSchema, {}>;
+export type AnyContainerBuilder = StableBuilder<AnyContainerSchema>;
 
 /** 控件容器图示 */
 export type ControlContainerSchema = FormSchema | InputGroupComponentSchema | StepsComponentSchema | StepComponentSchema | TabsetComponentSchema | TabComponentSchema;
 /** 控件容器构建器 */
-export type ControlContainerBuilder = Builder<ControlContainerSchema, ControlContainerSchema, {}>;
+export type ControlContainerBuilder = StableBuilder<ControlContainerSchema>;
 
 /** 表单图示 */
 export type FormSchema<N extends SingleKeySchemaName = SingleKeySchemaName> = FormGroupSchema<N> | FormArraySchema<N>;
 /** 表单构建器 */
-export type FormBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = Builder<FormSchema<N>, FormSchema<N>, {}>;
+export type FormBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = StableBuilder<FormSchema<N>>;
 
 /** 真实控件图示 */
 export type ControlSchema = SingleKeyControlSchema | DoubleKeyControlSchema | AnyKeyControlSchema;
 /** 真实控件构建器 */
-export type ControlBuilder = Builder<ControlSchema, ControlSchema, {}>;
+export type ControlBuilder = StableBuilder<ControlSchema>;
 
 /** 组件容器图示 */
 export type ComponentContainerSchema = ButtonGroupComponentSchema;
 /** 组件容器构建器 */
-export type ComponentContainerBuilder = Builder<ComponentContainerSchema, ComponentContainerSchema, {}>;
+export type ComponentContainerBuilder = StableBuilder<ComponentContainerSchema>;
 
 /** 普通组件图示 */
 export type ComponentSchema<N extends SingleKeySchemaName = SingleKeySchemaName> = ButtonComponentSchema<N>;
 /** 普通组件构建器 */
-export type ComponentBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = Builder<ComponentSchema<N>, ComponentSchema<N>, {}>;
+export type ComponentBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = StableBuilder<ComponentSchema<N>>;
 
 /** 可组合组件图示 */
 export type ComposableComponentSchema =
@@ -76,7 +76,7 @@ export type ComposableComponentSchema =
   CascaderControlSchema |
   ButtonComponentSchema;
 /** 可组合组件构建器 */
-export type ComposableComponentBuilder = Builder<ComposableComponentSchema, ComposableComponentSchema, {}>;
+export type ComposableComponentBuilder = StableBuilder<ComposableComponentSchema>;
 
 /** 单字段的真实控件图示 */
 export type SingleKeyControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> =
@@ -95,18 +95,18 @@ export type SingleKeyControlSchema<N extends SingleKeySchemaName = SingleKeySche
   RangePickerControlSchema<N> |
   SliderControlSchema<N>;
 /** 单字段的真实控件构建器 */
-export type SingleKeyControlBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = Builder<SingleKeyControlSchema<N>, SingleKeyControlSchema<N>, {}>;
+export type SingleKeyControlBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = StableBuilder<SingleKeyControlSchema<N>>;
 
 /** 双字段的真实控件图示 */
 export type DoubleKeyControlSchema<N extends DoubleKeySchemaName = DoubleKeySchemaName> =
   RangePickerControlSchema<N> |
   SliderControlSchema<N>;
 /** 双字段的真实控件构建器 */
-export type DoubleKeyControlBuilder<N extends DoubleKeySchemaName = DoubleKeySchemaName> = Builder<DoubleKeyControlSchema<N>, DoubleKeyControlSchema<N>, {}>;
+export type DoubleKeyControlBuilder<N extends DoubleKeySchemaName = DoubleKeySchemaName> = StableBuilder<DoubleKeyControlSchema<N>>;
 
 /** 任意键的真实控件图示 */
 export type AnyKeyControlSchema<N extends AnySchemaName = AnySchemaName> =
   RangePickerControlSchema<N> |
   SliderControlSchema<N>;
 /** 任意键的真实控件构建器 */
-export type AnyKeyControlBuilder<N extends AnySchemaName = AnySchemaName> = Builder<AnyKeyControlSchema<N>, AnyKeyControlSchema<N>, {}>;
+export type AnyKeyControlBuilder<N extends AnySchemaName = AnySchemaName> = StableBuilder<AnyKeyControlSchema<N>>;

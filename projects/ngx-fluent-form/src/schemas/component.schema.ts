@@ -5,7 +5,7 @@ import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzInputGroupComponent } from 'ng-zorro-antd/input';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
 import { NzTabComponent, NzTabPositionMode, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
-import { Builder } from '../utils/builder.utils';
+import { StableBuilder } from '../utils/builder.utils';
 import { AbstractComponentSchema, AbstractElementSchema, AbstractSchema, CallbackArg, SingleKeySchemaName } from './abstract.schema';
 import { AnyBuilder, AnySchema, ComposableComponentBuilder, ComposableComponentSchema } from './index.schema';
 
@@ -31,10 +31,10 @@ export interface ButtonComponentSchema<Name extends SingleKeySchemaName = Single
   type: 'button';
   subtype?: 'submit' | 'reset' | 'menu';
   style?: NzButtonType;
-  disabled?: boolean | ((arg: CallbackArg) => boolean) | string;
-  ghost?: boolean | ((arg: CallbackArg) => boolean) | string;
-  danger?: boolean | ((arg: CallbackArg) => boolean) | string;
-  loading?: boolean | ((arg: CallbackArg) => boolean) | string;
+  disabled?: boolean | ((arg: CallbackArg<ButtonComponentSchema<SingleKeySchemaName>>) => boolean) | string;
+  ghost?: boolean | ((arg: CallbackArg<ButtonComponentSchema<SingleKeySchemaName>>) => boolean) | string;
+  danger?: boolean | ((arg: CallbackArg<ButtonComponentSchema<SingleKeySchemaName>>) => boolean) | string;
+  loading?: boolean | ((arg: CallbackArg<ButtonComponentSchema<SingleKeySchemaName>>) => boolean) | string;
   shape?: NzButtonShape;
   size?: NzButtonSize;
   block?: boolean;
@@ -44,7 +44,7 @@ export interface ButtonComponentSchema<Name extends SingleKeySchemaName = Single
 
 export interface ButtonGroupComponentSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzButtonComponent> {
   type: 'button-group';
-  schemas: (ButtonComponentSchema | Builder<ButtonComponentSchema, ButtonComponentSchema, {}>)[];
+  schemas: (ButtonComponentSchema | StableBuilder<ButtonComponentSchema>)[];
   size?: NzButtonSize;
 }
 
@@ -57,7 +57,7 @@ export interface StepsComponentSchema<Name extends SingleKeySchemaName = SingleK
   size?: NzSizeDSType;
   status?: NzStatusType;
   start?: number;
-  schemas: (StepComponentSchema | Builder<StepComponentSchema, StepComponentSchema, {}>)[];
+  schemas: (StepComponentSchema | StableBuilder<StepComponentSchema>)[];
 }
 
 export interface StepComponentSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzStepComponent> {
@@ -65,7 +65,7 @@ export interface StepComponentSchema<Name extends SingleKeySchemaName = SingleKe
   title: string | TemplateRef<void>;
   subtitle?: string | TemplateRef<void>;
   description?: string | TemplateRef<void>;
-  disabled?: boolean | ((arg: CallbackArg) => boolean) | string;
+  disabled?: boolean | ((arg: CallbackArg<StepComponentSchema<SingleKeySchemaName>>) => boolean) | string;
   status?: 'wait' | 'process' | 'finish' | 'error';
   schemas: (AnySchema | AnyBuilder)[];
 }
@@ -79,12 +79,12 @@ export interface TabsetComponentSchema<Name extends SingleKeySchemaName = Single
   position?: NzTabPositionMode;
   gutter?: number;
   center?: boolean;
-  schemas: (TabComponentSchema | Builder<TabComponentSchema, TabComponentSchema, {}>)[];
+  schemas: (TabComponentSchema | StableBuilder<TabComponentSchema>)[];
 }
 
 export interface TabComponentSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzTabComponent> {
   type: 'tab';
   title: string;
-  disabled?: boolean | ((arg: CallbackArg) => boolean) | string;
+  disabled?: boolean | ((arg: CallbackArg<TabComponentSchema<SingleKeySchemaName>>) => boolean) | string;
   schemas: (AnySchema | AnyBuilder)[];
 }

@@ -43,6 +43,13 @@ export type Builder<T, B = {}, U = T, R extends string = 'schemas'> = (B extends
 };
 
 /**
+ * 稳定的 Builder
+ * @template T 原型
+ */
+export type StableBuilder<T> = Builder<T, T, {}>;
+
+/**
+ * 不稳定的 Builder，还有必填字段未填
  * @template T 原型
  * @template K 已填字段
  */

@@ -6,7 +6,7 @@ import dedent from 'ts-dedent';
 export const story = defineStory({
   args: {
     schemas: form(
-      input('text').label({ value: '文本输入框', tooltip: '小贴士' }).span(8).id('ipt'),
+      input('text').label({ value: '文本输入框', tooltip: '小贴士' }).span(8).id('ipt').disabled('false'),
       number('number').label('数字输入框').span(8),
       inputGroup().label('姓与名称').span(8).schemas(
         input('first').placeholder('姓').span(8),

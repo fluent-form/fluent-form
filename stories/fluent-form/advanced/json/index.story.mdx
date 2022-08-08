@@ -1,6 +1,6 @@
 import { Canvas, Meta, Story, Source } from '@storybook/addon-docs';
 import { meta } from '../../';
-import { story, jsonSource, jsonAndFluentSource, fluentAndJsonSource } from './';
+import { story, jsonSource, jsonAndFluentSource, fluentAndJsonSource, expressionSource } from './';
 
 <Meta
   title="FluentForm/Advanced"
@@ -30,3 +30,20 @@ import { story, jsonSource, jsonAndFluentSource, fluentAndJsonSource } from './'
   language="typescript"
   dark={true}
   code={fluentAndJsonSource} />
+
+## 静态表达式
+
+### 介绍
+
+组件图示的部分入参类型为**布尔值**的参数允许布尔值，或传入一个返回布尔值的函数；
+
+但在 JSON 下是无法编写函数的，这时候可以传入一个字符串类型的静态表达式，该表达式的执行上下文为 `{ model: model }` 。在字符串中可以编写一些简单的 JS 表达式。
+
+<Source
+  language="typescript"
+  dark={true}
+  code={expressionSource} />
+
+### 安全
+
+目前，静态表达式是一个简易的沙箱环境下运行的，可通过一些手段逃逸出沙箱环境；开发者需要确保编写的表达式是安全的，没有被注入的。

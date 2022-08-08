@@ -35,7 +35,7 @@ export interface AbstractSchema<Name extends AnySchemaName> {
   offset?: Cell;
   flex?: number | string;
   label?: string | Label;
-  hidden?: boolean | ((model: SafeAny) => boolean);
+  hidden?: boolean | ((model: SafeAny) => boolean) | string;
 }
 
 /** 抽象的真实控件图示 */
@@ -50,9 +50,9 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
   };
   value?: Val;
   /** Is it a required control */
-  required?: boolean | ((model: SafeAny) => boolean);
+  required?: boolean | ((model: SafeAny) => boolean) | string;
   /** Whether to disable control */
-  disabled?: boolean | ((model: SafeAny) => boolean);
+  disabled?: boolean | ((model: SafeAny) => boolean) | string;
   feedback?: boolean;
   /** Error message for control */
   tips?: {

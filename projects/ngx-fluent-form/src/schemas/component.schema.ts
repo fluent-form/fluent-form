@@ -32,10 +32,10 @@ export interface ButtonComponentSchema<Name extends SingleKeySchemaName = Single
   type: 'button';
   subtype?: 'submit' | 'reset' | 'menu';
   style?: NzButtonType;
-  disabled?: boolean | ((model: SafeAny) => boolean);
-  ghost?: boolean | ((model: SafeAny) => boolean);
-  danger?: boolean | ((model: SafeAny) => boolean);
-  loading?: boolean | ((model: SafeAny) => boolean);
+  disabled?: boolean | ((model: SafeAny) => boolean) | string;
+  ghost?: boolean | ((model: SafeAny) => boolean) | string;
+  danger?: boolean | ((model: SafeAny) => boolean) | string;
+  loading?: boolean | ((model: SafeAny) => boolean) | string;
   shape?: NzButtonShape;
   size?: NzButtonSize;
   block?: boolean;
@@ -66,7 +66,7 @@ export interface StepComponentSchema<Name extends SingleKeySchemaName = SingleKe
   title: string | TemplateRef<void>;
   subtitle?: string | TemplateRef<void>;
   description?: string | TemplateRef<void>;
-  disabled?: boolean | ((model: SafeAny) => boolean);
+  disabled?: boolean | ((model: SafeAny) => boolean) | string;
   status?: 'wait' | 'process' | 'finish' | 'error';
   schemas: (AnySchema | AnyBuilder)[];
 }
@@ -86,6 +86,6 @@ export interface TabsetComponentSchema<Name extends SingleKeySchemaName = Single
 export interface TabComponentSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzTabComponent> {
   type: 'tab';
   title: string;
-  disabled?: boolean | ((model: SafeAny) => boolean);
+  disabled?: boolean | ((model: SafeAny) => boolean) | string;
   schemas: (AnySchema | AnyBuilder)[];
 }

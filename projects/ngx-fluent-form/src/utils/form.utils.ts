@@ -1,4 +1,5 @@
 import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
+import { CallPipe } from '../pipes/call.pipe';
 import { AnyControlSchema, AnySchema, ControlSchema } from '../schemas/index.schema';
 import { Arr, Obj } from '../type';
 import { isComponentContainerSchema, isComponentSchema, isControlContainerSchema, isDoubleKeySchema } from './schema.utils';
@@ -97,6 +98,8 @@ export function formUtils<F extends FormGroup | FormArray>(form: F, schemas: Any
   return new FormUtils(form, schemas);
 }
 
+const callPipe = new CallPipe();
+
 export class FormUtils<F extends FormGroup | FormArray> {
   constructor(
     private readonly form: F,
@@ -178,13 +181,8 @@ export class FormUtils<F extends FormGroup | FormArray> {
       }
 
       const options = { emitEvent: false };
-
-      if (typeof schema.disabled === 'function') {
-        const disabled = schema.disabled(model);
-        disabled ? control.disable(options) : control.enable(options);
-      } else {
-        schema.disabled ? control.disable(options) : control.enable(options);
-      }
+      const disabled = callPipe.transform(schema.disabled, model);
+      disabled ? control.disable(options) : control.enable(options);
     });
   }
 

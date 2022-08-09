@@ -6,7 +6,27 @@
 <ng-template #componentTemplate let-control="control" let-schema="schema" let-model="model">
   <ng-container [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
+      <ng-container *ngIf="schema.autocomplete as autocomplete">
+        <input
+          nz-input
+          [attr.id]="schema.id"
+          [attr.minlength]="schema.length ?? schema.length?.min"
+          [attr.maxlength]="schema.length ?? schema.length?.max"
+          [type]="schema.subtype ?? 'text'"
+          [fluentPropertyBinder]="{ schema }"
+          [fluentEventBinder]="{ schema, control }"
+          [formControl]="control"
+          [placeholder]="schema.placeholder ?? ''"
+          [nzAutocomplete]="autocompleteCmp" />
+        <nz-autocomplete
+          #autocompleteCmp
+          [nzDataSource]="autocomplete.options"
+          [nzBackfill]="autocomplete.backfill"
+          [nzWidth]="autocomplete.width"
+          [compareWith]="autocomplete.compare"></nz-autocomplete>
+      </ng-container>
       <input
+        *ngIf="!schema.autocomplete"
         nz-input
         [attr.id]="schema.id"
         [attr.minlength]="schema.length ?? schema.length?.min"
@@ -19,7 +39,28 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="'textarea'">
+      <ng-container *ngIf="schema.autocomplete as autocomplete">
+        <textarea
+          nz-input
+          [attr.id]="schema.id"
+          [attr.minlength]="schema.length ?? schema.length?.min"
+          [attr.maxlength]="schema.length ?? schema.length?.max"
+          [fluentPropertyBinder]="{ schema }"
+          [fluentEventBinder]="{ schema, control }"
+          [formControl]="control"
+          [placeholder]="schema.placeholder ?? ''"
+          [rows]="schema.rows"
+          [nzAutosize]="schema.autosize ?? {}"
+          [nzAutocomplete]="autocompleteCmp"></textarea>
+        <nz-autocomplete
+          #autocompleteCmp
+          [nzDataSource]="autocomplete.options"
+          [nzBackfill]="autocomplete.backfill"
+          [nzWidth]="autocomplete.width"
+          [compareWith]="autocomplete.compare"></nz-autocomplete>
+      </ng-container>
       <textarea
+        *ngIf="!schema.autocomplete"
         nz-input
         [attr.id]="schema.id"
         [attr.minlength]="schema.length ?? schema.length?.min"
@@ -278,7 +319,31 @@
 <ng-template #composableComponentTemplate let-control="control" let-schema="schema" let-model="model">
   <ng-container *ngIf="!(schema.hidden | call: { model, control, schema })" [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
+      <ng-container *ngIf="schema.autocomplete as autocomplete">
+        <input
+          nz-col
+          nz-input
+          [attr.id]="schema.id"
+          [attr.minlength]="schema.length ?? schema.length?.min"
+          [attr.maxlength]="schema.length ?? schema.length?.max"
+          [type]="schema.subtype ?? 'text'"
+          [nzSpan]="schema.span ?? null"
+          [nzOffset]="schema.offset"
+          [nzFlex]="schema.flex"
+          [fluentPropertyBinder]="{ schema }"
+          [fluentEventBinder]="{ schema, control }"
+          [formControl]="control"
+          [placeholder]="schema.placeholder ?? ''"
+          [nzAutocomplete]="autocompleteCmp" />
+        <nz-autocomplete
+          #autocompleteCmp
+          [nzDataSource]="autocomplete.options"
+          [nzBackfill]="autocomplete.backfill"
+          [nzWidth]="autocomplete.width"
+          [compareWith]="autocomplete.compare"></nz-autocomplete>
+      </ng-container>
       <input
+        *ngIf="!schema.autocomplete"
         nz-col
         nz-input
         [attr.id]="schema.id"
@@ -295,7 +360,32 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="'textarea'">
+      <ng-container *ngIf="schema.autocomplete as autocomplete">
+        <textarea
+          nz-col
+          nz-input
+          [attr.id]="schema.id"
+          [attr.minlength]="schema.length ?? schema.length?.min"
+          [attr.maxlength]="schema.length ?? schema.length?.max"
+          [nzSpan]="schema.span ?? null"
+          [nzOffset]="schema.offset"
+          [nzFlex]="schema.flex"
+          [fluentPropertyBinder]="{ schema }"
+          [fluentEventBinder]="{ schema, control }"
+          [formControl]="control"
+          [placeholder]="schema.placeholder ?? ''"
+          [rows]="schema.rows"
+          [nzAutosize]="schema.autosize ?? {}"
+          [nzAutocomplete]="autocompleteCmp"></textarea>
+        <nz-autocomplete
+          #autocompleteCmp
+          [nzDataSource]="autocomplete.options"
+          [nzBackfill]="autocomplete.backfill"
+          [nzWidth]="autocomplete.width"
+          [compareWith]="autocomplete.compare"></nz-autocomplete>
+      </ng-container>
       <textarea
+        *ngIf="!schema.autocomplete"
         nz-col
         nz-input
         [attr.id]="schema.id"

@@ -89,6 +89,10 @@ const standardTextControlSchema = <T extends InputControlSchema | TextareaContro
     }
   }
 
+  if (schema.autocomplete) {
+    schema.autocomplete.compare ??= (o1: unknown, o2: unknown) => o1 === o2;
+  }
+
   return schema;
 }
 

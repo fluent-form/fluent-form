@@ -1,6 +1,8 @@
 import { TemplateRef } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormControl, FormControlStatus, ValidatorFn } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
+import { AutocompleteDataSource } from 'ng-zorro-antd/auto-complete';
+import { CompareWith } from 'ng-zorro-antd/core/types';
 import { NzDateMode } from 'ng-zorro-antd/date-picker';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { ComponentInputMap, ComponentOutputListenerMap, HTMLElementEventListenerMap, HTMLElementPropertyMap, SingleOrAll } from '../type';
@@ -107,6 +109,12 @@ export interface AbstractElementControlSchema<Ele extends HTMLElement, Val> exte
 /** 抽象的文本控件图示 */
 export interface AbstractTextControlSchema<Name extends AnySchemaName, Val> extends AbstractControlSchema<Name, Val> {
   length?: number | SingleOrAll<{ max: number, min: number }>;
+  autocomplete?: {
+    backfill?: boolean;
+    options: AutocompleteDataSource;
+    width?: number;
+    compare?: CompareWith;
+  };
 }
 
 /** 抽象的日期控件图示 */

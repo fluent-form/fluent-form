@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCascaderModule } from 'ng-zorro-antd/cascader';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
@@ -61,7 +62,8 @@ import { TypeofPipe } from './pipes/typeof.pipe';
     NzIconModule,
     NzOutletModule,
     NzStepsModule,
-    NzTabsModule
+    NzTabsModule,
+    NzAutocompleteModule
   ],
   exports: [
     FluentFormComponent,

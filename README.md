@@ -20,8 +20,15 @@ Building dynamic form in Angular with Fluent API.
 
 ## Prerequisites
 
-- [Angular](https://angular.io) >= 13.0.0
-- [ng-zorro-antd](https://ng.ant.design) >= 13.0.0
+Before using `ngx-fluent-form`, you should have a basic understanding of the following:
+
+- [Angular Reactive Forms](https://angular.cn/guide/reactive-forms)
+- [ng-zorro-antd Data Entry Series Components](https://ng.ant.design/components/auto-complete/en)
+
+And make sure your relevant dependency versions meet the following requirements:
+
+- [Angular](https://angular.io) >= v13.0.0
+- [ng-zorro-antd](https://ng.ant.design) >= v13.0.0
 
 ## Install
 
@@ -77,4 +84,4 @@ For better performance, all components of `ngx-fluent-form` run in [OnPush](http
 
 ## Support
 
-Like `ngx-fluent-form` ? ⭐Star for this project!
+Love `ngx-fluent-form` ? ⭐Star for this project!

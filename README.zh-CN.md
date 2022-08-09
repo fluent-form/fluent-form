@@ -20,8 +20,15 @@
 
 ## 先决条件
 
-- [Angular](https://angular.io) >= 13.0.0
-- [ng-zorro-antd](https://ng.ant.design) >= 13.0.0
+在使用 `ngx-fluent-form` 之前，您应该对以下内容有基本的了解：
+
+- [Angular 响应式表单](https://angular.cn/guide/reactive-forms)
+- [ng-zorro-antd 数据录入系列组件](https://ng.ant.design/components/auto-complete/zh)
+
+并且确保你的相关依赖版本符合如下规定：
+
+- [Angular](https://angular.io) >= v13.0.0
+- [ng-zorro-antd](https://ng.ant.design) >= v13.0.0
 
 ## 安装
 

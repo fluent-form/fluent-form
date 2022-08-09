@@ -6,13 +6,28 @@ import dedent from 'ts-dedent';
 export const story = defineStory({
   args: {
     schemas: form(
-      input('text').label({ value: '文本输入框', tooltip: '小贴士' }).span(8).id('ipt').disabled('false'),
+      input('text')
+        .label({ value: '文本输入框', tooltip: '小贴士' })
+        .span(8)
+        .id('ipt')
+        .disabled('false')
+        .autocomplete({
+          options: ['a', 'b', 'c']
+        }),
       number('number').label('数字输入框').span(8).disabled(o => (console.log(o), false)),
       inputGroup().label('姓与名称').span(8).schemas(
-        input('first').placeholder('姓').span(8),
+        input('first').placeholder('姓').span(8).autocomplete({
+          options: [1, 2, 3]
+        }),
         input('last').placeholder('名').span(16),
       ),
-      textarea('textarea').label('文本框').span(24),
+      textarea('textarea').label('文本框').span(24).autocomplete({
+        options: [
+          { label: 'A', value: 'a' },
+          { label: 'B', value: 'b' },
+          { label: 'C', value: 'c' }
+        ]
+      }),
       date('date').label('日期录入框').span(6),
       range('range').label('区间日期录入框').span(6),
       datetime('datetime').label('日期时间录入框').span(6),
@@ -72,13 +87,28 @@ export const source = dedent`
   })
   export class ExampleComponent {
     schemas = form(
-      input('text').label({ value: '文本输入框', tooltip: '小贴士' }).span(8).id('ipt'),
-      number('number').label('数字输入框').span(8),
+      input('text')
+        .label({ value: '文本输入框', tooltip: '小贴士' })
+        .span(8)
+        .id('ipt')
+        .disabled('false')
+        .autocomplete({
+          options: ['a', 'b', 'c']
+        }),
+      number('number').label('数字输入框').span(8).disabled(o => (console.log(o), false)),
       inputGroup().label('姓与名称').span(8).schemas(
-        input('first').placeholder('姓').span(8),
+        input('first').placeholder('姓').span(8).autocomplete({
+          options: [1, 2, 3]
+        }),
         input('last').placeholder('名').span(16),
       ),
-      textarea('textarea').label('文本框').span(24),
+      textarea('textarea').label('文本框').span(24).autocomplete({
+        options: [
+          { label: 'A', value: 'a' },
+          { label: 'B', value: 'b' },
+          { label: 'C', value: 'c' }
+        ]
+      }),
       date('date').label('日期录入框').span(6),
       range('range').label('区间日期录入框').span(6),
       datetime('datetime').label('日期时间录入框').span(6),
@@ -111,8 +141,18 @@ export const source = dedent`
         step().title('第三步').schemas(
           input('textInStep3').label('文本输入框').placeholder('第三步的输入框'),
         )
+      ),
+      tabset().span(24).schemas(
+        tab().title('账号').schemas(
+          input('textInTab1').label('账号').span(12),
+        ),
+        tab().title('手机号').schemas(
+          input('textInTab2').label('手机号'),
+        ),
+        tab().title('禁用').disabled(true).schemas(
+          input('textInTab3'),
+        )
       )
-    ),
     );
 
     model = {};

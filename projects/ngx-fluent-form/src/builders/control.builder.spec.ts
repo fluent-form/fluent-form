@@ -1,5 +1,5 @@
 import { SafeAny } from '@ngify/types';
-import { CheckboxControlSchema, DatePickerControlSchema, InputControlSchema, NumberInputControlSchema, RangePickerControlSchema, RateControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from '../schemas';
+import { AbstractTextControlSchema, CheckboxControlSchema, DatePickerControlSchema, InputControlSchema, NumberInputControlSchema, RangePickerControlSchema, RateControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from '../schemas';
 import { array, cascader, checkbox, checkboxGroup, control, date, datetime, group, input, number, radio, range, rate, select, slider, switcher, textarea, time } from './control.builder';
 
 describe('control.builder', () => {
@@ -7,6 +7,13 @@ describe('control.builder', () => {
     const schema = control(input('input'));
     const value = { type: 'input', name: 'input' } as InputControlSchema<'input', string>;
     expect(schema).toEqual(value);
+  });
+
+  it('input with autocomplete', () => {
+    const schema = control(input('input').autocomplete({ options: [] })) as AbstractTextControlSchema<'input', string>;
+    expect(schema.autocomplete!.compare).toBeTruthy();
+    const schema2 = control(input('input').autocomplete({ options: [], compare: (a, b) => a === b })) as AbstractTextControlSchema<'input', string>;
+    expect(schema2.autocomplete!.compare).toBeTruthy();
   });
 
   it('textarea', () => {

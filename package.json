@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "dev": "ng build --watch",
-    "build": "ng build --configuration production & node ./scripts/copy.mjs",
+    "build": "ng build --configuration production",
+    "postbuild": "copyfiles ./README.md ./README.zh-CN.md ./LICENSE ./dist/ngx-fluent-form/",
     "test:watch": "ng test ngx-fluent-form",
     "test": "ng test ngx-fluent-form --configuration production",
     "coverage:watch": "ng test ngx-fluent-form --code-coverage",
@@ -57,6 +58,7 @@
     "@typescript-eslint/eslint-plugin": "5.27.1",
     "@typescript-eslint/parser": "5.27.1",
     "babel-loader": "8.2.5",
+    "copyfiles": "^2.4.1",
     "eslint": "8.19.0",
     "jasmine-core": "4.0.1",
     "karma": "6.3.17",

@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -29,5 +29,5 @@ jobs:
       - run: npm run lint
       - run: npm run test
       - run: npm run build
-      - run: cd ./project/ngx-fluent-form
+      - run: cd ./projects/ngx-fluent-form
       - run: npm run build

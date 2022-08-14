@@ -33,7 +33,7 @@ And make sure your relevant dependency versions meet the following requirements:
 ## Install
 
 ```shell
-npm i ngx-fluent-form
+ng add ngx-fluent-form
 ```
 
 ## Docs

@@ -33,7 +33,7 @@
 ## 安装
 
 ```shell
-npm i ngx-fluent-form
+ng add ngx-fluent-form
 ```
 
 ## 文档

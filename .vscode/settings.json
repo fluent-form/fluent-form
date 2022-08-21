@@ -2,6 +2,7 @@
   "livePreview.defaultPreviewPath": "/documentation/index.html",
   "conventionalCommits.scopes": [
     "storybook",
-    "directive"
+    "directive",
+    "deps"
   ]
 }

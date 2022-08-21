@@ -1,7 +1,9 @@
 nz-switch,
-nz-input-number,
+nz-select,
+nz-cascader,
 nz-date-picker,
-nz-range-picker,
-nz-time-picker {
+nz-time-picker,
+nz-input-number,
+nz-range-picker {
   width: 100%;
 }

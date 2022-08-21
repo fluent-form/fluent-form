@@ -55,7 +55,7 @@ import { FluentFormModule } from 'ngx-fluent-form';
 export class YourModule { }
 ```
 
-Configure `schemas` parameter to build your form::
+Configure `schemas` parameter to build your form:
 
 ```ts
 import { date, form, number, text } from 'ngx-fluent-form';

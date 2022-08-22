@@ -80,7 +80,7 @@ export class Component {
 
 ## Notice
 
-For better performance, all components of `ngx-fluent-form` run in [OnPush](https://angular.io/api/core/ChangeDetectionStrategy) mode, this means that `mutate` operations on @Input() data will not take effect, please use `immutable` methods to manipulate arrays or objects.
+For better performance, all components of `ngx-fluent-form` run in [OnPush](https://angular.io/api/core/ChangeDetectionStrategy) mode, this means that `mutate` operations on `@Input()` data will not take effect, please use `immutable` methods to manipulate arrays or objects.
 
 ## Support
 

@@ -10,32 +10,32 @@
         <input
           nz-input
           [attr.id]="schema.id"
-          [attr.minlength]="schema.length ?? schema.length?.min"
           [attr.maxlength]="schema.length ?? schema.length?.max"
-          [type]="schema.subtype ?? 'text'"
-          [fluentPropertyBinder]="{ schema }"
+          [attr.minlength]="schema.length ?? schema.length?.min"
           [fluentEventBinder]="{ schema, control }"
+          [fluentPropertyBinder]="{ schema }"
           [formControl]="control"
+          [nzAutocomplete]="autocompleteCmp"
           [placeholder]="schema.placeholder ?? ''"
-          [nzAutocomplete]="autocompleteCmp" />
+          [type]="schema.subtype ?? 'text'">
         <nz-autocomplete
           #autocompleteCmp
-          [nzDataSource]="autocomplete.options"
+          [compareWith]="autocomplete.compare"
           [nzBackfill]="autocomplete.backfill"
-          [nzWidth]="autocomplete.width"
-          [compareWith]="autocomplete.compare"></nz-autocomplete>
+          [nzDataSource]="autocomplete.options"
+          [nzWidth]="autocomplete.width"></nz-autocomplete>
       </ng-container>
       <input
         *ngIf="!schema.autocomplete"
         nz-input
         [attr.id]="schema.id"
-        [attr.minlength]="schema.length ?? schema.length?.min"
         [attr.maxlength]="schema.length ?? schema.length?.max"
-        [type]="schema.subtype ?? 'text'"
-        [fluentPropertyBinder]="{ schema }"
+        [attr.minlength]="schema.length ?? schema.length?.min"
         [fluentEventBinder]="{ schema, control }"
+        [fluentPropertyBinder]="{ schema }"
         [formControl]="control"
-        [placeholder]="schema.placeholder ?? ''" />
+        [placeholder]="schema.placeholder ?? ''"
+        [type]="schema.subtype ?? 'text'">
     </ng-container>
 
     <ng-container *ngSwitchCase="'textarea'">
@@ -43,46 +43,46 @@
         <textarea
           nz-input
           [attr.id]="schema.id"
-          [attr.minlength]="schema.length ?? schema.length?.min"
           [attr.maxlength]="schema.length ?? schema.length?.max"
-          [fluentPropertyBinder]="{ schema }"
+          [attr.minlength]="schema.length ?? schema.length?.min"
           [fluentEventBinder]="{ schema, control }"
+          [fluentPropertyBinder]="{ schema }"
           [formControl]="control"
-          [placeholder]="schema.placeholder ?? ''"
-          [rows]="schema.rows"
+          [nzAutocomplete]="autocompleteCmp"
           [nzAutosize]="schema.autosize ?? {}"
-          [nzAutocomplete]="autocompleteCmp"></textarea>
+          [placeholder]="schema.placeholder ?? ''"
+          [rows]="schema.rows"></textarea>
         <nz-autocomplete
           #autocompleteCmp
-          [nzDataSource]="autocomplete.options"
+          [compareWith]="autocomplete.compare"
           [nzBackfill]="autocomplete.backfill"
-          [nzWidth]="autocomplete.width"
-          [compareWith]="autocomplete.compare"></nz-autocomplete>
+          [nzDataSource]="autocomplete.options"
+          [nzWidth]="autocomplete.width"></nz-autocomplete>
       </ng-container>
       <textarea
         *ngIf="!schema.autocomplete"
         nz-input
         [attr.id]="schema.id"
-        [attr.minlength]="schema.length ?? schema.length?.min"
         [attr.maxlength]="schema.length ?? schema.length?.max"
-        [fluentPropertyBinder]="{ schema }"
+        [attr.minlength]="schema.length ?? schema.length?.min"
         [fluentEventBinder]="{ schema, control }"
+        [fluentPropertyBinder]="{ schema }"
         [formControl]="control"
+        [nzAutosize]="schema.autosize ?? {}"
         [placeholder]="schema.placeholder ?? ''"
-        [rows]="schema.rows"
-        [nzAutosize]="schema.autosize ?? {}"></textarea>
+        [rows]="schema.rows"></textarea>
     </ng-container>
 
     <ng-container *ngSwitchCase="'number'">
       <nz-input-number
         #cmp
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
         [nzId]="schema.id"
-        [nzPlaceHolder]="schema.placeholder ?? ''"
-        [nzMin]="schema.min ?? -infinity"
         [nzMax]="schema.max ?? infinity"
+        [nzMin]="schema.min ?? -infinity"
+        [nzPlaceHolder]="schema.placeholder ?? ''"
         [nzPrecision]="schema.precision?.value ?? (schema.precision | typeof: 'number') ? schema.precision : ''"
         [nzPrecisionMode]="schema.precision?.mode"
         [nzStep]="schema.step ?? 1">
@@ -92,45 +92,47 @@
     <ng-container *ngSwitchCase="'date'">
       <nz-date-picker
         #cmp
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
-        [nzId]="schema.id"
-        [nzPlaceHolder]="schema.placeholder"
-        [nzMode]="schema.mode"
         [nzAllowClear]="schema.clear"
-        [nzShowTime]="schema.time"
         [nzFormat]="schema.format"
-        [nzInline]="schema.inline"></nz-date-picker>
+        [nzId]="schema.id"
+        [nzInline]="schema.inline"
+        [nzMode]="schema.mode"
+        [nzPlaceHolder]="schema.placeholder"
+        [nzShowTime]="schema.time">
+      </nz-date-picker>
     </ng-container>
 
     <ng-container *ngSwitchCase="'range'">
       <nz-range-picker
         #cmp
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
-        [nzId]="schema.id"
-        [nzPlaceHolder]="schema.placeholder"
-        [nzMode]="schema.mode"
         [nzAllowClear]="schema.clear"
-        [nzShowTime]="schema.time"
         [nzFormat]="schema.format"
-        [nzInline]="schema.inline"></nz-range-picker>
+        [nzId]="schema.id"
+        [nzInline]="schema.inline"
+        [nzMode]="schema.mode"
+        [nzPlaceHolder]="schema.placeholder"
+        [nzShowTime]="schema.time">
+      </nz-range-picker>
     </ng-container>
 
     <ng-container *ngSwitchCase="'time'">
       <nz-time-picker
         #cmp
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
-        [nzId]="schema.id"
-        [nzPlaceHolder]="schema.placeholder"
         [nzAllowEmpty]="schema.clear"
         [nzFormat]="schema.format ?? 'HH:mm:ss'"
         [nzHourStep]="schema.step?.hour"
+        [nzId]="schema.id"
         [nzMinuteStep]="schema.step?.minute"
+        [nzPlaceHolder]="schema.placeholder"
         [nzSecondStep]="schema.step?.second">
       </nz-time-picker>
     </ng-container>
@@ -138,8 +140,8 @@
     <ng-container *ngSwitchCase="'switch'">
       <nz-switch
         #cmp
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
         [nzCheckedChildren]="schema.placeholder?.[0]"
         [nzUnCheckedChildren]="schema.placeholder?.[1]">
@@ -149,51 +151,52 @@
     <ng-container *ngSwitchCase="'select'">
       <nz-select
         #cmp
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
-        [nzId]="schema.id"
-        [nzPlaceHolder]="schema.placeholder"
         [nzAllowClear]="schema.clear"
-        [nzMode]="schema.mode ?? 'default'"
+        [nzId]="schema.id"
         [nzMaxMultipleCount]="schema.limit ?? infinity"
+        [nzMode]="schema.mode ?? 'default'"
+        [nzPlaceHolder]="schema.placeholder"
         [nzShowSearch]="schema.search">
         <nz-option
           *ngFor="let option of schema.options"
-          [nzValue]="option[schema.config?.valueProperty ?? 'value']"
+          [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
           [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
-          [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"></nz-option>
+          [nzValue]="option[schema.config?.valueProperty ?? 'value']">
+        </nz-option>
       </nz-select>
     </ng-container>
 
     <ng-container *ngSwitchCase="'cascader'">
       <nz-cascader
         #cmp
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
-        [nzPlaceHolder]="schema.placeholder"
         [nzAllowClear]="schema.clear ?? true"
         [nzAutoFocus]="schema.focus"
         [nzBackdrop]="schema.backdrop"
-        [nzSuffixIcon]="schema.suffixIcon ?? 'down'"
         [nzExpandIcon]="schema.expandIcon ?? ''"
         [nzExpandTrigger]="schema.trigger"
-        [nzShowArrow]="schema.arrow ?? true"
-        [nzSize]="schema.size"
+        [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
         [nzLoadData]="schema.loadData"
-        [nzShowSearch]="schema.search"
         [nzOptions]="schema.options"
-        [nzValueProperty]="schema.config?.valueProperty ?? 'value'"
-        [nzLabelProperty]="schema.config?.labelProperty ?? 'label'">
+        [nzPlaceHolder]="schema.placeholder"
+        [nzShowArrow]="schema.arrow ?? true"
+        [nzShowSearch]="schema.search"
+        [nzSize]="schema.size"
+        [nzSuffixIcon]="schema.suffixIcon ?? 'down'"
+        [nzValueProperty]="schema.config?.valueProperty ?? 'value'">
       </nz-cascader>
     </ng-container>
 
     <ng-container *ngSwitchCase="'slider'">
       <nz-slider
         #cmp
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
         [nzIncluded]="schema.included ?? true"
         [nzMax]="schema.max ?? 100"
@@ -206,15 +209,21 @@
     <ng-container *ngSwitchCase="'radio'">
       <nz-radio-group
         #cmp
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
         [nzButtonStyle]="schema.style">
         <ng-container *ngFor="let option of schema.options">
-          <label *ngIf="!schema.style" nz-radio [nzValue]="option[schema.config?.valueProperty ?? 'value']">
+          <label
+            *ngIf="!schema.style"
+            nz-radio
+            [nzValue]="option[schema.config?.valueProperty ?? 'value']">
             {{ option[schema.config?.labelProperty ?? 'label'] }}
           </label>
-          <label *ngIf="schema.style" nz-radio-button [nzValue]="option[schema.config?.valueProperty ?? 'value']">
+          <label
+            *ngIf="schema.style"
+            nz-radio-button
+            [nzValue]="option[schema.config?.valueProperty ?? 'value']">
             {{ option[schema.config?.labelProperty ?? 'label'] }}
           </label>
         </ng-container>
@@ -225,8 +234,8 @@
       <label
         #cmp
         nz-checkbox
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
         [nzId]="schema.id">{{ schema.content }}</label>
     </ng-container>
@@ -234,8 +243,8 @@
     <ng-container *ngSwitchCase="'checkbox-group'">
       <nz-checkbox-group
         #cmp
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control">
       </nz-checkbox-group>
     </ng-container>
@@ -243,8 +252,8 @@
     <ng-container *ngSwitchCase="'rate'">
       <nz-rate
         #cmp
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
         [nzAllowClear]="schema.clear ?? true"
         [nzAllowHalf]="schema.half"
@@ -257,20 +266,21 @@
       <nz-input-group
         #cmp
         nzCompact
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema }"
-        [nzAddOnBefore]="schema.before?.icon ? null : schema.before"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [nzAddOnAfter]="schema.after?.icon ? null : schema.after"
-        [nzAddOnBeforeIcon]="schema.before?.icon"
         [nzAddOnAfterIcon]="schema.after?.icon"
+        [nzAddOnBefore]="schema.before?.icon ? null : schema.before"
+        [nzAddOnBeforeIcon]="schema.before?.icon"
         [nzPrefix]="schema.prefix?.icon ? null : schema.prefix"
-        [nzSuffix]="schema.suffix?.icon ? null : schema.suffix"
         [nzPrefixIcon]="schema.prefix?.icon"
-        [nzSuffixIcon]="schema.suffix?.icon"
-        [nzSize]="schema.size">
+        [nzSize]="schema.size"
+        [nzSuffix]="schema.suffix?.icon ? null : schema.suffix"
+        [nzSuffixIcon]="schema.suffix?.icon">
         <ng-container *ngFor="let subschema of schema.schemas">
           <ng-container
-            *ngTemplateOutlet="composableComponentTemplate; context: { control: (subschema.name | control: control), schema: subschema, model: model }">
+            [ngTemplateOutlet]="composableComponentTemplate"
+            [ngTemplateOutletContext]="{ control: (subschema.name | control: control), schema: subschema, model: model }">
           </ng-container>
         </ng-container>
       </nz-input-group>
@@ -279,12 +289,11 @@
     <ng-container *ngSwitchCase="'button-group'">
       <nz-button-group
         #cmp
-        [nzSize]="schema.size"
+        [fluentEventBinder]="{ cmp, schema }"
         [fluentPropertyBinder]="{ cmp, schema }"
-        [fluentEventBinder]="{ cmp, schema }">
+        [nzSize]="schema.size">
         <ng-container *ngFor="let subschema of schema.schemas">
-          <ng-container
-            *ngTemplateOutlet="componentTemplate; context: { schema: subschema, model: model }">
+          <ng-container *ngTemplateOutlet="componentTemplate; context: { schema: subschema, model: model }">
           </ng-container>
         </ng-container>
       </nz-button-group>
@@ -294,24 +303,24 @@
       <button
         *ngIf="!(schema.hidden | call: { model, control, schema })"
         nz-button
-        [type]="schema.mode"
-        [fluentPropertyBinder]="{ schema }"
-        [fluentEventBinder]="{ schema }"
         [disabled]="schema.disabled | call: { model, control, schema }"
-        [nzType]="schema.subtype"
+        [fluentEventBinder]="{ schema }"
+        [fluentPropertyBinder]="{ schema }"
+        [nzBlock]="schema.block"
+        [nzDanger]="schema.danger | call: { model, control, schema }"
         [nzGhost]="schema.ghost | call: { model, control, schema }"
         [nzLoading]="schema.loading | call: { model, control, schema }"
         [nzShape]="schema.shape"
         [nzSize]="schema.size"
-        [nzBlock]="schema.block"
-        [nzDanger]="schema.danger | call: { model, control, schema }">
+        [nzType]="schema.subtype"
+        [type]="schema.mode">
         <i
           *ngIf="schema.icon"
           nz-icon
-          [nzType]="schema.icon.type ?? schema.icon"
-          [nzTheme]="schema.icon.theme"
+          [nzRotate]="schema.icon.rotate"
           [nzSpin]="schema.icon.spin"
-          [nzRotate]="schema.icon.rotate"></i>
+          [nzTheme]="schema.icon.theme"
+          [nzType]="schema.icon.type ?? schema.icon"></i>
         <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
       </button>
     </ng-container>
@@ -324,46 +333,48 @@
 <!-- @param schema  组件的图示 -->
 <!-- @param model   当前模型值 -->
 <ng-template #composableComponentTemplate let-control="control" let-schema="schema" let-model="model">
-  <ng-container *ngIf="!(schema.hidden | call: { model, control, schema })" [ngSwitch]="schema.type">
+  <ng-container
+    *ngIf="!(schema.hidden | call: { model, control, schema })"
+    [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
       <ng-container *ngIf="schema.autocomplete as autocomplete">
         <input
           nz-col
           nz-input
           [attr.id]="schema.id"
-          [attr.minlength]="schema.length ?? schema.length?.min"
           [attr.maxlength]="schema.length ?? schema.length?.max"
-          [type]="schema.subtype ?? 'text'"
-          [nzSpan]="schema.span ?? null"
-          [nzOffset]="schema.offset"
-          [nzFlex]="schema.flex"
-          [fluentPropertyBinder]="{ schema }"
+          [attr.minlength]="schema.length ?? schema.length?.min"
           [fluentEventBinder]="{ schema, control }"
+          [fluentPropertyBinder]="{ schema }"
           [formControl]="control"
+          [nzAutocomplete]="autocompleteCmp"
+          [nzFlex]="schema.flex"
+          [nzOffset]="schema.offset"
+          [nzSpan]="schema.span ?? null"
           [placeholder]="schema.placeholder ?? ''"
-          [nzAutocomplete]="autocompleteCmp" />
+          [type]="schema.subtype ?? 'text'">
         <nz-autocomplete
           #autocompleteCmp
-          [nzDataSource]="autocomplete.options"
+          [compareWith]="autocomplete.compare"
           [nzBackfill]="autocomplete.backfill"
-          [nzWidth]="autocomplete.width"
-          [compareWith]="autocomplete.compare"></nz-autocomplete>
+          [nzDataSource]="autocomplete.options"
+          [nzWidth]="autocomplete.width"></nz-autocomplete>
       </ng-container>
       <input
         *ngIf="!schema.autocomplete"
         nz-col
         nz-input
         [attr.id]="schema.id"
-        [attr.minlength]="schema.length ?? schema.length?.min"
         [attr.maxlength]="schema.length ?? schema.length?.max"
-        [nzSpan]="schema.span ?? null"
-        [nzOffset]="schema.offset"
-        [nzFlex]="schema.flex"
-        [type]="schema.subtype ?? 'text'"
-        [fluentPropertyBinder]="{ schema }"
+        [attr.minlength]="schema.length ?? schema.length?.min"
         [fluentEventBinder]="{ schema, control }"
+        [fluentPropertyBinder]="{ schema }"
         [formControl]="control"
-        [placeholder]="schema.placeholder ?? ''" />
+        [nzFlex]="schema.flex"
+        [nzOffset]="schema.offset"
+        [nzSpan]="schema.span ?? null"
+        [placeholder]="schema.placeholder ?? ''"
+        [type]="schema.subtype ?? 'text'">
     </ng-container>
 
     <ng-container *ngSwitchCase="'textarea'">
@@ -372,59 +383,59 @@
           nz-col
           nz-input
           [attr.id]="schema.id"
-          [attr.minlength]="schema.length ?? schema.length?.min"
           [attr.maxlength]="schema.length ?? schema.length?.max"
-          [nzSpan]="schema.span ?? null"
-          [nzOffset]="schema.offset"
-          [nzFlex]="schema.flex"
-          [fluentPropertyBinder]="{ schema }"
+          [attr.minlength]="schema.length ?? schema.length?.min"
           [fluentEventBinder]="{ schema, control }"
+          [fluentPropertyBinder]="{ schema }"
           [formControl]="control"
-          [placeholder]="schema.placeholder ?? ''"
-          [rows]="schema.rows"
+          [nzAutocomplete]="autocompleteCmp"
           [nzAutosize]="schema.autosize ?? {}"
-          [nzAutocomplete]="autocompleteCmp"></textarea>
+          [nzFlex]="schema.flex"
+          [nzOffset]="schema.offset"
+          [nzSpan]="schema.span ?? null"
+          [placeholder]="schema.placeholder ?? ''"
+          [rows]="schema.rows"></textarea>
         <nz-autocomplete
           #autocompleteCmp
-          [nzDataSource]="autocomplete.options"
+          [compareWith]="autocomplete.compare"
           [nzBackfill]="autocomplete.backfill"
-          [nzWidth]="autocomplete.width"
-          [compareWith]="autocomplete.compare"></nz-autocomplete>
+          [nzDataSource]="autocomplete.options"
+          [nzWidth]="autocomplete.width"></nz-autocomplete>
       </ng-container>
       <textarea
         *ngIf="!schema.autocomplete"
         nz-col
         nz-input
         [attr.id]="schema.id"
-        [attr.minlength]="schema.length ?? schema.length?.min"
         [attr.maxlength]="schema.length ?? schema.length?.max"
-        [nzSpan]="schema.span ?? null"
-        [nzOffset]="schema.offset"
-        [nzFlex]="schema.flex"
-        [fluentPropertyBinder]="{ schema }"
+        [attr.minlength]="schema.length ?? schema.length?.min"
         [fluentEventBinder]="{ schema, control }"
+        [fluentPropertyBinder]="{ schema }"
         [formControl]="control"
+        [nzAutosize]="schema.autosize ?? {}"
+        [nzFlex]="schema.flex"
+        [nzOffset]="schema.offset"
+        [nzSpan]="schema.span ?? null"
         [placeholder]="schema.placeholder ?? ''"
-        [rows]="schema.rows"
-        [nzAutosize]="schema.autosize ?? {}"></textarea>
+        [rows]="schema.rows"></textarea>
     </ng-container>
 
     <ng-container *ngSwitchCase="'number'">
       <nz-input-number
         #cmp
         nz-col
-        [nzId]="schema.id"
-        [nzSpan]="schema.span ?? null"
-        [nzOffset]="schema.offset"
-        [nzFlex]="schema.flex"
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
-        [nzPlaceHolder]="schema.placeholder ?? ''"
-        [nzMin]="schema.min ?? -infinity"
+        [nzFlex]="schema.flex"
+        [nzId]="schema.id"
         [nzMax]="schema.max ?? infinity"
+        [nzMin]="schema.min ?? -infinity"
+        [nzOffset]="schema.offset"
+        [nzPlaceHolder]="schema.placeholder ?? ''"
         [nzPrecision]="schema.precision ?? ''"
         [nzPrecisionMode]="schema.precisionMode"
+        [nzSpan]="schema.span ?? null"
         [nzStep]="schema.step ?? 1">
       </nz-input-number>
     </ng-container>
@@ -433,57 +444,57 @@
       <nz-date-picker
         #cmp
         nz-col
-        [nzId]="schema.id"
-        [nzSpan]="schema.span ?? null"
-        [nzOffset]="schema.offset"
-        [nzFlex]="schema.flex"
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
-        [nzPlaceHolder]="schema.placeholder"
-        [nzMode]="schema.mode"
         [nzAllowClear]="schema.clear"
-        [nzShowTime]="schema.time"
+        [nzFlex]="schema.flex"
         [nzFormat]="schema.format"
-        [nzInline]="schema.inline"></nz-date-picker>
+        [nzId]="schema.id"
+        [nzInline]="schema.inline"
+        [nzMode]="schema.mode"
+        [nzOffset]="schema.offset"
+        [nzPlaceHolder]="schema.placeholder"
+        [nzShowTime]="schema.time"
+        [nzSpan]="schema.span ?? null"></nz-date-picker>
     </ng-container>
 
     <ng-container *ngSwitchCase="'range'">
       <nz-range-picker
         #cmp
         nz-col
-        [nzId]="schema.id"
-        [nzSpan]="schema.span ?? null"
-        [nzOffset]="schema.offset"
-        [nzFlex]="schema.flex"
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
-        [nzPlaceHolder]="schema.placeholder"
-        [nzMode]="schema.mode"
         [nzAllowClear]="schema.clear"
-        [nzShowTime]="schema.time"
+        [nzFlex]="schema.flex"
         [nzFormat]="schema.format"
-        [nzInline]="schema.inline"></nz-range-picker>
+        [nzId]="schema.id"
+        [nzInline]="schema.inline"
+        [nzMode]="schema.mode"
+        [nzOffset]="schema.offset"
+        [nzPlaceHolder]="schema.placeholder"
+        [nzShowTime]="schema.time"
+        [nzSpan]="schema.span ?? null"></nz-range-picker>
     </ng-container>
 
     <ng-container *ngSwitchCase="'time'">
       <nz-time-picker
         #cmp
         nz-col
-        [nzId]="schema.id"
-        [nzSpan]="schema.span ?? null"
-        [nzOffset]="schema.offset"
-        [nzFlex]="schema.flex"
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
-        [nzPlaceHolder]="schema.placeholder"
         [nzAllowEmpty]="schema.clear"
+        [nzFlex]="schema.flex"
         [nzFormat]="schema.format ?? 'HH:mm:ss'"
         [nzHourStep]="schema.step?.hour"
+        [nzId]="schema.id"
         [nzMinuteStep]="schema.step?.minute"
-        [nzSecondStep]="schema.step?.second">
+        [nzOffset]="schema.offset"
+        [nzPlaceHolder]="schema.placeholder"
+        [nzSecondStep]="schema.step?.second"
+        [nzSpan]="schema.span ?? null">
       </nz-time-picker>
     </ng-container>
 
@@ -491,23 +502,24 @@
       <nz-select
         #cmp
         nz-col
-        [nzId]="schema.id"
-        [nzSpan]="schema.span ?? null"
-        [nzOffset]="schema.offset"
-        [nzFlex]="schema.flex"
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
-        [nzPlaceHolder]="schema.placeholder"
         [nzAllowClear]="schema.clear"
-        [nzMode]="schema.mode ?? 'default'"
+        [nzFlex]="schema.flex"
+        [nzId]="schema.id"
         [nzMaxMultipleCount]="schema.limit ?? infinity"
-        [nzShowSearch]="schema.search">
+        [nzMode]="schema.mode ?? 'default'"
+        [nzOffset]="schema.offset"
+        [nzPlaceHolder]="schema.placeholder"
+        [nzShowSearch]="schema.search"
+        [nzSpan]="schema.span ?? null">
         <nz-option
           *ngFor="let option of schema.options"
-          [nzValue]="option[schema.config?.valueProperty ?? 'value']"
+          [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
           [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
-          [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"></nz-option>
+          [nzValue]="option[schema.config?.valueProperty ?? 'value']">
+        </nz-option>
       </nz-select>
     </ng-container>
 
@@ -515,54 +527,54 @@
       <nz-cascader
         #cmp
         nz-col
-        [nzSpan]="schema.span ?? null"
-        [nzOffset]="schema.offset"
-        [nzFlex]="schema.flex"
-        [fluentPropertyBinder]="{ cmp, schema }"
         [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
-        [nzPlaceHolder]="schema.placeholder"
         [nzAllowClear]="schema.clear ?? true"
         [nzAutoFocus]="schema.focus"
         [nzBackdrop]="schema.backdrop"
-        [nzSuffixIcon]="schema.suffixIcon"
         [nzExpandIcon]="schema.expandIcon"
         [nzExpandTrigger]="schema.trigger"
-        [nzShowArrow]="schema.arrow ?? true"
-        [nzSize]="schema.size"
+        [nzFlex]="schema.flex"
+        [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
         [nzLoadData]="schema.loadData"
-        [nzShowSearch]="schema.search"
+        [nzOffset]="schema.offset"
         [nzOptions]="schema.options"
-        [nzValueProperty]="schema.config?.valueProperty ?? 'value'"
-        [nzLabelProperty]="schema.config?.labelProperty ?? 'label'">
+        [nzPlaceHolder]="schema.placeholder"
+        [nzShowArrow]="schema.arrow ?? true"
+        [nzShowSearch]="schema.search"
+        [nzSize]="schema.size"
+        [nzSpan]="schema.span ?? null"
+        [nzSuffixIcon]="schema.suffixIcon"
+        [nzValueProperty]="schema.config?.valueProperty ?? 'value'">
       </nz-cascader>
     </ng-container>
 
     <ng-container *ngSwitchCase="'button'">
       <button
-        nz-col
         nz-button
-        [type]="schema.mode"
-        [nzSpan]="schema.span ?? null"
-        [nzOffset]="schema.offset"
-        [nzFlex]="schema.flex"
-        [fluentPropertyBinder]="{ schema }"
-        [fluentEventBinder]="{ schema }"
+        nz-col
         [disabled]="schema.disabled"
-        [nzType]="schema.subtype"
+        [fluentEventBinder]="{ schema }"
+        [fluentPropertyBinder]="{ schema }"
+        [nzBlock]="schema.block"
+        [nzDanger]="schema.danger"
+        [nzFlex]="schema.flex"
         [nzGhost]="schema.ghost"
         [nzLoading]="schema.loading"
+        [nzOffset]="schema.offset"
         [nzShape]="schema.shape"
         [nzSize]="schema.size"
-        [nzBlock]="schema.block"
-        [nzDanger]="schema.danger">
+        [nzSpan]="schema.span ?? null"
+        [nzType]="schema.subtype"
+        [type]="schema.mode">
         <i
           *ngIf="schema.icon"
           nz-icon
-          [nzType]="schema.icon.type ?? schema.icon"
-          [nzTheme]="schema.icon.theme"
+          [nzRotate]="schema.icon.rotate"
           [nzSpin]="schema.icon.spin"
-          [nzRotate]="schema.icon.rotate"></i>
+          [nzTheme]="schema.icon.theme"
+          [nzType]="schema.icon.type ?? schema.icon"></i>
         <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
       </button>
     </ng-container>

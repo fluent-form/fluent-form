@@ -159,7 +159,13 @@
         [nzMaxMultipleCount]="schema.limit ?? infinity"
         [nzMode]="schema.mode ?? 'default'"
         [nzPlaceHolder]="schema.placeholder"
-        [nzShowSearch]="schema.search">
+        [nzShowSearch]="schema.search"
+        [nzBackdrop]="schema.backdrop"
+        [nzBorderless]="schema.borderless"
+        [nzAutoFocus]="schema.focus"
+        [nzShowArrow]="schema.arrow ?? (!schema.mode || schema.mode === 'default')"
+        [nzSize]="schema.size"
+        [nzSuffixIcon]="schema.suffixIcon">
         <nz-option
           *ngFor="let option of schema.options"
           [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
@@ -513,7 +519,14 @@
         [nzOffset]="schema.offset"
         [nzPlaceHolder]="schema.placeholder"
         [nzShowSearch]="schema.search"
-        [nzSpan]="schema.span ?? null">
+        [nzSpan]="schema.span ?? null"
+        [nzShowSearch]="schema.search"
+        [nzBackdrop]="schema.backdrop"
+        [nzBorderless]="schema.borderless"
+        [nzAutoFocus]="schema.focus"
+        [nzShowArrow]="schema.arrow ?? (!schema.mode || schema.mode === 'default')"
+        [nzSize]="schema.size"
+        [nzSuffixIcon]="schema.suffixIcon">
         <nz-option
           *ngFor="let option of schema.options"
           [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"

@@ -6,7 +6,7 @@ import { NzDatePickerComponent, NzRangePickerComponent } from 'ng-zorro-antd/dat
 import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
 import { NzRadioGroupComponent } from 'ng-zorro-antd/radio';
 import { NzRateComponent } from 'ng-zorro-antd/rate';
-import { NzSelectComponent, NzSelectModeType } from 'ng-zorro-antd/select';
+import { NzSelectComponent, NzSelectModeType, NzSelectSizeType } from 'ng-zorro-antd/select';
 import { NzSliderComponent } from 'ng-zorro-antd/slider';
 import { NzSwitchComponent } from 'ng-zorro-antd/switch';
 import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
@@ -103,6 +103,12 @@ export interface SelectControlSchema<Name extends SingleKeySchemaName = SingleKe
   limit?: number;
   /** Support search */
   search?: boolean;
+  backdrop?: boolean;
+  borderless?: boolean;
+  focus?: boolean;
+  arrow?: boolean;
+  size?: NzSelectSizeType;
+  suffixIcon?: TemplateRef<any> | string;
   options: Obj[];
   config?: {
     labelProperty?: string;

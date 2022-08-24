@@ -2,8 +2,9 @@ import { TemplateRef } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormControl, FormControlStatus, ValidatorFn } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { AutocompleteDataSource } from 'ng-zorro-antd/auto-complete';
-import { CompareWith } from 'ng-zorro-antd/core/types';
+import { CompareWith, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDateMode } from 'ng-zorro-antd/date-picker';
+import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { ComponentInputMap, ComponentOutputListenerMap, HTMLElementEventListenerMap, HTMLElementPropertyMap, SingleOrAll } from '../type';
 
@@ -129,4 +130,18 @@ export interface AbstractDateControlSchema<Name extends AnySchemaName, Val> exte
   format?: string;
   /** Inline mode */
   inline?: boolean;
+  backdrop?: boolean;
+  placement?: NzPlacement;
+  today?: boolean;
+  now?: boolean;
+  suffixIcon?: string | TemplateRef<void>;
+}
+
+/** 抽象的输入字段控件图示 */
+export interface AbstractInputFieldControlSchema<Placeholder extends string | [string, string] = string> {
+  placeholder?: Placeholder;
+  focus?: boolean;
+  readonly?: boolean;
+  size?: NzSizeLDSType;
+  borderless?: boolean;
 }

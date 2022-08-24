@@ -17,7 +17,11 @@
           [formControl]="control"
           [nzAutocomplete]="autocompleteCmp"
           [placeholder]="schema.placeholder ?? ''"
-          [type]="schema.subtype ?? 'text'">
+          [type]="schema.subtype ?? 'text'"
+          [autofocus]="schema.focus"
+          [readonly]="schema.readonly"
+          [nzSize]="schema.size"
+          [nzBorderless]="schema.borderless">
         <nz-autocomplete
           #autocompleteCmp
           [compareWith]="autocomplete.compare"
@@ -35,7 +39,11 @@
         [fluentPropertyBinder]="{ schema }"
         [formControl]="control"
         [placeholder]="schema.placeholder ?? ''"
-        [type]="schema.subtype ?? 'text'">
+        [type]="schema.subtype ?? 'text'"
+        [autofocus]="schema.focus"
+        [readonly]="schema.readonly"
+        [nzSize]="schema.size"
+        [nzBorderless]="schema.borderless">
     </ng-container>
 
     <ng-container *ngSwitchCase="'textarea'">
@@ -51,7 +59,11 @@
           [nzAutocomplete]="autocompleteCmp"
           [nzAutosize]="schema.autosize ?? {}"
           [placeholder]="schema.placeholder ?? ''"
-          [rows]="schema.rows"></textarea>
+          [rows]="schema.rows"
+          [autofocus]="schema.focus"
+          [readonly]="schema.readonly"
+          [nzSize]="schema.size"
+          [nzBorderless]="schema.borderless"></textarea>
         <nz-autocomplete
           #autocompleteCmp
           [compareWith]="autocomplete.compare"
@@ -70,7 +82,11 @@
         [formControl]="control"
         [nzAutosize]="schema.autosize ?? {}"
         [placeholder]="schema.placeholder ?? ''"
-        [rows]="schema.rows"></textarea>
+        [rows]="schema.rows"
+        [autofocus]="schema.focus"
+        [readonly]="schema.readonly"
+        [nzSize]="schema.size"
+        [nzBorderless]="schema.borderless"></textarea>
     </ng-container>
 
     <ng-container *ngSwitchCase="'number'">
@@ -85,7 +101,11 @@
         [nzPlaceHolder]="schema.placeholder ?? ''"
         [nzPrecision]="schema.precision?.value ?? (schema.precision | typeof: 'number') ? schema.precision : ''"
         [nzPrecisionMode]="schema.precision?.mode"
-        [nzStep]="schema.step ?? 1">
+        [nzStep]="schema.step ?? 1"
+        [nzAutoFocus]="schema.focus"
+        [nzReadOnly]="schema.readonly"
+        [nzSize]="schema.size"
+        [nzBorderless]="schema.borderless">
       </nz-input-number>
     </ng-container>
 
@@ -101,7 +121,16 @@
         [nzInline]="schema.inline"
         [nzMode]="schema.mode"
         [nzPlaceHolder]="schema.placeholder"
-        [nzShowTime]="schema.time">
+        [nzShowTime]="schema.time"
+        [nzBackdrop]="schema.backdrop"
+        [nzPlacement]="schema.placement ?? 'bottomLeft'"
+        [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
+        [nzAutoFocus]="schema.focus"
+        [nzInputReadOnly]="schema.readonly"
+        [nzSize]="schema.size"
+        [nzBorderless]="schema.borderless"
+        [nzShowToday]="schema.today ?? true"
+        [nzShowNow]="schema.now ?? true">
       </nz-date-picker>
     </ng-container>
 
@@ -117,7 +146,18 @@
         [nzInline]="schema.inline"
         [nzMode]="schema.mode"
         [nzPlaceHolder]="schema.placeholder"
-        [nzShowTime]="schema.time">
+        [nzShowTime]="schema.time"
+        [nzShowTime]="schema.time"
+        [nzBackdrop]="schema.backdrop"
+        [nzPlacement]="schema.placement ?? 'bottomLeft'"
+        [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
+        [nzAutoFocus]="schema.focus"
+        [nzInputReadOnly]="schema.readonly"
+        [nzSize]="schema.size"
+        [nzBorderless]="schema.borderless"
+        [nzShowToday]="schema.today ?? true"
+        [nzShowNow]="schema.now ?? true"
+        [nzSeparator]="schema.separator">
       </nz-range-picker>
     </ng-container>
 
@@ -133,7 +173,12 @@
         [nzId]="schema.id"
         [nzMinuteStep]="schema.step?.minute"
         [nzPlaceHolder]="schema.placeholder"
-        [nzSecondStep]="schema.step?.second">
+        [nzSecondStep]="schema.step?.second"
+        [nzAutoFocus]="schema.focus"
+        [nzSize]="schema.size"
+        [nzBorderless]="schema.borderless"
+        [nzBackdrop]="schema.backdrop"
+        [nzSuffixIcon]="schema.suffixIcon ?? 'clock-circle'">
       </nz-time-picker>
     </ng-container>
 
@@ -144,7 +189,8 @@
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
         [nzCheckedChildren]="schema.placeholder?.[0]"
-        [nzUnCheckedChildren]="schema.placeholder?.[1]">
+        [nzUnCheckedChildren]="schema.placeholder?.[1]"
+        [nzSize]="schema.size">
       </nz-switch>
     </ng-container>
 
@@ -208,7 +254,10 @@
         [nzMax]="schema.max ?? 100"
         [nzMin]="schema.min"
         [nzRange]="schema.range"
-        [nzStep]="schema.step ?? 1">
+        [nzStep]="schema.step ?? 1"
+        [nzDots]="schema.dots"
+        [nzVertical]="schema.vertical"
+        [nzReverse]="schema.reverse">
       </nz-slider>
     </ng-container>
 
@@ -218,7 +267,8 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
-        [nzButtonStyle]="schema.style">
+        [nzButtonStyle]="schema.style"
+        [nzSize]="schema.size">
         <ng-container *ngFor="let option of schema.options">
           <label
             *ngIf="!schema.style"
@@ -243,7 +293,9 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
-        [nzId]="schema.id">{{ schema.content }}</label>
+        [nzId]="schema.id"
+        [nzAutoFocus]="schema.focus"
+        [nzIndeterminate]="schema.indeterminate">{{ schema.content }}</label>
     </ng-container>
 
     <ng-container *ngSwitchCase="'checkbox-group'">
@@ -265,7 +317,8 @@
         [nzAllowHalf]="schema.half"
         [nzCharacter]="schema.character"
         [nzCount]="schema.count ?? 5"
-        [nzTooltips]="schema.tooltips ?? []"></nz-rate>
+        [nzTooltips]="schema.tooltips ?? []"
+        [nzAutoFocus]="schema.focus"></nz-rate>
     </ng-container>
 
     <ng-container *ngSwitchCase="'input-group'">
@@ -358,7 +411,11 @@
           [nzOffset]="schema.offset"
           [nzSpan]="schema.span ?? null"
           [placeholder]="schema.placeholder ?? ''"
-          [type]="schema.subtype ?? 'text'">
+          [type]="schema.subtype ?? 'text'"
+          [autofocus]="schema.focus"
+          [readonly]="schema.readonly"
+          [nzSize]="schema.size"
+          [nzBorderless]="schema.borderless">
         <nz-autocomplete
           #autocompleteCmp
           [compareWith]="autocomplete.compare"
@@ -380,7 +437,11 @@
         [nzOffset]="schema.offset"
         [nzSpan]="schema.span ?? null"
         [placeholder]="schema.placeholder ?? ''"
-        [type]="schema.subtype ?? 'text'">
+        [type]="schema.subtype ?? 'text'"
+        [autofocus]="schema.focus"
+        [readonly]="schema.readonly"
+        [nzSize]="schema.size"
+        [nzBorderless]="schema.borderless">
     </ng-container>
 
     <ng-container *ngSwitchCase="'textarea'">
@@ -400,7 +461,11 @@
           [nzOffset]="schema.offset"
           [nzSpan]="schema.span ?? null"
           [placeholder]="schema.placeholder ?? ''"
-          [rows]="schema.rows"></textarea>
+          [rows]="schema.rows"
+          [autofocus]="schema.focus"
+          [readonly]="schema.readonly"
+          [nzSize]="schema.size"
+          [nzBorderless]="schema.borderless"></textarea>
         <nz-autocomplete
           #autocompleteCmp
           [compareWith]="autocomplete.compare"
@@ -423,7 +488,11 @@
         [nzOffset]="schema.offset"
         [nzSpan]="schema.span ?? null"
         [placeholder]="schema.placeholder ?? ''"
-        [rows]="schema.rows"></textarea>
+        [rows]="schema.rows"
+        [autofocus]="schema.focus"
+        [readonly]="schema.readonly"
+        [nzSize]="schema.size"
+        [nzBorderless]="schema.borderless"></textarea>
     </ng-container>
 
     <ng-container *ngSwitchCase="'number'">
@@ -442,7 +511,11 @@
         [nzPrecision]="schema.precision ?? ''"
         [nzPrecisionMode]="schema.precisionMode"
         [nzSpan]="schema.span ?? null"
-        [nzStep]="schema.step ?? 1">
+        [nzStep]="schema.step ?? 1"
+        [nzAutoFocus]="schema.focus"
+        [nzReadOnly]="schema.readonly"
+        [nzSize]="schema.size"
+        [nzBorderless]="schema.borderless">
       </nz-input-number>
     </ng-container>
 
@@ -462,7 +535,17 @@
         [nzOffset]="schema.offset"
         [nzPlaceHolder]="schema.placeholder"
         [nzShowTime]="schema.time"
-        [nzSpan]="schema.span ?? null"></nz-date-picker>
+        [nzSpan]="schema.span ?? null"
+        [nzShowTime]="schema.time"
+        [nzBackdrop]="schema.backdrop"
+        [nzPlacement]="schema.placement ?? 'bottomLeft'"
+        [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
+        [nzAutoFocus]="schema.focus"
+        [nzInputReadOnly]="schema.readonly"
+        [nzSize]="schema.size"
+        [nzBorderless]="schema.borderless"
+        [nzShowToday]="schema.today ?? true"
+        [nzShowNow]="schema.now ?? true"></nz-date-picker>
     </ng-container>
 
     <ng-container *ngSwitchCase="'range'">
@@ -481,7 +564,18 @@
         [nzOffset]="schema.offset"
         [nzPlaceHolder]="schema.placeholder"
         [nzShowTime]="schema.time"
-        [nzSpan]="schema.span ?? null"></nz-range-picker>
+        [nzSpan]="schema.span ?? null"
+        [nzShowTime]="schema.time"
+        [nzBackdrop]="schema.backdrop"
+        [nzPlacement]="schema.placement ?? 'bottomLeft'"
+        [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
+        [nzAutoFocus]="schema.focus"
+        [nzInputReadOnly]="schema.readonly"
+        [nzSize]="schema.size"
+        [nzBorderless]="schema.borderless"
+        [nzShowToday]="schema.today ?? true"
+        [nzShowNow]="schema.now ?? true"
+        [nzSeparator]="schema.separator"></nz-range-picker>
     </ng-container>
 
     <ng-container *ngSwitchCase="'time'">
@@ -500,7 +594,12 @@
         [nzOffset]="schema.offset"
         [nzPlaceHolder]="schema.placeholder"
         [nzSecondStep]="schema.step?.second"
-        [nzSpan]="schema.span ?? null">
+        [nzSpan]="schema.span ?? null"
+        [nzAutoFocus]="schema.focus"
+        [nzSize]="schema.size"
+        [nzBorderless]="schema.borderless"
+        [nzBackdrop]="schema.backdrop"
+        [nzSuffixIcon]="schema.suffixIcon ?? 'clock-circle'">
       </nz-time-picker>
     </ng-container>
 

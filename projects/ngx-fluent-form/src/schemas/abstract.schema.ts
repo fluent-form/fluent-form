@@ -141,7 +141,7 @@ export interface AbstractDateControlSchema<Name extends AnySchemaName, Val> exte
 export interface AbstractInputFieldControlSchema<Placeholder extends string | [string, string] = string> {
   placeholder?: Placeholder;
   focus?: boolean;
-  readonly?: boolean;
+  readonly?: boolean | ((arg: CallbackArg<AbstractSchema<AnySchemaName>>) => boolean) | string;
   size?: NzSizeLDSType;
   borderless?: boolean;
 }

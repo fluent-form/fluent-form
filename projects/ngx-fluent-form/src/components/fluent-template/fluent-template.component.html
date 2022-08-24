@@ -19,7 +19,7 @@
           [placeholder]="schema.placeholder ?? ''"
           [type]="schema.subtype ?? 'text'"
           [autofocus]="schema.focus"
-          [readonly]="schema.readonly"
+          [readonly]="schema.readonly | call: { model, control, schema }"
           [nzSize]="schema.size"
           [nzBorderless]="schema.borderless">
         <nz-autocomplete
@@ -41,7 +41,7 @@
         [placeholder]="schema.placeholder ?? ''"
         [type]="schema.subtype ?? 'text'"
         [autofocus]="schema.focus"
-        [readonly]="schema.readonly"
+        [readonly]="schema.readonly | call: { model, control, schema }"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless">
     </ng-container>
@@ -61,7 +61,7 @@
           [placeholder]="schema.placeholder ?? ''"
           [rows]="schema.rows"
           [autofocus]="schema.focus"
-          [readonly]="schema.readonly"
+          [readonly]="schema.readonly | call: { model, control, schema }"
           [nzSize]="schema.size"
           [nzBorderless]="schema.borderless"></textarea>
         <nz-autocomplete
@@ -84,7 +84,7 @@
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
         [autofocus]="schema.focus"
-        [readonly]="schema.readonly"
+        [readonly]="schema.readonly | call: { model, control, schema }"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"></textarea>
     </ng-container>
@@ -103,7 +103,7 @@
         [nzPrecisionMode]="schema.precision?.mode"
         [nzStep]="schema.step ?? 1"
         [nzAutoFocus]="schema.focus"
-        [nzReadOnly]="schema.readonly"
+        [nzReadOnly]="schema.readonly | call: { model, control, schema }"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless">
       </nz-input-number>
@@ -126,7 +126,7 @@
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
         [nzAutoFocus]="schema.focus"
-        [nzInputReadOnly]="schema.readonly"
+        [nzInputReadOnly]="schema.readonly | call: { model, control, schema }"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"
         [nzShowToday]="schema.today ?? true"
@@ -152,7 +152,7 @@
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
         [nzAutoFocus]="schema.focus"
-        [nzInputReadOnly]="schema.readonly"
+        [nzInputReadOnly]="schema.readonly | call: { model, control, schema }"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"
         [nzShowToday]="schema.today ?? true"
@@ -413,7 +413,7 @@
           [placeholder]="schema.placeholder ?? ''"
           [type]="schema.subtype ?? 'text'"
           [autofocus]="schema.focus"
-          [readonly]="schema.readonly"
+          [readonly]="schema.readonly | call: { model, control, schema }"
           [nzSize]="schema.size"
           [nzBorderless]="schema.borderless">
         <nz-autocomplete
@@ -439,7 +439,7 @@
         [placeholder]="schema.placeholder ?? ''"
         [type]="schema.subtype ?? 'text'"
         [autofocus]="schema.focus"
-        [readonly]="schema.readonly"
+        [readonly]="schema.readonly | call: { model, control, schema }"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless">
     </ng-container>
@@ -463,7 +463,7 @@
           [placeholder]="schema.placeholder ?? ''"
           [rows]="schema.rows"
           [autofocus]="schema.focus"
-          [readonly]="schema.readonly"
+          [readonly]="schema.readonly | call: { model, control, schema }"
           [nzSize]="schema.size"
           [nzBorderless]="schema.borderless"></textarea>
         <nz-autocomplete
@@ -490,7 +490,7 @@
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
         [autofocus]="schema.focus"
-        [readonly]="schema.readonly"
+        [readonly]="schema.readonly | call: { model, control, schema }"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"></textarea>
     </ng-container>
@@ -513,7 +513,7 @@
         [nzSpan]="schema.span ?? null"
         [nzStep]="schema.step ?? 1"
         [nzAutoFocus]="schema.focus"
-        [nzReadOnly]="schema.readonly"
+        [nzReadOnly]="schema.readonly | call: { model, control, schema }"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless">
       </nz-input-number>
@@ -541,7 +541,7 @@
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
         [nzAutoFocus]="schema.focus"
-        [nzInputReadOnly]="schema.readonly"
+        [nzInputReadOnly]="schema.readonly | call: { model, control, schema }"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"
         [nzShowToday]="schema.today ?? true"
@@ -570,7 +570,7 @@
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
         [nzAutoFocus]="schema.focus"
-        [nzInputReadOnly]="schema.readonly"
+        [nzInputReadOnly]="schema.readonly | call: { model, control, schema }"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"
         [nzShowToday]="schema.today ?? true"

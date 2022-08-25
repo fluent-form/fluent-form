@@ -11,6 +11,8 @@ import { NzSelectComponent, NzSelectModeType, NzSelectSizeType } from 'ng-zorro-
 import { NzSliderComponent } from 'ng-zorro-antd/slider';
 import { NzSwitchComponent } from 'ng-zorro-antd/switch';
 import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
+import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
+import { NzTreeSelectComponent } from 'ng-zorro-antd/tree-select';
 import { Obj, SingleOrAll } from '../type';
 import { AbstractComponentControlSchema, AbstractControlSchema, AbstractDateControlSchema, AbstractElementControlSchema, AbstractInputFieldControlSchema, AbstractSchema, AbstractTextControlSchema, AnySchemaName, SingleKeySchemaName } from './abstract.schema';
 import { AnyBuilder, AnySchema, FormBuilder, FormSchema, SingleKeyControlBuilder, SingleKeyControlSchema } from './index.schema';
@@ -194,4 +196,28 @@ export interface RateControlSchema<Name extends SingleKeySchemaName = SingleKeyS
   /** Customize tooltip by each character */
   tooltips?: string[];
   focus?: boolean;
+}
+
+export interface TreeSelectControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = SafeAny[]> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzTreeSelectComponent, Val> {
+  type: 'tree-select';
+  clear?: boolean;
+  placeholder?: string;
+  icon?: boolean;
+  search?: boolean;
+  size?: NzSizeLDSType;
+  checkable?: boolean | { strict: boolean };
+  expandIcon?: boolean | NzTreeSelectComponent['nzExpandedIcon'];
+  line?: boolean;
+  async?: boolean;
+  options: NzTreeNodeOptions[];
+  expandAll?: boolean;
+  expandedKeys?: string[];
+  backdrop?: boolean;
+  multiple?: boolean;
+  virtual?: {
+    height?: number;
+    itemSize?: number;
+    maxBufferPx?: number;
+    minBufferPx?: number;
+  }
 }

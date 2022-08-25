@@ -1,5 +1,5 @@
 import { AnySchemaName, SingleKeySchemaName } from '../schemas/abstract.schema';
-import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from '../schemas/control.schema';
+import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema, TreeSelectControlSchema } from '../schemas/control.schema';
 import { AnyBuilder, AnySchema } from '../schemas/index.schema';
 import { standardSchema, standardSchemas } from '../utils';
 import { builder, UnstableBuilder } from '../utils/builder.utils';
@@ -63,6 +63,12 @@ export function cascader(): UnstableBuilder<CascaderControlSchema<number>, TypeA
 export function cascader<N extends SingleKeySchemaName>(name?: N): UnstableBuilder<CascaderControlSchema<N>, TypeAndName>;
 export function cascader<N extends SingleKeySchemaName>(name?: N) {
   return builder<CascaderControlSchema<N>>().type('cascader').name(name);
+}
+
+export function treeSelect(): UnstableBuilder<TreeSelectControlSchema<number>, TypeAndName>;
+export function treeSelect<N extends SingleKeySchemaName>(name?: N): UnstableBuilder<TreeSelectControlSchema<N>, TypeAndName>;
+export function treeSelect<N extends SingleKeySchemaName>(name?: N) {
+  return builder<TreeSelectControlSchema<N>>().type('tree-select').name(name);
 }
 
 export function radio(): UnstableBuilder<RadioControlSchema<number>, TypeAndName>;

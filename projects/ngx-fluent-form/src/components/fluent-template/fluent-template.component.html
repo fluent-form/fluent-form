@@ -185,6 +185,7 @@
     <ng-container *ngSwitchCase="'switch'">
       <nz-switch
         #cmp
+        [nzId]="schema.id"
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
@@ -235,13 +236,41 @@
         [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
         [nzLoadData]="schema.loadData"
         [nzOptions]="schema.options"
-        [nzPlaceHolder]="schema.placeholder"
+        [nzPlaceHolder]="schema.placeholder ?? ' '"
         [nzShowArrow]="schema.arrow ?? true"
         [nzShowSearch]="schema.search"
         [nzSize]="schema.size"
         [nzSuffixIcon]="schema.suffixIcon ?? 'down'"
         [nzValueProperty]="schema.config?.valueProperty ?? 'value'">
       </nz-cascader>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'tree-select'">
+      <nz-tree-select
+        #cmp
+        [nzId]="schema.id"
+        [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [formControl]="control"
+        [nzAllowClear]="schema.clear ?? true"
+        [nzBackdrop]="schema.backdrop"
+        [nzShowIcon]="schema.icon"
+        [nzShowSearch]="schema.search"
+        [nzSize]="schema.size"
+        [nzCheckable]="schema.checkable"
+        [nzCheckStrictly]="schema.checkable?.strict"
+        [nzShowExpand]="schema.expandIcon ?? true"
+        [nzExpandedIcon]="schema.expandIcon"
+        [nzShowLine]="schema.line"
+        [nzAsyncData]="schema.async"
+        [nzNodes]="schema.options"
+        [nzDefaultExpandAll]="schema.expandAll"
+        [nzExpandedKeys]="schema.expandedKeys"
+        [nzMultiple]="schema.multiple"
+        [nzVirtualHeight]="schema.virtual?.heigth"
+        [nzVirtualItemSize]="schema.virtual?.itemSize ?? 28"
+        [nzVirtualMaxBufferPx]="schema.virtual?.maxBufferPx ?? 500"
+        [nzVirtualMinBufferPx]="schema.virtual?.minBufferPx ?? 28"></nz-tree-select>
     </ng-container>
 
     <ng-container *ngSwitchCase="'slider'">
@@ -362,6 +391,7 @@
       <button
         *ngIf="!(schema.hidden | call: { model, control, schema })"
         nz-button
+        [attr.id]="schema.id"
         [disabled]="schema.disabled | call: { model, control, schema }"
         [fluentEventBinder]="{ schema }"
         [fluentPropertyBinder]="{ schema }"
@@ -652,7 +682,7 @@
         [nzLoadData]="schema.loadData"
         [nzOffset]="schema.offset"
         [nzOptions]="schema.options"
-        [nzPlaceHolder]="schema.placeholder"
+        [nzPlaceHolder]="schema.placeholder ?? ' '"
         [nzShowArrow]="schema.arrow ?? true"
         [nzShowSearch]="schema.search"
         [nzSize]="schema.size"
@@ -662,10 +692,43 @@
       </nz-cascader>
     </ng-container>
 
+    <ng-container *ngSwitchCase="'tree-select'">
+      <nz-tree-select
+        #cmp
+        nz-col
+        [nzId]="schema.id"
+        [fluentEventBinder]="{ cmp, schema, control }"
+        [fluentPropertyBinder]="{ cmp, schema }"
+        [formControl]="control"
+        [nzAllowClear]="schema.clear ?? true"
+        [nzBackdrop]="schema.backdrop"
+        [nzShowIcon]="schema.icon"
+        [nzShowSearch]="schema.search"
+        [nzSize]="schema.size"
+        [nzCheckable]="schema.checkable"
+        [nzCheckStrictly]="schema.checkable?.strict"
+        [nzShowExpand]="schema.expandIcon ?? true"
+        [nzExpandedIcon]="schema.expandIcon"
+        [nzShowLine]="schema.line"
+        [nzAsyncData]="schema.async"
+        [nzNodes]="schema.options"
+        [nzDefaultExpandAll]="schema.expandAll"
+        [nzExpandedKeys]="schema.expandedKeys"
+        [nzMultiple]="schema.multiple"
+        [nzVirtualHeight]="schema.virtual?.heigth"
+        [nzVirtualItemSize]="schema.virtual?.itemSize ?? 28"
+        [nzVirtualMaxBufferPx]="schema.virtual?.maxBufferPx ?? 500"
+        [nzVirtualMinBufferPx]="schema.virtual?.minBufferPx ?? 28"
+        [nzSpan]="schema.span ?? null"
+        [nzFlex]="schema.flex"
+        [nzOffset]="schema.offset"></nz-tree-select>
+    </ng-container>
+
     <ng-container *ngSwitchCase="'button'">
       <button
         nz-button
         nz-col
+        [attr.id]="schema.id"
         [disabled]="schema.disabled"
         [fluentEventBinder]="{ schema }"
         [fluentPropertyBinder]="{ schema }"

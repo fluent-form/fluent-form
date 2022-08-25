@@ -21,6 +21,7 @@ import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { FluentFormComponent, FluentTemplateComponent } from './components';
 import { ControlOutletDirective, EventBinderDirective, FluentControlOutletDirective, FluentFormDirective, FluentFormNameDirective, PropertyBinderDirective } from './directives';
 import { CallPipe } from './pipes/call.pipe';
@@ -63,7 +64,8 @@ import { TypeofPipe } from './pipes/typeof.pipe';
     NzOutletModule,
     NzStepsModule,
     NzTabsModule,
-    NzAutocompleteModule
+    NzAutocompleteModule,
+    NzTreeSelectModule
   ],
   exports: [
     FluentFormComponent,

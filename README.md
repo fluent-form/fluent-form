@@ -28,7 +28,7 @@ Before using `ngx-fluent-form`, you should have a basic understanding of the fol
 And make sure your relevant dependency versions meet the following requirements:
 
 - [Angular](https://angular.io) >= v13.0.0
-- [ng-zorro-antd](https://ng.ant.design) >= v13.0.0
+- [ng-zorro-antd](https://ng.ant.design) >= v13.4.0
 
 ## Install
 
@@ -58,14 +58,14 @@ export class YourModule { }
 Configure `schemas` parameter to build your form:
 
 ```ts
-import { date, form, number, text } from 'ngx-fluent-form';
+import { date, form, number, input } from 'ngx-fluent-form';
 
 @Component({
   template: `<fluent-form [(model)]="model" [schema]="schema"></fluent-form>`
 })
 export class Component {
   schema = form(
-    text('text').label('label'),
+    input('text').label('label'),
     number('number').label('label').max(100),
     date('date').label('label')
   );

@@ -28,7 +28,7 @@
 并且确保你的相关依赖版本符合如下规定：
 
 - [Angular](https://angular.io) >= v13.0.0
-- [ng-zorro-antd](https://ng.ant.design) >= v13.0.0
+- [ng-zorro-antd](https://ng.ant.design) >= v13.4.0
 
 ## 安装
 
@@ -59,14 +59,14 @@ export class YourModule { }
 配置 `schemas` 参数，构建你的表单：
 
 ```ts
-import { date, form, number, text } from 'ngx-fluent-form';
+import { date, form, number, input } from 'ngx-fluent-form';
 
 @Component({
   template: `<fluent-form [(model)]="model" [schema]="schema"></fluent-form>`
 })
 export class Component {
   schema = form(
-    text('text').label('label'),
+    input('text').label('label'),
     number('number').label('label').max(100),
     date('date').label('label')
   );

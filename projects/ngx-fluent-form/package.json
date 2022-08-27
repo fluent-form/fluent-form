@@ -1,11 +1,11 @@
 {
   "name": "ngx-fluent-form",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "HyperLife1119 <hyperlife1119@qq.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc -p tsconfig.schematics.json",
-    "postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/ngx-fluent-form/"
+    "build:schematics": "tsc -p tsconfig.schematics.json",
+    "postbuild:schematics": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/ngx-fluent-form/"
   },
   "repository": {
     "type": "git",

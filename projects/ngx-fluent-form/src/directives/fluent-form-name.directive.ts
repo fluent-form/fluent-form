@@ -1,8 +1,8 @@
 import { Directive, EventEmitter, forwardRef, Host, Input, OnInit, Output, SkipSelf } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { startWith, takeUntil } from 'rxjs';
 import { AnySchema, ComponentSchema, ControlContainerSchema, ControlSchema } from '../schemas';
-import { Destroyer } from '../services/destroyer.service';
 import { Arr, Obj } from '../type';
 import { schemasUtils } from '../utils';
 import { ControlContainer } from './control-container';
@@ -12,7 +12,7 @@ import { FluentFormDirective } from './fluent-form.directive';
 @Directive({
   selector: '[fluentFormName]',
   providers: [
-    Destroyer,
+    NzDestroyService,
     {
       provide: ControlContainer,
       useExisting: forwardRef(() => FluentFormNameDirective)
@@ -31,7 +31,7 @@ export class FluentFormNameDirective<T extends Obj | Arr> extends ControlContain
 
   constructor(
     @Host() @SkipSelf() private controlContainer: ControlContainer<T>,
-    private destroy$: Destroyer
+    private destroy$: NzDestroyService
   ) {
     super();
   }

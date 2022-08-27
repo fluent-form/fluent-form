@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { takeUntil } from 'rxjs';
 import { AnySchema } from '../../schemas';
-import { Destroyer } from '../../services/destroyer.service';
 import { Obj } from '../../type';
 import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchemas } from '../../utils';
 
@@ -13,7 +13,7 @@ import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchemas } fr
   templateUrl: './fluent-form.component.html',
   styleUrls: ['./fluent-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [Destroyer]
+  providers: [NzDestroyService]
 })
 export class FluentFormComponent<T extends Obj> implements OnChanges {
   /**
@@ -45,7 +45,7 @@ export class FluentFormComponent<T extends Obj> implements OnChanges {
   @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
   @Output() modelChange: EventEmitter<T> = new EventEmitter();
 
-  constructor(private destroy$: Destroyer) { }
+  constructor(private destroy$: NzDestroyService) { }
 
   ngOnChanges({ schemas: schemasChange, model: modelChange }: SimpleChanges): void {
     if (schemasChange) {

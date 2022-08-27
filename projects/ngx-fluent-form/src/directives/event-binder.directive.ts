@@ -1,14 +1,14 @@
 import { Directive, ElementRef, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
+import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { asapScheduler, fromEvent, observeOn, takeUntil } from 'rxjs';
 import { ControlSchema } from '../schemas/index.schema';
-import { Destroyer } from '../services/destroyer.service';
 import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../type';
 
 @Directive({
   selector: '[fluentEventBinder]',
-  providers: [Destroyer]
+  providers: [NzDestroyService]
 })
 export class EventBinderDirective<E extends HTMLElement, C extends object, S extends ControlSchema> implements OnChanges {
   @Input() fluentEventBinder!: { cmp?: C, schema: S, control?: FormControl };
@@ -19,7 +19,7 @@ export class EventBinderDirective<E extends HTMLElement, C extends object, S ext
 
   constructor(
     private elementRef: ElementRef<E>,
-    private destory$: Destroyer
+    private destory$: NzDestroyService
   ) { }
 
   ngOnChanges({ fluentEventBinder }: SimpleChanges): void {

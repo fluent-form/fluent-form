@@ -5,7 +5,7 @@ import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { takeUntil } from 'rxjs';
 import { AnySchema } from '../../schemas';
-import { Obj } from '../../type';
+import { Obj } from '../../types';
 import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchemas } from '../../utils';
 
 @Component({

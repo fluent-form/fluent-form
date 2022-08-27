@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Obj } from '../type';
+import { Obj } from '../types';
 
 const RETURN_STR = 'return ';
 

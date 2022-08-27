@@ -4,7 +4,7 @@ import { SafeAny } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { asapScheduler, fromEvent, observeOn, takeUntil } from 'rxjs';
 import { ControlSchema } from '../schemas/index.schema';
-import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../type';
+import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../types';
 
 @Directive({
   selector: '[fluentEventBinder]',

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Arr, Obj } from '../../type';
+import { Arr, Obj } from '../../types';
 import { FluentTemplateComponent } from './fluent-template.component';
 
 describe('FluentTemplateComponent', () => {

@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { startWith, takeUntil } from 'rxjs';
 import { AnySchema, ComponentSchema, ControlContainerSchema, ControlSchema } from '../schemas';
-import { Arr, Obj } from '../type';
+import { Arr, Obj } from '../types';
 import { schemasUtils } from '../utils';
 import { ControlContainer } from './control-container';
 import { FluentControlOutletDirective } from './fluent-control-outlet.directive';

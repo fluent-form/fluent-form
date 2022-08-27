@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { ComponentSchema, ControlSchema } from '../../schemas';
-import { Arr, Obj } from '../../type';
+import { Arr, Obj } from '../../types';
 
 export type ComponentTemplateRef<T extends Obj | Arr> = TemplateRef<{
   /** 当前控件 */

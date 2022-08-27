@@ -1,7 +1,7 @@
 import { AbstractControl } from '@angular/forms';
 import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
 import { ControlSchema } from '../schemas';
-import { Arr, Obj } from '../type';
+import { Arr, Obj } from '../types';
 import { isDoubleKeySchema } from './schema.utils';
 
 export function valueUtils<S extends Obj | Arr | AbstractControl>(source: S, schema: ControlSchema) {

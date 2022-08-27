@@ -1,7 +1,7 @@
 import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
 import { CallPipe } from '../pipes/call.pipe';
 import { AnyControlSchema, AnySchema, ControlSchema } from '../schemas/index.schema';
-import { Arr, Obj } from '../type';
+import { Arr, Obj } from '../types';
 import { isComponentContainerSchema, isComponentSchema, isControlContainerSchema, isDoubleKeySchema } from './schema.utils';
 import { valueUtils } from './value.utils';
 

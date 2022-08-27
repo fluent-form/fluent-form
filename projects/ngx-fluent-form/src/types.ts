@@ -97,3 +97,5 @@ type WritableMap<T> = {
 export type Obj = Record<string, unknown>;
 /** Any Array */
 export type Arr = unknown[];
+
+export type TypeAndName = 'type' | 'name';

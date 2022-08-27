@@ -1,6 +1,6 @@
 import { AbstractControl } from '@angular/forms';
 import { AnySchema } from '../schemas';
-import { Arr, Obj } from '../type';
+import { Arr, Obj } from '../types';
 import { FluentFormNameDirective } from './fluent-form-name.directive';
 import { FluentFormDirective } from './fluent-form.directive';
 

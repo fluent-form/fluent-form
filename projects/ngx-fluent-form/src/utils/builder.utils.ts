@@ -1,5 +1,5 @@
 import { SafeAny } from '@ngify/types';
-import { Obj } from '../type';
+import { Obj } from '../types';
 
 export function builder<T>(): Builder<T> {
   const builder = new Proxy({} as Obj, {

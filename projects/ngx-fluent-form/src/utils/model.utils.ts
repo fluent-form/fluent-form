@@ -1,6 +1,6 @@
 import { FormArray, FormGroup } from '@angular/forms';
 import { AnySchema } from '../schemas';
-import { Arr, Obj } from '../type';
+import { Arr, Obj } from '../types';
 import { isComponentContainerSchema, isComponentSchema, isControlContainerSchema } from './schema.utils';
 import { valueUtils } from './value.utils';
 

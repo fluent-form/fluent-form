@@ -3,7 +3,7 @@ import { AbstractControl } from '@angular/forms';
 import { ComponentTemplateRef } from '../components';
 import { COMPONENT_TEMPLATE_REF_TOKEN } from '../providers';
 import { ComponentSchema, ControlSchema } from '../schemas';
-import { Arr, Obj } from '../type';
+import { Arr, Obj } from '../types';
 import { ControlContainer } from './control-container';
 
 @Directive({

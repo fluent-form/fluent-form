@@ -4,6 +4,7 @@ import { miscellaneous } from 'documentation.json';
 import Md from 'markdown-to-jsx';
 import * as React from 'react';
 
+/** @internal */
 export interface Fn {
   name: string;
   file: string;
@@ -17,6 +18,7 @@ export interface Fn {
   jsdoctags: Jsdoctag[];
 }
 
+/** @internal */
 export interface Arg {
   name: string;
   type: string;
@@ -25,6 +27,7 @@ export interface Arg {
   optional: boolean;
 }
 
+/** @internal */
 export interface Jsdoctag {
   name: Name;
   type: string;
@@ -35,6 +38,7 @@ export interface Jsdoctag {
   comment: string;
 }
 
+/** @internal */
 export interface Name {
   pos: number;
   end: number;
@@ -44,7 +48,6 @@ export interface Name {
   kind: number;
   escapedText: string;
 }
-
 
 const Title = styled.div({ fontWeight: 'bold' });
 const Name = styled.span({ fontWeight: 'bold' });

@@ -4,6 +4,7 @@ import { interfaces } from 'documentation.json';
 import Md from 'markdown-to-jsx';
 import * as React from 'react';
 
+/** @internal */
 export interface Interface {
   name: string;
   id: string;
@@ -21,6 +22,7 @@ export interface Interface {
   extends: string;
 }
 
+/** @internal */
 export interface Method {
   name: string;
   args: Arg[];
@@ -35,6 +37,7 @@ export interface Method {
   jsdoctags: Jsdoctag[];
 }
 
+/** @internal */
 export interface Arg {
   name: string;
   type: string;
@@ -43,6 +46,7 @@ export interface Arg {
   optional: boolean;
 }
 
+/** @internal */
 export interface Jsdoctag {
   name: Name;
   type: string;
@@ -52,6 +56,7 @@ export interface Jsdoctag {
   comment: string;
 }
 
+/** @internal */
 export interface Name {
   pos: number;
   end: number;
@@ -62,6 +67,7 @@ export interface Name {
   escapedText: string;
 }
 
+/** @internal */
 export interface Property {
   name: string;
   deprecated: boolean;

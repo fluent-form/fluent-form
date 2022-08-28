@@ -1,5 +1,5 @@
 import { TemplateRef } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormControl, FormControlStatus, ValidatorFn } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormControl, FormControlStatus, ValidatorFn } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { AutocompleteDataSource } from 'ng-zorro-antd/auto-complete';
 import { CompareWith, NzSizeLDSType } from 'ng-zorro-antd/core/types';
@@ -7,6 +7,7 @@ import { NzDateMode } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { ComponentInputMap, ComponentOutputListenerMap, HTMLElementEventListenerMap, HTMLElementPropertyMap, SingleOrAll } from '../types';
+import { AnyBuilder, AnySchema } from './index.schema';
 
 /** 任意字段控件名称 */
 export type AnySchemaName = SingleKeySchemaName | DoubleKeySchemaName;
@@ -15,6 +16,7 @@ export type SingleKeySchemaName = string | number;
 /** 双字段图示名称 */
 export type DoubleKeySchemaName = readonly [string, string];
 
+/** @internal */
 type Cell = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24;
 
 /** @internal */
@@ -30,6 +32,7 @@ interface Tooltip {
   icon: string | NzFormTooltipIcon;
 }
 
+/** @internal */
 export interface CallbackArg<S> {
   schema: S;
   /** 如果当前没有对应的 control，会返回上一级的 control，这时候一般是 form group/array */
@@ -77,6 +80,18 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
   validator?: ValidatorFn[];
   /** Async validators for control */
   asyncValidator?: AsyncValidatorFn[];
+  updateOn?: AbstractControlOptions['updateOn'];
+}
+
+/** 抽象的容器控件图示 */
+export interface AbstractContainerControlSchema<Name extends AnySchemaName> extends AbstractSchema<Name> {
+  label?: string;
+  schemas: (AnySchema | AnyBuilder)[];
+  /** Validator for the control */
+  validator?: ValidatorFn[];
+  /** Async validators for control */
+  asyncValidator?: AsyncValidatorFn[];
+  updateOn?: AbstractControlOptions['updateOn'];
 }
 
 /** @internal */

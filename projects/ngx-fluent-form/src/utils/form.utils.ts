@@ -1,5 +1,6 @@
-import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGroup } from '@angular/forms';
 import { CallPipe } from '../pipes/call.pipe';
+import { FormArraySchema, FormGroupSchema } from '../schemas';
 import { AnyControlSchema, AnySchema, ControlSchema } from '../schemas/index.schema';
 import { Arr, Obj } from '../types';
 import { isComponentContainerSchema, isComponentSchema, isControlContainerSchema, isDoubleKeySchema } from './schema.utils';
@@ -10,11 +11,11 @@ import { valueUtils } from './value.utils';
  * @param schema
  */
 export function createFormControl(schema: ControlSchema): FormControl {
-  return new FormControl(
-    schema.value,
-    schema.validator,
-    schema.asyncValidator
-  );
+  return new FormControl(schema.value, {
+    validators: schema.validator,
+    asyncValidators: schema.asyncValidator,
+    updateOn: schema.updateOn
+  });
 }
 
 /**
@@ -27,11 +28,11 @@ function createFormControls(schemas: AnySchema[], controls: Record<string, Abstr
   return schemas.filter(o => !isComponentSchema(o) && !isComponentContainerSchema(o)).reduce((controls, schema) => {
     switch (schema.type) {
       case 'group':
-        controls[schema.name!.toString()] = createFormGroup(schema.schemas as AnySchema[]);
+        controls[schema.name!.toString()] = createFormGroup(schema);
         break;
 
       case 'array':
-        controls[schema.name!.toString()] = createFormArray(schema.schemas as AnyControlSchema[]);
+        controls[schema.name!.toString()] = createFormArray(schema);
         break;
 
       case 'step':
@@ -52,30 +53,54 @@ function createFormControls(schemas: AnySchema[], controls: Record<string, Abstr
 
 /**
  * 将图示组转换为表单组
- * @param schemas 标准化后的图示
+ * @param schema
  */
-export function createFormGroup(schemas: AnySchema[]): FormGroup {
-  return new FormGroup(createFormControls(schemas));
+export function createFormGroup(schema: FormGroupSchema): FormGroup
+/**
+ * 将图示组转换为表单组
+ * @param schemas
+ */
+export function createFormGroup(schemas: | AnySchema[]): FormGroup
+export function createFormGroup(schemaOrSchemas: FormGroupSchema | AnySchema[]): FormGroup {
+  let schemas: AnySchema[], options: AbstractControlOptions = {};
+
+  if (Array.isArray(schemaOrSchemas)) {
+    schemas = schemaOrSchemas;
+  } else {
+    schemas = schemaOrSchemas.schemas as AnySchema[];
+    options = {
+      validators: schemaOrSchemas.validator,
+      asyncValidators: schemaOrSchemas.asyncValidator,
+      updateOn: schemaOrSchemas.updateOn
+    };
+  }
+
+  return new FormGroup(createFormControls(schemas), options);
 }
 
 /**
  * 将图示组转换为表单数组
- * @param schemas 标准化后的图示
+ * @param schemas
  */
-export function createFormArray(schemas: AnyControlSchema[]): FormArray {
+export function createFormArray(schema: FormArraySchema): FormArray {
   return new FormArray(
-    schemas.map(schema => {
+    (schema.schemas as AnyControlSchema[]).map(schema => {
       switch (schema.type) {
         case 'group':
-          return createFormGroup(schema.schemas as AnySchema[]);
+          return createFormGroup(schema);
 
         case 'array':
-          return createFormArray(schema.schemas as AnyControlSchema[]);
+          return createFormArray(schema);
 
         default:
           return createFormControl(schema);
       }
-    })
+    }),
+    {
+      validators: schema.validator,
+      asyncValidators: schema.asyncValidator,
+      updateOn: schema.updateOn
+    }
   );
 }
 

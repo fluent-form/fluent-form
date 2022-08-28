@@ -14,18 +14,15 @@ import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { NzTreeSelectComponent } from 'ng-zorro-antd/tree-select';
 import { Obj, SingleOrAll } from '../types';
-import { AbstractComponentControlSchema, AbstractControlSchema, AbstractDateControlSchema, AbstractElementControlSchema, AbstractInputFieldControlSchema, AbstractSchema, AbstractTextControlSchema, AnySchemaName, SingleKeySchemaName } from './abstract.schema';
-import { AnyBuilder, AnySchema, FormBuilder, FormSchema, SingleKeyControlBuilder, SingleKeyControlSchema } from './index.schema';
+import { AbstractComponentControlSchema, AbstractContainerControlSchema, AbstractControlSchema, AbstractDateControlSchema, AbstractElementControlSchema, AbstractInputFieldControlSchema, AbstractTextControlSchema, AnySchemaName, SingleKeySchemaName } from './abstract.schema';
+import { FormBuilder, FormSchema, SingleKeyControlBuilder, SingleKeyControlSchema } from './index.schema';
 
-export interface FormGroupSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name> {
+export interface FormGroupSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractContainerControlSchema<Name> {
   type: 'group';
-  label?: string;
-  schemas: (AnySchema | AnyBuilder)[];
 }
 
-export interface FormArraySchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractSchema<Name> {
+export interface FormArraySchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractContainerControlSchema<Name> {
   type: 'array';
-  label?: string;
   schemas: (SingleKeyControlSchema<number> | SingleKeyControlBuilder<number> | FormSchema<number> | FormBuilder<number>)[];
 }
 

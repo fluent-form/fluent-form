@@ -66,7 +66,7 @@ export interface RangePickerControlSchema<Name extends AnySchemaName = AnySchema
 export interface TimePickerControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = Date> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzTimePickerComponent, Val>, AbstractInputFieldControlSchema {
   type: 'time';
   /** Show clean button */
-  clear?: boolean;
+  clearable?: boolean;
   /** Time display format */
   format?: string;
   /** Time step length */
@@ -91,13 +91,13 @@ export interface SelectControlSchema<Name extends SingleKeySchemaName = SingleKe
   /** Placeholder text */
   placeholder?: string;
   /** Show clean button */
-  clear?: boolean;
+  clearable?: boolean;
   /** Mode of select control */
   mode?: NzSelectModeType;
   /** Max selected */
   limit?: number;
   /** Support search */
-  search?: boolean;
+  searchable?: boolean;
   backdrop?: boolean;
   borderless?: boolean;
   focus?: boolean;
@@ -117,7 +117,7 @@ export interface CascaderControlSchema<Name extends SingleKeySchemaName = Single
   /** Placeholder text */
   placeholder?: string;
   /** Show clean button */
-  clear?: boolean;
+  clearable?: boolean;
   focus?: boolean;
   backdrop?: boolean;
   expandIcon?: string | TemplateRef<void>;
@@ -128,7 +128,7 @@ export interface CascaderControlSchema<Name extends SingleKeySchemaName = Single
   /** Expand trigger for cascader control */
   trigger?: NzCascaderExpandTrigger;
   /** Support search, cannot be used with `options.load` */
-  search?: boolean;
+  searchable?: boolean;
   options: NzCascaderOption[];
   config?: {
     labelProperty?: string;
@@ -186,7 +186,7 @@ export interface CheckboxGroupControlSchema<Name extends SingleKeySchemaName = S
 export interface RateControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = number> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzRateComponent, Val> {
   type: 'rate';
   /** Show clean button */
-  clear?: boolean;
+  clearable?: boolean;
   /** whether to allow semi selection */
   half?: boolean;
   /** star count */
@@ -200,10 +200,10 @@ export interface RateControlSchema<Name extends SingleKeySchemaName = SingleKeyS
 
 export interface TreeSelectControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = SafeAny[]> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzTreeSelectComponent, Val> {
   type: 'tree-select';
-  clear?: boolean;
+  clearable?: boolean;
   placeholder?: string;
   icon?: boolean;
-  search?: boolean;
+  searchable?: boolean;
   size?: NzSizeLDSType;
   checkable?: boolean | { strict: boolean };
   expandIcon?: boolean | NzTreeSelectComponent['nzExpandedIcon'];

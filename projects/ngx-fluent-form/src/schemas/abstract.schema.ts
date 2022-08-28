@@ -123,7 +123,7 @@ export interface AbstractDateControlSchema<Name extends AnySchemaName, Val> exte
   /** Mode of date picker control */
   mode?: NzDateMode;
   /** Show clean button */
-  clear?: boolean;
+  clearable?: boolean;
   /** Show time picker in date picker */
   time?: boolean;
   /** Date display format */

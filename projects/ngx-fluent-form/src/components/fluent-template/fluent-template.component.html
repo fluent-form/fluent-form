@@ -19,7 +19,7 @@
           [placeholder]="schema.placeholder ?? ''"
           [type]="schema.subtype ?? 'text'"
           [autofocus]="schema.focus"
-          [readonly]="schema.readonly | call: { model, control, schema }"
+          [readonly]="schema.readonly | call: model : schema : control"
           [nzSize]="schema.size"
           [nzBorderless]="schema.borderless">
         <nz-autocomplete
@@ -41,7 +41,7 @@
         [placeholder]="schema.placeholder ?? ''"
         [type]="schema.subtype ?? 'text'"
         [autofocus]="schema.focus"
-        [readonly]="schema.readonly | call: { model, control, schema }"
+        [readonly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless">
     </ng-container>
@@ -61,7 +61,7 @@
           [placeholder]="schema.placeholder ?? ''"
           [rows]="schema.rows"
           [autofocus]="schema.focus"
-          [readonly]="schema.readonly | call: { model, control, schema }"
+          [readonly]="schema.readonly | call: model : schema : control"
           [nzSize]="schema.size"
           [nzBorderless]="schema.borderless"></textarea>
         <nz-autocomplete
@@ -84,7 +84,7 @@
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
         [autofocus]="schema.focus"
-        [readonly]="schema.readonly | call: { model, control, schema }"
+        [readonly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"></textarea>
     </ng-container>
@@ -103,7 +103,7 @@
         [nzPrecisionMode]="schema.precision?.mode"
         [nzStep]="schema.step ?? 1"
         [nzAutoFocus]="schema.focus"
-        [nzReadOnly]="schema.readonly | call: { model, control, schema }"
+        [nzReadOnly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless">
       </nz-input-number>
@@ -126,7 +126,7 @@
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
         [nzAutoFocus]="schema.focus"
-        [nzInputReadOnly]="schema.readonly | call: { model, control, schema }"
+        [nzInputReadOnly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"
         [nzShowToday]="schema.today ?? true"
@@ -152,7 +152,7 @@
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
         [nzAutoFocus]="schema.focus"
-        [nzInputReadOnly]="schema.readonly | call: { model, control, schema }"
+        [nzInputReadOnly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"
         [nzShowToday]="schema.today ?? true"
@@ -389,16 +389,16 @@
 
     <ng-container *ngSwitchCase="'button'">
       <button
-        *ngIf="!(schema.hidden | call: { model, control, schema })"
+        *ngIf="!(schema.hidden | call: model : schema : control)"
         nz-button
         [attr.id]="schema.id"
-        [disabled]="schema.disabled | call: { model, control, schema }"
+        [disabled]="schema.disabled | call: model : schema : control"
         [fluentEventBinder]="{ schema }"
         [fluentPropertyBinder]="{ schema }"
         [nzBlock]="schema.block"
-        [nzDanger]="schema.danger | call: { model, control, schema }"
-        [nzGhost]="schema.ghost | call: { model, control, schema }"
-        [nzLoading]="schema.loading | call: { model, control, schema }"
+        [nzDanger]="schema.danger | call: model : schema : control"
+        [nzGhost]="schema.ghost | call: model : schema : control"
+        [nzLoading]="schema.loading | call: model : schema : control"
         [nzShape]="schema.shape"
         [nzSize]="schema.size"
         [nzType]="schema.subtype"
@@ -423,7 +423,7 @@
 <!-- @param model   当前模型值 -->
 <ng-template #composableComponentTemplate let-control="control" let-schema="schema" let-model="model">
   <ng-container
-    *ngIf="!(schema.hidden | call: { model, control, schema })"
+    *ngIf="!(schema.hidden | call: model : schema : control)"
     [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
       <ng-container *ngIf="schema.autocomplete as autocomplete">
@@ -443,7 +443,7 @@
           [placeholder]="schema.placeholder ?? ''"
           [type]="schema.subtype ?? 'text'"
           [autofocus]="schema.focus"
-          [readonly]="schema.readonly | call: { model, control, schema }"
+          [readonly]="schema.readonly | call: model : schema : control"
           [nzSize]="schema.size"
           [nzBorderless]="schema.borderless">
         <nz-autocomplete
@@ -469,7 +469,7 @@
         [placeholder]="schema.placeholder ?? ''"
         [type]="schema.subtype ?? 'text'"
         [autofocus]="schema.focus"
-        [readonly]="schema.readonly | call: { model, control, schema }"
+        [readonly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless">
     </ng-container>
@@ -493,7 +493,7 @@
           [placeholder]="schema.placeholder ?? ''"
           [rows]="schema.rows"
           [autofocus]="schema.focus"
-          [readonly]="schema.readonly | call: { model, control, schema }"
+          [readonly]="schema.readonly | call: model : schema : control"
           [nzSize]="schema.size"
           [nzBorderless]="schema.borderless"></textarea>
         <nz-autocomplete
@@ -520,7 +520,7 @@
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
         [autofocus]="schema.focus"
-        [readonly]="schema.readonly | call: { model, control, schema }"
+        [readonly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"></textarea>
     </ng-container>
@@ -543,7 +543,7 @@
         [nzSpan]="schema.span ?? null"
         [nzStep]="schema.step ?? 1"
         [nzAutoFocus]="schema.focus"
-        [nzReadOnly]="schema.readonly | call: { model, control, schema }"
+        [nzReadOnly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless">
       </nz-input-number>
@@ -571,7 +571,7 @@
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
         [nzAutoFocus]="schema.focus"
-        [nzInputReadOnly]="schema.readonly | call: { model, control, schema }"
+        [nzInputReadOnly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"
         [nzShowToday]="schema.today ?? true"
@@ -600,7 +600,7 @@
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
         [nzAutoFocus]="schema.focus"
-        [nzInputReadOnly]="schema.readonly | call: { model, control, schema }"
+        [nzInputReadOnly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"
         [nzShowToday]="schema.today ?? true"

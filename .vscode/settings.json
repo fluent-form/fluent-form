@@ -3,6 +3,7 @@
   "conventionalCommits.scopes": [
     "storybook",
     "directive",
-    "deps"
+    "deps",
+    "pipe"
   ]
 }

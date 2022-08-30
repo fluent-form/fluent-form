@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Obj } from '../types';
+import { AbstractControl } from '@angular/forms';
+import { AbstractSchema, AnySchemaName, CallbackArg } from '../schemas';
 
 const RETURN_STR = 'return ';
 
@@ -8,9 +9,12 @@ const RETURN_STR = 'return ';
 })
 export class CallPipe implements PipeTransform {
 
-  transform<T>(value: boolean | ((arg: T) => boolean) | string | undefined, arg: T): boolean {
+  transform<T extends [unknown, AbstractSchema<AnySchemaName>, AbstractControl]>(
+    value: boolean | ((arg: CallbackArg<AbstractSchema<AnySchemaName>>) => boolean) | string | undefined,
+    ...[model, schema, control]: T
+  ): boolean {
     if (typeof value === 'function') {
-      return value(arg);
+      return value({ model, schema, control });
     }
 
     if (typeof value === 'string') {
@@ -18,7 +22,7 @@ export class CallPipe implements PipeTransform {
         value = RETURN_STR + value;
       }
 
-      return compileCode(value)(arg as Obj);
+      return compileCode(value)({ model, schema, control });
     }
 
     return value ?? false;
@@ -26,11 +30,12 @@ export class CallPipe implements PipeTransform {
 
 }
 
+/** @internal */
 function compileCode(code: string) {
   code = code.replace(/debugger/g, '');
   const fn = new Function('ctx', `with(ctx){{${code}}}`);
 
-  return (ctx: Obj) => {
+  return (ctx: CallbackArg<AbstractSchema<AnySchemaName>>) => {
     const proxy = new Proxy(Object.freeze(ctx), {
       // 拦截所有属性，防止到 Proxy 对象以外的作用域链查找。
       has() {

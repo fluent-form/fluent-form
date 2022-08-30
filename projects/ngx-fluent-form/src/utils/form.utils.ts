@@ -206,11 +206,12 @@ export class FormUtils<F extends FormGroup | FormArray> {
       }
 
       const options = { emitEvent: false };
-      const disabled = callPipe.transform(schema.disabled, {
+      const disabled = callPipe.transform(
+        schema.disabled,
         model,
-        control,
-        schema
-      });
+        schema,
+        control
+      );
       disabled ? control.disable(options) : control.enable(options);
     });
   }

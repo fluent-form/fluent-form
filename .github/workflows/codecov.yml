@@ -9,8 +9,6 @@ env:
 on:
   push:
     branches: [main]
-    paths:
-      - projects/ngx-fluent-form/**
 
 jobs:
   build:

@@ -63,9 +63,9 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
   };
   value?: Val;
   /** Is it a required control */
-  required?: boolean | ((arg: CallbackArg<AbstractSchema<AnySchemaName>>) => boolean) | string;
+  required?: boolean | ((arg: CallbackArg<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
   /** Whether to disable control */
-  disabled?: boolean | ((arg: CallbackArg<AbstractSchema<AnySchemaName>>) => boolean) | string;
+  disabled?: boolean | ((arg: CallbackArg<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
   feedback?: boolean;
   /** Error message for control */
   tips?: {
@@ -156,7 +156,7 @@ export interface AbstractDateControlSchema<Name extends AnySchemaName, Val> exte
 export interface AbstractInputFieldControlSchema<Placeholder extends string | [string, string] = string> {
   placeholder?: Placeholder;
   focus?: boolean;
-  readonly?: boolean | ((arg: CallbackArg<AbstractSchema<AnySchemaName>>) => boolean) | string;
+  readonly?: boolean | ((arg: CallbackArg<AbstractInputFieldControlSchema<Placeholder>>) => boolean) | string;
   size?: NzSizeLDSType;
   borderless?: boolean;
 }

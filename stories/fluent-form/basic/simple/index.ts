@@ -44,6 +44,7 @@ export const story = defineStory({
       button().subtype('primary').content('普通按钮'),
       button().subtype('primary').content('带图标的按钮').icon('check'),
       button().content('危险按钮').danger(true),
+      button().subtype('link').content('链接按钮'),
       buttonGroup().schemas(
         button().subtype('primary').content('确认'),
         button().content('取消'),

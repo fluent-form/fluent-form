@@ -388,30 +388,58 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="'button'">
-      <button
-        *ngIf="!(schema.hidden | call: model : schema : control)"
-        nz-button
-        [attr.id]="schema.id"
-        [disabled]="schema.disabled | call: model : schema : control"
-        [fluentEventBinder]="{ schema }"
-        [fluentPropertyBinder]="{ schema }"
-        [nzBlock]="schema.block"
-        [nzDanger]="schema.danger | call: model : schema : control"
-        [nzGhost]="schema.ghost | call: model : schema : control"
-        [nzLoading]="schema.loading | call: model : schema : control"
-        [nzShape]="schema.shape"
-        [nzSize]="schema.size"
-        [nzType]="schema.subtype"
-        [type]="schema.mode">
-        <i
-          *ngIf="schema.icon"
-          nz-icon
-          [nzRotate]="schema.icon.rotate"
-          [nzSpin]="schema.icon.spin"
-          [nzTheme]="schema.icon.theme"
-          [nzType]="schema.icon.type ?? schema.icon"></i>
-        <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
-      </button>
+      <ng-container *ngIf="schema.subtype ===  'link'">
+        <a
+          *ngIf="!(schema.hidden | call: model : schema : control)"
+          nz-button
+          [attr.id]="schema.id"
+          [disabled]="schema.disabled | call: model : schema : control"
+          [fluentEventBinder]="{ schema }"
+          [fluentPropertyBinder]="{ schema }"
+          [nzBlock]="schema.block"
+          [nzDanger]="schema.danger | call: model : schema : control"
+          [nzGhost]="schema.ghost | call: model : schema : control"
+          [nzLoading]="schema.loading | call: model : schema : control"
+          [nzShape]="schema.shape"
+          [nzSize]="schema.size"
+          [nzType]="schema.subtype"
+          [type]="schema.mode">
+          <i
+            *ngIf="schema.icon"
+            nz-icon
+            [nzRotate]="schema.icon.rotate"
+            [nzSpin]="schema.icon.spin"
+            [nzTheme]="schema.icon.theme"
+            [nzType]="schema.icon.type ?? schema.icon"></i>
+          <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
+        </a>
+      </ng-container>
+      <ng-container *ngIf="schema.subtype !==  'link'">
+        <button
+          *ngIf="!(schema.hidden | call: model : schema : control)"
+          nz-button
+          [attr.id]="schema.id"
+          [disabled]="schema.disabled | call: model : schema : control"
+          [fluentEventBinder]="{ schema }"
+          [fluentPropertyBinder]="{ schema }"
+          [nzBlock]="schema.block"
+          [nzDanger]="schema.danger | call: model : schema : control"
+          [nzGhost]="schema.ghost | call: model : schema : control"
+          [nzLoading]="schema.loading | call: model : schema : control"
+          [nzShape]="schema.shape"
+          [nzSize]="schema.size"
+          [nzType]="schema.subtype"
+          [type]="schema.mode">
+          <i
+            *ngIf="schema.icon"
+            nz-icon
+            [nzRotate]="schema.icon.rotate"
+            [nzSpin]="schema.icon.spin"
+            [nzTheme]="schema.icon.theme"
+            [nzType]="schema.icon.type ?? schema.icon"></i>
+          <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
+        </button>
+      </ng-container>
     </ng-container>
   </ng-container>
 </ng-template>
@@ -725,33 +753,64 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="'button'">
-      <button
-        nz-button
-        nz-col
-        [attr.id]="schema.id"
-        [disabled]="schema.disabled"
-        [fluentEventBinder]="{ schema }"
-        [fluentPropertyBinder]="{ schema }"
-        [nzBlock]="schema.block"
-        [nzDanger]="schema.danger"
-        [nzFlex]="schema.flex"
-        [nzGhost]="schema.ghost"
-        [nzLoading]="schema.loading"
-        [nzOffset]="schema.offset"
-        [nzShape]="schema.shape"
-        [nzSize]="schema.size"
-        [nzSpan]="schema.span ?? null"
-        [nzType]="schema.subtype"
-        [type]="schema.mode">
-        <i
-          *ngIf="schema.icon"
-          nz-icon
-          [nzRotate]="schema.icon.rotate"
-          [nzSpin]="schema.icon.spin"
-          [nzTheme]="schema.icon.theme"
-          [nzType]="schema.icon.type ?? schema.icon"></i>
-        <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
-      </button>
+      <ng-container *ngIf="schema.subtype ===  'link'">
+        <a
+          nz-button
+          nz-col
+          [attr.id]="schema.id"
+          [disabled]="schema.disabled"
+          [fluentEventBinder]="{ schema }"
+          [fluentPropertyBinder]="{ schema }"
+          [nzBlock]="schema.block"
+          [nzDanger]="schema.danger"
+          [nzFlex]="schema.flex"
+          [nzGhost]="schema.ghost"
+          [nzLoading]="schema.loading"
+          [nzOffset]="schema.offset"
+          [nzShape]="schema.shape"
+          [nzSize]="schema.size"
+          [nzSpan]="schema.span ?? null"
+          [nzType]="schema.subtype"
+          [type]="schema.mode">
+          <i
+            *ngIf="schema.icon"
+            nz-icon
+            [nzRotate]="schema.icon.rotate"
+            [nzSpin]="schema.icon.spin"
+            [nzTheme]="schema.icon.theme"
+            [nzType]="schema.icon.type ?? schema.icon"></i>
+          <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
+        </a>
+      </ng-container>
+      <ng-container *ngIf="schema.subtype !==  'link'">
+        <button
+          nz-button
+          nz-col
+          [attr.id]="schema.id"
+          [disabled]="schema.disabled"
+          [fluentEventBinder]="{ schema }"
+          [fluentPropertyBinder]="{ schema }"
+          [nzBlock]="schema.block"
+          [nzDanger]="schema.danger"
+          [nzFlex]="schema.flex"
+          [nzGhost]="schema.ghost"
+          [nzLoading]="schema.loading"
+          [nzOffset]="schema.offset"
+          [nzShape]="schema.shape"
+          [nzSize]="schema.size"
+          [nzSpan]="schema.span ?? null"
+          [nzType]="schema.subtype"
+          [type]="schema.mode">
+          <i
+            *ngIf="schema.icon"
+            nz-icon
+            [nzRotate]="schema.icon.rotate"
+            [nzSpin]="schema.icon.spin"
+            [nzTheme]="schema.icon.theme"
+            [nzType]="schema.icon.type ?? schema.icon"></i>
+          <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
+        </button>
+      </ng-container>
     </ng-container>
   </ng-container>
 </ng-template>

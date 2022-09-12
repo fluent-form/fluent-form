@@ -19,7 +19,7 @@
  */
 
 import { StableBuilder } from '../utils/builder.utils';
-import { AnySchemaName, DoubleKeySchemaName, SingleKeySchemaName } from './abstract.schema';
+import { AnySchemaName, DoubleSchemaName, SchemaName } from './abstract.schema';
 import { ButtonComponentSchema, ButtonGroupComponentSchema, InputGroupComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsetComponentSchema } from './component.schema';
 import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema, TreeSelectControlSchema } from './control.schema';
 
@@ -44,9 +44,9 @@ export type ControlContainerSchema = FormSchema | InputGroupComponentSchema | St
 export type ControlContainerBuilder = StableBuilder<ControlContainerSchema>;
 
 /** 表单图示 */
-export type FormSchema<N extends SingleKeySchemaName = SingleKeySchemaName> = FormGroupSchema<N> | FormArraySchema<N>;
+export type FormSchema<N extends SchemaName = SchemaName> = FormGroupSchema<N> | FormArraySchema<N>;
 /** 表单构建器 */
-export type FormBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = StableBuilder<FormSchema<N>>;
+export type FormBuilder<N extends SchemaName = SchemaName> = StableBuilder<FormSchema<N>>;
 
 /** 真实控件图示 */
 export type ControlSchema = SingleKeyControlSchema | DoubleKeyControlSchema | AnyKeyControlSchema;
@@ -59,9 +59,9 @@ export type ComponentContainerSchema = ButtonGroupComponentSchema;
 export type ComponentContainerBuilder = StableBuilder<ComponentContainerSchema>;
 
 /** 普通组件图示 */
-export type ComponentSchema<N extends SingleKeySchemaName = SingleKeySchemaName> = ButtonComponentSchema<N>;
+export type ComponentSchema<N extends SchemaName = SchemaName> = ButtonComponentSchema<N>;
 /** 普通组件构建器 */
-export type ComponentBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = StableBuilder<ComponentSchema<N>>;
+export type ComponentBuilder<N extends SchemaName = SchemaName> = StableBuilder<ComponentSchema<N>>;
 
 /** 可组合组件图示 */
 export type ComposableComponentSchema =
@@ -70,8 +70,8 @@ export type ComposableComponentSchema =
   NumberInputControlSchema |
   DatePickerControlSchema |
   TimePickerControlSchema |
-  RangePickerControlSchema<SingleKeySchemaName> |
-  RangePickerControlSchema<DoubleKeySchemaName> |
+  RangePickerControlSchema<SchemaName> |
+  RangePickerControlSchema<DoubleSchemaName> |
   SelectControlSchema |
   CascaderControlSchema |
   TreeSelectControlSchema |
@@ -80,7 +80,7 @@ export type ComposableComponentSchema =
 export type ComposableComponentBuilder = StableBuilder<ComposableComponentSchema>;
 
 /** 单字段的真实控件图示 */
-export type SingleKeyControlSchema<N extends SingleKeySchemaName = SingleKeySchemaName> =
+export type SingleKeyControlSchema<N extends SchemaName = SchemaName> =
   InputControlSchema<N> |
   TextareaControlSchema<N> |
   NumberInputControlSchema<N> |
@@ -97,14 +97,14 @@ export type SingleKeyControlSchema<N extends SingleKeySchemaName = SingleKeySche
   RangePickerControlSchema<N> |
   SliderControlSchema<N>;
 /** 单字段的真实控件构建器 */
-export type SingleKeyControlBuilder<N extends SingleKeySchemaName = SingleKeySchemaName> = StableBuilder<SingleKeyControlSchema<N>>;
+export type SingleKeyControlBuilder<N extends SchemaName = SchemaName> = StableBuilder<SingleKeyControlSchema<N>>;
 
 /** 双字段的真实控件图示 */
-export type DoubleKeyControlSchema<N extends DoubleKeySchemaName = DoubleKeySchemaName> =
+export type DoubleKeyControlSchema<N extends DoubleSchemaName = DoubleSchemaName> =
   RangePickerControlSchema<N> |
   SliderControlSchema<N>;
 /** 双字段的真实控件构建器 */
-export type DoubleKeyControlBuilder<N extends DoubleKeySchemaName = DoubleKeySchemaName> = StableBuilder<DoubleKeyControlSchema<N>>;
+export type DoubleKeyControlBuilder<N extends DoubleSchemaName = DoubleSchemaName> = StableBuilder<DoubleKeyControlSchema<N>>;
 
 /** 任意键的真实控件图示 */
 export type AnyKeyControlSchema<N extends AnySchemaName = AnySchemaName> =

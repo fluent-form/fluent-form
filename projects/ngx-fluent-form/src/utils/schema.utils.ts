@@ -1,7 +1,7 @@
 import { AsyncValidatorFn, ValidatorFn, Validators } from '@angular/forms';
 import { COMPONENT_CONTAINER_SCHEMA_TYPES, COMPONENT_SCHEMA_TYPES, CONTROL_CONTAINER_SCHEMA_TYPES, TEXT_CONTROL_SCHEMA_TYPES } from '../constants';
 import { InputControlSchema, TextareaControlSchema } from '../schemas';
-import { AnySchemaName, SingleKeySchemaName } from '../schemas/abstract.schema';
+import { AnySchemaName, SchemaName } from '../schemas/abstract.schema';
 import { AnyContainerSchema, AnyControlSchema, AnySchema, ComponentContainerSchema, ComponentSchema, ControlContainerSchema, ControlSchema, DoubleKeyControlSchema } from '../schemas/index.schema';
 import { Builder, isBuilder } from './builder.utils';
 
@@ -164,13 +164,13 @@ export class SchemasUtils<S extends AnySchema[]> {
   constructor(private readonly schemas: S) { }
 
   find<T extends AnySchema>(name: AnySchemaName): T | undefined;
-  find<T extends AnySchema>(path: [...SingleKeySchemaName[], AnySchemaName]): T | undefined;
-  find<T extends AnySchema>(path: AnySchemaName | [...SingleKeySchemaName[], AnySchemaName]): T | undefined;
-  find<T extends AnySchema>(path: AnySchemaName | [...SingleKeySchemaName[], AnySchemaName]): T | undefined {
+  find<T extends AnySchema>(path: [...SchemaName[], AnySchemaName]): T | undefined;
+  find<T extends AnySchema>(path: AnySchemaName | [...SchemaName[], AnySchemaName]): T | undefined;
+  find<T extends AnySchema>(path: AnySchemaName | [...SchemaName[], AnySchemaName]): T | undefined {
     let schemas = this.schemas as AnySchema[];
     // 如果是数组，那么除了最后一个元素，其他元素所对应的 schema 一定是 container schema
     if (Array.isArray(path)) {
-      const [endPath, ...beforePath] = path.reverse() as [AnySchemaName, ...SingleKeySchemaName[]];
+      const [endPath, ...beforePath] = path.reverse() as [AnySchemaName, ...SchemaName[]];
       schemas = beforePath.reduceRight((schemas, name) => (
         (schemas.find(o => o.name === name) as AnyContainerSchema).schemas as AnyControlSchema[]
       ), schemas as AnyControlSchema[]);

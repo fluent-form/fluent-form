@@ -14,24 +14,24 @@ import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { NzTreeSelectComponent } from 'ng-zorro-antd/tree-select';
 import { Obj, SingleOrAll } from '../types';
-import { AbstractComponentControlSchema, AbstractContainerControlSchema, AbstractControlSchema, AbstractDateControlSchema, AbstractElementControlSchema, AbstractInputFieldControlSchema, AbstractTextControlSchema, AnySchemaName, SingleKeySchemaName } from './abstract.schema';
+import { AbstractComponentControlSchema, AbstractContainerControlSchema, AbstractControlSchema, AbstractDateControlSchema, AbstractElementControlSchema, AbstractInputFieldControlSchema, AbstractTextControlSchema, AnySchemaName, SchemaName } from './abstract.schema';
 import { FormBuilder, FormSchema, SingleKeyControlBuilder, SingleKeyControlSchema } from './index.schema';
 
-export interface FormGroupSchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractContainerControlSchema<Name> {
+export interface FormGroupSchema<Name extends SchemaName = SchemaName> extends AbstractContainerControlSchema<Name> {
   type: 'group';
 }
 
-export interface FormArraySchema<Name extends SingleKeySchemaName = SingleKeySchemaName> extends AbstractContainerControlSchema<Name> {
+export interface FormArraySchema<Name extends SchemaName = SchemaName> extends AbstractContainerControlSchema<Name> {
   type: 'array';
   schemas: (SingleKeyControlSchema<number> | SingleKeyControlBuilder<number> | FormSchema<number> | FormBuilder<number>)[];
 }
 
-export interface InputControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = string> extends AbstractTextControlSchema<Name, Val>, AbstractElementControlSchema<HTMLInputElement, Val>, AbstractInputFieldControlSchema {
+export interface InputControlSchema<Name extends SchemaName = SchemaName, Val = string> extends AbstractTextControlSchema<Name, Val>, AbstractElementControlSchema<HTMLInputElement, Val>, AbstractInputFieldControlSchema {
   type: 'input';
   subtype?: 'text' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
 }
 
-export interface TextareaControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = string> extends AbstractTextControlSchema<Name, Val>, AbstractElementControlSchema<HTMLTextAreaElement, Val>, AbstractInputFieldControlSchema {
+export interface TextareaControlSchema<Name extends SchemaName = SchemaName, Val = string> extends AbstractTextControlSchema<Name, Val>, AbstractElementControlSchema<HTMLTextAreaElement, Val>, AbstractInputFieldControlSchema {
   type: 'textarea';
   /** The number of lines in the text field */
   rows?: number;
@@ -39,7 +39,7 @@ export interface TextareaControlSchema<Name extends SingleKeySchemaName = Single
   autosize?: boolean | { minRows: number, maxRows: number };
 }
 
-export interface NumberInputControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = number> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzInputNumberComponent, Val>, AbstractInputFieldControlSchema {
+export interface NumberInputControlSchema<Name extends SchemaName = SchemaName, Val = number> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzInputNumberComponent, Val>, AbstractInputFieldControlSchema {
   type: 'number';
   /** Maximum value */
   max?: number;
@@ -51,7 +51,7 @@ export interface NumberInputControlSchema<Name extends SingleKeySchemaName = Sin
   step?: number;
 }
 
-export interface DatePickerControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = Date> extends AbstractDateControlSchema<Name, Val>, AbstractComponentControlSchema<NzDatePickerComponent, Val>, AbstractInputFieldControlSchema {
+export interface DatePickerControlSchema<Name extends SchemaName = SchemaName, Val = Date> extends AbstractDateControlSchema<Name, Val>, AbstractComponentControlSchema<NzDatePickerComponent, Val>, AbstractInputFieldControlSchema {
   type: 'date';
 }
 
@@ -60,7 +60,7 @@ export interface RangePickerControlSchema<Name extends AnySchemaName = AnySchema
   separator?: string;
 }
 
-export interface TimePickerControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = Date> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzTimePickerComponent, Val>, AbstractInputFieldControlSchema {
+export interface TimePickerControlSchema<Name extends SchemaName = SchemaName, Val = Date> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzTimePickerComponent, Val>, AbstractInputFieldControlSchema {
   type: 'time';
   /** Show clean button */
   clearable?: boolean;
@@ -76,14 +76,14 @@ export interface TimePickerControlSchema<Name extends SingleKeySchemaName = Sing
   suffixIcon?: string | TemplateRef<void>;
 }
 
-export interface SwitchControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = boolean> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzSwitchComponent, Val> {
+export interface SwitchControlSchema<Name extends SchemaName = SchemaName, Val = boolean> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzSwitchComponent, Val> {
   type: 'switch';
   /** Placeholder text */
   placeholder?: [string | TemplateRef<void>, string | TemplateRef<void>];
   size?: NzSizeDSType;
 }
 
-export interface SelectControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = SafeAny | SafeAny[]> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzSelectComponent, Val> {
+export interface SelectControlSchema<Name extends SchemaName = SchemaName, Val = SafeAny | SafeAny[]> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzSelectComponent, Val> {
   type: 'select';
   /** Placeholder text */
   placeholder?: string;
@@ -109,7 +109,7 @@ export interface SelectControlSchema<Name extends SingleKeySchemaName = SingleKe
   };
 }
 
-export interface CascaderControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = SafeAny[]> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzCascaderComponent, Val> {
+export interface CascaderControlSchema<Name extends SchemaName = SchemaName, Val = SafeAny[]> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzCascaderComponent, Val> {
   type: 'cascader';
   /** Placeholder text */
   placeholder?: string;
@@ -152,7 +152,7 @@ export interface SliderControlSchema<Name extends AnySchemaName = AnySchemaName,
   reverse?: boolean;
 }
 
-export interface RadioControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = SafeAny> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzRadioGroupComponent, Val> {
+export interface RadioControlSchema<Name extends SchemaName = SchemaName, Val = SafeAny> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzRadioGroupComponent, Val> {
   type: 'radio';
   /** Radio control style */
   style?: 'outline' | 'solid';
@@ -164,14 +164,14 @@ export interface RadioControlSchema<Name extends SingleKeySchemaName = SingleKey
   };
 }
 
-export interface CheckboxControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = boolean> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzCheckboxComponent, Val> {
+export interface CheckboxControlSchema<Name extends SchemaName = SchemaName, Val = boolean> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzCheckboxComponent, Val> {
   type: 'checkbox';
   content?: string;
   focus?: boolean;
   indeterminate?: boolean;
 }
 
-export interface CheckboxGroupControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = SafeAny> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzCheckboxGroupComponent, Val> {
+export interface CheckboxGroupControlSchema<Name extends SchemaName = SchemaName, Val = SafeAny> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzCheckboxGroupComponent, Val> {
   type: 'checkbox-group';
   options: Obj[];
   config?: {
@@ -180,7 +180,7 @@ export interface CheckboxGroupControlSchema<Name extends SingleKeySchemaName = S
   };
 }
 
-export interface RateControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = number> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzRateComponent, Val> {
+export interface RateControlSchema<Name extends SchemaName = SchemaName, Val = number> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzRateComponent, Val> {
   type: 'rate';
   /** Show clean button */
   clearable?: boolean;
@@ -195,7 +195,7 @@ export interface RateControlSchema<Name extends SingleKeySchemaName = SingleKeyS
   focus?: boolean;
 }
 
-export interface TreeSelectControlSchema<Name extends SingleKeySchemaName = SingleKeySchemaName, Val = SafeAny[]> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzTreeSelectComponent, Val> {
+export interface TreeSelectControlSchema<Name extends SchemaName = SchemaName, Val = SafeAny[]> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzTreeSelectComponent, Val> {
   type: 'tree-select';
   clearable?: boolean;
   placeholder?: string;

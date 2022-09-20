@@ -36,7 +36,7 @@ type TypeAndNameAndTime = TypeAndName | 'time';
 
 export function datetime(): UnstableBuilder<DatePickerControlSchema<number>, TypeAndNameAndTime>;
 export function datetime<N extends SchemaName>(name?: N): UnstableBuilder<DatePickerControlSchema<N>, TypeAndNameAndTime>;
-export function datetime<N extends SchemaName>(name?: N): UnstableBuilder<DatePickerControlSchema<N>, TypeAndNameAndTime> {
+export function datetime<N extends SchemaName>(name?: N): UnstableBuilder<DatePickerControlSchema<N>, TypeAndNameAndTime | 'format'> {
   return date<N>(name).format('yyyy-MM-dd HH:mm:ss').time(true);
 }
 

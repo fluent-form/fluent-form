@@ -16,24 +16,24 @@ Building dynamic form in Angular with Fluent API.
 - Support using Fluent API and JSON.
 - Type-safe form configuration.
 - Built on top of Angular Reactive Forms.
-- Form components and grid layout based on `ng-zorro-antd`.
+- Components and grid layout based on `ng-zorro-antd`.
 
 ## Prerequisites
 
 Before using `ngx-fluent-form`, you should have a basic understanding of the following:
 
 - [Angular Reactive Forms](https://angular.cn/guide/reactive-forms)
-- [ng-zorro-antd Data Entry Series Components](https://ng.ant.design/components/auto-complete/en)
+- [ng-zorro-antd](https://ng.ant.design/components/auto-complete/en)
 
 And make sure your relevant dependency versions meet the following requirements:
 
-- [Angular](https://angular.io) >= v13.0.0
-- [ng-zorro-antd](https://ng.ant.design) >= v13.4.0
+- [Angular](https://angular.io) `>= v13.0.0 & < v14.0.0`
+- [ng-zorro-antd](https://ng.ant.design) `>= v13.4.0 & < v14.0.0`
 
 ## Install
 
 ```shell
-ng add ngx-fluent-form
+$ ng add ngx-fluent-form
 ```
 
 ## Docs
@@ -55,16 +55,16 @@ import { FluentFormModule } from 'ngx-fluent-form';
 export class YourModule { }
 ```
 
-Configure `schemas` parameter to build your form:
+Configure form `schemas` parameter to start building your form:
 
 ```ts
 import { date, form, number, input } from 'ngx-fluent-form';
 
 @Component({
-  template: `<fluent-form [(model)]="model" [schema]="schema"></fluent-form>`
+  template: `<fluent-form [(model)]="model" [schemas]="schemas"></fluent-form>`
 })
 export class Component {
-  schema = form(
+  schemas = form(
     input('text').label('label'),
     number('number').label('label').max(100),
     date('date').label('label')
@@ -84,4 +84,4 @@ For better performance, all components of `ngx-fluent-form` run in [OnPush](http
 
 ## Support
 
-Love `ngx-fluent-form` ? ⭐Star for this project!
+Love `ngx-fluent-form`? ⭐Star for this project!

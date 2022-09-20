@@ -73,7 +73,7 @@ export const fluentAndJsonSource = dedent`
   export class ExampleComponent {
     schemas = form(
       { type: 'input', name: 'username', label: '用户名', placeholder: '请输入用户名' },
-      input('password').label('密码').placeholder('请输入密码').subtype('password').disabled(model => !model.username),
+      input('password').label('密码').placeholder('请输入密码').subtype('password').disabled(({ model }) => !model.username),
     );
 
     model = {};

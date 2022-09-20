@@ -16,19 +16,19 @@
 - 支持使用 Fluent API 与 JSON。
 - 类型安全的表单配置。
 - 建立在 Angular 响应式表单之上。
-- 基于 `ng-zorro-antd` 的表单组件与栅格布局。
+- 基于 `ng-zorro-antd` 的组件与栅格布局。
 
 ## 先决条件
 
 在使用 `ngx-fluent-form` 之前，您应该对以下内容有基本的了解：
 
 - [Angular 响应式表单](https://angular.cn/guide/reactive-forms)
-- [ng-zorro-antd 数据录入系列组件](https://ng.ant.design/components/auto-complete/zh)
+- [ng-zorro-antd](https://ng.ant.design/components/auto-complete/zh)
 
 并且确保你的相关依赖版本符合如下规定：
 
-- [Angular](https://angular.io) >= v13.0.0
-- [ng-zorro-antd](https://ng.ant.design) >= v13.4.0
+- [Angular](https://angular.io) `>= v13.0.0 & < v14.0.0`
+- [ng-zorro-antd](https://ng.ant.design) `>= v13.4.0 & < v14.0.0`
 
 ## 安装
 
@@ -56,16 +56,16 @@ import { FluentFormModule } from 'ngx-fluent-form';
 export class YourModule { }
 ```
 
-配置 `schemas` 参数，构建你的表单：
+配置表单 `schemas` 参数，开始构建你的表单：
 
 ```ts
 import { date, form, number, input } from 'ngx-fluent-form';
 
 @Component({
-  template: `<fluent-form [(model)]="model" [schema]="schema"></fluent-form>`
+  template: `<fluent-form [(model)]="model" [schemas]="schemas"></fluent-form>`
 })
 export class Component {
-  schema = form(
+  schemas = form(
     input('text').label('label'),
     number('number').label('label').max(100),
     date('date').label('label')
@@ -85,4 +85,4 @@ export class Component {
 
 ## 支持
 
-喜欢 `ngx-fluent-form` ？为该项目点星⭐！
+喜欢 `ngx-fluent-form`？为该项目点星⭐！

@@ -28,7 +28,7 @@ export const story = defineStory({
           { label: 'C', value: 'c' }
         ]
       }),
-      date('date').label('日期录入框').span(6),
+      date('date').label('日期录入框').span(6).class('custom-class'),
       range('range').label('区间日期录入框').span(6),
       datetime('datetime').label('日期时间录入框').span(6),
       time('time').label('时间录入框').span(6),

@@ -58,7 +58,7 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
     super();
 
     this.schemas = form(
-      input('name'),
+      input('name').class(['custom-class']),
       number('age'),
       textarea('address'),
       group('info').schemas(

@@ -212,7 +212,10 @@ export class FormUtils<F extends FormGroup | FormArray> {
         schema,
         control
       );
-      disabled ? control.disable(options) : control.enable(options);
+
+      if (disabled !== control.disabled) {
+        disabled ? control.disable(options) : control.enable(options);
+      }
     });
   }
 

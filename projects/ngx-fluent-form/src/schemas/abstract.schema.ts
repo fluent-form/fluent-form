@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { TemplateRef } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormControl, FormControlStatus, ValidatorFn } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
@@ -49,6 +50,7 @@ export interface AbstractSchema<Name extends AnySchemaName> {
   flex?: number | string;
   label?: string | Label;
   hidden?: boolean | ((arg: CallbackArg<AbstractSchema<AnySchemaName>>) => boolean) | string;
+  class?: NgClass['ngClass'];
 }
 
 /** 抽象的真实控件图示 */

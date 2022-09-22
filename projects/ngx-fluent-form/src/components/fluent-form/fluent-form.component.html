@@ -22,6 +22,7 @@
     <ng-template #formItemTemplate let-schema="schema" let-control="control" let-model="model">
       <div
         nz-col
+        [ngClass]="schema.class"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
@@ -55,6 +56,7 @@
             (nzIndexChange)="schema.active = $event">
             <ng-container *ngFor="let subschema of schema.schemas; index as index">
               <nz-step
+                [ngClass]="subschema.class"
                 [nzTitle]="subschema.title"
                 [nzSubtitle]="subschema.subtitle"
                 [nzDescription]="subschema.description"
@@ -90,6 +92,7 @@
             [nzCentered]="schema.center">
             <nz-tab
               *ngFor="let tabSchema of schema.schemas"
+              [ngClass]="tabSchema.class"
               [nzTitle]="tabSchema.title"
               [nzDisabled]="tabSchema.disabled | call: model : tabSchema : control">
               <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
@@ -126,7 +129,7 @@
               [nzValidatingTip]="schema.tips?.validating"
               [nzExtra]="schema.tips?.extra"
               [nzAutoTips]="schema.tips?.auto ?? {}">
-              <ng-container *fluentControlOutlet="control; schema: schema; model: model"></ng-container>
+              <ng-container *fluentControlOutlet="control; schema: schema; model: model; classful: false"></ng-container>
             </nz-form-control>
           </nz-form-item>
         </ng-container>

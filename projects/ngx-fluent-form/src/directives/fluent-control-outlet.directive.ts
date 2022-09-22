@@ -15,6 +15,7 @@ export class FluentControlOutletDirective<T extends Obj | Arr> implements OnInit
 
   schema!: ComponentSchema | ControlSchema;
   control!: AbstractControl;
+  classful: boolean = true;
 
   get model(): T {
     return this.controlContainer.directive.model as T;

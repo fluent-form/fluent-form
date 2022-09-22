@@ -3,7 +3,7 @@
 <!-- @param control FormControl -->
 <!-- @param schema  组件的图示 -->
 <!-- @param model   当前模型值 -->
-<ng-template #componentTemplate let-control="control" let-schema="schema" let-model="model">
+<ng-template #componentTemplate let-control="control" let-schema="schema" let-model="model" let-classful="classful">
   <ng-container [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
       <ng-container *ngIf="schema.autocomplete as autocomplete">
@@ -14,6 +14,7 @@
           [attr.minlength]="schema.length ?? schema.length?.min"
           [fluentEventBinder]="{ schema, control }"
           [fluentPropertyBinder]="{ schema }"
+          [ngClass]="classful ? schema.class : null"
           [formControl]="control"
           [nzAutocomplete]="autocompleteCmp"
           [placeholder]="schema.placeholder ?? ''"
@@ -38,6 +39,7 @@
         [fluentEventBinder]="{ schema, control }"
         [fluentPropertyBinder]="{ schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [placeholder]="schema.placeholder ?? ''"
         [type]="schema.subtype ?? 'text'"
         [autofocus]="schema.focus"
@@ -56,6 +58,7 @@
           [fluentEventBinder]="{ schema, control }"
           [fluentPropertyBinder]="{ schema }"
           [formControl]="control"
+          [ngClass]="classful ? schema.class : null"
           [nzAutocomplete]="autocompleteCmp"
           [nzAutosize]="schema.autosize ?? {}"
           [placeholder]="schema.placeholder ?? ''"
@@ -80,6 +83,7 @@
         [fluentEventBinder]="{ schema, control }"
         [fluentPropertyBinder]="{ schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzAutosize]="schema.autosize ?? {}"
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
@@ -95,6 +99,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzId]="schema.id"
         [nzMax]="schema.max ?? infinity"
         [nzMin]="schema.min ?? -infinity"
@@ -115,6 +120,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzAllowClear]="schema.clearable"
         [nzFormat]="schema.format"
         [nzId]="schema.id"
@@ -140,6 +146,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzAllowClear]="schema.clearable"
         [nzFormat]="schema.format"
         [nzId]="schema.id"
@@ -167,6 +174,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzAllowEmpty]="schema.clearable"
         [nzFormat]="schema.format ?? 'HH:mm:ss'"
         [nzHourStep]="schema.step?.hour"
@@ -189,6 +197,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzCheckedChildren]="schema.placeholder?.[0]"
         [nzUnCheckedChildren]="schema.placeholder?.[1]"
         [nzSize]="schema.size">
@@ -201,6 +210,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzAllowClear]="schema.clearable"
         [nzId]="schema.id"
         [nzMaxMultipleCount]="schema.limit ?? infinity"
@@ -228,6 +238,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzAllowClear]="schema.clearable ?? true"
         [nzAutoFocus]="schema.focus"
         [nzBackdrop]="schema.backdrop"
@@ -252,6 +263,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzAllowClear]="schema.clearable ?? true"
         [nzBackdrop]="schema.backdrop"
         [nzShowIcon]="schema.icon"
@@ -279,6 +291,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzIncluded]="schema.included ?? true"
         [nzMax]="schema.max ?? 100"
         [nzMin]="schema.min"
@@ -296,6 +309,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzButtonStyle]="schema.style"
         [nzSize]="schema.size">
         <ng-container *ngFor="let option of schema.options">
@@ -322,6 +336,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzId]="schema.id"
         [nzAutoFocus]="schema.focus"
         [nzIndeterminate]="schema.indeterminate">{{ schema.content }}</label>
@@ -332,7 +347,8 @@
         #cmp
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
-        [formControl]="control">
+        [formControl]="control"
+        [ngClass]="classful ? schema.class : null">
       </nz-checkbox-group>
     </ng-container>
 
@@ -342,6 +358,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzAllowClear]="schema.clearable ?? true"
         [nzAllowHalf]="schema.half"
         [nzCharacter]="schema.character"
@@ -356,6 +373,7 @@
         nzCompact
         [fluentEventBinder]="{ cmp, schema }"
         [fluentPropertyBinder]="{ cmp, schema }"
+        [ngClass]="classful ? schema.class : null"
         [nzAddOnAfter]="schema.after?.icon ? null : schema.after"
         [nzAddOnAfterIcon]="schema.after?.icon"
         [nzAddOnBefore]="schema.before?.icon ? null : schema.before"
@@ -368,7 +386,7 @@
         <ng-container *ngFor="let subschema of schema.schemas">
           <ng-container
             [ngTemplateOutlet]="composableComponentTemplate"
-            [ngTemplateOutletContext]="{ control: (subschema.name | control: control), schema: subschema, model: model }">
+            [ngTemplateOutletContext]="{ control: (subschema.name | control: control), schema: subschema, model: model, classful: classful }">
           </ng-container>
         </ng-container>
       </nz-input-group>
@@ -379,6 +397,7 @@
         #cmp
         [fluentEventBinder]="{ cmp, schema }"
         [fluentPropertyBinder]="{ cmp, schema }"
+        [ngClass]="classful ? schema.class : null"
         [nzSize]="schema.size">
         <ng-container *ngFor="let subschema of schema.schemas">
           <ng-container *ngTemplateOutlet="componentTemplate; context: { schema: subschema, model: model }">
@@ -396,6 +415,7 @@
           [disabled]="schema.disabled | call: model : schema : control"
           [fluentEventBinder]="{ schema }"
           [fluentPropertyBinder]="{ schema }"
+          [ngClass]="classful ? schema.class : null"
           [nzBlock]="schema.block"
           [nzDanger]="schema.danger | call: model : schema : control"
           [nzGhost]="schema.ghost | call: model : schema : control"
@@ -422,6 +442,7 @@
           [disabled]="schema.disabled | call: model : schema : control"
           [fluentEventBinder]="{ schema }"
           [fluentPropertyBinder]="{ schema }"
+          [ngClass]="classful ? schema.class : null"
           [nzBlock]="schema.block"
           [nzDanger]="schema.danger | call: model : schema : control"
           [nzGhost]="schema.ghost | call: model : schema : control"
@@ -449,7 +470,7 @@
 <!-- @param control FormControl -->
 <!-- @param schema  组件的图示 -->
 <!-- @param model   当前模型值 -->
-<ng-template #composableComponentTemplate let-control="control" let-schema="schema" let-model="model">
+<ng-template #composableComponentTemplate let-control="control" let-schema="schema" let-model="model" let-classful="classful">
   <ng-container
     *ngIf="!(schema.hidden | call: model : schema : control)"
     [ngSwitch]="schema.type">
@@ -464,6 +485,7 @@
           [fluentEventBinder]="{ schema, control }"
           [fluentPropertyBinder]="{ schema }"
           [formControl]="control"
+          [ngClass]="classful ? schema.class : null"
           [nzAutocomplete]="autocompleteCmp"
           [nzFlex]="schema.flex"
           [nzOffset]="schema.offset"
@@ -491,6 +513,7 @@
         [fluentEventBinder]="{ schema, control }"
         [fluentPropertyBinder]="{ schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzFlex]="schema.flex"
         [nzOffset]="schema.offset"
         [nzSpan]="schema.span ?? null"
@@ -513,6 +536,7 @@
           [fluentEventBinder]="{ schema, control }"
           [fluentPropertyBinder]="{ schema }"
           [formControl]="control"
+          [ngClass]="classful ? schema.class : null"
           [nzAutocomplete]="autocompleteCmp"
           [nzAutosize]="schema.autosize ?? {}"
           [nzFlex]="schema.flex"
@@ -541,6 +565,7 @@
         [fluentEventBinder]="{ schema, control }"
         [fluentPropertyBinder]="{ schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzAutosize]="schema.autosize ?? {}"
         [nzFlex]="schema.flex"
         [nzOffset]="schema.offset"
@@ -560,6 +585,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzFlex]="schema.flex"
         [nzId]="schema.id"
         [nzMax]="schema.max ?? infinity"
@@ -584,6 +610,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzAllowClear]="schema.clearable"
         [nzFlex]="schema.flex"
         [nzFormat]="schema.format"
@@ -613,6 +640,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzAllowClear]="schema.clearable"
         [nzFlex]="schema.flex"
         [nzFormat]="schema.format"
@@ -643,6 +671,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzAllowEmpty]="schema.clearable"
         [nzFlex]="schema.flex"
         [nzFormat]="schema.format ?? 'HH:mm:ss'"
@@ -668,6 +697,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzAllowClear]="schema.clearable"
         [nzFlex]="schema.flex"
         [nzId]="schema.id"
@@ -700,6 +730,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzAllowClear]="schema.clearable ?? true"
         [nzAutoFocus]="schema.focus"
         [nzBackdrop]="schema.backdrop"
@@ -728,6 +759,7 @@
         [fluentEventBinder]="{ cmp, schema, control }"
         [fluentPropertyBinder]="{ cmp, schema }"
         [formControl]="control"
+        [ngClass]="classful ? schema.class : null"
         [nzAllowClear]="schema.clearable ?? true"
         [nzBackdrop]="schema.backdrop"
         [nzShowIcon]="schema.icon"
@@ -761,6 +793,7 @@
           [disabled]="schema.disabled"
           [fluentEventBinder]="{ schema }"
           [fluentPropertyBinder]="{ schema }"
+          [ngClass]="classful ? schema.class : null"
           [nzBlock]="schema.block"
           [nzDanger]="schema.danger"
           [nzFlex]="schema.flex"
@@ -790,6 +823,7 @@
           [disabled]="schema.disabled"
           [fluentEventBinder]="{ schema }"
           [fluentPropertyBinder]="{ schema }"
+          [ngClass]="classful ? schema.class : null"
           [nzBlock]="schema.block"
           [nzDanger]="schema.danger"
           [nzFlex]="schema.flex"

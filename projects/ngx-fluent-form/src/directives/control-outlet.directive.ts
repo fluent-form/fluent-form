@@ -15,6 +15,8 @@ export class ControlOutletDirective<T extends Obj | Arr> implements OnInit {
   @Input('fluentControlOutletSchema') schema!: ControlSchema | ComponentSchema;
   /** 当前模型 */
   @Input('fluentControlOutletModel') model!: T;
+  /** 有类名 */
+  @Input('fluentControlOutletClassful') classful: boolean = true;
 
   constructor(
     @Inject(COMPONENT_TEMPLATE_REF_TOKEN)

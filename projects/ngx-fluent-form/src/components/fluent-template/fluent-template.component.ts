@@ -5,11 +5,13 @@ import { Arr, Obj } from '../../types';
 
 export type ComponentTemplateRef<T extends Obj | Arr> = TemplateRef<{
   /** 当前控件 */
-  control: AbstractControl,
+  control: AbstractControl;
   /** 当前图示 */
-  schema: ComponentSchema | ControlSchema,
+  schema: ComponentSchema | ControlSchema;
   /** 当前模型值 */
-  model: T
+  model: T;
+  /** 有类名 */
+  classful: boolean;
 }>;
 
 /**

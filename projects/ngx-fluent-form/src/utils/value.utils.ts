@@ -8,6 +8,9 @@ export function valueUtils<S extends Obj | Arr | AbstractControl>(source: S, sch
   return new ValueUtils(source, schema);
 }
 
+/**
+ * 通过 schema 获取 source 中对应的值，其中 source 可以是模型或控件
+ */
 export class ValueUtils<S extends Obj | Arr | AbstractControl> {
   constructor(
     private readonly source: S,
@@ -18,6 +21,9 @@ export class ValueUtils<S extends Obj | Arr | AbstractControl> {
     return this.source instanceof AbstractControl ? this.getControlValue() : this.getModelValue();
   }
 
+  /**
+   * 从模型中获取对应值
+   */
   private getModelValue(): unknown {
     let value: unknown;
     // 如果是双字段模式，则需要从模型中分别取得这两个字段的值组为一个元组
@@ -59,6 +65,9 @@ export class ValueUtils<S extends Obj | Arr | AbstractControl> {
     return value;
   }
 
+  /**
+   * 从控件中获取对应值
+   */
   private getControlValue(): unknown {
     const value = (this.source as AbstractControl).value as unknown;
 

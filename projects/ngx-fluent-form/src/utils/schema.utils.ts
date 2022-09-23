@@ -72,20 +72,20 @@ const standardTextControlSchema = <T extends InputControlSchema | TextareaContro
   const utils = controlSchemaUtils(schema);
 
   if (schema.type === 'input' && schema.subtype === 'email') {
-    utils.addValidator(Validators.email);
+    utils.addValidators(Validators.email);
   }
 
   if (schema.length) {
     if (typeof schema.length === 'number') {
-      utils.addValidator([
+      utils.addValidators(
         Validators.minLength(schema.length),
         Validators.maxLength(schema.length)
-      ]);
+      );
     } else {
       const { min, max } = schema.length as { max?: number, min?: number };
 
-      min && utils.addValidator(Validators.minLength(min));
-      max && utils.addValidator(Validators.maxLength(max));
+      min && utils.addValidators(Validators.minLength(min));
+      max && utils.addValidators(Validators.maxLength(max));
     }
   }
 
@@ -110,7 +110,7 @@ export const standardSchema = <T extends AnySchema>(schema: T | Builder<T, T, {}
   }
 
   if ('required' in _schema && _schema.required) {
-    controlSchemaUtils(_schema as ControlSchema).addValidator(Validators.required);
+    controlSchemaUtils(_schema as ControlSchema).addValidators(Validators.required);
   }
 
   return _schema as T;
@@ -131,25 +131,21 @@ export function controlSchemaUtils<S extends ControlSchema>(schema: S) {
 export class ControlSchemaUtils<S extends ControlSchema> {
   constructor(private readonly schema: S) { }
 
-  addValidator(validator: ValidatorFn | ValidatorFn[]) {
-    const validators = Array.isArray(validator) ? validator : [validator];
-
-    if (this.schema.validator) {
-      this.schema.validator = this.schema.validator.concat(validators);
+  addValidators(...validators: ValidatorFn[]) {
+    if (this.schema.validators) {
+      this.schema.validators = this.schema.validators.concat(validators);
     } else {
-      this.schema.validator = validators;
+      this.schema.validators = validators;
     }
 
     return this;
   }
 
-  addAsyncValidator(validator: AsyncValidatorFn | AsyncValidatorFn[]) {
-    const validators = Array.isArray(validator) ? validator : [validator];
-
-    if (this.schema.asyncValidator) {
-      this.schema.asyncValidator = this.schema.asyncValidator.concat(validators);
+  addAsyncValidators(...validators: AsyncValidatorFn[]) {
+    if (this.schema.asyncValidators) {
+      this.schema.asyncValidators = this.schema.asyncValidators.concat(validators);
     } else {
-      this.schema.asyncValidator = validators;
+      this.schema.asyncValidators = validators;
     }
 
     return this;

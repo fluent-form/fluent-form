@@ -79,9 +79,9 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
     auto?: Record<'default' | (string & {}), Record<string, string>>;
   };
   /** Validator for the control */
-  validator?: ValidatorFn[];
+  validators?: ValidatorFn[];
   /** Async validators for control */
-  asyncValidator?: AsyncValidatorFn[];
+  asyncValidators?: AsyncValidatorFn[];
   updateOn?: AbstractControlOptions['updateOn'];
 }
 
@@ -90,9 +90,9 @@ export interface AbstractContainerControlSchema<Name extends AnySchemaName> exte
   label?: string;
   schemas: (AnySchema | AnyBuilder)[];
   /** Validator for the control */
-  validator?: ValidatorFn[];
+  validators?: ValidatorFn[];
   /** Async validators for control */
-  asyncValidator?: AsyncValidatorFn[];
+  asyncValidators?: AsyncValidatorFn[];
   updateOn?: AbstractControlOptions['updateOn'];
 }
 

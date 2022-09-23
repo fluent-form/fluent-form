@@ -18,8 +18,8 @@ describe('schema.utils', () => {
       const schema1 = standardSchema(input('name').length(1));
       const schema2 = standardSchema(input('name').length({ min: 1, max: 2 }));
 
-      expect(schema1.validator?.length).toBe(2);
-      expect(schema2.validator?.length).toBe(2);
+      expect(schema1.validators?.length).toBe(2);
+      expect(schema2.validators?.length).toBe(2);
     });
 
     describe('嵌套图示', () => {
@@ -89,7 +89,7 @@ describe('schema.utils', () => {
           type: 'input',
           name: 'name',
           required: true,
-          validator: [Validators.required]
+          validators: [Validators.required]
         }];
         const schemas = standardSchemas([input('name').required(true)]);
 
@@ -102,7 +102,7 @@ describe('schema.utils', () => {
           subtype: 'email',
           name: 'name',
           required: true,
-          validator: [Validators.email, Validators.required]
+          validators: [Validators.email, Validators.required]
         }];
         const schemas = standardSchemas([input('name').subtype('email').required(true)]);
 
@@ -114,26 +114,26 @@ describe('schema.utils', () => {
   describe('使用 ControlUtils 添加验证器', () => {
     it('同步验证器', () => {
       const schema = standardSchema(input('name'));
-      controlSchemaUtils(schema).addValidator(Validators.required);
+      controlSchemaUtils(schema).addValidators(Validators.required);
 
-      expect(schema.validator?.length).toEqual(1);
+      expect(schema.validators?.length).toEqual(1);
 
-      controlSchemaUtils(schema).addValidator([Validators.email]);
+      controlSchemaUtils(schema).addValidators(Validators.email);
 
-      expect(schema.validator?.length).toEqual(2);
+      expect(schema.validators?.length).toEqual(2);
     });
 
     it('异步验证器', () => {
       const validator1: AsyncValidatorFn = (ctrl: AbstractControl) => of(null);
       const validator2: AsyncValidatorFn = (ctrl: AbstractControl) => Promise.resolve(null);
       const schema = standardSchema(input('name'));
-      controlSchemaUtils(schema).addAsyncValidator(validator1);
+      controlSchemaUtils(schema).addAsyncValidators(validator1);
 
-      expect(schema.asyncValidator?.length).toEqual(1);
+      expect(schema.asyncValidators?.length).toEqual(1);
 
-      controlSchemaUtils(schema).addAsyncValidator([validator2]);
+      controlSchemaUtils(schema).addAsyncValidators(validator2);
 
-      expect(schema.asyncValidator?.length).toEqual(2);
+      expect(schema.asyncValidators?.length).toEqual(2);
     });
   });
 

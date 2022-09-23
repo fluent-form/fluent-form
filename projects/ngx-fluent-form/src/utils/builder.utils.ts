@@ -1,6 +1,8 @@
 import { SafeAny } from '@ngify/types';
 import { Obj } from '../types';
 
+const REST_PARAMETERS = ['schemas', 'validators', 'asyncValidators'] as const;
+
 export function builder<T>(): Builder<T> {
   const builder = new Proxy({} as Obj, {
     get(target, prop: string) {
@@ -8,7 +10,7 @@ export function builder<T>(): Builder<T> {
         return () => target;
       }
 
-      if ('schemas' === prop) {
+      if (REST_PARAMETERS.includes(prop as typeof REST_PARAMETERS[number])) {
         return (...args: unknown[]): unknown => {
           target[prop] = args;
           return builder;
@@ -31,14 +33,18 @@ export function builder<T>(): Builder<T> {
  * @template T 原型
  * @template B 已选
  * @template U 未选
- * @template R 需要 Rest 参数的属性名
+ * @template R 可以 Rest 参数的属性名
  */
-export type Builder<T, B = {}, U = T, R extends string = 'schemas'> = (B extends T ? { build: () => T } : unknown) & {
+export type Builder<T, B = {}, U = T, R extends string = typeof REST_PARAMETERS[number]> = (B extends T ? { build: () => T } : unknown) & {
   [P in keyof U]-?: (
-    P extends R ? (
-      U[P] extends SafeAny[] ? (...o: U[P]) => Builder<T, B & Record<P, U[P]>, Omit<U, P>, R> : never
-    ) :
-    (o: U[P]) => Builder<T, B & Record<P, U[P]>, Omit<U, P>, R>
+    P extends R
+    ? (
+      // 兼容可选的剩余参数
+      U[P] extends (undefined | SafeAny[])
+      ? (...o: NonNullable<U[P]>) => Builder<T, B & Record<P, U[P]>, Omit<U, P>, R>
+      : never
+    )
+    : (o: U[P]) => Builder<T, B & Record<P, U[P]>, Omit<U, P>, R>
   )
 };
 

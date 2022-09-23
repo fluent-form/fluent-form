@@ -12,8 +12,8 @@ import { valueUtils } from './value.utils';
  */
 export function createFormControl(schema: ControlSchema): FormControl {
   return new FormControl(schema.value, {
-    validators: schema.validator,
-    asyncValidators: schema.asyncValidator,
+    validators: schema.validators,
+    asyncValidators: schema.asyncValidators,
     updateOn: schema.updateOn
   });
 }
@@ -69,8 +69,8 @@ export function createFormGroup(schemaOrSchemas: FormGroupSchema | AnySchema[]):
   } else {
     schemas = schemaOrSchemas.schemas as AnySchema[];
     options = {
-      validators: schemaOrSchemas.validator,
-      asyncValidators: schemaOrSchemas.asyncValidator,
+      validators: schemaOrSchemas.validators,
+      asyncValidators: schemaOrSchemas.asyncValidators,
       updateOn: schemaOrSchemas.updateOn
     };
   }
@@ -97,8 +97,8 @@ export function createFormArray(schema: FormArraySchema): FormArray {
       }
     }),
     {
-      validators: schema.validator,
-      asyncValidators: schema.asyncValidator,
+      validators: schema.validators,
+      asyncValidators: schema.asyncValidators,
       updateOn: schema.updateOn
     }
   );

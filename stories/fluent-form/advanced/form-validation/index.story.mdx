@@ -16,6 +16,7 @@ import { story, source } from './';
   - 均可使用 `validators`、`asyncValidators` 选项来添加额外的验证。
 - 对于文本输入控件，例如 `input`、`textarea` 控件，提供了一个 `length` 选项来便捷设置输入的长度。
 - 对于 `subtype` 为 `email` 的 `input` 控件，会自动添加 E-Mail 验证。
+- 对于 `input-group` 输入组，默认会使用组内的首个控件的验证状态与验证提示，可以使用 `primary` 手动指定为其他控件。
 
 <Canvas withToolbar isExpanded mdxSource={source}>
   <Story name="Form Validation">{story}</Story>

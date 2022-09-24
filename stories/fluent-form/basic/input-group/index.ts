@@ -6,8 +6,8 @@ export const story = defineStory({
   args: {
     schemas: form(
       inputGroup().label('姓与名称').span(8).schemas(
-        input('first').placeholder('姓').span(8),
-        input('last').placeholder('名').span(16),
+        input('firstName').placeholder('姓').span(8),
+        input('lastName').placeholder('名').span(16),
       ),
       inputGroup().label('个人信息').span(8).schemas(
         input('name').placeholder('姓名').span(15),

@@ -51,6 +51,7 @@ export class FluentFormComponent<T extends Obj> implements OnChanges {
 
   constructor(
     private destroy$: NzDestroyService,
+    /** @internal */
     @Inject(COMPONENT_TEMPLATE_REF_TOKEN)
     public componentTemplate: ComponentTemplateRef<T>,
   ) { }

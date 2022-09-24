@@ -12,7 +12,7 @@ import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../type
 })
 export class FluentBinderDirective<E extends HTMLElement, C extends object, S extends ControlSchema> implements OnChanges {
   @Input('fluentBinder') component?: C;
-  @Input('fluentBinderSchema') schema: S;
+  @Input('fluentBinderSchema') schema!: S;
   @Input('fluentBinderControl') control?: AbstractControl;
 
   private get host() {
@@ -29,7 +29,7 @@ export class FluentBinderDirective<E extends HTMLElement, C extends object, S ex
 
     this.schema.property && Object.keys(this.schema.property).forEach(property => {
       const value = (this.schema.property as S['property'])![property as keyof S['property']];
-      this.host[property as keyof (E | C)] = value as unknown as (E | C)[keyof (E | C)];
+      (this.host as E | C)[property as keyof (E | C)] = value as unknown as (E | C)[keyof (E | C)];
     });
 
     this.schema.listener && Object.keys(this.schema.listener).forEach(eventName => {

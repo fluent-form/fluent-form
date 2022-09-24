@@ -1,5 +1,5 @@
 import { Directive, ElementRef, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { asapScheduler, fromEvent, observeOn, takeUntil } from 'rxjs';
@@ -11,7 +11,7 @@ import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../type
   providers: [NzDestroyService]
 })
 export class EventBinderDirective<E extends HTMLElement, C extends object, S extends ControlSchema> implements OnChanges {
-  @Input() fluentEventBinder!: { cmp?: C, schema: S, control?: FormControl };
+  @Input() fluentEventBinder!: { cmp?: C, schema: S, control?: AbstractControl };
 
   private get host() {
     return this.fluentEventBinder.cmp ?? this.elementRef.nativeElement;

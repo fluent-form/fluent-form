@@ -129,7 +129,820 @@
               [nzValidatingTip]="schema.tips?.validating"
               [nzExtra]="schema.tips?.extra"
               [nzAutoTips]="schema.tips?.auto ?? {}">
-              <ng-container *fluentControlOutlet="control; schema: schema; model: model; classful: false"></ng-container>
+              <!-- 表单控件 -->
+              <ng-container [ngSwitch]="schema.type">
+                <ng-container *ngSwitchCase="'input'">
+                  <ng-container *ngIf="schema.autocomplete as autocomplete">
+                    <input
+                      nz-input
+                      [attr.id]="schema.id"
+                      [attr.maxlength]="schema.length ?? schema.length?.max"
+                      [attr.minlength]="schema.length ?? schema.length?.min"
+                      [fluentEventBinder]="{ schema, control }"
+                      [fluentPropertyBinder]="{ schema }"
+                      [formControl]="control"
+                      [nzAutocomplete]="autocompleteCmp"
+                      [placeholder]="schema.placeholder ?? ''"
+                      [type]="schema.subtype ?? 'text'"
+                      [autofocus]="schema.focus"
+                      [readonly]="schema.readonly | call: model : schema : control"
+                      [nzSize]="schema.size"
+                      [nzBorderless]="schema.borderless">
+                    <nz-autocomplete
+                      #autocompleteCmp
+                      [compareWith]="autocomplete.compare"
+                      [nzBackfill]="autocomplete.backfill"
+                      [nzDataSource]="autocomplete.options"
+                      [nzWidth]="autocomplete.width"></nz-autocomplete>
+                  </ng-container>
+                  <input
+                    *ngIf="!schema.autocomplete"
+                    nz-input
+                    [attr.id]="schema.id"
+                    [attr.maxlength]="schema.length ?? schema.length?.max"
+                    [attr.minlength]="schema.length ?? schema.length?.min"
+                    [fluentEventBinder]="{ schema, control }"
+                    [fluentPropertyBinder]="{ schema }"
+                    [formControl]="control"
+                    [placeholder]="schema.placeholder ?? ''"
+                    [type]="schema.subtype ?? 'text'"
+                    [autofocus]="schema.focus"
+                    [readonly]="schema.readonly | call: model : schema : control"
+                    [nzSize]="schema.size"
+                    [nzBorderless]="schema.borderless">
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'textarea'">
+                  <ng-container *ngIf="schema.autocomplete as autocomplete">
+                    <textarea
+                      nz-input
+                      [attr.id]="schema.id"
+                      [attr.maxlength]="schema.length ?? schema.length?.max"
+                      [attr.minlength]="schema.length ?? schema.length?.min"
+                      [fluentEventBinder]="{ schema, control }"
+                      [fluentPropertyBinder]="{ schema }"
+                      [formControl]="control"
+                      [nzAutocomplete]="autocompleteCmp"
+                      [nzAutosize]="schema.autosize ?? {}"
+                      [placeholder]="schema.placeholder ?? ''"
+                      [rows]="schema.rows"
+                      [autofocus]="schema.focus"
+                      [readonly]="schema.readonly | call: model : schema : control"
+                      [nzSize]="schema.size"
+                      [nzBorderless]="schema.borderless"></textarea>
+                    <nz-autocomplete
+                      #autocompleteCmp
+                      [compareWith]="autocomplete.compare"
+                      [nzBackfill]="autocomplete.backfill"
+                      [nzDataSource]="autocomplete.options"
+                      [nzWidth]="autocomplete.width"></nz-autocomplete>
+                  </ng-container>
+                  <textarea
+                    *ngIf="!schema.autocomplete"
+                    nz-input
+                    [attr.id]="schema.id"
+                    [attr.maxlength]="schema.length ?? schema.length?.max"
+                    [attr.minlength]="schema.length ?? schema.length?.min"
+                    [fluentEventBinder]="{ schema, control }"
+                    [fluentPropertyBinder]="{ schema }"
+                    [formControl]="control"
+                    [nzAutosize]="schema.autosize ?? {}"
+                    [placeholder]="schema.placeholder ?? ''"
+                    [rows]="schema.rows"
+                    [autofocus]="schema.focus"
+                    [readonly]="schema.readonly | call: model : schema : control"
+                    [nzSize]="schema.size"
+                    [nzBorderless]="schema.borderless"></textarea>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'number'">
+                  <nz-input-number
+                    #cmp
+                    [fluentEventBinder]="{ cmp, schema, control }"
+                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [formControl]="control"
+                    [nzId]="schema.id"
+                    [nzMax]="schema.max ?? infinity"
+                    [nzMin]="schema.min ?? -infinity"
+                    [nzPlaceHolder]="schema.placeholder ?? ''"
+                    [nzPrecision]="schema.precision?.value ?? (schema.precision | typeof: 'number') ? schema.precision : ''"
+                    [nzPrecisionMode]="schema.precision?.mode"
+                    [nzStep]="schema.step ?? 1"
+                    [nzAutoFocus]="schema.focus"
+                    [nzReadOnly]="schema.readonly | call: model : schema : control"
+                    [nzSize]="schema.size"
+                    [nzBorderless]="schema.borderless">
+                  </nz-input-number>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'date'">
+                  <nz-date-picker
+                    #cmp
+                    [fluentEventBinder]="{ cmp, schema, control }"
+                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [formControl]="control"
+                    [nzAllowClear]="schema.clearable"
+                    [nzFormat]="schema.format"
+                    [nzId]="schema.id"
+                    [nzInline]="schema.inline"
+                    [nzMode]="schema.mode"
+                    [nzPlaceHolder]="schema.placeholder"
+                    [nzShowTime]="schema.time"
+                    [nzBackdrop]="schema.backdrop"
+                    [nzPlacement]="schema.placement ?? 'bottomLeft'"
+                    [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
+                    [nzAutoFocus]="schema.focus"
+                    [nzInputReadOnly]="schema.readonly | call: model : schema : control"
+                    [nzSize]="schema.size"
+                    [nzBorderless]="schema.borderless"
+                    [nzShowToday]="schema.today ?? true"
+                    [nzShowNow]="schema.now ?? true">
+                  </nz-date-picker>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'range'">
+                  <nz-range-picker
+                    #cmp
+                    [fluentEventBinder]="{ cmp, schema, control }"
+                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [formControl]="control"
+                    [nzAllowClear]="schema.clearable"
+                    [nzFormat]="schema.format"
+                    [nzId]="schema.id"
+                    [nzInline]="schema.inline"
+                    [nzMode]="schema.mode"
+                    [nzPlaceHolder]="schema.placeholder"
+                    [nzShowTime]="schema.time"
+                    [nzShowTime]="schema.time"
+                    [nzBackdrop]="schema.backdrop"
+                    [nzPlacement]="schema.placement ?? 'bottomLeft'"
+                    [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
+                    [nzAutoFocus]="schema.focus"
+                    [nzInputReadOnly]="schema.readonly | call: model : schema : control"
+                    [nzSize]="schema.size"
+                    [nzBorderless]="schema.borderless"
+                    [nzShowToday]="schema.today ?? true"
+                    [nzShowNow]="schema.now ?? true"
+                    [nzSeparator]="schema.separator">
+                  </nz-range-picker>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'time'">
+                  <nz-time-picker
+                    #cmp
+                    [fluentEventBinder]="{ cmp, schema, control }"
+                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [formControl]="control"
+                    [nzAllowEmpty]="schema.clearable"
+                    [nzFormat]="schema.format ?? 'HH:mm:ss'"
+                    [nzHourStep]="schema.step?.hour"
+                    [nzId]="schema.id"
+                    [nzMinuteStep]="schema.step?.minute"
+                    [nzPlaceHolder]="schema.placeholder"
+                    [nzSecondStep]="schema.step?.second"
+                    [nzAutoFocus]="schema.focus"
+                    [nzSize]="schema.size"
+                    [nzBorderless]="schema.borderless"
+                    [nzBackdrop]="schema.backdrop"
+                    [nzSuffixIcon]="schema.suffixIcon ?? 'clock-circle'">
+                  </nz-time-picker>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'switch'">
+                  <nz-switch
+                    #cmp
+                    [nzId]="schema.id"
+                    [fluentEventBinder]="{ cmp, schema, control }"
+                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [formControl]="control"
+                    [nzCheckedChildren]="schema.placeholder?.[0]"
+                    [nzUnCheckedChildren]="schema.placeholder?.[1]"
+                    [nzSize]="schema.size">
+                  </nz-switch>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'select'">
+                  <nz-select
+                    #cmp
+                    [fluentEventBinder]="{ cmp, schema, control }"
+                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [formControl]="control"
+                    [nzAllowClear]="schema.clearable"
+                    [nzId]="schema.id"
+                    [nzMaxMultipleCount]="schema.limit ?? infinity"
+                    [nzMode]="schema.mode ?? 'default'"
+                    [nzPlaceHolder]="schema.placeholder"
+                    [nzShowSearch]="schema.searchable"
+                    [nzBackdrop]="schema.backdrop"
+                    [nzBorderless]="schema.borderless"
+                    [nzAutoFocus]="schema.focus"
+                    [nzShowArrow]="schema.arrow ?? (!schema.mode || schema.mode === 'default')"
+                    [nzSize]="schema.size"
+                    [nzSuffixIcon]="schema.suffixIcon">
+                    <nz-option
+                      *ngFor="let option of schema.options"
+                      [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
+                      [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
+                      [nzValue]="option[schema.config?.valueProperty ?? 'value']">
+                    </nz-option>
+                  </nz-select>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'cascader'">
+                  <nz-cascader
+                    #cmp
+                    [fluentEventBinder]="{ cmp, schema, control }"
+                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [formControl]="control"
+                    [nzAllowClear]="schema.clearable ?? true"
+                    [nzAutoFocus]="schema.focus"
+                    [nzBackdrop]="schema.backdrop"
+                    [nzExpandIcon]="schema.expandIcon ?? ''"
+                    [nzExpandTrigger]="schema.trigger"
+                    [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
+                    [nzLoadData]="schema.loadData"
+                    [nzOptions]="schema.options"
+                    [nzPlaceHolder]="schema.placeholder ?? ' '"
+                    [nzShowArrow]="schema.arrow ?? true"
+                    [nzShowSearch]="schema.searchable"
+                    [nzSize]="schema.size"
+                    [nzSuffixIcon]="schema.suffixIcon ?? 'down'"
+                    [nzValueProperty]="schema.config?.valueProperty ?? 'value'">
+                  </nz-cascader>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'tree-select'">
+                  <nz-tree-select
+                    #cmp
+                    [nzId]="schema.id"
+                    [fluentEventBinder]="{ cmp, schema, control }"
+                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [formControl]="control"
+                    [nzAllowClear]="schema.clearable ?? true"
+                    [nzBackdrop]="schema.backdrop"
+                    [nzShowIcon]="schema.icon"
+                    [nzShowSearch]="schema.searchable"
+                    [nzSize]="schema.size"
+                    [nzCheckable]="schema.checkable"
+                    [nzCheckStrictly]="schema.checkable?.strict"
+                    [nzShowExpand]="schema.expandIcon ?? true"
+                    [nzExpandedIcon]="schema.expandIcon"
+                    [nzShowLine]="schema.line"
+                    [nzAsyncData]="schema.async"
+                    [nzNodes]="schema.options"
+                    [nzDefaultExpandAll]="schema.expandAll"
+                    [nzExpandedKeys]="schema.expandedKeys"
+                    [nzMultiple]="schema.multiple"
+                    [nzVirtualHeight]="schema.virtual?.height"
+                    [nzVirtualItemSize]="schema.virtual?.itemSize ?? 28"
+                    [nzVirtualMaxBufferPx]="schema.virtual?.maxBufferPx ?? 500"
+                    [nzVirtualMinBufferPx]="schema.virtual?.minBufferPx ?? 28"></nz-tree-select>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'slider'">
+                  <nz-slider
+                    #cmp
+                    [fluentEventBinder]="{ cmp, schema, control }"
+                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [formControl]="control"
+                    [nzIncluded]="schema.included ?? true"
+                    [nzMax]="schema.max ?? 100"
+                    [nzMin]="schema.min"
+                    [nzRange]="schema.range"
+                    [nzStep]="schema.step ?? 1"
+                    [nzDots]="schema.dots"
+                    [nzVertical]="schema.vertical"
+                    [nzReverse]="schema.reverse">
+                  </nz-slider>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'radio'">
+                  <nz-radio-group
+                    #cmp
+                    [fluentEventBinder]="{ cmp, schema, control }"
+                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [formControl]="control"
+                    [nzButtonStyle]="schema.style"
+                    [nzSize]="schema.size">
+                    <ng-container *ngFor="let option of schema.options">
+                      <label
+                        *ngIf="!schema.style"
+                        nz-radio
+                        [nzValue]="option[schema.config?.valueProperty ?? 'value']">
+                        {{ option[schema.config?.labelProperty ?? 'label'] }}
+                      </label>
+                      <label
+                        *ngIf="schema.style"
+                        nz-radio-button
+                        [nzValue]="option[schema.config?.valueProperty ?? 'value']">
+                        {{ option[schema.config?.labelProperty ?? 'label'] }}
+                      </label>
+                    </ng-container>
+                  </nz-radio-group>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'checkbox'">
+                  <label
+                    #cmp
+                    nz-checkbox
+                    [fluentEventBinder]="{ cmp, schema, control }"
+                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [formControl]="control"
+                    [nzId]="schema.id"
+                    [nzAutoFocus]="schema.focus"
+                    [nzIndeterminate]="schema.indeterminate">{{ schema.content }}</label>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'checkbox-group'">
+                  <nz-checkbox-group
+                    #cmp
+                    [fluentEventBinder]="{ cmp, schema, control }"
+                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [formControl]="control">
+                  </nz-checkbox-group>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'rate'">
+                  <nz-rate
+                    #cmp
+                    [fluentEventBinder]="{ cmp, schema, control }"
+                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [formControl]="control"
+                    [nzAllowClear]="schema.clearable ?? true"
+                    [nzAllowHalf]="schema.half"
+                    [nzCharacter]="schema.character"
+                    [nzCount]="schema.count ?? 5"
+                    [nzTooltips]="schema.tooltips ?? []"
+                    [nzAutoFocus]="schema.focus"></nz-rate>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'input-group'">
+                  <nz-input-group
+                    #cmp
+                    nzCompact
+                    [fluentEventBinder]="{ cmp, schema }"
+                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [nzAddOnAfter]="schema.after?.icon ? null : schema.after"
+                    [nzAddOnAfterIcon]="schema.after?.icon"
+                    [nzAddOnBefore]="schema.before?.icon ? null : schema.before"
+                    [nzAddOnBeforeIcon]="schema.before?.icon"
+                    [nzPrefix]="schema.prefix?.icon ? null : schema.prefix"
+                    [nzPrefixIcon]="schema.prefix?.icon"
+                    [nzSize]="schema.size"
+                    [nzSuffix]="schema.suffix?.icon ? null : schema.suffix"
+                    [nzSuffixIcon]="schema.suffix?.icon">
+                    <ng-container *ngFor="let subschema of schema.schemas">
+                      <!-- 可组合的控件，这时候的 control 其实是父级的 control -->
+                      <ng-container
+                        *ngIf="!(subschema.hidden | call: model : subschema : control)"
+                        [ngSwitch]="subschema.type">
+                        <ng-container *ngSwitchCase="'input'">
+                          <ng-container *ngIf="subschema.autocomplete as autocomplete">
+                            <input
+                              nz-col
+                              nz-input
+                              [attr.id]="subschema.id"
+                              [attr.maxlength]="subschema.length ?? subschema.length?.max"
+                              [attr.minlength]="subschema.length ?? subschema.length?.min"
+                              [fluentEventBinder]="{ schema: subschema, control: (subschema.name | control: control) }"
+                              [fluentPropertyBinder]="{ schema: subschema }"
+                              [formControl]="subschema.name | control: control : 'control'"
+                              [ngClass]="subschema.class"
+                              [nzAutocomplete]="autocompleteCmp"
+                              [nzFlex]="subschema.flex"
+                              [nzOffset]="subschema.offset"
+                              [nzSpan]="subschema.span ?? null"
+                              [placeholder]="subschema.placeholder ?? ''"
+                              [type]="subschema.subtype ?? 'text'"
+                              [autofocus]="subschema.focus"
+                              [readonly]="subschema.readonly | call: model : subschema : (subschema.name | control: control)"
+                              [nzSize]="subschema.size"
+                              [nzBorderless]="subschema.borderless">
+                            <nz-autocomplete
+                              #autocompleteCmp
+                              [compareWith]="autocomplete.compare"
+                              [nzBackfill]="autocomplete.backfill"
+                              [nzDataSource]="autocomplete.options"
+                              [nzWidth]="autocomplete.width"></nz-autocomplete>
+                          </ng-container>
+                          <input
+                            *ngIf="!subschema.autocomplete"
+                            nz-col
+                            nz-input
+                            [attr.id]="subschema.id"
+                            [attr.maxlength]="subschema.length ?? subschema.length?.max"
+                            [attr.minlength]="subschema.length ?? subschema.length?.min"
+                            [fluentEventBinder]="{ schema: subschema, control: (subschema.name | control: control) }"
+                            [fluentPropertyBinder]="{ schema: subschema }"
+                            [formControl]="subschema.name | control: control : 'control'"
+                            [ngClass]="subschema.class"
+                            [nzFlex]="subschema.flex"
+                            [nzOffset]="subschema.offset"
+                            [nzSpan]="subschema.span ?? null"
+                            [placeholder]="subschema.placeholder ?? ''"
+                            [type]="subschema.subtype ?? 'text'"
+                            [autofocus]="subschema.focus"
+                            [readonly]="subschema.readonly | call: model : subschema : (subschema.name | control: control)"
+                            [nzSize]="subschema.size"
+                            [nzBorderless]="subschema.borderless">
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="'textarea'">
+                          <ng-container *ngIf="subschema.autocomplete as autocomplete">
+                            <textarea
+                              nz-col
+                              nz-input
+                              [attr.id]="subschema.id"
+                              [attr.maxlength]="subschema.length ?? subschema.length?.max"
+                              [attr.minlength]="subschema.length ?? subschema.length?.min"
+                              [fluentEventBinder]="{ schema: subschema, control: (subschema.name | control: control) }"
+                              [fluentPropertyBinder]="{ schema: subschema }"
+                              [formControl]="subschema.name | control: control : 'control'"
+                              [ngClass]="subschema.class"
+                              [nzAutocomplete]="autocompleteCmp"
+                              [nzAutosize]="subschema.autosize ?? {}"
+                              [nzFlex]="subschema.flex"
+                              [nzOffset]="subschema.offset"
+                              [nzSpan]="subschema.span ?? null"
+                              [placeholder]="subschema.placeholder ?? ''"
+                              [rows]="subschema.rows"
+                              [autofocus]="subschema.focus"
+                              [readonly]="subschema.readonly | call: model : subschema : (subschema.name | control: control)"
+                              [nzSize]="subschema.size"
+                              [nzBorderless]="subschema.borderless"></textarea>
+                            <nz-autocomplete
+                              #autocompleteCmp
+                              [compareWith]="autocomplete.compare"
+                              [nzBackfill]="autocomplete.backfill"
+                              [nzDataSource]="autocomplete.options"
+                              [nzWidth]="autocomplete.width"></nz-autocomplete>
+                          </ng-container>
+                          <textarea
+                            *ngIf="!subschema.autocomplete"
+                            nz-col
+                            nz-input
+                            [attr.id]="subschema.id"
+                            [attr.maxlength]="subschema.length ?? subschema.length?.max"
+                            [attr.minlength]="subschema.length ?? subschema.length?.min"
+                            [fluentEventBinder]="{ schema: subschema, control: (subschema.name | control: control) }"
+                            [fluentPropertyBinder]="{ schema: subschema }"
+                            [formControl]="subschema.name | control: control : 'control'"
+                            [ngClass]="subschema.class"
+                            [nzAutosize]="subschema.autosize ?? {}"
+                            [nzFlex]="subschema.flex"
+                            [nzOffset]="subschema.offset"
+                            [nzSpan]="subschema.span ?? null"
+                            [placeholder]="subschema.placeholder ?? ''"
+                            [rows]="subschema.rows"
+                            [autofocus]="subschema.focus"
+                            [readonly]="subschema.readonly | call: model : subschema : (subschema.name | control: control)"
+                            [nzSize]="subschema.size"
+                            [nzBorderless]="subschema.borderless"></textarea>
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="'number'">
+                          <nz-input-number
+                            #cmp
+                            nz-col
+                            [fluentEventBinder]="{ cmp, schema: subschema, control: (subschema.name | control: control) }"
+                            [fluentPropertyBinder]="{ cmp, schema: subschema }"
+                            [formControl]="subschema.name | control: control : 'control'"
+                            [ngClass]="subschema.class"
+                            [nzFlex]="subschema.flex"
+                            [nzId]="subschema.id"
+                            [nzMax]="subschema.max ?? infinity"
+                            [nzMin]="subschema.min ?? -infinity"
+                            [nzOffset]="subschema.offset"
+                            [nzPlaceHolder]="subschema.placeholder ?? ''"
+                            [nzPrecision]="subschema.precision ?? ''"
+                            [nzPrecisionMode]="subschema.precisionMode"
+                            [nzSpan]="subschema.span ?? null"
+                            [nzStep]="subschema.step ?? 1"
+                            [nzAutoFocus]="subschema.focus"
+                            [nzReadOnly]="subschema.readonly | call: model : subschema : (subschema.name | control: control)"
+                            [nzSize]="subschema.size"
+                            [nzBorderless]="subschema.borderless">
+                          </nz-input-number>
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="'date'">
+                          <nz-date-picker
+                            #cmp
+                            nz-col
+                            [fluentEventBinder]="{ cmp, schema: subschema, control:(subschema.name | control: control) }"
+                            [fluentPropertyBinder]="{ cmp, schema: subschema }"
+                            [formControl]="subschema.name | control: control : 'control'"
+                            [ngClass]="subschema.class"
+                            [nzAllowClear]="subschema.clearable"
+                            [nzFlex]="subschema.flex"
+                            [nzFormat]="subschema.format"
+                            [nzId]="subschema.id"
+                            [nzInline]="subschema.inline"
+                            [nzMode]="subschema.mode"
+                            [nzOffset]="subschema.offset"
+                            [nzPlaceHolder]="subschema.placeholder"
+                            [nzShowTime]="subschema.time"
+                            [nzSpan]="subschema.span ?? null"
+                            [nzShowTime]="subschema.time"
+                            [nzBackdrop]="subschema.backdrop"
+                            [nzPlacement]="subschema.placement ?? 'bottomLeft'"
+                            [nzSuffixIcon]="subschema.suffixIcon ?? 'calendar'"
+                            [nzAutoFocus]="subschema.focus"
+                            [nzInputReadOnly]="subschema.readonly | call: model : subschema : (subschema.name | control: control)"
+                            [nzSize]="subschema.size"
+                            [nzBorderless]="subschema.borderless"
+                            [nzShowToday]="subschema.today ?? true"
+                            [nzShowNow]="subschema.now ?? true"></nz-date-picker>
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="'range'">
+                          <nz-range-picker
+                            #cmp
+                            nz-col
+                            [fluentEventBinder]="{ cmp, schema: subschema, control: (subschema.name | control: control) }"
+                            [fluentPropertyBinder]="{ cmp, schema: subschema }"
+                            [formControl]="subschema.name | control: control : 'control'"
+                            [ngClass]="subschema.class"
+                            [nzAllowClear]="subschema.clearable"
+                            [nzFlex]="subschema.flex"
+                            [nzFormat]="subschema.format"
+                            [nzId]="subschema.id"
+                            [nzInline]="subschema.inline"
+                            [nzMode]="subschema.mode"
+                            [nzOffset]="subschema.offset"
+                            [nzPlaceHolder]="subschema.placeholder"
+                            [nzShowTime]="subschema.time"
+                            [nzSpan]="subschema.span ?? null"
+                            [nzShowTime]="subschema.time"
+                            [nzBackdrop]="subschema.backdrop"
+                            [nzPlacement]="subschema.placement ?? 'bottomLeft'"
+                            [nzSuffixIcon]="subschema.suffixIcon ?? 'calendar'"
+                            [nzAutoFocus]="subschema.focus"
+                            [nzInputReadOnly]="subschema.readonly | call: model : subschema : (subschema.name | control: control)"
+                            [nzSize]="subschema.size"
+                            [nzBorderless]="subschema.borderless"
+                            [nzShowToday]="subschema.today ?? true"
+                            [nzShowNow]="subschema.now ?? true"
+                            [nzSeparator]="subschema.separator"></nz-range-picker>
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="'time'">
+                          <nz-time-picker
+                            #cmp
+                            nz-col
+                            [fluentEventBinder]="{ cmp, schema: subschema, control: (subschema.name | control: control) }"
+                            [fluentPropertyBinder]="{ cmp, schema: subschema }"
+                            [formControl]="subschema.name | control: control : 'control'"
+                            [ngClass]="subschema.class"
+                            [nzAllowEmpty]="subschema.clearable"
+                            [nzFlex]="subschema.flex"
+                            [nzFormat]="subschema.format ?? 'HH:mm:ss'"
+                            [nzHourStep]="subschema.step?.hour"
+                            [nzId]="subschema.id"
+                            [nzMinuteStep]="subschema.step?.minute"
+                            [nzOffset]="subschema.offset"
+                            [nzPlaceHolder]="subschema.placeholder"
+                            [nzSecondStep]="subschema.step?.second"
+                            [nzSpan]="subschema.span ?? null"
+                            [nzAutoFocus]="subschema.focus"
+                            [nzSize]="subschema.size"
+                            [nzBorderless]="subschema.borderless"
+                            [nzBackdrop]="subschema.backdrop"
+                            [nzSuffixIcon]="subschema.suffixIcon ?? 'clock-circle'">
+                          </nz-time-picker>
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="'select'">
+                          <nz-select
+                            #cmp
+                            nz-col
+                            [fluentEventBinder]="{ cmp, schema: subschema, control: (subschema.name | control: control) }"
+                            [fluentPropertyBinder]="{ cmp, schema: subschema }"
+                            [formControl]="subschema.name | control: control : 'control'"
+                            [ngClass]="subschema.class"
+                            [nzAllowClear]="subschema.clearable"
+                            [nzFlex]="subschema.flex"
+                            [nzId]="subschema.id"
+                            [nzMaxMultipleCount]="subschema.limit ?? infinity"
+                            [nzMode]="subschema.mode ?? 'default'"
+                            [nzOffset]="subschema.offset"
+                            [nzPlaceHolder]="subschema.placeholder"
+                            [nzShowSearch]="subschema.searchable"
+                            [nzSpan]="subschema.span ?? null"
+                            [nzShowSearch]="subschema.searchable"
+                            [nzBackdrop]="subschema.backdrop"
+                            [nzBorderless]="subschema.borderless"
+                            [nzAutoFocus]="subschema.focus"
+                            [nzShowArrow]="subschema.arrow ?? (!subschema.mode || subschema.mode === 'default')"
+                            [nzSize]="subschema.size"
+                            [nzSuffixIcon]="subschema.suffixIcon">
+                            <nz-option
+                              *ngFor="let option of subschema.options"
+                              [nzDisabled]="option[subschema.config?.disabledProperty ?? 'disabled']"
+                              [nzLabel]="option[subschema.config?.labelProperty ?? 'label']"
+                              [nzValue]="option[subschema.config?.valueProperty ?? 'value']">
+                            </nz-option>
+                          </nz-select>
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="'cascader'">
+                          <nz-cascader
+                            #cmp
+                            nz-col
+                            [fluentEventBinder]="{ cmp, schema: subschema, control: (subschema.name | control: control) }"
+                            [fluentPropertyBinder]="{ cmp, schema: subschema }"
+                            [formControl]="subschema.name | control: control : 'control'"
+                            [ngClass]="subschema.class"
+                            [nzAllowClear]="subschema.clearable ?? true"
+                            [nzAutoFocus]="subschema.focus"
+                            [nzBackdrop]="subschema.backdrop"
+                            [nzExpandIcon]="subschema.expandIcon"
+                            [nzExpandTrigger]="subschema.trigger"
+                            [nzFlex]="subschema.flex"
+                            [nzLabelProperty]="subschema.config?.labelProperty ?? 'label'"
+                            [nzLoadData]="subschema.loadData"
+                            [nzOffset]="subschema.offset"
+                            [nzOptions]="subschema.options"
+                            [nzPlaceHolder]="subschema.placeholder ?? ' '"
+                            [nzShowArrow]="subschema.arrow ?? true"
+                            [nzShowSearch]="subschema.searchable"
+                            [nzSize]="subschema.size"
+                            [nzSpan]="subschema.span ?? null"
+                            [nzSuffixIcon]="subschema.suffixIcon"
+                            [nzValueProperty]="subschema.config?.valueProperty ?? 'value'">
+                          </nz-cascader>
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="'tree-select'">
+                          <nz-tree-select
+                            #cmp
+                            nz-col
+                            [nzId]="subschema.id"
+                            [fluentEventBinder]="{ cmp, schema: subschema, control: (subschema.name | control: control) }"
+                            [fluentPropertyBinder]="{ cmp, schema: subschema }"
+                            [formControl]="subschema.name | control: control : 'control'"
+                            [ngClass]="subschema.class"
+                            [nzAllowClear]="subschema.clearable ?? true"
+                            [nzBackdrop]="subschema.backdrop"
+                            [nzShowIcon]="subschema.icon"
+                            [nzShowSearch]="subschema.searchable"
+                            [nzSize]="subschema.size"
+                            [nzCheckable]="subschema.checkable"
+                            [nzCheckStrictly]="subschema.checkable?.strict"
+                            [nzShowExpand]="subschema.expandIcon ?? true"
+                            [nzExpandedIcon]="subschema.expandIcon"
+                            [nzShowLine]="subschema.line"
+                            [nzAsyncData]="subschema.async"
+                            [nzNodes]="subschema.options"
+                            [nzDefaultExpandAll]="subschema.expandAll"
+                            [nzExpandedKeys]="subschema.expandedKeys"
+                            [nzMultiple]="subschema.multiple"
+                            [nzVirtualHeight]="subschema.virtual?.height"
+                            [nzVirtualItemSize]="subschema.virtual?.itemSize ?? 28"
+                            [nzVirtualMaxBufferPx]="subschema.virtual?.maxBufferPx ?? 500"
+                            [nzVirtualMinBufferPx]="subschema.virtual?.minBufferPx ?? 28"
+                            [nzSpan]="subschema.span ?? null"
+                            [nzFlex]="subschema.flex"
+                            [nzOffset]="subschema.offset"></nz-tree-select>
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="'button'">
+                          <ng-container *ngIf="subschema.subtype ===  'link'">
+                            <a
+                              nz-button
+                              nz-col
+                              [attr.id]="subschema.id"
+                              [disabled]="subschema.disabled"
+                              [fluentEventBinder]="{ schema: subschema }"
+                              [fluentPropertyBinder]="{ schema: subschema }"
+                              [ngClass]="subschema.class"
+                              [nzBlock]="subschema.block"
+                              [nzDanger]="subschema.danger"
+                              [nzFlex]="subschema.flex"
+                              [nzGhost]="subschema.ghost"
+                              [nzLoading]="subschema.loading"
+                              [nzOffset]="subschema.offset"
+                              [nzShape]="subschema.shape"
+                              [nzSize]="subschema.size"
+                              [nzSpan]="subschema.span ?? null"
+                              [nzType]="subschema.subtype"
+                              [type]="subschema.mode">
+                              <i
+                                *ngIf="subschema.icon"
+                                nz-icon
+                                [nzRotate]="subschema.icon.rotate"
+                                [nzSpin]="subschema.icon.spin"
+                                [nzTheme]="subschema.icon.theme"
+                                [nzType]="subschema.icon.type ?? subschema.icon"></i>
+                              <ng-container *nzStringTemplateOutlet="subschema.content">{{ subschema.content }}</ng-container>
+                            </a>
+                          </ng-container>
+                          <ng-container *ngIf="subschema.subtype !==  'link'">
+                            <button
+                              nz-button
+                              nz-col
+                              [attr.id]="subschema.id"
+                              [disabled]="subschema.disabled"
+                              [fluentEventBinder]="{ schema: subschema }"
+                              [fluentPropertyBinder]="{ schema: subschema }"
+                              [ngClass]="subschema.class"
+                              [nzBlock]="subschema.block"
+                              [nzDanger]="subschema.danger"
+                              [nzFlex]="subschema.flex"
+                              [nzGhost]="subschema.ghost"
+                              [nzLoading]="subschema.loading"
+                              [nzOffset]="subschema.offset"
+                              [nzShape]="subschema.shape"
+                              [nzSize]="subschema.size"
+                              [nzSpan]="subschema.span ?? null"
+                              [nzType]="subschema.subtype"
+                              [type]="subschema.mode">
+                              <i
+                                *ngIf="subschema.icon"
+                                nz-icon
+                                [nzRotate]="subschema.icon.rotate"
+                                [nzSpin]="subschema.icon.spin"
+                                [nzTheme]="subschema.icon.theme"
+                                [nzType]="subschema.icon.type ?? subschema.icon"></i>
+                              <ng-container *nzStringTemplateOutlet="subschema.content">{{ subschema.content }}</ng-container>
+                            </button>
+                          </ng-container>
+                        </ng-container>
+                      </ng-container>
+                      <!-- 可组合的控件 -->
+                    </ng-container>
+                  </nz-input-group>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'button-group'">
+                  <nz-button-group
+                    #cmp
+                    [fluentEventBinder]="{ cmp, schema }"
+                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [nzSize]="schema.size">
+                    <ng-container *ngFor="let subschema of schema.schemas">
+                      <ng-container *ngTemplateOutlet="componentTemplate; context: { schema: subschema, model: model }">
+                      </ng-container>
+                    </ng-container>
+                  </nz-button-group>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'button'">
+                  <ng-container *ngIf="schema.subtype ===  'link'">
+                    <a
+                      *ngIf="!(schema.hidden | call: model : schema : control)"
+                      nz-button
+                      [attr.id]="schema.id"
+                      [disabled]="schema.disabled | call: model : schema : control"
+                      [fluentEventBinder]="{ schema }"
+                      [fluentPropertyBinder]="{ schema }"
+                      [nzBlock]="schema.block"
+                      [nzDanger]="schema.danger | call: model : schema : control"
+                      [nzGhost]="schema.ghost | call: model : schema : control"
+                      [nzLoading]="schema.loading | call: model : schema : control"
+                      [nzShape]="schema.shape"
+                      [nzSize]="schema.size"
+                      [nzType]="schema.subtype"
+                      [type]="schema.mode">
+                      <i
+                        *ngIf="schema.icon"
+                        nz-icon
+                        [nzRotate]="schema.icon.rotate"
+                        [nzSpin]="schema.icon.spin"
+                        [nzTheme]="schema.icon.theme"
+                        [nzType]="schema.icon.type ?? schema.icon"></i>
+                      <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
+                    </a>
+                  </ng-container>
+                  <ng-container *ngIf="schema.subtype !==  'link'">
+                    <button
+                      *ngIf="!(schema.hidden | call: model : schema : control)"
+                      nz-button
+                      [attr.id]="schema.id"
+                      [disabled]="schema.disabled | call: model : schema : control"
+                      [fluentEventBinder]="{ schema }"
+                      [fluentPropertyBinder]="{ schema }"
+                      [nzBlock]="schema.block"
+                      [nzDanger]="schema.danger | call: model : schema : control"
+                      [nzGhost]="schema.ghost | call: model : schema : control"
+                      [nzLoading]="schema.loading | call: model : schema : control"
+                      [nzShape]="schema.shape"
+                      [nzSize]="schema.size"
+                      [nzType]="schema.subtype"
+                      [type]="schema.mode">
+                      <i
+                        *ngIf="schema.icon"
+                        nz-icon
+                        [nzRotate]="schema.icon.rotate"
+                        [nzSpin]="schema.icon.spin"
+                        [nzTheme]="schema.icon.theme"
+                        [nzType]="schema.icon.type ?? schema.icon"></i>
+                      <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
+                    </button>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+              <!-- 表单控件 -->
             </nz-form-control>
           </nz-form-item>
         </ng-container>

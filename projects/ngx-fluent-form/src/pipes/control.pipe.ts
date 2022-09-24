@@ -1,11 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
 
 @Pipe({
   name: 'control'
 })
 export class ControlPipe implements PipeTransform {
 
+  transform(value: string, container: FormGroup | FormArray, type: 'control'): FormControl
+  transform(value: string, container: FormGroup | FormArray, type: 'group'): FormGroup
+  transform(value: string, container: FormGroup | FormArray, type: 'array'): FormArray
+  transform(value: string, container: FormGroup | FormArray): AbstractControl
   transform(value: string, container: FormGroup | FormArray): AbstractControl | null {
     // 关于为什么使用 `AbstractControl.get([name])` 而不是 `AbstractControl.get(name)` ？
     // 由于 NG 没有提供 FormArrayDirective，查阅源码后发现其实 FormGroupDirective 是兼容传入 FormArray 对象的。

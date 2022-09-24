@@ -1,4 +1,3 @@
-export * from './control-outlet.directive';
 export * from './event-binder.directive';
 export * from './fluent-control-outlet.directive';
 export * from './fluent-form-name.directive';

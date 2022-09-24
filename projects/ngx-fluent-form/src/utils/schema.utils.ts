@@ -159,10 +159,10 @@ export function schemasUtils<S extends AnySchema[]>(schemas: S) {
 export class SchemasUtils<S extends AnySchema[]> {
   constructor(private readonly schemas: S) { }
 
-  find<T extends AnySchema>(name: AnySchemaName): T | undefined;
-  find<T extends AnySchema>(path: [...SchemaName[], AnySchemaName]): T | undefined;
-  find<T extends AnySchema>(path: AnySchemaName | [...SchemaName[], AnySchemaName]): T | undefined;
-  find<T extends AnySchema>(path: AnySchemaName | [...SchemaName[], AnySchemaName]): T | undefined {
+  find<T extends AnySchema>(name: AnySchemaName): T | null;
+  find<T extends AnySchema>(path: [...SchemaName[], AnySchemaName]): T | null;
+  find<T extends AnySchema>(path: AnySchemaName | [...SchemaName[], AnySchemaName]): T | null;
+  find<T extends AnySchema>(path: AnySchemaName | [...SchemaName[], AnySchemaName]): T | null {
     let schemas = this.schemas as AnySchema[];
     // 如果是数组，那么除了最后一个元素，其他元素所对应的 schema 一定是 container schema
     if (Array.isArray(path)) {
@@ -173,14 +173,14 @@ export class SchemasUtils<S extends AnySchema[]> {
       path = endPath;
     }
 
-    return schemas.find(o => {
+    return (schemas.find(o => {
       // 处理双字段模式
       if (Array.isArray(o.name) && Array.isArray(path)) {
         return arraysEqual(o.name, path);
       }
 
       return o.name === path;
-    }) as T | undefined;
+    }) ?? null) as T | null;
   }
 }
 

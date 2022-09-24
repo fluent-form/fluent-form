@@ -16,19 +16,19 @@
 - 支持使用 Fluent API 与 JSON。
 - 类型安全的表单配置。
 - 建立在 Angular 响应式表单之上。
-- 基于 `ng-zorro-antd` 的组件与栅格布局。
+- 基于 `Ng-Zorro-Antd` 的组件与栅格布局。
 
 ## 先决条件
 
 在使用 `ngx-fluent-form` 之前，您应该对以下内容有基本的了解：
 
 - [Angular 响应式表单](https://angular.cn/guide/reactive-forms)
-- [ng-zorro-antd](https://ng.ant.design/components/auto-complete/zh)
+- [Ng-Zorro-Antd](https://ng.ant.design/components/auto-complete/zh)
 
 并且确保你的相关依赖版本符合如下规定：
 
 - [Angular](https://angular.io) `>= v13.0.0 & < v14.0.0`
-- [ng-zorro-antd](https://ng.ant.design) `>= v13.4.0 & < v14.0.0`
+- [Ng-Zorro-Antd](https://ng.ant.design) `>= v13.4.0 & < v14.0.0`
 
 ## 安装
 

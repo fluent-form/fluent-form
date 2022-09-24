@@ -205,7 +205,6 @@ export class FormUtils<F extends FormGroup | FormArray> {
         return formUtils(this.form, schema.schemas as AnySchema[]).change(model);
       }
 
-      const options = { emitEvent: false };
       const disabled = callPipe.transform(
         schema.disabled,
         model,
@@ -214,6 +213,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
       );
 
       if (disabled !== control.disabled) {
+        const options = { emitEvent: false };
         disabled ? control.disable(options) : control.enable(options);
       }
     });

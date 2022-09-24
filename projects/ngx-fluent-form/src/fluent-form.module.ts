@@ -24,9 +24,7 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { FluentFormComponent, FluentTemplateComponent } from './components';
 import { FluentBinderDirective, FluentControlOutletDirective, FluentFormDirective, FluentFormNameDirective } from './directives';
-import { CallPipe } from './pipes/call.pipe';
-import { ControlPipe } from './pipes/control.pipe';
-import { TypeofPipe } from './pipes/typeof.pipe';
+import { CallPipe, ControlPipe, SchemaPipe, TypeofPipe } from './pipes';
 
 @NgModule({
   declarations: [
@@ -39,6 +37,7 @@ import { TypeofPipe } from './pipes/typeof.pipe';
     TypeofPipe,
     CallPipe,
     ControlPipe,
+    SchemaPipe
   ],
   imports: [
     CommonModule,

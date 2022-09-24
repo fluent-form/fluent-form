@@ -131,15 +131,18 @@
                 {{ schema.label.value ?? schema.label }}
               </nz-form-label>
             </ng-container>
-
+            <!-- 在控件被 input-group 包裹的时候，控件状态/提示默认使用的是 input-group 里的第一个控件 -->
+            <!-- 如果需要采用 input-group 内其他控件的状态/提示，需要使用 input-group 的 primary 参数明确指定 -->
             <nz-form-control
-              [nzHasFeedback]="schema.feedback"
-              [nzSuccessTip]="schema.tips?.success"
-              [nzWarningTip]="schema.tips?.warning"
-              [nzErrorTip]="schema.tips?.error"
-              [nzValidatingTip]="schema.tips?.validating"
-              [nzExtra]="schema.tips?.extra"
-              [nzAutoTips]="schema.tips?.auto ?? {}">
+              *ngIf="(schema.type === 'input-group' ? (schema.primary | schema: schema.schemas) ?? {} : schema) as currentSchema"
+              [nzValidateStatus]="schema.type === 'input-group' ? (schema.primary | control: control) : control"
+              [nzHasFeedback]="currentSchema.feedback"
+              [nzValidatingTip]="currentSchema.tips?.validating"
+              [nzSuccessTip]="currentSchema.tips?.success"
+              [nzWarningTip]="currentSchema.tips?.warning"
+              [nzErrorTip]="currentSchema.tips?.error"
+              [nzExtra]="currentSchema.tips?.extra"
+              [nzAutoTips]="currentSchema.tips?.auto ?? {}">
               <!-- 表单控件 -->
               <!-- 在 nz-form-control 中的表单控件组件通常需要注入 nz-form-control 提供的一些资源； -->
               <!-- 由于 angular 是 DI 是静态的，在编译期间会进行静态分析，这里需要将表单控件模板直接写在 nz-form-control 内， -->

@@ -6,7 +6,7 @@ import { NzInputGroupComponent } from 'ng-zorro-antd/input';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
 import { NzTabComponent, NzTabPositionMode, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
 import { StableBuilder } from '../utils/builder.utils';
-import { AbstractComponentSchema, AbstractElementSchema, AbstractSchema, CallbackArg, SchemaName } from './abstract.schema';
+import { AbstractComponentSchema, AbstractElementSchema, AbstractSchema, AnySchemaName, CallbackArg, SchemaName } from './abstract.schema';
 import { AnyBuilder, AnySchema, ComposableComponentBuilder, ComposableComponentSchema } from './index.schema';
 
 /** @internal */
@@ -25,6 +25,7 @@ export interface InputGroupComponentSchema<Name extends SchemaName = SchemaName>
   prefix?: string | TemplateRef<void> | { icon: string };
   suffix?: string | TemplateRef<void> | { icon: string };
   size?: NzSizeLDSType;
+  primary?: AnySchemaName;
 }
 
 export interface ButtonComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractElementSchema<HTMLButtonElement> {

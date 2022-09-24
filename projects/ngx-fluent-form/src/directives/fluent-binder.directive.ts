@@ -7,14 +7,16 @@ import { ControlSchema } from '../schemas/index.schema';
 import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../types';
 
 @Directive({
-  selector: '[fluentEventBinder]',
+  selector: '[fluentBinderSchema]',
   providers: [NzDestroyService]
 })
-export class EventBinderDirective<E extends HTMLElement, C extends object, S extends ControlSchema> implements OnChanges {
-  @Input() fluentEventBinder!: { cmp?: C, schema: S, control?: AbstractControl };
+export class FluentBinderDirective<E extends HTMLElement, C extends object, S extends ControlSchema> implements OnChanges {
+  @Input('fluentBinder') component?: C;
+  @Input('fluentBinderSchema') schema: S;
+  @Input('fluentBinderControl') control?: AbstractControl;
 
   private get host() {
-    return this.fluentEventBinder.cmp ?? this.elementRef.nativeElement;
+    return this.component ?? this.elementRef.nativeElement;
   }
 
   constructor(
@@ -22,33 +24,36 @@ export class EventBinderDirective<E extends HTMLElement, C extends object, S ext
     private destory$: NzDestroyService
   ) { }
 
-  ngOnChanges({ fluentEventBinder }: SimpleChanges): void {
-    fluentEventBinder.firstChange || this.destory$.next();
+  ngOnChanges({ schema }: SimpleChanges): void {
+    schema.firstChange || this.destory$.next();
 
-    const { schema, control } = this.fluentEventBinder;
+    this.schema.property && Object.keys(this.schema.property).forEach(property => {
+      const value = (this.schema.property as S['property'])![property as keyof S['property']];
+      this.host[property as keyof (E | C)] = value as unknown as (E | C)[keyof (E | C)];
+    });
 
-    schema.listener && Object.keys(schema.listener).forEach(eventName => {
+    this.schema.listener && Object.keys(this.schema.listener).forEach(eventName => {
       if (eventName === 'valueChange') {
-        control!.valueChanges.pipe(
+        this.control!.valueChanges.pipe(
           observeOn(asapScheduler), // 微任务调度，确保顶层事件先发射
           takeUntil(this.destory$),
-        ).subscribe(schema.listener![eventName]!);
+        ).subscribe(this.schema.listener![eventName]!);
       } else if (eventName === 'statusChange') {
-        control!.statusChanges.pipe(
+        this.control!.statusChanges.pipe(
           observeOn(asapScheduler),
           takeUntil(this.destory$),
-        ).subscribe(schema.listener![eventName]!);
+        ).subscribe(this.schema.listener![eventName]!);
       } else if (this.host instanceof HTMLElement) {
         fromEvent(this.host, eventName).pipe(
           takeUntil(this.destory$)
-        ).subscribe(event => (schema.listener as HTMLElementEventListenerMap)![
+        ).subscribe(event => (this.schema.listener as HTMLElementEventListenerMap)![
           eventName as keyof HTMLElementEventListenerMap
         ]!(event as SafeAny))
       } else {
         (this.host[eventName as keyof C] as unknown as EventEmitter<unknown>).pipe(
           takeUntil(this.destory$)
         ).subscribe((event: SafeAny) => {
-          (schema.listener as ComponentOutputListenerMap<C>)![
+          (this.schema.listener as ComponentOutputListenerMap<C>)![
             eventName as keyof ComponentOutputListenerMap<C>
           ]!(event);
         });

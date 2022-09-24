@@ -1,10 +1,10 @@
 import { ElementRef } from '@angular/core';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
-import { EventBinderDirective } from './event-binder.directive';
+import { FluentBinderDirective } from './fluent-binder.directive';
 
-describe('EventBinderDirective', () => {
+describe('FluentBinderDirective', () => {
   it('should create an instance', () => {
-    const directive = new EventBinderDirective(
+    const directive = new FluentBinderDirective(
       new ElementRef({} as HTMLElement),
       new NzDestroyService()
     );

@@ -46,6 +46,9 @@
 
         <ng-container *ngSwitchCase="'steps'">
           <nz-steps
+            #cmp
+            [fluentBinder]="cmp"
+            [fluentBinderSchema]="schema"
             [nzType]="schema.subtype"
             [nzCurrent]="schema.active ?? 0"
             [nzLabelPlacement]="schema.placement"
@@ -56,6 +59,9 @@
             (nzIndexChange)="schema.active = $event">
             <ng-container *ngFor="let subschema of schema.schemas; index as index">
               <nz-step
+                #cmp
+                [fluentBinder]="cmp"
+                [fluentBinderSchema]="subschema"
                 [ngClass]="subschema.class"
                 [nzTitle]="subschema.title"
                 [nzSubtitle]="subschema.subtitle"
@@ -83,6 +89,9 @@
 
         <ng-container *ngSwitchCase="'tabset'">
           <nz-tabset
+            #cmp
+            [fluentBinder]="cmp"
+            [fluentBinderSchema]="schema"
             [nzSelectedIndex]="schema.active"
             [nzType]="schema.subtype ?? 'line'"
             [nzSize]="schema.size ?? 'default'"
@@ -92,6 +101,9 @@
             [nzCentered]="schema.center">
             <nz-tab
               *ngFor="let tabSchema of schema.schemas"
+              #cmp
+              [fluentBinder]="cmp"
+              [fluentBinderSchema]="tabSchema"
               [ngClass]="tabSchema.class"
               [nzTitle]="tabSchema.title"
               [nzDisabled]="tabSchema.disabled | call: model : tabSchema : control">
@@ -138,8 +150,8 @@
                       [attr.id]="schema.id"
                       [attr.maxlength]="schema.length ?? schema.length?.max"
                       [attr.minlength]="schema.length ?? schema.length?.min"
-                      [fluentEventBinder]="{ schema, control }"
-                      [fluentPropertyBinder]="{ schema }"
+                      [fluentBinderSchema]="schema"
+                      [fluentBinderControl]="control"
                       [formControl]="control"
                       [nzAutocomplete]="autocompleteCmp"
                       [placeholder]="schema.placeholder ?? ''"
@@ -161,8 +173,8 @@
                     [attr.id]="schema.id"
                     [attr.maxlength]="schema.length ?? schema.length?.max"
                     [attr.minlength]="schema.length ?? schema.length?.min"
-                    [fluentEventBinder]="{ schema, control }"
-                    [fluentPropertyBinder]="{ schema }"
+                    [fluentBinderSchema]="schema"
+                    [fluentBinderControl]="control"
                     [formControl]="control"
                     [placeholder]="schema.placeholder ?? ''"
                     [type]="schema.subtype ?? 'text'"
@@ -179,8 +191,8 @@
                       [attr.id]="schema.id"
                       [attr.maxlength]="schema.length ?? schema.length?.max"
                       [attr.minlength]="schema.length ?? schema.length?.min"
-                      [fluentEventBinder]="{ schema, control }"
-                      [fluentPropertyBinder]="{ schema }"
+                      [fluentBinderSchema]="schema"
+                      [fluentBinderControl]="control"
                       [formControl]="control"
                       [nzAutocomplete]="autocompleteCmp"
                       [nzAutosize]="schema.autosize ?? {}"
@@ -203,8 +215,8 @@
                     [attr.id]="schema.id"
                     [attr.maxlength]="schema.length ?? schema.length?.max"
                     [attr.minlength]="schema.length ?? schema.length?.min"
-                    [fluentEventBinder]="{ schema, control }"
-                    [fluentPropertyBinder]="{ schema }"
+                    [fluentBinderSchema]="schema"
+                    [fluentBinderControl]="control"
                     [formControl]="control"
                     [nzAutosize]="schema.autosize ?? {}"
                     [placeholder]="schema.placeholder ?? ''"
@@ -218,8 +230,9 @@
                 <ng-container *ngSwitchCase="'number'">
                   <nz-input-number
                     #cmp
-                    [fluentEventBinder]="{ cmp, schema, control }"
-                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [fluentBinder]="cmp"
+                    [fluentBinderSchema]="schema"
+                    [fluentBinderControl]="control"
                     [formControl]="control"
                     [nzId]="schema.id"
                     [nzMax]="schema.max ?? infinity"
@@ -238,8 +251,9 @@
                 <ng-container *ngSwitchCase="'date'">
                   <nz-date-picker
                     #cmp
-                    [fluentEventBinder]="{ cmp, schema, control }"
-                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [fluentBinder]="cmp"
+                    [fluentBinderSchema]="schema"
+                    [fluentBinderControl]="control"
                     [formControl]="control"
                     [nzAllowClear]="schema.clearable"
                     [nzFormat]="schema.format"
@@ -263,8 +277,9 @@
                 <ng-container *ngSwitchCase="'range'">
                   <nz-range-picker
                     #cmp
-                    [fluentEventBinder]="{ cmp, schema, control }"
-                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [fluentBinder]="cmp"
+                    [fluentBinderSchema]="schema"
+                    [fluentBinderControl]="control"
                     [formControl]="control"
                     [nzAllowClear]="schema.clearable"
                     [nzFormat]="schema.format"
@@ -290,8 +305,9 @@
                 <ng-container *ngSwitchCase="'time'">
                   <nz-time-picker
                     #cmp
-                    [fluentEventBinder]="{ cmp, schema, control }"
-                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [fluentBinder]="cmp"
+                    [fluentBinderSchema]="schema"
+                    [fluentBinderControl]="control"
                     [formControl]="control"
                     [nzAllowEmpty]="schema.clearable"
                     [nzFormat]="schema.format ?? 'HH:mm:ss'"
@@ -312,8 +328,9 @@
                   <nz-switch
                     #cmp
                     [nzId]="schema.id"
-                    [fluentEventBinder]="{ cmp, schema, control }"
-                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [fluentBinder]="cmp"
+                    [fluentBinderSchema]="schema"
+                    [fluentBinderControl]="control"
                     [formControl]="control"
                     [nzCheckedChildren]="schema.placeholder?.[0]"
                     [nzUnCheckedChildren]="schema.placeholder?.[1]"
@@ -324,8 +341,9 @@
                 <ng-container *ngSwitchCase="'select'">
                   <nz-select
                     #cmp
-                    [fluentEventBinder]="{ cmp, schema, control }"
-                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [fluentBinder]="cmp"
+                    [fluentBinderSchema]="schema"
+                    [fluentBinderControl]="control"
                     [formControl]="control"
                     [nzAllowClear]="schema.clearable"
                     [nzId]="schema.id"
@@ -351,8 +369,9 @@
                 <ng-container *ngSwitchCase="'cascader'">
                   <nz-cascader
                     #cmp
-                    [fluentEventBinder]="{ cmp, schema, control }"
-                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [fluentBinder]="cmp"
+                    [fluentBinderSchema]="schema"
+                    [fluentBinderControl]="control"
                     [formControl]="control"
                     [nzAllowClear]="schema.clearable ?? true"
                     [nzAutoFocus]="schema.focus"
@@ -375,8 +394,9 @@
                   <nz-tree-select
                     #cmp
                     [nzId]="schema.id"
-                    [fluentEventBinder]="{ cmp, schema, control }"
-                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [fluentBinder]="cmp"
+                    [fluentBinderSchema]="schema"
+                    [fluentBinderControl]="control"
                     [formControl]="control"
                     [nzAllowClear]="schema.clearable ?? true"
                     [nzBackdrop]="schema.backdrop"
@@ -402,8 +422,9 @@
                 <ng-container *ngSwitchCase="'slider'">
                   <nz-slider
                     #cmp
-                    [fluentEventBinder]="{ cmp, schema, control }"
-                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [fluentBinder]="cmp"
+                    [fluentBinderSchema]="schema"
+                    [fluentBinderControl]="control"
                     [formControl]="control"
                     [nzIncluded]="schema.included ?? true"
                     [nzMax]="schema.max ?? 100"
@@ -419,8 +440,9 @@
                 <ng-container *ngSwitchCase="'radio'">
                   <nz-radio-group
                     #cmp
-                    [fluentEventBinder]="{ cmp, schema, control }"
-                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [fluentBinder]="cmp"
+                    [fluentBinderSchema]="schema"
+                    [fluentBinderControl]="control"
                     [formControl]="control"
                     [nzButtonStyle]="schema.style"
                     [nzSize]="schema.size">
@@ -445,8 +467,9 @@
                   <label
                     #cmp
                     nz-checkbox
-                    [fluentEventBinder]="{ cmp, schema, control }"
-                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [fluentBinder]="cmp"
+                    [fluentBinderSchema]="schema"
+                    [fluentBinderControl]="control"
                     [formControl]="control"
                     [nzId]="schema.id"
                     [nzAutoFocus]="schema.focus"
@@ -456,8 +479,9 @@
                 <ng-container *ngSwitchCase="'checkbox-group'">
                   <nz-checkbox-group
                     #cmp
-                    [fluentEventBinder]="{ cmp, schema, control }"
-                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [fluentBinder]="cmp"
+                    [fluentBinderSchema]="schema"
+                    [fluentBinderControl]="control"
                     [formControl]="control">
                   </nz-checkbox-group>
                 </ng-container>
@@ -465,8 +489,9 @@
                 <ng-container *ngSwitchCase="'rate'">
                   <nz-rate
                     #cmp
-                    [fluentEventBinder]="{ cmp, schema, control }"
-                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [fluentBinder]="cmp"
+                    [fluentBinderSchema]="schema"
+                    [fluentBinderControl]="control"
                     [formControl]="control"
                     [nzAllowClear]="schema.clearable ?? true"
                     [nzAllowHalf]="schema.half"
@@ -480,8 +505,8 @@
                   <nz-input-group
                     #cmp
                     nzCompact
-                    [fluentEventBinder]="{ cmp, schema }"
-                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [fluentBinder]="cmp"
+                    [fluentBinderSchema]="schema"
                     [nzAddOnAfter]="schema.after?.icon ? null : schema.after"
                     [nzAddOnAfterIcon]="schema.after?.icon"
                     [nzAddOnBefore]="schema.before?.icon ? null : schema.before"
@@ -504,8 +529,8 @@
                               [attr.id]="subschema.id"
                               [attr.maxlength]="subschema.length ?? subschema.length?.max"
                               [attr.minlength]="subschema.length ?? subschema.length?.min"
-                              [fluentEventBinder]="{ schema: subschema, control: (subschema.name | control: control) }"
-                              [fluentPropertyBinder]="{ schema: subschema }"
+                              [fluentBinderSchema]="subschema"
+                              [fluentBinderControl]="subschema.name | control: control"
                               [formControl]="subschema.name | control: control : 'control'"
                               [ngClass]="subschema.class"
                               [nzAutocomplete]="autocompleteCmp"
@@ -532,8 +557,8 @@
                             [attr.id]="subschema.id"
                             [attr.maxlength]="subschema.length ?? subschema.length?.max"
                             [attr.minlength]="subschema.length ?? subschema.length?.min"
-                            [fluentEventBinder]="{ schema: subschema, control: (subschema.name | control: control) }"
-                            [fluentPropertyBinder]="{ schema: subschema }"
+                            [fluentBinderSchema]="subschema"
+                            [fluentBinderControl]="subschema.name | control: control"
                             [formControl]="subschema.name | control: control : 'control'"
                             [ngClass]="subschema.class"
                             [nzFlex]="subschema.flex"
@@ -555,8 +580,8 @@
                               [attr.id]="subschema.id"
                               [attr.maxlength]="subschema.length ?? subschema.length?.max"
                               [attr.minlength]="subschema.length ?? subschema.length?.min"
-                              [fluentEventBinder]="{ schema: subschema, control: (subschema.name | control: control) }"
-                              [fluentPropertyBinder]="{ schema: subschema }"
+                              [fluentBinderSchema]="subschema"
+                              [fluentBinderControl]="subschema.name | control: control"
                               [formControl]="subschema.name | control: control : 'control'"
                               [ngClass]="subschema.class"
                               [nzAutocomplete]="autocompleteCmp"
@@ -584,8 +609,8 @@
                             [attr.id]="subschema.id"
                             [attr.maxlength]="subschema.length ?? subschema.length?.max"
                             [attr.minlength]="subschema.length ?? subschema.length?.min"
-                            [fluentEventBinder]="{ schema: subschema, control: (subschema.name | control: control) }"
-                            [fluentPropertyBinder]="{ schema: subschema }"
+                            [fluentBinderSchema]="subschema"
+                            [fluentBinderControl]="subschema.name | control: control"
                             [formControl]="subschema.name | control: control : 'control'"
                             [ngClass]="subschema.class"
                             [nzAutosize]="subschema.autosize ?? {}"
@@ -604,8 +629,9 @@
                           <nz-input-number
                             #cmp
                             nz-col
-                            [fluentEventBinder]="{ cmp, schema: subschema, control: (subschema.name | control: control) }"
-                            [fluentPropertyBinder]="{ cmp, schema: subschema }"
+                            [fluentBinder]="cmp"
+                            [fluentBinderSchema]="subschema"
+                            [fluentBinderControl]="subschema.name | control: control"
                             [formControl]="subschema.name | control: control : 'control'"
                             [ngClass]="subschema.class"
                             [nzFlex]="subschema.flex"
@@ -629,8 +655,9 @@
                           <nz-date-picker
                             #cmp
                             nz-col
-                            [fluentEventBinder]="{ cmp, schema: subschema, control:(subschema.name | control: control) }"
-                            [fluentPropertyBinder]="{ cmp, schema: subschema }"
+                            [fluentBinder]="cmp"
+                            [fluentBinderSchema]="subschema"
+                            [fluentBinderControl]="subschema.name | control: control"
                             [formControl]="subschema.name | control: control : 'control'"
                             [ngClass]="subschema.class"
                             [nzAllowClear]="subschema.clearable"
@@ -659,8 +686,9 @@
                           <nz-range-picker
                             #cmp
                             nz-col
-                            [fluentEventBinder]="{ cmp, schema: subschema, control: (subschema.name | control: control) }"
-                            [fluentPropertyBinder]="{ cmp, schema: subschema }"
+                            [fluentBinder]="cmp"
+                            [fluentBinderSchema]="subschema"
+                            [fluentBinderControl]="subschema.name | control: control"
                             [formControl]="subschema.name | control: control : 'control'"
                             [ngClass]="subschema.class"
                             [nzAllowClear]="subschema.clearable"
@@ -690,8 +718,9 @@
                           <nz-time-picker
                             #cmp
                             nz-col
-                            [fluentEventBinder]="{ cmp, schema: subschema, control: (subschema.name | control: control) }"
-                            [fluentPropertyBinder]="{ cmp, schema: subschema }"
+                            [fluentBinder]="cmp"
+                            [fluentBinderSchema]="subschema"
+                            [fluentBinderControl]="subschema.name | control: control"
                             [formControl]="subschema.name | control: control : 'control'"
                             [ngClass]="subschema.class"
                             [nzAllowEmpty]="subschema.clearable"
@@ -716,8 +745,9 @@
                           <nz-select
                             #cmp
                             nz-col
-                            [fluentEventBinder]="{ cmp, schema: subschema, control: (subschema.name | control: control) }"
-                            [fluentPropertyBinder]="{ cmp, schema: subschema }"
+                            [fluentBinder]="cmp"
+                            [fluentBinderSchema]="subschema"
+                            [fluentBinderControl]="subschema.name | control: control"
                             [formControl]="subschema.name | control: control : 'control'"
                             [ngClass]="subschema.class"
                             [nzAllowClear]="subschema.clearable"
@@ -749,8 +779,9 @@
                           <nz-cascader
                             #cmp
                             nz-col
-                            [fluentEventBinder]="{ cmp, schema: subschema, control: (subschema.name | control: control) }"
-                            [fluentPropertyBinder]="{ cmp, schema: subschema }"
+                            [fluentBinder]="cmp"
+                            [fluentBinderSchema]="subschema"
+                            [fluentBinderControl]="subschema.name | control: control"
                             [formControl]="subschema.name | control: control : 'control'"
                             [ngClass]="subschema.class"
                             [nzAllowClear]="subschema.clearable ?? true"
@@ -778,8 +809,9 @@
                             #cmp
                             nz-col
                             [nzId]="subschema.id"
-                            [fluentEventBinder]="{ cmp, schema: subschema, control: (subschema.name | control: control) }"
-                            [fluentPropertyBinder]="{ cmp, schema: subschema }"
+                            [fluentBinder]="cmp"
+                            [fluentBinderSchema]="subschema"
+                            [fluentBinderControl]="subschema.name | control: control"
                             [formControl]="subschema.name | control: control : 'control'"
                             [ngClass]="subschema.class"
                             [nzAllowClear]="subschema.clearable ?? true"
@@ -813,8 +845,7 @@
                               nz-col
                               [attr.id]="subschema.id"
                               [disabled]="subschema.disabled"
-                              [fluentEventBinder]="{ schema: subschema }"
-                              [fluentPropertyBinder]="{ schema: subschema }"
+                              [fluentBinderSchema]="subschema"
                               [ngClass]="subschema.class"
                               [nzBlock]="subschema.block"
                               [nzDanger]="subschema.danger"
@@ -843,8 +874,7 @@
                               nz-col
                               [attr.id]="subschema.id"
                               [disabled]="subschema.disabled"
-                              [fluentEventBinder]="{ schema: subschema }"
-                              [fluentPropertyBinder]="{ schema: subschema }"
+                              [fluentBinderSchema]="subschema"
                               [ngClass]="subschema.class"
                               [nzBlock]="subschema.block"
                               [nzDanger]="subschema.danger"
@@ -877,8 +907,8 @@
                 <ng-container *ngSwitchCase="'button-group'">
                   <nz-button-group
                     #cmp
-                    [fluentEventBinder]="{ cmp, schema }"
-                    [fluentPropertyBinder]="{ cmp, schema }"
+                    [fluentBinder]="cmp"
+                    [fluentBinderSchema]="schema"
                     [nzSize]="schema.size">
                     <ng-container *ngFor="let subschema of schema.schemas">
                       <ng-container *ngTemplateOutlet="componentTemplate; context: { schema: subschema, model: model }">
@@ -894,8 +924,7 @@
                       nz-button
                       [attr.id]="schema.id"
                       [disabled]="schema.disabled | call: model : schema : control"
-                      [fluentEventBinder]="{ schema }"
-                      [fluentPropertyBinder]="{ schema }"
+                      [fluentBinderSchema]="schema"
                       [nzBlock]="schema.block"
                       [nzDanger]="schema.danger | call: model : schema : control"
                       [nzGhost]="schema.ghost | call: model : schema : control"
@@ -920,8 +949,7 @@
                       nz-button
                       [attr.id]="schema.id"
                       [disabled]="schema.disabled | call: model : schema : control"
-                      [fluentEventBinder]="{ schema }"
-                      [fluentPropertyBinder]="{ schema }"
+                      [fluentBinderSchema]="schema"
                       [nzBlock]="schema.block"
                       [nzDanger]="schema.danger | call: model : schema : control"
                       [nzGhost]="schema.ghost | call: model : schema : control"

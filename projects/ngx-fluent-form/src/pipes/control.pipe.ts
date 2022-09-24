@@ -6,6 +6,12 @@ import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/for
 })
 export class ControlPipe implements PipeTransform {
 
+  /**
+   * 将 value 作为 key，获取 container 中的实例
+   * @param value
+   * @param container
+   * @param type 用来重载方法的返回值
+   */
   transform(value: string, container: FormGroup | FormArray, type: 'control'): FormControl
   transform(value: string, container: FormGroup | FormArray, type: 'group'): FormGroup
   transform(value: string, container: FormGroup | FormArray, type: 'array'): FormArray

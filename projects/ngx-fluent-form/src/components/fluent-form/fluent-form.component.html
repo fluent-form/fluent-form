@@ -142,6 +142,9 @@
               [nzExtra]="schema.tips?.extra"
               [nzAutoTips]="schema.tips?.auto ?? {}">
               <!-- 表单控件 -->
+              <!-- 在 nz-form-control 中的表单控件组件通常需要注入 nz-form-control 提供的一些资源； -->
+              <!-- 由于 angular 是 DI 是静态的，在编译期间会进行静态分析，这里需要将表单控件模板直接写在 nz-form-control 内， -->
+              <!-- 否则 angular 无法分析出这些表单控件的父级组件，也就没办法注入 nz-form-control 中提供的资源。 -->
               <ng-container [ngSwitch]="schema.type">
                 <ng-container *ngSwitchCase="'input'">
                   <ng-container *ngIf="schema.autocomplete as autocomplete">
@@ -517,74 +520,104 @@
                     [nzSuffix]="schema.suffix?.icon ? null : schema.suffix"
                     [nzSuffixIcon]="schema.suffix?.icon">
                     <ng-container *ngFor="let subschema of schema.schemas">
-                      <!-- 可组合的控件，这时候的 control 其实是父级的 control -->
-                      <ng-container
-                        *ngIf="!(subschema.hidden | call: model : subschema : control)"
-                        [ngSwitch]="subschema.type">
-                        <ng-container *ngSwitchCase="'input'">
-                          <ng-container *ngIf="subschema.autocomplete as autocomplete">
+                      <!-- 可组合的控件 -->
+                      <!-- 这时候的 control 其实是父级的 control，需要通过 control pipe 来获取到实际的控件实例 -->
+                      <ng-container *ngIf="(subschema.name | control: control : 'control') as subcontrol">
+                        <ng-container
+                          *ngIf="!(subschema.hidden | call: model : subschema : control)"
+                          [ngSwitch]="subschema.type">
+                          <ng-container *ngSwitchCase="'input'">
+                            <ng-container *ngIf="subschema.autocomplete as autocomplete">
+                              <input
+                                nz-col
+                                nz-input
+                                [attr.id]="subschema.id"
+                                [attr.maxlength]="subschema.length ?? subschema.length?.max"
+                                [attr.minlength]="subschema.length ?? subschema.length?.min"
+                                [fluentBinderSchema]="subschema"
+                                [fluentBinderControl]="subcontrol"
+                                [formControl]="subcontrol"
+                                [ngClass]="subschema.class"
+                                [nzAutocomplete]="autocompleteCmp"
+                                [nzFlex]="subschema.flex"
+                                [nzOffset]="subschema.offset"
+                                [nzSpan]="subschema.span ?? null"
+                                [placeholder]="subschema.placeholder ?? ''"
+                                [type]="subschema.subtype ?? 'text'"
+                                [autofocus]="subschema.focus"
+                                [readonly]="subschema.readonly | call: model : subschema : subcontrol"
+                                [nzSize]="subschema.size"
+                                [nzBorderless]="subschema.borderless">
+                              <nz-autocomplete
+                                #autocompleteCmp
+                                [compareWith]="autocomplete.compare"
+                                [nzBackfill]="autocomplete.backfill"
+                                [nzDataSource]="autocomplete.options"
+                                [nzWidth]="autocomplete.width"></nz-autocomplete>
+                            </ng-container>
                             <input
+                              *ngIf="!subschema.autocomplete"
                               nz-col
                               nz-input
                               [attr.id]="subschema.id"
                               [attr.maxlength]="subschema.length ?? subschema.length?.max"
                               [attr.minlength]="subschema.length ?? subschema.length?.min"
                               [fluentBinderSchema]="subschema"
-                              [fluentBinderControl]="subschema.name | control: control"
-                              [formControl]="subschema.name | control: control : 'control'"
+                              [fluentBinderControl]="subcontrol"
+                              [formControl]="subcontrol"
                               [ngClass]="subschema.class"
-                              [nzAutocomplete]="autocompleteCmp"
                               [nzFlex]="subschema.flex"
                               [nzOffset]="subschema.offset"
                               [nzSpan]="subschema.span ?? null"
                               [placeholder]="subschema.placeholder ?? ''"
                               [type]="subschema.subtype ?? 'text'"
                               [autofocus]="subschema.focus"
-                              [readonly]="subschema.readonly | call: model : subschema : (subschema.name | control: control)"
+                              [readonly]="subschema.readonly | call: model : subschema : subcontrol"
                               [nzSize]="subschema.size"
                               [nzBorderless]="subschema.borderless">
-                            <nz-autocomplete
-                              #autocompleteCmp
-                              [compareWith]="autocomplete.compare"
-                              [nzBackfill]="autocomplete.backfill"
-                              [nzDataSource]="autocomplete.options"
-                              [nzWidth]="autocomplete.width"></nz-autocomplete>
                           </ng-container>
-                          <input
-                            *ngIf="!subschema.autocomplete"
-                            nz-col
-                            nz-input
-                            [attr.id]="subschema.id"
-                            [attr.maxlength]="subschema.length ?? subschema.length?.max"
-                            [attr.minlength]="subschema.length ?? subschema.length?.min"
-                            [fluentBinderSchema]="subschema"
-                            [fluentBinderControl]="subschema.name | control: control"
-                            [formControl]="subschema.name | control: control : 'control'"
-                            [ngClass]="subschema.class"
-                            [nzFlex]="subschema.flex"
-                            [nzOffset]="subschema.offset"
-                            [nzSpan]="subschema.span ?? null"
-                            [placeholder]="subschema.placeholder ?? ''"
-                            [type]="subschema.subtype ?? 'text'"
-                            [autofocus]="subschema.focus"
-                            [readonly]="subschema.readonly | call: model : subschema : (subschema.name | control: control)"
-                            [nzSize]="subschema.size"
-                            [nzBorderless]="subschema.borderless">
-                        </ng-container>
 
-                        <ng-container *ngSwitchCase="'textarea'">
-                          <ng-container *ngIf="subschema.autocomplete as autocomplete">
+                          <ng-container *ngSwitchCase="'textarea'">
+                            <ng-container *ngIf="subschema.autocomplete as autocomplete">
+                              <textarea
+                                nz-col
+                                nz-input
+                                [attr.id]="subschema.id"
+                                [attr.maxlength]="subschema.length ?? subschema.length?.max"
+                                [attr.minlength]="subschema.length ?? subschema.length?.min"
+                                [fluentBinderSchema]="subschema"
+                                [fluentBinderControl]="subcontrol"
+                                [formControl]="subcontrol"
+                                [ngClass]="subschema.class"
+                                [nzAutocomplete]="autocompleteCmp"
+                                [nzAutosize]="subschema.autosize ?? {}"
+                                [nzFlex]="subschema.flex"
+                                [nzOffset]="subschema.offset"
+                                [nzSpan]="subschema.span ?? null"
+                                [placeholder]="subschema.placeholder ?? ''"
+                                [rows]="subschema.rows"
+                                [autofocus]="subschema.focus"
+                                [readonly]="subschema.readonly | call: model : subschema : subcontrol"
+                                [nzSize]="subschema.size"
+                                [nzBorderless]="subschema.borderless"></textarea>
+                              <nz-autocomplete
+                                #autocompleteCmp
+                                [compareWith]="autocomplete.compare"
+                                [nzBackfill]="autocomplete.backfill"
+                                [nzDataSource]="autocomplete.options"
+                                [nzWidth]="autocomplete.width"></nz-autocomplete>
+                            </ng-container>
                             <textarea
+                              *ngIf="!subschema.autocomplete"
                               nz-col
                               nz-input
                               [attr.id]="subschema.id"
                               [attr.maxlength]="subschema.length ?? subschema.length?.max"
                               [attr.minlength]="subschema.length ?? subschema.length?.min"
                               [fluentBinderSchema]="subschema"
-                              [fluentBinderControl]="subschema.name | control: control"
-                              [formControl]="subschema.name | control: control : 'control'"
+                              [fluentBinderControl]="subcontrol"
+                              [formControl]="subcontrol"
                               [ngClass]="subschema.class"
-                              [nzAutocomplete]="autocompleteCmp"
                               [nzAutosize]="subschema.autosize ?? {}"
                               [nzFlex]="subschema.flex"
                               [nzOffset]="subschema.offset"
@@ -592,310 +625,283 @@
                               [placeholder]="subschema.placeholder ?? ''"
                               [rows]="subschema.rows"
                               [autofocus]="subschema.focus"
-                              [readonly]="subschema.readonly | call: model : subschema : (subschema.name | control: control)"
+                              [readonly]="subschema.readonly | call: model : subschema : subcontrol"
                               [nzSize]="subschema.size"
                               [nzBorderless]="subschema.borderless"></textarea>
-                            <nz-autocomplete
-                              #autocompleteCmp
-                              [compareWith]="autocomplete.compare"
-                              [nzBackfill]="autocomplete.backfill"
-                              [nzDataSource]="autocomplete.options"
-                              [nzWidth]="autocomplete.width"></nz-autocomplete>
                           </ng-container>
-                          <textarea
-                            *ngIf="!subschema.autocomplete"
-                            nz-col
-                            nz-input
-                            [attr.id]="subschema.id"
-                            [attr.maxlength]="subschema.length ?? subschema.length?.max"
-                            [attr.minlength]="subschema.length ?? subschema.length?.min"
-                            [fluentBinderSchema]="subschema"
-                            [fluentBinderControl]="subschema.name | control: control"
-                            [formControl]="subschema.name | control: control : 'control'"
-                            [ngClass]="subschema.class"
-                            [nzAutosize]="subschema.autosize ?? {}"
-                            [nzFlex]="subschema.flex"
-                            [nzOffset]="subschema.offset"
-                            [nzSpan]="subschema.span ?? null"
-                            [placeholder]="subschema.placeholder ?? ''"
-                            [rows]="subschema.rows"
-                            [autofocus]="subschema.focus"
-                            [readonly]="subschema.readonly | call: model : subschema : (subschema.name | control: control)"
-                            [nzSize]="subschema.size"
-                            [nzBorderless]="subschema.borderless"></textarea>
-                        </ng-container>
 
-                        <ng-container *ngSwitchCase="'number'">
-                          <nz-input-number
-                            #cmp
-                            nz-col
-                            [fluentBinder]="cmp"
-                            [fluentBinderSchema]="subschema"
-                            [fluentBinderControl]="subschema.name | control: control"
-                            [formControl]="subschema.name | control: control : 'control'"
-                            [ngClass]="subschema.class"
-                            [nzFlex]="subschema.flex"
-                            [nzId]="subschema.id"
-                            [nzMax]="subschema.max ?? infinity"
-                            [nzMin]="subschema.min ?? -infinity"
-                            [nzOffset]="subschema.offset"
-                            [nzPlaceHolder]="subschema.placeholder ?? ''"
-                            [nzPrecision]="subschema.precision ?? ''"
-                            [nzPrecisionMode]="subschema.precisionMode"
-                            [nzSpan]="subschema.span ?? null"
-                            [nzStep]="subschema.step ?? 1"
-                            [nzAutoFocus]="subschema.focus"
-                            [nzReadOnly]="subschema.readonly | call: model : subschema : (subschema.name | control: control)"
-                            [nzSize]="subschema.size"
-                            [nzBorderless]="subschema.borderless">
-                          </nz-input-number>
-                        </ng-container>
-
-                        <ng-container *ngSwitchCase="'date'">
-                          <nz-date-picker
-                            #cmp
-                            nz-col
-                            [fluentBinder]="cmp"
-                            [fluentBinderSchema]="subschema"
-                            [fluentBinderControl]="subschema.name | control: control"
-                            [formControl]="subschema.name | control: control : 'control'"
-                            [ngClass]="subschema.class"
-                            [nzAllowClear]="subschema.clearable"
-                            [nzFlex]="subschema.flex"
-                            [nzFormat]="subschema.format"
-                            [nzId]="subschema.id"
-                            [nzInline]="subschema.inline"
-                            [nzMode]="subschema.mode"
-                            [nzOffset]="subschema.offset"
-                            [nzPlaceHolder]="subschema.placeholder"
-                            [nzShowTime]="subschema.time"
-                            [nzSpan]="subschema.span ?? null"
-                            [nzShowTime]="subschema.time"
-                            [nzBackdrop]="subschema.backdrop"
-                            [nzPlacement]="subschema.placement ?? 'bottomLeft'"
-                            [nzSuffixIcon]="subschema.suffixIcon ?? 'calendar'"
-                            [nzAutoFocus]="subschema.focus"
-                            [nzInputReadOnly]="subschema.readonly | call: model : subschema : (subschema.name | control: control)"
-                            [nzSize]="subschema.size"
-                            [nzBorderless]="subschema.borderless"
-                            [nzShowToday]="subschema.today ?? true"
-                            [nzShowNow]="subschema.now ?? true"></nz-date-picker>
-                        </ng-container>
-
-                        <ng-container *ngSwitchCase="'range'">
-                          <nz-range-picker
-                            #cmp
-                            nz-col
-                            [fluentBinder]="cmp"
-                            [fluentBinderSchema]="subschema"
-                            [fluentBinderControl]="subschema.name | control: control"
-                            [formControl]="subschema.name | control: control : 'control'"
-                            [ngClass]="subschema.class"
-                            [nzAllowClear]="subschema.clearable"
-                            [nzFlex]="subschema.flex"
-                            [nzFormat]="subschema.format"
-                            [nzId]="subschema.id"
-                            [nzInline]="subschema.inline"
-                            [nzMode]="subschema.mode"
-                            [nzOffset]="subschema.offset"
-                            [nzPlaceHolder]="subschema.placeholder"
-                            [nzShowTime]="subschema.time"
-                            [nzSpan]="subschema.span ?? null"
-                            [nzShowTime]="subschema.time"
-                            [nzBackdrop]="subschema.backdrop"
-                            [nzPlacement]="subschema.placement ?? 'bottomLeft'"
-                            [nzSuffixIcon]="subschema.suffixIcon ?? 'calendar'"
-                            [nzAutoFocus]="subschema.focus"
-                            [nzInputReadOnly]="subschema.readonly | call: model : subschema : (subschema.name | control: control)"
-                            [nzSize]="subschema.size"
-                            [nzBorderless]="subschema.borderless"
-                            [nzShowToday]="subschema.today ?? true"
-                            [nzShowNow]="subschema.now ?? true"
-                            [nzSeparator]="subschema.separator"></nz-range-picker>
-                        </ng-container>
-
-                        <ng-container *ngSwitchCase="'time'">
-                          <nz-time-picker
-                            #cmp
-                            nz-col
-                            [fluentBinder]="cmp"
-                            [fluentBinderSchema]="subschema"
-                            [fluentBinderControl]="subschema.name | control: control"
-                            [formControl]="subschema.name | control: control : 'control'"
-                            [ngClass]="subschema.class"
-                            [nzAllowEmpty]="subschema.clearable"
-                            [nzFlex]="subschema.flex"
-                            [nzFormat]="subschema.format ?? 'HH:mm:ss'"
-                            [nzHourStep]="subschema.step?.hour"
-                            [nzId]="subschema.id"
-                            [nzMinuteStep]="subschema.step?.minute"
-                            [nzOffset]="subschema.offset"
-                            [nzPlaceHolder]="subschema.placeholder"
-                            [nzSecondStep]="subschema.step?.second"
-                            [nzSpan]="subschema.span ?? null"
-                            [nzAutoFocus]="subschema.focus"
-                            [nzSize]="subschema.size"
-                            [nzBorderless]="subschema.borderless"
-                            [nzBackdrop]="subschema.backdrop"
-                            [nzSuffixIcon]="subschema.suffixIcon ?? 'clock-circle'">
-                          </nz-time-picker>
-                        </ng-container>
-
-                        <ng-container *ngSwitchCase="'select'">
-                          <nz-select
-                            #cmp
-                            nz-col
-                            [fluentBinder]="cmp"
-                            [fluentBinderSchema]="subschema"
-                            [fluentBinderControl]="subschema.name | control: control"
-                            [formControl]="subschema.name | control: control : 'control'"
-                            [ngClass]="subschema.class"
-                            [nzAllowClear]="subschema.clearable"
-                            [nzFlex]="subschema.flex"
-                            [nzId]="subschema.id"
-                            [nzMaxMultipleCount]="subschema.limit ?? infinity"
-                            [nzMode]="subschema.mode ?? 'default'"
-                            [nzOffset]="subschema.offset"
-                            [nzPlaceHolder]="subschema.placeholder"
-                            [nzShowSearch]="subschema.searchable"
-                            [nzSpan]="subschema.span ?? null"
-                            [nzShowSearch]="subschema.searchable"
-                            [nzBackdrop]="subschema.backdrop"
-                            [nzBorderless]="subschema.borderless"
-                            [nzAutoFocus]="subschema.focus"
-                            [nzShowArrow]="subschema.arrow ?? (!subschema.mode || subschema.mode === 'default')"
-                            [nzSize]="subschema.size"
-                            [nzSuffixIcon]="subschema.suffixIcon">
-                            <nz-option
-                              *ngFor="let option of subschema.options"
-                              [nzDisabled]="option[subschema.config?.disabledProperty ?? 'disabled']"
-                              [nzLabel]="option[subschema.config?.labelProperty ?? 'label']"
-                              [nzValue]="option[subschema.config?.valueProperty ?? 'value']">
-                            </nz-option>
-                          </nz-select>
-                        </ng-container>
-
-                        <ng-container *ngSwitchCase="'cascader'">
-                          <nz-cascader
-                            #cmp
-                            nz-col
-                            [fluentBinder]="cmp"
-                            [fluentBinderSchema]="subschema"
-                            [fluentBinderControl]="subschema.name | control: control"
-                            [formControl]="subschema.name | control: control : 'control'"
-                            [ngClass]="subschema.class"
-                            [nzAllowClear]="subschema.clearable ?? true"
-                            [nzAutoFocus]="subschema.focus"
-                            [nzBackdrop]="subschema.backdrop"
-                            [nzExpandIcon]="subschema.expandIcon"
-                            [nzExpandTrigger]="subschema.trigger"
-                            [nzFlex]="subschema.flex"
-                            [nzLabelProperty]="subschema.config?.labelProperty ?? 'label'"
-                            [nzLoadData]="subschema.loadData"
-                            [nzOffset]="subschema.offset"
-                            [nzOptions]="subschema.options"
-                            [nzPlaceHolder]="subschema.placeholder ?? ' '"
-                            [nzShowArrow]="subschema.arrow ?? true"
-                            [nzShowSearch]="subschema.searchable"
-                            [nzSize]="subschema.size"
-                            [nzSpan]="subschema.span ?? null"
-                            [nzSuffixIcon]="subschema.suffixIcon"
-                            [nzValueProperty]="subschema.config?.valueProperty ?? 'value'">
-                          </nz-cascader>
-                        </ng-container>
-
-                        <ng-container *ngSwitchCase="'tree-select'">
-                          <nz-tree-select
-                            #cmp
-                            nz-col
-                            [nzId]="subschema.id"
-                            [fluentBinder]="cmp"
-                            [fluentBinderSchema]="subschema"
-                            [fluentBinderControl]="subschema.name | control: control"
-                            [formControl]="subschema.name | control: control : 'control'"
-                            [ngClass]="subschema.class"
-                            [nzAllowClear]="subschema.clearable ?? true"
-                            [nzBackdrop]="subschema.backdrop"
-                            [nzShowIcon]="subschema.icon"
-                            [nzShowSearch]="subschema.searchable"
-                            [nzSize]="subschema.size"
-                            [nzCheckable]="subschema.checkable"
-                            [nzCheckStrictly]="subschema.checkable?.strict"
-                            [nzShowExpand]="subschema.expandIcon ?? true"
-                            [nzExpandedIcon]="subschema.expandIcon"
-                            [nzShowLine]="subschema.line"
-                            [nzAsyncData]="subschema.async"
-                            [nzNodes]="subschema.options"
-                            [nzDefaultExpandAll]="subschema.expandAll"
-                            [nzExpandedKeys]="subschema.expandedKeys"
-                            [nzMultiple]="subschema.multiple"
-                            [nzVirtualHeight]="subschema.virtual?.height"
-                            [nzVirtualItemSize]="subschema.virtual?.itemSize ?? 28"
-                            [nzVirtualMaxBufferPx]="subschema.virtual?.maxBufferPx ?? 500"
-                            [nzVirtualMinBufferPx]="subschema.virtual?.minBufferPx ?? 28"
-                            [nzSpan]="subschema.span ?? null"
-                            [nzFlex]="subschema.flex"
-                            [nzOffset]="subschema.offset"></nz-tree-select>
-                        </ng-container>
-
-                        <ng-container *ngSwitchCase="'button'">
-                          <ng-container *ngIf="subschema.subtype ===  'link'">
-                            <a
-                              nz-button
+                          <ng-container *ngSwitchCase="'number'">
+                            <nz-input-number
+                              #cmp
                               nz-col
-                              [attr.id]="subschema.id"
-                              [disabled]="subschema.disabled"
+                              [fluentBinder]="cmp"
                               [fluentBinderSchema]="subschema"
+                              [fluentBinderControl]="subcontrol"
+                              [formControl]="subcontrol"
                               [ngClass]="subschema.class"
-                              [nzBlock]="subschema.block"
-                              [nzDanger]="subschema.danger"
                               [nzFlex]="subschema.flex"
-                              [nzGhost]="subschema.ghost"
-                              [nzLoading]="subschema.loading"
+                              [nzId]="subschema.id"
+                              [nzMax]="subschema.max ?? infinity"
+                              [nzMin]="subschema.min ?? -infinity"
                               [nzOffset]="subschema.offset"
-                              [nzShape]="subschema.shape"
+                              [nzPlaceHolder]="subschema.placeholder ?? ''"
+                              [nzPrecision]="subschema.precision ?? ''"
+                              [nzPrecisionMode]="subschema.precisionMode"
+                              [nzSpan]="subschema.span ?? null"
+                              [nzStep]="subschema.step ?? 1"
+                              [nzAutoFocus]="subschema.focus"
+                              [nzReadOnly]="subschema.readonly | call: model : subschema : subcontrol"
+                              [nzSize]="subschema.size"
+                              [nzBorderless]="subschema.borderless">
+                            </nz-input-number>
+                          </ng-container>
+
+                          <ng-container *ngSwitchCase="'date'">
+                            <nz-date-picker
+                              #cmp
+                              nz-col
+                              [fluentBinder]="cmp"
+                              [fluentBinderSchema]="subschema"
+                              [fluentBinderControl]="subcontrol"
+                              [formControl]="subcontrol"
+                              [ngClass]="subschema.class"
+                              [nzAllowClear]="subschema.clearable"
+                              [nzFlex]="subschema.flex"
+                              [nzFormat]="subschema.format"
+                              [nzId]="subschema.id"
+                              [nzInline]="subschema.inline"
+                              [nzMode]="subschema.mode"
+                              [nzOffset]="subschema.offset"
+                              [nzPlaceHolder]="subschema.placeholder"
+                              [nzShowTime]="subschema.time"
+                              [nzSpan]="subschema.span ?? null"
+                              [nzShowTime]="subschema.time"
+                              [nzBackdrop]="subschema.backdrop"
+                              [nzPlacement]="subschema.placement ?? 'bottomLeft'"
+                              [nzSuffixIcon]="subschema.suffixIcon ?? 'calendar'"
+                              [nzAutoFocus]="subschema.focus"
+                              [nzInputReadOnly]="subschema.readonly | call: model : subschema : subcontrol"
+                              [nzSize]="subschema.size"
+                              [nzBorderless]="subschema.borderless"
+                              [nzShowToday]="subschema.today ?? true"
+                              [nzShowNow]="subschema.now ?? true"></nz-date-picker>
+                          </ng-container>
+
+                          <ng-container *ngSwitchCase="'range'">
+                            <nz-range-picker
+                              #cmp
+                              nz-col
+                              [fluentBinder]="cmp"
+                              [fluentBinderSchema]="subschema"
+                              [fluentBinderControl]="subcontrol"
+                              [formControl]="subcontrol"
+                              [ngClass]="subschema.class"
+                              [nzAllowClear]="subschema.clearable"
+                              [nzFlex]="subschema.flex"
+                              [nzFormat]="subschema.format"
+                              [nzId]="subschema.id"
+                              [nzInline]="subschema.inline"
+                              [nzMode]="subschema.mode"
+                              [nzOffset]="subschema.offset"
+                              [nzPlaceHolder]="subschema.placeholder"
+                              [nzShowTime]="subschema.time"
+                              [nzSpan]="subschema.span ?? null"
+                              [nzShowTime]="subschema.time"
+                              [nzBackdrop]="subschema.backdrop"
+                              [nzPlacement]="subschema.placement ?? 'bottomLeft'"
+                              [nzSuffixIcon]="subschema.suffixIcon ?? 'calendar'"
+                              [nzAutoFocus]="subschema.focus"
+                              [nzInputReadOnly]="subschema.readonly | call: model : subschema : subcontrol"
+                              [nzSize]="subschema.size"
+                              [nzBorderless]="subschema.borderless"
+                              [nzShowToday]="subschema.today ?? true"
+                              [nzShowNow]="subschema.now ?? true"
+                              [nzSeparator]="subschema.separator"></nz-range-picker>
+                          </ng-container>
+
+                          <ng-container *ngSwitchCase="'time'">
+                            <nz-time-picker
+                              #cmp
+                              nz-col
+                              [fluentBinder]="cmp"
+                              [fluentBinderSchema]="subschema"
+                              [fluentBinderControl]="subcontrol"
+                              [formControl]="subcontrol"
+                              [ngClass]="subschema.class"
+                              [nzAllowEmpty]="subschema.clearable"
+                              [nzFlex]="subschema.flex"
+                              [nzFormat]="subschema.format ?? 'HH:mm:ss'"
+                              [nzHourStep]="subschema.step?.hour"
+                              [nzId]="subschema.id"
+                              [nzMinuteStep]="subschema.step?.minute"
+                              [nzOffset]="subschema.offset"
+                              [nzPlaceHolder]="subschema.placeholder"
+                              [nzSecondStep]="subschema.step?.second"
+                              [nzSpan]="subschema.span ?? null"
+                              [nzAutoFocus]="subschema.focus"
+                              [nzSize]="subschema.size"
+                              [nzBorderless]="subschema.borderless"
+                              [nzBackdrop]="subschema.backdrop"
+                              [nzSuffixIcon]="subschema.suffixIcon ?? 'clock-circle'">
+                            </nz-time-picker>
+                          </ng-container>
+
+                          <ng-container *ngSwitchCase="'select'">
+                            <nz-select
+                              #cmp
+                              nz-col
+                              [fluentBinder]="cmp"
+                              [fluentBinderSchema]="subschema"
+                              [fluentBinderControl]="subcontrol"
+                              [formControl]="subcontrol"
+                              [ngClass]="subschema.class"
+                              [nzAllowClear]="subschema.clearable"
+                              [nzFlex]="subschema.flex"
+                              [nzId]="subschema.id"
+                              [nzMaxMultipleCount]="subschema.limit ?? infinity"
+                              [nzMode]="subschema.mode ?? 'default'"
+                              [nzOffset]="subschema.offset"
+                              [nzPlaceHolder]="subschema.placeholder"
+                              [nzShowSearch]="subschema.searchable"
+                              [nzSpan]="subschema.span ?? null"
+                              [nzShowSearch]="subschema.searchable"
+                              [nzBackdrop]="subschema.backdrop"
+                              [nzBorderless]="subschema.borderless"
+                              [nzAutoFocus]="subschema.focus"
+                              [nzShowArrow]="subschema.arrow ?? (!subschema.mode || subschema.mode === 'default')"
+                              [nzSize]="subschema.size"
+                              [nzSuffixIcon]="subschema.suffixIcon">
+                              <nz-option
+                                *ngFor="let option of subschema.options"
+                                [nzDisabled]="option[subschema.config?.disabledProperty ?? 'disabled']"
+                                [nzLabel]="option[subschema.config?.labelProperty ?? 'label']"
+                                [nzValue]="option[subschema.config?.valueProperty ?? 'value']">
+                              </nz-option>
+                            </nz-select>
+                          </ng-container>
+
+                          <ng-container *ngSwitchCase="'cascader'">
+                            <nz-cascader
+                              #cmp
+                              nz-col
+                              [fluentBinder]="cmp"
+                              [fluentBinderSchema]="subschema"
+                              [fluentBinderControl]="subcontrol"
+                              [formControl]="subcontrol"
+                              [ngClass]="subschema.class"
+                              [nzAllowClear]="subschema.clearable ?? true"
+                              [nzAutoFocus]="subschema.focus"
+                              [nzBackdrop]="subschema.backdrop"
+                              [nzExpandIcon]="subschema.expandIcon"
+                              [nzExpandTrigger]="subschema.trigger"
+                              [nzFlex]="subschema.flex"
+                              [nzLabelProperty]="subschema.config?.labelProperty ?? 'label'"
+                              [nzLoadData]="subschema.loadData"
+                              [nzOffset]="subschema.offset"
+                              [nzOptions]="subschema.options"
+                              [nzPlaceHolder]="subschema.placeholder ?? ' '"
+                              [nzShowArrow]="subschema.arrow ?? true"
+                              [nzShowSearch]="subschema.searchable"
                               [nzSize]="subschema.size"
                               [nzSpan]="subschema.span ?? null"
-                              [nzType]="subschema.subtype"
-                              [type]="subschema.mode">
-                              <i
-                                *ngIf="subschema.icon"
-                                nz-icon
-                                [nzRotate]="subschema.icon.rotate"
-                                [nzSpin]="subschema.icon.spin"
-                                [nzTheme]="subschema.icon.theme"
-                                [nzType]="subschema.icon.type ?? subschema.icon"></i>
-                              <ng-container *nzStringTemplateOutlet="subschema.content">{{ subschema.content }}</ng-container>
-                            </a>
+                              [nzSuffixIcon]="subschema.suffixIcon"
+                              [nzValueProperty]="subschema.config?.valueProperty ?? 'value'">
+                            </nz-cascader>
                           </ng-container>
-                          <ng-container *ngIf="subschema.subtype !==  'link'">
-                            <button
-                              nz-button
+
+                          <ng-container *ngSwitchCase="'tree-select'">
+                            <nz-tree-select
+                              #cmp
                               nz-col
-                              [attr.id]="subschema.id"
-                              [disabled]="subschema.disabled"
+                              [nzId]="subschema.id"
+                              [fluentBinder]="cmp"
                               [fluentBinderSchema]="subschema"
+                              [fluentBinderControl]="subcontrol"
+                              [formControl]="subcontrol"
                               [ngClass]="subschema.class"
-                              [nzBlock]="subschema.block"
-                              [nzDanger]="subschema.danger"
-                              [nzFlex]="subschema.flex"
-                              [nzGhost]="subschema.ghost"
-                              [nzLoading]="subschema.loading"
-                              [nzOffset]="subschema.offset"
-                              [nzShape]="subschema.shape"
+                              [nzAllowClear]="subschema.clearable ?? true"
+                              [nzBackdrop]="subschema.backdrop"
+                              [nzShowIcon]="subschema.icon"
+                              [nzShowSearch]="subschema.searchable"
                               [nzSize]="subschema.size"
+                              [nzCheckable]="subschema.checkable"
+                              [nzCheckStrictly]="subschema.checkable?.strict"
+                              [nzShowExpand]="subschema.expandIcon ?? true"
+                              [nzExpandedIcon]="subschema.expandIcon"
+                              [nzShowLine]="subschema.line"
+                              [nzAsyncData]="subschema.async"
+                              [nzNodes]="subschema.options"
+                              [nzDefaultExpandAll]="subschema.expandAll"
+                              [nzExpandedKeys]="subschema.expandedKeys"
+                              [nzMultiple]="subschema.multiple"
+                              [nzVirtualHeight]="subschema.virtual?.height"
+                              [nzVirtualItemSize]="subschema.virtual?.itemSize ?? 28"
+                              [nzVirtualMaxBufferPx]="subschema.virtual?.maxBufferPx ?? 500"
+                              [nzVirtualMinBufferPx]="subschema.virtual?.minBufferPx ?? 28"
                               [nzSpan]="subschema.span ?? null"
-                              [nzType]="subschema.subtype"
-                              [type]="subschema.mode">
-                              <i
-                                *ngIf="subschema.icon"
-                                nz-icon
-                                [nzRotate]="subschema.icon.rotate"
-                                [nzSpin]="subschema.icon.spin"
-                                [nzTheme]="subschema.icon.theme"
-                                [nzType]="subschema.icon.type ?? subschema.icon"></i>
-                              <ng-container *nzStringTemplateOutlet="subschema.content">{{ subschema.content }}</ng-container>
-                            </button>
+                              [nzFlex]="subschema.flex"
+                              [nzOffset]="subschema.offset"></nz-tree-select>
+                          </ng-container>
+
+                          <ng-container *ngSwitchCase="'button'">
+                            <ng-container *ngIf="subschema.subtype ===  'link'">
+                              <a
+                                nz-button
+                                nz-col
+                                [attr.id]="subschema.id"
+                                [disabled]="subschema.disabled"
+                                [fluentBinderSchema]="subschema"
+                                [ngClass]="subschema.class"
+                                [nzBlock]="subschema.block"
+                                [nzDanger]="subschema.danger"
+                                [nzFlex]="subschema.flex"
+                                [nzGhost]="subschema.ghost"
+                                [nzLoading]="subschema.loading"
+                                [nzOffset]="subschema.offset"
+                                [nzShape]="subschema.shape"
+                                [nzSize]="subschema.size"
+                                [nzSpan]="subschema.span ?? null"
+                                [nzType]="subschema.subtype"
+                                [type]="subschema.mode">
+                                <i
+                                  *ngIf="subschema.icon"
+                                  nz-icon
+                                  [nzRotate]="subschema.icon.rotate"
+                                  [nzSpin]="subschema.icon.spin"
+                                  [nzTheme]="subschema.icon.theme"
+                                  [nzType]="subschema.icon.type ?? subschema.icon"></i>
+                                <ng-container *nzStringTemplateOutlet="subschema.content">{{ subschema.content }}</ng-container>
+                              </a>
+                            </ng-container>
+                            <ng-container *ngIf="subschema.subtype !==  'link'">
+                              <button
+                                nz-button
+                                nz-col
+                                [attr.id]="subschema.id"
+                                [disabled]="subschema.disabled"
+                                [fluentBinderSchema]="subschema"
+                                [ngClass]="subschema.class"
+                                [nzBlock]="subschema.block"
+                                [nzDanger]="subschema.danger"
+                                [nzFlex]="subschema.flex"
+                                [nzGhost]="subschema.ghost"
+                                [nzLoading]="subschema.loading"
+                                [nzOffset]="subschema.offset"
+                                [nzShape]="subschema.shape"
+                                [nzSize]="subschema.size"
+                                [nzSpan]="subschema.span ?? null"
+                                [nzType]="subschema.subtype"
+                                [type]="subschema.mode">
+                                <i
+                                  *ngIf="subschema.icon"
+                                  nz-icon
+                                  [nzRotate]="subschema.icon.rotate"
+                                  [nzSpin]="subschema.icon.spin"
+                                  [nzTheme]="subschema.icon.theme"
+                                  [nzType]="subschema.icon.type ?? subschema.icon"></i>
+                                <ng-container *nzStringTemplateOutlet="subschema.content">{{ subschema.content }}</ng-container>
+                              </button>
+                            </ng-container>
                           </ng-container>
                         </ng-container>
                       </ng-container>
@@ -981,6 +987,7 @@
       <ng-container
         [ngTemplateOutlet]="formItemTemplate"
         [ngTemplateOutletContext]="{ control: (schema.name | control: form) ?? form, schema: schema, model: model }">
+        <!-- 当获取不到对应的控件实例时，通常说明当前的 schema 不是一个 control schema，☝️这里直接返回父级表单实例 -->
       </ng-container>
     </ng-container>
   </form>

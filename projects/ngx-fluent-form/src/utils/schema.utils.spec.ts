@@ -228,14 +228,14 @@ describe('schema.utils', () => {
       const schemas = standardSchemas([input('name')]);
       const schema = schemasUtils(schemas).find('n');
 
-      expect(schema).toBe(undefined);
+      expect(schema).toBe(null);
     });
 
     it('不存在的双字段图示', () => {
       const schemas = standardSchemas([slider(['begin', 'end'])]);
       const schema = schemasUtils(schemas).find([['begin', 'e']]);
 
-      expect(schema).toBe(undefined);
+      expect(schema).toBe(null);
     });
   });
 });

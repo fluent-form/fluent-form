@@ -14,7 +14,7 @@ export type HTMLElementEventListenerMap = {
 /**
  * HTML 元素的属性对象
  */
-export type HTMLElementPropertyMap<E extends HTMLElement> = Partial<WritableMap<Property<E>>>;
+export type HTMLElementPropertyMap<E extends HTMLElement> = Partial<Property<E>>;
 
 /**
  * 组件的 Ouput 名
@@ -81,17 +81,6 @@ export type Single<T> = { [P in keyof T]: { [K in P]-?: T[P] } }[keyof T];
  * ```
  */
 export type SingleOrAll<T> = Single<T> | Required<T>;
-
-type IfEquals<X, Y, T = X, F = never> =
-  (<T>() => T extends X ? true : false) extends
-  (<T>() => T extends Y ? true : false) ? T : F;
-
-/**
- * 过滤出可写的键值对
- */
-type WritableMap<T> = {
-  [P in keyof T]-?: IfEquals<{ [K in P]: T[P] }, { -readonly [K in P]: T[P] }>
-};
 
 /** Any Object */
 export type Obj = Record<string, unknown>;

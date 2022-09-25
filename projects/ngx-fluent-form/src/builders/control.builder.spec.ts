@@ -1,6 +1,6 @@
 import { SafeAny } from '@ngify/types';
 import { AbstractTextControlSchema, CheckboxControlSchema, DatePickerControlSchema, InputControlSchema, NumberInputControlSchema, RangePickerControlSchema, RateControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from '../schemas';
-import { array, cascader, checkbox, checkboxGroup, control, date, datetime, group, input, number, radio, range, rate, select, slider, switcher, textarea, time } from './control.builder';
+import { array, cascader, checkbox, checkboxGroup, control, date, datetime, group, input, number, radio, range, rate, select, slider, switcher, textarea, time, treeSelect } from './control.builder';
 
 describe('control.builder', () => {
   it('input', () => {
@@ -66,6 +66,12 @@ describe('control.builder', () => {
   it('cascader', () => {
     const schema = control(cascader('cascader').options([]));
     const value = { type: 'cascader', name: 'cascader', options: [] } as SafeAny;
+    expect(schema).toEqual(value);
+  });
+
+  it('treeSelect', () => {
+    const schema = control(treeSelect('treeSelect').options([]));
+    const value = { type: 'tree-select', name: 'treeSelect', options: [] } as SafeAny;
     expect(schema).toEqual(value);
   });
 

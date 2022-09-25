@@ -15,7 +15,7 @@ export class FluentBinderDirective<E extends HTMLElement, C extends object, S ex
   @Input('fluentBinderSchema') schema!: S;
   @Input('fluentBinderControl') control?: AbstractControl;
 
-  private get host() {
+  private get host(): C | E {
     return this.component ?? this.elementRef.nativeElement;
   }
 
@@ -28,8 +28,8 @@ export class FluentBinderDirective<E extends HTMLElement, C extends object, S ex
     schema.firstChange || this.destory$.next();
 
     this.schema.property && Object.keys(this.schema.property).forEach(property => {
-      const value = (this.schema.property as S['property'])![property as keyof S['property']];
-      (this.host as E | C)[property as keyof (E | C)] = value as unknown as (E | C)[keyof (E | C)];
+      const value = this.schema.property![property as keyof typeof this.schema.property];
+      this.host[property as keyof (C | E)] = value;
     });
 
     this.schema.listener && Object.keys(this.schema.listener).forEach(eventName => {
@@ -46,9 +46,11 @@ export class FluentBinderDirective<E extends HTMLElement, C extends object, S ex
       } else if (this.host instanceof HTMLElement) {
         fromEvent(this.host, eventName).pipe(
           takeUntil(this.destory$)
-        ).subscribe(event => (this.schema.listener as HTMLElementEventListenerMap)![
-          eventName as keyof HTMLElementEventListenerMap
-        ]!(event as SafeAny))
+        ).subscribe(event => {
+          (this.schema.listener as HTMLElementEventListenerMap)![
+            eventName as keyof HTMLElementEventListenerMap
+          ]!(event as SafeAny)
+        });
       } else {
         (this.host[eventName as keyof C] as unknown as EventEmitter<unknown>).pipe(
           takeUntil(this.destory$)

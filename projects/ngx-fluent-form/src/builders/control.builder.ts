@@ -1,3 +1,4 @@
+import { SafeAny } from "@ngify/types";
 import { AbstractSchema, AnySchemaName, SchemaName } from '../schemas/abstract.schema';
 import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema, TreeSelectControlSchema } from '../schemas/control.schema';
 import { AnyBuilder, AnySchema } from '../schemas/index.schema';
@@ -5,13 +6,17 @@ import { TypeAndName } from '../types';
 import { standardSchema, standardSchemas } from "../utils";
 import { builder, StableBuilder, UnstableBuilder } from '../utils/builder.utils';
 
-type FormBuilderFn = (it: UnstableBuilder<FormGroupSchema, TypeAndName | 'label'>) => StableBuilder<FormGroupSchema>;
+type FormBuilderFn = (it: UnstableBuilder<FormGroupSchema, keyof AbstractSchema<AnySchemaName>>) => StableBuilder<FormGroupSchema>;
+
+function isFormBuilderFnTuple(arr: SafeAny[]): arr is [FormBuilderFn] {
+  return arr[0] instanceof Function;
+}
 
 export function form(fn: FormBuilderFn): FormGroupSchema;
 export function form(...schemas: (AnySchema | AnyBuilder)[]): AnySchema[];
 export function form(...fnOrSchemas: (AnySchema | AnyBuilder)[] | [FormBuilderFn]): AnySchema[] | FormGroupSchema {
-  if (fnOrSchemas[0] instanceof Function) {
-    const fn = fnOrSchemas[0];
+  if (isFormBuilderFnTuple(fnOrSchemas)) {
+    const [fn] = fnOrSchemas;
     const builder = group() as UnstableBuilder<FormGroupSchema<number>, keyof AbstractSchema<AnySchemaName>>;
     const schema = fn(builder);
     return standardSchema(schema);

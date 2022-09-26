@@ -1,4 +1,4 @@
-import { AsyncValidatorFn, ValidatorFn, Validators } from '@angular/forms';
+import { ValidatorFn, Validators } from '@angular/forms';
 import { COMPONENT_CONTAINER_SCHEMA_TYPES, COMPONENT_SCHEMA_TYPES, CONTROL_CONTAINER_SCHEMA_TYPES, TEXT_CONTROL_SCHEMA_TYPES } from '../constants';
 import { InputControlSchema, TextareaControlSchema } from '../schemas';
 import { AnySchemaName, SchemaName } from '../schemas/abstract.schema';
@@ -80,7 +80,7 @@ const standardTextControlSchema = <T extends InputControlSchema | TextareaContro
  * 标准化图示
  * @param schema
  */
-export const standardSchema = <T extends AnySchema>(schema: T | StableBuilder<T>): T => {
+export function standardSchema<T extends AnySchema>(schema: T | StableBuilder<T>): T {
   let _schema = (isBuilder(schema) ? schema.build() : { ...schema }) as AnySchema;
 
   if (isControlContainerSchema(_schema) || isComponentContainerSchema(_schema)) {
@@ -106,26 +106,6 @@ export function controlSchemaUtils<S extends ControlSchema>(schema: S) {
 
 export class ControlSchemaUtils<S extends ControlSchema> {
   constructor(private readonly schema: S) { }
-
-  addValidators(...validators: ValidatorFn[]) {
-    if (this.schema.validators) {
-      this.schema.validators = this.schema.validators.concat(validators);
-    } else {
-      this.schema.validators = validators;
-    }
-
-    return this;
-  }
-
-  addAsyncValidators(...validators: AsyncValidatorFn[]) {
-    if (this.schema.asyncValidators) {
-      this.schema.asyncValidators = this.schema.asyncValidators.concat(validators);
-    } else {
-      this.schema.asyncValidators = validators;
-    }
-
-    return this;
-  }
 
   /**
    * 根据部分图示提供的便捷验证参数获取额外的验证器

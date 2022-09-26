@@ -1,8 +1,8 @@
-import { FluentFormComponent, form, input } from 'ngx-fluent-form';
+import { form, input } from 'ngx-fluent-form';
 import { defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
-export const story = defineStory<FluentFormComponent<{}>>({
+export const story = defineStory({
   args: {
     schemas: form(
       input('text1')

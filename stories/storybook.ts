@@ -5,6 +5,7 @@ import { Directive, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SafeAny } from '@ngify/types';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NZ_I18N, zh_CN } from 'ng-zorro-antd/i18n';
@@ -63,11 +64,11 @@ export const defineStory = <T>(story?: Partial<Story<T>>): Story<T> => (
 
 @Directive()
 export abstract class AbstractFluentFormWrapperComponent {
-  @Input() schemas!: FluentFormComponent<any>['schemas'];
-  @Input() model!: FluentFormComponent<any>['model'];
-  @Input() layout: FluentFormComponent<any>['layout'] = 'vertical';
-  @Input() colon: FluentFormComponent<any>['colon'] = true;
-  @Input() spinning: FluentFormComponent<any>['spinning'] = false;
-  @Input() spinTip: FluentFormComponent<any>['spinTip'] = 'Loading...';
-  @Input() spinSize: FluentFormComponent<any>['spinSize'] = 'large';
+  @Input() schemas!: FluentFormComponent<SafeAny>['schemas'];
+  @Input() model!: FluentFormComponent<SafeAny>['model'];
+  @Input() layout: FluentFormComponent<SafeAny>['layout'] = 'vertical';
+  @Input() colon: FluentFormComponent<SafeAny>['colon'] = true;
+  @Input() spinning: FluentFormComponent<SafeAny>['spinning'] = false;
+  @Input() spinTip: FluentFormComponent<SafeAny>['spinTip'] = 'Loading...';
+  @Input() spinSize: FluentFormComponent<SafeAny>['spinSize'] = 'large';
 }

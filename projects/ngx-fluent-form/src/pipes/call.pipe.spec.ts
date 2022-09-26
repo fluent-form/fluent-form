@@ -1,11 +1,11 @@
-import { control, switcher } from '../builders';
+import { switcher } from '../builders';
 import { ControlSchema } from '../schemas';
-import { createFormControl } from '../utils';
+import { createFormControl, standardSchema } from '../utils';
 import { CallPipe } from './call.pipe';
 
 describe('CallPipe', () => {
   const model = { value: true } as const;
-  const schema = control(switcher('value')) as ControlSchema;
+  const schema = standardSchema(switcher('value')) as ControlSchema;
   const ctrl = createFormControl(schema);
 
   let pipe: CallPipe;

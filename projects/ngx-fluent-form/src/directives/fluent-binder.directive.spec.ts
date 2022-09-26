@@ -4,9 +4,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzRateComponent, NzRateModule } from 'ng-zorro-antd/rate';
-import { control, input, rate } from '../builders';
+import { input, rate } from '../builders';
 import { ControlSchema } from '../schemas';
-import { createFormControl } from '../utils';
+import { createFormControl, standardSchema } from '../utils';
 import { FluentBinderDirective } from './fluent-binder.directive';
 
 @Component({
@@ -26,7 +26,7 @@ import { FluentBinderDirective } from './fluent-binder.directive';
   `
 })
 class TestingComponent {
-  inputSchema = control(
+  inputSchema = standardSchema(
     input('ipt')
       .property({
         readOnly: true
@@ -37,7 +37,7 @@ class TestingComponent {
         statusChange: () => { },
       })
   );
-  rateSchema = control(
+  rateSchema = standardSchema(
     rate('rat')
       .property({
         nzAutoFocus: true

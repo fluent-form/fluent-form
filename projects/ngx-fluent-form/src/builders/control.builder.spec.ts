@@ -1,9 +1,15 @@
 import { SafeAny } from '@ngify/types';
-import { AbstractTextControlSchema, CheckboxControlSchema, DatePickerControlSchema, InputControlSchema, NumberInputControlSchema, RangePickerControlSchema, RateControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from '../schemas';
+import { AbstractTextControlSchema, CheckboxControlSchema, DatePickerControlSchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RangePickerControlSchema, RateControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from '../schemas';
 import { standardSchema } from '../utils';
-import { array, cascader, checkbox, checkboxGroup, date, datetime, group, input, number, radio, range, rate, select, slider, switcher, textarea, time, treeSelect } from './control.builder';
+import { array, cascader, checkbox, checkboxGroup, date, datetime, form, group, input, number, radio, range, rate, select, slider, switcher, textarea, time, treeSelect } from './control.builder';
 
 describe('control.builder', () => {
+  it('form', () => {
+    const schema = form(it => it.updateOn('blur').schemas());
+    const value = { type: 'group', updateOn: 'blur', schemas: [] } as FormGroupSchema;
+    expect(schema).toEqual(value);
+  });
+
   it('input', () => {
     const schema = standardSchema(input('input'));
     const value = { type: 'input', name: 'input' } as InputControlSchema<'input', string>;

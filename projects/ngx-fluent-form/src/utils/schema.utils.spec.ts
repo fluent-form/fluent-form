@@ -1,5 +1,4 @@
-import { AbstractControl, AsyncValidatorFn, Validators } from '@angular/forms';
-import { of } from 'rxjs';
+import { Validators } from '@angular/forms';
 import { schemasUtils, standardSchema, standardSchemas } from '.';
 import { array, group, input, inputGroup, slider } from '../builders';
 import { AnySchema } from '../schemas/index.schema';
@@ -12,14 +11,6 @@ describe('schema.utils', () => {
       const schemas = standardSchemas([input('name')]);
 
       expect(schemas).toEqual(value);
-    });
-
-    it('文本图示', () => {
-      const schema1 = standardSchema(input('name').length(1));
-      const schema2 = standardSchema(input('name').length({ min: 1, max: 2 }));
-
-      expect(schema1.validators?.length).toBe(2);
-      expect(schema2.validators?.length).toBe(2);
     });
 
     describe('嵌套图示', () => {
@@ -84,56 +75,35 @@ describe('schema.utils', () => {
     });
 
     describe('带验证器的图示', () => {
-      it('required', () => {
-        const value: AnySchema[] = [{
-          type: 'input',
-          name: 'name',
-          required: true,
-          validators: [Validators.required]
-        }];
-        const schemas = standardSchemas([input('name').required(true)]);
+      it('length', () => {
+        const schema = standardSchema(input('name').length(1));
+        const validators = controlSchemaUtils(schema).getExtraValidators();
 
-        expect(schemas).toEqual(value);
+        expect(validators.length).toBe(2);
+      });
+
+      it('min/max', () => {
+        const schema = standardSchema(input('name').length({ min: 1, max: 2 }));
+        const validators = controlSchemaUtils(schema).getExtraValidators();
+
+        expect(validators.length).toBe(2);
+      });
+
+      it('required', () => {
+        const schema = standardSchema(input('name').required(true));
+        const validators = controlSchemaUtils(schema).getExtraValidators();
+
+        expect(validators).toEqual([Validators.required]);
       });
 
       it('email', () => {
-        const value: AnySchema[] = [{
-          type: 'input',
-          subtype: 'email',
-          name: 'name',
-          required: true,
-          validators: [Validators.email, Validators.required]
-        }];
-        const schemas = standardSchemas([input('name').subtype('email').required(true)]);
+        const schema = standardSchema(input('name').subtype('email').required(true));
+        const validators = controlSchemaUtils(schema).getExtraValidators();
 
-        expect(schemas).toEqual(value);
+        expect(validators.length).toBe(2);
+        expect(validators).toContain(Validators.email);
+        expect(validators).toContain(Validators.required);
       });
-    });
-  });
-
-  describe('使用 ControlUtils 添加验证器', () => {
-    it('同步验证器', () => {
-      const schema = standardSchema(input('name'));
-      controlSchemaUtils(schema).addValidators(Validators.required);
-
-      expect(schema.validators?.length).toEqual(1);
-
-      controlSchemaUtils(schema).addValidators(Validators.email);
-
-      expect(schema.validators?.length).toEqual(2);
-    });
-
-    it('异步验证器', () => {
-      const validator1: AsyncValidatorFn = (ctrl: AbstractControl) => of(null);
-      const validator2: AsyncValidatorFn = (ctrl: AbstractControl) => Promise.resolve(null);
-      const schema = standardSchema(input('name'));
-      controlSchemaUtils(schema).addAsyncValidators(validator1);
-
-      expect(schema.asyncValidators?.length).toEqual(1);
-
-      controlSchemaUtils(schema).addAsyncValidators(validator2);
-
-      expect(schema.asyncValidators?.length).toEqual(2);
     });
   });
 

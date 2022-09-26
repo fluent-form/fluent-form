@@ -3,7 +3,7 @@ import { COMPONENT_CONTAINER_SCHEMA_TYPES, COMPONENT_SCHEMA_TYPES, CONTROL_CONTA
 import { InputControlSchema, TextareaControlSchema } from '../schemas';
 import { AnySchemaName, SchemaName } from '../schemas/abstract.schema';
 import { AnyContainerSchema, AnyControlSchema, AnySchema, ComponentContainerSchema, ComponentSchema, ControlContainerSchema, ControlSchema, DoubleKeyControlSchema } from '../schemas/index.schema';
-import { Builder, isBuilder } from './builder.utils';
+import { isBuilder, StableBuilder } from './builder.utils';
 
 /**
  * 是否为控件容器图示
@@ -69,26 +69,6 @@ const standardContainerSchema = <T extends AnyContainerSchema>(schema: T): T => 
  * @param schema
  */
 const standardTextControlSchema = <T extends InputControlSchema | TextareaControlSchema>(schema: T): T => {
-  const utils = controlSchemaUtils(schema);
-
-  if (schema.type === 'input' && schema.subtype === 'email') {
-    utils.addValidators(Validators.email);
-  }
-
-  if (schema.length) {
-    if (typeof schema.length === 'number') {
-      utils.addValidators(
-        Validators.minLength(schema.length),
-        Validators.maxLength(schema.length)
-      );
-    } else {
-      const { min, max } = schema.length as { max?: number, min?: number };
-
-      min && utils.addValidators(Validators.minLength(min));
-      max && utils.addValidators(Validators.maxLength(max));
-    }
-  }
-
   if (schema.autocomplete) {
     schema.autocomplete.compare ??= (o1: unknown, o2: unknown) => o1 === o2;
   }
@@ -100,17 +80,13 @@ const standardTextControlSchema = <T extends InputControlSchema | TextareaContro
  * 标准化图示
  * @param schema
  */
-export const standardSchema = <T extends AnySchema>(schema: T | Builder<T, T, {}>): T => {
+export const standardSchema = <T extends AnySchema>(schema: T | StableBuilder<T>): T => {
   let _schema = (isBuilder(schema) ? schema.build() : { ...schema }) as AnySchema;
 
   if (isControlContainerSchema(_schema) || isComponentContainerSchema(_schema)) {
     standardContainerSchema(_schema);
   } else if (isTextControlSchema(_schema)) {
     standardTextControlSchema(_schema);
-  }
-
-  if ('required' in _schema && _schema.required) {
-    controlSchemaUtils(_schema as ControlSchema).addValidators(Validators.required);
   }
 
   return _schema as T;
@@ -120,7 +96,7 @@ export const standardSchema = <T extends AnySchema>(schema: T | Builder<T, T, {}
  * 标准化所有图示
  * @param schemas
  */
-export const standardSchemas = (schemas: (AnySchema | Builder<AnySchema, AnySchema, {}>)[]) => (
+export const standardSchemas = (schemas: (AnySchema | StableBuilder<AnySchema>)[]) => (
   schemas.map(schema => standardSchema(schema))
 );
 
@@ -149,6 +125,40 @@ export class ControlSchemaUtils<S extends ControlSchema> {
     }
 
     return this;
+  }
+
+  /**
+   * 根据部分图示提供的便捷验证参数获取额外的验证器
+   * @returns
+   */
+  getExtraValidators(): ValidatorFn[] {
+    const validators: ValidatorFn[] = [];
+
+    if (this.schema.required) {
+      validators.push(Validators.required);
+    }
+
+    if (this.schema.type === 'input') {
+      if (this.schema.subtype === 'email') {
+        validators.push(Validators.email);
+      }
+
+      if (this.schema.length) {
+        if (typeof this.schema.length === 'number') {
+          validators.push(
+            Validators.minLength(this.schema.length),
+            Validators.maxLength(this.schema.length)
+          );
+        } else {
+          const { min, max } = this.schema.length as { max?: number, min?: number };
+
+          min && validators.push(Validators.minLength(min));
+          max && validators.push(Validators.maxLength(max));
+        }
+      }
+    }
+
+    return validators;
   }
 }
 

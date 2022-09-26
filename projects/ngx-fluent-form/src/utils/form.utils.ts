@@ -3,7 +3,7 @@ import { CallPipe } from '../pipes/call.pipe';
 import { FormArraySchema, FormGroupSchema } from '../schemas';
 import { AnyControlSchema, AnySchema, ControlSchema } from '../schemas/index.schema';
 import { Arr, Obj } from '../types';
-import { isComponentContainerSchema, isComponentSchema, isControlContainerSchema, isDoubleKeySchema } from './schema.utils';
+import { controlSchemaUtils, isComponentContainerSchema, isComponentSchema, isControlContainerSchema, isDoubleKeySchema } from './schema.utils';
 import { valueUtils } from './value.utils';
 
 /**
@@ -11,8 +11,10 @@ import { valueUtils } from './value.utils';
  * @param schema
  */
 export function createFormControl(schema: ControlSchema): FormControl {
+  const validators = controlSchemaUtils(schema).getExtraValidators();
+
   return new FormControl(schema.value, {
-    validators: schema.validators,
+    validators: schema.validators ? validators.concat(schema.validators) : validators,
     asyncValidators: schema.asyncValidators,
     updateOn: schema.updateOn
   });

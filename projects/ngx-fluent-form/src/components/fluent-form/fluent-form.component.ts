@@ -5,9 +5,9 @@ import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { takeUntil } from 'rxjs';
 import { COMPONENT_TEMPLATE_REF_TOKEN } from '../../providers';
-import { AnySchema } from '../../schemas';
+import { AnySchema, FormGroupSchema } from '../../schemas';
 import { Obj } from '../../types';
-import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchemas } from '../../utils';
+import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchema, standardSchemas } from '../../utils';
 import { ComponentTemplateRef } from '../fluent-template/fluent-template.component';
 
 @Component({
@@ -34,8 +34,10 @@ export class FluentFormComponent<T extends Obj> implements OnChanges {
   get schemas(): AnySchema[] {
     return this._schemas;
   }
-  set schemas(value: AnySchema[]) {
-    this._schemas = standardSchemas(value);
+  set schemas(value: AnySchema[] | FormGroupSchema) {
+    const schemas = Array.isArray(value) ? standardSchemas(value) : standardSchema(value);
+    this._schemas = (Array.isArray(schemas) ? schemas : schemas.schemas) as AnySchema[];
+    this.formChange.emit(this.form = createFormGroup(schemas));
   }
 
   /** 模型 */
@@ -59,8 +61,6 @@ export class FluentFormComponent<T extends Obj> implements OnChanges {
   ngOnChanges({ schemas: schemasChange, model: modelChange }: SimpleChanges): void {
     if (schemasChange) {
       schemasChange.firstChange || this.destroy$.next();
-
-      this.formChange.emit(this.form = createFormGroup(this.schemas));
 
       const utils = formUtils(this.form, this.schemas);
 

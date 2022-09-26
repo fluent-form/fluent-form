@@ -57,12 +57,13 @@ function createFormControls(schemas: AnySchema[], controls: Record<string, Abstr
  * 将图示组转换为表单组
  * @param schema
  */
-export function createFormGroup(schema: FormGroupSchema): FormGroup
+export function createFormGroup(schema: FormGroupSchema): FormGroup;
 /**
  * 将图示组转换为表单组
  * @param schemas
  */
-export function createFormGroup(schemas: | AnySchema[]): FormGroup
+export function createFormGroup(schemas: | AnySchema[]): FormGroup;
+export function createFormGroup(schemaOrSchemas: FormGroupSchema | AnySchema[]): FormGroup;
 export function createFormGroup(schemaOrSchemas: FormGroupSchema | AnySchema[]): FormGroup {
   let schemas: AnySchema[], options: AbstractControlOptions = {};
 
@@ -82,7 +83,7 @@ export function createFormGroup(schemaOrSchemas: FormGroupSchema | AnySchema[]):
 
 /**
  * 将图示组转换为表单数组
- * @param schemas
+ * @param schema
  */
 export function createFormArray(schema: FormArraySchema): FormArray {
   return new FormArray(

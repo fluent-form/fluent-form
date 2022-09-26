@@ -1,11 +1,24 @@
-import { AnySchemaName, SchemaName } from '../schemas/abstract.schema';
+import { AbstractSchema, AnySchemaName, SchemaName } from '../schemas/abstract.schema';
 import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema, TreeSelectControlSchema } from '../schemas/control.schema';
 import { AnyBuilder, AnySchema } from '../schemas/index.schema';
 import { TypeAndName } from '../types';
-import { standardSchemas } from "../utils";
-import { builder, UnstableBuilder } from '../utils/builder.utils';
+import { standardSchema, standardSchemas } from "../utils";
+import { builder, StableBuilder, UnstableBuilder } from '../utils/builder.utils';
 
-export const form = (...schemas: (AnySchema | AnyBuilder)[]) => standardSchemas(schemas);
+type FormBuilderFn = (it: UnstableBuilder<FormGroupSchema, TypeAndName | 'label'>) => StableBuilder<FormGroupSchema>;
+
+export function form(fn: FormBuilderFn): FormGroupSchema;
+export function form(...schemas: (AnySchema | AnyBuilder)[]): AnySchema[];
+export function form(...fnOrSchemas: (AnySchema | AnyBuilder)[] | [FormBuilderFn]): AnySchema[] | FormGroupSchema {
+  if (fnOrSchemas[0] instanceof Function) {
+    const fn = fnOrSchemas[0];
+    const builder = group() as UnstableBuilder<FormGroupSchema<number>, keyof AbstractSchema<AnySchemaName>>;
+    const schema = fn(builder);
+    return standardSchema(schema);
+  }
+
+  return standardSchemas(fnOrSchemas);
+}
 
 export function input(): UnstableBuilder<InputControlSchema<number>, TypeAndName>;
 export function input<N extends SchemaName>(name?: N): UnstableBuilder<InputControlSchema<N>, TypeAndName>;

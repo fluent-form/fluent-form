@@ -2,9 +2,9 @@ import { Directive, EventEmitter, forwardRef, Input, OnChanges, Output, SimpleCh
 import { FormArray, FormGroup } from '@angular/forms';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { takeUntil } from 'rxjs';
-import { AnySchema, ComponentSchema, ControlSchema } from '../schemas';
+import { AnySchema, ComponentSchema, ControlSchema, FormGroupSchema } from '../schemas';
 import { Arr, Obj } from '../types';
-import { createFormGroup, formUtils, FormUtils, modelUtils, schemasUtils, standardSchemas } from '../utils';
+import { createFormGroup, formUtils, FormUtils, modelUtils, schemasUtils, standardSchema, standardSchemas } from '../utils';
 import { ControlContainer } from './control-container';
 import { FluentControlOutletDirective } from './fluent-control-outlet.directive';
 import { FluentFormNameDirective } from './fluent-form-name.directive';
@@ -29,8 +29,10 @@ export class FluentFormDirective<T extends Obj | Arr> extends ControlContainer<T
   override get schemas(): AnySchema[] {
     return this._schemas;
   }
-  override set schemas(value: AnySchema[]) {
-    this._schemas = standardSchemas(value);
+  override set schemas(value: AnySchema[] | FormGroupSchema) {
+    const schemas = Array.isArray(value) ? standardSchemas(value) : standardSchema(value);
+    this._schemas = (Array.isArray(schemas) ? schemas : schemas.schemas) as AnySchema[];
+    this.formChange.emit(this.form = createFormGroup(schemas));
   }
 
   /** 模型 */
@@ -50,8 +52,6 @@ export class FluentFormDirective<T extends Obj | Arr> extends ControlContainer<T
   ngOnChanges({ schemas: schemasChange, model: modelChange }: SimpleChanges): void {
     if (schemasChange) {
       schemasChange.firstChange || this.destroy$.next();
-
-      this.formChange.emit(this.form = createFormGroup(this.schemas));
 
       this.directives.forEach(directive => this.assignDirective(directive));
 

@@ -1,7 +1,6 @@
-import { Directive, Host, Inject, Input, OnChanges, OnDestroy, OnInit, SkipSelf, ViewContainerRef } from '@angular/core';
+import { ComponentRef, Directive, Host, Input, OnChanges, OnDestroy, OnInit, SkipSelf, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { ComponentTemplateRef } from '../components';
-import { COMPONENT_TEMPLATE_REF_TOKEN } from '../providers';
+import { OutletComponent } from '../components';
 import { ComponentSchema, ControlSchema } from '../schemas';
 import { Arr, Obj } from '../types';
 import { ControlContainer } from './control-container';
@@ -15,27 +14,30 @@ export class FluentControlOutletDirective<T extends Obj | Arr> implements OnInit
 
   schema!: ComponentSchema | ControlSchema;
   control!: AbstractControl;
-  classful: boolean = true;
 
   get model(): T {
     return this.controlContainer.directive.model as T;
   }
 
+  private readonly componentRef!: ComponentRef<OutletComponent<Obj | Arr>>;
+
   constructor(
     private viewContainerRef: ViewContainerRef,
-    @Inject(COMPONENT_TEMPLATE_REF_TOKEN)
-    private componentTemplate: ComponentTemplateRef<T>,
     @Host() @SkipSelf()
     private controlContainer: ControlContainer<T>,
-  ) { }
+  ) {
+    this.componentRef = this.viewContainerRef.createComponent(OutletComponent);
+  }
 
   ngOnInit() {
     this.controlContainer.directive.addDirective(this);
-    this.viewContainerRef.createEmbeddedView(this.componentTemplate, this);
   }
 
   ngOnChanges() {
     this.controlContainer.directive.assignDirective(this);
+    this.componentRef.instance.control = this.control;
+    this.componentRef.instance.schema = this.schema;
+    this.componentRef.instance.model = this.model;
   }
 
   ngOnDestroy() {

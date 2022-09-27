@@ -10,8 +10,8 @@
         <input
           nz-input
           [attr.id]="schema.id"
-          [attr.maxlength]="schema.length ?? schema.length?.max"
-          [attr.minlength]="schema.length ?? schema.length?.min"
+          [attr.maxlength]="schema.length?.max ?? schema.length"
+          [attr.minlength]="schema.length?.min ?? schema.length"
           [fluentBinderSchema]="schema"
           [fluentBinderControl]="control"
           [ngClass]="classful ? schema.class : null"
@@ -34,8 +34,8 @@
         *ngIf="!schema.autocomplete"
         nz-input
         [attr.id]="schema.id"
-        [attr.maxlength]="schema.length ?? schema.length?.max"
-        [attr.minlength]="schema.length ?? schema.length?.min"
+        [attr.maxlength]="schema.length?.max ?? schema.length"
+        [attr.minlength]="schema.length?.min ?? schema.length"
         [fluentBinderSchema]="schema"
         [fluentBinderControl]="control"
         [formControl]="control"
@@ -53,8 +53,8 @@
         <textarea
           nz-input
           [attr.id]="schema.id"
-          [attr.maxlength]="schema.length ?? schema.length?.max"
-          [attr.minlength]="schema.length ?? schema.length?.min"
+          [attr.maxlength]="schema.length?.max ?? schema.length"
+          [attr.minlength]="schema.length?.min ?? schema.length"
           [fluentBinderSchema]="schema"
           [fluentBinderControl]="control"
           [formControl]="control"
@@ -78,8 +78,8 @@
         *ngIf="!schema.autocomplete"
         nz-input
         [attr.id]="schema.id"
-        [attr.maxlength]="schema.length ?? schema.length?.max"
-        [attr.minlength]="schema.length ?? schema.length?.min"
+        [attr.maxlength]="schema.length?.max ?? schema.length"
+        [attr.minlength]="schema.length?.min ?? schema.length"
         [fluentBinderSchema]="schema"
         [fluentBinderControl]="control"
         [formControl]="control"
@@ -491,8 +491,8 @@
           nz-col
           nz-input
           [attr.id]="schema.id"
-          [attr.maxlength]="schema.length ?? schema.length?.max"
-          [attr.minlength]="schema.length ?? schema.length?.min"
+          [attr.maxlength]="schema.length?.max ?? schema.length"
+          [attr.minlength]="schema.length?.min ?? schema.length"
           [fluentBinderSchema]="schema"
           [fluentBinderControl]="control"
           [formControl]="control"
@@ -519,8 +519,8 @@
         nz-col
         nz-input
         [attr.id]="schema.id"
-        [attr.maxlength]="schema.length ?? schema.length?.max"
-        [attr.minlength]="schema.length ?? schema.length?.min"
+        [attr.maxlength]="schema.length?.max ?? schema.length"
+        [attr.minlength]="schema.length?.min ?? schema.length"
         [fluentBinderSchema]="schema"
         [fluentBinderControl]="control"
         [formControl]="control"
@@ -542,8 +542,8 @@
           nz-col
           nz-input
           [attr.id]="schema.id"
-          [attr.maxlength]="schema.length ?? schema.length?.max"
-          [attr.minlength]="schema.length ?? schema.length?.min"
+          [attr.maxlength]="schema.length?.max ?? schema.length"
+          [attr.minlength]="schema.length?.min ?? schema.length"
           [fluentBinderSchema]="schema"
           [fluentBinderControl]="control"
           [formControl]="control"
@@ -571,8 +571,8 @@
         nz-col
         nz-input
         [attr.id]="schema.id"
-        [attr.maxlength]="schema.length ?? schema.length?.max"
-        [attr.minlength]="schema.length ?? schema.length?.min"
+        [attr.maxlength]="schema.length?.max ?? schema.length"
+        [attr.minlength]="schema.length?.min ?? schema.length"
         [fluentBinderSchema]="schema"
         [fluentBinderControl]="control"
         [formControl]="control"

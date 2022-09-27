@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { ComponentSchema, ControlSchema } from '../../schemas';
 import { Arr, Obj } from '../../types';
@@ -14,20 +14,26 @@ export type ComponentTemplateRef<T extends Obj | Arr> = TemplateRef<{
   classful: boolean;
 }>;
 
-/**
- * 这个组件专门用来放可复用的模板
- * @internal
- */
 @Component({
-  selector: 'fluent-template',
-  templateUrl: './fluent-template.component.html',
-  styleUrls: ['./fluent-template.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'fluent-outlet',
+  templateUrl: './outlet.component.html',
+  styleUrls: ['./outlet.component.css']
 })
-export class FluentTemplateComponent<T extends Obj | Arr> {
+export class OutletComponent<T extends Obj | Arr> implements OnInit {
+  @Input() control!: AbstractControl;
+  @Input() schema!: ControlSchema | ComponentSchema;
+  @Input() model!: T;
+  @Input() classful: boolean = true;
+
   @ViewChild('componentTemplate', { static: true }) componentTemplate!: ComponentTemplateRef<T>;
 
   /** @internal */
   readonly infinity: number = Infinity;
+
+  constructor(private viewContainerRef: ViewContainerRef) { }
+
+  ngOnInit(): void {
+    this.viewContainerRef.createEmbeddedView(this.componentTemplate, this);
+  }
 
 }

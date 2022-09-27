@@ -1,6 +1,6 @@
 import { ComponentRef, Directive, Host, Input, OnChanges, OnDestroy, OnInit, SkipSelf, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { OutletComponent } from '../components';
+import { FluentOutletComponent } from '../components';
 import { ComponentSchema, ControlSchema } from '../schemas';
 import { Arr, Obj } from '../types';
 import { ControlContainer } from './control-container';
@@ -19,14 +19,14 @@ export class FluentControlOutletDirective<T extends Obj | Arr> implements OnInit
     return this.controlContainer.directive.model as T;
   }
 
-  private readonly componentRef!: ComponentRef<OutletComponent<Obj | Arr>>;
+  private readonly componentRef!: ComponentRef<FluentOutletComponent<Obj | Arr>>;
 
   constructor(
     private viewContainerRef: ViewContainerRef,
     @Host() @SkipSelf()
     private controlContainer: ControlContainer<T>,
   ) {
-    this.componentRef = this.viewContainerRef.createComponent(OutletComponent);
+    this.componentRef = this.viewContainerRef.createComponent(FluentOutletComponent);
   }
 
   ngOnInit() {

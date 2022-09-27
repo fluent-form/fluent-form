@@ -19,7 +19,7 @@ export type ComponentTemplateRef<T extends Obj | Arr> = TemplateRef<{
   templateUrl: './outlet.component.html',
   styleUrls: ['./outlet.component.css']
 })
-export class OutletComponent<T extends Obj | Arr> implements OnInit {
+export class FluentOutletComponent<T extends Obj | Arr> implements OnInit {
   @Input() control!: AbstractControl;
   @Input() schema!: ControlSchema | ComponentSchema;
   @Input() model!: T;

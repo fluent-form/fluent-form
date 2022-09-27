@@ -4,22 +4,22 @@ import { button } from '../../builders';
 import { FluentFormModule } from '../../fluent-form.module';
 import { Arr, Obj } from '../../types';
 import { standardSchema } from '../../utils';
-import { OutletComponent } from './outlet.component';
+import { FluentOutletComponent } from './outlet.component';
 
-describe('OutletComponent', () => {
-  let component: OutletComponent<Obj | Arr>;
-  let fixture: ComponentFixture<OutletComponent<Obj | Arr>>;
+describe('FluentOutletComponent', () => {
+  let component: FluentOutletComponent<Obj | Arr>;
+  let fixture: ComponentFixture<FluentOutletComponent<Obj | Arr>>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [OutletComponent],
+      declarations: [FluentOutletComponent],
       imports: [FluentFormModule]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OutletComponent);
+    fixture = TestBed.createComponent(FluentOutletComponent);
     component = fixture.componentInstance;
     component.control = new FormGroup({});
     component.schema = standardSchema(button());

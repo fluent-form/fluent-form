@@ -11,7 +11,7 @@ import { story, source } from './';
 
 # Toplevel Form - 顶层表单
 
-对于顶层表单，`form()` 还支持传入一个函数作为参数，该函数的参数为一个 `group()` 实例，可以借助它来配置顶层表单的验证器（`validators / asyncValidators`）与更新时机（`updateOn`）。
+如果想配置顶层表单，`form()` 还支持传入一个函数作为参数，该函数的参数为一个 `group()` 实例，可以借助它来配置顶层表单的验证器（`validators / asyncValidators`）与更新时机（`updateOn`）。
 
 <Canvas withToolbar isExpanded mdxSource={source}>
   <Story name="Toplevel Form">{story}</Story>

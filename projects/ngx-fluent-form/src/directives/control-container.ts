@@ -1,8 +1,8 @@
 import { AbstractControl } from '@angular/forms';
 import { AnySchema } from '../schemas';
 import { Arr, Obj } from '../types';
-import { FluentFormNameDirective } from './fluent-form-name.directive';
-import { FluentFormDirective } from './fluent-form.directive';
+import { FluentFormNameDirective } from './form-name.directive';
+import { FluentFormDirective } from './form.directive';
 
 /**
  * 抽象的控件容器

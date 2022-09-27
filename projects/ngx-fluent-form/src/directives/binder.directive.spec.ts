@@ -7,7 +7,7 @@ import { NzRateComponent, NzRateModule } from 'ng-zorro-antd/rate';
 import { input, rate } from '../builders';
 import { ControlSchema } from '../schemas';
 import { createFormControl, standardSchema } from '../utils';
-import { FluentBinderDirective } from './fluent-binder.directive';
+import { FluentBinderDirective } from './binder.directive';
 
 @Component({
   template: `

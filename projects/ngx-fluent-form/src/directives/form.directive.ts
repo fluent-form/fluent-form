@@ -6,8 +6,8 @@ import { AnySchema, ComponentSchema, ControlSchema, FormGroupSchema } from '../s
 import { Arr, Obj } from '../types';
 import { createFormGroup, formUtils, FormUtils, modelUtils, schemasUtils, standardSchema, standardSchemas } from '../utils';
 import { ControlContainer } from './control-container';
-import { FluentControlOutletDirective } from './fluent-control-outlet.directive';
-import { FluentFormNameDirective } from './fluent-form-name.directive';
+import { FluentControlOutletDirective } from './control-outlet.directive';
+import { FluentFormNameDirective } from './form-name.directive';
 
 @Directive({
   selector: '[fluentForm]',
@@ -36,7 +36,7 @@ export class FluentFormDirective<T extends Obj | Arr> extends ControlContainer<T
   }
 
   /** 模型 */
-  @Input() override model!: T;
+  @Input('fluentModel') override model!: T;
 
   @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
   @Output() modelChange: EventEmitter<T> = new EventEmitter();

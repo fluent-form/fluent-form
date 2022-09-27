@@ -5,7 +5,7 @@ import { FluentFormModule } from '../fluent-form.module';
 
 @Component({
   template: `
-    <div [fluentForm]="schemas" [(model)]="model">
+    <div [fluentForm]="schemas" [(fluentModel)]="model">
       <fluent-control-outlet name="ipt"></fluent-control-outlet>
       <ng-container fluentFormName="group">
         <fluent-control-outlet name="ipt"></fluent-control-outlet>

@@ -10,8 +10,8 @@ import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchema, stan
 
 @Component({
   selector: 'fluent-form',
-  templateUrl: './fluent-form.component.html',
-  styleUrls: ['./fluent-form.component.scss'],
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [NzDestroyService]
 })

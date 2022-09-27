@@ -6,8 +6,8 @@ import { AnySchema, ComponentSchema, ControlContainerSchema, ControlSchema } fro
 import { Arr, Obj } from '../types';
 import { schemasUtils } from '../utils';
 import { ControlContainer } from './control-container';
-import { FluentControlOutletDirective } from './fluent-control-outlet.directive';
-import { FluentFormDirective } from './fluent-form.directive';
+import { FluentControlOutletDirective } from './control-outlet.directive';
+import { FluentFormDirective } from './form.directive';
 
 @Directive({
   selector: '[fluentFormName]',

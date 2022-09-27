@@ -4,7 +4,7 @@ import { array, button, form, group, input, inputGroup } from '../../builders';
 import { FluentFormModule } from '../../fluent-form.module';
 import { AnySchema } from '../../schemas/index.schema';
 import { Obj } from '../../types';
-import { FluentFormComponent } from './fluent-form.component';
+import { FluentFormComponent } from './form.component';
 
 @Component({
   template: `<fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>`,

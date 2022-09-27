@@ -18,7 +18,7 @@ import dedent from 'ts-dedent';
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of table.data; index as index" [fluentForm]="schemas" [(model)]="list[index]">
+          <tr *ngFor="let data of table.data; index as index" [fluentForm]="schemas" [(fluentModel)]="list[index]">
             <td>{{ index + 1 }}</td>
             <td>
               <fluent-control-outlet name="name"></fluent-control-outlet>
@@ -121,7 +121,7 @@ export const source = dedent`
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of table.data; index as index" [fluentForm]="schemas" [(model)]="list[index]">
+          <tr *ngFor="let data of table.data; index as index" [fluentForm]="schemas" [(fluentModel)]="list[index]">
             <td>{{ index + 1 }}</td>
             <td>
               <fluent-control-outlet name="name"></fluent-control-outlet>

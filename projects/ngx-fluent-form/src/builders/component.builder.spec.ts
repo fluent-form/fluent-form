@@ -1,13 +1,19 @@
 import { SafeAny } from '@ngify/types';
 import { ButtonComponentSchema, StepsComponentSchema, TabsetComponentSchema } from '../schemas';
 import { standardSchema } from '../utils';
-import { button, buttonGroup, inputGroup, step, steps, tab, tabset } from './component.builder';
+import { button, buttonGroup, inputGroup, step, steps, tab, tabset, text } from './component.builder';
 import { input } from './control.builder';
 
 describe('component.builder', () => {
   it('inputGroup', () => {
     const schema = standardSchema(inputGroup().schemas());
     const value = { type: 'input-group', schemas: [] } as SafeAny;
+    expect(schema).toEqual(value);
+  });
+
+  it('text', () => {
+    const schema = standardSchema(text().content(''));
+    const value = { type: 'text', content: '' } as SafeAny;
     expect(schema).toEqual(value);
   });
 

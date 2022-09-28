@@ -1,7 +1,7 @@
 import { SafeAny } from '@ngify/types';
-import { AbstractTextControlSchema, CheckboxControlSchema, DatePickerControlSchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RangePickerControlSchema, RateControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema } from '../schemas';
+import { AbstractTextControlSchema, CheckboxControlSchema, DatePickerControlSchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RangePickerControlSchema, RateControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema } from '../schemas';
 import { standardSchema } from '../utils';
-import { array, cascader, checkbox, checkboxGroup, date, datetime, form, group, input, number, radio, range, rate, select, slider, switcher, textarea, time, treeSelect } from './control.builder';
+import { array, cascader, checkbox, checkboxGroup, date, datetime, form, group, input, number, radio, range, rate, select, slider, textarea, time, toggle, treeSelect } from './control.builder';
 
 describe('control.builder', () => {
   it('form', () => {
@@ -58,9 +58,9 @@ describe('control.builder', () => {
     expect(schema).toEqual(value);
   });
 
-  it('switcher', () => {
-    const schema = standardSchema(switcher('switcher'));
-    const value = { type: 'switch', name: 'switcher' } as SwitchControlSchema<'switcher', boolean>;
+  it('toggle', () => {
+    const schema = standardSchema(toggle('toggle'));
+    const value = { type: 'toggle', name: 'toggle' } as ToggleControlSchema<'toggle', boolean>;
     expect(schema).toEqual(value);
   });
 

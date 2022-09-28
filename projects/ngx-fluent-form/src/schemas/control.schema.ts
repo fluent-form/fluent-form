@@ -76,8 +76,8 @@ export interface TimePickerControlSchema<Name extends SchemaName = SchemaName, V
   suffixIcon?: string | TemplateRef<void>;
 }
 
-export interface SwitchControlSchema<Name extends SchemaName = SchemaName, Val = boolean> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzSwitchComponent, Val> {
-  type: 'switch';
+export interface ToggleControlSchema<Name extends SchemaName = SchemaName, Val = boolean> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzSwitchComponent, Val> {
+  type: 'toggle';
   /** Placeholder text */
   placeholder?: [string | TemplateRef<void>, string | TemplateRef<void>];
   size?: NzSizeDSType;

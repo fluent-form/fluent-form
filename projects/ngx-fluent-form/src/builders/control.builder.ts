@@ -1,6 +1,6 @@
 import { SafeAny } from "@ngify/types";
 import { AbstractSchema, AnySchemaName, SchemaName } from '../schemas/abstract.schema';
-import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SwitchControlSchema, TextareaControlSchema, TimePickerControlSchema, TreeSelectControlSchema } from '../schemas/control.schema';
+import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas/control.schema';
 import { AnyBuilder, AnySchema } from '../schemas/index.schema';
 import { TypeAndName } from '../types';
 import { standardSchema, standardSchemas } from "../utils";
@@ -63,10 +63,10 @@ export function time<N extends SchemaName>(name?: N) {
   return builder<TimePickerControlSchema<N>>().type('time').name(name);
 }
 
-export function switcher(): UnstableBuilder<SwitchControlSchema<number>, TypeAndName>;
-export function switcher<N extends SchemaName>(name?: N): UnstableBuilder<SwitchControlSchema<N>, TypeAndName>;
-export function switcher<N extends SchemaName>(name?: N) {
-  return builder<SwitchControlSchema<N>>().type('switch').name(name);
+export function toggle(): UnstableBuilder<ToggleControlSchema<number>, TypeAndName>;
+export function toggle<N extends SchemaName>(name?: N): UnstableBuilder<ToggleControlSchema<N>, TypeAndName>;
+export function toggle<N extends SchemaName>(name?: N) {
+  return builder<ToggleControlSchema<N>>().type('toggle').name(name);
 }
 
 export function select(): UnstableBuilder<SelectControlSchema<number>, TypeAndName>;

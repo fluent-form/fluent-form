@@ -2,6 +2,7 @@ import { TemplateRef } from '@angular/core';
 import { ThemeType } from '@ant-design/icons-angular';
 import { NzButtonComponent, NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
+import { NzFormTextComponent } from 'ng-zorro-antd/form';
 import { NzInputGroupComponent } from 'ng-zorro-antd/input';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
 import { NzTabComponent, NzTabPositionMode, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
@@ -26,6 +27,11 @@ export interface InputGroupComponentSchema<Name extends SchemaName = SchemaName>
   suffix?: string | TemplateRef<void> | { icon: string };
   size?: NzSizeLDSType;
   primary?: AnySchemaName;
+}
+
+export interface TextComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzFormTextComponent> {
+  type: 'text';
+  content: string | TemplateRef<void>;
 }
 
 export interface ButtonComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractElementSchema<HTMLButtonElement> {

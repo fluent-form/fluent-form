@@ -1,9 +1,13 @@
-import { ButtonComponentSchema, ButtonGroupComponentSchema, InputGroupComponentSchema, SchemaName, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsetComponentSchema } from '../schemas';
+import { ButtonComponentSchema, ButtonGroupComponentSchema, InputGroupComponentSchema, SchemaName, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsetComponentSchema, TextComponentSchema } from '../schemas';
 import { TypeAndName } from '../types';
 import { builder, UnstableBuilder } from '../utils/builder.utils';
 
 export function inputGroup<N extends SchemaName>(name?: N): UnstableBuilder<InputGroupComponentSchema<N>, TypeAndName> {
   return builder<InputGroupComponentSchema<N>>().type('input-group').name(name);
+}
+
+export function text<N extends SchemaName>(name?: N): UnstableBuilder<TextComponentSchema<N>, TypeAndName> {
+  return builder<TextComponentSchema<N>>().type('text').name(name);
 }
 
 export function buttonGroup<N extends SchemaName>(name?: N): UnstableBuilder<ButtonGroupComponentSchema<N>, TypeAndName> {

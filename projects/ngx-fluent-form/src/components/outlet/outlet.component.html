@@ -405,6 +405,16 @@
       </nz-input-group>
     </ng-container>
 
+    <ng-container *ngSwitchCase="'text'">
+      <nz-form-text
+        #cmp
+        [fluentBinder]="cmp"
+        [fluentBinderSchema]="schema"
+        [ngClass]="classful ? schema.class : null">
+        <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
+      </nz-form-text>
+    </ng-container>
+
     <ng-container *ngSwitchCase="'button-group'">
       <nz-button-group
         #cmp

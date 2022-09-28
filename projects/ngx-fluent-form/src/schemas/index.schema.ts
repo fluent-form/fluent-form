@@ -20,7 +20,7 @@
 
 import { StableBuilder } from '../utils/builder.utils';
 import { AnySchemaName, DoubleSchemaName, SchemaName } from './abstract.schema';
-import { ButtonComponentSchema, ButtonGroupComponentSchema, InputGroupComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsetComponentSchema } from './component.schema';
+import { ButtonComponentSchema, ButtonGroupComponentSchema, InputGroupComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsetComponentSchema, TextComponentSchema } from './component.schema';
 import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from './control.schema';
 
 /** 任意图示 */
@@ -59,7 +59,7 @@ export type ComponentContainerSchema = ButtonGroupComponentSchema;
 export type ComponentContainerBuilder = StableBuilder<ComponentContainerSchema>;
 
 /** 普通组件图示 */
-export type ComponentSchema<N extends SchemaName = SchemaName> = ButtonComponentSchema<N>;
+export type ComponentSchema<N extends SchemaName = SchemaName> = ButtonComponentSchema<N> | TextComponentSchema<N>;
 /** 普通组件构建器 */
 export type ComponentBuilder<N extends SchemaName = SchemaName> = StableBuilder<ComponentSchema<N>>;
 

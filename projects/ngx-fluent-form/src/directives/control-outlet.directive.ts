@@ -7,7 +7,8 @@ import { ControlContainer } from './control-container';
 
 @Directive({
   // eslint-disable-next-line
-  selector: 'fluent-control-outlet'
+  selector: 'fluent-control-outlet',
+  exportAs: 'fluentControlOutlet',
 })
 export class FluentControlOutletDirective<T extends Obj | Arr> implements OnInit, OnChanges, OnDestroy {
   @Input() name!: string | number;

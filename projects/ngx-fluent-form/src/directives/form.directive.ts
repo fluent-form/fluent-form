@@ -11,6 +11,7 @@ import { FluentFormNameDirective } from './form-name.directive';
 
 @Directive({
   selector: '[fluentForm]',
+  exportAs: 'fluentForm',
   providers: [
     NzDestroyService,
     {

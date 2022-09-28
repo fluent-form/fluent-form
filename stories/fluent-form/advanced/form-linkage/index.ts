@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { form, input, radio, select, switcher } from 'ngx-fluent-form';
+import { form, input, radio, select, toggle } from 'ngx-fluent-form';
 import { AbstractFluentFormWrapperComponent, defineMeta, defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
@@ -48,7 +48,7 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
         { label: '显示', value: true },
         { label: '隐藏', value: false },
       ]),
-      switcher('state').label('状态').span(4).placeholder(['启用', '禁用']),
+      toggle('state').label('状态').span(4).placeholder(['启用', '禁用']),
       input('text')
         .label('文本输入框')
         .span(6)
@@ -68,7 +68,7 @@ export const story = defineStory();
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { form, input, radio, select, switcher } from 'ngx-fluent-form';
+  import { form, input, radio, select, toggle } from 'ngx-fluent-form';
 
   const SELECT_OPTIONS = [
     { label: 'Jack', value: 'jack' },
@@ -92,7 +92,7 @@ export const source = dedent`
         { label: '显示', value: true },
         { label: '隐藏', value: false },
       ]),
-      switcher('state').label('状态').span(4).placeholder(['启用', '禁用']),
+      toggle('state').label('状态').span(4).placeholder(['启用', '禁用']),
       input('text')
         .label('文本输入框')
         .span(6)

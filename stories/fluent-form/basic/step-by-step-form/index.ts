@@ -1,4 +1,4 @@
-import { button, form, group, input, step, steps, switcher, textarea } from 'ngx-fluent-form';
+import { button, form, group, input, step, steps, textarea, toggle } from 'ngx-fluent-form';
 import { defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
@@ -12,7 +12,7 @@ export const story = defineStory({
         ),
         step().title('第二步').schemas(
           input('inputInStep2').label('文本输入框'),
-          switcher('switchInStep2').label('开关')
+          toggle('toggleInStep2').label('开关')
         ),
         step().title('第三步').schemas(
           group('step3').span(24).schemas(
@@ -28,7 +28,7 @@ export const story = defineStory({
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { button, form, group, input, step, steps, switcher, textarea } from 'ngx-fluent-form';
+  import { button, form, group, input, step, steps, toggle, textarea } from 'ngx-fluent-form';
 
   @Component({
     selector: 'example-component',
@@ -43,7 +43,7 @@ export const source = dedent`
         ),
         step().title('第二步').schemas(
           input('inputInStep2').label('文本输入框'),
-          switcher('switchInStep2').label('开关')
+          toggle('toggleInStep2').label('开关')
         ),
         step().title('第三步').schemas(
           group('step3').span(24).schemas(

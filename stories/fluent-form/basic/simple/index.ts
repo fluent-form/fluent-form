@@ -1,4 +1,4 @@
-import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, datetime, form, input, inputGroup, number, radio, range, rate, select, slider, step, steps, switcher, tab, tabset, textarea, time, treeSelect } from 'ngx-fluent-form';
+import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, datetime, form, input, inputGroup, number, radio, range, rate, select, slider, step, steps, tab, tabset, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
 import { CASCADER_OPTIONS, CHECKBOX_OPTIONS, RADIO_OPTIONS, SELECT_OPTIONS, TREE_SELECT_OPTIONS } from 'stories/options';
 import { defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
@@ -32,7 +32,7 @@ export const story = defineStory({
       range('range').label('区间日期录入框').span(6),
       datetime('datetime').label('日期时间录入框').span(6),
       time('time').label('时间录入框').span(6),
-      switcher('switch').label('开关').placeholder(['启用', '禁用']).value(true).span(12),
+      toggle('toggle').label('开关').placeholder(['启用', '禁用']).value(true).span(12),
       radio('radio').label('单选框组').options(RADIO_OPTIONS).span(12),
       checkbox('checkbox').label('单个复选框').content('同意').span(12),
       checkboxGroup('checkboxGroup').label('复选框组').options(CHECKBOX_OPTIONS).span(12),
@@ -81,7 +81,7 @@ export const story = defineStory({
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, datetime, form, input, inputGroup, number, radio, range, rate, select, slider, step, steps, switcher, textarea, time } from 'ngx-fluent-form';
+  import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, datetime, form, input, inputGroup, number, radio, range, rate, select, slider, step, steps, toggle, textarea, time } from 'ngx-fluent-form';
 
   @Component({
     selector: 'example-component',
@@ -115,7 +115,7 @@ export const source = dedent`
       range('range').label('区间日期录入框').span(6),
       datetime('datetime').label('日期时间录入框').span(6),
       time('time').label('时间录入框').span(6),
-      switcher('switch').label('开关').placeholder(['启用', '禁用']).value(true).span(12),
+      toggle('toggle').label('开关').placeholder(['启用', '禁用']).value(true).span(12),
       radio('radio').label('单选框组').options(RADIO_OPTIONS).span(12),
       checkbox('checkbox').label('单个复选框').content('同意').span(12),
       checkboxGroup('checkboxGroup').label('复选框组').options(CHECKBOX_OPTIONS).span(12),

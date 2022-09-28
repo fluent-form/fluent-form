@@ -1,4 +1,4 @@
-import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, datetime, form, input, inputGroup, number, radio, range, rate, select, slider, step, steps, tab, tabset, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
+import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, datetime, form, input, inputGroup, number, radio, range, rate, select, slider, step, steps, tab, tabset, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
 import { CASCADER_OPTIONS, CHECKBOX_OPTIONS, RADIO_OPTIONS, SELECT_OPTIONS, TREE_SELECT_OPTIONS } from 'stories/options';
 import { defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
@@ -41,6 +41,7 @@ export const story = defineStory({
       treeSelect('treeSelect').label('树形选择器').options(TREE_SELECT_OPTIONS).expandedKeys(['100', '1001']).span(8),
       rate('rate').label('评分').value(2.5).span(12),
       slider('slider').label('滑动条').value(30).span(12),
+      text().content('文本'),
       button().subtype('primary').content('普通按钮'),
       button().subtype('primary').content('带图标的按钮').icon('check'),
       button().content('危险按钮').danger(true),

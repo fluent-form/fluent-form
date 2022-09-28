@@ -16,14 +16,14 @@ Building dynamic form in Angular with Fluent API.
 - Support using Fluent API and JSON.
 - Type-safe form configuration.
 - Built on top of Angular Reactive Forms.
-- Components and grid layout based on [NgZorroAntd](https://ng.ant.design).
+- Components and grid layout based on [NG-ZORRO](https://ng.ant.design).
 
 ## Prerequisites
 
 Before using `ngx-fluent-form`, you should have a basic understanding of the following:
 
 - [Angular Reactive Forms](https://angular.cn/guide/reactive-forms)
-- [NgZorroAntd](https://ng.ant.design)
+- [NG-ZORRO Components](https://ng.ant.design)
 
 And make sure your relevant dependency versions meet the following requirements:
 
@@ -63,7 +63,7 @@ import { date, form, number, input } from 'ngx-fluent-form';
 @Component({
   template: `<fluent-form [(model)]="model" [schemas]="schemas"></fluent-form>`
 })
-export class Component {
+export class ExampleComponent {
   schemas = form(
     input('text').label('label'),
     number('number').label('label').max(100),

@@ -50,7 +50,7 @@ export const cmpSource = dedent`
   @Component({
     template: \`<fluent-form [(model)]="model" [schemas]="schemas"></fluent-form>\`
   })
-  export class Component {
+  export class ExampleComponent {
     schemas = form(
       input('text').label('文本'),
       number('number').label('数字').max(100),

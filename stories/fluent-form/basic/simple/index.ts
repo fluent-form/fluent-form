@@ -124,6 +124,7 @@ export const source = dedent`
       cascader('cascader').label('联级选择器').options(CASCADER_OPTIONS).span(12),
       rate('rate').label('评分').value(2.5).span(12),
       slider('slider').label('滑动条').value(30).span(12),
+      text().content('文本'),
       button().subtype('primary').content('普通按钮'),
       button().subtype('primary').content('带图标的按钮').icon('check'),
       button().content('危险按钮').danger(true),

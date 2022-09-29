@@ -74,12 +74,14 @@ describe('FluentBinderDirective', () => {
   });
 
   it('input should be read only', () => {
-    const readOnly = debugElement.nativeElement.querySelector('input').readOnly;
-    expect(readOnly).toBe(true);
+    const input = debugElement.nativeElement.querySelector('input');
+    input.dispatchEvent(new InputEvent('input'));
+    expect(input.readOnly).toBe(true);
   });
 
   it('rate should be auto focus', () => {
-    const focus = debugElement.query(By.directive(NzRateComponent)).componentInstance.nzAutoFocus;
-    expect(focus).toBe(true);
+    const rate = debugElement.query(By.directive(NzRateComponent)).componentInstance;
+    rate.nzOnFocus.emit();
+    expect(rate.nzAutoFocus).toBe(true);
   });
 });

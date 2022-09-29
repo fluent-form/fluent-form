@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { array, button, form, group, input, inputGroup } from '../../builders';
 import { FluentFormModule } from '../../fluent-form.module';
+import { FormGroupSchema } from '../../schemas';
 import { AnySchema } from '../../schemas/index.schema';
 import { Obj } from '../../types';
 import { FluentFormComponent } from './form.component';
@@ -11,7 +12,7 @@ import { FluentFormComponent } from './form.component';
 })
 class TestWarpperComponent<T extends Obj> {
   @ViewChild(FluentFormComponent) target!: FluentFormComponent<T>;
-  schemas!: AnySchema[];
+  schemas!: AnySchema[] | FormGroupSchema;
   model: T = {} as T;
 }
 
@@ -35,6 +36,16 @@ describe('FluentFormComponent', () => {
 
   it('应该能创建组件', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('能够配置顶层表单', () => {
+    component.schemas = form(it => it.updateOn('blur').schemas(
+      input('text').span(1)
+    ));
+    component.model = { text: 'test' };
+    fixture.detectChanges();
+
+    expect(component.target.form.getRawValue()).toEqual(component.model);
   });
 
   it('模型应该能正确赋值表单', () => {

@@ -6,8 +6,8 @@ import { AnySchema, ComponentSchema, ControlContainerSchema, ControlSchema } fro
 import { Arr, Obj } from '../types';
 import { schemasUtils } from '../utils';
 import { ControlContainer } from './control-container';
-import { FluentControlOutletDirective } from './control-outlet.directive';
 import { FluentFormDirective } from './form.directive';
+import { FluentSchemaOutletDirective } from './schema-outlet.directive';
 
 @Directive({
   selector: '[fluentFormName]',
@@ -21,7 +21,7 @@ import { FluentFormDirective } from './form.directive';
   ]
 })
 export class FluentFormNameDirective<T extends Obj | Arr> extends ControlContainer<T> implements OnInit {
-  private directives: FluentControlOutletDirective<T>[] = [];
+  private directives: FluentSchemaOutletDirective<T>[] = [];
   @Input('fluentFormName') name!: string | number;
 
   @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
@@ -54,7 +54,7 @@ export class FluentFormNameDirective<T extends Obj | Arr> extends ControlContain
    * 添加子指令
    * @param directive
    */
-  addDirective(directive: FluentControlOutletDirective<T>) {
+  addDirective(directive: FluentSchemaOutletDirective<T>) {
     this.assignDirective(directive);
     this.directives = this.directives.concat(directive);
   }
@@ -63,8 +63,8 @@ export class FluentFormNameDirective<T extends Obj | Arr> extends ControlContain
    * 分配参数到子指令
    * @param directive
    */
-  assignDirective(directive: FluentControlOutletDirective<T>) {
-    directive.control = this.form.get([directive.name])!;
+  assignDirective(directive: FluentSchemaOutletDirective<T>) {
+    directive.control = this.form.get([directive.name]) ?? this.form;
     directive.schema = schemasUtils(this.schemas).find<ComponentSchema | ControlSchema>(directive.name)!;
   }
 
@@ -72,7 +72,7 @@ export class FluentFormNameDirective<T extends Obj | Arr> extends ControlContain
    * 移除子指令
    * @param directive
    */
-  removeDirective(directive: FluentControlOutletDirective<T>) {
+  removeDirective(directive: FluentSchemaOutletDirective<T>) {
     this.directives = this.directives.filter(o => o !== directive);
   }
 }

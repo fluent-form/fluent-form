@@ -7,10 +7,13 @@ import { ControlContainer } from './control-container';
 
 @Directive({
   // eslint-disable-next-line
-  selector: 'fluent-control-outlet',
-  exportAs: 'fluentControlOutlet',
+  selector: 'fluent-schema-outlet',
+  exportAs: 'fluentSchemaOutlet',
+  host: {
+    'style.display': 'none'
+  }
 })
-export class FluentControlOutletDirective<T extends Obj | Arr> implements OnInit, OnChanges, OnDestroy {
+export class FluentSchemaOutletDirective<T extends Obj | Arr> implements OnInit, OnChanges, OnDestroy {
   @Input() name!: string | number;
 
   schema!: ComponentSchema | ControlSchema;

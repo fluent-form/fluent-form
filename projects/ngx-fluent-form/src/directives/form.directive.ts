@@ -6,8 +6,8 @@ import { AnySchema, ComponentSchema, ControlSchema, FormGroupSchema } from '../s
 import { Arr, Obj } from '../types';
 import { createFormGroup, formUtils, FormUtils, modelUtils, schemasUtils, standardSchema, standardSchemas } from '../utils';
 import { ControlContainer } from './control-container';
-import { FluentControlOutletDirective } from './control-outlet.directive';
 import { FluentFormNameDirective } from './form-name.directive';
+import { FluentControlOutletDirective } from './schema-outlet.directive';
 
 @Directive({
   selector: '[fluentForm]',
@@ -86,7 +86,7 @@ export class FluentFormDirective<T extends Obj | Arr> extends ControlContainer<T
    * @param directive
    */
   assignDirective(directive: FluentControlOutletDirective<T>) {
-    directive.control = this.form.get([directive.name])!;
+    directive.control = this.form.get([directive.name]) ?? this.form;
     directive.schema = schemasUtils(this.schemas).find<ComponentSchema | ControlSchema>(directive.name)!;
   }
 

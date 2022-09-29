@@ -10,7 +10,7 @@ import { ControlContainer } from './control-container';
   selector: 'fluent-schema-outlet',
   exportAs: 'fluentSchemaOutlet',
   host: {
-    'style.display': 'none'
+    '[style.display]': `'none'`
   }
 })
 export class FluentSchemaOutletDirective<T extends Obj | Arr> implements OnInit, OnChanges, OnDestroy {

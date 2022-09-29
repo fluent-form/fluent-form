@@ -3,7 +3,7 @@ import { AbstractControl } from '@angular/forms';
 import { FluentOutletComponent } from '../components';
 import { ComponentSchema, ControlSchema } from '../schemas';
 import { Arr, Obj } from '../types';
-import { ControlContainer } from './control-container';
+import { ControlContainer } from './models/control-container';
 
 @Directive({
   // eslint-disable-next-line

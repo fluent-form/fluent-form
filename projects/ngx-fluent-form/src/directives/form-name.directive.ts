@@ -5,8 +5,8 @@ import { startWith, takeUntil } from 'rxjs';
 import { AnySchema, ComponentSchema, ControlContainerSchema, ControlSchema } from '../schemas';
 import { Arr, Obj } from '../types';
 import { schemasUtils } from '../utils';
-import { ControlContainer } from './control-container';
 import { FluentFormDirective } from './form.directive';
+import { ControlContainer } from './models/control-container';
 import { FluentSchemaOutletDirective } from './schema-outlet.directive';
 
 @Directive({

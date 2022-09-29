@@ -17,7 +17,10 @@ export type ComponentTemplateRef<T extends Obj | Arr> = TemplateRef<{
 @Component({
   selector: 'fluent-outlet',
   templateUrl: './outlet.component.html',
-  styleUrls: ['./outlet.component.css']
+  styleUrls: ['./outlet.component.css'],
+  host: {
+    '[style.display]': `'none'`
+  }
 })
 export class FluentOutletComponent<T extends Obj | Arr> implements OnInit {
   @Input() control!: AbstractControl;

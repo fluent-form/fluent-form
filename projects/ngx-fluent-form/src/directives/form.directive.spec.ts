@@ -6,12 +6,12 @@ import { FluentFormModule } from '../fluent-form.module';
 @Component({
   template: `
     <div [fluentForm]="schemas" [(fluentModel)]="model">
-      <fluent-control-outlet name="ipt"></fluent-control-outlet>
+      <fluent-schema-outlet name="ipt"></fluent-schema-outlet>
       <ng-container fluentFormName="group">
-        <fluent-control-outlet name="ipt"></fluent-control-outlet>
+        <fluent-schema-outlet name="ipt"></fluent-schema-outlet>
       </ng-container>
       <ng-container fluentFormName="array">
-        <fluent-control-outlet [name]="0"></fluent-control-outlet>
+        <fluent-schema-outlet [name]="0"></fluent-schema-outlet>
       </ng-container>
     </div>
   `

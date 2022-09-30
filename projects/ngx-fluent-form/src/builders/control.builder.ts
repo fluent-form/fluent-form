@@ -8,6 +8,7 @@ import { builder, StableBuilder, UnstableBuilder } from '../utils/builder.utils'
 
 type FormBuilderFn = (it: UnstableBuilder<FormGroupSchema, keyof AbstractSchema<AnySchemaName>>) => StableBuilder<FormGroupSchema>;
 
+/** @internal */
 function isFormBuilderFnTuple(arr: SafeAny[]): arr is [FormBuilderFn] {
   return arr[0] instanceof Function;
 }

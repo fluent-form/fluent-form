@@ -15,6 +15,7 @@
           [fluentBinderSchema]="schema"
           [fluentBinderControl]="control"
           [ngClass]="classful ? schema.class : null"
+          [ngStyle]="schema.style"
           [formControl]="control"
           [nzAutocomplete]="autocompleteCmp"
           [placeholder]="schema.placeholder ?? ''"
@@ -40,6 +41,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [placeholder]="schema.placeholder ?? ''"
         [type]="schema.subtype ?? 'text'"
         [autofocus]="schema.focus"
@@ -59,6 +61,7 @@
           [fluentBinderControl]="control"
           [formControl]="control"
           [ngClass]="classful ? schema.class : null"
+          [ngStyle]="schema.style"
           [nzAutocomplete]="autocompleteCmp"
           [nzAutosize]="schema.autosize ?? {}"
           [placeholder]="schema.placeholder ?? ''"
@@ -84,6 +87,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzAutosize]="schema.autosize ?? {}"
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
@@ -101,6 +105,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzId]="schema.id"
         [nzMax]="schema.max ?? infinity"
         [nzMin]="schema.min ?? -infinity"
@@ -123,6 +128,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzAllowClear]="schema.clearable"
         [nzFormat]="schema.format"
         [nzId]="schema.id"
@@ -150,6 +156,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzAllowClear]="schema.clearable"
         [nzFormat]="schema.format"
         [nzId]="schema.id"
@@ -179,6 +186,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzAllowEmpty]="schema.clearable"
         [nzFormat]="schema.format ?? 'HH:mm:ss'"
         [nzHourStep]="schema.step?.hour"
@@ -203,6 +211,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzCheckedChildren]="schema.placeholder?.[0]"
         [nzUnCheckedChildren]="schema.placeholder?.[1]"
         [nzSize]="schema.size">
@@ -217,6 +226,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzAllowClear]="schema.clearable"
         [nzId]="schema.id"
         [nzMaxMultipleCount]="schema.limit ?? infinity"
@@ -246,6 +256,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzAllowClear]="schema.clearable ?? true"
         [nzAutoFocus]="schema.focus"
         [nzBackdrop]="schema.backdrop"
@@ -272,6 +283,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzAllowClear]="schema.clearable ?? true"
         [nzBackdrop]="schema.backdrop"
         [nzShowIcon]="schema.icon"
@@ -301,6 +313,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzIncluded]="schema.included ?? true"
         [nzMax]="schema.max ?? 100"
         [nzMin]="schema.min"
@@ -320,18 +333,19 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
-        [nzButtonStyle]="schema.style"
+        [ngStyle]="schema.style"
+        [nzButtonStyle]="schema.button"
         [nzSize]="schema.size">
         <ng-container *ngFor="let option of schema.options">
           <label
-            *ngIf="!schema.style"
-            nz-radio
+            *ngIf="schema.button"
+            nz-radio-button
             [nzValue]="option[schema.config?.valueProperty ?? 'value']">
             {{ option[schema.config?.labelProperty ?? 'label'] }}
           </label>
           <label
-            *ngIf="schema.style"
-            nz-radio-button
+            *ngIf="!schema.button"
+            nz-radio
             [nzValue]="option[schema.config?.valueProperty ?? 'value']">
             {{ option[schema.config?.labelProperty ?? 'label'] }}
           </label>
@@ -348,6 +362,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzId]="schema.id"
         [nzAutoFocus]="schema.focus"
         [nzIndeterminate]="schema.indeterminate">{{ schema.content }}</label>
@@ -360,7 +375,8 @@
         [fluentBinderSchema]="schema"
         [fluentBinderControl]="control"
         [formControl]="control"
-        [ngClass]="classful ? schema.class : null">
+        [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style">
       </nz-checkbox-group>
     </ng-container>
 
@@ -372,6 +388,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzAllowClear]="schema.clearable ?? true"
         [nzAllowHalf]="schema.half"
         [nzCharacter]="schema.character"
@@ -387,6 +404,7 @@
         [fluentBinder]="cmp"
         [fluentBinderSchema]="schema"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzAddOnAfter]="schema.after?.icon ? null : schema.after"
         [nzAddOnAfterIcon]="schema.after?.icon"
         [nzAddOnBefore]="schema.before?.icon ? null : schema.before"
@@ -410,7 +428,8 @@
         #cmp
         [fluentBinder]="cmp"
         [fluentBinderSchema]="schema"
-        [ngClass]="classful ? schema.class : null">
+        [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style">
         <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
       </nz-form-text>
     </ng-container>
@@ -421,6 +440,7 @@
         [fluentBinder]="cmp"
         [fluentBinderSchema]="schema"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzSize]="schema.size">
         <ng-container *ngFor="let subschema of schema.schemas">
           <ng-container *ngTemplateOutlet="componentTemplate; context: { schema: subschema, model: model }">
@@ -438,6 +458,7 @@
           [disabled]="schema.disabled | call: model : schema : control"
           [fluentBinderSchema]="schema"
           [ngClass]="classful ? schema.class : null"
+          [ngStyle]="schema.style"
           [nzBlock]="schema.block"
           [nzDanger]="schema.danger | call: model : schema : control"
           [nzGhost]="schema.ghost | call: model : schema : control"
@@ -457,6 +478,7 @@
           [disabled]="schema.disabled | call: model : schema : control"
           [fluentBinderSchema]="schema"
           [ngClass]="classful ? schema.class : null"
+          [ngStyle]="schema.style"
           [nzBlock]="schema.block"
           [nzDanger]="schema.danger | call: model : schema : control"
           [nzGhost]="schema.ghost | call: model : schema : control"
@@ -493,6 +515,7 @@
           [fluentBinderControl]="control"
           [formControl]="control"
           [ngClass]="classful ? schema.class : null"
+          [ngStyle]="schema.style"
           [nzAutocomplete]="autocompleteCmp"
           [nzFlex]="schema.flex"
           [nzOffset]="schema.offset"
@@ -521,6 +544,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzFlex]="schema.flex"
         [nzOffset]="schema.offset"
         [nzSpan]="schema.span ?? null"
@@ -544,6 +568,7 @@
           [fluentBinderControl]="control"
           [formControl]="control"
           [ngClass]="classful ? schema.class : null"
+          [ngStyle]="schema.style"
           [nzAutocomplete]="autocompleteCmp"
           [nzAutosize]="schema.autosize ?? {}"
           [nzFlex]="schema.flex"
@@ -573,6 +598,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzAutosize]="schema.autosize ?? {}"
         [nzFlex]="schema.flex"
         [nzOffset]="schema.offset"
@@ -594,6 +620,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzFlex]="schema.flex"
         [nzId]="schema.id"
         [nzMax]="schema.max ?? infinity"
@@ -620,6 +647,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzAllowClear]="schema.clearable"
         [nzFlex]="schema.flex"
         [nzFormat]="schema.format"
@@ -651,6 +679,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzAllowClear]="schema.clearable"
         [nzFlex]="schema.flex"
         [nzFormat]="schema.format"
@@ -683,6 +712,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzAllowEmpty]="schema.clearable"
         [nzFlex]="schema.flex"
         [nzFormat]="schema.format ?? 'HH:mm:ss'"
@@ -710,6 +740,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzAllowClear]="schema.clearable"
         [nzFlex]="schema.flex"
         [nzId]="schema.id"
@@ -744,6 +775,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzAllowClear]="schema.clearable ?? true"
         [nzAutoFocus]="schema.focus"
         [nzBackdrop]="schema.backdrop"
@@ -774,6 +806,7 @@
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="classful ? schema.class : null"
+        [ngStyle]="schema.style"
         [nzAllowClear]="schema.clearable ?? true"
         [nzBackdrop]="schema.backdrop"
         [nzShowIcon]="schema.icon"
@@ -808,6 +841,7 @@
           [fluentBinderSchema]="schema"
           [fluentBinderControl]="control"
           [ngClass]="classful ? schema.class : null"
+          [ngStyle]="schema.style"
           [nzBlock]="schema.block"
           [nzDanger]="schema.danger"
           [nzFlex]="schema.flex"
@@ -830,6 +864,7 @@
           [disabled]="schema.disabled"
           [fluentBinderSchema]="schema"
           [ngClass]="classful ? schema.class : null"
+          [ngStyle]="schema.style"
           [nzBlock]="schema.block"
           [nzDanger]="schema.danger"
           [nzFlex]="schema.flex"

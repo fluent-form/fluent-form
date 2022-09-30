@@ -6,14 +6,18 @@
 <!-- @param schema 当前图示 -->
 <!-- @param form   当前表单 -->
 <!-- @param model  当前模型 -->
-<ng-template #formTemplate let-form="form" let-schemas="schemas" let-model="model">
+<!-- @param class  类      -->
+<!-- @param style  样式    -->
+<ng-template #formTemplate let-form="form" let-schemas="schemas" let-model="model" let-class="class" let-style="style">
   <form
     nz-row
     nz-form
     [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }"
     [nzLayout]="layout"
     [nzNoColon]="!colon"
-    [formGroup]="form">
+    [formGroup]="form"
+    [ngClass]="class"
+    [ngStyle]="style">
 
     <!-- 表单项模板 -->
     <!-- @param schema  当前图示 -->
@@ -22,7 +26,6 @@
     <ng-template #formItemTemplate let-schema="schema" let-control="control" let-model="model">
       <div
         nz-col
-        [ngClass]="schema.class"
         [nzSpan]="schema.span ?? null"
         [nzOffset]="schema.offset"
         [nzFlex]="schema.flex"
@@ -32,7 +35,7 @@
           <nz-divider *ngIf="schema.label" [nzText]="schema.label"></nz-divider>
           <ng-container
             [ngTemplateOutlet]="formTemplate"
-            [ngTemplateOutletContext]="{ form: control, schemas: schema.schemas, model: model[schema.name] }">
+            [ngTemplateOutletContext]="{ form: control, schemas: schema.schemas, model: model[schema.name], class: schema.class, style: schema.style }">
           </ng-container>
         </ng-container>
 
@@ -40,7 +43,7 @@
           <nz-divider *ngIf="schema.label" [nzText]="schema.label"></nz-divider>
           <ng-container
             [ngTemplateOutlet]="formTemplate"
-            [ngTemplateOutletContext]="{ form: control, schemas: schema.schemas, model: model[schema.name] }">
+            [ngTemplateOutletContext]="{ form: control, schemas: schema.schemas, model: model[schema.name], class: schema.class, style: schema.style }">
           </ng-container>
         </ng-container>
 
@@ -49,6 +52,8 @@
             #cmp
             [fluentBinder]="cmp"
             [fluentBinderSchema]="schema"
+            [ngClass]="schema.class"
+            [ngStyle]="schema.style"
             [nzType]="schema.subtype"
             [nzCurrent]="schema.active ?? 0"
             [nzLabelPlacement]="schema.placement"
@@ -63,6 +68,7 @@
                 [fluentBinder]="cmp"
                 [fluentBinderSchema]="subschema"
                 [ngClass]="subschema.class"
+                [ngStyle]="subschema.style"
                 [nzTitle]="subschema.title"
                 [nzSubtitle]="subschema.subtitle"
                 [nzDescription]="subschema.description"
@@ -92,6 +98,8 @@
             #cmp
             [fluentBinder]="cmp"
             [fluentBinderSchema]="schema"
+            [ngClass]="schema.class"
+            [ngStyle]="schema.style"
             [nzSelectedIndex]="schema.active"
             [nzType]="schema.subtype ?? 'line'"
             [nzSize]="schema.size ?? 'default'"
@@ -105,6 +113,7 @@
               [fluentBinder]="cmp"
               [fluentBinderSchema]="tabSchema"
               [ngClass]="tabSchema.class"
+              [ngStyle]="tabSchema.style"
               [nzTitle]="tabSchema.title"
               [nzDisabled]="tabSchema.disabled | call: model : tabSchema : control">
               <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
@@ -120,7 +129,7 @@
         </ng-container>
 
         <ng-container *ngSwitchDefault>
-          <nz-form-item>
+          <nz-form-item [ngClass]="schema.class">
             <ng-container *ngIf="schema.label">
               <nz-form-label
                 [nzSpan]="schema.label.span"

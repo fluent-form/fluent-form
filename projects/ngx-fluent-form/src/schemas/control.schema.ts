@@ -5,7 +5,7 @@ import { NzCheckboxComponent, NzCheckboxGroupComponent } from 'ng-zorro-antd/che
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDatePickerComponent, NzRangePickerComponent } from 'ng-zorro-antd/date-picker';
 import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
-import { NzRadioGroupComponent } from 'ng-zorro-antd/radio';
+import { NzRadioButtonStyle, NzRadioGroupComponent } from 'ng-zorro-antd/radio';
 import { NzRateComponent } from 'ng-zorro-antd/rate';
 import { NzSelectComponent, NzSelectModeType, NzSelectSizeType } from 'ng-zorro-antd/select';
 import { NzSliderComponent } from 'ng-zorro-antd/slider';
@@ -154,8 +154,7 @@ export interface SliderControlSchema<Name extends AnySchemaName = AnySchemaName,
 
 export interface RadioControlSchema<Name extends SchemaName = SchemaName, Val = SafeAny> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzRadioGroupComponent, Val> {
   type: 'radio';
-  /** Radio control style */
-  style?: 'outline' | 'solid';
+  button?: boolean | NzRadioButtonStyle;
   size?: NzSizeLDSType;
   options: Obj[];
   config?: {

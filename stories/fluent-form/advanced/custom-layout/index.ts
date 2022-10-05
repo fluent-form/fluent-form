@@ -22,19 +22,19 @@ import dedent from 'ts-dedent';
           <tr *ngFor="let item of table.data; index as index" [fluentForm]="schemas" [(fluentModel)]="list[index]">
             <td>{{ index + 1 }}</td>
             <td>
-              <fluent-schema-outlet name="name"></fluent-schema-outlet>
+              <fluent-outlet name="name"></fluent-outlet>
             </td>
             <td>
-              <fluent-schema-outlet name="age"></fluent-schema-outlet>
+              <fluent-outlet name="age"></fluent-outlet>
             </td>
             <td nzWidth="175px">
-              <fluent-schema-outlet name="address"></fluent-schema-outlet>
+              <fluent-outlet name="address"></fluent-outlet>
             </td>
             <td fluentFormName="info">
-              <fluent-schema-outlet name="cellphone"></fluent-schema-outlet>
+              <fluent-outlet name="cellphone"></fluent-outlet>
             </td>
             <td>
-              <fluent-schema-outlet name="enabled"></fluent-schema-outlet>
+              <fluent-outlet name="enabled"></fluent-outlet>
             </td>
           </tr>
         </tbody>
@@ -126,19 +126,19 @@ export const source = dedent`
           <tr *ngFor="let item of table.data; index as index" [fluentForm]="schemas" [(fluentModel)]="list[index]">
             <td>{{ index + 1 }}</td>
             <td>
-              <fluent-schema-outlet name="name"></fluent-schema-outlet>
+              <fluent-outlet name="name"></fluent-outlet>
             </td>
             <td>
-              <fluent-schema-outlet name="age"></fluent-schema-outlet>
+              <fluent-outlet name="age"></fluent-outlet>
             </td>
             <td nzWidth="175px">
-              <fluent-schema-outlet name="address"></fluent-schema-outlet>
+              <fluent-outlet name="address"></fluent-outlet>
             </td>
             <td fluentFormName="info">
-              <fluent-schema-outlet name="cellphone"></fluent-schema-outlet>
+              <fluent-outlet name="cellphone"></fluent-outlet>
             </td>
             <td>
-              <fluent-schema-outlet name="enabled"></fluent-schema-outlet>
+              <fluent-outlet name="enabled"></fluent-outlet>
             </td>
           </tr>
         </tbody>

@@ -7,14 +7,14 @@ import { AnySchema, FormGroupSchema } from '../schemas';
 @Component({
   template: `
     <div [fluentForm]="schemas" [(fluentModel)]="model">
-      <fluent-schema-outlet name="ipts"></fluent-schema-outlet>
-      <fluent-schema-outlet name="ipt"></fluent-schema-outlet>
+      <fluent-outlet name="ipts"></fluent-outlet>
+      <fluent-outlet name="ipt"></fluent-outlet>
       <ng-container fluentFormName="group">
-        <fluent-schema-outlet name="ipt"></fluent-schema-outlet>
-        <fluent-schema-outlet name="ipts"></fluent-schema-outlet>
+        <fluent-outlet name="ipt"></fluent-outlet>
+        <fluent-outlet name="ipts"></fluent-outlet>
       </ng-container>
       <ng-container fluentFormName="array">
-        <fluent-schema-outlet [name]="0"></fluent-schema-outlet>
+        <fluent-outlet [name]="0"></fluent-outlet>
       </ng-container>
     </div>
   `

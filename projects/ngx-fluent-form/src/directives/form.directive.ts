@@ -7,7 +7,7 @@ import { Arr, Obj } from '../types';
 import { createFormGroup, formUtils, FormUtils, modelUtils, schemasUtils, standardSchema, standardSchemas } from '../utils';
 import { FluentFormNameDirective } from './form-name.directive';
 import { ControlContainer } from './models/control-container';
-import { FluentSchemaOutletDirective } from './schema-outlet.directive';
+import { FluentOutletDirective } from './outlet.directive';
 
 @Directive({
   selector: '[fluentForm]',
@@ -22,7 +22,7 @@ import { FluentSchemaOutletDirective } from './schema-outlet.directive';
 })
 export class FluentFormDirective<T extends Obj | Arr> extends ControlContainer<T> implements OnChanges {
   private _model!: T;
-  private directives: FluentSchemaOutletDirective<T>[] = [];
+  private directives: FluentOutletDirective<T>[] = [];
 
   override form!: FormGroup;
 
@@ -76,7 +76,7 @@ export class FluentFormDirective<T extends Obj | Arr> extends ControlContainer<T
    * 添加子指令
    * @param directive
    */
-  addDirective(directive: FluentSchemaOutletDirective<T>) {
+  addDirective(directive: FluentOutletDirective<T>) {
     this.assignDirective(directive);
     this.directives = this.directives.concat(directive);
   }
@@ -85,7 +85,7 @@ export class FluentFormDirective<T extends Obj | Arr> extends ControlContainer<T
    * 分配参数到子指令
    * @param directive
    */
-  assignDirective(directive: FluentSchemaOutletDirective<T>) {
+  assignDirective(directive: FluentOutletDirective<T>) {
     directive.control = this.form.get([directive.name]) ?? this.form;
     directive.schema = schemasUtils(this.schemas).find<ComponentSchema | ControlSchema>(directive.name)!;
   }
@@ -94,7 +94,7 @@ export class FluentFormDirective<T extends Obj | Arr> extends ControlContainer<T
    * 移除子指令
    * @param directive
    */
-  removeDirective(directive: FluentSchemaOutletDirective<T>) {
+  removeDirective(directive: FluentOutletDirective<T>) {
     this.directives = this.directives.filter(o => o !== directive);
   }
 

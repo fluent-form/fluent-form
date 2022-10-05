@@ -22,17 +22,17 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
-import { FluentFormComponent, FluentOutletComponent } from './components';
-import { FluentBinderDirective, FluentFormDirective, FluentFormNameDirective, FluentSchemaOutletDirective } from './directives';
+import { FluentControlOutletComponent, FluentFormComponent } from './components';
+import { FluentBinderDirective, FluentFormDirective, FluentFormNameDirective, FluentOutletDirective } from './directives';
 import { CallPipe, ControlPipe, SchemaPipe, TypeofPipe } from './pipes';
 
 @NgModule({
   declarations: [
     FluentFormComponent,
-    FluentOutletComponent,
+    FluentControlOutletComponent,
     FluentFormDirective,
     FluentFormNameDirective,
-    FluentSchemaOutletDirective,
+    FluentOutletDirective,
     FluentBinderDirective,
     TypeofPipe,
     CallPipe,
@@ -68,7 +68,7 @@ import { CallPipe, ControlPipe, SchemaPipe, TypeofPipe } from './pipes';
     FluentFormComponent,
     FluentFormDirective,
     FluentFormNameDirective,
-    FluentSchemaOutletDirective,
+    FluentOutletDirective,
   ]
 })
 export class FluentFormModule { }

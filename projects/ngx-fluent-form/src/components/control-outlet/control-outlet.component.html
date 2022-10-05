@@ -3,7 +3,7 @@
 <!-- @param control FormControl -->
 <!-- @param schema  组件的图示 -->
 <!-- @param model   当前模型值 -->
-<ng-template #componentTemplate let-control="control" let-schema="schema" let-model="model" let-classful="classful">
+<ng-template #controlTemplate let-control="control" let-schema="schema" let-model="model" let-classful="classful">
   <ng-container [ngSwitch]="schema.type">
     <ng-container *ngSwitchCase="'input'">
       <ng-container *ngIf="schema.autocomplete as autocomplete">
@@ -416,7 +416,7 @@
         [nzSuffixIcon]="schema.suffix?.icon">
         <ng-container *ngFor="let subschema of schema.schemas">
           <ng-container
-            [ngTemplateOutlet]="composableComponentTemplate"
+            [ngTemplateOutlet]="composableControlTemplate"
             [ngTemplateOutletContext]="{ control: (subschema.name | control: control), schema: subschema, model: model, classful: classful }">
           </ng-container>
         </ng-container>
@@ -443,7 +443,7 @@
         [ngStyle]="schema.style"
         [nzSize]="schema.size">
         <ng-container *ngFor="let subschema of schema.schemas">
-          <ng-container *ngTemplateOutlet="componentTemplate; context: { schema: subschema, model: model }">
+          <ng-container *ngTemplateOutlet="controlTemplate; context: { schema: subschema, model: model }">
           </ng-container>
         </ng-container>
       </nz-button-group>
@@ -499,7 +499,7 @@
 <!-- @param control FormControl -->
 <!-- @param schema  组件的图示 -->
 <!-- @param model   当前模型值 -->
-<ng-template #composableComponentTemplate let-control="control" let-schema="schema" let-model="model" let-classful="classful">
+<ng-template #composableControlTemplate let-control="control" let-schema="schema" let-model="model" let-classful="classful">
   <ng-container
     *ngIf="!(schema.hidden | call: model : schema : control)"
     [ngSwitch]="schema.type">

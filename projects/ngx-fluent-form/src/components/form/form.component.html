@@ -152,7 +152,8 @@
               [nzErrorTip]="currentSchema.tips?.error"
               [nzExtra]="currentSchema.tips?.extra"
               [nzAutoTips]="currentSchema.tips?.auto ?? {}">
-              <fluent-outlet [control]="control" [schema]="schema" [model]="model" [classful]="false"></fluent-outlet>
+              <fluent-control-outlet [control]="control" [schema]="schema" [model]="model" [classful]="false">
+              </fluent-control-outlet>
             </nz-form-control>
           </nz-form-item>
         </ng-container>

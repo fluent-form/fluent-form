@@ -3,7 +3,7 @@ import { AbstractControl } from '@angular/forms';
 import { ComponentSchema, ControlSchema } from '../../schemas';
 import { Arr, Obj } from '../../types';
 
-export type ComponentTemplateRef<T extends Obj | Arr> = TemplateRef<{
+export interface FluentControlTemplateContext<T extends Obj | Arr> {
   /** 当前控件 */
   control: AbstractControl;
   /** 当前图示 */
@@ -12,23 +12,23 @@ export type ComponentTemplateRef<T extends Obj | Arr> = TemplateRef<{
   model: T;
   /** 有类名 */
   classful: boolean;
-}>;
+}
 
 @Component({
-  selector: 'fluent-outlet',
-  templateUrl: './outlet.component.html',
-  styleUrls: ['./outlet.component.css'],
+  selector: 'fluent-control-outlet',
+  templateUrl: './control-outlet.component.html',
+  styleUrls: ['./control-outlet.component.css'],
   host: {
     '[style.display]': `'none'`
   }
 })
-export class FluentOutletComponent<T extends Obj | Arr> implements OnInit {
+export class FluentControlOutletComponent<T extends Obj | Arr> implements OnInit, FluentControlTemplateContext<T> {
   @Input() control!: AbstractControl;
   @Input() schema!: ControlSchema | ComponentSchema;
   @Input() model!: T;
   @Input() classful: boolean = true;
 
-  @ViewChild('componentTemplate', { static: true }) componentTemplate!: ComponentTemplateRef<T>;
+  @ViewChild('controlTemplate', { static: true }) controlTemplateRef!: TemplateRef<FluentControlTemplateContext<T>>;
 
   /** @internal */
   readonly infinity: number = Infinity;
@@ -36,7 +36,7 @@ export class FluentOutletComponent<T extends Obj | Arr> implements OnInit {
   constructor(private viewContainerRef: ViewContainerRef) { }
 
   ngOnInit(): void {
-    this.viewContainerRef.createEmbeddedView(this.componentTemplate, this);
+    this.viewContainerRef.createEmbeddedView(this.controlTemplateRef, this);
   }
 
 }

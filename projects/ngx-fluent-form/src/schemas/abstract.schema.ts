@@ -48,14 +48,18 @@ export interface AbstractSchema<Name extends AnySchemaName> {
   span?: Cell;
   offset?: Cell;
   flex?: number | string;
-  label?: string | Label;
   hidden?: boolean | ((arg: CallbackArg<AbstractSchema<AnySchemaName>>) => boolean) | string;
   class?: NgClass['ngClass'];
   style?: NgStyle['ngStyle'];
 }
 
+/** 带标签的图示 */
+export interface AbstractLabelfulSchema {
+  label?: string | Label;
+}
+
 /** 抽象的真实控件图示 */
-export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends AbstractSchema<Name> {
+export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends AbstractSchema<Name>, AbstractLabelfulSchema {
   id?: string;
   /** I/O mapper for control */
   mapper?: {

@@ -1,21 +1,23 @@
 /**
  * 主要分为以下几大图示：
  *
- * - 控件图示（AbstractControl）
- *   - 普通控件图示（FormControl）
- *     - 单字段控件
- *     - 双字段控件
- *   - 表单控件图示（FormGroup/FormArray）
+ * - 控件图示
+ *   - AbstractControlSchema 普通控件图示（FormControl）
+ *     - SingleKeyControlSchema 单字段控件
+ *     - DoubleKeyControlSchema 双字段控件（Range/Slider 等区间选择控件）
+ *   - AbstractContainerControlSchema 容器控件图示（FormGroup/FormArray）
  *
- * - 容器图示（包裹控件或者组件的图示）
- *   - 组件容器图示（组件包裹组件）
- *   - 控件容器图示
- *     - 组件包裹控件（InputGroup...）
+ * - ContainerSchema 容器图示（可以包裹控件或者组件的图示）
+ *   - ComponentContainerSchema 组件容器图示（包裹组件）
+ *   - ControlContainerSchema 控件容器图示（包裹控件）
+ *     - 组件包裹控件（InputGroup）
  *     - 表单控包裹控件（FormGroup/FormArray）
  *
  * - 普通组件图示（Component）
  *
- * - 可组合图示（可被 InputGroup 包裹）
+ * - ComposableComponentSchema 可组合图示（可被 InputGroup 包裹的图示）
+ *
+ * - AbstractLabelfulSchema 有表单标签的图示
  */
 
 import { StableBuilder } from '../utils/builder.utils';

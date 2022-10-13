@@ -43,7 +43,8 @@ export const defineMeta = (meta?: Meta) => ({
       options: ['vertical', 'horizontal', 'inline'],
     },
     gutter: {
-      control: 'object'
+      control: 'object',
+      defaultValue: { xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }
     }
   },
   parameters: {
@@ -57,14 +58,10 @@ export const defineMeta = (meta?: Meta) => ({
   ...meta
 });
 
-export const defineStory = <T>(story?: Partial<Story<T>>): Story<T> => {
-  story.args['gutter'] = { xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 };
-
-  return Object.assign(
-    (args => ({ props: args })) as Story<T>,
-    story
-  );
-};
+export const defineStory = <T>(story?: Partial<Story<T>>): Story<T> => Object.assign(
+  (args => ({ props: args })) as Story<T>,
+  story
+);
 
 @Directive()
 export abstract class AbstractFluentFormWrapperComponent {
@@ -72,5 +69,5 @@ export abstract class AbstractFluentFormWrapperComponent {
   @Input() model!: FluentFormComponent<SafeAny>['model'];
   @Input() layout: FluentFormComponent<SafeAny>['layout'] = 'vertical';
   @Input() colon: FluentFormComponent<SafeAny>['colon'] = true;
-  @Input() gutter: FluentFormComponent<SafeAny>['gutter'];
+  @Input() gutter!: FluentFormComponent<SafeAny>['gutter'];
 }

@@ -1,6 +1,4 @@
-<nz-spin [nzTip]="spinTip" [nzSpinning]="spinning" [nzSize]="spinSize">
-  <ng-container *ngTemplateOutlet="formTemplate; context: { form, schemas, model }"></ng-container>
-</nz-spin>
+<ng-container *ngTemplateOutlet="formTemplate; context: { form, schemas, model }"></ng-container>
 
 <!-- 表单模板 -->
 <!-- @param schema 当前图示 -->
@@ -12,7 +10,7 @@
   <form
     nz-row
     nz-form
-    [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }"
+    [nzGutter]="gutter"
     [nzLayout]="layout"
     [nzNoColon]="!colon"
     [formGroup]="form"

@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
-import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
+import { NzRowDirective } from 'ng-zorro-antd/grid';
 import { takeUntil } from 'rxjs';
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { Obj } from '../../types';
@@ -40,9 +40,7 @@ export class FluentFormComponent<T extends Obj> implements OnChanges {
   @Input() model!: T;
   @Input() layout: NzFormLayoutType = 'vertical';
   @Input() colon: boolean = true;
-  @Input() spinning?: boolean;
-  @Input() spinTip: string = 'Loading...';
-  @Input() spinSize: NzSizeLDSType = 'large';
+  @Input() gutter: NzRowDirective['nzGutter'] = { xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 };
 
   @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
   @Output() modelChange: EventEmitter<T> = new EventEmitter();

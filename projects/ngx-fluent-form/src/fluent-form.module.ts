@@ -16,7 +16,6 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
-import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
@@ -42,7 +41,6 @@ import { CallPipe, ControlPipe, SchemaPipe, TypeofPipe } from './pipes';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    NzSpinModule,
     NzButtonModule,
     NzInputModule,
     NzInputNumberModule,

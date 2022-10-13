@@ -20,9 +20,7 @@ const SELECT_OPTIONS = [
         [(model)]="model"
         [layout]="layout"
         [colon]="colon"
-        [spinning]="spinning"
-        [spinTip]="spinTip"
-        [spinSize]="spinSize"></fluent-form>
+        [gutter]="gutter"></fluent-form>
 
       <div nz-col nzFlex="1">
         <pre>{{ model | json }}</pre>

@@ -13,7 +13,7 @@
     "coverage:watch": "ng test ngx-fluent-form --code-coverage",
     "coverage": "ng test ngx-fluent-form --no-watch --code-coverage --browsers=ChromeHeadless",
     "lint": "ng lint",
-    "publish": "npm run build && npm publish ./dist/ngx-fluent-form",
+    "publish": "npm publish ./dist/ngx-fluent-form",
     "docs:json": "compodoc --config=./compodoc.json",
     "storybook": "npm run docs:json && start-storybook -p 6006",
     "build-storybook": "npm run docs:json && build-storybook"

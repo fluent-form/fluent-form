@@ -29,7 +29,7 @@ export class FluentFormComponent<T extends Obj> implements OnChanges {
   schema!: FormGroupSchema;
 
   get schemas(): AnySchema[] {
-    return this.schema?.schemas;
+    return this.schema?.schemas as AnySchema[];
   }
 
   @Input()

@@ -30,7 +30,7 @@ export class FluentFormDirective<T extends Obj | Arr> extends ControlContainer<T
   schema!: FormGroupSchema;
 
   override get schemas(): AnySchema[] {
-    return this.schema?.schemas;
+    return this.schema?.schemas as AnySchema[];
   }
 
   @Input('fluentForm')

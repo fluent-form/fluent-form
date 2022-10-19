@@ -35,7 +35,7 @@
           <nz-divider *ngIf="schema.label" [nzText]="schema.label"></nz-divider>
           <ng-container
             [ngTemplateOutlet]="formTemplate"
-            [ngTemplateOutletContext]="{ form: control, schemas: schema.schemas, model: model[schema.name], class: schema.class, style: schema.style }">
+            [ngTemplateOutletContext]="{ form: control, schema: schema, model: model[schema.name], class: schema.class, style: schema.style }">
           </ng-container>
         </ng-container>
 
@@ -43,7 +43,7 @@
           <nz-divider *ngIf="schema.label" [nzText]="schema.label"></nz-divider>
           <ng-container
             [ngTemplateOutlet]="formTemplate"
-            [ngTemplateOutletContext]="{ form: control, schemas: schema.schemas, model: model[schema.name], class: schema.class, style: schema.style }">
+            [ngTemplateOutletContext]="{ form: control, schema: schema, model: model[schema.name], class: schema.class, style: schema.style }">
           </ng-container>
         </ng-container>
 

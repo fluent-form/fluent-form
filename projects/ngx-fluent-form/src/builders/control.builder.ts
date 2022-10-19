@@ -1,7 +1,5 @@
 import { SafeAny } from "@ngify/types";
-import { AbstractSchema, AnySchemaName, SchemaName } from '../schemas/abstract.schema';
-import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas/control.schema';
-import { AnyBuilder, AnySchema } from '../schemas/index.schema';
+import { AbstractSchema, AnyBuilder, AnySchema, AnySchemaName, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SchemaName, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { TypeAndName } from '../types';
 import { standardSchema, standardSchemas } from "../utils";
 import { builder, StableBuilder, UnstableBuilder } from '../utils/builder.utils';

@@ -5,7 +5,7 @@
  *   - AbstractControlSchema 普通控件图示（FormControl）
  *     - SingleKeyControlSchema 单字段控件
  *     - DoubleKeyControlSchema 双字段控件（Range/Slider 等区间选择控件）
- *   - AbstractContainerControlSchema 容器控件图示（FormGroup/FormArray）
+ *   - AbstractControlContainerSchema 控件容器图示（FormGroup/FormArray）
  *
  * - ContainerSchema 容器图示（可以包裹控件或者组件的图示）
  *   - ComponentContainerSchema 组件容器图示（包裹组件）
@@ -23,7 +23,8 @@
 import { StableBuilder } from '../utils/builder.utils';
 import { AnySchemaName, DoubleSchemaName, SchemaName } from './abstract.schema';
 import { ButtonComponentSchema, ButtonGroupComponentSchema, InputGroupComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsetComponentSchema, TextComponentSchema } from './component.schema';
-import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from './control.schema';
+import { FormArraySchema, FormGroupSchema } from './control-container.schema';
+import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from './control.schema';
 
 /** 任意图示 */
 export type AnySchema = ControlSchema | AnyContainerSchema | ComponentSchema;

@@ -91,7 +91,7 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
 }
 
 /** 抽象的容器控件图示 */
-export interface AbstractContainerControlSchema<Name extends AnySchemaName> extends AbstractSchema<Name> {
+export interface AbstractControlContainerSchema<Name extends AnySchemaName> extends AbstractSchema<Name>, AbstractElementControlSchema<HTMLFormElement, SafeAny> {
   label?: string;
   schemas: (AnySchema | AnyBuilder)[];
   /** Validator for the control */

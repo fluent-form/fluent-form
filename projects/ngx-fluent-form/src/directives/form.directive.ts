@@ -2,9 +2,10 @@ import { Directive, EventEmitter, forwardRef, Input, OnChanges, Output, SimpleCh
 import { FormArray, FormGroup } from '@angular/forms';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { takeUntil } from 'rxjs';
+import { group } from '../builders';
 import { AnySchema, ComponentSchema, ControlSchema, FormGroupSchema } from '../schemas';
 import { Arr, Obj } from '../types';
-import { createFormGroup, formUtils, FormUtils, modelUtils, schemasUtils, standardSchema, standardSchemas } from '../utils';
+import { createFormGroup, formUtils, FormUtils, modelUtils, schemasUtils, standardSchema } from '../utils';
 import { FluentFormNameDirective } from './form-name.directive';
 import { ControlContainer } from './models/control-container';
 import { FluentOutletDirective } from './outlet.directive';
@@ -25,15 +26,21 @@ export class FluentFormDirective<T extends Obj | Arr> extends ControlContainer<T
   private directives: FluentOutletDirective<T>[] = [];
 
   override form!: FormGroup;
+  /** @internal */
+  schema!: FormGroupSchema;
+
+  override get schemas(): AnySchema[] {
+    return this.schema?.schemas;
+  }
 
   @Input('fluentForm')
-  override get schemas(): AnySchema[] {
-    return this._schemas;
-  }
   override set schemas(value: AnySchema[] | FormGroupSchema) {
-    const schemas = Array.isArray(value) ? standardSchemas(value) : standardSchema(value);
-    this._schemas = (Array.isArray(schemas) ? schemas : schemas.schemas) as AnySchema[];
-    this.formChange.emit(this.form = createFormGroup(schemas));
+    // 这里统一包装为 FormGroupSchema
+    this.schema = standardSchema(
+      Array.isArray(value) ? group().schemas(...value) : standardSchema(value)
+    );
+
+    this.formChange.emit(this.form = createFormGroup(this.schema));
   }
 
   /** 模型 */

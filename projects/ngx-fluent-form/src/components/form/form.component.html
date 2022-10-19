@@ -1,4 +1,4 @@
-<ng-container *ngTemplateOutlet="formTemplate; context: { form, schemas, model }"></ng-container>
+<ng-container *ngTemplateOutlet="formTemplate; context: { form, schema, model }"></ng-container>
 
 <!-- 表单模板 -->
 <!-- @param schema 当前图示 -->
@@ -6,7 +6,7 @@
 <!-- @param model  当前模型 -->
 <!-- @param class  类      -->
 <!-- @param style  样式    -->
-<ng-template #formTemplate let-form="form" let-schemas="schemas" let-model="model" let-class="class" let-style="style">
+<ng-template #formTemplate let-form="form" let-schema="schema" let-model="model" let-class="class" let-style="style">
   <form
     nz-row
     nz-form
@@ -15,7 +15,9 @@
     [nzNoColon]="!colon"
     [formGroup]="form"
     [ngClass]="class"
-    [ngStyle]="style">
+    [ngStyle]="style"
+    [fluentBinderSchema]="schema"
+    [fluentBinderControl]="form">
 
     <!-- 表单项模板 -->
     <!-- @param schema  当前图示 -->
@@ -158,10 +160,10 @@
       </div>
     </ng-template>
 
-    <ng-container *ngFor="let schema of schemas">
+    <ng-container *ngFor="let subschema of schema.schemas">
       <ng-container
         [ngTemplateOutlet]="formItemTemplate"
-        [ngTemplateOutletContext]="{ control: (schema.name | control: form) ?? form, schema: schema, model: model }">
+        [ngTemplateOutletContext]="{ control: (subschema.name | control: form) ?? form, schema: subschema, model: model }">
         <!-- 当获取不到对应的控件实例时，通常说明当前的 schema 不是一个 control schema，☝️这里直接返回父级表单实例 -->
       </ng-container>
     </ng-container>

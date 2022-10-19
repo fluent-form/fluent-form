@@ -4,9 +4,10 @@ import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { NzRowDirective } from 'ng-zorro-antd/grid';
 import { takeUntil } from 'rxjs';
+import { group } from '../../builders';
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { Obj } from '../../types';
-import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchema, standardSchemas } from '../../utils';
+import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchema } from '../../utils';
 
 @Component({
   selector: 'fluent-form',
@@ -21,19 +22,24 @@ export class FluentFormComponent<T extends Obj> implements OnChanges {
    * 判断变更是内部发出的还是外部传入的，如果引用一致，则为内部变更，直接忽略
    */
   private _model!: T;
-  private _schemas!: AnySchema[];
 
   /** @internal */
   form!: FormGroup;
+  /** @internal */
+  schema!: FormGroupSchema;
+
+  get schemas(): AnySchema[] {
+    return this.schema?.schemas;
+  }
 
   @Input()
-  get schemas(): AnySchema[] {
-    return this._schemas;
-  }
   set schemas(value: AnySchema[] | FormGroupSchema) {
-    const schemas = Array.isArray(value) ? standardSchemas(value) : standardSchema(value);
-    this._schemas = (Array.isArray(schemas) ? schemas : schemas.schemas) as AnySchema[];
-    this.formChange.emit(this.form = createFormGroup(schemas));
+    // 这里统一包装为 FormGroupSchema
+    this.schema = standardSchema(
+      Array.isArray(value) ? group().schemas(...value) : standardSchema(value)
+    );
+
+    this.formChange.emit(this.form = createFormGroup(this.schema));
   }
 
   /** 模型 */

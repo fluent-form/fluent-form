@@ -14,17 +14,7 @@ import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { NzTreeSelectComponent } from 'ng-zorro-antd/tree-select';
 import { Obj, SingleOrAll } from '../types';
-import { AbstractComponentControlSchema, AbstractContainerControlSchema, AbstractControlSchema, AbstractDateControlSchema, AbstractElementControlSchema, AbstractInputFieldControlSchema, AbstractTextControlSchema, AnySchemaName, SchemaName } from './abstract.schema';
-import { FormBuilder, FormSchema, SingleKeyControlBuilder, SingleKeyControlSchema } from './index.schema';
-
-export interface FormGroupSchema<Name extends SchemaName = SchemaName> extends AbstractContainerControlSchema<Name> {
-  type: 'group';
-}
-
-export interface FormArraySchema<Name extends SchemaName = SchemaName> extends AbstractContainerControlSchema<Name> {
-  type: 'array';
-  schemas: (SingleKeyControlSchema<number> | SingleKeyControlBuilder<number> | FormSchema<number> | FormBuilder<number>)[];
-}
+import { AbstractComponentControlSchema, AbstractControlSchema, AbstractDateControlSchema, AbstractElementControlSchema, AbstractInputFieldControlSchema, AbstractTextControlSchema, AnySchemaName, SchemaName } from './abstract.schema';
 
 export interface InputControlSchema<Name extends SchemaName = SchemaName, Val = string> extends AbstractTextControlSchema<Name, Val>, AbstractElementControlSchema<HTMLInputElement, Val>, AbstractInputFieldControlSchema {
   type: 'input';

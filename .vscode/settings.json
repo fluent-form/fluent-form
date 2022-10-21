@@ -4,6 +4,8 @@
     "storybook",
     "directive",
     "deps",
-    "pipe"
-  ]
+    "pipe",
+    "release"
+  ],
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }

@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { ComponentSchema, ControlSchema } from '../../schemas';
-import { Arr, Obj } from '../../types';
+import { AnyArray, AnyObject } from '../../types';
 
-export interface FluentControlTemplateContext<T extends Obj | Arr> {
+export interface FluentControlTemplateContext<T extends AnyObject | AnyArray> {
   /** 当前控件 */
   control: AbstractControl;
   /** 当前图示 */
@@ -22,7 +22,7 @@ export interface FluentControlTemplateContext<T extends Obj | Arr> {
     '[style.display]': `'none'`
   }
 })
-export class FluentControlOutletComponent<T extends Obj | Arr> implements OnInit, FluentControlTemplateContext<T> {
+export class FluentControlOutletComponent<T extends AnyObject | AnyArray> implements OnInit, FluentControlTemplateContext<T> {
   @Input() control!: AbstractControl;
   @Input() schema!: ControlSchema | ComponentSchema;
   @Input() model!: T;

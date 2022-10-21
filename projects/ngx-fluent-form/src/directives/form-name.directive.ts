@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { startWith, takeUntil } from 'rxjs';
 import { AnySchema, ComponentSchema, ControlContainerSchema, ControlSchema } from '../schemas';
-import { Arr, Obj } from '../types';
+import { AnyArray, AnyObject } from '../types';
 import { schemasUtils } from '../utils';
 import { FluentFormDirective } from './form.directive';
 import { ControlContainer } from './models/control-container';
@@ -20,7 +20,7 @@ import { FluentOutletDirective } from './outlet.directive';
     }
   ]
 })
-export class FluentFormNameDirective<T extends Obj | Arr> extends ControlContainer<T> implements OnInit {
+export class FluentFormNameDirective<T extends AnyObject | AnyArray> extends ControlContainer<T> implements OnInit {
   private directives: FluentOutletDirective<T>[] = [];
   @Input('fluentFormName') name!: string | number;
 
@@ -44,7 +44,7 @@ export class FluentFormNameDirective<T extends Obj | Arr> extends ControlContain
     ).subscribe(() => {
       this.form = this.controlContainer.directive.form.get([this.name])!;
       this.schemas = schemasUtils(this.controlContainer.directive.schemas).find<ControlContainerSchema>(this.name)!.schemas as AnySchema[];
-      this.model = this.controlContainer.directive.model[this.name as keyof (Obj | Arr)] as T;
+      this.model = this.controlContainer.directive.model[this.name as keyof (AnyObject | AnyArray)] as T;
 
       this.directives.forEach(directive => this.assignDirective(directive));
     });

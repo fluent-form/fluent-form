@@ -13,7 +13,7 @@ import { NzSwitchComponent } from 'ng-zorro-antd/switch';
 import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { NzTreeSelectComponent } from 'ng-zorro-antd/tree-select';
-import { Obj, SingleOrAll } from '../types';
+import { AnyObject, SingleOrAll } from '../types';
 import { AbstractComponentControlSchema, AbstractControlSchema, AbstractDateControlSchema, AbstractElementControlSchema, AbstractInputFieldControlSchema, AbstractTextControlSchema, AnySchemaName, SchemaName } from './abstract.schema';
 
 export interface InputControlSchema<Name extends SchemaName = SchemaName, Val = string> extends AbstractTextControlSchema<Name, Val>, AbstractElementControlSchema<HTMLInputElement, Val>, AbstractInputFieldControlSchema {
@@ -91,7 +91,7 @@ export interface SelectControlSchema<Name extends SchemaName = SchemaName, Val =
   arrow?: boolean;
   size?: NzSelectSizeType;
   suffixIcon?: TemplateRef<any> | string;
-  options: Obj[];
+  options: AnyObject[];
   config?: {
     labelProperty?: string;
     valueProperty?: string;
@@ -146,7 +146,7 @@ export interface RadioControlSchema<Name extends SchemaName = SchemaName, Val = 
   type: 'radio';
   button?: boolean | NzRadioButtonStyle;
   size?: NzSizeLDSType;
-  options: Obj[];
+  options: AnyObject[];
   config?: {
     labelProperty?: string;
     valueProperty?: string;
@@ -162,7 +162,7 @@ export interface CheckboxControlSchema<Name extends SchemaName = SchemaName, Val
 
 export interface CheckboxGroupControlSchema<Name extends SchemaName = SchemaName, Val = SafeAny> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzCheckboxGroupComponent, Val> {
   type: 'checkbox-group';
-  options: Obj[];
+  options: AnyObject[];
   config?: {
     labelProperty?: string;
     valueProperty?: string;

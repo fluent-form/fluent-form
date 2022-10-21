@@ -4,7 +4,7 @@ import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { takeUntil } from 'rxjs';
 import { group } from '../builders';
 import { AnySchema, ComponentSchema, ControlSchema, FormGroupSchema } from '../schemas';
-import { Arr, Obj } from '../types';
+import { AnyArray, AnyObject } from '../types';
 import { createFormGroup, formUtils, FormUtils, modelUtils, schemasUtils, standardSchema } from '../utils';
 import { FluentFormNameDirective } from './form-name.directive';
 import { ControlContainer } from './models/control-container';
@@ -21,7 +21,7 @@ import { FluentOutletDirective } from './outlet.directive';
     }
   ]
 })
-export class FluentFormDirective<T extends Obj | Arr> extends ControlContainer<T> implements OnChanges {
+export class FluentFormDirective<T extends AnyObject | AnyArray> extends ControlContainer<T> implements OnChanges {
   private _model!: T;
   private directives: FluentOutletDirective<T>[] = [];
 
@@ -69,13 +69,13 @@ export class FluentFormDirective<T extends Obj | Arr> extends ControlContainer<T
         this.onValueChanges(utils);
       });
       // 使用模型初始化表单
-      modelUtils(this.model as Obj, this.schemas).assign(this.form);
+      modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
     }
 
     // 如果是首次变更（首次的初始化已在上面处理了）
     // 并且当前模型值与内部的模型值不一致
     if (modelChange && !modelChange.firstChange && modelChange.currentValue !== this._model) {
-      modelUtils(this.model as Obj, this.schemas).assign(this.form);
+      modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
     }
   }
 

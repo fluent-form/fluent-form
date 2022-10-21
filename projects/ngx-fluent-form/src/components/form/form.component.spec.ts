@@ -4,13 +4,13 @@ import { array, button, form, group, input, inputGroup } from '../../builders';
 import { FluentFormModule } from '../../fluent-form.module';
 import { FormGroupSchema } from '../../schemas';
 import { AnySchema } from '../../schemas/index.schema';
-import { Obj } from '../../types';
+import { AnyObject } from '../../types';
 import { FluentFormComponent } from './form.component';
 
 @Component({
   template: `<fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>`,
 })
-class TestWarpperComponent<T extends Obj> {
+class TestWarpperComponent<T extends AnyObject> {
   @ViewChild(FluentFormComponent) target!: FluentFormComponent<T>;
   schemas!: AnySchema[] | FormGroupSchema;
   model: T = {} as T;

@@ -2,7 +2,7 @@ import { AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGr
 import { CallPipe } from '../pipes/call.pipe';
 import { FormArraySchema, FormGroupSchema } from '../schemas';
 import { AnyControlSchema, AnySchema, ControlSchema } from '../schemas/index.schema';
-import { Arr, Obj } from '../types';
+import { AnyArray, AnyObject } from '../types';
 import { controlSchemaUtils, isComponentContainerSchema, isComponentSchema, isControlContainerSchema, isDoubleKeySchema } from './schema.utils';
 import { valueUtils } from './value.utils';
 
@@ -140,7 +140,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
    * @param clear 是否清空模型，函数内部递归调用的时候将置为false，保证只会清空一次
    * @returns model
    */
-  assign<T extends (F extends FormGroup ? Obj : Arr)>(model: T, clear: boolean = true): T {
+  assign<T extends (F extends FormGroup ? AnyObject : AnyArray)>(model: T, clear: boolean = true): T {
     this.schemas.forEach(schema => {
       // 这些图示不包含控件图示，直接跳过
       if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
@@ -149,7 +149,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
 
       if (schema.type === 'group') {
         formUtils(control as FormGroup, schema.schemas as AnySchema[]).assign(
-          (model[schema.name as keyof T] = ({} as T[keyof T])) as unknown as Obj,
+          (model[schema.name as keyof T] = ({} as T[keyof T])) as unknown as AnyObject,
           false
         );
         return;
@@ -157,7 +157,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
 
       if (schema.type === 'array') {
         formUtils(control as FormArray, schema.schemas as AnySchema[]).assign(
-          (model[schema.name as keyof T] = ([] as unknown as T[keyof T])) as unknown as Arr,
+          (model[schema.name as keyof T] = ([] as unknown as T[keyof T])) as unknown as AnyArray,
           false
         );
         return;

@@ -2,7 +2,7 @@ import { ComponentFactoryResolver, Directive, Host, Injector, Input, OnChanges, 
 import { AbstractControl } from '@angular/forms';
 import { FluentControlOutletComponent, FluentControlTemplateContext } from '../components';
 import { ComponentSchema, ControlSchema } from '../schemas';
-import { Arr, Obj } from '../types';
+import { AnyArray, AnyObject } from '../types';
 import { ControlContainer } from './models/control-container';
 
 @Directive({
@@ -13,7 +13,7 @@ import { ControlContainer } from './models/control-container';
     '[style.display]': `'none'`
   }
 })
-export class FluentOutletDirective<T extends Obj | Arr> implements OnInit, OnChanges, OnDestroy, FluentControlTemplateContext<T> {
+export class FluentOutletDirective<T extends AnyObject | AnyArray> implements OnInit, OnChanges, OnDestroy, FluentControlTemplateContext<T> {
   @Input() name!: string | number;
 
   schema!: ComponentSchema | ControlSchema;

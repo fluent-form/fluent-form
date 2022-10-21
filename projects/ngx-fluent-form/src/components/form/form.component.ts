@@ -6,7 +6,7 @@ import { NzRowDirective } from 'ng-zorro-antd/grid';
 import { takeUntil } from 'rxjs';
 import { group } from '../../builders';
 import { AnySchema, FormGroupSchema } from '../../schemas';
-import { Obj } from '../../types';
+import { AnyObject } from '../../types';
 import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchema } from '../../utils';
 
 @Component({
@@ -16,7 +16,7 @@ import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchema } fro
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [NzDestroyService]
 })
-export class FluentFormComponent<T extends Obj> implements OnChanges {
+export class FluentFormComponent<T extends AnyObject> implements OnChanges {
   /**
    * 内部的不可变模型，用来跟公开的模型值进行引用比较，
    * 判断变更是内部发出的还是外部传入的，如果引用一致，则为内部变更，直接忽略
@@ -63,13 +63,13 @@ export class FluentFormComponent<T extends Obj> implements OnChanges {
         this.onValueChanges(utils);
       });
       // 使用模型初始化表单
-      modelUtils(this.model as Obj, this.schemas).assign(this.form);
+      modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
     }
 
     // 如果是首次变更（首次的初始化已在上面处理了）
     // 并且当前模型值与内部的模型值不一致
     if (modelChange && !modelChange.firstChange && modelChange.currentValue !== this._model) {
-      modelUtils(this.model as Obj, this.schemas).assign(this.form);
+      modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
     }
   }
 

@@ -83,8 +83,8 @@ export type Single<T> = { [P in keyof T]: { [K in P]-?: T[P] } }[keyof T];
 export type SingleOrAll<T> = Single<T> | Required<T>;
 
 /** Any Object */
-export type Obj = Record<string, unknown>;
+export type AnyObject = Record<string, SafeAny>;
 /** Any Array */
-export type Arr = unknown[];
+export type AnyArray = SafeAny[];
 
 export type TypeAndName = 'type' | 'name';

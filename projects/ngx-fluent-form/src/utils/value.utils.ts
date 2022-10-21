@@ -1,17 +1,17 @@
 import { AbstractControl } from '@angular/forms';
 import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
 import { ControlSchema } from '../schemas';
-import { Arr, Obj } from '../types';
+import { AnyArray, AnyObject } from '../types';
 import { isDoubleKeySchema } from './schema.utils';
 
-export function valueUtils<S extends Obj | Arr | AbstractControl>(source: S, schema: ControlSchema) {
+export function valueUtils<S extends AnyObject | AnyArray | AbstractControl>(source: S, schema: ControlSchema) {
   return new ValueUtils(source, schema);
 }
 
 /**
  * 通过 schema 获取 source 中对应的值，其中 source 可以是模型或控件
  */
-export class ValueUtils<S extends Obj | Arr | AbstractControl> {
+export class ValueUtils<S extends AnyObject | AnyArray | AbstractControl> {
   constructor(
     private readonly source: S,
     private readonly schema: ControlSchema

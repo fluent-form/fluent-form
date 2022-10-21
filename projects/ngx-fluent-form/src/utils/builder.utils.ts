@@ -1,10 +1,10 @@
 import { SafeAny } from '@ngify/types';
-import { Obj } from '../types';
+import { AnyObject } from '../types';
 
 const REST_PARAMETERS = ['schemas', 'validators', 'asyncValidators'] as const;
 
 export function builder<T>(): Builder<T> {
-  const builder = new Proxy({} as Obj, {
+  const builder = new Proxy({} as AnyObject, {
     get(target, prop: string) {
       if ('build' === prop) {
         return () => target;

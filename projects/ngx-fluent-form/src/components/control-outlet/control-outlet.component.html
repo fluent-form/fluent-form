@@ -450,7 +450,7 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="'button'">
-      <ng-container *ngIf="schema.subtype ===  'link'">
+      <ng-container *ngIf="schema.subtype === 'link'">
         <a
           *ngIf="!(schema.hidden | call: model : schema : control)"
           nz-button
@@ -465,16 +465,16 @@
           [nzLoading]="schema.loading | call: model : schema : control"
           [nzShape]="schema.shape"
           [nzSize]="schema.size"
-          [nzType]="schema.subtype"
-          [type]="schema.mode">
+          [nzType]="schema.subtype">
           <ng-container *ngTemplateOutlet="buttonContentTemplate; context: { schema }"></ng-container>
         </a>
       </ng-container>
-      <ng-container *ngIf="schema.subtype !==  'link'">
+      <ng-container *ngIf="schema.subtype !== 'link'">
         <button
           *ngIf="!(schema.hidden | call: model : schema : control)"
           nz-button
           [attr.id]="schema.id"
+          [attr.type]="schema.mode"
           [disabled]="schema.disabled | call: model : schema : control"
           [fluentBinderSchema]="schema"
           [ngClass]="classful ? schema.class : null"
@@ -485,8 +485,7 @@
           [nzLoading]="schema.loading | call: model : schema : control"
           [nzShape]="schema.shape"
           [nzSize]="schema.size"
-          [nzType]="schema.subtype"
-          [type]="schema.mode">
+          [nzType]="schema.subtype">
           <ng-container *ngTemplateOutlet="buttonContentTemplate; context: { schema }"></ng-container>
         </button>
       </ng-container>
@@ -832,7 +831,7 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="'button'">
-      <ng-container *ngIf="schema.subtype ===  'link'">
+      <ng-container *ngIf="schema.subtype === 'link'">
         <a
           nz-col
           nz-button
@@ -851,16 +850,16 @@
           [nzShape]="schema.shape"
           [nzSize]="schema.size"
           [nzSpan]="schema.span ?? null"
-          [nzType]="schema.subtype"
-          [type]="schema.mode">
+          [nzType]="schema.subtype">
           <ng-container *ngTemplateOutlet="buttonContentTemplate; context: { schema }"></ng-container>
         </a>
       </ng-container>
-      <ng-container *ngIf="schema.subtype !==  'link'">
+      <ng-container *ngIf="schema.subtype !== 'link'">
         <button
           nz-col
           nz-button
           [attr.id]="schema.id"
+          [attr.type]="schema.mode"
           [disabled]="schema.disabled"
           [fluentBinderSchema]="schema"
           [ngClass]="classful ? schema.class : null"
@@ -874,8 +873,7 @@
           [nzShape]="schema.shape"
           [nzSize]="schema.size"
           [nzSpan]="schema.span ?? null"
-          [nzType]="schema.subtype"
-          [type]="schema.mode">
+          [nzType]="schema.subtype">
           <ng-container *ngTemplateOutlet="buttonContentTemplate; context: { schema }"></ng-container>
         </button>
       </ng-container>

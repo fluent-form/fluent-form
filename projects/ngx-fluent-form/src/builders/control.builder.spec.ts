@@ -1,7 +1,7 @@
 import { SafeAny } from '@ngify/types';
 import { AbstractTextControlSchema, CheckboxControlSchema, DatePickerControlSchema, InputControlSchema, NumberInputControlSchema, RangePickerControlSchema, RateControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema } from '../schemas';
 import { standardSchema } from '../utils';
-import { cascader, checkbox, checkboxGroup, date, datetime, email, input, number, password, radio, range, rate, select, slider, string, textarea, time, toggle, treeSelect } from './control.builder';
+import { cascader, checkbox, checkboxGroup, date, datetime, email, input, integer, number, password, radio, range, rate, select, slider, string, textarea, time, toggle, treeSelect } from './control.builder';
 
 describe('control.builder', () => {
   it('input', () => {
@@ -44,6 +44,12 @@ describe('control.builder', () => {
   it('number', () => {
     const schema = standardSchema(number('number'));
     const value = { type: 'number', name: 'number' } as NumberInputControlSchema<'number', number>;
+    expect(schema).toEqual(value);
+  });
+
+  it('integer', () => {
+    const schema = standardSchema(integer('integer'));
+    const value = { type: 'number', name: 'integer', precision: { value: 0, mode: 'cut' } } as NumberInputControlSchema<'integer', number>;
     expect(schema).toEqual(value);
   });
 

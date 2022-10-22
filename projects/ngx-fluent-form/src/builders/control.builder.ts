@@ -38,6 +38,12 @@ export function number<N extends SchemaName>(name?: N) {
   return builder<NumberInputControlSchema<N>>().type('number').name(name);
 }
 
+export function integer(): UnstableBuilder<NumberInputControlSchema<number>, TypeAndName | 'precision'>;
+export function integer<N extends SchemaName>(name?: N): UnstableBuilder<NumberInputControlSchema<N>, TypeAndName | 'precision'>;
+export function integer<N extends SchemaName>(name?: N) {
+  return builder<NumberInputControlSchema<N>>().type('number').name(name).precision({ value: 0, mode: 'cut' });
+}
+
 export function date(): UnstableBuilder<DatePickerControlSchema<number>, TypeAndName>;
 export function date<N extends SchemaName>(name?: N): UnstableBuilder<DatePickerControlSchema<N>, TypeAndName>;
 export function date<N extends SchemaName>(name?: N) {

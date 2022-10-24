@@ -11,19 +11,19 @@ export function input<N extends SchemaName>(name?: N) {
 export function string(): UnstableBuilder<InputControlSchema<number>, TypeAndName | 'subtype'>;
 export function string<N extends SchemaName>(name?: N): UnstableBuilder<InputControlSchema<N>, TypeAndName | 'subtype'>;
 export function string<N extends SchemaName>(name?: N) {
-  return builder<InputControlSchema<N>>().type('input').name(name).subtype('text');
+  return input(name).subtype('text');
 }
 
 export function email(): UnstableBuilder<InputControlSchema<number>, TypeAndName | 'subtype'>;
 export function email<N extends SchemaName>(name?: N): UnstableBuilder<InputControlSchema<N>, TypeAndName | 'subtype'>;
 export function email<N extends SchemaName>(name?: N) {
-  return builder<InputControlSchema<N>>().type('input').name(name).subtype('email');
+  return input(name).subtype('email');
 }
 
 export function password(): UnstableBuilder<InputControlSchema<number>, TypeAndName | 'subtype'>;
 export function password<N extends SchemaName>(name?: N): UnstableBuilder<InputControlSchema<N>, TypeAndName | 'subtype'>;
 export function password<N extends SchemaName>(name?: N) {
-  return builder<InputControlSchema<N>>().type('input').name(name).subtype('password');
+  return input(name).subtype('password');
 }
 
 export function textarea(): UnstableBuilder<TextareaControlSchema<number>, TypeAndName>;
@@ -41,7 +41,7 @@ export function number<N extends SchemaName>(name?: N) {
 export function integer(): UnstableBuilder<NumberInputControlSchema<number>, TypeAndName | 'precision'>;
 export function integer<N extends SchemaName>(name?: N): UnstableBuilder<NumberInputControlSchema<N>, TypeAndName | 'precision'>;
 export function integer<N extends SchemaName>(name?: N) {
-  return builder<NumberInputControlSchema<N>>().type('number').name(name).precision({ value: 0, mode: 'cut' });
+  return number(name).precision({ value: 0, mode: 'cut' });
 }
 
 export function date(): UnstableBuilder<DatePickerControlSchema<number>, TypeAndName>;

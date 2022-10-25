@@ -414,11 +414,10 @@
         [nzSize]="schema.size"
         [nzSuffix]="schema.suffix?.icon ? null : schema.suffix"
         [nzSuffixIcon]="schema.suffix?.icon">
-        <ng-container *ngFor="let subschema of schema.schemas">
-          <ng-container
-            [ngTemplateOutlet]="composableControlTemplate"
-            [ngTemplateOutletContext]="{ control: (subschema.name | control: control), schema: subschema, model: model, classful: classful }">
-          </ng-container>
+        <ng-container
+          *ngFor="let subschema of schema.schemas"
+          [ngTemplateOutlet]="composableControlTemplate"
+          [ngTemplateOutletContext]="{ control: (subschema.name | control: control) ?? control, schema: subschema, model: model, classful: true }">
         </ng-container>
       </nz-input-group>
     </ng-container>
@@ -442,9 +441,10 @@
         [ngClass]="classful ? schema.class : null"
         [ngStyle]="schema.style"
         [nzSize]="schema.size">
-        <ng-container *ngFor="let subschema of schema.schemas">
-          <ng-container *ngTemplateOutlet="controlTemplate; context: { schema: subschema, model: model }">
-          </ng-container>
+        <ng-container
+          *ngFor="let subschema of schema.schemas"
+          [ngTemplateOutlet]="controlTemplate"
+          [ngTemplateOutletContext]="{ control: control, schema: subschema, model: model, classful: true }">
         </ng-container>
       </nz-button-group>
     </ng-container>

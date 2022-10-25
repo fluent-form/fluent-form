@@ -18,11 +18,12 @@ import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchema } fro
 })
 export class FluentFormComponent<T extends AnyObject> implements OnChanges {
   /**
-   * 内部的不可变模型，用来跟公开的模型值进行引用比较，
-   * 判断变更是内部发出的还是外部传入的，如果引用一致，则为内部变更，直接忽略
+   * 内部的不可变模型，主要有以下用途：
+   * - 用来跟公开的模型值进行引用比较，判断变更是内部发出的还是外部传入的，如果引用一致则为内部变更
+   * - 为了兼容 mutable model 的用法，需要确保每次传递给 call pipe 的 model 是 mutable 的
+   * @internal
    */
-  private _model!: T;
-
+  immutableModel!: T;
   /** @internal */
   form!: FormGroup;
   /** @internal */
@@ -66,9 +67,9 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges {
       modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
     }
 
-    // 如果是首次变更（首次的初始化已在上面处理了）
-    // 并且当前模型值与内部的模型值不一致
-    if (modelChange && !modelChange.firstChange && modelChange.currentValue !== this._model) {
+    // 如果不是首次变更（首次变更已经在上面处理了，这里要忽略掉）
+    // 并且当前模型值与内部的模型值不一致（如果引用一致，则为组件内部引起的变更，我们只需要处理外部引起的变更）
+    if (modelChange && !modelChange.firstChange && modelChange.currentValue !== this.immutableModel) {
       modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
     }
   }
@@ -80,7 +81,7 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges {
   private onValueChanges(utils: FormUtils<FormGroup>) {
     utils.assign(this.model);
     utils.change(this.model);
-    this.modelChange.emit(this._model = utils.assign({} as T));
+    this.modelChange.emit(this.immutableModel = utils.assign({} as T));
   }
 
 }

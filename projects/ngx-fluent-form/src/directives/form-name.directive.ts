@@ -1,13 +1,11 @@
-import { Directive, EventEmitter, forwardRef, Host, Input, OnInit, Output, SkipSelf } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Directive, forwardRef, Host, Input, OnInit, SkipSelf } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { startWith, takeUntil } from 'rxjs';
-import { AnySchema, ComponentSchema, ControlContainerSchema, ControlSchema } from '../schemas';
+import { AnySchema, ControlContainerSchema } from '../schemas';
 import { AnyArray, AnyObject } from '../types';
 import { schemasUtils } from '../utils';
-import { FluentFormDirective } from './form.directive';
-import { ControlContainer } from './models/control-container';
-import { FluentOutletDirective } from './outlet.directive';
+import { ControlContainer, ControlContainerDirective } from './models/control-container';
 
 @Directive({
   selector: '[fluentFormName]',
@@ -20,14 +18,25 @@ import { FluentOutletDirective } from './outlet.directive';
     }
   ]
 })
-export class FluentFormNameDirective<T extends AnyObject | AnyArray> extends ControlContainer<T> implements OnInit {
-  private directives: FluentOutletDirective<T>[] = [];
+export class FluentFormNameDirective<T extends AnyObject | AnyArray> extends ControlContainerDirective<T> implements OnInit {
+  /** @internal */
+  schemas!: AnySchema[];
+  /** @internal */
+  form!: AbstractControl;
+
   @Input('fluentFormName') name!: string | number;
 
-  @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
-
-  get directive(): FluentFormDirective<T> | FluentFormNameDirective<T> {
+  /** @internal */
+  get directive(): ControlContainerDirective<T> {
     return this;
+  }
+  /** @internal */
+  get model(): T {
+    return this.controlContainer.directive.model[this.name as keyof (AnyObject | AnyArray)] as T;
+  }
+  /** @internal */
+  get immutableModel(): T {
+    return this.controlContainer.directive.immutableModel[this.name as keyof (AnyObject | AnyArray)] as T;
   }
 
   constructor(
@@ -42,37 +51,12 @@ export class FluentFormNameDirective<T extends AnyObject | AnyArray> extends Con
       startWith(this.controlContainer.directive.form),
       takeUntil(this.destroy$)
     ).subscribe(() => {
-      this.form = this.controlContainer.directive.form.get([this.name])!;
+      this.formChange.emit(
+        this.form = this.controlContainer.directive.form.get([this.name])!
+      );
       this.schemas = schemasUtils(this.controlContainer.directive.schemas).find<ControlContainerSchema>(this.name)!.schemas as AnySchema[];
-      this.model = this.controlContainer.directive.model[this.name as keyof (AnyObject | AnyArray)] as T;
 
       this.directives.forEach(directive => this.assignDirective(directive));
     });
-  }
-
-  /**
-   * 添加子指令
-   * @param directive
-   */
-  addDirective(directive: FluentOutletDirective<T>) {
-    this.assignDirective(directive);
-    this.directives = this.directives.concat(directive);
-  }
-
-  /**
-   * 分配参数到子指令
-   * @param directive
-   */
-  assignDirective(directive: FluentOutletDirective<T>) {
-    directive.control = this.form.get([directive.name]) ?? this.form;
-    directive.schema = schemasUtils(this.schemas).find<ComponentSchema | ControlSchema>(directive.name)!;
-  }
-
-  /**
-   * 移除子指令
-   * @param directive
-   */
-  removeDirective(directive: FluentOutletDirective<T>) {
-    this.directives = this.directives.filter(o => o !== directive);
   }
 }

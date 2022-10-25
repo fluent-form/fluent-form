@@ -15,13 +15,15 @@ import { ControlContainer } from './models/control-container';
 })
 export class FluentOutletDirective<T extends AnyObject | AnyArray> implements OnInit, OnChanges, OnDestroy, FluentControlTemplateContext<T> {
   @Input() name!: string | number;
-
+  /** @internal */
   schema!: ComponentSchema | ControlSchema;
+  /** @internal */
   control!: AbstractControl;
+  /** @internal */
   classful: boolean = true;
-
+  /** @internal */
   get model(): T {
-    return this.controlContainer.directive.model as T;
+    return this.controlContainer.directive.immutableModel as T;
   }
 
   constructor(

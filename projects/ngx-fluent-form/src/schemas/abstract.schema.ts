@@ -64,11 +64,11 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
   /** I/O mapper for control */
   mapper?: {
     /** An input mapper that maps from a model's value to a form control's value */
-    input: (value?: SafeAny) => SafeAny,
+    input: (value?: SafeAny) => Val,
     /** An output mapper that maps from a form control's value to a model's value */
-    output: (value?: SafeAny) => SafeAny,
+    output: (value?: Val) => SafeAny,
   };
-  value?: Val;
+  value?: SafeAny;
   /** Is it a required control */
   required?: boolean | ((arg: CallbackArg<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
   /** Whether to disable control */

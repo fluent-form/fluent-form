@@ -26,17 +26,22 @@ export class ValueUtils<S extends AnyObject | AnyArray | AbstractControl> {
    */
   private getModelValue(): unknown {
     let value: unknown;
+    // 如果从模型中读出来的值为 undefined，说明模型中没有写入该值，这里取图示中提供的默认值
     // 如果是双字段模式，则需要从模型中分别取得这两个字段的值组为一个元组
     if (isDoubleKeySchema(this.schema)) {
-      value = this.schema.name!.map((prop, index) => (
-        this.source[prop as keyof S] ?? this.schema.value?.[index] ?? null
-      ));
+      value = this.schema.name!.map((name, index) => {
+        const val = this.source[name as keyof S];
+        return val === undefined ? this.schema.value?.[index] ?? null : val;
+      });
       // 如果数组元素都是 null，那就直接赋值 null
       if ((value as []).every(o => o === null)) {
         value = null;
       }
     } else {
-      value = this.source[this.schema.name as keyof S] ?? this.schema.value ?? null;
+      value = this.source[this.schema.name as keyof S];
+      if (value === undefined) {
+        value = this.schema.value ?? null;
+      }
     }
 
     if (this.schema.mapper) {
@@ -69,7 +74,7 @@ export class ValueUtils<S extends AnyObject | AnyArray | AbstractControl> {
    * 从控件中获取对应值
    */
   private getControlValue(): unknown {
-    const value = (this.source as AbstractControl).value as unknown;
+    const value = (this.source as AbstractControl).value;
 
     if (this.schema.mapper) {
       return this.schema.mapper.output(value);

@@ -13,11 +13,15 @@ import { valueUtils } from './value.utils';
 export function createFormControl(schema: ControlSchema): FormControl {
   const validators = controlSchemaUtils(schema).getExtraValidators();
 
-  return new FormControl(schema.value, {
-    validators: schema.validators ? validators.concat(schema.validators) : validators,
-    asyncValidators: schema.asyncValidators,
-    updateOn: schema.updateOn
-  });
+  return new FormControl(
+    // 如果有传入映射器，则默认值也需要经过映射
+    schema.mapper ? schema.mapper.input(schema.value) : schema.value,
+    {
+      validators: schema.validators ? validators.concat(schema.validators) : validators,
+      asyncValidators: schema.asyncValidators,
+      updateOn: schema.updateOn
+    }
+  );
 }
 
 /**
@@ -108,17 +112,11 @@ export function createFormArray(schema: FormArraySchema): FormArray {
 }
 
 /**
- * 删除模型的字段
+ * 置空对象
  * @param model
- * @param schema
  */
-function deleteProperty<T>(model: T, schema: AnyControlSchema): T {
-  if (isDoubleKeySchema(schema)) {
-    schema.name!.forEach(name => delete model[name as keyof T]);
-  } else {
-    delete model[schema.name!.toString() as keyof T];
-  }
-
+function emptyObject<T extends AnyObject>(model: T): T {
+  Object.keys(model).forEach(key => delete model[key]);
   return model;
 }
 
@@ -137,10 +135,10 @@ export class FormUtils<F extends FormGroup | FormArray> {
   /**
    * 将表单值分配到模型
    * @param model
-   * @param clear 是否清空模型，函数内部递归调用的时候将置为false，保证只会清空一次
+   * @param first 是否清空模型，函数内部递归调用的时候将置为false，保证只会清空一次
    * @returns model
    */
-  assign<T extends (F extends FormGroup ? AnyObject : AnyArray)>(model: T, clear: boolean = true): T {
+  assign<T extends (F extends FormGroup ? AnyObject : AnyArray)>(model: T, first: boolean = true): T {
     this.schemas.forEach(schema => {
       // 这些图示不包含控件图示，直接跳过
       if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
@@ -149,7 +147,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
 
       if (schema.type === 'group') {
         formUtils(control as FormGroup, schema.schemas as AnySchema[]).assign(
-          (model[schema.name as keyof T] = ({} as T[keyof T])) as unknown as AnyObject,
+          (model[schema.name as keyof T] = {} as T[keyof T]) as unknown as AnyObject,
           false
         );
         return;
@@ -157,7 +155,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
 
       if (schema.type === 'array') {
         formUtils(control as FormArray, schema.schemas as AnySchema[]).assign(
-          (model[schema.name as keyof T] = ([] as unknown as T[keyof T])) as unknown as AnyArray,
+          (model[schema.name as keyof T] = [] as unknown as T[keyof T]) as unknown as AnyArray,
           false
         );
         return;
@@ -168,7 +166,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
         return;
       }
 
-      clear && deleteProperty(model, schema);
+      first && emptyObject(model);
 
       const value = valueUtils(control, schema).getValue();
 

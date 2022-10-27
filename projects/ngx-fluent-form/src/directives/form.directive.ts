@@ -34,7 +34,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
   set schemas(value: AnySchema[] | FormGroupSchema) {
     // 这里统一包装为 FormGroupSchema
     this.schema = standardSchema(
-      Array.isArray(value) ? group().schemas(...value) : standardSchema(value)
+      Array.isArray(value) ? group().schemas(...value) : value
     );
 
     this.formChange.emit(this.form = createFormGroup(this.schema));

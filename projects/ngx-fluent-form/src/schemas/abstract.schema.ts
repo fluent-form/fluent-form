@@ -162,7 +162,7 @@ export interface AbstractDateControlSchema<Name extends AnySchemaName, Val> exte
 /** 抽象的输入字段控件图示 */
 export interface AbstractInputFieldControlSchema<Placeholder extends string | [string, string] = string> {
   placeholder?: Placeholder;
-  focus?: boolean;
+  autofocus?: boolean;
   readonly?: boolean | ((arg: CallbackArg<AbstractInputFieldControlSchema<Placeholder>>) => boolean) | string;
   size?: NzSizeLDSType;
   borderless?: boolean;

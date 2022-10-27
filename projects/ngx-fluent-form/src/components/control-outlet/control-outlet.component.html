@@ -20,7 +20,7 @@
           [nzAutocomplete]="autocompleteCmp"
           [placeholder]="schema.placeholder ?? ''"
           [type]="schema.subtype ?? 'text'"
-          [autofocus]="schema.focus"
+          [autofocus]="schema.autofocus"
           [readonly]="schema.readonly | call: model : schema : control"
           [nzSize]="schema.size"
           [nzBorderless]="schema.borderless">
@@ -44,7 +44,7 @@
         [ngStyle]="schema.style"
         [placeholder]="schema.placeholder ?? ''"
         [type]="schema.subtype ?? 'text'"
-        [autofocus]="schema.focus"
+        [autofocus]="schema.autofocus"
         [readonly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless">
@@ -66,7 +66,7 @@
           [nzAutosize]="schema.autosize ?? {}"
           [placeholder]="schema.placeholder ?? ''"
           [rows]="schema.rows"
-          [autofocus]="schema.focus"
+          [autofocus]="schema.autofocus"
           [readonly]="schema.readonly | call: model : schema : control"
           [nzSize]="schema.size"
           [nzBorderless]="schema.borderless"></textarea>
@@ -91,7 +91,7 @@
         [nzAutosize]="schema.autosize ?? {}"
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
-        [autofocus]="schema.focus"
+        [autofocus]="schema.autofocus"
         [readonly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"></textarea>
@@ -113,7 +113,7 @@
         [nzPrecision]="schema.precision?.value ?? (schema.precision | typeof: 'number') ? schema.precision : ''"
         [nzPrecisionMode]="schema.precision?.mode"
         [nzStep]="schema.step ?? 1"
-        [nzAutoFocus]="schema.focus"
+        [nzAutoFocus]="schema.autofocus"
         [nzReadOnly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless">
@@ -139,7 +139,7 @@
         [nzBackdrop]="schema.backdrop"
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
-        [nzAutoFocus]="schema.focus"
+        [nzAutoFocus]="schema.autofocus"
         [nzInputReadOnly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"
@@ -168,7 +168,7 @@
         [nzBackdrop]="schema.backdrop"
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
-        [nzAutoFocus]="schema.focus"
+        [nzAutoFocus]="schema.autofocus"
         [nzInputReadOnly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"
@@ -194,7 +194,7 @@
         [nzMinuteStep]="schema.step?.minute"
         [nzPlaceHolder]="schema.placeholder"
         [nzSecondStep]="schema.step?.second"
-        [nzAutoFocus]="schema.focus"
+        [nzAutoFocus]="schema.autofocus"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"
         [nzBackdrop]="schema.backdrop"
@@ -235,7 +235,7 @@
         [nzShowSearch]="schema.searchable"
         [nzBackdrop]="schema.backdrop"
         [nzBorderless]="schema.borderless"
-        [nzAutoFocus]="schema.focus"
+        [nzAutoFocus]="schema.autofocus"
         [nzShowArrow]="schema.arrow ?? (!schema.mode || schema.mode === 'default')"
         [nzSize]="schema.size"
         [nzSuffixIcon]="schema.suffixIcon">
@@ -258,7 +258,7 @@
         [ngClass]="classful ? schema.class : null"
         [ngStyle]="schema.style"
         [nzAllowClear]="schema.clearable ?? true"
-        [nzAutoFocus]="schema.focus"
+        [nzAutoFocus]="schema.autofocus"
         [nzBackdrop]="schema.backdrop"
         [nzExpandIcon]="schema.expandIcon ?? ''"
         [nzExpandTrigger]="schema.trigger"
@@ -364,7 +364,7 @@
         [ngClass]="classful ? schema.class : null"
         [ngStyle]="schema.style"
         [nzId]="schema.id"
-        [nzAutoFocus]="schema.focus"
+        [nzAutoFocus]="schema.autofocus"
         [nzIndeterminate]="schema.indeterminate">{{ schema.content }}</label>
     </ng-container>
 
@@ -394,7 +394,7 @@
         [nzCharacter]="schema.character"
         [nzCount]="schema.count ?? 5"
         [nzTooltips]="schema.tooltips ?? []"
-        [nzAutoFocus]="schema.focus"></nz-rate>
+        [nzAutoFocus]="schema.autofocus"></nz-rate>
     </ng-container>
 
     <ng-container *ngSwitchCase="'input-group'">
@@ -521,7 +521,7 @@
           [nzSpan]="schema.span ?? null"
           [placeholder]="schema.placeholder ?? ''"
           [type]="schema.subtype ?? 'text'"
-          [autofocus]="schema.focus"
+          [autofocus]="schema.autofocus"
           [readonly]="schema.readonly | call: model : schema : control"
           [nzSize]="schema.size"
           [nzBorderless]="schema.borderless">
@@ -549,7 +549,7 @@
         [nzSpan]="schema.span ?? null"
         [placeholder]="schema.placeholder ?? ''"
         [type]="schema.subtype ?? 'text'"
-        [autofocus]="schema.focus"
+        [autofocus]="schema.autofocus"
         [readonly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless">
@@ -575,7 +575,7 @@
           [nzSpan]="schema.span ?? null"
           [placeholder]="schema.placeholder ?? ''"
           [rows]="schema.rows"
-          [autofocus]="schema.focus"
+          [autofocus]="schema.autofocus"
           [readonly]="schema.readonly | call: model : schema : control"
           [nzSize]="schema.size"
           [nzBorderless]="schema.borderless"></textarea>
@@ -604,7 +604,7 @@
         [nzSpan]="schema.span ?? null"
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
-        [autofocus]="schema.focus"
+        [autofocus]="schema.autofocus"
         [readonly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"></textarea>
@@ -630,7 +630,7 @@
         [nzPrecisionMode]="schema.precisionMode"
         [nzSpan]="schema.span ?? null"
         [nzStep]="schema.step ?? 1"
-        [nzAutoFocus]="schema.focus"
+        [nzAutoFocus]="schema.autofocus"
         [nzReadOnly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless">
@@ -661,7 +661,7 @@
         [nzBackdrop]="schema.backdrop"
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
-        [nzAutoFocus]="schema.focus"
+        [nzAutoFocus]="schema.autofocus"
         [nzInputReadOnly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"
@@ -693,7 +693,7 @@
         [nzBackdrop]="schema.backdrop"
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
-        [nzAutoFocus]="schema.focus"
+        [nzAutoFocus]="schema.autofocus"
         [nzInputReadOnly]="schema.readonly | call: model : schema : control"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"
@@ -722,7 +722,7 @@
         [nzPlaceHolder]="schema.placeholder"
         [nzSecondStep]="schema.step?.second"
         [nzSpan]="schema.span ?? null"
-        [nzAutoFocus]="schema.focus"
+        [nzAutoFocus]="schema.autofocus"
         [nzSize]="schema.size"
         [nzBorderless]="schema.borderless"
         [nzBackdrop]="schema.backdrop"
@@ -752,7 +752,7 @@
         [nzShowSearch]="schema.searchable"
         [nzBackdrop]="schema.backdrop"
         [nzBorderless]="schema.borderless"
-        [nzAutoFocus]="schema.focus"
+        [nzAutoFocus]="schema.autofocus"
         [nzShowArrow]="schema.arrow ?? (!schema.mode || schema.mode === 'default')"
         [nzSize]="schema.size"
         [nzSuffixIcon]="schema.suffixIcon">
@@ -776,7 +776,7 @@
         [ngClass]="classful ? schema.class : null"
         [ngStyle]="schema.style"
         [nzAllowClear]="schema.clearable ?? true"
-        [nzAutoFocus]="schema.focus"
+        [nzAutoFocus]="schema.autofocus"
         [nzBackdrop]="schema.backdrop"
         [nzExpandIcon]="schema.expandIcon"
         [nzExpandTrigger]="schema.trigger"

@@ -87,7 +87,7 @@ export interface SelectControlSchema<Name extends SchemaName = SchemaName, Val =
   searchable?: boolean;
   backdrop?: boolean;
   borderless?: boolean;
-  focus?: boolean;
+  autofocus?: boolean;
   arrow?: boolean;
   size?: NzSelectSizeType;
   suffixIcon?: TemplateRef<any> | string;
@@ -105,7 +105,7 @@ export interface CascaderControlSchema<Name extends SchemaName = SchemaName, Val
   placeholder?: string;
   /** Show clean button */
   clearable?: boolean;
-  focus?: boolean;
+  autofocus?: boolean;
   backdrop?: boolean;
   expandIcon?: string | TemplateRef<void>;
   suffixIcon?: string | TemplateRef<void>;
@@ -156,7 +156,7 @@ export interface RadioControlSchema<Name extends SchemaName = SchemaName, Val = 
 export interface CheckboxControlSchema<Name extends SchemaName = SchemaName, Val = boolean> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzCheckboxComponent, Val> {
   type: 'checkbox';
   content?: string;
-  focus?: boolean;
+  autofocus?: boolean;
   indeterminate?: boolean;
 }
 
@@ -181,7 +181,7 @@ export interface RateControlSchema<Name extends SchemaName = SchemaName, Val = n
   character?: TemplateRef<void>;
   /** Customize tooltip by each character */
   tooltips?: string[];
-  focus?: boolean;
+  autofocus?: boolean;
 }
 
 export interface TreeSelectControlSchema<Name extends SchemaName = SchemaName, Val = SafeAny[]> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzTreeSelectComponent, Val> {

@@ -215,7 +215,7 @@ describe('form.utils', () => {
       const schemas = standardSchemas([
         date('date').mapper({
           input: (o: string) => new Date(o),
-          output: (o: Date) => [o.getFullYear(), o.getMonth() + 1, o.getDate()].join('-')
+          output: o => [o!.getFullYear(), o!.getMonth() + 1, o!.getDate()].join('-')
         })
       ]);
       const form = createFormGroup(schemas);
@@ -384,7 +384,7 @@ describe('form.utils', () => {
       const schemas = standardSchemas([
         date('date').value(new Date(dateStr)).mapper({
           input: (o: string) => new Date(o),
-          output: (o: Date) => [o.getFullYear(), o.getMonth() + 1, o.getDate()].join('-')
+          output: o => [o!.getFullYear(), o!.getMonth() + 1, o!.getDate()].join('-')
         })
       ]);
       const form = createFormGroup(schemas);

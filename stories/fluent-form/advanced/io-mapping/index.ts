@@ -7,7 +7,7 @@ export const story = defineStory({
     schemas: form(
       date('date').label('日期控件').span(8).mapper({
         input: (o?: string) => o ? new Date(o) : new Date(),
-        output: (o?: Date) => [o!.getFullYear(), o!.getMonth() + 1, o!.getDate()].join('/')
+        output: o => [o!.getFullYear(), o!.getMonth() + 1, o!.getDate()].join('/')
       })
     ),
     model: { date: '2022/2/22' }
@@ -26,7 +26,7 @@ export const source = dedent`
     schemas = form(
       date('date').label('日期控件').span(8).mapper({
         input: (o?: string) => o ? new Date(o) : new Date(),
-        output: (o?: Date) => [o!.getFullYear(), o!.getMonth() + 1, o!.getDate()].join('/')
+        output: o => [o!.getFullYear(), o!.getMonth() + 1, o!.getDate()].join('/')
       })
     );
 

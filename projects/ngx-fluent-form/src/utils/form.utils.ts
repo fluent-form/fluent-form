@@ -111,15 +111,6 @@ export function createFormArray(schema: FormArraySchema): FormArray {
   );
 }
 
-/**
- * 置空对象
- * @param model
- */
-function emptyObject<T extends AnyObject>(model: T): T {
-  Object.keys(model).forEach(key => delete model[key]);
-  return model;
-}
-
 export function formUtils<F extends FormGroup | FormArray>(form: F, schemas: AnySchema[]) {
   return new FormUtils(form, schemas);
 }
@@ -135,10 +126,9 @@ export class FormUtils<F extends FormGroup | FormArray> {
   /**
    * 将表单值分配到模型
    * @param model
-   * @param first 是否清空模型，函数内部递归调用的时候将置为false，保证只会清空一次
    * @returns model
    */
-  assign<T extends (F extends FormGroup ? AnyObject : AnyArray)>(model: T, first: boolean = true): T {
+  assign<T extends (F extends FormGroup ? AnyObject : AnyArray)>(model: T): T {
     this.schemas.forEach(schema => {
       // 这些图示不包含控件图示，直接跳过
       if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
@@ -148,7 +138,6 @@ export class FormUtils<F extends FormGroup | FormArray> {
       if (schema.type === 'group') {
         formUtils(control as FormGroup, schema.schemas as AnySchema[]).assign(
           (model[schema.name as keyof T] = {} as T[keyof T]) as unknown as AnyObject,
-          false
         );
         return;
       }
@@ -156,17 +145,14 @@ export class FormUtils<F extends FormGroup | FormArray> {
       if (schema.type === 'array') {
         formUtils(control as FormArray, schema.schemas as AnySchema[]).assign(
           (model[schema.name as keyof T] = [] as unknown as T[keyof T]) as unknown as AnyArray,
-          false
         );
         return;
       }
 
       if (isControlContainerSchema(schema)) {
-        formUtils(this.form, schema.schemas as AnySchema[]).assign(model, false);
+        formUtils(this.form, schema.schemas as AnySchema[]).assign(model);
         return;
       }
-
-      first && emptyObject(model);
 
       const value = valueUtils(control, schema).getValue();
 

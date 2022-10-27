@@ -34,10 +34,6 @@ export class FluentFormNameDirective<T extends AnyObject | AnyArray> extends Con
   get model(): T {
     return this.controlContainer.directive.model[this.name as keyof (AnyObject | AnyArray)] as T;
   }
-  /** @internal */
-  get immutableModel(): T {
-    return this.controlContainer.directive.immutableModel[this.name as keyof (AnyObject | AnyArray)] as T;
-  }
 
   constructor(
     @Host() @SkipSelf() private controlContainer: ControlContainer<T>,

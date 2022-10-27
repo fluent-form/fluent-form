@@ -15,8 +15,6 @@ export abstract class ControlContainer<T extends AnyObject | AnyArray> {
   abstract form: AbstractControl;
   /** 当前模型 */
   abstract model: T;
-  /** 内部的不可变模型 */
-  abstract immutableModel: T;
 
   /** 当前容器的指令 */
   abstract get directive(): ControlContainerDirective<T>;

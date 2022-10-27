@@ -23,7 +23,7 @@ export class FluentOutletDirective<T extends AnyObject | AnyArray> implements On
   classful: boolean = true;
   /** @internal */
   get model(): T {
-    return this.controlContainer.directive.immutableModel as T;
+    return this.controlContainer.directive.model as T;
   }
 
   constructor(

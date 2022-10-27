@@ -21,9 +21,8 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges {
    * 内部的不可变模型，主要有以下用途：
    * - 用来跟公开的模型值进行引用比较，判断变更是内部发出的还是外部传入的，如果引用一致则为内部变更
    * - 为了兼容 mutable model 的用法，需要确保每次传递给 call pipe 的 model 是 mutable 的
-   * @internal
    */
-  immutableModel!: T;
+  private immutableModel!: T;
   /** @internal */
   form!: FormGroup;
   /** @internal */
@@ -79,9 +78,8 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges {
    * @param utils
    */
   private onValueChanges(utils: FormUtils<FormGroup>) {
-    utils.assign(this.model);
-    utils.change(this.model);
-    this.modelChange.emit(this.immutableModel = utils.assign({} as T));
+    utils.change(this.immutableModel = utils.assign({} as T));
+    this.modelChange.emit(this.immutableModel);
   }
 
 }

@@ -20,10 +20,9 @@ import { ControlContainer, ControlContainerDirective } from './models/control-co
   ]
 })
 export class FluentFormDirective<T extends AnyObject | AnyArray> extends ControlContainerDirective<T> implements OnChanges {
+  private immutableModel!: T;
   /** @internal */
   schema!: FormGroupSchema;
-  /** @internal */
-  immutableModel!: T;
   /** @internal */
   form!: FormGroup;
 
@@ -44,7 +43,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
   /** 模型 */
   @Input('fluentModel') model!: T;
 
-  @Output() modelChange: EventEmitter<T> = new EventEmitter();
+  @Output('fluentModelChange') modelChange: EventEmitter<T> = new EventEmitter();
 
   /** @internal */
   get directive(): ControlContainerDirective<T> {
@@ -82,8 +81,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
    * @param utils
    */
   private onValueChanges(utils: FormUtils<FormGroup | FormArray>) {
-    utils.assign(this.model);
-    utils.change(this.model);
-    this.modelChange.emit(this.immutableModel = utils.assign({} as T));
+    utils.change(this.immutableModel = utils.assign({} as T));
+    this.modelChange.emit(this.immutableModel);
   }
 }

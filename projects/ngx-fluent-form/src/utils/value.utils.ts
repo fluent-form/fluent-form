@@ -31,7 +31,7 @@ export class ValueUtils<S extends AnyObject | AnyArray | AbstractControl> {
     if (isDoubleKeySchema(this.schema)) {
       value = this.schema.name!.map((name, index) => {
         const val = this.source[name as keyof S];
-        return val === undefined ? this.schema.value?.[index] ?? null : val;
+        return val === undefined ? this.schema.defaultValue?.[index] ?? null : val;
       });
       // 如果数组元素都是 null，那就直接赋值 null
       if ((value as []).every(o => o === null)) {
@@ -40,7 +40,7 @@ export class ValueUtils<S extends AnyObject | AnyArray | AbstractControl> {
     } else {
       value = this.source[this.schema.name as keyof S];
       if (value === undefined) {
-        value = this.schema.value ?? null;
+        value = this.schema.defaultValue ?? null;
       }
     }
 

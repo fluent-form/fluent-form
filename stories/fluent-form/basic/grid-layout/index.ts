@@ -12,9 +12,9 @@ export const story = defineStory({
       date('date').label('日期录入框').span(8),
       datetime('datetime').label('日期时间录入框').span(8),
       time('time').label('时间录入框').span(8),
-      toggle('toggle').label('开关').placeholder(['启用', '禁用']).value(true).flex('auto'),
-      rate('rate').label('评分').value(2.5).flex(1),
-      slider('slider').label('滑动条').value(30).flex(3),
+      toggle('toggle').label('开关').placeholder(['启用', '禁用']).defaultValue(true).flex('auto'),
+      rate('rate').label('评分').defaultValue(2.5).flex(1),
+      slider('slider').label('滑动条').defaultValue(30).flex(3),
     ),
     model: {}
   }
@@ -40,9 +40,9 @@ export const source = dedent`
       datetime('datetime').label('日期时间录入框').span(8),
       time('time').label('时间录入框').span(8),
 
-      toggle('toggle').label('开关').placeholder(['启用', '禁用']).value(true).flex('auto'),
-      rate('rate').label('评分').value(2.5).flex(1),
-      slider('slider').label('滑动条').value(30).flex(3),
+      toggle('toggle').label('开关').placeholder(['启用', '禁用']).defaultValue(true).flex('auto'),
+      rate('rate').label('评分').defaultValue(2.5).flex(1),
+      slider('slider').label('滑动条').defaultValue(30).flex(3),
     );
 
     model = {};

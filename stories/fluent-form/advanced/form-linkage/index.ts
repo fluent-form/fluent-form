@@ -42,7 +42,7 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
           this.model = { ...this.model };
         }
       }),
-      radio('show').label('控制显隐').span(7).value(true).options([
+      radio('show').label('控制显隐').span(7).defaultValue(true).options([
         { label: '显示', value: true },
         { label: '隐藏', value: false },
       ]),
@@ -86,7 +86,7 @@ export const source = dedent`
           this.model = { ...this.model };
         }
       }),
-      radio('show').label('控制显隐').span(7).value(true).options([
+      radio('show').label('控制显隐').span(7).defaultValue(true).options([
         { label: '显示', value: true },
         { label: '隐藏', value: false },
       ]),

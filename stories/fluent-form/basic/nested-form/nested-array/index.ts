@@ -11,12 +11,12 @@ export const story = defineStory({
       datetime('boardingTime').label('登机时间').required(true).span(12),
       array('passengers').label('机组乘客').span(24).schemas(
         group().span(12).schemas(
-          input('name').label('姓名').value('史蒂夫'),
-          radio('gender').label('性别').options(GENDER_OPTIONS).value('男'),
+          input('name').label('姓名').defaultValue('史蒂夫'),
+          radio('gender').label('性别').options(GENDER_OPTIONS).defaultValue('男'),
         ),
         group().span(12).schemas(
-          input('name').label('姓名').value('卡拉'),
-          radio('gender').label('性别').options(GENDER_OPTIONS).value('女'),
+          input('name').label('姓名').defaultValue('卡拉'),
+          radio('gender').label('性别').options(GENDER_OPTIONS).defaultValue('女'),
         ),
         group().span(12).schemas(
           input('name').label('姓名'),
@@ -44,12 +44,12 @@ export const source = dedent`
       datetime('boardingTime').label('登机时间').required(true).span(12),
       array('passengers').label('机组乘客').span(24).schemas(
         group().span(12).schemas(
-          input('name').label('姓名').value('史蒂夫'),
-          radio('gender').label('性别').options(GENDER_OPTIONS).value('男'),
+          input('name').label('姓名').defaultValue('史蒂夫'),
+          radio('gender').label('性别').options(GENDER_OPTIONS).defaultValue('男'),
         ),
         group().span(12).schemas(
-          input('name').label('姓名').value('卡拉'),
-          radio('gender').label('性别').options(GENDER_OPTIONS).value('女'),
+          input('name').label('姓名').defaultValue('卡拉'),
+          radio('gender').label('性别').options(GENDER_OPTIONS).defaultValue('女'),
         ),
         group().span(12).schemas(
           input('name').label('姓名'),

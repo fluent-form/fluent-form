@@ -60,7 +60,7 @@ describe('FluentFormComponent', () => {
 
   it('表单应该能正确赋值模型', () => {
     component.schemas = form(
-      input('text').span(1).value('test')
+      input('text').span(1).defaultValue('test')
     );
     component.model = {};
     fixture.detectChanges();

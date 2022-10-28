@@ -230,7 +230,7 @@ describe('form.utils', () => {
 
   describe('form to model', () => {
     it('应该能正确处理一级对象', () => {
-      const schemas = standardSchemas([number('o').value(1)]);
+      const schemas = standardSchemas([number('o').defaultValue(1)]);
       const form = createFormGroup(schemas);
       const model = formUtils(form, schemas).assign({});
 
@@ -240,7 +240,7 @@ describe('form.utils', () => {
     it('应该能正确处理一级对象（input-group）', () => {
       const schemas = standardSchemas([
         inputGroup().schemas(
-          number('o').value(1)
+          number('o').defaultValue(1)
         )
       ]);
       const form = createFormGroup(schemas);
@@ -262,7 +262,7 @@ describe('form.utils', () => {
     it('应该能正确处理多级对象', () => {
       const schemas = standardSchemas([
         group('detail').schemas(
-          number('o').value(1)
+          number('o').defaultValue(1)
         )
       ]);
       const form = createFormGroup(schemas);
@@ -274,7 +274,7 @@ describe('form.utils', () => {
     it('应该能正确处理一级数组', () => {
       const schemas = standardSchemas([
         array('details').schemas(
-          number(0).value(1)
+          number(0).defaultValue(1)
         )
       ]);
       const form = createFormGroup(schemas);
@@ -287,7 +287,7 @@ describe('form.utils', () => {
       const schemas = standardSchemas([
         array('details').schemas(
           array(0).schemas(
-            number(0).value(1)
+            number(0).defaultValue(1)
           )
         )
       ]);
@@ -299,7 +299,7 @@ describe('form.utils', () => {
 
     it('应该能正确处理双字段模式', () => {
       const schemas = standardSchemas([
-        slider(['begin', 'end']).value([0, 1])
+        slider(['begin', 'end']).defaultValue([0, 1])
       ]);
       const form = createFormGroup(schemas);
       const model = formUtils(form, schemas).assign({});
@@ -320,7 +320,7 @@ describe('form.utils', () => {
     it('应该能正确处理日期控件', () => {
       const d = new Date();
       const schemas = standardSchemas([
-        date('date').value(d)
+        date('date').defaultValue(d)
       ]);
       const form = createFormGroup(schemas);
       const model = formUtils(form, schemas).assign({});
@@ -331,7 +331,7 @@ describe('form.utils', () => {
     it('应该能正确处理时间控件', () => {
       const d = new Date();
       const schemas = standardSchemas([
-        time('time').value(d)
+        time('time').defaultValue(d)
       ]);
       const form = createFormGroup(schemas);
       const model = formUtils(form, schemas).assign({});
@@ -343,7 +343,7 @@ describe('form.utils', () => {
       const begin = new Date();
       const end = new Date();
       const schemas = standardSchemas([
-        range('range').value([begin, end])
+        range('range').defaultValue([begin, end])
       ]);
       const form = createFormGroup(schemas);
       const model = formUtils(form, schemas).assign({});
@@ -355,7 +355,7 @@ describe('form.utils', () => {
       const begin = new Date();
       const end = new Date();
       const schemas = standardSchemas([
-        range(['begin', 'end']).value([begin, end])
+        range(['begin', 'end']).defaultValue([begin, end])
       ]);
       const form = createFormGroup(schemas);
       const model = formUtils(form, schemas).assign({});
@@ -365,7 +365,7 @@ describe('form.utils', () => {
 
     it('应该能正确处理多选框控件', () => {
       const schemas = standardSchemas([
-        checkboxGroup('active').value([
+        checkboxGroup('active').defaultValue([
           { label: 'one', value: 1, checked: true },
           { label: 'two', value: 2 },
         ]).options([
@@ -382,7 +382,7 @@ describe('form.utils', () => {
     it('应该能正确应用映射器', () => {
       const dateStr = '2022-2-22';
       const schemas = standardSchemas([
-        date('date').value(new Date(dateStr)).mapper({
+        date('date').defaultValue(new Date(dateStr)).mapper({
           input: (o: string) => new Date(o),
           output: o => [o!.getFullYear(), o!.getMonth() + 1, o!.getDate()].join('-')
         })

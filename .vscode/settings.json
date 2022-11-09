@@ -5,7 +5,9 @@
     "directive",
     "deps",
     "pipe",
-    "release"
+    "release",
+    "schema",
+    "utils"
   ],
   "typescript.tsdk": "node_modules\\typescript\\lib"
 }

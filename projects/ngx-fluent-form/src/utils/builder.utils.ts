@@ -3,8 +3,8 @@ import { AnyObject } from '../types';
 
 const REST_PARAMETERS = ['schemas', 'validators', 'asyncValidators'] as const;
 
-export function builder<T>(): Builder<T> {
-  const builder = new Proxy({} as AnyObject, {
+export function builder<T>(target: AnyObject = {}): Builder<T> {
+  const builder = new Proxy(target, {
     get(target, prop: string) {
       if ('build' === prop) {
         return () => target;

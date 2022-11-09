@@ -116,7 +116,7 @@ export interface CascaderControlSchema<Name extends SchemaName = SchemaName, Val
   trigger?: NzCascaderExpandTrigger;
   /** Support search, cannot be used with `options.load` */
   searchable?: boolean;
-  options: NzCascaderOption[];
+  options?: NzCascaderOption[];
   config?: {
     labelProperty?: string;
     valueProperty?: string;

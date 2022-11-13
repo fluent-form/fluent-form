@@ -32,8 +32,6 @@ export function builder<T>(target: Partial<T> = {}): Builder<T> {
 type Buildable<T> = { build: () => T };
 type RestParams = undefined | SafeAny[];
 type DefaultRestParamsName = typeof REST_PARAMETERS[number];
-type BuildingFn<P, R> = (o: P) => R;
-type RestParamsBuildingFn<P, R> = P extends RestParams ? (...o: NonNullable<P>) => R : never;
 
 /**
  * @template T target 原型
@@ -44,8 +42,12 @@ type RestParamsBuildingFn<P, R> = P extends RestParams ? (...o: NonNullable<P>) 
 export type Builder<T, S = {}, C = T, R extends string = DefaultRestParamsName> = (S extends T ? Buildable<T> : unknown) & {
   [P in keyof C]-?: (
     P extends R
-    ? RestParamsBuildingFn<C[P], Builder<T, S & Record<P, C[P]>, Omit<C, P>, R>>
-    : BuildingFn<C[P], Builder<T, S & Record<P, C[P]>, Omit<C, P>, R>>
+    ? (
+      C[P] extends RestParams
+      ? (...o: NonNullable<C[P]>) => Builder<T, S & Record<P, C[P]>, Omit<C, P>, R>
+      : never
+    )
+    : (o: C[P]) => Builder<T, S & Record<P, C[P]>, Omit<C, P>, R>
   )
 };
 

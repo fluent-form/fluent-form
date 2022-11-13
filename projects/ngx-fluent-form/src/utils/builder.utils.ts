@@ -29,22 +29,23 @@ export function builder<T>(target: Partial<T> = {}): Builder<T> {
   return builder as Builder<T>;
 }
 
+type Buildable<T> = { build: () => T };
+type RestParams = undefined | SafeAny[];
+type DefaultRestParamsName = typeof REST_PARAMETERS[number];
+type BuildingFn<P, R> = (o: P) => R;
+type RestParamsBuildingFn<P, R> = P extends RestParams ? (...o: NonNullable<P>) => R : never;
+
 /**
- * @template T 原型
- * @template B 已选
- * @template U 未选
- * @template R 可以 Rest 参数的属性名
+ * @template T target 原型
+ * @template S selected 已选
+ * @template C candidate 候选
+ * @template R rest 剩余参数名
  */
-export type Builder<T, B = {}, U = T, R extends string = typeof REST_PARAMETERS[number]> = (B extends T ? { build: () => T } : unknown) & {
-  [P in keyof U]-?: (
+export type Builder<T, S = {}, C = T, R extends string = DefaultRestParamsName> = (S extends T ? Buildable<T> : unknown) & {
+  [P in keyof C]-?: (
     P extends R
-    ? (
-      // 兼容可选的剩余参数
-      U[P] extends (undefined | SafeAny[])
-      ? (...o: NonNullable<U[P]>) => Builder<T, B & Record<P, U[P]>, Omit<U, P>, R>
-      : never
-    )
-    : (o: U[P]) => Builder<T, B & Record<P, U[P]>, Omit<U, P>, R>
+    ? RestParamsBuildingFn<C[P], Builder<T, S & Record<P, C[P]>, Omit<C, P>, R>>
+    : BuildingFn<C[P], Builder<T, S & Record<P, C[P]>, Omit<C, P>, R>>
   )
 };
 

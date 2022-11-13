@@ -9,6 +9,9 @@ import { ControlSchema } from '../schemas';
 import { createFormControl, standardSchema } from '../utils';
 import { FluentBinderDirective } from './binder.directive';
 
+// eslint-disable-next-line
+function emptyFn() { }
+
 @Component({
   template: `
     <input
@@ -32,9 +35,9 @@ class TestingComponent {
         readOnly: true
       })
       .listener({
-        input: () => { },
-        valueChange: () => { },
-        statusChange: () => { },
+        input: emptyFn,
+        valueChange: emptyFn,
+        statusChange: emptyFn,
       })
   );
   rateSchema = standardSchema(
@@ -43,9 +46,9 @@ class TestingComponent {
         nzAutoFocus: true
       })
       .listener({
-        valueChange: () => { },
-        statusChange: () => { },
-        nzOnFocus: () => { }
+        valueChange: emptyFn,
+        statusChange: emptyFn,
+        nzOnFocus: emptyFn
       })
   );
 
@@ -68,6 +71,7 @@ describe('FluentBinderDirective', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestingComponent);
+    // eslint-disable-next-line
     component = fixture.componentInstance;
     debugElement = fixture.debugElement;
     fixture.detectChanges();

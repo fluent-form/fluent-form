@@ -49,7 +49,7 @@ export class FluentBinderDirective<E extends HTMLElement, C extends object, S ex
         ).subscribe(event => {
           (this.schema.listener as HTMLElementEventListenerMap)![
             eventName as keyof HTMLElementEventListenerMap
-          ]!(event as SafeAny)
+          ]!(event as SafeAny);
         });
       } else {
         (this.host[eventName as keyof C] as unknown as EventEmitter<unknown>).pipe(

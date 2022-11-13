@@ -26,7 +26,7 @@ export class FluentControlOutletComponent<T extends AnyObject | AnyArray> implem
   @Input() control!: AbstractControl;
   @Input() schema!: ControlSchema | ComponentSchema;
   @Input() model!: T;
-  @Input() classful: boolean = true;
+  @Input() classful = true;
 
   @ViewChild('controlTemplate', { static: true }) controlTemplateRef!: TemplateRef<FluentControlTemplateContext<T>>;
 

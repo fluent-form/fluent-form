@@ -134,7 +134,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
       // 这些图示不包含控件图示，直接跳过
       if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
 
-      const control = this.form.get([schema.name?.toString()!])!;
+      const control = this.form.get([schema.name!.toString()])!;
 
       if (schema.type === 'group') {
         formUtils(control as FormGroup, schema.schemas as AnySchema[]).assign(
@@ -179,7 +179,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
       // 这些图示不包含控件图示，直接跳过
       if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
 
-      const control = this.form.get([schema.name?.toString()!])!;
+      const control = this.form.get([schema.name!.toString()])!;
 
       if (schema.type === 'group') {
         return formUtils(control as FormGroup, schema.schemas as AnySchema[]).change(model[schema.name as keyof T]);

@@ -90,7 +90,7 @@ export interface SelectControlSchema<Name extends SchemaName = SchemaName, Val =
   autofocus?: boolean;
   arrow?: boolean;
   size?: NzSelectSizeType;
-  suffixIcon?: TemplateRef<any> | string;
+  suffixIcon?: TemplateRef<SafeAny> | string;
   options: AnyObject[];
   config?: {
     labelProperty?: string;

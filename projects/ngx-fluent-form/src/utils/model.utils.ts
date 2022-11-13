@@ -20,7 +20,7 @@ export class ModelUtils<M extends AnyArray | AnyObject> {
    * @param emitEvent 是否发射事件，函数内部递归调用的时候将置为false，保证只会触发一次事件
    * @returns form
    */
-  assign<F extends (M extends AnyArray ? FormArray : FormGroup)>(form: F, emitEvent: boolean = true): F {
+  assign<F extends (M extends AnyArray ? FormArray : FormGroup)>(form: F, emitEvent = true): F {
     this.schemas.forEach(schema => {
       // 这些图示不包含控件图示，直接跳过
       if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }

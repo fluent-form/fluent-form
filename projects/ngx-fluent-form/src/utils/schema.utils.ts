@@ -61,7 +61,7 @@ const standardContainerSchema = <T extends AnyContainerSchema>(schema: T): T => 
   schema.schemas = schemas;
 
   return schema;
-}
+};
 
 /**
  * 标准化文本控件图示
@@ -74,7 +74,7 @@ const standardTextControlSchema = <T extends InputControlSchema | TextareaContro
   }
 
   return schema;
-}
+};
 
 /**
  * 标准化图示
@@ -90,7 +90,7 @@ export function standardSchema<T extends AnySchema>(schema: T | StableBuilder<T>
   }
 
   return _schema as T;
-};
+}
 
 /**
  * 标准化所有图示

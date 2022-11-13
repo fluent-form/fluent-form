@@ -20,7 +20,7 @@ export class FluentOutletDirective<T extends AnyObject | AnyArray> implements On
   /** @internal */
   control!: AbstractControl;
   /** @internal */
-  classful: boolean = true;
+  classful = true;
   /** @internal */
   get model(): T {
     return this.controlContainer.directive.model as T;

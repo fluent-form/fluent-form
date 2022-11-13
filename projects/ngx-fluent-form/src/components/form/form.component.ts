@@ -45,7 +45,7 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges {
   /** 模型 */
   @Input() model!: T;
   @Input() layout: NzFormLayoutType = 'vertical';
-  @Input() colon: boolean = true;
+  @Input() colon = true;
   @Input() gutter: NzRowDirective['nzGutter'] = { xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 };
 
   @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();

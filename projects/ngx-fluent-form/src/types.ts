@@ -23,9 +23,10 @@ export type HTMLElementPropertyMap<E extends HTMLElement> = Partial<Property<E>>
  * ```
  * @template C 组件的类类型
  */
-type ComponentOutputName<C> = Exclude<{
-  [K in keyof C]: C[K] extends EventEmitter<SafeAny> ? K : never
-}[keyof C], undefined>;
+type ComponentOutputName<C> = Exclude<
+  { [K in keyof C]: C[K] extends EventEmitter<SafeAny> ? K : never }[keyof C],
+  undefined
+>;
 
 /**
  * 组件的事件侦听器对象
@@ -46,25 +47,7 @@ export type ComponentOutputListenerMap<C> = {
  * ```
  * @template C 组件的类类型
  */
-type ComponentProperty<C> = Omit<Property<C>, ComponentOutputName<C>>;
-
-/**
- * NZ 组件的 Input 名字
- * ```ts
- * nzValue | nzStatus
- * ```
- * @template C 组件的类类型
- */
-type ComponentInputName<C> = Extract<keyof ComponentProperty<C>, `nz${Capitalize<string>}`>;
-
-/**
- * NZ 组件的 Input Map
- * ```ts
- * { nzValue: string, nzStatus: string, ... }
- * ```
- * @template C 组件的类类型
- */
-export type ComponentInputMap<C> = Partial<{ [P in ComponentInputName<C>]: C[P] }>;
+export type ComponentPropertyMap<C> = Partial<Omit<C, ComponentOutputName<C>>>;
 
 /**
  * 必填单个属性

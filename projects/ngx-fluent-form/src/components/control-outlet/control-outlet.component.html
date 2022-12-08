@@ -883,12 +883,12 @@
 
 <!-- 按钮内容模板 -->
 <ng-template #buttonContentTemplate let-schema="schema">
-  <i
+  <span
     *ngIf="schema.icon"
     nz-icon
     [nzRotate]="schema.icon.rotate"
     [nzSpin]="schema.icon.spin"
     [nzTheme]="schema.icon.theme"
-    [nzType]="schema.icon.type ?? schema.icon"></i>
+    [nzType]="schema.icon.type ?? schema.icon"></span>
   <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
 </ng-template>

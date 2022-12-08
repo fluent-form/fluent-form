@@ -1,4 +1,4 @@
-import { AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, UntypedFormArray, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { CallPipe } from '../pipes/call.pipe';
 import { FormArraySchema, FormGroupSchema } from '../schemas';
 import { AnyControlSchema, AnySchema, ControlSchema } from '../schemas/index.schema';
@@ -10,10 +10,10 @@ import { valueUtils } from './value.utils';
  * 将图示转换为控件
  * @param schema
  */
-export function createFormControl(schema: ControlSchema): FormControl {
+export function createFormControl(schema: ControlSchema): UntypedFormControl {
   const validators = controlSchemaUtils(schema).getExtraValidators();
 
-  return new FormControl(
+  return new UntypedFormControl(
     // 如果有传入映射器，则默认值也需要经过映射
     schema.mapper ? schema.mapper.input(schema.defaultValue) : schema.defaultValue,
     {
@@ -62,14 +62,14 @@ function createFormControls(schemas: AnySchema[], controls: Record<string, Abstr
  * 将图示组转换为表单组
  * @param schema
  */
-export function createFormGroup(schema: FormGroupSchema): FormGroup;
+export function createFormGroup(schema: FormGroupSchema): UntypedFormGroup;
 /**
  * 将图示组转换为表单组
  * @param schemas
  */
-export function createFormGroup(schemas: | AnySchema[]): FormGroup;
-export function createFormGroup(schemaOrSchemas: FormGroupSchema | AnySchema[]): FormGroup;
-export function createFormGroup(schemaOrSchemas: FormGroupSchema | AnySchema[]): FormGroup {
+export function createFormGroup(schemas: | AnySchema[]): UntypedFormGroup;
+export function createFormGroup(schemaOrSchemas: FormGroupSchema | AnySchema[]): UntypedFormGroup;
+export function createFormGroup(schemaOrSchemas: FormGroupSchema | AnySchema[]): UntypedFormGroup {
   let schemas: AnySchema[], options: AbstractControlOptions = {};
 
   if (Array.isArray(schemaOrSchemas)) {
@@ -83,15 +83,15 @@ export function createFormGroup(schemaOrSchemas: FormGroupSchema | AnySchema[]):
     };
   }
 
-  return new FormGroup(createFormControls(schemas), options);
+  return new UntypedFormGroup(createFormControls(schemas), options);
 }
 
 /**
  * 将图示组转换为表单数组
  * @param schema
  */
-export function createFormArray(schema: FormArraySchema): FormArray {
-  return new FormArray(
+export function createFormArray(schema: FormArraySchema): UntypedFormArray {
+  return new UntypedFormArray(
     (schema.schemas as AnyControlSchema[]).map(schema => {
       switch (schema.type) {
         case 'group':
@@ -112,13 +112,13 @@ export function createFormArray(schema: FormArraySchema): FormArray {
   );
 }
 
-export function formUtils<F extends FormGroup | FormArray>(form: F, schemas: AnySchema[]) {
+export function formUtils<F extends UntypedFormGroup | UntypedFormArray>(form: F, schemas: AnySchema[]) {
   return new FormUtils(form, schemas);
 }
 
 const callPipe = new CallPipe();
 
-export class FormUtils<F extends FormGroup | FormArray> {
+export class FormUtils<F extends UntypedFormGroup | UntypedFormArray> {
   constructor(
     private readonly form: F,
     private readonly schemas: AnySchema[],
@@ -129,7 +129,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
    * @param model
    * @returns model
    */
-  assign<T extends (F extends FormGroup ? AnyObject : AnyArray)>(model: T): T {
+  assign<T extends (F extends UntypedFormGroup ? AnyObject : AnyArray)>(model: T): T {
     this.schemas.forEach(schema => {
       // 这些图示不包含控件图示，直接跳过
       if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
@@ -138,14 +138,14 @@ export class FormUtils<F extends FormGroup | FormArray> {
       const control = this.form.get([schema.name?.toString()!])!;
 
       if (schema.type === 'group') {
-        formUtils(control as FormGroup, schema.schemas as AnySchema[]).assign(
+        formUtils(control as UntypedFormGroup, schema.schemas as AnySchema[]).assign(
           (model[schema.name as keyof T] = {} as T[keyof T]) as unknown as AnyObject,
         );
         return;
       }
 
       if (schema.type === 'array') {
-        formUtils(control as FormArray, schema.schemas as AnySchema[]).assign(
+        formUtils(control as UntypedFormArray, schema.schemas as AnySchema[]).assign(
           (model[schema.name as keyof T] = [] as unknown as T[keyof T]) as unknown as AnyArray,
         );
         return;
@@ -184,11 +184,11 @@ export class FormUtils<F extends FormGroup | FormArray> {
       const control = this.form.get([schema.name?.toString()!])!;
 
       if (schema.type === 'group') {
-        return formUtils(control as FormGroup, schema.schemas as AnySchema[]).change(model[schema.name as keyof T]);
+        return formUtils(control as UntypedFormGroup, schema.schemas as AnySchema[]).change(model[schema.name as keyof T]);
       }
 
       if (schema.type === 'array') {
-        return formUtils(control as FormArray, schema.schemas as AnySchema[]).change(model[schema.name as keyof T]);
+        return formUtils(control as UntypedFormArray, schema.schemas as AnySchema[]).change(model[schema.name as keyof T]);
       }
 
       if (isControlContainerSchema(schema)) {

@@ -1,5 +1,5 @@
 import { Directive, EventEmitter, forwardRef, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { takeUntil } from 'rxjs';
 import { group } from '../builders';
@@ -24,7 +24,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
   /** @internal */
   schema!: FormGroupSchema;
   /** @internal */
-  form!: FormGroup;
+  form!: UntypedFormGroup;
 
   get schemas(): AnySchema[] {
     return this.schema?.schemas as AnySchema[];
@@ -80,7 +80,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
    * 更新模型
    * @param utils
    */
-  private onValueChanges(utils: FormUtils<FormGroup | FormArray>) {
+  private onValueChanges(utils: FormUtils<UntypedFormGroup | UntypedFormArray>) {
     utils.change(this.immutableModel = utils.assign({} as T));
     this.modelChange.emit(this.immutableModel);
   }

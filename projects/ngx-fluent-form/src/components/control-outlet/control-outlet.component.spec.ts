@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { button } from '../../builders';
 import { FluentFormModule } from '../../fluent-form.module';
 import { AnyArray, AnyObject } from '../../types';
@@ -21,7 +21,7 @@ describe('FluentControlOutletComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FluentControlOutletComponent);
     component = fixture.componentInstance;
-    component.control = new FormGroup({});
+    component.control = new UntypedFormGroup({});
     component.schema = standardSchema(button());
     component.model = {};
     fixture.detectChanges();

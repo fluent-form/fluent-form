@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { NzRowDirective } from 'ng-zorro-antd/grid';
@@ -24,7 +24,7 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges {
    */
   private immutableModel!: T;
   /** @internal */
-  form!: FormGroup;
+  form!: UntypedFormGroup;
   /** @internal */
   schema!: FormGroupSchema;
 
@@ -48,7 +48,7 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges {
   @Input() colon = true;
   @Input() gutter: NzRowDirective['nzGutter'] = { xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 };
 
-  @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
+  @Output() formChange: EventEmitter<UntypedFormGroup> = new EventEmitter();
   @Output() modelChange: EventEmitter<T> = new EventEmitter();
 
   constructor(private destroy$: NzDestroyService) { }
@@ -77,7 +77,7 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges {
    * 表单值更新时
    * @param utils
    */
-  private onValueChanges(utils: FormUtils<FormGroup>) {
+  private onValueChanges(utils: FormUtils<UntypedFormGroup>) {
     utils.change(this.immutableModel = utils.assign({} as T));
     this.modelChange.emit(this.immutableModel);
   }

@@ -17,7 +17,7 @@
   "homepage": "https://github.com/HyperLife1119/ngx-fluent-form",
   "keywords": [
     "angular",
-    "angular13",
+    "angular14",
     "form",
     "reactive-form",
     "json-form",
@@ -35,9 +35,9 @@
     "save": "dependencies"
   },
   "peerDependencies": {
-    "@angular/forms": "^13.0.0",
-    "@angular/core": "^13.0.0",
-    "ng-zorro-antd": "^13.4.0",
+    "@angular/forms": "^14.0.0",
+    "@angular/core": "^14.0.0",
+    "ng-zorro-antd": "^14.0.0",
     "@ngify/types": "^1.2.0"
   },
   "dependencies": {

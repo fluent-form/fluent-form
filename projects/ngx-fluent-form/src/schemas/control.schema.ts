@@ -62,6 +62,7 @@ export interface TimePickerControlSchema<Name extends SchemaName = SchemaName, V
     minute?: number;
     second?: number;
   };
+  readonly?: boolean;
   backdrop?: boolean;
   suffixIcon?: string | TemplateRef<void>;
 }

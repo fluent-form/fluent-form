@@ -27,8 +27,8 @@ Before using `ngx-fluent-form`, you should have a basic understanding of the fol
 
 And make sure your relevant dependency versions meet the following requirements:
 
-- `angular >= v13.0.0 & < v14.0.0`
-- `ng-zorro-antd >= v13.4.0 & < v14.0.0`
+- `angular >= v14.0.0`
+- `ng-zorro-antd >= v14.0.0`
 
 ## Install
 

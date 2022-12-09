@@ -70,7 +70,7 @@
     "karma": "6.4.1",
     "karma-chrome-launcher": "3.1.0",
     "karma-coverage": "2.2.0",
-    "karma-jasmine": "4.0.1",
+    "karma-jasmine": "4.0.2",
     "karma-jasmine-html-reporter": "1.7.0",
     "markdown-to-jsx": "7.1.7",
     "ng-packagr": "14.2.2",

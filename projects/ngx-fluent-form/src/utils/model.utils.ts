@@ -27,7 +27,7 @@ export class ModelUtils<M extends AnyArray | AnyObject> {
 
       if (schema.type === 'group') {
         modelUtils(
-          (this.model[schema.name as keyof M] ??= {} as M[keyof M]) as unknown as AnyObject,
+          (this.model[schema.name as keyof M] ??= {} as M[keyof M]) as AnyObject,
           schema.schemas as AnySchema[]
         ).assign(form.get([schema.name!]) as UntypedFormGroup, false);
         return;
@@ -35,7 +35,7 @@ export class ModelUtils<M extends AnyArray | AnyObject> {
 
       if (schema.type === 'array') {
         modelUtils(
-          (this.model[schema.name as keyof M] ??= [] as unknown as M[keyof M]) as unknown as AnyArray,
+          (this.model[schema.name as keyof M] ??= [] as M[keyof M]) as AnyArray,
           schema.schemas as AnySchema[]
         ).assign(form.get([schema.name!]) as UntypedFormArray, false);
         return;

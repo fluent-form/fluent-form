@@ -139,14 +139,14 @@ export class FormUtils<F extends UntypedFormGroup | UntypedFormArray> {
 
       if (schema.type === 'group') {
         formUtils(control as UntypedFormGroup, schema.schemas as AnySchema[]).assign(
-          (model[schema.name as keyof T] = {} as T[keyof T]) as unknown as AnyObject,
+          (model[schema.name as keyof T] = {} as T[keyof T]) as AnyObject,
         );
         return;
       }
 
       if (schema.type === 'array') {
         formUtils(control as UntypedFormArray, schema.schemas as AnySchema[]).assign(
-          (model[schema.name as keyof T] = [] as unknown as T[keyof T]) as unknown as AnyArray,
+          (model[schema.name as keyof T] = [] as T[keyof T]) as AnyArray,
         );
         return;
       }

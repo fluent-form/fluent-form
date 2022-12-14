@@ -58,6 +58,7 @@ class TestingComponent {
 }
 
 describe('FluentBinderDirective', () => {
+  // eslint-disable-next-line
   let component: TestingComponent;
   let fixture: ComponentFixture<TestingComponent>;
   let debugElement: DebugElement;
@@ -71,7 +72,6 @@ describe('FluentBinderDirective', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestingComponent);
-    // eslint-disable-next-line
     component = fixture.componentInstance;
     debugElement = fixture.debugElement;
     fixture.detectChanges();

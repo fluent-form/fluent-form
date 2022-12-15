@@ -10,8 +10,8 @@ import dedent from 'ts-dedent';
       <fluent-form
         nz-col
         nzFlex="2"
-        [schemas]="schemas"
         [(model)]="model"
+        [schemas]="schemas"
         [layout]="layout"
         [colon]="colon"
         [gutter]="gutter"></fluent-form>

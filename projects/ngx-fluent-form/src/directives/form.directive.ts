@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, forwardRef, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Directive, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { takeUntil } from 'rxjs';
@@ -19,8 +19,9 @@ import { ControlContainer, ControlContainerDirective } from './models/control-co
     }
   ]
 })
-export class FluentFormDirective<T extends AnyObject | AnyArray> extends ControlContainerDirective<T> implements OnChanges {
+export class FluentFormDirective<T extends AnyObject | AnyArray> extends ControlContainerDirective<T> {
   private immutableModel!: T;
+  private _model!: T;
   /** @internal */
   schema!: FormGroupSchema;
   /** @internal */
@@ -32,16 +33,37 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
 
   @Input('fluentForm')
   set schemas(value: AnySchema[] | FormGroupSchema) {
+    this.schema && this.destroy$.next();
+
     // 这里统一包装为 FormGroupSchema
     this.schema = standardSchema(
       Array.isArray(value) ? group().schemas(...value) : value
     );
-
     this.formChange.emit(this.form = createFormGroup(this.schema));
+    this.directives.forEach(directive => this.assignDirective(directive));
+
+    const utils = formUtils(this.form, this.schemas);
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.onValueChanges(utils);
+    });
+
+    this.model && modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
+  }
+
+  get model(): T {
+    return this._model;
   }
 
   /** 模型 */
-  @Input('fluentModel') model!: T;
+  @Input('fluentModel')
+  set model(value: T) {
+    this._model = value;
+
+    // 如果是外部变更，就赋值到表单
+    if (this.model !== this.immutableModel) {
+      this.form && modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
+    }
+  }
 
   @Output('fluentModelChange') modelChange: EventEmitter<T> = new EventEmitter();
 
@@ -52,28 +74,6 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
 
   constructor(private destroy$: NzDestroyService) {
     super();
-  }
-
-  ngOnChanges({ schemas: schemasChange, model: modelChange }: SimpleChanges): void {
-    if (schemasChange) {
-      schemasChange.firstChange || this.destroy$.next();
-
-      this.directives.forEach(directive => this.assignDirective(directive));
-
-      const utils = formUtils(this.form, this.schemas);
-
-      this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-        this.onValueChanges(utils);
-      });
-      // 使用模型初始化表单
-      modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
-    }
-
-    // 如果不是首次变更（首次变更已经在上面处理了，这里要忽略掉）
-    // 并且当前模型值与内部的模型值不一致（如果引用一致，则为组件内部引起的变更，我们只需要处理外部引起的变更）
-    if (modelChange && !modelChange.firstChange && modelChange.currentValue !== this.immutableModel) {
-      modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
-    }
   }
 
   /**

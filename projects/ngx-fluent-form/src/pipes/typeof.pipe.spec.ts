@@ -1,10 +1,10 @@
-import { TypeofPipe } from './typeof.pipe';
+import { FluentTypeofPipe } from './typeof.pipe';
 
-describe('TypeofPipe', () => {
-  let pipe: TypeofPipe;
+describe('FluentTypeofPipe', () => {
+  let pipe: FluentTypeofPipe;
 
   beforeEach(() => {
-    pipe = new TypeofPipe();
+    pipe = new FluentTypeofPipe();
   });
 
   it('create an instance', () => {

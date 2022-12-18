@@ -1,17 +1,17 @@
 import { toggle } from '../builders';
 import { ControlSchema } from '../schemas';
 import { createFormControl, standardSchema } from '../utils';
-import { CallPipe } from './call.pipe';
+import { FluentCallPipe } from './call.pipe';
 
-describe('CallPipe', () => {
+describe('FluentCallPipe', () => {
   const model = { value: true } as const;
   const schema = standardSchema(toggle('value')) as ControlSchema;
   const ctrl = createFormControl(schema);
 
-  let pipe: CallPipe;
+  let pipe: FluentCallPipe;
 
   beforeEach(() => {
-    pipe = new CallPipe();
+    pipe = new FluentCallPipe();
   });
 
   it('create an instance', () => {

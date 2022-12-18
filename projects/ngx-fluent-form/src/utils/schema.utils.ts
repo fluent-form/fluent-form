@@ -4,6 +4,7 @@ import { InputControlSchema, TextareaControlSchema } from '../schemas';
 import { AnySchemaName, SchemaName } from '../schemas/abstract.schema';
 import { AnyContainerSchema, AnyControlSchema, AnySchema, ComponentContainerSchema, ComponentSchema, ControlContainerSchema, ControlSchema, DoubleKeyControlSchema } from '../schemas/index.schema';
 import { isBuilder, StableBuilder } from './builder.utils';
+import { isNumber } from './is.utils';
 
 /**
  * 是否为控件容器图示
@@ -124,7 +125,7 @@ export class ControlSchemaUtils<S extends ControlSchema> {
       }
 
       if (this.schema.length) {
-        if (typeof this.schema.length === 'number') {
+        if (isNumber(this.schema.length)) {
           validators.push(
             Validators.minLength(this.schema.length),
             Validators.maxLength(this.schema.length)

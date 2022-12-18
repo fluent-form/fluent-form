@@ -1,5 +1,6 @@
 import { SafeAny } from '@ngify/types';
 import { AnyObject } from '../types';
+import { isFunction } from './is.utils';
 
 function _builder<T>(target: Partial<T> = {}, rests: readonly (keyof T)[]): Builder<T> {
   const builder = new Proxy(target as AnyObject, {
@@ -80,6 +81,4 @@ export type UnstableBuilder<T, K extends keyof T> = Builder<T, Pick<T, K>, Omit<
  * 是否为一个构建器
  * @param builder
  */
-export const isBuilder = <T = unknown>(builder: SafeAny): builder is Builder<T> => (
-  typeof builder.build === 'function'
-);
+export const isBuilder = <T = unknown>(builder: SafeAny): builder is Builder<T> => isFunction(builder.build);

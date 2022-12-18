@@ -1,13 +1,13 @@
 import { NgClass, NgStyle } from '@angular/common';
 import { TemplateRef } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, UntypedFormControl, FormControlStatus, ValidatorFn } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormControlStatus, UntypedFormControl, ValidatorFn } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { AutocompleteDataSource } from 'ng-zorro-antd/auto-complete';
 import { CompareWith, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDateMode } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
-import { ComponentOutputListenerMap, ComponentPropertyMap, HTMLElementEventListenerMap, HTMLElementPropertyMap, SingleOrAll } from '../types';
+import { ComponentOutputListenerMap, ComponentPropertyMap, HTMLElementEventListenerMap, HTMLElementPropertyMap } from '../types';
 import { AnyBuilder, AnySchema } from './index.schema';
 
 /** 任意字段控件名称 */
@@ -131,7 +131,7 @@ export interface AbstractElementControlSchema<Ele extends HTMLElement, Val> exte
 
 /** 抽象的文本控件图示 */
 export interface AbstractTextControlSchema<Name extends AnySchemaName, Val> extends AbstractControlSchema<Name, Val> {
-  length?: number | SingleOrAll<{ max: number, min: number }>;
+  length?: number | { max?: number, min?: number };
   autocomplete?: {
     backfill?: boolean;
     options: AutocompleteDataSource;

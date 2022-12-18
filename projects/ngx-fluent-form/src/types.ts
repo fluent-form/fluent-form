@@ -57,14 +57,6 @@ export type ComponentPropertyMap<C> = Partial<Omit<C, ComponentOutputName<C>>>;
  */
 export type Single<T> = { [P in keyof T]: { [K in P]-?: T[P] } }[keyof T];
 
-/**
- * 必填单个属性或者全部属性
- * ```
- * SingleOrAll<{ a: string, b: number }> -> { a: string } | { b: number } | { a: string, b: number }
- * ```
- */
-export type SingleOrAll<T> = Single<T> | Required<T>;
-
 /** Any Object */
 export type AnyObject = Record<string, SafeAny>;
 /** Any Array */

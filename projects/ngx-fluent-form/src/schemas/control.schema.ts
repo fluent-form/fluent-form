@@ -13,7 +13,7 @@ import { NzSwitchComponent } from 'ng-zorro-antd/switch';
 import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { NzTreeSelectComponent } from 'ng-zorro-antd/tree-select';
-import { AnyObject, SingleOrAll } from '../types';
+import { AnyObject } from '../types';
 import { AbstractComponentControlSchema, AbstractControlSchema, AbstractDateControlSchema, AbstractElementControlSchema, AbstractInputFieldControlSchema, AbstractTextControlSchema, AnySchemaName, SchemaName } from './abstract.schema';
 
 export interface InputControlSchema<Name extends SchemaName = SchemaName, Val = string> extends AbstractTextControlSchema<Name, Val>, AbstractElementControlSchema<HTMLInputElement, Val>, AbstractInputFieldControlSchema {
@@ -36,7 +36,7 @@ export interface NumberInputControlSchema<Name extends SchemaName = SchemaName, 
   /** Minimum value */
   min?: number;
   /** Decimal precision */
-  precision?: number | SingleOrAll<{ value: number, mode: NzInputNumberComponent['nzPrecisionMode'] }>;
+  precision?: number | { value?: number, mode?: NzInputNumberComponent['nzPrecisionMode'] };
   /** Step length */
   step?: number;
 }

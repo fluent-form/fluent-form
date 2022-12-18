@@ -8,6 +8,7 @@ import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../type
 
 @Directive({
   selector: '[fluentBinderSchema]',
+  standalone: true,
   providers: [NzDestroyService]
 })
 export class FluentBinderDirective<E extends HTMLElement, C extends object, S extends ControlSchema> implements OnChanges {

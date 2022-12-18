@@ -73,6 +73,15 @@
             "style": "kebab-case"
           }
         ],
+        "@angular-eslint/component-class-suffix": [
+          "error",
+          {
+            "suffixes": [
+              "Component",
+              "Widget"
+            ]
+          }
+        ],
         "@angular-eslint/no-input-rename": "off",
         "@angular-eslint/no-output-rename": "off",
         "@angular-eslint/no-host-metadata-property": "off"

@@ -1,23 +1,26 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
+import { SafeAny } from '@ngify/types';
 import { AbstractSchema, AnySchemaName, CallbackArg } from '../schemas';
+import { isFunction, isString } from '../utils';
 
 const RETURN_STR = 'return ';
 
 @Pipe({
-  name: 'call'
+  name: 'call',
+  standalone: true
 })
-export class CallPipe implements PipeTransform {
+export class FluentCallPipe implements PipeTransform {
 
   transform<T extends [unknown, AbstractSchema<AnySchemaName>, AbstractControl]>(
-    value: boolean | ((arg: CallbackArg<AbstractSchema<AnySchemaName>>) => boolean) | string | undefined,
+    value: boolean | ((...args: SafeAny[]) => boolean) | string | undefined,
     ...[model, schema, control]: T
   ): boolean {
-    if (typeof value === 'function') {
+    if (isFunction(value)) {
       return value({ model, schema, control });
     }
 
-    if (typeof value === 'string') {
+    if (isString(value)) {
       if (!value.includes(RETURN_STR)) {
         value = RETURN_STR + value;
       }

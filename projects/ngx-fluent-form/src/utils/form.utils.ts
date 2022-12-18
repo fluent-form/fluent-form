@@ -1,5 +1,5 @@
 import { AbstractControl, AbstractControlOptions, UntypedFormArray, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { CallPipe } from '../pipes/call.pipe';
+import { FluentCallPipe } from '../pipes/call.pipe';
 import { FormArraySchema, FormGroupSchema } from '../schemas';
 import { AnyControlSchema, AnySchema, ControlSchema } from '../schemas/index.schema';
 import { AnyArray, AnyObject } from '../types';
@@ -116,7 +116,7 @@ export function formUtils<F extends UntypedFormGroup | UntypedFormArray>(form: F
   return new FormUtils(form, schemas);
 }
 
-const callPipe = new CallPipe();
+const callPipe = new FluentCallPipe();
 
 export class FormUtils<F extends UntypedFormGroup | UntypedFormArray> {
   constructor(

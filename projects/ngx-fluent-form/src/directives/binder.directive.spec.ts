@@ -65,8 +65,8 @@ describe('FluentBinderDirective', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TestingComponent, FluentBinderDirective],
-      imports: [NzInputModule, NzRateModule, ReactiveFormsModule]
+      declarations: [TestingComponent],
+      imports: [NzInputModule, NzRateModule, ReactiveFormsModule, FluentBinderDirective]
     }).compileComponents();
   });
 

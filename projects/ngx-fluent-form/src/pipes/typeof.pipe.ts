@@ -5,13 +5,12 @@ type Typeof = 'string' | 'number' | 'bigint' | 'boolean' | 'symbol' | 'undefined
 @Pipe({
   name: 'typeof'
 })
-export class TypeofPipe implements PipeTransform {
+export class FluentTypeofPipe implements PipeTransform {
 
   transform(value: unknown): Typeof;
-  transform(value: unknown, type: Typeof): boolean;
+  transform<T extends Typeof>(value: unknown, type: T): value is T;
   transform(value: unknown, type?: Typeof) {
     const typeName = typeof value;
-
     return type ? typeName === type : typeName;
   }
 

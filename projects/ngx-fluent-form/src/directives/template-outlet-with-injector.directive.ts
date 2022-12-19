@@ -3,10 +3,10 @@ import { Directive, Injector } from '@angular/core';
 
 @Directive({
   // eslint-disable-next-line
-  selector: 'ng-template[withInjector]',
+  selector: '[ngTemplateOutlet][ngTemplateOutletWithInjector]',
   standalone: true
 })
-export class FluentTemplateWithInjectorDirective {
+export class FluentTemplateOutletWithInjectorDirective {
 
   constructor(outlet: NgTemplateOutlet, injector: Injector) {
     outlet.ngTemplateOutletInjector = injector;

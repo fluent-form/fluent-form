@@ -343,7 +343,7 @@ describe('form.utils', () => {
       const begin = new Date();
       const end = new Date();
       const schemas = standardSchemas([
-        dateRange('date').defaultValue([begin, end])
+        dateRange('range').defaultValue([begin, end])
       ]);
       const form = createFormGroup(schemas);
       const model = formUtils(form, schemas).assign({});

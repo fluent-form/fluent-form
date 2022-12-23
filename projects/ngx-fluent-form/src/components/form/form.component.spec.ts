@@ -45,7 +45,7 @@ describe('FluentFormComponent', () => {
     component.model = { text: 'test' };
     fixture.detectChanges();
 
-    expect(component.target.form.getRawValue()).toEqual(component.model);
+    expect(component.target['form'].getRawValue()).toEqual(component.model);
   });
 
   it('模型应该能正确赋值表单', () => {
@@ -55,7 +55,7 @@ describe('FluentFormComponent', () => {
     component.model = { text: 'test' };
     fixture.detectChanges();
 
-    expect(component.target.form.getRawValue()).toEqual(component.model);
+    expect(component.target['form'].getRawValue()).toEqual(component.model);
   });
 
   it('表单应该能正确赋值模型', () => {
@@ -84,8 +84,8 @@ describe('FluentFormComponent', () => {
     component.model = { text: 'test' };
     fixture.detectChanges();
 
-    expect(component.target.form.get('text')?.disabled).toEqual(true);
-    expect(component.target.form.get('group.text')?.disabled).toEqual(false);
-    expect(component.target.form.get(['array', 0])?.disabled).toEqual(true);
+    expect(component.target['form'].get('text')?.disabled).toEqual(true);
+    expect(component.target['form'].get('group.text')?.disabled).toEqual(false);
+    expect(component.target['form'].get(['array', 0])?.disabled).toEqual(true);
   });
 });

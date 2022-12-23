@@ -39,8 +39,12 @@ export const defineMeta = (meta?: Meta) => ({
       control: 'object'
     },
     layout: {
-      control: 'radio-group',
+      control: 'radio',
       options: ['vertical', 'horizontal', 'inline'],
+    },
+    gutter: {
+      control: 'object',
+      defaultValue: { xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }
     }
   },
   parameters: {
@@ -65,4 +69,5 @@ export abstract class AbstractFluentFormWrapperComponent {
   @Input() model!: FluentFormComponent<SafeAny>['model'];
   @Input() layout: FluentFormComponent<SafeAny>['layout'] = 'vertical';
   @Input() colon: FluentFormComponent<SafeAny>['colon'] = true;
+  @Input() gutter!: FluentFormComponent<SafeAny>['gutter'];
 }

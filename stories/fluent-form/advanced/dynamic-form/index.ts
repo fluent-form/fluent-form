@@ -13,7 +13,8 @@ import dedent from 'ts-dedent';
         [(model)]="model"
         [schemas]="schemas"
         [layout]="layout"
-        [colon]="colon"></fluent-form>
+        [colon]="colon"
+        [gutter]="gutter"></fluent-form>
       <div nz-col nzFlex="1">
         <pre>{{ model | json }}</pre>
       </div>

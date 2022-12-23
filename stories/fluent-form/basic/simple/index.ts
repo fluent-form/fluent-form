@@ -1,4 +1,4 @@
-import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, datetime, form, input, inputGroup, number, radio, range, rate, select, slider, step, steps, tab, tabset, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
+import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, form, input, inputGroup, number, radioGroup, rate, select, slider, step, steps, tab, tabset, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
 import { CASCADER_OPTIONS, CHECKBOX_OPTIONS, RADIO_OPTIONS, SELECT_OPTIONS, TREE_SELECT_OPTIONS } from 'stories/options';
 import { defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
@@ -29,11 +29,11 @@ export const story = defineStory({
         ]
       }),
       date('date').label('日期录入框').col(6).class('custom-class'),
-      range('range').label('区间日期录入框').col(6),
+      dateRange('date-range').label('区间日期录入框').col(6),
       datetime('datetime').label('日期时间录入框').col(6),
       time('time').label('时间录入框').col(6),
       toggle('toggle').label('开关').placeholder(['启用', '禁用']).defaultValue(true).col(12),
-      radio('radio').label('单选框组').options(RADIO_OPTIONS).col(12),
+      radioGroup('radio-group').label('单选框组').options(RADIO_OPTIONS).col(12),
       checkbox('checkbox').label('单个复选框').content('同意').col(12),
       checkboxGroup('checkboxGroup').label('复选框组').options(CHECKBOX_OPTIONS).col(12),
       select('select').label('选择器').options(SELECT_OPTIONS).col(8),
@@ -82,7 +82,7 @@ export const story = defineStory({
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, datetime, form, input, inputGroup, number, radio, range, rate, select, slider, step, steps, toggle, textarea, time } from 'ngx-fluent-form';
+  import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, datetime, form, input, inputGroup, number, radioGroup, dateRange, rate, select, slider, step, steps, toggle, textarea, time } from 'ngx-fluent-form';
 
   @Component({
     selector: 'example-component',
@@ -113,11 +113,11 @@ export const source = dedent`
         ]
       }),
       date('date').label('日期录入框').col(6),
-      range('range').label('区间日期录入框').col(6),
+      dateRange('date-range').label('区间日期录入框').col(6),
       datetime('datetime').label('日期时间录入框').col(6),
       time('time').label('时间录入框').col(6),
       toggle('toggle').label('开关').placeholder(['启用', '禁用']).defaultValue(true).col(12),
-      radio('radio').label('单选框组').options(RADIO_OPTIONS).col(12),
+      radioGroup('radio-group').label('单选框组').options(RADIO_OPTIONS).col(12),
       checkbox('checkbox').label('单个复选框').content('同意').col(12),
       checkboxGroup('checkboxGroup').label('复选框组').options(CHECKBOX_OPTIONS).col(12),
       select('select').label('选择器').options(SELECT_OPTIONS).col(12),

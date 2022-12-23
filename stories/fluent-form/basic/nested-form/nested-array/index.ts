@@ -1,4 +1,4 @@
-import { array, datetime, form, group, input, radio } from 'ngx-fluent-form';
+import { array, datetime, form, group, input, radioGroup } from 'ngx-fluent-form';
 import { defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
@@ -12,15 +12,15 @@ export const story = defineStory({
       array('passengers').label('机组乘客').col(24).schemas(
         group().col(12).schemas(
           input('name').label('姓名').defaultValue('史蒂夫'),
-          radio('gender').label('性别').options(GENDER_OPTIONS).defaultValue('男'),
+          radioGroup('gender').label('性别').options(GENDER_OPTIONS).defaultValue('男'),
         ),
         group().col(12).schemas(
           input('name').label('姓名').defaultValue('卡拉'),
-          radio('gender').label('性别').options(GENDER_OPTIONS).defaultValue('女'),
+          radioGroup('gender').label('性别').options(GENDER_OPTIONS).defaultValue('女'),
         ),
         group().col(12).schemas(
           input('name').label('姓名'),
-          radio('gender').label('性别').options(GENDER_OPTIONS),
+          radioGroup('gender').label('性别').options(GENDER_OPTIONS),
         )
       )
     ),
@@ -30,7 +30,7 @@ export const story = defineStory({
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { array, datetime, form, group, input, radio } from 'ngx-fluent-form';
+  import { array, datetime, form, group, input, radioGroup } from 'ngx-fluent-form';
 
   const GENDER_OPTIONS = [{ label: '女', value: '女' }, { label: '男', value: '男' }];
 
@@ -45,15 +45,15 @@ export const source = dedent`
       array('passengers').label('机组乘客').col(24).schemas(
         group().col(12).schemas(
           input('name').label('姓名').defaultValue('史蒂夫'),
-          radio('gender').label('性别').options(GENDER_OPTIONS).defaultValue('男'),
+          radioGroup('gender').label('性别').options(GENDER_OPTIONS).defaultValue('男'),
         ),
         group().col(12).schemas(
           input('name').label('姓名').defaultValue('卡拉'),
-          radio('gender').label('性别').options(GENDER_OPTIONS).defaultValue('女'),
+          radioGroup('gender').label('性别').options(GENDER_OPTIONS).defaultValue('女'),
         ),
         group().col(12).schemas(
           input('name').label('姓名'),
-          radio('gender').label('性别').options(GENDER_OPTIONS),
+          radioGroup('gender').label('性别').options(GENDER_OPTIONS),
         )
       )
     );

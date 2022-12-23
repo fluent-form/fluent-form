@@ -39,7 +39,7 @@ export const defineMeta = (meta?: Meta) => ({
       control: 'object'
     },
     layout: {
-      control: 'radio',
+      control: 'radio-group',
       options: ['vertical', 'horizontal', 'inline'],
     }
   },

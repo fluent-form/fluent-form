@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { form, input, radio, select, toggle } from 'ngx-fluent-form';
+import { form, input, radioGroup, select, toggle } from 'ngx-fluent-form';
 import { AbstractFluentFormWrapperComponent, defineMeta, defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
@@ -41,7 +41,7 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
           this.model = { ...this.model };
         }
       }),
-      radio('show').label('控制显隐').col(7).defaultValue(true).options([
+      radioGroup('show').label('控制显隐').col(7).defaultValue(true).options([
         { label: '显示', value: true },
         { label: '隐藏', value: false },
       ]),
@@ -65,7 +65,7 @@ export const story = defineStory();
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { form, input, radio, select, toggle } from 'ngx-fluent-form';
+  import { form, input, radioGroup, select, toggle } from 'ngx-fluent-form';
 
   const SELECT_OPTIONS = [
     { label: 'Jack', value: 'jack' },
@@ -85,7 +85,7 @@ export const source = dedent`
           this.model = { ...this.model };
         }
       }),
-      radio('show').label('控制显隐').col(7).defaultValue(true).options([
+      radioGroup('show').label('控制显隐').col(7).defaultValue(true).options([
         { label: '显示', value: true },
         { label: '隐藏', value: false },
       ]),

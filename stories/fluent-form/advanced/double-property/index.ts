@@ -1,11 +1,11 @@
-import { form, range } from 'ngx-fluent-form';
+import { dateRange, form } from 'ngx-fluent-form';
 import { defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
 export const story = defineStory({
   args: {
     schemas: form(
-      range(['start', 'end']).label('日期区间控件').col(12),
+      dateRange(['start', 'end']).label('日期区间控件').col(12),
     ),
     model: {}
   }
@@ -13,7 +13,7 @@ export const story = defineStory({
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { form, range } from 'ngx-fluent-form';
+  import { form, dateRange } from 'ngx-fluent-form';
 
   @Component({
     selector: 'example-component',
@@ -21,7 +21,7 @@ export const source = dedent`
   })
   export class ExampleComponent {
     schemas = form(
-      range(['start', 'end']).label('日期区间控件').col(12),
+      dateRange(['start', 'end']).label('日期区间控件').col(12),
     );
 
     model = {};

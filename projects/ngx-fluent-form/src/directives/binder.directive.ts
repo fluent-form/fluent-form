@@ -3,7 +3,7 @@ import { AbstractControl } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { asapScheduler, fromEvent, observeOn, takeUntil } from 'rxjs';
-import { ControlSchema } from '../schemas/index.schema';
+import { ControlContainerSchema, ControlSchema } from '../schemas/index.schema';
 import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../types';
 
 @Directive({
@@ -11,7 +11,7 @@ import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../type
   standalone: true,
   providers: [NzDestroyService]
 })
-export class FluentBinderDirective<E extends HTMLElement, C extends object, S extends ControlSchema> implements OnChanges {
+export class FluentBinderDirective<E extends HTMLElement, C extends object, S extends ControlSchema | ControlContainerSchema> implements OnChanges {
   @Input('fluentBinder') component?: C;
   @Input('fluentBinderSchema') schema!: S;
   @Input('fluentBinderControl') control?: AbstractControl;
@@ -34,16 +34,16 @@ export class FluentBinderDirective<E extends HTMLElement, C extends object, S ex
     });
 
     this.schema.listener && Object.keys(this.schema.listener).forEach(eventName => {
-      if (eventName === 'valueChange') {
+      if (eventName === 'valueChange' && eventName in this.schema.listener!) {
         this.control!.valueChanges.pipe(
           observeOn(asapScheduler), // 微任务调度，确保顶层事件先发射
           takeUntil(this.destory$),
-        ).subscribe(this.schema.listener![eventName]!);
-      } else if (eventName === 'statusChange') {
+        ).subscribe(this.schema.listener[eventName]);
+      } else if (eventName === 'statusChange' && eventName in this.schema.listener!) {
         this.control!.statusChanges.pipe(
           observeOn(asapScheduler),
           takeUntil(this.destory$),
-        ).subscribe(this.schema.listener![eventName]!);
+        ).subscribe(this.schema.listener[eventName]);
       } else if (this.host instanceof HTMLElement) {
         fromEvent(this.host, eventName).pipe(
           takeUntil(this.destory$)

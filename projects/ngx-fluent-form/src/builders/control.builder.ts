@@ -88,10 +88,10 @@ export function treeSelect<N extends SchemaName>(name?: N) {
   return builder<TreeSelectControlSchema<N>>().type('tree-select').name(name);
 }
 
-export function radio(): UnstableBuilder<RadioControlSchema<number>, TypeAndName>;
-export function radio<N extends SchemaName>(name?: N): UnstableBuilder<RadioControlSchema<N>, TypeAndName>;
-export function radio<N extends SchemaName>(name?: N) {
-  return builder<RadioControlSchema<N>>().type('radio').name(name);
+export function radioGroup(): UnstableBuilder<RadioControlSchema<number>, TypeAndName>;
+export function radioGroup<N extends SchemaName>(name?: N): UnstableBuilder<RadioControlSchema<N>, TypeAndName>;
+export function radioGroup<N extends SchemaName>(name?: N) {
+  return builder<RadioControlSchema<N>>().type('radio-group').name(name);
 }
 
 export function checkbox(): UnstableBuilder<CheckboxControlSchema<number>, TypeAndName>;
@@ -118,8 +118,8 @@ export function slider<N extends AnySchemaName>(name?: N) {
   return builder<SliderControlSchema<N>>().type('slider').name(name);
 }
 
-export function range(): UnstableBuilder<RangePickerControlSchema<number>, TypeAndName>;
-export function range<N extends AnySchemaName>(name?: N): UnstableBuilder<RangePickerControlSchema<N>, TypeAndName>;
-export function range<N extends AnySchemaName>(name?: N) {
-  return builder<RangePickerControlSchema<N>>().type('range').name(name);
+export function dateRange(): UnstableBuilder<RangePickerControlSchema<number>, TypeAndName>;
+export function dateRange<N extends AnySchemaName>(name?: N): UnstableBuilder<RangePickerControlSchema<N>, TypeAndName>;
+export function dateRange<N extends AnySchemaName>(name?: N) {
+  return builder<RangePickerControlSchema<N>>().type('date-range').name(name);
 }

@@ -148,7 +148,7 @@
       </nz-date-picker>
     </ng-container>
 
-    <ng-container *ngSwitchCase="'range'">
+    <ng-container *ngSwitchCase="'date-range'">
       <nz-range-picker
         #cmp
         [fluentBinder]="cmp"
@@ -326,7 +326,7 @@
       </nz-slider>
     </ng-container>
 
-    <ng-container *ngSwitchCase="'radio'">
+    <ng-container *ngSwitchCase="'radio-group'">
       <nz-radio-group
         #cmp
         [fluentBinder]="cmp"
@@ -670,7 +670,7 @@
         [nzShowNow]="schema.now ?? true"></nz-date-picker>
     </ng-container>
 
-    <ng-container *ngSwitchCase="'range'">
+    <ng-container *ngSwitchCase="'date-range'">
       <nz-range-picker
         #cmp
         nz-col

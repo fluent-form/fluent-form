@@ -1,5 +1,5 @@
 import { createFormGroup, standardSchemas } from '.';
-import { array, button, buttonGroup, checkboxGroup, date, group, input, inputGroup, number, range, slider, time } from '../builders';
+import { array, button, buttonGroup, checkboxGroup, date, dateRange, group, input, inputGroup, number, slider, time } from '../builders';
 import { formUtils } from './form.utils';
 import { modelUtils } from './model.utils';
 
@@ -133,7 +133,7 @@ describe('form.utils', () => {
     it('应该能正确处理双字段模式（空模型）', () => {
       const model = {};
       const fields = ['begin', 'end'] as const;
-      const schemas = standardSchemas([range(fields)]);
+      const schemas = standardSchemas([dateRange(fields)]);
       const form = createFormGroup(schemas);
 
       modelUtils(model, schemas).assign(form);
@@ -169,7 +169,7 @@ describe('form.utils', () => {
       const begin = new Date();
       const end = new Date();
       const model = { range: [begin.getTime(), end.getTime()] };
-      const schemas = standardSchemas([range('range')]);
+      const schemas = standardSchemas([dateRange('date-range')]);
       const form = createFormGroup(schemas);
 
       modelUtils(model, schemas).assign(form);
@@ -182,7 +182,7 @@ describe('form.utils', () => {
       const end = new Date();
       const model = { begin: begin.getTime(), end: end.getTime() };
       const fields = ['begin', 'end'] as const;
-      const schemas = standardSchemas([range(fields)]);
+      const schemas = standardSchemas([dateRange(fields)]);
       const form = createFormGroup(schemas);
 
       modelUtils(model, schemas).assign(form);
@@ -309,7 +309,7 @@ describe('form.utils', () => {
 
     it('应该能正确处理双字段模式（空模型）', () => {
       const schemas = standardSchemas([
-        range(['begin', 'end'])
+        dateRange(['begin', 'end'])
       ]);
       const form = createFormGroup(schemas);
       const model = formUtils(form, schemas).assign({});
@@ -343,7 +343,7 @@ describe('form.utils', () => {
       const begin = new Date();
       const end = new Date();
       const schemas = standardSchemas([
-        range('range').defaultValue([begin, end])
+        dateRange('date-range').defaultValue([begin, end])
       ]);
       const form = createFormGroup(schemas);
       const model = formUtils(form, schemas).assign({});
@@ -355,7 +355,7 @@ describe('form.utils', () => {
       const begin = new Date();
       const end = new Date();
       const schemas = standardSchemas([
-        range(['begin', 'end']).defaultValue([begin, end])
+        dateRange(['begin', 'end']).defaultValue([begin, end])
       ]);
       const form = createFormGroup(schemas);
       const model = formUtils(form, schemas).assign({});

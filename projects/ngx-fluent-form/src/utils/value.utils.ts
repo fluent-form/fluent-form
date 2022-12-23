@@ -52,7 +52,7 @@ export class ValueUtils<S extends AnyObject | AnyArray | AbstractControl> {
       return value ? new Date(value as string | number | Date) : null;
     }
 
-    if (this.schema.type === 'range') {
+    if (this.schema.type === 'date-range') {
       return (value as [string | number | Date, string | number | Date])?.map(o => o ? new Date(o) : null) ?? null;
     }
 
@@ -84,7 +84,7 @@ export class ValueUtils<S extends AnyObject | AnyArray | AbstractControl> {
       return (value as Date | null)?.getTime() ?? null;
     }
 
-    if (this.schema.type === 'range') {
+    if (this.schema.type === 'date-range') {
       return (value as [Date | null, Date | null])?.map(o => o?.getTime() ?? null) ?? null;
     }
 

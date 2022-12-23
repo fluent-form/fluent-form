@@ -1,4 +1,4 @@
-import { form, input, range } from '../builders';
+import { dateRange, form, input } from '../builders';
 import { createFormGroup } from '../utils';
 import { ControlPipe } from './control.pipe';
 
@@ -6,7 +6,7 @@ describe('ControlPipe', () => {
   let pipe: ControlPipe;
   const schemas = form(
     input('a'),
-    range(['b', 'c'])
+    dateRange(['b', 'c'])
   );
   const formGroup = createFormGroup(schemas);
 

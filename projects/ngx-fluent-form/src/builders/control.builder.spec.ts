@@ -1,7 +1,7 @@
 import { SafeAny } from '@ngify/types';
 import { AbstractTextControlSchema, CheckboxControlSchema, DatePickerControlSchema, InputControlSchema, NumberInputControlSchema, RangePickerControlSchema, RateControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema } from '../schemas';
 import { standardSchema } from '../utils';
-import { cascader, checkbox, checkboxGroup, date, datetime, email, input, integer, number, password, radio, range, rate, select, slider, string, textarea, time, toggle, treeSelect } from './control.builder';
+import { cascader, checkbox, checkboxGroup, date, dateRange, datetime, email, input, integer, number, password, radioGroup, rate, select, slider, string, textarea, time, toggle, treeSelect } from './control.builder';
 
 describe('control.builder', () => {
   it('input', () => {
@@ -100,9 +100,9 @@ describe('control.builder', () => {
     expect(schema).toEqual(value);
   });
 
-  it('radio', () => {
-    const schema = standardSchema(radio('radio').options([]));
-    const value = { type: 'radio', name: 'radio', options: [] } as SafeAny;
+  it('radio-group', () => {
+    const schema = standardSchema(radioGroup('radio-group').options([]));
+    const value = { type: 'radio-group', name: 'radio-group', options: [] } as SafeAny;
     expect(schema).toEqual(value);
   });
 
@@ -130,9 +130,9 @@ describe('control.builder', () => {
     expect(schema).toEqual(value);
   });
 
-  it('range', () => {
-    const schema = standardSchema(range('range'));
-    const value = { type: 'range', name: 'range' } as RangePickerControlSchema<'range', [Date, Date]>;
+  it('date-range', () => {
+    const schema = standardSchema(dateRange('date-range'));
+    const value = { type: 'date-range', name: 'date-range' } as RangePickerControlSchema<'date-range', [Date, Date]>;
     expect(schema).toEqual(value);
   });
 });

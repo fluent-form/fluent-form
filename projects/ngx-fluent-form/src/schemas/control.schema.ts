@@ -46,7 +46,7 @@ export interface DatePickerControlSchema<Name extends SchemaName = SchemaName, V
 }
 
 export interface RangePickerControlSchema<Name extends AnySchemaName = AnySchemaName, Val = [Date, Date]> extends AbstractDateControlSchema<Name, Val>, AbstractComponentControlSchema<NzRangePickerComponent, Val>, AbstractInputFieldControlSchema<[string, string]> {
-  type: 'range';
+  type: 'date-range';
   separator?: string;
 }
 
@@ -144,7 +144,7 @@ export interface SliderControlSchema<Name extends AnySchemaName = AnySchemaName,
 }
 
 export interface RadioControlSchema<Name extends SchemaName = SchemaName, Val = SafeAny> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzRadioGroupComponent, Val> {
-  type: 'radio';
+  type: 'radio-group';
   button?: boolean | NzRadioButtonStyle;
   size?: NzSizeLDSType;
   options: AnyObject[];

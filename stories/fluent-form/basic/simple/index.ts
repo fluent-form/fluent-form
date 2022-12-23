@@ -8,39 +8,39 @@ export const story = defineStory({
     schemas: form(
       input('text')
         .label({ value: '文本输入框', tooltip: '小贴士' })
-        .span(8)
+        .col(8)
         .id('ipt')
         .disabled('false')
         .autocomplete({
           options: ['a', 'b', 'c']
         }),
-      number('number').label('数字输入框').span(8).disabled(o => (console.log(o), false)),
-      inputGroup().label('姓与名称').span(8).schemas(
-        input('first').placeholder('姓').span(8).autocomplete({
+      number('number').label('数字输入框').col(8).disabled(o => (console.log(o), false)),
+      inputGroup().label('姓与名称').col(8).schemas(
+        input('first').placeholder('姓').col(8).autocomplete({
           options: [1, 2, 3]
         }),
-        input('last').placeholder('名').span(16),
+        input('last').placeholder('名').col(16),
       ),
-      textarea('textarea').label('文本框').span(24).autocomplete({
+      textarea('textarea').label('文本框').col(24).autocomplete({
         options: [
           { label: 'A', value: 'a' },
           { label: 'B', value: 'b' },
           { label: 'C', value: 'c' }
         ]
       }),
-      date('date').label('日期录入框').span(6).class('custom-class'),
-      range('range').label('区间日期录入框').span(6),
-      datetime('datetime').label('日期时间录入框').span(6),
-      time('time').label('时间录入框').span(6),
-      toggle('toggle').label('开关').placeholder(['启用', '禁用']).defaultValue(true).span(12),
-      radio('radio').label('单选框组').options(RADIO_OPTIONS).span(12),
-      checkbox('checkbox').label('单个复选框').content('同意').span(12),
-      checkboxGroup('checkboxGroup').label('复选框组').options(CHECKBOX_OPTIONS).span(12),
-      select('select').label('选择器').options(SELECT_OPTIONS).span(8),
-      cascader('cascader').label('联级选择器').options(CASCADER_OPTIONS).span(8),
-      treeSelect('treeSelect').label('树形选择器').options(TREE_SELECT_OPTIONS).expandedKeys(['100', '1001']).span(8),
-      rate('rate').label('评分').defaultValue(2.5).span(12),
-      slider('slider').label('滑动条').defaultValue(30).span(12),
+      date('date').label('日期录入框').col(6).class('custom-class'),
+      range('range').label('区间日期录入框').col(6),
+      datetime('datetime').label('日期时间录入框').col(6),
+      time('time').label('时间录入框').col(6),
+      toggle('toggle').label('开关').placeholder(['启用', '禁用']).defaultValue(true).col(12),
+      radio('radio').label('单选框组').options(RADIO_OPTIONS).col(12),
+      checkbox('checkbox').label('单个复选框').content('同意').col(12),
+      checkboxGroup('checkboxGroup').label('复选框组').options(CHECKBOX_OPTIONS).col(12),
+      select('select').label('选择器').options(SELECT_OPTIONS).col(8),
+      cascader('cascader').label('联级选择器').options(CASCADER_OPTIONS).col(8),
+      treeSelect('treeSelect').label('树形选择器').options(TREE_SELECT_OPTIONS).expandedKeys(['100', '1001']).col(8),
+      rate('rate').label('评分').defaultValue(2.5).col(12),
+      slider('slider').label('滑动条').defaultValue(30).col(12),
       text().content('文本'),
       button().subtype('primary').content('普通按钮'),
       button().subtype('primary').content('带图标的按钮').icon('check'),
@@ -52,10 +52,10 @@ export const story = defineStory({
         button().content('看不见我').hidden(() => true),
         button().content('动态').hidden(({ model }) => model.slider < 50),
       ),
-      steps().span(24).active(0).schemas(
+      steps().col(24).active(0).schemas(
         step().title('第一步').schemas(
-          input('text1InStep1').label('文本输入框').placeholder('第一步的输入框').span(12),
-          input('text2InStep1').label('文本输入框').placeholder('第一步的输入框').span(12),
+          input('text1InStep1').label('文本输入框').placeholder('第一步的输入框').col(12),
+          input('text2InStep1').label('文本输入框').placeholder('第一步的输入框').col(12),
         ),
         step().title('第二步').schemas(
           input('textInStep2').label('文本输入框').placeholder('第二步的输入框'),
@@ -64,9 +64,9 @@ export const story = defineStory({
           input('textInStep3').label('文本输入框').placeholder('第三步的输入框'),
         )
       ),
-      tabset().span(24).schemas(
+      tabset().col(24).schemas(
         tab().title('账号').schemas(
-          input('textInTab1').label('账号').span(12),
+          input('textInTab1').label('账号').col(12),
         ),
         tab().title('手机号').schemas(
           input('textInTab2').label('手机号'),
@@ -92,38 +92,38 @@ export const source = dedent`
     schemas = form(
       input('text')
         .label({ value: '文本输入框', tooltip: '小贴士' })
-        .span(8)
+        .col(8)
         .id('ipt')
         .disabled('false')
         .autocomplete({
           options: ['a', 'b', 'c']
         }),
-      number('number').label('数字输入框').span(8).disabled(o => (console.log(o), false)),
-      inputGroup().label('姓与名称').span(8).schemas(
-        input('first').placeholder('姓').span(8).autocomplete({
+      number('number').label('数字输入框').col(8).disabled(o => (console.log(o), false)),
+      inputGroup().label('姓与名称').col(8).schemas(
+        input('first').placeholder('姓').col(8).autocomplete({
           options: [1, 2, 3]
         }),
-        input('last').placeholder('名').span(16),
+        input('last').placeholder('名').col(16),
       ),
-      textarea('textarea').label('文本框').span(24).autocomplete({
+      textarea('textarea').label('文本框').col(24).autocomplete({
         options: [
           { label: 'A', value: 'a' },
           { label: 'B', value: 'b' },
           { label: 'C', value: 'c' }
         ]
       }),
-      date('date').label('日期录入框').span(6),
-      range('range').label('区间日期录入框').span(6),
-      datetime('datetime').label('日期时间录入框').span(6),
-      time('time').label('时间录入框').span(6),
-      toggle('toggle').label('开关').placeholder(['启用', '禁用']).defaultValue(true).span(12),
-      radio('radio').label('单选框组').options(RADIO_OPTIONS).span(12),
-      checkbox('checkbox').label('单个复选框').content('同意').span(12),
-      checkboxGroup('checkboxGroup').label('复选框组').options(CHECKBOX_OPTIONS).span(12),
-      select('select').label('选择器').options(SELECT_OPTIONS).span(12),
-      cascader('cascader').label('联级选择器').options(CASCADER_OPTIONS).span(12),
-      rate('rate').label('评分').defaultValue(2.5).span(12),
-      slider('slider').label('滑动条').defaultValue(30).span(12),
+      date('date').label('日期录入框').col(6),
+      range('range').label('区间日期录入框').col(6),
+      datetime('datetime').label('日期时间录入框').col(6),
+      time('time').label('时间录入框').col(6),
+      toggle('toggle').label('开关').placeholder(['启用', '禁用']).defaultValue(true).col(12),
+      radio('radio').label('单选框组').options(RADIO_OPTIONS).col(12),
+      checkbox('checkbox').label('单个复选框').content('同意').col(12),
+      checkboxGroup('checkboxGroup').label('复选框组').options(CHECKBOX_OPTIONS).col(12),
+      select('select').label('选择器').options(SELECT_OPTIONS).col(12),
+      cascader('cascader').label('联级选择器').options(CASCADER_OPTIONS).col(12),
+      rate('rate').label('评分').defaultValue(2.5).col(12),
+      slider('slider').label('滑动条').defaultValue(30).col(12),
       text().content('文本'),
       button().subtype('primary').content('普通按钮'),
       button().subtype('primary').content('带图标的按钮').icon('check'),
@@ -134,10 +134,10 @@ export const source = dedent`
         button().content('看不见我').hidden(() => true),
         button().content('动态').hidden(({ model }) => model.slider < 50),
       ),
-      steps().span(24).active(0).schemas(
+      steps().col(24).active(0).schemas(
         step().title('第一步').schemas(
-          input('text1InStep1').label('文本输入框').placeholder('第一步的输入框').span(12),
-          input('text2InStep1').label('文本输入框').placeholder('第一步的输入框').span(12),
+          input('text1InStep1').label('文本输入框').placeholder('第一步的输入框').col(12),
+          input('text2InStep1').label('文本输入框').placeholder('第一步的输入框').col(12),
         ),
         step().title('第二步').schemas(
           input('textInStep2').label('文本输入框').placeholder('第二步的输入框'),
@@ -146,9 +146,9 @@ export const source = dedent`
           input('textInStep3').label('文本输入框').placeholder('第三步的输入框'),
         )
       ),
-      tabset().span(24).schemas(
+      tabset().col(24).schemas(
         tab().title('账号').schemas(
-          input('textInTab1').label('账号').span(12),
+          input('textInTab1').label('账号').col(12),
         ),
         tab().title('手机号').schemas(
           input('textInTab2').label('手机号'),

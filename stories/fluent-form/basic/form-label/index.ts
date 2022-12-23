@@ -10,7 +10,7 @@ export const story = defineStory({
           value: '右对齐',
           span: 7
         })
-        .span(24),
+        .col(24),
 
       input('text2')
         .label({
@@ -18,7 +18,7 @@ export const story = defineStory({
           span: 7,
           tooltip: '小贴士'
         })
-        .span(24),
+        .col(24),
 
       input('text3')
         .label({
@@ -29,7 +29,7 @@ export const story = defineStory({
             icon: 'info-circle'
           }
         })
-        .span(24),
+        .col(24),
     ),
     model: {},
     layout: 'horizontal'
@@ -51,7 +51,7 @@ export const source = dedent`
           value: '右对齐',
           span: 7
         })
-        .span(24),
+        .col(24),
 
       input('text2')
         .label({
@@ -59,7 +59,7 @@ export const source = dedent`
           span: 7,
           tooltip: '小贴士'
         })
-        .span(24),
+        .col(24),
 
       input('text3')
         .label({
@@ -70,7 +70,7 @@ export const source = dedent`
             icon: 'info-circle'
           }
         })
-        .span(24),
+        .col(24),
     );
 
     model = {};

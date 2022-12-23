@@ -78,13 +78,13 @@ export interface Property {
   line: number;
 }
 
-const Required = styled.span(({ theme }) => ({
+const Required = styled.col(({ theme }) => ({
   color: theme.color.negative,
   fontFamily: theme.typography.fonts.mono,
   cursor: 'help',
 }));
 
-const Name = styled.span({ fontWeight: 'bold' });
+const Name = styled.col({ fontWeight: 'bold' });
 
 function scrollIntoView(id: string) {
   document.getElementById(id)!.scrollIntoView({ behavior: 'smooth' });

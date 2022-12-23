@@ -5,7 +5,7 @@ import dedent from 'ts-dedent';
 export const story = defineStory({
   args: {
     schemas: form(
-      date('date').label('日期控件').span(8).mapper({
+      date('date').label('日期控件').col(8).mapper({
         input: (o?: string) => o ? new Date(o) : new Date(),
         output: o => [o!.getFullYear(), o!.getMonth() + 1, o!.getDate()].join('/')
       })
@@ -24,7 +24,7 @@ export const source = dedent`
   })
   export class ExampleComponent {
     schemas = form(
-      date('date').label('日期控件').span(8).mapper({
+      date('date').label('日期控件').col(8).mapper({
         input: (o?: string) => o ? new Date(o) : new Date(),
         output: o => [o!.getFullYear(), o!.getMonth() + 1, o!.getDate()].join('/')
       })

@@ -5,22 +5,22 @@ import dedent from 'ts-dedent';
 export const story = defineStory({
   args: {
     schemas: form(
-      inputGroup().label('姓与名称').span(8).schemas(
-        input('firstName').placeholder('姓').span(8),
-        input('lastName').placeholder('名').span(16),
+      inputGroup().label('姓与名称').col(8).schemas(
+        input('firstName').placeholder('姓').col(8),
+        input('lastName').placeholder('名').col(16),
       ),
-      inputGroup().label('个人信息').span(8).schemas(
-        input('name').placeholder('姓名').span(15),
-        number('age').placeholder('年龄').min(1).max(100).span(9),
+      inputGroup().label('个人信息').col(8).schemas(
+        input('name').placeholder('姓名').col(15),
+        number('age').placeholder('年龄').min(1).max(100).col(9),
       ),
-      inputGroup().span(10).schemas(
-        input('keyword').subtype('search').placeholder('请输入搜索关键字').span(18),
-        button().subtype('primary').content('提交').flex('auto'),
+      inputGroup().col(10).schemas(
+        input('keyword').subtype('search').placeholder('请输入搜索关键字').col(18),
+        button().subtype('primary').content('提交').col({ flex: 'auto' }),
       ),
-      inputGroup().span(6).before('@').schemas(
+      inputGroup().col(6).before('@').schemas(
         input('at').placeholder('请输入'),
       ),
-      inputGroup().span(8).suffix({ icon: 'info-circle' }).schemas(
+      inputGroup().col(8).suffix({ icon: 'info-circle' }).schemas(
         input('info').placeholder('图标后缀'),
       )
     ),
@@ -38,22 +38,22 @@ export const source = dedent`
   })
   export class ExampleComponent {
     schemas = form(
-      inputGroup().label('姓与名称').span(8).schemas(
-        input('first').placeholder('姓').span(8),
-        input('last').placeholder('名').span(16),
+      inputGroup().label('姓与名称').col(8).schemas(
+        input('first').placeholder('姓').col(8),
+        input('last').placeholder('名').col(16),
       ),
-      inputGroup().label('个人信息').span(8).schemas(
-        input('name').placeholder('姓名').span(15),
-        number('age').placeholder('年龄').min(1).max(100).span(9),
+      inputGroup().label('个人信息').col(8).schemas(
+        input('name').placeholder('姓名').col(15),
+        number('age').placeholder('年龄').min(1).max(100).col(9),
       ),
-      inputGroup().span(10).schemas(
-        input('keyword').subtype('search').placeholder('请输入搜索关键字').span(18),
-        button().subtype('primary').content('提交').flex('auto'),
+      inputGroup().col(10).schemas(
+        input('keyword').subtype('search').placeholder('请输入搜索关键字').col(18),
+        button().subtype('primary').content('提交').col({ flex: 'auto' }),
       ),
-      inputGroup().span(6).before('@').schemas(
+      inputGroup().col(6).before('@').schemas(
         input('at').placeholder('请输入'),
       ),
-      inputGroup().span(8).suffix({ icon: 'info-circle' }).schemas(
+      inputGroup().col(8).suffix({ icon: 'info-circle' }).schemas(
         input('info').placeholder('图标后缀'),
       )
     );

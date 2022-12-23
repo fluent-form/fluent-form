@@ -50,7 +50,7 @@ export interface Name {
 }
 
 const Title = styled.div({ fontWeight: 'bold' });
-const Name = styled.span({ fontWeight: 'bold' });
+const Name = styled.col({ fontWeight: 'bold' });
 
 /** 分组后的 */
 const fnMap = (miscellaneous.functions as Fn[])

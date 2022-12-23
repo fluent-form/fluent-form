@@ -58,8 +58,8 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
 
     this.schemas = form(
       inputGroup('name').schemas(
-        input('firstName').span(8),
-        input('lastName').span(16),
+        input('firstName').col(8),
+        input('lastName').col(16),
       ),
       number('age'),
       textarea('address'),
@@ -148,8 +148,8 @@ export const source = dedent`
   export class ExampleComponent {
     schemas = form(
       inputGroup('name').schemas(
-        input('firstName').span(8),
-        input('lastName').span(16),
+        input('firstName').col(8),
+        input('lastName').col(16),
       ),
       number('age'),
       textarea('address'),

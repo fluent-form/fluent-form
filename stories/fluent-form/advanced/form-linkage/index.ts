@@ -36,20 +36,20 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
     super();
 
     this.schemas = form(
-      select('select').label('控制内容').options(SELECT_OPTIONS).span(6).listener({
+      select('select').label('控制内容').options(SELECT_OPTIONS).col(6).listener({
         valueChange: value => {
           this.model.text = value;
           this.model = { ...this.model };
         }
       }),
-      radio('show').label('控制显隐').span(7).defaultValue(true).options([
+      radio('show').label('控制显隐').col(7).defaultValue(true).options([
         { label: '显示', value: true },
         { label: '隐藏', value: false },
       ]),
-      toggle('state').label('状态').span(4).placeholder(['启用', '禁用']),
+      toggle('state').label('状态').col(4).placeholder(['启用', '禁用']),
       input('text')
         .label('文本输入框')
-        .span(6)
+        .col(6)
         .hidden(({ model }) => !model.show)
         .disabled(({ model }) => !model.state),
     );
@@ -80,20 +80,20 @@ export const source = dedent`
   })
   export class ExampleComponent {
     schemas = form(
-      select('select').label('控制内容').options(SELECT_OPTIONS).span(6).listener({
+      select('select').label('控制内容').options(SELECT_OPTIONS).col(6).listener({
         valueChange: value => {
           this.model.text = value;
           this.model = { ...this.model };
         }
       }),
-      radio('show').label('控制显隐').span(7).defaultValue(true).options([
+      radio('show').label('控制显隐').col(7).defaultValue(true).options([
         { label: '显示', value: true },
         { label: '隐藏', value: false },
       ]),
-      toggle('state').label('状态').span(4).placeholder(['启用', '禁用']),
+      toggle('state').label('状态').col(4).placeholder(['启用', '禁用']),
       input('text')
         .label('文本输入框')
-        .span(6)
+        .col(6)
         .hidden(({ model }) => !model.show)
         .disabled(({ model }) => !model.state),
     );

@@ -7,18 +7,18 @@ const GENDER_OPTIONS = [{ label: '女', value: '女' }, { label: '男', value: '
 export const story = defineStory({
   args: {
     schemas: form(
-      input('flight').label('航班').required(true).span(12),
-      datetime('boardingTime').label('登机时间').required(true).span(12),
-      array('passengers').label('机组乘客').span(24).schemas(
-        group().span(12).schemas(
+      input('flight').label('航班').required(true).col(12),
+      datetime('boardingTime').label('登机时间').required(true).col(12),
+      array('passengers').label('机组乘客').col(24).schemas(
+        group().col(12).schemas(
           input('name').label('姓名').defaultValue('史蒂夫'),
           radio('gender').label('性别').options(GENDER_OPTIONS).defaultValue('男'),
         ),
-        group().span(12).schemas(
+        group().col(12).schemas(
           input('name').label('姓名').defaultValue('卡拉'),
           radio('gender').label('性别').options(GENDER_OPTIONS).defaultValue('女'),
         ),
-        group().span(12).schemas(
+        group().col(12).schemas(
           input('name').label('姓名'),
           radio('gender').label('性别').options(GENDER_OPTIONS),
         )
@@ -40,18 +40,18 @@ export const source = dedent`
   })
   export class ExampleComponent {
     schemas = form(
-      input('flight').label('航班').required(true).span(12),
-      datetime('boardingTime').label('登机时间').required(true).span(12),
-      array('passengers').label('机组乘客').span(24).schemas(
-        group().span(12).schemas(
+      input('flight').label('航班').required(true).col(12),
+      datetime('boardingTime').label('登机时间').required(true).col(12),
+      array('passengers').label('机组乘客').col(24).schemas(
+        group().col(12).schemas(
           input('name').label('姓名').defaultValue('史蒂夫'),
           radio('gender').label('性别').options(GENDER_OPTIONS).defaultValue('男'),
         ),
-        group().span(12).schemas(
+        group().col(12).schemas(
           input('name').label('姓名').defaultValue('卡拉'),
           radio('gender').label('性别').options(GENDER_OPTIONS).defaultValue('女'),
         ),
-        group().span(12).schemas(
+        group().col(12).schemas(
           input('name').label('姓名'),
           radio('gender').label('性别').options(GENDER_OPTIONS),
         )

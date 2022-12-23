@@ -5,7 +5,7 @@ import dedent from 'ts-dedent';
 export const story = defineStory({
   args: {
     schemas: form(
-      range(['start', 'end']).label('日期区间控件').span(12),
+      range(['start', 'end']).label('日期区间控件').col(12),
     ),
     model: {}
   }
@@ -21,7 +21,7 @@ export const source = dedent`
   })
   export class ExampleComponent {
     schemas = form(
-      range(['start', 'end']).label('日期区间控件').span(12),
+      range(['start', 'end']).label('日期区间控件').col(12),
     );
 
     model = {};

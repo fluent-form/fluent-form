@@ -29,8 +29,8 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
     super();
 
     this.schemas = form(
-      array('passengers').span(24).schemas(
-        input().label('乘客').span(12),
+      array('passengers').col(24).schemas(
+        input().label('乘客').col(12),
       ),
       buttonGroup().schemas(
         button().subtype('primary').content('添加控件').listener({
@@ -48,7 +48,7 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
   add() {
     const array = schemasUtils(this.schemas).find<FormArraySchema>('passengers')!;
     array.schemas.push(
-      input().label('乘客').span(12).build()
+      input().label('乘客').col(12).build()
     );
     array.schemas = [...array.schemas];
     this.schemas = [...this.schemas];
@@ -80,8 +80,8 @@ export const source = dedent`
   })
   export class ExampleComponent {
     schemas = form(
-      array('passengers').span(24).schemas(
-        input().label('乘客').span(12),
+      array('passengers').col(24).schemas(
+        input().label('乘客').col(12),
       ),
       buttonGroup().schemas(
         button().subtype('primary').content('添加控件').listener({
@@ -98,7 +98,7 @@ export const source = dedent`
     add() {
       const array = schemasUtils(this.schemas).find<FormArraySchema>('passengers')!;
       array.schemas.push(
-        input().label('乘客').span(12).build()
+        input().label('乘客').col(12).build()
       );
       array.schemas = [...array.schemas];
       this.schemas = [...this.schemas];

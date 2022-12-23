@@ -10,7 +10,7 @@ export const story = defineStory({
         .label('Username')
         .required(true)
         .length({ min: 3, max: 10 })
-        .span(12)
+        .col(12)
         .feedback(true)
         .tips({
           auto: {
@@ -25,7 +25,7 @@ export const story = defineStory({
         .label('Email')
         .subtype('email')
         .required(true)
-        .span(12)
+        .col(12)
         .feedback(true)
         .tips({
           auto: {
@@ -39,13 +39,13 @@ export const story = defineStory({
         .label('Password')
         .subtype('password')
         .required(true)
-        .span(12)
+        .col(12)
         .feedback(true)
         .tips({ error: 'Please enter your password!' }),
-      inputGroup().label('First & Last name').span(12).primary('lastName').schemas(
-        input('firstName').span(8),
+      inputGroup().label('First & Last name').col(12).primary('lastName').schemas(
+        input('firstName').col(8),
         input('lastName')
-          .span(16)
+          .col(16)
           .required(true)
           .validators(Validators.pattern(/[A-Z]{3}/))
           .tips({ error: 'Please enter three capital letters!' }),
@@ -70,7 +70,7 @@ export const source = dedent`
         .label('Username')
         .required(true)
         .length({ min: 3, max: 10 })
-        .span(12)
+        .col(12)
         .feedback(true)
         .tips({
           auto: {
@@ -85,7 +85,7 @@ export const source = dedent`
         .label('Email')
         .subtype('email')
         .required(true)
-        .span(12)
+        .col(12)
         .feedback(true)
         .tips({
           auto: {
@@ -99,13 +99,13 @@ export const source = dedent`
         .label('Password')
         .subtype('password')
         .required(true)
-        .span(12)
+        .col(12)
         .feedback(true)
         .tips({ error: 'Please enter your password!' }),
-      inputGroup().label('First & Last name').span(12).primary('lastName').schemas(
-        input('firstName').span(8),
+      inputGroup().label('First & Last name').col(12).primary('lastName').schemas(
+        input('firstName').col(8),
         input('lastName')
-          .span(16)
+          .col(16)
           .required(true)
           .validators(Validators.pattern(/[A-Z]{3}/))
           .tips({ error: 'Please enter three capital letters!' }),

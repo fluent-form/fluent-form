@@ -41,13 +41,17 @@ export interface CallbackArg<S> {
   model: SafeAny;
 }
 
+export interface Col {
+  span?: Cell;
+  offset?: Cell;
+  flex?: number | string;
+}
+
 /** 抽象图示 */
 export interface AbstractSchema<Name extends AnySchemaName> {
   type: string;
   name?: Name;
-  span?: Cell;
-  offset?: Cell;
-  flex?: number | string;
+  col?: Col | Cell;
   hidden?: boolean | ((arg: CallbackArg<AbstractSchema<AnySchemaName>>) => boolean) | string;
   class?: NgClass['ngClass'];
   style?: NgStyle['ngStyle'];

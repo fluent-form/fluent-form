@@ -40,7 +40,7 @@ describe('FluentFormComponent', () => {
 
   it('能够配置顶层表单', () => {
     component.schemas = form(it => it.updateOn('blur').schemas(
-      input('text').span(1)
+      input('text').col(1)
     ));
     component.model = { text: 'test' };
     fixture.detectChanges();
@@ -50,7 +50,7 @@ describe('FluentFormComponent', () => {
 
   it('模型应该能正确赋值表单', () => {
     component.schemas = form(
-      input('text').span(1)
+      input('text').col(1)
     );
     component.model = { text: 'test' };
     fixture.detectChanges();
@@ -60,7 +60,7 @@ describe('FluentFormComponent', () => {
 
   it('表单应该能正确赋值模型', () => {
     component.schemas = form(
-      input('text').span(1).defaultValue('test')
+      input('text').col(1).defaultValue('test')
     );
     component.model = {};
     fixture.detectChanges();

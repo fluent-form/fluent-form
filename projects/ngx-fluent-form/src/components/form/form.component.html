@@ -26,9 +26,9 @@
     <ng-template #formItemTemplate let-schema="schema" let-control="control" let-model="model">
       <div
         nz-col
-        [nzSpan]="schema.span ?? null"
-        [nzOffset]="schema.offset"
-        [nzFlex]="schema.flex"
+        [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
+        [nzOffset]="schema.col?.offset"
+        [nzFlex]="schema.col?.flex"
         [ngSwitch]="schema.type"
         [hidden]="schema.hidden | call: model : schema : control">
         <ng-container *ngSwitchCase="'group'">

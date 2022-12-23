@@ -1,8 +1,8 @@
-import { SchemaPipe } from './schema.pipe';
+import { FluentSchemaPipe } from './schema.pipe';
 
-describe('SchemaPipe', () => {
+describe('FluentSchemaPipe', () => {
   it('create an instance', () => {
-    const pipe = new SchemaPipe();
+    const pipe = new FluentSchemaPipe();
     expect(pipe).toBeTruthy();
   });
 });

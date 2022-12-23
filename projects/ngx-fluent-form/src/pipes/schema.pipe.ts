@@ -5,7 +5,7 @@ import { schemasUtils } from '../utils';
 @Pipe({
   name: 'schema'
 })
-export class SchemaPipe implements PipeTransform {
+export class FluentSchemaPipe implements PipeTransform {
 
   /**
    * 将 value 作为 name，获取 schemas 中的图示

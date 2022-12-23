@@ -10,7 +10,7 @@
   <form
     nz-row
     nz-form
-    [nzGutter]="gutter"
+    [nzGutter]="schema.gutter ?? gutter"
     [nzLayout]="layout"
     [nzNoColon]="!colon"
     [ngClass]="class"

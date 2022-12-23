@@ -26,7 +26,6 @@ export class FluentFormComponent<T extends AnyObject>  {
 
   protected form!: UntypedFormGroup;
   protected schema!: FormGroupSchema;
-  protected readonly gutter: NzRowDirective['nzGutter'] = { xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 };
 
   get schemas(): AnySchema[] {
     return this.schema?.schemas as AnySchema[];
@@ -69,6 +68,7 @@ export class FluentFormComponent<T extends AnyObject>  {
 
   @Input() layout: NzFormLayoutType = 'vertical';
   @Input() colon = true;
+  @Input() gutter: NzRowDirective['nzGutter'] = { xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 };
 
   @Output() formChange: EventEmitter<UntypedFormGroup> = new EventEmitter();
   @Output() modelChange: EventEmitter<T> = new EventEmitter();

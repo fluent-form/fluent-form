@@ -1,9 +1,9 @@
 import { dateRange, form, input } from '../builders';
 import { createFormGroup } from '../utils';
-import { ControlPipe } from './control.pipe';
+import { FluentControlPipe } from './control.pipe';
 
-describe('ControlPipe', () => {
-  let pipe: ControlPipe;
+describe('FluentControlPipe', () => {
+  let pipe: FluentControlPipe;
   const schemas = form(
     input('a'),
     dateRange(['b', 'c'])
@@ -11,7 +11,7 @@ describe('ControlPipe', () => {
   const formGroup = createFormGroup(schemas);
 
   beforeEach(() => {
-    pipe = new ControlPipe();
+    pipe = new FluentControlPipe();
   });
 
   it('create an instance', () => {

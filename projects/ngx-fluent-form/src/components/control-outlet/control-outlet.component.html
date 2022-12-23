@@ -418,7 +418,7 @@
         <ng-container
           *ngFor="let subschema of schema.schemas"
           [ngTemplateOutlet]="composableControlTemplate"
-          [ngTemplateOutletContext]="{ control: (subschema.name | control: control) ?? control, schema: subschema, model: model, classful: true }">
+          [ngTemplateOutletContext]="{ control: (subschema.name | control: control), schema: subschema, model: model, classful: true }">
         </ng-container>
       </nz-input-group>
     </ng-container>

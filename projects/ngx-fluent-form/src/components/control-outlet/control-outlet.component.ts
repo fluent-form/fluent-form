@@ -36,7 +36,9 @@ export class FluentControlOutletComponent<T extends AnyObject | AnyArray> implem
   constructor(private viewContainerRef: ViewContainerRef) { }
 
   ngOnInit(): void {
-    this.viewContainerRef.createEmbeddedView(this.controlTemplateRef, this);
+    this.viewContainerRef.createEmbeddedView(this.controlTemplateRef, this, {
+      injector: this.viewContainerRef.parentInjector
+    });
   }
 
 }

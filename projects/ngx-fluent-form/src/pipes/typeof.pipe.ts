@@ -3,7 +3,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 type Typeof = 'string' | 'number' | 'bigint' | 'boolean' | 'symbol' | 'undefined' | 'object' | 'function';
 
 @Pipe({
-  name: 'typeof'
+  name: 'typeof',
+  standalone: true
 })
 export class FluentTypeofPipe implements PipeTransform {
 

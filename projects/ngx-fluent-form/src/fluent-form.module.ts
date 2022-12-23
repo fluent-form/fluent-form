@@ -34,10 +34,10 @@ import { FluentCallPipe, FluentControlPipe, FluentSchemaPipe, FluentTypeofPipe }
     FluentOutletDirective,
     FluentControlPipe,
     FluentSchemaPipe,
-    FluentTypeofPipe,
   ],
   imports: [
     FluentCallPipe,
+    FluentTypeofPipe,
     FluentBinderDirective,
     CommonModule,
     ReactiveFormsModule,

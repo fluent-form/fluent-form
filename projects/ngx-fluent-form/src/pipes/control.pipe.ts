@@ -3,7 +3,8 @@ import { AbstractControl, UntypedFormArray, UntypedFormControl, UntypedFormGroup
 import { AnySchemaName, SchemaName } from '../schemas';
 
 @Pipe({
-  name: 'control'
+  name: 'control',
+  standalone: true
 })
 export class FluentControlPipe implements PipeTransform {
 
@@ -24,6 +25,7 @@ export class FluentControlPipe implements PipeTransform {
     // 而 FormGroup 的控件名为字符串，AbstractControl#get() 方法的参数自然也只处理字符串类型（调用了 String#split()），
     // 但 FormArray 的控件名为数字，此时如果参数传入的是数字，就会出问题，因此这里将参数一律转为数组来绕开此问题。
     return container.get([Array.isArray(value) ? value.toString() : value as SchemaName]) ?? container;
+    // TODO
     // 当获取不到对应的控件实例时，通常说明当前的 schema 不是一个 control schema，这里直接返回父级表单实例☝️
   }
 

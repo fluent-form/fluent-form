@@ -13,6 +13,13 @@ import { FluentBinderDirective } from './binder.directive';
 function emptyFn() { }
 
 @Component({
+  standalone: true,
+  imports: [
+    NzInputModule,
+    NzRateModule,
+    ReactiveFormsModule,
+    FluentBinderDirective
+  ],
   template: `
     <input
       nz-input
@@ -54,7 +61,6 @@ class TestingComponent {
 
   inputControl = createFormControl(this.inputSchema as ControlSchema);
   rateControl = createFormControl(this.rateSchema as ControlSchema);
-
 }
 
 describe('FluentBinderDirective', () => {
@@ -62,13 +68,6 @@ describe('FluentBinderDirective', () => {
   let component: TestingComponent;
   let fixture: ComponentFixture<TestingComponent>;
   let debugElement: DebugElement;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestingComponent],
-      imports: [NzInputModule, NzRateModule, ReactiveFormsModule, FluentBinderDirective]
-    }).compileComponents();
-  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestingComponent);

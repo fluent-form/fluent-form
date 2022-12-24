@@ -1,0 +1,100 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
+  <ng-container *ngIf="schema.autocomplete as autocomplete">
+    <input
+      *fluentComposable="composableTemplate"
+      nz-input
+      [attr.id]="schema.id"
+      [attr.maxlength]="schema.length?.max ?? schema.length"
+      [attr.minlength]="schema.length?.min ?? schema.length"
+      [fluentBinderSchema]="schema"
+      [fluentBinderControl]="control"
+      [ngClass]="schema.class"
+      [ngStyle]="schema.style"
+      [formControl]="control"
+      [nzAutocomplete]="autocompleteCmp"
+      [placeholder]="schema.placeholder ?? ''"
+      [type]="schema.subtype ?? 'text'"
+      [autofocus]="schema.autofocus"
+      [readonly]="schema.readonly | call: model : schema : control"
+      [nzSize]="schema.size"
+      [nzBorderless]="schema.borderless">
+
+    <ng-template #composableTemplate>
+      <input
+        *ngIf="!(schema.hidden | call: model : schema : control)"
+        nz-col
+        nz-input
+        [attr.id]="schema.id"
+        [attr.maxlength]="schema.length?.max ?? schema.length"
+        [attr.minlength]="schema.length?.min ?? schema.length"
+        [fluentBinderSchema]="schema"
+        [fluentBinderControl]="control"
+        [formControl]="control"
+        [ngClass]="schema.class"
+        [ngStyle]="schema.style"
+        [nzAutocomplete]="autocompleteCmp"
+        [nzFlex]="schema.col?.flex"
+        [nzOffset]="schema.col?.offset"
+        [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
+        [placeholder]="schema.placeholder ?? ''"
+        [type]="schema.subtype ?? 'text'"
+        [autofocus]="schema.autofocus"
+        [readonly]="schema.readonly | call: model : schema : control"
+        [nzSize]="schema.size"
+        [nzBorderless]="schema.borderless">
+    </ng-template>
+
+    <nz-autocomplete
+      #autocompleteCmp
+      [compareWith]="autocomplete.compare"
+      [nzBackfill]="autocomplete.backfill"
+      [nzDataSource]="autocomplete.options"
+      [nzWidth]="autocomplete.width"></nz-autocomplete>
+  </ng-container>
+
+  <!-- 下面是没有自动完成的条件分支 -->
+
+  <ng-container *ngIf="!schema.autocomplete">
+    <input
+      *fluentComposable="composableTemplate"
+      nz-input
+      [attr.id]="schema.id"
+      [attr.maxlength]="schema.length?.max ?? schema.length"
+      [attr.minlength]="schema.length?.min ?? schema.length"
+      [fluentBinderSchema]="schema"
+      [fluentBinderControl]="control"
+      [formControl]="control"
+      [ngClass]="schema.class"
+      [ngStyle]="schema.style"
+      [placeholder]="schema.placeholder ?? ''"
+      [type]="schema.subtype ?? 'text'"
+      [autofocus]="schema.autofocus"
+      [readonly]="schema.readonly | call: model : schema : control"
+      [nzSize]="schema.size"
+      [nzBorderless]="schema.borderless">
+
+    <ng-template #composableTemplate>
+      <input
+        *ngIf="!(schema.hidden | call: model : schema : control)"
+        nz-col
+        nz-input
+        [attr.id]="schema.id"
+        [attr.maxlength]="schema.length?.max ?? schema.length"
+        [attr.minlength]="schema.length?.min ?? schema.length"
+        [fluentBinderSchema]="schema"
+        [fluentBinderControl]="control"
+        [formControl]="control"
+        [ngClass]="schema.class"
+        [ngStyle]="schema.style"
+        [nzFlex]="schema.col?.flex"
+        [nzOffset]="schema.col?.offset"
+        [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
+        [placeholder]="schema.placeholder ?? ''"
+        [type]="schema.subtype ?? 'text'"
+        [autofocus]="schema.autofocus"
+        [readonly]="schema.readonly | call: model : schema : control"
+        [nzSize]="schema.size"
+        [nzBorderless]="schema.borderless">
+    </ng-template>
+  </ng-container>
+</ng-template>

@@ -1,0 +1,11 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
+  <nz-checkbox-group
+    #cmp
+    [fluentBinder]="cmp"
+    [fluentBinderSchema]="schema"
+    [fluentBinderControl]="control"
+    [formControl]="control"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style">
+  </nz-checkbox-group>
+</ng-template>

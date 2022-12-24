@@ -1,0 +1,16 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
+  <nz-button-group
+    #cmp
+    [fluentBinder]="cmp"
+    [fluentBinderSchema]="schema"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style"
+    [nzSize]="schema.size">
+    <ng-container
+      *ngFor="let subschema of schema.schemas"
+      fluentWithInjector
+      [ngTemplateOutlet]="subschema.type | widgetTemplateRef"
+      [ngTemplateOutletContext]="{ control: control, schema: subschema, model: model }">
+    </ng-container>
+  </nz-button-group>
+</ng-template>

@@ -1,0 +1,16 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
+  <nz-rate
+    #cmp
+    [fluentBinder]="cmp"
+    [fluentBinderSchema]="schema"
+    [fluentBinderControl]="control"
+    [formControl]="control"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style"
+    [nzAllowClear]="schema.clearable ?? true"
+    [nzAllowHalf]="schema.half"
+    [nzCharacter]="schema.character"
+    [nzCount]="schema.count ?? 5"
+    [nzTooltips]="schema.tooltips ?? []"
+    [nzAutoFocus]="schema.autofocus"></nz-rate>
+</ng-template>

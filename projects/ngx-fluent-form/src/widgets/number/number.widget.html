@@ -1,0 +1,51 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
+  <nz-input-number
+    *fluentComposable="composableTemplate"
+    #cmp
+    [fluentBinder]="cmp"
+    [fluentBinderSchema]="schema"
+    [fluentBinderControl]="control"
+    [formControl]="control"
+    [ngClass]="classful ? schema.class : null"
+    [ngStyle]="schema.style"
+    [nzId]="schema.id"
+    [nzMax]="schema.max ?? infinity"
+    [nzMin]="schema.min ?? -infinity"
+    [nzPlaceHolder]="schema.placeholder ?? ''"
+    [nzPrecision]="schema.precision?.value ?? (schema.precision | typeof: 'number') ? schema.precision : ''"
+    [nzPrecisionMode]="schema.precision?.mode"
+    [nzStep]="schema.step ?? 1"
+    [nzAutoFocus]="schema.autofocus"
+    [nzReadOnly]="schema.readonly | call: model : schema : control"
+    [nzSize]="schema.size"
+    [nzBorderless]="schema.borderless">
+  </nz-input-number>
+
+  <ng-template #composableTemplate>
+    <nz-input-number
+      *ngIf="!(schema.hidden | call: model : schema : control)"
+      #cmp
+      nz-col
+      [fluentBinder]="cmp"
+      [fluentBinderSchema]="schema"
+      [fluentBinderControl]="control"
+      [formControl]="control"
+      [ngClass]="schema.class"
+      [ngStyle]="schema.style"
+      [nzFlex]="schema.col?.flex"
+      [nzId]="schema.id"
+      [nzMax]="schema.max ?? infinity"
+      [nzMin]="schema.min ?? -infinity"
+      [nzOffset]="schema.col?.offset"
+      [nzPlaceHolder]="schema.placeholder ?? ''"
+      [nzPrecision]="schema.precision ?? ''"
+      [nzPrecisionMode]="schema.precisionMode"
+      [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
+      [nzStep]="schema.step ?? 1"
+      [nzAutoFocus]="schema.autofocus"
+      [nzReadOnly]="schema.readonly | call: model : schema : control"
+      [nzSize]="schema.size"
+      [nzBorderless]="schema.borderless">
+    </nz-input-number>
+  </ng-template>
+</ng-template>

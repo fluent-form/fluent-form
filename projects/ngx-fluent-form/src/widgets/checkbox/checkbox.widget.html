@@ -1,0 +1,14 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
+  <label
+    #cmp
+    nz-checkbox
+    [fluentBinder]="cmp"
+    [fluentBinderSchema]="schema"
+    [fluentBinderControl]="control"
+    [formControl]="control"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style"
+    [nzId]="schema.id"
+    [nzAutoFocus]="schema.autofocus"
+    [nzIndeterminate]="schema.indeterminate">{{ schema.content }}</label>
+</ng-template>

@@ -1,0 +1,64 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
+  <nz-range-picker
+    #cmp
+    *fluentComposable="composableTemplate"
+    [fluentBinder]="cmp"
+    [fluentBinderSchema]="schema"
+    [fluentBinderControl]="control"
+    [formControl]="control"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style"
+    [nzAllowClear]="schema.clearable"
+    [nzFormat]="schema.format"
+    [nzId]="schema.id"
+    [nzInline]="schema.inline"
+    [nzMode]="schema.mode"
+    [nzPlaceHolder]="schema.placeholder"
+    [nzShowTime]="schema.time"
+    [nzShowTime]="schema.time"
+    [nzBackdrop]="schema.backdrop"
+    [nzPlacement]="schema.placement ?? 'bottomLeft'"
+    [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
+    [nzAutoFocus]="schema.autofocus"
+    [nzInputReadOnly]="schema.readonly | call: model : schema : control"
+    [nzSize]="schema.size"
+    [nzBorderless]="schema.borderless"
+    [nzShowToday]="schema.today ?? true"
+    [nzShowNow]="schema.now ?? true"
+    [nzSeparator]="schema.separator">
+  </nz-range-picker>
+
+  <ng-template #composableTemplate>
+    <nz-range-picker
+      #cmp
+      nz-col
+      *ngIf="!(schema.hidden | call: model : schema : control)"
+      [fluentBinder]="cmp"
+      [fluentBinderSchema]="schema"
+      [fluentBinderControl]="control"
+      [formControl]="control"
+      [ngClass]="schema.class"
+      [ngStyle]="schema.style"
+      [nzAllowClear]="schema.clearable"
+      [nzFlex]="schema.col?.flex"
+      [nzFormat]="schema.format"
+      [nzId]="schema.id"
+      [nzInline]="schema.inline"
+      [nzMode]="schema.mode"
+      [nzOffset]="schema.col?.offset"
+      [nzPlaceHolder]="schema.placeholder"
+      [nzShowTime]="schema.time"
+      [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
+      [nzShowTime]="schema.time"
+      [nzBackdrop]="schema.backdrop"
+      [nzPlacement]="schema.placement ?? 'bottomLeft'"
+      [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
+      [nzAutoFocus]="schema.autofocus"
+      [nzInputReadOnly]="schema.readonly | call: model : schema : control"
+      [nzSize]="schema.size"
+      [nzBorderless]="schema.borderless"
+      [nzShowToday]="schema.today ?? true"
+      [nzShowNow]="schema.now ?? true"
+      [nzSeparator]="schema.separator"></nz-range-picker>
+  </ng-template>
+</ng-template>

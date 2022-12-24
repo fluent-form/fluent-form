@@ -10,12 +10,13 @@ describe('FluentControlOutletComponent', () => {
   let component: FluentControlOutletComponent<AnyObject | AnyArray>;
   let fixture: ComponentFixture<FluentControlOutletComponent<AnyObject | AnyArray>>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [FluentControlOutletComponent],
-      imports: [FluentFormModule]
-    })
-      .compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        FluentControlOutletComponent,
+        FluentFormModule
+      ]
+    });
   });
 
   beforeEach(() => {

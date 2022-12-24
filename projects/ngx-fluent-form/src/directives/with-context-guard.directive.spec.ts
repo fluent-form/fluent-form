@@ -1,10 +1,13 @@
 import { FluentWithContextGuardDirective } from './with-context-guard.directive';
 
 describe('FluentWithContextGuardDirective', () => {
-  it('should be create', () => {
+  it('create an instance', () => {
+    const directive = new FluentWithContextGuardDirective();
     FluentWithContextGuardDirective.ngTemplateContextGuard(
-      new FluentWithContextGuardDirective,
+      directive,
       null
     );
+
+    expect(directive).toBeTruthy();
   });
 });

@@ -1,0 +1,66 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
+  <nz-select
+    #cmp
+    *fluentComposable="composableTemplate"
+    [fluentBinder]="cmp"
+    [fluentBinderSchema]="schema"
+    [fluentBinderControl]="control"
+    [formControl]="control"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style"
+    [nzAllowClear]="schema.clearable"
+    [nzId]="schema.id"
+    [nzMaxMultipleCount]="schema.limit ?? infinity"
+    [nzMode]="schema.mode ?? 'default'"
+    [nzPlaceHolder]="schema.placeholder"
+    [nzShowSearch]="schema.searchable"
+    [nzBackdrop]="schema.backdrop"
+    [nzBorderless]="schema.borderless"
+    [nzAutoFocus]="schema.autofocus"
+    [nzShowArrow]="schema.arrow ?? (!schema.mode || schema.mode === 'default')"
+    [nzSize]="schema.size"
+    [nzSuffixIcon]="schema.suffixIcon">
+    <nz-option
+      *ngFor="let option of schema.options"
+      [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
+      [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
+      [nzValue]="option[schema.config?.valueProperty ?? 'value']">
+    </nz-option>
+  </nz-select>
+
+  <ng-template #composableTemplate>
+    <nz-select
+      #cmp
+      nz-col
+      *ngIf="!(schema.hidden | call: model : schema : control)"
+      [fluentBinder]="cmp"
+      [fluentBinderSchema]="schema"
+      [fluentBinderControl]="control"
+      [formControl]="control"
+      [ngClass]="schema.class"
+      [ngStyle]="schema.style"
+      [nzAllowClear]="schema.clearable"
+      [nzFlex]="schema.col?.flex"
+      [nzId]="schema.id"
+      [nzMaxMultipleCount]="schema.limit ?? infinity"
+      [nzMode]="schema.mode ?? 'default'"
+      [nzOffset]="schema.col?.offset"
+      [nzPlaceHolder]="schema.placeholder"
+      [nzShowSearch]="schema.searchable"
+      [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
+      [nzShowSearch]="schema.searchable"
+      [nzBackdrop]="schema.backdrop"
+      [nzBorderless]="schema.borderless"
+      [nzAutoFocus]="schema.autofocus"
+      [nzShowArrow]="schema.arrow ?? (!schema.mode || schema.mode === 'default')"
+      [nzSize]="schema.size"
+      [nzSuffixIcon]="schema.suffixIcon">
+      <nz-option
+        *ngFor="let option of schema.options"
+        [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
+        [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
+        [nzValue]="option[schema.config?.valueProperty ?? 'value']">
+      </nz-option>
+    </nz-select>
+  </ng-template>
+</ng-template>

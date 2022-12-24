@@ -1,0 +1,10 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
+  <nz-form-text
+    #cmp
+    [fluentBinder]="cmp"
+    [fluentBinderSchema]="schema"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style">
+    <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
+  </nz-form-text>
+</ng-template>

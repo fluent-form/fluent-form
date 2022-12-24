@@ -3,7 +3,8 @@ import { AnySchema, AnySchemaName, ControlSchema, FormArraySchema, FormGroupSche
 import { schemasUtils } from '../utils';
 
 @Pipe({
-  name: 'schema'
+  name: 'schema',
+  standalone: true
 })
 export class FluentSchemaPipe implements PipeTransform {
 

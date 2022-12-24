@@ -1,0 +1,55 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
+  <nz-time-picker
+    #cmp
+    *fluentComposable="composableTemplate"
+    [fluentBinder]="cmp"
+    [fluentBinderSchema]="schema"
+    [fluentBinderControl]="control"
+    [formControl]="control"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style"
+    [nzAllowEmpty]="schema.clearable"
+    [nzFormat]="schema.format ?? 'HH:mm:ss'"
+    [nzHourStep]="schema.step?.hour"
+    [nzId]="schema.id"
+    [nzMinuteStep]="schema.step?.minute"
+    [nzPlaceHolder]="schema.placeholder"
+    [nzSecondStep]="schema.step?.second"
+    [nzAutoFocus]="schema.autofocus"
+    [nzSize]="schema.size"
+    [nzBorderless]="schema.borderless"
+    [nzBackdrop]="schema.backdrop"
+    [nzInputReadOnly]="schema.readonly"
+    [nzSuffixIcon]="schema.suffixIcon ?? 'clock-circle'">
+  </nz-time-picker>
+
+  <ng-template #composableTemplate>
+    <nz-time-picker
+      #cmp
+      nz-col
+      *ngIf="!(schema.hidden | call: model : schema : control)"
+      [fluentBinder]="cmp"
+      [fluentBinderSchema]="schema"
+      [fluentBinderControl]="control"
+      [formControl]="control"
+      [ngClass]="schema.class"
+      [ngStyle]="schema.style"
+      [nzAllowEmpty]="schema.clearable"
+      [nzFlex]="schema.col?.flex"
+      [nzFormat]="schema.format ?? 'HH:mm:ss'"
+      [nzHourStep]="schema.step?.hour"
+      [nzId]="schema.id"
+      [nzMinuteStep]="schema.step?.minute"
+      [nzOffset]="schema.col?.offset"
+      [nzPlaceHolder]="schema.placeholder"
+      [nzSecondStep]="schema.step?.second"
+      [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
+      [nzAutoFocus]="schema.autofocus"
+      [nzSize]="schema.size"
+      [nzBorderless]="schema.borderless"
+      [nzBackdrop]="schema.backdrop"
+      [nzInputReadOnly]="schema.readonly"
+      [nzSuffixIcon]="schema.suffixIcon ?? 'clock-circle'">
+    </nz-time-picker>
+  </ng-template>
+</ng-template>

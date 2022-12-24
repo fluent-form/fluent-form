@@ -1,5 +1,8 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
+import { FluentWithInjectorDirective } from '../../directives/with-injector.directive';
+import { FluentWidgetTemplateRefPipe } from '../../pipes';
 import { ComponentSchema, ControlSchema } from '../../schemas';
 import { AnyArray, AnyObject } from '../../types';
 
@@ -16,8 +19,13 @@ export interface FluentControlTemplateContext<T extends AnyObject | AnyArray> {
 
 @Component({
   selector: 'fluent-control-outlet',
+  standalone: true,
+  imports: [
+    NgTemplateOutlet,
+    FluentWithInjectorDirective,
+    FluentWidgetTemplateRefPipe,
+  ],
   templateUrl: './control-outlet.component.html',
-  styleUrls: ['./control-outlet.component.css'],
   host: {
     '[style.display]': `'none'`
   }
@@ -28,15 +36,12 @@ export class FluentControlOutletComponent<T extends AnyObject | AnyArray> implem
   @Input() model!: T;
   @Input() classful = true;
 
-  @ViewChild('controlTemplate', { static: true }) controlTemplateRef!: TemplateRef<FluentControlTemplateContext<T>>;
-
-  /** @internal */
-  readonly infinity: number = Infinity;
+  @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<FluentControlTemplateContext<T>>;
 
   constructor(private viewContainerRef: ViewContainerRef) { }
 
   ngOnInit(): void {
-    this.viewContainerRef.createEmbeddedView(this.controlTemplateRef, this, {
+    this.viewContainerRef.createEmbeddedView(this.templateRef, this, {
       injector: this.viewContainerRef.parentInjector
     });
   }

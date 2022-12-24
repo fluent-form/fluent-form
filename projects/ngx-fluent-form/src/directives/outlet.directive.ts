@@ -35,7 +35,7 @@ export class FluentOutletDirective<T extends AnyObject | AnyArray> implements On
   ) {
     // TODO v14.1 后使用 createComponent() 替代 ComponentFactoryResolver
     const { instance } = componentFactoryResolver.resolveComponentFactory(FluentControlOutletComponent).create(injector);
-    viewContainerRef.createEmbeddedView(instance.controlTemplateRef, this);
+    viewContainerRef.createEmbeddedView(instance.templateRef, this);
   }
 
   ngOnInit() {

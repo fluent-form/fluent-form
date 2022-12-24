@@ -1,0 +1,57 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
+  <nz-cascader
+    #cmp
+    *fluentComposable="composableTemplate"
+    [fluentBinder]="cmp"
+    [fluentBinderSchema]="schema"
+    [fluentBinderControl]="control"
+    [formControl]="control"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style"
+    [nzAllowClear]="schema.clearable ?? true"
+    [nzAutoFocus]="schema.autofocus"
+    [nzBackdrop]="schema.backdrop"
+    [nzExpandIcon]="schema.expandIcon ?? ''"
+    [nzExpandTrigger]="schema.trigger"
+    [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
+    [nzLoadData]="schema.loadData"
+    [nzOptions]="schema.options"
+    [nzPlaceHolder]="schema.placeholder ?? ' '"
+    [nzShowArrow]="schema.arrow ?? true"
+    [nzShowSearch]="schema.searchable"
+    [nzSize]="schema.size"
+    [nzSuffixIcon]="schema.suffixIcon ?? 'down'"
+    [nzValueProperty]="schema.config?.valueProperty ?? 'value'">
+  </nz-cascader>
+
+  <ng-template #composableTemplate>
+    <nz-cascader
+      #cmp
+      nz-col
+      *ngIf="!(schema.hidden | call: model : schema : control)"
+      [fluentBinder]="cmp"
+      [fluentBinderSchema]="schema"
+      [fluentBinderControl]="control"
+      [formControl]="control"
+      [ngClass]="schema.class"
+      [ngStyle]="schema.style"
+      [nzAllowClear]="schema.clearable ?? true"
+      [nzAutoFocus]="schema.autofocus"
+      [nzBackdrop]="schema.backdrop"
+      [nzExpandIcon]="schema.expandIcon"
+      [nzExpandTrigger]="schema.trigger"
+      [nzFlex]="schema.col?.flex"
+      [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
+      [nzLoadData]="schema.loadData"
+      [nzOffset]="schema.col?.offset"
+      [nzOptions]="schema.options"
+      [nzPlaceHolder]="schema.placeholder ?? ' '"
+      [nzShowArrow]="schema.arrow ?? true"
+      [nzShowSearch]="schema.searchable"
+      [nzSize]="schema.size"
+      [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
+      [nzSuffixIcon]="schema.suffixIcon"
+      [nzValueProperty]="schema.config?.valueProperty ?? 'value'">
+    </nz-cascader>
+  </ng-template>
+</ng-template>

@@ -1,0 +1,27 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
+  <nz-radio-group
+    #cmp
+    [fluentBinder]="cmp"
+    [fluentBinderSchema]="schema"
+    [fluentBinderControl]="control"
+    [formControl]="control"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style"
+    [nzButtonStyle]="schema.button"
+    [nzSize]="schema.size">
+    <ng-container *ngFor="let option of schema.options">
+      <label
+        *ngIf="schema.button"
+        nz-radio-button
+        [nzValue]="option[schema.config?.valueProperty ?? 'value']">
+        {{ option[schema.config?.labelProperty ?? 'label'] }}
+      </label>
+      <label
+        *ngIf="!schema.button"
+        nz-radio
+        [nzValue]="option[schema.config?.valueProperty ?? 'value']">
+        {{ option[schema.config?.labelProperty ?? 'label'] }}
+      </label>
+    </ng-container>
+  </nz-radio-group>
+</ng-template>

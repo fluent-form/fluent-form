@@ -1,0 +1,55 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
+  <ng-container *ngIf="schema.subtype === 'link'">
+    <a
+      nz-button
+      *ngIf="!(schema.hidden | call: model : schema : control)"
+      [attr.id]="schema.id"
+      [disabled]="schema.disabled | call: model : schema : control"
+      [fluentBinderSchema]="schema"
+      [ngClass]="schema.class"
+      [ngStyle]="schema.style"
+      [nzBlock]="schema.block"
+      [nzDanger]="schema.danger | call: model : schema : control"
+      [nzGhost]="schema.ghost | call: model : schema : control"
+      [nzLoading]="schema.loading | call: model : schema : control"
+      [nzShape]="schema.shape"
+      [nzSize]="schema.size"
+      [nzType]="schema.subtype">
+      <ng-container [ngTemplateOutlet]="buttonContentTemplate"></ng-container>
+    </a>
+  </ng-container>
+
+  <!-- 下面是实体按钮的条件分支 -->
+
+  <ng-container *ngIf="schema.subtype !== 'link'">
+    <button
+      nz-button
+      *ngIf="!(schema.hidden | call: model : schema : control)"
+      [attr.id]="schema.id"
+      [attr.type]="schema.mode"
+      [disabled]="schema.disabled | call: model : schema : control"
+      [fluentBinderSchema]="schema"
+      [ngClass]="schema.class"
+      [ngStyle]="schema.style"
+      [nzBlock]="schema.block"
+      [nzDanger]="schema.danger | call: model : schema : control"
+      [nzGhost]="schema.ghost | call: model : schema : control"
+      [nzLoading]="schema.loading | call: model : schema : control"
+      [nzShape]="schema.shape"
+      [nzSize]="schema.size"
+      [nzType]="schema.subtype">
+      <ng-container [ngTemplateOutlet]="buttonContentTemplate"></ng-container>
+    </button>
+  </ng-container>
+
+  <ng-template #buttonContentTemplate>
+    <span
+      *ngIf="schema.icon"
+      nz-icon
+      [nzRotate]="schema.icon.rotate"
+      [nzSpin]="schema.icon.spin"
+      [nzTheme]="schema.icon.theme"
+      [nzType]="schema.icon.type ?? schema.icon"></span>
+    <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
+  </ng-template>
+</ng-template>

@@ -1,3 +1,21 @@
 export const enum WidgetType {
-  Input = 'input'
+  Input = 'input',
+  InputGroup = 'input-group',
+  Textarea = 'textarea',
+  Number = 'number',
+  Date = 'date',
+  DateRange = 'date-range',
+  Time = 'time',
+  Toggle = 'toggle',
+  Select = 'select',
+  Cascader = 'cascader',
+  TreeSelect = 'tree-select',
+  Slider = 'slider',
+  RadioGroup = 'radio-group',
+  Checkbox = 'checkbox',
+  CheckboxGroup = 'checkbox-group',
+  Rate = 'rate',
+  Text = 'text',
+  Button = 'button',
+  ButtonGroup = 'button-group',
 }

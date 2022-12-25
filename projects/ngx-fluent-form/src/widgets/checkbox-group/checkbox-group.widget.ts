@@ -3,7 +3,6 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { FluentBinderDirective, FluentWithContextGuardDirective } from '../../directives';
-import { FluentCallPipe, FluentTypeofPipe } from '../../pipes';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type CheckboxGroupWidgetTemplateContext = WidgetTemplateContext<any>;
@@ -17,8 +16,6 @@ type CheckboxGroupWidgetTemplateContext = WidgetTemplateContext<any>;
     NzCheckboxModule,
     FluentBinderDirective,
     FluentWithContextGuardDirective,
-    FluentTypeofPipe,
-    FluentCallPipe
   ],
   templateUrl: './checkbox-group.widget.html',
 })

@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { FluentBinderDirective, FluentWithContextGuardDirective } from '../../directives';
-import { FluentCallPipe, FluentTypeofPipe } from '../../pipes';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type TextWidgetTemplateContext = WidgetTemplateContext<any>;
@@ -19,8 +18,6 @@ type TextWidgetTemplateContext = WidgetTemplateContext<any>;
     NzOutletModule,
     FluentBinderDirective,
     FluentWithContextGuardDirective,
-    FluentTypeofPipe,
-    FluentCallPipe
   ],
   templateUrl: './text.widget.html',
 })

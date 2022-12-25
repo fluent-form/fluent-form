@@ -2,7 +2,7 @@ import { NgClass, NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { FluentBinderDirective, FluentWithContextGuardDirective, FluentWithInjectorDirective } from '../../directives';
-import { FluentCallPipe, FluentTypeofPipe, FluentWidgetTemplateRefPipe } from '../../pipes';
+import { FluentWidgetTemplateRefPipe } from '../../pipes';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type ButtonGroupWidgetTemplateContext = WidgetTemplateContext<any>;
@@ -18,8 +18,6 @@ type ButtonGroupWidgetTemplateContext = WidgetTemplateContext<any>;
     FluentBinderDirective,
     FluentWithInjectorDirective,
     FluentWithContextGuardDirective,
-    FluentTypeofPipe,
-    FluentCallPipe,
     FluentWidgetTemplateRefPipe
   ],
   templateUrl: './button-group.widget.html',

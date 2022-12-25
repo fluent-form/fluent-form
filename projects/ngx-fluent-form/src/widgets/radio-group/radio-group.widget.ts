@@ -3,7 +3,6 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { FluentBinderDirective, FluentWithContextGuardDirective } from '../../directives';
-import { FluentCallPipe, FluentTypeofPipe } from '../../pipes';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type RadioGroupWidgetTemplateContext = WidgetTemplateContext<any>;
@@ -19,8 +18,6 @@ type RadioGroupWidgetTemplateContext = WidgetTemplateContext<any>;
     NzRadioModule,
     FluentBinderDirective,
     FluentWithContextGuardDirective,
-    FluentTypeofPipe,
-    FluentCallPipe
   ],
   templateUrl: './radio-group.widget.html',
 })

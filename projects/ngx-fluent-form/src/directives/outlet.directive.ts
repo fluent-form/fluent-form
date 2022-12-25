@@ -9,6 +9,7 @@ import { ControlContainer } from './models/control-container';
   // eslint-disable-next-line
   selector: 'fluent-outlet',
   exportAs: 'fluentOutlet',
+  standalone: true,
   host: {
     '[style.display]': `'none'`
   }

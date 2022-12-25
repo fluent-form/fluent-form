@@ -11,6 +11,7 @@ import { ControlContainer, ControlContainerDirective } from './models/control-co
 @Directive({
   selector: '[fluentForm]',
   exportAs: 'fluentForm',
+  standalone: true,
   providers: [
     NzDestroyService,
     {

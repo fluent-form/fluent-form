@@ -21,11 +21,10 @@ import { AnySchema, FormGroupSchema } from '../schemas';
 })
 class TestingComponent {
   schemas!: AnySchema[] | FormGroupSchema;
-
   model = {};
 }
 
-describe('ControlOutletDirective', () => {
+describe('FluentFormDirective', () => {
   let component: TestingComponent;
   let fixture: ComponentFixture<TestingComponent>;
 

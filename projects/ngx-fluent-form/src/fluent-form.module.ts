@@ -1,14 +1,7 @@
-import { CommonModule } from '@angular/common';
 import { NgModule, Type } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzStepsModule } from 'ng-zorro-antd/steps';
-import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { FluentControlOutletComponent, FluentFormComponent } from './components';
-import { FluentBinderDirective, FluentFormDirective, FluentFormNameDirective, FluentOutletDirective } from './directives';
+import { FluentFormComponent } from './components';
+import { FluentFormDirective, FluentFormNameDirective, FluentOutletDirective } from './directives';
 import { WidgetKind } from './enumerations';
-import { FluentCallPipe, FluentControlPipe, FluentSchemaPipe, FluentTypeofPipe } from './pipes';
 import { WIDGET_MAP } from './tokens';
 import { AbstractWidget } from './widgets/abstract.widget';
 import { ButtonGroupWidget } from './widgets/button-group/button-group.widget';
@@ -32,25 +25,11 @@ import { ToggleWidget } from './widgets/toggle/toggle.widget';
 import { TreeSelectWidget } from './widgets/tree-select/tree-select.widget';
 
 @NgModule({
-  declarations: [
+  imports: [
     FluentFormComponent,
     FluentFormDirective,
     FluentFormNameDirective,
     FluentOutletDirective,
-  ],
-  imports: [
-    FluentControlOutletComponent,
-    FluentCallPipe,
-    FluentSchemaPipe,
-    FluentTypeofPipe,
-    FluentControlPipe,
-    FluentBinderDirective,
-    CommonModule,
-    ReactiveFormsModule,
-    NzFormModule,
-    NzDividerModule,
-    NzStepsModule,
-    NzTabsModule,
   ],
   exports: [
     FluentFormComponent,

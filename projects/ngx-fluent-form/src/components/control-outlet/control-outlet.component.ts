@@ -13,8 +13,6 @@ export interface FluentControlTemplateContext<T extends AnyObject | AnyArray> {
   schema: ComponentSchema | ControlSchema;
   /** 当前模型值 */
   model: T;
-  /** 有类名 */
-  classful: boolean;
 }
 
 @Component({
@@ -34,7 +32,6 @@ export class FluentControlOutletComponent<T extends AnyObject | AnyArray> implem
   @Input() control!: AbstractControl;
   @Input() schema!: ControlSchema | ComponentSchema;
   @Input() model!: T;
-  @Input() classful = true;
 
   @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<FluentControlTemplateContext<T>>;
 

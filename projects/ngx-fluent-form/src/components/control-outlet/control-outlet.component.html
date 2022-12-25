@@ -1,6 +1,6 @@
-<ng-template let-control="control" let-schema="schema" let-model="model" let-classful="classful">
+<ng-template let-control="control" let-schema="schema" let-model="model">
   <ng-container
     fluentWithInjector
     [ngTemplateOutlet]="schema.type | widgetTemplateRef"
-    [ngTemplateOutletContext]="{control,schema,model,classful}"></ng-container>
+    [ngTemplateOutletContext]="{ control, schema, model }"></ng-container>
 </ng-template>

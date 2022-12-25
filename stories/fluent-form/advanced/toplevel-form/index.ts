@@ -6,7 +6,7 @@ export const story = defineStory({
   args: {
     schemas: form(it => it.updateOn('blur').schemas(
       input('username').label('Username'),
-      input('password').label('Password').subtype('password')
+      input('password').label('Password').type('password')
     )),
     model: {}
   }
@@ -24,7 +24,7 @@ export const source = dedent`
   export class ExampleComponent {
     schemas = form(it => it.updateOn('blur').schemas(
       input('username').label('Username'),
-      input('password').label('Password').subtype('password')
+      input('password').label('Password').type('password')
     ));
 
     model = {};

@@ -8,15 +8,15 @@ export const story = defineStory({
       tabset().col(24).schemas(
         tab().title('用户名').schemas(
           input('username').label('用户名').col(24),
-          input('password').subtype('password').label('密码').col(24),
+          input('password').type('password').label('密码').col(24),
           checkbox('remember').content('记住我'),
-          button().subtype('primary').mode('submit').content('立即登录').block(true).col(24)
+          button().type('primary').mode('submit').content('立即登录').block(true).col(24)
         ),
         tab().title('手机号').schemas(
-          input('cellphone').subtype('tel').label('手机号').col(24),
-          input('password').subtype('password').label('密码').col(24),
+          input('cellphone').type('tel').label('手机号').col(24),
+          input('password').type('password').label('密码').col(24),
           checkbox('remember').content('记住我'),
-          button().subtype('primary').mode('submit').content('立即登录').block(true).col(24)
+          button().type('primary').mode('submit').content('立即登录').block(true).col(24)
         ),
       )
     ),
@@ -37,15 +37,15 @@ export const source = dedent`
       tabset().col(24).schemas(
         tab().title('用户名').schemas(
           input('username').label('用户名').col(24),
-          input('password').subtype('password').label('密码').col(24),
+          input('password').type('password').label('密码').col(24),
           checkbox('remember').content('记住我'),
-          button().subtype('primary').mode('submit').content('立即登录').block(true).col(24)
+          button().type('primary').mode('submit').content('立即登录').block(true).col(24)
         ),
         tab().title('手机号').schemas(
-          input('cellphone').subtype('tel').label('手机号').col(24),
-          input('password').subtype('password').label('密码').col(24),
+          input('cellphone').type('tel').label('手机号').col(24),
+          input('password').type('password').label('密码').col(24),
           checkbox('remember').content('记住我'),
-          button().subtype('primary').mode('submit').content('立即登录').block(true).col(24)
+          button().type('primary').mode('submit').content('立即登录').block(true).col(24)
         ),
       )
     );

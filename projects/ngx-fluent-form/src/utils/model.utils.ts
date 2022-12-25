@@ -25,7 +25,7 @@ export class ModelUtils<M extends AnyArray | AnyObject> {
       // 这些图示不包含控件图示，直接跳过
       if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
 
-      if (schema.type === 'group') {
+      if (schema.kind === 'group') {
         modelUtils(
           (this.model[schema.name as keyof M] ??= {} as M[keyof M]) as AnyObject,
           schema.schemas as AnySchema[]
@@ -33,7 +33,7 @@ export class ModelUtils<M extends AnyArray | AnyObject> {
         return;
       }
 
-      if (schema.type === 'array') {
+      if (schema.kind === 'array') {
         modelUtils(
           (this.model[schema.name as keyof M] ??= [] as M[keyof M]) as AnyArray,
           schema.schemas as AnySchema[]

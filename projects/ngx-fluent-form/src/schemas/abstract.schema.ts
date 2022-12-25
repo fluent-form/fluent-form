@@ -50,7 +50,7 @@ export interface Col {
 
 /** 抽象图示 */
 export interface AbstractSchema<Name extends AnySchemaName> {
-  type: string;
+  kind: string;
   name?: Name;
   col?: Col | Cell;
   hidden?: boolean | ((arg: CallbackArg<AbstractSchema<AnySchemaName>>) => boolean) | string;

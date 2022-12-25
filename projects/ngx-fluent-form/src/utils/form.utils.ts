@@ -33,7 +33,7 @@ export function createFormControl(schema: ControlSchema): UntypedFormControl {
  */
 function createFormControls(schemas: AnySchema[], controls: Record<string, AbstractControl> = {}) {
   return schemas.filter(o => !isComponentSchema(o) && !isComponentContainerSchema(o)).reduce((controls, schema) => {
-    switch (schema.type) {
+    switch (schema.kind) {
       case 'group':
         controls[schema.name!.toString()] = createFormGroup(schema);
         break;
@@ -93,7 +93,7 @@ export function createFormGroup(schemaOrSchemas: FormGroupSchema | AnySchema[]):
 export function createFormArray(schema: FormArraySchema): UntypedFormArray {
   return new UntypedFormArray(
     (schema.schemas as AnyControlSchema[]).map(schema => {
-      switch (schema.type) {
+      switch (schema.kind) {
         case 'group':
           return createFormGroup(schema);
 
@@ -137,14 +137,14 @@ export class FormUtils<F extends UntypedFormGroup | UntypedFormArray> {
       // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
       const control = this.form.get([schema.name?.toString()!])!;
 
-      if (schema.type === 'group') {
+      if (schema.kind === 'group') {
         formUtils(control as UntypedFormGroup, schema.schemas as AnySchema[]).assign(
           (model[schema.name as keyof T] = {} as T[keyof T]) as AnyObject,
         );
         return;
       }
 
-      if (schema.type === 'array') {
+      if (schema.kind === 'array') {
         formUtils(control as UntypedFormArray, schema.schemas as AnySchema[]).assign(
           (model[schema.name as keyof T] = [] as T[keyof T]) as AnyArray,
         );
@@ -183,11 +183,11 @@ export class FormUtils<F extends UntypedFormGroup | UntypedFormArray> {
       // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
       const control = this.form.get([schema.name?.toString()!])!;
 
-      if (schema.type === 'group') {
+      if (schema.kind === 'group') {
         return formUtils(control as UntypedFormGroup, schema.schemas as AnySchema[]).change(model[schema.name as keyof T]);
       }
 
-      if (schema.type === 'array') {
+      if (schema.kind === 'array') {
         return formUtils(control as UntypedFormArray, schema.schemas as AnySchema[]).change(model[schema.name as keyof T]);
       }
 

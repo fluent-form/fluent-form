@@ -7,7 +7,7 @@ import { controlSchemaUtils } from './schema.utils';
 describe('schema.utils', () => {
   describe('应该能正确标准化图示', () => {
     it('普通图示', () => {
-      const value: AnySchema[] = [{ type: 'input', name: 'name' }];
+      const value: AnySchema[] = [{ kind: 'input', name: 'name' }];
       const schemas = standardSchemas([input('name')]);
 
       expect(schemas).toEqual(value);
@@ -16,10 +16,10 @@ describe('schema.utils', () => {
     describe('嵌套图示', () => {
       it('group', () => {
         const value: AnySchema[] = [{
-          type: 'group',
+          kind: 'group',
           name: 'name',
           schemas: [
-            { type: 'input', name: 'name' }
+            { kind: 'input', name: 'name' }
           ]
         }];
 
@@ -34,13 +34,13 @@ describe('schema.utils', () => {
 
       it('array', () => {
         const value: AnySchema[] = [{
-          type: 'array',
+          kind: 'array',
           name: 'name',
           schemas: [{
-            type: 'group',
+            kind: 'group',
             name: 0,
             schemas: [
-              { type: 'input', name: 'name' }
+              { kind: 'input', name: 'name' }
             ]
           }]
         }];
@@ -58,9 +58,9 @@ describe('schema.utils', () => {
 
       it('input-group', () => {
         const value: AnySchema[] = [{
-          type: 'input-group',
+          kind: 'input-group',
           schemas: [
-            { type: 'input', name: 'name' }
+            { kind: 'input', name: 'name' }
           ]
         }];
 
@@ -97,7 +97,7 @@ describe('schema.utils', () => {
       });
 
       it('email', () => {
-        const schema = standardSchema(input('name').subtype('email').required(true));
+        const schema = standardSchema(input('name').type('email').required(true));
         const validators = controlSchemaUtils(schema).getExtraValidators();
 
         expect(validators.length).toBe(2);

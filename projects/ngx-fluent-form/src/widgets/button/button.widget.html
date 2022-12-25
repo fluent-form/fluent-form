@@ -1,5 +1,5 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
-  <ng-container *ngIf="schema.subtype === 'link'">
+  <ng-container *ngIf="schema.type === 'link'">
     <a
       nz-button
       *ngIf="!(schema.hidden | call: model : schema : control)"
@@ -14,14 +14,14 @@
       [nzLoading]="schema.loading | call: model : schema : control"
       [nzShape]="schema.shape"
       [nzSize]="schema.size"
-      [nzType]="schema.subtype">
+      [nzType]="schema.type">
       <ng-container [ngTemplateOutlet]="buttonContentTemplate"></ng-container>
     </a>
   </ng-container>
 
   <!-- 下面是实体按钮的条件分支 -->
 
-  <ng-container *ngIf="schema.subtype !== 'link'">
+  <ng-container *ngIf="schema.type !== 'link'">
     <button
       nz-button
       *ngIf="!(schema.hidden | call: model : schema : control)"
@@ -37,7 +37,7 @@
       [nzLoading]="schema.loading | call: model : schema : control"
       [nzShape]="schema.shape"
       [nzSize]="schema.size"
-      [nzType]="schema.subtype">
+      [nzType]="schema.type">
       <ng-container [ngTemplateOutlet]="buttonContentTemplate"></ng-container>
     </button>
   </ng-container>

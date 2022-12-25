@@ -9,16 +9,16 @@ export class WidgetRepository extends Map<WidgetKind, TemplateRef<unknown>> {
   private readonly environmentInjector = inject(EnvironmentInjector);
   private readonly widgetMap = inject(WIDGET_MAP);
 
-  override get(type: WidgetKind): TemplateRef<unknown> {
-    return super.get(type) ?? this.register(type);
+  override get(kind: WidgetKind): TemplateRef<unknown> {
+    return super.get(kind) ?? this.register(kind);
   }
 
-  private register(type: WidgetKind) {
-    const { instance } = createComponent(this.widgetMap.get(type)!, {
+  private register(kind: WidgetKind) {
+    const { instance } = createComponent(this.widgetMap.get(kind)!, {
       environmentInjector: this.environmentInjector
     });
 
-    this.set(type, instance.templateRef);
+    this.set(kind, instance.templateRef);
 
     return instance.templateRef;
   }

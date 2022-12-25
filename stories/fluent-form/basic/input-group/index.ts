@@ -14,8 +14,8 @@ export const story = defineStory({
         number('age').placeholder('年龄').min(1).max(100).col(9),
       ),
       inputGroup().col(10).schemas(
-        input('keyword').subtype('search').placeholder('请输入搜索关键字').col(18),
-        button().subtype('primary').content('提交').col({ flex: 'auto' }),
+        input('keyword').type('search').placeholder('请输入搜索关键字').col(18),
+        button().type('primary').content('提交').col({ flex: 'auto' }),
       ),
       inputGroup().col(6).before('@').schemas(
         input('at').placeholder('请输入'),
@@ -47,8 +47,8 @@ export const source = dedent`
         number('age').placeholder('年龄').min(1).max(100).col(9),
       ),
       inputGroup().col(10).schemas(
-        input('keyword').subtype('search').placeholder('请输入搜索关键字').col(18),
-        button().subtype('primary').content('提交').col({ flex: 'auto' }),
+        input('keyword').type('search').placeholder('请输入搜索关键字').col(18),
+        button().type('primary').content('提交').col({ flex: 'auto' }),
       ),
       inputGroup().col(6).before('@').schemas(
         input('at').placeholder('请输入'),

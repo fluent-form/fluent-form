@@ -48,15 +48,15 @@ export class ValueUtils<S extends AnyObject | AnyArray | AbstractControl> {
       return this.schema.mapper.input(value);
     }
 
-    if (['date', 'time'].includes(this.schema.type)) {
+    if (['date', 'time'].includes(this.schema.kind)) {
       return value ? new Date(value as string | number | Date) : null;
     }
 
-    if (this.schema.type === 'date-range') {
+    if (this.schema.kind === 'date-range') {
       return (value as [string | number | Date, string | number | Date])?.map(o => o ? new Date(o) : null) ?? null;
     }
 
-    if (this.schema.type === 'checkbox-group') {
+    if (this.schema.kind === 'checkbox-group') {
       const labelProperty = this.schema.config?.labelProperty ?? 'label';
       const valueProperty = this.schema.config?.valueProperty ?? 'value';
 
@@ -80,19 +80,19 @@ export class ValueUtils<S extends AnyObject | AnyArray | AbstractControl> {
       return this.schema.mapper.output(value);
     }
 
-    if (['date', 'time'].includes(this.schema.type)) {
+    if (['date', 'time'].includes(this.schema.kind)) {
       return (value as Date | null)?.getTime() ?? null;
     }
 
-    if (this.schema.type === 'date-range') {
+    if (this.schema.kind === 'date-range') {
       return (value as [Date | null, Date | null])?.map(o => o?.getTime() ?? null) ?? null;
     }
 
-    if (this.schema.type === 'slider') {
+    if (this.schema.kind === 'slider') {
       return value as [number, number] ?? null;
     }
 
-    if (this.schema.type === 'checkbox-group') {
+    if (this.schema.kind === 'checkbox-group') {
       return (value as NzCheckBoxOptionInterface[])?.filter(o => o.checked).map(o => o.value);
     }
 

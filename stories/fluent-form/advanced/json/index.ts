@@ -4,13 +4,13 @@ import dedent from 'ts-dedent';
 export const story = defineStory({
   args: {
     schemas: [
-      { type: 'input', name: 'username', label: '用户名', placeholder: '请输入用户名' },
+      { kind: 'input', name: 'username', label: '用户名', placeholder: '请输入用户名' },
       {
-        type: 'input',
+        kind: 'input',
         name: 'password',
         label: '密码',
         placeholder: '请输入密码',
-        subtype: 'password',
+        type: 'password',
         disabled: '!model.username'
       },
     ],
@@ -28,13 +28,13 @@ export const jsonSource = dedent`
   })
   export class ExampleComponent {
     schemas: AnySchema[] = [
-      { type: 'input', name: 'username', label: '用户名', placeholder: '请输入用户名' },
+      { kind: 'input', name: 'username', label: '用户名', placeholder: '请输入用户名' },
       {
-        type: 'input',
+        kind: 'input',
         name: 'password',
         label: '密码',
         placeholder: '请输入密码',
-        subtype: 'password',
+        type: 'password',
         disabled: '!model.username'
       }
     ];
@@ -52,11 +52,11 @@ export const jsonAndFluentSource = dedent`
     schemas: AnySchema[] = [
       input('username').label('用户名').placeholder('请输入用户名').build(), // 👈 call build() method
       {
-        type: 'input',
+        kind: 'input',
         name: 'password',
         label: '密码',
         placeholder: '请输入密码',
-        subtype: 'password',
+        type: 'password',
         disabled: '!model.username'
       }
     ];
@@ -72,8 +72,8 @@ export const fluentAndJsonSource = dedent`
   @Component({...})
   export class ExampleComponent {
     schemas = form(
-      { type: 'input', name: 'username', label: '用户名', placeholder: '请输入用户名' },
-      input('password').label('密码').placeholder('请输入密码').subtype('password').disabled(({ model }) => !model.username),
+      { kind: 'input', name: 'username', label: '用户名', placeholder: '请输入用户名' },
+      input('password').label('密码').placeholder('请输入密码').type('password').disabled(({ model }) => !model.username),
     );
 
     model = {};
@@ -82,7 +82,7 @@ export const fluentAndJsonSource = dedent`
 
 export const expressionSource = dedent`
   {
-    type: 'input',
+    kind: 'input',
     name: 'password',
     label: '密码',
     disabled: '!model.username'

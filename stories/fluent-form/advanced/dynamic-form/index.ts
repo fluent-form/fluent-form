@@ -33,7 +33,7 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
         input().label('乘客').col(12),
       ),
       buttonGroup().schemas(
-        button().subtype('primary').content('添加控件').listener({
+        button().type('primary').content('添加控件').listener({
           click: () => this.add()
         }),
         button().content('移除控件').listener({
@@ -84,7 +84,7 @@ export const source = dedent`
         input().label('乘客').col(12),
       ),
       buttonGroup().schemas(
-        button().subtype('primary').content('添加控件').listener({
+        button().type('primary').content('添加控件').listener({
           click: () => this.add()
         }),
         button().content('移除控件').listener({

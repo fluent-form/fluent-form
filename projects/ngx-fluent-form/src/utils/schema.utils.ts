@@ -11,7 +11,7 @@ import { isNumber } from './is.utils';
  * @param schema
  */
 export const isControlContainerSchema = (schema: AnySchema): schema is ControlContainerSchema => (
-  CONTROL_CONTAINER_SCHEMA_TYPES.includes(schema.type)
+  CONTROL_CONTAINER_SCHEMA_TYPES.includes(schema.kind)
 );
 
 /**
@@ -19,7 +19,7 @@ export const isControlContainerSchema = (schema: AnySchema): schema is ControlCo
  * @param schema
  */
 export const isComponentContainerSchema = (schema: AnySchema): schema is ComponentContainerSchema => (
-  COMPONENT_CONTAINER_SCHEMA_TYPES.includes(schema.type)
+  COMPONENT_CONTAINER_SCHEMA_TYPES.includes(schema.kind)
 );
 
 /**
@@ -27,7 +27,7 @@ export const isComponentContainerSchema = (schema: AnySchema): schema is Compone
  * @param schema
  */
 export const isTextControlSchema = (schema: AnySchema): schema is InputControlSchema | TextareaControlSchema => (
-  TEXT_CONTROL_SCHEMA_TYPES.includes(schema.type)
+  TEXT_CONTROL_SCHEMA_TYPES.includes(schema.kind)
 );
 
 /**
@@ -35,7 +35,7 @@ export const isTextControlSchema = (schema: AnySchema): schema is InputControlSc
  * @param schema
  */
 export const isComponentSchema = (schema: AnySchema): schema is ComponentSchema => (
-  COMPONENT_SCHEMA_TYPES.includes(schema.type)
+  COMPONENT_SCHEMA_TYPES.includes(schema.kind)
 );
 
 /**
@@ -55,7 +55,7 @@ const standardContainerSchema = <T extends AnyContainerSchema>(schema: T): T => 
   const schemas = standardSchemas(schema.schemas);
 
   // 如果是数组表单图示，自动补充子图示的名称为索引值
-  if (schema.type === 'array') {
+  if (schema.kind === 'array') {
     schemas.forEach((schema, index) => schema.name = index);
   }
 
@@ -119,8 +119,8 @@ export class ControlSchemaUtils<S extends ControlSchema> {
       validators.push(Validators.required);
     }
 
-    if (this.schema.type === 'input') {
-      if (this.schema.subtype === 'email') {
+    if (this.schema.kind === 'input') {
+      if (this.schema.type === 'email') {
         validators.push(Validators.email);
       }
 
@@ -131,7 +131,7 @@ export class ControlSchemaUtils<S extends ControlSchema> {
             Validators.maxLength(this.schema.length)
           );
         } else {
-          const { min, max } = this.schema.length as { max?: number, min?: number };
+          const { min, max } = this.schema.length;
 
           min && validators.push(Validators.minLength(min));
           max && validators.push(Validators.maxLength(max));

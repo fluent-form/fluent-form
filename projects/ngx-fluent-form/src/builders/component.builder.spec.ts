@@ -7,25 +7,25 @@ import { input } from './control.builder';
 describe('component.builder', () => {
   it('inputGroup', () => {
     const schema = standardSchema(inputGroup().schemas());
-    const value = { type: 'input-group', schemas: [] } as SafeAny;
+    const value = { kind: 'input-group', schemas: [] } as SafeAny;
     expect(schema).toEqual(value);
   });
 
   it('text', () => {
     const schema = standardSchema(text().content(''));
-    const value = { type: 'text', content: '' } as TextComponentSchema;
+    const value = { kind: 'text', content: '' } as TextComponentSchema;
     expect(schema).toEqual(value);
   });
 
   it('buttonGroup', () => {
     const schema = standardSchema(buttonGroup().schemas());
-    const value = { type: 'button-group', schemas: [] } as SafeAny;
+    const value = { kind: 'button-group', schemas: [] } as SafeAny;
     expect(schema).toEqual(value);
   });
 
   it('button', () => {
     const schema = standardSchema(button());
-    const value = { type: 'button' } as ButtonComponentSchema;
+    const value = { kind: 'button' } as ButtonComponentSchema;
     expect(schema).toEqual(value);
   });
 
@@ -38,13 +38,13 @@ describe('component.builder', () => {
       )
     );
     const value = {
-      type: 'steps',
+      kind: 'steps',
       schemas: [
         {
-          type: 'step',
+          kind: 'step',
           title: 'title',
           schemas: [
-            { type: 'input', name: 'ipt' }
+            { kind: 'input', name: 'ipt' }
           ]
         }
       ]
@@ -61,13 +61,13 @@ describe('component.builder', () => {
       )
     );
     const value = {
-      type: 'tabset',
+      kind: 'tabset',
       schemas: [
         {
-          type: 'tab',
+          kind: 'tab',
           title: 'title',
           schemas: [
-            { type: 'input', name: 'ipt' }
+            { kind: 'input', name: 'ipt' }
           ]
         }
       ]

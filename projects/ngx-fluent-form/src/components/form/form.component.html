@@ -63,7 +63,7 @@
 </ng-template>
 
 <ng-template #formColContentTemplate let-schema="schema" let-control="control" let-model="model">
-  <ng-container [ngSwitch]="schema.type">
+  <ng-container [ngSwitch]="schema.kind">
     <ng-container *ngSwitchCase="'group'">
       <nz-divider *ngIf="schema.label" [nzText]="schema.label"></nz-divider>
       <ng-container
@@ -118,8 +118,8 @@
     <!-- 如果需要采用 input-group 内其他控件的状态/提示，需要使用 input-group 的 primary 参数明确指定 -->
     <!-- TODO: 目前好像没有采用第一个控件 -->
     <nz-form-control
-      *ngIf="(schema.type === 'input-group' ? (schema.primary | schema: schema.schemas) ?? {} : schema) as currentSchema"
-      [nzValidateStatus]="schema.type === 'input-group' ? (schema.primary | control: control) : control"
+      *ngIf="(schema.kind === 'input-group' ? (schema.primary | schema: schema.schemas) ?? {} : schema) as currentSchema"
+      [nzValidateStatus]="schema.kind === 'input-group' ? (schema.primary | control: control) : control"
       [nzHasFeedback]="currentSchema.feedback"
       [nzValidatingTip]="currentSchema.tips?.validating"
       [nzSuccessTip]="currentSchema.tips?.success"
@@ -140,7 +140,7 @@
     [fluentBinderSchema]="schema"
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
-    [nzType]="schema.subtype"
+    [nzType]="schema.type"
     [nzCurrent]="schema.active ?? 0"
     [nzLabelPlacement]="schema.placement"
     [nzProgressDot]="schema.dot"
@@ -201,9 +201,9 @@
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
     [nzSelectedIndex]="schema.active"
-    [nzType]="schema.subtype ?? 'line'"
+    [nzType]="schema.type ?? 'line'"
     [nzSize]="schema.size ?? 'default'"
-    [nzAnimated]="schema.animate ?? schema.subtype !== 'card'"
+    [nzAnimated]="schema.animate ?? schema.type !== 'card'"
     [nzTabPosition]="schema.position ?? 'top'"
     [nzTabBarGutter]="schema.gutter"
     [nzCentered]="schema.center">

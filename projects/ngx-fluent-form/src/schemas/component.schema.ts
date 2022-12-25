@@ -19,7 +19,7 @@ interface Icon {
 }
 
 export interface InputGroupComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzInputGroupComponent>, AbstractLabelfulSchema {
-  type: 'input-group';
+  kind: 'input-group';
   schemas: (ComposableComponentSchema | ComposableComponentBuilder)[];
   before?: string | TemplateRef<void> | { icon: string };
   after?: string | TemplateRef<void> | { icon: string };
@@ -30,13 +30,13 @@ export interface InputGroupComponentSchema<Name extends SchemaName = SchemaName>
 }
 
 export interface TextComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzFormTextComponent>, AbstractLabelfulSchema {
-  type: 'text';
+  kind: 'text';
   content: string | TemplateRef<void>;
 }
 
 export interface ButtonComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractElementSchema<HTMLButtonElement>, AbstractLabelfulSchema {
-  type: 'button';
-  subtype?: NzButtonType;
+  kind: 'button';
+  type?: NzButtonType;
   mode?: 'submit' | 'reset' | 'menu';
   disabled?: boolean | ((arg: CallbackArg<ButtonComponentSchema<SchemaName>>) => boolean) | string;
   ghost?: boolean | ((arg: CallbackArg<ButtonComponentSchema<SchemaName>>) => boolean) | string;
@@ -50,14 +50,14 @@ export interface ButtonComponentSchema<Name extends SchemaName = SchemaName> ext
 }
 
 export interface ButtonGroupComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzButtonComponent>, AbstractLabelfulSchema {
-  type: 'button-group';
+  kind: 'button-group';
   schemas: (ButtonComponentSchema | StableBuilder<ButtonComponentSchema>)[];
   size?: NzButtonSize;
 }
 
 export interface StepsComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzStepsComponent> {
-  type: 'steps';
-  subtype?: 'default' | 'navigation';
+  kind: 'steps';
+  type?: 'default' | 'navigation';
   active?: number;
   placement?: 'vertical' | 'horizontal';
   dot?: boolean;
@@ -68,7 +68,7 @@ export interface StepsComponentSchema<Name extends SchemaName = SchemaName> exte
 }
 
 export interface StepComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzStepComponent> {
-  type: 'step';
+  kind: 'step';
   title: string | TemplateRef<void>;
   subtitle?: string | TemplateRef<void>;
   description?: string | TemplateRef<void>;
@@ -78,8 +78,8 @@ export interface StepComponentSchema<Name extends SchemaName = SchemaName> exten
 }
 
 export interface TabsetComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzTabSetComponent> {
-  type: 'tabset';
-  subtype?: NzTabType;
+  kind: 'tabset';
+  type?: NzTabType;
   active?: number;
   animate?: boolean;
   size?: NzSizeLDSType;
@@ -90,7 +90,7 @@ export interface TabsetComponentSchema<Name extends SchemaName = SchemaName> ext
 }
 
 export interface TabComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzTabComponent> {
-  type: 'tab';
+  kind: 'tab';
   title: string;
   disabled?: boolean | ((arg: CallbackArg<TabComponentSchema<SchemaName>>) => boolean) | string;
   schemas: (AnySchema | AnyBuilder)[];

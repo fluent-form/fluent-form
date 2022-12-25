@@ -23,7 +23,7 @@ export const story = defineStory({
         }),
       input('email')
         .label('Email')
-        .subtype('email')
+        .type('email')
         .required(true)
         .col(12)
         .feedback(true)
@@ -37,7 +37,7 @@ export const story = defineStory({
         }),
       input('password')
         .label('Password')
-        .subtype('password')
+        .type('password')
         .required(true)
         .col(12)
         .feedback(true)
@@ -83,7 +83,7 @@ export const source = dedent`
         }),
       input('email')
         .label('Email')
-        .subtype('email')
+        .type('email')
         .required(true)
         .col(12)
         .feedback(true)
@@ -97,7 +97,7 @@ export const source = dedent`
         }),
       input('password')
         .label('Password')
-        .subtype('password')
+        .type('password')
         .required(true)
         .col(12)
         .feedback(true)

@@ -8,8 +8,8 @@ export const story = defineStory({
       input('name').label('用户名').required(true).col(24),
       input('age').label('年龄').required(true).col(24),
       group('info').label('其他信息').col(24).schemas(
-        input('cellphone').subtype('tel').label('手机号').col(12),
-        input('email').subtype('email').label('邮箱').col(12),
+        input('cellphone').type('tel').label('手机号').col(12),
+        input('email').type('email').label('邮箱').col(12),
       )
     ),
     model: {}
@@ -29,8 +29,8 @@ export const source = dedent`
       input('name').label('用户名').required(true).col(24),
       input('age').label('年龄').required(true).col(24),
       group('info').label('其他信息').col(24).schemas(
-        input('cellphone').subtype('tel').label('手机号').col(12),
-        input('email').subtype('email').label('邮箱').col(12),
+        input('cellphone').type('tel').label('手机号').col(12),
+        input('email').type('email').label('邮箱').col(12),
       )
     );
 

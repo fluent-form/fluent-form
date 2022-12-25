@@ -9,7 +9,7 @@
     <ng-container
       *ngFor="let subschema of schema.schemas"
       fluentWithInjector
-      [ngTemplateOutlet]="subschema.type | widgetTemplateRef"
+      [ngTemplateOutlet]="subschema.kind | widgetTemplateRef"
       [ngTemplateOutletContext]="{ control: control, schema: subschema, model: model }">
     </ng-container>
   </nz-button-group>

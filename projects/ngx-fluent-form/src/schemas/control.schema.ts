@@ -17,12 +17,12 @@ import { AnyObject } from '../types';
 import { AbstractComponentControlSchema, AbstractControlSchema, AbstractDateControlSchema, AbstractElementControlSchema, AbstractInputFieldControlSchema, AbstractTextControlSchema, AnySchemaName, SchemaName } from './abstract.schema';
 
 export interface InputControlSchema<Name extends SchemaName = SchemaName, Val = string> extends AbstractTextControlSchema<Name, Val>, AbstractElementControlSchema<HTMLInputElement, Val>, AbstractInputFieldControlSchema {
-  type: 'input';
-  subtype?: 'text' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
+  kind: 'input';
+  type?: 'text' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
 }
 
 export interface TextareaControlSchema<Name extends SchemaName = SchemaName, Val = string> extends AbstractTextControlSchema<Name, Val>, AbstractElementControlSchema<HTMLTextAreaElement, Val>, AbstractInputFieldControlSchema {
-  type: 'textarea';
+  kind: 'textarea';
   /** The number of lines in the text field */
   rows?: number;
   /** Whether to adapt the content height */
@@ -30,7 +30,7 @@ export interface TextareaControlSchema<Name extends SchemaName = SchemaName, Val
 }
 
 export interface NumberInputControlSchema<Name extends SchemaName = SchemaName, Val = number> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzInputNumberComponent, Val>, AbstractInputFieldControlSchema {
-  type: 'number';
+  kind: 'number';
   /** Maximum value */
   max?: number;
   /** Minimum value */
@@ -42,16 +42,16 @@ export interface NumberInputControlSchema<Name extends SchemaName = SchemaName, 
 }
 
 export interface DatePickerControlSchema<Name extends SchemaName = SchemaName, Val = Date> extends AbstractDateControlSchema<Name, Val>, AbstractComponentControlSchema<NzDatePickerComponent, Val>, AbstractInputFieldControlSchema {
-  type: 'date';
+  kind: 'date';
 }
 
 export interface RangePickerControlSchema<Name extends AnySchemaName = AnySchemaName, Val = [Date, Date]> extends AbstractDateControlSchema<Name, Val>, AbstractComponentControlSchema<NzRangePickerComponent, Val>, AbstractInputFieldControlSchema<[string, string]> {
-  type: 'date-range';
+  kind: 'date-range';
   separator?: string;
 }
 
 export interface TimePickerControlSchema<Name extends SchemaName = SchemaName, Val = Date> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzTimePickerComponent, Val>, AbstractInputFieldControlSchema {
-  type: 'time';
+  kind: 'time';
   /** Show clean button */
   clearable?: boolean;
   /** Time display format */
@@ -68,14 +68,14 @@ export interface TimePickerControlSchema<Name extends SchemaName = SchemaName, V
 }
 
 export interface ToggleControlSchema<Name extends SchemaName = SchemaName, Val = boolean> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzSwitchComponent, Val> {
-  type: 'toggle';
+  kind: 'toggle';
   /** Placeholder text */
   placeholder?: [string | TemplateRef<void>, string | TemplateRef<void>];
   size?: NzSizeDSType;
 }
 
 export interface SelectControlSchema<Name extends SchemaName = SchemaName, Val = SafeAny | SafeAny[]> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzSelectComponent, Val> {
-  type: 'select';
+  kind: 'select';
   /** Placeholder text */
   placeholder?: string;
   /** Show clean button */
@@ -101,7 +101,7 @@ export interface SelectControlSchema<Name extends SchemaName = SchemaName, Val =
 }
 
 export interface CascaderControlSchema<Name extends SchemaName = SchemaName, Val = SafeAny[]> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzCascaderComponent, Val> {
-  type: 'cascader';
+  kind: 'cascader';
   /** Placeholder text */
   placeholder?: string;
   /** Show clean button */
@@ -125,7 +125,7 @@ export interface CascaderControlSchema<Name extends SchemaName = SchemaName, Val
 }
 
 export interface SliderControlSchema<Name extends AnySchemaName = AnySchemaName, Val = number | [number, number]> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzSliderComponent, Val> {
-  type: 'slider';
+  kind: 'slider';
   /** Placeholder text */
   placeholder?: never;
   /** Containment relationship */
@@ -144,7 +144,7 @@ export interface SliderControlSchema<Name extends AnySchemaName = AnySchemaName,
 }
 
 export interface RadioControlSchema<Name extends SchemaName = SchemaName, Val = SafeAny> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzRadioGroupComponent, Val> {
-  type: 'radio-group';
+  kind: 'radio-group';
   button?: boolean | NzRadioButtonStyle;
   size?: NzSizeLDSType;
   options: AnyObject[];
@@ -155,14 +155,14 @@ export interface RadioControlSchema<Name extends SchemaName = SchemaName, Val = 
 }
 
 export interface CheckboxControlSchema<Name extends SchemaName = SchemaName, Val = boolean> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzCheckboxComponent, Val> {
-  type: 'checkbox';
+  kind: 'checkbox';
   content?: string;
   autofocus?: boolean;
   indeterminate?: boolean;
 }
 
 export interface CheckboxGroupControlSchema<Name extends SchemaName = SchemaName, Val = SafeAny> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzCheckboxGroupComponent, Val> {
-  type: 'checkbox-group';
+  kind: 'checkbox-group';
   options: AnyObject[];
   config?: {
     labelProperty?: string;
@@ -171,7 +171,7 @@ export interface CheckboxGroupControlSchema<Name extends SchemaName = SchemaName
 }
 
 export interface RateControlSchema<Name extends SchemaName = SchemaName, Val = number> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzRateComponent, Val> {
-  type: 'rate';
+  kind: 'rate';
   /** Show clean button */
   clearable?: boolean;
   /** whether to allow semi selection */
@@ -186,7 +186,7 @@ export interface RateControlSchema<Name extends SchemaName = SchemaName, Val = n
 }
 
 export interface TreeSelectControlSchema<Name extends SchemaName = SchemaName, Val = SafeAny[]> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzTreeSelectComponent, Val> {
-  type: 'tree-select';
+  kind: 'tree-select';
   clearable?: boolean;
   placeholder?: string;
   icon?: boolean;

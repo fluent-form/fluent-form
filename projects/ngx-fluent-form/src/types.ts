@@ -62,4 +62,4 @@ export type AnyObject = Record<string, SafeAny>;
 /** Any Array */
 export type AnyArray = SafeAny[];
 
-export type TypeAndName = 'type' | 'name';
+export type KindAndName = 'kind' | 'name';

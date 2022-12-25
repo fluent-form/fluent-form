@@ -26,8 +26,8 @@
     [nzMultiple]="schema.multiple"
     [nzVirtualHeight]="schema.virtual?.height"
     [nzVirtualItemSize]="schema.virtual?.itemSize ?? 28"
-    [nzVirtualMaxBufferPx]="schema.virtual?.maxBufferPx ?? 500"
-    [nzVirtualMinBufferPx]="schema.virtual?.minBufferPx ?? 28"></nz-tree-select>
+    [nzVirtualMaxBufferPx]="schema.virtual?.buffer?.max ?? 500"
+    [nzVirtualMinBufferPx]="schema.virtual?.buffer?.min ?? 28"></nz-tree-select>
 
   <ng-template #composableTemplate>
     <nz-tree-select
@@ -58,8 +58,8 @@
       [nzMultiple]="schema.multiple"
       [nzVirtualHeight]="schema.virtual?.height"
       [nzVirtualItemSize]="schema.virtual?.itemSize ?? 28"
-      [nzVirtualMaxBufferPx]="schema.virtual?.maxBufferPx ?? 500"
-      [nzVirtualMinBufferPx]="schema.virtual?.minBufferPx ?? 28"
+      [nzVirtualMaxBufferPx]="schema.virtual?.buffer?.max ?? 500"
+      [nzVirtualMinBufferPx]="schema.virtual?.buffer?.min ?? 28"
       [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
       [nzFlex]="schema.col?.flex"
       [nzOffset]="schema.col?.offset"></nz-tree-select>

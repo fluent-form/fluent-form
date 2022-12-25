@@ -202,9 +202,11 @@ export interface TreeSelectControlSchema<Name extends SchemaName = SchemaName, V
   backdrop?: boolean;
   multiple?: boolean;
   virtual?: {
-    height?: number;
+    height?: string;
     itemSize?: number;
-    maxBufferPx?: number;
-    minBufferPx?: number;
+    buffer?: {
+      min?: number;
+      max?: number;
+    }
   }
 }

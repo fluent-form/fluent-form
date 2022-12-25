@@ -7,7 +7,7 @@ import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { FluentControlOutletComponent, FluentFormComponent } from './components';
 import { FluentBinderDirective, FluentFormDirective, FluentFormNameDirective, FluentOutletDirective } from './directives';
-import { WidgetType } from './enumerations';
+import { WidgetKind } from './enumerations';
 import { FluentCallPipe, FluentControlPipe, FluentSchemaPipe, FluentTypeofPipe } from './pipes';
 import { WIDGET_MAP } from './tokens';
 import { AbstractWidget } from './widgets/abstract.widget';
@@ -61,26 +61,26 @@ import { TreeSelectWidget } from './widgets/tree-select/tree-select.widget';
   providers: [
     {
       provide: WIDGET_MAP,
-      useValue: new Map<WidgetType, Type<AbstractWidget<unknown>>>([
-        [WidgetType.Input, InputWidget],
-        [WidgetType.InputGroup, InputGroupWidget],
-        [WidgetType.Textarea, TextareaWidget],
-        [WidgetType.Number, NumberWidget],
-        [WidgetType.Date, DateWidget],
-        [WidgetType.DateRange, DateRangeWidget],
-        [WidgetType.Time, TimeWidget],
-        [WidgetType.Toggle, ToggleWidget],
-        [WidgetType.Select, SelectWidget],
-        [WidgetType.Cascader, CascaderWidget],
-        [WidgetType.TreeSelect, TreeSelectWidget],
-        [WidgetType.Slider, SilderWidget],
-        [WidgetType.RadioGroup, RadioGroupWidget],
-        [WidgetType.Checkbox, CheckboxWidget],
-        [WidgetType.CheckboxGroup, CheckboxGroupWidget],
-        [WidgetType.Rate, RateWidget],
-        [WidgetType.Text, TextWidget],
-        [WidgetType.Button, ButtonWidget],
-        [WidgetType.ButtonGroup, ButtonGroupWidget],
+      useValue: new Map<WidgetKind, Type<AbstractWidget<unknown>>>([
+        [WidgetKind.Input, InputWidget],
+        [WidgetKind.InputGroup, InputGroupWidget],
+        [WidgetKind.Textarea, TextareaWidget],
+        [WidgetKind.Number, NumberWidget],
+        [WidgetKind.Date, DateWidget],
+        [WidgetKind.DateRange, DateRangeWidget],
+        [WidgetKind.Time, TimeWidget],
+        [WidgetKind.Toggle, ToggleWidget],
+        [WidgetKind.Select, SelectWidget],
+        [WidgetKind.Cascader, CascaderWidget],
+        [WidgetKind.TreeSelect, TreeSelectWidget],
+        [WidgetKind.Slider, SilderWidget],
+        [WidgetKind.RadioGroup, RadioGroupWidget],
+        [WidgetKind.Checkbox, CheckboxWidget],
+        [WidgetKind.CheckboxGroup, CheckboxGroupWidget],
+        [WidgetKind.Rate, RateWidget],
+        [WidgetKind.Text, TextWidget],
+        [WidgetKind.Button, ButtonWidget],
+        [WidgetKind.ButtonGroup, ButtonGroupWidget],
       ])
     }
   ]

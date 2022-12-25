@@ -1,4 +1,4 @@
-export const enum WidgetType {
+export const enum WidgetKind {
   Input = 'input',
   InputGroup = 'input-group',
   Textarea = 'textarea',

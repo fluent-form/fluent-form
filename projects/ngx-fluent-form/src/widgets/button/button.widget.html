@@ -3,7 +3,6 @@
     <a
       nz-button
       *ngIf="!(schema.hidden | call: model : schema : control)"
-      [attr.id]="schema.id"
       [disabled]="schema.disabled | call: model : schema : control"
       [fluentBinderSchema]="schema"
       [ngClass]="schema.class"
@@ -12,20 +11,17 @@
       [nzDanger]="schema.danger | call: model : schema : control"
       [nzGhost]="schema.ghost | call: model : schema : control"
       [nzLoading]="schema.loading | call: model : schema : control"
-      [nzShape]="schema.shape"
-      [nzSize]="schema.size"
+      [nzShape]="schema.shape!"
+      [nzSize]="schema.size!"
       [nzType]="schema.type">
       <ng-container [ngTemplateOutlet]="buttonContentTemplate"></ng-container>
     </a>
   </ng-container>
 
-  <!-- 下面是实体按钮的条件分支 -->
-
   <ng-container *ngIf="schema.type !== 'link'">
     <button
       nz-button
       *ngIf="!(schema.hidden | call: model : schema : control)"
-      [attr.id]="schema.id"
       [attr.type]="schema.mode"
       [disabled]="schema.disabled | call: model : schema : control"
       [fluentBinderSchema]="schema"
@@ -35,9 +31,9 @@
       [nzDanger]="schema.danger | call: model : schema : control"
       [nzGhost]="schema.ghost | call: model : schema : control"
       [nzLoading]="schema.loading | call: model : schema : control"
-      [nzShape]="schema.shape"
-      [nzSize]="schema.size"
-      [nzType]="schema.type">
+      [nzShape]="schema.shape!"
+      [nzSize]="schema.size!"
+      [nzType]="schema.type ?? null">
       <ng-container [ngTemplateOutlet]="buttonContentTemplate"></ng-container>
     </button>
   </ng-container>
@@ -46,10 +42,10 @@
     <span
       *ngIf="schema.icon"
       nz-icon
-      [nzRotate]="schema.icon.rotate"
-      [nzSpin]="schema.icon.spin"
-      [nzTheme]="schema.icon.theme"
-      [nzType]="schema.icon.type ?? schema.icon"></span>
+      [nzRotate]="helper.icon.rotate | invoke: schema.icon"
+      [nzSpin]="helper.icon.spin | invoke: schema.icon"
+      [nzTheme]="(helper.icon.theme | invoke: schema.icon)!"
+      [nzType]="helper.icon.type | invoke: schema.icon"></span>
     <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
   </ng-template>
 </ng-template>

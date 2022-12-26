@@ -1,6 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { SafeAny } from '@ngify/types';
-import { NzCascaderComponent, NzCascaderExpandTrigger, NzCascaderOption, NzCascaderSize } from 'ng-zorro-antd/cascader';
+import { NzCascaderComponent, NzCascaderExpandTrigger, NzCascaderOption, NzCascaderSize, NzShowSearchOptions } from 'ng-zorro-antd/cascader';
 import { NzCheckboxComponent, NzCheckboxGroupComponent } from 'ng-zorro-antd/checkbox';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDatePickerComponent, NzRangePickerComponent } from 'ng-zorro-antd/date-picker';
@@ -116,7 +116,7 @@ export interface CascaderControlSchema<Name extends SchemaName = SchemaName, Val
   /** Expand trigger for cascader control */
   trigger?: NzCascaderExpandTrigger;
   /** Support search, cannot be used with `options.load` */
-  searchable?: boolean;
+  searchable?: boolean | NzShowSearchOptions;
   options?: NzCascaderOption[];
   config?: {
     labelProperty?: string;

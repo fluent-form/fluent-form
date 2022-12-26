@@ -1,12 +1,13 @@
 import { NgClass, NgStyle } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { FluentBinderDirective, FluentWithContextGuardDirective } from '../../directives';
+import { TextComponentSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
-type TextWidgetTemplateContext = WidgetTemplateContext<any>;
+type TextWidgetTemplateContext = WidgetTemplateContext<TextComponentSchema, FormGroup>;
 
 @Component({
   standalone: true,

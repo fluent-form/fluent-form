@@ -1,11 +1,13 @@
 import { NgClass, NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { FluentBinderDirective, FluentWithContextGuardDirective, FluentWithInjectorDirective } from '../../directives';
 import { FluentWidgetTemplateRefPipe } from '../../pipes';
+import { ButtonGroupComponentSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
-type ButtonGroupWidgetTemplateContext = WidgetTemplateContext<any>;
+type ButtonGroupWidgetTemplateContext = WidgetTemplateContext<ButtonGroupComponentSchema, FormGroup>;
 
 @Component({
   standalone: true,

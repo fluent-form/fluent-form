@@ -1,11 +1,13 @@
 import { NgClass, NgStyle } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { SafeAny } from '@ngify/types';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { FluentBinderDirective, FluentWithContextGuardDirective } from '../../directives';
+import { CheckboxGroupControlSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
-type CheckboxGroupWidgetTemplateContext = WidgetTemplateContext<any>;
+type CheckboxGroupWidgetTemplateContext = WidgetTemplateContext<CheckboxGroupControlSchema, FormControl<SafeAny[]>>;
 
 @Component({
   standalone: true,

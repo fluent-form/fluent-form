@@ -1,13 +1,15 @@
 import { NgClass, NgStyle } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { FluentBinderDirective, FluentComposableDirective, FluentWithContextGuardDirective } from '../../directives';
 import { FluentCallPipe, FluentTypeofPipe } from '../../pipes';
-import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
+import { FluentInvokePipe } from '../../pipes/invoke.pipe';
+import { DatePickerControlSchema } from '../../schemas';
+import { AbstractWidget, COL_HELPER, WidgetTemplateContext } from '../abstract.widget';
 
-type DateWidgetTemplateContext = WidgetTemplateContext<any>;
+type DateWidgetTemplateContext = WidgetTemplateContext<DatePickerControlSchema, FormControl<Date>>;
 
 @Component({
   standalone: true,
@@ -21,11 +23,14 @@ type DateWidgetTemplateContext = WidgetTemplateContext<any>;
     FluentWithContextGuardDirective,
     FluentComposableDirective,
     FluentTypeofPipe,
-    FluentCallPipe
+    FluentCallPipe,
+    FluentInvokePipe
   ],
   templateUrl: './date.widget.html',
   styles: [`nz-date-picker { width: 100% }`]
 })
 export class DateWidget extends AbstractWidget<DateWidgetTemplateContext> {
   @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<DateWidgetTemplateContext>;
+
+  protected readonly helper = { col: COL_HELPER } as const;
 }

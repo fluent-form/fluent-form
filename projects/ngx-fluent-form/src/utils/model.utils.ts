@@ -1,4 +1,4 @@
-import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 import { AnySchema } from '../schemas';
 import { AnyArray, AnyObject } from '../types';
 import { isComponentContainerSchema, isComponentSchema, isControlContainerSchema } from './schema.utils';
@@ -20,7 +20,7 @@ export class ModelUtils<M extends AnyArray | AnyObject> {
    * @param emitEvent 是否发射事件，函数内部递归调用的时候将置为false，保证只会触发一次事件
    * @returns form
    */
-  assign<F extends (M extends AnyArray ? UntypedFormArray : UntypedFormGroup)>(form: F, emitEvent = true): F {
+  assign<F extends (M extends AnyArray ? FormArray : FormGroup)>(form: F, emitEvent = true): F {
     this.schemas.forEach(schema => {
       // 这些图示不包含控件图示，直接跳过
       if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
@@ -29,7 +29,7 @@ export class ModelUtils<M extends AnyArray | AnyObject> {
         modelUtils(
           (this.model[schema.name as keyof M] ??= {} as M[keyof M]) as AnyObject,
           schema.schemas as AnySchema[]
-        ).assign(form.get([schema.name!]) as UntypedFormGroup, false);
+        ).assign(form.get([schema.name!]) as FormGroup, false);
         return;
       }
 
@@ -37,12 +37,12 @@ export class ModelUtils<M extends AnyArray | AnyObject> {
         modelUtils(
           (this.model[schema.name as keyof M] ??= [] as M[keyof M]) as AnyArray,
           schema.schemas as AnySchema[]
-        ).assign(form.get([schema.name!]) as UntypedFormArray, false);
+        ).assign(form.get([schema.name!]) as FormArray, false);
         return;
       }
 
       if (isControlContainerSchema(schema)) {
-        modelUtils(this.model as AnyObject, schema.schemas as AnySchema[]).assign(form as UntypedFormGroup, false);
+        modelUtils(this.model as AnyObject, schema.schemas as AnySchema[]).assign(form as FormGroup, false);
         return;
       }
 

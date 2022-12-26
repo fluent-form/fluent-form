@@ -1,6 +1,6 @@
 import { NgClass, NgFor, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormLayoutType, NzFormModule } from 'ng-zorro-antd/form';
@@ -44,7 +44,7 @@ import { FluentControlOutletComponent } from '../control-outlet/control-outlet.c
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [NzDestroyService]
 })
-export class FluentFormComponent<T extends AnyObject>  {
+export class FluentFormComponent<T extends AnyObject> {
   /**
    * 内部的不可变模型，主要有以下用途：
    * - 用来跟公开的模型值进行引用比较，判断变更是内部发出的还是外部传入的，如果引用一致则为内部变更
@@ -52,7 +52,7 @@ export class FluentFormComponent<T extends AnyObject>  {
   private immutableModel!: T;
   private _model!: T;
 
-  protected form!: UntypedFormGroup;
+  protected form!: FormGroup;
   protected schema!: FormGroupSchema;
 
   get schemas(): AnySchema[] {
@@ -98,7 +98,7 @@ export class FluentFormComponent<T extends AnyObject>  {
   @Input() colon = true;
   @Input() gutter: NzRowDirective['nzGutter'] = { xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 };
 
-  @Output() formChange: EventEmitter<UntypedFormGroup> = new EventEmitter();
+  @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
   @Output() modelChange: EventEmitter<T> = new EventEmitter();
 
   constructor(private destroy$: NzDestroyService) { }
@@ -107,7 +107,7 @@ export class FluentFormComponent<T extends AnyObject>  {
    * 表单值更新时
    * @param utils
    */
-  private onValueChanges(utils: FormUtils<UntypedFormGroup>) {
+  private onValueChanges(utils: FormUtils<FormGroup>) {
     utils.change(this.immutableModel = utils.assign({} as T));
     this.modelChange.emit(this.immutableModel);
   }

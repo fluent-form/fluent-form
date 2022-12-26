@@ -1,6 +1,6 @@
 import { NgClass, NgStyle } from '@angular/common';
 import { TemplateRef } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormControlStatus, UntypedFormControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormControl, FormControlStatus, ValidatorFn } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { AutocompleteDataSource } from 'ng-zorro-antd/auto-complete';
 import { CompareWith, NzSizeLDSType } from 'ng-zorro-antd/core/types';
@@ -81,10 +81,10 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
   feedback?: boolean;
   /** Error message for control */
   tips?: {
-    success?: string | TemplateRef<{ $implicit: UntypedFormControl }>;
-    warning?: string | TemplateRef<{ $implicit: UntypedFormControl }>;
-    error?: string | TemplateRef<{ $implicit: UntypedFormControl }>;
-    validating?: string | TemplateRef<{ $implicit: UntypedFormControl }>;
+    success?: string | TemplateRef<{ $implicit: FormControl<Val> }>;
+    warning?: string | TemplateRef<{ $implicit: FormControl<Val> }>;
+    error?: string | TemplateRef<{ $implicit: FormControl<Val> }>;
+    validating?: string | TemplateRef<{ $implicit: FormControl<Val> }>;
     extra?: string | TemplateRef<void>;
     auto?: Record<'default' | (string & {}), Record<string, string>>;
   };

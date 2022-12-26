@@ -1,15 +1,15 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
   <nz-switch
     #cmp
-    [nzId]="schema.id"
+    [nzId]="schema.id!"
     [fluentBinder]="cmp"
     [fluentBinderSchema]="schema"
     [fluentBinderControl]="control"
     [formControl]="control"
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
-    [nzCheckedChildren]="schema.placeholder?.[0]"
-    [nzUnCheckedChildren]="schema.placeholder?.[1]"
-    [nzSize]="schema.size">
+    [nzCheckedChildren]="schema.placeholder?.[0]!"
+    [nzUnCheckedChildren]="schema.placeholder?.[1]!"
+    [nzSize]="schema.size!">
   </nz-switch>
 </ng-template>

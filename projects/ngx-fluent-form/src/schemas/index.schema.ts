@@ -24,7 +24,7 @@ import { StableBuilder } from '../utils/builder.utils';
 import { AnySchemaName, DoubleSchemaName, SchemaName } from './abstract.schema';
 import { ButtonComponentSchema, ButtonGroupComponentSchema, InputGroupComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsetComponentSchema, TextComponentSchema } from './component.schema';
 import { FormArraySchema, FormGroupSchema } from './control-container.schema';
-import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from './control.schema';
+import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from './control.schema';
 
 /** 任意图示 */
 export type AnySchema = ControlSchema | AnyContainerSchema | ComponentSchema;
@@ -73,8 +73,8 @@ export type ComposableComponentSchema =
   NumberInputControlSchema |
   DatePickerControlSchema |
   TimePickerControlSchema |
-  RangePickerControlSchema<SchemaName> |
-  RangePickerControlSchema<DoubleSchemaName> |
+  DateRangePickerControlSchema<SchemaName> |
+  DateRangePickerControlSchema<DoubleSchemaName> |
   SelectControlSchema |
   CascaderControlSchema |
   TreeSelectControlSchema |
@@ -97,21 +97,21 @@ export type SingleKeyControlSchema<N extends SchemaName = SchemaName> =
   CheckboxControlSchema<N> |
   CheckboxGroupControlSchema<N> |
   RateControlSchema<N> |
-  RangePickerControlSchema<N> |
+  DateRangePickerControlSchema<N> |
   SliderControlSchema<N>;
 /** 单字段的真实控件构建器 */
 export type SingleKeyControlBuilder<N extends SchemaName = SchemaName> = StableBuilder<SingleKeyControlSchema<N>>;
 
 /** 双字段的真实控件图示 */
 export type DoubleKeyControlSchema<N extends DoubleSchemaName = DoubleSchemaName> =
-  RangePickerControlSchema<N> |
+  DateRangePickerControlSchema<N> |
   SliderControlSchema<N>;
 /** 双字段的真实控件构建器 */
 export type DoubleKeyControlBuilder<N extends DoubleSchemaName = DoubleSchemaName> = StableBuilder<DoubleKeyControlSchema<N>>;
 
 /** 任意键的真实控件图示 */
 export type AnyKeyControlSchema<N extends AnySchemaName = AnySchemaName> =
-  RangePickerControlSchema<N> |
+  DateRangePickerControlSchema<N> |
   SliderControlSchema<N>;
 /** 任意键的真实控件构建器 */
 export type AnyKeyControlBuilder<N extends AnySchemaName = AnySchemaName> = StableBuilder<AnyKeyControlSchema<N>>;

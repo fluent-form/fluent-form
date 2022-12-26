@@ -1,5 +1,5 @@
 import { SafeAny } from '@ngify/types';
-import { AbstractTextControlSchema, CheckboxControlSchema, DatePickerControlSchema, InputControlSchema, NumberInputControlSchema, RangePickerControlSchema, RateControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema } from '../schemas';
+import { AbstractTextControlSchema, CheckboxControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, InputControlSchema, NumberInputControlSchema, RateControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema } from '../schemas';
 import { standardSchema } from '../utils';
 import { cascader, checkbox, checkboxGroup, date, dateRange, datetime, email, input, integer, number, password, radioGroup, rate, select, slider, string, textarea, time, toggle, treeSelect } from './control.builder';
 
@@ -132,7 +132,7 @@ describe('control.builder', () => {
 
   it('date-range', () => {
     const schema = standardSchema(dateRange('date-range'));
-    const value = { kind: 'date-range', name: 'date-range' } as RangePickerControlSchema<'date-range', [Date, Date]>;
+    const value = { kind: 'date-range', name: 'date-range' } as DateRangePickerControlSchema<'date-range', [Date, Date]>;
     expect(schema).toEqual(value);
   });
 });

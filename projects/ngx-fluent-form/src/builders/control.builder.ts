@@ -1,4 +1,4 @@
-import { AnySchemaName, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RangePickerControlSchema, RateControlSchema, SchemaName, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { AnySchemaName, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RateControlSchema, SchemaName, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { KindAndName } from '../types';
 import { builder, UnstableBuilder } from '../utils/builder.utils';
 
@@ -120,8 +120,8 @@ export function slider<N extends AnySchemaName>(name?: N) {
   return builder<SliderControlSchema<N>>().kind('slider').name(name);
 }
 
-export function dateRange(): UnstableBuilder<RangePickerControlSchema<number>, KindAndName>;
-export function dateRange<N extends AnySchemaName>(name?: N): UnstableBuilder<RangePickerControlSchema<N>, KindAndName>;
+export function dateRange(): UnstableBuilder<DateRangePickerControlSchema<number>, KindAndName>;
+export function dateRange<N extends AnySchemaName>(name?: N): UnstableBuilder<DateRangePickerControlSchema<N>, KindAndName>;
 export function dateRange<N extends AnySchemaName>(name?: N) {
-  return builder<RangePickerControlSchema<N>>().kind('date-range').name(name);
+  return builder<DateRangePickerControlSchema<N>>().kind('date-range').name(name);
 }

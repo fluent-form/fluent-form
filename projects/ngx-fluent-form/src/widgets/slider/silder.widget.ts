@@ -1,11 +1,12 @@
 import { NgClass, NgStyle } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { FluentBinderDirective, FluentWithContextGuardDirective } from '../../directives';
+import { SliderControlSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
-type SilderWidgetTemplateContext = WidgetTemplateContext<any>;
+type SilderWidgetTemplateContext = WidgetTemplateContext<SliderControlSchema, FormControl<number>>;
 
 @Component({
   standalone: true,

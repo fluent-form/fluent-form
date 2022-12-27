@@ -3,7 +3,6 @@
   nz-form
   [nzGutter]="schema.gutter ?? gutter"
   [nzLayout]="layout"
-  [nzNoColon]="!colon"
   [ngClass]="schema.class"
   [ngStyle]="schema.style"
   [formGroup]="form"
@@ -35,7 +34,6 @@
     nz-form
     [nzGutter]="schema.gutter ?? gutter"
     [nzLayout]="layout"
-    [nzNoColon]="!colon"
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
     [fluentBinderSchema]="schema"
@@ -48,6 +46,7 @@
         [nzFlex]="schema.col?.flex"
         [hidden]="schema.hidden | call: model : schema : control">
         <ng-container
+          fluentWithInjector
           [ngTemplateOutlet]="formColContentTemplate"
           [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
         </ng-container>
@@ -67,6 +66,7 @@
     <ng-container *ngSwitchCase="'group'">
       <nz-divider *ngIf="schema.label" [nzText]="schema.label"></nz-divider>
       <ng-container
+        fluentWithInjector
         [ngTemplateOutlet]="nestFormTemplate"
         [ngTemplateOutletContext]="{ form: control, schema: schema, model: model[schema.name] }">
       </ng-container>
@@ -75,6 +75,7 @@
     <ng-container *ngSwitchCase="'array'">
       <nz-divider *ngIf="schema.label" [nzText]="schema.label"></nz-divider>
       <ng-container
+        fluentWithInjector
         [ngTemplateOutlet]="nestFormTemplate"
         [ngTemplateOutletContext]="{ form: control, schema: schema, model: model[schema.name] }">
       </ng-container>
@@ -82,6 +83,7 @@
 
     <ng-container *ngSwitchCase="'steps'">
       <ng-container
+        fluentWithInjector
         [ngTemplateOutlet]="stepsTemplate"
         [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
       </ng-container>
@@ -89,6 +91,7 @@
 
     <ng-container *ngSwitchCase="'tabset'">
       <ng-container
+        fluentWithInjector
         [ngTemplateOutlet]="tabsTemplate"
         [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
       </ng-container>
@@ -96,6 +99,7 @@
 
     <ng-container *ngSwitchDefault>
       <ng-container
+        fluentWithInjector
         [ngTemplateOutlet]="formItemTemplate"
         [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
       </ng-container>
@@ -111,6 +115,7 @@
       [nzTooltipTitle]="schema.label.tooltip?.title ?? schema.label.tooltip"
       [nzTooltipIcon]="schema.label.tooltip?.icon"
       [nzFor]="schema.id"
+      [nzNoColon]="!colon"
       [nzRequired]="schema.required | call: model : schema : control">
       {{ schema.label.value ?? schema.label }}
     </nz-form-label>
@@ -178,6 +183,7 @@
           [nzFlex]="schema.col?.flex"
           [hidden]="schema.hidden | call: model : schema : control">
           <ng-container
+            fluentWithInjector
             [ngTemplateOutlet]="formColContentTemplate"
             [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
           </ng-container>
@@ -225,6 +231,7 @@
             [nzFlex]="schema.col?.flex"
             [hidden]="schema.hidden | call: model : schema : control">
             <ng-container
+              fluentWithInjector
               [ngTemplateOutlet]="formColContentTemplate"
               [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
             </ng-container>

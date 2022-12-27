@@ -9,7 +9,7 @@ import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { takeUntil } from 'rxjs';
 import { group } from '../../builders';
-import { FluentBinderDirective } from '../../directives';
+import { FluentBinderDirective, FluentWithInjectorDirective } from '../../directives';
 import { FluentCallPipe, FluentControlPipe, FluentSchemaPipe, FluentTypeofPipe } from '../../pipes';
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { AnyObject } from '../../types';
@@ -35,6 +35,7 @@ import { FluentControlOutletComponent } from '../control-outlet/control-outlet.c
     NzTabsModule,
     FluentControlOutletComponent,
     FluentBinderDirective,
+    FluentWithInjectorDirective,
     FluentCallPipe,
     FluentTypeofPipe,
     FluentSchemaPipe,

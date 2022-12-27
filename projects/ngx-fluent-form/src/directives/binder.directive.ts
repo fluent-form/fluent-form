@@ -3,7 +3,7 @@ import { AbstractControl } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { asapScheduler, fromEvent, observeOn, takeUntil } from 'rxjs';
-import { ControlContainerSchema, ControlSchema } from '../schemas/index.schema';
+import { AbstractComponentControlSchema, AbstractElementControlSchema, AbstractElementSchema } from '../schemas';
 import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../types';
 
 @Directive({
@@ -11,7 +11,11 @@ import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../type
   standalone: true,
   providers: [NzDestroyService]
 })
-export class FluentBinderDirective<E extends HTMLElement, C extends object, S extends ControlSchema | ControlContainerSchema> implements OnChanges {
+export class FluentBinderDirective<
+  E extends HTMLElement,
+  C extends object,
+  S extends AbstractElementSchema<E> | AbstractComponentControlSchema<C, SafeAny> | AbstractElementControlSchema<E, SafeAny>
+> implements OnChanges {
   @Input('fluentBinder') component?: C;
   @Input('fluentBinderSchema') schema!: S;
   @Input('fluentBinderControl') control?: AbstractControl;
@@ -30,7 +34,7 @@ export class FluentBinderDirective<E extends HTMLElement, C extends object, S ex
 
     this.schema.property && Object.keys(this.schema.property).forEach(property => {
       const value = this.schema.property![property as keyof typeof this.schema.property];
-      this.host[property as keyof (C | E)] = value;
+      this.host[property as keyof (C | E)] = value as (C | E)[keyof (C | E)];
     });
 
     this.schema.listener && Object.keys(this.schema.listener).forEach(eventName => {

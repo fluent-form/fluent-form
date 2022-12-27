@@ -119,23 +119,21 @@ export class ControlSchemaUtils<S extends ControlSchema> {
       validators.push(Validators.required);
     }
 
-    if (this.schema.kind === 'input') {
-      if (this.schema.type === 'email') {
-        validators.push(Validators.email);
-      }
+    if (this.schema.kind === 'input' && this.schema.type === 'email') {
+      validators.push(Validators.email);
+    }
 
-      if (this.schema.length) {
-        if (isNumber(this.schema.length)) {
-          validators.push(
-            Validators.minLength(this.schema.length),
-            Validators.maxLength(this.schema.length)
-          );
-        } else {
-          const { min, max } = this.schema.length;
+    if (isTextControlSchema(this.schema) && this.schema.length) {
+      if (isNumber(this.schema.length)) {
+        validators.push(
+          Validators.minLength(this.schema.length),
+          Validators.maxLength(this.schema.length)
+        );
+      } else {
+        const { min, max } = this.schema.length;
 
-          min && validators.push(Validators.minLength(min));
-          max && validators.push(Validators.maxLength(max));
-        }
+        min && validators.push(Validators.minLength(min));
+        max && validators.push(Validators.maxLength(max));
       }
     }
 

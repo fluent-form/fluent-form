@@ -65,19 +65,6 @@ const standardContainerSchema = <T extends AnyContainerSchema>(schema: T): T => 
 };
 
 /**
- * 标准化文本控件图示
- * @internal
- * @param schema
- */
-const standardTextControlSchema = <T extends InputControlSchema | TextareaControlSchema>(schema: T): T => {
-  if (schema.autocomplete) {
-    schema.autocomplete.compare ??= (o1: unknown, o2: unknown) => o1 === o2;
-  }
-
-  return schema;
-};
-
-/**
  * 标准化图示
  * @param schema
  */
@@ -86,8 +73,6 @@ export function standardSchema<T extends AnySchema>(schema: T | StableBuilder<T>
 
   if (isControlContainerSchema(_schema) || isComponentContainerSchema(_schema)) {
     standardContainerSchema(_schema);
-  } else if (isTextControlSchema(_schema)) {
-    standardTextControlSchema(_schema);
   }
 
   return _schema as T;

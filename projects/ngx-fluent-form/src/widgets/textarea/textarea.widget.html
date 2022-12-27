@@ -48,7 +48,7 @@
 
     <nz-autocomplete
       #autocompleteCmp
-      [compareWith]="autocomplete.compare!"
+      [compareWith]="helper.autocomplete.compare | invoke: autocomplete"
       [nzBackfill]="autocomplete.backfill"
       [nzDataSource]="autocomplete.options"
       [nzWidth]="autocomplete.width"></nz-autocomplete>

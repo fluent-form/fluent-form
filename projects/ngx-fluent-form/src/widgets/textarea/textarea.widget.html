@@ -4,8 +4,8 @@
       *fluentComposable="composableTemplate"
       nz-input
       [attr.id]="schema.id"
-      [attr.maxlength]="schema.length?.max ?? schema.length"
-      [attr.minlength]="schema.length?.min ?? schema.length"
+      [attr.maxlength]="helper.length.max | invoke: schema.length"
+      [attr.minlength]="helper.length.min | invoke: schema.length"
       [fluentBinderSchema]="schema"
       [fluentBinderControl]="control"
       [formControl]="control"
@@ -17,7 +17,7 @@
       [rows]="schema.rows"
       [autofocus]="schema.autofocus"
       [readonly]="schema.readonly | call: model : schema : control"
-      [nzSize]="schema.size"
+      [nzSize]="schema.size!"
       [nzBorderless]="schema.borderless"></textarea>
 
     <ng-template #composableTemplate>
@@ -26,29 +26,29 @@
         nz-col
         nz-input
         [attr.id]="schema.id"
-        [attr.maxlength]="schema.length?.max ?? schema.length"
-        [attr.minlength]="schema.length?.min ?? schema.length"
+        [attr.maxlength]="helper.length.max | invoke: schema.length"
+        [attr.minlength]="helper.length.min | invoke: schema.length"
         [fluentBinderSchema]="schema"
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="schema.class"
         [ngStyle]="schema.style"
+        [nzSpan]="helper.col.span | invoke: schema.col"
+        [nzFlex]="helper.col.flex | invoke: schema.col"
+        [nzOffset]="helper.col.offset | invoke: schema.col"
         [nzAutocomplete]="autocompleteCmp"
         [nzAutosize]="schema.autosize ?? {}"
-        [nzFlex]="schema.col?.flex"
-        [nzOffset]="schema.col?.offset"
-        [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
         [autofocus]="schema.autofocus"
         [readonly]="schema.readonly | call: model : schema : control"
-        [nzSize]="schema.size"
+        [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless"></textarea>
     </ng-template>
 
     <nz-autocomplete
       #autocompleteCmp
-      [compareWith]="autocomplete.compare"
+      [compareWith]="autocomplete.compare!"
       [nzBackfill]="autocomplete.backfill"
       [nzDataSource]="autocomplete.options"
       [nzWidth]="autocomplete.width"></nz-autocomplete>
@@ -61,8 +61,8 @@
       *fluentComposable="composableTemplate"
       nz-input
       [attr.id]="schema.id"
-      [attr.maxlength]="schema.length?.max ?? schema.length"
-      [attr.minlength]="schema.length?.min ?? schema.length"
+      [attr.maxlength]="helper.length.max | invoke: schema.length"
+      [attr.minlength]="helper.length.min | invoke: schema.length"
       [fluentBinderSchema]="schema"
       [fluentBinderControl]="control"
       [formControl]="control"
@@ -73,7 +73,7 @@
       [rows]="schema.rows"
       [autofocus]="schema.autofocus"
       [readonly]="schema.readonly | call: model : schema : control"
-      [nzSize]="schema.size"
+      [nzSize]="schema.size!"
       [nzBorderless]="schema.borderless"></textarea>
 
     <ng-template #composableTemplate>
@@ -82,22 +82,22 @@
         nz-input
         *ngIf="!(schema.hidden | call: model : schema : control)"
         [attr.id]="schema.id"
-        [attr.maxlength]="schema.length?.max ?? schema.length"
-        [attr.minlength]="schema.length?.min ?? schema.length"
+        [attr.maxlength]="helper.length.max | invoke: schema.length"
+        [attr.minlength]="helper.length.min | invoke: schema.length"
         [fluentBinderSchema]="schema"
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="schema.class"
         [ngStyle]="schema.style"
+        [nzSpan]="helper.col.span | invoke: schema.col"
+        [nzFlex]="helper.col.flex | invoke: schema.col"
+        [nzOffset]="helper.col.offset | invoke: schema.col"
         [nzAutosize]="schema.autosize ?? {}"
-        [nzFlex]="schema.col?.flex"
-        [nzOffset]="schema.col?.offset"
-        [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
         [autofocus]="schema.autofocus"
         [readonly]="schema.readonly | call: model : schema : control"
-        [nzSize]="schema.size"
+        [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless"></textarea>
     </ng-template>
   </ng-container>

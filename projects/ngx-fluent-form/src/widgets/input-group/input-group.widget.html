@@ -6,20 +6,20 @@
     [fluentBinderSchema]="schema"
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
-    [nzAddOnAfter]="schema.after?.icon ? null : schema.after"
-    [nzAddOnAfterIcon]="schema.after?.icon"
-    [nzAddOnBefore]="schema.before?.icon ? null : schema.before"
-    [nzAddOnBeforeIcon]="schema.before?.icon"
-    [nzPrefix]="schema.prefix?.icon ? null : schema.prefix"
-    [nzPrefixIcon]="schema.prefix?.icon"
-    [nzSize]="schema.size"
-    [nzSuffix]="schema.suffix?.icon ? null : schema.suffix"
-    [nzSuffixIcon]="schema.suffix?.icon">
+    [nzSize]="schema.size!"
+    [nzAddOnBefore]="helper.addon | invoke: schema.before"
+    [nzAddOnAfter]="helper.addon | invoke: schema.after"
+    [nzPrefix]="helper.addon | invoke: schema.prefix"
+    [nzSuffix]="helper.addon | invoke: schema.suffix"
+    [nzAddOnBeforeIcon]="helper.addonIcon | invoke: schema.before"
+    [nzAddOnAfterIcon]="helper.addonIcon | invoke: schema.after"
+    [nzPrefixIcon]="helper.addonIcon | invoke: schema.prefix"
+    [nzSuffixIcon]="helper.addonIcon | invoke: schema.suffix">
     <ng-container
       *ngFor="let subschema of schema.schemas"
       fluentWithInjector
-      [ngTemplateOutlet]="subschema.kind | widgetTemplateRef"
-      [ngTemplateOutletContext]="{ control: (subschema.name | control: control), schema: subschema, model: model }">
+      [ngTemplateOutlet]="$any(subschema).kind | widgetTemplateRef"
+      [ngTemplateOutletContext]="{ control: ($any(subschema).name | control: control), schema: subschema, model: model }">
     </ng-container>
   </nz-input-group>
 </ng-template>

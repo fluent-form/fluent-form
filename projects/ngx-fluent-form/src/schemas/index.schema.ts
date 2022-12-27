@@ -24,7 +24,7 @@ import { StableBuilder } from '../utils/builder.utils';
 import { AnySchemaName, DoubleSchemaName, SchemaName } from './abstract.schema';
 import { ButtonComponentSchema, ButtonGroupComponentSchema, InputGroupComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsetComponentSchema, TextComponentSchema } from './component.schema';
 import { FormArraySchema, FormGroupSchema } from './control-container.schema';
-import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from './control.schema';
+import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, InputControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from './control.schema';
 
 /** 任意图示 */
 export type AnySchema = ControlSchema | AnyContainerSchema | ComponentSchema;
@@ -93,7 +93,7 @@ export type SingleKeyControlSchema<N extends SchemaName = SchemaName> =
   SelectControlSchema<N> |
   CascaderControlSchema<N> |
   TreeSelectControlSchema<N> |
-  RadioControlSchema<N> |
+  RadioGroupControlSchema<N> |
   CheckboxControlSchema<N> |
   CheckboxGroupControlSchema<N> |
   RateControlSchema<N> |

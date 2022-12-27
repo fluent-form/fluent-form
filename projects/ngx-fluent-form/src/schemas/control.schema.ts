@@ -143,9 +143,9 @@ export interface SliderControlSchema<Name extends AnySchemaName = AnySchemaName,
   reverse?: boolean;
 }
 
-export interface RadioControlSchema<Name extends SchemaName = SchemaName, Val = SafeAny> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzRadioGroupComponent, Val> {
+export interface RadioGroupControlSchema<Name extends SchemaName = SchemaName, Val = SafeAny> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzRadioGroupComponent, Val> {
   kind: 'radio-group';
-  button?: boolean | NzRadioButtonStyle;
+  button?: NzRadioButtonStyle;
   size?: NzSizeLDSType;
   options: AnyObject[];
   config?: {

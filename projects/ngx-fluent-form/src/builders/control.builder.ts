@@ -1,4 +1,4 @@
-import { AnySchemaName, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, InputControlSchema, NumberInputControlSchema, RadioControlSchema, RateControlSchema, SchemaName, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { AnySchemaName, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, InputControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SchemaName, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { KindAndName } from '../types';
 import { builder, UnstableBuilder } from '../utils/builder.utils';
 
@@ -90,10 +90,10 @@ export function treeSelect<N extends SchemaName>(name?: N) {
   return builder<TreeSelectControlSchema<N>>().kind('tree-select').name(name);
 }
 
-export function radioGroup(): UnstableBuilder<RadioControlSchema<number>, KindAndName>;
-export function radioGroup<N extends SchemaName>(name?: N): UnstableBuilder<RadioControlSchema<N>, KindAndName>;
+export function radioGroup(): UnstableBuilder<RadioGroupControlSchema<number>, KindAndName>;
+export function radioGroup<N extends SchemaName>(name?: N): UnstableBuilder<RadioGroupControlSchema<N>, KindAndName>;
 export function radioGroup<N extends SchemaName>(name?: N) {
-  return builder<RadioControlSchema<N>>().kind('radio-group').name(name);
+  return builder<RadioGroupControlSchema<N>>().kind('radio-group').name(name);
 }
 
 export function checkbox(): UnstableBuilder<CheckboxControlSchema<number>, KindAndName>;

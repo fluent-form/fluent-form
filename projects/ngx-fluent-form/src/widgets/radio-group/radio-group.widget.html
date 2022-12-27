@@ -7,8 +7,8 @@
     [formControl]="control"
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
-    [nzButtonStyle]="schema.button"
-    [nzSize]="schema.size">
+    [nzButtonStyle]="schema.button ?? 'outline'"
+    [nzSize]="schema.size!">
     <ng-container *ngFor="let option of schema.options">
       <label
         *ngIf="schema.button"

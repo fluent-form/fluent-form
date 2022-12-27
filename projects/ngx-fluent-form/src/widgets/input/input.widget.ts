@@ -1,14 +1,17 @@
 import { NgClass, NgIf, NgStyle } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { FluentBinderDirective, FluentComposableDirective, FluentWithContextGuardDirective } from '../../directives';
 import { FluentCallPipe, FluentTypeofPipe } from '../../pipes';
-import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
+import { FluentInvokePipe } from '../../pipes/invoke.pipe';
+import { InputControlSchema } from '../../schemas';
+import { isNumber } from '../../utils';
+import { AbstractWidget, COL_HELPER, WidgetTemplateContext } from '../abstract.widget';
 
-type InputWidgetTemplateContext = WidgetTemplateContext<any>;
+type InputWidgetTemplateContext = WidgetTemplateContext<InputControlSchema, FormControl<string>>;
 
 @Component({
   standalone: true,
@@ -24,10 +27,19 @@ type InputWidgetTemplateContext = WidgetTemplateContext<any>;
     FluentWithContextGuardDirective,
     FluentComposableDirective,
     FluentTypeofPipe,
-    FluentCallPipe
+    FluentCallPipe,
+    FluentInvokePipe
   ],
   templateUrl: './input.widget.html',
 })
 export class InputWidget extends AbstractWidget<InputWidgetTemplateContext> {
   @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<InputWidgetTemplateContext>;
+
+  protected readonly helper = {
+    col: COL_HELPER,
+    length: {
+      min: (length: InputControlSchema['length']) => isNumber(length) ? undefined : length?.min,
+      max: (length: InputControlSchema['length']) => isNumber(length) ? undefined : length?.max,
+    }
+  } as const;
 }

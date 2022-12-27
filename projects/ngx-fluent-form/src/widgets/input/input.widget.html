@@ -4,8 +4,8 @@
       *fluentComposable="composableTemplate"
       nz-input
       [attr.id]="schema.id"
-      [attr.maxlength]="schema.length?.max ?? schema.length"
-      [attr.minlength]="schema.length?.min ?? schema.length"
+      [attr.maxlength]="helper.length.max | invoke: schema.length"
+      [attr.minlength]="helper.length.min | invoke: schema.length"
       [fluentBinderSchema]="schema"
       [fluentBinderControl]="control"
       [ngClass]="schema.class"
@@ -16,7 +16,7 @@
       [type]="schema.type ?? 'text'"
       [autofocus]="schema.autofocus"
       [readonly]="schema.readonly | call: model : schema : control"
-      [nzSize]="schema.size"
+      [nzSize]="schema.size!"
       [nzBorderless]="schema.borderless">
 
     <ng-template #composableTemplate>
@@ -25,28 +25,28 @@
         nz-col
         nz-input
         [attr.id]="schema.id"
-        [attr.maxlength]="schema.length?.max ?? schema.length"
-        [attr.minlength]="schema.length?.min ?? schema.length"
+        [attr.maxlength]="helper.length.max | invoke: schema.length"
+        [attr.minlength]="helper.length.min | invoke: schema.length"
         [fluentBinderSchema]="schema"
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="schema.class"
         [ngStyle]="schema.style"
+        [nzSpan]="helper.col.span | invoke: schema.col"
+        [nzFlex]="helper.col.flex | invoke: schema.col"
+        [nzOffset]="helper.col.offset | invoke: schema.col"
         [nzAutocomplete]="autocompleteCmp"
-        [nzFlex]="schema.col?.flex"
-        [nzOffset]="schema.col?.offset"
-        [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
         [placeholder]="schema.placeholder ?? ''"
         [type]="schema.type ?? 'text'"
         [autofocus]="schema.autofocus"
         [readonly]="schema.readonly | call: model : schema : control"
-        [nzSize]="schema.size"
+        [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless">
     </ng-template>
 
     <nz-autocomplete
       #autocompleteCmp
-      [compareWith]="autocomplete.compare"
+      [compareWith]="autocomplete.compare!"
       [nzBackfill]="autocomplete.backfill"
       [nzDataSource]="autocomplete.options"
       [nzWidth]="autocomplete.width"></nz-autocomplete>
@@ -59,8 +59,8 @@
       *fluentComposable="composableTemplate"
       nz-input
       [attr.id]="schema.id"
-      [attr.maxlength]="schema.length?.max ?? schema.length"
-      [attr.minlength]="schema.length?.min ?? schema.length"
+      [attr.maxlength]="helper.length.max | invoke: schema.length"
+      [attr.minlength]="helper.length.min | invoke: schema.length"
       [fluentBinderSchema]="schema"
       [fluentBinderControl]="control"
       [formControl]="control"
@@ -70,7 +70,7 @@
       [type]="schema.type ?? 'text'"
       [autofocus]="schema.autofocus"
       [readonly]="schema.readonly | call: model : schema : control"
-      [nzSize]="schema.size"
+      [nzSize]="schema.size!"
       [nzBorderless]="schema.borderless">
 
     <ng-template #composableTemplate>
@@ -79,21 +79,21 @@
         nz-col
         nz-input
         [attr.id]="schema.id"
-        [attr.maxlength]="schema.length?.max ?? schema.length"
-        [attr.minlength]="schema.length?.min ?? schema.length"
+        [attr.maxlength]="helper.length.max | invoke: schema.length"
+        [attr.minlength]="helper.length.min | invoke: schema.length"
         [fluentBinderSchema]="schema"
         [fluentBinderControl]="control"
         [formControl]="control"
         [ngClass]="schema.class"
         [ngStyle]="schema.style"
-        [nzFlex]="schema.col?.flex"
-        [nzOffset]="schema.col?.offset"
-        [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
+        [nzSpan]="helper.col.span | invoke: schema.col"
+        [nzFlex]="helper.col.flex | invoke: schema.col"
+        [nzOffset]="helper.col.offset | invoke: schema.col"
         [placeholder]="schema.placeholder ?? ''"
         [type]="schema.type ?? 'text'"
         [autofocus]="schema.autofocus"
         [readonly]="schema.readonly | call: model : schema : control"
-        [nzSize]="schema.size"
+        [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless">
     </ng-template>
   </ng-container>

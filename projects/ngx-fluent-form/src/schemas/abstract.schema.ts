@@ -136,7 +136,7 @@ export interface AbstractElementControlSchema<Ele extends HTMLElement, Val> exte
 }
 
 /** 抽象的文本控件图示 */
-export interface AbstractTextControlSchema<Name extends AnySchemaName, Val> extends AbstractControlSchema<Name, Val> {
+export interface AbstractTextControlSchema<Name extends AnySchemaName, Val = string> extends AbstractControlSchema<Name, Val> {
   length?: number | { max?: number, min?: number };
   autocomplete?: {
     backfill?: boolean;

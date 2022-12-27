@@ -1,6 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { AbstractControl, FormArray, FormControl } from '@angular/forms';
-import { AbstractSchema, AnySchema } from '../schemas';
+import { AbstractSchema, AbstractTextControlSchema, AnySchema } from '../schemas';
 import { AnyArray, AnyObject } from '../types';
 import { isNumber } from '../utils';
 
@@ -15,6 +15,16 @@ export interface WidgetTemplateContext<S extends AnySchema, C extends AbstractCo
 export abstract class AbstractWidget<C> {
   protected readonly contextGuard!: C;
   readonly abstract templateRef: TemplateRef<C>;
+}
+
+export abstract class AbstractTextControlWidget<C> extends AbstractWidget<C> {
+  protected readonly helper = {
+    col: COL_HELPER,
+    length: {
+      min: (length: AbstractTextControlSchema<string>['length']) => isNumber(length) ? undefined : length?.min,
+      max: (length: AbstractTextControlSchema<string>['length']) => isNumber(length) ? undefined : length?.max,
+    }
+  } as const;
 }
 
 export const COL_HELPER = {

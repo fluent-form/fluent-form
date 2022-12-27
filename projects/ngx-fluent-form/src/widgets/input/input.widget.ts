@@ -8,8 +8,7 @@ import { FluentBinderDirective, FluentComposableDirective, FluentWithContextGuar
 import { FluentCallPipe, FluentTypeofPipe } from '../../pipes';
 import { FluentInvokePipe } from '../../pipes/invoke.pipe';
 import { InputControlSchema } from '../../schemas';
-import { isNumber } from '../../utils';
-import { AbstractWidget, COL_HELPER, WidgetTemplateContext } from '../abstract.widget';
+import { AbstractTextControlWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type InputWidgetTemplateContext = WidgetTemplateContext<InputControlSchema, FormControl<string>>;
 
@@ -32,14 +31,6 @@ type InputWidgetTemplateContext = WidgetTemplateContext<InputControlSchema, Form
   ],
   templateUrl: './input.widget.html',
 })
-export class InputWidget extends AbstractWidget<InputWidgetTemplateContext> {
+export class InputWidget extends AbstractTextControlWidget<InputWidgetTemplateContext> {
   @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<InputWidgetTemplateContext>;
-
-  protected readonly helper = {
-    col: COL_HELPER,
-    length: {
-      min: (length: InputControlSchema['length']) => isNumber(length) ? undefined : length?.min,
-      max: (length: InputControlSchema['length']) => isNumber(length) ? undefined : length?.max,
-    }
-  } as const;
 }

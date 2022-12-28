@@ -69,35 +69,6 @@ describe('FluentFormDirective', () => {
     });
   });
 
-  it('should be the expected model value', () => {
-    component.schemas = form(
-      input('ipt'),
-      inputGroup('ipts').schemas(
-        input('ipt2'),
-      ),
-      group('group').schemas(
-        input('ipt'),
-        inputGroup('ipts').schemas(
-          input('ipt2'),
-        ),
-      ),
-      array('array').schemas(
-        input()
-      )
-    );
-    fixture.detectChanges();
-
-    expect(component.model).toEqual({
-      ipt: null,
-      ipt2: null,
-      group: {
-        ipt: null,
-        ipt2: null,
-      },
-      array: [null]
-    });
-  });
-
   it('should be the expected model value (configure the toplevel form)', () => {
     component.schemas = form(it => it.updateOn('blur').schemas(
       input('ipt'),

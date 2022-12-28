@@ -41,7 +41,7 @@ export class TreeSelectWidget extends AbstractWidget<TreeSelectWidgetTemplateCon
     checkStrictly: (checkable: TreeSelectControlSchema['checkable']) =>
       isBoolean(checkable) || !checkable?.strict ? false : checkable.strict,
     showExpand: (expandIcon: TreeSelectControlSchema['expandIcon']) =>
-      isBoolean(expandIcon) ? expandIcon : true,
+      isUndefined(expandIcon) ? true : !!expandIcon,
     expandedIcon: (expandIcon: TreeSelectControlSchema['expandIcon']) =>
       isBoolean(expandIcon) ? undefined : expandIcon
   } as const;

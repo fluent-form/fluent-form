@@ -44,7 +44,7 @@
       nz-icon
       [nzRotate]="helper.icon.rotate | invoke: schema.icon"
       [nzSpin]="helper.icon.spin | invoke: schema.icon"
-      [nzTheme]="(helper.icon.theme | invoke: schema.icon)!"
+      [nzTheme]="helper.icon.theme | invoke: schema.icon"
       [nzType]="helper.icon.type | invoke: schema.icon"></span>
     <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
   </ng-template>

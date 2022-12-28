@@ -38,7 +38,7 @@ export class ButtonWidget extends AbstractWidget<ButtonWidgetTemplateContext> {
       type: (icon: ButtonComponentSchema['icon']) => isString(icon) ? icon : icon!.type,
       rotate: (icon: ButtonComponentSchema['icon']) => isString(icon) || !icon?.rotate ? 0 : icon.rotate,
       spin: (icon: ButtonComponentSchema['icon']) => isString(icon) || !icon?.spin ? false : icon.spin,
-      theme: (icon: ButtonComponentSchema['icon']) => isString(icon) ? undefined : icon?.theme
+      theme: (icon: ButtonComponentSchema['icon']) => isString(icon) || !icon?.theme ? 'outline' : icon.theme
     }
   } as const;
 }

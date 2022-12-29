@@ -1,17 +1,17 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormGroup } from '@angular/forms';
 import { form, input } from '../../builders';
 import { FluentFormModule } from '../../fluent-form.module';
 import { FormGroupSchema } from '../../schemas';
 import { AnySchema } from '../../schemas/index.schema';
 import { AnyObject } from '../../types';
-import { FluentFormComponent } from './form.component';
 
 @Component({
-  template: `<fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>`,
+  template: `<fluent-form [schemas]="schemas" [(model)]="model" (formChange)="form = $event"></fluent-form>`,
 })
 class TestWarpperComponent<T extends AnyObject> {
-  @ViewChild(FluentFormComponent) target!: FluentFormComponent<T>;
+  form!: FormGroup;
   schemas!: AnySchema[] | FormGroupSchema;
   model: T = {} as T;
 }
@@ -46,24 +46,80 @@ describe('FluentFormComponent', () => {
     expect(component.model).toEqual({ text: null });
   });
 
-  it('模型应该能正确赋值表单', () => {
-    component.schemas = form(
-      input('text')
-    );
-    component.model = { text: 'test' };
-    fixture.detectChanges();
+  describe('模型应该能正确赋值表单', () => {
+    it('先设置 schemas，后设置 model', () => {
+      component.schemas = form(
+        input('text')
+      );
+      component.model = { text: 'test' };
+      fixture.detectChanges();
 
-    expect(component.target['form'].value).toEqual(component.model);
+      expect(component.form.value).toEqual({ text: 'test' });
+    });
+
+    it('先设置 model，后设置 schemas', () => {
+      component.model = { text: 'test' };
+      component.schemas = form(
+        input('text')
+      );
+      fixture.detectChanges();
+
+      expect(component.form.value).toEqual({ text: 'test' });
+    });
+
+    it('多次设置 model', () => {
+      component.schemas = form(
+        input('text')
+      );
+      component.model = { text: 'test' };
+      fixture.detectChanges();
+
+      expect(component.form.value).toEqual({ text: 'test' });
+
+      component.model = { text: 'test change' };
+      fixture.detectChanges();
+
+      expect(component.form.value).toEqual({ text: 'test change' });
+    });
   });
 
-  it('表单应该能正确赋值模型', () => {
-    component.schemas = form(
-      input('text').col(1).defaultValue('test')
-    );
-    component.model = {};
-    fixture.detectChanges();
+  describe('表单应该能正确赋值模型', () => {
+    it('先设置 schemas，后设置 model', () => {
+      component.schemas = form(
+        input('text').col(1).defaultValue('test')
+      );
+      component.model = {};
+      fixture.detectChanges();
 
-    expect(component.model).toEqual({ text: 'test' });
+      expect(component.model).toEqual({ text: 'test' });
+    });
+
+    it('先设置 model，后设置 schemas', () => {
+      component.model = {};
+      component.schemas = form(
+        input('text').col(1).defaultValue('test')
+      );
+      fixture.detectChanges();
+
+      expect(component.model).toEqual({ text: 'test' });
+    });
+
+    it('多次设置 schemas', () => {
+      component.model = {};
+      component.schemas = form(
+        input('text').col(1).defaultValue('test')
+      );
+      fixture.detectChanges();
+
+      expect(component.model).toEqual({ text: 'test' });
+
+      component.schemas = form(
+        input('text').col(1).defaultValue('test change')
+      );
+      fixture.detectChanges();
+
+      expect(component.model).toEqual({ text: 'test change' });
+    });
   });
 
   it('应该能正确处理控件的 disabled 选项', () => {
@@ -75,8 +131,8 @@ describe('FluentFormComponent', () => {
     component.model = {};
     fixture.detectChanges();
 
-    expect(component.target['form'].get('a')!.disabled).toEqual(true);
-    expect(component.target['form'].get('b')!.disabled).toEqual(true);
-    expect(component.target['form'].get('c')!.disabled).toEqual(true);
+    expect(component.form.get('a')!.disabled).toEqual(true);
+    expect(component.form.get('b')!.disabled).toEqual(true);
+    expect(component.form.get('c')!.disabled).toEqual(true);
   });
 });

@@ -21,8 +21,10 @@ export abstract class AbstractTextControlWidget<C> extends AbstractWidget<C> {
   protected readonly helper = {
     col: COL_HELPER,
     length: {
-      min: (length: AbstractTextControlSchema<string>['length']) => isNumber(length) ? undefined : length?.min,
-      max: (length: AbstractTextControlSchema<string>['length']) => isNumber(length) ? undefined : length?.max,
+      min: (length: AbstractTextControlSchema<string>['length']) =>
+        isNumber(length) ? length : length?.min,
+      max: (length: AbstractTextControlSchema<string>['length']) =>
+        isNumber(length) ? length : length?.max,
     },
     autocomplete: {
       compare: (autocomplete: AbstractTextControlSchema<string>['autocomplete']) =>

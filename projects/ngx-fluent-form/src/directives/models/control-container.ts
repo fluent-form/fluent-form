@@ -23,7 +23,7 @@ export abstract class ControlContainer<T extends AnyObject | AnyArray> {
 
 @Directive()
 export abstract class ControlContainerDirective<T extends AnyObject | AnyArray> extends ControlContainer<T> {
-  @Output() formChange: EventEmitter<AbstractControl> = new EventEmitter();
+  @Output('fluentFormChange') formChange: EventEmitter<AbstractControl> = new EventEmitter();
 
   protected directives: FluentOutletDirective<T>[] = [];
 

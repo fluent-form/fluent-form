@@ -9,7 +9,7 @@ import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchema } fro
 import { ControlContainer, ControlContainerDirective } from './models/control-container';
 
 @Directive({
-  selector: '[fluentForm]',
+  selector: '[fluent-form][fluentSchemas]',
   exportAs: 'fluentForm',
   standalone: true,
   providers: [
@@ -32,7 +32,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
     return this.schema?.schemas as AnySchema[];
   }
 
-  @Input('fluentForm')
+  @Input('fluentSchemas')
   set schemas(value: AnySchema[] | FormGroupSchema) {
     this.schema && this.destroy$.next();
 

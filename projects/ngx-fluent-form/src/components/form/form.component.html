@@ -167,36 +167,34 @@
       [nzStatus]="subschema.status ?? schema.active === index ? 'process' : 'wait'"></nz-step>
   </nz-steps>
 
-  <ng-container *ngFor="let stepSchema of schema.schemas; index as stepIndex">
-    <!-- TODO: nzGutter -->
-    <div
-      nz-row
-      [nzGutter]="gutter"
-      [hidden]="schema.active !== stepIndex"
-      [style.margin-top.px]="16">
+  <div
+    *ngFor="let stepSchema of schema.schemas; index as stepIndex"
+    nz-row
+    [nzGutter]="gutter"
+    [hidden]="schema.active !== stepIndex"
+    [style.margin-top.px]="16">
 
-      <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
-        <div
-          nz-col
-          [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
-          [nzOffset]="schema.col?.offset"
-          [nzFlex]="schema.col?.flex"
-          [hidden]="schema.hidden | call: model : schema : control">
-          <ng-container
-            fluentWithInjector
-            [ngTemplateOutlet]="formColContentTemplate"
-            [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
-          </ng-container>
-        </div>
-      </ng-template>
+    <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
+      <div
+        nz-col
+        [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
+        [nzOffset]="schema.col?.offset"
+        [nzFlex]="schema.col?.flex"
+        [hidden]="schema.hidden | call: model : schema : control">
+        <ng-container
+          fluentWithInjector
+          [ngTemplateOutlet]="formColContentTemplate"
+          [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
+        </ng-container>
+      </div>
+    </ng-template>
 
-      <ng-container
-        *ngFor="let subschema of stepSchema.schemas"
-        [ngTemplateOutlet]="formColTemplate"
-        [ngTemplateOutletContext]="{ control: (subschema.name | control: form), schema: subschema, model: model }">
-      </ng-container>
-    </div>
-  </ng-container>
+    <ng-container
+      *ngFor="let subschema of stepSchema.schemas"
+      [ngTemplateOutlet]="formColTemplate"
+      [ngTemplateOutletContext]="{ control: (subschema.name | control: form), schema: subschema, model: model }">
+    </ng-container>
+  </div>
 </ng-template>
 
 <ng-template #tabsTemplate let-schema="schema" let-control="control" let-model="model">

@@ -187,11 +187,12 @@ describe('schema.utils', () => {
     });
 
     it('双字段图示', () => {
-      const target = standardSchema(slider(['begin', 'end']));
+      const names = ['begin', 'end'] as const;
+      const target = standardSchema(slider(names));
       const schemas = [target];
-      const schema = schemasUtils(schemas).find([['begin', 'end']]);
 
-      expect(schema).toEqual(target);
+      expect(schemasUtils(schemas).find([names])).toEqual(target);
+      expect(schemasUtils(schemas).find([['begin', 'end']])).toEqual(target);
     });
 
     it('不存在的图示', () => {

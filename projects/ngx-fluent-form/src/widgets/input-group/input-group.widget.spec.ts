@@ -19,14 +19,14 @@ describe('InputGroupWidget', () => {
 
   describe('helper function', () => {
     it('addon', () => {
-      expect(helper.addon(undefined)).toBeUndefined()
-      expect(helper.addon('user')).toEqual('user')
-    })
+      expect(helper.addon(undefined)).toBeUndefined();
+      expect(helper.addon('user')).toEqual('user');
+    });
 
     it('addonIcon', () => {
-      expect(helper.addonIcon(undefined)).toBeUndefined()
-      expect(helper.addonIcon('user')).toBeUndefined()
+      expect(helper.addonIcon(undefined)).toBeUndefined();
+      expect(helper.addonIcon('user')).toBeUndefined();
       expect(helper.addonIcon({ icon: 'user' })).toEqual('user');
-    })
-  })
+    });
+  });
 });

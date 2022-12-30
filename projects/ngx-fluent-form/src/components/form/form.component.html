@@ -1,7 +1,7 @@
 <form
   nz-row
   nz-form
-  [nzGutter]="schema.gutter ?? gutter"
+  [nzGutter]="gutter"
   [nzLayout]="layout"
   [ngClass]="schema.class"
   [ngStyle]="schema.style"
@@ -32,7 +32,7 @@
 <ng-template #nestFormTemplate let-form="form" let-schema="schema" let-model="model">
   <nz-row
     nz-form
-    [nzGutter]="schema.gutter ?? gutter"
+    [nzGutter]="gutter"
     [nzLayout]="layout"
     [ngClass]="schema.class"
     [ngStyle]="schema.style"

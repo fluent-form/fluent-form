@@ -7,7 +7,6 @@ import { CompareWith, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDateMode } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
-import { NzRowDirective } from 'ng-zorro-antd/grid';
 import { ComponentOutputListenerMap, ComponentPropertyMap, HTMLElementEventListenerMap, HTMLElementPropertyMap } from '../types';
 import { AnyBuilder, AnySchema } from './index.schema';
 
@@ -98,7 +97,6 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
 /** 抽象的容器控件图示 */
 export interface AbstractControlContainerSchema<Name extends AnySchemaName> extends AbstractSchema<Name>, AbstractElementControlSchema<HTMLFormElement, SafeAny> {
   label?: string;
-  gutter?: NzRowDirective['nzGutter'];
   schemas: (AnySchema | AnyBuilder)[];
   /** Validator for the control */
   validators?: ValidatorFn[];

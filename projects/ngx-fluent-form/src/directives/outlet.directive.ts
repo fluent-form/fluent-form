@@ -1,4 +1,4 @@
-import { ComponentFactoryResolver, Directive, Host, Injector, Input, OnChanges, OnDestroy, OnInit, SkipSelf, ViewContainerRef } from '@angular/core';
+import { createComponent, Directive, EnvironmentInjector, Host, Injector, Input, OnChanges, OnDestroy, OnInit, SkipSelf, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { FluentControlOutletComponent, FluentControlTemplateContext } from '../components';
 import { ComponentSchema, ControlSchema } from '../schemas';
@@ -27,14 +27,13 @@ export class FluentOutletDirective<T extends AnyObject | AnyArray> implements On
 
   constructor(
     injector: Injector,
+    environmentInjector: EnvironmentInjector,
     viewContainerRef: ViewContainerRef,
-    componentFactoryResolver: ComponentFactoryResolver,
     @Host() @SkipSelf()
     private controlContainer: ControlContainer<T>,
   ) {
-    // TODO v14.1 后使用 createComponent() 替代 ComponentFactoryResolver
-    const { instance } = componentFactoryResolver.resolveComponentFactory(FluentControlOutletComponent).create(injector);
-    viewContainerRef.createEmbeddedView(instance.templateRef, this);
+    const { instance } = createComponent(FluentControlOutletComponent, { environmentInjector });
+    viewContainerRef.createEmbeddedView(instance.templateRef, this, { injector });
   }
 
   ngOnInit() {

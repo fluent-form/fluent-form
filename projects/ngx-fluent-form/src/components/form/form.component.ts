@@ -50,7 +50,7 @@ export class FluentFormComponent<T extends AnyObject> {
    * 内部的不可变模型，主要有以下用途：
    * - 用来跟公开的模型值进行引用比较，判断变更是内部发出的还是外部传入的，如果引用一致则为内部变更
    */
-  private immutableModel!: T;
+  private internalModel!: T;
   private _model!: T;
 
   protected form!: FormGroup;
@@ -89,7 +89,7 @@ export class FluentFormComponent<T extends AnyObject> {
     this._model = value;
 
     // 如果是外部变更，就赋值到表单
-    if (this.model !== this.immutableModel) {
+    if (this.model !== this.internalModel) {
       // 如果表单已经好了，就使用初始化表单
       this.form && modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
     }
@@ -109,8 +109,8 @@ export class FluentFormComponent<T extends AnyObject> {
    * @param utils
    */
   private onValueChanges(utils: FormUtils<FormGroup>) {
-    utils.change(this.immutableModel = utils.assign({} as T));
-    this.modelChange.emit(this.immutableModel);
+    utils.change(this.internalModel = utils.assign({} as T));
+    this.modelChange.emit(this.internalModel);
   }
 
 }

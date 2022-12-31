@@ -21,7 +21,7 @@ import { ControlContainer, ControlContainerDirective } from './models/control-co
   ]
 })
 export class FluentFormDirective<T extends AnyObject | AnyArray> extends ControlContainerDirective<T> {
-  private immutableModel!: T;
+  private internalModel!: T;
   private _model!: T;
   /** @internal */
   schema!: FormGroupSchema;
@@ -61,7 +61,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
     this._model = value;
 
     // 如果是外部变更，就赋值到表单
-    if (this.model !== this.immutableModel) {
+    if (this.model !== this.internalModel) {
       this.form && modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
     }
   }
@@ -82,7 +82,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
    * @param utils
    */
   private onValueChanges(utils: FormUtils<FormGroup | FormArray>) {
-    utils.change(this.immutableModel = utils.assign({} as T));
-    this.modelChange.emit(this.immutableModel);
+    utils.change(this.internalModel = utils.assign({} as T));
+    this.modelChange.emit(this.internalModel);
   }
 }

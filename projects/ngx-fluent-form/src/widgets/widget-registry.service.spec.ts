@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { WIDGET_MAP } from '../tokens';
-import { WidgetRepository } from './widget-repository.service';
+import { WidgetRegistry } from './widget-registry.service';
 
-describe('WidgetRepository', () => {
-  let service: WidgetRepository;
+describe('WidgetRegistry', () => {
+  let service: WidgetRegistry;
 
   beforeEach(() => {
     TestBed.overrideProvider(WIDGET_MAP, { useValue: new Map() });
-    service = TestBed.inject(WidgetRepository);
+    service = TestBed.inject(WidgetRegistry);
   });
 
   it('should be created', () => {

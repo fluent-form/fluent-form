@@ -1,16 +1,16 @@
 import { inject, Pipe, PipeTransform, TemplateRef } from '@angular/core';
 import { WidgetKind } from '../enumerations';
-import { WidgetRepository } from '../widgets/widget-repository.service';
+import { WidgetRegistry } from '../widgets/widget-registry.service';
 
 @Pipe({
   name: 'widgetTemplateRef',
   standalone: true
 })
 export class FluentWidgetTemplateRefPipe implements PipeTransform {
-  private readonly repository = inject(WidgetRepository);
+  private readonly registry = inject(WidgetRegistry);
 
   transform(value: WidgetKind): TemplateRef<unknown> {
-    return this.repository.get(value);
+    return this.registry.get(value);
   }
 
 }

@@ -1,0 +1,8 @@
+dist
+*.js
+*.ts
+*.sass
+*.scss
+*.less
+*.css
+*.md

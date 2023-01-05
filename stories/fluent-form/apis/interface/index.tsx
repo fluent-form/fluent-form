@@ -178,10 +178,8 @@ export const Interfaces = () => (
                 <tr key={prop.line}>
                   <td>
                     <Spaced col={1}>
-                      <Name>
-                        {prop.deprecated ? <del>{prop.name}</del> : prop.name}
-                        {prop.optional || <Required title="Required">*</Required>}
-                      </Name>
+                      {prop.deprecated ? <del>{prop.name}</del> : prop.name}
+                      {/* <Required title="Required">*</Required> */}
 
                       {prop.deprecated && <Badge status='negative'>deprecated</Badge>}
                     </Spaced>

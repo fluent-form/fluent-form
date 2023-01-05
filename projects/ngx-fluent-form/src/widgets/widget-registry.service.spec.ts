@@ -1,12 +1,14 @@
 import { TestBed } from '@angular/core/testing';
-import { WIDGET_MAP } from '../tokens';
+import { provideFluentForm } from '../provide';
 import { WidgetRegistry } from './widget-registry.service';
 
 describe('WidgetRegistry', () => {
   let service: WidgetRegistry;
 
   beforeEach(() => {
-    TestBed.overrideProvider(WIDGET_MAP, { useValue: new Map() });
+    TestBed.configureTestingModule({
+      providers: [provideFluentForm()]
+    });
     service = TestBed.inject(WidgetRegistry);
   });
 

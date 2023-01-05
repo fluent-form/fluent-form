@@ -1,11 +1,13 @@
 import { EnvironmentInjector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { WIDGET_MAP } from '../tokens';
+import { provideFluentForm } from '../provide';
 import { FluentWidgetTemplateRefPipe } from './widget-template-ref.pipe';
 
 describe('FluentWidgetTemplateRefPipe', () => {
   beforeEach(() => {
-    TestBed.overrideProvider(WIDGET_MAP, { useValue: new Map() });
+    TestBed.configureTestingModule({
+      providers: [provideFluentForm()]
+    });
   });
 
   it('create an instance', () => {

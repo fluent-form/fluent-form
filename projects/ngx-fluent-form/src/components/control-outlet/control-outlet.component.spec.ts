@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
-import { FluentFormModule } from '../../fluent-form.module';
+import { provideFluentForm } from '../../provide';
 import { AnyArray, AnyObject } from '../../types';
 import { FluentControlOutletComponent } from './control-outlet.component';
 
@@ -10,10 +10,7 @@ describe('FluentControlOutletComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        FluentControlOutletComponent,
-        FluentFormModule
-      ]
+      providers: [provideFluentForm()]
     });
   });
 

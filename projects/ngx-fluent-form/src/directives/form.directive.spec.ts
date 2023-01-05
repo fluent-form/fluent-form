@@ -2,11 +2,20 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { array, form, group, input, inputGroup } from '../builders';
-import { FluentFormModule } from '../fluent-form.module';
+import { provideFluentForm } from '../provide';
 import { AnySchema, FormGroupSchema } from '../schemas';
 import { AnyObject } from '../types';
+import { FluentFormNameDirective } from './form-name.directive';
+import { FluentFormDirective } from './form.directive';
+import { FluentOutletDirective } from './outlet.directive';
 
 @Component({
+  standalone: true,
+  imports: [
+    FluentFormDirective,
+    FluentFormNameDirective,
+    FluentOutletDirective
+  ],
   template: `
     <div fluent-form [fluentSchemas]="schemas" [(fluentModel)]="model" (fluentFormChange)="form = $event">
       <fluent-outlet name="ipt"></fluent-outlet>
@@ -31,11 +40,10 @@ describe('FluentFormDirective', () => {
   let component: TestingComponent;
   let fixture: ComponentFixture<TestingComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestingComponent],
-      imports: [FluentFormModule]
-    }).compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [provideFluentForm()]
+    });
   });
 
   beforeEach(() => {

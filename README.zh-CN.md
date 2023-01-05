@@ -43,7 +43,11 @@ ng add ngx-fluent-form
 
 ## 用法
 
-导入 `FluentFormModule` 到你的模块：
+`ngx-fluent-form` 分别提供了 `NgModule` 与 [`StandaloneComponent`](https://angular.cn/guide/standalone-components) 两种方式供你选择使用：
+
+- `NgModule` 方式：
+
+1. 将 `FluentFormModule` 添加到你的 `NgModule`：
 
 ```ts
 import { FluentFormModule } from 'ngx-fluent-form';
@@ -56,7 +60,7 @@ import { FluentFormModule } from 'ngx-fluent-form';
 export class YourModule { }
 ```
 
-配置表单 `schemas` 参数，开始构建你的表单：
+2. 配置 `schemas` 参数，开始构建表单：
 
 ```ts
 import { date, form, number, input } from 'ngx-fluent-form';
@@ -66,13 +70,52 @@ import { date, form, number, input } from 'ngx-fluent-form';
 })
 export class ExampleComponent {
   schemas = form(
-    input('text').label('label'),
-    number('number').label('label').max(100),
-    date('date').label('label')
+    input('text').length(15),
+    number('number').max(100),
+    date('date').format('yyyy/MM/dd')
   );
 
   model = {
-    text: 'fluent-form',
+    text: 'I love ngx-fluent-form',
+    number: 10,
+    date: Date.now()
+  };
+}
+```
+
+- `StandaloneComponent` 方式：
+
+1. 将 `provideFluentForm` 添加到 `bootstrapApplication` 的配置中：
+
+```ts
+import { provideFluentForm } from 'ngx-fluent-form';
+
+bootstrapApplication(RootComponent, {
+  providers: [
+    provideFluentForm()
+  ]
+});
+```
+
+2. 将 `FluentFormComponent` 添加到你的独立组件，然后配置 `schemas` 参数，开始构建表单：
+
+```ts
+import { FluentFormComponent, date, form, number, input } from 'ngx-fluent-form';
+
+@Component({
+  standalone: true,
+  imports: [FluentFormComponent],
+  template: `<fluent-form [(model)]="model" [schemas]="schemas"></fluent-form>`
+})
+export class ExampleComponent {
+  schemas = form(
+    input('text').length(50),
+    number('number').max(100),
+    date('date').format('yyyy/MM/dd')
+  );
+
+  model = {
+    text: 'I love ngx-fluent-form',
     number: 10,
     date: Date.now()
   };

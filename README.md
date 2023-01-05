@@ -42,7 +42,11 @@ For documentation and examples please visit [https://hyperlife1119.github.io/ngx
 
 ## Usage
 
-Import the `FluentFormModule` into your module:
+`ngx-fluent-form` provides `NgModule` and (`StandaloneComponent`)[https://angular.io/guide/standalone-components] respectively for you to choose to use:
+
+- `NgModule` way：
+
+1. Add `FluentFormModule` into your `NgModule`:
 
 ```ts
 import { FluentFormModule } from 'ngx-fluent-form';
@@ -55,7 +59,7 @@ import { FluentFormModule } from 'ngx-fluent-form';
 export class YourModule { }
 ```
 
-Configure form `schemas` parameter to start building your form:
+2. Configure `schemas` parameter to start building form:
 
 ```ts
 import { date, form, number, input } from 'ngx-fluent-form';
@@ -65,13 +69,52 @@ import { date, form, number, input } from 'ngx-fluent-form';
 })
 export class ExampleComponent {
   schemas = form(
-    input('text').label('label'),
-    number('number').label('label').max(100),
-    date('date').label('label')
+    input('text').length(15),
+    number('number').max(100),
+    date('date').format('yyyy/MM/dd')
   );
 
   model = {
-    text: 'fluent-form',
+    text: 'I love ngx-fluent-form',
+    number: 10,
+    date: Date.now()
+  };
+}
+```
+
+- `StandaloneComponent` way：
+
+1. Add `provideFluentForm` to the configuration of `bootstrapApplication`:
+
+```ts
+import { provideFluentForm } from 'ngx-fluent-form';
+
+bootstrapApplication(RootComponent, {
+  providers: [
+    provideFluentForm()
+  ]
+});
+```
+
+2. Add `FluentFormComponent` to your independent component, configure the `schemas` parameter, and start building the form:
+
+```ts
+import { FluentFormComponent, date, form, number, input } from 'ngx-fluent-form';
+
+@Component({
+  standalone: true,
+  imports: [FluentFormComponent],
+  template: `<fluent-form [(model)]="model" [schemas]="schemas"></fluent-form>`
+})
+export class ExampleComponent {
+  schemas = form(
+    input('text').length(50),
+    number('number').max(100),
+    date('date').format('yyyy/MM/dd')
+  );
+
+  model = {
+    text: 'I love ngx-fluent-form',
     number: 10,
     date: Date.now()
   };

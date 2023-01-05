@@ -1,7 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { FluentWithInjectorDirective } from '../../directives/with-injector.directive';
+import { FluentWithInjectorDirective } from '../../directives';
 import { FluentWidgetTemplateRefPipe } from '../../pipes';
 import { ComponentSchema, ControlSchema } from '../../schemas';
 import { AnyArray, AnyObject } from '../../types';

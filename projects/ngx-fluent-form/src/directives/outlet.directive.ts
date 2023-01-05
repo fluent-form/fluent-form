@@ -5,6 +5,8 @@ import { ComponentSchema, ControlSchema } from '../schemas';
 import { AnyArray, AnyObject } from '../types';
 import { ControlContainer } from './models/control-container';
 
+// 为避免与 FluentControlOutletComponent 产生依赖循环，该指令需要单独导出
+
 @Directive({
   // eslint-disable-next-line
   selector: 'fluent-outlet',

@@ -42,7 +42,7 @@ For documentation and examples please visit [https://hyperlife1119.github.io/ngx
 
 ## Usage
 
-`ngx-fluent-form` provides `NgModule` and (`StandaloneComponent`)[https://angular.io/guide/standalone-components] respectively for you to choose to use:
+`ngx-fluent-form` provides `NgModule` and [`StandaloneComponent`](https://angular.io/guide/standalone-components) respectively for you to choose to use:
 
 - `NgModule` way：
 
@@ -96,7 +96,7 @@ bootstrapApplication(RootComponent, {
 });
 ```
 
-2. Add `FluentFormComponent` to your independent component, configure the `schemas` parameter, and start building the form:
+2. Add `FluentFormComponent` to your standalone component, configure the `schemas` parameter, and start building the form:
 
 ```ts
 import { FluentFormComponent, date, form, number, input } from 'ngx-fluent-form';

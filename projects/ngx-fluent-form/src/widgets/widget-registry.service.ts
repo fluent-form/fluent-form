@@ -1,6 +1,6 @@
 import { createComponent, EnvironmentInjector, inject, Injectable, TemplateRef } from '@angular/core';
 import { WidgetKind } from '../enumerations';
-import { WIDGET_MAP } from '../provide';
+import { WIDGET_MAP } from '../tokens';
 
 @Injectable({
   providedIn: 'root'

@@ -1,8 +1,7 @@
-import { InjectionToken, Provider, Type } from '@angular/core';
+import { Provider, Type } from '@angular/core';
 import { WidgetKind } from './enumerations';
+import { WIDGET_MAP } from './tokens';
 import { AbstractWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, InputGroupWidget, InputWidget, NumberWidget, RadioGroupWidget, RateWidget, SelectWidget, SilderWidget, TextareaWidget, TextWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from './widgets';
-
-export const WIDGET_MAP = new InjectionToken<Map<WidgetKind, Type<AbstractWidget<unknown>>>>('WidgetMap');
 
 export function provideFluentForm(): Provider[] {
   // TODO: 升级到 v15 后使用 https://angular.cn/api/core/makeEnvironmentProviders 进行包装

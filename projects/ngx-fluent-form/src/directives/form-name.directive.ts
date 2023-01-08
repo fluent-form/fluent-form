@@ -2,7 +2,7 @@ import { Directive, forwardRef, Host, Input, OnInit, SkipSelf } from '@angular/c
 import { AbstractControl } from '@angular/forms';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { startWith, takeUntil } from 'rxjs';
-import { AnySchema, ControlContainerSchema } from '../schemas';
+import { AnyControlContainerSchema, AnySchema } from '../schemas';
 import { AnyArray, AnyObject } from '../types';
 import { schemasUtils } from '../utils';
 import { ControlContainer, ControlContainerDirective } from './models/control-container';
@@ -51,7 +51,7 @@ export class FluentFormNameDirective<T extends AnyObject | AnyArray> extends Con
       this.formChange.emit(
         this.form = this.controlContainer.directive.form.get([this.name])!
       );
-      this.schemas = schemasUtils(this.controlContainer.directive.schemas).find<ControlContainerSchema>(this.name)!.schemas as AnySchema[];
+      this.schemas = schemasUtils(this.controlContainer.directive.schemas).find<AnyControlContainerSchema>(this.name)!.schemas as AnySchema[];
 
       this.directives.forEach(directive => this.assignDirective(directive));
     });

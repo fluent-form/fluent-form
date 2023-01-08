@@ -1,5 +1,5 @@
 import { ValidatorFn, Validators } from '@angular/forms';
-import { COMPONENT_SCHEMA_TYPES, COMPONENT_WRAPPER_SCHEMA_TYPES, CONTROL_CONTAINER_SCHEMA_TYPES, TEXT_CONTROL_SCHEMA_TYPES } from '../constants';
+import { COMPONENT_SCHEMA_KINDS, COMPONENT_WRAPPER_SCHEMA_KINDS, CONTROL_CONTAINER_SCHEMA_KINDS, TEXT_CONTROL_SCHEMA_KINDS } from '../constants';
 import { InputControlSchema, TextareaControlSchema } from '../schemas';
 import { AnySchemaName, SchemaName } from '../schemas/abstract.schema';
 import { AnyContainerSchema, AnyControlSchema, AnySchema, ComponentContainerSchema, ComponentSchema, ControlContainerSchema, ControlSchema, DoubleKeyControlSchema } from '../schemas/index.schema';
@@ -11,7 +11,7 @@ import { isNumber } from './is.utils';
  * @param schema
  */
 export const isControlContainerSchema = (schema: AnySchema): schema is ControlContainerSchema => (
-  CONTROL_CONTAINER_SCHEMA_TYPES.includes(schema.kind)
+  CONTROL_CONTAINER_SCHEMA_KINDS.includes(schema.kind)
 );
 
 /**
@@ -19,7 +19,7 @@ export const isControlContainerSchema = (schema: AnySchema): schema is ControlCo
  * @param schema
  */
 export const isComponentWrapperSchema = (schema: AnySchema): schema is ComponentContainerSchema => (
-  COMPONENT_WRAPPER_SCHEMA_TYPES.includes(schema.kind)
+  COMPONENT_WRAPPER_SCHEMA_KINDS.includes(schema.kind)
 );
 
 /**
@@ -27,7 +27,7 @@ export const isComponentWrapperSchema = (schema: AnySchema): schema is Component
  * @param schema
  */
 export const isTextControlSchema = (schema: AnySchema): schema is InputControlSchema | TextareaControlSchema => (
-  TEXT_CONTROL_SCHEMA_TYPES.includes(schema.kind)
+  TEXT_CONTROL_SCHEMA_KINDS.includes(schema.kind)
 );
 
 /**
@@ -35,7 +35,7 @@ export const isTextControlSchema = (schema: AnySchema): schema is InputControlSc
  * @param schema
  */
 export const isComponentSchema = (schema: AnySchema): schema is ComponentSchema => (
-  COMPONENT_SCHEMA_TYPES.includes(schema.kind)
+  COMPONENT_SCHEMA_KINDS.includes(schema.kind)
 );
 
 /**

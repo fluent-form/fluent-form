@@ -1,7 +1,7 @@
 import { FormArray, FormGroup } from '@angular/forms';
 import { AnySchema } from '../schemas';
 import { AnyArray, AnyObject } from '../types';
-import { isComponentContainerSchema, isComponentSchema, isControlContainerSchema } from './schema.utils';
+import { isComponentSchema, isComponentWrapperSchema, isControlContainerSchema } from './schema.utils';
 import { valueUtils } from './value.utils';
 
 export function modelUtils<M extends AnyArray | AnyObject>(model: M, schemas: AnySchema[]) {
@@ -23,7 +23,7 @@ export class ModelUtils<M extends AnyArray | AnyObject> {
   assign<F extends (M extends AnyArray ? FormArray : FormGroup)>(form: F, emitEvent = true): F {
     this.schemas.forEach(schema => {
       // 这些图示不包含控件图示，直接跳过
-      if (isComponentSchema(schema) || isComponentContainerSchema(schema)) { return; }
+      if (isComponentSchema(schema) || isComponentWrapperSchema(schema)) { return; }
 
       if (schema.kind === 'group') {
         modelUtils(

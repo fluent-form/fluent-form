@@ -1,5 +1,5 @@
 import { ValidatorFn, Validators } from '@angular/forms';
-import { COMPONENT_CONTAINER_SCHEMA_TYPES, COMPONENT_SCHEMA_TYPES, CONTROL_CONTAINER_SCHEMA_TYPES, TEXT_CONTROL_SCHEMA_TYPES } from '../constants';
+import { COMPONENT_SCHEMA_TYPES, COMPONENT_WRAPPER_SCHEMA_TYPES, CONTROL_CONTAINER_SCHEMA_TYPES, TEXT_CONTROL_SCHEMA_TYPES } from '../constants';
 import { InputControlSchema, TextareaControlSchema } from '../schemas';
 import { AnySchemaName, SchemaName } from '../schemas/abstract.schema';
 import { AnyContainerSchema, AnyControlSchema, AnySchema, ComponentContainerSchema, ComponentSchema, ControlContainerSchema, ControlSchema, DoubleKeyControlSchema } from '../schemas/index.schema';
@@ -15,11 +15,11 @@ export const isControlContainerSchema = (schema: AnySchema): schema is ControlCo
 );
 
 /**
- * 是否为组件容器图示
+ * 是否为组件包装器图示
  * @param schema
  */
-export const isComponentContainerSchema = (schema: AnySchema): schema is ComponentContainerSchema => (
-  COMPONENT_CONTAINER_SCHEMA_TYPES.includes(schema.kind)
+export const isComponentWrapperSchema = (schema: AnySchema): schema is ComponentContainerSchema => (
+  COMPONENT_WRAPPER_SCHEMA_TYPES.includes(schema.kind)
 );
 
 /**
@@ -71,7 +71,7 @@ const standardContainerSchema = <T extends AnyContainerSchema>(schema: T): T => 
 export function standardSchema<T extends AnySchema>(schema: T | StableBuilder<T>): T {
   let _schema = (isBuilder(schema) ? schema.build() : { ...schema }) as AnySchema;
 
-  if (isControlContainerSchema(_schema) || isComponentContainerSchema(_schema)) {
+  if (isControlContainerSchema(_schema) || isComponentWrapperSchema(_schema)) {
     standardContainerSchema(_schema);
   }
 

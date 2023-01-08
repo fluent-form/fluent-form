@@ -1,25 +1,3 @@
-/**
- * 主要分为以下几大图示：
- *
- * - 控件图示
- *   - AbstractControlSchema 普通控件图示（FormControl）
- *     - SingleKeyControlSchema 单字段控件
- *     - DoubleKeyControlSchema 双字段控件（Range/Slider 等区间选择控件）
- *   - AbstractControlContainerSchema 控件容器图示（FormGroup/FormArray）
- *
- * - ContainerSchema 容器图示（可以包裹控件或者组件的图示）
- *   - ComponentContainerSchema 组件容器图示（包裹组件）
- *   - ControlContainerSchema 控件容器图示（包裹控件）
- *     - 组件包裹控件（InputGroup）
- *     - 表单控包裹控件（FormGroup/FormArray）
- *
- * - 普通组件图示（Component）
- *
- * - ComposableComponentSchema 可组合图示（可被 InputGroup 包裹的图示）
- *
- * - AbstractLabelfulSchema 有表单标签的图示
- */
-
 import { StableBuilder } from '../utils/builder.utils';
 import { AnySchemaName, DoubleSchemaName, SchemaName } from './abstract.schema';
 import { ButtonGroupComponentSchema } from './component-wrapper.schema';
@@ -34,7 +12,7 @@ export type AnySchema = ControlSchema | AnyContainerSchema | ComponentSchema;
 export type AnyBuilder = StableBuilder<AnySchema>;
 
 /** 控件图示 */
-export type AnyControlSchema = FormSchema | ControlSchema;
+export type AnyControlSchema = AnyControlContainerSchema | ControlSchema;
 /** 控件构建器 */
 export type AnyControlBuilder = StableBuilder<AnyControlSchema>;
 
@@ -44,14 +22,14 @@ export type AnyContainerSchema = ControlContainerSchema | ComponentContainerSche
 export type AnyContainerBuilder = StableBuilder<AnyContainerSchema>;
 
 /** 控件容器图示 */
-export type ControlContainerSchema = FormSchema | InputGroupComponentSchema | StepsComponentSchema | StepComponentSchema | TabsetComponentSchema | TabComponentSchema;
+export type ControlContainerSchema = AnyControlContainerSchema | InputGroupComponentSchema | StepsComponentSchema | StepComponentSchema | TabsetComponentSchema | TabComponentSchema;
 /** 控件容器构建器 */
 export type ControlContainerBuilder = StableBuilder<ControlContainerSchema>;
 
 /** 表单图示 */
-export type FormSchema<N extends SchemaName = SchemaName> = FormGroupSchema<N> | FormArraySchema<N>;
+export type AnyControlContainerSchema<N extends SchemaName = SchemaName> = FormGroupSchema<N> | FormArraySchema<N>;
 /** 表单构建器 */
-export type FormBuilder<N extends SchemaName = SchemaName> = StableBuilder<FormSchema<N>>;
+export type AnyControlContainerBuilder<N extends SchemaName = SchemaName> = StableBuilder<AnyControlContainerSchema<N>>;
 
 /** 真实控件图示 */
 export type ControlSchema = SingleKeyControlSchema | DoubleKeyControlSchema | AnyKeyControlSchema;

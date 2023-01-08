@@ -1,14 +1,13 @@
 import { TemplateRef } from '@angular/core';
 import { ThemeType } from '@ant-design/icons-angular';
-import { NzButtonComponent, NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
+import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormTextComponent } from 'ng-zorro-antd/form';
-import { NzInputGroupComponent } from 'ng-zorro-antd/input';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
 import { NzTabComponent, NzTabPositionMode, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
 import { StableBuilder } from '../utils/builder.utils';
-import { AbstractComponentSchema, AbstractElementSchema, AbstractLabelfulSchema, AbstractSchema, AnySchemaName, CallbackArg, SchemaName } from './abstract.schema';
-import { AnyBuilder, AnySchema, ComposableComponentBuilder, ComposableComponentSchema } from './index.schema';
+import { AbstractComponentSchema, AbstractElementSchema, AbstractLabelfulSchema, AbstractSchema, CallbackArg, SchemaName } from './abstract.schema';
+import { AnyBuilder, AnySchema } from './index.schema';
 
 /** @internal */
 interface Icon {
@@ -16,17 +15,6 @@ interface Icon {
   theme?: ThemeType;
   spin?: boolean;
   rotate?: number;
-}
-
-export interface InputGroupComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzInputGroupComponent>, AbstractLabelfulSchema {
-  kind: 'input-group';
-  schemas: (ComposableComponentSchema | ComposableComponentBuilder)[];
-  before?: string | TemplateRef<void> | { icon: string };
-  after?: string | TemplateRef<void> | { icon: string };
-  prefix?: string | TemplateRef<void> | { icon: string };
-  suffix?: string | TemplateRef<void> | { icon: string };
-  size?: NzSizeLDSType;
-  primary?: AnySchemaName;
 }
 
 export interface TextComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzFormTextComponent>, AbstractLabelfulSchema {
@@ -47,12 +35,6 @@ export interface ButtonComponentSchema<Name extends SchemaName = SchemaName> ext
   block?: boolean;
   icon?: string | Icon;
   content?: string | TemplateRef<void>;
-}
-
-export interface ButtonGroupComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzButtonComponent>, AbstractLabelfulSchema {
-  kind: 'button-group';
-  schemas: (ButtonComponentSchema | StableBuilder<ButtonComponentSchema>)[];
-  size?: NzButtonSize;
 }
 
 export interface StepsComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzStepsComponent> {

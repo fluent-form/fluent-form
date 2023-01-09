@@ -2,7 +2,7 @@ import { ValidatorFn, Validators } from '@angular/forms';
 import { COMPONENT_SCHEMA_KINDS, COMPONENT_WRAPPER_SCHEMA_KINDS, CONTROL_CONTAINER_SCHEMA_KINDS, TEXT_CONTROL_SCHEMA_KINDS } from '../constants';
 import { InputControlSchema, TextareaControlSchema } from '../schemas';
 import { AnySchemaName, SchemaName } from '../schemas/abstract.schema';
-import { AnyContainerSchema, AnyControlSchema, AnySchema, ComponentContainerSchema, ComponentSchema, ControlContainerSchema, ControlSchema, DoubleKeyControlSchema } from '../schemas/index.schema';
+import { AnyContainerSchema, AnyControlOrControlContainerSchema, AnyControlSchema, AnySchema, ComponentContainerSchema, ComponentSchema, ControlContainerSchema, DoubleKeyControlSchema } from '../schemas/index.schema';
 import { isBuilder, StableBuilder } from './builder.utils';
 import { isNumber } from './is.utils';
 
@@ -86,11 +86,11 @@ export const standardSchemas = (schemas: (AnySchema | StableBuilder<AnySchema>)[
   schemas.map(schema => standardSchema(schema))
 );
 
-export function controlSchemaUtils<S extends ControlSchema>(schema: S) {
+export function controlSchemaUtils<S extends AnyControlSchema>(schema: S) {
   return new ControlSchemaUtils(schema);
 }
 
-export class ControlSchemaUtils<S extends ControlSchema> {
+export class ControlSchemaUtils<S extends AnyControlSchema> {
   constructor(private readonly schema: S) { }
 
   /**
@@ -142,8 +142,8 @@ export class SchemasUtils<S extends AnySchema[]> {
     if (Array.isArray(path)) {
       const [endPath, ...beforePath] = path.reverse() as [AnySchemaName, ...SchemaName[]];
       schemas = beforePath.reduceRight((schemas, name) => (
-        (schemas.find(o => o.name === name) as AnyContainerSchema).schemas as AnyControlSchema[]
-      ), schemas as AnyControlSchema[]);
+        (schemas.find(o => o.name === name) as AnyContainerSchema).schemas as AnyControlOrControlContainerSchema[]
+      ), schemas as AnyControlOrControlContainerSchema[]);
       path = endPath;
     }
 

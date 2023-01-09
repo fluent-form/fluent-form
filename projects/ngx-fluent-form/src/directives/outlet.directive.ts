@@ -1,7 +1,7 @@
 import { createComponent, Directive, EnvironmentInjector, Host, Injector, Input, OnChanges, OnDestroy, OnInit, SkipSelf, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { FluentControlOutletComponent, FluentControlTemplateContext } from '../components';
-import { ComponentSchema, ControlSchema } from '../schemas';
+import { AnyControlSchema, ComponentSchema } from '../schemas';
 import { AnyArray, AnyObject } from '../types';
 import { ControlContainer } from './models/control-container';
 
@@ -19,7 +19,7 @@ import { ControlContainer } from './models/control-container';
 export class FluentOutletDirective<T extends AnyObject | AnyArray> implements OnInit, OnChanges, OnDestroy, FluentControlTemplateContext<T> {
   @Input() name!: string | number;
   /** @internal */
-  schema!: ComponentSchema | ControlSchema;
+  schema!: ComponentSchema | AnyControlSchema;
   /** @internal */
   control!: AbstractControl;
   /** @internal */

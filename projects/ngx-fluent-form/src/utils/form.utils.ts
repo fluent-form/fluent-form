@@ -1,7 +1,7 @@
 import { AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGroup } from '@angular/forms';
 import { FluentCallPipe } from '../pipes/call.pipe';
 import { FormArraySchema, FormGroupSchema } from '../schemas';
-import { AnyControlSchema, AnySchema, ControlSchema } from '../schemas/index.schema';
+import { AnyControlOrControlContainerSchema, AnyControlSchema, AnySchema } from '../schemas/index.schema';
 import { AnyArray, AnyObject } from '../types';
 import { controlSchemaUtils, isComponentSchema, isComponentWrapperSchema, isControlContainerSchema, isDoubleKeySchema } from './schema.utils';
 import { valueUtils } from './value.utils';
@@ -10,7 +10,7 @@ import { valueUtils } from './value.utils';
  * 将图示转换为控件
  * @param schema
  */
-export function createFormControl(schema: ControlSchema): FormControl {
+export function createFormControl(schema: AnyControlSchema): FormControl {
   const validators = controlSchemaUtils(schema).getExtraValidators();
 
   return new FormControl(
@@ -51,7 +51,7 @@ function createFormControls(schemas: AnySchema[], controls: Record<string, Abstr
         break;
 
       default:
-        controls[schema.name!.toString()] = createFormControl(schema as ControlSchema);
+        controls[schema.name!.toString()] = createFormControl(schema as AnyControlSchema);
     }
 
     return controls;
@@ -92,7 +92,7 @@ export function createFormGroup(schemaOrSchemas: FormGroupSchema | AnySchema[]):
  */
 export function createFormArray(schema: FormArraySchema): FormArray {
   return new FormArray(
-    (schema.schemas as AnyControlSchema[]).map(schema => {
+    (schema.schemas as AnyControlOrControlContainerSchema[]).map(schema => {
       switch (schema.kind) {
         case 'group':
           return createFormGroup(schema);

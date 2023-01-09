@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzRateComponent, NzRateModule } from 'ng-zorro-antd/rate';
-import { ControlSchema, InputControlSchema, RateControlSchema } from '../schemas';
+import { AnyControlSchema, InputControlSchema, RateControlSchema } from '../schemas';
 import { createFormControl } from '../utils';
 import { FluentBinderDirective } from './binder.directive';
 
@@ -59,8 +59,8 @@ class TestingComponent {
     }
   };
 
-  inputControl = createFormControl(this.inputSchema as ControlSchema);
-  rateControl = createFormControl(this.rateSchema as ControlSchema);
+  inputControl = createFormControl(this.inputSchema as AnyControlSchema);
+  rateControl = createFormControl(this.rateSchema as AnyControlSchema);
 }
 
 describe('FluentBinderDirective', () => {

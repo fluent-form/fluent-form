@@ -1,11 +1,11 @@
 import { toggle } from '../builders';
-import { ControlSchema } from '../schemas';
+import { AnyControlSchema } from '../schemas';
 import { createFormControl, standardSchema } from '../utils';
 import { FluentCallPipe } from './call.pipe';
 
 describe('FluentCallPipe', () => {
   const model = { value: true } as const;
-  const schema = standardSchema(toggle('value')) as ControlSchema;
+  const schema = standardSchema(toggle('value')) as AnyControlSchema;
   const ctrl = createFormControl(schema);
 
   let pipe: FluentCallPipe;

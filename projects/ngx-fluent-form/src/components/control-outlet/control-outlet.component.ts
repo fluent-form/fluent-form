@@ -3,14 +3,14 @@ import { Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } fr
 import { AbstractControl } from '@angular/forms';
 import { FluentWithInjectorDirective } from '../../directives';
 import { FluentWidgetTemplateRefPipe } from '../../pipes';
-import { ComponentSchema, ControlSchema } from '../../schemas';
+import { AnyControlSchema, ComponentSchema } from '../../schemas';
 import { AnyArray, AnyObject } from '../../types';
 
 export interface FluentControlTemplateContext<T extends AnyObject | AnyArray> {
   /** 当前控件 */
   control: AbstractControl;
   /** 当前图示 */
-  schema: ComponentSchema | ControlSchema;
+  schema: ComponentSchema | AnyControlSchema;
   /** 当前模型值 */
   model: T;
 }
@@ -30,7 +30,7 @@ export interface FluentControlTemplateContext<T extends AnyObject | AnyArray> {
 })
 export class FluentControlOutletComponent<T extends AnyObject | AnyArray> implements OnInit, FluentControlTemplateContext<T> {
   @Input() control!: AbstractControl;
-  @Input() schema!: ControlSchema | ComponentSchema;
+  @Input() schema!: AnyControlSchema | ComponentSchema;
   @Input() model!: T;
 
   @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<FluentControlTemplateContext<T>>;

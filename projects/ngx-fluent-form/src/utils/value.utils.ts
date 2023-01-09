@@ -1,10 +1,10 @@
 import { AbstractControl } from '@angular/forms';
 import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
-import { ControlSchema } from '../schemas';
+import { AnyControlSchema } from '../schemas';
 import { AnyArray, AnyObject } from '../types';
 import { isDoubleKeySchema } from './schema.utils';
 
-export function valueUtils<S extends AnyObject | AnyArray | AbstractControl>(source: S, schema: ControlSchema) {
+export function valueUtils<S extends AnyObject | AnyArray | AbstractControl>(source: S, schema: AnyControlSchema) {
   return new ValueUtils(source, schema);
 }
 
@@ -14,7 +14,7 @@ export function valueUtils<S extends AnyObject | AnyArray | AbstractControl>(sou
 export class ValueUtils<S extends AnyObject | AnyArray | AbstractControl> {
   constructor(
     private readonly source: S,
-    private readonly schema: ControlSchema
+    private readonly schema: AnyControlSchema
   ) { }
 
   getValue(): unknown {

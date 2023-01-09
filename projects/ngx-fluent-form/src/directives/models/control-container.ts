@@ -1,6 +1,6 @@
 import { Directive, EventEmitter, Output } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { AnySchema, ComponentSchema, ControlSchema } from '../../schemas';
+import { AnyControlSchema, AnySchema, ComponentSchema } from '../../schemas';
 import { AnyArray, AnyObject } from '../../types';
 import { schemasUtils } from '../../utils';
 import { FluentOutletDirective } from '../outlet.directive';
@@ -42,7 +42,7 @@ export abstract class ControlContainerDirective<T extends AnyObject | AnyArray> 
    */
   assignDirective(directive: FluentOutletDirective<T>) {
     directive.control = this.form.get([directive.name]) ?? this.form;
-    directive.schema = schemasUtils(this.schemas).find<ComponentSchema | ControlSchema>(directive.name)!;
+    directive.schema = schemasUtils(this.schemas).find<ComponentSchema | AnyControlSchema>(directive.name)!;
   }
 
   /**

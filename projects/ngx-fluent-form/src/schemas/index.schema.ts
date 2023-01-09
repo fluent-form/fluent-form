@@ -1,4 +1,4 @@
-import { StableBuilder } from '../utils/builder.utils';
+import { StableBuilder } from '../utils';
 import { AnySchemaName, DoubleSchemaName, SchemaName } from './abstract.schema';
 import { StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsetComponentSchema } from './component-container.schema';
 import { ButtonGroupComponentSchema } from './component-wrapper.schema';

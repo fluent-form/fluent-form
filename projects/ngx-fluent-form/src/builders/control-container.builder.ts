@@ -1,8 +1,7 @@
 import { SafeAny } from '@ngify/types';
 import { AbstractSchema, AnyBuilder, AnySchema, AnySchemaName, FormArraySchema, FormGroupSchema, SchemaName } from '../schemas';
 import { KindAndName } from '../types';
-import { standardSchema, standardSchemas } from '../utils';
-import { builder, StableBuilder, UnstableBuilder } from '../utils/builder.utils';
+import { builder, StableBuilder, standardSchema, standardSchemas, UnstableBuilder } from '../utils';
 
 type FormBuilderFn = (it: UnstableBuilder<FormGroupSchema, keyof AbstractSchema<AnySchemaName>>) => StableBuilder<FormGroupSchema>;
 

@@ -1,3 +1,4 @@
+export * from './builder.utils';
 export * from './form.utils';
 export * from './is.utils';
 export * from './model.utils';

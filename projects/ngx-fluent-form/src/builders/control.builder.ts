@@ -1,6 +1,6 @@
 import { AnySchemaName, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, InputControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SchemaName, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { KindAndName } from '../types';
-import { builder, UnstableBuilder } from '../utils/builder.utils';
+import { builder, UnstableBuilder } from '../utils';
 
 export function input(): UnstableBuilder<InputControlSchema<number>, KindAndName>;
 export function input<N extends SchemaName>(name?: N): UnstableBuilder<InputControlSchema<N>, KindAndName>;

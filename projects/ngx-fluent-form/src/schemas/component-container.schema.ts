@@ -2,7 +2,7 @@ import { TemplateRef } from '@angular/core';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
 import { NzTabComponent, NzTabPositionMode, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
-import { StableBuilder } from '../utils/builder.utils';
+import { StableBuilder } from '../utils';
 import { AbstractComponentSchema, AbstractSchema, CallbackArg, SchemaName } from './abstract.schema';
 import { AnyBuilder, AnySchema } from './index.schema';
 

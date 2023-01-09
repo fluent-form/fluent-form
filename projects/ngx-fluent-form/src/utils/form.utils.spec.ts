@@ -1,5 +1,6 @@
 import { createFormGroup, standardSchemas } from '.';
 import { array, button, buttonGroup, checkboxGroup, date, dateRange, group, input, inputGroup, number, slider, time } from '../builders';
+import { AnySchema } from '../schemas';
 import { formUtils } from './form.utils';
 import { modelUtils } from './model.utils';
 
@@ -7,7 +8,7 @@ describe('form.utils', () => {
   describe('model to form', () => {
     it('应该能正确处理一级对象', () => {
       const model = { o: 1 };
-      const schemas = standardSchemas([number('o')]);
+      const schemas: AnySchema[] = [{ kind: 'number', name: 'o' }];
       const form = createFormGroup(schemas);
       modelUtils(model, schemas).assign(form);
 
@@ -16,12 +17,15 @@ describe('form.utils', () => {
 
     it('应该能正确处理一级对象（input-group）', () => {
       const model = { one: 1, two: 2 };
-      const schemas = standardSchemas([
-        inputGroup().schemas(
-          number('one'),
-          number('two'),
-        )
-      ]);
+      const schemas: AnySchema[] = [
+        {
+          kind: 'input-group',
+          schemas: [
+            { kind: 'number', name: 'one' },
+            { kind: 'number', name: 'two' },
+          ]
+        }
+      ];
       const form = createFormGroup(schemas);
 
       modelUtils(model, schemas).assign(form);
@@ -31,9 +35,14 @@ describe('form.utils', () => {
 
     it('应该能正确处理空对象（button-group）', () => {
       const model = {};
-      const schemas = standardSchemas([
-        buttonGroup().schemas(button(),)
-      ]);
+      const schemas: AnySchema[] = [
+        {
+          kind: 'button-group',
+          schemas: [
+            { kind: 'button' }
+          ]
+        }
+      ];
       const form = createFormGroup(schemas);
 
       modelUtils(model, schemas).assign(form);
@@ -43,11 +52,15 @@ describe('form.utils', () => {
 
     describe('应该能正确处理多级对象', () => {
       it('空模型', () => {
-        const schemas = standardSchemas([
-          group('detail').schemas(
-            number('o')
-          )
-        ]);
+        const schemas: AnySchema[] = [
+          {
+            kind: 'group',
+            name: 'detail',
+            schemas: [
+              { kind: 'number', name: 'o' }
+            ]
+          }
+        ];
         const form = createFormGroup(schemas);
         modelUtils({}, schemas).assign(form);
 
@@ -56,11 +69,15 @@ describe('form.utils', () => {
 
       it('非空模型', () => {
         const model = { detail: { o: 1 } };
-        const schemas = standardSchemas([
-          group('detail').schemas(
-            number('o')
-          )
-        ]);
+        const schemas: AnySchema[] = [
+          {
+            kind: 'group',
+            name: 'detail',
+            schemas: [
+              { kind: 'number', name: 'o' }
+            ]
+          }
+        ];
         const form = createFormGroup(schemas);
 
         modelUtils(model, schemas).assign(form);
@@ -71,11 +88,15 @@ describe('form.utils', () => {
 
     describe('应该能正确处理一级数组', () => {
       it('空模型', () => {
-        const schemas = standardSchemas([
-          array('details').schemas(
-            number()
-          )
-        ]);
+        const schemas: AnySchema[] = [
+          {
+            kind: 'array',
+            name: 'details',
+            schemas: [
+              { kind: 'number', name: 0 }
+            ]
+          }
+        ];
         const form = createFormGroup(schemas);
 
         modelUtils({}, schemas).assign(form);
@@ -85,11 +106,15 @@ describe('form.utils', () => {
 
       it('非空模型', () => {
         const model = { details: [1] };
-        const schemas = standardSchemas([
-          array('details').schemas(
-            number(0)
-          )
-        ]);
+        const schemas: AnySchema[] = [
+          {
+            kind: 'array',
+            name: 'details',
+            schemas: [
+              { kind: 'number', name: 0 }
+            ]
+          }
+        ];
         const form = createFormGroup(schemas);
 
         modelUtils(model, schemas).assign(form);

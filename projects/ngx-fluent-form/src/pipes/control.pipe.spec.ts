@@ -1,14 +1,12 @@
-import { dateRange, form, input } from '../builders';
 import { createFormGroup } from '../utils';
 import { FluentControlPipe } from './control.pipe';
 
 describe('FluentControlPipe', () => {
   let pipe: FluentControlPipe;
-  const schemas = form(
-    input('a'),
-    dateRange(['b', 'c'])
-  );
-  const formGroup = createFormGroup(schemas);
+  const formGroup = createFormGroup([
+    { kind: 'input', name: 'a' },
+    { kind: 'date-range', name: ['b', 'c'] }
+  ]);
 
   beforeEach(() => {
     pipe = new FluentControlPipe();

@@ -8,4 +8,4 @@ describe('control-wrapper.builder', () => {
     const value: InputGroupComponentSchema = { kind: 'input-group', schemas: [] };
     expect(schema).toEqual(value);
   });
-})
+});

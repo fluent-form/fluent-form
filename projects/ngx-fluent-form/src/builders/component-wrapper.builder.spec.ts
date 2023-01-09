@@ -8,4 +8,4 @@ describe('component-wrapper.builder', () => {
     const value: ButtonGroupComponentSchema = { kind: 'button-group', schemas: [] };
     expect(schema).toEqual(value);
   });
-})
+});

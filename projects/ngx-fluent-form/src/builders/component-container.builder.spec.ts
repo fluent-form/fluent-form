@@ -49,4 +49,4 @@ describe('component-container.builder', () => {
     };
     expect(schema).toEqual(value);
   });
-})
+});

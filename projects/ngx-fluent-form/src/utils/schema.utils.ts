@@ -42,7 +42,7 @@ export const isComponentSchema = (schema: AnySchema): schema is ComponentSchema 
  * 是否为双字段图示
  * @param schema
  */
-export const isDoubleKeySchema = (schema: AnySchema): schema is DoubleKeyControlSchema => (
+export const isDoubleKeyControlSchema = (schema: AnySchema): schema is DoubleKeyControlSchema => (
   Array.isArray(schema.name)
 );
 

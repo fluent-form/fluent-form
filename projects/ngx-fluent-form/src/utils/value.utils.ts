@@ -2,7 +2,7 @@ import { AbstractControl } from '@angular/forms';
 import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
 import { AnyControlSchema } from '../schemas';
 import { AnyArray, AnyObject } from '../types';
-import { isDoubleKeySchema } from './schema.utils';
+import { isDoubleKeyControlSchema } from './schema.utils';
 
 export function valueUtils<S extends AnyObject | AnyArray | AbstractControl>(source: S, schema: AnyControlSchema) {
   return new ValueUtils(source, schema);
@@ -28,7 +28,7 @@ export class ValueUtils<S extends AnyObject | AnyArray | AbstractControl> {
     let value: unknown;
     // 如果从模型中读出来的值为 undefined，说明模型中没有写入该值，这里取图示中提供的默认值
     // 如果是双字段模式，则需要从模型中分别取得这两个字段的值组为一个元组
-    if (isDoubleKeySchema(this.schema)) {
+    if (isDoubleKeyControlSchema(this.schema)) {
       value = this.schema.name!.map((name, index) => {
         const val = this.source[name as keyof S];
         return val === undefined ? this.schema.defaultValue?.[index] ?? null : val;

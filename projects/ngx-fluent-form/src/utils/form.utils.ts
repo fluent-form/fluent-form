@@ -3,7 +3,7 @@ import { FluentCallPipe } from '../pipes/call.pipe';
 import { FormArraySchema, FormGroupSchema } from '../schemas';
 import { AnyControlOrControlContainerSchema, AnyControlSchema, AnySchema } from '../schemas/index.schema';
 import { AnyArray, AnyObject } from '../types';
-import { controlSchemaUtils, isComponentSchema, isComponentWrapperSchema, isControlContainerSchema, isDoubleKeySchema } from './schema.utils';
+import { controlSchemaUtils, isComponentSchema, isComponentWrapperSchema, isControlContainerSchema, isDoubleKeyControlSchema } from './schema.utils';
 import { valueUtils } from './value.utils';
 
 /**
@@ -159,7 +159,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
       const value = valueUtils(control, schema).getValue();
 
       // 双字段情况
-      if (isDoubleKeySchema(schema)) {
+      if (isDoubleKeyControlSchema(schema)) {
         schema.name!.map((prop, idx) => {
           model[prop as keyof T] = ((value as [unknown, unknown])?.[idx] ?? null) as T[keyof T];
         });

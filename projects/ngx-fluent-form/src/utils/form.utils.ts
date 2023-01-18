@@ -3,7 +3,7 @@ import { FluentCallPipe } from '../pipes/call.pipe';
 import { FormArraySchema, FormGroupSchema } from '../schemas';
 import { AnyControlOrControlContainerSchema, AnyControlSchema, AnySchema } from '../schemas/index.schema';
 import { AnyArray, AnyObject } from '../types';
-import { controlSchemaUtils, isComponentSchema, isComponentWrapperSchema, isControlContainerSchema, isDoubleKeyControlSchema } from './schema.utils';
+import { controlSchemaUtils, isComponentContainerSchema, isComponentSchema, isComponentWrapperSchema, isControlContainerSchema, isControlWrapperSchema, isDoubleKeyControlSchema } from './schema.utils';
 import { valueUtils } from './value.utils';
 
 /**
@@ -151,7 +151,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
         return;
       }
 
-      if (isControlContainerSchema(schema)) {
+      if (isControlContainerSchema(schema) || isControlWrapperSchema(schema) || isComponentContainerSchema(schema)) {
         formUtils(this.form, schema.schemas as AnySchema[]).assign(model);
         return;
       }
@@ -191,7 +191,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
         return formUtils(control as FormArray, schema.schemas as AnySchema[]).change(model[schema.name as keyof T]);
       }
 
-      if (isControlContainerSchema(schema)) {
+      if (isControlContainerSchema(schema) || isControlWrapperSchema(schema) || isComponentContainerSchema(schema)) {
         return formUtils(this.form, schema.schemas as AnySchema[]).change(model);
       }
 

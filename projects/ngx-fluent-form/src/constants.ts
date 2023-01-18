@@ -1,8 +1,9 @@
 /** 控件容器图示类型 */
-export const CONTROL_CONTAINER_SCHEMA_KINDS = [
-  'group',
-  'array',
-  'input-group',
+export const CONTROL_CONTAINER_SCHEMA_KINDS = ['group', 'array'];
+/** 控件包装器图示类型 */
+export const CONTROL_WRAPPER_SCHEMA_KINDS = ['input-group'];
+/** 组件容器图示类型 */
+export const COMPONENT_CONTAINER_SCHEMA_KINDS = [
   'steps',
   'step',
   'tabset',

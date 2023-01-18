@@ -1,8 +1,8 @@
 import { ValidatorFn, Validators } from '@angular/forms';
-import { COMPONENT_SCHEMA_KINDS, COMPONENT_WRAPPER_SCHEMA_KINDS, CONTROL_CONTAINER_SCHEMA_KINDS, TEXT_CONTROL_SCHEMA_KINDS } from '../constants';
+import { COMPONENT_CONTAINER_SCHEMA_KINDS, COMPONENT_SCHEMA_KINDS, COMPONENT_WRAPPER_SCHEMA_KINDS, CONTROL_CONTAINER_SCHEMA_KINDS, CONTROL_WRAPPER_SCHEMA_KINDS, TEXT_CONTROL_SCHEMA_KINDS } from '../constants';
 import { InputControlSchema, TextareaControlSchema } from '../schemas';
 import { AnySchemaName, SchemaName } from '../schemas/abstract.schema';
-import { AnyContainerSchema, AnyControlOrControlContainerSchema, AnyControlSchema, AnySchema, ComponentContainerSchema, ComponentSchema, ControlContainerSchema, DoubleKeyControlSchema } from '../schemas/index.schema';
+import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlOrControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, AnyWrapperSchema, DoubleKeyControlSchema } from '../schemas/index.schema';
 import { isBuilder, StableBuilder } from './builder.utils';
 import { isNumber } from './is.utils';
 
@@ -10,15 +10,29 @@ import { isNumber } from './is.utils';
  * 是否为控件容器图示
  * @param schema
  */
-export const isControlContainerSchema = (schema: AnySchema): schema is ControlContainerSchema => (
+export const isControlContainerSchema = (schema: AnySchema): schema is AnyControlContainerSchema => (
   CONTROL_CONTAINER_SCHEMA_KINDS.includes(schema.kind)
 );
+
+/**
+ * 是否为控件包装器图示
+ * @param schema
+ */
+export const isControlWrapperSchema = (schema: AnySchema): schema is AnyControlWrapperSchema =>
+  CONTROL_WRAPPER_SCHEMA_KINDS.includes(schema.kind);
+
+/**
+ * 是否为组件容器图示
+ * @param schema
+ */
+export const isComponentContainerSchema = (schema: AnySchema): schema is AnyComponentContainerSchema =>
+  COMPONENT_CONTAINER_SCHEMA_KINDS.includes(schema.kind);
 
 /**
  * 是否为组件包装器图示
  * @param schema
  */
-export const isComponentWrapperSchema = (schema: AnySchema): schema is ComponentContainerSchema => (
+export const isComponentWrapperSchema = (schema: AnySchema): schema is AnyComponentWrapperSchema => (
   COMPONENT_WRAPPER_SCHEMA_KINDS.includes(schema.kind)
 );
 
@@ -34,7 +48,7 @@ export const isTextControlSchema = (schema: AnySchema): schema is InputControlSc
  * 是否为组件图示
  * @param schema
  */
-export const isComponentSchema = (schema: AnySchema): schema is ComponentSchema => (
+export const isComponentSchema = (schema: AnySchema): schema is AnyComponentSchema => (
   COMPONENT_SCHEMA_KINDS.includes(schema.kind)
 );
 
@@ -51,7 +65,7 @@ export const isDoubleKeyControlSchema = (schema: AnySchema): schema is DoubleKey
  * @internal
  * @param schema
  */
-const standardContainerSchema = <T extends AnyContainerSchema>(schema: T): T => {
+const standardContainerSchema = <T extends AnyContainerSchema | AnyWrapperSchema>(schema: T): T => {
   const schemas = standardSchemas(schema.schemas);
 
   // 如果是数组表单图示，自动补充子图示的名称为索引值
@@ -71,7 +85,12 @@ const standardContainerSchema = <T extends AnyContainerSchema>(schema: T): T => 
 export function standardSchema<T extends AnySchema>(schema: T | StableBuilder<T>): T {
   let _schema = (isBuilder(schema) ? schema.build() : { ...schema }) as AnySchema;
 
-  if (isControlContainerSchema(_schema) || isComponentWrapperSchema(_schema)) {
+  if (
+    isControlContainerSchema(_schema) ||
+    isControlWrapperSchema(_schema) ||
+    isComponentContainerSchema(_schema) ||
+    isComponentWrapperSchema(_schema)
+  ) {
     standardContainerSchema(_schema);
   }
 

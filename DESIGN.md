@@ -10,6 +10,7 @@ Root --- ComponentWrapper
 
 Control --- SingleKeyControl --- AnyKeyControl
 Control --- DoubleKeyControl --- AnyKeyControl
+Control --- BothKeyControl --- AnyKeyControl
 
 AnyKeyControl --- NormalControl
 AnyKeyControl --- ComposableControl

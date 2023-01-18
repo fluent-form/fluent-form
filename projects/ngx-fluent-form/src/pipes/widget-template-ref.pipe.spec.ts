@@ -1,6 +1,6 @@
 import { EnvironmentInjector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { provideFluentForm } from '../provide';
+import { provideFluentForm } from '../provider';
 import { FluentWidgetTemplateRefPipe } from './widget-template-ref.pipe';
 
 describe('FluentWidgetTemplateRefPipe', () => {

@@ -7,6 +7,6 @@ export * from './components';
 export * from './directives';
 export * from './directives/outlet.directive';
 export * from './fluent-form.module';
-export * from './provide';
+export * from './provider';
 export * from './schemas';
 export * from './utils';

@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { provideFluentForm } from '../provide';
+import { provideFluentForm } from '../provider';
 import { WidgetRegistry } from './widget-registry.service';
 
 describe('WidgetRegistry', () => {

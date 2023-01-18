@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { form, input } from '../../builders';
-import { provideFluentForm } from '../../provide';
+import { provideFluentForm } from '../../provider';
 import { FormGroupSchema } from '../../schemas';
 import { AnySchema } from '../../schemas/index.schema';
 import { AnyObject } from '../../types';

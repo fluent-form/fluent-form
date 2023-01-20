@@ -3,7 +3,7 @@ import { AnyObject } from '../types';
 
 const IS_BUILDER_KEY = '__isBuilder__';
 
-function _builder<T>(target: Partial<T> = {}, rests: readonly (keyof T)[]): Builder<T> {
+function _builder<T>(target: Partial<T>, rests: readonly (keyof T)[]): Builder<T> {
   const builder = new Proxy(target as AnyObject, {
     get(target, prop: string) {
       if ('build' === prop) {

@@ -18,13 +18,13 @@ export class ValueUtils<S extends AnyObject | AnyArray | AbstractControl> {
   ) { }
 
   getValue(): unknown {
-    return this.source instanceof AbstractControl ? this.getControlValue() : this.getModelValue();
+    return this.source instanceof AbstractControl ? this.getValueFromControl() : this.getValueFromModel();
   }
 
   /**
    * 从模型中获取对应值
    */
-  private getModelValue(): unknown {
+  private getValueFromModel(): unknown {
     let value: unknown;
     // 如果从模型中读出来的值为 undefined，说明模型中没有写入该值，这里取图示中提供的默认值
     // 如果是双字段模式，则需要从模型中分别取得这两个字段的值组为一个元组
@@ -53,7 +53,7 @@ export class ValueUtils<S extends AnyObject | AnyArray | AbstractControl> {
     }
 
     if (this.schema.kind === 'date-range') {
-      return (value as [string | number | Date, string | number | Date])?.map(o => o ? new Date(o) : null) ?? null;
+      return (value as [string | number | Date, string | number | Date])?.map(o => new Date(o)) ?? null;
     }
 
     if (this.schema.kind === 'checkbox-group') {
@@ -73,7 +73,7 @@ export class ValueUtils<S extends AnyObject | AnyArray | AbstractControl> {
   /**
    * 从控件中获取对应值
    */
-  private getControlValue(): unknown {
+  private getValueFromControl(): unknown {
     const value = (this.source as AbstractControl).value;
 
     if (this.schema.mapper) {
@@ -85,15 +85,11 @@ export class ValueUtils<S extends AnyObject | AnyArray | AbstractControl> {
     }
 
     if (this.schema.kind === 'date-range') {
-      return (value as [Date | null, Date | null])?.map(o => o?.getTime() ?? null) ?? null;
-    }
-
-    if (this.schema.kind === 'slider') {
-      return value as [number, number] ?? null;
+      return (value as [Date, Date])?.map(o => o.getTime()) ?? null;
     }
 
     if (this.schema.kind === 'checkbox-group') {
-      return (value as NzCheckBoxOptionInterface[])?.filter(o => o.checked).map(o => o.value);
+      return (value as NzCheckBoxOptionInterface[]).filter(o => o.checked).map(o => o.value);
     }
 
     return value;

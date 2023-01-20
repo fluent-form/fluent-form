@@ -32,26 +32,19 @@ export function createFormControl(schema: AnyControlSchema): FormControl {
  * @param controls
  */
 function createFormControls(schemas: AnySchema[], controls: Record<string, AbstractControl> = {}) {
-  return schemas.filter(o => !isComponentSchema(o) && !isComponentWrapperSchema(o)).reduce((controls, schema) => {
-    switch (schema.kind) {
-      case 'group':
-        controls[schema.name!.toString()] = createFormGroup(schema);
-        break;
+  return schemas.reduce((controls, schema) => {
+    if (isComponentSchema(schema) || isComponentWrapperSchema(schema)) {
+      return controls;
+    }
 
-      case 'array':
-        controls[schema.name!.toString()] = createFormArray(schema);
-        break;
-
-      case 'step':
-      case 'steps':
-      case 'tabset':
-      case 'tab':
-      case 'input-group':
-        createFormControls(schema.schemas as AnySchema[], controls);
-        break;
-
-      default:
-        controls[schema.name!.toString()] = createFormControl(schema as AnyControlSchema);
+    if (schema.kind === 'group') {
+      controls[schema.name!.toString()] = createFormGroup(schema);
+    } else if (schema.kind === 'array') {
+      controls[schema.name!.toString()] = createFormArray(schema);
+    } else if (isControlWrapperSchema(schema) || isComponentContainerSchema(schema)) {
+      createFormControls(schema.schemas as AnySchema[], controls);
+    } else {
+      controls[schema.name!.toString()] = createFormControl(schema);
     }
 
     return controls;

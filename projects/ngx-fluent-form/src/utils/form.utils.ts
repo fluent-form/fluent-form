@@ -3,6 +3,7 @@ import { FluentCallPipe } from '../pipes/call.pipe';
 import { FormArraySchema, FormGroupSchema } from '../schemas';
 import { AnyControlOrControlContainerSchema, AnyControlSchema, AnySchema } from '../schemas/index.schema';
 import { AnyArray, AnyObject } from '../types';
+import { isUndefined } from './is.utils';
 import { controlSchemaUtils, isComponentContainerSchema, isComponentSchema, isComponentWrapperSchema, isControlContainerSchema, isControlWrapperSchema, isDoubleKeyControlSchema } from './schema.utils';
 import { valueUtils } from './value.utils';
 
@@ -17,7 +18,7 @@ export function createFormControl(schema: AnyControlSchema): FormControl {
     // 如果有传入映射器，则默认值也需要经过映射
     schema.mapper ? schema.mapper.input(schema.defaultValue) : schema.defaultValue,
     {
-      nonNullable: schema.defaultValue !== undefined,
+      nonNullable: !isUndefined(schema.defaultValue),
       validators: schema.validators ? validators.concat(schema.validators) : validators,
       asyncValidators: schema.asyncValidators,
       updateOn: schema.updateOn

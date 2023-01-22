@@ -93,11 +93,13 @@ export class ExampleComponent {
 1. 将 `provideFluentForm` 添加到 `bootstrapApplication` 的配置中：
 
 ```ts
-import { provideFluentForm } from 'ngx-fluent-form';
+import { provideFluentForm, withAllWidgets } from 'ngx-fluent-form';
 
 bootstrapApplication(RootComponent, {
   providers: [
-    provideFluentForm()
+    provideFluentForm(
+      withAllWidgets()
+    )
   ]
 });
 ```

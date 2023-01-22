@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FluentFormComponent } from './components';
 import { FluentFormDirective, FluentFormNameDirective } from './directives';
 import { FluentOutletDirective } from './directives/outlet.directive';
+import { withAllWidgets } from './features';
 import { provideFluentForm } from './provider';
 
 @NgModule({
@@ -18,7 +19,9 @@ import { provideFluentForm } from './provider';
     FluentOutletDirective,
   ],
   providers: [
-    provideFluentForm()
+    provideFluentForm(
+      withAllWidgets()
+    )
   ]
 })
 export class FluentFormModule { }

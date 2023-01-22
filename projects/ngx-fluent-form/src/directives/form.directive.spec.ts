@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { array, form, group, input, inputGroup } from '../builders';
+import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
 import { AnySchema, FormGroupSchema } from '../schemas';
 import { AnyObject } from '../types';
@@ -42,7 +43,11 @@ describe('FluentFormDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideFluentForm()]
+      providers: [
+        provideFluentForm(
+          withAllWidgets()
+        )
+      ]
     });
   });
 

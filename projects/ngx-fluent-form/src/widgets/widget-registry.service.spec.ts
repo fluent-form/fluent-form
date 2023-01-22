@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
 import { WidgetRegistry } from './widget-registry.service';
 
@@ -7,7 +8,11 @@ describe('WidgetRegistry', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideFluentForm()]
+      providers: [
+        provideFluentForm(
+          withAllWidgets()
+        )
+      ]
     });
     service = TestBed.inject(WidgetRegistry);
   });

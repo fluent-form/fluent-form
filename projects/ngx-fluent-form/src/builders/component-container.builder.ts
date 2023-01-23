@@ -1,4 +1,4 @@
-import { SchemaName, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsetComponentSchema } from '../schemas';
+import { SchemaName, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema } from '../schemas';
 import { KindAndName } from '../types';
 import { builder, UnstableBuilder } from '../utils';
 
@@ -10,8 +10,8 @@ export function step<N extends SchemaName>(name?: N): UnstableBuilder<StepCompon
   return builder<StepComponentSchema<N>>().kind('step').name(name);
 }
 
-export function tabset<N extends SchemaName>(name?: N): UnstableBuilder<TabsetComponentSchema<N>, KindAndName> {
-  return builder<TabsetComponentSchema<N>>().kind('tabset').name(name);
+export function tabs<N extends SchemaName>(name?: N): UnstableBuilder<TabsComponentSchema<N>, KindAndName> {
+  return builder<TabsComponentSchema<N>>().kind('tabs').name(name);
 }
 
 export function tab<N extends SchemaName>(name?: N): UnstableBuilder<TabComponentSchema<N>, KindAndName> {

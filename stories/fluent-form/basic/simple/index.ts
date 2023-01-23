@@ -1,4 +1,4 @@
-import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, form, input, inputGroup, number, radioGroup, rate, select, slider, step, steps, tab, tabset, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
+import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, form, input, inputGroup, number, radioGroup, rate, select, slider, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
 import { CASCADER_OPTIONS, CHECKBOX_OPTIONS, RADIO_OPTIONS, SELECT_OPTIONS, TREE_SELECT_OPTIONS } from 'stories/options';
 import { defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
@@ -64,7 +64,7 @@ export const story = defineStory({
           input('textInStep3').label('文本输入框').placeholder('第三步的输入框'),
         )
       ),
-      tabset().col(24).schemas(
+      tabs().col(24).schemas(
         tab().title('账号').schemas(
           input('textInTab1').label('账号').col(12),
         ),
@@ -146,7 +146,7 @@ export const source = dedent`
           input('textInStep3').label('文本输入框').placeholder('第三步的输入框'),
         )
       ),
-      tabset().col(24).schemas(
+      tabs().col(24).schemas(
         tab().title('账号').schemas(
           input('textInTab1').label('账号').col(12),
         ),

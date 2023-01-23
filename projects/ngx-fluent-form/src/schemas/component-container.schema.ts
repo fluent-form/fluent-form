@@ -28,8 +28,8 @@ export interface StepComponentSchema<Name extends SchemaName = SchemaName> exten
   schemas: (AnySchema | AnyBuilder)[];
 }
 
-export interface TabsetComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzTabSetComponent> {
-  kind: 'tabset';
+export interface TabsComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzTabSetComponent> {
+  kind: 'tabs';
   type?: NzTabType;
   active?: number;
   animate?: boolean;

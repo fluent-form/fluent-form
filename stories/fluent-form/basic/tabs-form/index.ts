@@ -1,11 +1,11 @@
-import { button, checkbox, form, input, tab, tabset } from 'ngx-fluent-form';
+import { button, checkbox, form, input, tab, tabs } from 'ngx-fluent-form';
 import { defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
 export const story = defineStory({
   args: {
     schemas: form(
-      tabset().col(24).schemas(
+      tabs().col(24).schemas(
         tab().title('用户名').schemas(
           input('username').label('用户名').col(24),
           input('password').type('password').label('密码').col(24),
@@ -26,7 +26,7 @@ export const story = defineStory({
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { button, checkbox, form, input, tab, tabset } from 'ngx-fluent-form';
+  import { button, checkbox, form, input, tab, tabs } from 'ngx-fluent-form';
 
   @Component({
     selector: 'example-component',
@@ -34,7 +34,7 @@ export const source = dedent`
   })
   export class ExampleComponent {
     schemas = form(
-      tabset().col(24).schemas(
+      tabs().col(24).schemas(
         tab().title('用户名').schemas(
           input('username').label('用户名').col(24),
           input('password').type('password').label('密码').col(24),

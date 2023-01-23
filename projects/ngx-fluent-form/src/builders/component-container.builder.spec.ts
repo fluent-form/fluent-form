@@ -1,6 +1,6 @@
-import { StepsComponentSchema, TabsetComponentSchema } from '../schemas';
+import { StepsComponentSchema, TabsComponentSchema } from '../schemas';
 import { standardSchema } from '../utils';
-import { step, steps, tab, tabset } from './component-container.builder';
+import { step, steps, tab, tabs } from './component-container.builder';
 import { input } from './control.builder';
 
 describe('component-container.builder', () => {
@@ -27,16 +27,16 @@ describe('component-container.builder', () => {
     expect(schema).toEqual(value);
   });
 
-  it('tabset', () => {
+  it('tabs', () => {
     const schema = standardSchema(
-      tabset().schemas(
+      tabs().schemas(
         tab().title('title').schemas(
           input('ipt')
         )
       )
     );
-    const value: TabsetComponentSchema = {
-      kind: 'tabset',
+    const value: TabsComponentSchema = {
+      kind: 'tabs',
       schemas: [
         {
           kind: 'tab',

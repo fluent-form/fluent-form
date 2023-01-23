@@ -6,7 +6,7 @@ export const CONTROL_WRAPPER_SCHEMA_KINDS = ['input-group'];
 export const COMPONENT_CONTAINER_SCHEMA_KINDS = [
   'steps',
   'step',
-  'tabset',
+  'tabs',
   'tab'
 ];
 /** 文本控件图示类型 */

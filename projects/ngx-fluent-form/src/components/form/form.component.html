@@ -9,8 +9,7 @@
   [fluentBinderSchema]="schema"
   [fluentBinderControl]="form">
   <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
-    <div
-      nz-col
+    <nz-col
       [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
       [nzOffset]="schema.col?.offset"
       [nzFlex]="schema.col?.flex"
@@ -19,7 +18,7 @@
         [ngTemplateOutlet]="formColContentTemplate"
         [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
       </ng-container>
-    </div>
+    </nz-col>
   </ng-template>
 
   <ng-container
@@ -29,7 +28,75 @@
   </ng-container>
 </form>
 
-<ng-template #nestFormTemplate let-form="form" let-schema="schema" let-model="model">
+<ng-template #formColContentTemplate let-schema="schema" let-control="control" let-model="model">
+  <ng-container [ngSwitch]="schema.kind">
+    <ng-container
+      *ngSwitchCase="'group'"
+      fluentWithInjector
+      [ngTemplateOutlet]="nestedFormTemplate"
+      [ngTemplateOutletContext]="{ form: control, schema: schema, model: model[schema.name] }">
+    </ng-container>
+
+    <ng-container
+      *ngSwitchCase="'array'"
+      fluentWithInjector
+      [ngTemplateOutlet]="nestedFormTemplate"
+      [ngTemplateOutletContext]="{ form: control, schema: schema, model: model[schema.name] }">
+    </ng-container>
+
+    <ng-container
+      *ngSwitchCase="'steps'"
+      fluentWithInjector
+      [ngTemplateOutlet]="stepsTemplate"
+      [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
+    </ng-container>
+
+    <ng-container
+      *ngSwitchCase="'tabset'"
+      fluentWithInjector
+      [ngTemplateOutlet]="tabsTemplate"
+      [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
+    </ng-container>
+
+    <ng-container *ngSwitchDefault>
+      <nz-form-item [ngClass]="schema.class">
+        <nz-form-label
+          *ngIf="schema.label"
+          [nzSpan]="schema.label.span"
+          [nzTooltipTitle]="schema.label.tooltip?.title ?? schema.label.tooltip"
+          [nzTooltipIcon]="schema.label.tooltip?.icon"
+          [nzFor]="schema.id"
+          [nzNoColon]="!colon"
+          [nzRequired]="schema.required | call: model:schema:control">
+          {{ schema.label.value ?? schema.label }}
+        </nz-form-label>
+        <!-- 在控件被 input-group 包裹的时候，控件状态/提示默认使用的是 input-group 里的第一个控件 -->
+        <!-- 如果需要采用 input-group 内其他控件的状态/提示，需要使用 input-group 的 primary 参数明确指定 -->
+        <nz-form-control
+          *ngIf="
+            schema.kind === 'input-group'
+              ? (schema.primary ?? schema.schemas[0].name | schema: schema.schemas)
+              : schema as currentSchema
+          "
+          [nzValidateStatus]="
+            schema.kind === 'input-group' ? (schema.primary ?? schema.schemas[0].name | control: control) : control
+          "
+          [nzHasFeedback]="currentSchema.feedback"
+          [nzValidatingTip]="currentSchema.tips?.validating"
+          [nzSuccessTip]="currentSchema.tips?.success"
+          [nzWarningTip]="currentSchema.tips?.warning"
+          [nzErrorTip]="currentSchema.tips?.error"
+          [nzExtra]="currentSchema.tips?.extra"
+          [nzAutoTips]="currentSchema.tips?.auto ?? {}">
+          <fluent-control-outlet [control]="control" [schema]="schema" [model]="model"></fluent-control-outlet>
+        </nz-form-control>
+      </nz-form-item>
+    </ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #nestedFormTemplate let-form="form" let-schema="schema" let-model="model">
+  <nz-divider *ngIf="schema.label" [nzText]="schema.label"></nz-divider>
   <nz-row
     nz-form
     [nzGutter]="gutter"
@@ -39,8 +106,7 @@
     [fluentBinderSchema]="schema"
     [fluentBinderControl]="form">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
-      <div
-        nz-col
+      <nz-col
         [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
         [nzOffset]="schema.col?.offset"
         [nzFlex]="schema.col?.flex"
@@ -50,7 +116,7 @@
           [ngTemplateOutlet]="formColContentTemplate"
           [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
         </ng-container>
-      </div>
+      </nz-col>
     </ng-template>
 
     <ng-container
@@ -59,87 +125,6 @@
       [ngTemplateOutletContext]="{ control: (subschema.name | control: form), schema: subschema, model: model }">
     </ng-container>
   </nz-row>
-</ng-template>
-
-<ng-template #formColContentTemplate let-schema="schema" let-control="control" let-model="model">
-  <ng-container [ngSwitch]="schema.kind">
-    <ng-container *ngSwitchCase="'group'">
-      <nz-divider *ngIf="schema.label" [nzText]="schema.label"></nz-divider>
-      <ng-container
-        fluentWithInjector
-        [ngTemplateOutlet]="nestFormTemplate"
-        [ngTemplateOutletContext]="{ form: control, schema: schema, model: model[schema.name] }">
-      </ng-container>
-    </ng-container>
-
-    <ng-container *ngSwitchCase="'array'">
-      <nz-divider *ngIf="schema.label" [nzText]="schema.label"></nz-divider>
-      <ng-container
-        fluentWithInjector
-        [ngTemplateOutlet]="nestFormTemplate"
-        [ngTemplateOutletContext]="{ form: control, schema: schema, model: model[schema.name] }">
-      </ng-container>
-    </ng-container>
-
-    <ng-container *ngSwitchCase="'steps'">
-      <ng-container
-        fluentWithInjector
-        [ngTemplateOutlet]="stepsTemplate"
-        [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
-      </ng-container>
-    </ng-container>
-
-    <ng-container *ngSwitchCase="'tabset'">
-      <ng-container
-        fluentWithInjector
-        [ngTemplateOutlet]="tabsTemplate"
-        [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
-      </ng-container>
-    </ng-container>
-
-    <ng-container *ngSwitchDefault>
-      <ng-container
-        fluentWithInjector
-        [ngTemplateOutlet]="formItemTemplate"
-        [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
-      </ng-container>
-    </ng-container>
-  </ng-container>
-</ng-template>
-
-<ng-template #formItemTemplate let-schema="schema" let-control="control" let-model="model">
-  <nz-form-item [ngClass]="schema.class">
-    <nz-form-label
-      *ngIf="schema.label"
-      [nzSpan]="schema.label.span"
-      [nzTooltipTitle]="schema.label.tooltip?.title ?? schema.label.tooltip"
-      [nzTooltipIcon]="schema.label.tooltip?.icon"
-      [nzFor]="schema.id"
-      [nzNoColon]="!colon"
-      [nzRequired]="schema.required | call: model:schema:control">
-      {{ schema.label.value ?? schema.label }}
-    </nz-form-label>
-    <!-- 在控件被 input-group 包裹的时候，控件状态/提示默认使用的是 input-group 里的第一个控件 -->
-    <!-- 如果需要采用 input-group 内其他控件的状态/提示，需要使用 input-group 的 primary 参数明确指定 -->
-    <nz-form-control
-      *ngIf="
-        schema.kind === 'input-group'
-          ? (schema.primary ?? schema.schemas[0].name | schema: schema.schemas)
-          : schema as currentSchema
-      "
-      [nzValidateStatus]="
-        schema.kind === 'input-group' ? (schema.primary ?? schema.schemas[0].name | control: control) : control
-      "
-      [nzHasFeedback]="currentSchema.feedback"
-      [nzValidatingTip]="currentSchema.tips?.validating"
-      [nzSuccessTip]="currentSchema.tips?.success"
-      [nzWarningTip]="currentSchema.tips?.warning"
-      [nzErrorTip]="currentSchema.tips?.error"
-      [nzExtra]="currentSchema.tips?.extra"
-      [nzAutoTips]="currentSchema.tips?.auto ?? {}">
-      <fluent-control-outlet [control]="control" [schema]="schema" [model]="model"></fluent-control-outlet>
-    </nz-form-control>
-  </nz-form-item>
 </ng-template>
 
 <ng-template #stepsTemplate let-schema="schema" let-control="control" let-model="model">
@@ -171,15 +156,13 @@
       [nzStatus]="subschema.status ?? schema.active === index ? 'process' : 'wait'"></nz-step>
   </nz-steps>
 
-  <div
+  <nz-row
     *ngFor="let stepSchema of schema.schemas; index as stepIndex"
-    nz-row
     [nzGutter]="gutter"
     [hidden]="schema.active !== stepIndex"
     [style.margin-top.px]="16">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
-      <div
-        nz-col
+      <nz-col
         [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
         [nzOffset]="schema.col?.offset"
         [nzFlex]="schema.col?.flex"
@@ -189,7 +172,7 @@
           [ngTemplateOutlet]="formColContentTemplate"
           [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
         </ng-container>
-      </div>
+      </nz-col>
     </ng-template>
 
     <ng-container
@@ -197,7 +180,7 @@
       [ngTemplateOutlet]="formColTemplate"
       [ngTemplateOutletContext]="{ control: (subschema.name | control: form), schema: subschema, model: model }">
     </ng-container>
-  </div>
+  </nz-row>
 </ng-template>
 
 <ng-template #tabsTemplate let-schema="schema" let-control="control" let-model="model">
@@ -223,10 +206,9 @@
       [ngStyle]="tabSchema.style"
       [nzTitle]="tabSchema.title"
       [nzDisabled]="tabSchema.disabled | call: model:tabSchema:control">
-      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+      <nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
         <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
-          <div
-            nz-col
+          <nz-col
             [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
             [nzOffset]="schema.col?.offset"
             [nzFlex]="schema.col?.flex"
@@ -236,7 +218,7 @@
               [ngTemplateOutlet]="formColContentTemplate"
               [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
             </ng-container>
-          </div>
+          </nz-col>
         </ng-template>
 
         <ng-container
@@ -244,7 +226,7 @@
           [ngTemplateOutlet]="formColTemplate"
           [ngTemplateOutletContext]="{ control: (subschema.name | control: form), schema: subschema, model: model }">
         </ng-container>
-      </div>
+      </nz-row>
     </nz-tab>
   </nz-tabset>
 </ng-template>

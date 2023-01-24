@@ -1,7 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
-import { NzTabComponent, NzTabPositionMode, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
+import { NzTabComponent, NzTabPosition, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
 import { StableBuilder } from '../utils';
 import { AbstractComponentSchema, AbstractSchema, CallbackArg, SchemaName } from './abstract.schema';
 import { AnyBuilder, AnySchema } from './index.schema';
@@ -34,7 +34,7 @@ export interface TabsComponentSchema<Name extends SchemaName = SchemaName> exten
   active?: number;
   animate?: boolean;
   size?: NzSizeLDSType;
-  position?: NzTabPositionMode;
+  position?: NzTabPosition;
   gutter?: number;
   center?: boolean;
   schemas: (TabComponentSchema | StableBuilder<TabComponentSchema>)[];

@@ -130,3 +130,9 @@ For better performance, all components of `ngx-fluent-form` run in [OnPush](http
 ## Support
 
 Love `ngx-fluent-form`? ⭐Star for this project!
+
+## Special thanks
+
+Thanks to [JetBrains](https://www.jetbrains.com/?from=ngx-fluent-form) for supporting us free open source licenses.
+
+![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)

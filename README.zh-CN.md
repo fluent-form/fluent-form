@@ -131,3 +131,9 @@ export class ExampleComponent {
 ## 支持
 
 喜欢 `ngx-fluent-form`？为该项目点星⭐！
+
+## 特别鸣谢
+
+感谢 [JetBrains](https://www.jetbrains.com/?from=ngx-fluent-form) 为我们提供免费开源许可证。
+
+![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)

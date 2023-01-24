@@ -1,49 +1,44 @@
-import { NgClass, NgFor, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { NgClass, NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormLayoutType, NzFormModule } from 'ng-zorro-antd/form';
 import { NzRowDirective } from 'ng-zorro-antd/grid';
-import { NzStepsModule } from 'ng-zorro-antd/steps';
-import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { takeUntil } from 'rxjs';
 import { group } from '../../builders';
-import { FluentBinderDirective, FluentWithInjectorDirective } from '../../directives';
-import { FluentCallPipe, FluentControlPipe, FluentSchemaPipe, FluentTypeofPipe } from '../../pipes';
+import { FluentBinderDirective } from '../../directives';
+import { FluentCallPipe, FluentControlPipe, FluentTypeofPipe } from '../../pipes';
 import { AnySchema, FormGroupSchema } from '../../schemas';
+import { CONFIG } from '../../tokens';
 import { AnyObject } from '../../types';
 import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchema } from '../../utils';
-import { FluentControlOutletComponent } from '../control-outlet/control-outlet.component';
+import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/form-col-content-outlet.component';
 
 @Component({
   selector: 'fluent-form',
   standalone: true,
   imports: [
-    NgIf,
     NgFor,
-    NgSwitch,
-    NgSwitchCase,
-    NgSwitchDefault,
     NgClass,
     NgStyle,
     NgTemplateOutlet,
     ReactiveFormsModule,
     NzFormModule,
-    NzDividerModule,
-    NzStepsModule,
-    NzTabsModule,
-    FluentControlOutletComponent,
+    FluentFormColContentOutletComponent,
     FluentBinderDirective,
-    FluentWithInjectorDirective,
     FluentCallPipe,
     FluentTypeofPipe,
-    FluentSchemaPipe,
     FluentControlPipe
   ],
   templateUrl: './form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [NzDestroyService]
+  providers: [
+    NzDestroyService,
+    {
+      provide: CONFIG,
+      useExisting: forwardRef(() => FluentFormComponent)
+    }
+  ]
 })
 export class FluentFormComponent<T extends AnyObject> {
   /**

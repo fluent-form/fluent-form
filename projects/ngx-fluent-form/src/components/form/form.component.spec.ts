@@ -26,9 +26,11 @@ describe('FluentFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideFluentForm(
-        withAllWidgets()
-      )]
+      providers: [
+        provideFluentForm(
+          withAllWidgets()
+        )
+      ]
     });
   });
 

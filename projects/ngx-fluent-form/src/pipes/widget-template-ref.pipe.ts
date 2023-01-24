@@ -1,5 +1,5 @@
 import { inject, Pipe, PipeTransform, TemplateRef } from '@angular/core';
-import { WidgetKind } from '../enumerations';
+import { WidgetKind } from '../widgets/kind';
 import { WidgetRegistry } from '../widgets/widget-registry.service';
 
 @Pipe({

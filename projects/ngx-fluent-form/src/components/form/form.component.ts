@@ -6,6 +6,7 @@ import { NzFormLayoutType, NzFormModule } from 'ng-zorro-antd/form';
 import { NzRowDirective } from 'ng-zorro-antd/grid';
 import { takeUntil } from 'rxjs';
 import { group } from '../../builders';
+import { FluentConfig } from '../../config';
 import { FluentBinderDirective } from '../../directives';
 import { FluentCallPipe, FluentControlPipe, FluentTypeofPipe } from '../../pipes';
 import { AnySchema, FormGroupSchema } from '../../schemas';
@@ -40,7 +41,7 @@ import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/
     }
   ]
 })
-export class FluentFormComponent<T extends AnyObject> {
+export class FluentFormComponent<T extends AnyObject> implements FluentConfig {
   /**
    * 内部的不可变模型，主要有以下用途：
    * - 用来跟公开的模型值进行引用比较，判断变更是内部发出的还是外部传入的，如果引用一致则为内部变更

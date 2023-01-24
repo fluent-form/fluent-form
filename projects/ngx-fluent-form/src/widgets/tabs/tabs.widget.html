@@ -1,0 +1,46 @@
+<!-- TODO [fluentWithContextGuard]="contextGuard" -->
+<ng-template let-control="control" let-schema="schema" let-model="model">
+  <nz-tabset
+    #cmp
+    #config="fluentConfig"
+    [fluentBinder]="cmp"
+    [fluentBinderSchema]="schema"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style"
+    [nzSelectedIndex]="schema.active"
+    [nzType]="schema.type ?? 'line'"
+    [nzSize]="schema.size ?? 'default'"
+    [nzAnimated]="schema.animate ?? schema.type !== 'card'"
+    [nzTabPosition]="schema.position ?? 'top'"
+    [nzTabBarGutter]="schema.gutter"
+    [nzCentered]="schema.center">
+    <nz-tab
+      #cmp
+      *ngFor="let tabSchema of schema.schemas"
+      [fluentBinder]="cmp"
+      [fluentBinderSchema]="tabSchema"
+      [ngClass]="tabSchema.class"
+      [ngStyle]="tabSchema.style"
+      [nzTitle]="tabSchema.title"
+      [nzDisabled]="tabSchema.disabled | call: model:tabSchema:control">
+      <nz-row [nzGutter]="config.gutter">
+        <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
+          <nz-col
+            [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
+            [nzOffset]="schema.col?.offset"
+            [nzFlex]="schema.col?.flex"
+            [hidden]="schema.hidden | call: model:schema:control">
+            <fluent-form-col-content-outlet [control]="control" [schema]="schema" [model]="model">
+            </fluent-form-col-content-outlet>
+          </nz-col>
+        </ng-template>
+
+        <ng-container
+          *ngFor="let subschema of tabSchema.schemas"
+          [ngTemplateOutlet]="formColTemplate"
+          [ngTemplateOutletContext]="{ control: (subschema.name | control: control), schema: subschema, model: model }">
+        </ng-container>
+      </nz-row>
+    </nz-tab>
+  </nz-tabset>
+</ng-template>

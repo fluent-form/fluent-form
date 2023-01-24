@@ -1,7 +1,7 @@
 import { Provider, Type } from '@angular/core';
 import { WidgetKind } from './enumerations';
 import { WIDGET_MAP } from './tokens';
-import { AbstractWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, InputGroupWidget, InputWidget, NumberWidget, RadioGroupWidget, RateWidget, SelectWidget, SilderWidget, TextareaWidget, TextWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from './widgets';
+import { AbstractWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, InputGroupWidget, InputWidget, NumberWidget, RadioGroupWidget, RateWidget, SelectWidget, SilderWidget, StepsWidget, TabsWidget, TextareaWidget, TextWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from './widgets';
 
 export const enum FluentFormFeatureKind {
   Widget
@@ -37,7 +37,9 @@ export function withAllWidgets(): FluentFormFeature {
     useRateWidget(),
     useTextWidget(),
     useButtonWidget(),
-    useButtonGroupWidget()
+    useButtonGroupWidget(),
+    useStepsWidget(),
+    useTabsWidget()
   );
 }
 
@@ -188,5 +190,19 @@ export function useButtonGroupWidget(): FluentFormWidgetFeature {
   return {
     kind: WidgetKind.ButtonGroup,
     widget: ButtonGroupWidget
+  };
+}
+
+export function useStepsWidget(): FluentFormWidgetFeature {
+  return {
+    kind: WidgetKind.Steps,
+    widget: StepsWidget
+  };
+}
+
+export function useTabsWidget(): FluentFormWidgetFeature {
+  return {
+    kind: WidgetKind.Tabs,
+    widget: TabsWidget
   };
 }

@@ -18,4 +18,6 @@ export const enum WidgetKind {
   Text = 'text',
   Button = 'button',
   ButtonGroup = 'button-group',
+  Steps = 'steps',
+  Tabs = 'tabs',
 }

@@ -16,8 +16,10 @@ describe('FluentWidgetTemplateRefPipe', () => {
   });
 
   it('create an instance', () => {
+    // TODO: use TestBed.runInInjectionContext in ng v15
     const environmentInjector = TestBed.inject(EnvironmentInjector);
     const pipe = environmentInjector.runInContext(() => new FluentWidgetTemplateRefPipe());
+
     expect(pipe).toBeTruthy();
   });
 });

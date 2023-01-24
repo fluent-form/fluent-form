@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { withAllWidgets } from '../../features';
 import { provideFluentForm } from '../../provider';
+import { CONFIG } from '../../tokens';
 import { AnyArray, AnyObject } from '../../types';
 import { FluentFormColContentOutletComponent } from './form-col-content-outlet.component';
 
@@ -14,7 +15,11 @@ describe('FluentFormColContentOutletComponent', () => {
       providers: [
         provideFluentForm(
           withAllWidgets()
-        )
+        ),
+        {
+          provide: CONFIG,
+          useValue: {}
+        }
       ]
     });
 

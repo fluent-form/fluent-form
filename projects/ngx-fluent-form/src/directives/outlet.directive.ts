@@ -1,6 +1,7 @@
 import { createComponent, Directive, EnvironmentInjector, Host, Injector, Input, OnChanges, OnDestroy, OnInit, SkipSelf, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { FluentControlOutletComponent, FluentControlTemplateContext } from '../components';
+import { FluentControlTemplateContext } from '../components';
+import { FluentControlOutletComponent } from '../components/control-outlet/control-outlet.component';
 import { AnyComponentSchema, AnyControlSchema } from '../schemas';
 import { AnyArray, AnyObject } from '../types';
 import { ControlContainer } from './models/control-container';

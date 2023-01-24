@@ -1,7 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { FluentWithInjectorDirective } from '../../directives';
+import { FluentWithInjectorDirective } from '../../directives/with-injector.directive';
 import { FluentWidgetTemplateRefPipe } from '../../pipes';
 import { AnyComponentSchema, AnyControlSchema } from '../../schemas';
 import { AnyArray, AnyObject } from '../../types';
@@ -26,7 +26,8 @@ export interface FluentControlTemplateContext<T extends AnyObject | AnyArray> {
   templateUrl: './control-outlet.component.html',
   host: {
     '[style.display]': `'none'`
-  }
+  },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FluentControlOutletComponent<T extends AnyObject | AnyArray> implements OnInit, FluentControlTemplateContext<T> {
   @Input() control!: AbstractControl;
@@ -38,9 +39,7 @@ export class FluentControlOutletComponent<T extends AnyObject | AnyArray> implem
   constructor(private viewContainerRef: ViewContainerRef) { }
 
   ngOnInit(): void {
-    this.viewContainerRef.createEmbeddedView(this.templateRef, this, {
-      injector: this.viewContainerRef.parentInjector
-    });
+    this.viewContainerRef.createEmbeddedView(this.templateRef, this);
   }
 
 }

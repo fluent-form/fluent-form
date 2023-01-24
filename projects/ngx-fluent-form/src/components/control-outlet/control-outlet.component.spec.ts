@@ -17,9 +17,7 @@ describe('FluentControlOutletComponent', () => {
         )
       ]
     });
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(FluentControlOutletComponent);
     component = fixture.componentInstance;
     component.control = new FormGroup({});

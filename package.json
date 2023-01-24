@@ -2,7 +2,6 @@
   "name": "ngx-fluent-form",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
     "dev": "ng build --watch",
     "build": "npm run build:lib && npm run build:schematics",
     "build:lib": "ng build ngx-fluent-form --configuration production",
@@ -12,7 +11,7 @@
     "test": "ng test ngx-fluent-form --configuration production",
     "coverage:watch": "ng test ngx-fluent-form --code-coverage",
     "coverage": "ng test ngx-fluent-form --no-watch --code-coverage --browsers=ChromeHeadless",
-    "lint": "ng lint --fix",
+    "lint": "ng lint --fix --cache",
     "publish": "npm publish ./dist/ngx-fluent-form",
     "docs:json": "compodoc --config=./compodoc.json",
     "storybook": "npm run docs:json && start-storybook -p 6006",

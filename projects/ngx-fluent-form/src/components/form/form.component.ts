@@ -5,7 +5,6 @@ import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { NzFormLayoutType, NzFormModule } from 'ng-zorro-antd/form';
 import { NzRowDirective } from 'ng-zorro-antd/grid';
 import { takeUntil } from 'rxjs';
-import { group } from '../../builders';
 import { FluentConfig } from '../../config';
 import { FluentBinderDirective } from '../../directives';
 import { FluentCallPipe, FluentControlPipe, FluentTypeofPipe } from '../../pipes';
@@ -62,8 +61,9 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig {
 
     // 这里统一包装为 FormGroupSchema
     this.schema = standardSchema(
-      Array.isArray(value) ? group().schemas(...value) : value
+      Array.isArray(value) ? { kind: 'group', schemas: value } : value
     );
+
     this.formChange.emit(this.form = createFormGroup(this.schema));
 
     const utils = formUtils(this.form, this.schemas);

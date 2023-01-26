@@ -2,7 +2,6 @@ import { Directive, EventEmitter, forwardRef, Input, Output } from '@angular/cor
 import { FormArray, FormGroup } from '@angular/forms';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { takeUntil } from 'rxjs';
-import { group } from '../builders';
 import { AnySchema, FormGroupSchema } from '../schemas';
 import { AnyArray, AnyObject } from '../types';
 import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchema } from '../utils';
@@ -38,9 +37,11 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
 
     // 这里统一包装为 FormGroupSchema
     this.schema = standardSchema(
-      Array.isArray(value) ? group().schemas(...value) : value
+      Array.isArray(value) ? { kind: 'group', schemas: value } : value
     );
+
     this.formChange.emit(this.form = createFormGroup(this.schema));
+
     this.directives.forEach(directive => this.assignDirective(directive));
 
     const utils = formUtils(this.form, this.schemas);

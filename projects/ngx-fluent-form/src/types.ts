@@ -49,14 +49,6 @@ export type ComponentOutputListenerMap<C> = {
  */
 export type ComponentPropertyMap<C> = Partial<Omit<C, ComponentOutputName<C>>>;
 
-/**
- * 必填单个属性
- * ```
- * Single<{ a: string, b: number }> -> { a: string } | { b: number }
- * ```
- */
-export type Single<T> = { [P in keyof T]: { [K in P]-?: T[P] } }[keyof T];
-
 /** Any Object */
 export type AnyObject = Record<string, SafeAny>;
 /** Any Array */

@@ -1,10 +1,12 @@
 import { SafeAny } from '@ngify/types';
 import { AnyObject } from '../types';
 
-const IS_BUILDER_KEY = '__isBuilder__';
+const IS_BUILDER_KEY = '__is_builder__';
 
-function _builder<T>(target: Partial<T>, rests: readonly (keyof T)[]): Builder<T> {
-  const builder = new Proxy(target as AnyObject, {
+export function builder<T>(): Builder<T>
+export function builder<T, R extends keyof T>(rests: readonly R[]): Builder<T, R>
+export function builder<T, R extends keyof T>(rests?: readonly R[]): Builder<T, R> {
+  const builder = new Proxy({} as AnyObject, {
     get(target, prop: string) {
       if ('build' === prop) {
         return () => target;
@@ -14,7 +16,7 @@ function _builder<T>(target: Partial<T>, rests: readonly (keyof T)[]): Builder<T
         return true;
       }
 
-      if (rests.includes(prop as keyof T)) {
+      if (rests?.includes(prop as R)) {
         return (...args: unknown[]): unknown => {
           target[prop] = args;
           return builder;
@@ -30,60 +32,93 @@ function _builder<T>(target: Partial<T>, rests: readonly (keyof T)[]): Builder<T
     }
   });
 
-  return builder as Builder<T>;
+  return builder as Builder<T, R>;
 }
-
-
-export function builder<T>(target: Partial<T> = {}): Builder<T> {
-  return _builder(target, REST_PARAMETERS as unknown as (keyof T)[]);
-}
-
-const REST_PARAMETERS = ['schemas', 'validators', 'asyncValidators'] as const;
-
-type Buildable<T> = { build: () => T };
-type RestParams = undefined | SafeAny[];
-type DefaultRestParamsName = typeof REST_PARAMETERS[number];
-
-/**
- * @template T target 原型
- * @template S selected 已选
- * @template C candidate 候选
- * @template R rest 剩余参数名
- */
-type _Builder<T, S = {}, C = T, R = never> = (S extends T ? Buildable<T> : unknown) & {
-  [P in keyof C]-?: (
-    P extends R
-    ? (
-      C[P] extends RestParams
-      ? (...o: NonNullable<C[P]>) => _Builder<T, S & Record<P, C[P]>, Omit<C, P>, R>
-      : never
-    )
-    : (o: C[P]) => _Builder<T, S & Record<P, C[P]>, Omit<C, P>, R>
-  )
-};
-
-/**
- * @template T target 原型
- * @template S selected 已选
- * @template C candidate 候选
- */
-export type Builder<T, S = {}, C = T> = _Builder<T, S, C, DefaultRestParamsName>;
-
-/**
- * 稳定的 Builder
- * @template T 原型
- */
-export type StableBuilder<T> = Builder<T, T, {}>;
-
-/**
- * 不稳定的 Builder，还有必填字段未填
- * @template T 原型
- * @template K 已填字段
- */
-export type UnstableBuilder<T, K extends keyof T> = Builder<T, Pick<T, K>, Omit<T, K>>;
 
 /**
  * 是否为一个构建器
  * @param builder
  */
-export const isBuilder = <T = unknown>(builder: SafeAny): builder is Builder<T> => builder[IS_BUILDER_KEY];
+export const isBuilder = <T = unknown>(builder: SafeAny): builder is StableBuilder<T> => builder[IS_BUILDER_KEY];
+
+/** 剩余参数类型 */
+type RestParams = undefined | SafeAny[];
+type BuildKey = 'build';
+type Buildable = Record<BuildKey, unknown>;
+/** 取得接口的非空必填字段 */
+type NonNullableKey<T> = {
+  [K in keyof T]-?: { [_ in K]: T[K] } extends { [_ in K]-?: T[K] } ? K : never
+}[keyof T];
+
+/**
+ * @template T 原型
+ * @template C 候选
+ * @template N 必填字段
+ * @template S 已选字段
+ * @template R 剩余参数字段
+ * @template B 可以构建
+ */
+type _Builder<
+  T extends Buildable,
+  C extends keyof T,
+  N extends keyof T,
+  S extends keyof T = never,
+  R extends keyof T = never,
+  B extends BuildKey = never
+> = {
+    [K in Exclude<C, S> | B]: (
+      K extends BuildKey
+      ? () => { [K in S]: T[K] }
+      : K extends R
+      ? (...values: T[K] extends RestParams ? NonNullable<T[K]> : never) => _Builder<
+        T,
+        C,
+        N,
+        S | K,
+        R,
+        [N] extends [S | K] ? BuildKey : never
+      >
+      : (value: T[K]) => _Builder<
+        T,
+        C,
+        N,
+        S | K,
+        R,
+        [N] extends [S | K] ? BuildKey : never
+      >
+    )
+  };
+
+/**
+ * @template T 原型
+ * @template R 剩余参数字段
+ */
+export type Builder<T, R extends keyof T = never> = _Builder<
+  T & Buildable,
+  keyof T,
+  NonNullableKey<T>,
+  never,
+  R
+>;
+
+export type StableBuilder<T> = Record<BuildKey, () => T>;
+
+/**
+ * @template T 原型
+ * @template S 已选字段
+ * @template R 剩余参数字段
+ * @template N 必填字段
+ */
+export type UnstableBuilder<
+  T,
+  S extends keyof T,
+  R extends keyof T = never,
+  N extends keyof T = NonNullableKey<T>
+> = _Builder<
+  T & Buildable,
+  keyof T,
+  N,
+  S,
+  R,
+  [N] extends [S] ? BuildKey : never
+>;

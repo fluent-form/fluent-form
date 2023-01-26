@@ -1,6 +1,6 @@
 import { ButtonComponentSchema, SchemaName, TextComponentSchema } from '../schemas';
-import { KindAndName } from '../types';
 import { builder, UnstableBuilder } from '../utils';
+import { KindAndName } from './helper';
 
 export function text<N extends SchemaName>(name?: N): UnstableBuilder<TextComponentSchema<N>, KindAndName> {
   return builder<TextComponentSchema<N>>().kind('text').name(name);

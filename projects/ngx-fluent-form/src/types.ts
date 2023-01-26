@@ -61,5 +61,3 @@ export type Single<T> = { [P in keyof T]: { [K in P]-?: T[P] } }[keyof T];
 export type AnyObject = Record<string, SafeAny>;
 /** Any Array */
 export type AnyArray = SafeAny[];
-
-export type KindAndName = 'kind' | 'name';

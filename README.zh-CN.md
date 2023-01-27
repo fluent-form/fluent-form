@@ -43,9 +43,9 @@ ng add ngx-fluent-form
 
 ## 用法
 
-`ngx-fluent-form` 分别提供了 `NgModule` 与 [`StandaloneComponent`](https://angular.cn/guide/standalone-components) 两种方式供你选择使用：
+`ngx-fluent-form` 同时支持基于 `NgModule` 或 [`Standalone`](https://angular.cn/guide/standalone-components) 的项目。对于不同类型的项目，在用法上也有稍许不同：
 
-- `NgModule` 方式：
+### 对于基于 NgModule 的项目：
 
 1. 将 `FluentFormModule` 添加到你的 `NgModule`：
 
@@ -83,7 +83,7 @@ export class ExampleComponent {
 }
 ```
 
-- `StandaloneComponent` 方式：
+### 对于基于 Standalone 的项目：
 
 1. 将 `provideFluentForm` 添加到 `bootstrapApplication` 的配置中：
 
@@ -94,6 +94,11 @@ bootstrapApplication(RootComponent, {
   providers: [
     provideFluentForm(
       withAllWidgets()
+      // or use withWidgets and import widget features on demand.
+      // withWidgets(
+      //   useInputWidget()
+      //   ...
+      // )
     )
   ]
 });

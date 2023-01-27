@@ -42,9 +42,9 @@ For documentation and examples please visit [https://hyperlife1119.github.io/ngx
 
 ## Usage
 
-`ngx-fluent-form` provides `NgModule` and [`StandaloneComponent`](https://angular.io/guide/standalone-components) respectively for you to choose to use:
+`ngx-fluent-form` supports both `NgModule` or [`Standalone`](https://angular.io/guide/standalone-components) based projects. For different types of projects, there are slightly different usages:
 
-- `NgModule` way：
+### For NgModule based projects:
 
 1. Add `FluentFormModule` into your `NgModule`:
 
@@ -82,7 +82,7 @@ export class ExampleComponent {
 }
 ```
 
-- `StandaloneComponent` way：
+### For standalone based projects:
 
 1. Add `provideFluentForm` to the configuration of `bootstrapApplication`:
 
@@ -93,6 +93,11 @@ bootstrapApplication(RootComponent, {
   providers: [
     provideFluentForm(
       withAllWidgets()
+      // or use withWidgets and import widget features on demand.
+      // withWidgets(
+      //   useInputWidget()
+      //   ...
+      // )
     )
   ]
 });

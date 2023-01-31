@@ -30,7 +30,7 @@
     "@angular/router": "14.2.12",
     "ng-zorro-antd": "14.3.0",
     "rxjs": "7.8.0",
-    "tslib": "2.4.1",
+    "tslib": "2.5.0",
     "zone.js": "0.11.6"
   },
   "devDependencies": {
@@ -59,11 +59,11 @@
     "@storybook/testing-library": "0.0.13",
     "@types/jasmine": "4.3.1",
     "@types/node": "16.11.68",
-    "@typescript-eslint/eslint-plugin": "5.46.1",
-    "@typescript-eslint/parser": "5.46.1",
+    "@typescript-eslint/eslint-plugin": "5.49.0",
+    "@typescript-eslint/parser": "5.49.0",
     "babel-loader": "9.1.0",
     "copyfiles": "2.4.1",
-    "eslint": "8.31.0",
+    "eslint": "8.32.0",
     "husky": "^8.0.2",
     "jasmine-core": "4.5.0",
     "karma": "6.4.1",

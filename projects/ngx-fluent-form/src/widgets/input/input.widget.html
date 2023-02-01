@@ -15,13 +15,13 @@
       [placeholder]="schema.placeholder ?? ''"
       [type]="schema.type ?? 'text'"
       [autofocus]="schema.autofocus"
-      [readonly]="schema.readonly | call: model : schema : control"
+      [readonly]="schema.readonly | call: model:schema:control"
       [nzSize]="schema.size!"
       [nzBorderless]="schema.borderless" />
 
     <ng-template #composableTemplate>
       <input
-        *ngIf="!(schema.hidden | call: model : schema : control)"
+        *ngIf="!(schema.hidden | call: model:schema:control)"
         nz-col
         nz-input
         [attr.id]="schema.id"
@@ -39,7 +39,7 @@
         [placeholder]="schema.placeholder ?? ''"
         [type]="schema.type ?? 'text'"
         [autofocus]="schema.autofocus"
-        [readonly]="schema.readonly | call: model : schema : control"
+        [readonly]="schema.readonly | call: model:schema:control"
         [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless" />
     </ng-template>
@@ -69,13 +69,13 @@
       [placeholder]="schema.placeholder ?? ''"
       [type]="schema.type ?? 'text'"
       [autofocus]="schema.autofocus"
-      [readonly]="schema.readonly | call: model : schema : control"
+      [readonly]="schema.readonly | call: model:schema:control"
       [nzSize]="schema.size!"
       [nzBorderless]="schema.borderless" />
 
     <ng-template #composableTemplate>
       <input
-        *ngIf="!(schema.hidden | call: model : schema : control)"
+        *ngIf="!(schema.hidden | call: model:schema:control)"
         nz-col
         nz-input
         [attr.id]="schema.id"
@@ -92,7 +92,7 @@
         [placeholder]="schema.placeholder ?? ''"
         [type]="schema.type ?? 'text'"
         [autofocus]="schema.autofocus"
-        [readonly]="schema.readonly | call: model : schema : control"
+        [readonly]="schema.readonly | call: model:schema:control"
         [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless" />
     </ng-template>

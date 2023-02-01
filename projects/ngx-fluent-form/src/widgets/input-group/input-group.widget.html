@@ -19,7 +19,7 @@
       *ngFor="let subschema of schema.schemas"
       fluentWithInjector
       [ngTemplateOutlet]="$any(subschema).kind | widgetTemplateRef"
-      [ngTemplateOutletContext]="{ control: ($any(subschema).name | control: control), schema: subschema, model: model }">
+      [ngTemplateOutletContext]="{ control: $any(subschema).name | control: control, schema: subschema, model: model }">
     </ng-container>
   </nz-input-group>
 </ng-template>

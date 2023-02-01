@@ -15,8 +15,8 @@
     [nzTabBarGutter]="schema.gutter"
     [nzCentered]="schema.center">
     <nz-tab
-      #cmp
       *ngFor="let tabSchema of schema.schemas"
+      #cmp
       [fluentBinder]="cmp"
       [fluentBinderSchema]="tabSchema"
       [ngClass]="tabSchema.class"

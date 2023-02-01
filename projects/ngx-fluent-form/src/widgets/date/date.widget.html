@@ -1,7 +1,7 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
   <nz-date-picker
-    #cmp
     *fluentComposable="composableTemplate"
+    #cmp
     [fluentBinder]="cmp"
     [fluentBinderSchema]="schema"
     [fluentBinderControl]="control"
@@ -19,7 +19,7 @@
     [nzPlacement]="schema.placement ?? 'bottomLeft'"
     [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
     [nzAutoFocus]="schema.autofocus"
-    [nzInputReadOnly]="schema.readonly | call: model : schema : control"
+    [nzInputReadOnly]="schema.readonly | call: model:schema:control"
     [nzSize]="schema.size!"
     [nzBorderless]="schema.borderless"
     [nzShowToday]="schema.today ?? true"
@@ -28,9 +28,9 @@
 
   <ng-template #composableTemplate>
     <nz-date-picker
+      *ngIf="!(schema.hidden | call: model:schema:control)"
       #cmp
       nz-col
-      *ngIf="!(schema.hidden | call: model : schema : control)"
       [fluentBinder]="cmp"
       [fluentBinderSchema]="schema"
       [fluentBinderControl]="control"
@@ -52,7 +52,7 @@
       [nzPlacement]="schema.placement ?? 'bottomLeft'"
       [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
       [nzAutoFocus]="schema.autofocus"
-      [nzInputReadOnly]="schema.readonly | call: model : schema : control"
+      [nzInputReadOnly]="schema.readonly | call: model:schema:control"
       [nzSize]="schema.size!"
       [nzBorderless]="schema.borderless"
       [nzShowToday]="schema.today ?? true"

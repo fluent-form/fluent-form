@@ -1,7 +1,7 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
   <nz-select
-    #cmp
     *fluentComposable="composableTemplate"
+    #cmp
     [fluentBinder]="cmp"
     [fluentBinderSchema]="schema"
     [fluentBinderControl]="control"
@@ -17,7 +17,7 @@
     [nzBackdrop]="schema.backdrop!"
     [nzBorderless]="schema.borderless"
     [nzAutoFocus]="schema.autofocus"
-    [nzShowArrow]="schema.arrow ?? (!schema.mode || schema.mode === 'default')"
+    [nzShowArrow]="(schema.arrow ?? !schema.mode) || schema.mode === 'default'"
     [nzSize]="schema.size!"
     [nzSuffixIcon]="schema.suffixIcon!">
     <nz-option
@@ -30,9 +30,9 @@
 
   <ng-template #composableTemplate>
     <nz-select
+      *ngIf="!(schema.hidden | call: model:schema:control)"
       #cmp
       nz-col
-      *ngIf="!(schema.hidden | call: model : schema : control)"
       [fluentBinder]="cmp"
       [fluentBinderSchema]="schema"
       [fluentBinderControl]="control"
@@ -52,7 +52,7 @@
       [nzBackdrop]="schema.backdrop!"
       [nzBorderless]="schema.borderless"
       [nzAutoFocus]="schema.autofocus"
-      [nzShowArrow]="schema.arrow ?? (!schema.mode || schema.mode === 'default')"
+      [nzShowArrow]="(schema.arrow ?? !schema.mode) || schema.mode === 'default'"
       [nzSize]="schema.size!"
       [nzSuffixIcon]="schema.suffixIcon!">
       <nz-option

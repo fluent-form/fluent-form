@@ -16,13 +16,13 @@
       [placeholder]="schema.placeholder ?? ''"
       [rows]="schema.rows"
       [autofocus]="schema.autofocus"
-      [readonly]="schema.readonly | call: model : schema : control"
+      [readonly]="schema.readonly | call: model:schema:control"
       [nzSize]="schema.size!"
       [nzBorderless]="schema.borderless"></textarea>
 
     <ng-template #composableTemplate>
       <textarea
-        *ngIf="!(schema.hidden | call: model : schema : control)"
+        *ngIf="!(schema.hidden | call: model:schema:control)"
         nz-col
         nz-input
         [attr.id]="schema.id"
@@ -41,7 +41,7 @@
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
         [autofocus]="schema.autofocus"
-        [readonly]="schema.readonly | call: model : schema : control"
+        [readonly]="schema.readonly | call: model:schema:control"
         [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless"></textarea>
     </ng-template>
@@ -72,15 +72,15 @@
       [placeholder]="schema.placeholder ?? ''"
       [rows]="schema.rows"
       [autofocus]="schema.autofocus"
-      [readonly]="schema.readonly | call: model : schema : control"
+      [readonly]="schema.readonly | call: model:schema:control"
       [nzSize]="schema.size!"
       [nzBorderless]="schema.borderless"></textarea>
 
     <ng-template #composableTemplate>
       <textarea
+        *ngIf="!(schema.hidden | call: model:schema:control)"
         nz-col
         nz-input
-        *ngIf="!(schema.hidden | call: model : schema : control)"
         [attr.id]="schema.id"
         [attr.maxlength]="helper.length.max | invoke: schema.length"
         [attr.minlength]="helper.length.min | invoke: schema.length"
@@ -96,7 +96,7 @@
         [placeholder]="schema.placeholder ?? ''"
         [rows]="schema.rows"
         [autofocus]="schema.autofocus"
-        [readonly]="schema.readonly | call: model : schema : control"
+        [readonly]="schema.readonly | call: model:schema:control"
         [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless"></textarea>
     </ng-template>

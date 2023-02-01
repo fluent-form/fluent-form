@@ -16,8 +16,8 @@
     [nzStartIndex]="schema.start ?? 0"
     (nzIndexChange)="schema.active = $event">
     <nz-step
-      #cmp
       *ngFor="let subschema of schema.schemas; index as index"
+      #cmp
       [fluentBinder]="cmp"
       [fluentBinderSchema]="subschema"
       [ngClass]="subschema.class"

@@ -1,7 +1,7 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
   <nz-tree-select
-    #cmp
     *fluentComposable="composableTemplate"
+    #cmp
     [fluentBinder]="cmp"
     [fluentBinderSchema]="schema"
     [fluentBinderControl]="control"
@@ -31,9 +31,9 @@
 
   <ng-template #composableTemplate>
     <nz-tree-select
+      *ngIf="!(schema.hidden | call: model:schema:control)"
       #cmp
       nz-col
-      *ngIf="!(schema.hidden | call: model : schema : control)"
       [fluentBinder]="cmp"
       [fluentBinderSchema]="schema"
       [fluentBinderControl]="control"

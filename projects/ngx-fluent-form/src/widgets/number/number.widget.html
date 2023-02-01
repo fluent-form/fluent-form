@@ -16,14 +16,14 @@
     [nzPrecisionMode]="helper.precisionMode | invoke: schema.precision"
     [nzStep]="schema.step ?? 1"
     [nzAutoFocus]="schema.autofocus"
-    [nzReadOnly]="schema.readonly | call: model : schema : control"
+    [nzReadOnly]="schema.readonly | call: model:schema:control"
     [nzSize]="schema.size!"
     [nzBorderless]="schema.borderless">
   </nz-input-number>
 
   <ng-template #composableTemplate>
     <nz-input-number
-      *ngIf="!(schema.hidden | call: model : schema : control)"
+      *ngIf="!(schema.hidden | call: model:schema:control)"
       #cmp
       nz-col
       [fluentBinder]="cmp"
@@ -43,7 +43,7 @@
       [nzPrecisionMode]="helper.precisionMode | invoke: schema.precision"
       [nzStep]="schema.step ?? 1"
       [nzAutoFocus]="schema.autofocus"
-      [nzReadOnly]="schema.readonly | call: model : schema : control"
+      [nzReadOnly]="schema.readonly | call: model:schema:control"
       [nzSize]="schema.size!"
       [nzBorderless]="schema.borderless">
     </nz-input-number>

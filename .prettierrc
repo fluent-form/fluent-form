@@ -5,13 +5,28 @@
       "files": "*.html",
       "options": {
         "parser": "angular",
+        "plugins": [
+          "prettier-plugin-organize-attributes"
+        ],
         "singleQuote": true,
         "trailingComma": "all",
         "quoteProps": "preserve",
         "arrowParens": "avoid",
         "printWidth": 120,
         "bracketSameLine": true,
-        "htmlWhitespaceSensitivity": "strict"
+        "htmlWhitespaceSensitivity": "strict",
+        "attributeGroups": [
+          "$ANGULAR_STRUCTURAL_DIRECTIVE",
+          "$ANGULAR_ELEMENT_REF",
+          "$ID",
+          "$CLASS",
+          "$DEFAULT",
+          "$ANGULAR_ANIMATION",
+          "$ANGULAR_ANIMATION_INPUT",
+          "$ANGULAR_INPUT",
+          "$ANGULAR_TWO_WAY_BINDING",
+          "$ANGULAR_OUTPUT"
+        ]
       }
     }
   ]

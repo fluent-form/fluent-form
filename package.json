@@ -78,6 +78,6 @@
     "ng-packagr": "14.2.2",
     "prettier": "~2.7.1",
     "prettier-plugin-organize-attributes": "^0.0.5",
-    "typescript": "4.8.4"
+    "typescript": "4.9.5"
   }
 }

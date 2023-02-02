@@ -1,7 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { SafeAny } from '@ngify/types';
 import { NzCascaderComponent, NzCascaderExpandTrigger, NzCascaderOption, NzCascaderSize, NzShowSearchOptions } from 'ng-zorro-antd/cascader';
-import { NzCheckboxComponent, NzCheckboxGroupComponent } from 'ng-zorro-antd/checkbox';
+import { NzCheckboxComponent, NzCheckboxGroupComponent, NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDatePickerComponent, NzRangePickerComponent } from 'ng-zorro-antd/date-picker';
 import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
@@ -161,7 +161,7 @@ export interface CheckboxControlSchema<Name extends SchemaName = SchemaName, Val
   indeterminate?: boolean;
 }
 
-export interface CheckboxGroupControlSchema<Name extends SchemaName = SchemaName, Val = SafeAny> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzCheckboxGroupComponent, Val> {
+export interface CheckboxGroupControlSchema<Name extends SchemaName = SchemaName, Val = NzCheckBoxOptionInterface[]> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzCheckboxGroupComponent, Val> {
   kind: 'checkbox-group';
   options: AnyObject[];
   config?: {

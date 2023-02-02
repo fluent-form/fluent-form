@@ -1,5 +1,4 @@
 import { AbstractControl } from '@angular/forms';
-import { NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
 import { AnyControlSchema } from '../schemas';
 import { AnyArray, AnyObject } from '../types';
 import { isUndefined } from './is.utils';
@@ -49,25 +48,6 @@ export class ValueUtils<S extends AnyObject | AnyArray | AbstractControl> {
       return this.schema.mapper.input(value);
     }
 
-    if (['date', 'time'].includes(this.schema.kind)) {
-      return value ? new Date(value as string | number | Date) : null;
-    }
-
-    if (this.schema.kind === 'date-range') {
-      return (value as [string | number | Date, string | number | Date])?.map(o => new Date(o)) ?? null;
-    }
-
-    if (this.schema.kind === 'checkbox-group') {
-      const labelProperty = this.schema.config?.labelProperty ?? 'label';
-      const valueProperty = this.schema.config?.valueProperty ?? 'value';
-
-      return this.schema.options.map(o => ({
-        label: o[labelProperty],
-        value: o[valueProperty],
-        checked: (value as unknown[])?.includes(o[valueProperty])
-      })) as NzCheckBoxOptionInterface[];
-    }
-
     return value;
   }
 
@@ -79,18 +59,6 @@ export class ValueUtils<S extends AnyObject | AnyArray | AbstractControl> {
 
     if (this.schema.mapper) {
       return this.schema.mapper.output(value);
-    }
-
-    if (['date', 'time'].includes(this.schema.kind)) {
-      return (value as Date | null)?.getTime() ?? null;
-    }
-
-    if (this.schema.kind === 'date-range') {
-      return (value as [Date, Date])?.map(o => o.getTime()) ?? null;
-    }
-
-    if (this.schema.kind === 'checkbox-group') {
-      return (value as NzCheckBoxOptionInterface[]).filter(o => o.checked).map(o => o.value);
     }
 
     return value;

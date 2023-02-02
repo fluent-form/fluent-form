@@ -80,21 +80,54 @@ const standardContainerSchema = <T extends AnyContainerSchema | AnyWrapperSchema
 
 /**
  * 标准化图示
- * @param schema
+ * @param schemaOrSchemaBuilder
  */
-export function standardSchema<T extends AnySchema>(schema: T | StableBuilder<T>): T {
-  let _schema = (isBuilder(schema) ? schema.build() : { ...schema }) as AnySchema;
+export function standardSchema<T extends AnySchema>(schemaOrSchemaBuilder: T | StableBuilder<T>): T {
+  let schema = (isBuilder(schemaOrSchemaBuilder) ? schemaOrSchemaBuilder.build() : { ...schemaOrSchemaBuilder }) as AnySchema;
 
   if (
-    isControlContainerSchema(_schema) ||
-    isControlWrapperSchema(_schema) ||
-    isComponentContainerSchema(_schema) ||
-    isComponentWrapperSchema(_schema)
+    isControlContainerSchema(schema) ||
+    isControlWrapperSchema(schema) ||
+    isComponentContainerSchema(schema) ||
+    isComponentWrapperSchema(schema)
   ) {
-    standardContainerSchema(_schema);
+    standardContainerSchema(schema);
   }
 
-  return _schema as T;
+  switch (schema.kind) {
+    case 'date':
+    case 'time':
+      schema.mapper ??= {
+        input: (value: string | number | Date) => value ? new Date(value) : null,
+        output: value => value?.getTime() ?? null
+      };
+      break;
+
+    case 'date-range':
+      schema.mapper ??= {
+        input: (value: [string | number | Date, string | number | Date]) => value?.map(o => new Date(o)) as [Date, Date] ?? null,
+        output: value => value?.map(o => o.getTime()) ?? null
+      };
+      break;
+
+    case 'checkbox-group': {
+      const labelProperty = schema.config?.labelProperty ?? 'label';
+      const valueProperty = schema.config?.valueProperty ?? 'value';
+      const options = schema.options;
+
+      schema.mapper ??= {
+        input: value => options.map(option => ({
+          label: option[labelProperty],
+          value: option[valueProperty],
+          checked: !!value?.includes(option[valueProperty])
+        })),
+        output: value => value?.filter(o => o.checked).map(o => o.value)
+      };
+      break;
+    }
+  }
+
+  return schema as T;
 }
 
 /**

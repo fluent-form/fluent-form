@@ -68,9 +68,9 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
   /** I/O mapper for control */
   mapper?: {
     /** An input mapper that maps from a model's value to a form control's value */
-    input: (value?: SafeAny) => Val | null,
+    input: (value: SafeAny) => Val | null,
     /** An output mapper that maps from a form control's value to a model's value */
-    output: (value?: Val | null) => SafeAny,
+    output: (value: Val | null) => SafeAny,
   };
   defaultValue?: SafeAny;
   /** Is it a required control */

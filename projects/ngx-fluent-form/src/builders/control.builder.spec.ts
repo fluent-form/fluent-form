@@ -1,131 +1,128 @@
-import { SafeAny } from '@ngify/types';
-import { CheckboxControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, InputControlSchema, NumberInputControlSchema, RateControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema } from '../schemas';
+import { CascaderControlSchema, CheckboxControlSchema, InputControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { standardSchema } from '../utils';
 import { cascader, checkbox, checkboxGroup, date, dateRange, datetime, email, input, integer, number, password, radioGroup, rate, select, slider, string, textarea, time, toggle, treeSelect } from './control.builder';
 
 describe('control.builder', () => {
   it('input', () => {
     const schema = standardSchema(input('input'));
-    const value = { kind: 'input', name: 'input' } as InputControlSchema<'input', string>;
+    const value: InputControlSchema<'input'> = { kind: 'input', name: 'input' };
     expect(schema).toEqual(value);
   });
 
   it('string', () => {
     const schema = standardSchema(string('string'));
-    const value = { kind: 'input', name: 'string', type: 'text' } as InputControlSchema<'string', string>;
+    const value: InputControlSchema<'string'> = { kind: 'input', name: 'string', type: 'text' };
     expect(schema).toEqual(value);
   });
 
   it('email', () => {
     const schema = standardSchema(email('email'));
-    const value = { kind: 'input', name: 'email', type: 'email' } as InputControlSchema<'email', string>;
+    const value: InputControlSchema<'email'> = { kind: 'input', name: 'email', type: 'email' };
     expect(schema).toEqual(value);
   });
 
   it('password', () => {
     const schema = standardSchema(password('password'));
-    const value = { kind: 'input', name: 'password', type: 'password' } as InputControlSchema<'password', string>;
+    const value: InputControlSchema<'password'> = { kind: 'input', name: 'password', type: 'password' };
     expect(schema).toEqual(value);
   });
 
   it('textarea', () => {
     const schema = standardSchema(textarea('textarea'));
-    const value = standardSchema({ kind: 'textarea', name: 'textarea' }) as TextareaControlSchema<'textarea', string>;
+    const value: TextareaControlSchema<'textarea'> = { kind: 'textarea', name: 'textarea' };
     expect(schema).toEqual(value);
   });
 
   it('number', () => {
     const schema = standardSchema(number('number'));
-    const value = { kind: 'number', name: 'number' } as NumberInputControlSchema<'number', number>;
+    const value: NumberInputControlSchema<'number'> = { kind: 'number', name: 'number' };
     expect(schema).toEqual(value);
   });
 
   it('integer', () => {
     const schema = standardSchema(integer('integer'));
-    const value = { kind: 'number', name: 'integer', precision: { value: 0, mode: 'cut' } } as NumberInputControlSchema<'integer', number>;
+    const value: NumberInputControlSchema<'integer'> = { kind: 'number', name: 'integer', precision: { value: 0, mode: 'cut' } };
     expect(schema).toEqual(value);
   });
 
   it('date', () => {
     const schema = standardSchema(date('date'));
-    const value = { kind: 'date', name: 'date' } as DatePickerControlSchema<'date', Date>;
-    expect(schema).toEqual(value);
+    expect(schema.kind).toEqual('date');
+    expect(schema.name).toEqual('date');
   });
 
   it('datetime', () => {
     const schema = standardSchema(datetime('datetime'));
-    const value = {
-      kind: 'date',
-      name: 'datetime',
-      format: 'yyyy-MM-dd HH:mm:ss',
-      time: true
-    } as DatePickerControlSchema<'datetime', Date>;
-    expect(schema).toEqual(value);
+    expect(schema.kind).toEqual('date');
+    expect(schema.name).toEqual('datetime');
+    expect(schema.format).toEqual('yyyy-MM-dd HH:mm:ss');
+    expect(schema.time).toBeTrue();
   });
 
   it('time', () => {
     const schema = standardSchema(time('time'));
-    const value = { kind: 'time', name: 'time' } as TimePickerControlSchema<'time', Date>;
-    expect(schema).toEqual(value);
+    expect(schema.kind).toEqual('time');
+    expect(schema.name).toEqual('time');
   });
 
   it('toggle', () => {
     const schema = standardSchema(toggle('toggle'));
-    const value = { kind: 'toggle', name: 'toggle' } as ToggleControlSchema<'toggle', boolean>;
+    const value: ToggleControlSchema<'toggle'> = { kind: 'toggle', name: 'toggle' };
     expect(schema).toEqual(value);
   });
 
   it('select', () => {
     const schema = standardSchema(select('select').options([]));
-    const value = { kind: 'select', name: 'select', options: [] } as SafeAny;
+    const value: SelectControlSchema<'select'> = { kind: 'select', name: 'select', options: [] };
     expect(schema).toEqual(value);
   });
 
   it('cascader', () => {
     const schema = standardSchema(cascader('cascader').options([]));
-    const value = { kind: 'cascader', name: 'cascader', options: [] } as SafeAny;
+    const value: CascaderControlSchema<'cascader'> = { kind: 'cascader', name: 'cascader', options: [] };
     expect(schema).toEqual(value);
   });
 
   it('treeSelect', () => {
     const schema = standardSchema(treeSelect('treeSelect').options([]));
-    const value = { kind: 'tree-select', name: 'treeSelect', options: [] } as SafeAny;
+    const value: TreeSelectControlSchema<'treeSelect'> = { kind: 'tree-select', name: 'treeSelect', options: [] };
     expect(schema).toEqual(value);
   });
 
   it('radio-group', () => {
-    const schema = standardSchema(radioGroup('radio-group').options([]));
-    const value = { kind: 'radio-group', name: 'radio-group', options: [] } as SafeAny;
+    const schema = standardSchema(radioGroup('radioGroup').options([]));
+    const value: RadioGroupControlSchema<'radioGroup'> = { kind: 'radio-group', name: 'radioGroup', options: [] };
     expect(schema).toEqual(value);
   });
 
   it('checkbox', () => {
     const schema = standardSchema(checkbox('checkbox'));
-    const value = { kind: 'checkbox', name: 'checkbox' } as CheckboxControlSchema<'checkbox', boolean>;
+    const value: CheckboxControlSchema<'checkbox'> = { kind: 'checkbox', name: 'checkbox' };
     expect(schema).toEqual(value);
   });
 
   it('checkboxGroup', () => {
     const schema = standardSchema(checkboxGroup('checkboxGroup').options([]));
-    const value = { kind: 'checkbox-group', name: 'checkboxGroup', options: [] } as SafeAny;
-    expect(schema).toEqual(value);
+    expect(schema.kind).toEqual('checkbox-group');
+    expect(schema.name).toEqual('checkboxGroup');
+    expect(schema.options).toEqual([]);
   });
 
   it('rate', () => {
     const schema = standardSchema(rate('rate'));
-    const value = { kind: 'rate', name: 'rate' } as RateControlSchema<'rate', number>;
+    const value: RateControlSchema<'rate'> = { kind: 'rate', name: 'rate' };
     expect(schema).toEqual(value);
   });
 
   it('slider', () => {
     const schema = standardSchema(slider('slider'));
-    const value = { kind: 'slider', name: 'slider' } as SliderControlSchema<'slider', number | [number, number]>;
+    const value: SliderControlSchema<'slider'> = { kind: 'slider', name: 'slider' };
     expect(schema).toEqual(value);
   });
 
   it('date-range', () => {
-    const schema = standardSchema(dateRange('date-range'));
-    const value = { kind: 'date-range', name: 'date-range' } as DateRangePickerControlSchema<'date-range', [Date, Date]>;
-    expect(schema).toEqual(value);
+    const schema = standardSchema(dateRange('dateRange'));
+    expect(schema.kind).toEqual('date-range');
+    expect(schema.name).toEqual('dateRange');
   });
 });

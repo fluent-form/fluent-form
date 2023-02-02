@@ -170,7 +170,6 @@ describe('schema.utils', () => {
       ]);
       const schema = schemasUtils(schemas).find(['group', 'array', 0]);
 
-
       expect(schema).toEqual(target);
     });
 

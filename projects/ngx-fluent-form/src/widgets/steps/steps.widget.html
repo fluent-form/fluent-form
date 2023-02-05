@@ -1,5 +1,4 @@
-<!-- TODO [fluentWithContextGuard]="contextGuard" -->
-<ng-template let-control="control" let-schema="schema" let-model="model">
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
   <nz-steps
     #cmp
     #config="fluentConfig"
@@ -20,13 +19,13 @@
       #cmp
       [fluentBinder]="cmp"
       [fluentBinderSchema]="subschema"
-      [ngClass]="subschema.class"
-      [ngStyle]="subschema.style"
-      [nzTitle]="subschema.title"
-      [nzSubtitle]="subschema.subtitle"
-      [nzDescription]="subschema.description"
-      [nzDisabled]="subschema.disabled | call: model:subschema:control"
-      [nzStatus]="subschema.status ?? schema.active === index ? 'process' : 'wait'"></nz-step>
+      [ngClass]="$any(subschema).class"
+      [ngStyle]="$any(subschema).style"
+      [nzTitle]="$any(subschema).title"
+      [nzSubtitle]="$any(subschema).subtitle"
+      [nzDescription]="$any(subschema).description"
+      [nzDisabled]="$any(subschema).disabled | call: model:$any(subschema):control"
+      [nzStatus]="$any(subschema).status ?? schema.active === index ? 'process' : 'wait'"></nz-step>
   </nz-steps>
 
   <nz-row
@@ -48,7 +47,7 @@
     </ng-template>
 
     <ng-container
-      *ngFor="let subschema of stepSchema.schemas"
+      *ngFor="let subschema of $any(stepSchema).schemas"
       [ngTemplateOutlet]="formColTemplate"
       [ngTemplateOutletContext]="{ control: (subschema.name | control: control), schema: subschema, model: model }">
     </ng-container>

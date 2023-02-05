@@ -1,5 +1,4 @@
-<!-- TODO [fluentWithContextGuard]="contextGuard" -->
-<ng-template let-control="control" let-schema="schema" let-model="model">
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
   <nz-tabset
     #cmp
     #config="fluentConfig"
@@ -19,10 +18,10 @@
       #cmp
       [fluentBinder]="cmp"
       [fluentBinderSchema]="tabSchema"
-      [ngClass]="tabSchema.class"
-      [ngStyle]="tabSchema.style"
-      [nzTitle]="tabSchema.title"
-      [nzDisabled]="tabSchema.disabled | call: model:tabSchema:control">
+      [ngClass]="$any(tabSchema).class"
+      [ngStyle]="$any(tabSchema).style"
+      [nzTitle]="$any(tabSchema).title"
+      [nzDisabled]="$any(tabSchema).disabled | call: model:$any(tabSchema):control">
       <nz-row [nzGutter]="config.gutter">
         <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
           <nz-col
@@ -36,7 +35,7 @@
         </ng-template>
 
         <ng-container
-          *ngFor="let subschema of tabSchema.schemas"
+          *ngFor="let subschema of $any(tabSchema).schemas"
           [ngTemplateOutlet]="formColTemplate"
           [ngTemplateOutletContext]="{ control: (subschema.name | control: control), schema: subschema, model: model }">
         </ng-container>

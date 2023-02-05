@@ -8,7 +8,8 @@ import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchema } fro
 import { ControlContainer, ControlContainerDirective } from './models/control-container';
 
 @Directive({
-  selector: '[fluent-form][fluentSchemas]',
+  // eslint-disable-next-line
+  selector: '[fluent-form]',
   exportAs: 'fluentForm',
   standalone: true,
   providers: [

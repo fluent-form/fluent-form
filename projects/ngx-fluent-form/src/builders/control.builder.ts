@@ -26,6 +26,18 @@ export function email<N extends SchemaName>(name?: N) {
   return input(name).type('email');
 }
 
+export function telephone(): UnstableControlBuilder<InputControlSchema<number>, KindAndNameAndType>;
+export function telephone<N extends SchemaName>(name?: N): UnstableControlBuilder<InputControlSchema<N>, KindAndNameAndType>;
+export function telephone<N extends SchemaName>(name?: N) {
+  return input(name).type('tel');
+}
+
+export function url(): UnstableControlBuilder<InputControlSchema<number>, KindAndNameAndType>;
+export function url<N extends SchemaName>(name?: N): UnstableControlBuilder<InputControlSchema<N>, KindAndNameAndType>;
+export function url<N extends SchemaName>(name?: N) {
+  return input(name).type('url');
+}
+
 export function password(): UnstableControlBuilder<InputControlSchema<number>, KindAndNameAndType>;
 export function password<N extends SchemaName>(name?: N): UnstableControlBuilder<InputControlSchema<N>, KindAndNameAndType>;
 export function password<N extends SchemaName>(name?: N) {

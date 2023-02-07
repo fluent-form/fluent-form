@@ -2,7 +2,7 @@ import { TemplateRef } from '@angular/core';
 import { ThemeType } from '@ant-design/icons-angular';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzFormTextComponent } from 'ng-zorro-antd/form';
-import { AbstractComponentSchema, AbstractElementSchema, AbstractLabelfulSchema, AbstractSchema, CallbackArgs, SchemaName } from './abstract.schema';
+import { AbstractComponentSchema, AbstractElementSchema, AbstractSchema, CallbackArgs, Labelful, SchemaName } from './abstract.schema';
 
 /** @internal */
 interface Icon {
@@ -12,12 +12,12 @@ interface Icon {
   rotate?: number;
 }
 
-export interface TextComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzFormTextComponent>, AbstractLabelfulSchema {
+export interface TextComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzFormTextComponent>, Labelful {
   kind: 'text';
   content: string | TemplateRef<void>;
 }
 
-export interface ButtonComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractElementSchema<HTMLButtonElement>, AbstractLabelfulSchema {
+export interface ButtonComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractElementSchema<HTMLButtonElement>, Labelful {
   kind: 'button';
   type?: NzButtonType;
   mode?: 'submit' | 'reset' | 'menu';

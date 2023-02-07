@@ -18,7 +18,7 @@
       *ngFor="let subschema of schema.schemas; index as index"
       #cmp
       [fluentBinder]="cmp"
-      [fluentBinderSchema]="subschema"
+      [fluentBinderSchema]="$any(subschema)"
       [ngClass]="$any(subschema).class"
       [ngStyle]="$any(subschema).style"
       [nzTitle]="$any(subschema).title"

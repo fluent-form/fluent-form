@@ -17,7 +17,7 @@
       *ngFor="let tabSchema of schema.schemas"
       #cmp
       [fluentBinder]="cmp"
-      [fluentBinderSchema]="tabSchema"
+      [fluentBinderSchema]="$any(tabSchema)"
       [ngClass]="$any(tabSchema).class"
       [ngStyle]="$any(tabSchema).style"
       [nzTitle]="$any(tabSchema).title"

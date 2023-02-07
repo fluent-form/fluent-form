@@ -3,7 +3,7 @@ import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
 import { NzTabComponent, NzTabPosition, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
 import { StableBuilder } from '../utils';
-import { AbstractComponentSchema, AbstractSchema, CallbackArg, SchemaName } from './abstract.schema';
+import { AbstractComponentSchema, AbstractSchema, CallbackArgs, SchemaName } from './abstract.schema';
 import { AnyBuilder, AnySchema } from './index.schema';
 
 export interface StepsComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzStepsComponent> {
@@ -23,7 +23,7 @@ export interface StepComponentSchema<Name extends SchemaName = SchemaName> exten
   title: string | TemplateRef<void>;
   subtitle?: string | TemplateRef<void>;
   description?: string | TemplateRef<void>;
-  disabled?: boolean | ((arg: CallbackArg<StepComponentSchema<SchemaName>>) => boolean) | string;
+  disabled?: boolean | ((arg: CallbackArgs<StepComponentSchema<SchemaName>>) => boolean) | string;
   status?: 'wait' | 'process' | 'finish' | 'error';
   schemas: (AnySchema | AnyBuilder)[];
 }
@@ -43,6 +43,6 @@ export interface TabsComponentSchema<Name extends SchemaName = SchemaName> exten
 export interface TabComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzTabComponent> {
   kind: 'tab';
   title: string;
-  disabled?: boolean | ((arg: CallbackArg<TabComponentSchema<SchemaName>>) => boolean) | string;
+  disabled?: boolean | ((arg: CallbackArgs<TabComponentSchema<SchemaName>>) => boolean) | string;
   schemas: (AnySchema | AnyBuilder)[];
 }

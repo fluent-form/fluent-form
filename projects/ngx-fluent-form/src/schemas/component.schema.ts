@@ -2,7 +2,7 @@ import { TemplateRef } from '@angular/core';
 import { ThemeType } from '@ant-design/icons-angular';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzFormTextComponent } from 'ng-zorro-antd/form';
-import { AbstractComponentSchema, AbstractElementSchema, AbstractLabelfulSchema, AbstractSchema, CallbackArg, SchemaName } from './abstract.schema';
+import { AbstractComponentSchema, AbstractElementSchema, AbstractLabelfulSchema, AbstractSchema, CallbackArgs, SchemaName } from './abstract.schema';
 
 /** @internal */
 interface Icon {
@@ -21,10 +21,10 @@ export interface ButtonComponentSchema<Name extends SchemaName = SchemaName> ext
   kind: 'button';
   type?: NzButtonType;
   mode?: 'submit' | 'reset' | 'menu';
-  disabled?: boolean | ((arg: CallbackArg<ButtonComponentSchema<SchemaName>>) => boolean) | string;
-  ghost?: boolean | ((arg: CallbackArg<ButtonComponentSchema<SchemaName>>) => boolean) | string;
-  danger?: boolean | ((arg: CallbackArg<ButtonComponentSchema<SchemaName>>) => boolean) | string;
-  loading?: boolean | ((arg: CallbackArg<ButtonComponentSchema<SchemaName>>) => boolean) | string;
+  disabled?: boolean | ((arg: CallbackArgs<ButtonComponentSchema<SchemaName>>) => boolean) | string;
+  ghost?: boolean | ((arg: CallbackArgs<ButtonComponentSchema<SchemaName>>) => boolean) | string;
+  danger?: boolean | ((arg: CallbackArgs<ButtonComponentSchema<SchemaName>>) => boolean) | string;
+  loading?: boolean | ((arg: CallbackArgs<ButtonComponentSchema<SchemaName>>) => boolean) | string;
   shape?: NzButtonShape;
   size?: NzButtonSize;
   block?: boolean;

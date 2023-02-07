@@ -34,7 +34,7 @@ interface Tooltip {
 }
 
 /** @internal */
-export interface CallbackArg<S> {
+export interface CallbackArgs<S> {
   schema: S;
   /** 如果当前没有对应的 control，会返回上一级的 control，这时候一般是 form group/array */
   control: AbstractControl;
@@ -52,7 +52,7 @@ export interface AbstractSchema<Name extends AnySchemaName> {
   kind: string;
   name?: Name;
   col?: Col | Cell;
-  hidden?: boolean | ((arg: CallbackArg<AbstractSchema<AnySchemaName>>) => boolean) | string;
+  hidden?: boolean | ((arg: CallbackArgs<AbstractSchema<AnySchemaName>>) => boolean) | string;
   class?: NgClass['ngClass'];
   style?: NgStyle['ngStyle'];
 }
@@ -74,9 +74,9 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
   };
   defaultValue?: SafeAny;
   /** Is it a required control */
-  required?: boolean | ((arg: CallbackArg<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
+  required?: boolean | ((arg: CallbackArgs<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
   /** Whether to disable control */
-  disabled?: boolean | ((arg: CallbackArg<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
+  disabled?: boolean | ((arg: CallbackArgs<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
   feedback?: boolean;
   /** Error message for control */
   tips?: {
@@ -106,7 +106,7 @@ export interface AbstractControlContainerSchema<Name extends AnySchemaName> exte
 }
 
 /** @internal */
-interface ControlChangeListenerMap<Val> {
+interface ControlChangeListener<Val> {
   valueChange?: (value: Val) => void;
   statusChange?: (status: FormControlStatus) => void;
 }
@@ -125,12 +125,12 @@ export interface AbstractElementSchema<Ele extends HTMLElement> {
 
 /** 抽象的组件控件图示 */
 export interface AbstractComponentControlSchema<Cmp, Val> extends AbstractComponentSchema<Cmp> {
-  listener?: ComponentOutputListenerMap<Cmp> & ControlChangeListenerMap<Val>;
+  listener?: ComponentOutputListenerMap<Cmp> & ControlChangeListener<Val>;
 }
 
 /** 抽象的元素控件图示 */
 export interface AbstractElementControlSchema<Ele extends HTMLElement, Val> extends AbstractElementSchema<Ele> {
-  listener?: HTMLElementEventListenerMap & ControlChangeListenerMap<Val>;
+  listener?: HTMLElementEventListenerMap & ControlChangeListener<Val>;
 }
 
 /** 抽象的文本控件图示 */
@@ -167,7 +167,7 @@ export interface AbstractDateControlSchema<Name extends AnySchemaName, Val> exte
 export interface AbstractInputFieldControlSchema<Placeholder extends string | [string, string] = string> {
   placeholder?: Placeholder;
   autofocus?: boolean;
-  readonly?: boolean | ((arg: CallbackArg<AbstractInputFieldControlSchema<Placeholder>>) => boolean) | string;
+  readonly?: boolean | ((arg: CallbackArgs<AbstractInputFieldControlSchema<Placeholder>>) => boolean) | string;
   size?: NzSizeLDSType;
   borderless?: boolean;
 }

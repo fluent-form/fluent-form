@@ -3,8 +3,10 @@ import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
 import { NzTabComponent, NzTabPosition, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
 import { StableBuilder } from '../utils';
-import { AbstractComponentSchema, AbstractSchema, CallbackArgs, SchemaName } from './abstract.schema';
+import { AbstractComponentSchema, AbstractSchema } from './abstract.schema';
 import { AnyBuilder, AnySchema } from './index.schema';
+import { CallbackArgs } from './interfaces';
+import { SchemaName } from './types';
 
 export interface StepsComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzStepsComponent> {
   kind: 'steps';

@@ -1,51 +1,15 @@
 import { NgClass, NgStyle } from '@angular/common';
 import { TemplateRef } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormControl, FormControlStatus, ValidatorFn } from '@angular/forms';
+import { AbstractControlOptions, AsyncValidatorFn, FormControl, FormControlStatus, ValidatorFn } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { AutocompleteDataSource } from 'ng-zorro-antd/auto-complete';
 import { CompareWith, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDateMode } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
-import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { ComponentOutputListenerMap, ComponentPropertyMap, HTMLElementEventListenerMap, HTMLElementPropertyMap } from '../types';
 import { AnyBuilder, AnySchema } from './index.schema';
-
-/** 任意字段控件名称 */
-export type AnySchemaName = SchemaName | DoubleSchemaName;
-/** 单字段图示名称 */
-export type SchemaName = string | number;
-/** 双字段图示名称 */
-export type DoubleSchemaName = readonly [string, string];
-
-/** @internal */
-type Cell = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24;
-
-/** @internal */
-interface Label {
-  value: string;
-  span?: Cell;
-  tooltip?: string | Tooltip;
-}
-
-/** @internal */
-interface Tooltip {
-  title: string | TemplateRef<void>;
-  icon: string | NzFormTooltipIcon;
-}
-
-/** @internal */
-export interface CallbackArgs<S> {
-  schema: S;
-  /** 如果当前没有对应的 control，会返回上一级的 control，这时候一般是 form group/array */
-  control: AbstractControl;
-  model: SafeAny;
-}
-
-export interface Col {
-  span?: Cell;
-  offset?: Cell;
-  flex?: number | string;
-}
+import { CallbackArgs, Col, Labelful } from './interfaces';
+import { AnySchemaName, Cell } from './types';
 
 /** 抽象图示 */
 export interface AbstractSchema<Name extends AnySchemaName> {
@@ -55,11 +19,6 @@ export interface AbstractSchema<Name extends AnySchemaName> {
   hidden?: boolean | ((arg: CallbackArgs<AbstractSchema<AnySchemaName>>) => boolean) | string;
   class?: NgClass['ngClass'];
   style?: NgStyle['ngStyle'];
-}
-
-/** 带标签的 */
-export interface Labelful {
-  label?: string | Label;
 }
 
 /** 抽象的真实控件图示 */

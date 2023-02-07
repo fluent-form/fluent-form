@@ -1,4 +1,5 @@
-import { AnyComponentContainerSchema, SchemaName, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema } from '../schemas';
+import { AnyComponentContainerSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema } from '../schemas';
+import { SchemaName } from '../schemas/types';
 import { Builder, builder, UnstableBuilder } from '../utils';
 import { KindAndName, RestSchema, REST_SCHEMA } from './helper';
 

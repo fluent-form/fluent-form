@@ -1,5 +1,6 @@
 import { SafeAny } from '@ngify/types';
-import { AbstractSchema, AnyBuilder, AnyControlContainerSchema, AnySchema, AnySchemaName, FormArraySchema, FormGroupSchema, SchemaName } from '../schemas';
+import { AbstractSchema, AnyBuilder, AnyControlContainerSchema, AnySchema, FormArraySchema, FormGroupSchema } from '../schemas';
+import { AnySchemaName, SchemaName } from '../schemas/types';
 import { Builder, builder, StableBuilder, standardSchema, standardSchemas, UnstableBuilder } from '../utils';
 import { KindAndName } from './helper';
 

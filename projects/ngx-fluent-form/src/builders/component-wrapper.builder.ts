@@ -1,4 +1,5 @@
-import { AnyComponentWrapperSchema, ButtonGroupComponentSchema, SchemaName } from '../schemas';
+import { AnyComponentWrapperSchema, ButtonGroupComponentSchema } from '../schemas';
+import { SchemaName } from '../schemas/types';
 import { Builder, builder, UnstableBuilder } from '../utils';
 import { KindAndName, RestSchema, REST_SCHEMA } from './helper';
 

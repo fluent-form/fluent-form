@@ -1,8 +1,10 @@
 import { TemplateRef } from '@angular/core';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzInputGroupComponent } from 'ng-zorro-antd/input';
-import { AbstractComponentSchema, AbstractSchema, AnySchemaName, Labelful, SchemaName } from './abstract.schema';
+import { AbstractComponentSchema, AbstractSchema } from './abstract.schema';
 import { ComposableComponentBuilder, ComposableComponentSchema } from './index.schema';
+import { Labelful } from './interfaces';
+import { AnySchemaName, SchemaName } from './types';
 
 export interface ControlWrapper {
   schemas: (ComposableComponentSchema | ComposableComponentBuilder)[];

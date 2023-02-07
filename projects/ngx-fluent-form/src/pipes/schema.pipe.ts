@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AnyControlSchema, AnySchema, AnySchemaName, FormArraySchema, FormGroupSchema } from '../schemas';
+import { AnyControlSchema, AnySchema, FormArraySchema, FormGroupSchema } from '../schemas';
+import { AnySchemaName } from '../schemas/types';
 import { schemasUtils } from '../utils';
 
 @Pipe({

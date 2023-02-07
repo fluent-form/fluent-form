@@ -1,11 +1,11 @@
 import { StableBuilder } from '../utils';
-import { AnySchemaName, DoubleSchemaName, SchemaName } from './abstract.schema';
 import { StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema } from './component-container.schema';
 import { ButtonGroupComponentSchema } from './component-wrapper.schema';
 import { ButtonComponentSchema, TextComponentSchema } from './component.schema';
 import { FormArraySchema, FormGroupSchema } from './control-container.schema';
 import { InputGroupComponentSchema } from './control-wrapper.schema';
 import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, InputControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from './control.schema';
+import { AnySchemaName, DoubleSchemaName, SchemaName } from './types';
 
 /** 任意图示 */
 export type AnySchema =

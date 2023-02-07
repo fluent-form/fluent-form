@@ -2,7 +2,9 @@ import { TemplateRef } from '@angular/core';
 import { ThemeType } from '@ant-design/icons-angular';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzFormTextComponent } from 'ng-zorro-antd/form';
-import { AbstractComponentSchema, AbstractElementSchema, AbstractSchema, CallbackArgs, Labelful, SchemaName } from './abstract.schema';
+import { AbstractComponentSchema, AbstractElementSchema, AbstractSchema } from './abstract.schema';
+import { CallbackArgs, Labelful } from './interfaces';
+import { SchemaName } from './types';
 
 /** @internal */
 interface Icon {

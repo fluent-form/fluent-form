@@ -1,5 +1,6 @@
-import { AbstractControlContainerSchema, SchemaName } from './abstract.schema';
+import { AbstractControlContainerSchema } from './abstract.schema';
 import { AnyControlContainerBuilder, AnyControlContainerSchema, SingleKeyControlBuilder, SingleKeyControlSchema } from './index.schema';
+import { SchemaName } from './types';
 
 export interface FormGroupSchema<Name extends SchemaName = SchemaName> extends AbstractControlContainerSchema<Name> {
   kind: 'group';

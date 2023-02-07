@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
-import { AnySchemaName, SchemaName } from '../schemas';
+import { AnySchemaName, SchemaName } from '../schemas/types';
 
 @Pipe({
   name: 'control',

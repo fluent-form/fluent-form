@@ -1,8 +1,8 @@
 import { ValidatorFn, Validators } from '@angular/forms';
 import { COMPONENT_CONTAINER_SCHEMA_KINDS, COMPONENT_SCHEMA_KINDS, COMPONENT_WRAPPER_SCHEMA_KINDS, CONTROL_CONTAINER_SCHEMA_KINDS, CONTROL_WRAPPER_SCHEMA_KINDS, TEXT_CONTROL_SCHEMA_KINDS } from '../constants';
 import { InputControlSchema, TextareaControlSchema } from '../schemas';
-import { AnySchemaName, SchemaName } from '../schemas/abstract.schema';
 import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlOrControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, AnyWrapperSchema, DoubleKeyControlSchema } from '../schemas/index.schema';
+import { AnySchemaName, SchemaName } from '../schemas/types';
 import { isBuilder, StableBuilder } from './builder.utils';
 import { isNumber } from './is.utils';
 

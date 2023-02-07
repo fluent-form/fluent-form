@@ -1,7 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
-import { AbstractSchema, AnySchemaName, CallbackArgs } from '../schemas';
+import { AbstractSchema } from '../schemas';
+import { CallbackArgs } from '../schemas/interfaces';
+import { AnySchemaName } from '../schemas/types';
 import { isFunction, isString } from '../utils';
 
 const RETURN_STR = 'return ';

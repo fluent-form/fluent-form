@@ -1,4 +1,5 @@
-import { AnyControlWrapperSchema, InputGroupComponentSchema, SchemaName } from '../schemas';
+import { AnyControlWrapperSchema, InputGroupComponentSchema } from '../schemas';
+import { SchemaName } from '../schemas/types';
 import { Builder, builder, UnstableBuilder } from '../utils';
 import { KindAndName, RestSchema, REST_SCHEMA } from './helper';
 

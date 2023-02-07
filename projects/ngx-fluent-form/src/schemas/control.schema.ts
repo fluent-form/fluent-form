@@ -14,15 +14,16 @@ import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { NzTreeSelectComponent } from 'ng-zorro-antd/tree-select';
 import { AnyObject } from '../types';
-import { AbstractComponentControlSchema, AbstractControlSchema, AbstractDateControlSchema, AbstractElementControlSchema, AbstractInputFieldControlSchema, AbstractTextControlSchema } from './abstract.schema';
+import { AbstractComponentControlSchema, AbstractControlSchema, AbstractDateControlSchema, AbstractElementControlSchema, AbstractTextControlSchema } from './abstract.schema';
+import { AbstractInputField } from './interfaces';
 import { AnySchemaName, SchemaName } from './types';
 
-export interface InputControlSchema<Name extends SchemaName = SchemaName, Val = string> extends AbstractTextControlSchema<Name, Val>, AbstractElementControlSchema<HTMLInputElement, Val>, AbstractInputFieldControlSchema {
+export interface InputControlSchema<Name extends SchemaName = SchemaName, Val = string> extends AbstractTextControlSchema<Name, Val>, AbstractElementControlSchema<HTMLInputElement, Val> {
   kind: 'input';
   type?: 'text' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
 }
 
-export interface TextareaControlSchema<Name extends SchemaName = SchemaName, Val = string> extends AbstractTextControlSchema<Name, Val>, AbstractElementControlSchema<HTMLTextAreaElement, Val>, AbstractInputFieldControlSchema {
+export interface TextareaControlSchema<Name extends SchemaName = SchemaName, Val = string> extends AbstractTextControlSchema<Name, Val>, AbstractElementControlSchema<HTMLTextAreaElement, Val> {
   kind: 'textarea';
   /** The number of lines in the text field */
   rows?: number;
@@ -30,7 +31,7 @@ export interface TextareaControlSchema<Name extends SchemaName = SchemaName, Val
   autosize?: boolean | { minRows: number, maxRows: number };
 }
 
-export interface NumberInputControlSchema<Name extends SchemaName = SchemaName, Val = number> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzInputNumberComponent, Val>, AbstractInputFieldControlSchema {
+export interface NumberInputControlSchema<Name extends SchemaName = SchemaName, Val = number> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzInputNumberComponent, Val>, AbstractInputField {
   kind: 'number';
   /** Maximum value */
   max?: number;
@@ -42,16 +43,16 @@ export interface NumberInputControlSchema<Name extends SchemaName = SchemaName, 
   step?: number;
 }
 
-export interface DatePickerControlSchema<Name extends SchemaName = SchemaName, Val = Date> extends AbstractDateControlSchema<Name, Val>, AbstractComponentControlSchema<NzDatePickerComponent, Val>, AbstractInputFieldControlSchema {
+export interface DatePickerControlSchema<Name extends SchemaName = SchemaName, Val = Date> extends AbstractDateControlSchema<Name, Val>, AbstractComponentControlSchema<NzDatePickerComponent, Val>, AbstractInputField {
   kind: 'date';
 }
 
-export interface DateRangePickerControlSchema<Name extends AnySchemaName = AnySchemaName, Val = [Date, Date]> extends AbstractDateControlSchema<Name, Val>, AbstractComponentControlSchema<NzRangePickerComponent, Val>, AbstractInputFieldControlSchema<[string, string]> {
+export interface DateRangePickerControlSchema<Name extends AnySchemaName = AnySchemaName, Val = [Date, Date]> extends AbstractDateControlSchema<Name, Val>, AbstractComponentControlSchema<NzRangePickerComponent, Val>, AbstractInputField<[string, string]> {
   kind: 'date-range';
   separator?: string;
 }
 
-export interface TimePickerControlSchema<Name extends SchemaName = SchemaName, Val = Date> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzTimePickerComponent, Val>, AbstractInputFieldControlSchema {
+export interface TimePickerControlSchema<Name extends SchemaName = SchemaName, Val = Date> extends AbstractControlSchema<Name, Val>, AbstractComponentControlSchema<NzTimePickerComponent, Val>, AbstractInputField {
   kind: 'time';
   /** Show clean button */
   clearable?: boolean;

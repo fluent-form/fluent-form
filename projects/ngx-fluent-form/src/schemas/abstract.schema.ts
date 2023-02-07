@@ -1,14 +1,14 @@
 import { NgClass, NgStyle } from '@angular/common';
 import { TemplateRef } from '@angular/core';
-import { AbstractControlOptions, AsyncValidatorFn, FormControl, FormControlStatus, ValidatorFn } from '@angular/forms';
+import { AbstractControlOptions, AsyncValidatorFn, FormControl, ValidatorFn } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { AutocompleteDataSource } from 'ng-zorro-antd/auto-complete';
-import { CompareWith, NzSizeLDSType } from 'ng-zorro-antd/core/types';
+import { CompareWith } from 'ng-zorro-antd/core/types';
 import { NzDateMode } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { ComponentOutputListenerMap, ComponentPropertyMap, HTMLElementEventListenerMap, HTMLElementPropertyMap } from '../types';
 import { AnyBuilder, AnySchema } from './index.schema';
-import { CallbackArgs, Col, Labelful } from './interfaces';
+import { AbstractInputField, CallbackArgs, Col, ControlEventChange, Labelful } from './interfaces';
 import { AnySchemaName, Cell } from './types';
 
 /** 抽象图示 */
@@ -16,7 +16,7 @@ export interface AbstractSchema<Name extends AnySchemaName> {
   kind: string;
   name?: Name;
   col?: Col | Cell;
-  hidden?: boolean | ((arg: CallbackArgs<AbstractSchema<AnySchemaName>>) => boolean) | string;
+  hidden?: boolean | ((args: CallbackArgs<AbstractSchema<AnySchemaName>>) => boolean) | string;
   class?: NgClass['ngClass'];
   style?: NgStyle['ngStyle'];
 }
@@ -33,9 +33,9 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
   };
   defaultValue?: SafeAny;
   /** Is it a required control */
-  required?: boolean | ((arg: CallbackArgs<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
+  required?: boolean | ((args: CallbackArgs<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
   /** Whether to disable control */
-  disabled?: boolean | ((arg: CallbackArgs<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
+  disabled?: boolean | ((args: CallbackArgs<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
   feedback?: boolean;
   /** Error message for control */
   tips?: {
@@ -64,12 +64,6 @@ export interface AbstractControlContainerSchema<Name extends AnySchemaName> exte
   updateOn?: AbstractControlOptions['updateOn'];
 }
 
-/** @internal */
-interface ControlChangeListener<Val> {
-  valueChange?: (value: Val) => void;
-  statusChange?: (status: FormControlStatus) => void;
-}
-
 /** 抽象的组件图示 */
 export interface AbstractComponentSchema<Cmp> {
   listener?: ComponentOutputListenerMap<Cmp>;
@@ -84,16 +78,16 @@ export interface AbstractElementSchema<Ele extends HTMLElement> {
 
 /** 抽象的组件控件图示 */
 export interface AbstractComponentControlSchema<Cmp, Val> extends AbstractComponentSchema<Cmp> {
-  listener?: ComponentOutputListenerMap<Cmp> & ControlChangeListener<Val>;
+  listener?: ComponentOutputListenerMap<Cmp> & ControlEventChange<Val>;
 }
 
 /** 抽象的元素控件图示 */
 export interface AbstractElementControlSchema<Ele extends HTMLElement, Val> extends AbstractElementSchema<Ele> {
-  listener?: HTMLElementEventListenerMap & ControlChangeListener<Val>;
+  listener?: HTMLElementEventListenerMap & ControlEventChange<Val>;
 }
 
 /** 抽象的文本控件图示 */
-export interface AbstractTextControlSchema<Name extends AnySchemaName, Val = string> extends AbstractControlSchema<Name, Val> {
+export interface AbstractTextControlSchema<Name extends AnySchemaName, Val = string> extends AbstractControlSchema<Name, Val>, AbstractInputField {
   length?: number | { max?: number, min?: number };
   autocomplete?: {
     backfill?: boolean;
@@ -120,13 +114,4 @@ export interface AbstractDateControlSchema<Name extends AnySchemaName, Val> exte
   today?: boolean;
   now?: boolean;
   suffixIcon?: string | TemplateRef<void>;
-}
-
-/** 抽象的输入字段控件图示 */
-export interface AbstractInputFieldControlSchema<Placeholder extends string | [string, string] = string> {
-  placeholder?: Placeholder;
-  autofocus?: boolean;
-  readonly?: boolean | ((arg: CallbackArgs<AbstractInputFieldControlSchema<Placeholder>>) => boolean) | string;
-  size?: NzSizeLDSType;
-  borderless?: boolean;
 }

@@ -23,10 +23,10 @@ export interface ButtonComponentSchema<Name extends SchemaName = SchemaName> ext
   kind: 'button';
   type?: NzButtonType;
   mode?: 'submit' | 'reset' | 'menu';
-  disabled?: boolean | ((arg: CallbackArgs<ButtonComponentSchema<SchemaName>>) => boolean) | string;
-  ghost?: boolean | ((arg: CallbackArgs<ButtonComponentSchema<SchemaName>>) => boolean) | string;
-  danger?: boolean | ((arg: CallbackArgs<ButtonComponentSchema<SchemaName>>) => boolean) | string;
-  loading?: boolean | ((arg: CallbackArgs<ButtonComponentSchema<SchemaName>>) => boolean) | string;
+  disabled?: boolean | ((args: CallbackArgs<ButtonComponentSchema<SchemaName>>) => boolean) | string;
+  ghost?: boolean | ((args: CallbackArgs<ButtonComponentSchema<SchemaName>>) => boolean) | string;
+  danger?: boolean | ((args: CallbackArgs<ButtonComponentSchema<SchemaName>>) => boolean) | string;
+  loading?: boolean | ((args: CallbackArgs<ButtonComponentSchema<SchemaName>>) => boolean) | string;
   shape?: NzButtonShape;
   size?: NzButtonSize;
   block?: boolean;

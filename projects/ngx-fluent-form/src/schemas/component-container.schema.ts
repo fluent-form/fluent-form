@@ -25,7 +25,7 @@ export interface StepComponentSchema<Name extends SchemaName = SchemaName> exten
   title: string | TemplateRef<void>;
   subtitle?: string | TemplateRef<void>;
   description?: string | TemplateRef<void>;
-  disabled?: boolean | ((arg: CallbackArgs<StepComponentSchema<SchemaName>>) => boolean) | string;
+  disabled?: boolean | ((args: CallbackArgs<StepComponentSchema<SchemaName>>) => boolean) | string;
   status?: 'wait' | 'process' | 'finish' | 'error';
   schemas: (AnySchema | AnyBuilder)[];
 }
@@ -45,6 +45,6 @@ export interface TabsComponentSchema<Name extends SchemaName = SchemaName> exten
 export interface TabComponentSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, AbstractComponentSchema<NzTabComponent> {
   kind: 'tab';
   title: string;
-  disabled?: boolean | ((arg: CallbackArgs<TabComponentSchema<SchemaName>>) => boolean) | string;
+  disabled?: boolean | ((args: CallbackArgs<TabComponentSchema<SchemaName>>) => boolean) | string;
   schemas: (AnySchema | AnyBuilder)[];
 }

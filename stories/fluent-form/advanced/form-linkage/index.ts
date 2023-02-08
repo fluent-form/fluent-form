@@ -36,7 +36,7 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
     super();
 
     this.schemas = form(
-      select('select').label('控制内容').options(SELECT_OPTIONS).col(6).listener({
+      select('select').label('控制内容').options(SELECT_OPTIONS).col(6).listeners({
         valueChange: value => {
           this.model.text = value;
           this.model = { ...this.model };
@@ -54,7 +54,7 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
         .disabled(({ model }) => !model.state),
     );
 
-    this.model = {}
+    this.model = {};
   }
 }
 
@@ -80,7 +80,7 @@ export const source = dedent`
   })
   export class ExampleComponent {
     schemas = form(
-      select('select').label('控制内容').options(SELECT_OPTIONS).col(6).listener({
+      select('select').label('控制内容').options(SELECT_OPTIONS).col(6).listeners({
         valueChange: value => {
           this.model.text = value;
           this.model = { ...this.model };

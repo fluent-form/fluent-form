@@ -1,6 +1,6 @@
 import { CascaderControlSchema, CheckboxControlSchema, InputControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { standardSchema } from '../utils';
-import { cascader, checkbox, checkboxGroup, date, dateRange, datetime, email, input, integer, number, password, radioGroup, rate, select, slider, string, textarea, time, toggle, treeSelect } from './control.builder';
+import { cascader, checkbox, checkboxGroup, date, dateRange, datetime, email, input, integer, number, password, radioGroup, rate, select, slider, string, telephone, textarea, time, toggle, treeSelect, url } from './control.builder';
 
 describe('control.builder', () => {
   it('input', () => {
@@ -18,6 +18,18 @@ describe('control.builder', () => {
   it('email', () => {
     const schema = standardSchema(email('email'));
     const value: InputControlSchema<'email'> = { kind: 'input', name: 'email', type: 'email' };
+    expect(schema).toEqual(value);
+  });
+
+  it('telephone', () => {
+    const schema = standardSchema(telephone('telephone'));
+    const value: InputControlSchema<'telephone'> = { kind: 'input', name: 'telephone', type: 'tel' };
+    expect(schema).toEqual(value);
+  });
+
+  it('url', () => {
+    const schema = standardSchema(url('url'));
+    const value: InputControlSchema<'url'> = { kind: 'input', name: 'url', type: 'url' };
     expect(schema).toEqual(value);
   });
 

@@ -8,7 +8,7 @@ import { Property, SafeAny } from '@ngify/types';
  * ```
  */
 export type HTMLElementEventListenerMap = {
-  [K in keyof HTMLElementEventMap]?: (event: HTMLElementEventMap[K]) => void
+  [K in keyof HTMLElementEventMap]?: (event: HTMLElementEventMap[K]) => void | Promise<void>
 };
 
 /**
@@ -37,7 +37,7 @@ type ComponentOutputName<C> = Exclude<
  * @template S 各种控件的图示
  */
 export type ComponentOutputListenerMap<C> = {
-  [K in ComponentOutputName<C>]?: (event: C[K] extends EventEmitter<infer E> ? E : never) => void
+  [K in ComponentOutputName<C>]?: (event: C[K] extends EventEmitter<infer E> ? E : never) => void | Promise<void>
 }
 
 /**

@@ -38,10 +38,10 @@ class TestingComponent {
   inputSchema: InputControlSchema = {
     kind: 'input',
     name: 'ipt',
-    property: {
+    properties: {
       readOnly: true
     },
-    listener: {
+    listeners: {
       input: emptyFn,
       valueChange: emptyFn,
       statusChange: emptyFn,
@@ -49,10 +49,10 @@ class TestingComponent {
   };
   rateSchema: RateControlSchema = {
     kind: 'rate',
-    property: {
+    properties: {
       nzAutoFocus: true
     },
-    listener: {
+    listeners: {
       valueChange: emptyFn,
       statusChange: emptyFn,
       nzOnFocus: emptyFn

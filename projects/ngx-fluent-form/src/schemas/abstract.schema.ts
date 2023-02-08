@@ -6,9 +6,8 @@ import { AutocompleteDataSource } from 'ng-zorro-antd/auto-complete';
 import { CompareWith } from 'ng-zorro-antd/core/types';
 import { NzDateMode } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
-import { ComponentOutputListenerMap, ComponentPropertyMap, HTMLElementEventListenerMap, HTMLElementPropertyMap } from '../types';
 import { AnyBuilder, AnySchema } from './index.schema';
-import { AbstractInputField, CallbackArgs, Col, ControlEventChange, Labelful } from './interfaces';
+import { AbstractInputField, CallbackArgs, Col, ControlEventListener, Labelful } from './interfaces';
 import { AnySchemaName, Cell } from './types';
 
 /** 抽象图示 */
@@ -54,7 +53,7 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
 }
 
 /** 抽象的容器控件图示 */
-export interface AbstractControlContainerSchema<Name extends AnySchemaName> extends AbstractSchema<Name>, AbstractElementControlSchema<HTMLFormElement, SafeAny> {
+export interface AbstractControlContainerSchema<Name extends AnySchemaName> extends AbstractSchema<Name>, ControlEventListener<SafeAny> {
   label?: string;
   schemas: (AnySchema | AnyBuilder)[];
   /** Validator for the control */
@@ -62,28 +61,6 @@ export interface AbstractControlContainerSchema<Name extends AnySchemaName> exte
   /** Async validators for control */
   asyncValidators?: AsyncValidatorFn[];
   updateOn?: AbstractControlOptions['updateOn'];
-}
-
-/** 抽象的组件图示 */
-export interface AbstractComponentSchema<Cmp> {
-  listener?: ComponentOutputListenerMap<Cmp>;
-  property?: ComponentPropertyMap<Cmp>;
-}
-
-/** 抽象的元素图示 */
-export interface AbstractElementSchema<Ele extends HTMLElement> {
-  listener?: HTMLElementEventListenerMap;
-  property?: HTMLElementPropertyMap<Ele>;
-}
-
-/** 抽象的组件控件图示 */
-export interface AbstractComponentControlSchema<Cmp, Val> extends AbstractComponentSchema<Cmp> {
-  listener?: ComponentOutputListenerMap<Cmp> & ControlEventChange<Val>;
-}
-
-/** 抽象的元素控件图示 */
-export interface AbstractElementControlSchema<Ele extends HTMLElement, Val> extends AbstractElementSchema<Ele> {
-  listener?: HTMLElementEventListenerMap & ControlEventChange<Val>;
 }
 
 /** 抽象的文本控件图示 */

@@ -42,41 +42,40 @@ export class FluentBinderDirective<
     const { schema } = this;
 
     if (isPropertyPatcher(schema) && schema.properties) {
-      Object.keys(schema.properties).forEach(property => {
-        const value = schema.properties![property];
-        this.host[property as keyof (C | E)] = value as (C | E)[keyof (C | E)];
-      });
+      for (const [property, value] of Object.entries(schema.properties)) {
+        this.host[property as keyof (C | E)] = value;
+      }
     }
 
     if (isEventListener(schema) && schema.listeners) {
-      Object.keys(schema.listeners).forEach(eventName => {
+      for (const [eventName, listener] of Object.entries(schema.listeners)) {
         if (eventName === 'valueChange') {
           this.control!.valueChanges.pipe(
             observeOn(asapScheduler), // 微任务调度，确保顶层事件先发射
             takeUntil(this.destory$),
-          ).subscribe(schema.listeners![eventName]);
-          return;
+          ).subscribe(listener);
+          continue;
         }
 
         if (eventName === 'statusChange') {
           this.control!.statusChanges.pipe(
             observeOn(asapScheduler),
             takeUntil(this.destory$),
-          ).subscribe(schema.listeners![eventName]);
-          return;
+          ).subscribe(listener);
+          continue;
         }
 
         if (this.host instanceof HTMLElement) {
           fromEvent(this.host, eventName).pipe(
             takeUntil(this.destory$)
-          ).subscribe(schema.listeners![eventName]);
-          return;
+          ).subscribe(listener);
+          continue;
         }
 
         (this.host[eventName as keyof C] as EventEmitter<SafeAny>).pipe(
           takeUntil(this.destory$)
-        ).subscribe(schema.listeners![eventName]);
-      });
+        ).subscribe(listener);
+      }
     }
   }
 }

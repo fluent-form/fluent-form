@@ -7,7 +7,7 @@ import { CompareWith } from 'ng-zorro-antd/core/types';
 import { NzDateMode } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { AnyBuilder, AnySchema } from './index.schema';
-import { AbstractInputField, CallbackArgs, Col, ControlEventListener, Labelful } from './interfaces';
+import { AbstractInputField, CallbackArgs, Col, ControlEventListener, ControlValueMapper, Labelful } from './interfaces';
 import { AnySchemaName, Cell } from './types';
 
 /** 抽象图示 */
@@ -24,12 +24,7 @@ export interface AbstractSchema<Name extends AnySchemaName> {
 export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends AbstractSchema<Name>, Labelful {
   id?: string;
   /** I/O mapper for control */
-  mapper?: {
-    /** An input mapper that maps from a model's value to a form control's value */
-    input: (value: SafeAny) => Val | null,
-    /** An output mapper that maps from a form control's value to a model's value */
-    output: (value: Val | null) => SafeAny,
-  };
+  mapper?: ControlValueMapper<Val>;
   defaultValue?: SafeAny;
   /** Is it a required control */
   required?: boolean | ((args: CallbackArgs<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;

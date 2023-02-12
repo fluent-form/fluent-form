@@ -30,6 +30,13 @@ export interface Col {
   flex?: number | string;
 }
 
+export interface ControlValueMapper<V> {
+  /** An input mapper that maps from a model's value to a form control's value */
+  input: (value: SafeAny) => V | null;
+  /** An output mapper that maps from a form control's value to a model's value */
+  output: (value: V | null) => SafeAny;
+}
+
 export interface CallbackArgs<S> {
   schema: S;
   /** 如果当前没有对应的 control，会返回上一级的 control，这时候一般是 form group/array */

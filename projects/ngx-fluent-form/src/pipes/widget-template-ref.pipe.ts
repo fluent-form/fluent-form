@@ -9,8 +9,8 @@ import { WidgetRegistry } from '../widgets/widget-registry.service';
 export class FluentWidgetTemplateRefPipe implements PipeTransform {
   private readonly registry = inject(WidgetRegistry);
 
-  transform(value: WidgetKind): TemplateRef<unknown> {
-    return this.registry.get(value);
+  transform(value: string): TemplateRef<unknown> {
+    return this.registry.get(value as WidgetKind);
   }
 
 }

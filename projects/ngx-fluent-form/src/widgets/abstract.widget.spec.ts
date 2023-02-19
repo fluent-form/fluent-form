@@ -12,27 +12,6 @@ describe('AbstractTextControlWidget', () => {
   });
 
   describe('helper function', () => {
-    it('col.span', () => {
-      expect(helper.col.span(undefined)).toBeNull();
-      expect(helper.col.span(1)).toBe(1);
-      expect(helper.col.span({ span: 1 })).toBe(1);
-      expect(helper.col.span({ flex: 1 })).toBeNull();
-    });
-
-    it('col.flex', () => {
-      expect(helper.col.flex(undefined)).toBeNull();
-      expect(helper.col.flex(1)).toBeNull();
-      expect(helper.col.flex({ span: 1 })).toBeNull();
-      expect(helper.col.flex({ flex: 1 })).toBe(1);
-    });
-
-    it('col.offset', () => {
-      expect(helper.col.offset(undefined)).toBeNull();
-      expect(helper.col.offset(1)).toBeNull();
-      expect(helper.col.offset({ span: 1 })).toBeNull();
-      expect(helper.col.offset({ offset: 1 })).toBe(1);
-    });
-
     it('length.min', () => {
       expect(helper.length.min(undefined)).toBeUndefined();
       expect(helper.length.min(1)).toBe(1);

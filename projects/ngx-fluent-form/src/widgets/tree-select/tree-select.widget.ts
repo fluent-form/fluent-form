@@ -5,11 +5,11 @@ import { SafeAny } from '@ngify/types';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { FluentBinderDirective, FluentComposableDirective, FluentWithContextGuardDirective } from '../../directives';
-import { FluentCallPipe, FluentTypeofPipe } from '../../pipes';
+import { FluentCallPipe, FluentColumnPipe, FluentTypeofPipe } from '../../pipes';
 import { FluentInvokePipe } from '../../pipes/invoke.pipe';
 import { TreeSelectControlSchema } from '../../schemas';
 import { isBoolean, isUndefined } from '../../utils';
-import { AbstractWidget, COL_HELPER, WidgetTemplateContext } from '../abstract.widget';
+import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSchema, FormControl<SafeAny[]>>;
 
@@ -26,14 +26,14 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
     FluentComposableDirective,
     FluentTypeofPipe,
     FluentCallPipe,
-    FluentInvokePipe
+    FluentInvokePipe,
+    FluentColumnPipe
   ],
   templateUrl: './tree-select.widget.html',
   styles: [`nz-tree-select { width: 100% }`]
 })
 export class TreeSelectWidget extends AbstractWidget<TreeSelectWidgetTemplateContext> {
   protected readonly helper = {
-    col: COL_HELPER,
     checkable: (checkable: TreeSelectControlSchema['checkable']) =>
       isBoolean(checkable) ? checkable : !isUndefined(checkable?.strict),
     checkStrictly: (checkable: TreeSelectControlSchema['checkable']) =>

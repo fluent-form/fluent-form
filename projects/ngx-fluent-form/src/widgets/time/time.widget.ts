@@ -4,10 +4,9 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { FluentBinderDirective, FluentComposableDirective, FluentWithContextGuardDirective } from '../../directives';
-import { FluentCallPipe, FluentTypeofPipe } from '../../pipes';
-import { FluentInvokePipe } from '../../pipes/invoke.pipe';
+import { FluentCallPipe, FluentColumnPipe, FluentTypeofPipe } from '../../pipes';
 import { TimePickerControlSchema } from '../../schemas';
-import { AbstractWidget, COL_HELPER, WidgetTemplateContext } from '../abstract.widget';
+import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type TimeWidgetTemplateContext = WidgetTemplateContext<TimePickerControlSchema, FormControl<Date>>;
 
@@ -24,11 +23,9 @@ type TimeWidgetTemplateContext = WidgetTemplateContext<TimePickerControlSchema, 
     FluentComposableDirective,
     FluentTypeofPipe,
     FluentCallPipe,
-    FluentInvokePipe
+    FluentColumnPipe
   ],
   templateUrl: './time.widget.html',
   styles: [`nz-time-picker { width: 100% }`]
 })
-export class TimeWidget extends AbstractWidget<TimeWidgetTemplateContext> {
-  protected readonly helper = { col: COL_HELPER } as const;
-}
+export class TimeWidget extends AbstractWidget<TimeWidgetTemplateContext> { }

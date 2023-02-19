@@ -5,10 +5,9 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { FluentFormColContentOutletComponent } from '../../components';
 import { FluentBinderDirective, FluentConfigDirective, FluentWithContextGuardDirective } from '../../directives';
-import { FluentCallPipe, FluentControlPipe } from '../../pipes';
-import { FluentInvokePipe } from '../../pipes/invoke.pipe';
+import { FluentCallPipe, FluentColumnPipe, FluentControlPipe } from '../../pipes';
 import { StepsComponentSchema } from '../../schemas';
-import { AbstractWidget, COL_HELPER, WidgetTemplateContext } from '../abstract.widget';
+import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type StepsWidgetTemplateContext = WidgetTemplateContext<StepsComponentSchema, FormGroup>;
 
@@ -27,10 +26,8 @@ type StepsWidgetTemplateContext = WidgetTemplateContext<StepsComponentSchema, Fo
     FluentWithContextGuardDirective,
     FluentCallPipe,
     FluentControlPipe,
-    FluentInvokePipe
+    FluentColumnPipe
   ],
   templateUrl: './steps.widget.html',
 })
-export class StepsWidget extends AbstractWidget<StepsWidgetTemplateContext> {
-  protected readonly helper = { col: COL_HELPER } as const;
-}
+export class StepsWidget extends AbstractWidget<StepsWidgetTemplateContext> { }

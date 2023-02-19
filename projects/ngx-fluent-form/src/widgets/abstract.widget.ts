@@ -1,6 +1,6 @@
 import { Directive, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormControl } from '@angular/forms';
-import { AbstractSchema, AbstractTextControlSchema, AnySchema } from '../schemas';
+import { AbstractTextControlSchema, AnySchema } from '../schemas';
 import { StandardSchema } from '../schemas/types';
 import { AnyArray, AnyObject } from '../types';
 import { isNumber } from '../utils';
@@ -21,7 +21,6 @@ export abstract class AbstractWidget<C> {
 
 export abstract class AbstractTextControlWidget<C> extends AbstractWidget<C> {
   protected readonly helper = {
-    col: COL_HELPER,
     length: {
       min: (length: AbstractTextControlSchema<string>['length']) =>
         isNumber(length) ? length : length?.min,
@@ -34,9 +33,3 @@ export abstract class AbstractTextControlWidget<C> extends AbstractWidget<C> {
     }
   } as const;
 }
-
-export const COL_HELPER = {
-  span: (col: AbstractSchema<string>['col']) => isNumber(col) ? col : col?.span ?? null,
-  flex: (col: AbstractSchema<string>['col']) => isNumber(col) || !col?.flex ? null : col.flex,
-  offset: (col: AbstractSchema<string>['col']) => isNumber(col) || !col?.offset ? null : col.offset,
-} as const;

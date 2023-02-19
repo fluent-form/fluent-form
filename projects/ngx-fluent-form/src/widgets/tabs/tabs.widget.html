@@ -25,9 +25,9 @@
       <nz-row [nzGutter]="config.gutter">
         <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
           <nz-col
-            [nzSpan]="helper.col.span | invoke: schema.col"
-            [nzFlex]="helper.col.flex | invoke: schema.col"
-            [nzOffset]="helper.col.offset | invoke: schema.col"
+            [nzSpan]="schema.col | col: 'span'"
+            [nzFlex]="schema.col | col: 'flex'"
+            [nzOffset]="schema.col | col: 'offset'"
             [hidden]="schema.hidden | call: model:schema:control">
             <fluent-form-col-content-outlet [control]="control" [schema]="schema" [model]="model">
             </fluent-form-col-content-outlet>

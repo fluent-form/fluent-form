@@ -4,11 +4,11 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { FluentBinderDirective, FluentComposableDirective, FluentWithContextGuardDirective } from '../../directives';
-import { FluentCallPipe, FluentTypeofPipe } from '../../pipes';
+import { FluentCallPipe, FluentColumnPipe, FluentTypeofPipe } from '../../pipes';
 import { FluentInvokePipe } from '../../pipes/invoke.pipe';
 import { NumberInputControlSchema } from '../../schemas';
 import { isNumber } from '../../utils';
-import { AbstractWidget, COL_HELPER, WidgetTemplateContext } from '../abstract.widget';
+import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type NumberWidgetTemplateContext = WidgetTemplateContext<NumberInputControlSchema, FormControl<number>>;
 
@@ -26,7 +26,8 @@ type NumberWidgetTemplateContext = WidgetTemplateContext<NumberInputControlSchem
     FluentComposableDirective,
     FluentTypeofPipe,
     FluentCallPipe,
-    FluentInvokePipe
+    FluentInvokePipe,
+    FluentColumnPipe
   ],
   templateUrl: './number.widget.html',
   styles: [`nz-input-number { width: 100% }`]
@@ -35,7 +36,6 @@ export class NumberWidget extends AbstractWidget<NumberWidgetTemplateContext> {
   protected readonly infinity = Infinity;
 
   protected readonly helper = {
-    col: COL_HELPER,
     precision: (precision: NumberInputControlSchema['precision']) =>
       isNumber(precision) ? precision : precision?.value,
     precisionMode: (precision: NumberInputControlSchema['precision']) =>

@@ -4,10 +4,9 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { FluentBinderDirective, FluentComposableDirective, FluentWithContextGuardDirective } from '../../directives';
-import { FluentCallPipe, FluentTypeofPipe } from '../../pipes';
-import { FluentInvokePipe } from '../../pipes/invoke.pipe';
+import { FluentCallPipe, FluentColumnPipe, FluentTypeofPipe } from '../../pipes';
 import { DateRangePickerControlSchema } from '../../schemas';
-import { AbstractWidget, COL_HELPER, WidgetTemplateContext } from '../abstract.widget';
+import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type DateRangeWidgetTemplateContext = WidgetTemplateContext<DateRangePickerControlSchema, FormControl<[Date, Date]>>;
 
@@ -24,11 +23,9 @@ type DateRangeWidgetTemplateContext = WidgetTemplateContext<DateRangePickerContr
     FluentComposableDirective,
     FluentTypeofPipe,
     FluentCallPipe,
-    FluentInvokePipe
+    FluentColumnPipe
   ],
   templateUrl: './date-range.widget.html',
   styles: [`nz-range-picker { width: 100% }`]
 })
-export class DateRangeWidget extends AbstractWidget<DateRangeWidgetTemplateContext> {
-  protected readonly helper = { col: COL_HELPER } as const;
-}
+export class DateRangeWidget extends AbstractWidget<DateRangeWidgetTemplateContext> { }

@@ -16,6 +16,16 @@ describe('FluentControlPipe', () => {
     expect(pipe).toBeTruthy();
   });
 
+  describe('should be able to find the parent control', () => {
+    it('pass in a undefined', () => {
+      expect(pipe.transform(undefined, formGroup)).toBe(formGroup);
+    });
+
+    it('pass in a other name', () => {
+      expect(pipe.transform('b', formGroup)).toBe(formGroup);
+    });
+  });
+
   it('should be able to find the control', () => {
     expect(pipe.transform('a', formGroup)).toBeTruthy();
   });

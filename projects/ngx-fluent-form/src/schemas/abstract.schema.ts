@@ -8,12 +8,10 @@ import { NzDateMode } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { AnyBuilder, AnySchema } from './index.schema';
 import { AbstractInputField, CallbackArgs, Col, ControlEventListener, ControlValueMapper, Labelful } from './interfaces';
-import { AnySchemaName, Cell } from './types';
+import { AnySchemaName, Cell, SchemaLike } from './types';
 
 /** 抽象图示 */
-export interface AbstractSchema<Name extends AnySchemaName> {
-  kind: string;
-  name?: Name;
+export interface AbstractSchema<N extends AnySchemaName> extends SchemaLike<N> {
   col?: Col | Cell;
   hidden?: boolean | ((args: CallbackArgs<AbstractSchema<AnySchemaName>>) => boolean) | string;
   class?: NgClass['ngClass'];

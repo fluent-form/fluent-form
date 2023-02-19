@@ -1,13 +1,14 @@
 import { NgClass, NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { FluentFormColContentOutletComponent } from '../../components';
 import { FluentBinderDirective, FluentConfigDirective, FluentWithContextGuardDirective } from '../../directives';
-import { FluentCallPipe, FluentControlPipe, FluentTypeofPipe } from '../../pipes';
+import { FluentCallPipe, FluentControlPipe } from '../../pipes';
+import { FluentInvokePipe } from '../../pipes/invoke.pipe';
 import { TabsComponentSchema } from '../../schemas';
-import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
+import { AbstractWidget, COL_HELPER, WidgetTemplateContext } from '../abstract.widget';
 
 type TabsWidgetTemplateContext = WidgetTemplateContext<TabsComponentSchema, FormGroup>;
 
@@ -25,11 +26,11 @@ type TabsWidgetTemplateContext = WidgetTemplateContext<TabsComponentSchema, Form
     FluentConfigDirective,
     FluentWithContextGuardDirective,
     FluentCallPipe,
-    FluentTypeofPipe,
-    FluentControlPipe
+    FluentControlPipe,
+    FluentInvokePipe
   ],
   templateUrl: './tabs.widget.html',
 })
 export class TabsWidget extends AbstractWidget<TabsWidgetTemplateContext> {
-  @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<TabsWidgetTemplateContext>;
+  protected readonly helper = { col: COL_HELPER } as const;
 }

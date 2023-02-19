@@ -1,5 +1,5 @@
 import { NgClass, NgStyle } from '@angular/common';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { NzCascaderModule } from 'ng-zorro-antd/cascader';
@@ -31,7 +31,5 @@ type CascaderWidgetTemplateContext = WidgetTemplateContext<CascaderControlSchema
   styles: [`nz-cascader { width: 100% }`]
 })
 export class CascaderWidget extends AbstractWidget<CascaderWidgetTemplateContext> {
-  @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<CascaderWidgetTemplateContext>;
-
   protected readonly helper = { col: COL_HELPER } as const;
 }

@@ -1,5 +1,5 @@
 import { NgClass, NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { FluentBinderDirective, FluentWithContextGuardDirective, FluentWithInjectorDirective } from '../../directives';
@@ -24,6 +24,4 @@ type ButtonGroupWidgetTemplateContext = WidgetTemplateContext<ButtonGroupCompone
   ],
   templateUrl: './button-group.widget.html',
 })
-export class ButtonGroupWidget extends AbstractWidget<ButtonGroupWidgetTemplateContext> {
-  @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<ButtonGroupWidgetTemplateContext>;
-}
+export class ButtonGroupWidget extends AbstractWidget<ButtonGroupWidgetTemplateContext> { }

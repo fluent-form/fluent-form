@@ -1,5 +1,5 @@
 import { NgClass, NgStyle } from '@angular/common';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { FluentBinderDirective, FluentWithContextGuardDirective } from '../../directives';
@@ -21,6 +21,4 @@ type ToggleWidgetTemplateContext = WidgetTemplateContext<ToggleControlSchema, Fo
   templateUrl: './toggle.widget.html',
   styles: [`nz-switch { width: 100% }`]
 })
-export class ToggleWidget extends AbstractWidget<ToggleWidgetTemplateContext> {
-  @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<ToggleWidgetTemplateContext>;
-}
+export class ToggleWidget extends AbstractWidget<ToggleWidgetTemplateContext> { }

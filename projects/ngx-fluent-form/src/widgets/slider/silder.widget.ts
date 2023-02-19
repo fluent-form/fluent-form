@@ -1,5 +1,5 @@
 import { NgClass, NgStyle } from '@angular/common';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { FluentBinderDirective, FluentWithContextGuardDirective } from '../../directives';
@@ -20,6 +20,4 @@ type SilderWidgetTemplateContext = WidgetTemplateContext<SliderControlSchema, Fo
   ],
   templateUrl: './silder.widget.html',
 })
-export class SilderWidget extends AbstractWidget<SilderWidgetTemplateContext> {
-  @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<SilderWidgetTemplateContext>;
-}
+export class SilderWidget extends AbstractWidget<SilderWidgetTemplateContext> { }

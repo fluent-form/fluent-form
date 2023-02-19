@@ -1,5 +1,5 @@
 import { NgClass, NgIf, NgStyle } from '@angular/common';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -31,6 +31,4 @@ type TextareaWidgetTemplateContext = WidgetTemplateContext<TextareaControlSchema
   ],
   templateUrl: './textarea.widget.html',
 })
-export class TextareaWidget extends AbstractTextControlWidget<TextareaWidgetTemplateContext> {
-  @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<TextareaWidgetTemplateContext>;
-}
+export class TextareaWidget extends AbstractTextControlWidget<TextareaWidgetTemplateContext> { }

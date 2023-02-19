@@ -1,5 +1,5 @@
 import { NgClass, NgStyle } from '@angular/common';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { FluentBinderDirective, FluentWithContextGuardDirective } from '../../directives';
@@ -20,6 +20,4 @@ type CheckboxWidgetTemplateContext = WidgetTemplateContext<CheckboxControlSchema
   ],
   templateUrl: './checkbox.widget.html',
 })
-export class CheckboxWidget extends AbstractWidget<CheckboxWidgetTemplateContext> {
-  @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<CheckboxWidgetTemplateContext>;
-}
+export class CheckboxWidget extends AbstractWidget<CheckboxWidgetTemplateContext> { }

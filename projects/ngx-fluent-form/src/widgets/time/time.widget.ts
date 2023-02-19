@@ -1,5 +1,5 @@
 import { NgClass, NgStyle } from '@angular/common';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
@@ -30,7 +30,5 @@ type TimeWidgetTemplateContext = WidgetTemplateContext<TimePickerControlSchema, 
   styles: [`nz-time-picker { width: 100% }`]
 })
 export class TimeWidget extends AbstractWidget<TimeWidgetTemplateContext> {
-  @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<TimeWidgetTemplateContext>;
-
   protected readonly helper = { col: COL_HELPER } as const;
 }

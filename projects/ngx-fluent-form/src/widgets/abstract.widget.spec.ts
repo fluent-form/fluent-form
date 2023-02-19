@@ -1,9 +1,6 @@
-import { TemplateRef } from '@angular/core';
 import { AbstractTextControlWidget } from './abstract.widget';
 
-class TextControlWidget extends AbstractTextControlWidget<unknown> {
-  templateRef!: TemplateRef<unknown>;
-}
+class TextControlWidget extends AbstractTextControlWidget<unknown> { }
 
 describe('AbstractTextControlWidget', () => {
   let component: AbstractTextControlWidget<unknown>;

@@ -1,5 +1,5 @@
 import { NgClass, NgStyle } from '@angular/common';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -30,7 +30,5 @@ type DateWidgetTemplateContext = WidgetTemplateContext<DatePickerControlSchema, 
   styles: [`nz-date-picker { width: 100% }`]
 })
 export class DateWidget extends AbstractWidget<DateWidgetTemplateContext> {
-  @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<DateWidgetTemplateContext>;
-
   protected readonly helper = { col: COL_HELPER } as const;
 }

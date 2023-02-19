@@ -1,20 +1,22 @@
-import { TemplateRef } from '@angular/core';
+import { Directive, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormControl } from '@angular/forms';
 import { AbstractSchema, AbstractTextControlSchema, AnySchema } from '../schemas';
+import { StandardSchema } from '../schemas/types';
 import { AnyArray, AnyObject } from '../types';
 import { isNumber } from '../utils';
 
 type Model<C extends AbstractControl> = C extends FormArray ? AnyArray : AnyObject;
 
 export interface WidgetTemplateContext<S extends AnySchema, C extends AbstractControl = FormControl> {
-  schema: S;
+  schema: StandardSchema<S>;
   control: C;
   model: Model<C>;
 }
 
+@Directive()
 export abstract class AbstractWidget<C> {
   protected readonly contextGuard!: C;
-  readonly abstract templateRef: TemplateRef<C>;
+  @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<C>;
 }
 
 export abstract class AbstractTextControlWidget<C> extends AbstractWidget<C> {

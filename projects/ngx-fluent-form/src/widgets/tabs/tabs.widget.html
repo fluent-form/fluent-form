@@ -17,17 +17,17 @@
       *ngFor="let tabSchema of schema.schemas"
       #cmp
       [fluentBinder]="cmp"
-      [fluentBinderSchema]="$any(tabSchema)"
-      [ngClass]="$any(tabSchema).class"
-      [ngStyle]="$any(tabSchema).style"
-      [nzTitle]="$any(tabSchema).title"
-      [nzDisabled]="$any(tabSchema).disabled | call: model:$any(tabSchema):control">
+      [fluentBinderSchema]="tabSchema"
+      [ngClass]="tabSchema.class"
+      [ngStyle]="tabSchema.style"
+      [nzTitle]="tabSchema.title"
+      [nzDisabled]="tabSchema.disabled | call: model:tabSchema:control">
       <nz-row [nzGutter]="config.gutter">
         <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
           <nz-col
-            [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
-            [nzOffset]="schema.col?.offset"
-            [nzFlex]="schema.col?.flex"
+            [nzSpan]="helper.col.span | invoke: schema.col"
+            [nzFlex]="helper.col.flex | invoke: schema.col"
+            [nzOffset]="helper.col.offset | invoke: schema.col"
             [hidden]="schema.hidden | call: model:schema:control">
             <fluent-form-col-content-outlet [control]="control" [schema]="schema" [model]="model">
             </fluent-form-col-content-outlet>
@@ -35,7 +35,7 @@
         </ng-template>
 
         <ng-container
-          *ngFor="let subschema of $any(tabSchema).schemas"
+          *ngFor="let subschema of tabSchema.schemas"
           [ngTemplateOutlet]="formColTemplate"
           [ngTemplateOutletContext]="{ control: (subschema.name | control: control), schema: subschema, model: model }">
         </ng-container>

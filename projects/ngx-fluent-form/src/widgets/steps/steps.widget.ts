@@ -1,13 +1,14 @@
 import { NgClass, NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { FluentFormColContentOutletComponent } from '../../components';
 import { FluentBinderDirective, FluentConfigDirective, FluentWithContextGuardDirective } from '../../directives';
-import { FluentCallPipe, FluentControlPipe, FluentTypeofPipe } from '../../pipes';
+import { FluentCallPipe, FluentControlPipe } from '../../pipes';
+import { FluentInvokePipe } from '../../pipes/invoke.pipe';
 import { StepsComponentSchema } from '../../schemas';
-import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
+import { AbstractWidget, COL_HELPER, WidgetTemplateContext } from '../abstract.widget';
 
 type StepsWidgetTemplateContext = WidgetTemplateContext<StepsComponentSchema, FormGroup>;
 
@@ -25,11 +26,11 @@ type StepsWidgetTemplateContext = WidgetTemplateContext<StepsComponentSchema, Fo
     FluentConfigDirective,
     FluentWithContextGuardDirective,
     FluentCallPipe,
-    FluentTypeofPipe,
-    FluentControlPipe
+    FluentControlPipe,
+    FluentInvokePipe
   ],
   templateUrl: './steps.widget.html',
 })
 export class StepsWidget extends AbstractWidget<StepsWidgetTemplateContext> {
-  @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<StepsWidgetTemplateContext>;
+  protected readonly helper = { col: COL_HELPER } as const;
 }

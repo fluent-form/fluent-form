@@ -1,5 +1,5 @@
 import { NgClass, NgStyle } from '@angular/common';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -32,8 +32,6 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
   styles: [`nz-tree-select { width: 100% }`]
 })
 export class TreeSelectWidget extends AbstractWidget<TreeSelectWidgetTemplateContext> {
-  @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<TreeSelectWidgetTemplateContext>;
-
   protected readonly helper = {
     col: COL_HELPER,
     checkable: (checkable: TreeSelectControlSchema['checkable']) =>

@@ -1,5 +1,5 @@
 import { NgClass, NgIf, NgStyle } from '@angular/common';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
@@ -32,8 +32,6 @@ type NumberWidgetTemplateContext = WidgetTemplateContext<NumberInputControlSchem
   styles: [`nz-input-number { width: 100% }`]
 })
 export class NumberWidget extends AbstractWidget<NumberWidgetTemplateContext> {
-  @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<NumberWidgetTemplateContext>;
-
   protected readonly infinity = Infinity;
 
   protected readonly helper = {

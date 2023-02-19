@@ -1,5 +1,5 @@
 import { NgClass, NgStyle } from '@angular/common';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -22,6 +22,4 @@ type TextWidgetTemplateContext = WidgetTemplateContext<TextComponentSchema, Form
   ],
   templateUrl: './text.widget.html',
 })
-export class TextWidget extends AbstractWidget<TextWidgetTemplateContext> {
-  @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<TextWidgetTemplateContext>;
-}
+export class TextWidget extends AbstractWidget<TextWidgetTemplateContext> { }

@@ -1,5 +1,5 @@
 import { NgClass, NgStyle } from '@angular/common';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { FluentBinderDirective, FluentWithContextGuardDirective } from '../../directives';
@@ -20,6 +20,4 @@ type RateWidgetTemplateContext = WidgetTemplateContext<RateControlSchema, FormCo
   ],
   templateUrl: './rate.widget.html',
 })
-export class RateWidget extends AbstractWidget<RateWidgetTemplateContext> {
-  @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<RateWidgetTemplateContext>;
-}
+export class RateWidget extends AbstractWidget<RateWidgetTemplateContext> { }

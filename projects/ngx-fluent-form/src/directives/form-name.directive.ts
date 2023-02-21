@@ -33,7 +33,7 @@ export class FluentFormNameDirective<T extends AnyObject | AnyArray> extends Con
   }
   /** @internal */
   get model(): T {
-    return this.controlContainer.directive.model[this.name as keyof (AnyObject | AnyArray)] as T;
+    return this.controlContainer.directive.model[this.name as keyof T] as T;
   }
 
   constructor(

@@ -50,6 +50,6 @@ export type ComponentOutputListenerMap<C> = {
 export type ComponentPropertyMap<C> = Partial<Omit<C, ComponentOutputName<C>>>;
 
 /** Any Object */
-export type AnyObject = Record<string, SafeAny>;
+export type AnyObject = Record<string | number | symbol, SafeAny>;
 /** Any Array */
 export type AnyArray = SafeAny[];

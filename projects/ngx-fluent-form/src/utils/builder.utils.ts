@@ -1,31 +1,31 @@
 import { SafeAny } from '@ngify/types';
 import { AnyObject } from '../types';
 
-const IS_BUILDER_KEY = '__is_builder__';
+const BUILDER = Symbol('BUILDER');
 
 export function builder<T>(): Builder<T>
 export function builder<T, R extends keyof T>(rests: readonly R[]): Builder<T, R>
 export function builder<T, R extends keyof T>(rests?: readonly R[]): Builder<T, R> {
   const builder = new Proxy({} as AnyObject, {
-    get(target, prop: string) {
-      if ('build' === prop) {
+    get(target, property) {
+      if ('build' === property) {
         return () => target;
       }
 
-      if (IS_BUILDER_KEY === prop) {
+      if (BUILDER === property) {
         return true;
       }
 
-      if (rests?.includes(prop as R)) {
+      if (rests?.includes(property as R)) {
         return (...args: unknown[]): unknown => {
-          target[prop] = args;
+          target[property] = args;
           return builder;
         };
       }
 
       return (arg: unknown): unknown => {
-        if (arg !== target[prop]) {
-          target[prop] = arg;
+        if (arg !== target[property]) {
+          target[property] = arg;
         }
         return builder;
       };
@@ -37,9 +37,9 @@ export function builder<T, R extends keyof T>(rests?: readonly R[]): Builder<T, 
 
 /**
  * 是否为一个构建器
- * @param builder
+ * @param value
  */
-export const isBuilder = <T = unknown>(builder: SafeAny): builder is StableBuilder<T> => builder[IS_BUILDER_KEY];
+export const isBuilder = <T = unknown>(value: SafeAny): value is StableBuilder<T> => value[BUILDER] ?? false;
 
 /** 剩余参数类型 */
 type RestParams = undefined | SafeAny[];

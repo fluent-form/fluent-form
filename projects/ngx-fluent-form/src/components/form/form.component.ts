@@ -7,7 +7,7 @@ import { NzRowDirective } from 'ng-zorro-antd/grid';
 import { takeUntil } from 'rxjs';
 import { FluentConfig } from '../../config';
 import { FluentBinderDirective } from '../../directives';
-import { FluentCallPipe, FluentControlPipe, FluentTypeofPipe } from '../../pipes';
+import { FluentCallPipe, FluentColumnPipe, FluentControlPipe } from '../../pipes';
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { CONFIG } from '../../tokens';
 import { AnyObject } from '../../types';
@@ -27,8 +27,8 @@ import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/
     FluentFormColContentOutletComponent,
     FluentBinderDirective,
     FluentCallPipe,
-    FluentTypeofPipe,
-    FluentControlPipe
+    FluentControlPipe,
+    FluentColumnPipe
   ],
   templateUrl: './form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

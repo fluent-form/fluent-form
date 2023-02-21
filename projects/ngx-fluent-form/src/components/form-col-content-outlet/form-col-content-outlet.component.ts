@@ -4,7 +4,7 @@ import { AbstractControl } from '@angular/forms';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { FluentBinderDirective, FluentWithContextGuardDirective, FluentWithInjectorDirective } from '../../directives';
-import { FluentCallPipe, FluentControlPipe, FluentSchemaPipe, FluentTypeofPipe, FluentWidgetTemplateRefPipe } from '../../pipes';
+import { FluentCallPipe, FluentColumnPipe, FluentControlPipe, FluentSchemaPipe, FluentWidgetTemplateRefPipe } from '../../pipes';
 import { AnySchema } from '../../schemas';
 import { CONFIG } from '../../tokens';
 import { AnyArray, AnyObject } from '../../types';
@@ -40,7 +40,7 @@ interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
     FluentCallPipe,
     FluentSchemaPipe,
     FluentControlPipe,
-    FluentTypeofPipe,
+    FluentColumnPipe,
     FluentWidgetTemplateRefPipe
   ],
   templateUrl: './form-col-content-outlet.component.html',

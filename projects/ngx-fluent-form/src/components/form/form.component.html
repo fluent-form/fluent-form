@@ -10,9 +10,9 @@
   [fluentBinderControl]="form">
   <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
     <nz-col
-      [nzSpan]="(schema.col | typeof: 'number') ? schema.col : schema.col?.span"
-      [nzOffset]="schema.col?.offset"
-      [nzFlex]="schema.col?.flex"
+      [nzSpan]="schema.col | col: 'span'"
+      [nzFlex]="schema.col | col: 'flex'"
+      [nzOffset]="schema.col | col: 'offset'"
       [hidden]="schema.hidden | call: model:schema:control">
       <fluent-form-col-content-outlet
         [control]="control"

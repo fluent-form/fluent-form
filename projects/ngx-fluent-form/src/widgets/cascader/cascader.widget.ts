@@ -5,7 +5,7 @@ import { SafeAny } from '@ngify/types';
 import { NzCascaderModule } from 'ng-zorro-antd/cascader';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { FluentBinderDirective, FluentComposableDirective, FluentWithContextGuardDirective } from '../../directives';
-import { FluentCallPipe, FluentColumnPipe, FluentTypeofPipe } from '../../pipes';
+import { FluentCallPipe, FluentColumnPipe } from '../../pipes';
 import { CascaderControlSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -22,7 +22,6 @@ type CascaderWidgetTemplateContext = WidgetTemplateContext<CascaderControlSchema
     FluentBinderDirective,
     FluentWithContextGuardDirective,
     FluentComposableDirective,
-    FluentTypeofPipe,
     FluentCallPipe,
     FluentColumnPipe
   ],

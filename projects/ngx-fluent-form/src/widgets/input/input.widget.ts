@@ -5,7 +5,7 @@ import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { FluentBinderDirective, FluentComposableDirective, FluentWithContextGuardDirective } from '../../directives';
-import { FluentCallPipe, FluentColumnPipe, FluentInvokePipe, FluentTypeofPipe } from '../../pipes';
+import { FluentCallPipe, FluentColumnPipe, FluentInvokePipe } from '../../pipes';
 import { InputControlSchema } from '../../schemas';
 import { AbstractTextControlWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -24,7 +24,6 @@ type InputWidgetTemplateContext = WidgetTemplateContext<InputControlSchema, Form
     FluentBinderDirective,
     FluentWithContextGuardDirective,
     FluentComposableDirective,
-    FluentTypeofPipe,
     FluentCallPipe,
     FluentInvokePipe,
     FluentColumnPipe

@@ -42,7 +42,7 @@
     "@angular-eslint/template-parser": "14.4.0",
     "@angular/cli": "14.2.10",
     "@angular/compiler-cli": "14.2.12",
-    "@babel/core": "7.20.5",
+    "@babel/core": "7.21.0",
     "@commitlint/cli": "^17.2.0",
     "@commitlint/config-conventional": "^17.2.0",
     "@compodoc/compodoc": "1.1.19",

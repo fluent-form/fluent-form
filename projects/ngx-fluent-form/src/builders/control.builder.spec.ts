@@ -1,17 +1,11 @@
 import { CascaderControlSchema, CheckboxControlSchema, InputControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { standardSchema } from '../utils';
-import { cascader, checkbox, checkboxGroup, date, dateRange, datetime, email, input, integer, number, password, radioGroup, rate, select, slider, string, telephone, textarea, time, toggle, treeSelect, url } from './control.builder';
+import { cascader, checkbox, checkboxGroup, date, dateRange, datetime, email, input, integer, number, password, radioGroup, rate, select, slider, telephone, textarea, time, toggle, treeSelect, url } from './control.builder';
 
 describe('control.builder', () => {
   it('input', () => {
     const schema = standardSchema(input('input'));
     const value: InputControlSchema<'input'> = { kind: 'input', name: 'input' };
-    expect(schema).toEqual(value);
-  });
-
-  it('string', () => {
-    const schema = standardSchema(string('string'));
-    const value: InputControlSchema<'string'> = { kind: 'input', name: 'string', type: 'text' };
     expect(schema).toEqual(value);
   });
 

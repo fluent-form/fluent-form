@@ -5,7 +5,7 @@ import { isString } from '../utils';
 export const REST_SCHEMA = ['schemas'] as const;
 
 export type RestSchema = typeof REST_SCHEMA[number];
-export type KindAndName = 'kind' | 'name';
+export type KindOrName = 'kind' | 'name';
 export type KindOrSchemas = 'kind' | 'schemas';
 
 export function isSchemaNameTuple(arr: SafeAny[]): arr is [SchemaName] {

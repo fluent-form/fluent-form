@@ -1,13 +1,13 @@
 import { AnyComponentWrapperSchema, ButtonGroupComponentSchema } from '../schemas';
 import { SchemaName } from '../schemas/types';
 import { Builder, UnstableBuilder, builder } from '../utils';
-import { KindAndName, KindOrSchemas, REST_SCHEMA, RestSchema, isEmptyArray, isSchemaNameTuple } from './helper';
+import { KindOrName, KindOrSchemas, REST_SCHEMA, RestSchema, isEmptyArray, isSchemaNameTuple } from './helper';
 
 function componentWrapperBuilder<T extends AnyComponentWrapperSchema>(): Builder<T, RestSchema> {
   return builder<T, RestSchema>(REST_SCHEMA);
 }
 
-export function buttonGroup<N extends SchemaName>(name?: N): UnstableComponentWrapperBuilder<ButtonGroupComponentSchema<N>, KindAndName>;
+export function buttonGroup<N extends SchemaName>(name?: N): UnstableComponentWrapperBuilder<ButtonGroupComponentSchema<N>, KindOrName>;
 export function buttonGroup(...schemas: ButtonGroupComponentSchema['schemas']): UnstableComponentWrapperBuilder<ButtonGroupComponentSchema, KindOrSchemas>;
 export function buttonGroup(...nameOrSchemas: [] | [SchemaName] | ButtonGroupComponentSchema['schemas']) {
   if (isEmptyArray(nameOrSchemas) || isSchemaNameTuple(nameOrSchemas)) {

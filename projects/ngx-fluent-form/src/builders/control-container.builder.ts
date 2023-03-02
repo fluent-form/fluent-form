@@ -1,8 +1,8 @@
 import { SafeAny } from '@ngify/types';
 import { AbstractSchema, AnyBuilder, AnyControlContainerSchema, AnySchema, FormArraySchema, FormGroupSchema } from '../schemas';
 import { AnySchemaName, SchemaName } from '../schemas/types';
-import { Builder, builder, StableBuilder, standardSchema, standardSchemas, UnstableBuilder } from '../utils';
-import { KindAndName } from './helper';
+import { Builder, StableBuilder, UnstableBuilder, builder, standardSchema, standardSchemas } from '../utils';
+import { KindOrName } from './helper';
 
 const REST_PARAMS = ['schemas', 'validators', 'asyncValidators'] as const;
 
@@ -31,14 +31,14 @@ export function form(...fnOrSchemas: (AnySchema | AnyBuilder)[] | [FormBuilderFn
   return standardSchemas(fnOrSchemas);
 }
 
-export function group(): UnstableControlContainerBuilder<FormGroupSchema<number>, KindAndName>;
-export function group<N extends SchemaName>(name?: N): UnstableControlContainerBuilder<FormGroupSchema<N>, KindAndName>;
+export function group(): UnstableControlContainerBuilder<FormGroupSchema<number>, KindOrName>;
+export function group<N extends SchemaName>(name?: N): UnstableControlContainerBuilder<FormGroupSchema<N>, KindOrName>;
 export function group<N extends SchemaName>(name?: N) {
   return controlContainerBuilder<FormGroupSchema<N>>().kind('group').name(name);
 }
 
-export function array(): UnstableControlContainerBuilder<FormArraySchema<number>, KindAndName>;
-export function array<N extends SchemaName>(name?: N): UnstableControlContainerBuilder<FormArraySchema<N>, KindAndName>;
+export function array(): UnstableControlContainerBuilder<FormArraySchema<number>, KindOrName>;
+export function array<N extends SchemaName>(name?: N): UnstableControlContainerBuilder<FormArraySchema<N>, KindOrName>;
 export function array<N extends SchemaName>(name?: N) {
   return controlContainerBuilder<FormArraySchema<N>>().kind('array').name(name);
 }

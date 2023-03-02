@@ -1,11 +1,12 @@
-import { InputGroupComponentSchema } from '../schemas';
 import { standardSchema } from '../utils';
 import { inputGroup } from './control-wrapper.builder';
+import { input } from './control.builder';
 
 describe('control-wrapper.builder', () => {
   it('inputGroup', () => {
-    const schema = standardSchema(inputGroup().schemas());
-    const value: InputGroupComponentSchema = { kind: 'input-group', schemas: [] };
-    expect(schema).toEqual(value);
+    const schema1 = standardSchema(inputGroup(input()));
+    const schema2 = standardSchema(inputGroup().schemas());
+    expect(schema1).toEqual({ kind: 'input-group', schemas: [{ kind: 'input' }] });
+    expect(schema2).toEqual({ kind: 'input-group', schemas: [] });
   });
 });

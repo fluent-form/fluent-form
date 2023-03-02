@@ -1,14 +1,20 @@
 import { AnyControlWrapperSchema, InputGroupComponentSchema } from '../schemas';
 import { SchemaName } from '../schemas/types';
-import { Builder, builder, UnstableBuilder } from '../utils';
-import { KindAndName, RestSchema, REST_SCHEMA } from './helper';
+import { Builder, UnstableBuilder, builder } from '../utils';
+import { KindAndName, KindOrSchemas, REST_SCHEMA, RestSchema, isEmptyArray, isSchemaNameTuple } from './helper';
 
 function controlWrapperBuilder<T extends AnyControlWrapperSchema>(): Builder<T, RestSchema> {
   return builder<T, RestSchema>(REST_SCHEMA);
 }
 
-export function inputGroup<N extends SchemaName>(name?: N): UnstableControlWrapperBuilder<InputGroupComponentSchema<N>, KindAndName> {
-  return controlWrapperBuilder<InputGroupComponentSchema<N>>().kind('input-group').name(name);
+export function inputGroup<N extends SchemaName>(name?: N): UnstableControlWrapperBuilder<InputGroupComponentSchema<N>, KindAndName>;
+export function inputGroup(...schemas: InputGroupComponentSchema['schemas']): UnstableControlWrapperBuilder<InputGroupComponentSchema, KindOrSchemas>;
+export function inputGroup(...nameOrSchemas: [SchemaName] | InputGroupComponentSchema['schemas']) {
+  if (isEmptyArray(nameOrSchemas) || isSchemaNameTuple(nameOrSchemas)) {
+    return controlWrapperBuilder<InputGroupComponentSchema>().kind('input-group').name(nameOrSchemas[0]);
+  }
+
+  return controlWrapperBuilder<InputGroupComponentSchema>().kind('input-group').schemas(...nameOrSchemas);
 }
 
 type UnstableControlWrapperBuilder<T extends AnyControlWrapperSchema, S extends keyof T> = UnstableBuilder<T, S, RestSchema>

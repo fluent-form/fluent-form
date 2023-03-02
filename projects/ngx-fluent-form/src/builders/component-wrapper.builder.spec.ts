@@ -1,11 +1,12 @@
-import { ButtonGroupComponentSchema } from '../schemas';
 import { standardSchema } from '../utils';
 import { buttonGroup } from './component-wrapper.builder';
+import { button } from './component.builder';
 
 describe('component-wrapper.builder', () => {
   it('buttonGroup', () => {
-    const schema = standardSchema(buttonGroup().schemas());
-    const value: ButtonGroupComponentSchema = { kind: 'button-group', schemas: [] };
-    expect(schema).toEqual(value);
+    const schema1 = standardSchema(buttonGroup().schemas());
+    const schema2 = standardSchema(buttonGroup(button()));
+    expect(schema1).toEqual({ kind: 'button-group', schemas: [] });
+    expect(schema2).toEqual({ kind: 'button-group', schemas: [{ kind: 'button' }] });
   });
 });

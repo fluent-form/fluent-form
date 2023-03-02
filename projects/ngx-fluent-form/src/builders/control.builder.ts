@@ -15,26 +15,26 @@ export function input<N extends SchemaName>(name?: N) {
   return controlBuilder<InputControlSchema<N>>().kind('input').name(name);
 }
 
-export function email(): UnstableControlBuilder<InputControlSchema<number>, KindAndNameAndType>;
-export function email<N extends SchemaName>(name?: N): UnstableControlBuilder<InputControlSchema<N>, KindAndNameAndType>;
+export function email(): UnstableControlBuilder<InputControlSchema<number>, KindOrNameOrType>;
+export function email<N extends SchemaName>(name?: N): UnstableControlBuilder<InputControlSchema<N>, KindOrNameOrType>;
 export function email<N extends SchemaName>(name?: N) {
   return input(name).type('email');
 }
 
-export function telephone(): UnstableControlBuilder<InputControlSchema<number>, KindAndNameAndType>;
-export function telephone<N extends SchemaName>(name?: N): UnstableControlBuilder<InputControlSchema<N>, KindAndNameAndType>;
+export function telephone(): UnstableControlBuilder<InputControlSchema<number>, KindOrNameOrType>;
+export function telephone<N extends SchemaName>(name?: N): UnstableControlBuilder<InputControlSchema<N>, KindOrNameOrType>;
 export function telephone<N extends SchemaName>(name?: N) {
   return input(name).type('tel');
 }
 
-export function url(): UnstableControlBuilder<InputControlSchema<number>, KindAndNameAndType>;
-export function url<N extends SchemaName>(name?: N): UnstableControlBuilder<InputControlSchema<N>, KindAndNameAndType>;
+export function url(): UnstableControlBuilder<InputControlSchema<number>, KindOrNameOrType>;
+export function url<N extends SchemaName>(name?: N): UnstableControlBuilder<InputControlSchema<N>, KindOrNameOrType>;
 export function url<N extends SchemaName>(name?: N) {
   return input(name).type('url');
 }
 
-export function password(): UnstableControlBuilder<InputControlSchema<number>, KindAndNameAndType>;
-export function password<N extends SchemaName>(name?: N): UnstableControlBuilder<InputControlSchema<N>, KindAndNameAndType>;
+export function password(): UnstableControlBuilder<InputControlSchema<number>, KindOrNameOrType>;
+export function password<N extends SchemaName>(name?: N): UnstableControlBuilder<InputControlSchema<N>, KindOrNameOrType>;
 export function password<N extends SchemaName>(name?: N) {
   return input(name).type('password');
 }
@@ -63,8 +63,8 @@ export function date<N extends SchemaName>(name?: N) {
   return controlBuilder<DatePickerControlSchema<N>>().kind('date').name(name);
 }
 
-export function datetime(): UnstableControlBuilder<DatePickerControlSchema<number>, KindOrName | TimeAndFormat>;
-export function datetime<N extends SchemaName>(name?: N): UnstableControlBuilder<DatePickerControlSchema<N>, KindOrName | TimeAndFormat>;
+export function datetime(): UnstableControlBuilder<DatePickerControlSchema<number>, KindOrName | TimeOrFormat>;
+export function datetime<N extends SchemaName>(name?: N): UnstableControlBuilder<DatePickerControlSchema<N>, KindOrName | TimeOrFormat>;
 export function datetime<N extends SchemaName>(name?: N) {
   return date<N>(name).format('yyyy-MM-dd HH:mm:ss').time(true);
 }
@@ -137,5 +137,5 @@ export function dateRange<N extends AnySchemaName>(name?: N) {
 
 type RestSchema = typeof REST_PARAMS[number];
 type UnstableControlBuilder<T extends AnyControlSchema, S extends keyof T> = UnstableBuilder<T, S, RestSchema>
-type KindAndNameAndType = KindOrName | 'type';
-type TimeAndFormat = 'time' | 'format';
+type KindOrNameOrType = KindOrName | 'type';
+type TimeOrFormat = 'time' | 'format';

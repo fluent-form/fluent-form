@@ -6,11 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SafeAny } from '@ngify/types';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, Story, moduleMetadata } from '@storybook/angular';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NZ_I18N, zh_CN } from 'ng-zorro-antd/i18n';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { FluentFormComponent, FluentFormModule } from 'ngx-fluent-form';
+import { AnySchema, FluentFormComponent, FluentFormModule } from 'ngx-fluent-form';
 
 registerLocaleData(zh);
 
@@ -65,7 +65,7 @@ export const defineStory = <T>(story?: Partial<Story<T>>): Story<T> => Object.as
 
 @Directive()
 export abstract class AbstractFluentFormWrapperComponent {
-  @Input() schemas!: FluentFormComponent<SafeAny>['schemas'];
+  @Input() schemas!: AnySchema[];
   @Input() model!: FluentFormComponent<SafeAny>['model'];
   @Input() layout: FluentFormComponent<SafeAny>['layout'] = 'vertical';
   @Input() colon: FluentFormComponent<SafeAny>['colon'] = true;

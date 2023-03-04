@@ -17,13 +17,13 @@ export interface SchemaLike<N extends AnySchemaName = AnySchemaName> {
 
 /** 排除图示构建器 */
 type ExcludeSchemaBuilder<T> =
-  T extends SafeAny[]
+  T extends (SchemaLike | StableBuilder<SchemaLike>)[]
   ? ExcludeSchemaBuilder<T[number]>[]
   : T extends SchemaLike
   ? StandardSchema<T>
   : Exclude<T, StableBuilder<SafeAny>>
 
 /** 标准化的图示 */
-export type StandardSchema<S> = {
+export type StandardSchema<S extends SchemaLike> = {
   [K in keyof S]: ExcludeSchemaBuilder<S[K]>
 }

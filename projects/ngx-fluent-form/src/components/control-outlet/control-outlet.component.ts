@@ -4,6 +4,7 @@ import { AbstractControl } from '@angular/forms';
 import { FluentWithInjectorDirective } from '../../directives/with-injector.directive';
 import { FluentWidgetTemplateRefPipe } from '../../pipes';
 import { AnyComponentSchema, AnyControlSchema } from '../../schemas';
+import { StandardSchema } from '../../schemas/types';
 import { AnyArray, AnyObject } from '../../types';
 
 export interface FluentControlTemplateContext<T extends AnyObject | AnyArray> {
@@ -31,7 +32,7 @@ export interface FluentControlTemplateContext<T extends AnyObject | AnyArray> {
 })
 export class FluentControlOutletComponent<T extends AnyObject | AnyArray> implements OnInit, FluentControlTemplateContext<T> {
   @Input() control!: AbstractControl;
-  @Input() schema!: AnyControlSchema | AnyComponentSchema;
+  @Input() schema!: StandardSchema<AnyControlSchema | AnyComponentSchema>;
   @Input() model!: T;
 
   @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<FluentControlTemplateContext<T>>;

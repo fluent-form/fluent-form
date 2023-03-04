@@ -1,5 +1,5 @@
 import { NgClass, NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { NzFormLayoutType, NzFormModule } from 'ng-zorro-antd/form';
@@ -9,9 +9,10 @@ import { FluentConfig } from '../../config';
 import { FluentBinderDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe, FluentControlPipe } from '../../pipes';
 import { AnySchema, FormGroupSchema } from '../../schemas';
+import { StandardSchema } from '../../schemas/types';
 import { CONFIG } from '../../tokens';
 import { AnyObject } from '../../types';
-import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchema } from '../../utils';
+import { FormUtils, createFormGroup, formUtils, modelUtils, standardSchema } from '../../utils';
 import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/form-col-content-outlet.component';
 
 @Component({
@@ -49,10 +50,10 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig {
   private _model!: T;
 
   protected form!: FormGroup;
-  protected schema!: FormGroupSchema;
+  protected schema!: StandardSchema<FormGroupSchema>;
 
-  get schemas(): AnySchema[] {
-    return this.schema?.schemas as AnySchema[];
+  get schemas(): StandardSchema<AnySchema>[] {
+    return this.schema?.schemas;
   }
 
   @Input()

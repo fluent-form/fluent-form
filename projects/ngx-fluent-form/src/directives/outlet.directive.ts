@@ -3,6 +3,7 @@ import { AbstractControl } from '@angular/forms';
 import { FluentControlTemplateContext } from '../components';
 import { FluentControlOutletComponent } from '../components/control-outlet/control-outlet.component';
 import { AnyComponentSchema, AnyControlSchema } from '../schemas';
+import { StandardSchema } from '../schemas/types';
 import { AnyArray, AnyObject } from '../types';
 import { ControlContainer } from './models/control-container';
 
@@ -18,7 +19,7 @@ import { ControlContainer } from './models/control-container';
 export class FluentOutletDirective<T extends AnyObject | AnyArray> implements OnInit, OnChanges, OnDestroy, FluentControlTemplateContext<T> {
   @Input() name!: string | number;
   /** @internal */
-  schema!: AnyComponentSchema | AnyControlSchema;
+  schema!: StandardSchema<AnyComponentSchema | AnyControlSchema>;
   /** @internal */
   control!: AbstractControl;
   /** @internal */

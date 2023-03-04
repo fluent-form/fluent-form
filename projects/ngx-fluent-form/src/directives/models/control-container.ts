@@ -1,6 +1,7 @@
 import { Directive, EventEmitter, Output } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AnyComponentSchema, AnyControlSchema, AnySchema } from '../../schemas';
+import { StandardSchema } from '../../schemas/types';
 import { AnyArray, AnyObject } from '../../types';
 import { schemasUtils } from '../../utils';
 import { FluentOutletDirective } from '../outlet.directive';
@@ -10,7 +11,7 @@ import { FluentOutletDirective } from '../outlet.directive';
  */
 export abstract class ControlContainer<T extends AnyObject | AnyArray> {
   /** 当前图示 */
-  abstract schemas: AnySchema[];
+  abstract schemas: StandardSchema<AnySchema>[];
   /** 当前表单 */
   abstract form: AbstractControl;
   /** 当前模型 */
@@ -18,7 +19,6 @@ export abstract class ControlContainer<T extends AnyObject | AnyArray> {
 
   /** 当前容器的指令 */
   abstract get directive(): ControlContainerDirective<T>;
-
 }
 
 @Directive()

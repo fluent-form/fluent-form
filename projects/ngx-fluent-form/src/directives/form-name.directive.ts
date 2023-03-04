@@ -3,6 +3,7 @@ import { AbstractControl } from '@angular/forms';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { startWith, takeUntil } from 'rxjs';
 import { AnyControlContainerSchema, AnySchema } from '../schemas';
+import { StandardSchema } from '../schemas/types';
 import { AnyArray, AnyObject } from '../types';
 import { schemasUtils } from '../utils';
 import { ControlContainer, ControlContainerDirective } from './models/control-container';
@@ -21,7 +22,7 @@ import { ControlContainer, ControlContainerDirective } from './models/control-co
 })
 export class FluentFormNameDirective<T extends AnyObject | AnyArray> extends ControlContainerDirective<T> implements OnInit {
   /** @internal */
-  schemas!: AnySchema[];
+  schemas!: StandardSchema<AnySchema>[];
   /** @internal */
   form!: AbstractControl;
 
@@ -51,7 +52,8 @@ export class FluentFormNameDirective<T extends AnyObject | AnyArray> extends Con
       this.formChange.emit(
         this.form = this.controlContainer.directive.form.get([this.name])!
       );
-      this.schemas = schemasUtils(this.controlContainer.directive.schemas).find<AnyControlContainerSchema>(this.name)!.schemas as AnySchema[];
+      this.schemas = schemasUtils(this.controlContainer.directive.schemas)
+        .find<StandardSchema<AnyControlContainerSchema>>(this.name)!.schemas;
 
       this.directives.forEach(directive => this.assignDirective(directive));
     });

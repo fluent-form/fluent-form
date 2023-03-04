@@ -3,6 +3,7 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { takeUntil } from 'rxjs';
 import { AnySchema, FormGroupSchema } from '../schemas';
+import { StandardSchema } from '../schemas/types';
 import { AnyArray, AnyObject } from '../types';
 import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchema } from '../utils';
 import { ControlContainer, ControlContainerDirective } from './models/control-container';
@@ -23,13 +24,12 @@ import { ControlContainer, ControlContainerDirective } from './models/control-co
 export class FluentFormDirective<T extends AnyObject | AnyArray> extends ControlContainerDirective<T> {
   private internalModel!: T;
   private _model!: T;
-  /** @internal */
-  schema!: FormGroupSchema;
+  private schema!: StandardSchema<FormGroupSchema>;
   /** @internal */
   form!: FormGroup;
 
-  get schemas(): AnySchema[] {
-    return this.schema?.schemas as AnySchema[];
+  get schemas(): StandardSchema<AnySchema>[] {
+    return this.schema?.schemas;
   }
 
   @Input('fluentSchemas')

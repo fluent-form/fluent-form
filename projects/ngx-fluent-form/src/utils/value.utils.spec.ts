@@ -1,5 +1,4 @@
 import { FormControl } from '@angular/forms';
-import { AnySchema } from '../schemas';
 import { standardSchema } from './schema.utils';
 import { valueUtils } from './value.utils';
 
@@ -8,7 +7,7 @@ describe('ValueUtils', () => {
     describe('normal', () => {
       it('no init value and default value', () => {
         const model = {};
-        const schema: AnySchema = standardSchema({ kind: 'number', name: 'num' });
+        const schema = standardSchema({ kind: 'number', name: 'num' });
         const value = valueUtils(model, schema).getValue();
 
         expect(value).toBeNull();
@@ -16,7 +15,7 @@ describe('ValueUtils', () => {
 
       it('with init value', () => {
         const model = { num: 1 };
-        const schema: AnySchema = standardSchema({ kind: 'number', name: 'num' });
+        const schema = standardSchema({ kind: 'number', name: 'num' });
         const value = valueUtils(model, schema).getValue();
 
         expect(value).toBe(1);
@@ -24,7 +23,7 @@ describe('ValueUtils', () => {
 
       it('with default value', () => {
         const model = {};
-        const schema: AnySchema = standardSchema({ kind: 'number', name: 'num', defaultValue: 1 });
+        const schema = standardSchema({ kind: 'number', name: 'num', defaultValue: 1 });
         const value = valueUtils(model, schema).getValue();
 
         expect(value).toBe(1);
@@ -32,7 +31,7 @@ describe('ValueUtils', () => {
 
       it('with init value and default value', () => {
         const model = { num: 2 };
-        const schema: AnySchema = standardSchema({ kind: 'number', name: 'num', defaultValue: 1 });
+        const schema = standardSchema({ kind: 'number', name: 'num', defaultValue: 1 });
         const value = valueUtils(model, schema).getValue();
 
         expect(value).toBe(2);
@@ -40,7 +39,7 @@ describe('ValueUtils', () => {
 
       it('with mapper', () => {
         const model = { num: '1' };
-        const schema: AnySchema = standardSchema({
+        const schema = standardSchema({
           kind: 'number',
           name: 'num',
           mapper: {
@@ -57,7 +56,7 @@ describe('ValueUtils', () => {
     describe('double key control', () => {
       it('no init value and default value', () => {
         const model = {};
-        const schema: AnySchema = standardSchema({ kind: 'slider', name: ['start', 'end'], range: true, });
+        const schema = standardSchema({ kind: 'slider', name: ['start', 'end'], range: true, });
         const value = valueUtils(model, schema).getValue();
 
         expect(value).toBeNull();
@@ -65,7 +64,7 @@ describe('ValueUtils', () => {
 
       it('with init value', () => {
         const model = { start: 0, end: 100 };
-        const schema: AnySchema = standardSchema({ kind: 'slider', name: ['start', 'end'], range: true, });
+        const schema = standardSchema({ kind: 'slider', name: ['start', 'end'], range: true, });
         const value = valueUtils(model, schema).getValue();
 
         expect(value).toEqual([0, 100]);
@@ -73,7 +72,7 @@ describe('ValueUtils', () => {
 
       it('with default value', () => {
         const model = {};
-        const schema: AnySchema = standardSchema({ kind: 'slider', name: ['start', 'end'], range: true, defaultValue: [0, 100] });
+        const schema = standardSchema({ kind: 'slider', name: ['start', 'end'], range: true, defaultValue: [0, 100] });
         const value = valueUtils(model, schema).getValue();
 
         expect(value).toEqual([0, 100]);
@@ -81,7 +80,7 @@ describe('ValueUtils', () => {
 
       it('with init value and default value', () => {
         const model = { start: 1, end: 99 };
-        const schema: AnySchema = standardSchema({ kind: 'slider', name: ['start', 'end'], range: true, defaultValue: [0, 100] });
+        const schema = standardSchema({ kind: 'slider', name: ['start', 'end'], range: true, defaultValue: [0, 100] });
         const value = valueUtils(model, schema).getValue();
 
         expect(value).toEqual([1, 99]);
@@ -89,7 +88,7 @@ describe('ValueUtils', () => {
 
       it('with mapper', () => {
         const model = { start: '0', end: '100' };
-        const schema: AnySchema = standardSchema({
+        const schema = standardSchema({
           kind: 'slider',
           name: ['start', 'end'],
           range: true,
@@ -107,7 +106,7 @@ describe('ValueUtils', () => {
     describe('date control', () => {
       it('with no init value and default value', () => {
         const model = {};
-        const schema: AnySchema = standardSchema({ kind: 'date', name: 'date' });
+        const schema = standardSchema({ kind: 'date', name: 'date' });
         const value = valueUtils(model, schema).getValue();
 
         expect(value).toBeNull();
@@ -116,7 +115,7 @@ describe('ValueUtils', () => {
       it('with init value', () => {
         const now = Date.now();
         const model = { date: now };
-        const schema: AnySchema = standardSchema({ kind: 'date', name: 'date' });
+        const schema = standardSchema({ kind: 'date', name: 'date' });
         const value = valueUtils(model, schema).getValue() as Date;
 
         expect(value).toBeInstanceOf(Date);
@@ -126,7 +125,7 @@ describe('ValueUtils', () => {
       it('with default value', () => {
         const now = Date.now();
         const model = {};
-        const schema: AnySchema = standardSchema({ kind: 'date', name: 'date', defaultValue: now });
+        const schema = standardSchema({ kind: 'date', name: 'date', defaultValue: now });
         const value = valueUtils(model, schema).getValue() as Date;
 
         expect(value).toBeInstanceOf(Date);
@@ -137,7 +136,7 @@ describe('ValueUtils', () => {
     describe('time control', () => {
       it('with no init value and default value', () => {
         const model = {};
-        const schema: AnySchema = standardSchema({ kind: 'time', name: 'time' });
+        const schema = standardSchema({ kind: 'time', name: 'time' });
         const value = valueUtils(model, schema).getValue();
 
         expect(value).toBeNull();
@@ -146,7 +145,7 @@ describe('ValueUtils', () => {
       it('with init value', () => {
         const now = Date.now();
         const model = { time: now };
-        const schema: AnySchema = standardSchema({ kind: 'time', name: 'time' });
+        const schema = standardSchema({ kind: 'time', name: 'time' });
         const value = valueUtils(model, schema).getValue() as Date;
 
         expect(value).toBeInstanceOf(Date);
@@ -156,7 +155,7 @@ describe('ValueUtils', () => {
       it('with default value', () => {
         const now = Date.now();
         const model = {};
-        const schema: AnySchema = standardSchema({ kind: 'time', name: 'time', defaultValue: now });
+        const schema = standardSchema({ kind: 'time', name: 'time', defaultValue: now });
         const value = valueUtils(model, schema).getValue() as Date;
 
         expect(value).toBeInstanceOf(Date);
@@ -166,7 +165,7 @@ describe('ValueUtils', () => {
 
     describe('date range control', () => {
       it('with no init value and default value', () => {
-        const schema: AnySchema = standardSchema({ kind: 'date-range', name: ['begin', 'end'] });
+        const schema = standardSchema({ kind: 'date-range', name: ['begin', 'end'] });
         const model = {};
         const value = valueUtils(model, schema).getValue();
 
@@ -175,7 +174,7 @@ describe('ValueUtils', () => {
 
       it('with init value', () => {
         const begin = new Date(), end = new Date();
-        const schema: AnySchema = standardSchema({ kind: 'date-range', name: ['begin', 'end'] });
+        const schema = standardSchema({ kind: 'date-range', name: ['begin', 'end'] });
         const model = { begin, end };
         const value = valueUtils(model, schema).getValue();
 
@@ -183,7 +182,7 @@ describe('ValueUtils', () => {
       });
 
       it('with init value but is null', () => {
-        const schema: AnySchema = standardSchema({ kind: 'date-range', name: ['begin', 'end'] });
+        const schema = standardSchema({ kind: 'date-range', name: ['begin', 'end'] });
         const model = { begin: null, end: null };
         const value = valueUtils(model, schema).getValue();
 
@@ -192,7 +191,7 @@ describe('ValueUtils', () => {
 
       it('with default value', () => {
         const begin = new Date(), end = new Date();
-        const schema: AnySchema = standardSchema({ kind: 'date-range', name: ['begin', 'end'], defaultValue: [begin, end] });
+        const schema = standardSchema({ kind: 'date-range', name: ['begin', 'end'], defaultValue: [begin, end] });
         const model = {};
         const value = valueUtils(model, schema).getValue();
 
@@ -201,7 +200,7 @@ describe('ValueUtils', () => {
     });
 
     it('checkbox group control', () => {
-      const schema: AnySchema = standardSchema({
+      const schema = standardSchema({
         kind: 'checkbox-group',
         name: 'active',
         options: [
@@ -222,7 +221,7 @@ describe('ValueUtils', () => {
 
   describe('getValueFromControl', () => {
     it('normal', () => {
-      const schema: AnySchema = standardSchema({ kind: 'number', name: 'num' });
+      const schema = standardSchema({ kind: 'number', name: 'num' });
       const control = new FormControl(1);
       const value = valueUtils(control, schema).getValue();
 
@@ -230,7 +229,7 @@ describe('ValueUtils', () => {
     });
 
     it('with mapper', () => {
-      const schema: AnySchema = standardSchema({
+      const schema = standardSchema({
         kind: 'number',
         name: 'num',
         mapper: {
@@ -246,7 +245,7 @@ describe('ValueUtils', () => {
 
     describe('date control', () => {
       it('with has no value', () => {
-        const schema: AnySchema = standardSchema({ kind: 'date', name: 'date', });
+        const schema = standardSchema({ kind: 'date', name: 'date', });
         const control = new FormControl(null);
         const value = valueUtils(control, schema).getValue();
 
@@ -255,7 +254,7 @@ describe('ValueUtils', () => {
 
       it('with has value', () => {
         const now = new Date();
-        const schema: AnySchema = standardSchema({ kind: 'date', name: 'date', });
+        const schema = standardSchema({ kind: 'date', name: 'date', });
         const control = new FormControl(now);
         const value = valueUtils(control, schema).getValue();
 
@@ -265,7 +264,7 @@ describe('ValueUtils', () => {
 
     describe('time control', () => {
       it('with has no value', () => {
-        const schema: AnySchema = standardSchema({ kind: 'time', name: 'time', });
+        const schema = standardSchema({ kind: 'time', name: 'time', });
         const control = new FormControl(null);
         const value = valueUtils(control, schema).getValue();
 
@@ -274,7 +273,7 @@ describe('ValueUtils', () => {
 
       it('with has value', () => {
         const now = new Date();
-        const schema: AnySchema = standardSchema({ kind: 'time', name: 'time', });
+        const schema = standardSchema({ kind: 'time', name: 'time', });
         const control = new FormControl(now);
         const value = valueUtils(control, schema).getValue();
 
@@ -284,7 +283,7 @@ describe('ValueUtils', () => {
 
     describe('date range control', () => {
       it('with has no value', () => {
-        const schema: AnySchema = standardSchema({ kind: 'date-range', name: 'range', });
+        const schema = standardSchema({ kind: 'date-range', name: 'range', });
         const control = new FormControl(null);
         const value = valueUtils(control, schema).getValue();
 
@@ -293,7 +292,7 @@ describe('ValueUtils', () => {
 
       it('with has value', () => {
         const begin = new Date(), end = new Date();
-        const schema: AnySchema = standardSchema({ kind: 'date-range', name: 'range', });
+        const schema = standardSchema({ kind: 'date-range', name: 'range', });
         const control = new FormControl([begin, end]);
         const value = valueUtils(control, schema).getValue();
 
@@ -302,7 +301,7 @@ describe('ValueUtils', () => {
     });
 
     it('checkbox group control', () => {
-      const schema: AnySchema = standardSchema({ kind: 'checkbox-group', name: 'active', options: [] });
+      const schema = standardSchema({ kind: 'checkbox-group', name: 'active', options: [] });
       const control = new FormControl([
         { label: 'one', value: 1, checked: true },
         { label: 'two', value: 2, checked: false },

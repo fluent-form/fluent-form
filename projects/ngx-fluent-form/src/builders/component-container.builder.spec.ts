@@ -1,4 +1,3 @@
-import { StepsComponentSchema, TabsComponentSchema } from '../schemas';
 import { standardSchema } from '../utils';
 import { step, steps, tab, tabs } from './component-container.builder';
 import { input } from './control.builder';
@@ -12,7 +11,7 @@ describe('component-container.builder', () => {
         )
       )
     );
-    const value: StepsComponentSchema = {
+    expect(schema).toEqual({
       kind: 'steps',
       schemas: [
         {
@@ -23,8 +22,7 @@ describe('component-container.builder', () => {
           ]
         }
       ]
-    };
-    expect(schema).toEqual(value);
+    });
   });
 
   it('tabs', () => {
@@ -35,7 +33,7 @@ describe('component-container.builder', () => {
         )
       )
     );
-    const value: TabsComponentSchema = {
+    expect(schema).toEqual({
       kind: 'tabs',
       schemas: [
         {
@@ -46,7 +44,6 @@ describe('component-container.builder', () => {
           ]
         }
       ]
-    };
-    expect(schema).toEqual(value);
+    });
   });
 });

@@ -1,39 +1,42 @@
 import { Validators } from '@angular/forms';
 import { schemasUtils, standardSchema, standardSchemas } from '.';
 import { array, group, input, inputGroup, slider } from '../builders';
-import { AnySchema } from '../schemas/index.schema';
 import { controlSchemaUtils } from './schema.utils';
 
 describe('schema.utils', () => {
   describe('应该能正确标准化图示', () => {
     it('普通图示', () => {
-      const value: AnySchema[] = [{ kind: 'input', name: 'name' }];
       const schemas = standardSchemas([input('name')]);
-
-      expect(schemas).toEqual(value);
+      expect(schemas).toEqual([{ kind: 'input', name: 'name' }]);
     });
 
     describe('嵌套图示', () => {
       it('group', () => {
-        const value: AnySchema[] = [{
-          kind: 'group',
-          name: 'name',
-          schemas: [
-            { kind: 'input', name: 'name' }
-          ]
-        }];
-
         const schemas = standardSchemas([
           group('name').schemas(
             input('name')
           )
         ]);
 
-        expect(schemas).toEqual(value);
+        expect(schemas).toEqual([{
+          kind: 'group',
+          name: 'name',
+          schemas: [
+            { kind: 'input', name: 'name' }
+          ]
+        }]);
       });
 
       it('array', () => {
-        const value: AnySchema[] = [{
+        const schemas = standardSchemas([
+          array('name').schemas(
+            group().schemas(
+              input('name')
+            )
+          )
+        ]);
+
+        expect(schemas).toEqual([{
           kind: 'array',
           name: 'name',
           schemas: [{
@@ -43,34 +46,22 @@ describe('schema.utils', () => {
               { kind: 'input', name: 'name' }
             ]
           }]
-        }];
-
-        const schemas = standardSchemas([
-          array('name').schemas(
-            group().schemas(
-              input('name')
-            )
-          )
-        ]);
-
-        expect(schemas).toEqual(value);
+        }]);
       });
 
       it('input-group', () => {
-        const value: AnySchema[] = [{
-          kind: 'input-group',
-          schemas: [
-            { kind: 'input', name: 'name' }
-          ]
-        }];
-
         const schemas = standardSchemas([
           inputGroup().schemas(
             input('name')
           )
         ]);
 
-        expect(schemas).toEqual(value);
+        expect(schemas).toEqual([{
+          kind: 'input-group',
+          schemas: [
+            { kind: 'input', name: 'name' }
+          ]
+        }]);
       });
     });
 

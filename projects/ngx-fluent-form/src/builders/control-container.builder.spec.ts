@@ -1,4 +1,4 @@
-import { FormArraySchema, FormGroupSchema } from '../schemas';
+import { FormGroupSchema } from '../schemas';
 import { standardSchema } from '../utils';
 import { array, form, group } from './control-container.builder';
 
@@ -11,13 +11,11 @@ describe('control-container.builder', () => {
 
   it('group', () => {
     const schema = standardSchema(group('group').schemas());
-    const value: FormGroupSchema<'group'> = { kind: 'group', name: 'group', schemas: [] };
-    expect(schema).toEqual(value);
+    expect(schema).toEqual({ kind: 'group', name: 'group', schemas: [] });
   });
 
   it('array', () => {
     const schema = standardSchema(array('array').schemas());
-    const value: FormArraySchema<'array'> = { kind: 'array', name: 'array', schemas: [] };
-    expect(schema).toEqual(value);
+    expect(schema).toEqual({ kind: 'array', name: 'array', schemas: [] });
   });
 });

@@ -1,11 +1,12 @@
 import { NgClass, NgFor, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef, inject } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
-import { FluentBinderDirective, FluentWithContextGuardDirective, FluentWithInjectorDirective } from '../../directives';
+import { FluentBinderDirective, FluentWithContextGuardDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe, FluentControlPipe, FluentSchemaPipe, FluentWidgetTemplateRefPipe } from '../../pipes';
 import { AnySchema } from '../../schemas';
+import { StandardSchema } from '../../schemas/types';
 import { CONFIG } from '../../tokens';
 import { AnyArray, AnyObject } from '../../types';
 import { FluentControlOutletComponent } from '../control-outlet/control-outlet.component';
@@ -14,7 +15,7 @@ interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
   /** 当前控件 */
   control: AbstractControl;
   /** 当前图示 */
-  schema: AnySchema;
+  schema: StandardSchema<AnySchema>;
   /** 当前模型值 */
   model: T;
 }
@@ -36,7 +37,6 @@ interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
     FluentControlOutletComponent,
     FluentBinderDirective,
     FluentWithContextGuardDirective,
-    FluentWithInjectorDirective,
     FluentCallPipe,
     FluentSchemaPipe,
     FluentControlPipe,
@@ -55,7 +55,7 @@ export class FluentFormColContentOutletComponent<T extends AnyObject | AnyArray>
   @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<FluentFormColContentTemplateContext<T>>;
 
   @Input() control!: AbstractControl;
-  @Input() schema!: AnySchema;
+  @Input() schema!: StandardSchema<AnySchema>;
   @Input() model!: T;
 
   constructor(private viewContainerRef: ViewContainerRef) { }

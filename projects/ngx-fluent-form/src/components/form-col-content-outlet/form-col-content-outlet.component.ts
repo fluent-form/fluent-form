@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, ViewChi
 import { AbstractControl } from '@angular/forms';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
-import { FluentBinderDirective, FluentWithContextGuardDirective } from '../../directives';
+import { FluentBinderDirective, FluentWithInjectorDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe, FluentControlPipe, FluentSchemaPipe, FluentWidgetTemplateRefPipe } from '../../pipes';
 import { AnySchema } from '../../schemas';
 import { StandardSchema } from '../../schemas/types';
@@ -36,7 +36,7 @@ interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
     NzFormModule,
     FluentControlOutletComponent,
     FluentBinderDirective,
-    FluentWithContextGuardDirective,
+    FluentWithInjectorDirective,
     FluentCallPipe,
     FluentSchemaPipe,
     FluentControlPipe,

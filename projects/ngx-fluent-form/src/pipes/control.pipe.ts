@@ -19,7 +19,6 @@ export class FluentControlPipe implements PipeTransform {
   transform(value: AnySchemaName | undefined, container: FormGroup | FormArray, type: 'array'): FormArray;
   transform(value: AnySchemaName | undefined, container: FormGroup | FormArray): AbstractControl;
   transform(value: AnySchemaName | undefined, container: FormGroup | FormArray): AbstractControl {
-    if (!value) return container;
     // 关于为什么使用 `AbstractControl.get([name])` 而不是 `AbstractControl.get(name)` ？
     // 由于 NG 没有提供 FormArrayDirective，查阅源码后发现其实 FormGroupDirective 是兼容传入 FormArray 对象的。
     // 需要注意的就是 AbstractControl#get() 方法，由于 FormGroupDirective 原本是为 FormGroup 服务的，

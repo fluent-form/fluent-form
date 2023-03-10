@@ -46,7 +46,7 @@
     "@commitlint/cli": "^17.2.0",
     "@commitlint/config-conventional": "^17.2.0",
     "@compodoc/compodoc": "1.1.19",
-    "@ngify/types": "1.2.0",
+    "@ngify/types": "1.5.1",
     "@storybook/addon-actions": "6.5.14",
     "@storybook/addon-essentials": "6.5.14",
     "@storybook/addon-interactions": "6.5.14",

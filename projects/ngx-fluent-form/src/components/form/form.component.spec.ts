@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
+import { AnyObject } from '@ngify/types';
 import { form, input } from '../../builders';
 import { withAllWidgets } from '../../features';
 import { provideFluentForm } from '../../provider';
 import { FormGroupSchema } from '../../schemas';
 import { AnySchema } from '../../schemas/index.schema';
-import { AnyObject } from '../../types';
 import { FluentFormComponent } from './form.component';
 
 @Component({

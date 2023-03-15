@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
+import { AnyObject } from '@ngify/types';
 import { array, form, group, input, inputGroup } from '../builders';
 import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
 import { AnySchema, FormGroupSchema } from '../schemas';
-import { AnyObject } from '../types';
 import { FluentFormNameDirective } from './form-name.directive';
 import { FluentFormDirective } from './form.directive';
 import { FluentOutletDirective } from './outlet.directive';

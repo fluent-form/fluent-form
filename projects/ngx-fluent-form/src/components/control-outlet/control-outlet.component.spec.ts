@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
+import { AnyArray, AnyObject } from '@ngify/types';
 import { withAllWidgets } from '../../features';
 import { provideFluentForm } from '../../provider';
-import { AnyArray, AnyObject } from '../../types';
 import { FluentControlOutletComponent } from './control-outlet.component';
 
 describe('FluentControlOutletComponent', () => {

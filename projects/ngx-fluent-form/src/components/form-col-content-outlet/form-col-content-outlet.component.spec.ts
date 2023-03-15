@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
+import { AnyArray, AnyObject } from '@ngify/types';
 import { withAllWidgets } from '../../features';
 import { provideFluentForm } from '../../provider';
 import { CONFIG } from '../../tokens';
-import { AnyArray, AnyObject } from '../../types';
 import { FluentFormColContentOutletComponent } from './form-col-content-outlet.component';
 
 describe('FluentFormColContentOutletComponent', () => {

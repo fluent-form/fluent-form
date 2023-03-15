@@ -1,11 +1,11 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
+import { AnyArray, AnyObject } from '@ngify/types';
 import { FluentWithInjectorDirective } from '../../directives/with-injector.directive';
 import { FluentWidgetTemplateRefPipe } from '../../pipes';
 import { AnyComponentSchema, AnyControlSchema } from '../../schemas';
 import { StandardSchema } from '../../schemas/types';
-import { AnyArray, AnyObject } from '../../types';
 
 export interface FluentControlTemplateContext<T extends AnyObject | AnyArray> {
   /** 当前控件 */

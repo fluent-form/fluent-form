@@ -1,10 +1,10 @@
 import { createComponent, Directive, EnvironmentInjector, Host, Injector, Input, OnChanges, OnDestroy, OnInit, SkipSelf, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
+import { AnyArray, AnyObject } from '@ngify/types';
 import { FluentControlTemplateContext } from '../components';
 import { FluentControlOutletComponent } from '../components/control-outlet/control-outlet.component';
 import { AnyComponentSchema, AnyControlSchema } from '../schemas';
 import { StandardSchema } from '../schemas/types';
-import { AnyArray, AnyObject } from '../types';
 import { ControlContainer } from './models/control-container';
 
 @Directive({

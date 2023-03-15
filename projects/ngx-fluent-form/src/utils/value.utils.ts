@@ -1,6 +1,6 @@
 import { AbstractControl } from '@angular/forms';
+import { AnyArray, AnyObject } from '@ngify/types';
 import { AnyControlSchema } from '../schemas';
-import { AnyArray, AnyObject } from '../types';
 import { isUndefined } from './is.utils';
 import { isDoubleKeyControlSchema } from './schema.utils';
 

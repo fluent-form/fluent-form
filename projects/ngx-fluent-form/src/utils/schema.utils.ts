@@ -146,7 +146,7 @@ export class ControlSchemaUtils<S extends AnyControlSchema> {
   getExtraValidators(): ValidatorFn[] {
     const validators: ValidatorFn[] = [];
 
-    if (this.schema.required) {
+    if (this.schema.required === true) { // required 可能是个函数，需要动态
       validators.push(Validators.required);
     }
 

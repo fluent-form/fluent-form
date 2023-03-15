@@ -1,5 +1,5 @@
 import { EventEmitter } from '@angular/core';
-import { Property, SafeAny } from '@ngify/types';
+import { PickProperty, SafeAny } from '@ngify/types';
 
 /**
  * HTML 元素的事件侦听器对象
@@ -14,7 +14,7 @@ export type HTMLElementEventListenerMap = {
 /**
  * HTML 元素的属性对象
  */
-export type HTMLElementPropertyMap<E extends HTMLElement> = Partial<Property<E>>;
+export type HTMLElementPropertyMap<E extends HTMLElement> = Partial<PickProperty<E>>;
 
 /**
  * 组件的 Ouput 名
@@ -48,8 +48,3 @@ export type ComponentOutputListenerMap<C> = {
  * @template C 组件的类类型
  */
 export type ComponentPropertyMap<C> = Partial<Omit<C, ComponentOutputName<C>>>;
-
-/** Any Object */
-export type AnyObject = Record<string | number | symbol, SafeAny>;
-/** Any Array */
-export type AnyArray = SafeAny[];

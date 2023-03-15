@@ -1,8 +1,8 @@
 import { Directive, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormControl } from '@angular/forms';
+import { AnyArray, AnyObject } from '@ngify/types';
 import { AbstractTextControlSchema, AnySchema } from '../schemas';
 import { StandardSchema } from '../schemas/types';
-import { AnyArray, AnyObject } from '../types';
 import { isNumber } from '../utils';
 
 type Model<C extends AbstractControl> = C extends FormArray ? AnyArray : AnyObject;

@@ -1,7 +1,7 @@
 import { TemplateRef } from '@angular/core';
-import { SafeAny } from '@ngify/types';
+import { AnyObject, SafeAny } from '@ngify/types';
 import { NzCascaderComponent, NzCascaderExpandTrigger, NzCascaderOption, NzCascaderSize, NzShowSearchOptions } from 'ng-zorro-antd/cascader';
-import { NzCheckboxComponent, NzCheckboxGroupComponent, NzCheckBoxOptionInterface } from 'ng-zorro-antd/checkbox';
+import { NzCheckBoxOptionInterface, NzCheckboxComponent, NzCheckboxGroupComponent } from 'ng-zorro-antd/checkbox';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDatePickerComponent, NzRangePickerComponent } from 'ng-zorro-antd/date-picker';
 import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
@@ -13,7 +13,6 @@ import { NzSwitchComponent } from 'ng-zorro-antd/switch';
 import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { NzTreeSelectComponent } from 'ng-zorro-antd/tree-select';
-import { AnyObject } from '../types';
 import { AbstractControlSchema, AbstractDateControlSchema, AbstractTextControlSchema } from './abstract.schema';
 import { AbstractInputField, ComponentControlEventListener, ComponentPropertyPatcher, ElementControlEventListener, ElementPropertyPatcher } from './interfaces';
 import { AnySchemaName, SchemaName } from './types';

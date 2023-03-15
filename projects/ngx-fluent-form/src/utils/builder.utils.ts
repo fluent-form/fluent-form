@@ -1,5 +1,4 @@
-import { SafeAny } from '@ngify/types';
-import { AnyObject } from '../types';
+import { AnyObject, SafeAny } from '@ngify/types';
 
 const BUILDER = Symbol('BUILDER');
 

@@ -1,6 +1,6 @@
 import { FormArray, FormGroup } from '@angular/forms';
+import { AnyArray, AnyObject } from '@ngify/types';
 import { AnySchema } from '../schemas';
-import { AnyArray, AnyObject } from '../types';
 import { isComponentContainerSchema, isComponentSchema, isComponentWrapperSchema, isControlContainerSchema, isControlWrapperSchema } from './schema.utils';
 import { valueUtils } from './value.utils';
 

@@ -1,6 +1,7 @@
 import { NgClass, NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { NzFormLayoutType, NzFormModule } from 'ng-zorro-antd/form';
 import { NzRowDirective } from 'ng-zorro-antd/grid';
@@ -11,7 +12,6 @@ import { FluentCallPipe, FluentColumnPipe, FluentControlPipe } from '../../pipes
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { StandardSchema } from '../../schemas/types';
 import { CONFIG } from '../../tokens';
-import { AnyObject } from '../../types';
 import { FormUtils, createFormGroup, formUtils, modelUtils, standardSchema } from '../../utils';
 import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/form-col-content-outlet.component';
 

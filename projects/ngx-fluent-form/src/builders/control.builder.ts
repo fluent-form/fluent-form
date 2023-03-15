@@ -136,6 +136,7 @@ export function dateRange<N extends AnySchemaName>(name?: N) {
 }
 
 type RestSchema = typeof REST_PARAMS[number];
-type UnstableControlBuilder<T extends AnyControlSchema, S extends keyof T> = UnstableBuilder<T, S, RestSchema>
 type KindOrNameOrType = KindOrName | 'type';
 type TimeOrFormat = 'time' | 'format';
+
+export type UnstableControlBuilder<T extends AnyControlSchema, S extends keyof T> = UnstableBuilder<T, S, RestSchema>

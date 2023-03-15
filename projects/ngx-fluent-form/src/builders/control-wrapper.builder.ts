@@ -17,4 +17,4 @@ export function inputGroup(...nameOrSchemas: [SchemaName] | InputGroupComponentS
   return controlWrapperBuilder<InputGroupComponentSchema>().kind('input-group').schemas(...nameOrSchemas);
 }
 
-type UnstableControlWrapperBuilder<T extends AnyControlWrapperSchema, S extends keyof T> = UnstableBuilder<T, S, RestSchema>
+export type UnstableControlWrapperBuilder<T extends AnyControlWrapperSchema, S extends keyof T> = UnstableBuilder<T, S, RestSchema>

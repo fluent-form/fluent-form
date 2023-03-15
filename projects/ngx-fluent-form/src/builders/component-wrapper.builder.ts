@@ -17,4 +17,4 @@ export function buttonGroup(...nameOrSchemas: [] | [SchemaName] | ButtonGroupCom
   return componentWrapperBuilder<ButtonGroupComponentSchema>().kind('button-group').schemas(...nameOrSchemas);
 }
 
-type UnstableComponentWrapperBuilder<T extends AnyComponentWrapperSchema, S extends keyof T> = UnstableBuilder<T, S, RestSchema>;
+export type UnstableComponentWrapperBuilder<T extends AnyComponentWrapperSchema, S extends keyof T> = UnstableBuilder<T, S, RestSchema>;

@@ -23,4 +23,4 @@ export function tab<N extends SchemaName>(name?: N): UnstableComponentContainerB
   return componentContainerBuilder<TabComponentSchema<N>>().kind('tab').name(name);
 }
 
-type UnstableComponentContainerBuilder<T extends AnyComponentContainerSchema, S extends keyof T> = UnstableBuilder<T, S, RestSchema>;
+export type UnstableComponentContainerBuilder<T extends AnyComponentContainerSchema, S extends keyof T> = UnstableBuilder<T, S, RestSchema>;

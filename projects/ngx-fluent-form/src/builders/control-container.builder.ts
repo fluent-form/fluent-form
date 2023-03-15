@@ -45,4 +45,5 @@ export function array<N extends SchemaName>(name?: N) {
 
 type FormBuilderFn = (it: UnstableBuilder<FormGroupSchema, keyof AbstractSchema<AnySchemaName>, RestSchema>) => StableBuilder<FormGroupSchema>;
 type RestSchema = typeof REST_PARAMS[number];
-type UnstableControlContainerBuilder<T extends AnyControlContainerSchema, S extends keyof T> = UnstableBuilder<T, S, RestSchema>;
+
+export type UnstableControlContainerBuilder<T extends AnyControlContainerSchema, S extends keyof T> = UnstableBuilder<T, S, RestSchema>;

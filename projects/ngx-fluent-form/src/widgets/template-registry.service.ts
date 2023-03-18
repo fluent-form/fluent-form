@@ -1,19 +1,18 @@
 import { createComponent, EnvironmentInjector, inject, Injectable, TemplateRef } from '@angular/core';
 import { WIDGET_MAP } from '../tokens';
-import { WidgetKind } from './kind';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WidgetRegistry extends Map<WidgetKind, TemplateRef<unknown>> {
+export class TemplateRegistry extends Map<string, TemplateRef<unknown>> {
   private readonly environmentInjector = inject(EnvironmentInjector);
   private readonly widgetMap = inject(WIDGET_MAP);
 
-  override get(kind: WidgetKind): TemplateRef<unknown> {
+  override get(kind: string): TemplateRef<unknown> {
     return super.get(kind) ?? this.register(kind);
   }
 
-  private register(kind: WidgetKind) {
+  private register(kind: string) {
     const { instance } = createComponent(this.widgetMap.get(kind)!, {
       environmentInjector: this.environmentInjector
     });

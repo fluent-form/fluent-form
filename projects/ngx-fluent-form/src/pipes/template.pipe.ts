@@ -1,5 +1,5 @@
 import { inject, Pipe, PipeTransform, TemplateRef } from '@angular/core';
-import { TemplateRegistry } from '../widgets/template-registry.service';
+import { TemplateRegistry } from '../services';
 
 @Pipe({
   name: 'template',

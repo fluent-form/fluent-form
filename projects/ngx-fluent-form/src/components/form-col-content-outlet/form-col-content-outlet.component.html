@@ -17,14 +17,14 @@
     <ng-container
       *ngSwitchCase="'steps'"
       fluentWithInjector
-      [ngTemplateOutlet]="schema.kind | widgetTemplateRef"
+      [ngTemplateOutlet]="schema.kind | template"
       [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
     </ng-container>
 
     <ng-container
       *ngSwitchCase="'tabs'"
       fluentWithInjector
-      [ngTemplateOutlet]="schema.kind | widgetTemplateRef"
+      [ngTemplateOutlet]="schema.kind | template"
       [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
     </ng-container>
 

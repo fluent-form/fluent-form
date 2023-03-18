@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, ViewChi
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { FluentWithInjectorDirective } from '../../directives/with-injector.directive';
-import { FluentWidgetTemplateRefPipe } from '../../pipes';
+import { FluentTemplatePipe } from '../../pipes';
 import { AnyComponentSchema, AnyControlSchema } from '../../schemas';
 import { StandardSchema } from '../../schemas/types';
 
@@ -22,7 +22,7 @@ export interface FluentControlTemplateContext<T extends AnyObject | AnyArray> {
   imports: [
     NgTemplateOutlet,
     FluentWithInjectorDirective,
-    FluentWidgetTemplateRefPipe,
+    FluentTemplatePipe,
   ],
   templateUrl: './control-outlet.component.html',
   host: {

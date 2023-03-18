@@ -3,10 +3,10 @@ import { WidgetKind } from '../widgets/kind';
 import { WidgetRegistry } from '../widgets/widget-registry.service';
 
 @Pipe({
-  name: 'widgetTemplateRef',
+  name: 'template',
   standalone: true
 })
-export class FluentWidgetTemplateRefPipe implements PipeTransform {
+export class FluentTemplatePipe implements PipeTransform {
   private readonly registry = inject(WidgetRegistry);
 
   transform(value: string): TemplateRef<unknown> {

@@ -13,6 +13,7 @@ import { NzSwitchComponent } from 'ng-zorro-antd/switch';
 import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { NzTreeSelectComponent } from 'ng-zorro-antd/tree-select';
+import { Observable } from 'rxjs';
 import { AbstractControlSchema, AbstractDateControlSchema, AbstractTextControlSchema } from './abstract.schema';
 import { AbstractInputField, ComponentControlEventListener, ComponentPropertyPatcher, ElementControlEventListener, ElementPropertyPatcher } from './interfaces';
 import { AnySchemaName, SchemaName } from './types';
@@ -101,11 +102,14 @@ export interface SelectControlSchema<Name extends SchemaName = SchemaName, Val =
   arrow?: boolean;
   size?: NzSelectSizeType;
   suffixIcon?: TemplateRef<SafeAny> | string;
-  options: AnyObject[];
+  loading?: boolean;
+  options?: AnyObject[];
+  fetchOptions?: (keyword$: Observable<string>) => Observable<AnyObject[]>;
   config?: {
     labelProperty?: string;
     valueProperty?: string;
     disabledProperty?: string;
+    hideProperty?: string;
   };
 }
 

@@ -1,4 +1,5 @@
 import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, form, input, inputGroup, number, radioGroup, rate, select, slider, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
+import { map, switchMap, timer } from 'rxjs';
 import { CASCADER_OPTIONS, CHECKBOX_OPTIONS, RADIO_OPTIONS, SELECT_OPTIONS, TREE_SELECT_OPTIONS } from 'stories/options';
 import { defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
@@ -37,6 +38,19 @@ export const story = defineStory({
       checkbox('checkbox').label('单个复选框').content('同意').col(12),
       checkboxGroup('checkboxGroup').label('复选框组').options(CHECKBOX_OPTIONS).col(12),
       select('select').label('选择器').options(SELECT_OPTIONS).col(8),
+      select('asyncSelect').label('动态数据选择器').col(8).fetchOptions(
+        $ => $.pipe(
+          switchMap(str =>
+            timer(1000).pipe(
+              map(() => [
+                { label: 'a ' + str, value: 'a ' + str },
+                { label: 'b ' + str, value: 'b ' + str },
+                { label: 'c ' + str, value: 'c ' + str },
+              ])
+            )
+          )
+        )
+      ),
       cascader('cascader').label('联级选择器').options(CASCADER_OPTIONS).col(8),
       treeSelect('treeSelect').label('树形选择器').options(TREE_SELECT_OPTIONS).expandedKeys(['100', '1001']).col(8),
       rate('rate').label('评分').defaultValue(2.5).col(12),
@@ -121,6 +135,19 @@ export const source = dedent`
       checkbox('checkbox').label('单个复选框').content('同意').col(12),
       checkboxGroup('checkboxGroup').label('复选框组').options(CHECKBOX_OPTIONS).col(12),
       select('select').label('选择器').options(SELECT_OPTIONS).col(12),
+      select('asyncSelect').label('动态数据选择器').col(8).fetchOptions(
+        $ => $.pipe(
+          switchMap(str =>
+            timer(1000).pipe(
+              map(() => [
+                { label: 'a ' + str, value: 'a ' + str },
+                { label: 'b ' + str, value: 'b ' + str },
+                { label: 'c ' + str, value: 'c ' + str },
+              ])
+            )
+          )
+        )
+      ),
       cascader('cascader').label('联级选择器').options(CASCADER_OPTIONS).col(12),
       rate('rate').label('评分').defaultValue(2.5).col(12),
       slider('slider').label('滑动条').defaultValue(30).col(12),

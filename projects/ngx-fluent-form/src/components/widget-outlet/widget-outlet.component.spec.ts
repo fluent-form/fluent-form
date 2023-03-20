@@ -3,11 +3,11 @@ import { FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { withAllWidgets } from '../../features';
 import { provideFluentForm } from '../../provider';
-import { FluentControlOutletComponent } from './control-outlet.component';
+import { FluentWidgetOutletComponent } from './widget-outlet.component';
 
-describe('FluentControlOutletComponent', () => {
-  let component: FluentControlOutletComponent<AnyObject | AnyArray>;
-  let fixture: ComponentFixture<FluentControlOutletComponent<AnyObject | AnyArray>>;
+describe('FluentWidgetOutletComponent', () => {
+  let component: FluentWidgetOutletComponent<AnyObject | AnyArray>;
+  let fixture: ComponentFixture<FluentWidgetOutletComponent<AnyObject | AnyArray>>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -18,7 +18,7 @@ describe('FluentControlOutletComponent', () => {
       ]
     });
 
-    fixture = TestBed.createComponent(FluentControlOutletComponent);
+    fixture = TestBed.createComponent(FluentWidgetOutletComponent);
     component = fixture.componentInstance;
     component.control = new FormGroup({});
     component.schema = { kind: 'button' };

@@ -9,7 +9,7 @@ import { FluentCallPipe, FluentColumnPipe, FluentControlPipe, FluentSchemaPipe, 
 import { AnySchema } from '../../schemas';
 import { StandardSchema } from '../../schemas/types';
 import { CONFIG } from '../../tokens';
-import { FluentControlOutletComponent } from '../control-outlet/control-outlet.component';
+import { FluentWidgetOutletComponent } from '../widget-outlet/widget-outlet.component';
 
 interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
   /** 当前控件 */
@@ -34,7 +34,7 @@ interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
     NgTemplateOutlet,
     NzDividerModule,
     NzFormModule,
-    FluentControlOutletComponent,
+    FluentWidgetOutletComponent,
     FluentBinderDirective,
     FluentWithInjectorDirective,
     FluentCallPipe,

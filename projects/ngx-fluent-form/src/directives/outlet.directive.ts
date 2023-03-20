@@ -1,8 +1,8 @@
 import { createComponent, Directive, EnvironmentInjector, Host, Injector, Input, OnChanges, OnDestroy, OnInit, SkipSelf, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
-import { FluentControlTemplateContext } from '../components';
-import { FluentControlOutletComponent } from '../components/control-outlet/control-outlet.component';
+import { FluentWidgetTemplateContext } from '../components';
+import { FluentWidgetOutletComponent } from '../components/widget-outlet/widget-outlet.component';
 import { AnyComponentSchema, AnyControlSchema } from '../schemas';
 import { StandardSchema } from '../schemas/types';
 import { ControlContainer } from './models/control-container';
@@ -16,7 +16,7 @@ import { ControlContainer } from './models/control-container';
     '[style.display]': `'none'`
   }
 })
-export class FluentOutletDirective<T extends AnyObject | AnyArray> implements OnInit, OnChanges, OnDestroy, FluentControlTemplateContext<T> {
+export class FluentOutletDirective<T extends AnyObject | AnyArray> implements OnInit, OnChanges, OnDestroy, FluentWidgetTemplateContext<T> {
   @Input() name!: string | number;
   /** @internal */
   schema!: StandardSchema<AnyComponentSchema | AnyControlSchema>;
@@ -34,7 +34,7 @@ export class FluentOutletDirective<T extends AnyObject | AnyArray> implements On
     @Host() @SkipSelf()
     private controlContainer: ControlContainer<T>,
   ) {
-    const { instance } = createComponent(FluentControlOutletComponent, { environmentInjector });
+    const { instance } = createComponent(FluentWidgetOutletComponent, { environmentInjector });
     viewContainerRef.createEmbeddedView(instance.templateRef, this, { injector });
   }
 

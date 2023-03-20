@@ -1,5 +1,5 @@
 import { NgClass, NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, forwardRef, inject } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
@@ -42,6 +42,7 @@ import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/
   ]
 })
 export class FluentFormComponent<T extends AnyObject> implements FluentConfig {
+  private readonly destroy$ = inject(NzDestroyService);
   /**
    * 内部的不可变模型，主要有以下用途：
    * - 用来跟公开的模型值进行引用比较，判断变更是内部发出的还是外部传入的，如果引用一致则为内部变更
@@ -98,8 +99,6 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig {
 
   @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
   @Output() modelChange: EventEmitter<T> = new EventEmitter();
-
-  constructor(private destroy$: NzDestroyService) { }
 
   /**
    * 表单值更新时

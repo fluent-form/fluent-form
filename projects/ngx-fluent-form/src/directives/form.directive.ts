@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { Directive, EventEmitter, forwardRef, inject, Input, Output } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
@@ -22,6 +22,7 @@ import { ControlContainer, ControlContainerDirective } from './models/control-co
   ]
 })
 export class FluentFormDirective<T extends AnyObject | AnyArray> extends ControlContainerDirective<T> {
+  private readonly destroy$ = inject(NzDestroyService);
   private internalModel!: T;
   private _model!: T;
   private schema!: StandardSchema<FormGroupSchema>;
@@ -73,10 +74,6 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
   /** @internal */
   get directive(): ControlContainerDirective<T> {
     return this;
-  }
-
-  constructor(private destroy$: NzDestroyService) {
-    super();
   }
 
   /**

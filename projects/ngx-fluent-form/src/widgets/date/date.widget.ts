@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { FluentBinderDirective, FluentComposableDirective, FluentWithContextGuardDirective } from '../../directives';
+import { FluentBinderDirective, FluentComposableDirective, FluentContextGuardDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe } from '../../pipes';
 import { DatePickerControlSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
@@ -19,7 +19,7 @@ type DateWidgetTemplateContext = WidgetTemplateContext<DatePickerControlSchema, 
     NzGridModule,
     NzDatePickerModule,
     FluentBinderDirective,
-    FluentWithContextGuardDirective,
+    FluentContextGuardDirective,
     FluentComposableDirective,
     FluentCallPipe,
     FluentColumnPipe

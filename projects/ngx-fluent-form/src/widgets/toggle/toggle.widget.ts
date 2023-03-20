@@ -2,7 +2,7 @@ import { NgClass, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { FluentBinderDirective, FluentWithContextGuardDirective } from '../../directives';
+import { FluentBinderDirective, FluentContextGuardDirective } from '../../directives';
 import { ToggleControlSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -16,7 +16,7 @@ type ToggleWidgetTemplateContext = WidgetTemplateContext<ToggleControlSchema, Fo
     ReactiveFormsModule,
     NzSwitchModule,
     FluentBinderDirective,
-    FluentWithContextGuardDirective,
+    FluentContextGuardDirective,
   ],
   templateUrl: './toggle.widget.html',
   styles: [`nz-switch { width: 100% }`]

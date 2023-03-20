@@ -2,7 +2,7 @@ import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
-import { FluentBinderDirective, FluentWithContextGuardDirective } from '../../directives';
+import { FluentBinderDirective, FluentContextGuardDirective } from '../../directives';
 import { RadioGroupControlSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -18,7 +18,7 @@ type RadioGroupWidgetTemplateContext = WidgetTemplateContext<RadioGroupControlSc
     ReactiveFormsModule,
     NzRadioModule,
     FluentBinderDirective,
-    FluentWithContextGuardDirective,
+    FluentContextGuardDirective,
   ],
   templateUrl: './radio-group.widget.html',
 })

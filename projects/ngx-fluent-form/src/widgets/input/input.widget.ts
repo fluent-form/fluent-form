@@ -4,7 +4,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { FluentBinderDirective, FluentComposableDirective, FluentWithContextGuardDirective } from '../../directives';
+import { FluentBinderDirective, FluentComposableDirective, FluentContextGuardDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe, FluentInvokePipe } from '../../pipes';
 import { InputControlSchema } from '../../schemas';
 import { AbstractTextControlWidget, WidgetTemplateContext } from '../abstract.widget';
@@ -22,7 +22,7 @@ type InputWidgetTemplateContext = WidgetTemplateContext<InputControlSchema, Form
     NzGridModule,
     NzAutocompleteModule,
     FluentBinderDirective,
-    FluentWithContextGuardDirective,
+    FluentContextGuardDirective,
     FluentComposableDirective,
     FluentCallPipe,
     FluentInvokePipe,

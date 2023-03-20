@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
-import { FluentBinderDirective, FluentWithContextGuardDirective } from '../../directives';
+import { FluentBinderDirective, FluentContextGuardDirective } from '../../directives';
 import { CheckboxGroupControlSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -17,7 +17,7 @@ type CheckboxGroupWidgetTemplateContext = WidgetTemplateContext<CheckboxGroupCon
     ReactiveFormsModule,
     NzCheckboxModule,
     FluentBinderDirective,
-    FluentWithContextGuardDirective,
+    FluentContextGuardDirective,
   ],
   templateUrl: './checkbox-group.widget.html',
 })

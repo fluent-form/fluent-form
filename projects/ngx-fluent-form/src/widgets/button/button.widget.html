@@ -1,4 +1,4 @@
-<ng-template let-control="control" let-schema="schema" let-model="model" [fluentWithContextGuard]="contextGuard">
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <ng-container *ngIf="schema.type === 'link'">
     <a
       *ngIf="!(schema.hidden | call: model:schema:control)"

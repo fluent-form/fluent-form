@@ -2,7 +2,7 @@ import { NgClass, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
-import { FluentBinderDirective, FluentWithContextGuardDirective } from '../../directives';
+import { FluentBinderDirective, FluentContextGuardDirective } from '../../directives';
 import { CheckboxControlSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -16,7 +16,7 @@ type CheckboxWidgetTemplateContext = WidgetTemplateContext<CheckboxControlSchema
     ReactiveFormsModule,
     NzCheckboxModule,
     FluentBinderDirective,
-    FluentWithContextGuardDirective,
+    FluentContextGuardDirective,
   ],
   templateUrl: './checkbox.widget.html',
 })

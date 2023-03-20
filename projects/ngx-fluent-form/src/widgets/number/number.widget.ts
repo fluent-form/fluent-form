@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-import { FluentBinderDirective, FluentComposableDirective, FluentWithContextGuardDirective } from '../../directives';
+import { FluentBinderDirective, FluentComposableDirective, FluentContextGuardDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe, FluentInvokePipe } from '../../pipes';
 import { NumberInputControlSchema } from '../../schemas';
 import { isNumber } from '../../utils';
@@ -21,7 +21,7 @@ type NumberWidgetTemplateContext = WidgetTemplateContext<NumberInputControlSchem
     NzGridModule,
     NzInputNumberModule,
     FluentBinderDirective,
-    FluentWithContextGuardDirective,
+    FluentContextGuardDirective,
     FluentComposableDirective,
     FluentCallPipe,
     FluentInvokePipe,

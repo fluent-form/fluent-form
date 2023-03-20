@@ -2,7 +2,7 @@ import { NgClass, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
-import { FluentBinderDirective, FluentWithContextGuardDirective } from '../../directives';
+import { FluentBinderDirective, FluentContextGuardDirective } from '../../directives';
 import { SliderControlSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -16,7 +16,7 @@ type SilderWidgetTemplateContext = WidgetTemplateContext<SliderControlSchema, Fo
     ReactiveFormsModule,
     NzSliderModule,
     FluentBinderDirective,
-    FluentWithContextGuardDirective,
+    FluentContextGuardDirective,
   ],
   templateUrl: './silder.widget.html',
 })

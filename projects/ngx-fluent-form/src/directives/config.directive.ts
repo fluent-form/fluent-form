@@ -3,7 +3,7 @@ import { CONFIG } from '../tokens';
 
 @Directive({
   // eslint-disable-next-line
-  selector: 'nz-steps, nz-tabset',
+  selector: 'nz-steps, nz-tabset, nz-row[nz-form]',
   standalone: true,
   exportAs: 'fluentConfig'
 })

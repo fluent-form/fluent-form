@@ -1,7 +1,8 @@
 import { Provider, Type } from '@angular/core';
 import { WIDGET_MAP } from './tokens';
-import { AbstractWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, InputGroupWidget, InputWidget, NumberWidget, RadioGroupWidget, RateWidget, SelectWidget, SilderWidget, StepsWidget, TabsWidget, TextareaWidget, TextWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from './widgets';
+import { AbstractWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, InputGroupWidget, InputWidget, NumberWidget, RadioGroupWidget, RateWidget, SelectWidget, SilderWidget, StepsWidget, TabsWidget, TextWidget, TextareaWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from './widgets';
 import { WidgetKind } from './widgets/kind';
+import { NestedFormWidget } from './widgets/nested-form/nested-form.widget';
 
 export const enum FluentFormFeatureKind {
   Widget
@@ -39,7 +40,8 @@ export function withAllWidgets(): FluentFormFeature {
     useButtonWidget(),
     useButtonGroupWidget(),
     useStepsWidget(),
-    useTabsWidget()
+    useTabsWidget(),
+    useNestedFormWidget()
   );
 }
 
@@ -204,5 +206,12 @@ export function useTabsWidget(): FluentFormWidgetFeature {
   return {
     kind: WidgetKind.Tabs,
     widget: TabsWidget
+  };
+}
+
+export function useNestedFormWidget(): FluentFormWidgetFeature {
+  return {
+    kind: WidgetKind.NestedForm,
+    widget: NestedFormWidget
   };
 }

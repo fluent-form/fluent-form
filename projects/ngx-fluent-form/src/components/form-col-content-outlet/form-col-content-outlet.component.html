@@ -3,15 +3,15 @@
     <ng-container
       *ngSwitchCase="'group'"
       fluentWithInjector
-      [ngTemplateOutlet]="nestedFormTemplate"
-      [ngTemplateOutletContext]="{ form: control, schema: schema, model: model[schema.name] }">
+      [ngTemplateOutlet]="'nested-form' | template"
+      [ngTemplateOutletContext]="{ control: control, schema: schema, model: model[schema.name] }">
     </ng-container>
 
     <ng-container
       *ngSwitchCase="'array'"
       fluentWithInjector
-      [ngTemplateOutlet]="nestedFormTemplate"
-      [ngTemplateOutletContext]="{ form: control, schema: schema, model: model[schema.name] }">
+      [ngTemplateOutlet]="'nested-form' | template"
+      [ngTemplateOutletContext]="{ control: control, schema: schema, model: model[schema.name] }">
     </ng-container>
 
     <ng-container
@@ -35,38 +35,6 @@
       [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
     </ng-container>
   </ng-container>
-</ng-template>
-
-<ng-template #nestedFormTemplate let-form="form" let-schema="schema" let-model="model">
-  <nz-divider *ngIf="schema.label" [nzText]="schema.label"></nz-divider>
-  <nz-row
-    nz-form
-    [nzGutter]="config.gutter"
-    [nzLayout]="config.layout"
-    [ngClass]="schema.class"
-    [ngStyle]="schema.style"
-    [fluentBinderSchema]="schema"
-    [fluentBinderControl]="form">
-    <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
-      <nz-col
-        [nzSpan]="schema.col | col: 'span'"
-        [nzFlex]="schema.col | col: 'flex'"
-        [nzOffset]="schema.col | col: 'offset'"
-        [hidden]="schema.hidden | call: model:schema:control">
-        <ng-container
-          fluentWithInjector
-          [ngTemplateOutlet]="formColContentTemplate"
-          [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
-        </ng-container>
-      </nz-col>
-    </ng-template>
-
-    <ng-container
-      *ngFor="let subschema of schema.schemas"
-      [ngTemplateOutlet]="formColTemplate"
-      [ngTemplateOutletContext]="{ control: (subschema.name | control: form), schema: subschema, model: model }">
-    </ng-container>
-  </nz-row>
 </ng-template>
 
 <ng-template #formItemTemplate let-control="control" let-schema="schema" let-model="model">

@@ -1,4 +1,5 @@
 import { Directive, inject } from '@angular/core';
+import { FluentConfig } from '../config';
 import { CONFIG } from '../tokens';
 
 @Directive({
@@ -7,7 +8,7 @@ import { CONFIG } from '../tokens';
   standalone: true,
   exportAs: 'fluentConfig'
 })
-export class FluentConfigDirective {
+export class FluentConfigDirective implements FluentConfig {
   protected config = inject(CONFIG);
 
   get layout() { return this.config.layout; }

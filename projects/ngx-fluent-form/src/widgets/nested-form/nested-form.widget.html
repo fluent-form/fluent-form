@@ -14,6 +14,9 @@
         [nzSpan]="schema.col | col: 'span'"
         [nzFlex]="schema.col | col: 'flex'"
         [nzOffset]="schema.col | col: 'offset'"
+        [nzPush]="schema.col | col: 'push'"
+        [nzPull]="schema.col | col: 'pull'"
+        [nzOrder]="schema.col | col: 'order'"
         [hidden]="schema.hidden | call: model:schema:control">
         <fluent-form-col-content-outlet
           [control]="control"

@@ -28,6 +28,9 @@ export interface Col {
   span?: Cell;
   offset?: Cell;
   flex?: number | string;
+  push?: Cell;
+  pull?: Cell;
+  order?: number;
 }
 
 export interface ControlValueMapper<V> {

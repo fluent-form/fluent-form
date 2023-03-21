@@ -31,4 +31,25 @@ describe('FluentColumnPipe', () => {
     expect(pipe.transform({ span: 1 }, 'offset')).toBeNull();
     expect(pipe.transform({ offset: 1 }, 'offset')).toBe(1);
   });
+
+  it('push', () => {
+    expect(pipe.transform(undefined, 'push')).toBeNull();
+    expect(pipe.transform(1, 'push')).toBeNull();
+    expect(pipe.transform({ span: 1 }, 'push')).toBeNull();
+    expect(pipe.transform({ push: 1 }, 'push')).toBe(1);
+  });
+
+  it('pull', () => {
+    expect(pipe.transform(undefined, 'pull')).toBeNull();
+    expect(pipe.transform(1, 'pull')).toBeNull();
+    expect(pipe.transform({ span: 1 }, 'pull')).toBeNull();
+    expect(pipe.transform({ pull: 1 }, 'pull')).toBe(1);
+  });
+
+  it('order', () => {
+    expect(pipe.transform(undefined, 'order')).toBeNull();
+    expect(pipe.transform(1, 'order')).toBeNull();
+    expect(pipe.transform({ span: 1 }, 'order')).toBeNull();
+    expect(pipe.transform({ order: 1 }, 'order')).toBe(1);
+  });
 });

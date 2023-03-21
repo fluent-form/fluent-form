@@ -1,11 +1,15 @@
-import { createComponent, Directive, EnvironmentInjector, Host, Injector, Input, OnChanges, OnDestroy, OnInit, SkipSelf, ViewContainerRef } from '@angular/core';
+import { Directive, inject, Input, OnChanges, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
-import { FluentWidgetTemplateContext } from '../components';
-import { FluentWidgetOutletComponent } from '../components/widget-outlet/widget-outlet.component';
 import { AnyComponentSchema, AnyControlSchema } from '../schemas';
-import { StandardSchema } from '../schemas/types';
+import { SchemaName, StandardSchema } from '../schemas/types';
+import { TemplateRegistry } from '../services';
+import { WidgetTemplateContext } from '../widgets';
 import { ControlContainer } from './models/control-container';
+
+// TODO
+// 目前 fluent-outlet 渲染的组件是不支持显示验证状态/控件标签的，考虑将 fluent-outlet 改为组件，
+// 内部把 nz-form-label 和 nz-form-control 渲染一下
 
 @Directive({
   // eslint-disable-next-line
@@ -16,27 +20,30 @@ import { ControlContainer } from './models/control-container';
     '[style.display]': `'none'`
   }
 })
-export class FluentOutletDirective<T extends AnyObject | AnyArray> implements OnInit, OnChanges, OnDestroy, FluentWidgetTemplateContext<T> {
-  @Input() name!: string | number;
+export class FluentOutletDirective<S extends AnyComponentSchema | AnyControlSchema, T extends AnyObject | AnyArray> implements OnInit, OnChanges, OnDestroy, WidgetTemplateContext<S, AbstractControl> {
+  private readonly registry = inject(TemplateRegistry);
+  private readonly viewContainerRef = inject(ViewContainerRef);
+  private readonly controlContainer: ControlContainer<T> = inject(ControlContainer<T>, { host: true, skipSelf: true });
+  private _schema!: StandardSchema<S>;
+
   /** @internal */
-  schema!: StandardSchema<AnyComponentSchema | AnyControlSchema>;
+  set schema(value: StandardSchema<S>) {
+    this._schema = value;
+    this.viewContainerRef.length && this.viewContainerRef.clear();
+    this.viewContainerRef.createEmbeddedView(this.registry.get(value.kind), this);
+  }
+  /** @internal */
+  get schema() {
+    return this._schema;
+  }
   /** @internal */
   control!: AbstractControl;
   /** @internal */
-  get model(): T {
-    return this.controlContainer.directive.model as T;
+  get model() {
+    return this.controlContainer.directive.model;
   }
 
-  constructor(
-    injector: Injector,
-    environmentInjector: EnvironmentInjector,
-    viewContainerRef: ViewContainerRef,
-    @Host() @SkipSelf()
-    private controlContainer: ControlContainer<T>,
-  ) {
-    const { instance } = createComponent(FluentWidgetOutletComponent, { environmentInjector });
-    viewContainerRef.createEmbeddedView(instance.templateRef, this, { injector });
-  }
+  @Input() name!: SchemaName;
 
   ngOnInit() {
     this.controlContainer.directive.addDirective(this);

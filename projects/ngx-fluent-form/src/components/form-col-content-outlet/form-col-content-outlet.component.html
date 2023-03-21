@@ -67,7 +67,10 @@
       [nzErrorTip]="currentSchema.tips?.error"
       [nzExtra]="currentSchema.tips?.extra"
       [nzAutoTips]="currentSchema.tips?.auto ?? {}">
-      <fluent-widget-outlet [control]="control" [schema]="schema" [model]="model"></fluent-widget-outlet>
+      <ng-container
+        fluentWithInjector
+        [ngTemplateOutlet]="schema.kind | template"
+        [ngTemplateOutletContext]="{ control, schema, model }"></ng-container>
     </nz-form-control>
   </nz-form-item>
 </ng-template>

@@ -7,6 +7,7 @@ import { isNumber } from '../utils';
 
 type Model<C extends AbstractControl> = C extends FormArray ? AnyArray : AnyObject;
 
+// TODO 考虑把第二个泛型改为 Model
 export interface WidgetTemplateContext<S extends AnySchema, C extends AbstractControl = FormControl> {
   schema: StandardSchema<S>;
   control: C;

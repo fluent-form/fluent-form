@@ -20,14 +20,14 @@ import { ControlContainer } from './models/control-container';
     '[style.display]': `'none'`
   }
 })
-export class FluentOutletDirective<S extends AnyComponentSchema | AnyControlSchema, T extends AnyObject | AnyArray> implements OnInit, OnChanges, OnDestroy, WidgetTemplateContext<S, AbstractControl> {
+export class FluentOutletDirective<T extends AnyObject | AnyArray> implements OnInit, OnChanges, OnDestroy, WidgetTemplateContext<AnyComponentSchema | AnyControlSchema, AbstractControl> {
   private readonly registry = inject(TemplateRegistry);
   private readonly viewContainerRef = inject(ViewContainerRef);
   private readonly controlContainer: ControlContainer<T> = inject(ControlContainer<T>, { host: true, skipSelf: true });
-  private _schema!: StandardSchema<S>;
+  private _schema!: StandardSchema<AnyComponentSchema | AnyControlSchema>;
 
   /** @internal */
-  set schema(value: StandardSchema<S>) {
+  set schema(value: StandardSchema<AnyComponentSchema | AnyControlSchema>) {
     this._schema = value;
     this.viewContainerRef.length && this.viewContainerRef.clear();
     this.viewContainerRef.createEmbeddedView(this.registry.get(value.kind), this);

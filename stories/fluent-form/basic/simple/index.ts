@@ -1,4 +1,4 @@
-import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, form, input, inputGroup, number, radioGroup, rate, select, slider, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
+import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, form, input, inputGroup, number, radioGroup, rate, row, select, slider, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
 import { map, switchMap, timer } from 'rxjs';
 import { CASCADER_OPTIONS, CHECKBOX_OPTIONS, RADIO_OPTIONS, SELECT_OPTIONS, TREE_SELECT_OPTIONS } from 'stories/options';
 import { defineStory } from 'stories/storybook';
@@ -88,6 +88,10 @@ export const story = defineStory({
         tab().title('禁用').disabled(true).schemas(
           input('textInTab3'),
         )
+      ),
+      row().col(24).justify('space-between').schemas(
+        date('dateInRow').label('居左').col(8),
+        dateRange('dateRangeInRow').label('居右').col(8),
       )
     ),
     model: {}
@@ -96,7 +100,7 @@ export const story = defineStory({
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, datetime, form, input, inputGroup, number, radioGroup, dateRange, rate, select, slider, step, steps, toggle, textarea, time } from 'ngx-fluent-form';
+  import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, datetime, form, input, inputGroup, number, radioGroup, dateRange, rate, row, select, slider, step, steps, toggle, textarea, time } from 'ngx-fluent-form';
 
   @Component({
     selector: 'example-component',
@@ -183,6 +187,10 @@ export const source = dedent`
         tab().title('禁用').disabled(true).schemas(
           input('textInTab3'),
         )
+      ),
+      row().col(24).justify('space-between').schemas(
+        date('dateInRow').label('居左').col(8),
+        dateRange('dateRangeInRow').label('居右').col(8),
       )
     );
 

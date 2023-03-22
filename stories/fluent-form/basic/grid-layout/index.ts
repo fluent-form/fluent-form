@@ -1,4 +1,4 @@
-import { date, datetime, form, input, number, rate, slider, textarea, time, toggle } from 'ngx-fluent-form';
+import { date, datetime, form, input, number, rate, row, slider, textarea, time, toggle } from 'ngx-fluent-form';
 import { defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
@@ -15,6 +15,9 @@ export const story = defineStory({
       toggle('toggle').label('开关').placeholder(['启用', '禁用']).defaultValue(true).col({ flex: 'auto' }),
       rate('rate').label('评分').defaultValue(2.5).col({ flex: 1 }),
       slider('slider').label('滑动条').defaultValue(30).col({ flex: 3 }),
+      row().justify('center').col(24).schemas(
+        input('centerText').label('水平居中输入框').col(12),
+      )
     ),
     model: {}
   }
@@ -22,7 +25,7 @@ export const story = defineStory({
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { date, datetime, form, input, number, rate, slider, toggle, textarea, time } from 'ngx-fluent-form';
+  import { date, datetime, form, input, number, rate, row, slider, toggle, textarea, time } from 'ngx-fluent-form';
 
   @Component({
     selector: 'example-component',
@@ -43,6 +46,10 @@ export const source = dedent`
       toggle('toggle').label('开关').placeholder(['启用', '禁用']).defaultValue(true).col({ flex: 'auto' }),
       rate('rate').label('评分').defaultValue(2.5).col({ flex: 1 }),
       slider('slider').label('滑动条').defaultValue(30).col({ flex: 3 }),
+
+      row().justify('center').col(24).schemas(
+        input('centerText').label('水平居中输入框').col(12),
+      )
     );
 
     model = {};

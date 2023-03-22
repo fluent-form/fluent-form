@@ -12,7 +12,8 @@
     [nzAnimated]="schema.animate ?? schema.type !== 'card'"
     [nzTabPosition]="schema.position ?? 'top'"
     [nzTabBarGutter]="schema.gutter"
-    [nzCentered]="schema.center">
+    [nzCentered]="schema.center"
+    [hidden]="schema.hidden | call: model:schema:control">
     <nz-tab
       *ngFor="let tabSchema of schema.schemas"
       #cmp
@@ -21,7 +22,8 @@
       [ngClass]="tabSchema.class"
       [ngStyle]="tabSchema.style"
       [nzTitle]="tabSchema.title"
-      [nzDisabled]="tabSchema.disabled | call: model:tabSchema:control">
+      [nzDisabled]="tabSchema.disabled | call: model:tabSchema:control"
+      [hidden]="tabSchema.hidden | call: model:tabSchema:control">
       <nz-row [nzGutter]="config.gutter">
         <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
           <nz-col

@@ -1,5 +1,5 @@
 import { StableBuilder } from '../utils';
-import { StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema } from './component-container.schema';
+import { RowComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema } from './component-container.schema';
 import { ButtonGroupComponentSchema } from './component-wrapper.schema';
 import { ButtonComponentSchema, TextComponentSchema } from './component.schema';
 import { FormArraySchema, FormGroupSchema } from './control-container.schema';
@@ -41,7 +41,8 @@ export type AnyComponentContainerSchema<N extends SchemaName = SchemaName> =
   | StepsComponentSchema<N>
   | StepComponentSchema<N>
   | TabsComponentSchema<N>
-  | TabComponentSchema<N>;
+  | TabComponentSchema<N>
+  | RowComponentSchema<N>;
 /** 任意组件容器构建器 */
 export type AnyComponentContainerBuilder<N extends SchemaName = SchemaName> = StableBuilder<AnyComponentContainerSchema<N>>;
 

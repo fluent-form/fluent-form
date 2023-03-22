@@ -7,7 +7,8 @@ export const COMPONENT_CONTAINER_SCHEMA_KINDS = [
   'steps',
   'step',
   'tabs',
-  'tab'
+  'tab',
+  'row'
 ];
 /** 文本控件图示类型 */
 export const TEXT_CONTROL_SCHEMA_KINDS = ['input', 'textarea'];

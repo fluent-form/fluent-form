@@ -5,7 +5,7 @@ import { NzTabComponent, NzTabPosition, NzTabSetComponent, NzTabType } from 'ng-
 import { StableBuilder } from '../utils';
 import { AbstractSchema } from './abstract.schema';
 import { AnyBuilder, AnySchema } from './index.schema';
-import { CallbackArgs, ComponentEventListener, ComponentPropertyPatcher } from './interfaces';
+import { CallbackArgs, ComponentEventListener, ComponentPropertyPatcher, ElementEventListener, ElementPropertyPatcher, Row } from './interfaces';
 import { SchemaName } from './types';
 
 export interface StepsComponentSchema<Name extends SchemaName = SchemaName>
@@ -50,5 +50,11 @@ export interface TabComponentSchema<Name extends SchemaName = SchemaName>
   kind: 'tab';
   title: string;
   disabled?: boolean | ((args: CallbackArgs<TabComponentSchema<SchemaName>>) => boolean) | string;
+  schemas: (AnySchema | AnyBuilder)[];
+}
+
+export interface RowComponentSchema<Name extends SchemaName = SchemaName>
+  extends AbstractSchema<Name>, ElementEventListener, ElementPropertyPatcher<HTMLElement>, Row {
+  kind: 'row';
   schemas: (AnySchema | AnyBuilder)[];
 }

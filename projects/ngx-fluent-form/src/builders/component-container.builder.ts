@@ -1,4 +1,4 @@
-import { AnyComponentContainerSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema } from '../schemas';
+import { AnyComponentContainerSchema, RowComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema } from '../schemas';
 import { SchemaName } from '../schemas/types';
 import { Builder, UnstableBuilder, builder } from '../utils';
 import { KindOrName, REST_SCHEMA, RestSchema } from './helper';
@@ -21,6 +21,10 @@ export function tabs<N extends SchemaName>(name?: N): UnstableComponentContainer
 
 export function tab<N extends SchemaName>(name?: N): UnstableComponentContainerBuilder<TabComponentSchema<N>, KindOrName> {
   return componentContainerBuilder<TabComponentSchema<N>>().kind('tab').name(name);
+}
+
+export function row<N extends SchemaName>(name?: N): UnstableComponentContainerBuilder<RowComponentSchema<N>, KindOrName> {
+  return componentContainerBuilder<RowComponentSchema<N>>().kind('row').name(name);
 }
 
 export type UnstableComponentContainerBuilder<T extends AnyComponentContainerSchema, S extends keyof T> = UnstableBuilder<T, S, RestSchema>;

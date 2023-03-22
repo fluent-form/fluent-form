@@ -7,7 +7,7 @@ import { CompareWith } from 'ng-zorro-antd/core/types';
 import { NzDateMode } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { AnyBuilder, AnySchema } from './index.schema';
-import { AbstractInputField, CallbackArgs, Col, ControlEventListener, ControlValueMapper, Labelful } from './interfaces';
+import { AbstractInputField, CallbackArgs, Col, ControlEventListener, ControlValueMapper, Labelful, Row } from './interfaces';
 import { AnySchemaName, Cell, SchemaLike } from './types';
 
 /** 抽象图示 */
@@ -46,7 +46,7 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
 }
 
 /** 抽象的容器控件图示 */
-export interface AbstractControlContainerSchema<Name extends AnySchemaName> extends AbstractSchema<Name>, ControlEventListener<SafeAny> {
+export interface AbstractControlContainerSchema<Name extends AnySchemaName> extends AbstractSchema<Name>, ControlEventListener<SafeAny>, Row {
   label?: string;
   schemas: (AnySchema | AnyBuilder)[];
   /** Validator for the control */

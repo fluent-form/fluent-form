@@ -3,6 +3,7 @@ import { AbstractControl, FormControlStatus } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
 import { ComponentOutputListenerMap, ComponentPropertyMap, HTMLElementEventListenerMap, HTMLElementPropertyMap } from '../types';
 import { Cell } from './types';
 
@@ -22,6 +23,12 @@ interface Label {
 /** 带标签的 */
 export interface Labelful {
   label?: string | Label;
+}
+
+export interface Row {
+  align?: NzAlign;
+  justify?: NzJustify;
+  gutter?: NzRowDirective['nzGutter'];
 }
 
 export interface Col {

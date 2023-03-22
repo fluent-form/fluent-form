@@ -3,7 +3,9 @@
   <nz-row
     #config="fluentConfig"
     nz-form
-    [nzGutter]="config.gutter"
+    [nzGutter]="schema.gutter ?? config.gutter"
+    [nzAlign]="schema.align!"
+    [nzJustify]="schema.justify!"
     [nzLayout]="config.layout"
     [ngClass]="schema.class"
     [ngStyle]="schema.style"

@@ -1,7 +1,9 @@
 <form
   nz-row
   nz-form
-  [nzGutter]="gutter"
+  [nzGutter]="schema.gutter ?? gutter"
+  [nzAlign]="schema.align ?? align"
+  [nzJustify]="schema.justify ?? justify"
   [nzLayout]="layout"
   [ngClass]="schema.class"
   [ngStyle]="schema.style"

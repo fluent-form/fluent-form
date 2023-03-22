@@ -4,7 +4,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { NzFormLayoutType, NzFormModule } from 'ng-zorro-antd/form';
-import { NzRowDirective } from 'ng-zorro-antd/grid';
+import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
 import { takeUntil } from 'rxjs';
 import { FluentConfig } from '../../config';
 import { FluentBinderDirective } from '../../directives';
@@ -95,7 +95,9 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig {
 
   @Input() layout: NzFormLayoutType = 'vertical';
   @Input() colon = true;
-  @Input() gutter: NzRowDirective['nzGutter'] = { xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 };
+  @Input() gutter: NzRowDirective['nzGutter'] | null = { xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 };
+  @Input() align: NzAlign | null = null;
+  @Input() justify: NzJustify | null = null;
 
   @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
   @Output() modelChange: EventEmitter<T> = new EventEmitter();

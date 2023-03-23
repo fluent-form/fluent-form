@@ -12,6 +12,7 @@ import { AnySchemaName, Cell, SchemaLike } from './types';
 
 /** 抽象图示 */
 export interface AbstractSchema<N extends AnySchemaName> extends SchemaLike<N> {
+  /* Used to define the width of the control. */
   col?: Col | Cell;
   hidden?: boolean | ((args: CallbackArgs<AbstractSchema<AnySchemaName>>) => boolean) | string;
   class?: NgClass['ngClass'];
@@ -23,6 +24,7 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
   id?: string;
   /** I/O mapper for control */
   mapper?: ControlValueMapper<Val>;
+  /* Used to set the default value of the control. */
   defaultValue?: SafeAny;
   /** Is it a required control */
   required?: boolean | ((args: CallbackArgs<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
@@ -42,17 +44,20 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
   validators?: ValidatorFn[];
   /** Async validators for control */
   asyncValidators?: AsyncValidatorFn[];
+  /** The event name for control to update upon. */
   updateOn?: AbstractControlOptions['updateOn'];
 }
 
 /** 抽象的容器控件图示 */
 export interface AbstractControlContainerSchema<Name extends AnySchemaName> extends AbstractSchema<Name>, ControlEventListener<SafeAny>, Row {
+  /* Used to define the label of the control. */
   label?: string;
   schemas: (AnySchema | AnyBuilder)[];
   /** Validator for the control */
   validators?: ValidatorFn[];
   /** Async validators for control */
   asyncValidators?: AsyncValidatorFn[];
+  /** The event name for control to update upon. */
   updateOn?: AbstractControlOptions['updateOn'];
 }
 

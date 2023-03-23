@@ -65,9 +65,10 @@ type _Builder<
   R extends keyof T = never,
   B extends BuildKey = never
 > = {
-    [K in Exclude<C, S> | B]: (
+    // 通过 `keyof Pick` 从原始类型 T 中提取出字段后再遍历就能够携带上字段在 T 中的注释
+    [K in keyof Pick<T, Exclude<C, S> | B>]-?: (
       K extends BuildKey
-      ? () => { [K in S]: T[K] }
+      ? () => Pick<T, S>
       : K extends R
       ? (...vals: T[K] extends RestParams ? NonNullable<T[K]> : never) => _Builder<
         T,

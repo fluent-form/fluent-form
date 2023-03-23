@@ -69,7 +69,7 @@ type _Builder<
       K extends BuildKey
       ? () => { [K in S]: T[K] }
       : K extends R
-      ? (...values: T[K] extends RestParams ? NonNullable<T[K]> : never) => _Builder<
+      ? (...vals: T[K] extends RestParams ? NonNullable<T[K]> : never) => _Builder<
         T,
         C,
         N,
@@ -77,7 +77,7 @@ type _Builder<
         R,
         [N] extends [S | K] ? BuildKey : never
       >
-      : (value: T[K]) => _Builder<
+      : (val: T[K]) => _Builder<
         T,
         C,
         N,

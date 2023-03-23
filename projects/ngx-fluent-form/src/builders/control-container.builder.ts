@@ -1,6 +1,6 @@
 import { SafeAny } from '@ngify/types';
-import { AbstractSchema, AnyBuilder, AnyControlContainerSchema, AnySchema, FormArraySchema, FormGroupSchema } from '../schemas';
-import { AnySchemaName, SchemaName } from '../schemas/types';
+import { AnyBuilder, AnyControlContainerSchema, AnySchema, FormArraySchema, FormGroupSchema } from '../schemas';
+import { SchemaName } from '../schemas/types';
 import { Builder, StableBuilder, UnstableBuilder, builder, standardSchema, standardSchemas } from '../utils';
 import { KindOrName } from './helper';
 
@@ -23,7 +23,7 @@ export function form(...schemas: (AnySchema | AnyBuilder)[]): AnySchema[];
 export function form(...fnOrSchemas: (AnySchema | AnyBuilder)[] | [FormBuilderFn]): AnySchema[] | FormGroupSchema {
   if (isFormBuilderFnTuple(fnOrSchemas)) {
     const [fn] = fnOrSchemas;
-    const builder = group() as UnstableBuilder<FormGroupSchema<number>, keyof AbstractSchema<AnySchemaName>, RestSchema>;
+    const builder = group();
     const schema = fn(builder);
     return standardSchema(schema);
   }
@@ -43,7 +43,7 @@ export function array<N extends SchemaName>(name?: N) {
   return controlContainerBuilder<FormArraySchema<N>>().kind('array').name(name);
 }
 
-type FormBuilderFn = (it: UnstableBuilder<FormGroupSchema, keyof AbstractSchema<AnySchemaName>, RestSchema>) => StableBuilder<FormGroupSchema>;
+type FormBuilderFn = (it: UnstableControlContainerBuilder<FormGroupSchema, KindOrName>) => StableBuilder<FormGroupSchema>;
 type RestSchema = typeof REST_PARAMS[number];
 
 export type UnstableControlContainerBuilder<T extends AnyControlContainerSchema, S extends keyof T> = UnstableBuilder<T, S, RestSchema>;

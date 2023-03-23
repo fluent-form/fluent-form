@@ -44,6 +44,8 @@ export const isBuilder = <T = unknown>(value: SafeAny): value is StableBuilder<T
 type RestParams = undefined | SafeAny[];
 type BuildKey = 'build';
 type Buildable = Record<BuildKey, unknown>;
+/** 构建好的 */
+type Built<T, K extends keyof T> = { [P in K]-?: T[P] };
 /** 取得接口的非空必填字段 */
 type NonNullableKey<T> = {
   [K in keyof T]-?: { [_ in K]: T[K] } extends { [_ in K]-?: T[K] } ? K : never
@@ -68,7 +70,7 @@ type _Builder<
     // 通过 `keyof Pick` 从原始类型 T 中提取出字段后再遍历就能够携带上字段在 T 中的注释
     [K in keyof Pick<T, Exclude<C, S> | B>]-?: (
       K extends BuildKey
-      ? () => Pick<T, S>
+      ? () => Built<T, S>
       : K extends R
       ? (...vals: T[K] extends RestParams ? NonNullable<T[K]> : never) => _Builder<
         T,

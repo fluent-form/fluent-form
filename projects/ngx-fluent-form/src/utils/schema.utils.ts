@@ -136,7 +136,7 @@ export function controlSchemaUtils<S extends AnyControlSchema>(schema: S) {
   return new ControlSchemaUtils(schema);
 }
 
-export class ControlSchemaUtils<S extends AnyControlSchema> {
+export class ControlSchemaUtils<S extends StandardSchema<AnyControlSchema>> {
   constructor(private readonly schema: S) { }
 
   /**

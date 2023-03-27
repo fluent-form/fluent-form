@@ -1,10 +1,11 @@
 import { AnySchema } from '../schemas';
+import { StandardSchema } from '../schemas/types';
 import { createFormGroup } from './form.utils';
 import { modelUtils } from './model.utils';
 
 describe('ModelUtils', () => {
   it('with control', () => {
-    const schemas: AnySchema[] = [{ kind: 'number', name: 'num' }];
+    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'number', name: 'num' }];
     const form = createFormGroup(schemas);
     const model = { num: 1 };
 
@@ -12,7 +13,7 @@ describe('ModelUtils', () => {
   });
 
   it('with double key control', () => {
-    const schemas: AnySchema[] = [{ kind: 'slider', name: ['start', 'end'] }];
+    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'slider', name: ['start', 'end'] }];
     const form = createFormGroup(schemas);
     const model = { start: 0, end: 100 };
 
@@ -20,7 +21,7 @@ describe('ModelUtils', () => {
   });
 
   it('with component', () => {
-    const schemas: AnySchema[] = [{ kind: 'button' }];
+    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'button' }];
     const form = createFormGroup(schemas);
     const model = {};
 
@@ -28,7 +29,7 @@ describe('ModelUtils', () => {
   });
 
   it('with component wrapper', () => {
-    const schemas: AnySchema[] = [{ kind: 'button-group', schemas: [] }];
+    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'button-group', schemas: [] }];
     const form = createFormGroup(schemas);
     const model = {};
 
@@ -36,7 +37,7 @@ describe('ModelUtils', () => {
   });
 
   it('with group (empty)', () => {
-    const schemas: AnySchema[] = [
+    const schemas: StandardSchema<AnySchema>[] = [
       {
         kind: 'group',
         name: 'obj',
@@ -50,7 +51,7 @@ describe('ModelUtils', () => {
   });
 
   it('with group', () => {
-    const schemas: AnySchema[] = [
+    const schemas: StandardSchema<AnySchema>[] = [
       {
         kind: 'group',
         name: 'obj',
@@ -66,7 +67,7 @@ describe('ModelUtils', () => {
   });
 
   it('with array (empty)', () => {
-    const schemas: AnySchema[] = [
+    const schemas: StandardSchema<AnySchema>[] = [
       {
         kind: 'array',
         name: 'arr',
@@ -80,7 +81,7 @@ describe('ModelUtils', () => {
   });
 
   it('with array', () => {
-    const schemas: AnySchema[] = [
+    const schemas: StandardSchema<AnySchema>[] = [
       {
         kind: 'array',
         name: 'arr',
@@ -96,7 +97,7 @@ describe('ModelUtils', () => {
   });
 
   it('with mix', () => {
-    const schemas: AnySchema[] = [
+    const schemas: StandardSchema<AnySchema>[] = [
       {
         kind: 'group',
         name: 'obj',

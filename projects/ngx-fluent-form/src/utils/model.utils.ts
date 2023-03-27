@@ -1,17 +1,18 @@
 import { FormArray, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { AnySchema } from '../schemas';
+import { StandardSchema } from '../schemas/types';
 import { isComponentContainerSchema, isComponentSchema, isComponentWrapperSchema, isControlContainerSchema, isControlWrapperSchema } from './schema.utils';
 import { valueUtils } from './value.utils';
 
-export function modelUtils<M extends AnyArray | AnyObject>(model: M, schemas: AnySchema[]) {
+export function modelUtils<M extends AnyArray | AnyObject>(model: M, schemas: StandardSchema<AnySchema>[]) {
   return new ModelUtils(model, schemas);
 }
 
 export class ModelUtils<M extends AnyArray | AnyObject> {
   constructor(
     private readonly model: M,
-    private readonly schemas: AnySchema[],
+    private readonly schemas: StandardSchema<AnySchema>[],
   ) { }
 
   /**
@@ -28,7 +29,7 @@ export class ModelUtils<M extends AnyArray | AnyObject> {
       if (schema.kind === 'group') {
         modelUtils(
           (this.model[schema.name as keyof M] ??= {} as M[keyof M]) as AnyObject,
-          schema.schemas as AnySchema[]
+          schema.schemas
         ).assign(form.get([schema.name!]) as FormGroup, false);
         return;
       }
@@ -36,13 +37,13 @@ export class ModelUtils<M extends AnyArray | AnyObject> {
       if (schema.kind === 'array') {
         modelUtils(
           (this.model[schema.name as keyof M] ??= [] as M[keyof M]) as AnyArray,
-          schema.schemas as AnySchema[]
+          schema.schemas
         ).assign(form.get([schema.name!]) as FormArray, false);
         return;
       }
 
       if (isControlContainerSchema(schema) || isComponentContainerSchema(schema) || isControlWrapperSchema(schema)) {
-        modelUtils(this.model as AnyObject, schema.schemas as AnySchema[]).assign(form as FormGroup, false);
+        modelUtils(this.model as AnyObject, schema.schemas).assign(form as FormGroup, false);
         return;
       }
 

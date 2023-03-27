@@ -2,7 +2,8 @@ import { AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGr
 import { AnyArray, AnyObject } from '@ngify/types';
 import { FluentCallPipe } from '../pipes/call.pipe';
 import { FormArraySchema, FormGroupSchema } from '../schemas';
-import { AnyControlOrControlContainerSchema, AnyControlSchema, AnySchema } from '../schemas/index.schema';
+import { AnyControlSchema, AnySchema } from '../schemas/index.schema';
+import { StandardSchema } from '../schemas/types';
 import { isUndefined } from './is.utils';
 import { controlSchemaUtils, isComponentContainerSchema, isComponentSchema, isComponentWrapperSchema, isControlContainerSchema, isControlWrapperSchema, isDoubleKeyControlSchema } from './schema.utils';
 import { valueUtils } from './value.utils';
@@ -11,7 +12,7 @@ import { valueUtils } from './value.utils';
  * 将图示转换为控件
  * @param schema
  */
-export function createFormControl(schema: AnyControlSchema): FormControl {
+export function createFormControl(schema: StandardSchema<AnyControlSchema>): FormControl {
   const validators = controlSchemaUtils(schema).getExtraValidators();
 
   return new FormControl(
@@ -32,7 +33,7 @@ export function createFormControl(schema: AnyControlSchema): FormControl {
  * @param schemas
  * @param controls
  */
-function createFormControls(schemas: AnySchema[], controls: Record<string, AbstractControl> = {}) {
+function createFormControls(schemas: StandardSchema<AnySchema>[], controls: Record<string, AbstractControl> = {}) {
   return schemas.reduce((controls, schema) => {
     if (isComponentSchema(schema) || isComponentWrapperSchema(schema)) {
       return controls;
@@ -43,7 +44,7 @@ function createFormControls(schemas: AnySchema[], controls: Record<string, Abstr
     } else if (schema.kind === 'array') {
       controls[schema.name!.toString()] = createFormArray(schema);
     } else if (isControlWrapperSchema(schema) || isComponentContainerSchema(schema)) {
-      createFormControls(schema.schemas as AnySchema[], controls);
+      createFormControls(schema.schemas, controls);
     } else {
       controls[schema.name!.toString()] = createFormControl(schema);
     }
@@ -56,20 +57,20 @@ function createFormControls(schemas: AnySchema[], controls: Record<string, Abstr
  * 将图示组转换为表单组
  * @param schema
  */
-export function createFormGroup(schema: FormGroupSchema): FormGroup;
+export function createFormGroup(schema: StandardSchema<FormGroupSchema>): FormGroup;
 /**
  * 将图示组转换为表单组
  * @param schemas
  */
-export function createFormGroup(schemas: | AnySchema[]): FormGroup;
-export function createFormGroup(schemaOrSchemas: FormGroupSchema | AnySchema[]): FormGroup;
-export function createFormGroup(schemaOrSchemas: FormGroupSchema | AnySchema[]): FormGroup {
-  let schemas: AnySchema[], options: AbstractControlOptions = {};
+export function createFormGroup(schemas: | StandardSchema<AnySchema>[]): FormGroup;
+export function createFormGroup(schemaOrSchemas: StandardSchema<FormGroupSchema> | StandardSchema<AnySchema>[]): FormGroup;
+export function createFormGroup(schemaOrSchemas: StandardSchema<FormGroupSchema> | StandardSchema<AnySchema>[]): FormGroup {
+  let schemas: StandardSchema<AnySchema>[], options: AbstractControlOptions = {};
 
   if (Array.isArray(schemaOrSchemas)) {
     schemas = schemaOrSchemas;
   } else {
-    schemas = schemaOrSchemas.schemas as AnySchema[];
+    schemas = schemaOrSchemas.schemas;
     options = {
       validators: schemaOrSchemas.validators,
       asyncValidators: schemaOrSchemas.asyncValidators,
@@ -84,9 +85,9 @@ export function createFormGroup(schemaOrSchemas: FormGroupSchema | AnySchema[]):
  * 将图示组转换为表单数组
  * @param schema
  */
-export function createFormArray(schema: FormArraySchema): FormArray {
+export function createFormArray(schema: StandardSchema<FormArraySchema>): FormArray {
   return new FormArray(
-    (schema.schemas as AnyControlOrControlContainerSchema[]).map(schema => {
+    schema.schemas.map(schema => {
       switch (schema.kind) {
         case 'group':
           return createFormGroup(schema);
@@ -106,7 +107,7 @@ export function createFormArray(schema: FormArraySchema): FormArray {
   );
 }
 
-export function formUtils<F extends FormGroup | FormArray>(form: F, schemas: AnySchema[]) {
+export function formUtils<F extends FormGroup | FormArray>(form: F, schemas: StandardSchema<AnySchema>[]) {
   return new FormUtils(form, schemas);
 }
 
@@ -115,7 +116,7 @@ const callPipe = new FluentCallPipe();
 export class FormUtils<F extends FormGroup | FormArray> {
   constructor(
     private readonly form: F,
-    private readonly schemas: AnySchema[],
+    private readonly schemas: StandardSchema<AnySchema>[],
   ) { }
 
   /**
@@ -132,21 +133,21 @@ export class FormUtils<F extends FormGroup | FormArray> {
       const control = this.form.get([schema.name?.toString()!])!;
 
       if (schema.kind === 'group') {
-        formUtils(control as FormGroup, schema.schemas as AnySchema[]).assign(
+        formUtils(control as FormGroup, schema.schemas).assign(
           (model[schema.name as keyof T] = {} as T[keyof T]) as AnyObject,
         );
         return;
       }
 
       if (schema.kind === 'array') {
-        formUtils(control as FormArray, schema.schemas as AnySchema[]).assign(
+        formUtils(control as FormArray, schema.schemas).assign(
           (model[schema.name as keyof T] = [] as T[keyof T]) as AnyArray,
         );
         return;
       }
 
       if (isControlContainerSchema(schema) || isControlWrapperSchema(schema) || isComponentContainerSchema(schema)) {
-        formUtils(this.form, schema.schemas as AnySchema[]).assign(model);
+        formUtils(this.form, schema.schemas).assign(model);
         return;
       }
 
@@ -178,15 +179,15 @@ export class FormUtils<F extends FormGroup | FormArray> {
       const control = this.form.get([schema.name?.toString()!])!;
 
       if (schema.kind === 'group') {
-        return formUtils(control as FormGroup, schema.schemas as AnySchema[]).change(model[schema.name as keyof T]);
+        return formUtils(control as FormGroup, schema.schemas).change(model[schema.name as keyof T]);
       }
 
       if (schema.kind === 'array') {
-        return formUtils(control as FormArray, schema.schemas as AnySchema[]).change(model[schema.name as keyof T]);
+        return formUtils(control as FormArray, schema.schemas).change(model[schema.name as keyof T]);
       }
 
       if (isControlContainerSchema(schema) || isControlWrapperSchema(schema) || isComponentContainerSchema(schema)) {
-        return formUtils(this.form, schema.schemas as AnySchema[]).change(model);
+        return formUtils(this.form, schema.schemas).change(model);
       }
 
       const disabled = callPipe.transform(

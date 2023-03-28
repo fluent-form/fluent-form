@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzFormModule } from 'ng-zorro-antd/form';
-import { FluentBinderDirective, FluentContextGuardDirective } from '../../directives';
+import { FluentBindingDirective, FluentContextGuardDirective } from '../../directives';
 import { TextComponentSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -17,7 +17,7 @@ type TextWidgetTemplateContext = WidgetTemplateContext<TextComponentSchema, Form
     ReactiveFormsModule,
     NzFormModule,
     NzOutletModule,
-    FluentBinderDirective,
+    FluentBindingDirective,
     FluentContextGuardDirective,
   ],
   templateUrl: './text.widget.html',

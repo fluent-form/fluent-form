@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
@@ -14,43 +14,28 @@ function isPropertyPatcher(value: SafeAny): value is PropertyPatcher {
 }
 
 @Directive({
-  selector: '[fluentBinderSchema]',
+  selector: '[fluentBinding]',
   standalone: true,
   providers: [NzDestroyService]
 })
-export class FluentBinderDirective<
-  E extends HTMLElement,
-  C extends object,
-  S extends EventListener | PropertyPatcher
-> implements OnChanges {
-  @Input('fluentBinder') component?: C;
-  @Input('fluentBinderSchema') schema!: S;
-  @Input('fluentBinderControl') control?: AbstractControl;
+export class FluentBindingDirective<E extends HTMLElement, C extends object, S extends EventListener | PropertyPatcher> {
 
-  private get host(): C | E {
-    return this.component ?? this.elementRef.nativeElement;
-  }
+  @Input() set fluentBinding(value: { component?: C, schema: S, control?: AbstractControl }) {
+    const host = value.component ?? this.elementRef.nativeElement;
+    const { schema, control } = value;
 
-  constructor(
-    private elementRef: ElementRef<E>,
-    private destory$: NzDestroyService
-  ) { }
-
-  ngOnChanges({ schema: schemaChange }: SimpleChanges): void {
-    schemaChange.firstChange || this.destory$.next();
-
-    const { schema } = this;
+    this.destory$.next();
 
     if (isPropertyPatcher(schema) && schema.properties) {
       for (const [property, value] of Object.entries(schema.properties)) {
-        this.host[property as keyof (C | E)] = value;
+        host[property as keyof (C | E)] = value;
       }
     }
 
     if (isEventListener(schema) && schema.listeners) {
       for (const [eventName, listener] of Object.entries(schema.listeners)) {
         if (eventName === 'valueChange') {
-          this.control!.valueChanges.pipe(
+          control!.valueChanges.pipe(
             observeOn(asapScheduler), // 微任务调度，确保顶层事件先发射
             takeUntil(this.destory$),
           ).subscribe(listener);
@@ -58,24 +43,30 @@ export class FluentBinderDirective<
         }
 
         if (eventName === 'statusChange') {
-          this.control!.statusChanges.pipe(
+          control!.statusChanges.pipe(
             observeOn(asapScheduler),
             takeUntil(this.destory$),
           ).subscribe(listener);
           continue;
         }
 
-        if (this.host instanceof HTMLElement) {
-          fromEvent(this.host, eventName).pipe(
+        if (host instanceof HTMLElement) {
+          fromEvent(host, eventName).pipe(
             takeUntil(this.destory$)
           ).subscribe(listener);
           continue;
         }
 
-        (this.host[eventName as keyof C] as EventEmitter<SafeAny>).pipe(
+        (host[eventName as keyof C] as EventEmitter<SafeAny>).pipe(
           takeUntil(this.destory$)
         ).subscribe(listener);
       }
     }
   }
+
+  constructor(
+    private elementRef: ElementRef<E>,
+    private destory$: NzDestroyService
+  ) { }
+
 }

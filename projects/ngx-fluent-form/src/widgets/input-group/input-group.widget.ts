@@ -2,7 +2,7 @@ import { NgClass, NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, TemplateRef } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { FluentBinderDirective, FluentContextGuardDirective, FluentWithInjectorDirective } from '../../directives';
+import { FluentBindingDirective, FluentContextGuardDirective, FluentWithInjectorDirective } from '../../directives';
 import { FluentControlPipe, FluentInvokePipe, FluentTemplatePipe } from '../../pipes';
 import { InputGroupComponentSchema } from '../../schemas';
 import { isString } from '../../utils';
@@ -19,7 +19,7 @@ type InputGroupWidgetTemplateContext = WidgetTemplateContext<InputGroupComponent
     NgTemplateOutlet,
     ReactiveFormsModule,
     NzInputModule,
-    FluentBinderDirective,
+    FluentBindingDirective,
     FluentContextGuardDirective,
     FluentWithInjectorDirective,
     FluentControlPipe,

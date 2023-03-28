@@ -4,7 +4,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { Subject, tap } from 'rxjs';
-import { FluentBinderDirective, FluentComposableDirective, FluentContextDirective, FluentContextGuardDirective, FluentLifeCycleDirective } from '../../directives';
+import { FluentBindingDirective, FluentComposableDirective, FluentContextDirective, FluentContextGuardDirective, FluentLifeCycleDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe } from '../../pipes';
 import { SelectControlSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
@@ -20,7 +20,7 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
     ReactiveFormsModule,
     NzGridModule,
     NzSelectModule,
-    FluentBinderDirective,
+    FluentBindingDirective,
     FluentContextGuardDirective,
     FluentComposableDirective,
     FluentContextDirective,

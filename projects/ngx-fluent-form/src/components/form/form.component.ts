@@ -7,7 +7,7 @@ import { NzFormLayoutType, NzFormModule } from 'ng-zorro-antd/form';
 import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
 import { takeUntil } from 'rxjs';
 import { FluentConfig } from '../../config';
-import { FluentBinderDirective } from '../../directives';
+import { FluentBindingDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe, FluentControlPipe } from '../../pipes';
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { StandardSchema } from '../../schemas/types';
@@ -26,7 +26,7 @@ import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/
     ReactiveFormsModule,
     NzFormModule,
     FluentFormColContentOutletComponent,
-    FluentBinderDirective,
+    FluentBindingDirective,
     FluentCallPipe,
     FluentControlPipe,
     FluentColumnPipe

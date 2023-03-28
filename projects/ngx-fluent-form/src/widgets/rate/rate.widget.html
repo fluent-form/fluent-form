@@ -1,9 +1,7 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <nz-rate
-    #cmp
-    [fluentBinder]="cmp"
-    [fluentBinderSchema]="schema"
-    [fluentBinderControl]="control"
+    #component
+    [fluentBinding]="{ component, schema, control }"
     [formControl]="control"
     [ngClass]="schema.class"
     [ngStyle]="schema.style"

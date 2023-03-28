@@ -4,7 +4,7 @@
       *ngIf="!(schema.hidden | call: model:schema:control)"
       nz-button
       [disabled]="schema.disabled | call: model:schema:control"
-      [fluentBinderSchema]="schema"
+      [fluentBinding]="{ schema, control }"
       [ngClass]="schema.class"
       [ngStyle]="schema.style"
       [nzBlock]="schema.block"
@@ -24,7 +24,7 @@
       nz-button
       [attr.type]="schema.mode"
       [disabled]="schema.disabled | call: model:schema:control"
-      [fluentBinderSchema]="schema"
+      [fluentBinding]="{ schema, control }"
       [ngClass]="schema.class"
       [ngStyle]="schema.style"
       [nzBlock]="schema.block"

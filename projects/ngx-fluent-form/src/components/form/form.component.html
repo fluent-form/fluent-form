@@ -8,8 +8,7 @@
   [ngClass]="schema.class"
   [ngStyle]="schema.style"
   [formGroup]="form"
-  [fluentBinderSchema]="schema"
-  [fluentBinderControl]="form">
+  [fluentBinding]="{ schema, control: form }">
   <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
     <nz-col
       [nzSpan]="schema.col | col: 'span'"

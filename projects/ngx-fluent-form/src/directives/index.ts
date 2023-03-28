@@ -1,4 +1,4 @@
-export * from './binder.directive';
+export * from './binding.directive';
 export * from './composable.directive';
 export * from './config.directive';
 export * from './context-guard.directive';

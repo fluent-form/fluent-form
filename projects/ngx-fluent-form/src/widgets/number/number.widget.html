@@ -1,10 +1,8 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <nz-input-number
     *fluentComposable="composableTemplate"
-    #cmp
-    [fluentBinder]="cmp"
-    [fluentBinderSchema]="schema"
-    [fluentBinderControl]="control"
+    #component
+    [fluentBinding]="{ component, schema, control }"
     [formControl]="control"
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
@@ -24,11 +22,9 @@
   <ng-template #composableTemplate>
     <nz-input-number
       *ngIf="!(schema.hidden | call: model:schema:control)"
-      #cmp
+      #component
       nz-col
-      [fluentBinder]="cmp"
-      [fluentBinderSchema]="schema"
-      [fluentBinderControl]="control"
+      [fluentBinding]="{ component, schema, control }"
       [formControl]="control"
       [ngClass]="schema.class"
       [ngStyle]="schema.style"

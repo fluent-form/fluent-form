@@ -1,9 +1,8 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <nz-tabset
-    #cmp
+    #component
     #config="fluentConfig"
-    [fluentBinder]="cmp"
-    [fluentBinderSchema]="schema"
+    [fluentBinding]="{ component, schema, control }"
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
     [nzSelectedIndex]="schema.active"
@@ -16,9 +15,8 @@
     [hidden]="schema.hidden | call: model:schema:control">
     <nz-tab
       *ngFor="let tabSchema of schema.schemas"
-      #cmp
-      [fluentBinder]="cmp"
-      [fluentBinderSchema]="tabSchema"
+      #component
+      [fluentBinding]="{ component, schema, control }"
       [ngClass]="tabSchema.class"
       [ngStyle]="tabSchema.style"
       [nzTitle]="tabSchema.title"

@@ -2,10 +2,8 @@
   <ng-container *fluentContext="ctxClass as ctx" (fluentInit)="ctx.init(schema)" (fluentDestroy)="ctx.destroy()">
     <nz-select
       *fluentComposable="composableTemplate"
-      #cmp
-      [fluentBinder]="cmp"
-      [fluentBinderSchema]="schema"
-      [fluentBinderControl]="control"
+      #component
+      [fluentBinding]="{ component, schema, control }"
       [formControl]="control"
       [ngClass]="schema.class"
       [ngStyle]="schema.style"
@@ -36,11 +34,9 @@
     <ng-template #composableTemplate>
       <nz-select
         *ngIf="!(schema.hidden | call: model:schema:control)"
-        #cmp
+        #component
         nz-col
-        [fluentBinder]="cmp"
-        [fluentBinderSchema]="schema"
-        [fluentBinderControl]="control"
+        [fluentBinding]="{ component, schema, control }"
         [formControl]="control"
         [ngClass]="schema.class"
         [ngStyle]="schema.style"

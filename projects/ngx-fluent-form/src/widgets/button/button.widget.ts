@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { FluentBinderDirective, FluentContextGuardDirective } from '../../directives';
+import { FluentBindingDirective, FluentContextGuardDirective } from '../../directives';
 import { FluentCallPipe, FluentInvokePipe } from '../../pipes';
 import { ButtonComponentSchema } from '../../schemas';
 import { isString } from '../../utils';
@@ -22,7 +22,7 @@ type ButtonWidgetTemplateContext = WidgetTemplateContext<ButtonComponentSchema, 
     NzButtonModule,
     NzIconModule,
     NzOutletModule,
-    FluentBinderDirective,
+    FluentBindingDirective,
     FluentContextGuardDirective,
     FluentCallPipe,
     FluentInvokePipe

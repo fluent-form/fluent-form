@@ -4,7 +4,7 @@ import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { FluentWithInjectorDirective } from '../../directives';
+import { FluentBindingDirective, FluentWithInjectorDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe, FluentControlPipe, FluentSchemaPipe, FluentTemplatePipe } from '../../pipes';
 import { AnySchema } from '../../schemas';
 import { StandardSchema } from '../../schemas/types';
@@ -33,6 +33,7 @@ interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
     NgTemplateOutlet,
     NzFormModule,
     NzGridModule,
+    FluentBindingDirective,
     FluentWithInjectorDirective,
     FluentCallPipe,
     FluentSchemaPipe,

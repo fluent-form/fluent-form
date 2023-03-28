@@ -1,8 +1,7 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <nz-button-group
-    #cmp
-    [fluentBinder]="cmp"
-    [fluentBinderSchema]="schema"
+    #component
+    [fluentBinding]="{ component, schema, control }"
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
     [nzSize]="schema.size!">

@@ -5,7 +5,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { FluentFormColContentOutletComponent } from '../../components';
-import { FluentBinderDirective, FluentConfigDirective, FluentContextGuardDirective } from '../../directives';
+import { FluentBindingDirective, FluentConfigDirective, FluentContextGuardDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe, FluentControlPipe } from '../../pipes';
 import { FormArraySchema, FormGroupSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
@@ -24,7 +24,7 @@ type NestedFormWidgetTemplateContext = WidgetTemplateContext<FormGroupSchema, Fo
     NzFormModule,
     NzDividerModule,
     FluentFormColContentOutletComponent,
-    FluentBinderDirective,
+    FluentBindingDirective,
     FluentContextGuardDirective,
     FluentConfigDirective,
     FluentColumnPipe,

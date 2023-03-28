@@ -6,7 +6,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzRateComponent, NzRateModule } from 'ng-zorro-antd/rate';
 import { AnyControlSchema, InputControlSchema, RateControlSchema } from '../schemas';
 import { createFormControl } from '../utils';
-import { FluentBinderDirective } from './binder.directive';
+import { FluentBindingDirective } from './binding.directive';
 
 // eslint-disable-next-line
 function emptyFn() { }
@@ -17,20 +17,17 @@ function emptyFn() { }
     NzInputModule,
     NzRateModule,
     ReactiveFormsModule,
-    FluentBinderDirective
+    FluentBindingDirective
   ],
   template: `
     <input
       nz-input
-      [fluentBinderSchema]="inputSchema"
-      [fluentBinderControl]="inputControl"
+      [fluentBinding]="{ schema: inputSchema, control: inputControl }"
       [formControl]="inputControl">
 
     <nz-rate
-      #cmp
-      [fluentBinder]="cmp"
-      [fluentBinderSchema]="rateSchema"
-      [fluentBinderControl]="rateControl"
+      #component
+      [fluentBinding]="{ component, schema: rateSchema, control: rateControl}"
       [formControl]="rateControl"></nz-rate>
   `
 })
@@ -63,7 +60,7 @@ class TestingComponent {
   rateControl = createFormControl(this.rateSchema as AnyControlSchema);
 }
 
-describe('FluentBinderDirective', () => {
+describe('FluentBindingDirective', () => {
   // eslint-disable-next-line
   let component: TestingComponent;
   let fixture: ComponentFixture<TestingComponent>;

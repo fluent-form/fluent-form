@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { FluentFormColContentOutletComponent } from '../../components';
-import { FluentBinderDirective, FluentConfigDirective, FluentContextGuardDirective } from '../../directives';
+import { FluentBindingDirective, FluentConfigDirective, FluentContextGuardDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe, FluentControlPipe } from '../../pipes';
 import { TabsComponentSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
@@ -21,7 +21,7 @@ type TabsWidgetTemplateContext = WidgetTemplateContext<TabsComponentSchema, Form
     NzTabsModule,
     NzGridModule,
     FluentFormColContentOutletComponent,
-    FluentBinderDirective,
+    FluentBindingDirective,
     FluentConfigDirective,
     FluentContextGuardDirective,
     FluentCallPipe,

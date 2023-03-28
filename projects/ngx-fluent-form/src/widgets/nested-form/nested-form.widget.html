@@ -12,8 +12,7 @@
     [nzLayout]="config.layout"
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
-    [fluentBinderSchema]="schema"
-    [fluentBinderControl]="control"
+    [fluentBinding]="{ schema, control }"
     [hidden]="schema.hidden | call: model:schema:control">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
       <nz-col

@@ -21,11 +21,7 @@
     [nzNodes]="schema.options"
     [nzDefaultExpandAll]="schema.expandAll"
     [nzExpandedKeys]="schema.expandedKeys!"
-    [nzMultiple]="schema.multiple"
-    [nzVirtualHeight]="schema.virtual?.height!"
-    [nzVirtualItemSize]="schema.virtual?.itemSize ?? 28"
-    [nzVirtualMaxBufferPx]="schema.virtual?.buffer?.max ?? 500"
-    [nzVirtualMinBufferPx]="schema.virtual?.buffer?.min ?? 28"></nz-tree-select>
+    [nzMultiple]="schema.multiple"></nz-tree-select>
 
   <ng-template #composableTemplate>
     <nz-tree-select
@@ -57,10 +53,6 @@
       [nzNodes]="schema.options"
       [nzDefaultExpandAll]="schema.expandAll"
       [nzExpandedKeys]="schema.expandedKeys!"
-      [nzMultiple]="schema.multiple"
-      [nzVirtualHeight]="schema.virtual?.height!"
-      [nzVirtualItemSize]="schema.virtual?.itemSize ?? 28"
-      [nzVirtualMaxBufferPx]="schema.virtual?.buffer?.max ?? 500"
-      [nzVirtualMinBufferPx]="schema.virtual?.buffer?.min ?? 28"></nz-tree-select>
+      [nzMultiple]="schema.multiple"></nz-tree-select>
   </ng-template>
 </ng-template>

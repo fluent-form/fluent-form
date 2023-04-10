@@ -27,7 +27,7 @@ export class FluentCallPipe implements PipeTransform {
         value = RETURN_STR + value;
       }
 
-      return compileCode(value)({ model, schema, control });
+      return evaluateCode(value)({ model, schema, control });
     }
 
     return value ?? false;
@@ -36,9 +36,8 @@ export class FluentCallPipe implements PipeTransform {
 }
 
 /** @internal */
-function compileCode(code: string) {
-  code = code.replace(/debugger/g, '');
-  const fn = new Function('ctx', `with(ctx){{${code}}}`);
+function evaluateCode(code: string) {
+  const fn = new Function('ctx', `with(ctx){${code}}`);
 
   return (ctx: CallbackArgs<AbstractSchema<AnySchemaName>>) => {
     const proxy = new Proxy(Object.freeze(ctx), {

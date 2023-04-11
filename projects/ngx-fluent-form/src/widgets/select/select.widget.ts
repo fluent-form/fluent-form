@@ -1,10 +1,11 @@
-import { NgClass, NgFor, NgStyle } from '@angular/common';
+import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
 import { ChangeDetectorRef, Component, Injector } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { Subject, tap } from 'rxjs';
-import { FluentBindingDirective, FluentComposableDirective, FluentContextDirective, FluentContextGuardDirective, FluentLifeCycleDirective } from '../../directives';
+import { FluentBindingDirective, FluentContextDirective, FluentContextGuardDirective, FluentInjectDirective, FluentLifeCycleDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe } from '../../pipes';
 import { SelectControlSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
@@ -14,15 +15,16 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
 @Component({
   standalone: true,
   imports: [
+    NgIf,
     NgFor,
     NgClass,
     NgStyle,
     ReactiveFormsModule,
     NzGridModule,
     NzSelectModule,
+    FluentInjectDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,
-    FluentComposableDirective,
     FluentContextDirective,
     FluentLifeCycleDirective,
     FluentCallPipe,
@@ -32,6 +34,7 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
   styles: [`nz-select { width: 100% }`]
 })
 export class SelectWidget extends AbstractWidget<SelectWidgetTemplateContext> {
+  protected readonly NzFormNoStatusService = NzFormNoStatusService;
   protected readonly infinity = Infinity;
   protected readonly ctxClass = SelectWidgetTemplatePrivateContext;
 }

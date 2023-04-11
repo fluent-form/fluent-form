@@ -1,74 +1,77 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <ng-container *fluentContext="ctxClass as ctx" (fluentInit)="ctx.init(schema)" (fluentDestroy)="ctx.destroy()">
-    <nz-select
-      *fluentComposable="composableTemplate"
-      #component
-      [fluentBinding]="{ component, schema, control }"
-      [formControl]="control"
-      [ngClass]="schema.class"
-      [ngStyle]="schema.style"
-      [nzAllowClear]="schema.clearable"
-      [nzId]="schema.id!"
-      [nzMaxMultipleCount]="schema.limit ?? infinity"
-      [nzMode]="schema.mode ?? 'default'"
-      [nzPlaceHolder]="schema.placeholder!"
-      [nzShowSearch]="schema.searchable || !!schema.fetchOptions"
-      [nzBackdrop]="schema.backdrop!"
-      [nzBorderless]="schema.borderless"
-      [nzAutoFocus]="schema.autofocus"
-      [nzShowArrow]="(schema.arrow ?? !schema.mode) || schema.mode === 'default'"
-      [nzSize]="schema.size!"
-      [nzSuffixIcon]="schema.suffixIcon!"
-      [nzLoading]="schema.loading"
-      [nzServerSearch]="!!schema.fetchOptions"
-      (nzOnSearch)="schema.fetchOptions && ctx.trigger($event)">
-      <nz-option
-        *ngFor="let option of schema.options"
-        [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
-        [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
-        [nzValue]="option[schema.config?.valueProperty ?? 'value']"
-        [nzHide]="option[schema.config?.hideProperty ?? 'hide']">
-      </nz-option>
-    </nz-select>
+  <ng-container *fluentInject="NzFormNoStatusService as service; optional: true">
+    <ng-container *fluentContext="ctxClass as ctx" (fluentInit)="ctx.init(schema)" (fluentDestroy)="ctx.destroy()">
+      <ng-container *ngIf="service; else standardTemplate">
+        <nz-select
+          *ngIf="!(schema.hidden | call: model:schema:control)"
+          #component
+          nz-col
+          [fluentBinding]="{ component, schema, control }"
+          [formControl]="control"
+          [ngClass]="schema.class"
+          [ngStyle]="schema.style"
+          [nzSpan]="schema.col | col: 'span'"
+          [nzFlex]="schema.col | col: 'flex'"
+          [nzOffset]="schema.col | col: 'offset'"
+          [nzPush]="schema.col | col: 'push'"
+          [nzPull]="schema.col | col: 'pull'"
+          [nzOrder]="schema.col | col: 'order'"
+          [nzId]="schema.id!"
+          [nzAllowClear]="schema.clearable"
+          [nzMaxMultipleCount]="schema.limit ?? infinity"
+          [nzMode]="schema.mode ?? 'default'"
+          [nzPlaceHolder]="schema.placeholder!"
+          [nzShowSearch]="schema.searchable || !!schema.fetchOptions"
+          [nzBackdrop]="schema.backdrop!"
+          [nzBorderless]="schema.borderless"
+          [nzAutoFocus]="schema.autofocus"
+          [nzShowArrow]="(schema.arrow ?? !schema.mode) || schema.mode === 'default'"
+          [nzSize]="schema.size!"
+          [nzSuffixIcon]="schema.suffixIcon!"
+          [nzLoading]="schema.loading"
+          [nzServerSearch]="!!schema.fetchOptions"
+          (nzOnSearch)="schema.fetchOptions && ctx.trigger($event)">
+          <nz-option
+            *ngFor="let option of schema.options"
+            [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
+            [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
+            [nzValue]="option[schema.config?.valueProperty ?? 'value']"
+            [nzHide]="option[schema.config?.hideProperty ?? 'hide']">
+          </nz-option>
+        </nz-select>
+      </ng-container>
 
-    <ng-template #composableTemplate>
-      <nz-select
-        *ngIf="!(schema.hidden | call: model:schema:control)"
-        #component
-        nz-col
-        [fluentBinding]="{ component, schema, control }"
-        [formControl]="control"
-        [ngClass]="schema.class"
-        [ngStyle]="schema.style"
-        [nzSpan]="schema.col | col: 'span'"
-        [nzFlex]="schema.col | col: 'flex'"
-        [nzOffset]="schema.col | col: 'offset'"
-        [nzPush]="schema.col | col: 'push'"
-        [nzPull]="schema.col | col: 'pull'"
-        [nzOrder]="schema.col | col: 'order'"
-        [nzId]="schema.id!"
-        [nzAllowClear]="schema.clearable"
-        [nzMaxMultipleCount]="schema.limit ?? infinity"
-        [nzMode]="schema.mode ?? 'default'"
-        [nzPlaceHolder]="schema.placeholder!"
-        [nzShowSearch]="schema.searchable || !!schema.fetchOptions"
-        [nzBackdrop]="schema.backdrop!"
-        [nzBorderless]="schema.borderless"
-        [nzAutoFocus]="schema.autofocus"
-        [nzShowArrow]="(schema.arrow ?? !schema.mode) || schema.mode === 'default'"
-        [nzSize]="schema.size!"
-        [nzSuffixIcon]="schema.suffixIcon!"
-        [nzLoading]="schema.loading"
-        [nzServerSearch]="!!schema.fetchOptions"
-        (nzOnSearch)="schema.fetchOptions && ctx.trigger($event)">
-        <nz-option
-          *ngFor="let option of schema.options"
-          [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
-          [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
-          [nzValue]="option[schema.config?.valueProperty ?? 'value']"
-          [nzHide]="option[schema.config?.hideProperty ?? 'hide']">
-        </nz-option>
-      </nz-select>
-    </ng-template>
+      <ng-template #standardTemplate>
+        <nz-select
+          #component
+          [fluentBinding]="{ component, schema, control }"
+          [formControl]="control"
+          [ngClass]="schema.class"
+          [ngStyle]="schema.style"
+          [nzAllowClear]="schema.clearable"
+          [nzId]="schema.id!"
+          [nzMaxMultipleCount]="schema.limit ?? infinity"
+          [nzMode]="schema.mode ?? 'default'"
+          [nzPlaceHolder]="schema.placeholder!"
+          [nzShowSearch]="schema.searchable || !!schema.fetchOptions"
+          [nzBackdrop]="schema.backdrop!"
+          [nzBorderless]="schema.borderless"
+          [nzAutoFocus]="schema.autofocus"
+          [nzShowArrow]="(schema.arrow ?? !schema.mode) || schema.mode === 'default'"
+          [nzSize]="schema.size!"
+          [nzSuffixIcon]="schema.suffixIcon!"
+          [nzLoading]="schema.loading"
+          [nzServerSearch]="!!schema.fetchOptions"
+          (nzOnSearch)="schema.fetchOptions && ctx.trigger($event)">
+          <nz-option
+            *ngFor="let option of schema.options"
+            [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
+            [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
+            [nzValue]="option[schema.config?.valueProperty ?? 'value']"
+            [nzHide]="option[schema.config?.hideProperty ?? 'hide']">
+          </nz-option>
+        </nz-select>
+      </ng-template>
+    </ng-container>
   </ng-container>
 </ng-template>

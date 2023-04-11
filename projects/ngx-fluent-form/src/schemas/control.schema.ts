@@ -22,7 +22,7 @@ export interface InputControlSchema<Name extends SchemaName = SchemaName, Val = 
   extends AbstractTextControlSchema<Name, Val>, ElementControlEventListener<Val>, ElementPropertyPatcher<HTMLInputElement> {
   kind: 'input';
   /* A type of input. */
-  type?: 'text' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
+  type?: 'text' | 'number' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
 }
 
 export interface TextareaControlSchema<Name extends SchemaName = SchemaName, Val = string>

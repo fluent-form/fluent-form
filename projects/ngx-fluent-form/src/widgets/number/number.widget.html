@@ -1,50 +1,53 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <nz-input-number
-    *fluentComposable="composableTemplate"
-    #component
-    [fluentBinding]="{ component, schema, control }"
-    [formControl]="control"
-    [ngClass]="schema.class"
-    [ngStyle]="schema.style"
-    [nzId]="schema.id!"
-    [nzMax]="schema.max ?? infinity"
-    [nzMin]="schema.min ?? -infinity"
-    [nzPlaceHolder]="schema.placeholder ?? ''"
-    [nzPrecision]="helper.precision | invoke: schema.precision"
-    [nzPrecisionMode]="helper.precisionMode | invoke: schema.precision"
-    [nzStep]="schema.step ?? 1"
-    [nzAutoFocus]="schema.autofocus"
-    [nzReadOnly]="schema.readonly | call: model:schema:control"
-    [nzSize]="schema.size!"
-    [nzBorderless]="schema.borderless">
-  </nz-input-number>
+  <ng-container *fluentInject="NzFormNoStatusService as service; optional: true">
+    <ng-container *ngIf="service; else standardTemplate">
+      <nz-input-number
+        *ngIf="!(schema.hidden | call: model:schema:control)"
+        #component
+        nz-col
+        [fluentBinding]="{ component, schema, control }"
+        [formControl]="control"
+        [ngClass]="schema.class"
+        [ngStyle]="schema.style"
+        [nzSpan]="schema.col | col: 'span'"
+        [nzFlex]="schema.col | col: 'flex'"
+        [nzOffset]="schema.col | col: 'offset'"
+        [nzPush]="schema.col | col: 'push'"
+        [nzPull]="schema.col | col: 'pull'"
+        [nzOrder]="schema.col | col: 'order'"
+        [nzId]="schema.id!"
+        [nzMax]="schema.max ?? infinity"
+        [nzMin]="schema.min ?? -infinity"
+        [nzPlaceHolder]="schema.placeholder ?? ''"
+        [nzPrecision]="helper.precision | invoke: schema.precision"
+        [nzPrecisionMode]="helper.precisionMode | invoke: schema.precision"
+        [nzStep]="schema.step ?? 1"
+        [nzAutoFocus]="schema.autofocus"
+        [nzReadOnly]="schema.readonly | call: model:schema:control"
+        [nzSize]="schema.size!"
+        [nzBorderless]="schema.borderless">
+      </nz-input-number>
+    </ng-container>
 
-  <ng-template #composableTemplate>
-    <nz-input-number
-      *ngIf="!(schema.hidden | call: model:schema:control)"
-      #component
-      nz-col
-      [fluentBinding]="{ component, schema, control }"
-      [formControl]="control"
-      [ngClass]="schema.class"
-      [ngStyle]="schema.style"
-      [nzSpan]="schema.col | col: 'span'"
-      [nzFlex]="schema.col | col: 'flex'"
-      [nzOffset]="schema.col | col: 'offset'"
-      [nzPush]="schema.col | col: 'push'"
-      [nzPull]="schema.col | col: 'pull'"
-      [nzOrder]="schema.col | col: 'order'"
-      [nzId]="schema.id!"
-      [nzMax]="schema.max ?? infinity"
-      [nzMin]="schema.min ?? -infinity"
-      [nzPlaceHolder]="schema.placeholder ?? ''"
-      [nzPrecision]="helper.precision | invoke: schema.precision"
-      [nzPrecisionMode]="helper.precisionMode | invoke: schema.precision"
-      [nzStep]="schema.step ?? 1"
-      [nzAutoFocus]="schema.autofocus"
-      [nzReadOnly]="schema.readonly | call: model:schema:control"
-      [nzSize]="schema.size!"
-      [nzBorderless]="schema.borderless">
-    </nz-input-number>
-  </ng-template>
+    <ng-template #standardTemplate>
+      <nz-input-number
+        #component
+        [fluentBinding]="{ component, schema, control }"
+        [formControl]="control"
+        [ngClass]="schema.class"
+        [ngStyle]="schema.style"
+        [nzId]="schema.id!"
+        [nzMax]="schema.max ?? infinity"
+        [nzMin]="schema.min ?? -infinity"
+        [nzPlaceHolder]="schema.placeholder ?? ''"
+        [nzPrecision]="helper.precision | invoke: schema.precision"
+        [nzPrecisionMode]="helper.precisionMode | invoke: schema.precision"
+        [nzStep]="schema.step ?? 1"
+        [nzAutoFocus]="schema.autofocus"
+        [nzReadOnly]="schema.readonly | call: model:schema:control"
+        [nzSize]="schema.size!"
+        [nzBorderless]="schema.borderless">
+      </nz-input-number>
+    </ng-template>
+  </ng-container>
 </ng-template>

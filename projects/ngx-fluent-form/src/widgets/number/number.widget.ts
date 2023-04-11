@@ -1,9 +1,10 @@
 import { NgClass, NgIf, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-import { FluentBindingDirective, FluentComposableDirective, FluentContextGuardDirective } from '../../directives';
+import { FluentBindingDirective, FluentContextGuardDirective, FluentInjectDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe, FluentInvokePipe } from '../../pipes';
 import { NumberInputControlSchema } from '../../schemas';
 import { isNumber } from '../../utils';
@@ -20,9 +21,9 @@ type NumberWidgetTemplateContext = WidgetTemplateContext<NumberInputControlSchem
     ReactiveFormsModule,
     NzGridModule,
     NzInputNumberModule,
+    FluentInjectDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,
-    FluentComposableDirective,
     FluentCallPipe,
     FluentInvokePipe,
     FluentColumnPipe
@@ -31,6 +32,7 @@ type NumberWidgetTemplateContext = WidgetTemplateContext<NumberInputControlSchem
   styles: [`nz-input-number { width: 100% }`]
 })
 export class NumberWidget extends AbstractWidget<NumberWidgetTemplateContext> {
+  protected readonly NzFormNoStatusService = NzFormNoStatusService;
   protected readonly infinity = Infinity;
 
   protected readonly helper = {

@@ -1,106 +1,108 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <ng-container *ngIf="schema.autocomplete as autocomplete">
-    <textarea
-      *fluentComposable="composableTemplate"
-      nz-input
-      [attr.id]="schema.id"
-      [attr.maxlength]="helper.length.max | invoke: schema.length"
-      [attr.minlength]="helper.length.min | invoke: schema.length"
-      [fluentBinding]="{ schema, control }"
-      [formControl]="control"
-      [ngClass]="schema.class"
-      [ngStyle]="schema.style"
-      [nzAutocomplete]="autocompleteCmp"
-      [nzAutosize]="schema.autosize ?? {}"
-      [placeholder]="schema.placeholder ?? ''"
-      [rows]="schema.rows"
-      [autofocus]="schema.autofocus"
-      [readonly]="schema.readonly | call: model:schema:control"
-      [nzSize]="schema.size!"
-      [nzBorderless]="schema.borderless"></textarea>
+  <ng-container *fluentInject="NzFormNoStatusService as service; optional: true">
+    <ng-container *ngIf="schema.autocomplete as autocomplete; else noAutocompleteTemplate">
+      <ng-container *ngIf="service; else standardTemplate">
+        <textarea
+          *ngIf="!(schema.hidden | call: model:schema:control)"
+          nz-col
+          nz-input
+          [attr.id]="schema.id"
+          [attr.maxlength]="helper.length.max | invoke: schema.length"
+          [attr.minlength]="helper.length.min | invoke: schema.length"
+          [fluentBinding]="{ schema, control }"
+          [formControl]="control"
+          [ngClass]="schema.class"
+          [ngStyle]="schema.style"
+          [nzSpan]="schema.col | col: 'span'"
+          [nzFlex]="schema.col | col: 'flex'"
+          [nzOffset]="schema.col | col: 'offset'"
+          [nzPush]="schema.col | col: 'push'"
+          [nzPull]="schema.col | col: 'pull'"
+          [nzOrder]="schema.col | col: 'order'"
+          [nzAutocomplete]="autocompleteComponent"
+          [nzAutosize]="schema.autosize ?? {}"
+          [placeholder]="schema.placeholder ?? ''"
+          [rows]="schema.rows"
+          [autofocus]="schema.autofocus"
+          [readonly]="schema.readonly | call: model:schema:control"
+          [nzSize]="schema.size!"
+          [nzBorderless]="schema.borderless"></textarea>
+      </ng-container>
 
-    <ng-template #composableTemplate>
-      <textarea
-        *ngIf="!(schema.hidden | call: model:schema:control)"
-        nz-col
-        nz-input
-        [attr.id]="schema.id"
-        [attr.maxlength]="helper.length.max | invoke: schema.length"
-        [attr.minlength]="helper.length.min | invoke: schema.length"
-        [fluentBinding]="{ schema, control }"
-        [formControl]="control"
-        [ngClass]="schema.class"
-        [ngStyle]="schema.style"
-        [nzSpan]="schema.col | col: 'span'"
-        [nzFlex]="schema.col | col: 'flex'"
-        [nzOffset]="schema.col | col: 'offset'"
-        [nzPush]="schema.col | col: 'push'"
-        [nzPull]="schema.col | col: 'pull'"
-        [nzOrder]="schema.col | col: 'order'"
-        [nzAutocomplete]="autocompleteCmp"
-        [nzAutosize]="schema.autosize ?? {}"
-        [placeholder]="schema.placeholder ?? ''"
-        [rows]="schema.rows"
-        [autofocus]="schema.autofocus"
-        [readonly]="schema.readonly | call: model:schema:control"
-        [nzSize]="schema.size!"
-        [nzBorderless]="schema.borderless"></textarea>
-    </ng-template>
+      <ng-template #standardTemplate>
+        <textarea
+          nz-input
+          [attr.id]="schema.id"
+          [attr.maxlength]="helper.length.max | invoke: schema.length"
+          [attr.minlength]="helper.length.min | invoke: schema.length"
+          [fluentBinding]="{ schema, control }"
+          [formControl]="control"
+          [ngClass]="schema.class"
+          [ngStyle]="schema.style"
+          [nzAutocomplete]="autocompleteComponent"
+          [nzAutosize]="schema.autosize ?? {}"
+          [placeholder]="schema.placeholder ?? ''"
+          [rows]="schema.rows"
+          [autofocus]="schema.autofocus"
+          [readonly]="schema.readonly | call: model:schema:control"
+          [nzSize]="schema.size!"
+          [nzBorderless]="schema.borderless"></textarea>
+      </ng-template>
 
-    <nz-autocomplete
-      #autocompleteCmp
-      [compareWith]="helper.autocomplete.compare | invoke: autocomplete"
-      [nzBackfill]="autocomplete.backfill"
-      [nzDataSource]="autocomplete.options"
-      [nzWidth]="autocomplete.width"></nz-autocomplete>
-  </ng-container>
+      <nz-autocomplete
+        #autocompleteComponent
+        [compareWith]="helper.autocomplete.compare | invoke: autocomplete"
+        [nzBackfill]="autocomplete.backfill"
+        [nzDataSource]="autocomplete.options"
+        [nzWidth]="autocomplete.width"></nz-autocomplete>
+    </ng-container>
 
-  <!-- 下面是没有自动完成的条件分支 -->
+    <ng-template #noAutocompleteTemplate>
+      <ng-container *ngIf="service; else standardTemplate">
+        <textarea
+          *ngIf="!(schema.hidden | call: model:schema:control)"
+          nz-col
+          nz-input
+          [attr.id]="schema.id"
+          [attr.maxlength]="helper.length.max | invoke: schema.length"
+          [attr.minlength]="helper.length.min | invoke: schema.length"
+          [fluentBinding]="{ schema, control }"
+          [formControl]="control"
+          [ngClass]="schema.class"
+          [ngStyle]="schema.style"
+          [nzSpan]="schema.col | col: 'span'"
+          [nzFlex]="schema.col | col: 'flex'"
+          [nzOffset]="schema.col | col: 'offset'"
+          [nzPush]="schema.col | col: 'push'"
+          [nzPull]="schema.col | col: 'pull'"
+          [nzOrder]="schema.col | col: 'order'"
+          [nzAutosize]="schema.autosize ?? {}"
+          [placeholder]="schema.placeholder ?? ''"
+          [rows]="schema.rows"
+          [autofocus]="schema.autofocus"
+          [readonly]="schema.readonly | call: model:schema:control"
+          [nzSize]="schema.size!"
+          [nzBorderless]="schema.borderless"></textarea>
+      </ng-container>
 
-  <ng-container *ngIf="!schema.autocomplete">
-    <textarea
-      *fluentComposable="composableTemplate"
-      nz-input
-      [attr.id]="schema.id"
-      [attr.maxlength]="helper.length.max | invoke: schema.length"
-      [attr.minlength]="helper.length.min | invoke: schema.length"
-      [fluentBinding]="{ schema, control }"
-      [formControl]="control"
-      [ngClass]="schema.class"
-      [ngStyle]="schema.style"
-      [nzAutosize]="schema.autosize ?? {}"
-      [placeholder]="schema.placeholder ?? ''"
-      [rows]="schema.rows"
-      [autofocus]="schema.autofocus"
-      [readonly]="schema.readonly | call: model:schema:control"
-      [nzSize]="schema.size!"
-      [nzBorderless]="schema.borderless"></textarea>
-
-    <ng-template #composableTemplate>
-      <textarea
-        *ngIf="!(schema.hidden | call: model:schema:control)"
-        nz-col
-        nz-input
-        [attr.id]="schema.id"
-        [attr.maxlength]="helper.length.max | invoke: schema.length"
-        [attr.minlength]="helper.length.min | invoke: schema.length"
-        [fluentBinding]="{ schema, control }"
-        [formControl]="control"
-        [ngClass]="schema.class"
-        [ngStyle]="schema.style"
-        [nzSpan]="schema.col | col: 'span'"
-        [nzFlex]="schema.col | col: 'flex'"
-        [nzOffset]="schema.col | col: 'offset'"
-        [nzPush]="schema.col | col: 'push'"
-        [nzPull]="schema.col | col: 'pull'"
-        [nzOrder]="schema.col | col: 'order'"
-        [nzAutosize]="schema.autosize ?? {}"
-        [placeholder]="schema.placeholder ?? ''"
-        [rows]="schema.rows"
-        [autofocus]="schema.autofocus"
-        [readonly]="schema.readonly | call: model:schema:control"
-        [nzSize]="schema.size!"
-        [nzBorderless]="schema.borderless"></textarea>
+      <ng-template #standardTemplate>
+        <textarea
+          nz-input
+          [attr.id]="schema.id"
+          [attr.maxlength]="helper.length.max | invoke: schema.length"
+          [attr.minlength]="helper.length.min | invoke: schema.length"
+          [fluentBinding]="{ schema, control }"
+          [formControl]="control"
+          [ngClass]="schema.class"
+          [ngStyle]="schema.style"
+          [nzAutosize]="schema.autosize ?? {}"
+          [placeholder]="schema.placeholder ?? ''"
+          [rows]="schema.rows"
+          [autofocus]="schema.autofocus"
+          [readonly]="schema.readonly | call: model:schema:control"
+          [nzSize]="schema.size!"
+          [nzBorderless]="schema.borderless"></textarea>
+      </ng-template>
     </ng-template>
   </ng-container>
 </ng-template>

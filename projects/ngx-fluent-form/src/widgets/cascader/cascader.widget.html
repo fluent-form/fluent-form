@@ -1,56 +1,59 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <nz-cascader
-    *fluentComposable="composableTemplate"
-    #component
-    [fluentBinding]="{ component, schema, control }"
-    [formControl]="control"
-    [ngClass]="schema.class"
-    [ngStyle]="schema.style"
-    [nzAllowClear]="schema.clearable ?? true"
-    [nzAutoFocus]="schema.autofocus"
-    [nzBackdrop]="schema.backdrop!"
-    [nzExpandIcon]="schema.expandIcon ?? ''"
-    [nzExpandTrigger]="schema.trigger!"
-    [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
-    [nzLoadData]="schema.loadData"
-    [nzOptions]="schema.options ?? null"
-    [nzPlaceHolder]="schema.placeholder ?? ' '"
-    [nzShowArrow]="schema.arrow ?? true"
-    [nzShowSearch]="schema.searchable!"
-    [nzSize]="schema.size!"
-    [nzSuffixIcon]="schema.suffixIcon ?? 'down'"
-    [nzValueProperty]="schema.config?.valueProperty ?? 'value'">
-  </nz-cascader>
+  <ng-container *fluentInject="NzFormNoStatusService as service; optional: true">
+    <ng-container *ngIf="service; else standardTemplate">
+      <nz-cascader
+        *ngIf="!(schema.hidden | call: model:schema:control)"
+        #component
+        nz-col
+        [fluentBinding]="{ component, schema, control }"
+        [formControl]="control"
+        [ngClass]="schema.class"
+        [ngStyle]="schema.style"
+        [nzSpan]="schema.col | col: 'span'"
+        [nzFlex]="schema.col | col: 'flex'"
+        [nzOffset]="schema.col | col: 'offset'"
+        [nzPush]="schema.col | col: 'push'"
+        [nzPull]="schema.col | col: 'pull'"
+        [nzOrder]="schema.col | col: 'order'"
+        [nzAllowClear]="schema.clearable ?? true"
+        [nzAutoFocus]="schema.autofocus"
+        [nzBackdrop]="schema.backdrop!"
+        [nzExpandIcon]="schema.expandIcon!"
+        [nzExpandTrigger]="schema.trigger!"
+        [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
+        [nzLoadData]="schema.loadData"
+        [nzOptions]="schema.options!"
+        [nzPlaceHolder]="schema.placeholder ?? ' '"
+        [nzShowArrow]="schema.arrow ?? true"
+        [nzShowSearch]="schema.searchable!"
+        [nzSize]="schema.size!"
+        [nzSuffixIcon]="schema.suffixIcon!"
+        [nzValueProperty]="schema.config?.valueProperty ?? 'value'">
+      </nz-cascader>
+    </ng-container>
 
-  <ng-template #composableTemplate>
-    <nz-cascader
-      *ngIf="!(schema.hidden | call: model:schema:control)"
-      #component
-      nz-col
-      [fluentBinding]="{ component, schema, control }"
-      [formControl]="control"
-      [ngClass]="schema.class"
-      [ngStyle]="schema.style"
-      [nzSpan]="schema.col | col: 'span'"
-      [nzFlex]="schema.col | col: 'flex'"
-      [nzOffset]="schema.col | col: 'offset'"
-      [nzPush]="schema.col | col: 'push'"
-      [nzPull]="schema.col | col: 'pull'"
-      [nzOrder]="schema.col | col: 'order'"
-      [nzAllowClear]="schema.clearable ?? true"
-      [nzAutoFocus]="schema.autofocus"
-      [nzBackdrop]="schema.backdrop!"
-      [nzExpandIcon]="schema.expandIcon!"
-      [nzExpandTrigger]="schema.trigger!"
-      [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
-      [nzLoadData]="schema.loadData"
-      [nzOptions]="schema.options!"
-      [nzPlaceHolder]="schema.placeholder ?? ' '"
-      [nzShowArrow]="schema.arrow ?? true"
-      [nzShowSearch]="schema.searchable!"
-      [nzSize]="schema.size!"
-      [nzSuffixIcon]="schema.suffixIcon!"
-      [nzValueProperty]="schema.config?.valueProperty ?? 'value'">
-    </nz-cascader>
-  </ng-template>
+    <ng-template #standardTemplate>
+      <nz-cascader
+        #component
+        [fluentBinding]="{ component, schema, control }"
+        [formControl]="control"
+        [ngClass]="schema.class"
+        [ngStyle]="schema.style"
+        [nzAllowClear]="schema.clearable ?? true"
+        [nzAutoFocus]="schema.autofocus"
+        [nzBackdrop]="schema.backdrop!"
+        [nzExpandIcon]="schema.expandIcon ?? ''"
+        [nzExpandTrigger]="schema.trigger!"
+        [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
+        [nzLoadData]="schema.loadData"
+        [nzOptions]="schema.options ?? null"
+        [nzPlaceHolder]="schema.placeholder ?? ' '"
+        [nzShowArrow]="schema.arrow ?? true"
+        [nzShowSearch]="schema.searchable!"
+        [nzSize]="schema.size!"
+        [nzSuffixIcon]="schema.suffixIcon ?? 'down'"
+        [nzValueProperty]="schema.config?.valueProperty ?? 'value'">
+      </nz-cascader>
+    </ng-template>
+  </ng-container>
 </ng-template>

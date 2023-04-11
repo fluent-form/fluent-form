@@ -1,6 +1,7 @@
 import { Directive, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
+import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { AbstractTextControlSchema, AnySchema } from '../schemas';
 import { StandardSchema } from '../schemas/types';
 import { isNumber } from '../utils';
@@ -20,6 +21,7 @@ export abstract class AbstractWidget<C> {
 }
 
 export abstract class AbstractTextControlWidget<C> extends AbstractWidget<C> {
+  protected readonly NzFormNoStatusService = NzFormNoStatusService;
   protected readonly helper = {
     length: {
       min: (length: AbstractTextControlSchema<string>['length']) =>

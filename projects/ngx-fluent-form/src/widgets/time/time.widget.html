@@ -1,54 +1,57 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <nz-time-picker
-    *fluentComposable="composableTemplate"
-    #component
-    [fluentBinding]="{ component, schema, control }"
-    [formControl]="control"
-    [ngClass]="schema.class"
-    [ngStyle]="schema.style"
-    [nzAllowEmpty]="schema.clearable"
-    [nzFormat]="schema.format ?? 'HH:mm:ss'"
-    [nzId]="schema.id!"
-    [nzHourStep]="schema.step?.hour!"
-    [nzMinuteStep]="schema.step?.minute!"
-    [nzSecondStep]="schema.step?.second!"
-    [nzPlaceHolder]="schema.placeholder!"
-    [nzAutoFocus]="schema.autofocus"
-    [nzSize]="schema.size!"
-    [nzBorderless]="schema.borderless"
-    [nzBackdrop]="schema.backdrop!"
-    [nzInputReadOnly]="schema.readonly"
-    [nzSuffixIcon]="schema.suffixIcon ?? 'clock-circle'">
-  </nz-time-picker>
+  <ng-container *fluentInject="NzFormNoStatusService as service; optional: true">
+    <ng-container *ngIf="service; else standardTemplate">
+      <nz-time-picker
+        *ngIf="!(schema.hidden | call: model:schema:control)"
+        #component
+        nz-col
+        [fluentBinding]="{ component, schema, control }"
+        [formControl]="control"
+        [ngClass]="schema.class"
+        [ngStyle]="schema.style"
+        [nzSpan]="schema.col | col: 'span'"
+        [nzFlex]="schema.col | col: 'flex'"
+        [nzOffset]="schema.col | col: 'offset'"
+        [nzPush]="schema.col | col: 'push'"
+        [nzPull]="schema.col | col: 'pull'"
+        [nzOrder]="schema.col | col: 'order'"
+        [nzId]="schema.id!"
+        [nzAllowEmpty]="schema.clearable"
+        [nzFormat]="schema.format ?? 'HH:mm:ss'"
+        [nzHourStep]="schema.step?.hour!"
+        [nzMinuteStep]="schema.step?.minute!"
+        [nzSecondStep]="schema.step?.second!"
+        [nzPlaceHolder]="schema.placeholder!"
+        [nzAutoFocus]="schema.autofocus"
+        [nzSize]="schema.size!"
+        [nzBorderless]="schema.borderless"
+        [nzBackdrop]="schema.backdrop!"
+        [nzInputReadOnly]="schema.readonly"
+        [nzSuffixIcon]="schema.suffixIcon ?? 'clock-circle'">
+      </nz-time-picker>
+    </ng-container>
 
-  <ng-template #composableTemplate>
-    <nz-time-picker
-      *ngIf="!(schema.hidden | call: model:schema:control)"
-      #component
-      nz-col
-      [fluentBinding]="{ component, schema, control }"
-      [formControl]="control"
-      [ngClass]="schema.class"
-      [ngStyle]="schema.style"
-      [nzSpan]="schema.col | col: 'span'"
-      [nzFlex]="schema.col | col: 'flex'"
-      [nzOffset]="schema.col | col: 'offset'"
-      [nzPush]="schema.col | col: 'push'"
-      [nzPull]="schema.col | col: 'pull'"
-      [nzOrder]="schema.col | col: 'order'"
-      [nzId]="schema.id!"
-      [nzAllowEmpty]="schema.clearable"
-      [nzFormat]="schema.format ?? 'HH:mm:ss'"
-      [nzHourStep]="schema.step?.hour!"
-      [nzMinuteStep]="schema.step?.minute!"
-      [nzSecondStep]="schema.step?.second!"
-      [nzPlaceHolder]="schema.placeholder!"
-      [nzAutoFocus]="schema.autofocus"
-      [nzSize]="schema.size!"
-      [nzBorderless]="schema.borderless"
-      [nzBackdrop]="schema.backdrop!"
-      [nzInputReadOnly]="schema.readonly"
-      [nzSuffixIcon]="schema.suffixIcon ?? 'clock-circle'">
-    </nz-time-picker>
-  </ng-template>
+    <ng-template #standardTemplate>
+      <nz-time-picker
+        #component
+        [fluentBinding]="{ component, schema, control }"
+        [formControl]="control"
+        [ngClass]="schema.class"
+        [ngStyle]="schema.style"
+        [nzAllowEmpty]="schema.clearable"
+        [nzFormat]="schema.format ?? 'HH:mm:ss'"
+        [nzId]="schema.id!"
+        [nzHourStep]="schema.step?.hour!"
+        [nzMinuteStep]="schema.step?.minute!"
+        [nzSecondStep]="schema.step?.second!"
+        [nzPlaceHolder]="schema.placeholder!"
+        [nzAutoFocus]="schema.autofocus"
+        [nzSize]="schema.size!"
+        [nzBorderless]="schema.borderless"
+        [nzBackdrop]="schema.backdrop!"
+        [nzInputReadOnly]="schema.readonly"
+        [nzSuffixIcon]="schema.suffixIcon ?? 'clock-circle'">
+      </nz-time-picker>
+    </ng-template>
+  </ng-container>
 </ng-template>

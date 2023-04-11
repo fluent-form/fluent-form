@@ -1,58 +1,61 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <nz-tree-select
-    *fluentComposable="composableTemplate"
-    #component
-    [fluentBinding]="{ component, schema, control }"
-    [formControl]="control"
-    [ngClass]="schema.class"
-    [ngStyle]="schema.style"
-    [nzId]="schema.id!"
-    [nzAllowClear]="schema.clearable ?? true"
-    [nzBackdrop]="schema.backdrop!"
-    [nzShowIcon]="schema.icon"
-    [nzShowSearch]="schema.searchable"
-    [nzSize]="schema.size!"
-    [nzCheckable]="helper.checkable | invoke: schema.checkable"
-    [nzCheckStrictly]="helper.checkStrictly | invoke: schema.checkable"
-    [nzShowExpand]="helper.showExpand | invoke: schema.expandIcon"
-    [nzExpandedIcon]="helper.expandedIcon | invoke: schema.expandIcon"
-    [nzShowLine]="schema.line"
-    [nzAsyncData]="schema.async"
-    [nzNodes]="schema.options"
-    [nzDefaultExpandAll]="schema.expandAll"
-    [nzExpandedKeys]="schema.expandedKeys!"
-    [nzMultiple]="schema.multiple"></nz-tree-select>
+  <ng-container *fluentInject="NzFormNoStatusService as service; optional: true">
+    <ng-container *ngIf="service; else standardTemplate">
+      <nz-tree-select
+        *ngIf="!(schema.hidden | call: model:schema:control)"
+        #component
+        nz-col
+        [fluentBinding]="{ component, schema, control }"
+        [formControl]="control"
+        [ngClass]="schema.class"
+        [ngStyle]="schema.style"
+        [nzSpan]="schema.col | col: 'span'"
+        [nzFlex]="schema.col | col: 'flex'"
+        [nzOffset]="schema.col | col: 'offset'"
+        [nzPush]="schema.col | col: 'push'"
+        [nzPull]="schema.col | col: 'pull'"
+        [nzOrder]="schema.col | col: 'order'"
+        [nzId]="schema.id!"
+        [nzAllowClear]="schema.clearable ?? true"
+        [nzBackdrop]="schema.backdrop!"
+        [nzShowIcon]="schema.icon"
+        [nzShowSearch]="schema.searchable"
+        [nzSize]="schema.size!"
+        [nzCheckable]="helper.checkable | invoke: schema.checkable"
+        [nzCheckStrictly]="helper.checkStrictly | invoke: schema.checkable"
+        [nzShowExpand]="helper.showExpand | invoke: schema.expandIcon"
+        [nzExpandedIcon]="helper.expandedIcon | invoke: schema.expandIcon"
+        [nzShowLine]="schema.line"
+        [nzAsyncData]="schema.async"
+        [nzNodes]="schema.options"
+        [nzDefaultExpandAll]="schema.expandAll"
+        [nzExpandedKeys]="schema.expandedKeys!"
+        [nzMultiple]="schema.multiple"></nz-tree-select>
+    </ng-container>
 
-  <ng-template #composableTemplate>
-    <nz-tree-select
-      *ngIf="!(schema.hidden | call: model:schema:control)"
-      #component
-      nz-col
-      [fluentBinding]="{ component, schema, control }"
-      [formControl]="control"
-      [ngClass]="schema.class"
-      [ngStyle]="schema.style"
-      [nzSpan]="schema.col | col: 'span'"
-      [nzFlex]="schema.col | col: 'flex'"
-      [nzOffset]="schema.col | col: 'offset'"
-      [nzPush]="schema.col | col: 'push'"
-      [nzPull]="schema.col | col: 'pull'"
-      [nzOrder]="schema.col | col: 'order'"
-      [nzId]="schema.id!"
-      [nzAllowClear]="schema.clearable ?? true"
-      [nzBackdrop]="schema.backdrop!"
-      [nzShowIcon]="schema.icon"
-      [nzShowSearch]="schema.searchable"
-      [nzSize]="schema.size!"
-      [nzCheckable]="helper.checkable | invoke: schema.checkable"
-      [nzCheckStrictly]="helper.checkStrictly | invoke: schema.checkable"
-      [nzShowExpand]="helper.showExpand | invoke: schema.expandIcon"
-      [nzExpandedIcon]="helper.expandedIcon | invoke: schema.expandIcon"
-      [nzShowLine]="schema.line"
-      [nzAsyncData]="schema.async"
-      [nzNodes]="schema.options"
-      [nzDefaultExpandAll]="schema.expandAll"
-      [nzExpandedKeys]="schema.expandedKeys!"
-      [nzMultiple]="schema.multiple"></nz-tree-select>
-  </ng-template>
+    <ng-template #standardTemplate>
+      <nz-tree-select
+        #component
+        [fluentBinding]="{ component, schema, control }"
+        [formControl]="control"
+        [ngClass]="schema.class"
+        [ngStyle]="schema.style"
+        [nzId]="schema.id!"
+        [nzAllowClear]="schema.clearable ?? true"
+        [nzBackdrop]="schema.backdrop!"
+        [nzShowIcon]="schema.icon"
+        [nzShowSearch]="schema.searchable"
+        [nzSize]="schema.size!"
+        [nzCheckable]="helper.checkable | invoke: schema.checkable"
+        [nzCheckStrictly]="helper.checkStrictly | invoke: schema.checkable"
+        [nzShowExpand]="helper.showExpand | invoke: schema.expandIcon"
+        [nzExpandedIcon]="helper.expandedIcon | invoke: schema.expandIcon"
+        [nzShowLine]="schema.line"
+        [nzAsyncData]="schema.async"
+        [nzNodes]="schema.options"
+        [nzDefaultExpandAll]="schema.expandAll"
+        [nzExpandedKeys]="schema.expandedKeys!"
+        [nzMultiple]="schema.multiple"></nz-tree-select>
+    </ng-template>
+  </ng-container>
 </ng-template>

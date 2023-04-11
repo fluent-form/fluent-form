@@ -1,10 +1,11 @@
-import { NgClass, NgStyle } from '@angular/common';
+import { NgClass, NgIf, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
+import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
-import { FluentBindingDirective, FluentComposableDirective, FluentContextGuardDirective } from '../../directives';
+import { FluentBindingDirective, FluentContextGuardDirective, FluentInjectDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe, FluentInvokePipe } from '../../pipes';
 import { TreeSelectControlSchema } from '../../schemas';
 import { isBoolean, isUndefined } from '../../utils';
@@ -15,14 +16,15 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
 @Component({
   standalone: true,
   imports: [
+    NgIf,
     NgClass,
     NgStyle,
     ReactiveFormsModule,
     NzGridModule,
     NzTreeSelectModule,
+    FluentInjectDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,
-    FluentComposableDirective,
     FluentCallPipe,
     FluentInvokePipe,
     FluentColumnPipe
@@ -31,6 +33,7 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
   styles: [`nz-tree-select { width: 100% }`]
 })
 export class TreeSelectWidget extends AbstractWidget<TreeSelectWidgetTemplateContext> {
+  protected readonly NzFormNoStatusService = NzFormNoStatusService;
   protected readonly helper = {
     checkable: (checkable: TreeSelectControlSchema['checkable']) =>
       isBoolean(checkable) ? checkable : !isUndefined(checkable?.strict),

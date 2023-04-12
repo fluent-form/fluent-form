@@ -26,7 +26,7 @@
   </ng-template>
 
   <ng-container
-    *ngFor="let subschema of schema.schemas"
+    *ngFor="let subschema of schemas"
     [ngTemplateOutlet]="formColTemplate"
     [ngTemplateOutletContext]="{ control: (subschema.name | control: form), schema: subschema, model: model }">
   </ng-container>

@@ -1,8 +1,8 @@
-import { Directive, EventEmitter, forwardRef, inject, Input, Output } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { Directive, EventEmitter, forwardRef, inject, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { FormArray, FormControlStatus, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
-import { takeUntil } from 'rxjs';
+import { skip, takeUntil } from 'rxjs';
 import { AnySchema, FormGroupSchema } from '../schemas';
 import { StandardSchema } from '../schemas/types';
 import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchema } from '../utils';
@@ -21,12 +21,15 @@ import { ControlContainer, ControlContainerDirective } from './models/control-co
     }
   ]
 })
-export class FluentFormDirective<T extends AnyObject | AnyArray> extends ControlContainerDirective<T> {
+export class FluentFormDirective<T extends AnyObject | AnyArray> extends ControlContainerDirective<T> implements OnChanges {
   private readonly destroy$ = inject(NzDestroyService);
+  /**
+   * 内部的不可变模型，主要有以下用途：
+   * - 用来跟公开的模型值进行引用比较，判断变更是内部发出的还是外部传入的，如果引用一致则为内部变更
+   */
   private internalModel!: T;
-  private _model!: T;
   private schema!: StandardSchema<FormGroupSchema>;
-  /** @internal */
+
   form!: FormGroup;
 
   get schemas(): StandardSchema<AnySchema>[] {
@@ -51,29 +54,40 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
       this.onValueChanges(utils);
     });
 
-    this.model && modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
-  }
+    this.form.valueChanges.pipe(
+      skip(1),
+      takeUntil(this.destroy$)
+    ).subscribe(o =>
+      this.valueChanges.emit(o)
+    );
 
-  get model(): T {
-    return this._model;
+    this.form.statusChanges.pipe(
+      skip(1),
+      takeUntil(this.destroy$)
+    ).subscribe(o =>
+      this.statusChanges.emit(o)
+    );
   }
 
   /** 模型 */
-  @Input('fluentModel')
-  set model(value: T) {
-    this._model = value;
-
-    // 如果是外部变更，就赋值到表单
-    if (this.model !== this.internalModel) {
-      this.form && modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
-    }
-  }
+  @Input('fluentModel') model!: T;
 
   @Output('fluentModelChange') modelChange: EventEmitter<T> = new EventEmitter();
+  @Output('fluentValueChanges') valueChanges: EventEmitter<T> = new EventEmitter();
+  @Output('fluentStatusChanges') statusChanges: EventEmitter<FormControlStatus> = new EventEmitter();
 
   /** @internal */
   get directive(): ControlContainerDirective<T> {
     return this;
+  }
+
+  ngOnChanges({ schemas: schemasChange, model: modelChange }: SimpleChanges) {
+    if (schemasChange || modelChange) {
+      // 如果是外部变更，就赋值到表单
+      if (this.model !== this.internalModel) {
+        modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
+      }
+    }
   }
 
   /**

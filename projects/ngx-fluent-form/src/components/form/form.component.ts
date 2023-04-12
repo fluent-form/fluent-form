@@ -1,5 +1,5 @@
 import { NgClass, NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, forwardRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, forwardRef, inject } from '@angular/core';
 import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
@@ -41,13 +41,15 @@ import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/
     }
   ]
 })
-export class FluentFormComponent<T extends AnyObject> implements OnChanges, FluentConfig {
+export class FluentFormComponent<T extends AnyObject> implements FluentConfig {
   private readonly destroy$ = inject(NzDestroyService);
   /**
    * 内部的不可变模型，主要有以下用途：
    * - 用来跟公开的模型值进行引用比较，判断变更是内部发出的还是外部传入的，如果引用一致则为内部变更
    */
   private internalModel!: T;
+  private _model!: T;
+
   protected schema!: StandardSchema<FormGroupSchema>;
 
   form!: FormGroup;
@@ -72,6 +74,9 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges, Flue
       this.onValueChanges(utils);
     });
 
+    // 如果模型已经好了，就使用初始化表单
+    this.model && modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
+
     this.form.valueChanges.pipe(
       skip(1),
       takeUntil(this.destroy$)
@@ -88,7 +93,22 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges, Flue
   }
 
   /** 模型 */
-  @Input() model!: T;
+  get model(): T {
+    return this._model;
+  }
+
+  /** 模型 */
+  @Input()
+  set model(value: T) {
+    this._model = value;
+
+    // 如果是外部变更，就赋值到表单
+    if (this.model !== this.internalModel) {
+      // 如果表单已经好了，就使用初始化表单
+      this.form && modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
+    }
+  }
+
   @Input() layout: NzFormLayoutType = 'vertical';
   @Input() colon = true;
   @Input() gutter: NzRowDirective['nzGutter'] | null = { xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 };
@@ -99,15 +119,6 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges, Flue
   @Output() modelChange: EventEmitter<T> = new EventEmitter();
   @Output() valueChanges: EventEmitter<T> = new EventEmitter();
   @Output() statusChanges: EventEmitter<FormControlStatus> = new EventEmitter();
-
-  ngOnChanges({ schemas: schemasChange, model: modelChange }: SimpleChanges) {
-    if (schemasChange || modelChange) {
-      // 如果是外部变更，就赋值到表单
-      if (this.model !== this.internalModel) {
-        modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
-      }
-    }
-  }
 
   /**
    * 表单值更新时

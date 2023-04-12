@@ -28,6 +28,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
    * - 用来跟公开的模型值进行引用比较，判断变更是内部发出的还是外部传入的，如果引用一致则为内部变更
    */
   private internalModel!: T;
+  private _model!: T;
   private schema!: StandardSchema<FormGroupSchema>;
 
   form!: FormGroup;
@@ -54,6 +55,8 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
       this.onValueChanges(utils);
     });
 
+    this.model && modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
+
     this.form.valueChanges.pipe(
       skip(1),
       takeUntil(this.destroy$)
@@ -69,8 +72,20 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
     );
   }
 
+  get model(): T {
+    return this._model;
+  }
+
   /** 模型 */
-  @Input('fluentModel') model!: T;
+  @Input('fluentModel')
+  set model(value: T) {
+    this._model = value;
+
+    // 如果是外部变更，就赋值到表单
+    if (this.model !== this.internalModel) {
+      this.form && modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
+    }
+  }
 
   @Output('fluentModelChange') modelChange: EventEmitter<T> = new EventEmitter();
   @Output('fluentValueChanges') valueChanges: EventEmitter<T> = new EventEmitter();

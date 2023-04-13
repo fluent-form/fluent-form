@@ -4,7 +4,7 @@ import { AbstractControlOptions, AsyncValidatorFn, FormControl, ValidatorFn } fr
 import { SafeAny } from '@ngify/types';
 import { AutocompleteDataSource } from 'ng-zorro-antd/auto-complete';
 import { CompareWith } from 'ng-zorro-antd/core/types';
-import { NzDateMode } from 'ng-zorro-antd/date-picker';
+import { NzDateMode, SupportTimeOptions } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { AnyBuilder, AnySchema } from './index.schema';
 import { AbstractInputField, CallbackArgs, Col, ControlEventListener, ControlValueMapper, Labelful, Row } from './interfaces';
@@ -79,7 +79,7 @@ export interface AbstractDateControlSchema<Name extends AnySchemaName, Val> exte
   /** Show clean button */
   clearable?: boolean;
   /** Show time picker in date picker */
-  time?: boolean;
+  time?: boolean | SupportTimeOptions;
   /** Date display format */
   format?: string;
   /** Inline mode */

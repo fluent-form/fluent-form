@@ -13,7 +13,13 @@ export class TemplateRegistry extends Map<string, TemplateRef<unknown>> {
   }
 
   private register(kind: string) {
-    const { instance } = createComponent(this.widgetMap.get(kind)!, {
+    const component = this.widgetMap.get(kind);
+
+    if (!component) {
+      throw new Error(`The '${kind}' template was not found`);
+    }
+
+    const { instance } = createComponent(component, {
       environmentInjector: this.environmentInjector
     });
 

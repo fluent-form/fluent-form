@@ -4,6 +4,14 @@ import { createFormGroup } from './form.utils';
 import { modelUtils } from './model.utils';
 
 describe('ModelUtils', () => {
+  it('with none control', () => {
+    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'none', name: 'none' }];
+    const form = createFormGroup(schemas);
+    const model = {};
+
+    expect(modelUtils(model, schemas).assign(form).value).toEqual({ none: null });
+  });
+
   it('with control', () => {
     const schemas: StandardSchema<AnySchema>[] = [{ kind: 'number', name: 'num' }];
     const form = createFormGroup(schemas);

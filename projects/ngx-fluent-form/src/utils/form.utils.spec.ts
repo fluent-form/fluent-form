@@ -45,6 +45,15 @@ describe('form.utils', () => {
       expect(group.value).toEqual({});
     });
 
+    it('with none control', () => {
+      const schemas: StandardSchema<AnySchema>[] = [
+        { kind: 'none', name: 'none' }
+      ];
+      const group = createFormGroup(schemas);
+
+      expect(group.value).toEqual({ none: null });
+    });
+
     it('with control', () => {
       const schemas: StandardSchema<AnySchema>[] = [
         { kind: 'input', name: 'text' }

@@ -18,6 +18,10 @@ import { AbstractControlSchema, AbstractDateControlSchema, AbstractTextControlSc
 import { AbstractInputField, ComponentControlEventListener, ComponentPropertyPatcher, ElementControlEventListener, ElementPropertyPatcher } from './interfaces';
 import { AnySchemaName, SchemaName } from './types';
 
+export interface NoneControlSchema<N extends SchemaName> extends AbstractControlSchema<N, SafeAny> {
+  kind: 'none';
+}
+
 export interface InputControlSchema<Name extends SchemaName = SchemaName, Val = string>
   extends AbstractTextControlSchema<Name, Val>, ElementControlEventListener<Val>, ElementPropertyPatcher<HTMLInputElement> {
   kind: 'input';

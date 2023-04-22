@@ -1,4 +1,4 @@
-import { NgClass, NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, forwardRef, inject } from '@angular/core';
 import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
@@ -19,6 +19,7 @@ import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/
   selector: 'fluent-form',
   standalone: true,
   imports: [
+    NgIf,
     NgFor,
     NgClass,
     NgStyle,

@@ -4,7 +4,7 @@ import { ButtonGroupComponentSchema } from './component-wrapper.schema';
 import { ButtonComponentSchema, TextComponentSchema } from './component.schema';
 import { FormArraySchema, FormGroupSchema } from './control-container.schema';
 import { InputGroupComponentSchema } from './control-wrapper.schema';
-import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, InputControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from './control.schema';
+import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, InputControlSchema, NoneControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from './control.schema';
 import { AnySchemaName, DoubleSchemaName, SchemaName } from './types';
 
 /** 任意图示 */
@@ -97,7 +97,8 @@ export type SingleKeyControlSchema<N extends SchemaName = SchemaName> =
   | CheckboxGroupControlSchema<N>
   | RateControlSchema<N>
   | DateRangePickerControlSchema<N>
-  | SliderControlSchema<N>;
+  | SliderControlSchema<N>
+  | NoneControlSchema<N>;
 /** 单字段的真实控件构建器 */
 export type SingleKeyControlBuilder<N extends SchemaName = SchemaName> = StableBuilder<SingleKeyControlSchema<N>>;
 

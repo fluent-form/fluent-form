@@ -20,4 +20,8 @@ describe('WidgetRegistry', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should throw error', () => {
+    expect(() => service.get('undefinded')).toThrowError(`The 'undefinded' template was not found`);
+  });
 });

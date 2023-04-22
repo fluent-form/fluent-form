@@ -13,7 +13,7 @@ import { ControlContainer } from './models/control-container';
 
 @Directive({
   // eslint-disable-next-line
-  selector: 'fluent-outlet',
+  selector: 'fluent-outlet,[fluentOutlet]',
   exportAs: 'fluentOutlet',
   standalone: true,
   host: {

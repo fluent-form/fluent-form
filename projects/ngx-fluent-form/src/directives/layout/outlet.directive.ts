@@ -1,11 +1,11 @@
 import { Directive, inject, Input, OnChanges, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
-import { AnyComponentSchema, AnyControlSchema } from '../schemas';
-import { SchemaName, StandardSchema } from '../schemas/types';
-import { TemplateRegistry } from '../services';
-import { WidgetTemplateContext } from '../widgets';
-import { ControlContainer } from './models/control-container';
+import { AnyComponentSchema, AnyControlSchema } from '../../schemas';
+import { SchemaName, StandardSchema } from '../../schemas/types';
+import { TemplateRegistry } from '../../services';
+import { WidgetTemplateContext } from '../../widgets';
+import { FluentControlContainer } from './models/control-container';
 
 // TODO
 // 目前 fluent-outlet 渲染的组件是不支持显示验证状态/控件标签的，考虑将 fluent-outlet 改为组件，
@@ -23,7 +23,7 @@ import { ControlContainer } from './models/control-container';
 export class FluentOutletDirective<T extends AnyObject | AnyArray> implements OnInit, OnChanges, OnDestroy, WidgetTemplateContext<AnyComponentSchema | AnyControlSchema, AbstractControl> {
   private readonly registry = inject(TemplateRegistry);
   private readonly viewContainerRef = inject(ViewContainerRef);
-  private readonly controlContainer: ControlContainer<T> = inject(ControlContainer<T>, { host: true, skipSelf: true });
+  private readonly controlContainer: FluentControlContainer<T> = inject(FluentControlContainer<T>, { host: true, skipSelf: true });
   private _schema!: StandardSchema<AnyComponentSchema | AnyControlSchema>;
 
   /** @internal */

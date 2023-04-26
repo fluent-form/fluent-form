@@ -3,10 +3,10 @@ import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { startWith, takeUntil } from 'rxjs';
-import { AnyControlContainerSchema, AnySchema } from '../schemas';
-import { StandardSchema } from '../schemas/types';
-import { schemasUtils } from '../utils';
-import { ControlContainer, ControlContainerDirective } from './models/control-container';
+import { AnyControlContainerSchema, AnySchema } from '../../schemas';
+import { StandardSchema } from '../../schemas/types';
+import { schemasUtils } from '../../utils';
+import { ControlContainerDirective, FluentControlContainer } from './models/control-container';
 
 @Directive({
   selector: '[fluentFormName]',
@@ -15,7 +15,7 @@ import { ControlContainer, ControlContainerDirective } from './models/control-co
   providers: [
     NzDestroyService,
     {
-      provide: ControlContainer,
+      provide: FluentControlContainer,
       useExisting: forwardRef(() => FluentFormNameDirective)
     }
   ]
@@ -38,7 +38,7 @@ export class FluentFormNameDirective<T extends AnyObject | AnyArray> extends Con
   }
 
   constructor(
-    @Host() @SkipSelf() private controlContainer: ControlContainer<T>,
+    @Host() @SkipSelf() private controlContainer: FluentControlContainer<T>,
     private destroy$: NzDestroyService
   ) {
     super();

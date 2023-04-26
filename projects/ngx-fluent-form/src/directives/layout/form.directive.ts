@@ -3,10 +3,10 @@ import { FormArray, FormControlStatus, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { skip, takeUntil } from 'rxjs';
-import { AnySchema, FormGroupSchema } from '../schemas';
-import { StandardSchema } from '../schemas/types';
-import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchema } from '../utils';
-import { ControlContainer, ControlContainerDirective } from './models/control-container';
+import { AnySchema, FormGroupSchema } from '../../schemas';
+import { StandardSchema } from '../../schemas/types';
+import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchema } from '../../utils';
+import { ControlContainerDirective, FluentControlContainer } from './models/control-container';
 
 @Directive({
   // eslint-disable-next-line
@@ -16,7 +16,7 @@ import { ControlContainer, ControlContainerDirective } from './models/control-co
   providers: [
     NzDestroyService,
     {
-      provide: ControlContainer,
+      provide: FluentControlContainer,
       useExisting: forwardRef(() => FluentFormDirective)
     }
   ]

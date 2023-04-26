@@ -1,15 +1,15 @@
 import { Directive, EventEmitter, Output } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
-import { AnyComponentSchema, AnyControlSchema, AnySchema } from '../../schemas';
-import { StandardSchema } from '../../schemas/types';
-import { schemasUtils } from '../../utils';
+import { AnyComponentSchema, AnyControlSchema, AnySchema } from '../../../schemas';
+import { StandardSchema } from '../../../schemas/types';
+import { schemasUtils } from '../../../utils';
 import { FluentOutletDirective } from '../outlet.directive';
 
 /**
  * 抽象的控件容器
  */
-export abstract class ControlContainer<T extends AnyObject | AnyArray> {
+export abstract class FluentControlContainer<T extends AnyObject | AnyArray> {
   /** 当前图示 */
   abstract schemas: StandardSchema<AnySchema>[];
   /** 当前表单 */
@@ -22,7 +22,7 @@ export abstract class ControlContainer<T extends AnyObject | AnyArray> {
 }
 
 @Directive()
-export abstract class ControlContainerDirective<T extends AnyObject | AnyArray> extends ControlContainer<T> {
+export abstract class ControlContainerDirective<T extends AnyObject | AnyArray> extends FluentControlContainer<T> {
   @Output('fluentFormChange') formChange: EventEmitter<AbstractControl> = new EventEmitter();
 
   protected directives: FluentOutletDirective<T>[] = [];

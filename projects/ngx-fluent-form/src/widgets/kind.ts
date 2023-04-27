@@ -20,5 +20,6 @@ export const enum WidgetKind {
   ButtonGroup = 'button-group',
   Steps = 'steps',
   Tabs = 'tabs',
-  NestedForm = 'nested-form',
+  Group = 'group',
+  Array = 'array',
 }

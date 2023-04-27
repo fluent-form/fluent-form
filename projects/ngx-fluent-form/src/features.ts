@@ -45,14 +45,14 @@ export function withAllWidgets(): FluentFormFeature {
   );
 }
 
-export function withWidgets(...widgetFeatures: FluentFormWidgetFeature[]): FluentFormFeature {
+export function withWidgets(...features: (FluentFormWidgetFeature | FluentFormWidgetFeature[])[]): FluentFormFeature {
   return {
     kind: FluentFormFeatureKind.Widget,
     providers: [
       {
         provide: WIDGET_MAP,
         useValue: new Map(
-          widgetFeatures.map(feature => [
+          features.flat().map(feature => [
             feature.kind,
             feature.widget
           ])
@@ -209,9 +209,15 @@ export function useTabsWidget(): FluentFormWidgetFeature {
   };
 }
 
-export function useNestedFormWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.NestedForm,
-    widget: NestedFormWidget
-  };
+export function useNestedFormWidget(): FluentFormWidgetFeature[] {
+  return [
+    {
+      kind: WidgetKind.Group,
+      widget: NestedFormWidget
+    },
+    {
+      kind: WidgetKind.Array,
+      widget: NestedFormWidget
+    }
+  ];
 }

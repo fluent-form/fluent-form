@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FluentFormComponent } from './components';
-import { FluentFormDirective, FluentFormNameDirective } from './directives';
-import { FluentOutletDirective } from './directives/outlet.directive';
+import { FluentFormDirective, FluentFormNameDirective, FluentOutletDirective } from './directives';
 import { withAllWidgets } from './features';
 import { provideFluentForm } from './provider';
 

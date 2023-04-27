@@ -3,28 +3,28 @@
     <ng-container
       *ngSwitchCase="'group'"
       fluentWithInjector
-      [ngTemplateOutlet]="'nested-form' | template"
+      [ngTemplateOutlet]="schema | template"
       [ngTemplateOutletContext]="{ control: control, schema: schema, model: model[schema.name] }">
     </ng-container>
 
     <ng-container
       *ngSwitchCase="'array'"
       fluentWithInjector
-      [ngTemplateOutlet]="'nested-form' | template"
+      [ngTemplateOutlet]="schema | template"
       [ngTemplateOutletContext]="{ control: control, schema: schema, model: model[schema.name] }">
     </ng-container>
 
     <ng-container
       *ngSwitchCase="'steps'"
       fluentWithInjector
-      [ngTemplateOutlet]="schema.kind | template"
+      [ngTemplateOutlet]="schema | template"
       [ngTemplateOutletContext]="{ control, schema, model }">
     </ng-container>
 
     <ng-container
       *ngSwitchCase="'tabs'"
       fluentWithInjector
-      [ngTemplateOutlet]="schema.kind | template"
+      [ngTemplateOutlet]="schema | template"
       [ngTemplateOutletContext]="{ control, schema, model }">
     </ng-container>
 
@@ -76,7 +76,7 @@
       [nzAutoTips]="currentSchema.tips?.auto ?? {}">
       <ng-container
         fluentWithInjector
-        [ngTemplateOutlet]="schema.kind | template"
+        [ngTemplateOutlet]="schema | template"
         [ngTemplateOutletContext]="{ control, schema, model }"></ng-container>
     </nz-form-control>
   </nz-form-item>

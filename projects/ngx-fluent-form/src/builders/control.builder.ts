@@ -1,4 +1,4 @@
-import { AnyControlSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, InputControlSchema, NoneControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { AnyControlSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, HeadlessControlSchema, InputControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { AnySchemaName, SchemaName } from '../schemas/types';
 import { Builder, UnstableBuilder, builder } from '../utils';
 import { KindOrName } from './helper';
@@ -9,8 +9,8 @@ function controlBuilder<T extends AnyControlSchema>(): Builder<T, RestSchema> {
   return builder<T, RestSchema>(REST_PARAMS);
 }
 
-export function none<N extends SchemaName>(name?: N): UnstableControlBuilder<NoneControlSchema<N>, KindOrName> {
-  return controlBuilder<NoneControlSchema<N>>().kind('none').name(name);
+export function headless<N extends SchemaName>(name?: N): UnstableControlBuilder<HeadlessControlSchema<N>, KindOrName> {
+  return controlBuilder<HeadlessControlSchema<N>>().kind('headless').name(name);
 }
 
 export function input(): UnstableControlBuilder<InputControlSchema<number>, KindOrName>;

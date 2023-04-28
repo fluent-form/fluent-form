@@ -1,4 +1,4 @@
-import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, form, input, inputGroup, none, number, radioGroup, rate, row, select, slider, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
+import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, form, headless, input, inputGroup, number, radioGroup, rate, row, select, slider, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
 import { map, switchMap, timer } from 'rxjs';
 import { CASCADER_OPTIONS, CHECKBOX_OPTIONS, RADIO_OPTIONS, SELECT_OPTIONS, TREE_SELECT_OPTIONS } from 'stories/options';
 import { defineStory } from 'stories/storybook';
@@ -7,7 +7,7 @@ import dedent from 'ts-dedent';
 export const story = defineStory({
   args: {
     schemas: form(
-      none('none'),
+      headless('headless'),
       input('text')
         .label({ value: '文本输入框', tooltip: '小贴士' })
         .col(8)
@@ -101,7 +101,7 @@ export const story = defineStory({
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, form, input, inputGroup, none, number, radioGroup, rate, row, select, slider, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
+  import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, form, headless, input, inputGroup, number, radioGroup, rate, row, select, slider, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
 
   @Component({
     selector: 'example-component',
@@ -109,7 +109,7 @@ export const source = dedent`
   })
   export class ExampleComponent {
     schemas = form(
-      none('none'),
+      headless('headless'),
       input('text')
         .label({ value: '文本输入框', tooltip: '小贴士' })
         .col(8)

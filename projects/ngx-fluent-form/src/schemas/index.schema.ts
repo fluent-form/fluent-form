@@ -4,7 +4,8 @@ import { ButtonGroupComponentSchema } from './component-wrapper.schema';
 import { ButtonComponentSchema, TextComponentSchema } from './component.schema';
 import { FormArraySchema, FormGroupSchema } from './control-container.schema';
 import { InputGroupComponentSchema } from './control-wrapper.schema';
-import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, InputControlSchema, NoneControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from './control.schema';
+import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, HeadlessControlSchema, InputControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from './control.schema';
+import { TemplateSchema } from './template.schema';
 import { AnySchemaName, DoubleSchemaName, SchemaName } from './types';
 
 /** 任意图示 */
@@ -12,7 +13,8 @@ export type AnySchema =
   | AnyControlSchema
   | AnyContainerSchema
   | AnyComponentSchema
-  | AnyWrapperSchema;
+  | AnyWrapperSchema
+  | AnyTemplateSchema;
 /** 任意构建器 */
 export type AnyBuilder = StableBuilder<AnySchema>;
 
@@ -66,6 +68,11 @@ export type AnyComponentSchema<N extends SchemaName = SchemaName> = ButtonCompon
 /** 普通组件构建器 */
 export type AnyComponentBuilder<N extends SchemaName = SchemaName> = StableBuilder<AnyComponentSchema<N>>;
 
+/** 模板图示 */
+export type AnyTemplateSchema<N extends SchemaName = SchemaName> = TemplateSchema<N>;
+/** 模板构建器 */
+export type AnyTemplateBuilder<N extends SchemaName = SchemaName> = StableBuilder<AnyTemplateSchema<N>>;
+
 /** 可组合组件图示 */
 export type ComposableComponentSchema =
   | InputControlSchema
@@ -98,7 +105,7 @@ export type SingleKeyControlSchema<N extends SchemaName = SchemaName> =
   | RateControlSchema<N>
   | DateRangePickerControlSchema<N>
   | SliderControlSchema<N>
-  | NoneControlSchema<N>;
+  | HeadlessControlSchema<N>;
 /** 单字段的真实控件构建器 */
 export type SingleKeyControlBuilder<N extends SchemaName = SchemaName> = StableBuilder<SingleKeyControlSchema<N>>;
 

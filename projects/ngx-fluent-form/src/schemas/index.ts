@@ -6,3 +6,4 @@ export * from './control-container.schema';
 export * from './control-wrapper.schema';
 export * from './control.schema';
 export * from './index.schema';
+export * from './template.schema';

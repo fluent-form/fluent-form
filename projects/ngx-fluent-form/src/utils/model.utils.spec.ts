@@ -4,12 +4,12 @@ import { createFormGroup } from './form.utils';
 import { modelUtils } from './model.utils';
 
 describe('ModelUtils', () => {
-  it('with none control', () => {
-    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'none', name: 'none' }];
+  it('with headless control', () => {
+    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'headless', name: 'headless' }];
     const form = createFormGroup(schemas);
     const model = {};
 
-    expect(modelUtils(model, schemas).assign(form).value).toEqual({ none: null });
+    expect(modelUtils(model, schemas).assign(form).value).toEqual({ headless: null });
   });
 
   it('with control', () => {
@@ -38,6 +38,14 @@ describe('ModelUtils', () => {
 
   it('with component wrapper', () => {
     const schemas: StandardSchema<AnySchema>[] = [{ kind: 'button-group', schemas: [] }];
+    const form = createFormGroup(schemas);
+    const model = {};
+
+    expect(modelUtils(model, schemas).assign(form).value).toEqual({});
+  });
+
+  it('with template', () => {
+    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'template' }];
     const form = createFormGroup(schemas);
     const model = {};
 

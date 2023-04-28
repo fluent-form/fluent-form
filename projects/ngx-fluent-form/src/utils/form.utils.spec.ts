@@ -45,13 +45,13 @@ describe('form.utils', () => {
       expect(group.value).toEqual({});
     });
 
-    it('with none control', () => {
+    it('with headless control', () => {
       const schemas: StandardSchema<AnySchema>[] = [
-        { kind: 'none', name: 'none' }
+        { kind: 'headless', name: 'headless' }
       ];
       const group = createFormGroup(schemas);
 
-      expect(group.value).toEqual({ none: null });
+      expect(group.value).toEqual({ headless: null });
     });
 
     it('with control', () => {
@@ -66,6 +66,24 @@ describe('form.utils', () => {
     it('with component', () => {
       const schemas: StandardSchema<AnySchema>[] = [
         { kind: 'button' }
+      ];
+      const group = createFormGroup(schemas);
+
+      expect(group.value).toEqual({});
+    });
+
+    it('with component wrapper', () => {
+      const schemas: StandardSchema<AnySchema>[] = [
+        { kind: 'button-group', schemas: [] }
+      ];
+      const group = createFormGroup(schemas);
+
+      expect(group.value).toEqual({});
+    });
+
+    it('with template', () => {
+      const schemas: StandardSchema<AnySchema>[] = [
+        { kind: 'template' }
       ];
       const group = createFormGroup(schemas);
 

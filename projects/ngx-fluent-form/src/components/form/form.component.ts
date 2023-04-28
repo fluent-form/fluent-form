@@ -1,5 +1,5 @@
 import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, forwardRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, Output, QueryList, forwardRef, inject } from '@angular/core';
 import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
@@ -7,11 +7,11 @@ import { NzFormLayoutType, NzFormModule } from 'ng-zorro-antd/form';
 import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
 import { skip, takeUntil } from 'rxjs';
 import { FluentConfig } from '../../config';
-import { FluentBindingDirective } from '../../directives';
+import { FluentBindingDirective, FluentTemplateDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe, FluentControlPipe } from '../../pipes';
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { StandardSchema } from '../../schemas/types';
-import { CONFIG } from '../../tokens';
+import { CONFIG, DIRECTIVE_QUERY_CONTAINER } from '../../tokens';
 import { FormUtils, createFormGroup, formUtils, modelUtils, standardSchema } from '../../utils';
 import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/form-col-content-outlet.component';
 
@@ -38,6 +38,10 @@ import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/
     NzDestroyService,
     {
       provide: CONFIG,
+      useExisting: forwardRef(() => FluentFormComponent)
+    },
+    {
+      provide: DIRECTIVE_QUERY_CONTAINER,
       useExisting: forwardRef(() => FluentFormComponent)
     }
   ]
@@ -120,6 +124,8 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig {
   @Output() modelChange: EventEmitter<T> = new EventEmitter();
   @Output() valueChanges: EventEmitter<T> = new EventEmitter();
   @Output() statusChanges: EventEmitter<FormControlStatus> = new EventEmitter();
+
+  @ContentChildren(FluentTemplateDirective) templateDirectives!: QueryList<FluentTemplateDirective>;
 
   /**
    * 表单值更新时

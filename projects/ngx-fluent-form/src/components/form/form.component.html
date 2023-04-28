@@ -27,7 +27,7 @@
 
   <ng-container *ngFor="let subschema of schemas">
     <ng-container
-      *ngIf="subschema.kind !== 'none'"
+      *ngIf="subschema.kind !== 'headless' || (subschema.kind === 'headless' && subschema.template)"
       [ngTemplateOutlet]="formColTemplate"
       [ngTemplateOutletContext]="{
         control: (subschema.name | control: form),

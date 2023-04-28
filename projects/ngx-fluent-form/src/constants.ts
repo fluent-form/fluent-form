@@ -16,3 +16,5 @@ export const TEXT_CONTROL_SCHEMA_KINDS = ['input', 'textarea'];
 export const COMPONENT_WRAPPER_SCHEMA_KINDS = ['button-group'];
 /** 普通组件图示类型 */
 export const COMPONENT_SCHEMA_KINDS = ['button', 'text'];
+/** 模板图示类型 */
+export const TEMPLATE_SCHEMA_KINDS = ['template'];

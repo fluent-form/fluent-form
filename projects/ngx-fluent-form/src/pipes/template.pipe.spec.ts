@@ -1,25 +1,53 @@
 import { EnvironmentInjector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { withAllWidgets } from '../features';
-import { provideFluentForm } from '../provider';
+import { TemplateRegistry } from '../services';
+import { DIRECTIVE_QUERY_CONTAINER } from '../tokens';
 import { FluentTemplatePipe } from './template.pipe';
 
 describe('FluentTemplatePipe', () => {
+  let pipe: FluentTemplatePipe;
+
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        provideFluentForm(
-          withAllWidgets()
-        )
-      ]
+    TestBed.overrideProvider(TemplateRegistry, {
+      useValue: new Map()
     });
+
+    TestBed.overrideProvider(DIRECTIVE_QUERY_CONTAINER, {
+      useValue: {
+        templateDirectives: {
+          find(fn: Function) {
+            return fn({ name: 'named' }) ? { templateRef: {} } : null;
+          }
+        }
+      }
+    });
+
+    // TODO: use TestBed.runInInjectionContext in ng v15
+    const environmentInjector = TestBed.inject(EnvironmentInjector);
+    pipe = environmentInjector.runInContext(() => new FluentTemplatePipe());
   });
 
   it('create an instance', () => {
-    // TODO: use TestBed.runInInjectionContext in ng v15
-    const environmentInjector = TestBed.inject(EnvironmentInjector);
-    const pipe = environmentInjector.runInContext(() => new FluentTemplatePipe());
-
     expect(pipe).toBeTruthy();
+  });
+
+  it('should be not found template (with template schema)', () => {
+    expect(() => pipe.transform({ kind: 'template', name: 'unnamed' }))
+      .toThrowError(`The custom 'unnamed' template was not found`);
+  });
+
+  it('should be not found template (with headless schema)', () => {
+    expect(() => pipe.transform({ kind: 'headless', name: 'headless', template: 'unnamed' }))
+      .toThrowError(`The custom 'unnamed' template was not found`);
+  });
+
+  it('should be find template (with template schema)', () => {
+    const value = pipe.transform({ kind: 'template', name: 'named' });
+    expect(value).toBeTruthy();
+  });
+
+  it('should be find template (with headless schema)', () => {
+    const value = pipe.transform({ kind: 'headless', name: 'headless', template: 'named' });
+    expect(value).toBeTruthy();
   });
 });

@@ -1,7 +1,7 @@
 import { ValidatorFn, Validators } from '@angular/forms';
-import { COMPONENT_CONTAINER_SCHEMA_KINDS, COMPONENT_SCHEMA_KINDS, COMPONENT_WRAPPER_SCHEMA_KINDS, CONTROL_CONTAINER_SCHEMA_KINDS, CONTROL_WRAPPER_SCHEMA_KINDS, TEXT_CONTROL_SCHEMA_KINDS } from '../constants';
+import { COMPONENT_CONTAINER_SCHEMA_KINDS, COMPONENT_SCHEMA_KINDS, COMPONENT_WRAPPER_SCHEMA_KINDS, CONTROL_CONTAINER_SCHEMA_KINDS, CONTROL_WRAPPER_SCHEMA_KINDS, TEMPLATE_SCHEMA_KINDS, TEXT_CONTROL_SCHEMA_KINDS } from '../constants';
 import { InputControlSchema, TextareaControlSchema } from '../schemas';
-import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlOrControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, AnyWrapperSchema, DoubleKeyControlSchema } from '../schemas/index.schema';
+import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlOrControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, AnyTemplateSchema, AnyWrapperSchema, DoubleKeyControlSchema } from '../schemas/index.schema';
 import { AnySchemaName, SchemaName, StandardSchema } from '../schemas/types';
 import { StableBuilder, isBuilder } from './builder.utils';
 import { isNumber } from './is.utils';
@@ -47,6 +47,20 @@ export const isTextControlSchema = (schema: AnySchema): schema is InputControlSc
  */
 export const isComponentSchema = (schema: AnySchema): schema is AnyComponentSchema =>
   COMPONENT_SCHEMA_KINDS.includes(schema.kind);
+
+/**
+ * 是否为模板图示
+ * @param schema
+ */
+export const isTemplateSchema = (schema: AnySchema): schema is AnyTemplateSchema =>
+  TEMPLATE_SCHEMA_KINDS.includes(schema.kind);
+
+/**
+ * 是否为非控件图示
+ * @param schema
+ */
+export const isNonControlSchema = (schema: AnySchema): schema is AnyComponentSchema | AnyComponentWrapperSchema | AnyTemplateSchema =>
+  isComponentSchema(schema) || isComponentWrapperSchema(schema) || isTemplateSchema(schema);
 
 /**
  * 是否为双字段图示

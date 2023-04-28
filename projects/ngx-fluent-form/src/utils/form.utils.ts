@@ -5,7 +5,7 @@ import { FormArraySchema, FormGroupSchema } from '../schemas';
 import { AnyControlSchema, AnySchema } from '../schemas/index.schema';
 import { StandardSchema } from '../schemas/types';
 import { isUndefined } from './is.utils';
-import { controlSchemaUtils, isComponentContainerSchema, isComponentSchema, isComponentWrapperSchema, isControlContainerSchema, isControlWrapperSchema, isDoubleKeyControlSchema } from './schema.utils';
+import { controlSchemaUtils, isComponentContainerSchema, isControlContainerSchema, isControlWrapperSchema, isDoubleKeyControlSchema, isNonControlSchema } from './schema.utils';
 import { valueUtils } from './value.utils';
 
 /**
@@ -35,7 +35,7 @@ export function createFormControl(schema: StandardSchema<AnyControlSchema>): For
  */
 function createFormControls(schemas: StandardSchema<AnySchema>[], controls: Record<string, AbstractControl> = {}) {
   return schemas.reduce((controls, schema) => {
-    if (isComponentSchema(schema) || isComponentWrapperSchema(schema)) {
+    if (isNonControlSchema(schema)) {
       return controls;
     }
 
@@ -127,7 +127,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
   assign<T extends (F extends FormGroup ? AnyObject : AnyArray)>(model: T): T {
     this.schemas.forEach(schema => {
       // 这些图示不包含控件图示，直接跳过
-      if (isComponentSchema(schema) || isComponentWrapperSchema(schema)) { return; }
+      if (isNonControlSchema(schema)) { return; }
 
       // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
       const control = this.form.get([schema.name?.toString()!])!;
@@ -173,7 +173,7 @@ export class FormUtils<F extends FormGroup | FormArray> {
   change<T>(model: T) {
     this.schemas.forEach(schema => {
       // 这些图示不包含控件图示，直接跳过
-      if (isComponentSchema(schema) || isComponentWrapperSchema(schema)) { return; }
+      if (isNonControlSchema(schema)) { return; }
 
       // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
       const control = this.form.get([schema.name?.toString()!])!;

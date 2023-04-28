@@ -1,7 +1,7 @@
 import { inject, Pipe, PipeTransform, TemplateRef } from '@angular/core';
-import { AbstractSchema } from '../schemas';
-import { AnySchemaName } from '../schemas/types';
+import { AnySchema } from '../schemas';
 import { TemplateRegistry } from '../services';
+import { DIRECTIVE_QUERY_CONTAINER } from '../tokens';
 
 @Pipe({
   name: 'template',
@@ -9,9 +9,41 @@ import { TemplateRegistry } from '../services';
 })
 export class FluentTemplatePipe implements PipeTransform {
   private readonly registry = inject(TemplateRegistry);
+  private readonly directiveContainer = inject(DIRECTIVE_QUERY_CONTAINER, { optional: true });
 
-  transform(value: AbstractSchema<AnySchemaName>): TemplateRef<unknown> {
-    return this.registry.get(value.kind);
+  transform(value: AnySchema): TemplateRef<unknown> {
+    const templateDirectives = this.directiveContainer?.templateDirectives;
+
+    switch (value.kind) {
+      case 'template': {
+        const dir = templateDirectives?.find(o => o.name === value.name);
+
+        if (!dir) {
+          throwTemplateNotFoundError(value.name!);
+        }
+
+        return dir.templateRef;
+      }
+
+      case 'headless': {
+        // 这里假设在外层已经判断 value.template 是否存在了
+        const dir = templateDirectives?.find(o => o.name === value.template);
+
+        if (!dir) {
+          throwTemplateNotFoundError(value.template!);
+        }
+
+        return dir.templateRef;
+      }
+
+      default:
+        return this.registry.get(value.kind);
+    }
+
   }
 
+}
+
+function throwTemplateNotFoundError(name: string | number): never {
+  throw new Error(`The custom '${name}' template was not found`);
 }

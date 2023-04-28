@@ -7,6 +7,7 @@ Root --- ControlWrapper
 Root --- Component
 Root --- ComponentContainer
 Root --- ComponentWrapper
+Root --- Template
 
 Control --- SingleKeyControl --- AnyKeyControl
 Control --- DoubleKeyControl --- AnyKeyControl
@@ -37,6 +38,8 @@ ComponentContainer --- Tabs
 ComponentContainer --- Steps
 
 ComponentWrapper --- ButtonGroup
+
+Template
 ```
 
 <br>

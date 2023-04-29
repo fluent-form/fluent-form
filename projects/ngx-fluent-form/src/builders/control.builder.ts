@@ -25,18 +25,6 @@ export function email<N extends SchemaName>(name?: N) {
   return input(name).type('email');
 }
 
-export function telephone(): UnstableControlBuilder<InputControlSchema<number>, KindOrNameOrType>;
-export function telephone<N extends SchemaName>(name?: N): UnstableControlBuilder<InputControlSchema<N>, KindOrNameOrType>;
-export function telephone<N extends SchemaName>(name?: N) {
-  return input(name).type('tel');
-}
-
-export function url(): UnstableControlBuilder<InputControlSchema<number>, KindOrNameOrType>;
-export function url<N extends SchemaName>(name?: N): UnstableControlBuilder<InputControlSchema<N>, KindOrNameOrType>;
-export function url<N extends SchemaName>(name?: N) {
-  return input(name).type('url');
-}
-
 export function password(): UnstableControlBuilder<InputControlSchema<number>, KindOrNameOrType>;
 export function password<N extends SchemaName>(name?: N): UnstableControlBuilder<InputControlSchema<N>, KindOrNameOrType>;
 export function password<N extends SchemaName>(name?: N) {
@@ -53,12 +41,6 @@ export function number(): UnstableControlBuilder<NumberInputControlSchema<number
 export function number<N extends SchemaName>(name?: N): UnstableControlBuilder<NumberInputControlSchema<N>, KindOrName>;
 export function number<N extends SchemaName>(name?: N) {
   return controlBuilder<NumberInputControlSchema<N>>().kind('number').name(name);
-}
-
-export function integer(): UnstableControlBuilder<NumberInputControlSchema<number>, KindOrName | 'precision'>;
-export function integer<N extends SchemaName>(name?: N): UnstableControlBuilder<NumberInputControlSchema<N>, KindOrName | 'precision'>;
-export function integer<N extends SchemaName>(name?: N) {
-  return number(name).precision({ value: 0, mode: 'cut' });
 }
 
 export function date(): UnstableControlBuilder<DatePickerControlSchema<number>, KindOrName>;

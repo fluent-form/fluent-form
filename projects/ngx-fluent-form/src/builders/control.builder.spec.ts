@@ -1,6 +1,6 @@
 import { CascaderControlSchema, CheckboxControlSchema, HeadlessControlSchema, InputControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { standardSchema } from '../utils';
-import { cascader, checkbox, checkboxGroup, date, dateRange, datetime, email, headless, input, integer, number, password, radioGroup, rate, select, slider, telephone, textarea, time, toggle, treeSelect, url } from './control.builder';
+import { cascader, checkbox, checkboxGroup, date, dateRange, datetime, email, headless, input, number, password, radioGroup, rate, select, slider, textarea, time, toggle, treeSelect } from './control.builder';
 
 describe('control.builder', () => {
   it('headless', () => {
@@ -21,18 +21,6 @@ describe('control.builder', () => {
     expect(schema).toEqual(value);
   });
 
-  it('telephone', () => {
-    const schema = standardSchema(telephone('telephone'));
-    const value: InputControlSchema<'telephone'> = { kind: 'input', name: 'telephone', type: 'tel' };
-    expect(schema).toEqual(value);
-  });
-
-  it('url', () => {
-    const schema = standardSchema(url('url'));
-    const value: InputControlSchema<'url'> = { kind: 'input', name: 'url', type: 'url' };
-    expect(schema).toEqual(value);
-  });
-
   it('password', () => {
     const schema = standardSchema(password('password'));
     const value: InputControlSchema<'password'> = { kind: 'input', name: 'password', type: 'password' };
@@ -48,12 +36,6 @@ describe('control.builder', () => {
   it('number', () => {
     const schema = standardSchema(number('number'));
     const value: NumberInputControlSchema<'number'> = { kind: 'number', name: 'number' };
-    expect(schema).toEqual(value);
-  });
-
-  it('integer', () => {
-    const schema = standardSchema(integer('integer'));
-    const value: NumberInputControlSchema<'integer'> = { kind: 'number', name: 'integer', precision: { value: 0, mode: 'cut' } };
     expect(schema).toEqual(value);
   });
 

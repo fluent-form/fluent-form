@@ -3,18 +3,18 @@ import { TemplateRef } from '@angular/core';
 import { AbstractControlOptions, AsyncValidatorFn, FormControl, ValidatorFn } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { AutocompleteDataSource } from 'ng-zorro-antd/auto-complete';
-import { CompareWith } from 'ng-zorro-antd/core/types';
+import { CompareWith, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDateMode, SupportTimeOptions } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { AnyBuilder, AnySchema } from './index.schema';
-import { AbstractInputField, CallbackArgs, Col, ControlEventListenerHolder, ControlValueMapper, Labelful, Row } from './interfaces';
-import { AnySchemaName, Cell, SchemaLike } from './types';
+import { Col, ControlEventListenerHolder, ControlValueMapper, Labelful, Row, SchemaContext, SchemaLike } from './interfaces';
+import { AnySchemaName, Cell } from './types';
 
 /** 抽象图示 */
 export interface AbstractSchema<N extends AnySchemaName> extends SchemaLike<N> {
   /* Used to define the width of the control. */
   col?: Col | Cell;
-  hidden?: boolean | ((args: CallbackArgs<AbstractSchema<AnySchemaName>>) => boolean) | string;
+  hidden?: boolean | ((ctx: SchemaContext<AbstractSchema<AnySchemaName>>) => boolean) | string;
   class?: NgClass['ngClass'];
   style?: NgStyle['ngStyle'];
 }
@@ -27,9 +27,9 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
   /* Used to set the default value of the control. */
   defaultValue?: SafeAny;
   /** Is it a required control */
-  required?: boolean | ((args: CallbackArgs<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
+  required?: boolean | ((ctx: SchemaContext<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
   /** Whether to disable control */
-  disabled?: boolean | ((args: CallbackArgs<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
+  disabled?: boolean | ((ctx: SchemaContext<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
   feedback?: boolean;
   /** Error message for control */
   tips?: {
@@ -61,8 +61,17 @@ export interface AbstractControlContainerSchema<Name extends AnySchemaName> exte
   updateOn?: AbstractControlOptions['updateOn'];
 }
 
+/** 抽象的输入框图示 */
+export interface AbstractInputBoxControlSchema<N extends AnySchemaName, V, P extends string | [string, string] = string> extends AbstractControlSchema<N, V> {
+  placeholder?: P;
+  autofocus?: boolean;
+  readonly?: boolean | ((ctx: SchemaContext<AbstractInputBoxControlSchema<AnySchemaName, V, P>>) => boolean) | string;
+  size?: NzSizeLDSType;
+  borderless?: boolean;
+}
+
 /** 抽象的文本控件图示 */
-export interface AbstractTextControlSchema<Name extends AnySchemaName, Val = string> extends AbstractControlSchema<Name, Val>, AbstractInputField {
+export interface AbstractTextControlSchema<Name extends AnySchemaName> extends AbstractInputBoxControlSchema<Name, string> {
   length?: number | { max?: number, min?: number };
   autocomplete?: {
     backfill?: boolean;
@@ -73,7 +82,7 @@ export interface AbstractTextControlSchema<Name extends AnySchemaName, Val = str
 }
 
 /** 抽象的日期控件图示 */
-export interface AbstractDateControlSchema<Name extends AnySchemaName, Val> extends AbstractControlSchema<Name, Val> {
+export interface AbstractDateControlSchema<N extends AnySchemaName, V, P extends string | [string, string] = string> extends AbstractInputBoxControlSchema<N, V, P> {
   /** Mode of date picker control */
   mode?: NzDateMode;
   /** Show clean button */

@@ -1,11 +1,15 @@
 import { TemplateRef } from '@angular/core';
 import { AbstractControl, FormControlStatus } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
-import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
 import { ComponentOutputListenerMap, ComponentPropertyMap, HTMLElementEventListenerMap, HTMLElementPropertyMap } from '../types';
-import { Cell } from './types';
+import { AnySchemaName, Cell, StandardSchema } from './types';
+
+export interface SchemaLike<N extends AnySchemaName = AnySchemaName> {
+  kind: string;
+  name?: N;
+}
 
 /** @internal */
 interface Tooltip {
@@ -47,8 +51,8 @@ export interface ControlValueMapper<V> {
   output: (value: V | null) => SafeAny;
 }
 
-export interface CallbackArgs<S> {
-  schema: S;
+export interface SchemaContext<S extends SchemaLike> {
+  schema: StandardSchema<S>;
   /** 如果当前没有对应的 control，会返回上一级的 control，这时候一般是 form group/array */
   control: AbstractControl;
   model: SafeAny;
@@ -58,15 +62,6 @@ export interface CallbackArgs<S> {
 type ControlEventChange<Val> = {
   valueChange?: (value: Val) => void | Promise<void>;
   statusChange?: (status: FormControlStatus) => void | Promise<void>;
-}
-
-/** 抽象的输入字段 */
-export interface AbstractInputField<Placeholder extends string | [string, string] = string> {
-  placeholder?: Placeholder;
-  autofocus?: boolean;
-  readonly?: boolean | ((args: CallbackArgs<AbstractInputField<Placeholder>>) => boolean) | string;
-  size?: NzSizeLDSType;
-  borderless?: boolean;
 }
 
 /** 事件侦听器 */

@@ -14,8 +14,8 @@ import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { NzTreeSelectComponent } from 'ng-zorro-antd/tree-select';
 import { Observable } from 'rxjs';
-import { AbstractControlSchema, AbstractDateControlSchema, AbstractTextControlSchema } from './abstract.schema';
-import { AbstractInputField, ComponentControlEventListenerHolder, ComponentPropertyHolder, ElementControlEventListenerHolder, ElementPropertyHolder, PropertyHolder } from './interfaces';
+import { AbstractControlSchema, AbstractDateControlSchema, AbstractInputBoxControlSchema, AbstractTextControlSchema } from './abstract.schema';
+import { ComponentControlEventListenerHolder, ComponentPropertyHolder, ElementControlEventListenerHolder, ElementPropertyHolder, PropertyHolder } from './interfaces';
 import { AnySchemaName, SchemaName } from './types';
 
 export interface HeadlessControlSchema<N extends SchemaName> extends AbstractControlSchema<N, SafeAny>, PropertyHolder {
@@ -24,14 +24,14 @@ export interface HeadlessControlSchema<N extends SchemaName> extends AbstractCon
 }
 
 export interface InputControlSchema<Name extends SchemaName = SchemaName, Val = string>
-  extends AbstractTextControlSchema<Name, Val>, ElementControlEventListenerHolder<Val>, ElementPropertyHolder<HTMLInputElement> {
+  extends AbstractTextControlSchema<Name>, ElementControlEventListenerHolder<Val>, ElementPropertyHolder<HTMLInputElement> {
   kind: 'input';
   /* A type of input. */
   type?: 'text' | 'number' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
 }
 
 export interface TextareaControlSchema<Name extends SchemaName = SchemaName, Val = string>
-  extends AbstractTextControlSchema<Name, Val>, ElementControlEventListenerHolder<Val>, ElementPropertyHolder<HTMLTextAreaElement> {
+  extends AbstractTextControlSchema<Name>, ElementControlEventListenerHolder<Val>, ElementPropertyHolder<HTMLTextAreaElement> {
   kind: 'textarea';
   /** The number of lines in the text field */
   rows?: number;
@@ -40,7 +40,7 @@ export interface TextareaControlSchema<Name extends SchemaName = SchemaName, Val
 }
 
 export interface NumberInputControlSchema<Name extends SchemaName = SchemaName, Val = number>
-  extends AbstractControlSchema<Name, Val>, AbstractInputField, ComponentControlEventListenerHolder<NzInputNumberComponent, Val>, ComponentPropertyHolder<NzInputNumberComponent> {
+  extends AbstractInputBoxControlSchema<Name, Val>, ComponentControlEventListenerHolder<NzInputNumberComponent, Val>, ComponentPropertyHolder<NzInputNumberComponent> {
   kind: 'number';
   /** Maximum value */
   max?: number;
@@ -53,18 +53,18 @@ export interface NumberInputControlSchema<Name extends SchemaName = SchemaName, 
 }
 
 export interface DatePickerControlSchema<Name extends SchemaName = SchemaName, Val = Date>
-  extends AbstractDateControlSchema<Name, Val>, AbstractInputField, ComponentControlEventListenerHolder<NzDatePickerComponent, Val>, ComponentPropertyHolder<NzDatePickerComponent> {
+  extends AbstractDateControlSchema<Name, Val>, ComponentControlEventListenerHolder<NzDatePickerComponent, Val>, ComponentPropertyHolder<NzDatePickerComponent> {
   kind: 'date';
 }
 
 export interface DateRangePickerControlSchema<Name extends AnySchemaName = AnySchemaName, Val = [Date, Date]>
-  extends AbstractDateControlSchema<Name, Val>, AbstractInputField<[string, string]>, ComponentControlEventListenerHolder<NzRangePickerComponent, Val>, ComponentPropertyHolder<NzRangePickerComponent> {
+  extends AbstractDateControlSchema<Name, Val, [string, string]>, ComponentControlEventListenerHolder<NzRangePickerComponent, Val>, ComponentPropertyHolder<NzRangePickerComponent> {
   kind: 'date-range';
   separator?: string;
 }
 
 export interface TimePickerControlSchema<Name extends SchemaName = SchemaName, Val = Date>
-  extends AbstractControlSchema<Name, Val>, AbstractInputField, ComponentControlEventListenerHolder<NzTimePickerComponent, Val>, ComponentPropertyHolder<NzTimePickerComponent> {
+  extends AbstractInputBoxControlSchema<Name, Val>, ComponentControlEventListenerHolder<NzTimePickerComponent, Val>, ComponentPropertyHolder<NzTimePickerComponent> {
   kind: 'time';
   /** Show clean button */
   clearable?: boolean;
@@ -76,7 +76,6 @@ export interface TimePickerControlSchema<Name extends SchemaName = SchemaName, V
     minute?: number;
     second?: number;
   };
-  readonly?: boolean;
   backdrop?: boolean;
   suffixIcon?: string | TemplateRef<void>;
 }

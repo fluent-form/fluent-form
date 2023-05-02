@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { AbstractSchema } from '../schemas';
-import { CallbackArgs } from '../schemas/interfaces';
+import { SchemaContext } from '../schemas/interfaces';
 import { AnySchemaName } from '../schemas/types';
 import { isFunction, isString } from '../utils';
 
@@ -39,7 +39,7 @@ export class FluentCallPipe implements PipeTransform {
 function evaluateCode(code: string) {
   const fn = new Function('ctx', `with(ctx){${code}}`);
 
-  return (ctx: CallbackArgs<AbstractSchema<AnySchemaName>>) => {
+  return (ctx: SchemaContext<AbstractSchema<AnySchemaName>>) => {
     const proxy = new Proxy(Object.freeze(ctx), {
       // 拦截所有属性，防止到 Proxy 对象以外的作用域链查找。
       has() {

@@ -70,46 +70,46 @@ export interface AbstractInputField<Placeholder extends string | [string, string
 }
 
 /** 事件侦听器 */
-export interface EventListener {
+export interface EventListenerHolder {
   listeners?: Record<string, undefined | ((event: SafeAny) => void | Promise<void>)>
 }
 
 /** 控件事件侦听器 */
-export interface ControlEventListener<V = SafeAny> extends EventListener {
+export interface ControlEventListenerHolder<V = SafeAny> extends EventListenerHolder {
   listeners?: ControlEventChange<V>;
 }
 
 /** 组件事件侦听器 */
-export interface ComponentEventListener<C> extends EventListener {
+export interface ComponentEventListenerHolder<C> extends EventListenerHolder {
   listeners?: ComponentOutputListenerMap<C>;
 }
 
 /** 组件控件事件侦听器 */
-export interface ComponentControlEventListener<C, V = SafeAny> extends EventListener {
+export interface ComponentControlEventListenerHolder<C, V = SafeAny> extends EventListenerHolder {
   listeners?: ComponentOutputListenerMap<C> & ControlEventChange<V>;
 }
 
 /** 元素事件侦听器 */
-export interface ElementEventListener extends EventListener {
+export interface ElementEventListenerHolder extends EventListenerHolder {
   listeners?: HTMLElementEventListenerMap;
 }
 
 /** 元素控件事件侦听器 */
-export interface ElementControlEventListener<V = SafeAny> extends EventListener {
+export interface ElementControlEventListenerHolder<V = SafeAny> extends EventListenerHolder {
   listeners?: HTMLElementEventListenerMap & ControlEventChange<V>;
 }
 
 /** 属性修补器 */
-export interface PropertyPatcher {
+export interface PropertyHolder {
   properties?: Record<string, SafeAny>
 }
 
 /** 组件属性修补器 */
-export interface ComponentPropertyPatcher<C> extends PropertyPatcher {
+export interface ComponentPropertyHolder<C> extends PropertyHolder {
   properties?: ComponentPropertyMap<C>;
 }
 
 /** 元素属性修补器 */
-export interface ElementPropertyPatcher<E extends HTMLElement> extends PropertyPatcher {
+export interface ElementPropertyHolder<E extends HTMLElement> extends PropertyHolder {
   properties?: HTMLElementPropertyMap<E>;
 }

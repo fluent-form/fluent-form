@@ -5,11 +5,11 @@ import { NzTabComponent, NzTabPosition, NzTabSetComponent, NzTabType } from 'ng-
 import { StableBuilder } from '../utils';
 import { AbstractSchema } from './abstract.schema';
 import { AnyBuilder, AnySchema } from './index.schema';
-import { CallbackArgs, ComponentEventListener, ComponentPropertyPatcher, ElementEventListener, ElementPropertyPatcher, Row } from './interfaces';
+import { CallbackArgs, ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Row } from './interfaces';
 import { SchemaName } from './types';
 
 export interface StepsComponentSchema<Name extends SchemaName = SchemaName>
-  extends AbstractSchema<Name>, ComponentEventListener<NzStepsComponent>, ComponentPropertyPatcher<NzStepsComponent> {
+  extends AbstractSchema<Name>, ComponentEventListenerHolder<NzStepsComponent>, ComponentPropertyHolder<NzStepsComponent> {
   kind: 'steps';
   type?: 'default' | 'navigation';
   active?: number;
@@ -22,7 +22,7 @@ export interface StepsComponentSchema<Name extends SchemaName = SchemaName>
 }
 
 export interface StepComponentSchema<Name extends SchemaName = SchemaName>
-  extends AbstractSchema<Name>, ComponentEventListener<NzStepComponent>, ComponentPropertyPatcher<NzStepComponent> {
+  extends AbstractSchema<Name>, ComponentEventListenerHolder<NzStepComponent>, ComponentPropertyHolder<NzStepComponent> {
   kind: 'step';
   title: string | TemplateRef<void>;
   subtitle?: string | TemplateRef<void>;
@@ -33,7 +33,7 @@ export interface StepComponentSchema<Name extends SchemaName = SchemaName>
 }
 
 export interface TabsComponentSchema<Name extends SchemaName = SchemaName>
-  extends AbstractSchema<Name>, ComponentEventListener<NzTabSetComponent>, ComponentPropertyPatcher<NzTabSetComponent> {
+  extends AbstractSchema<Name>, ComponentEventListenerHolder<NzTabSetComponent>, ComponentPropertyHolder<NzTabSetComponent> {
   kind: 'tabs';
   type?: NzTabType;
   active?: number;
@@ -46,7 +46,7 @@ export interface TabsComponentSchema<Name extends SchemaName = SchemaName>
 }
 
 export interface TabComponentSchema<Name extends SchemaName = SchemaName>
-  extends AbstractSchema<Name>, ComponentEventListener<NzTabComponent>, ComponentPropertyPatcher<NzTabComponent> {
+  extends AbstractSchema<Name>, ComponentEventListenerHolder<NzTabComponent>, ComponentPropertyHolder<NzTabComponent> {
   kind: 'tab';
   title: string;
   disabled?: boolean | ((args: CallbackArgs<TabComponentSchema<SchemaName>>) => boolean) | string;
@@ -54,7 +54,7 @@ export interface TabComponentSchema<Name extends SchemaName = SchemaName>
 }
 
 export interface RowComponentSchema<Name extends SchemaName = SchemaName>
-  extends AbstractSchema<Name>, ElementEventListener, ElementPropertyPatcher<HTMLElement>, Row {
+  extends AbstractSchema<Name>, ElementEventListenerHolder, ElementPropertyHolder<HTMLElement>, Row {
   kind: 'row';
   schemas: (AnySchema | AnyBuilder)[];
 }

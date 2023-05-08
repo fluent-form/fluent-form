@@ -1,11 +1,12 @@
+import { Injectable, inject } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGroup } from '@angular/forms';
-import { AnyArray, AnyObject } from '@ngify/types';
-import { FluentCallPipe } from '../pipes/call.pipe';
 import { FormArraySchema, FormGroupSchema } from '../schemas';
 import { AnyControlSchema, AnySchema } from '../schemas/index.schema';
 import { StandardSchema } from '../schemas/types';
+import { ValueTransformer } from '../services';
+import { Model } from '../types';
 import { isUndefined } from './is.utils';
-import { controlSchemaUtils, isComponentContainerSchema, isControlContainerSchema, isControlWrapperSchema, isDoubleKeyControlSchema, isNonControlSchema } from './schema.utils';
+import { controlSchemaUtils, isComponentContainerSchema, isControlWrapperSchema, isDoubleKeyControlSchema, isNonControlSchema } from './schema.utils';
 import { valueUtils } from './value.utils';
 
 /**
@@ -107,94 +108,35 @@ export function createFormArray(schema: StandardSchema<FormArraySchema>): FormAr
   );
 }
 
-export function formUtils<F extends FormGroup | FormArray>(form: F, schemas: StandardSchema<AnySchema>[]) {
-  return new FormUtils(form, schemas);
-}
+@Injectable({
+  providedIn: 'root'
+})
+export class FormUtil {
+  private readonly valueTransformer = inject(ValueTransformer);
 
-const callPipe = new FluentCallPipe();
-
-export class FormUtils<F extends FormGroup | FormArray> {
-  constructor(
-    private readonly form: F,
-    private readonly schemas: StandardSchema<AnySchema>[],
-  ) { }
-
-  /**
-   * 将表单值分配到模型
-   * @param model
-   * @returns model
-   */
-  assign<T extends (F extends FormGroup ? AnyObject : AnyArray)>(model: T): T {
-    this.schemas.forEach(schema => {
+  updateForm<F extends FormGroup | FormArray, M extends Model<F>>(form: F, schemas: StandardSchema<AnySchema>[], model: M) {
+    schemas.forEach(schema => {
       // 这些图示不包含控件图示，直接跳过
       if (isNonControlSchema(schema)) { return; }
 
       // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-      const control = this.form.get([schema.name?.toString()!])!;
+      const control = form.get([schema.name?.toString()!])!;
 
       if (schema.kind === 'group') {
-        formUtils(control as FormGroup, schema.schemas).assign(
-          (model[schema.name as keyof T] = {} as T[keyof T]) as AnyObject,
-        );
-        return;
+        return this.updateForm(control as FormGroup, schema.schemas, model[schema.name as keyof M] as Model<FormGroup>);
       }
 
       if (schema.kind === 'array') {
-        formUtils(control as FormArray, schema.schemas).assign(
-          (model[schema.name as keyof T] = [] as T[keyof T]) as AnyArray,
-        );
-        return;
+        return this.updateForm(control as FormArray, schema.schemas, model[schema.name as keyof M] as Model<FormArray>);
       }
 
-      if (isControlContainerSchema(schema) || isControlWrapperSchema(schema) || isComponentContainerSchema(schema)) {
-        formUtils(this.form, schema.schemas).assign(model);
-        return;
+      if (isControlWrapperSchema(schema) || isComponentContainerSchema(schema)) {
+        return this.updateForm(form, schema.schemas, model);
       }
 
-      const value = valueUtils(control, schema).getValue();
-
-      // 双字段情况
-      if (isDoubleKeyControlSchema(schema)) {
-        schema.name!.map((prop, idx) => {
-          model[prop as keyof T] = ((value as [unknown, unknown])?.[idx] ?? null) as T[keyof T];
-        });
-      } else {
-        model[schema.name as keyof T] = value as T[keyof T];
-      }
-    });
-
-    return model;
-  }
-
-  /**
-   * 更新表单控件状态，目前只有 disabled 选项
-   * @param model
-   */
-  change<T>(model: T) {
-    this.schemas.forEach(schema => {
-      // 这些图示不包含控件图示，直接跳过
-      if (isNonControlSchema(schema)) { return; }
-
-      // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-      const control = this.form.get([schema.name?.toString()!])!;
-
-      if (schema.kind === 'group') {
-        return formUtils(control as FormGroup, schema.schemas).change(model[schema.name as keyof T]);
-      }
-
-      if (schema.kind === 'array') {
-        return formUtils(control as FormArray, schema.schemas).change(model[schema.name as keyof T]);
-      }
-
-      if (isControlContainerSchema(schema) || isControlWrapperSchema(schema) || isComponentContainerSchema(schema)) {
-        return formUtils(this.form, schema.schemas).change(model);
-      }
-
-      const disabled = callPipe.transform(
+      const disabled = this.valueTransformer.transform(
         schema.disabled,
-        model,
-        schema,
-        control
+        { model, schema, control }
       );
 
       if (disabled !== control.disabled) {
@@ -204,4 +146,49 @@ export class FormUtils<F extends FormGroup | FormArray> {
     });
   }
 
+  updateModel<F extends FormGroup | FormArray, M extends Model<F>>(form: F, schemas: StandardSchema<AnySchema>[], model: M) {
+    schemas.forEach(schema => {
+      // 这些图示不包含控件图示，直接跳过
+      if (isNonControlSchema(schema)) return;
+
+      // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+      const control = form.get([schema.name?.toString()!])!;
+
+      if (schema.kind === 'group') {
+        this.updateModel(
+          control as FormGroup,
+          schema.schemas,
+          (model[schema.name as keyof M] = {} as M[keyof M]) as Model<FormGroup>,
+        );
+        return;
+      }
+
+      if (schema.kind === 'array') {
+        this.updateModel(
+          control as FormArray,
+          schema.schemas,
+          (model[schema.name as keyof M] = [] as M[keyof M]) as Model<FormArray>,
+        );
+        return;
+      }
+
+      if (isControlWrapperSchema(schema) || isComponentContainerSchema(schema)) {
+        this.updateModel(form, schema.schemas, model);
+        return;
+      }
+
+      const value = valueUtils(control, schema).getValue();
+
+      // 双字段情况
+      if (isDoubleKeyControlSchema(schema)) {
+        schema.name!.map((prop, idx) => {
+          model[prop as keyof M] = ((value as [unknown, unknown])?.[idx] ?? null) as M[keyof M];
+        });
+      } else {
+        model[schema.name as keyof M] = value as M[keyof M];
+      }
+    });
+
+    return model;
+  }
 }

@@ -1,7 +1,8 @@
+import { TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
 import { AnySchema } from '../schemas';
 import { StandardSchema } from '../schemas/types';
-import { createFormArray, createFormControl, createFormGroup, formUtils } from './form.utils';
+import { FormUtil, createFormArray, createFormControl, createFormGroup } from './form.utils';
 
 describe('form.utils', () => {
   describe('createFormControl', () => {
@@ -203,41 +204,48 @@ describe('form.utils', () => {
     });
   });
 
-  describe('FormUtils', () => {
+  describe('FormUtil', () => {
+    let util: FormUtil;
+
+    beforeEach(() => {
+      TestBed.configureTestingModule({});
+      util = TestBed.inject(FormUtil);
+    });
+
     describe('assign', () => {
       it('with control', () => {
         const schemas: StandardSchema<AnySchema>[] = [{ kind: 'number', name: 'num', defaultValue: 1 }];
         const form = createFormGroup(schemas);
 
-        expect(formUtils(form, schemas).assign({})).toEqual({ num: 1 });
+        expect(util.updateModel(form, schemas, {})).toEqual({ num: 1 });
       });
 
       it('with double key control', () => {
         const schemas: StandardSchema<AnySchema>[] = [{ kind: 'slider', name: ['start', 'end'] }];
         const form = createFormGroup(schemas);
 
-        expect(formUtils(form, schemas).assign({})).toEqual({ start: null, end: null });
+        expect(util.updateModel(form, schemas, {})).toEqual({ start: null, end: null });
       });
 
       it('with double key control (with default value)', () => {
         const schemas: StandardSchema<AnySchema>[] = [{ kind: 'slider', name: ['start', 'end'], defaultValue: [0, 100] }];
         const form = createFormGroup(schemas);
 
-        expect(formUtils(form, schemas).assign({})).toEqual({ start: 0, end: 100 });
+        expect(util.updateModel(form, schemas, {})).toEqual({ start: 0, end: 100 });
       });
 
       it('with component', () => {
         const schemas: StandardSchema<AnySchema>[] = [{ kind: 'button' }];
         const form = createFormGroup(schemas);
 
-        expect(formUtils(form, schemas).assign({})).toEqual({});
+        expect(util.updateModel(form, schemas, {})).toEqual({});
       });
 
       it('with component wrapper', () => {
         const schemas: StandardSchema<AnySchema>[] = [{ kind: 'button-group', schemas: [] }];
         const form = createFormGroup(schemas);
 
-        expect(formUtils(form, schemas).assign({})).toEqual({});
+        expect(util.updateModel(form, schemas, {})).toEqual({});
       });
 
       it('with group (empty)', () => {
@@ -250,7 +258,7 @@ describe('form.utils', () => {
         ];
         const form = createFormGroup(schemas);
 
-        expect(formUtils(form, schemas).assign({})).toEqual({ obj: {} });
+        expect(util.updateModel(form, schemas, {})).toEqual({ obj: {} });
       });
 
       it('with group', () => {
@@ -265,7 +273,7 @@ describe('form.utils', () => {
         ];
         const form = createFormGroup(schemas);
 
-        expect(formUtils(form, schemas).assign({})).toEqual({ obj: { num: 1 } });
+        expect(util.updateModel(form, schemas, {})).toEqual({ obj: { num: 1 } });
       });
 
       it('with array (empty)', () => {
@@ -278,7 +286,7 @@ describe('form.utils', () => {
         ];
         const form = createFormGroup(schemas);
 
-        expect(formUtils(form, schemas).assign({})).toEqual({ arr: [] });
+        expect(util.updateModel(form, schemas, {})).toEqual({ arr: [] });
       });
 
       it('with array', () => {
@@ -293,7 +301,7 @@ describe('form.utils', () => {
         ];
         const form = createFormGroup(schemas);
 
-        expect(formUtils(form, schemas).assign({})).toEqual({ arr: [1] });
+        expect(util.updateModel(form, schemas, {})).toEqual({ arr: [1] });
       });
 
       it('with mix', () => {
@@ -327,7 +335,7 @@ describe('form.utils', () => {
         ];
         const form = createFormGroup(schemas);
 
-        expect(formUtils(form, schemas).assign({})).toEqual({
+        expect(util.updateModel(form, schemas, {})).toEqual({
           obj: { arr: [1] },
           arr: [{ num: 1 }]
         });
@@ -341,7 +349,7 @@ describe('form.utils', () => {
         ];
         const form = createFormGroup(schemas);
 
-        formUtils(form, schemas).change({ bool: true });
+        util.updateForm(form, schemas, { bool: true });
         expect(form.get('bool')!.disabled).toBeTrue();
       });
 
@@ -352,10 +360,10 @@ describe('form.utils', () => {
         ];
         const form = createFormGroup(schemas);
 
-        formUtils(form, schemas).change({ bool: true });
+        util.updateForm(form, schemas, { bool: true });
         expect(form.get('bool')!.disabled).toBeTrue();
 
-        formUtils(form, schemas).change({ bool: false });
+        util.updateForm(form, schemas, { bool: false });
         expect(form.get('bool')!.enabled).toBeTrue();
       });
 
@@ -371,7 +379,7 @@ describe('form.utils', () => {
         ];
         const form = createFormGroup(schemas);
 
-        formUtils(form, schemas).change({ obj: { bool: true } });
+        util.updateForm(form, schemas, { obj: { bool: true } });
         expect(form.get('obj.bool')!.disabled).toBeTrue();
       });
 
@@ -387,7 +395,7 @@ describe('form.utils', () => {
         ];
         const form = createFormGroup(schemas);
 
-        formUtils(form, schemas).change({ arr: [true] });
+        util.updateForm(form, schemas, { arr: [true] });
         expect(form.get(['arr', 0])!.disabled).toBeTrue();
       });
     });

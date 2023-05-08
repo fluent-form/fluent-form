@@ -1,11 +1,11 @@
 import { Directive, EventEmitter, forwardRef, inject, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FormArray, FormControlStatus, FormGroup } from '@angular/forms';
+import { FormControlStatus, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { skip, takeUntil } from 'rxjs';
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { StandardSchema } from '../../schemas/types';
-import { createFormGroup, formUtils, FormUtils, modelUtils, standardSchema } from '../../utils';
+import { createFormGroup, FormUtil, modelUtils, standardSchema } from '../../utils';
 import { ControlContainerDirective, FluentControlContainer } from './models/control-container';
 
 @Directive({
@@ -23,6 +23,7 @@ import { ControlContainerDirective, FluentControlContainer } from './models/cont
 })
 export class FluentFormDirective<T extends AnyObject | AnyArray> extends ControlContainerDirective<T> implements OnChanges {
   private readonly destroy$ = inject(NzDestroyService);
+  private readonly formUtil = inject(FormUtil);
   /**
    * 内部的不可变模型，主要有以下用途：
    * - 用来跟公开的模型值进行引用比较，判断变更是内部发出的还是外部传入的，如果引用一致则为内部变更
@@ -50,9 +51,8 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
 
     this.directives.forEach(directive => this.assignDirective(directive));
 
-    const utils = formUtils(this.form, this.schemas);
     this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.onValueChanges(utils);
+      this.onValueChanges();
     });
 
     this.model && modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
@@ -109,8 +109,16 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
    * 更新模型
    * @param utils
    */
-  private onValueChanges(utils: FormUtils<FormGroup | FormArray>) {
-    utils.change(this.internalModel = utils.assign({} as T));
+  private onValueChanges() {
+    this.formUtil.updateForm(
+      this.form,
+      this.schemas,
+      this.internalModel = this.formUtil.updateModel(
+        this.form,
+        this.schemas,
+        {} as T
+      )
+    );
     this.modelChange.emit(this.internalModel);
   }
 }

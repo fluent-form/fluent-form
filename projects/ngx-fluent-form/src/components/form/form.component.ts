@@ -12,7 +12,7 @@ import { FluentCallPipe, FluentColumnPipe, FluentControlPipe } from '../../pipes
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { StandardSchema } from '../../schemas/types';
 import { CONFIG, DIRECTIVE_QUERY_CONTAINER } from '../../tokens';
-import { FormUtils, createFormGroup, formUtils, modelUtils, standardSchema } from '../../utils';
+import { FormUtil, createFormGroup, modelUtils, standardSchema } from '../../utils';
 import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/form-col-content-outlet.component';
 
 @Component({
@@ -48,6 +48,7 @@ import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/
 })
 export class FluentFormComponent<T extends AnyObject> implements FluentConfig {
   private readonly destroy$ = inject(NzDestroyService);
+  private readonly formUtil = inject(FormUtil);
   /**
    * 内部的不可变模型，主要有以下用途：
    * - 用来跟公开的模型值进行引用比较，判断变更是内部发出的还是外部传入的，如果引用一致则为内部变更
@@ -74,9 +75,8 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig {
 
     this.formChange.emit(this.form = createFormGroup(this.schema));
 
-    const utils = formUtils(this.form, this.schemas);
     this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.onValueChanges(utils);
+      this.onValueChanges();
     });
 
     // 如果模型已经好了，就使用初始化表单
@@ -131,8 +131,16 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig {
    * 表单值更新时
    * @param utils
    */
-  private onValueChanges(utils: FormUtils<FormGroup>) {
-    utils.change(this.internalModel = utils.assign({} as T));
+  private onValueChanges() {
+    this.formUtil.updateForm(
+      this.form,
+      this.schemas,
+      this.internalModel = this.formUtil.updateModel(
+        this.form,
+        this.schemas,
+        {} as T
+      )
+    );
     this.modelChange.emit(this.internalModel);
   }
 

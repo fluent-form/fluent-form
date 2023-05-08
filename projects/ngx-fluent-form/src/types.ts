@@ -1,5 +1,6 @@
 import { EventEmitter } from '@angular/core';
-import { PickProperty, SafeAny } from '@ngify/types';
+import { AbstractControl, FormArray } from '@angular/forms';
+import { AnyArray, AnyObject, PickProperty, SafeAny } from '@ngify/types';
 
 /**
  * HTML 元素的事件侦听器对象
@@ -48,3 +49,5 @@ export type ComponentOutputListenerMap<C> = {
  * @template C 组件的类类型
  */
 export type ComponentPropertyMap<C> = Partial<Omit<C, ComponentOutputName<C>>>;
+
+export type Model<C extends AbstractControl> = C extends FormArray ? AnyArray : AnyObject;

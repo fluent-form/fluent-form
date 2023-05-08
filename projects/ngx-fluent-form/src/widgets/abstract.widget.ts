@@ -1,12 +1,10 @@
 import { Directive, TemplateRef, ViewChild } from '@angular/core';
-import { AbstractControl, FormArray, FormControl } from '@angular/forms';
-import { AnyArray, AnyObject } from '@ngify/types';
+import { AbstractControl, FormControl } from '@angular/forms';
 import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { AbstractTextControlSchema, AnySchema } from '../schemas';
 import { StandardSchema } from '../schemas/types';
+import { Model } from '../types';
 import { isNumber } from '../utils';
-
-type Model<C extends AbstractControl> = C extends FormArray ? AnyArray : AnyObject;
 
 export interface WidgetTemplateContext<S extends AnySchema, C extends AbstractControl = FormControl> {
   schema: StandardSchema<S>;

@@ -1,4 +1,4 @@
-import { Injectable, Pipe, PipeTransform, inject } from '@angular/core';
+import { Pipe, PipeTransform, inject } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { AbstractSchema } from '../schemas';
@@ -8,9 +8,6 @@ import { ValueTransformer } from '../services';
 @Pipe({
   name: 'call',
   standalone: true
-})
-@Injectable({
-  providedIn: 'root'
 })
 export class FluentCallPipe implements PipeTransform {
   private readonly transformer = inject(ValueTransformer);

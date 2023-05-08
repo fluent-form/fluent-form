@@ -15,6 +15,7 @@ describe('FluentCallPipe', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
+        FluentCallPipe,
         {
           provide: CodeEvaluator,
           useClass: DynamicCodeEvaluator

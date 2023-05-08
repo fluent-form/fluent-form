@@ -1,57 +1,25 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Injectable, Pipe, PipeTransform, inject } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { AbstractSchema } from '../schemas';
-import { SchemaContext } from '../schemas/interfaces';
 import { AnySchemaName } from '../schemas/types';
-import { isFunction, isString } from '../utils';
-
-const RETURN_STR = 'return ';
+import { ValueTransformer } from '../services';
 
 @Pipe({
   name: 'call',
   standalone: true
 })
+@Injectable({
+  providedIn: 'root'
+})
 export class FluentCallPipe implements PipeTransform {
+  private readonly transformer = inject(ValueTransformer);
 
   transform<T extends [unknown, AbstractSchema<AnySchemaName>, AbstractControl]>(
     value: boolean | ((...args: SafeAny[]) => boolean) | string | undefined,
     ...[model, schema, control]: T
   ): boolean {
-    if (isFunction(value)) {
-      return value({ model, schema, control });
-    }
-
-    if (isString(value)) {
-      if (!value.includes(RETURN_STR)) {
-        value = RETURN_STR + value;
-      }
-
-      return evaluateCode(value)({ model, schema, control });
-    }
-
-    return value ?? false;
+    return this.transformer.transform(value, { model, schema, control }) ?? false;
   }
 
-}
-
-/** @internal */
-function evaluateCode(code: string) {
-  const fn = new Function('ctx', `with(ctx){${code}}`);
-
-  return (ctx: SchemaContext<AbstractSchema<AnySchemaName>>) => {
-    const proxy = new Proxy(Object.freeze(ctx), {
-      // 拦截所有属性，防止到 Proxy 对象以外的作用域链查找。
-      has() {
-        return true;
-      },
-      get(target, key, receiver) {
-        if (key === Symbol.unscopables) {
-          return undefined;
-        }
-        return Reflect.get(target, key, receiver);
-      },
-    });
-    return fn(proxy);
-  };
 }

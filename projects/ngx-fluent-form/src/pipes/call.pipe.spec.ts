@@ -1,5 +1,7 @@
+import { TestBed } from '@angular/core/testing';
 import { toggle } from '../builders';
 import { AnyControlSchema } from '../schemas';
+import { CodeEvaluator, DynamicCodeEvaluator } from '../services';
 import { createFormControl, standardSchema } from '../utils';
 import { FluentCallPipe } from './call.pipe';
 
@@ -11,7 +13,16 @@ describe('FluentCallPipe', () => {
   let pipe: FluentCallPipe;
 
   beforeEach(() => {
-    pipe = new FluentCallPipe();
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: CodeEvaluator,
+          useClass: DynamicCodeEvaluator
+        }
+      ]
+    });
+
+    pipe = TestBed.inject(FluentCallPipe);
   });
 
   it('create an instance', () => {

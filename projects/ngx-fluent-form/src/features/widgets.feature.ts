@@ -1,21 +1,31 @@
-import { Provider, Type } from '@angular/core';
-import { WIDGET_MAP } from './tokens';
-import { AbstractWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, InputGroupWidget, InputWidget, NumberWidget, RadioGroupWidget, RateWidget, SelectWidget, SilderWidget, StepsWidget, TabsWidget, TextWidget, TextareaWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from './widgets';
-import { WidgetKind } from './widgets/kind';
-import { NestedFormWidget } from './widgets/nested-form/nested-form.widget';
-
-export const enum FluentFormFeatureKind {
-  Widget
-}
-
-export interface FluentFormFeature {
-  kind: FluentFormFeatureKind;
-  providers: Provider[];
-}
+import { Type } from '@angular/core';
+import { WIDGET_MAP } from '../tokens';
+import { AbstractWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, InputGroupWidget, InputWidget, NumberWidget, RadioGroupWidget, RateWidget, SelectWidget, SilderWidget, StepsWidget, TabsWidget, TextWidget, TextareaWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from '../widgets';
+import { WidgetKind } from '../widgets/kind';
+import { NestedFormWidget } from '../widgets/nested-form/nested-form.widget';
+import { FluentFormFeature } from './interfaces';
+import { FluentFormFeatureKind } from './kind';
 
 export interface FluentFormWidgetFeature {
   kind: WidgetKind;
   widget: Type<AbstractWidget<unknown>>;
+}
+
+export function withWidgets(...features: (FluentFormWidgetFeature | FluentFormWidgetFeature[])[]): FluentFormFeature {
+  return {
+    kind: FluentFormFeatureKind.Widget,
+    providers: [
+      {
+        provide: WIDGET_MAP,
+        useValue: new Map(
+          features.flat().map(feature => [
+            feature.kind,
+            feature.widget
+          ])
+        )
+      }
+    ]
+  };
 }
 
 export function withAllWidgets(): FluentFormFeature {
@@ -43,23 +53,6 @@ export function withAllWidgets(): FluentFormFeature {
     useTabsWidget(),
     useNestedFormWidget()
   );
-}
-
-export function withWidgets(...features: (FluentFormWidgetFeature | FluentFormWidgetFeature[])[]): FluentFormFeature {
-  return {
-    kind: FluentFormFeatureKind.Widget,
-    providers: [
-      {
-        provide: WIDGET_MAP,
-        useValue: new Map(
-          features.flat().map(feature => [
-            feature.kind,
-            feature.widget
-          ])
-        )
-      }
-    ]
-  };
 }
 
 export function useInputWidget(): FluentFormWidgetFeature {

@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FluentFormComponent } from './components';
 import { FluentFormDirective, FluentFormNameDirective, FluentOutletDirective, FluentTemplateDirective } from './directives';
-import { withAllWidgets } from './features';
+import { FluentFormFeature } from './features';
 import { provideFluentForm } from './provider';
 
 @NgModule({
@@ -18,11 +18,15 @@ import { provideFluentForm } from './provider';
     FluentFormDirective,
     FluentFormNameDirective,
     FluentOutletDirective,
-  ],
-  providers: [
-    provideFluentForm(
-      withAllWidgets()
-    )
   ]
 })
-export class FluentFormModule { }
+export class FluentFormModule {
+  static forRoot(...features: FluentFormFeature[]): ModuleWithProviders<FluentFormModule> {
+    return {
+      ngModule: FluentFormModule,
+      providers: [
+        provideFluentForm(...features)
+      ]
+    };
+  }
+}

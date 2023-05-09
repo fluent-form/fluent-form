@@ -16,16 +16,12 @@ export class ValueTransformer {
       return value(context);
     }
 
-    if (isString(value)) {
-      if (this.evaluator) {
-        if (!value.includes(RETURN_STR)) {
-          value = RETURN_STR + value;
-        }
-
-        return this.evaluator.evaluate(value, context);
+    if (isString(value) && this.evaluator) {
+      if (!value.includes(RETURN_STR)) {
+        value = RETURN_STR + value;
       }
 
-      return value;
+      return this.evaluator.evaluate(value, context);
     }
 
     return value;

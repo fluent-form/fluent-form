@@ -1,11 +1,11 @@
-import { Directive, EventEmitter, forwardRef, inject, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Directive, EventEmitter, forwardRef, inject, Input, Output } from '@angular/core';
 import { FormControlStatus, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { skip, takeUntil } from 'rxjs';
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { StandardSchema } from '../../schemas/types';
-import { createFormGroup, FormUtil, modelUtils, standardSchema } from '../../utils';
+import { createFormGroup, FormUtil, ModelUtil, standardSchema } from '../../utils';
 import { ControlContainerDirective, FluentControlContainer } from './models/control-container';
 
 @Directive({
@@ -21,9 +21,10 @@ import { ControlContainerDirective, FluentControlContainer } from './models/cont
     }
   ]
 })
-export class FluentFormDirective<T extends AnyObject | AnyArray> extends ControlContainerDirective<T> implements OnChanges {
+export class FluentFormDirective<T extends AnyObject | AnyArray> extends ControlContainerDirective<T> {
   private readonly destroy$ = inject(NzDestroyService);
   private readonly formUtil = inject(FormUtil);
+  private readonly modelUtil = inject(ModelUtil);
   /**
    * 内部的不可变模型，主要有以下用途：
    * - 用来跟公开的模型值进行引用比较，判断变更是内部发出的还是外部传入的，如果引用一致则为内部变更
@@ -55,7 +56,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
       this.onValueChanges();
     });
 
-    this.model && modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
+    this.model && this.modelUtil.updateForm(this.model, this.schemas, this.form);
 
     this.form.valueChanges.pipe(
       skip(1),
@@ -83,7 +84,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
 
     // 如果是外部变更，就赋值到表单
     if (this.model !== this.internalModel) {
-      this.form && modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
+      this.form && this.modelUtil.updateForm(this.model, this.schemas, this.form);
     }
   }
 
@@ -94,15 +95,6 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
   /** @internal */
   get directive(): ControlContainerDirective<T> {
     return this;
-  }
-
-  ngOnChanges({ schemas: schemasChange, model: modelChange }: SimpleChanges) {
-    if (schemasChange || modelChange) {
-      // 如果是外部变更，就赋值到表单
-      if (this.model !== this.internalModel) {
-        modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
-      }
-    }
   }
 
   /**

@@ -1,15 +1,23 @@
+import { TestBed } from '@angular/core/testing';
 import { AnySchema } from '../schemas';
 import { StandardSchema } from '../schemas/types';
 import { createFormGroup } from './form.utils';
-import { modelUtils } from './model.utils';
+import { ModelUtil } from './model.utils';
 
 describe('ModelUtils', () => {
+  let util: ModelUtil;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    util = TestBed.inject(ModelUtil);
+  });
+
   it('with headless control', () => {
     const schemas: StandardSchema<AnySchema>[] = [{ kind: 'headless', name: 'headless' }];
     const form = createFormGroup(schemas);
     const model = {};
 
-    expect(modelUtils(model, schemas).assign(form).value).toEqual({ headless: null });
+    expect(util.updateForm(model, schemas, form).value).toEqual({ headless: null });
   });
 
   it('with control', () => {
@@ -17,7 +25,7 @@ describe('ModelUtils', () => {
     const form = createFormGroup(schemas);
     const model = { num: 1 };
 
-    expect(modelUtils(model, schemas).assign(form).value).toEqual({ num: 1 });
+    expect(util.updateForm(model, schemas, form).value).toEqual({ num: 1 });
   });
 
   it('with double key control', () => {
@@ -25,7 +33,7 @@ describe('ModelUtils', () => {
     const form = createFormGroup(schemas);
     const model = { start: 0, end: 100 };
 
-    expect(modelUtils(model, schemas).assign(form).value).toEqual({ 'start,end': [0, 100] });
+    expect(util.updateForm(model, schemas, form).value).toEqual({ 'start,end': [0, 100] });
   });
 
   it('with component', () => {
@@ -33,7 +41,7 @@ describe('ModelUtils', () => {
     const form = createFormGroup(schemas);
     const model = {};
 
-    expect(modelUtils(model, schemas).assign(form).value).toEqual({});
+    expect(util.updateForm(model, schemas, form).value).toEqual({});
   });
 
   it('with component wrapper', () => {
@@ -41,7 +49,7 @@ describe('ModelUtils', () => {
     const form = createFormGroup(schemas);
     const model = {};
 
-    expect(modelUtils(model, schemas).assign(form).value).toEqual({});
+    expect(util.updateForm(model, schemas, form).value).toEqual({});
   });
 
   it('with template', () => {
@@ -49,7 +57,7 @@ describe('ModelUtils', () => {
     const form = createFormGroup(schemas);
     const model = {};
 
-    expect(modelUtils(model, schemas).assign(form).value).toEqual({});
+    expect(util.updateForm(model, schemas, form).value).toEqual({});
   });
 
   it('with group (empty)', () => {
@@ -63,7 +71,7 @@ describe('ModelUtils', () => {
     const form = createFormGroup(schemas);
     const model = { obj: {} };
 
-    expect(modelUtils(model, schemas).assign(form).value).toEqual({ obj: {} });
+    expect(util.updateForm(model, schemas, form).value).toEqual({ obj: {} });
   });
 
   it('with group', () => {
@@ -79,7 +87,7 @@ describe('ModelUtils', () => {
     const form = createFormGroup(schemas);
     const model = { obj: { num: 1 } };
 
-    expect(modelUtils(model, schemas).assign(form).value).toEqual({ obj: { num: 1 } });
+    expect(util.updateForm(model, schemas, form).value).toEqual({ obj: { num: 1 } });
   });
 
   it('with array (empty)', () => {
@@ -93,7 +101,7 @@ describe('ModelUtils', () => {
     const form = createFormGroup(schemas);
     const model = { arr: [] };
 
-    expect(modelUtils(model, schemas).assign(form).value).toEqual({ arr: [] });
+    expect(util.updateForm(model, schemas, form).value).toEqual({ arr: [] });
   });
 
   it('with array', () => {
@@ -109,7 +117,7 @@ describe('ModelUtils', () => {
     const form = createFormGroup(schemas);
     const model = { arr: [1] };
 
-    expect(modelUtils(model, schemas).assign(form).value).toEqual({ arr: [1] });
+    expect(util.updateForm(model, schemas, form).value).toEqual({ arr: [1] });
   });
 
   it('with mix', () => {
@@ -147,7 +155,7 @@ describe('ModelUtils', () => {
       arr: [{ num: 1 }]
     };
 
-    expect(modelUtils(model, schemas).assign(form).value).toEqual({
+    expect(util.updateForm(model, schemas, form).value).toEqual({
       obj: { arr: [1] },
       arr: [{ num: 1 }]
     });

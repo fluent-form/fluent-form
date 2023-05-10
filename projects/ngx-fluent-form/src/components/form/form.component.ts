@@ -12,7 +12,7 @@ import { FluentCallPipe, FluentColumnPipe, FluentControlPipe } from '../../pipes
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { StandardSchema } from '../../schemas/types';
 import { CONFIG, DIRECTIVE_QUERY_CONTAINER } from '../../tokens';
-import { FormUtil, createFormGroup, modelUtils, standardSchema } from '../../utils';
+import { FormUtil, ModelUtil, createFormGroup, standardSchema } from '../../utils';
 import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/form-col-content-outlet.component';
 
 @Component({
@@ -49,6 +49,7 @@ import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/
 export class FluentFormComponent<T extends AnyObject> implements FluentConfig {
   private readonly destroy$ = inject(NzDestroyService);
   private readonly formUtil = inject(FormUtil);
+  private readonly modelUtil = inject(ModelUtil);
   /**
    * 内部的不可变模型，主要有以下用途：
    * - 用来跟公开的模型值进行引用比较，判断变更是内部发出的还是外部传入的，如果引用一致则为内部变更
@@ -80,7 +81,7 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig {
     });
 
     // 如果模型已经好了，就使用初始化表单
-    this.model && modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
+    this.model && this.modelUtil.updateForm(this.model, this.schemas, this.form);
 
     this.form.valueChanges.pipe(
       skip(1),
@@ -110,7 +111,7 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig {
     // 如果是外部变更，就赋值到表单
     if (this.model !== this.internalModel) {
       // 如果表单已经好了，就使用初始化表单
-      this.form && modelUtils(this.model as AnyObject, this.schemas).assign(this.form);
+      this.form && this.modelUtil.updateForm(this.model, this.schemas, this.form);
     }
   }
 

@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGroup } from '@angular/forms';
 import { FormArraySchema, FormGroupSchema } from '../schemas';
 import { AnyControlSchema, AnySchema } from '../schemas/index.schema';
@@ -7,7 +7,7 @@ import { ValueTransformer } from '../services';
 import { Model } from '../types';
 import { isUndefined } from './is.utils';
 import { controlSchemaUtils, isComponentContainerSchema, isControlWrapperSchema, isDoubleKeyControlSchema, isNonControlSchema } from './schema.utils';
-import { valueUtils } from './value.utils';
+import { ValueUtil } from './value.utils';
 
 /**
  * 将图示转换为控件
@@ -112,6 +112,7 @@ export function createFormArray(schema: StandardSchema<FormArraySchema>): FormAr
   providedIn: 'root'
 })
 export class FormUtil {
+  private readonly valueUtil = inject(ValueUtil);
   private readonly valueTransformer = inject(ValueTransformer);
 
   updateForm<F extends FormGroup | FormArray, M extends Model<F>>(form: F, schemas: StandardSchema<AnySchema>[], model: M) {
@@ -177,7 +178,7 @@ export class FormUtil {
         return;
       }
 
-      const value = valueUtils(control, schema).getValue();
+      const value = this.valueUtil.valueOfControl(control, schema);
 
       // 双字段情况
       if (isDoubleKeyControlSchema(schema)) {

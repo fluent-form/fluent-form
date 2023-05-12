@@ -1,14 +1,21 @@
+import { TestBed } from '@angular/core/testing';
 import { FormControl } from '@angular/forms';
 import { standardSchema } from './schema.utils';
-import { valueUtils } from './value.utils';
+import { ValueUtil } from './value.utils';
 
 describe('ValueUtils', () => {
+  let util: ValueUtil;
+
+  beforeEach(() => {
+    util = TestBed.inject(ValueUtil);
+  });
+
   describe('getValueFromModel', () => {
     describe('normal', () => {
       it('no init value and default value', () => {
         const model = {};
         const schema = standardSchema({ kind: 'number', name: 'num' });
-        const value = valueUtils(model, schema).getValue();
+        const value = util.valueOfModel(model, schema);
 
         expect(value).toBeNull();
       });
@@ -16,7 +23,7 @@ describe('ValueUtils', () => {
       it('with init value', () => {
         const model = { num: 1 };
         const schema = standardSchema({ kind: 'number', name: 'num' });
-        const value = valueUtils(model, schema).getValue();
+        const value = util.valueOfModel(model, schema);
 
         expect(value).toBe(1);
       });
@@ -24,7 +31,7 @@ describe('ValueUtils', () => {
       it('with default value', () => {
         const model = {};
         const schema = standardSchema({ kind: 'number', name: 'num', defaultValue: 1 });
-        const value = valueUtils(model, schema).getValue();
+        const value = util.valueOfModel(model, schema);
 
         expect(value).toBe(1);
       });
@@ -32,7 +39,7 @@ describe('ValueUtils', () => {
       it('with init value and default value', () => {
         const model = { num: 2 };
         const schema = standardSchema({ kind: 'number', name: 'num', defaultValue: 1 });
-        const value = valueUtils(model, schema).getValue();
+        const value = util.valueOfModel(model, schema);
 
         expect(value).toBe(2);
       });
@@ -47,7 +54,7 @@ describe('ValueUtils', () => {
             output: value => String(value)
           }
         });
-        const value = valueUtils(model, schema).getValue();
+        const value = util.valueOfModel(model, schema);
 
         expect(value).toBe(1);
       });
@@ -57,7 +64,7 @@ describe('ValueUtils', () => {
       it('no init value and default value', () => {
         const model = {};
         const schema = standardSchema({ kind: 'slider', name: ['start', 'end'], range: true, });
-        const value = valueUtils(model, schema).getValue();
+        const value = util.valueOfModel(model, schema);
 
         expect(value).toBeNull();
       });
@@ -65,7 +72,7 @@ describe('ValueUtils', () => {
       it('with init value', () => {
         const model = { start: 0, end: 100 };
         const schema = standardSchema({ kind: 'slider', name: ['start', 'end'], range: true, });
-        const value = valueUtils(model, schema).getValue();
+        const value = util.valueOfModel(model, schema);
 
         expect(value).toEqual([0, 100]);
       });
@@ -73,7 +80,7 @@ describe('ValueUtils', () => {
       it('with default value', () => {
         const model = {};
         const schema = standardSchema({ kind: 'slider', name: ['start', 'end'], range: true, defaultValue: [0, 100] });
-        const value = valueUtils(model, schema).getValue();
+        const value = util.valueOfModel(model, schema);
 
         expect(value).toEqual([0, 100]);
       });
@@ -81,7 +88,7 @@ describe('ValueUtils', () => {
       it('with init value and default value', () => {
         const model = { start: 1, end: 99 };
         const schema = standardSchema({ kind: 'slider', name: ['start', 'end'], range: true, defaultValue: [0, 100] });
-        const value = valueUtils(model, schema).getValue();
+        const value = util.valueOfModel(model, schema);
 
         expect(value).toEqual([1, 99]);
       });
@@ -97,7 +104,7 @@ describe('ValueUtils', () => {
             output: (value?: [number, number] | number | null) => (value as [number, number]).map(String) as [string, string]
           }
         });
-        const value = valueUtils(model, schema).getValue();
+        const value = util.valueOfModel(model, schema);
 
         expect(value).toEqual([0, 100]);
       });
@@ -107,7 +114,7 @@ describe('ValueUtils', () => {
       it('with no init value and default value', () => {
         const model = {};
         const schema = standardSchema({ kind: 'date', name: 'date' });
-        const value = valueUtils(model, schema).getValue();
+        const value = util.valueOfModel(model, schema);
 
         expect(value).toBeNull();
       });
@@ -116,7 +123,7 @@ describe('ValueUtils', () => {
         const now = Date.now();
         const model = { date: now };
         const schema = standardSchema({ kind: 'date', name: 'date' });
-        const value = valueUtils(model, schema).getValue() as Date;
+        const value = util.valueOfModel(model, schema) as Date;
 
         expect(value).toBeInstanceOf(Date);
         expect(value.getTime()).toBe(now);
@@ -126,7 +133,7 @@ describe('ValueUtils', () => {
         const now = Date.now();
         const model = {};
         const schema = standardSchema({ kind: 'date', name: 'date', defaultValue: now });
-        const value = valueUtils(model, schema).getValue() as Date;
+        const value = util.valueOfModel(model, schema) as Date;
 
         expect(value).toBeInstanceOf(Date);
         expect(value.getTime()).toBe(now);
@@ -137,7 +144,7 @@ describe('ValueUtils', () => {
       it('with no init value and default value', () => {
         const model = {};
         const schema = standardSchema({ kind: 'time', name: 'time' });
-        const value = valueUtils(model, schema).getValue();
+        const value = util.valueOfModel(model, schema);
 
         expect(value).toBeNull();
       });
@@ -146,7 +153,7 @@ describe('ValueUtils', () => {
         const now = Date.now();
         const model = { time: now };
         const schema = standardSchema({ kind: 'time', name: 'time' });
-        const value = valueUtils(model, schema).getValue() as Date;
+        const value = util.valueOfModel(model, schema) as Date;
 
         expect(value).toBeInstanceOf(Date);
         expect(value.getTime()).toBe(now);
@@ -156,7 +163,7 @@ describe('ValueUtils', () => {
         const now = Date.now();
         const model = {};
         const schema = standardSchema({ kind: 'time', name: 'time', defaultValue: now });
-        const value = valueUtils(model, schema).getValue() as Date;
+        const value = util.valueOfModel(model, schema) as Date;
 
         expect(value).toBeInstanceOf(Date);
         expect(value.getTime()).toBe(now);
@@ -167,7 +174,7 @@ describe('ValueUtils', () => {
       it('with no init value and default value', () => {
         const schema = standardSchema({ kind: 'date-range', name: ['begin', 'end'] });
         const model = {};
-        const value = valueUtils(model, schema).getValue();
+        const value = util.valueOfModel(model, schema);
 
         expect(value).toEqual(null);
       });
@@ -176,7 +183,7 @@ describe('ValueUtils', () => {
         const begin = new Date(), end = new Date();
         const schema = standardSchema({ kind: 'date-range', name: ['begin', 'end'] });
         const model = { begin, end };
-        const value = valueUtils(model, schema).getValue();
+        const value = util.valueOfModel(model, schema);
 
         expect(value).toEqual([begin, end]);
       });
@@ -184,7 +191,7 @@ describe('ValueUtils', () => {
       it('with init value but is null', () => {
         const schema = standardSchema({ kind: 'date-range', name: ['begin', 'end'] });
         const model = { begin: null, end: null };
-        const value = valueUtils(model, schema).getValue();
+        const value = util.valueOfModel(model, schema);
 
         expect(value).toEqual(null);
       });
@@ -193,7 +200,7 @@ describe('ValueUtils', () => {
         const begin = new Date(), end = new Date();
         const schema = standardSchema({ kind: 'date-range', name: ['begin', 'end'], defaultValue: [begin, end] });
         const model = {};
-        const value = valueUtils(model, schema).getValue();
+        const value = util.valueOfModel(model, schema);
 
         expect(value).toEqual([begin, end]);
       });
@@ -210,7 +217,7 @@ describe('ValueUtils', () => {
         defaultValue: [1]
       });
       const model = {};
-      const value = valueUtils(model, schema).getValue();
+      const value = util.valueOfModel(model, schema);
 
       expect(value).toEqual([
         { label: 'one', value: 1, checked: true },
@@ -223,7 +230,7 @@ describe('ValueUtils', () => {
     it('normal', () => {
       const schema = standardSchema({ kind: 'number', name: 'num' });
       const control = new FormControl(1);
-      const value = valueUtils(control, schema).getValue();
+      const value = util.valueOfControl(control, schema);
 
       expect(value).toBe(1);
     });
@@ -238,7 +245,7 @@ describe('ValueUtils', () => {
         }
       });
       const control = new FormControl(1);
-      const value = valueUtils(control, schema).getValue();
+      const value = util.valueOfControl(control, schema);
 
       expect(value).toEqual('1');
     });
@@ -247,7 +254,7 @@ describe('ValueUtils', () => {
       it('with has no value', () => {
         const schema = standardSchema({ kind: 'date', name: 'date', });
         const control = new FormControl(null);
-        const value = valueUtils(control, schema).getValue();
+        const value = util.valueOfControl(control, schema);
 
         expect(value).toBeNull();
       });
@@ -256,7 +263,7 @@ describe('ValueUtils', () => {
         const now = new Date();
         const schema = standardSchema({ kind: 'date', name: 'date', });
         const control = new FormControl(now);
-        const value = valueUtils(control, schema).getValue();
+        const value = util.valueOfControl(control, schema);
 
         expect(value).toBe(now.getTime());
       });
@@ -266,7 +273,7 @@ describe('ValueUtils', () => {
       it('with has no value', () => {
         const schema = standardSchema({ kind: 'time', name: 'time', });
         const control = new FormControl(null);
-        const value = valueUtils(control, schema).getValue();
+        const value = util.valueOfControl(control, schema);
 
         expect(value).toBeNull();
       });
@@ -275,7 +282,7 @@ describe('ValueUtils', () => {
         const now = new Date();
         const schema = standardSchema({ kind: 'time', name: 'time', });
         const control = new FormControl(now);
-        const value = valueUtils(control, schema).getValue();
+        const value = util.valueOfControl(control, schema);
 
         expect(value).toBe(now.getTime());
       });
@@ -285,7 +292,7 @@ describe('ValueUtils', () => {
       it('with has no value', () => {
         const schema = standardSchema({ kind: 'date-range', name: 'range', });
         const control = new FormControl(null);
-        const value = valueUtils(control, schema).getValue();
+        const value = util.valueOfControl(control, schema);
 
         expect(value).toBeNull();
       });
@@ -294,7 +301,7 @@ describe('ValueUtils', () => {
         const begin = new Date(), end = new Date();
         const schema = standardSchema({ kind: 'date-range', name: 'range', });
         const control = new FormControl([begin, end]);
-        const value = valueUtils(control, schema).getValue();
+        const value = util.valueOfControl(control, schema);
 
         expect(value).toEqual([begin.getTime(), end.getTime()]);
       });
@@ -306,7 +313,7 @@ describe('ValueUtils', () => {
         { label: 'one', value: 1, checked: true },
         { label: 'two', value: 2, checked: false },
       ]);
-      const value = valueUtils(control, schema).getValue();
+      const value = util.valueOfControl(control, schema);
 
       expect(value).toEqual([1]);
     });

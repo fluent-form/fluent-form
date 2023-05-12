@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { AnySchema } from '../schemas';
 import { StandardSchema } from '../schemas/types';
 import { Model } from '../types';
 import { isComponentContainerSchema, isControlWrapperSchema, isNonControlSchema } from './schema.utils';
-import { valueUtils } from './value.utils';
+import { ValueUtil } from './value.utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModelUtil {
+  private readonly valueUtil = inject(ValueUtil);
 
   /**
    * 将模型的值赋值到表单
@@ -47,7 +48,7 @@ export class ModelUtil {
         return;
       }
 
-      const value = valueUtils(model, schema).getValue();
+      const value = this.valueUtil.valueOfModel(model, schema);
 
       form.get([schema.name!.toString()])!.setValue(value, { emitEvent: false });
     });

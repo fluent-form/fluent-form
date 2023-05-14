@@ -3,7 +3,7 @@ import { COMPONENT_CONTAINER_SCHEMA_KINDS, COMPONENT_SCHEMA_KINDS, COMPONENT_WRA
 import { InputControlSchema, TextareaControlSchema } from '../schemas';
 import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlOrControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, AnyTemplateSchema, AnyWrapperSchema, DoubleKeyControlSchema } from '../schemas/index.schema';
 import { AnySchemaName, SchemaName, StandardSchema } from '../schemas/types';
-import { StableBuilder, isBuilder } from './builder.utils';
+import { isBuilder, StableBuilder } from './builder.utils';
 import { isNumber } from './is.utils';
 
 /**
@@ -11,49 +11,49 @@ import { isNumber } from './is.utils';
  * @param schema
  */
 export const isControlContainerSchema = (schema: AnySchema): schema is AnyControlContainerSchema =>
-  CONTROL_CONTAINER_SCHEMA_KINDS.includes(schema.kind);
+  CONTROL_CONTAINER_SCHEMA_KINDS.has(schema.kind);
 
 /**
  * 是否为控件包装器图示
  * @param schema
  */
 export const isControlWrapperSchema = (schema: AnySchema): schema is AnyControlWrapperSchema =>
-  CONTROL_WRAPPER_SCHEMA_KINDS.includes(schema.kind);
+  CONTROL_WRAPPER_SCHEMA_KINDS.has(schema.kind);
 
 /**
  * 是否为组件容器图示
  * @param schema
  */
 export const isComponentContainerSchema = (schema: AnySchema): schema is AnyComponentContainerSchema =>
-  COMPONENT_CONTAINER_SCHEMA_KINDS.includes(schema.kind);
+  COMPONENT_CONTAINER_SCHEMA_KINDS.has(schema.kind);
 
 /**
  * 是否为组件包装器图示
  * @param schema
  */
 export const isComponentWrapperSchema = (schema: AnySchema): schema is AnyComponentWrapperSchema =>
-  COMPONENT_WRAPPER_SCHEMA_KINDS.includes(schema.kind);
+  COMPONENT_WRAPPER_SCHEMA_KINDS.has(schema.kind);
 
 /**
  * 是否为文本图示
  * @param schema
  */
 export const isTextControlSchema = (schema: AnySchema): schema is InputControlSchema | TextareaControlSchema =>
-  TEXT_CONTROL_SCHEMA_KINDS.includes(schema.kind);
+  TEXT_CONTROL_SCHEMA_KINDS.has(schema.kind);
 
 /**
  * 是否为组件图示
  * @param schema
  */
 export const isComponentSchema = (schema: AnySchema): schema is AnyComponentSchema =>
-  COMPONENT_SCHEMA_KINDS.includes(schema.kind);
+  COMPONENT_SCHEMA_KINDS.has(schema.kind);
 
 /**
  * 是否为模板图示
  * @param schema
  */
 export const isTemplateSchema = (schema: AnySchema): schema is AnyTemplateSchema =>
-  TEMPLATE_SCHEMA_KINDS.includes(schema.kind);
+  TEMPLATE_SCHEMA_KINDS.has(schema.kind);
 
 /**
  * 是否为非控件图示

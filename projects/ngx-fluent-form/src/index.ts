@@ -6,6 +6,7 @@ export * from './builders';
 export * from './components';
 export * from './directives';
 export * from './features';
+export * from './interfaces';
 export * from './module';
 export * from './provider';
 export * from './schemas';

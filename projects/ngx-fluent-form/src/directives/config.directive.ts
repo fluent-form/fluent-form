@@ -1,5 +1,5 @@
 import { Directive, inject } from '@angular/core';
-import { FluentConfig } from '../config';
+import { FluentConfig } from '../interfaces';
 import { CONFIG } from '../tokens';
 
 @Directive({

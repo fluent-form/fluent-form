@@ -1,6 +1,5 @@
 import { InjectionToken, Type } from '@angular/core';
-import { FluentConfig } from './config';
-import { DirectiveQueryContainer } from './interfaces';
+import { DirectiveQueryContainer, FluentConfig } from './interfaces';
 import { AbstractWidget } from './widgets';
 
 export const WIDGET_MAP = new InjectionToken<Map<string, Type<AbstractWidget<unknown>>>>('WidgetMap');

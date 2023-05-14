@@ -1,18 +1,18 @@
 import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, Output, QueryList, forwardRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, forwardRef, inject, Input, Output, QueryList } from '@angular/core';
 import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { NzFormLayoutType, NzFormModule } from 'ng-zorro-antd/form';
 import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
 import { skip, takeUntil } from 'rxjs';
-import { FluentConfig } from '../../config';
 import { FluentBindingDirective, FluentTemplateDirective } from '../../directives';
+import { DirectiveQueryContainer, FluentConfig } from '../../interfaces';
 import { FluentCallPipe, FluentColumnPipe, FluentControlPipe } from '../../pipes';
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { StandardSchema } from '../../schemas/types';
 import { CONFIG, DIRECTIVE_QUERY_CONTAINER } from '../../tokens';
-import { FormUtil, ModelUtil, createFormGroup, standardSchema } from '../../utils';
+import { createFormGroup, FormUtil, ModelUtil, standardSchema } from '../../utils';
 import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/form-col-content-outlet.component';
 
 @Component({
@@ -46,7 +46,7 @@ import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/
     }
   ]
 })
-export class FluentFormComponent<T extends AnyObject> implements FluentConfig {
+export class FluentFormComponent<T extends AnyObject> implements FluentConfig, DirectiveQueryContainer {
   private readonly destroy$ = inject(NzDestroyService);
   private readonly formUtil = inject(FormUtil);
   private readonly modelUtil = inject(ModelUtil);
@@ -130,7 +130,6 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig {
 
   /**
    * 表单值更新时
-   * @param utils
    */
   private onValueChanges() {
     this.formUtil.updateForm(

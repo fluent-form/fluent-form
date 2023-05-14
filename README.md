@@ -1,6 +1,6 @@
 # ngx-fluent-form
 
-Building dynamic form in Angular with Fluent API.
+Building dynamic form in Angular with Fluent API or JSON.
 
 [![npm version](https://img.shields.io/npm/v/ngx-fluent-form/latest.svg)](https://npmjs.com/package/ngx-fluent-form)
 ![Node.js CI](https://github.com/HyperLife1119/ngx-fluent-form/workflows/Node.js%20CI/badge.svg)
@@ -14,7 +14,8 @@ Building dynamic form in Angular with Fluent API.
 ## Features
 
 - Support using Fluent API and JSON.
-- Type-safe form configuration.
+- Based on Angular Template, without Host Element, supports nested layout.
+- Type-safe form schema configuration.
 - Built on top of Angular Reactive Forms.
 - Components and grid layout based on [NG-ZORRO](https://ng.ant.design).
 
@@ -40,51 +41,13 @@ $ ng add ngx-fluent-form
 
 For documentation and examples please visit [https://hyperlife1119.github.io/ngx-fluent-form](https://hyperlife1119.github.io/ngx-fluent-form).
 
-## Usage
+## Usages
 
-`ngx-fluent-form` supports both `NgModule` or [`Standalone`](https://angular.io/guide/standalone-components) based projects. For different types of projects, there are slightly different usages:
+`ngx-fluent-form` supports both `NgModule` or `Standalone` based projects. For different types of projects, there are slightly different usages:
 
-### For NgModule based projects:
+### Standalone usage:
 
-1. Add `FluentFormModule` into your `NgModule`:
-
-```ts
-import { FluentFormModule } from 'ngx-fluent-form';
-
-@NgModule({
-  imports: [
-    FluentFormModule
-  ]
-})
-export class YourModule { }
-```
-
-2. Configure `schemas` parameter to start building form:
-
-```ts
-import { date, form, number, input } from 'ngx-fluent-form';
-
-@Component({
-  template: `<fluent-form [(model)]="model" [schemas]="schemas"></fluent-form>`
-})
-export class ExampleComponent {
-  schemas = form(
-    input('text').length(15),
-    number('number').max(100),
-    date('date').format('yyyy/MM/dd')
-  );
-
-  model = {
-    text: 'I love ngx-fluent-form',
-    number: 10,
-    date: Date.now()
-  };
-}
-```
-
-### For standalone based projects:
-
-1. Add `provideFluentForm` to the configuration of `bootstrapApplication`:
+1. Configure `provideFluentForm()` and add it to `bootstrapApplication()`:
 
 ```ts
 import { provideFluentForm, withAllWidgets } from 'ngx-fluent-form';
@@ -106,7 +69,7 @@ bootstrapApplication(RootComponent, {
 2. Add `FluentFormComponent` to your standalone component, configure the `schemas` parameter, and start building the form:
 
 ```ts
-import { FluentFormComponent, date, form, number, input } from 'ngx-fluent-form';
+import { FluentFormComponent, buttonGroup, button, date, form, number, input } from 'ngx-fluent-form';
 
 @Component({
   standalone: true,
@@ -115,26 +78,88 @@ import { FluentFormComponent, date, form, number, input } from 'ngx-fluent-form'
 })
 export class ExampleComponent {
   schemas = form(
-    input('text').length(50),
-    number('number').max(100),
-    date('date').format('yyyy/MM/dd')
+    input('text').length(15),
+    number('count').max(100),
+    date('date').format('yyyy/MM/dd'),
+    buttonGroup(
+      button().content('cancel'),
+      button().content('submit')
+    )
   );
 
   model = {
     text: 'I love ngx-fluent-form',
-    number: 10,
+    count: 10,
     date: Date.now()
   };
 }
 ```
 
-## Notice
+### NgModule usage:
 
-For better performance, all components of `ngx-fluent-form` run in [OnPush](https://angular.io/api/core/ChangeDetectionStrategy) mode, this means that `mutate` operations on `@Input()` data will not take effect, please use `immutable` methods to manipulate arrays or objects.
+1. Configure `FluentFormModule.forRoot()` and add it to your root `NgModule`, usually `AppModule`
+
+```ts
+import { FluentFormModule, withAllWidgets } from 'ngx-fluent-form';
+
+@NgModule({
+  imports: [
+    FluentFormModule.forRoot(
+      withAllWidgets()
+      // or use withWidgets and import widget features on demand.
+      // withWidgets(
+      //   useInputWidget()
+      //   ...
+      // )
+    )
+  ]
+})
+export class RootModule { }
+```
+
+2. Add `FluentFormModule` into your `NgModule`:
+
+```ts
+import { FluentFormModule } from 'ngx-fluent-form';
+
+@NgModule({
+  imports: [
+    FluentFormModule
+  ]
+})
+export class YourModule { }
+```
+
+3. Configure `schemas` parameter to start building form:
+
+```ts
+import { buttonGroup, button, date, form, number, input } from 'ngx-fluent-form';
+
+@Component({
+  template: `<fluent-form [(model)]="model" [schemas]="schemas"></fluent-form>`
+})
+export class ExampleComponent {
+  schemas = form(
+    input('text').length(15),
+    number('count').max(100),
+    date('date').format('yyyy/MM/dd'),
+    buttonGroup(
+      button().content('cancel'),
+      button().content('submit')
+    )
+  );
+
+  model = {
+    text: 'I love ngx-fluent-form',
+    count: 10,
+    date: Date.now()
+  };
+}
+```
 
 ## Support
 
-Love `ngx-fluent-form`? ⭐Star for this project!
+Do you love `ngx-fluent-form`? Star for this project! ⭐
 
 ## Special thanks
 

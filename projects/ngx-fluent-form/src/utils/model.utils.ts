@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { AnySchema } from '../schemas';
+import { isComponentContainerSchema, isControlWrapperSchema, isNonControlSchema } from '../schemas/kind';
 import { StandardSchema } from '../schemas/types';
 import { Model } from '../types';
-import { isComponentContainerSchema, isControlWrapperSchema, isNonControlSchema } from './schema.utils';
 import { ValueUtil } from './value.utils';
 
 @Injectable({

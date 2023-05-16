@@ -2,11 +2,12 @@ import { inject, Injectable } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGroup } from '@angular/forms';
 import { FormArraySchema, FormGroupSchema } from '../schemas';
 import { AnyControlSchema, AnySchema } from '../schemas/index.schema';
+import { isComponentContainerSchema, isControlWrapperSchema, isDoubleKeyControlSchema, isNonControlSchema } from '../schemas/kind';
 import { StandardSchema } from '../schemas/types';
 import { ValueTransformer } from '../services';
 import { Model } from '../types';
 import { isUndefined } from './is.utils';
-import { controlSchemaUtils, isComponentContainerSchema, isControlWrapperSchema, isDoubleKeyControlSchema, isNonControlSchema } from './schema.utils';
+import { controlSchemaUtils } from './schema.utils';
 import { ValueUtil } from './value.utils';
 
 /**

@@ -11,10 +11,10 @@ import { Col, ControlEventListenerHolder, ControlValueMapper, Labelful, Row, Sch
 import { AnySchemaName, Cell } from './types';
 
 /** 抽象图示 */
-export interface AbstractSchema<N extends AnySchemaName> extends SchemaLike<N> {
+export interface AbstractSchema<N extends AnySchemaName = AnySchemaName> extends SchemaLike<N> {
   /* Used to define the width of the control. */
   col?: Col | Cell;
-  hidden?: boolean | ((ctx: SchemaContext<AbstractSchema<AnySchemaName>>) => boolean) | string;
+  hidden?: boolean | ((ctx: SchemaContext<AbstractSchema>) => boolean) | string;
   class?: NgClass['ngClass'];
   style?: NgStyle['ngStyle'];
 }

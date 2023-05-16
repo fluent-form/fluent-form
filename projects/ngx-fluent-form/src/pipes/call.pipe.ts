@@ -1,8 +1,7 @@
-import { Pipe, PipeTransform, inject } from '@angular/core';
+import { inject, Pipe, PipeTransform } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { AbstractSchema } from '../schemas';
-import { AnySchemaName } from '../schemas/types';
 import { ValueTransformer } from '../services';
 
 @Pipe({
@@ -12,7 +11,7 @@ import { ValueTransformer } from '../services';
 export class FluentCallPipe implements PipeTransform {
   private readonly transformer = inject(ValueTransformer);
 
-  transform<T extends [unknown, AbstractSchema<AnySchemaName>, AbstractControl]>(
+  transform<T extends [unknown, AbstractSchema, AbstractControl]>(
     value: boolean | ((...args: SafeAny[]) => boolean) | string | undefined,
     ...[model, schema, control]: T
   ): boolean {

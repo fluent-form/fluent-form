@@ -1,34 +1,30 @@
 import { Type } from '@angular/core';
 import { WIDGET_MAP } from '../tokens';
-import { AbstractWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, InputGroupWidget, InputWidget, NumberWidget, RadioGroupWidget, RateWidget, SelectWidget, SilderWidget, StepsWidget, TabsWidget, TextWidget, TextareaWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from '../widgets';
+import { AbstractWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, InputGroupWidget, InputWidget, NestedFormWidget, NumberWidget, RadioGroupWidget, RateWidget, SelectWidget, SilderWidget, StepsWidget, TabsWidget, TextareaWidget, TextWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from '../widgets';
 import { WidgetKind } from '../widgets/kind';
-import { NestedFormWidget } from '../widgets/nested-form/nested-form.widget';
-import { FluentFormFeature } from './interfaces';
-import { FluentFormFeatureKind } from './kind';
+import { makeFluentFormFeature } from './helper';
+import { FluentFormFeature, FluentFormFeatureKind } from './interface';
 
 export interface FluentFormWidgetFeature {
   kind: WidgetKind;
   widget: Type<AbstractWidget<unknown>>;
 }
 
-export function withWidgets(...features: (FluentFormWidgetFeature | FluentFormWidgetFeature[])[]): FluentFormFeature {
-  return {
-    kind: FluentFormFeatureKind.Widget,
-    providers: [
-      {
-        provide: WIDGET_MAP,
-        useValue: new Map(
-          features.flat().map(feature => [
-            feature.kind,
-            feature.widget
-          ])
-        )
-      }
-    ]
-  };
+export function withWidgets(...features: (FluentFormWidgetFeature | FluentFormWidgetFeature[])[]): FluentFormFeature<FluentFormFeatureKind.Widget> {
+  return makeFluentFormFeature(FluentFormFeatureKind.Widget, [
+    {
+      provide: WIDGET_MAP,
+      useValue: new Map(
+        features.flat().map(feature => [
+          feature.kind,
+          feature.widget
+        ])
+      )
+    }
+  ]);
 }
 
-export function withAllWidgets(): FluentFormFeature {
+export function withAllWidgets(): FluentFormFeature<FluentFormFeatureKind.Widget> {
   return withWidgets(
     useInputWidget(),
     useInputGroupWidget(),
@@ -55,162 +51,97 @@ export function withAllWidgets(): FluentFormFeature {
   );
 }
 
+function makeFluentFormWidgetFeature(kind: WidgetKind, widget: Type<AbstractWidget<unknown>>): FluentFormWidgetFeature {
+  return { kind, widget };
+}
+
 export function useInputWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.Input,
-    widget: InputWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.Input, InputWidget);
 }
 
 export function useInputGroupWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.InputGroup,
-    widget: InputGroupWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.InputGroup, InputGroupWidget);
 }
 
 export function useTextareaWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.Textarea,
-    widget: TextareaWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.Textarea, TextareaWidget);
 }
 
 export function useNumberWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.Number,
-    widget: NumberWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.Number, NumberWidget);
 }
 
 export function useDateWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.Date,
-    widget: DateWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.Date, DateWidget);
 }
 
 export function useDateRangeWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.DateRange,
-    widget: DateRangeWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.DateRange, DateRangeWidget);
 }
 
 export function useTimeWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.Time,
-    widget: TimeWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.Time, TimeWidget);
 }
 
 export function useToggleWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.Toggle,
-    widget: ToggleWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.Toggle, ToggleWidget);
 }
 
 export function useSelectWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.Select,
-    widget: SelectWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.Select, SelectWidget);
 }
 
 export function useCascaderWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.Cascader,
-    widget: CascaderWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.Cascader, CascaderWidget);
 }
 
 export function useTreeSelectWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.TreeSelect,
-    widget: TreeSelectWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.TreeSelect, TreeSelectWidget);
 }
 
 export function useSliderWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.Slider,
-    widget: SilderWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.Slider, SilderWidget);
 }
 
 export function useRadioGroupWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.RadioGroup,
-    widget: RadioGroupWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.RadioGroup, RadioGroupWidget);
 }
 
 export function useCheckboxWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.Checkbox,
-    widget: CheckboxWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.Checkbox, CheckboxWidget);
 }
 
 export function useCheckboxGroupWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.CheckboxGroup,
-    widget: CheckboxGroupWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.CheckboxGroup, CheckboxGroupWidget);
 }
 
 export function useRateWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.Rate,
-    widget: RateWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.Rate, RateWidget);
 }
 
 export function useTextWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.Text,
-    widget: TextWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.Text, TextWidget);
 }
 
 export function useButtonWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.Button,
-    widget: ButtonWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.Button, ButtonWidget);
 }
 
 export function useButtonGroupWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.ButtonGroup,
-    widget: ButtonGroupWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.ButtonGroup, ButtonGroupWidget);
 }
 
 export function useStepsWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.Steps,
-    widget: StepsWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.Steps, StepsWidget);
 }
 
 export function useTabsWidget(): FluentFormWidgetFeature {
-  return {
-    kind: WidgetKind.Tabs,
-    widget: TabsWidget
-  };
+  return makeFluentFormWidgetFeature(WidgetKind.Tabs, TabsWidget);
 }
 
 export function useNestedFormWidget(): FluentFormWidgetFeature[] {
   return [
-    {
-      kind: WidgetKind.Group,
-      widget: NestedFormWidget
-    },
-    {
-      kind: WidgetKind.Array,
-      widget: NestedFormWidget
-    }
+    makeFluentFormWidgetFeature(WidgetKind.Group, NestedFormWidget),
+    makeFluentFormWidgetFeature(WidgetKind.Array, NestedFormWidget)
   ];
 }

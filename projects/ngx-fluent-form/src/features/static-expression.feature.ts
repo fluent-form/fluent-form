@@ -1,15 +1,12 @@
 import { CodeEvaluator, DynamicCodeEvaluator } from '../services';
-import { FluentFormFeature } from './interfaces';
-import { FluentFormFeatureKind } from './kind';
+import { makeFluentFormFeature } from './helper';
+import { FluentFormFeature, FluentFormFeatureKind } from './interface';
 
-export function withStaticExpression(): FluentFormFeature {
-  return {
-    kind: FluentFormFeatureKind.StaticExpression,
-    providers: [
-      {
-        provide: CodeEvaluator,
-        useClass: DynamicCodeEvaluator
-      }
-    ]
-  };
+export function withStaticExpression(): FluentFormFeature<FluentFormFeatureKind.StaticExpression> {
+  return makeFluentFormFeature(FluentFormFeatureKind.StaticExpression, [
+    {
+      provide: CodeEvaluator,
+      useClass: DynamicCodeEvaluator
+    }
+  ]);
 }

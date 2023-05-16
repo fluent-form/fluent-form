@@ -8,6 +8,7 @@ export * from './date-range/date-range.widget';
 export * from './date/date.widget';
 export * from './input-group/input-group.widget';
 export * from './input/input.widget';
+export * from './nested-form/nested-form.widget';
 export * from './number/number.widget';
 export * from './radio-group/radio-group.widget';
 export * from './rate/rate.widget';

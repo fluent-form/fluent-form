@@ -31,13 +31,13 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
   /** Whether to disable control */
   disabled?: boolean | ((ctx: SchemaContext<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
   feedback?: boolean;
+  description?: string | TemplateRef<void>;
   /** Error message for control */
   tips?: {
     success?: string | TemplateRef<{ $implicit: FormControl<Val> }>;
     warning?: string | TemplateRef<{ $implicit: FormControl<Val> }>;
     error?: string | TemplateRef<{ $implicit: FormControl<Val> }>;
     validating?: string | TemplateRef<{ $implicit: FormControl<Val> }>;
-    extra?: string | TemplateRef<void>;
     auto?: Record<'default' | (string & {}), Record<string, string>>;
   };
   /** Validator for the control */

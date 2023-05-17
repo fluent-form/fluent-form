@@ -9,14 +9,14 @@ import { story, source } from './';
   argTypes={meta.argTypes}
   parameters={meta.parameters} />
 
-# I/O Mapping - 输入/输出映射
+# Parser & Formatter - 解析器与格式化器
 
-对于需要双向映射的值，可以使用 `mapper` 选项。
+对于需要解析/格式化的控件，可以使用 `mapper` 选项。
 
 例如日期控件期望**得到**且将**输出** `Date` 对象，而我们期望从日期控件的**输出**中**得到**日期字符串：
 
 > 注意：`ngx-fluent-form` 默认会将日期控件输出的 `Date` 对象转为时间戳，要覆盖此行为，可以使用 `mapper` 选项。
 
 <Canvas withToolbar isExpanded mdxSource={source}>
-  <Story name="I/O Mapping">{story}</Story>
+  <Story name="Parser & Formatter">{story}</Story>
 </Canvas>

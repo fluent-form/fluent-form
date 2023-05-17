@@ -32,7 +32,7 @@ export class ValueUtil {
     }
 
     if (schema.mapper) {
-      return schema.mapper.input(value);
+      return schema.mapper.parser(value);
     }
 
     return value;
@@ -42,7 +42,7 @@ export class ValueUtil {
     const value = control.value;
 
     if (schema.mapper) {
-      return schema.mapper.output(value);
+      return schema.mapper.formatter(value);
     }
 
     return value;

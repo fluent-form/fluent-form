@@ -45,10 +45,10 @@ export interface Col {
 }
 
 export interface ControlValueMapper<V> {
-  /** An input mapper that maps from a model's value to a form control's value */
-  input: (value: SafeAny) => V | null;
-  /** An output mapper that maps from a form control's value to a model's value */
-  output: (value: V | null) => SafeAny;
+  /** A parser that maps from a model's value to a form control's value */
+  parser: (value: SafeAny) => V | null;
+  /** A formatter that maps from a form control's value to a model's value */
+  formatter: (value: V | null) => SafeAny;
 }
 
 export interface SchemaContext<S extends SchemaLike> {

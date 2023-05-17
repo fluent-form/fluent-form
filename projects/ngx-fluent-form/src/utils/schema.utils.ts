@@ -43,15 +43,15 @@ export function standardSchema<T extends AnySchema>(schemaOrSchemaBuilder: T | S
     case 'date':
     case 'time':
       schema.mapper ??= {
-        input: (value: string | number | Date) => value ? new Date(value) : null,
-        output: value => value?.getTime() ?? null
+        parser: (value: string | number | Date) => value ? new Date(value) : null,
+        formatter: value => value?.getTime() ?? null
       };
       break;
 
     case 'date-range':
       schema.mapper ??= {
-        input: (value: [string | number | Date, string | number | Date]) => value?.map(o => new Date(o)) as [Date, Date] ?? null,
-        output: value => value?.map(o => o.getTime()) ?? null
+        parser: (value: [string | number | Date, string | number | Date]) => value?.map(o => new Date(o)) as [Date, Date] ?? null,
+        formatter: value => value?.map(o => o.getTime()) ?? null
       };
       break;
 
@@ -61,12 +61,12 @@ export function standardSchema<T extends AnySchema>(schemaOrSchemaBuilder: T | S
       const options = schema.options;
 
       schema.mapper ??= {
-        input: value => options.map(option => ({
+        parser: value => options.map(option => ({
           label: option[labelProperty],
           value: option[valueProperty],
           checked: !!value?.includes(option[valueProperty])
         })),
-        output: value => value?.filter(o => o.checked).map(o => o.value)
+        formatter: value => value?.filter(o => o.checked).map(o => o.value)
       };
       break;
     }

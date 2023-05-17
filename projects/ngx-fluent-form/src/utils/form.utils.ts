@@ -19,7 +19,7 @@ export function createFormControl(schema: StandardSchema<AnyControlSchema>): For
 
   return new FormControl(
     // 如果有传入映射器，则默认值也需要经过映射
-    schema.mapper ? schema.mapper.input(schema.defaultValue) : schema.defaultValue,
+    schema.mapper ? schema.mapper.parser(schema.defaultValue) : schema.defaultValue,
     {
       nonNullable: !isUndefined(schema.defaultValue),
       validators: schema.validators ? validators.concat(schema.validators) : validators,

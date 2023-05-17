@@ -50,8 +50,8 @@ describe('ValueUtils', () => {
           kind: 'number',
           name: 'num',
           mapper: {
-            input: (value: string) => Number(value),
-            output: value => String(value)
+            parser: (value: string) => Number(value),
+            formatter: value => String(value)
           }
         });
         const value = util.valueOfModel(model, schema);
@@ -100,8 +100,8 @@ describe('ValueUtils', () => {
           name: ['start', 'end'],
           range: true,
           mapper: {
-            input: (value: [string, string]) => value.map(Number) as [number, number],
-            output: (value?: [number, number] | number | null) => (value as [number, number]).map(String) as [string, string]
+            parser: (value: [string, string]) => value.map(Number) as [number, number],
+            formatter: (value?: [number, number] | number | null) => (value as [number, number]).map(String) as [string, string]
           }
         });
         const value = util.valueOfModel(model, schema);
@@ -240,8 +240,8 @@ describe('ValueUtils', () => {
         kind: 'number',
         name: 'num',
         mapper: {
-          input: (value: string) => Number(value),
-          output: value => String(value)
+          parser: (value: string) => Number(value),
+          formatter: value => String(value)
         }
       });
       const control = new FormControl(1);

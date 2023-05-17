@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
 import { AnySchema } from '../schemas';
 import { StandardSchema } from '../schemas/types';
-import { FormUtil, createFormArray, createFormControl, createFormGroup } from './form.utils';
+import { createFormArray, createFormControl, createFormGroup, FormUtil } from './form.utils';
 
 describe('form.utils', () => {
   describe('createFormControl', () => {
@@ -18,8 +18,8 @@ describe('form.utils', () => {
       const schema: AnySchema = {
         kind: 'input',
         mapper: {
-          input: (value: number) => value.toString(),
-          output: value => Number(value)
+          parser: (value: number) => value.toString(),
+          formatter: value => Number(value)
         },
         defaultValue: 1
       };

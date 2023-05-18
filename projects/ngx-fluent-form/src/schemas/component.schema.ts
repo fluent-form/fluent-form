@@ -3,7 +3,7 @@ import { ThemeType } from '@ant-design/icons-angular';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzFormTextComponent } from 'ng-zorro-antd/form';
 import { AbstractSchema } from './abstract.schema';
-import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Labelful, SchemaContext } from './interfaces';
+import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Labelful, PropertyHolder, SchemaContext } from './interfaces';
 import { SchemaName } from './types';
 
 /** @internal */
@@ -12,6 +12,10 @@ interface Icon {
   theme?: ThemeType;
   spin?: boolean;
   rotate?: number;
+}
+
+export interface TemplateSchema<Name extends SchemaName = SchemaName> extends AbstractSchema<Name>, Labelful, PropertyHolder {
+  kind: 'template';
 }
 
 export interface TextComponentSchema<Name extends SchemaName = SchemaName>

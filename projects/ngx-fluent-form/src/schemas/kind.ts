@@ -1,5 +1,5 @@
 import { InputControlSchema, TextareaControlSchema } from './control.schema';
-import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyControlContainerSchema, AnyControlWrapperSchema, AnySchema, AnyTemplateSchema, DoubleKeyControlSchema } from './index.schema';
+import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyControlContainerSchema, AnyControlWrapperSchema, AnySchema, DoubleKeyControlSchema } from './index.schema';
 
 /** 控件容器图示类型 */
 export const CONTROL_CONTAINER_SCHEMA_KINDS = new Set(['group', 'array']);
@@ -16,11 +16,9 @@ export const COMPONENT_CONTAINER_SCHEMA_KINDS = new Set([
 /** 组件包装器图示类型 */
 export const COMPONENT_WRAPPER_SCHEMA_KINDS = new Set(['button-group']);
 /** 普通组件图示类型 */
-export const COMPONENT_SCHEMA_KINDS = new Set(['button', 'text']);
+export const COMPONENT_SCHEMA_KINDS = new Set(['button', 'text', 'template']);
 /** 文本控件图示类型 */
 export const TEXT_CONTROL_SCHEMA_KINDS = new Set(['input', 'textarea']);
-/** 模板图示类型 */
-export const TEMPLATE_SCHEMA_KINDS = new Set(['template']);
 
 /**
  * 是否为控件容器图示
@@ -71,19 +69,11 @@ export function isComponentSchema(schema: AnySchema): schema is AnyComponentSche
 }
 
 /**
- * 是否为模板图示
- * @param schema
- */
-export function isTemplateSchema(schema: AnySchema): schema is AnyTemplateSchema {
-  return TEMPLATE_SCHEMA_KINDS.has(schema.kind);
-}
-
-/**
  * 是否为非控件图示
  * @param schema
  */
-export function isNonControlSchema(schema: AnySchema): schema is AnyComponentSchema | AnyComponentWrapperSchema | AnyTemplateSchema {
-  return isComponentSchema(schema) || isComponentWrapperSchema(schema) || isTemplateSchema(schema);
+export function isNonControlSchema(schema: AnySchema): schema is AnyComponentSchema | AnyComponentWrapperSchema {
+  return isComponentSchema(schema) || isComponentWrapperSchema(schema);
 }
 
 /**

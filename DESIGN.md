@@ -38,8 +38,6 @@ ComponentContainer --- Tabs
 ComponentContainer --- Steps
 
 ComponentWrapper --- ButtonGroup
-
-Template
 ```
 
 <br>

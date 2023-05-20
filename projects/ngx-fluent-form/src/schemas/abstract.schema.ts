@@ -31,7 +31,7 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
   /** Whether to disable control */
   disabled?: boolean | ((ctx: SchemaContext<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
   feedback?: boolean;
-  description?: string | TemplateRef<void>;
+  hint?: string | TemplateRef<void>;
   /** Error message for control */
   tips?: {
     success?: string | TemplateRef<{ $implicit: FormControl<Val> }>;

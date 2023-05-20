@@ -73,7 +73,7 @@
       [nzWarningTip]="currentSchema.tips?.warning"
       [nzErrorTip]="currentSchema.tips?.error"
       [nzAutoTips]="currentSchema.tips?.auto ?? {}"
-      [nzExtra]="currentSchema.description">
+      [nzExtra]="currentSchema.hint">
       <ng-container
         fluentWithInjector
         [ngTemplateOutlet]="schema | template"

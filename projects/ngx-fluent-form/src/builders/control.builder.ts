@@ -1,6 +1,6 @@
 import { AnyControlSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, HeadlessControlSchema, InputControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { AnySchemaName, SchemaName } from '../schemas/types';
-import { Builder, UnstableBuilder, builder } from '../utils';
+import { Builder, builder, UnstableBuilder } from '../utils';
 import { KindOrName } from './helper';
 
 const REST_PARAMS = ['validators', 'asyncValidators'] as const;
@@ -17,12 +17,6 @@ export function input(): UnstableControlBuilder<InputControlSchema<number>, Kind
 export function input<N extends SchemaName>(name?: N): UnstableControlBuilder<InputControlSchema<N>, KindOrName>;
 export function input<N extends SchemaName>(name?: N) {
   return controlBuilder<InputControlSchema<N>>().kind('input').name(name);
-}
-
-export function email(): UnstableControlBuilder<InputControlSchema<number>, KindOrNameOrType>;
-export function email<N extends SchemaName>(name?: N): UnstableControlBuilder<InputControlSchema<N>, KindOrNameOrType>;
-export function email<N extends SchemaName>(name?: N) {
-  return input(name).type('email');
 }
 
 export function password(): UnstableControlBuilder<InputControlSchema<number>, KindOrNameOrType>;

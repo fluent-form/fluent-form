@@ -6,7 +6,7 @@ import { array, form, group, input, inputGroup } from '../../builders';
 import { withAllWidgets } from '../../features';
 import { provideFluentForm } from '../../provider';
 import { AnySchema, FormGroupSchema } from '../../schemas';
-import { FluentFormKeyDirective } from './form-name.directive';
+import { FluentFormKeyDirective } from './form-key.directive';
 import { FluentFormDirective } from './form.directive';
 import { FluentOutletDirective } from './outlet.directive';
 

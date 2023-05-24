@@ -30,7 +30,7 @@
       *ngIf="subschema.kind !== 'headless' || (subschema.kind === 'headless' && subschema.template)"
       [ngTemplateOutlet]="formColTemplate"
       [ngTemplateOutletContext]="{
-        control: (subschema.name | control: form),
+        control: (subschema.key | control: form),
         schema: subschema,
         model: model
       }"></ng-container>

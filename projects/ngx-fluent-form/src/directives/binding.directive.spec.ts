@@ -34,7 +34,7 @@ function emptyFn() { }
 class TestingComponent {
   inputSchema: InputControlSchema = {
     kind: 'input',
-    name: 'ipt',
+    key: 'ipt',
     properties: {
       readOnly: true
     },

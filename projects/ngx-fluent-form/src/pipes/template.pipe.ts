@@ -16,10 +16,10 @@ export class FluentTemplatePipe implements PipeTransform {
 
     switch (value.kind) {
       case 'template': {
-        const dir = templateDirectives?.find(o => o.name === value.name);
+        const dir = templateDirectives?.find(o => o.name === value.key);
 
         if (!dir) {
-          throwTemplateNotFoundError(value.name!);
+          throwTemplateNotFoundError(value.key!);
         }
 
         return dir.templateRef;

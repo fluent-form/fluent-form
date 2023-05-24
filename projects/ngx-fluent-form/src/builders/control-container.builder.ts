@@ -1,8 +1,8 @@
 import { SafeAny } from '@ngify/types';
 import { AnyBuilder, AnyControlContainerSchema, AnySchema, FormArraySchema, FormGroupSchema } from '../schemas';
 import { SchemaName } from '../schemas/types';
-import { Builder, StableBuilder, UnstableBuilder, builder, standardSchema, standardSchemas } from '../utils';
-import { KindOrName } from './helper';
+import { Builder, builder, StableBuilder, standardSchema, standardSchemas, UnstableBuilder } from '../utils';
+import { KindOrKey } from './helper';
 
 const REST_PARAMS = ['schemas', 'validators', 'asyncValidators'] as const;
 
@@ -31,19 +31,19 @@ export function form(...fnOrSchemas: (AnySchema | AnyBuilder)[] | [FormBuilderFn
   return standardSchemas(fnOrSchemas);
 }
 
-export function group(): UnstableControlContainerBuilder<FormGroupSchema<number>, KindOrName>;
-export function group<N extends SchemaName>(name?: N): UnstableControlContainerBuilder<FormGroupSchema<N>, KindOrName>;
-export function group<N extends SchemaName>(name?: N) {
-  return controlContainerBuilder<FormGroupSchema<N>>().kind('group').name(name);
+export function group(): UnstableControlContainerBuilder<FormGroupSchema<number>, KindOrKey>;
+export function group<N extends SchemaName>(key?: N): UnstableControlContainerBuilder<FormGroupSchema<N>, KindOrKey>;
+export function group<N extends SchemaName>(key?: N) {
+  return controlContainerBuilder<FormGroupSchema<N>>().kind('group').key(key);
 }
 
-export function array(): UnstableControlContainerBuilder<FormArraySchema<number>, KindOrName>;
-export function array<N extends SchemaName>(name?: N): UnstableControlContainerBuilder<FormArraySchema<N>, KindOrName>;
-export function array<N extends SchemaName>(name?: N) {
-  return controlContainerBuilder<FormArraySchema<N>>().kind('array').name(name);
+export function array(): UnstableControlContainerBuilder<FormArraySchema<number>, KindOrKey>;
+export function array<N extends SchemaName>(key?: N): UnstableControlContainerBuilder<FormArraySchema<N>, KindOrKey>;
+export function array<N extends SchemaName>(key?: N) {
+  return controlContainerBuilder<FormArraySchema<N>>().kind('array').key(key);
 }
 
-type FormBuilderFn = (it: UnstableControlContainerBuilder<FormGroupSchema, KindOrName>) => StableBuilder<FormGroupSchema>;
+type FormBuilderFn = (it: UnstableControlContainerBuilder<FormGroupSchema, KindOrKey>) => StableBuilder<FormGroupSchema>;
 type RestSchema = typeof REST_PARAMS[number];
 
 export type UnstableControlContainerBuilder<T extends AnyControlContainerSchema, S extends keyof T> = UnstableBuilder<T, S, RestSchema>;

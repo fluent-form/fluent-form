@@ -81,5 +81,5 @@ export function isNonControlSchema(schema: AnySchema): schema is AnyComponentSch
  * @param schema
  */
 export function isDoubleKeyControlSchema(schema: AnySchema): schema is DoubleKeyControlSchema {
-  return Array.isArray(schema.name);
+  return Array.isArray(schema.key);
 }

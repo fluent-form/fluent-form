@@ -4,8 +4,8 @@ import { FluentControlPipe } from './control.pipe';
 describe('FluentControlPipe', () => {
   let pipe: FluentControlPipe;
   const formGroup = createFormGroup([
-    { kind: 'input', name: 'a' },
-    { kind: 'date-range', name: ['b', 'c'] }
+    { kind: 'input', key: 'a' },
+    { kind: 'date-range', key: ['b', 'c'] }
   ]);
 
   beforeEach(() => {

@@ -7,7 +7,7 @@ describe('schema.utils', () => {
   describe('应该能正确标准化图示', () => {
     it('普通图示', () => {
       const schemas = standardSchemas([input('name')]);
-      expect(schemas).toEqual([{ kind: 'input', name: 'name' }]);
+      expect(schemas).toEqual([{ kind: 'input', key: 'name' }]);
     });
 
     describe('嵌套图示', () => {
@@ -20,9 +20,9 @@ describe('schema.utils', () => {
 
         expect(schemas).toEqual([{
           kind: 'group',
-          name: 'name',
+          key: 'name',
           schemas: [
-            { kind: 'input', name: 'name' }
+            { kind: 'input', key: 'name' }
           ]
         }]);
       });
@@ -38,12 +38,12 @@ describe('schema.utils', () => {
 
         expect(schemas).toEqual([{
           kind: 'array',
-          name: 'name',
+          key: 'name',
           schemas: [{
             kind: 'group',
-            name: 0,
+            key: 0,
             schemas: [
-              { kind: 'input', name: 'name' }
+              { kind: 'input', key: 'name' }
             ]
           }]
         }]);
@@ -59,7 +59,7 @@ describe('schema.utils', () => {
         expect(schemas).toEqual([{
           kind: 'input-group',
           schemas: [
-            { kind: 'input', name: 'name' }
+            { kind: 'input', key: 'name' }
           ]
         }]);
       });

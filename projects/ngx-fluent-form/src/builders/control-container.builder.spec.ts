@@ -11,11 +11,11 @@ describe('control-container.builder', () => {
 
   it('group', () => {
     const schema = standardSchema(group('group').schemas());
-    expect(schema).toEqual({ kind: 'group', name: 'group', schemas: [] });
+    expect(schema).toEqual({ kind: 'group', key: 'group', schemas: [] });
   });
 
   it('array', () => {
     const schema = standardSchema(array('array').schemas());
-    expect(schema).toEqual({ kind: 'array', name: 'array', schemas: [] });
+    expect(schema).toEqual({ kind: 'array', key: 'array', schemas: [] });
   });
 });

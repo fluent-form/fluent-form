@@ -4,14 +4,14 @@
       *ngSwitchCase="'group'"
       fluentWithInjector
       [ngTemplateOutlet]="schema | template"
-      [ngTemplateOutletContext]="{ control: control, schema: schema, model: model[schema.name] }">
+      [ngTemplateOutletContext]="{ control: control, schema: schema, model: model[schema.key] }">
     </ng-container>
 
     <ng-container
       *ngSwitchCase="'array'"
       fluentWithInjector
       [ngTemplateOutlet]="schema | template"
-      [ngTemplateOutletContext]="{ control: control, schema: schema, model: model[schema.name] }">
+      [ngTemplateOutletContext]="{ control: control, schema: schema, model: model[schema.key] }">
     </ng-container>
 
     <ng-container
@@ -61,11 +61,11 @@
     <nz-form-control
       *ngIf="
         schema.kind === 'input-group'
-          ? (schema.primary ?? schema.schemas[0].name | schema: schema.schemas)
+          ? (schema.primary ?? schema.schemas[0].key | schema: schema.schemas)
           : schema as currentSchema
       "
       [nzValidateStatus]="
-        schema.kind === 'input-group' ? (schema.primary ?? schema.schemas[0].name | control: control) : control
+        schema.kind === 'input-group' ? (schema.primary ?? schema.schemas[0].key | control: control) : control
       "
       [nzHasFeedback]="currentSchema.feedback"
       [nzValidatingTip]="currentSchema.tips?.validating"
@@ -110,7 +110,7 @@
     <ng-container
       *ngFor="let subschema of schema.schemas"
       [ngTemplateOutlet]="colTemplate"
-      [ngTemplateOutletContext]="{ control: (subschema.name | control: control), schema: subschema, model: model }">
+      [ngTemplateOutletContext]="{ control: (subschema.key | control: control), schema: subschema, model: model }">
     </ng-container>
   </nz-row>
 </ng-template>

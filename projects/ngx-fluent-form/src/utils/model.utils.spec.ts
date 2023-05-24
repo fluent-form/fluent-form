@@ -13,7 +13,7 @@ describe('ModelUtils', () => {
   });
 
   it('with headless control', () => {
-    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'headless', name: 'headless' }];
+    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'headless', key: 'headless' }];
     const form = createFormGroup(schemas);
     const model = {};
 
@@ -21,7 +21,7 @@ describe('ModelUtils', () => {
   });
 
   it('with control', () => {
-    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'number', name: 'num' }];
+    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'number', key: 'num' }];
     const form = createFormGroup(schemas);
     const model = { num: 1 };
 
@@ -29,7 +29,7 @@ describe('ModelUtils', () => {
   });
 
   it('with double key control', () => {
-    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'slider', name: ['start', 'end'] }];
+    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'slider', key: ['start', 'end'] }];
     const form = createFormGroup(schemas);
     const model = { start: 0, end: 100 };
 
@@ -64,7 +64,7 @@ describe('ModelUtils', () => {
     const schemas: StandardSchema<AnySchema>[] = [
       {
         kind: 'group',
-        name: 'obj',
+        key: 'obj',
         schemas: []
       }
     ];
@@ -78,9 +78,9 @@ describe('ModelUtils', () => {
     const schemas: StandardSchema<AnySchema>[] = [
       {
         kind: 'group',
-        name: 'obj',
+        key: 'obj',
         schemas: [
-          { kind: 'number', name: 'num' }
+          { kind: 'number', key: 'num' }
         ]
       }
     ];
@@ -94,7 +94,7 @@ describe('ModelUtils', () => {
     const schemas: StandardSchema<AnySchema>[] = [
       {
         kind: 'array',
-        name: 'arr',
+        key: 'arr',
         schemas: []
       }
     ];
@@ -108,9 +108,9 @@ describe('ModelUtils', () => {
     const schemas: StandardSchema<AnySchema>[] = [
       {
         kind: 'array',
-        name: 'arr',
+        key: 'arr',
         schemas: [
-          { kind: 'number', name: 0 }
+          { kind: 'number', key: 0 }
         ]
       }
     ];
@@ -124,26 +124,26 @@ describe('ModelUtils', () => {
     const schemas: StandardSchema<AnySchema>[] = [
       {
         kind: 'group',
-        name: 'obj',
+        key: 'obj',
         schemas: [
           {
             kind: 'array',
-            name: 'arr',
+            key: 'arr',
             schemas: [
-              { kind: 'number', name: 0 }
+              { kind: 'number', key: 0 }
             ]
           }
         ]
       },
       {
         kind: 'array',
-        name: 'arr',
+        key: 'arr',
         schemas: [
           {
             kind: 'group',
-            name: 0,
+            key: 0,
             schemas: [
-              { kind: 'number', name: 'num' }
+              { kind: 'number', key: 'num' }
             ]
           },
         ]

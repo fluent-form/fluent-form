@@ -25,9 +25,9 @@ export class ModelUtil {
 
       if (schema.kind === 'group') {
         this.updateForm(
-          (model[schema.name as keyof M] ??= {} as M[keyof M]) as Model<FormGroup>,
+          (model[schema.key as keyof M] ??= {} as M[keyof M]) as Model<FormGroup>,
           schema.schemas,
-          form.get([schema.name!]) as FormGroup,
+          form.get([schema.key!]) as FormGroup,
           false
         );
         return;
@@ -35,9 +35,9 @@ export class ModelUtil {
 
       if (schema.kind === 'array') {
         this.updateForm(
-          (model[schema.name as keyof M] ??= [] as M[keyof M]) as Model<FormArray>,
+          (model[schema.key as keyof M] ??= [] as M[keyof M]) as Model<FormArray>,
           schema.schemas,
-          form.get([schema.name!]) as FormArray,
+          form.get([schema.key!]) as FormArray,
           false
         );
         return;
@@ -50,7 +50,7 @@ export class ModelUtil {
 
       const value = this.valueUtil.valueOfModel(model, schema);
 
-      form.get([schema.name!.toString()])!.setValue(value, { emitEvent: false });
+      form.get([schema.key!.toString()])!.setValue(value, { emitEvent: false });
     });
 
     emitEvent && form.updateValueAndValidity();

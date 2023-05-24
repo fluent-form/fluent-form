@@ -18,7 +18,7 @@ describe('component-container.builder', () => {
           kind: 'step',
           title: 'title',
           schemas: [
-            { kind: 'input', name: 'ipt' }
+            { kind: 'input', key: 'ipt' }
           ]
         }
       ]
@@ -40,7 +40,7 @@ describe('component-container.builder', () => {
           kind: 'tab',
           title: 'title',
           schemas: [
-            { kind: 'input', name: 'ipt' }
+            { kind: 'input', key: 'ipt' }
           ]
         }
       ]

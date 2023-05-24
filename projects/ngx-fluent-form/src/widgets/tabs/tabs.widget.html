@@ -40,7 +40,7 @@
         <ng-container
           *ngFor="let subschema of tabSchema.schemas"
           [ngTemplateOutlet]="formColTemplate"
-          [ngTemplateOutletContext]="{ control: (subschema.name | control: control), schema: subschema, model: model }">
+          [ngTemplateOutletContext]="{ control: (subschema.key | control: control), schema: subschema, model: model }">
         </ng-container>
       </nz-row>
     </nz-tab>

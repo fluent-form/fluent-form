@@ -13,7 +13,7 @@ describe('FluentSchemaPipe', () => {
   });
 
   it('should be can find schema by name', () => {
-    const schemas: AnySchema[] = [{ kind: 'input', name: 'text' }];
+    const schemas: AnySchema[] = [{ kind: 'input', key: 'text' }];
     const schema = pipe.transform('text', schemas, 'control');
     expect(schema).toBe(schemas[0] as AnyControlSchema);
   });

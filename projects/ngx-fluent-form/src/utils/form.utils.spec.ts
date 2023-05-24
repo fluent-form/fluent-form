@@ -48,7 +48,7 @@ describe('form.utils', () => {
 
     it('with headless control', () => {
       const schemas: StandardSchema<AnySchema>[] = [
-        { kind: 'headless', name: 'headless' }
+        { kind: 'headless', key: 'headless' }
       ];
       const group = createFormGroup(schemas);
 
@@ -57,7 +57,7 @@ describe('form.utils', () => {
 
     it('with control', () => {
       const schemas: StandardSchema<AnySchema>[] = [
-        { kind: 'input', name: 'text' }
+        { kind: 'input', key: 'text' }
       ];
       const group = createFormGroup(schemas);
 
@@ -95,7 +95,7 @@ describe('form.utils', () => {
       const schema: StandardSchema<AnySchema> = {
         kind: 'group',
         schemas: [
-          { kind: 'input', name: 'text' }
+          { kind: 'input', key: 'text' }
         ]
       };
       const group = createFormGroup(schema);
@@ -107,9 +107,9 @@ describe('form.utils', () => {
       const schemas: StandardSchema<AnySchema>[] = [
         {
           kind: 'group',
-          name: 'obj',
+          key: 'obj',
           schemas: [
-            { kind: 'input', name: 'text' }
+            { kind: 'input', key: 'text' }
           ]
         }
       ];
@@ -122,13 +122,13 @@ describe('form.utils', () => {
       const schemas: StandardSchema<AnySchema>[] = [
         {
           kind: 'group',
-          name: 'obj',
+          key: 'obj',
           schemas: [
             {
               kind: 'array',
-              name: 'arr',
+              key: 'arr',
               schemas: [
-                { kind: 'input', name: 0 }
+                { kind: 'input', key: 0 }
               ]
             }
           ]
@@ -153,7 +153,7 @@ describe('form.utils', () => {
       const schema: StandardSchema<AnySchema> = {
         kind: 'array',
         schemas: [
-          { kind: 'input', name: 0 }
+          { kind: 'input', key: 0 }
         ]
       };
       const array = createFormArray(schema);
@@ -165,7 +165,7 @@ describe('form.utils', () => {
       const schema: StandardSchema<AnySchema> = {
         kind: 'array',
         schemas: [
-          { kind: 'group', name: 0, schemas: [] }
+          { kind: 'group', key: 0, schemas: [] }
         ]
       };
       const array = createFormArray(schema);
@@ -177,7 +177,7 @@ describe('form.utils', () => {
       const schema: StandardSchema<AnySchema> = {
         kind: 'array',
         schemas: [
-          { kind: 'array', name: 0, schemas: [] }
+          { kind: 'array', key: 0, schemas: [] }
         ]
       };
       const array = createFormArray(schema);
@@ -191,9 +191,9 @@ describe('form.utils', () => {
         schemas: [
           {
             kind: 'group',
-            name: 0,
+            key: 0,
             schemas: [
-              { kind: 'input', name: 'text' }
+              { kind: 'input', key: 'text' }
             ]
           }
         ]
@@ -214,21 +214,21 @@ describe('form.utils', () => {
 
     describe('assign', () => {
       it('with control', () => {
-        const schemas: StandardSchema<AnySchema>[] = [{ kind: 'number', name: 'num', defaultValue: 1 }];
+        const schemas: StandardSchema<AnySchema>[] = [{ kind: 'number', key: 'num', defaultValue: 1 }];
         const form = createFormGroup(schemas);
 
         expect(util.updateModel(form, schemas, {})).toEqual({ num: 1 });
       });
 
       it('with double key control', () => {
-        const schemas: StandardSchema<AnySchema>[] = [{ kind: 'slider', name: ['start', 'end'] }];
+        const schemas: StandardSchema<AnySchema>[] = [{ kind: 'slider', key: ['start', 'end'] }];
         const form = createFormGroup(schemas);
 
         expect(util.updateModel(form, schemas, {})).toEqual({ start: null, end: null });
       });
 
       it('with double key control (with default value)', () => {
-        const schemas: StandardSchema<AnySchema>[] = [{ kind: 'slider', name: ['start', 'end'], defaultValue: [0, 100] }];
+        const schemas: StandardSchema<AnySchema>[] = [{ kind: 'slider', key: ['start', 'end'], defaultValue: [0, 100] }];
         const form = createFormGroup(schemas);
 
         expect(util.updateModel(form, schemas, {})).toEqual({ start: 0, end: 100 });
@@ -252,7 +252,7 @@ describe('form.utils', () => {
         const schemas: StandardSchema<AnySchema>[] = [
           {
             kind: 'group',
-            name: 'obj',
+            key: 'obj',
             schemas: []
           }
         ];
@@ -265,9 +265,9 @@ describe('form.utils', () => {
         const schemas: StandardSchema<AnySchema>[] = [
           {
             kind: 'group',
-            name: 'obj',
+            key: 'obj',
             schemas: [
-              { kind: 'number', name: 'num', defaultValue: 1 }
+              { kind: 'number', key: 'num', defaultValue: 1 }
             ]
           }
         ];
@@ -280,7 +280,7 @@ describe('form.utils', () => {
         const schemas: StandardSchema<AnySchema>[] = [
           {
             kind: 'array',
-            name: 'arr',
+            key: 'arr',
             schemas: []
           }
         ];
@@ -293,9 +293,9 @@ describe('form.utils', () => {
         const schemas: StandardSchema<AnySchema>[] = [
           {
             kind: 'array',
-            name: 'arr',
+            key: 'arr',
             schemas: [
-              { kind: 'number', name: 0, defaultValue: 1 }
+              { kind: 'number', key: 0, defaultValue: 1 }
             ]
           }
         ];
@@ -308,26 +308,26 @@ describe('form.utils', () => {
         const schemas: StandardSchema<AnySchema>[] = [
           {
             kind: 'group',
-            name: 'obj',
+            key: 'obj',
             schemas: [
               {
                 kind: 'array',
-                name: 'arr',
+                key: 'arr',
                 schemas: [
-                  { kind: 'number', name: 0, defaultValue: 1 }
+                  { kind: 'number', key: 0, defaultValue: 1 }
                 ]
               }
             ]
           },
           {
             kind: 'array',
-            name: 'arr',
+            key: 'arr',
             schemas: [
               {
                 kind: 'group',
-                name: 0,
+                key: 0,
                 schemas: [
-                  { kind: 'number', name: 'num', defaultValue: 1 }
+                  { kind: 'number', key: 'num', defaultValue: 1 }
                 ]
               },
             ]
@@ -345,7 +345,7 @@ describe('form.utils', () => {
     describe('change', () => {
       it('normal', () => {
         const schemas: StandardSchema<AnySchema>[] = [
-          { kind: 'toggle', name: 'bool', disabled: ({ model }) => model.bool },
+          { kind: 'toggle', key: 'bool', disabled: ({ model }) => model.bool },
         ];
         const form = createFormGroup(schemas);
 
@@ -356,7 +356,7 @@ describe('form.utils', () => {
       it('with component', () => {
         const schemas: StandardSchema<AnySchema>[] = [
           { kind: 'button' },
-          { kind: 'toggle', name: 'bool', disabled: ({ model }) => model.bool },
+          { kind: 'toggle', key: 'bool', disabled: ({ model }) => model.bool },
         ];
         const form = createFormGroup(schemas);
 
@@ -371,9 +371,9 @@ describe('form.utils', () => {
         const schemas: StandardSchema<AnySchema>[] = [
           {
             kind: 'group',
-            name: 'obj',
+            key: 'obj',
             schemas: [
-              { kind: 'toggle', name: 'bool', disabled: ({ model }) => model.bool },
+              { kind: 'toggle', key: 'bool', disabled: ({ model }) => model.bool },
             ]
           }
         ];
@@ -387,9 +387,9 @@ describe('form.utils', () => {
         const schemas: StandardSchema<AnySchema>[] = [
           {
             kind: 'array',
-            name: 'arr',
+            key: 'arr',
             schemas: [
-              { kind: 'toggle', name: 0, disabled: ({ model }) => model[0] },
+              { kind: 'toggle', key: 0, disabled: ({ model }) => model[0] },
             ]
           }
         ];

@@ -15,7 +15,7 @@ const standardContainerSchema = <T extends AnyContainerSchema | AnyWrapperSchema
 
   // 如果是数组表单图示，自动补充子图示的名称为索引值
   if (schema.kind === 'array') {
-    schemas.forEach((schema, index) => schema.name = index);
+    schemas.forEach((schema, index) => schema.key = index);
   }
 
   schema.schemas = schemas;
@@ -138,18 +138,18 @@ export class SchemasUtils<S extends AnySchema[]> {
     if (Array.isArray(path)) {
       const [endPath, ...beforePath] = path.reverse() as [AnySchemaName, ...SchemaName[]];
       schemas = beforePath.reduceRight((schemas, name) => (
-        (schemas.find(o => o.name === name) as AnyContainerSchema).schemas as AnyControlOrControlContainerSchema[]
+        (schemas.find(o => o.key === name) as AnyContainerSchema).schemas as AnyControlOrControlContainerSchema[]
       ), schemas as AnyControlOrControlContainerSchema[]);
       path = endPath;
     }
 
     return (schemas.find(o => {
       // 处理双字段模式
-      if (Array.isArray(o.name) && Array.isArray(path)) {
-        return arraysEqual(o.name, path);
+      if (Array.isArray(o.key) && Array.isArray(path)) {
+        return arraysEqual(o.key, path);
       }
 
-      return o.name === path;
+      return o.key === path;
     }) ?? null) as T | null;
   }
 }

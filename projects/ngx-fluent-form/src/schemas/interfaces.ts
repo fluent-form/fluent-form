@@ -8,7 +8,7 @@ import { AnySchemaName, Cell, StandardSchema } from './types';
 
 export interface SchemaLike<N extends AnySchemaName = AnySchemaName> {
   kind: string;
-  name?: N;
+  key?: N;
 }
 
 /** @internal */

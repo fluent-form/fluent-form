@@ -42,13 +42,13 @@ function createFormControls(schemas: StandardSchema<AnySchema>[], controls: Reco
     }
 
     if (schema.kind === 'group') {
-      controls[schema.name!.toString()] = createFormGroup(schema);
+      controls[schema.key!.toString()] = createFormGroup(schema);
     } else if (schema.kind === 'array') {
-      controls[schema.name!.toString()] = createFormArray(schema);
+      controls[schema.key!.toString()] = createFormArray(schema);
     } else if (isControlWrapperSchema(schema) || isComponentContainerSchema(schema)) {
       createFormControls(schema.schemas, controls);
     } else {
-      controls[schema.name!.toString()] = createFormControl(schema);
+      controls[schema.key!.toString()] = createFormControl(schema);
     }
 
     return controls;
@@ -122,14 +122,14 @@ export class FormUtil {
       if (isNonControlSchema(schema)) { return; }
 
       // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-      const control = form.get([schema.name?.toString()!])!;
+      const control = form.get([schema.key?.toString()!])!;
 
       if (schema.kind === 'group') {
-        return this.updateForm(control as FormGroup, schema.schemas, model[schema.name as keyof M] as Model<FormGroup>);
+        return this.updateForm(control as FormGroup, schema.schemas, model[schema.key as keyof M] as Model<FormGroup>);
       }
 
       if (schema.kind === 'array') {
-        return this.updateForm(control as FormArray, schema.schemas, model[schema.name as keyof M] as Model<FormArray>);
+        return this.updateForm(control as FormArray, schema.schemas, model[schema.key as keyof M] as Model<FormArray>);
       }
 
       if (isControlWrapperSchema(schema) || isComponentContainerSchema(schema)) {
@@ -154,13 +154,13 @@ export class FormUtil {
       if (isNonControlSchema(schema)) return;
 
       // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-      const control = form.get([schema.name?.toString()!])!;
+      const control = form.get([schema.key?.toString()!])!;
 
       if (schema.kind === 'group') {
         this.updateModel(
           control as FormGroup,
           schema.schemas,
-          (model[schema.name as keyof M] = {} as M[keyof M]) as Model<FormGroup>,
+          (model[schema.key as keyof M] = {} as M[keyof M]) as Model<FormGroup>,
         );
         return;
       }
@@ -169,7 +169,7 @@ export class FormUtil {
         this.updateModel(
           control as FormArray,
           schema.schemas,
-          (model[schema.name as keyof M] = [] as M[keyof M]) as Model<FormArray>,
+          (model[schema.key as keyof M] = [] as M[keyof M]) as Model<FormArray>,
         );
         return;
       }
@@ -183,11 +183,11 @@ export class FormUtil {
 
       // 双字段情况
       if (isDoubleKeyControlSchema(schema)) {
-        schema.name!.map((prop, idx) => {
+        schema.key!.map((prop, idx) => {
           model[prop as keyof M] = ((value as [unknown, unknown])?.[idx] ?? null) as M[keyof M];
         });
       } else {
-        model[schema.name as keyof M] = value as M[keyof M];
+        model[schema.key as keyof M] = value as M[keyof M];
       }
     });
 

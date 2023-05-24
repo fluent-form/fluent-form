@@ -34,7 +34,7 @@ import dedent from 'ts-dedent';
             <td nzWidth="175px">
               <fluent-outlet name="address"></fluent-outlet>
             </td>
-            <td fluentFormName="info">
+            <td fluentFormKey="info">
               <fluent-outlet name="cellphone"></fluent-outlet>
             </td>
             <td>
@@ -55,7 +55,7 @@ import dedent from 'ts-dedent';
 })
 class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
   list: any;
-  name = 'name'
+  name = 'name';
 
   constructor() {
     super();
@@ -142,7 +142,7 @@ export const source = dedent`
             <td nzWidth="175px">
               <fluent-outlet name="address"></fluent-outlet>
             </td>
-            <td fluentFormName="info">
+            <td fluentFormKey="info">
               <fluent-outlet name="cellphone"></fluent-outlet>
             </td>
             <td>

@@ -9,24 +9,24 @@ import { schemasUtils } from '../../utils';
 import { ControlContainerDirective, FluentControlContainer } from './models/control-container';
 
 @Directive({
-  selector: '[fluentFormName]',
-  exportAs: 'fluentFormName',
+  selector: '[fluentFormKey]',
+  exportAs: 'fluentFormKey',
   standalone: true,
   providers: [
     NzDestroyService,
     {
       provide: FluentControlContainer,
-      useExisting: forwardRef(() => FluentFormNameDirective)
+      useExisting: forwardRef(() => FluentFormKeyDirective)
     }
   ]
 })
-export class FluentFormNameDirective<T extends AnyObject | AnyArray> extends ControlContainerDirective<T> implements OnInit {
+export class FluentFormKeyDirective<T extends AnyObject | AnyArray> extends ControlContainerDirective<T> implements OnInit {
   /** @internal */
   schemas!: StandardSchema<AnySchema>[];
   /** @internal */
   form!: AbstractControl;
 
-  @Input('fluentFormName') name!: string | number;
+  @Input('fluentFormKey') key!: string | number;
 
   /** @internal */
   get directive(): ControlContainerDirective<T> {
@@ -34,7 +34,7 @@ export class FluentFormNameDirective<T extends AnyObject | AnyArray> extends Con
   }
   /** @internal */
   get model(): T {
-    return this.controlContainer.directive.model[this.name as keyof T] as T;
+    return this.controlContainer.directive.model[this.key as keyof T] as T;
   }
 
   constructor(
@@ -50,10 +50,10 @@ export class FluentFormNameDirective<T extends AnyObject | AnyArray> extends Con
       takeUntil(this.destroy$)
     ).subscribe(() => {
       this.formChange.emit(
-        this.form = this.controlContainer.directive.form.get([this.name])!
+        this.form = this.controlContainer.directive.form.get([this.key])!
       );
       this.schemas = schemasUtils(this.controlContainer.directive.schemas)
-        .find<StandardSchema<AnyControlContainerSchema>>(this.name)!.schemas;
+        .find<StandardSchema<AnyControlContainerSchema>>(this.key)!.schemas;
 
       this.directives.forEach(directive => this.assignDirective(directive));
     });

@@ -6,7 +6,7 @@ import { array, form, group, input, inputGroup } from '../../builders';
 import { withAllWidgets } from '../../features';
 import { provideFluentForm } from '../../provider';
 import { AnySchema, FormGroupSchema } from '../../schemas';
-import { FluentFormNameDirective } from './form-name.directive';
+import { FluentFormKeyDirective } from './form-name.directive';
 import { FluentFormDirective } from './form.directive';
 import { FluentOutletDirective } from './outlet.directive';
 
@@ -14,18 +14,18 @@ import { FluentOutletDirective } from './outlet.directive';
   standalone: true,
   imports: [
     FluentFormDirective,
-    FluentFormNameDirective,
+    FluentFormKeyDirective,
     FluentOutletDirective
   ],
   template: `
     <div fluent-form [fluentSchemas]="schemas" [(fluentModel)]="model" (fluentFormChange)="form = $event">
       <fluent-outlet name="ipt"></fluent-outlet>
       <fluent-outlet name="ipts"></fluent-outlet>
-      <ng-container fluentFormName="group">
+      <ng-container fluentFormKey="group">
         <fluent-outlet name="ipt"></fluent-outlet>
         <fluent-outlet name="ipts"></fluent-outlet>
       </ng-container>
-      <ng-container fluentFormName="array">
+      <ng-container fluentFormKey="array">
         <fluent-outlet [name]="0"></fluent-outlet>
       </ng-container>
     </div>

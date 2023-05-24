@@ -55,7 +55,6 @@ import dedent from 'ts-dedent';
 })
 class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
   list: any;
-  name = 'name';
 
   constructor() {
     super();

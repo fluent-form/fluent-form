@@ -21,7 +21,7 @@ describe('FluentControlPipe', () => {
       expect(pipe.transform(undefined, formGroup)).toBe(formGroup);
     });
 
-    it('pass in a other name', () => {
+    it('pass in a other key', () => {
       expect(pipe.transform('b', formGroup)).toBe(formGroup);
     });
   });

@@ -10,7 +10,7 @@ import { schemasUtils } from '../utils';
 export class FluentSchemaPipe implements PipeTransform {
 
   /**
-   * 将 value 作为 name，获取 schemas 中的图示
+   * 将 value 作为 key，获取 schemas 中的图示
    * @param value
    * @param schemas
    * @param type 用来重载方法的返回值

@@ -4,10 +4,10 @@ import dedent from 'ts-dedent';
 export const story = defineStory({
   args: {
     schemas: [
-      { kind: 'input', name: 'username', label: '用户名', placeholder: '请输入用户名' },
+      { kind: 'input', key: 'username', label: '用户名', placeholder: '请输入用户名' },
       {
         kind: 'input',
-        name: 'password',
+        key: 'password',
         label: '密码',
         placeholder: '请输入密码',
         type: 'password',
@@ -28,10 +28,10 @@ export const jsonSource = dedent`
   })
   export class ExampleComponent {
     schemas: AnySchema[] = [
-      { kind: 'input', name: 'username', label: '用户名', placeholder: '请输入用户名' },
+      { kind: 'input', key: 'username', label: '用户名', placeholder: '请输入用户名' },
       {
         kind: 'input',
-        name: 'password',
+        key: 'password',
         label: '密码',
         placeholder: '请输入密码',
         type: 'password',
@@ -53,7 +53,7 @@ export const jsonAndFluentSource = dedent`
       input('username').label('用户名').placeholder('请输入用户名').build(), // 👈 call build() method
       {
         kind: 'input',
-        name: 'password',
+        key: 'password',
         label: '密码',
         placeholder: '请输入密码',
         type: 'password',
@@ -72,7 +72,7 @@ export const fluentAndJsonSource = dedent`
   @Component({...})
   export class ExampleComponent {
     schemas = form(
-      { kind: 'input', name: 'username', label: '用户名', placeholder: '请输入用户名' },
+      { kind: 'input', key: 'username', label: '用户名', placeholder: '请输入用户名' },
       input('password').label('密码').placeholder('请输入密码').type('password').disabled(({ model }) => !model.username),
     );
 
@@ -83,7 +83,7 @@ export const fluentAndJsonSource = dedent`
 export const expressionSource = dedent`
   {
     kind: 'input',
-    name: 'password',
+    key: 'password',
     label: '密码',
     disabled: '!model.username'
   }

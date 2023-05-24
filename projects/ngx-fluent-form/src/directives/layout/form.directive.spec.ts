@@ -19,14 +19,14 @@ import { FluentOutletDirective } from './outlet.directive';
   ],
   template: `
     <div fluent-form [fluentSchemas]="schemas" [(fluentModel)]="model" (fluentFormChange)="form = $event">
-      <fluent-outlet name="ipt"></fluent-outlet>
-      <fluent-outlet name="ipts"></fluent-outlet>
+      <fluent-outlet key="ipt"></fluent-outlet>
+      <fluent-outlet key="ipts"></fluent-outlet>
       <ng-container fluentFormKey="group">
-        <fluent-outlet name="ipt"></fluent-outlet>
-        <fluent-outlet name="ipts"></fluent-outlet>
+        <fluent-outlet key="ipt"></fluent-outlet>
+        <fluent-outlet key="ipts"></fluent-outlet>
       </ng-container>
       <ng-container fluentFormKey="array">
-        <fluent-outlet [name]="0"></fluent-outlet>
+        <fluent-outlet [key]="0"></fluent-outlet>
       </ng-container>
     </div>
   `

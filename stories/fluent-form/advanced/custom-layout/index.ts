@@ -26,19 +26,19 @@ import dedent from 'ts-dedent';
             [(fluentModel)]="list[index]">
             <td>{{ index + 1 }}</td>
             <td>
-              <fluent-outlet name="name"></fluent-outlet>
+              <fluent-outlet key="name"></fluent-outlet>
             </td>
             <td>
-              <fluent-outlet name="age"></fluent-outlet>
+              <fluent-outlet key="age"></fluent-outlet>
             </td>
             <td nzWidth="175px">
-              <fluent-outlet name="address"></fluent-outlet>
+              <fluent-outlet key="address"></fluent-outlet>
             </td>
             <td fluentFormKey="info">
-              <fluent-outlet name="cellphone"></fluent-outlet>
+              <fluent-outlet key="cellphone"></fluent-outlet>
             </td>
             <td>
-              <fluent-outlet name="enabled"></fluent-outlet>
+              <fluent-outlet key="enabled"></fluent-outlet>
             </td>
           </tr>
         </tbody>
@@ -134,19 +134,19 @@ export const source = dedent`
             [(fluentModel)]="list[index]">
             <td>{{ index + 1 }}</td>
             <td>
-              <fluent-outlet name="name"></fluent-outlet>
+              <fluent-outlet key="name"></fluent-outlet>
             </td>
             <td>
-              <fluent-outlet name="age"></fluent-outlet>
+              <fluent-outlet key="age"></fluent-outlet>
             </td>
             <td nzWidth="175px">
-              <fluent-outlet name="address"></fluent-outlet>
+              <fluent-outlet key="address"></fluent-outlet>
             </td>
             <td fluentFormKey="info">
-              <fluent-outlet name="cellphone"></fluent-outlet>
+              <fluent-outlet key="cellphone"></fluent-outlet>
             </td>
             <td>
-              <fluent-outlet name="enabled"></fluent-outlet>
+              <fluent-outlet key="enabled"></fluent-outlet>
             </td>
           </tr>
         </tbody>

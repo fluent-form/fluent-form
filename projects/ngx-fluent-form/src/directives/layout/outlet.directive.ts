@@ -43,7 +43,7 @@ export class FluentOutletDirective<T extends AnyObject | AnyArray> implements On
     return this.controlContainer.directive.model;
   }
 
-  @Input() name!: SchemaName;
+  @Input() key!: SchemaName;
 
   ngOnInit() {
     this.controlContainer.directive.addDirective(this);

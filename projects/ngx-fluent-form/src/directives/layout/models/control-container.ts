@@ -41,8 +41,8 @@ export abstract class ControlContainerDirective<T extends AnyObject | AnyArray> 
    * @param directive
    */
   assignDirective(directive: FluentOutletDirective<T>) {
-    directive.control = this.form.get([directive.name]) ?? this.form;
-    directive.schema = schemasUtils(this.schemas).find<AnyComponentSchema | AnyControlSchema>(directive.name)!;
+    directive.control = this.form.get([directive.key]) ?? this.form;
+    directive.schema = schemasUtils(this.schemas).find<AnyComponentSchema | AnyControlSchema>(directive.key)!;
   }
 
   /**

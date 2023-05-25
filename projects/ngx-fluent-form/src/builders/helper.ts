@@ -1,5 +1,5 @@
 import { SafeAny } from '@ngify/types';
-import { SchemaName } from '../schemas/types';
+import { SchemaKey } from '../schemas/types';
 import { isString } from '../utils';
 
 export const REST_SCHEMA = ['schemas'] as const;
@@ -8,7 +8,7 @@ export type RestSchema = typeof REST_SCHEMA[number];
 export type KindOrKey = 'kind' | 'key';
 export type KindOrSchemas = 'kind' | 'schemas';
 
-export function isSchemaNameTuple(arr: SafeAny[]): arr is [SchemaName] {
+export function isSchemaKeyTuple(arr: SafeAny[]): arr is [SchemaKey] {
   return isString(arr[0]);
 }
 

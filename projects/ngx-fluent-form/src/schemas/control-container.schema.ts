@@ -1,12 +1,12 @@
 import { AbstractControlContainerSchema } from './abstract.schema';
 import { AnyControlContainerBuilder, AnyControlContainerSchema, SingleKeyControlBuilder, SingleKeyControlSchema } from './index.schema';
-import { SchemaName } from './types';
+import { SchemaKey } from './types';
 
-export interface FormGroupSchema<Name extends SchemaName = SchemaName> extends AbstractControlContainerSchema<Name> {
+export interface FormGroupSchema<Key extends SchemaKey = SchemaKey> extends AbstractControlContainerSchema<Key> {
   kind: 'group';
 }
 
-export interface FormArraySchema<Name extends SchemaName = SchemaName> extends AbstractControlContainerSchema<Name> {
+export interface FormArraySchema<Key extends SchemaKey = SchemaKey> extends AbstractControlContainerSchema<Key> {
   kind: 'array';
   schemas: (SingleKeyControlSchema<number> | SingleKeyControlBuilder<number> | AnyControlContainerSchema<number> | AnyControlContainerBuilder<number>)[];
 }

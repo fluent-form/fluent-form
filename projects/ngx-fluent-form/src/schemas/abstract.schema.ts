@@ -8,10 +8,10 @@ import { NzDateMode, SupportTimeOptions } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { AnyBuilder, AnySchema } from './index.schema';
 import { Col, ControlEventListenerHolder, ControlValueMapper, Labelful, Row, SchemaContext, SchemaLike } from './interfaces';
-import { AnySchemaName, Cell } from './types';
+import { AnySchemaKey, Cell } from './types';
 
 /** 抽象图示 */
-export interface AbstractSchema<N extends AnySchemaName = AnySchemaName> extends SchemaLike<N> {
+export interface AbstractSchema<Key extends AnySchemaKey = AnySchemaKey> extends SchemaLike<Key> {
   /* Used to define the width of the control. */
   col?: Col | Cell;
   hidden?: boolean | ((ctx: SchemaContext<AbstractSchema>) => boolean) | string;
@@ -20,16 +20,16 @@ export interface AbstractSchema<N extends AnySchemaName = AnySchemaName> extends
 }
 
 /** 抽象的真实控件图示 */
-export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends AbstractSchema<Name>, Labelful {
+export interface AbstractControlSchema<Key extends AnySchemaKey, Val> extends AbstractSchema<Key>, Labelful {
   id?: string;
   /** I/O mapper for control */
   mapper?: ControlValueMapper<Val>;
   /* Used to set the default value of the control. */
   defaultValue?: SafeAny;
   /** Is it a required control */
-  required?: boolean | ((ctx: SchemaContext<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
+  required?: boolean | ((ctx: SchemaContext<AbstractControlSchema<AnySchemaKey, Val>>) => boolean) | string;
   /** Whether to disable control */
-  disabled?: boolean | ((ctx: SchemaContext<AbstractControlSchema<AnySchemaName, Val>>) => boolean) | string;
+  disabled?: boolean | ((ctx: SchemaContext<AbstractControlSchema<AnySchemaKey, Val>>) => boolean) | string;
   feedback?: boolean;
   hint?: string | TemplateRef<void>;
   /** Error message for control */
@@ -49,7 +49,7 @@ export interface AbstractControlSchema<Name extends AnySchemaName, Val> extends 
 }
 
 /** 抽象的容器控件图示 */
-export interface AbstractControlContainerSchema<Name extends AnySchemaName> extends AbstractSchema<Name>, ControlEventListenerHolder<SafeAny>, Row {
+export interface AbstractControlContainerSchema<Key extends AnySchemaKey> extends AbstractSchema<Key>, ControlEventListenerHolder<SafeAny>, Row {
   /* Used to define the label of the control. */
   label?: string;
   schemas: (AnySchema | AnyBuilder)[];
@@ -62,16 +62,16 @@ export interface AbstractControlContainerSchema<Name extends AnySchemaName> exte
 }
 
 /** 抽象的输入框图示 */
-export interface AbstractInputBoxControlSchema<N extends AnySchemaName, V, P extends string | [string, string] = string> extends AbstractControlSchema<N, V> {
+export interface AbstractInputBoxControlSchema<Key extends AnySchemaKey, Val, P extends string | [string, string] = string> extends AbstractControlSchema<Key, Val> {
   placeholder?: P;
   autofocus?: boolean;
-  readonly?: boolean | ((ctx: SchemaContext<AbstractInputBoxControlSchema<AnySchemaName, V, P>>) => boolean) | string;
+  readonly?: boolean | ((ctx: SchemaContext<AbstractInputBoxControlSchema<AnySchemaKey, Val, P>>) => boolean) | string;
   size?: NzSizeLDSType;
   borderless?: boolean;
 }
 
 /** 抽象的文本控件图示 */
-export interface AbstractTextControlSchema<Name extends AnySchemaName> extends AbstractInputBoxControlSchema<Name, string> {
+export interface AbstractTextControlSchema<Key extends AnySchemaKey> extends AbstractInputBoxControlSchema<Key, string> {
   length?: number | { max?: number, min?: number };
   autocomplete?: {
     backfill?: boolean;
@@ -82,7 +82,7 @@ export interface AbstractTextControlSchema<Name extends AnySchemaName> extends A
 }
 
 /** 抽象的日期控件图示 */
-export interface AbstractDateControlSchema<N extends AnySchemaName, V, P extends string | [string, string] = string> extends AbstractInputBoxControlSchema<N, V, P> {
+export interface AbstractDateControlSchema<Key extends AnySchemaKey, Val, P extends string | [string, string] = string> extends AbstractInputBoxControlSchema<Key, Val, P> {
   /** Mode of date picker control */
   mode?: NzDateMode;
   /** Show clean button */

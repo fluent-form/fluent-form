@@ -1,16 +1,16 @@
 import { AnyComponentWrapperSchema, ButtonGroupComponentSchema } from '../schemas';
-import { SchemaName } from '../schemas/types';
+import { SchemaKey } from '../schemas/types';
 import { Builder, builder, UnstableBuilder } from '../utils';
-import { isEmptyArray, isSchemaNameTuple, KindOrKey, KindOrSchemas, RestSchema, REST_SCHEMA } from './helper';
+import { isEmptyArray, isSchemaKeyTuple, KindOrKey, KindOrSchemas, RestSchema, REST_SCHEMA } from './helper';
 
 function componentWrapperBuilder<T extends AnyComponentWrapperSchema>(): Builder<T, RestSchema> {
   return builder<T, RestSchema>(REST_SCHEMA);
 }
 
-export function buttonGroup<N extends SchemaName>(key?: N): UnstableComponentWrapperBuilder<ButtonGroupComponentSchema<N>, KindOrKey>;
+export function buttonGroup<Key extends SchemaKey>(key?: Key): UnstableComponentWrapperBuilder<ButtonGroupComponentSchema<Key>, KindOrKey>;
 export function buttonGroup(...schemas: ButtonGroupComponentSchema['schemas']): UnstableComponentWrapperBuilder<ButtonGroupComponentSchema, KindOrSchemas>;
-export function buttonGroup(...keyOrSchemas: [] | [SchemaName] | ButtonGroupComponentSchema['schemas']) {
-  if (isEmptyArray(keyOrSchemas) || isSchemaNameTuple(keyOrSchemas)) {
+export function buttonGroup(...keyOrSchemas: [] | [SchemaKey] | ButtonGroupComponentSchema['schemas']) {
+  if (isEmptyArray(keyOrSchemas) || isSchemaKeyTuple(keyOrSchemas)) {
     return componentWrapperBuilder<ButtonGroupComponentSchema>().kind('button-group').key(keyOrSchemas[0]);
   }
 

@@ -6,10 +6,10 @@ import { StableBuilder } from '../utils';
 import { AbstractSchema } from './abstract.schema';
 import { AnyBuilder, AnySchema } from './index.schema';
 import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Row, SchemaContext } from './interfaces';
-import { SchemaName } from './types';
+import { SchemaKey } from './types';
 
-export interface StepsComponentSchema<Name extends SchemaName = SchemaName>
-  extends AbstractSchema<Name>, ComponentEventListenerHolder<NzStepsComponent>, ComponentPropertyHolder<NzStepsComponent> {
+export interface StepsComponentSchema<Key extends SchemaKey = SchemaKey>
+  extends AbstractSchema<Key>, ComponentEventListenerHolder<NzStepsComponent>, ComponentPropertyHolder<NzStepsComponent> {
   kind: 'steps';
   type?: 'default' | 'navigation';
   active?: number;
@@ -21,19 +21,19 @@ export interface StepsComponentSchema<Name extends SchemaName = SchemaName>
   schemas: (StepComponentSchema | StableBuilder<StepComponentSchema>)[];
 }
 
-export interface StepComponentSchema<Name extends SchemaName = SchemaName>
-  extends AbstractSchema<Name>, ComponentEventListenerHolder<NzStepComponent>, ComponentPropertyHolder<NzStepComponent> {
+export interface StepComponentSchema<Key extends SchemaKey = SchemaKey>
+  extends AbstractSchema<Key>, ComponentEventListenerHolder<NzStepComponent>, ComponentPropertyHolder<NzStepComponent> {
   kind: 'step';
   title: string | TemplateRef<void>;
   subtitle?: string | TemplateRef<void>;
   description?: string | TemplateRef<void>;
-  disabled?: boolean | ((ctx: SchemaContext<StepComponentSchema<SchemaName>>) => boolean) | string;
+  disabled?: boolean | ((ctx: SchemaContext<StepComponentSchema<SchemaKey>>) => boolean) | string;
   status?: 'wait' | 'process' | 'finish' | 'error';
   schemas: (AnySchema | AnyBuilder)[];
 }
 
-export interface TabsComponentSchema<Name extends SchemaName = SchemaName>
-  extends AbstractSchema<Name>, ComponentEventListenerHolder<NzTabSetComponent>, ComponentPropertyHolder<NzTabSetComponent> {
+export interface TabsComponentSchema<Key extends SchemaKey = SchemaKey>
+  extends AbstractSchema<Key>, ComponentEventListenerHolder<NzTabSetComponent>, ComponentPropertyHolder<NzTabSetComponent> {
   kind: 'tabs';
   type?: NzTabType;
   active?: number;
@@ -45,16 +45,16 @@ export interface TabsComponentSchema<Name extends SchemaName = SchemaName>
   schemas: (TabComponentSchema | StableBuilder<TabComponentSchema>)[];
 }
 
-export interface TabComponentSchema<Name extends SchemaName = SchemaName>
-  extends AbstractSchema<Name>, ComponentEventListenerHolder<NzTabComponent>, ComponentPropertyHolder<NzTabComponent> {
+export interface TabComponentSchema<Key extends SchemaKey = SchemaKey>
+  extends AbstractSchema<Key>, ComponentEventListenerHolder<NzTabComponent>, ComponentPropertyHolder<NzTabComponent> {
   kind: 'tab';
   title: string;
-  disabled?: boolean | ((ctx: SchemaContext<TabComponentSchema<SchemaName>>) => boolean) | string;
+  disabled?: boolean | ((ctx: SchemaContext<TabComponentSchema<SchemaKey>>) => boolean) | string;
   schemas: (AnySchema | AnyBuilder)[];
 }
 
-export interface RowComponentSchema<Name extends SchemaName = SchemaName>
-  extends AbstractSchema<Name>, ElementEventListenerHolder, ElementPropertyHolder<HTMLElement>, Row {
+export interface RowComponentSchema<Key extends SchemaKey = SchemaKey>
+  extends AbstractSchema<Key>, ElementEventListenerHolder, ElementPropertyHolder<HTMLElement>, Row {
   kind: 'row';
   schemas: (AnySchema | AnyBuilder)[];
 }

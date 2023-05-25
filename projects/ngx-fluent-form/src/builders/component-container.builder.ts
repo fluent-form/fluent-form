@@ -1,5 +1,5 @@
 import { AnyComponentContainerSchema, RowComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema } from '../schemas';
-import { SchemaName } from '../schemas/types';
+import { SchemaKey } from '../schemas/types';
 import { Builder, builder, UnstableBuilder } from '../utils';
 import { KindOrKey, RestSchema, REST_SCHEMA } from './helper';
 
@@ -7,24 +7,24 @@ function componentContainerBuilder<T extends AnyComponentContainerSchema>(): Bui
   return builder<T, RestSchema>(REST_SCHEMA);
 }
 
-export function steps<N extends SchemaName>(key?: N): UnstableComponentContainerBuilder<StepsComponentSchema<N>, KindOrKey> {
-  return componentContainerBuilder<StepsComponentSchema<N>>().kind('steps').key(key);
+export function steps<Key extends SchemaKey>(key?: Key): UnstableComponentContainerBuilder<StepsComponentSchema<Key>, KindOrKey> {
+  return componentContainerBuilder<StepsComponentSchema<Key>>().kind('steps').key(key);
 }
 
-export function step<N extends SchemaName>(key?: N): UnstableComponentContainerBuilder<StepComponentSchema<N>, KindOrKey> {
-  return componentContainerBuilder<StepComponentSchema<N>>().kind('step').key(key);
+export function step<Key extends SchemaKey>(key?: Key): UnstableComponentContainerBuilder<StepComponentSchema<Key>, KindOrKey> {
+  return componentContainerBuilder<StepComponentSchema<Key>>().kind('step').key(key);
 }
 
-export function tabs<N extends SchemaName>(key?: N): UnstableComponentContainerBuilder<TabsComponentSchema<N>, KindOrKey> {
-  return componentContainerBuilder<TabsComponentSchema<N>>().kind('tabs').key(key);
+export function tabs<Key extends SchemaKey>(key?: Key): UnstableComponentContainerBuilder<TabsComponentSchema<Key>, KindOrKey> {
+  return componentContainerBuilder<TabsComponentSchema<Key>>().kind('tabs').key(key);
 }
 
-export function tab<N extends SchemaName>(key?: N): UnstableComponentContainerBuilder<TabComponentSchema<N>, KindOrKey> {
-  return componentContainerBuilder<TabComponentSchema<N>>().kind('tab').key(key);
+export function tab<Key extends SchemaKey>(key?: Key): UnstableComponentContainerBuilder<TabComponentSchema<Key>, KindOrKey> {
+  return componentContainerBuilder<TabComponentSchema<Key>>().kind('tab').key(key);
 }
 
-export function row<N extends SchemaName>(key?: N): UnstableComponentContainerBuilder<RowComponentSchema<N>, KindOrKey> {
-  return componentContainerBuilder<RowComponentSchema<N>>().kind('row').key(key);
+export function row<Key extends SchemaKey>(key?: Key): UnstableComponentContainerBuilder<RowComponentSchema<Key>, KindOrKey> {
+  return componentContainerBuilder<RowComponentSchema<Key>>().kind('row').key(key);
 }
 
 export type UnstableComponentContainerBuilder<T extends AnyComponentContainerSchema, S extends keyof T> = UnstableBuilder<T, S, RestSchema>;

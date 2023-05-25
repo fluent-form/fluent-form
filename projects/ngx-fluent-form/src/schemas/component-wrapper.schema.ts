@@ -3,10 +3,10 @@ import { StableBuilder } from '../utils';
 import { AbstractSchema } from './abstract.schema';
 import { ButtonComponentSchema } from './component.schema';
 import { ComponentEventListenerHolder, ComponentPropertyHolder, Labelful } from './interfaces';
-import { SchemaName } from './types';
+import { SchemaKey } from './types';
 
-export interface ButtonGroupComponentSchema<Name extends SchemaName = SchemaName>
-  extends AbstractSchema<Name>, Labelful, ComponentEventListenerHolder<NzButtonComponent>, ComponentPropertyHolder<NzButtonComponent> {
+export interface ButtonGroupComponentSchema<Key extends SchemaKey = SchemaKey>
+  extends AbstractSchema<Key>, Labelful, ComponentEventListenerHolder<NzButtonComponent>, ComponentPropertyHolder<NzButtonComponent> {
   kind: 'button-group';
   schemas: (ButtonComponentSchema | StableBuilder<ButtonComponentSchema>)[];
   size?: NzButtonSize;

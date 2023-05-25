@@ -1,7 +1,7 @@
 import { ValidatorFn, Validators } from '@angular/forms';
 import { AnyContainerSchema, AnyControlOrControlContainerSchema, AnyControlSchema, AnySchema, AnyWrapperSchema } from '../schemas';
 import { isComponentContainerSchema, isComponentWrapperSchema, isControlContainerSchema, isControlWrapperSchema, isTextControlSchema } from '../schemas/kind';
-import { AnySchemaName, SchemaName, StandardSchema } from '../schemas/types';
+import { AnySchemaKey, SchemaKey, StandardSchema } from '../schemas/types';
 import { isBuilder, StableBuilder } from './builder.utils';
 import { isNumber } from './is.utils';
 
@@ -129,14 +129,14 @@ export function schemasUtils<S extends AnySchema[]>(schemas: S) {
 export class SchemasUtils<S extends AnySchema[]> {
   constructor(private readonly schemas: S) { }
 
-  find<T extends AnySchema>(name: AnySchemaName): T | null;
-  find<T extends AnySchema>(path: [...SchemaName[], AnySchemaName]): T | null;
-  find<T extends AnySchema>(path: AnySchemaName | [...SchemaName[], AnySchemaName]): T | null;
-  find<T extends AnySchema>(path: AnySchemaName | [...SchemaName[], AnySchemaName]): T | null {
+  find<T extends AnySchema>(key: AnySchemaKey): T | null;
+  find<T extends AnySchema>(path: [...SchemaKey[], AnySchemaKey]): T | null;
+  find<T extends AnySchema>(path: AnySchemaKey | [...SchemaKey[], AnySchemaKey]): T | null;
+  find<T extends AnySchema>(path: AnySchemaKey | [...SchemaKey[], AnySchemaKey]): T | null {
     let schemas = this.schemas as AnySchema[];
     // 如果是数组，那么除了最后一个元素，其他元素所对应的 schema 一定是 container schema
     if (Array.isArray(path)) {
-      const [endPath, ...beforePath] = path.reverse() as [AnySchemaName, ...SchemaName[]];
+      const [endPath, ...beforePath] = path.reverse() as [AnySchemaKey, ...SchemaKey[]];
       schemas = beforePath.reduceRight((schemas, name) => (
         (schemas.find(o => o.key === name) as AnyContainerSchema).schemas as AnyControlOrControlContainerSchema[]
       ), schemas as AnyControlOrControlContainerSchema[]);

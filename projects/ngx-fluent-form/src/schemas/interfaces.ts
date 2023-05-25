@@ -4,11 +4,11 @@ import { SafeAny } from '@ngify/types';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
 import { ComponentOutputListenerMap, ComponentPropertyMap, HTMLElementEventListenerMap, HTMLElementPropertyMap } from '../types';
-import { AnySchemaName, Cell, StandardSchema } from './types';
+import { AnySchemaKey, Cell, StandardSchema } from './types';
 
-export interface SchemaLike<N extends AnySchemaName = AnySchemaName> {
+export interface SchemaLike<Key extends AnySchemaKey = AnySchemaKey> {
   kind: string;
-  key?: N;
+  key?: Key;
 }
 
 /** @internal */

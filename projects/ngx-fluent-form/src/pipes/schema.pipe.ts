@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { AnyControlSchema, AnySchema, FormArraySchema, FormGroupSchema } from '../schemas';
-import { AnySchemaName } from '../schemas/types';
+import { AnySchemaKey } from '../schemas/types';
 import { schemasUtils } from '../utils';
 
 @Pipe({
@@ -15,11 +15,11 @@ export class FluentSchemaPipe implements PipeTransform {
    * @param schemas
    * @param type 用来重载方法的返回值
    */
-  transform(value: AnySchemaName, schemas: AnySchema[], type: 'control'): AnyControlSchema | null;
-  transform(value: AnySchemaName, schemas: AnySchema[], type: 'group'): FormGroupSchema | null;
-  transform(value: AnySchemaName, schemas: AnySchema[], type: 'array'): FormArraySchema | null;
-  transform(value: AnySchemaName, schemas: AnySchema[]): AnySchema | null;
-  transform(value: AnySchemaName, schemas: AnySchema[]): AnySchema | null {
+  transform(value: AnySchemaKey, schemas: AnySchema[], type: 'control'): AnyControlSchema | null;
+  transform(value: AnySchemaKey, schemas: AnySchema[], type: 'group'): FormGroupSchema | null;
+  transform(value: AnySchemaKey, schemas: AnySchema[], type: 'array'): FormArraySchema | null;
+  transform(value: AnySchemaKey, schemas: AnySchema[]): AnySchema | null;
+  transform(value: AnySchemaKey, schemas: AnySchema[]): AnySchema | null {
     return schemasUtils(schemas).find(value);
   }
 

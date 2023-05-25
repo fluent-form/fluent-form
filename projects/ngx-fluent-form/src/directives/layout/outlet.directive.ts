@@ -2,7 +2,7 @@ import { Directive, inject, Input, OnChanges, OnDestroy, OnInit, ViewContainerRe
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { AnyComponentSchema, AnyControlSchema } from '../../schemas';
-import { SchemaName, StandardSchema } from '../../schemas/types';
+import { SchemaKey, StandardSchema } from '../../schemas/types';
 import { TemplateRegistry } from '../../services';
 import { WidgetTemplateContext } from '../../widgets';
 import { FluentControlContainer } from './models/control-container';
@@ -43,7 +43,7 @@ export class FluentOutletDirective<T extends AnyObject | AnyArray> implements On
     return this.controlContainer.directive.model;
   }
 
-  @Input() key!: SchemaName;
+  @Input() key!: SchemaKey;
 
   ngOnInit() {
     this.controlContainer.directive.addDirective(this);

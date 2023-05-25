@@ -7,7 +7,6 @@ Root --- ControlWrapper
 Root --- Component
 Root --- ComponentContainer
 Root --- ComponentWrapper
-Root --- Template
 
 Control --- SingleKeyControl --- AnyKeyControl
 Control --- DoubleKeyControl --- AnyKeyControl

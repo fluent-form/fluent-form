@@ -2,7 +2,7 @@ import { Directive, ElementRef, EventEmitter, Input } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
-import { asapScheduler, fromEvent, observeOn, takeUntil } from 'rxjs';
+import { fromEvent, takeUntil } from 'rxjs';
 import { EventListenerHolder, PropertyHolder } from '../schemas/interfaces';
 
 function isEventListener(value: SafeAny): value is EventListenerHolder {
@@ -36,7 +36,6 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
       for (const [eventName, listener] of Object.entries(schema.listeners)) {
         if (eventName === 'valueChange') {
           control!.valueChanges.pipe(
-            observeOn(asapScheduler), // 微任务调度，确保顶层事件先发射
             takeUntil(this.destory$),
           ).subscribe(listener);
           continue;
@@ -44,7 +43,6 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
 
         if (eventName === 'statusChange') {
           control!.statusChanges.pipe(
-            observeOn(asapScheduler),
             takeUntil(this.destory$),
           ).subscribe(listener);
           continue;

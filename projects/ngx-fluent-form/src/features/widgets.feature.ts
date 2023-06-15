@@ -2,7 +2,7 @@ import { Type } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { SchemaConfig } from '../interfaces';
-import { AbstractSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, InputGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, StepsComponentSchema, TabsComponentSchema, TextareaControlSchema, TextComponentSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { AbstractSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, InputGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema, TextareaControlSchema, TextComponentSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP, WIDGET_MAP } from '../tokens';
 import { isNumber } from '../utils';
@@ -13,7 +13,7 @@ import { FluentFormFeature, FluentFormFeatureKind } from './interface';
 
 export interface FluentFormWidgetFeature<S extends AbstractSchema> extends SchemaConfig<S> {
   kind: string;
-  widget: Type<AbstractWidget<unknown>>;
+  widget?: Type<AbstractWidget<unknown>>;
 }
 
 export function withWidgets(...features: (FluentFormWidgetFeature<SafeAny> | FluentFormWidgetFeature<SafeAny>[])[]): FluentFormFeature<FluentFormFeatureKind.Widget> {
@@ -22,12 +22,15 @@ export function withWidgets(...features: (FluentFormWidgetFeature<SafeAny> | Flu
   return makeFluentFormFeature(FluentFormFeatureKind.Widget, [
     {
       provide: WIDGET_MAP,
-      useValue: new Map(
-        flattenedFeatures.map(feature => [
-          feature.kind,
-          feature.widget
-        ])
-      )
+      useFactory: () => {
+        const map: Map<string, Type<AbstractWidget<unknown>>> = new Map(
+          flattenedFeatures.filter(feature => feature.widget).map(feature => [
+            feature.kind,
+            feature.widget!
+          ])
+        );
+        return map;
+      }
     },
     {
       provide: SCHEMA_MAP,
@@ -306,20 +309,32 @@ export function useButtonGroupWidget(): FluentFormWidgetFeature<ButtonGroupCompo
   };
 }
 
-export function useStepsWidget(): FluentFormWidgetFeature<StepsComponentSchema> {
-  return {
-    type: SchemaType.ComponentContainer,
-    kind: WidgetKind.Steps,
-    widget: StepsWidget
-  };
+export function useStepsWidget(): [FluentFormWidgetFeature<StepsComponentSchema>, FluentFormWidgetFeature<StepComponentSchema>] {
+  return [
+    {
+      type: SchemaType.ComponentContainer,
+      kind: WidgetKind.Steps,
+      widget: StepsWidget
+    },
+    {
+      type: SchemaType.ComponentContainer,
+      kind: 'step'
+    }
+  ];
 }
 
-export function useTabsWidget(): FluentFormWidgetFeature<TabsComponentSchema> {
-  return {
-    type: SchemaType.ComponentContainer,
-    kind: WidgetKind.Tabs,
-    widget: TabsWidget
-  };
+export function useTabsWidget(): [FluentFormWidgetFeature<TabsComponentSchema>, FluentFormWidgetFeature<TabComponentSchema>] {
+  return [
+    {
+      type: SchemaType.ComponentContainer,
+      kind: WidgetKind.Tabs,
+      widget: TabsWidget
+    },
+    {
+      type: SchemaType.ComponentContainer,
+      kind: 'tab'
+    }
+  ];
 }
 
 export function useNestedFormWidget(): [FluentFormWidgetFeature<FormGroupSchema>, FluentFormWidgetFeature<FormArraySchema>] {

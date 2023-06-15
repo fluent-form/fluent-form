@@ -98,7 +98,7 @@ export function standardSchemas<T extends (AnySchema | StableBuilder<AnySchema>)
   return schemas.map(schema => standardSchema(schema));
 }
 
-export function schemasUtils<S extends AnySchema[]>(schemas: S) {
+export function schemasUtils<S extends StandardSchema<AnySchema>[]>(schemas: S) {
   return new SchemasUtils(schemas);
 }
 

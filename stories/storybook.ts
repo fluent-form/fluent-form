@@ -10,7 +10,7 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NZ_I18N, zh_CN } from 'ng-zorro-antd/i18n';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { AnySchema, FluentFormComponent, FluentFormModule, FormGroupSchema, StandardSchema, withAllWidgets, withStaticExpression } from 'ngx-fluent-form';
+import { AnySchema, FluentFormComponent, FluentFormModule, StandardSchema, withAllWidgets, withStaticExpression } from 'ngx-fluent-form';
 
 registerLocaleData(zh);
 
@@ -68,7 +68,7 @@ export const defineStory = <T>(story?: Partial<Story<T>>): Story<T> => Object.as
 
 @Directive()
 export abstract class AbstractFluentFormWrapperComponent {
-  @Input() schemas!: StandardSchema<AnySchema>[] | StandardSchema<FormGroupSchema>;
+  @Input() schemas!: StandardSchema<AnySchema>[];
   @Input() model!: FluentFormComponent<SafeAny>['model'];
   @Input() layout: FluentFormComponent<SafeAny>['layout'] = 'vertical';
   @Input() colon: FluentFormComponent<SafeAny>['colon'] = true;

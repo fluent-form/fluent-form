@@ -1,4 +1,4 @@
-import { AnyControlSchema, AnySchema } from '../schemas';
+import { AnyControlSchema, StandardSchema } from '../schemas';
 import { FluentSchemaPipe } from './schema.pipe';
 
 describe('FluentSchemaPipe', () => {
@@ -13,8 +13,8 @@ describe('FluentSchemaPipe', () => {
   });
 
   it('should be can find schema by key', () => {
-    const schemas: AnySchema[] = [{ kind: 'input', key: 'text' }];
+    const schemas: StandardSchema<AnyControlSchema>[] = [{ kind: 'input', key: 'text' }];
     const schema = pipe.transform('text', schemas, 'control');
-    expect(schema).toBe(schemas[0] as AnyControlSchema);
+    expect(schema).toBe(schemas[0]);
   });
 });

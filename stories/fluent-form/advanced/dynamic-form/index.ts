@@ -48,17 +48,15 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
   add() {
     const array = schemasUtils(this.schemas).find<FormArraySchema>('passengers')!;
     array.schemas.push(
-      input().label('乘客').col(12).build()
+      input().label('乘客').col(12)
     );
-    array.schemas = [...array.schemas];
-    this.schemas = [...this.schemas];
+    this.schemas = form(...this.schemas);
   }
 
   remove() {
     const array = schemasUtils(this.schemas).find<FormArraySchema>('passengers')!;
     array.schemas.pop();
-    array.schemas = [...array.schemas];
-    this.schemas = [...this.schemas];
+    this.schemas = form(...this.schemas);
   }
 }
 

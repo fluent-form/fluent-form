@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Cell } from '../schemas';
 import { Col } from '../schemas/interfaces';
-import { Cell } from '../schemas/types';
 import { isNumber } from '../utils';
 
 @Pipe({

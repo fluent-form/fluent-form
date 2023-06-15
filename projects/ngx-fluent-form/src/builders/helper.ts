@@ -1,5 +1,5 @@
 import { SafeAny } from '@ngify/types';
-import { SchemaKey } from '../schemas/types';
+import { SchemaKey } from '../schemas';
 import { isString } from '../utils';
 
 export const REST_SCHEMA = ['schemas'] as const;

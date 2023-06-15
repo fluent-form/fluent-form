@@ -5,7 +5,7 @@ import { AnyObject } from '@ngify/types';
 import { form, input } from '../../builders';
 import { withAllWidgets, withStaticExpression } from '../../features';
 import { provideFluentForm } from '../../provider';
-import { FormGroupSchema } from '../../schemas';
+import { FormGroupSchema, StandardSchema } from '../../schemas';
 import { AnySchema } from '../../schemas/index.schema';
 import { FluentFormComponent } from './form.component';
 
@@ -16,7 +16,7 @@ import { FluentFormComponent } from './form.component';
 })
 class TestWarpperComponent<T extends AnyObject> {
   form!: FormGroup;
-  schemas!: AnySchema[] | FormGroupSchema;
+  schemas!: StandardSchema<AnySchema>[] | StandardSchema<FormGroupSchema>;
   model: T = {} as T;
 }
 

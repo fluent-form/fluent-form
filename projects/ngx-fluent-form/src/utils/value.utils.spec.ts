@@ -1,52 +1,64 @@
 import { TestBed } from '@angular/core/testing';
 import { FormControl } from '@angular/forms';
-import { standardSchema } from './schema.utils';
+import { withAllWidgets } from '../features';
+import { provideFluentForm } from '../provider';
+import { SchemaUtil } from './schema.utils';
 import { ValueUtil } from './value.utils';
 
 describe('ValueUtils', () => {
-  let util: ValueUtil;
+  let valueUtil: ValueUtil;
+  let schemaUtil: SchemaUtil;
 
   beforeEach(() => {
-    util = TestBed.inject(ValueUtil);
+    TestBed.configureTestingModule({
+      providers: [
+        provideFluentForm(
+          withAllWidgets()
+        )
+      ]
+    });
+
+    valueUtil = TestBed.inject(ValueUtil);
+    schemaUtil = TestBed.inject(SchemaUtil);
   });
 
   describe('getValueFromModel', () => {
     describe('normal', () => {
       it('no init value and default value', () => {
         const model = {};
-        const schema = standardSchema({ kind: 'number', key: 'num' });
-        const value = util.valueOfModel(model, schema);
+        const schema = schemaUtil.patchSchema({ kind: 'number', key: 'num' });
+        const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBeNull();
       });
 
       it('with init value', () => {
         const model = { num: 1 };
-        const schema = standardSchema({ kind: 'number', key: 'num' });
-        const value = util.valueOfModel(model, schema);
+        const schema = schemaUtil.patchSchema({ kind: 'number', key: 'num' });
+        const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBe(1);
       });
 
       it('with default value', () => {
         const model = {};
-        const schema = standardSchema({ kind: 'number', key: 'num', defaultValue: 1 });
-        const value = util.valueOfModel(model, schema);
+        const schema = schemaUtil.patchSchema({ kind: 'number', key: 'num', defaultValue: 1 });
+        const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBe(1);
       });
 
       it('with init value and default value', () => {
         const model = { num: 2 };
-        const schema = standardSchema({ kind: 'number', key: 'num', defaultValue: 1 });
-        const value = util.valueOfModel(model, schema);
+        const schema = schemaUtil.patchSchema({ kind: 'number', key: 'num', defaultValue: 1 });
+        const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBe(2);
       });
 
       it('with mapper', () => {
         const model = { num: '1' };
-        const schema = standardSchema({
+        const schema = schemaUtil.patchSchema({
           kind: 'number',
           key: 'num',
           mapper: {
@@ -54,7 +66,7 @@ describe('ValueUtils', () => {
             formatter: value => String(value)
           }
         });
-        const value = util.valueOfModel(model, schema);
+        const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBe(1);
       });
@@ -63,39 +75,39 @@ describe('ValueUtils', () => {
     describe('double key control', () => {
       it('no init value and default value', () => {
         const model = {};
-        const schema = standardSchema({ kind: 'slider', key: ['start', 'end'], range: true, });
-        const value = util.valueOfModel(model, schema);
+        const schema = schemaUtil.patchSchema({ kind: 'slider', key: ['start', 'end'], range: true, });
+        const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBeNull();
       });
 
       it('with init value', () => {
         const model = { start: 0, end: 100 };
-        const schema = standardSchema({ kind: 'slider', key: ['start', 'end'], range: true, });
-        const value = util.valueOfModel(model, schema);
+        const schema = schemaUtil.patchSchema({ kind: 'slider', key: ['start', 'end'], range: true, });
+        const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toEqual([0, 100]);
       });
 
       it('with default value', () => {
         const model = {};
-        const schema = standardSchema({ kind: 'slider', key: ['start', 'end'], range: true, defaultValue: [0, 100] });
-        const value = util.valueOfModel(model, schema);
+        const schema = schemaUtil.patchSchema({ kind: 'slider', key: ['start', 'end'], range: true, defaultValue: [0, 100] });
+        const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toEqual([0, 100]);
       });
 
       it('with init value and default value', () => {
         const model = { start: 1, end: 99 };
-        const schema = standardSchema({ kind: 'slider', key: ['start', 'end'], range: true, defaultValue: [0, 100] });
-        const value = util.valueOfModel(model, schema);
+        const schema = schemaUtil.patchSchema({ kind: 'slider', key: ['start', 'end'], range: true, defaultValue: [0, 100] });
+        const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toEqual([1, 99]);
       });
 
       it('with mapper', () => {
         const model = { start: '0', end: '100' };
-        const schema = standardSchema({
+        const schema = schemaUtil.patchSchema({
           kind: 'slider',
           key: ['start', 'end'],
           range: true,
@@ -104,7 +116,7 @@ describe('ValueUtils', () => {
             formatter: (value?: [number, number] | number | null) => (value as [number, number]).map(String) as [string, string]
           }
         });
-        const value = util.valueOfModel(model, schema);
+        const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toEqual([0, 100]);
       });
@@ -113,8 +125,8 @@ describe('ValueUtils', () => {
     describe('date control', () => {
       it('with no init value and default value', () => {
         const model = {};
-        const schema = standardSchema({ kind: 'date', key: 'date' });
-        const value = util.valueOfModel(model, schema);
+        const schema = schemaUtil.patchSchema({ kind: 'date', key: 'date' });
+        const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBeNull();
       });
@@ -122,8 +134,8 @@ describe('ValueUtils', () => {
       it('with init value', () => {
         const now = Date.now();
         const model = { date: now };
-        const schema = standardSchema({ kind: 'date', key: 'date' });
-        const value = util.valueOfModel(model, schema) as Date;
+        const schema = schemaUtil.patchSchema({ kind: 'date', key: 'date' });
+        const value = valueUtil.valueOfModel(model, schema) as Date;
 
         expect(value).toBeInstanceOf(Date);
         expect(value.getTime()).toBe(now);
@@ -132,8 +144,8 @@ describe('ValueUtils', () => {
       it('with default value', () => {
         const now = Date.now();
         const model = {};
-        const schema = standardSchema({ kind: 'date', key: 'date', defaultValue: now });
-        const value = util.valueOfModel(model, schema) as Date;
+        const schema = schemaUtil.patchSchema({ kind: 'date', key: 'date', defaultValue: now });
+        const value = valueUtil.valueOfModel(model, schema) as Date;
 
         expect(value).toBeInstanceOf(Date);
         expect(value.getTime()).toBe(now);
@@ -143,8 +155,8 @@ describe('ValueUtils', () => {
     describe('time control', () => {
       it('with no init value and default value', () => {
         const model = {};
-        const schema = standardSchema({ kind: 'time', key: 'time' });
-        const value = util.valueOfModel(model, schema);
+        const schema = schemaUtil.patchSchema({ kind: 'time', key: 'time' });
+        const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBeNull();
       });
@@ -152,8 +164,8 @@ describe('ValueUtils', () => {
       it('with init value', () => {
         const now = Date.now();
         const model = { time: now };
-        const schema = standardSchema({ kind: 'time', key: 'time' });
-        const value = util.valueOfModel(model, schema) as Date;
+        const schema = schemaUtil.patchSchema({ kind: 'time', key: 'time' });
+        const value = valueUtil.valueOfModel(model, schema) as Date;
 
         expect(value).toBeInstanceOf(Date);
         expect(value.getTime()).toBe(now);
@@ -162,8 +174,8 @@ describe('ValueUtils', () => {
       it('with default value', () => {
         const now = Date.now();
         const model = {};
-        const schema = standardSchema({ kind: 'time', key: 'time', defaultValue: now });
-        const value = util.valueOfModel(model, schema) as Date;
+        const schema = schemaUtil.patchSchema({ kind: 'time', key: 'time', defaultValue: now });
+        const value = valueUtil.valueOfModel(model, schema) as Date;
 
         expect(value).toBeInstanceOf(Date);
         expect(value.getTime()).toBe(now);
@@ -172,42 +184,42 @@ describe('ValueUtils', () => {
 
     describe('date range control', () => {
       it('with no init value and default value', () => {
-        const schema = standardSchema({ kind: 'date-range', key: ['begin', 'end'] });
+        const schema = schemaUtil.patchSchema({ kind: 'date-range', key: ['begin', 'end'] });
         const model = {};
-        const value = util.valueOfModel(model, schema);
+        const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toEqual(null);
       });
 
       it('with init value', () => {
         const begin = new Date(), end = new Date();
-        const schema = standardSchema({ kind: 'date-range', key: ['begin', 'end'] });
+        const schema = schemaUtil.patchSchema({ kind: 'date-range', key: ['begin', 'end'] });
         const model = { begin, end };
-        const value = util.valueOfModel(model, schema);
+        const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toEqual([begin, end]);
       });
 
       it('with init value but is null', () => {
-        const schema = standardSchema({ kind: 'date-range', key: ['begin', 'end'] });
+        const schema = schemaUtil.patchSchema({ kind: 'date-range', key: ['begin', 'end'] });
         const model = { begin: null, end: null };
-        const value = util.valueOfModel(model, schema);
+        const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toEqual(null);
       });
 
       it('with default value', () => {
         const begin = new Date(), end = new Date();
-        const schema = standardSchema({ kind: 'date-range', key: ['begin', 'end'], defaultValue: [begin, end] });
+        const schema = schemaUtil.patchSchema({ kind: 'date-range', key: ['begin', 'end'], defaultValue: [begin, end] });
         const model = {};
-        const value = util.valueOfModel(model, schema);
+        const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toEqual([begin, end]);
       });
     });
 
     it('checkbox group control', () => {
-      const schema = standardSchema({
+      const schema = schemaUtil.patchSchema({
         kind: 'checkbox-group',
         key: 'active',
         options: [
@@ -217,7 +229,7 @@ describe('ValueUtils', () => {
         defaultValue: [1]
       });
       const model = {};
-      const value = util.valueOfModel(model, schema);
+      const value = valueUtil.valueOfModel(model, schema);
 
       expect(value).toEqual([
         { label: 'one', value: 1, checked: true },
@@ -228,15 +240,15 @@ describe('ValueUtils', () => {
 
   describe('getValueFromControl', () => {
     it('normal', () => {
-      const schema = standardSchema({ kind: 'number', key: 'num' });
+      const schema = schemaUtil.patchSchema({ kind: 'number', key: 'num' });
       const control = new FormControl(1);
-      const value = util.valueOfControl(control, schema);
+      const value = valueUtil.valueOfControl(control, schema);
 
       expect(value).toBe(1);
     });
 
     it('with mapper', () => {
-      const schema = standardSchema({
+      const schema = schemaUtil.patchSchema({
         kind: 'number',
         key: 'num',
         mapper: {
@@ -245,25 +257,25 @@ describe('ValueUtils', () => {
         }
       });
       const control = new FormControl(1);
-      const value = util.valueOfControl(control, schema);
+      const value = valueUtil.valueOfControl(control, schema);
 
       expect(value).toEqual('1');
     });
 
     describe('date control', () => {
       it('with has no value', () => {
-        const schema = standardSchema({ kind: 'date', key: 'date', });
+        const schema = schemaUtil.patchSchema({ kind: 'date', key: 'date', });
         const control = new FormControl(null);
-        const value = util.valueOfControl(control, schema);
+        const value = valueUtil.valueOfControl(control, schema);
 
         expect(value).toBeNull();
       });
 
       it('with has value', () => {
         const now = new Date();
-        const schema = standardSchema({ kind: 'date', key: 'date', });
+        const schema = schemaUtil.patchSchema({ kind: 'date', key: 'date', });
         const control = new FormControl(now);
-        const value = util.valueOfControl(control, schema);
+        const value = valueUtil.valueOfControl(control, schema);
 
         expect(value).toBe(now.getTime());
       });
@@ -271,18 +283,18 @@ describe('ValueUtils', () => {
 
     describe('time control', () => {
       it('with has no value', () => {
-        const schema = standardSchema({ kind: 'time', key: 'time', });
+        const schema = schemaUtil.patchSchema({ kind: 'time', key: 'time', });
         const control = new FormControl(null);
-        const value = util.valueOfControl(control, schema);
+        const value = valueUtil.valueOfControl(control, schema);
 
         expect(value).toBeNull();
       });
 
       it('with has value', () => {
         const now = new Date();
-        const schema = standardSchema({ kind: 'time', key: 'time', });
+        const schema = schemaUtil.patchSchema({ kind: 'time', key: 'time', });
         const control = new FormControl(now);
-        const value = util.valueOfControl(control, schema);
+        const value = valueUtil.valueOfControl(control, schema);
 
         expect(value).toBe(now.getTime());
       });
@@ -290,30 +302,30 @@ describe('ValueUtils', () => {
 
     describe('date range control', () => {
       it('with has no value', () => {
-        const schema = standardSchema({ kind: 'date-range', key: 'range', });
+        const schema = schemaUtil.patchSchema({ kind: 'date-range', key: 'range', });
         const control = new FormControl(null);
-        const value = util.valueOfControl(control, schema);
+        const value = valueUtil.valueOfControl(control, schema);
 
         expect(value).toBeNull();
       });
 
       it('with has value', () => {
         const begin = new Date(), end = new Date();
-        const schema = standardSchema({ kind: 'date-range', key: 'range', });
+        const schema = schemaUtil.patchSchema({ kind: 'date-range', key: 'range', });
         const control = new FormControl([begin, end]);
-        const value = util.valueOfControl(control, schema);
+        const value = valueUtil.valueOfControl(control, schema);
 
         expect(value).toEqual([begin.getTime(), end.getTime()]);
       });
     });
 
     it('checkbox group control', () => {
-      const schema = standardSchema({ kind: 'checkbox-group', key: 'active', options: [] });
+      const schema = schemaUtil.patchSchema({ kind: 'checkbox-group', key: 'active', options: [] });
       const control = new FormControl([
         { label: 'one', value: 1, checked: true },
         { label: 'two', value: 2, checked: false },
       ]);
-      const value = util.valueOfControl(control, schema);
+      const value = valueUtil.valueOfControl(control, schema);
 
       expect(value).toEqual([1]);
     });

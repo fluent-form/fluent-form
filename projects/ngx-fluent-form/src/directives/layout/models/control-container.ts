@@ -1,8 +1,7 @@
 import { Directive, EventEmitter, Output } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
-import { AnyComponentSchema, AnyControlSchema, AnySchema } from '../../../schemas';
-import { StandardSchema } from '../../../schemas/types';
+import { AnyComponentSchema, AnyControlSchema, AnySchema, StandardSchema } from '../../../schemas';
 import { schemasUtils } from '../../../utils';
 import { FluentOutletDirective } from '../outlet.directive';
 

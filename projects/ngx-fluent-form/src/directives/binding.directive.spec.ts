@@ -1,11 +1,13 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, inject } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzRateComponent, NzRateModule } from 'ng-zorro-antd/rate';
-import { AnyControlSchema, InputControlSchema, RateControlSchema } from '../schemas';
-import { createFormControl } from '../utils';
+import { withAllWidgets } from '../features';
+import { provideFluentForm } from '../provider';
+import { InputControlSchema, RateControlSchema } from '../schemas';
+import { FormUtil } from '../utils';
 import { FluentBindingDirective } from './binding.directive';
 
 // eslint-disable-next-line
@@ -32,6 +34,8 @@ function emptyFn() { }
   `
 })
 class TestingComponent {
+  readonly formUtil = inject(FormUtil);
+
   inputSchema: InputControlSchema = {
     kind: 'input',
     key: 'ipt',
@@ -56,8 +60,8 @@ class TestingComponent {
     }
   };
 
-  inputControl = createFormControl(this.inputSchema as AnyControlSchema);
-  rateControl = createFormControl(this.rateSchema as AnyControlSchema);
+  inputControl = this.formUtil.createFormControl(this.inputSchema);
+  rateControl = this.formUtil.createFormControl(this.rateSchema);
 }
 
 describe('FluentBindingDirective', () => {
@@ -67,6 +71,13 @@ describe('FluentBindingDirective', () => {
   let debugElement: DebugElement;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        provideFluentForm(
+          withAllWidgets()
+        )
+      ]
+    });
     fixture = TestBed.createComponent(TestingComponent);
     component = fixture.componentInstance;
     debugElement = fixture.debugElement;

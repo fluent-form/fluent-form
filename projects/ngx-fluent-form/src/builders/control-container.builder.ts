@@ -1,6 +1,5 @@
 import { SafeAny } from '@ngify/types';
-import { AnyBuilder, AnyControlContainerSchema, AnySchema, FormArraySchema, FormGroupSchema } from '../schemas';
-import { SchemaKey } from '../schemas/types';
+import { AnyBuilder, AnyControlContainerSchema, AnySchema, FormArraySchema, FormGroupSchema, SchemaKey, StandardSchema } from '../schemas';
 import { Builder, builder, StableBuilder, standardSchema, standardSchemas, UnstableBuilder } from '../utils';
 import { KindOrKey } from './helper';
 
@@ -14,21 +13,20 @@ function controlContainerBuilder<T extends AnyControlContainerSchema>(): Builder
  * 是否为表单构建器函数元组
  * @param arr
  */
-function isFormBuilderFnTuple(arr: SafeAny[]): arr is [FormBuilderFn] {
+function isFormFactoryFnTuple(arr: SafeAny[]): arr is [FormBuilderFn] {
   return arr[0] instanceof Function;
 }
 
-export function form(fn: FormBuilderFn): FormGroupSchema;
-export function form(...schemas: (AnySchema | AnyBuilder)[]): AnySchema[];
-export function form(...fnOrSchemas: (AnySchema | AnyBuilder)[] | [FormBuilderFn]): AnySchema[] | FormGroupSchema {
-  if (isFormBuilderFnTuple(fnOrSchemas)) {
-    const [fn] = fnOrSchemas;
-    const builder = group();
-    const schema = fn(builder);
-    return standardSchema(schema);
+export function form(factory: FormBuilderFn): StandardSchema<FormGroupSchema>;
+export function form(...schemas: AnySchema[]): StandardSchema<AnySchema>[];
+export function form(...builders: AnyBuilder[]): StandardSchema<AnySchema>[];
+export function form(...fnOrSchemasOrBuilder: AnySchema[] | AnyBuilder[] | [FormBuilderFn]): StandardSchema<AnySchema>[] | StandardSchema<FormGroupSchema> {
+  if (isFormFactoryFnTuple(fnOrSchemasOrBuilder)) {
+    const [factory] = fnOrSchemasOrBuilder;
+    return standardSchema(factory(group()));
   }
 
-  return standardSchemas(fnOrSchemas);
+  return standardSchemas(fnOrSchemasOrBuilder);
 }
 
 export function group(): UnstableControlContainerBuilder<FormGroupSchema<number>, KindOrKey>;

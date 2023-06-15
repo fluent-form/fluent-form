@@ -3,8 +3,7 @@ import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { startWith, takeUntil } from 'rxjs';
-import { AnyControlContainerSchema, AnySchema } from '../../schemas';
-import { StandardSchema } from '../../schemas/types';
+import { AnyControlContainerSchema, AnySchema, StandardSchema } from '../../schemas';
 import { schemasUtils } from '../../utils';
 import { ControlContainerDirective, FluentControlContainer } from './models/control-container';
 

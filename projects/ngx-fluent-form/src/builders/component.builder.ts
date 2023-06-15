@@ -1,5 +1,4 @@
-import { ButtonComponentSchema, TextComponentSchema } from '../schemas';
-import { SchemaKey } from '../schemas/types';
+import { ButtonComponentSchema, SchemaKey, TextComponentSchema } from '../schemas';
 import { builder, UnstableBuilder } from '../utils';
 import { KindOrKey } from './helper';
 

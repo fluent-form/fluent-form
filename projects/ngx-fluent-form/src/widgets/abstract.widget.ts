@@ -1,8 +1,7 @@
 import { Directive, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
-import { AbstractTextControlSchema, AnySchema } from '../schemas';
-import { StandardSchema } from '../schemas/types';
+import { AbstractTextControlSchema, AnySchema, StandardSchema } from '../schemas';
 import { Model } from '../types';
 import { isNumber } from '../utils';
 

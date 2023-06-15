@@ -1,28 +1,32 @@
 import { TestBed } from '@angular/core/testing';
-import { toggle } from '../builders';
+import { FormControl } from '@angular/forms';
+import { AnyObject } from '@ngify/types';
+import { withAllWidgets, withStaticExpression } from '../features';
+import { provideFluentForm } from '../provider';
 import { AnyControlSchema } from '../schemas';
-import { CodeEvaluator, DynamicCodeEvaluator } from '../services';
-import { createFormControl, standardSchema } from '../utils';
+import { FormUtil } from '../utils';
 import { FluentCallPipe } from './call.pipe';
 
 describe('FluentCallPipe', () => {
-  const model = { value: true } as const;
-  const schema = standardSchema(toggle('value')) as AnyControlSchema;
-  const ctrl = createFormControl(schema);
-
+  let model: AnyObject;
+  let schema: AnyControlSchema;
+  let ctrl: FormControl;
   let pipe: FluentCallPipe;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        FluentCallPipe,
-        {
-          provide: CodeEvaluator,
-          useClass: DynamicCodeEvaluator
-        }
+        provideFluentForm(
+          withAllWidgets(),
+          withStaticExpression()
+        ),
+        FluentCallPipe
       ]
     });
 
+    model = { value: true };
+    schema = { kind: 'toggle' };
+    ctrl = TestBed.inject(FormUtil).createFormControl(schema);
     pipe = TestBed.inject(FluentCallPipe);
   });
 

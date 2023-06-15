@@ -1,27 +1,73 @@
+import { inject, Injectable } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
-import { AnyContainerSchema, AnyControlOrControlContainerSchema, AnyControlSchema, AnySchema, AnyWrapperSchema } from '../schemas';
-import { isComponentContainerSchema, isComponentWrapperSchema, isControlContainerSchema, isControlWrapperSchema, isTextControlSchema } from '../schemas/kind';
-import { AnySchemaKey, SchemaKey, StandardSchema } from '../schemas/types';
+import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlOrControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, AnySchemaKey, DoubleKeyControlSchema, SchemaKey, StandardSchema } from '../schemas';
+import { SchemaLike, SchemaType } from '../schemas/interfaces';
+import { SCHEMA_MAP } from '../tokens';
 import { isBuilder, StableBuilder } from './builder.utils';
-import { isNumber } from './is.utils';
 
-/**
- * 标准化容器图示
- * @internal
- * @param schema
- */
-const standardContainerSchema = <T extends AnyContainerSchema | AnyWrapperSchema>(schema: T): T => {
-  const schemas = standardSchemas(schema.schemas);
+@Injectable({
+  providedIn: 'root'
+})
+export class SchemaUtil {
+  private readonly schemaMap = inject(SCHEMA_MAP);
 
-  // 如果是数组表单图示，自动补充子图示的名称为索引值
-  if (schema.kind === 'array') {
-    schemas.forEach((schema, index) => schema.key = index);
+  patchSchemas<T extends StandardSchema<AnySchema>[]>(schemas: T) {
+    return schemas.map(schema => this.patchSchema(schema));
   }
 
-  schema.schemas = schemas;
+  patchSchema<T extends StandardSchema<AnySchema>>(schema: T): T {
+    if ('schemas' in schema) {
+      schema.schemas = this.patchSchemas(schema.schemas);
+    }
 
-  return schema;
-};
+    return this.schemaMap.get(schema.kind)?.patch?.(schema) ?? schema;
+  }
+
+  isControlContainerSchema(schema: SchemaLike): schema is AnyControlContainerSchema {
+    return this.typeOf(schema) === SchemaType.ControlContainer;
+  }
+
+  isControlWrapperSchema(schema: SchemaLike): schema is AnyControlWrapperSchema {
+    return this.typeOf(schema) === SchemaType.ControlWrapper;
+  }
+
+  isComponentContainerSchema(schema: SchemaLike): schema is AnyComponentContainerSchema {
+    return this.typeOf(schema) === SchemaType.ComponentContainer;
+  }
+
+  isComponentWrapperSchema(schema: SchemaLike): schema is AnyComponentWrapperSchema {
+    return this.typeOf(schema) === SchemaType.ComponentWrapper;
+  }
+
+  isComponentSchema(schema: SchemaLike): schema is AnyComponentSchema {
+    return this.typeOf(schema) === SchemaType.Component;
+  }
+
+  isNonControlSchema(schema: SchemaLike): schema is AnyComponentSchema | AnyComponentWrapperSchema {
+    return this.isComponentSchema(schema) || this.isComponentWrapperSchema(schema);
+  }
+
+  typeOf(schema: SchemaLike) {
+    return this.schemaMap.get(schema.kind)?.type;
+  }
+
+  validatorsOf(schema: StandardSchema<AnyControlSchema>) {
+    const validators: ValidatorFn[] = this.schemaMap.get(schema.kind)?.validators?.(schema) ?? [];
+
+    // TODO required 可能是个函数，需要动态
+    schema.required && validators.push(Validators.required);
+
+    return validators;
+  }
+}
+
+/**
+ * 是否为双字段图示
+ * @param schema
+ */
+export function isDoubleKeyControlSchema(schema: SchemaLike): schema is DoubleKeyControlSchema {
+  return Array.isArray(schema.key);
+}
 
 /**
  * 标准化图示
@@ -30,46 +76,15 @@ const standardContainerSchema = <T extends AnyContainerSchema | AnyWrapperSchema
 export function standardSchema<T extends AnySchema>(schemaOrSchemaBuilder: T | StableBuilder<T>): StandardSchema<T> {
   const schema = (isBuilder(schemaOrSchemaBuilder) ? schemaOrSchemaBuilder.build() : { ...schemaOrSchemaBuilder });
 
-  if (
-    isControlContainerSchema(schema) ||
-    isControlWrapperSchema(schema) ||
-    isComponentContainerSchema(schema) ||
-    isComponentWrapperSchema(schema)
-  ) {
-    standardContainerSchema(schema);
-  }
+  if ('schemas' in schema) {
+    const schemas = standardSchemas(schema.schemas);
 
-  switch (schema.kind) {
-    case 'date':
-    case 'time':
-      schema.mapper ??= {
-        parser: (value: string | number | Date) => value ? new Date(value) : null,
-        formatter: value => value?.getTime() ?? null
-      };
-      break;
-
-    case 'date-range':
-      schema.mapper ??= {
-        parser: (value: [string | number | Date, string | number | Date]) => value?.map(o => new Date(o)) as [Date, Date] ?? null,
-        formatter: value => value?.map(o => o.getTime()) ?? null
-      };
-      break;
-
-    case 'checkbox-group': {
-      const labelProperty = schema.config?.labelProperty ?? 'label';
-      const valueProperty = schema.config?.valueProperty ?? 'value';
-      const options = schema.options;
-
-      schema.mapper ??= {
-        parser: value => options.map(option => ({
-          label: option[labelProperty],
-          value: option[valueProperty],
-          checked: !!value?.includes(option[valueProperty])
-        })),
-        formatter: value => value?.filter(o => o.checked).map(o => o.value)
-      };
-      break;
+    // 如果是数组表单图示，自动补充子图示的名称为索引值
+    if (schema.kind === 'array') {
+      schemas.forEach((schema, index) => schema.key = index);
     }
+
+    schema.schemas = schemas;
   }
 
   return schema as StandardSchema<T>;
@@ -79,47 +94,8 @@ export function standardSchema<T extends AnySchema>(schemaOrSchemaBuilder: T | S
  * 标准化所有图示
  * @param schemas
  */
-export const standardSchemas = <T extends (AnySchema | StableBuilder<AnySchema>)[]>(schemas: T) =>
-  schemas.map(schema => standardSchema(schema));
-
-export function controlSchemaUtils<S extends AnyControlSchema>(schema: S) {
-  return new ControlSchemaUtils(schema);
-}
-
-export class ControlSchemaUtils<S extends StandardSchema<AnyControlSchema>> {
-  constructor(private readonly schema: S) { }
-
-  /**
-   * 根据部分图示提供的便捷验证参数获取额外的验证器
-   * @returns
-   */
-  getExtraValidators(): ValidatorFn[] {
-    const validators: ValidatorFn[] = [];
-
-    if (this.schema.required === true) { // required 可能是个函数，需要动态
-      validators.push(Validators.required);
-    }
-
-    if (this.schema.kind === 'input' && this.schema.type === 'email') {
-      validators.push(Validators.email);
-    }
-
-    if (isTextControlSchema(this.schema) && this.schema.length) {
-      if (isNumber(this.schema.length)) {
-        validators.push(
-          Validators.minLength(this.schema.length),
-          Validators.maxLength(this.schema.length)
-        );
-      } else {
-        const { min, max } = this.schema.length;
-
-        min && validators.push(Validators.minLength(min));
-        max && validators.push(Validators.maxLength(max));
-      }
-    }
-
-    return validators;
-  }
+export function standardSchemas<T extends (AnySchema | StableBuilder<AnySchema>)[]>(schemas: T) {
+  return schemas.map(schema => standardSchema(schema));
 }
 
 export function schemasUtils<S extends AnySchema[]>(schemas: S) {

@@ -1,5 +1,4 @@
-import { TemplateSchema } from '../schemas';
-import { SchemaKey } from '../schemas/types';
+import { SchemaKey, TemplateSchema } from '../schemas';
 import { builder, UnstableBuilder } from '../utils';
 import { KindOrKey } from './helper';
 

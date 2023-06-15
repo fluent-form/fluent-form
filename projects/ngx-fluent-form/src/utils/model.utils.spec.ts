@@ -1,63 +1,73 @@
 import { TestBed } from '@angular/core/testing';
-import { AnySchema } from '../schemas';
-import { StandardSchema } from '../schemas/types';
-import { createFormGroup } from './form.utils';
+import { withAllWidgets } from '../features';
+import { provideFluentForm } from '../provider';
+import { AnySchema, StandardSchema } from '../schemas';
+import { FormUtil } from './form.utils';
 import { ModelUtil } from './model.utils';
 
 describe('ModelUtils', () => {
-  let util: ModelUtil;
+  let modelUtil: ModelUtil;
+  let formUtil: FormUtil;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    util = TestBed.inject(ModelUtil);
+    TestBed.configureTestingModule({
+      providers: [
+        provideFluentForm(
+          withAllWidgets()
+        )
+      ]
+    });
+
+    modelUtil = TestBed.inject(ModelUtil);
+    formUtil = TestBed.inject(FormUtil);
   });
 
   it('with headless control', () => {
     const schemas: StandardSchema<AnySchema>[] = [{ kind: 'headless', key: 'headless' }];
-    const form = createFormGroup(schemas);
+    const form = formUtil.createFormGroup(schemas);
     const model = {};
 
-    expect(util.updateForm(model, schemas, form).value).toEqual({ headless: null });
+    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({ headless: null });
   });
 
   it('with control', () => {
     const schemas: StandardSchema<AnySchema>[] = [{ kind: 'number', key: 'num' }];
-    const form = createFormGroup(schemas);
+    const form = formUtil.createFormGroup(schemas);
     const model = { num: 1 };
 
-    expect(util.updateForm(model, schemas, form).value).toEqual({ num: 1 });
+    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({ num: 1 });
   });
 
   it('with double key control', () => {
     const schemas: StandardSchema<AnySchema>[] = [{ kind: 'slider', key: ['start', 'end'] }];
-    const form = createFormGroup(schemas);
+    const form = formUtil.createFormGroup(schemas);
     const model = { start: 0, end: 100 };
 
-    expect(util.updateForm(model, schemas, form).value).toEqual({ 'start,end': [0, 100] });
+    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({ 'start,end': [0, 100] });
   });
 
   it('with component', () => {
     const schemas: StandardSchema<AnySchema>[] = [{ kind: 'button' }];
-    const form = createFormGroup(schemas);
+    const form = formUtil.createFormGroup(schemas);
     const model = {};
 
-    expect(util.updateForm(model, schemas, form).value).toEqual({});
+    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({});
   });
 
   it('with component wrapper', () => {
     const schemas: StandardSchema<AnySchema>[] = [{ kind: 'button-group', schemas: [] }];
-    const form = createFormGroup(schemas);
+    const form = formUtil.createFormGroup(schemas);
     const model = {};
 
-    expect(util.updateForm(model, schemas, form).value).toEqual({});
+    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({});
   });
 
   it('with template', () => {
     const schemas: StandardSchema<AnySchema>[] = [{ kind: 'template' }];
-    const form = createFormGroup(schemas);
+    const form = formUtil.createFormGroup(schemas);
     const model = {};
 
-    expect(util.updateForm(model, schemas, form).value).toEqual({});
+    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({});
   });
 
   it('with group (empty)', () => {
@@ -68,10 +78,10 @@ describe('ModelUtils', () => {
         schemas: []
       }
     ];
-    const form = createFormGroup(schemas);
+    const form = formUtil.createFormGroup(schemas);
     const model = { obj: {} };
 
-    expect(util.updateForm(model, schemas, form).value).toEqual({ obj: {} });
+    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({ obj: {} });
   });
 
   it('with group', () => {
@@ -84,10 +94,10 @@ describe('ModelUtils', () => {
         ]
       }
     ];
-    const form = createFormGroup(schemas);
+    const form = formUtil.createFormGroup(schemas);
     const model = { obj: { num: 1 } };
 
-    expect(util.updateForm(model, schemas, form).value).toEqual({ obj: { num: 1 } });
+    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({ obj: { num: 1 } });
   });
 
   it('with array (empty)', () => {
@@ -98,10 +108,10 @@ describe('ModelUtils', () => {
         schemas: []
       }
     ];
-    const form = createFormGroup(schemas);
+    const form = formUtil.createFormGroup(schemas);
     const model = { arr: [] };
 
-    expect(util.updateForm(model, schemas, form).value).toEqual({ arr: [] });
+    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({ arr: [] });
   });
 
   it('with array', () => {
@@ -114,10 +124,10 @@ describe('ModelUtils', () => {
         ]
       }
     ];
-    const form = createFormGroup(schemas);
+    const form = formUtil.createFormGroup(schemas);
     const model = { arr: [1] };
 
-    expect(util.updateForm(model, schemas, form).value).toEqual({ arr: [1] });
+    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({ arr: [1] });
   });
 
   it('with mix', () => {
@@ -149,13 +159,13 @@ describe('ModelUtils', () => {
         ]
       }
     ];
-    const form = createFormGroup(schemas);
+    const form = formUtil.createFormGroup(schemas);
     const model = {
       obj: { arr: [1] },
       arr: [{ num: 1 }]
     };
 
-    expect(util.updateForm(model, schemas, form).value).toEqual({
+    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({
       obj: { arr: [1] },
       arr: [{ num: 1 }]
     });

@@ -1,6 +1,6 @@
 import { Canvas, Meta, Story, Source } from '@storybook/addon-docs';
 import { meta } from '../../';
-import { story, jsonSource, jsonAndFluentSource, fluentAndJsonSource, expressionSource } from './';
+import { story, jsonSource, expressionSource } from './';
 
 <Meta
   title="FluentForm/Advanced"
@@ -18,18 +18,6 @@ import { story, jsonSource, jsonAndFluentSource, fluentAndJsonSource, expression
 <Canvas withToolbar isExpanded mdxSource={jsonSource}>
   <Story name="Fluent API & JSON">{story}</Story>
 </Canvas>
-
-你还可以混合使用 Fluent API 和 JSON：
-
-<Source
-  language="typescript"
-  dark={true}
-  code={jsonAndFluentSource} />
-
-<Source
-  language="typescript"
-  dark={true}
-  code={fluentAndJsonSource} />
 
 ## 静态表达式
 

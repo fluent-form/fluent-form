@@ -1,9 +1,25 @@
+import { TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
-import { schemasUtils, standardSchema, standardSchemas } from '.';
 import { array, group, input, inputGroup, slider } from '../builders';
-import { controlSchemaUtils } from './schema.utils';
+import { withAllWidgets } from '../features';
+import { provideFluentForm } from '../provider';
+import { schemasUtils, SchemaUtil, standardSchema, standardSchemas } from './schema.utils';
 
 describe('schema.utils', () => {
+  let schemaUtil: SchemaUtil;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        provideFluentForm(
+          withAllWidgets()
+        )
+      ]
+    });
+
+    schemaUtil = TestBed.inject(SchemaUtil);
+  });
+
   describe('应该能正确标准化图示', () => {
     it('普通图示', () => {
       const schemas = standardSchemas([input('name')]);
@@ -68,28 +84,28 @@ describe('schema.utils', () => {
     describe('带验证器的图示', () => {
       it('length', () => {
         const schema = standardSchema(input('name').length(1));
-        const validators = controlSchemaUtils(schema).getExtraValidators();
+        const validators = schemaUtil.validatorsOf(schema);
 
         expect(validators.length).toBe(2);
       });
 
       it('min/max', () => {
         const schema = standardSchema(input('name').length({ min: 1, max: 2 }));
-        const validators = controlSchemaUtils(schema).getExtraValidators();
+        const validators = schemaUtil.validatorsOf(schema);
 
         expect(validators.length).toBe(2);
       });
 
       it('required', () => {
         const schema = standardSchema(input('name').required(true));
-        const validators = controlSchemaUtils(schema).getExtraValidators();
+        const validators = schemaUtil.validatorsOf(schema);
 
         expect(validators).toEqual([Validators.required]);
       });
 
       it('email', () => {
         const schema = standardSchema(input('name').type('email').required(true));
-        const validators = controlSchemaUtils(schema).getExtraValidators();
+        const validators = schemaUtil.validatorsOf(schema);
 
         expect(validators.length).toBe(2);
         expect(validators).toContain(Validators.email);

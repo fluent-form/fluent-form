@@ -1,13 +1,12 @@
 import { NgClass, NgFor, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { FluentBindingDirective, FluentWithInjectorDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe, FluentControlPipe, FluentSchemaPipe, FluentTemplatePipe } from '../../pipes';
-import { AnySchema } from '../../schemas';
-import { StandardSchema } from '../../schemas/types';
+import { AnySchema, StandardSchema } from '../../schemas';
 import { CONFIG } from '../../tokens';
 
 interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {

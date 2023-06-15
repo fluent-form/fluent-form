@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
-import { AnyControlSchema } from '../schemas';
-import { isDoubleKeyControlSchema } from '../schemas/kind';
-import { StandardSchema } from '../schemas/types';
+import { AnyControlSchema, StandardSchema } from '../schemas';
 import { isUndefined } from './is.utils';
+import { isDoubleKeyControlSchema } from './schema.utils';
 
 @Injectable({
   providedIn: 'root'

@@ -1,15 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
-import { AnySchema } from '../schemas';
-import { isComponentContainerSchema, isControlWrapperSchema, isNonControlSchema } from '../schemas/kind';
-import { StandardSchema } from '../schemas/types';
+import { AnySchema, StandardSchema } from '../schemas';
 import { Model } from '../types';
+import { SchemaUtil } from './schema.utils';
 import { ValueUtil } from './value.utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModelUtil {
+  private readonly schemaUtil = inject(SchemaUtil);
   private readonly valueUtil = inject(ValueUtil);
 
   /**
@@ -21,7 +21,7 @@ export class ModelUtil {
   updateForm<F extends FormGroup | FormArray, M extends Model<F>>(model: M, schemas: StandardSchema<AnySchema>[], form: F, emitEvent = true): F {
     schemas.forEach(schema => {
       // 这些图示不包含控件图示，直接跳过
-      if (isNonControlSchema(schema)) return;
+      if (this.schemaUtil.isNonControlSchema(schema)) return;
 
       if (schema.kind === 'group') {
         this.updateForm(
@@ -43,7 +43,7 @@ export class ModelUtil {
         return;
       }
 
-      if (isComponentContainerSchema(schema) || isControlWrapperSchema(schema)) {
+      if (this.schemaUtil.isComponentContainerSchema(schema) || this.schemaUtil.isControlWrapperSchema(schema)) {
         this.updateForm(model, schema.schemas, form, false);
         return;
       }

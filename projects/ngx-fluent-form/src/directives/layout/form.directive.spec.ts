@@ -5,7 +5,7 @@ import { AnyObject } from '@ngify/types';
 import { array, form, group, input, inputGroup } from '../../builders';
 import { withAllWidgets } from '../../features';
 import { provideFluentForm } from '../../provider';
-import { AnySchema, FormGroupSchema } from '../../schemas';
+import { AnySchema, FormGroupSchema, StandardSchema } from '../../schemas';
 import { FluentFormKeyDirective } from './form-key.directive';
 import { FluentFormDirective } from './form.directive';
 import { FluentOutletDirective } from './outlet.directive';
@@ -33,7 +33,7 @@ import { FluentOutletDirective } from './outlet.directive';
 })
 class TestingComponent {
   form!: FormGroup;
-  schemas!: AnySchema[] | FormGroupSchema;
+  schemas!: StandardSchema<AnySchema>[] | StandardSchema<FormGroupSchema>;
   model!: AnyObject;
 }
 

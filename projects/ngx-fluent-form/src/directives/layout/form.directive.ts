@@ -3,9 +3,8 @@ import { FormControlStatus, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { skip, takeUntil } from 'rxjs';
-import { AnySchema, FormGroupSchema } from '../../schemas';
-import { StandardSchema } from '../../schemas/types';
-import { createFormGroup, FormUtil, ModelUtil, standardSchema } from '../../utils';
+import { AnySchema, FormGroupSchema, StandardSchema } from '../../schemas';
+import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
 import { ControlContainerDirective, FluentControlContainer } from './models/control-container';
 
 @Directive({
@@ -25,6 +24,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
   private readonly destroy$ = inject(NzDestroyService);
   private readonly formUtil = inject(FormUtil);
   private readonly modelUtil = inject(ModelUtil);
+  private readonly schemaUtil = inject(SchemaUtil);
   /**
    * 内部的不可变模型，主要有以下用途：
    * - 用来跟公开的模型值进行引用比较，判断变更是内部发出的还是外部传入的，如果引用一致则为内部变更
@@ -40,15 +40,15 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
   }
 
   @Input('fluentSchemas')
-  set schemas(value: AnySchema[] | FormGroupSchema) {
+  set schemas(value: StandardSchema<AnySchema>[] | StandardSchema<FormGroupSchema>) {
     this.schema && this.destroy$.next();
 
     // 这里统一包装为 FormGroupSchema
-    this.schema = standardSchema(
+    this.schema = this.schemaUtil.patchSchema(
       Array.isArray(value) ? { kind: 'group', schemas: value } : value
     );
 
-    this.formChange.emit(this.form = createFormGroup(this.schema));
+    this.formChange.emit(this.form = this.formUtil.createFormGroup(this.schema));
 
     this.directives.forEach(directive => this.assignDirective(directive));
 

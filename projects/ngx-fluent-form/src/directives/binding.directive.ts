@@ -37,14 +37,18 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
         if (eventName === 'valueChange') {
           control!.valueChanges.pipe(
             takeUntil(this.destory$),
-          ).subscribe(listener);
+          ).subscribe(value => {
+            listener!(value, control!);
+          });
           continue;
         }
 
         if (eventName === 'statusChange') {
           control!.statusChanges.pipe(
             takeUntil(this.destory$),
-          ).subscribe(listener);
+          ).subscribe(status => {
+            listener!(status, control!);
+          });
           continue;
         }
 

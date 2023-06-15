@@ -69,13 +69,13 @@ export interface SchemaContext<S extends SchemaLike> {
 
 /** 控件事件变更 */
 type ControlEventChange<Val> = {
-  valueChange?: (value: Val) => void | Promise<void>;
-  statusChange?: (status: FormControlStatus) => void | Promise<void>;
+  valueChange?: (value: Val, control: AbstractControl) => void | Promise<void>;
+  statusChange?: (status: FormControlStatus, control: AbstractControl) => void | Promise<void>;
 }
 
 /** 事件侦听器 */
 export interface EventListenerHolder {
-  listeners?: Record<string, undefined | ((event: SafeAny) => void | Promise<void>)>
+  listeners?: Record<string, undefined | ((...args: SafeAny[]) => void | Promise<void>)>
 }
 
 /** 控件事件侦听器 */

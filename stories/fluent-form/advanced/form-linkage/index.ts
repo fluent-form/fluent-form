@@ -37,9 +37,8 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
 
     this.schemas = form(
       select('select').label('控制内容').options(SELECT_OPTIONS).col(6).listeners({
-        valueChange: value => {
-          this.model.text = value;
-          this.model = { ...this.model };
+        valueChange: (value, control) => {
+          control.parent?.get('text')?.setValue(value);
         }
       }),
       radioGroup('show').label('控制显隐').col(7).defaultValue(true).options([
@@ -81,9 +80,8 @@ export const source = dedent`
   export class ExampleComponent {
     schemas = form(
       select('select').label('控制内容').options(SELECT_OPTIONS).col(6).listeners({
-        valueChange: value => {
-          this.model.text = value;
-          this.model = { ...this.model };
+        valueChange: (value, control) => {
+          control.parent?.get('text')?.setValue(value);
         }
       }),
       radioGroup('show').label('控制显隐').col(7).defaultValue(true).options([

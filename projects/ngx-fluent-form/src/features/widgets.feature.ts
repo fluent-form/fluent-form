@@ -2,7 +2,7 @@ import { Type } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { SchemaConfig } from '../interfaces';
-import { AbstractSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, InputGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema, TextareaControlSchema, TextComponentSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { AbstractSchema, AbstractTextControlSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, InputGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema, TextareaControlSchema, TextComponentSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP, WIDGET_MAP } from '../tokens';
 import { isNumber } from '../utils';
@@ -80,29 +80,35 @@ export function withAllWidgets(): FluentFormFeature<FluentFormFeatureKind.Widget
   );
 }
 
+function validatorsOfTextControl(schema: AbstractTextControlSchema) {
+  const validators: ValidatorFn[] = [];
+
+  if (schema.length) {
+    if (isNumber(schema.length)) {
+      validators.push(
+        Validators.minLength(schema.length),
+        Validators.maxLength(schema.length)
+      );
+    } else {
+      const { min, max } = schema.length;
+      min && validators.push(Validators.minLength(min));
+      max && validators.push(Validators.maxLength(max));
+    }
+  }
+
+  return validators;
+}
+
 export function useInputWidget(): FluentFormWidgetFeature<InputControlSchema> {
   return {
     type: SchemaType.Control,
     kind: WidgetKind.Input,
     widget: InputWidget,
     validators: schema => {
-      const validators: ValidatorFn[] = [];
+      const validators = validatorsOfTextControl(schema);
 
       if (schema.type === 'email') {
         validators.push(Validators.email);
-      }
-
-      if (schema.length) {
-        if (isNumber(schema.length)) {
-          validators.push(
-            Validators.minLength(schema.length),
-            Validators.maxLength(schema.length)
-          );
-        } else {
-          const { min, max } = schema.length;
-          min && validators.push(Validators.minLength(min));
-          max && validators.push(Validators.maxLength(max));
-        }
       }
 
       return validators;
@@ -123,24 +129,7 @@ export function useTextareaWidget(): FluentFormWidgetFeature<TextareaControlSche
     type: SchemaType.Control,
     kind: WidgetKind.Textarea,
     widget: TextareaWidget,
-    validators: schema => {
-      const validators: ValidatorFn[] = [];
-
-      if (schema.length) {
-        if (isNumber(schema.length)) {
-          validators.push(
-            Validators.minLength(schema.length),
-            Validators.maxLength(schema.length)
-          );
-        } else {
-          const { min, max } = schema.length;
-          min && validators.push(Validators.minLength(min));
-          max && validators.push(Validators.maxLength(max));
-        }
-      }
-
-      return validators;
-    }
+    validators: validatorsOfTextControl
   };
 }
 

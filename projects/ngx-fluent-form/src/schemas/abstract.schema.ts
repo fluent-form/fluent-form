@@ -71,7 +71,7 @@ export interface AbstractInputBoxControlSchema<Key extends AnySchemaKey, Val, P 
 }
 
 /** 抽象的文本控件图示 */
-export interface AbstractTextControlSchema<Key extends AnySchemaKey> extends AbstractInputBoxControlSchema<Key, string> {
+export interface AbstractTextControlSchema<Key extends AnySchemaKey = AnySchemaKey> extends AbstractInputBoxControlSchema<Key, string> {
   length?: number | { max?: number, min?: number };
   autocomplete?: {
     backfill?: boolean;

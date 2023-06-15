@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
-import { array, group, input, inputGroup, slider } from '../builders';
+import { array, group, input, inputGroup, slider, textarea } from '../builders';
 import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
 import { schemasUtils, SchemaUtil, standardSchema, standardSchemas } from './schema.utils';
@@ -18,6 +18,49 @@ describe('schema.utils', () => {
     });
 
     schemaUtil = TestBed.inject(SchemaUtil);
+  });
+
+  describe('SchemaUtil', () => {
+    it('is x schema', () => {
+      expect(schemaUtil.isComponentContainerSchema({ kind: 'tab' })).toBeTrue();
+      expect(schemaUtil.isComponentSchema({ kind: 'text' })).toBeTrue();
+      expect(schemaUtil.isComponentWrapperSchema({ kind: 'button-group' })).toBeTrue();
+      expect(schemaUtil.isControlContainerSchema({ kind: 'group' })).toBeTrue();
+      expect(schemaUtil.isControlWrapperSchema({ kind: 'input-group' })).toBeTrue();
+      expect(schemaUtil.isNonControlSchema({ kind: 'button' })).toBeTrue();
+    });
+
+    describe('带验证器的图示', () => {
+      it('length', () => {
+        const schema = standardSchema(input('name').length(1));
+        const validators = schemaUtil.validatorsOf(schema);
+
+        expect(validators.length).toBe(2);
+      });
+
+      it('min/max', () => {
+        const schema = standardSchema(textarea('name').length({ min: 1, max: 2 }));
+        const validators = schemaUtil.validatorsOf(schema);
+
+        expect(validators.length).toBe(2);
+      });
+
+      it('required', () => {
+        const schema = standardSchema(input('name').required(true));
+        const validators = schemaUtil.validatorsOf(schema);
+
+        expect(validators).toEqual([Validators.required]);
+      });
+
+      it('email', () => {
+        const schema = standardSchema(input('name').type('email').required(true));
+        const validators = schemaUtil.validatorsOf(schema);
+
+        expect(validators.length).toBe(2);
+        expect(validators).toContain(Validators.email);
+        expect(validators).toContain(Validators.required);
+      });
+    });
   });
 
   describe('应该能正确标准化图示', () => {
@@ -78,38 +121,6 @@ describe('schema.utils', () => {
             { kind: 'input', key: 'name' }
           ]
         }]);
-      });
-    });
-
-    describe('带验证器的图示', () => {
-      it('length', () => {
-        const schema = standardSchema(input('name').length(1));
-        const validators = schemaUtil.validatorsOf(schema);
-
-        expect(validators.length).toBe(2);
-      });
-
-      it('min/max', () => {
-        const schema = standardSchema(input('name').length({ min: 1, max: 2 }));
-        const validators = schemaUtil.validatorsOf(schema);
-
-        expect(validators.length).toBe(2);
-      });
-
-      it('required', () => {
-        const schema = standardSchema(input('name').required(true));
-        const validators = schemaUtil.validatorsOf(schema);
-
-        expect(validators).toEqual([Validators.required]);
-      });
-
-      it('email', () => {
-        const schema = standardSchema(input('name').type('email').required(true));
-        const validators = schemaUtil.validatorsOf(schema);
-
-        expect(validators.length).toBe(2);
-        expect(validators).toContain(Validators.email);
-        expect(validators).toContain(Validators.required);
       });
     });
   });

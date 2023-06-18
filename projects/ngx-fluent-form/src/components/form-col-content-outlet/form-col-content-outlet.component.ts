@@ -48,14 +48,13 @@ interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
 })
 export class FluentFormColContentOutletComponent<T extends AnyObject | AnyArray> implements OnInit {
   protected config = inject(CONFIG);
+  private viewContainerRef = inject(ViewContainerRef);
 
   @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<FluentFormColContentTemplateContext<T>>;
 
   @Input() control!: AbstractControl;
   @Input() schema!: StandardSchema<AnySchema>;
   @Input() model!: T;
-
-  constructor(private viewContainerRef: ViewContainerRef) { }
 
   ngOnInit(): void {
     this.viewContainerRef.createEmbeddedView(this.templateRef, this);

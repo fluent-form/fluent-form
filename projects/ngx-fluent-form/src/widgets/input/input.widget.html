@@ -7,6 +7,7 @@
           nz-col
           nz-input
           [attr.id]="schema.id"
+          [attr.name]="schema.key"
           [attr.maxlength]="helper.length.max | invoke: schema.length"
           [attr.minlength]="helper.length.min | invoke: schema.length"
           [fluentBinding]="{ schema, control }"
@@ -32,6 +33,7 @@
         <input
           nz-input
           [attr.id]="schema.id"
+          [attr.name]="schema.key"
           [attr.maxlength]="helper.length.max | invoke: schema.length"
           [attr.minlength]="helper.length.min | invoke: schema.length"
           [fluentBinding]="{ schema, control }"
@@ -62,6 +64,7 @@
           nz-col
           nz-input
           [attr.id]="schema.id"
+          [attr.name]="schema.key"
           [attr.maxlength]="helper.length.max | invoke: schema.length"
           [attr.minlength]="helper.length.min | invoke: schema.length"
           [fluentBinding]="{ schema, control }"
@@ -86,6 +89,7 @@
         <input
           nz-input
           [attr.id]="schema.id"
+          [attr.name]="schema.key"
           [attr.maxlength]="helper.length.max | invoke: schema.length"
           [attr.minlength]="helper.length.min | invoke: schema.length"
           [fluentBinding]="{ schema, control }"

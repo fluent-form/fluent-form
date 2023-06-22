@@ -6,7 +6,7 @@ import { AbstractSchema, AbstractTextControlSchema, ButtonComponentSchema, Butto
 import { SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP, WIDGET_MAP } from '../tokens';
 import { isNumber } from '../utils';
-import { AbstractWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, InputGroupWidget, InputWidget, NestedFormWidget, NumberWidget, RadioGroupWidget, RateWidget, SelectWidget, SilderWidget, StepsWidget, TabsWidget, TextareaWidget, TextWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from '../widgets';
+import { AbstractWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, FormArrayWidget, FormGroupWidget, InputGroupWidget, InputWidget, NumberWidget, RadioGroupWidget, RateWidget, SelectWidget, SilderWidget, StepsWidget, TabsWidget, TextareaWidget, TextWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from '../widgets';
 import { WidgetKind } from '../widgets/kind';
 import { makeFluentFormFeature } from './helper';
 import { FluentFormFeature, FluentFormFeatureKind } from './interface';
@@ -76,7 +76,8 @@ export function withAllWidgets(): FluentFormFeature<FluentFormFeatureKind.Widget
     useButtonGroupWidget(),
     useStepsWidget(),
     useTabsWidget(),
-    useNestedFormWidget()
+    useFormGroupWidget(),
+    useFormArrayWidget(),
   );
 }
 
@@ -326,17 +327,18 @@ export function useTabsWidget(): [FluentFormWidgetFeature<TabsComponentSchema>, 
   ];
 }
 
-export function useNestedFormWidget(): [FluentFormWidgetFeature<FormGroupSchema>, FluentFormWidgetFeature<FormArraySchema>] {
-  return [
-    {
-      type: SchemaType.ControlContainer,
-      kind: WidgetKind.Group,
-      widget: NestedFormWidget
-    },
-    {
-      type: SchemaType.ControlContainer,
-      kind: WidgetKind.Array,
-      widget: NestedFormWidget
-    }
-  ];
+export function useFormGroupWidget(): FluentFormWidgetFeature<FormGroupSchema> {
+  return {
+    type: SchemaType.ControlContainer,
+    kind: WidgetKind.Group,
+    widget: FormGroupWidget
+  };
+}
+
+export function useFormArrayWidget(): FluentFormWidgetFeature<FormArraySchema> {
+  return {
+    type: SchemaType.ControlContainer,
+    kind: WidgetKind.Array,
+    widget: FormArrayWidget
+  };
 }

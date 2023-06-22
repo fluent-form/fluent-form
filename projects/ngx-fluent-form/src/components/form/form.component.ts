@@ -5,7 +5,7 @@ import { AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { NzFormLayoutType, NzFormModule } from 'ng-zorro-antd/form';
 import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
-import { skip, takeUntil } from 'rxjs';
+import { takeUntil } from 'rxjs';
 import { FluentBindingDirective, FluentTemplateDirective } from '../../directives';
 import { DirectiveQueryContainer, FluentConfig } from '../../interfaces';
 import { FluentCallPipe, FluentColumnPipe, FluentControlPipe } from '../../pipes';
@@ -67,35 +67,14 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig, D
 
   @Input()
   set schemas(value: StandardSchema<AnySchema>[] | StandardSchema<FormGroupSchema>) {
-    this.schema && this.destroy$.next();
-
     // 这里统一包装为 FormGroupSchema
     this.schema = this.schemaUtil.patchSchema(
       Array.isArray(value) ? { kind: 'group', schemas: value } : value
     );
 
-    this.formChange.emit(this.form = this.formUtil.createFormGroup(this.schema));
-
-    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.onValueChanges();
-    });
-
-    // 如果模型已经好了，就使用初始化表单
-    this.model && this.modelUtil.updateForm(this.model, this.schemas, this.form);
-
-    this.form.valueChanges.pipe(
-      skip(1),
-      takeUntil(this.destroy$)
-    ).subscribe(o =>
-      this.valueChanges.emit(o)
-    );
-
-    this.form.statusChanges.pipe(
-      skip(1),
-      takeUntil(this.destroy$)
-    ).subscribe(o =>
-      this.statusChanges.emit(o)
-    );
+    if (this.model) {
+      this.createForm();
+    }
   }
 
   /** 模型 */
@@ -110,8 +89,11 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig, D
 
     // 如果是外部变更，就赋值到表单
     if (this.model !== this.internalModel) {
-      // 如果表单已经好了，就使用初始化表单
-      this.form && this.modelUtil.updateForm(this.model, this.schemas, this.form);
+      if (this.form) {
+        this.updateForm();
+      } else if (this.schema) {
+        this.createForm();
+      }
     }
   }
 
@@ -128,18 +110,41 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig, D
 
   @ContentChildren(FluentTemplateDirective) templateDirectives!: QueryList<FluentTemplateDirective>;
 
-  /**
-   * 表单值更新时
-   */
+  private createForm() {
+    this.destroy$.next();
+
+    this.formChange.emit(
+      this.form = this.formUtil.createFormGroup(this.schema, this.model)
+    );
+
+    this.onValueChanges();
+
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.onValueChanges();
+    });
+
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(o =>
+      this.valueChanges.emit(o)
+    );
+
+    this.form.statusChanges.pipe(takeUntil(this.destroy$)).subscribe(o =>
+      this.statusChanges.emit(o)
+    );
+  }
+
+  private updateForm() {
+    return this.modelUtil.updateForm(this.form, this.model, this.schemas);
+  }
+
   private onValueChanges() {
     this.formUtil.updateForm(
       this.form,
-      this.schemas,
       this.internalModel = this.formUtil.updateModel(
+        {} as T,
         this.form,
-        this.schemas,
-        {} as T
-      )
+        this.schemas
+      ),
+      this.schemas
     );
     this.modelChange.emit(this.internalModel);
   }

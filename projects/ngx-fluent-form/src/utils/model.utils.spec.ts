@@ -22,152 +22,201 @@ describe('ModelUtils', () => {
     formUtil = TestBed.inject(FormUtil);
   });
 
-  it('with headless control', () => {
-    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'headless', key: 'headless' }];
-    const form = formUtil.createFormGroup(schemas);
-    const model = {};
+  describe('updateForm', () => {
+    it('group', () => {
+      const schemas: StandardSchema<AnySchema>[] = [
+        { kind: 'input', key: 'input' }
+      ];
+      const form = formUtil.createFormGroup(schemas, {});
 
-    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({ headless: null });
-  });
+      modelUtil.updateForm(form, {}, schemas);
+      expect(form.value).toEqual({ input: null });
 
-  it('with control', () => {
-    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'number', key: 'num' }];
-    const form = formUtil.createFormGroup(schemas);
-    const model = { num: 1 };
+      modelUtil.updateForm(form, { input: 'input' }, schemas);
+      expect(form.value).toEqual({ input: 'input' });
+    });
 
-    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({ num: 1 });
-  });
+    it('group nested group', () => {
+      const schemas: StandardSchema<AnySchema>[] = [
+        {
+          kind: 'group',
+          key: 'object',
+          schemas: [
+            { kind: 'input', key: 'input' }
+          ]
+        }
+      ];
+      const form = formUtil.createFormGroup(schemas, {});
 
-  it('with double key control', () => {
-    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'slider', key: ['start', 'end'] }];
-    const form = formUtil.createFormGroup(schemas);
-    const model = { start: 0, end: 100 };
+      modelUtil.updateForm(form, {}, schemas);
+      expect(form.value).toEqual({ object: { input: null } });
 
-    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({ 'start,end': [0, 100] });
-  });
+      modelUtil.updateForm(form, { object: { input: 'input' } }, schemas);
+      expect(form.value).toEqual({ object: { input: 'input' } });
+    });
 
-  it('with component', () => {
-    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'button' }];
-    const form = formUtil.createFormGroup(schemas);
-    const model = {};
+    it('array', () => {
+      const schemas: StandardSchema<AnySchema>[] = [
+        {
+          kind: 'array',
+          key: 'array',
+          schemas: [
+            { kind: 'input' }
+          ]
+        }
+      ];
+      const form = formUtil.createFormGroup(schemas, {});
 
-    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({});
-  });
+      modelUtil.updateForm(form, {}, schemas);
+      expect(form.value).toEqual({ array: [] });
 
-  it('with component wrapper', () => {
-    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'button-group', schemas: [] }];
-    const form = formUtil.createFormGroup(schemas);
-    const model = {};
+      modelUtil.updateForm(form, { array: ['input'] }, schemas);
+      expect(form.value).toEqual({ array: ['input'] });
 
-    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({});
-  });
+      modelUtil.updateForm(form, { array: ['text'] }, schemas);
+      expect(form.value).toEqual({ array: ['text'] });
+    });
 
-  it('with template', () => {
-    const schemas: StandardSchema<AnySchema>[] = [{ kind: 'template' }];
-    const form = formUtil.createFormGroup(schemas);
-    const model = {};
+    it('array nested array', () => {
+      const schemas: StandardSchema<AnySchema>[] = [
+        {
+          kind: 'array',
+          key: 'array',
+          schemas: [
+            {
+              kind: 'array',
+              schemas: [
+                { kind: 'input' }
+              ]
+            }
+          ]
+        }
+      ];
+      const form = formUtil.createFormGroup(schemas, {});
 
-    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({});
-  });
+      modelUtil.updateForm(form, {}, schemas);
+      expect(form.value).toEqual({ array: [] });
 
-  it('with group (empty)', () => {
-    const schemas: StandardSchema<AnySchema>[] = [
-      {
-        kind: 'group',
-        key: 'obj',
-        schemas: []
-      }
-    ];
-    const form = formUtil.createFormGroup(schemas);
-    const model = { obj: {} };
+      modelUtil.updateForm(form, { array: [] }, schemas);
+      expect(form.value).toEqual({ array: [] });
 
-    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({ obj: {} });
-  });
+      modelUtil.updateForm(form, { array: [[]] }, schemas);
+      expect(form.value).toEqual({ array: [[]] });
 
-  it('with group', () => {
-    const schemas: StandardSchema<AnySchema>[] = [
-      {
-        kind: 'group',
-        key: 'obj',
-        schemas: [
-          { kind: 'number', key: 'num' }
-        ]
-      }
-    ];
-    const form = formUtil.createFormGroup(schemas);
-    const model = { obj: { num: 1 } };
+      modelUtil.updateForm(form, { array: [['input']] }, schemas);
+      expect(form.value).toEqual({ array: [['input']] });
 
-    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({ obj: { num: 1 } });
-  });
+      modelUtil.updateForm(form, { array: [['text']] }, schemas);
+      expect(form.value).toEqual({ array: [['text']] });
+    });
 
-  it('with array (empty)', () => {
-    const schemas: StandardSchema<AnySchema>[] = [
-      {
-        kind: 'array',
-        key: 'arr',
-        schemas: []
-      }
-    ];
-    const form = formUtil.createFormGroup(schemas);
-    const model = { arr: [] };
+    it('array nested object', () => {
+      const schemas: StandardSchema<AnySchema>[] = [
+        {
+          kind: 'array',
+          key: 'array',
+          schemas: [
+            {
+              kind: 'group',
+              schemas: [
+                { kind: 'input', key: 'input' }
+              ]
+            }
+          ]
+        }
+      ];
+      const form = formUtil.createFormGroup(schemas, {});
 
-    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({ arr: [] });
-  });
+      modelUtil.updateForm(form, {}, schemas);
+      expect(form.value).toEqual({ array: [] });
 
-  it('with array', () => {
-    const schemas: StandardSchema<AnySchema>[] = [
-      {
-        kind: 'array',
-        key: 'arr',
-        schemas: [
-          { kind: 'number', key: 0 }
-        ]
-      }
-    ];
-    const form = formUtil.createFormGroup(schemas);
-    const model = { arr: [1] };
+      modelUtil.updateForm(form, { array: [{}] }, schemas);
+      expect(form.value).toEqual({ array: [{ input: null }] });
 
-    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({ arr: [1] });
-  });
+      modelUtil.updateForm(form, { array: [{ input: 'input' }] }, schemas);
+      expect(form.value).toEqual({ array: [{ input: 'input' }] });
+    });
 
-  it('with mix', () => {
-    const schemas: StandardSchema<AnySchema>[] = [
-      {
-        kind: 'group',
-        key: 'obj',
-        schemas: [
-          {
-            kind: 'array',
-            key: 'arr',
-            schemas: [
-              { kind: 'number', key: 0 }
-            ]
-          }
-        ]
-      },
-      {
-        kind: 'array',
-        key: 'arr',
-        schemas: [
-          {
-            kind: 'group',
-            key: 0,
-            schemas: [
-              { kind: 'number', key: 'num' }
-            ]
-          },
-        ]
-      }
-    ];
-    const form = formUtil.createFormGroup(schemas);
-    const model = {
-      obj: { arr: [1] },
-      arr: [{ num: 1 }]
-    };
+    it('with double key control', () => {
+      const schemas: StandardSchema<AnySchema>[] = [
+        { kind: 'slider', key: ['start', 'end'] }
+      ];
+      const form = formUtil.createFormGroup(schemas, {});
 
-    expect(modelUtil.updateForm(model, schemas, form).value).toEqual({
-      obj: { arr: [1] },
-      arr: [{ num: 1 }]
+      modelUtil.updateForm(form, {}, schemas);
+      expect(form.value).toEqual({ 'start,end': null });
+
+      modelUtil.updateForm(form, { start: 0, end: 100 }, schemas);
+      expect(form.value).toEqual({ 'start,end': [0, 100] });
+    });
+
+    it('with control wrapper', () => {
+      const schemas: StandardSchema<AnySchema>[] = [
+        {
+          kind: 'input-group',
+          schemas: [
+            { kind: 'input', key: 'input' },
+          ]
+        }
+      ];
+      const form = formUtil.createFormGroup(schemas, {});
+
+      modelUtil.updateForm(form, {}, schemas);
+      expect(form.value).toEqual({ input: null });
+
+      modelUtil.updateForm(form, { input: 'input' }, schemas);
+      expect(form.value).toEqual({ input: 'input' });
+    });
+
+    it('with component', () => {
+      const schemas: StandardSchema<AnySchema>[] = [
+        { kind: 'input', key: 'input' },
+        { kind: 'button' }
+      ];
+      const form = formUtil.createFormGroup(schemas, {});
+
+      modelUtil.updateForm(form, {}, schemas);
+      expect(form.value).toEqual({ input: null });
+
+      modelUtil.updateForm(form, { input: 'input' }, schemas);
+      expect(form.value).toEqual({ input: 'input' });
+    });
+
+    it('with component wrapper', () => {
+      const schemas: StandardSchema<AnySchema>[] = [
+        { kind: 'input', key: 'input' },
+        {
+          kind: 'button-group',
+          schemas: [
+            { kind: 'button' }
+          ]
+        }
+      ];
+      const form = formUtil.createFormGroup(schemas, {});
+
+      modelUtil.updateForm(form, {}, schemas);
+      expect(form.value).toEqual({ input: null });
+
+      modelUtil.updateForm(form, { input: 'input' }, schemas);
+      expect(form.value).toEqual({ input: 'input' });
+    });
+
+    it('with component container', () => {
+      const schemas: StandardSchema<AnySchema>[] = [
+        {
+          kind: 'row',
+          schemas: [
+            { kind: 'input', key: 'input' },
+          ]
+        }
+      ];
+      const form = formUtil.createFormGroup(schemas, {});
+
+      modelUtil.updateForm(form, {}, schemas);
+      expect(form.value).toEqual({ input: null });
+
+      modelUtil.updateForm(form, { input: 'input' }, schemas);
+      expect(form.value).toEqual({ input: 'input' });
     });
   });
 });

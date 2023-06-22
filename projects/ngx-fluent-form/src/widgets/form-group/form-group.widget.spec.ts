@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NestedFormWidget } from './nested-form.widget';
+import { FormGroupWidget } from './form-group.widget';
 
 describe('NestedFormWidget', () => {
-  let component: NestedFormWidget;
-  let fixture: ComponentFixture<NestedFormWidget>;
+  let component: FormGroupWidget;
+  let fixture: ComponentFixture<FormGroupWidget>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NestedFormWidget);
+    fixture = TestBed.createComponent(FormGroupWidget);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -52,7 +52,7 @@ export type AnyControlContainerSchema<Key extends SchemaKey = SchemaKey> = FormG
 export type AnyControlContainerBuilder<Key extends SchemaKey = SchemaKey> = StableBuilder<AnyControlContainerSchema<Key>>;
 
 /** 真实控件图示 */
-export type AnyControlSchema = SingleKeyControlSchema | DoubleKeyControlSchema | BothKeyControlSchema;
+export type AnyControlSchema = SingleKeyControlSchema | DoubleKeyControlSchema | AnyKeyControlSchema;
 /** 真实控件构建器 */
 export type AnyControlBuilder = StableBuilder<AnyControlSchema>;
 
@@ -110,8 +110,8 @@ export type DoubleKeyControlSchema<Key extends DoubleSchemaKey = DoubleSchemaKey
 export type DoubleKeyControlBuilder<Key extends DoubleSchemaKey = DoubleSchemaKey> = StableBuilder<DoubleKeyControlSchema<Key>>;
 
 /** 任意键的真实控件图示 */
-export type BothKeyControlSchema<Key extends AnySchemaKey = AnySchemaKey> =
+export type AnyKeyControlSchema<Key extends AnySchemaKey = AnySchemaKey> =
   | DateRangePickerControlSchema<Key>
   | SliderControlSchema<Key>;
 /** 任意键的真实控件构建器 */
-export type BothKeyControlBuilder<Key extends AnySchemaKey = AnySchemaKey> = StableBuilder<BothKeyControlSchema<Key>>;
+export type AnyKeyControlBuilder<Key extends AnySchemaKey = AnySchemaKey> = StableBuilder<AnyKeyControlSchema<Key>>;

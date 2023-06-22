@@ -23,3 +23,5 @@ type ExcludeSchemaBuilder<T> =
 export type StandardSchema<S extends SchemaLike> = {
   [K in keyof S]: ExcludeSchemaBuilder<S[K]>
 }
+
+export type StandardSchemas<T extends SchemaLike[]> = { [K in keyof T]: StandardSchema<T[K]> };

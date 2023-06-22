@@ -18,7 +18,7 @@ export interface StepsComponentSchema<Key extends SchemaKey = SchemaKey>
   size?: NzSizeDSType;
   status?: NzStatusType;
   start?: number;
-  schemas: (StepComponentSchema | StableBuilder<StepComponentSchema>)[];
+  schemas: StepComponentSchema[] | StableBuilder<StepComponentSchema>[];
 }
 
 export interface StepComponentSchema<Key extends SchemaKey = SchemaKey>
@@ -29,7 +29,7 @@ export interface StepComponentSchema<Key extends SchemaKey = SchemaKey>
   description?: string | TemplateRef<void>;
   disabled?: boolean | ((ctx: SchemaContext<StepComponentSchema<SchemaKey>>) => boolean) | string;
   status?: 'wait' | 'process' | 'finish' | 'error';
-  schemas: (AnySchema | AnyBuilder)[];
+  schemas: AnySchema[] | AnyBuilder[];
 }
 
 export interface TabsComponentSchema<Key extends SchemaKey = SchemaKey>
@@ -42,7 +42,7 @@ export interface TabsComponentSchema<Key extends SchemaKey = SchemaKey>
   position?: NzTabPosition;
   gutter?: number;
   center?: boolean;
-  schemas: (TabComponentSchema | StableBuilder<TabComponentSchema>)[];
+  schemas: TabComponentSchema[] | StableBuilder<TabComponentSchema>[];
 }
 
 export interface TabComponentSchema<Key extends SchemaKey = SchemaKey>
@@ -50,11 +50,11 @@ export interface TabComponentSchema<Key extends SchemaKey = SchemaKey>
   kind: 'tab';
   title: string;
   disabled?: boolean | ((ctx: SchemaContext<TabComponentSchema<SchemaKey>>) => boolean) | string;
-  schemas: (AnySchema | AnyBuilder)[];
+  schemas: AnySchema[] | AnyBuilder[];
 }
 
 export interface RowComponentSchema<Key extends SchemaKey = SchemaKey>
   extends AbstractSchema<Key>, ElementEventListenerHolder, ElementPropertyHolder<HTMLElement>, Row {
   kind: 'row';
-  schemas: (AnySchema | AnyBuilder)[];
+  schemas: AnySchema[] | AnyBuilder[];
 }

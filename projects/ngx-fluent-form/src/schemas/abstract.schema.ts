@@ -52,7 +52,7 @@ export interface AbstractControlSchema<Key extends AnySchemaKey, Val> extends Ab
 export interface AbstractControlContainerSchema<Key extends AnySchemaKey> extends AbstractSchema<Key>, ControlEventListenerHolder<SafeAny>, Row {
   /* Used to define the label of the control. */
   label?: string;
-  schemas: (AnySchema | AnyBuilder)[];
+  schemas: AnySchema[] | AnyBuilder[];
   /** Validator for the control */
   validators?: ValidatorFn[];
   /** Async validators for control */

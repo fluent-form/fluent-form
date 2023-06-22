@@ -23,12 +23,32 @@ export class SchemaUtil {
     return this.schemaMap.get(schema.kind)?.patch?.(schema) ?? schema;
   }
 
+  /**
+   * 过滤出第一层的控件/控件容器图示
+   * @param schemas
+   */
+  filterControlSchemas(schemas: StandardSchema<AnySchema>[]) {
+    return schemas.reduce((schemas, schema) => {
+      if (this.isControlWrapperSchema(schema) || this.isComponentContainerSchema(schema)) {
+        schemas = schemas.concat(this.filterControlSchemas(schema.schemas));
+      } else if (this.isControlContainerSchema(schema) || this.isControlSchema(schema)) {
+        schemas.push(schema);
+      }
+
+      return schemas;
+    }, [] as StandardSchema<AnyControlSchema | AnyControlContainerSchema>[]);
+  }
+
   isControlContainerSchema(schema: SchemaLike): schema is AnyControlContainerSchema {
     return this.typeOf(schema) === SchemaType.ControlContainer;
   }
 
   isControlWrapperSchema(schema: SchemaLike): schema is AnyControlWrapperSchema {
     return this.typeOf(schema) === SchemaType.ControlWrapper;
+  }
+
+  isControlSchema(schema: SchemaLike): schema is AnyControlSchema {
+    return this.typeOf(schema) === SchemaType.Control;
   }
 
   isComponentContainerSchema(schema: SchemaLike): schema is AnyComponentContainerSchema {
@@ -43,6 +63,10 @@ export class SchemaUtil {
     return this.typeOf(schema) === SchemaType.Component;
   }
 
+  /**
+   * 非控件图示，表示其本身或其子节点不会包含控件图示
+   * @param schema
+   */
   isNonControlSchema(schema: SchemaLike): schema is AnyComponentSchema | AnyComponentWrapperSchema {
     return this.isComponentSchema(schema) || this.isComponentWrapperSchema(schema);
   }
@@ -55,7 +79,9 @@ export class SchemaUtil {
     const validators: ValidatorFn[] = this.schemaMap.get(schema.kind)?.validators?.(schema) ?? [];
 
     // TODO required 可能是个函数，需要动态
-    schema.required && validators.push(Validators.required);
+    if (schema.required === true) {
+      validators.push(Validators.required);
+    }
 
     return validators;
   }

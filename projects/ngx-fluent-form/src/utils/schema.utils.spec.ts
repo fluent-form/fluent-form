@@ -3,6 +3,7 @@ import { Validators } from '@angular/forms';
 import { array, group, input, inputGroup, slider, textarea } from '../builders';
 import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
+import { AnySchema, StandardSchema } from '../schemas';
 import { schemasUtils, SchemaUtil, standardSchema, standardSchemas } from './schema.utils';
 
 describe('schema.utils', () => {
@@ -21,20 +22,49 @@ describe('schema.utils', () => {
   });
 
   describe('SchemaUtil', () => {
-    it('is x schema', () => {
+    it('isAnySchema', () => {
       expect(schemaUtil.isComponentContainerSchema({ kind: 'tab' })).toBeTrue();
       expect(schemaUtil.isComponentSchema({ kind: 'text' })).toBeTrue();
       expect(schemaUtil.isComponentWrapperSchema({ kind: 'button-group' })).toBeTrue();
       expect(schemaUtil.isControlContainerSchema({ kind: 'group' })).toBeTrue();
       expect(schemaUtil.isControlWrapperSchema({ kind: 'input-group' })).toBeTrue();
+      expect(schemaUtil.isControlSchema({ kind: 'input' })).toBeTrue();
       expect(schemaUtil.isNonControlSchema({ kind: 'button' })).toBeTrue();
+    });
+
+    it('filterControlSchemas', () => {
+      expect(schemaUtil.filterControlSchemas([
+        { kind: 'text', content: '' },
+        { kind: 'button-group', schemas: [] },
+        { kind: 'input' },
+        { kind: 'group', schemas: [] },
+        { kind: 'array', schemas: [] },
+        {
+          kind: 'input-group',
+          schemas: [
+            { kind: 'input' }
+          ]
+        },
+        {
+          kind: 'row',
+          schemas: [
+            { kind: 'input' }
+          ]
+        }
+      ])).toEqual([
+        { kind: 'input' },
+        { kind: 'group', schemas: [] },
+        { kind: 'array', schemas: [] },
+        { kind: 'input' },
+        { kind: 'input' },
+      ]);
     });
 
     describe('带验证器的图示', () => {
       it('length', () => {
-        const schema = standardSchema(input('name').length(1));
+        const schema: StandardSchema<AnySchema> = { kind: 'input', length: 1 };
         const validators = schemaUtil.validatorsOf(schema);
-
+        // min & max
         expect(validators.length).toBe(2);
       });
 

@@ -2,7 +2,7 @@ import { Directive, EventEmitter, forwardRef, inject, Input, Output } from '@ang
 import { FormControlStatus, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
-import { skip, takeUntil } from 'rxjs';
+import { takeUntil } from 'rxjs';
 import { AnySchema, FormGroupSchema, StandardSchema } from '../../schemas';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
 import { ControlContainerDirective, FluentControlContainer } from './models/control-container';
@@ -41,36 +41,14 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
 
   @Input('fluentSchemas')
   set schemas(value: StandardSchema<AnySchema>[] | StandardSchema<FormGroupSchema>) {
-    this.schema && this.destroy$.next();
-
     // 这里统一包装为 FormGroupSchema
     this.schema = this.schemaUtil.patchSchema(
       Array.isArray(value) ? { kind: 'group', schemas: value } : value
     );
 
-    this.formChange.emit(this.form = this.formUtil.createFormGroup(this.schema));
-
-    this.directives.forEach(directive => this.assignDirective(directive));
-
-    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.onValueChanges();
-    });
-
-    this.model && this.modelUtil.updateForm(this.model, this.schemas, this.form);
-
-    this.form.valueChanges.pipe(
-      skip(1),
-      takeUntil(this.destroy$)
-    ).subscribe(o =>
-      this.valueChanges.emit(o)
-    );
-
-    this.form.statusChanges.pipe(
-      skip(1),
-      takeUntil(this.destroy$)
-    ).subscribe(o =>
-      this.statusChanges.emit(o)
-    );
+    if (this.model) {
+      this.createForm();
+    }
   }
 
   get model(): T {
@@ -84,7 +62,11 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
 
     // 如果是外部变更，就赋值到表单
     if (this.model !== this.internalModel) {
-      this.form && this.modelUtil.updateForm(this.model, this.schemas, this.form);
+      if (this.form) {
+        this.updateForm();
+      } else if (this.schema) {
+        this.createForm();
+      }
     }
   }
 
@@ -97,18 +79,41 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
     return this;
   }
 
-  /**
-   * 更新模型
-   */
+  private createForm() {
+    this.destroy$.next();
+
+    this.formChange.emit(
+      this.form = this.formUtil.createFormGroup(this.schema, this.model)
+    );
+
+    this.onValueChanges();
+
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.onValueChanges();
+    });
+
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(o =>
+      this.valueChanges.emit(o)
+    );
+
+    this.form.statusChanges.pipe(takeUntil(this.destroy$)).subscribe(o =>
+      this.statusChanges.emit(o)
+    );
+  }
+
+  private updateForm() {
+    this.modelUtil.updateForm(this.form, this.model, this.schemas);
+  }
+
   private onValueChanges() {
     this.formUtil.updateForm(
       this.form,
-      this.schemas,
       this.internalModel = this.formUtil.updateModel(
+        {} as T,
         this.form,
         this.schemas,
-        {} as T
-      )
+      ),
+      this.schemas,
     );
     this.modelChange.emit(this.internalModel);
   }

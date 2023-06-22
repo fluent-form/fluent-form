@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { array, button, buttonGroup, form, FormArraySchema, input, schemasUtils } from 'ngx-fluent-form';
+import { button, buttonGroup, form, FormArraySchema, FormGroupSchema, group, input, schemasUtils } from 'ngx-fluent-form';
 import { AbstractFluentFormWrapperComponent, defineMeta, defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
@@ -29,8 +29,8 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
     super();
 
     this.schemas = form(
-      array('passengers').col(24).schemas(
-        input().label('乘客').col(12),
+      group('users').col(24).schemas(
+        input('user1').label('用户').col(12),
       ),
       buttonGroup().schemas(
         button().type('primary').content('添加控件').listeners({
@@ -46,15 +46,15 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
   }
 
   add() {
-    const array = schemasUtils(this.schemas).find<FormArraySchema>('passengers')!;
-    array.schemas.push(
-      input().label('乘客').col(12)
+    const group = schemasUtils(this.schemas).find<FormGroupSchema>('users')!;
+    group.schemas.push(
+      input(`user${group.schemas.length + 1}`).label('用户').col(12)
     );
     this.schemas = form(...this.schemas);
   }
 
   remove() {
-    const array = schemasUtils(this.schemas).find<FormArraySchema>('passengers')!;
+    const array = schemasUtils(this.schemas).find<FormArraySchema>('users')!;
     array.schemas.pop();
     this.schemas = form(...this.schemas);
   }
@@ -78,8 +78,8 @@ export const source = dedent`
   })
   export class ExampleComponent {
     schemas = form(
-      array('passengers').col(24).schemas(
-        input().label('乘客').col(12),
+      group('users').col(24).schemas(
+        input('user1').label('用户').col(12),
       ),
       buttonGroup().schemas(
         button().type('primary').content('添加控件').listeners({
@@ -94,19 +94,17 @@ export const source = dedent`
     model = {};
 
     add() {
-      const array = schemasUtils(this.schemas).find<FormArraySchema>('passengers')!;
-      array.schemas.push(
-        input().label('乘客').col(12).build()
+      const group = schemasUtils(this.schemas).find<FormGroupSchema>('users')!;
+      group.schemas.push(
+        input(\`user\${ group.schemas.length + 1}\`).label('用户').col(12)
       );
-      array.schemas = [...array.schemas];
-      this.schemas = [...this.schemas];
+      this.schemas = form(...this.schemas);
     }
 
     remove() {
-      const array = schemasUtils(this.schemas).find<FormArraySchema>('passengers')!;
+      const array = schemasUtils(this.schemas).find<FormArraySchema>('users')!;
       array.schemas.pop();
-      array.schemas = [...array.schemas];
-      this.schemas = [...this.schemas];
+      this.schemas = form(...this.schemas);
     }
   }
 `;

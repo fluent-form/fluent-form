@@ -95,7 +95,9 @@ export const story = defineStory({
         dateRange('dateRangeInRow').label('居右').col(8),
       )
     ),
-    model: {}
+    model: {
+      text: 'I love ngx-fluent-form'
+    }
   }
 });
 

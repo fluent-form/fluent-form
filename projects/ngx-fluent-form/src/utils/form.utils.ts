@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AnyArray, AnyObject, SafeAny } from '@ngify/types';
 import { FormArraySchema, FormGroupSchema, StandardSchema } from '../schemas';
-import { AnyControlSchema, AnySchema } from '../schemas/index.schema';
+import { AnyControlContainerSchema, AnyControlSchema, AnySchema } from '../schemas/index.schema';
 import { ValueTransformer } from '../services';
-import { Model } from '../types';
 import { isUndefined } from './is.utils';
 import { isDoubleKeyControlSchema, SchemaUtil } from './schema.utils';
 import { ValueUtil } from './value.utils';
@@ -16,88 +16,25 @@ export class FormUtil {
   private readonly valueUtil = inject(ValueUtil);
   private readonly valueTransformer = inject(ValueTransformer);
 
-  updateForm<F extends FormGroup | FormArray, M extends Model<F>>(form: F, schemas: StandardSchema<AnySchema>[], model: M) {
-    schemas.forEach(schema => {
-      // 这些图示不包含控件图示，直接跳过
-      if (this.schemaUtil.isNonControlSchema(schema)) { return; }
+  createFormControl(schema: StandardSchema<AnyControlSchema>, model: AnyObject): FormControl {
+    const validators: ValidatorFn[] = this.schemaUtil.validatorsOf(schema);
+    const value = this.valueUtil.valueOfModel(model, schema) ?? schema.defaultValue;
 
-      // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-      const control = form.get([schema.key?.toString()!])!;
-
-      if (schema.kind === 'group') {
-        return this.updateForm(control as FormGroup, schema.schemas, model[schema.key as keyof M] as Model<FormGroup>);
+    return new FormControl(
+      schema.mapper ? schema.mapper.parser(value) : value,
+      {
+        nonNullable: !isUndefined(schema.defaultValue),
+        validators: schema.validators ? validators.concat(schema.validators) : validators,
+        asyncValidators: schema.asyncValidators,
+        updateOn: schema.updateOn
       }
-
-      if (schema.kind === 'array') {
-        return this.updateForm(control as FormArray, schema.schemas, model[schema.key as keyof M] as Model<FormArray>);
-      }
-
-      if (this.schemaUtil.isControlWrapperSchema(schema) || this.schemaUtil.isComponentContainerSchema(schema)) {
-        return this.updateForm(form, schema.schemas, model);
-      }
-
-      const disabled = this.valueTransformer.transform(
-        schema.disabled,
-        { model, schema, control }
-      );
-
-      if (disabled !== control.disabled) {
-        const options = { emitEvent: false };
-        disabled ? control.disable(options) : control.enable(options);
-      }
-    });
+    );
   }
 
-  updateModel<F extends FormGroup | FormArray, M extends Model<F>>(form: F, schemas: StandardSchema<AnySchema>[], model: M) {
-    schemas.forEach(schema => {
-      // 这些图示不包含控件图示，直接跳过
-      if (this.schemaUtil.isNonControlSchema(schema)) return;
-
-      // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-      const control = form.get([schema.key?.toString()!])!;
-
-      if (schema.kind === 'group') {
-        this.updateModel(
-          control as FormGroup,
-          schema.schemas,
-          (model[schema.key as keyof M] = {} as M[keyof M]) as Model<FormGroup>,
-        );
-        return;
-      }
-
-      if (schema.kind === 'array') {
-        this.updateModel(
-          control as FormArray,
-          schema.schemas,
-          (model[schema.key as keyof M] = [] as M[keyof M]) as Model<FormArray>,
-        );
-        return;
-      }
-
-      if (this.schemaUtil.isControlWrapperSchema(schema) || this.schemaUtil.isComponentContainerSchema(schema)) {
-        this.updateModel(form, schema.schemas, model);
-        return;
-      }
-
-      const value = this.valueUtil.valueOfControl(control, schema);
-
-      // 双字段情况
-      if (isDoubleKeyControlSchema(schema)) {
-        schema.key!.map((prop, idx) => {
-          model[prop as keyof M] = ((value as [unknown, unknown])?.[idx] ?? null) as M[keyof M];
-        });
-      } else {
-        model[schema.key as keyof M] = value as M[keyof M];
-      }
-    });
-
-    return model;
-  }
-
-  createFormGroup(schema: StandardSchema<FormGroupSchema>): FormGroup;
-  createFormGroup(schemas: StandardSchema<AnySchema>[]): FormGroup;
-  createFormGroup(schemaOrSchemas: StandardSchema<FormGroupSchema> | StandardSchema<AnySchema>[]): FormGroup;
-  createFormGroup(schemaOrSchemas: StandardSchema<FormGroupSchema> | StandardSchema<AnySchema>[]): FormGroup {
+  createFormGroup(schema: StandardSchema<FormGroupSchema>, model: AnyObject): FormGroup;
+  createFormGroup(schemas: StandardSchema<AnySchema>[], model: AnyObject): FormGroup;
+  createFormGroup(schemaOrSchemas: StandardSchema<FormGroupSchema> | StandardSchema<AnySchema>[], model: AnyObject): FormGroup;
+  createFormGroup(schemaOrSchemas: StandardSchema<FormGroupSchema> | StandardSchema<AnySchema>[], model: AnyObject): FormGroup {
     let schemas: StandardSchema<AnySchema>[];
     let options: AbstractControlOptions = {};
 
@@ -112,63 +49,166 @@ export class FormUtil {
       };
     }
 
-    return new FormGroup(this.createFormControls(schemas), options);
-  }
-
-  createFormArray(schema: StandardSchema<FormArraySchema>): FormArray {
-    return new FormArray(
-      schema.schemas.map(schema => {
-        switch (schema.kind) {
-          case 'group':
-            return this.createFormGroup(schema);
-
-          case 'array':
-            return this.createFormArray(schema);
-
-          default:
-            return this.createFormControl(schema);
-        }
-      }),
-      {
-        validators: schema.validators,
-        asyncValidators: schema.asyncValidators,
-        updateOn: schema.updateOn
-      }
+    return new FormGroup(
+      this.createControlMap(schemas, model),
+      options
     );
   }
 
-  createFormControl(schema: StandardSchema<AnyControlSchema>): FormControl {
-    const validators: ValidatorFn[] = this.schemaUtil.validatorsOf(schema);
-
-    return new FormControl(
-      // 如果有传入映射器，则默认值也需要经过映射
-      schema.mapper ? schema.mapper.parser(schema.defaultValue) : schema.defaultValue,
-      {
-        nonNullable: !isUndefined(schema.defaultValue),
-        validators: schema.validators ? validators.concat(schema.validators) : validators,
-        asyncValidators: schema.asyncValidators,
-        updateOn: schema.updateOn
-      }
-    );
-  }
-
-  createFormControls(schemas: StandardSchema<AnySchema>[], controls: Record<string, AbstractControl> = {}) {
+  private createControlMap(schemas: StandardSchema<AnySchema>[], model: AnyObject) {
     return schemas.reduce((controls, schema) => {
       if (this.schemaUtil.isNonControlSchema(schema)) {
         return controls;
       }
 
       if (schema.kind === 'group') {
-        controls[schema.key!.toString()] = this.createFormGroup(schema);
+        const key = schema.key!.toString();
+        controls[key] = this.createFormGroup(schema, model[key] ?? {});
       } else if (schema.kind === 'array') {
-        controls[schema.key!.toString()] = this.createFormArray(schema);
+        const key = schema.key!.toString();
+        controls[key] = this.createFormArray(schema, model[key] ?? []);
       } else if (this.schemaUtil.isControlWrapperSchema(schema) || this.schemaUtil.isComponentContainerSchema(schema)) {
-        this.createFormControls(schema.schemas, controls);
+        Object.assign(controls, this.createControlMap(schema.schemas, model));
       } else {
-        controls[schema.key!.toString()] = this.createFormControl(schema);
+        controls[schema.key!.toString()] = this.createFormControl(schema, model);
       }
 
       return controls;
-    }, controls);
+    }, {} as Record<string, AbstractControl>);
+  }
+
+  createFormArray(schema: StandardSchema<FormArraySchema>, model: AnyArray): FormArray {
+    const controls = this.createFormArrayElements(schema.schemas, model);
+
+    return new FormArray<SafeAny>(controls, {
+      validators: schema.validators,
+      asyncValidators: schema.asyncValidators,
+      updateOn: schema.updateOn
+    });
+  }
+
+  createFormArrayElements(schemas: StandardSchema<AnySchema>[], model: AnyArray) {
+    // 只拿第一个，其他的忽略
+    const [schema] = this.schemaUtil.filterControlSchemas(schemas);
+
+    if (!schema) {
+      throw Error('FormArray element control schema not found');
+    }
+
+    return model.map((_, index) => {
+      schema.key = index;
+      return this.createAnyControl(schema, model);
+    });
+  }
+
+  createAnyControl(schema: StandardSchema<AnyControlSchema>, model: AnyObject): FormControl;
+  createAnyControl(schema: StandardSchema<FormGroupSchema>, model: AnyObject): FormGroup;
+  createAnyControl(schema: StandardSchema<FormArraySchema>, model: AnyArray): FormArray;
+  createAnyControl(schema: StandardSchema<AnyControlSchema | AnyControlContainerSchema>, model: AnyObject | AnyArray): AbstractControl;
+  createAnyControl(schema: StandardSchema<AnyControlSchema | AnyControlContainerSchema>, model: AnyObject | AnyArray): AbstractControl {
+    switch (schema.kind) {
+      case 'group':
+        return this.createFormGroup(schema, (model as AnyObject)[schema.key!] ?? {});
+
+      case 'array':
+        return this.createFormArray(schema, (model as AnyArray)[schema.key as number] ?? []);
+
+      default:
+        return this.createFormControl(schema, model);
+    }
+  }
+
+  updateForm(form: FormGroup, model: AnyObject, schemas: StandardSchema<AnySchema>[], emitEvent?: boolean): void;
+  updateForm(form: FormArray, model: AnyArray, schemas: StandardSchema<AnySchema>[], emitEvent?: boolean): void;
+  updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: StandardSchema<AnySchema>[], emitEvent = true): void {
+    schemas.forEach(schema => {
+      // 这些图示不包含控件图示，直接跳过
+      if (this.schemaUtil.isNonControlSchema(schema)) return;
+
+      if (schema.kind === 'group') {
+        const key = schema.key!;
+        const formGroup = form.get([key]) as FormGroup;
+        return this.updateForm(formGroup, model[key], schema.schemas, false);
+      }
+
+      if (schema.kind === 'array') {
+        const key = schema.key!;
+        const formArray = form.get([key]) as FormArray;
+        const [elementSchema] = this.schemaUtil.filterControlSchemas(schema.schemas);
+        const elementSchemas = formArray.controls.map((_, index) => ({ ...elementSchema, key: index }));
+
+        return this.updateForm(formArray, model[schema.key!], elementSchemas, false);
+      }
+
+      if (this.schemaUtil.isControlWrapperSchema(schema) || this.schemaUtil.isComponentContainerSchema(schema)) {
+        return this.updateForm(form as FormGroup, model, schema.schemas, false);
+      }
+
+      const control = form.get([schema.key!.toString()])!;
+
+      // update disabled
+      const disabled = this.valueTransformer.transform(schema.disabled, { model, schema, control });
+      const options = { emitEvent: false };
+      if (disabled) {
+        control.disable(options);
+      } else {
+        control.enable(options);
+      }
+      // update required validator
+      const required = this.valueTransformer.transform(schema.required, { model, schema, control });
+      if (required) {
+        control.addValidators(Validators.required);
+      } else {
+        control.removeValidators(Validators.required);
+      }
+    });
+
+    emitEvent && form.updateValueAndValidity({ emitEvent: false });
+  }
+
+  updateModel(model: AnyObject, form: FormGroup, schemas: StandardSchema<AnySchema>[]): AnyObject;
+  updateModel(model: AnyArray, form: FormArray, schemas: StandardSchema<AnySchema>[]): AnyArray;
+  updateModel(model: AnyObject, form: FormGroup | FormArray, schemas: StandardSchema<AnySchema>[]): AnyObject | AnyArray {
+    schemas.forEach(schema => {
+      // 这些图示不包含控件图示，直接跳过
+      if (this.schemaUtil.isNonControlSchema(schema)) return;
+
+      if (schema.kind === 'group') {
+        const key = schema.key!;
+        const formGroup = form.get([key]) as FormGroup;
+        this.updateModel(model[key] = {}, formGroup, schema.schemas);
+        return;
+      }
+
+      if (schema.kind === 'array') {
+        const key = schema.key!;
+        const formArray = form.get([key]) as FormArray;
+        const [elementSchema] = this.schemaUtil.filterControlSchemas(schema.schemas);
+        const elementSchemas = formArray.controls.map((_, index) => ({ ...elementSchema, key: index }));
+
+        this.updateModel(model[key] = [], formArray, elementSchemas);
+        return;
+      }
+
+      if (this.schemaUtil.isControlWrapperSchema(schema) || this.schemaUtil.isComponentContainerSchema(schema)) {
+        this.updateModel(model, form as FormGroup, schema.schemas);
+        return;
+      }
+
+      const key = schema.key!.toString();
+      const control = form.get([key])!;
+      const value = this.valueUtil.valueOfControl(control, schema);
+
+      // 双字段情况
+      if (isDoubleKeyControlSchema(schema)) {
+        schema.key!.map((prop, idx) => {
+          model[prop] = (value as [unknown, unknown])?.[idx] ?? null;
+        });
+      } else {
+        model[key] = value;
+      }
+    });
+
+    return model;
   }
 }

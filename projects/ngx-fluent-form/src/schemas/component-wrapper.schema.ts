@@ -8,6 +8,6 @@ import { SchemaKey } from './types';
 export interface ButtonGroupComponentSchema<Key extends SchemaKey = SchemaKey>
   extends AbstractSchema<Key>, Labelful, ComponentEventListenerHolder<NzButtonComponent>, ComponentPropertyHolder<NzButtonComponent> {
   kind: 'button-group';
-  schemas: ButtonComponentSchema[] | StableBuilder<ButtonComponentSchema>[];
+  schemas: (ButtonComponentSchema | StableBuilder<ButtonComponentSchema>)[];
   size?: NzButtonSize;
 }

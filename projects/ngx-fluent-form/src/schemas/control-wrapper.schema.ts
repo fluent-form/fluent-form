@@ -7,7 +7,7 @@ import { ComponentEventListenerHolder, ComponentPropertyHolder, Labelful } from 
 import { AnySchemaKey, SchemaKey } from './types';
 
 export interface ControlWrapper<Key extends SchemaKey> extends AbstractSchema<Key> {
-  schemas: ComposableComponentSchema[] | ComposableComponentBuilder[];
+  schemas: (ComposableComponentSchema | ComposableComponentBuilder)[];
 }
 
 export interface InputGroupComponentSchema<Key extends SchemaKey = SchemaKey>

@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Injector } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { of, switchMap } from 'rxjs';
 import { SelectWidget, SelectWidgetTemplatePrivateContext } from './select.widget';
 
 describe('SelectWidget', () => {
@@ -31,7 +31,13 @@ describe('SelectWidget', () => {
         ],
       })
     );
-    ctx.init({ kind: 'select', fetchOptions: () => of([]) });
+    ctx.init({
+      kind: 'select',
+      fetchOptions: keyword$ =>
+        keyword$.pipe(
+          switchMap(() => of([]))
+        )
+    });
     ctx.trigger('keyword');
     ctx.destroy();
     expect(ctx).toBeTruthy();

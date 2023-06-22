@@ -1,0 +1,57 @@
+<ng-template let-formArray="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <nz-divider
+    *ngIf="schema.label"
+    [nzText]="schema.label"
+    [hidden]="schema.hidden | call: model:schema:formArray"></nz-divider>
+
+  <nz-row
+    #config="fluentConfig"
+    nz-form
+    [nzGutter]="schema.gutter ?? config.gutter"
+    [nzAlign]="schema.align!"
+    [nzJustify]="schema.justify!"
+    [nzLayout]="config.layout"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style"
+    [fluentBinding]="{ schema, control: formArray }"
+    [hidden]="schema.hidden | call: model:schema:formArray">
+    <ng-template
+      #formColTemplate
+      let-schema="schema"
+      let-control="control"
+      let-model="model"
+      let-index="index"
+      let-first="first">
+      <nz-col
+        [nzSpan]="schema.col | col: 'span'"
+        [nzFlex]="schema.col | col: 'flex'"
+        [nzOffset]="schema.col | col: 'offset'"
+        [nzPush]="schema.col | col: 'push'"
+        [nzPull]="schema.col | col: 'pull'"
+        [nzOrder]="schema.col | col: 'order'"
+        [hidden]="schema.hidden | call: model:schema:control">
+        <!-- form array 的 schemas 可能会有多个，只在第一个时渲染移除按钮 -->
+        <nz-row *ngIf="first" nzJustify="end">
+          <button nz-button nzShape="circle" nzSize="small" nzDanger (click)="formArray.removeAt(index)">
+            <span nz-icon nzType="minus" nzTheme="outline"></span>
+          </button>
+        </nz-row>
+
+        <fluent-form-col-content-outlet
+          [control]="control"
+          [schema]="schema"
+          [model]="model"></fluent-form-col-content-outlet>
+      </nz-col>
+    </ng-template>
+
+    <ng-container *ngFor="let control of formArray.controls; index as index">
+      <ng-container
+        *ngFor="let subschema of schema.schemas; first as first"
+        [ngTemplateOutlet]="formColTemplate"
+        [ngTemplateOutletContext]="{ control: control, schema: subschema, model: model, index: index, first: first }">
+      </ng-container>
+    </ng-container>
+  </nz-row>
+
+  <button nz-button nzType="primary" (click)="add(formArray, schema)">Add</button>
+</ng-template>

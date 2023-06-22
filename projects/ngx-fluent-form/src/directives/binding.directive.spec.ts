@@ -60,8 +60,8 @@ class TestingComponent {
     }
   };
 
-  inputControl = this.formUtil.createFormControl(this.inputSchema);
-  rateControl = this.formUtil.createFormControl(this.rateSchema);
+  inputControl = this.formUtil.createFormControl(this.inputSchema, {});
+  rateControl = this.formUtil.createFormControl(this.rateSchema, {});
 }
 
 describe('FluentBindingDirective', () => {

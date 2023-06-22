@@ -23,7 +23,7 @@ describe('FluentControlPipe', () => {
     formGroup = TestBed.inject(FormUtil).createFormGroup([
       { kind: 'input', key: 'a' },
       { kind: 'date-range', key: ['b', 'c'] }
-    ]);
+    ], {});
   });
 
   it('create an instance', () => {

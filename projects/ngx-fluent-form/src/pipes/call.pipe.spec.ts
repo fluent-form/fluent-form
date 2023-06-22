@@ -26,7 +26,7 @@ describe('FluentCallPipe', () => {
 
     model = { value: true };
     schema = { kind: 'toggle' };
-    ctrl = TestBed.inject(FormUtil).createFormControl(schema);
+    ctrl = TestBed.inject(FormUtil).createFormControl(schema, {});
     pipe = TestBed.inject(FluentCallPipe);
   });
 

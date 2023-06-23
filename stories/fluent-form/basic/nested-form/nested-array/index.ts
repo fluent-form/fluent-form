@@ -9,7 +9,7 @@ export const story = defineStory({
     schemas: form(
       input('flight').label('航班').required(true).col(12),
       datetime('boardingTime').label('登机时间').required(true).col(12),
-      array('passengers').label('乘客').col(24).schemas(
+      array('passengers').label('乘客').length({ min: 1, max: 5 }).col(24).schemas(
         group().col(12).schemas(
           input('name').label('姓名').placeholder('请输入姓名').col(24),
           radioGroup('gender').label('性别').options(GENDER_OPTIONS).defaultValue('男'),
@@ -41,7 +41,7 @@ export const source = dedent`
     schemas = form(
       input('flight').label('航班').required(true).col(12),
       datetime('boardingTime').label('登机时间').required(true).col(12),
-      array('passengers').label('机组乘客').col(24).schemas(
+      array('passengers').label('机组乘客').length({ min: 1, max: 5 }).col(24).schemas(
         group().col(12).schemas(
           input('name').label('姓名').placeholder('请输入姓名').col(24),
           radioGroup('gender').label('性别').options(GENDER_OPTIONS).defaultValue('男'),

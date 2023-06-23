@@ -8,9 +8,9 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FluentFormColContentOutletComponent } from '../../components';
 import { FluentBindingDirective, FluentConfigDirective, FluentContextGuardDirective } from '../../directives';
-import { FluentCallPipe, FluentColumnPipe } from '../../pipes';
+import { FluentCallPipe, FluentColumnPipe, FluentInvokePipe } from '../../pipes';
 import { FormArraySchema, StandardSchema } from '../../schemas';
-import { FormUtil, SchemaUtil } from '../../utils';
+import { FormUtil, isNumber, SchemaUtil } from '../../utils';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, FormArray>;
@@ -33,7 +33,8 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
     FluentContextGuardDirective,
     FluentConfigDirective,
     FluentColumnPipe,
-    FluentCallPipe
+    FluentCallPipe,
+    FluentInvokePipe
   ],
   templateUrl: './form-array.widget.html'
 })
@@ -41,11 +42,20 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
   private readonly schemaUtil = inject(SchemaUtil);
   private readonly formUtil = inject(FormUtil);
 
-  add(control: FormArray, schema: StandardSchema<FormArraySchema>) {
+  protected add(control: FormArray, schema: StandardSchema<FormArraySchema>) {
     const [elementSchema] = this.schemaUtil.filterControlSchemas(schema.schemas);
 
     control.push(
       this.formUtil.createAnyControl(elementSchema, {})
     );
   }
+
+  protected readonly helper = {
+    length: {
+      min: (length: FormArraySchema['length']) =>
+        isNumber(length) ? length : length?.min ?? 0,
+      max: (length: FormArraySchema['length']) =>
+        isNumber(length) ? length : length?.max ?? Infinity,
+    }
+  } as const;
 }

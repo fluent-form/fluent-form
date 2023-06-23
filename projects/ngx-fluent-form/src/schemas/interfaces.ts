@@ -153,3 +153,5 @@ export interface ComponentPropertyHolder<C> extends PropertyHolder {
 export interface ElementPropertyHolder<E extends HTMLElement> extends PropertyHolder {
   properties?: HTMLElementPropertyMap<E>;
 }
+
+export type Length = number | { max?: number, min?: number };

@@ -1,19 +1,20 @@
-<ng-template let-formGroup="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+<ng-template let-formGroup="control" let-formSchema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <nz-divider
-    *ngIf="schema.label"
-    [nzText]="schema.label"
-    [hidden]="schema.hidden | call: model:schema:formGroup"></nz-divider>
+    *ngIf="formSchema.label"
+    [nzText]="formSchema.label"
+    [hidden]="formSchema.hidden | call: model:formSchema:formGroup"></nz-divider>
+
   <nz-row
     #config="fluentConfig"
     nz-form
-    [nzGutter]="schema.gutter ?? config.gutter"
-    [nzAlign]="schema.align!"
-    [nzJustify]="schema.justify!"
+    [nzGutter]="formSchema.gutter ?? config.gutter"
+    [nzAlign]="formSchema.align!"
+    [nzJustify]="formSchema.justify!"
     [nzLayout]="config.layout"
-    [ngClass]="schema.class"
-    [ngStyle]="schema.style"
-    [fluentBinding]="{ schema, control: formGroup }"
-    [hidden]="schema.hidden | call: model:schema:formGroup">
+    [ngClass]="formSchema.class"
+    [ngStyle]="formSchema.style"
+    [fluentBinding]="{ schema: formSchema, control: formGroup }"
+    [hidden]="formSchema.hidden | call: model:formSchema:formGroup">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
       <nz-col
         [nzSpan]="schema.col | col: 'span'"
@@ -31,7 +32,7 @@
     </ng-template>
 
     <ng-container
-      *ngFor="let subschema of schema.schemas"
+      *ngFor="let subschema of formSchema.schemas"
       [ngTemplateOutlet]="formColTemplate"
       [ngTemplateOutletContext]="{ control: (subschema.key | control: formGroup), schema: subschema, model: model }">
       <!-- TODO 上面的这个 model 应该在 subschema.kind = group 时候改为 model[subschema.key] -->

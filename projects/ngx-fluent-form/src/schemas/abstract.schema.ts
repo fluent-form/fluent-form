@@ -7,7 +7,7 @@ import { CompareWith, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDateMode, SupportTimeOptions } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { AnyBuilder, AnySchema } from './index.schema';
-import { Col, ControlEventListenerHolder, ControlValueMapper, Labelful, Row, SchemaContext, SchemaLike } from './interfaces';
+import { Col, ControlEventListenerHolder, ControlValueMapper, Labelful, Length, Row, SchemaContext, SchemaLike } from './interfaces';
 import { AnySchemaKey, Cell } from './types';
 
 /** 抽象图示 */
@@ -72,7 +72,7 @@ export interface AbstractInputBoxControlSchema<Key extends AnySchemaKey, Val, P 
 
 /** 抽象的文本控件图示 */
 export interface AbstractTextControlSchema<Key extends AnySchemaKey = AnySchemaKey> extends AbstractInputBoxControlSchema<Key, string> {
-  length?: number | { max?: number, min?: number };
+  length?: Length;
   autocomplete?: {
     backfill?: boolean;
     options: AutocompleteDataSource;

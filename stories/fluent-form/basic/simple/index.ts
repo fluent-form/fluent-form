@@ -9,7 +9,8 @@ export const story = defineStory({
     schemas: form(
       headless('headless'),
       input('text')
-        .label({ value: '文本输入框', tooltip: '小贴士' })
+        .label('文本输入框')
+        .tooltip('小贴士')
         .col(8)
         .id('ipt')
         .disabled('false')
@@ -113,7 +114,8 @@ export const source = dedent`
     schemas = form(
       headless('headless'),
       input('text')
-        .label({ value: '文本输入框', tooltip: '小贴士' })
+        .label('文本输入框')
+        .tooltip('小贴士')
         .col(8)
         .id('ipt')
         .disabled('false')

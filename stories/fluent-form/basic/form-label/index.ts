@@ -6,29 +6,17 @@ export const story = defineStory({
   args: {
     schemas: form(
       input('text1')
-        .label({
-          value: '右对齐',
-          span: 7
-        })
+        .label({ content: '右对齐', span: 7 })
         .col(24),
 
       input('text2')
-        .label({
-          value: '附带提示',
-          span: 7,
-          tooltip: '小贴士'
-        })
+        .label({ content: '附带提示', span: 7 })
+        .tooltip('小贴士')
         .col(24),
 
       input('text3')
-        .label({
-          value: '自定义提示图标',
-          span: 7,
-          tooltip: {
-            title: '小贴士',
-            icon: 'info-circle'
-          }
-        })
+        .label({ content: '自定义提示图标', span: 7 })
+        .tooltip({ content: '小贴士', icon: 'info-circle' })
         .col(24),
     ),
     model: {},
@@ -47,29 +35,17 @@ export const source = dedent`
   export class ExampleComponent {
     schemas = form(
       input('text1')
-        .label({
-          value: '右对齐',
-          span: 7
-        })
+        .label({ content: '右对齐', span: 7 })
         .col(24),
 
       input('text2')
-        .label({
-          value: '附带提示',
-          span: 7,
-          tooltip: '小贴士'
-        })
+        .label({ content: '附带提示', span: 7 })
+        .tooltip('小贴士')
         .col(24),
 
       input('text3')
-        .label({
-          value: '自定义提示图标',
-          span: 7,
-          tooltip: {
-            title: '小贴士',
-            icon: 'info-circle'
-          }
-        })
+        .label({ content: '自定义提示图标', span: 7 })
+        .tooltip({ content: '小贴士', icon: 'info-circle' })
         .col(24),
     );
 

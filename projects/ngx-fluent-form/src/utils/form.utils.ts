@@ -3,6 +3,7 @@ import { AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGr
 import { AnyArray, AnyObject, SafeAny } from '@ngify/types';
 import { FormArraySchema, FormGroupSchema, StandardSchema } from '../schemas';
 import { AnyControlContainerSchema, AnyControlSchema, AnySchema } from '../schemas/index.schema';
+import { SchemaKind } from '../schemas/interfaces';
 import { ValueTransformer } from '../services';
 import { isUndefined } from './is.utils';
 import { isDoubleKeyControlSchema, SchemaUtil } from './schema.utils';
@@ -61,10 +62,10 @@ export class FormUtil {
         return controls;
       }
 
-      if (schema.kind === 'group') {
+      if (schema.kind === SchemaKind.Group) {
         const key = schema.key!.toString();
         controls[key] = this.createFormGroup(schema, model[key] ?? {});
-      } else if (schema.kind === 'array') {
+      } else if (schema.kind === SchemaKind.Array) {
         const key = schema.key!.toString();
         controls[key] = this.createFormArray(schema, model[key] ?? []);
       } else if (this.schemaUtil.isControlWrapperSchema(schema) || this.schemaUtil.isComponentContainerSchema(schema)) {
@@ -125,13 +126,13 @@ export class FormUtil {
       // 这些图示不包含控件图示，直接跳过
       if (this.schemaUtil.isNonControlSchema(schema)) return;
 
-      if (schema.kind === 'group') {
+      if (schema.kind === SchemaKind.Group) {
         const key = schema.key!;
         const formGroup = form.get([key]) as FormGroup;
         return this.updateForm(formGroup, model[key], schema.schemas, false);
       }
 
-      if (schema.kind === 'array') {
+      if (schema.kind === SchemaKind.Array) {
         const key = schema.key!;
         const formArray = form.get([key]) as FormArray;
         const [elementSchema] = this.schemaUtil.filterControlSchemas(schema.schemas);
@@ -173,14 +174,14 @@ export class FormUtil {
       // 这些图示不包含控件图示，直接跳过
       if (this.schemaUtil.isNonControlSchema(schema)) return;
 
-      if (schema.kind === 'group') {
+      if (schema.kind === SchemaKind.Group) {
         const key = schema.key!;
         const formGroup = form.get([key]) as FormGroup;
         this.updateModel(model[key] = {}, formGroup, schema.schemas);
         return;
       }
 
-      if (schema.kind === 'array') {
+      if (schema.kind === SchemaKind.Array) {
         const key = schema.key!;
         const formArray = form.get([key]) as FormArray;
         const [elementSchema] = this.schemaUtil.filterControlSchemas(schema.schemas);

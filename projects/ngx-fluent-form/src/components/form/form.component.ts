@@ -10,6 +10,7 @@ import { FluentBindingDirective, FluentTemplateDirective } from '../../directive
 import { DirectiveQueryContainer, FluentConfig } from '../../interfaces';
 import { FluentCallPipe, FluentColumnPipe, FluentControlPipe } from '../../pipes';
 import { AnySchema, FormGroupSchema, StandardSchema } from '../../schemas';
+import { SchemaKind } from '../../schemas/interfaces';
 import { CONFIG, DIRECTIVE_QUERY_CONTAINER } from '../../tokens';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
 import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/form-col-content-outlet.component';
@@ -58,6 +59,7 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig, D
   private _model!: T;
 
   protected schema!: StandardSchema<FormGroupSchema>;
+  protected readonly SchemaKind = SchemaKind;
 
   form!: FormGroup;
 

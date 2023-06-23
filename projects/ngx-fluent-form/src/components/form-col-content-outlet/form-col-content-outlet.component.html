@@ -1,35 +1,35 @@
 <ng-template #formColContentTemplate let-schema="schema" let-control="control" let-model="model">
   <ng-container [ngSwitch]="schema.kind">
     <ng-container
-      *ngSwitchCase="'group'"
+      *ngSwitchCase="SchemaKind.Group"
       fluentWithInjector
       [ngTemplateOutlet]="schema | template"
       [ngTemplateOutletContext]="{ control: control, schema: schema, model: model[schema.key] }">
     </ng-container>
 
     <ng-container
-      *ngSwitchCase="'array'"
+      *ngSwitchCase="SchemaKind.Array"
       fluentWithInjector
       [ngTemplateOutlet]="schema | template"
       [ngTemplateOutletContext]="{ control: control, schema: schema, model: model[schema.key] }">
     </ng-container>
 
     <ng-container
-      *ngSwitchCase="'steps'"
+      *ngSwitchCase="SchemaKind.Steps"
       fluentWithInjector
       [ngTemplateOutlet]="schema | template"
       [ngTemplateOutletContext]="{ control, schema, model }">
     </ng-container>
 
     <ng-container
-      *ngSwitchCase="'tabs'"
+      *ngSwitchCase="SchemaKind.Tabs"
       fluentWithInjector
       [ngTemplateOutlet]="schema | template"
       [ngTemplateOutletContext]="{ control, schema, model }">
     </ng-container>
 
     <ng-container
-      *ngSwitchCase="'row'"
+      *ngSwitchCase="SchemaKind.Row"
       fluentWithInjector
       [ngTemplateOutlet]="rowTemplate"
       [ngTemplateOutletContext]="{ control, schema, model }">
@@ -60,12 +60,12 @@
     <!-- 如果需要采用 input-group 内其他控件的状态/提示，需要使用 input-group 的 primary 参数明确指定 -->
     <nz-form-control
       *ngIf="
-        schema.kind === 'input-group'
+        schema.kind === SchemaKind.InputGroup
           ? (schema.primary ?? schema.schemas[0].key | schema: schema.schemas)
           : schema as currentSchema
       "
       [nzValidateStatus]="
-        schema.kind === 'input-group' ? (schema.primary ?? schema.schemas[0].key | control: control) : control
+        schema.kind === SchemaKind.InputGroup ? (schema.primary ?? schema.schemas[0].key | control: control) : control
       "
       [nzHasFeedback]="currentSchema.feedback"
       [nzValidatingTip]="currentSchema.tips?.validating"

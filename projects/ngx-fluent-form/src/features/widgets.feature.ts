@@ -3,11 +3,10 @@ import { ValidatorFn, Validators } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { SchemaConfig } from '../interfaces';
 import { AbstractSchema, AbstractTextControlSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, InputControlSchema, InputGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema, TextareaControlSchema, TextComponentSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
-import { SchemaType } from '../schemas/interfaces';
+import { SchemaKind, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP, WIDGET_MAP } from '../tokens';
 import { isNumber } from '../utils';
 import { AbstractWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, FormArrayWidget, FormGroupWidget, InputGroupWidget, InputWidget, NumberWidget, RadioGroupWidget, RateWidget, SelectWidget, SilderWidget, StepsWidget, TabsWidget, TextareaWidget, TextWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from '../widgets';
-import { WidgetKind } from '../widgets/kind';
 import { makeFluentFormFeature } from './helper';
 import { FluentFormFeature, FluentFormFeatureKind } from './interface';
 
@@ -43,9 +42,9 @@ export function withWidgets(...features: (FluentFormWidgetFeature<SafeAny> | Flu
         );
 
         // 添加内置的 schema
-        map.set('row', { type: SchemaType.ComponentContainer });
-        map.set('headless', { type: SchemaType.Control });
-        map.set('template', { type: SchemaType.Component });
+        map.set(SchemaKind.Row, { type: SchemaType.ComponentContainer });
+        map.set(SchemaKind.Headless, { type: SchemaType.Control });
+        map.set(SchemaKind.Template, { type: SchemaType.Component });
 
         return map;
       }
@@ -102,8 +101,8 @@ function validatorsOfTextControl(schema: AbstractTextControlSchema) {
 
 export function useInputWidget(): FluentFormWidgetFeature<InputControlSchema> {
   return {
+    kind: SchemaKind.Input,
     type: SchemaType.Control,
-    kind: WidgetKind.Input,
     widget: InputWidget,
     validators: schema => {
       const validators = validatorsOfTextControl(schema);
@@ -119,16 +118,16 @@ export function useInputWidget(): FluentFormWidgetFeature<InputControlSchema> {
 
 export function useInputGroupWidget(): FluentFormWidgetFeature<InputGroupComponentSchema> {
   return {
+    kind: SchemaKind.InputGroup,
     type: SchemaType.ControlWrapper,
-    kind: WidgetKind.InputGroup,
     widget: InputGroupWidget
   };
 }
 
 export function useTextareaWidget(): FluentFormWidgetFeature<TextareaControlSchema> {
   return {
+    kind: SchemaKind.Textarea,
     type: SchemaType.Control,
-    kind: WidgetKind.Textarea,
     widget: TextareaWidget,
     validators: validatorsOfTextControl
   };
@@ -136,16 +135,16 @@ export function useTextareaWidget(): FluentFormWidgetFeature<TextareaControlSche
 
 export function useNumberWidget(): FluentFormWidgetFeature<NumberInputControlSchema> {
   return {
+    kind: SchemaKind.Number,
     type: SchemaType.Control,
-    kind: WidgetKind.Number,
     widget: NumberWidget
   };
 }
 
 export function useDateWidget(): FluentFormWidgetFeature<DatePickerControlSchema> {
   return {
+    kind: SchemaKind.Date,
     type: SchemaType.Control,
-    kind: WidgetKind.Date,
     widget: DateWidget,
     patch: schema => {
       schema.mapper ??= {
@@ -159,8 +158,8 @@ export function useDateWidget(): FluentFormWidgetFeature<DatePickerControlSchema
 
 export function useDateRangeWidget(): FluentFormWidgetFeature<DateRangePickerControlSchema> {
   return {
+    kind: SchemaKind.DateRange,
     type: SchemaType.Control,
-    kind: WidgetKind.DateRange,
     widget: DateRangeWidget,
     patch: schema => {
       schema.mapper ??= {
@@ -174,8 +173,8 @@ export function useDateRangeWidget(): FluentFormWidgetFeature<DateRangePickerCon
 
 export function useTimeWidget(): FluentFormWidgetFeature<TimePickerControlSchema> {
   return {
+    kind: SchemaKind.Time,
     type: SchemaType.Control,
-    kind: WidgetKind.Time,
     widget: TimeWidget,
     patch: schema => {
       schema.mapper ??= {
@@ -189,64 +188,64 @@ export function useTimeWidget(): FluentFormWidgetFeature<TimePickerControlSchema
 
 export function useToggleWidget(): FluentFormWidgetFeature<ToggleControlSchema> {
   return {
+    kind: SchemaKind.Toggle,
     type: SchemaType.Control,
-    kind: WidgetKind.Toggle,
     widget: ToggleWidget
   };
 }
 
 export function useSelectWidget(): FluentFormWidgetFeature<SelectControlSchema> {
   return {
+    kind: SchemaKind.Select,
     type: SchemaType.Control,
-    kind: WidgetKind.Select,
     widget: SelectWidget
   };
 }
 
 export function useCascaderWidget(): FluentFormWidgetFeature<CascaderControlSchema> {
   return {
+    kind: SchemaKind.Cascader,
     type: SchemaType.Control,
-    kind: WidgetKind.Cascader,
     widget: CascaderWidget
   };
 }
 
 export function useTreeSelectWidget(): FluentFormWidgetFeature<TreeSelectControlSchema> {
   return {
+    kind: SchemaKind.TreeSelect,
     type: SchemaType.Control,
-    kind: WidgetKind.TreeSelect,
     widget: TreeSelectWidget
   };
 }
 
 export function useSliderWidget(): FluentFormWidgetFeature<SliderControlSchema> {
   return {
+    kind: SchemaKind.Slider,
     type: SchemaType.Control,
-    kind: WidgetKind.Slider,
     widget: SilderWidget
   };
 }
 
 export function useRadioGroupWidget(): FluentFormWidgetFeature<RadioGroupControlSchema> {
   return {
+    kind: SchemaKind.RadioGroup,
     type: SchemaType.Control,
-    kind: WidgetKind.RadioGroup,
     widget: RadioGroupWidget
   };
 }
 
 export function useCheckboxWidget(): FluentFormWidgetFeature<CheckboxControlSchema> {
   return {
+    kind: SchemaKind.Checkbox,
     type: SchemaType.Control,
-    kind: WidgetKind.Checkbox,
     widget: CheckboxWidget
   };
 }
 
 export function useCheckboxGroupWidget(): FluentFormWidgetFeature<CheckboxGroupControlSchema> {
   return {
+    kind: SchemaKind.CheckboxGroup,
     type: SchemaType.Control,
-    kind: WidgetKind.CheckboxGroup,
     widget: CheckboxGroupWidget,
     patch: schema => {
       const labelProperty = schema.config?.labelProperty ?? 'label';
@@ -269,32 +268,32 @@ export function useCheckboxGroupWidget(): FluentFormWidgetFeature<CheckboxGroupC
 
 export function useRateWidget(): FluentFormWidgetFeature<RateControlSchema> {
   return {
+    kind: SchemaKind.Rate,
     type: SchemaType.Control,
-    kind: WidgetKind.Rate,
     widget: RateWidget
   };
 }
 
 export function useTextWidget(): FluentFormWidgetFeature<TextComponentSchema> {
   return {
+    kind: SchemaKind.Text,
     type: SchemaType.Component,
-    kind: WidgetKind.Text,
     widget: TextWidget
   };
 }
 
 export function useButtonWidget(): FluentFormWidgetFeature<ButtonComponentSchema> {
   return {
+    kind: SchemaKind.Button,
     type: SchemaType.Component,
-    kind: WidgetKind.Button,
     widget: ButtonWidget
   };
 }
 
 export function useButtonGroupWidget(): FluentFormWidgetFeature<ButtonGroupComponentSchema> {
   return {
+    kind: SchemaKind.ButtonGroup,
     type: SchemaType.ComponentWrapper,
-    kind: WidgetKind.ButtonGroup,
     widget: ButtonGroupWidget
   };
 }
@@ -302,13 +301,13 @@ export function useButtonGroupWidget(): FluentFormWidgetFeature<ButtonGroupCompo
 export function useStepsWidget(): [FluentFormWidgetFeature<StepsComponentSchema>, FluentFormWidgetFeature<StepComponentSchema>] {
   return [
     {
+      kind: SchemaKind.Steps,
       type: SchemaType.ComponentContainer,
-      kind: WidgetKind.Steps,
       widget: StepsWidget
     },
     {
+      kind: SchemaKind.Step,
       type: SchemaType.ComponentContainer,
-      kind: 'step'
     }
   ];
 }
@@ -316,29 +315,29 @@ export function useStepsWidget(): [FluentFormWidgetFeature<StepsComponentSchema>
 export function useTabsWidget(): [FluentFormWidgetFeature<TabsComponentSchema>, FluentFormWidgetFeature<TabComponentSchema>] {
   return [
     {
+      kind: SchemaKind.Tabs,
       type: SchemaType.ComponentContainer,
-      kind: WidgetKind.Tabs,
       widget: TabsWidget
     },
     {
+      kind: SchemaKind.Tab,
       type: SchemaType.ComponentContainer,
-      kind: 'tab'
     }
   ];
 }
 
 export function useFormGroupWidget(): FluentFormWidgetFeature<FormGroupSchema> {
   return {
+    kind: SchemaKind.Group,
     type: SchemaType.ControlContainer,
-    kind: WidgetKind.Group,
     widget: FormGroupWidget
   };
 }
 
 export function useFormArrayWidget(): FluentFormWidgetFeature<FormArraySchema> {
   return {
+    kind: SchemaKind.Array,
     type: SchemaType.ControlContainer,
-    kind: WidgetKind.Array,
     widget: FormArrayWidget
   };
 }

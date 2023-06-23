@@ -15,6 +15,42 @@ export const enum SchemaType {
   ComponentWrapper
 }
 
+export enum SchemaKind {
+  Headless = 'headless',
+  Input = 'input',
+  Textarea = 'textarea',
+  Number = 'number',
+  Date = 'date',
+  DateRange = 'date-range',
+  Time = 'time',
+  Toggle = 'toggle',
+  Select = 'select',
+  Cascader = 'cascader',
+  Slider = 'slider',
+  RadioGroup = 'radio-group',
+  Checkbox = 'checkbox',
+  CheckboxGroup = 'checkbox-group',
+  Rate = 'rate',
+  TreeSelect = 'tree-select',
+
+  InputGroup = 'input-group',
+
+  Group = 'group',
+  Array = 'array',
+
+  Template = 'template',
+  Text = 'text',
+  Button = 'button',
+
+  ButtonGroup = 'button-group',
+
+  Steps = 'steps',
+  Step = 'step',
+  Tabs = 'tabs',
+  Tab = 'tab',
+  Row = 'row'
+}
+
 export interface SchemaLike<Key extends AnySchemaKey = AnySchemaKey> {
   kind: string;
   key?: Key;

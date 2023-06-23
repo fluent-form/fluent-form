@@ -7,6 +7,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { FluentBindingDirective, FluentWithInjectorDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe, FluentControlPipe, FluentSchemaPipe, FluentTemplatePipe } from '../../pipes';
 import { AnySchema, StandardSchema } from '../../schemas';
+import { SchemaKind } from '../../schemas/interfaces';
 import { CONFIG } from '../../tokens';
 
 interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
@@ -47,8 +48,9 @@ interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FluentFormColContentOutletComponent<T extends AnyObject | AnyArray> implements OnInit {
-  protected config = inject(CONFIG);
-  private viewContainerRef = inject(ViewContainerRef);
+  protected readonly config = inject(CONFIG);
+  protected readonly SchemaKind = SchemaKind;
+  private readonly viewContainerRef = inject(ViewContainerRef);
 
   @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<FluentFormColContentTemplateContext<T>>;
 

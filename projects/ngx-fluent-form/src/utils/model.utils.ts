@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { AnySchema, StandardSchema } from '../schemas';
+import { SchemaKind } from '../schemas/interfaces';
 import { FormUtil } from './form.utils';
 import { SchemaUtil } from './schema.utils';
 import { ValueUtil } from './value.utils';
@@ -21,14 +22,14 @@ export class ModelUtil {
       // 这些图示不包含控件图示，直接跳过
       if (this.schemaUtil.isNonControlSchema(schema)) return;
 
-      if (schema.kind === 'group') {
+      if (schema.kind === SchemaKind.Group) {
         const key = schema.key!;
         const formGroup = form.get([key]) as FormGroup;
         this.updateForm(formGroup, model[key] ??= {}, schema.schemas, false);
         return;
       }
 
-      if (schema.kind === 'array') {
+      if (schema.kind === SchemaKind.Array) {
         const key = schema.key!;
         const array: AnyArray = model[key] ??= [];
         const formArray = form.get([key]) as FormArray;

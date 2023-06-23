@@ -58,20 +58,20 @@ export interface SchemaLike<Key extends AnySchemaKey = AnySchemaKey> {
 
 /** @internal */
 interface Tooltip {
-  title: string | TemplateRef<void>;
+  content: string | TemplateRef<void>;
   icon: string | NzFormTooltipIcon;
 }
 
 /** @internal */
 interface Label {
-  value: string;
+  content: string;
   span?: Cell;
-  tooltip?: string | Tooltip;
 }
 
 /** 带标签的 */
 export interface Labelful {
   label?: string | Label;
+  tooltip?: string | Tooltip;
 }
 
 export interface Row {

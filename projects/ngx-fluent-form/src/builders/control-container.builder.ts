@@ -20,6 +20,7 @@ function isFormFactoryFnTuple(arr: SafeAny[]): arr is [FormBuilderFn] {
 export function form(factory: FormBuilderFn): StandardSchema<FormGroupSchema>;
 export function form(...schemas: AnySchema[]): StandardSchema<AnySchema>[];
 export function form(...builders: AnyBuilder[]): StandardSchema<AnySchema>[];
+export function form(...schemasOrBuilders: AnySchema[] | AnyBuilder[]): StandardSchema<AnySchema>[];
 export function form(...fnOrSchemasOrBuilder: AnySchema[] | AnyBuilder[] | [FormBuilderFn]): StandardSchema<AnySchema>[] | StandardSchema<FormGroupSchema> {
   if (isFormFactoryFnTuple(fnOrSchemasOrBuilder)) {
     const [factory] = fnOrSchemasOrBuilder;

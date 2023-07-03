@@ -40,12 +40,12 @@
 
   <ng-template #buttonContentTemplate>
     <span
-      *ngIf="schema.icon"
+      *ngIf="helper.icon | invoke: schema.icon as icon"
       nz-icon
-      [nzRotate]="helper.icon.rotate | invoke: schema.icon"
-      [nzSpin]="helper.icon.spin | invoke: schema.icon"
-      [nzTheme]="helper.icon.theme | invoke: schema.icon"
-      [nzType]="helper.icon.type | invoke: schema.icon"></span>
+      [nzRotate]="icon.rotate ?? 0"
+      [nzSpin]="icon.spin"
+      [nzTheme]="icon.theme ?? 'outline'"
+      [nzType]="icon.type"></span>
     <ng-container *ngIf="schema.content">
       <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
     </ng-container>

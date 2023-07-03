@@ -18,27 +18,10 @@ describe('ButtonWidget', () => {
   });
 
   describe('helper function', () => {
-    it('icon.type', () => {
-      expect(helper.icon.type('user')).toEqual('user');
-      expect(helper.icon.type({ type: 'user' })).toEqual('user');
-    });
-
-    it('icon.rotate', () => {
-      expect(helper.icon.rotate('user')).toBe(0);
-      expect(helper.icon.rotate({ type: 'user' })).toBe(0);
-      expect(helper.icon.rotate({ type: 'user', rotate: 1 })).toBe(1);
-    });
-
-    it('icon.spin', () => {
-      expect(helper.icon.spin('user')).toBeFalse();
-      expect(helper.icon.spin({ type: 'user' })).toBeFalse();
-      expect(helper.icon.spin({ type: 'user', spin: true })).toBeTrue();
-    });
-
-    it('icon.theme', () => {
-      expect(helper.icon.theme('user')).toEqual('outline');
-      expect(helper.icon.theme({ type: 'user' })).toEqual('outline');
-      expect(helper.icon.theme({ type: 'user', theme: 'fill' })).toEqual('fill');
+    it('icon', () => {
+      expect(helper.icon(undefined)).toBeUndefined();
+      expect(helper.icon('user')).toEqual({ type: 'user' });
+      expect(helper.icon({ type: 'user' })).toEqual({ type: 'user' });
     });
   });
 });

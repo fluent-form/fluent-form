@@ -59,12 +59,22 @@
     </ng-container>
   </nz-row>
 
-  <button
-    *ngIf="formSchema.addable ?? true"
-    nz-button
-    nzType="primary"
-    [disabled]="formArray.length === (helper.length.max | invoke: formSchema.length)"
-    (click)="add(formArray, formSchema)">
-    Add
-  </button>
+  <ng-container *ngIf="formSchema.addable ?? true">
+    <button
+      *ngIf="helper.addable | invoke: formSchema.addable as addable"
+      nz-button
+      [nzType]="addable.type ?? null"
+      [nzBlock]="addable.block"
+      [nzDanger]="addable.danger | call: model:formSchema:formArray"
+      [nzGhost]="addable.ghost | call: model:formSchema:formArray"
+      [nzShape]="addable.shape!"
+      [nzSize]="addable.size!"
+      [disabled]="formArray.length === (helper.length.max | invoke: formSchema.length)"
+      (click)="push(formArray, formSchema)">
+      <span *ngIf="addable.icon" nz-icon nzTheme="outline" [nzType]="addable.icon"></span>
+      <ng-container *ngIf="addable.content">
+        <ng-container *nzStringTemplateOutlet="addable.content">{{ addable.content }}</ng-container>
+      </ng-container>
+    </button>
+  </ng-container>
 </ng-template>

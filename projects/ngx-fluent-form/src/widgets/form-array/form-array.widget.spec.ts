@@ -30,7 +30,7 @@ describe('NestedFormWidget', () => {
 
   it('add method', () => {
     const formArray = new FormArray<SafeAny>([]);
-    component['add'](formArray, {
+    component['push'](formArray, {
       kind: 'array',
       schemas: [
         { kind: 'input' }
@@ -53,6 +53,12 @@ describe('NestedFormWidget', () => {
       expect(helper.length.max(1)).toBe(1);
       expect(helper.length.max({ min: 1 })).toBe(Infinity);
       expect(helper.length.max({ max: 1 })).toBe(1);
+    });
+
+    it('addable', () => {
+      expect(helper.addable(false)).toBe(false);
+      expect(helper.addable(true)).toEqual({ type: 'primary', icon: 'plus', shape: 'circle' });
+      expect(helper.addable({})).toEqual({});
     });
   });
 });

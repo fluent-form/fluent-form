@@ -2,6 +2,7 @@ import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common
 import { Component, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -10,7 +11,7 @@ import { FluentFormColContentOutletComponent } from '../../components';
 import { FluentBindingDirective, FluentConfigDirective, FluentContextGuardDirective } from '../../directives';
 import { FluentCallPipe, FluentColumnPipe, FluentInvokePipe } from '../../pipes';
 import { FormArraySchema, StandardSchema } from '../../schemas';
-import { FormUtil, isNumber, SchemaUtil } from '../../utils';
+import { FormUtil, isNumber, isUndefined, SchemaUtil } from '../../utils';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, FormArray>;
@@ -28,6 +29,7 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
     NzButtonModule,
     NzDividerModule,
     NzIconModule,
+    NzOutletModule,
     FluentFormColContentOutletComponent,
     FluentBindingDirective,
     FluentContextGuardDirective,
@@ -42,7 +44,7 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
   private readonly schemaUtil = inject(SchemaUtil);
   private readonly formUtil = inject(FormUtil);
 
-  protected add(control: FormArray, schema: StandardSchema<FormArraySchema>) {
+  protected push(control: FormArray, schema: StandardSchema<FormArraySchema>) {
     const [elementSchema] = this.schemaUtil.filterControlSchemas(schema.schemas);
 
     control.push(
@@ -56,6 +58,15 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
         isNumber(length) ? length : length?.min ?? 0,
       max: (length: FormArraySchema['length']) =>
         isNumber(length) ? length : length?.max ?? Infinity,
+    },
+    addable: (addable: FormArraySchema['addable']): NonBoolean<FormArraySchema['addable']> | false => {
+      if (addable === true || isUndefined(addable)) {
+        return { type: 'primary', icon: 'plus', shape: 'circle' };
+      }
+
+      return addable;
     }
   } as const;
 }
+
+type NonBoolean<T> = T extends boolean ? never : T;

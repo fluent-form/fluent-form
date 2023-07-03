@@ -1,5 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { AbstractControl, FormControlStatus } from '@angular/forms';
+import { ThemeType } from '@ant-design/icons-angular';
 import { SafeAny } from '@ngify/types';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
@@ -87,6 +88,13 @@ export interface Col {
   push?: Cell;
   pull?: Cell;
   order?: number;
+}
+
+export interface Icon {
+  type: string;
+  theme?: ThemeType;
+  spin?: boolean;
+  rotate?: number;
 }
 
 export interface ControlValueMapper<V> {

@@ -1,18 +1,9 @@
 import { TemplateRef } from '@angular/core';
-import { ThemeType } from '@ant-design/icons-angular';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzFormTextComponent } from 'ng-zorro-antd/form';
 import { AbstractSchema } from './abstract.schema';
-import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Labelful, PropertyHolder, SchemaContext } from './interfaces';
+import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Icon, Labelful, PropertyHolder, SchemaContext } from './interfaces';
 import { SchemaKey } from './types';
-
-/** @internal */
-interface Icon {
-  type: string;
-  theme?: ThemeType;
-  spin?: boolean;
-  rotate?: number;
-}
 
 export interface TemplateSchema<Key extends SchemaKey = SchemaKey> extends AbstractSchema<Key>, Labelful, PropertyHolder {
   kind: 'template';

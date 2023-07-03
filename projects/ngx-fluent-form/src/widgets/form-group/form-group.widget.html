@@ -35,7 +35,6 @@
       *ngFor="let subschema of formSchema.schemas"
       [ngTemplateOutlet]="formColTemplate"
       [ngTemplateOutletContext]="{ control: (subschema.key | control: formGroup), schema: subschema, model: model }">
-      <!-- TODO 上面的这个 model 应该在 subschema.kind = group 时候改为 model[subschema.key] -->
     </ng-container>
   </nz-row>
 </ng-template>

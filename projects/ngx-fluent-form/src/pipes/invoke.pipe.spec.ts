@@ -1,10 +1,10 @@
-import { FluentInvokePipe } from './invoke.pipe';
+import { InvokePipe } from './invoke.pipe';
 
 describe('InvokePipe', () => {
-  let pipe: FluentInvokePipe;
+  let pipe: InvokePipe;
 
   beforeEach(() => {
-    pipe = new FluentInvokePipe();
+    pipe = new InvokePipe();
   });
 
   it('create an instance', () => {

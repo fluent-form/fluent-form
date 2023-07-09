@@ -9,7 +9,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FluentFormColContentOutletComponent } from '../../components';
 import { FluentBindingDirective, FluentConfigDirective, FluentContextGuardDirective } from '../../directives';
-import { FluentCallPipe, FluentColumnPipe, FluentInvokePipe } from '../../pipes';
+import { FluentCallPipe, FluentColumnPipe, InvokePipe } from '../../pipes';
 import { FormArraySchema, StandardSchema } from '../../schemas';
 import { FormUtil, isNumber, isUndefined, SchemaUtil } from '../../utils';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
@@ -36,7 +36,7 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
     FluentConfigDirective,
     FluentColumnPipe,
     FluentCallPipe,
-    FluentInvokePipe
+    InvokePipe
   ],
   templateUrl: './form-array.widget.html'
 })

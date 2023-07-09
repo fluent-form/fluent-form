@@ -3,7 +3,7 @@ import { Component, TemplateRef } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentWithInjectorDirective } from '../../directives';
-import { FluentControlPipe, FluentInvokePipe, FluentTemplatePipe } from '../../pipes';
+import { FluentControlPipe, FluentTemplatePipe, InvokePipe } from '../../pipes';
 import { InputGroupComponentSchema } from '../../schemas';
 import { isString } from '../../utils';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
@@ -24,7 +24,7 @@ type InputGroupWidgetTemplateContext = WidgetTemplateContext<InputGroupComponent
     FluentWithInjectorDirective,
     FluentControlPipe,
     FluentTemplatePipe,
-    FluentInvokePipe,
+    InvokePipe,
   ],
   templateUrl: './input-group.widget.html',
 })

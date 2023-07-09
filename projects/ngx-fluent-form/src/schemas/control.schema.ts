@@ -108,8 +108,7 @@ export interface SelectControlSchema<Key extends SchemaKey = SchemaKey, Val = Sa
   size?: NzSelectSizeType;
   suffixIcon?: TemplateRef<SafeAny> | string;
   loading?: boolean;
-  options?: AnyObject[];
-  fetchOptions?: (keyword$: Observable<string>) => Observable<AnyObject[]>;
+  options: AnyObject[] | ((keyword$: Observable<string>) => Observable<AnyObject[]>);
   config?: {
     labelProperty?: string;
     valueProperty?: string;

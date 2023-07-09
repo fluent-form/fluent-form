@@ -33,7 +33,11 @@ describe('SelectWidget', () => {
     );
     ctx.init({
       kind: 'select',
-      fetchOptions: keyword$ =>
+      options: []
+    });
+    ctx.init({
+      kind: 'select',
+      options: keyword$ =>
         keyword$.pipe(
           switchMap(() => of([]))
         )

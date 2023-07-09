@@ -21,7 +21,7 @@
           [nzMaxMultipleCount]="schema.limit ?? infinity"
           [nzMode]="schema.mode ?? 'default'"
           [nzPlaceHolder]="schema.placeholder!"
-          [nzShowSearch]="schema.searchable || !!schema.fetchOptions"
+          [nzShowSearch]="schema.searchable || schema.options | typeof: 'function'"
           [nzBackdrop]="schema.backdrop!"
           [nzBorderless]="schema.borderless"
           [nzAutoFocus]="schema.autofocus"
@@ -29,10 +29,10 @@
           [nzSize]="schema.size!"
           [nzSuffixIcon]="schema.suffixIcon!"
           [nzLoading]="schema.loading"
-          [nzServerSearch]="!!schema.fetchOptions"
-          (nzOnSearch)="schema.fetchOptions && ctx.trigger($event)">
+          [nzServerSearch]="schema.options | typeof: 'function'"
+          (nzOnSearch)="ctx.trigger($event)">
           <nz-option
-            *ngFor="let option of schema.options"
+            *ngFor="let option of ctx.options"
             [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
             [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
             [nzValue]="option[schema.config?.valueProperty ?? 'value']"
@@ -53,7 +53,7 @@
           [nzMaxMultipleCount]="schema.limit ?? infinity"
           [nzMode]="schema.mode ?? 'default'"
           [nzPlaceHolder]="schema.placeholder!"
-          [nzShowSearch]="schema.searchable || !!schema.fetchOptions"
+          [nzShowSearch]="schema.searchable || schema.options | typeof: 'function'"
           [nzBackdrop]="schema.backdrop!"
           [nzBorderless]="schema.borderless"
           [nzAutoFocus]="schema.autofocus"
@@ -61,10 +61,10 @@
           [nzSize]="schema.size!"
           [nzSuffixIcon]="schema.suffixIcon!"
           [nzLoading]="schema.loading"
-          [nzServerSearch]="!!schema.fetchOptions"
-          (nzOnSearch)="schema.fetchOptions && ctx.trigger($event)">
+          [nzServerSearch]="schema.options | typeof: 'function'"
+          (nzOnSearch)="ctx.trigger($event)">
           <nz-option
-            *ngFor="let option of schema.options"
+            *ngFor="let option of ctx.options"
             [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
             [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
             [nzValue]="option[schema.config?.valueProperty ?? 'value']"

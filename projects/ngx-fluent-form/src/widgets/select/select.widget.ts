@@ -1,12 +1,13 @@
 import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
 import { ChangeDetectorRef, Component, Injector } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { AnyObject } from '@ngify/types';
 import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { Subject, tap } from 'rxjs';
 import { FluentBindingDirective, FluentContextDirective, FluentContextGuardDirective, FluentInjectDirective, FluentLifeCycleDirective } from '../../directives';
-import { FluentCallPipe, FluentColumnPipe } from '../../pipes';
+import { FluentCallPipe, FluentColumnPipe, TypeofPipe } from '../../pipes';
 import { SelectControlSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -28,7 +29,8 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
     FluentContextDirective,
     FluentLifeCycleDirective,
     FluentCallPipe,
-    FluentColumnPipe
+    FluentColumnPipe,
+    TypeofPipe
   ],
   templateUrl: './select.widget.html',
   styles: [`nz-select { width: 100% }`]
@@ -43,17 +45,21 @@ export class SelectWidgetTemplatePrivateContext {
   private readonly keyword$ = new Subject<string>();
   private readonly cdr: ChangeDetectorRef;
 
+  options: AnyObject[] = [];
+
   constructor(injector: Injector) {
     this.cdr = injector.get(ChangeDetectorRef);
   }
 
   init(schema: SelectControlSchema) {
-    if (schema.fetchOptions) {
+    if (Array.isArray(schema.options)) {
+      this.options = schema.options;
+    } else {
       this.keyword$.pipe(
         tap(() => schema.loading = true),
-        schema.fetchOptions,
+        schema.options,
       ).subscribe(options => {
-        schema.options = options;
+        this.options = options;
         schema.loading = false;
         this.cdr.detectChanges();
       });

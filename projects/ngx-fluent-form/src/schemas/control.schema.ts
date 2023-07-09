@@ -130,12 +130,11 @@ export interface CascaderControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   suffixIcon?: string | TemplateRef<void>;
   arrow?: boolean;
   size?: NzCascaderSize;
-  loadData?: (node: NzCascaderOption, index: number) => PromiseLike<SafeAny>;
   /** Expand trigger for cascader control */
   trigger?: NzCascaderExpandTrigger;
   /** Support search, cannot be used with `options.load` */
   searchable?: boolean | NzShowSearchOptions;
-  options?: NzCascaderOption[];
+  options: NzCascaderOption[] | ((node: NzCascaderOption, index: number) => PromiseLike<SafeAny>);
   config?: {
     labelProperty?: string;
     valueProperty?: string;

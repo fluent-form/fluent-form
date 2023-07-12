@@ -7,7 +7,7 @@ import { AnyControlSchema } from '../schemas';
 import { FormUtil } from '../utils';
 import { FluentReactivePipe } from './reactive.pipe';
 
-describe('FluentCallPipe', () => {
+describe('FluentReactivePipe', () => {
   let model: AnyObject;
   let schema: AnyControlSchema;
   let ctrl: FormControl;

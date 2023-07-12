@@ -1,8 +1,14 @@
-import { ButtonComponentSchema, TextComponentSchema } from '../schemas';
+import { ButtonComponentSchema, TemplateSchema, TextComponentSchema } from '../schemas';
 import { standardSchema } from '../utils';
-import { button, text } from './component.builder';
+import { button, template, text } from './component.builder';
 
 describe('component.builder', () => {
+  it('template', () => {
+    const schema = standardSchema(template('named'));
+    const value: TemplateSchema<'named'> = { kind: 'template', key: 'named' };
+    expect(schema).toEqual(value);
+  });
+
   it('text', () => {
     const schema = standardSchema(text().content(''));
     const value: TextComponentSchema = { kind: 'text', content: '' };

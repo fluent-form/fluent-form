@@ -1,5 +1,6 @@
 import { inject, Pipe, PipeTransform, TemplateRef } from '@angular/core';
 import { AnySchema } from '../schemas';
+import { SchemaKind } from '../schemas/interfaces';
 import { TemplateRegistry } from '../services';
 import { DIRECTIVE_QUERY_CONTAINER } from '../tokens';
 
@@ -15,7 +16,7 @@ export class FluentTemplatePipe implements PipeTransform {
     const templateDirectives = this.directiveContainer?.templateDirectives;
 
     switch (value.kind) {
-      case 'template': {
+      case SchemaKind.Template: {
         const dir = templateDirectives?.find(o => o.name === value.key);
 
         if (!dir) {
@@ -25,7 +26,7 @@ export class FluentTemplatePipe implements PipeTransform {
         return dir.templateRef;
       }
 
-      case 'headless': {
+      case SchemaKind.Headless: {
         // 这里假设在外层已经判断 value.template 是否存在了
         const dir = templateDirectives?.find(o => o.name === value.template);
 

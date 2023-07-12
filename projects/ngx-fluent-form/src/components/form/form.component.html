@@ -17,7 +17,7 @@
       [nzPush]="schema.col | col: 'push'"
       [nzPull]="schema.col | col: 'pull'"
       [nzOrder]="schema.col | col: 'order'"
-      [hidden]="schema.hidden | call: model:schema:control">
+      [hidden]="schema.hidden | reactive: model:schema:control">
       <fluent-form-col-content-outlet
         [control]="control"
         [schema]="schema"

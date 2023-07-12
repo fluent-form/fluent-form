@@ -2,7 +2,7 @@
   <ng-container *fluentInject="NzFormNoStatusService as service; optional: true">
     <ng-container *ngIf="service; else standardTemplate">
       <nz-input-number
-        *ngIf="!(schema.hidden | call: model:schema:control)"
+        *ngIf="!(schema.hidden | reactive: model:schema:control)"
         #component
         nz-col
         [fluentBinding]="{ component, schema, control }"
@@ -23,7 +23,7 @@
         [nzPrecisionMode]="helper.precisionMode | invoke: schema.precision"
         [nzStep]="schema.step ?? 1"
         [nzAutoFocus]="schema.autofocus"
-        [nzReadOnly]="schema.readonly | call: model:schema:control"
+        [nzReadOnly]="schema.readonly | reactive: model:schema:control"
         [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless">
       </nz-input-number>
@@ -44,7 +44,7 @@
         [nzPrecisionMode]="helper.precisionMode | invoke: schema.precision"
         [nzStep]="schema.step ?? 1"
         [nzAutoFocus]="schema.autofocus"
-        [nzReadOnly]="schema.readonly | call: model:schema:control"
+        [nzReadOnly]="schema.readonly | reactive: model:schema:control"
         [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless">
       </nz-input-number>

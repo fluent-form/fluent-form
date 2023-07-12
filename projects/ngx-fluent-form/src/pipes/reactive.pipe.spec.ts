@@ -5,13 +5,13 @@ import { withAllWidgets, withStaticExpression } from '../features';
 import { provideFluentForm } from '../provider';
 import { AnyControlSchema } from '../schemas';
 import { FormUtil } from '../utils';
-import { FluentCallPipe } from './call.pipe';
+import { FluentReactivePipe } from './reactive.pipe';
 
 describe('FluentCallPipe', () => {
   let model: AnyObject;
   let schema: AnyControlSchema;
   let ctrl: FormControl;
-  let pipe: FluentCallPipe;
+  let pipe: FluentReactivePipe;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -20,14 +20,14 @@ describe('FluentCallPipe', () => {
           withAllWidgets(),
           withStaticExpression()
         ),
-        FluentCallPipe
+        FluentReactivePipe
       ]
     });
 
     model = { value: true };
     schema = { kind: 'toggle' };
     ctrl = TestBed.inject(FormUtil).createFormControl(schema, {});
-    pipe = TestBed.inject(FluentCallPipe);
+    pipe = TestBed.inject(FluentReactivePipe);
   });
 
   it('create an instance', () => {

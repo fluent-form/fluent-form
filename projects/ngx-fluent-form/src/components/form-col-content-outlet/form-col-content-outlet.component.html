@@ -53,7 +53,7 @@
       [nzTooltipIcon]="schema.tooltip?.icon"
       [nzFor]="schema.id"
       [nzNoColon]="!config.colon"
-      [nzRequired]="schema.required | call: model:schema:control">
+      [nzRequired]="schema.required | reactive: model:schema:control">
       {{ schema.label.content ?? schema.label }}
     </nz-form-label>
     <!-- 在控件被 input-group 包裹的时候，控件状态/提示默认使用的是 input-group 里的第一个控件 -->
@@ -89,7 +89,7 @@
     [nzAlign]="schema.align"
     [nzJustify]="schema.justify"
     [nzGutter]="schema.gutter ?? config.gutter"
-    [hidden]="schema.hidden | call: model:schema:control"
+    [hidden]="schema.hidden | reactive: model:schema:control"
     [fluentBinding]="{ schema, control }">
     <ng-template #colTemplate let-schema="schema" let-control="control" let-model="model">
       <nz-col
@@ -99,7 +99,7 @@
         [nzPush]="schema.col | col: 'push'"
         [nzPull]="schema.col | col: 'pull'"
         [nzOrder]="schema.col | col: 'order'"
-        [hidden]="schema.hidden | call: model:schema:control">
+        [hidden]="schema.hidden | reactive: model:schema:control">
         <fluent-form-col-content-outlet
           [control]="control"
           [schema]="schema"

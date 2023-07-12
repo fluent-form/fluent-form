@@ -5,7 +5,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { FluentFormColContentOutletComponent } from '../../components';
 import { FluentBindingDirective, FluentConfigDirective, FluentContextGuardDirective } from '../../directives';
-import { FluentCallPipe, FluentColumnPipe, FluentControlPipe } from '../../pipes';
+import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe } from '../../pipes';
 import { StepsComponentSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -24,7 +24,7 @@ type StepsWidgetTemplateContext = WidgetTemplateContext<StepsComponentSchema, Fo
     FluentBindingDirective,
     FluentConfigDirective,
     FluentContextGuardDirective,
-    FluentCallPipe,
+    FluentReactivePipe,
     FluentControlPipe,
     FluentColumnPipe
   ],

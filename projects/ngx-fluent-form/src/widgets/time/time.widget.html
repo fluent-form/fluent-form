@@ -2,7 +2,7 @@
   <ng-container *fluentInject="NzFormNoStatusService as service; optional: true">
     <ng-container *ngIf="service; else standardTemplate">
       <nz-time-picker
-        *ngIf="!(schema.hidden | call: model:schema:control)"
+        *ngIf="!(schema.hidden | reactive: model:schema:control)"
         #component
         nz-col
         [fluentBinding]="{ component, schema, control }"
@@ -26,7 +26,7 @@
         [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless"
         [nzBackdrop]="schema.backdrop!"
-        [nzInputReadOnly]="schema.readonly | call: model:schema:control"
+        [nzInputReadOnly]="schema.readonly | reactive: model:schema:control"
         [nzSuffixIcon]="schema.suffixIcon ?? 'clock-circle'">
       </nz-time-picker>
     </ng-container>
@@ -49,7 +49,7 @@
         [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless"
         [nzBackdrop]="schema.backdrop!"
-        [nzInputReadOnly]="schema.readonly | call: model:schema:control"
+        [nzInputReadOnly]="schema.readonly | reactive: model:schema:control"
         [nzSuffixIcon]="schema.suffixIcon ?? 'clock-circle'">
       </nz-time-picker>
     </ng-template>

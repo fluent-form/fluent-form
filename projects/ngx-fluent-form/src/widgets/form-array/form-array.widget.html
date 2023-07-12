@@ -2,7 +2,7 @@
   <nz-divider
     *ngIf="formSchema.label"
     [nzText]="formSchema.label"
-    [hidden]="formSchema.hidden | call: model:formSchema:formArray"></nz-divider>
+    [hidden]="formSchema.hidden | reactive: model:formSchema:formArray"></nz-divider>
 
   <nz-row
     #config="fluentConfig"
@@ -14,7 +14,7 @@
     [ngClass]="formSchema.class"
     [ngStyle]="formSchema.style"
     [fluentBinding]="{ schema: formSchema, control: formArray }"
-    [hidden]="formSchema.hidden | call: model:formSchema:formArray">
+    [hidden]="formSchema.hidden | reactive: model:formSchema:formArray">
     <ng-template
       #formColTemplate
       let-schema="schema"
@@ -29,7 +29,7 @@
         [nzPush]="schema.col | col: 'push'"
         [nzPull]="schema.col | col: 'pull'"
         [nzOrder]="schema.col | col: 'order'"
-        [hidden]="schema.hidden | call: model:schema:control">
+        [hidden]="schema.hidden | reactive: model:schema:control">
         <!-- form array 的 schemas 可能会有多个，只在第一个时渲染移除按钮 -->
         <nz-row *ngIf="first && (formSchema.removable ?? true)" nzJustify="end">
           <button
@@ -65,8 +65,8 @@
       nz-button
       [nzType]="addable.type ?? null"
       [nzBlock]="addable.block"
-      [nzDanger]="addable.danger | call: model:formSchema:formArray"
-      [nzGhost]="addable.ghost | call: model:formSchema:formArray"
+      [nzDanger]="addable.danger | reactive: model:formSchema:formArray"
+      [nzGhost]="addable.ghost | reactive: model:formSchema:formArray"
       [nzShape]="addable.shape!"
       [nzSize]="addable.size!"
       [disabled]="formArray.length === (helper.length.max | invoke: formSchema.length)"

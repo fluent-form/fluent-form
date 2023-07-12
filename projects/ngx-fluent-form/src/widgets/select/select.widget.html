@@ -3,7 +3,7 @@
     <ng-container *fluentContext="ctxClass as ctx" (fluentInit)="ctx.init(schema)" (fluentDestroy)="ctx.destroy()">
       <ng-container *ngIf="service; else standardTemplate">
         <nz-select
-          *ngIf="!(schema.hidden | call: model:schema:control)"
+          *ngIf="!(schema.hidden | reactive: model:schema:control)"
           #component
           nz-col
           [fluentBinding]="{ component, schema, control }"

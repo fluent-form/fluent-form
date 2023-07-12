@@ -2,7 +2,7 @@
   <ng-container *fluentInject="NzFormNoStatusService as service; optional: true">
     <ng-container *ngIf="service; else standardTemplate">
       <nz-range-picker
-        *ngIf="!(schema.hidden | call: model:schema:control)"
+        *ngIf="!(schema.hidden | reactive: model:schema:control)"
         #component
         nz-col
         [fluentBinding]="{ component, schema, control }"
@@ -27,7 +27,7 @@
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
         [nzAutoFocus]="schema.autofocus"
-        [nzInputReadOnly]="schema.readonly | call: model:schema:control"
+        [nzInputReadOnly]="schema.readonly | reactive: model:schema:control"
         [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless"
         [nzShowToday]="schema.today ?? true"
@@ -54,7 +54,7 @@
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzSuffixIcon]="schema.suffixIcon ?? 'calendar'"
         [nzAutoFocus]="schema.autofocus"
-        [nzInputReadOnly]="schema.readonly | call: model:schema:control"
+        [nzInputReadOnly]="schema.readonly | reactive: model:schema:control"
         [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless"
         [nzShowToday]="schema.today ?? true"

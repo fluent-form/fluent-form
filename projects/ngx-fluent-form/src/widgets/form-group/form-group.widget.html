@@ -2,7 +2,7 @@
   <nz-divider
     *ngIf="formSchema.label"
     [nzText]="formSchema.label"
-    [hidden]="formSchema.hidden | call: model:formSchema:formGroup"></nz-divider>
+    [hidden]="formSchema.hidden | reactive: model:formSchema:formGroup"></nz-divider>
 
   <nz-row
     #config="fluentConfig"
@@ -14,7 +14,7 @@
     [ngClass]="formSchema.class"
     [ngStyle]="formSchema.style"
     [fluentBinding]="{ schema: formSchema, control: formGroup }"
-    [hidden]="formSchema.hidden | call: model:formSchema:formGroup">
+    [hidden]="formSchema.hidden | reactive: model:formSchema:formGroup">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
       <nz-col
         [nzSpan]="schema.col | col: 'span'"
@@ -23,7 +23,7 @@
         [nzPush]="schema.col | col: 'push'"
         [nzPull]="schema.col | col: 'pull'"
         [nzOrder]="schema.col | col: 'order'"
-        [hidden]="schema.hidden | call: model:schema:control">
+        [hidden]="schema.hidden | reactive: model:schema:control">
         <fluent-form-col-content-outlet
           [control]="control"
           [schema]="schema"

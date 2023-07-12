@@ -6,7 +6,7 @@ import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentInjectDirective } from '../../directives';
-import { FluentCallPipe, FluentColumnPipe, InvokePipe } from '../../pipes';
+import { FluentColumnPipe, FluentReactivePipe, InvokePipe } from '../../pipes';
 import { TreeSelectControlSchema } from '../../schemas';
 import { isBoolean, isUndefined } from '../../utils';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
@@ -25,7 +25,7 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
     FluentInjectDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,
-    FluentCallPipe,
+    FluentReactivePipe,
     InvokePipe,
     FluentColumnPipe
   ],

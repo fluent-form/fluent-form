@@ -5,7 +5,7 @@ import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentInjectDirective } from '../../directives';
-import { FluentCallPipe, FluentColumnPipe, InvokePipe } from '../../pipes';
+import { FluentColumnPipe, FluentReactivePipe, InvokePipe } from '../../pipes';
 import { NumberInputControlSchema } from '../../schemas';
 import { isNumber } from '../../utils';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
@@ -24,7 +24,7 @@ type NumberWidgetTemplateContext = WidgetTemplateContext<NumberInputControlSchem
     FluentInjectDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,
-    FluentCallPipe,
+    FluentReactivePipe,
     InvokePipe,
     FluentColumnPipe
   ],

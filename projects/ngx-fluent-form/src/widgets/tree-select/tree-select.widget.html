@@ -2,7 +2,7 @@
   <ng-container *fluentInject="NzFormNoStatusService as service; optional: true">
     <ng-container *ngIf="service; else standardTemplate">
       <nz-tree-select
-        *ngIf="!(schema.hidden | call: model:schema:control)"
+        *ngIf="!(schema.hidden | reactive: model:schema:control)"
         #component
         nz-col
         [fluentBinding]="{ component, schema, control }"

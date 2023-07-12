@@ -5,10 +5,10 @@ import { AbstractSchema } from '../schemas';
 import { ValueTransformer } from '../services';
 
 @Pipe({
-  name: 'call',
+  name: 'reactive',
   standalone: true
 })
-export class FluentCallPipe implements PipeTransform {
+export class FluentReactivePipe implements PipeTransform {
   private readonly transformer = inject(ValueTransformer);
 
   transform<T extends [unknown, AbstractSchema, AbstractControl]>(

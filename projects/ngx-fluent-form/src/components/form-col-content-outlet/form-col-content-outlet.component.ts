@@ -5,7 +5,7 @@ import { AnyArray, AnyObject } from '@ngify/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { FluentBindingDirective, FluentWithInjectorDirective } from '../../directives';
-import { FluentCallPipe, FluentColumnPipe, FluentControlPipe, FluentSchemaPipe, FluentTemplatePipe } from '../../pipes';
+import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe, FluentSchemaPipe, FluentTemplatePipe } from '../../pipes';
 import { AnySchema, StandardSchema } from '../../schemas';
 import { SchemaKind } from '../../schemas/interfaces';
 import { CONFIG } from '../../tokens';
@@ -35,7 +35,7 @@ interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
     NzGridModule,
     FluentBindingDirective,
     FluentWithInjectorDirective,
-    FluentCallPipe,
+    FluentReactivePipe,
     FluentSchemaPipe,
     FluentControlPipe,
     FluentTemplatePipe,

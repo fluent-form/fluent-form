@@ -12,7 +12,7 @@
     [nzSize]="schema.size ?? 'default'"
     [nzStatus]="schema.status ?? 'process'"
     [nzStartIndex]="schema.start ?? 0"
-    [hidden]="schema.hidden | call: model:schema:control"
+    [hidden]="schema.hidden | reactive: model:schema:control"
     (nzIndexChange)="schema.active = $event">
     <nz-step
       *ngFor="let subschema of schema.schemas; index as index"
@@ -23,9 +23,9 @@
       [nzTitle]="subschema.title"
       [nzSubtitle]="subschema.subtitle"
       [nzDescription]="subschema.description"
-      [nzDisabled]="subschema.disabled | call: model:subschema:control"
+      [nzDisabled]="subschema.disabled | reactive: model:subschema:control"
       [nzStatus]="subschema.status ?? schema.active === index ? 'process' : 'wait'"
-      [hidden]="subschema.hidden | call: model:subschema:control"></nz-step>
+      [hidden]="subschema.hidden | reactive: model:subschema:control"></nz-step>
   </nz-steps>
 
   <nz-row
@@ -41,7 +41,7 @@
         [nzPush]="schema.col | col: 'push'"
         [nzPull]="schema.col | col: 'pull'"
         [nzOrder]="schema.col | col: 'order'"
-        [hidden]="schema.hidden | call: model:schema:control">
+        [hidden]="schema.hidden | reactive: model:schema:control">
         <fluent-form-col-content-outlet
           [control]="control"
           [schema]="schema"

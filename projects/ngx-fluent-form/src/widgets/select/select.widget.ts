@@ -7,7 +7,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { Subject, tap } from 'rxjs';
 import { FluentBindingDirective, FluentContextDirective, FluentContextGuardDirective, FluentInjectDirective, FluentLifeCycleDirective } from '../../directives';
-import { FluentCallPipe, FluentColumnPipe, TypeofPipe } from '../../pipes';
+import { FluentColumnPipe, FluentReactivePipe, TypeofPipe } from '../../pipes';
 import { SelectControlSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -28,7 +28,7 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
     FluentContextGuardDirective,
     FluentContextDirective,
     FluentLifeCycleDirective,
-    FluentCallPipe,
+    FluentReactivePipe,
     FluentColumnPipe,
     TypeofPipe
   ],

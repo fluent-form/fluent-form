@@ -1,16 +1,16 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <ng-container *ngIf="schema.type === 'link'">
     <a
-      *ngIf="!(schema.hidden | call: model:schema:control)"
+      *ngIf="!(schema.hidden | reactive: model:schema:control)"
       nz-button
-      [disabled]="schema.disabled | call: model:schema:control"
+      [disabled]="schema.disabled | reactive: model:schema:control"
       [fluentBinding]="{ schema, control }"
       [ngClass]="schema.class"
       [ngStyle]="schema.style"
       [nzBlock]="schema.block"
-      [nzDanger]="schema.danger | call: model:schema:control"
-      [nzGhost]="schema.ghost | call: model:schema:control"
-      [nzLoading]="schema.loading | call: model:schema:control"
+      [nzDanger]="schema.danger | reactive: model:schema:control"
+      [nzGhost]="schema.ghost | reactive: model:schema:control"
+      [nzLoading]="schema.loading | reactive: model:schema:control"
       [nzShape]="schema.shape!"
       [nzSize]="schema.size!"
       [nzType]="schema.type">
@@ -20,17 +20,17 @@
 
   <ng-container *ngIf="schema.type !== 'link'">
     <button
-      *ngIf="!(schema.hidden | call: model:schema:control)"
+      *ngIf="!(schema.hidden | reactive: model:schema:control)"
       nz-button
       [attr.type]="schema.mode"
-      [disabled]="schema.disabled | call: model:schema:control"
+      [disabled]="schema.disabled | reactive: model:schema:control"
       [fluentBinding]="{ schema, control }"
       [ngClass]="schema.class"
       [ngStyle]="schema.style"
       [nzBlock]="schema.block"
-      [nzDanger]="schema.danger | call: model:schema:control"
-      [nzGhost]="schema.ghost | call: model:schema:control"
-      [nzLoading]="schema.loading | call: model:schema:control"
+      [nzDanger]="schema.danger | reactive: model:schema:control"
+      [nzGhost]="schema.ghost | reactive: model:schema:control"
+      [nzLoading]="schema.loading | reactive: model:schema:control"
       [nzShape]="schema.shape!"
       [nzSize]="schema.size!"
       [nzType]="schema.type ?? null">

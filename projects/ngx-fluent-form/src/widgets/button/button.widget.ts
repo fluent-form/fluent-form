@@ -5,7 +5,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FluentBindingDirective, FluentContextGuardDirective } from '../../directives';
-import { FluentCallPipe, InvokePipe } from '../../pipes';
+import { FluentReactivePipe, InvokePipe } from '../../pipes';
 import { ButtonComponentSchema } from '../../schemas';
 import { Icon } from '../../schemas/interfaces';
 import { isString, isUndefined } from '../../utils';
@@ -25,7 +25,7 @@ type ButtonWidgetTemplateContext = WidgetTemplateContext<ButtonComponentSchema, 
     NzOutletModule,
     FluentBindingDirective,
     FluentContextGuardDirective,
-    FluentCallPipe,
+    FluentReactivePipe,
     InvokePipe
   ],
   templateUrl: './button.widget.html',

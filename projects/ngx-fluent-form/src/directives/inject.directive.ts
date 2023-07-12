@@ -1,4 +1,4 @@
-import { Directive, InjectFlags, Injector, Input, OnChanges, ProviderToken, TemplateRef, ViewContainerRef, inject } from '@angular/core';
+import { Directive, inject, Injector, Input, OnChanges, ProviderToken, TemplateRef, ViewContainerRef } from '@angular/core';
 import { SafeAny } from '@ngify/types';
 
 interface FluentInjectContext<T> {
@@ -34,23 +34,12 @@ export class FluentInjectDirective<T extends ProviderToken<SafeAny>> implements 
   }
 
   ngOnChanges(): void {
-    // TODO angular15就不需要 InjectFlags 了
-    let flags = InjectFlags.Default;
-
-    if (this.fluentInjectHost) {
-      flags |= InjectFlags.Host;
-    }
-    if (this.fluentInjectSelf) {
-      flags |= InjectFlags.Self;
-    }
-    if (this.fluentInjectSkipSelf) {
-      flags |= InjectFlags.SkipSelf;
-    }
-    if (this.fluentInjectOptional) {
-      flags |= InjectFlags.Optional;
-    }
-
-    this.context.fluentInject = this.injector.get(this.fluentInject, this.fluentInjectDefault, flags);
+    this.context.fluentInject = this.injector.get(this.fluentInject, this.fluentInjectDefault, {
+      host: this.fluentInjectHost,
+      self: this.fluentInjectSelf,
+      skipSelf: this.fluentInjectSkipSelf,
+      optional: this.fluentInjectOptional,
+    });
   }
 
   static ngTemplateContextGuard<T extends ProviderToken<SafeAny>>(_: FluentInjectDirective<T>, ctx: unknown): ctx is FluentInjectContext<ProviderTokenValue<T>> {

@@ -1,4 +1,3 @@
-import { EnvironmentInjector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { TemplateRegistry } from '../services';
 import { DIRECTIVE_QUERY_CONTAINER } from '../tokens';
@@ -22,9 +21,7 @@ describe('FluentTemplatePipe', () => {
       }
     });
 
-    // TODO: use TestBed.runInInjectionContext in ng v15
-    const environmentInjector = TestBed.inject(EnvironmentInjector);
-    pipe = environmentInjector.runInContext(() => new FluentTemplatePipe());
+    pipe = TestBed.runInInjectionContext(() => new FluentTemplatePipe());
   });
 
   it('create an instance', () => {

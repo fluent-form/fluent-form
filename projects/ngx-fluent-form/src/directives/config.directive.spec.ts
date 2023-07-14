@@ -1,4 +1,3 @@
-import { EnvironmentInjector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { CONFIG } from '../tokens';
 import { FluentConfigDirective } from './config.directive';
@@ -20,9 +19,7 @@ describe('FluentConfigDirective', () => {
   });
 
   it('create an instance', () => {
-    // TODO: use TestBed.runInInjectionContext in ng v15
-    const environmentInjector = TestBed.inject(EnvironmentInjector);
-    const directive = environmentInjector.runInContext(() => new FluentConfigDirective());
+    const directive = TestBed.runInInjectionContext(() => new FluentConfigDirective());
 
     expect(directive).toBeTruthy();
     expect(directive.layout).toEqual('vertical');

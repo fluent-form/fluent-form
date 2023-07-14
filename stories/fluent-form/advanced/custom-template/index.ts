@@ -15,6 +15,11 @@ import dedent from 'ts-dedent';
         [layout]="layout"
         [colon]="colon"
         [gutter]="gutter">
+        <input
+          *fluentTemplate="'controlTpl'; control as control"
+          [formControl]="control"
+          placeholder="custom control template" />
+
         <ng-container *fluentTemplate="'namedTpl1'">
           <button>click me</button>
         </ng-container>
@@ -42,10 +47,8 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
     super();
 
     this.schemas = form(
-      row().schemas(
-        headless('headless1').template('namedTpl1'),
-        headless('headless2').template('namedTpl2'),
-        headless('headless3').template('namedTpl3'),
+      row().col(24).schemas(
+        headless('headless').template('controlTpl'),
       ),
       row().schemas(
         template('namedTpl1'),
@@ -72,6 +75,11 @@ export const source = dedent`
     selector: 'example-component',
     template: \`
       <fluent-form [schemas]="schemas" [(model)]="model">
+        <input
+          *fluentTemplate="'controlTpl'; control as control"
+          [formControl]="control"
+          placeholder="custom control template" />
+
         <ng-container *fluentTemplate="'namedTpl1'">
           <button>click me</button>
         </ng-container>
@@ -88,10 +96,8 @@ export const source = dedent`
   })
   export class ExampleComponent {
     schemas = form(
-      row().schemas(
-        headless('headless1').template('namedTpl1'),
-        headless('headless2').template('namedTpl2'),
-        headless('headless3').template('namedTpl3'),
+      row().col(24).schemas(
+        headless('headless').template('controlTpl'),
       ),
       row().schemas(
         template('namedTpl1'),

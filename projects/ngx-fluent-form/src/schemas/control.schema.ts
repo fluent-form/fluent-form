@@ -42,10 +42,7 @@ export interface TextareaControlSchema<Key extends SchemaKey = SchemaKey, Val = 
 export interface NumberInputControlSchema<Key extends SchemaKey = SchemaKey, Val = number>
   extends AbstractInputBoxControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzInputNumberComponent, Val>, ComponentPropertyHolder<NzInputNumberComponent> {
   kind: 'number';
-  /** Maximum value */
-  max?: number;
-  /** Minimum value */
-  min?: number;
+  range?: { max?: number, min?: number }
   /** Decimal precision */
   precision?: number | { value?: number, mode?: NzInputNumberComponent['nzPrecisionMode'] };
   /** Step length */

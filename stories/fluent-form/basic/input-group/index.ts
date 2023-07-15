@@ -11,7 +11,7 @@ export const story = defineStory({
       ),
       inputGroup().label('个人信息').col(8).schemas(
         input('name').placeholder('姓名').col(15),
-        number('age').placeholder('年龄').min(1).max(100).col(9),
+        number('age').placeholder('年龄').range({ min: 1, max: 100 }).col(9),
       ),
       inputGroup().col(10).schemas(
         input('keyword').type('search').placeholder('请输入搜索关键字').col(18),
@@ -44,7 +44,7 @@ export const source = dedent`
       ),
       inputGroup().label('个人信息').col(8).schemas(
         input('name').placeholder('姓名').col(15),
-        number('age').placeholder('年龄').min(1).max(100).col(9),
+        number('age').placeholder('年龄').range({ min: 1, max: 100 }).col(9),
       ),
       inputGroup().col(10).schemas(
         input('keyword').type('search').placeholder('请输入搜索关键字').col(18),

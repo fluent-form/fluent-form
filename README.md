@@ -79,7 +79,7 @@ import { FluentFormComponent, buttonGroup, button, date, form, number, input } f
 export class ExampleComponent {
   schemas = form(
     input('text').length(15),
-    number('count').max(100),
+    number('count'),
     date('date').format('yyyy/MM/dd'),
     buttonGroup(
       button().content('cancel'),
@@ -141,7 +141,7 @@ import { buttonGroup, button, date, form, number, input } from 'ngx-fluent-form'
 export class ExampleComponent {
   schemas = form(
     input('text').length(15),
-    number('count').max(100),
+    number('count'),
     date('date').format('yyyy/MM/dd'),
     buttonGroup(
       button().content('cancel'),

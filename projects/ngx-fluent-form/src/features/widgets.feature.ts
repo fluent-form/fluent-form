@@ -72,7 +72,6 @@ export function withAllWidgets(): FluentFormFeature<FluentFormFeatureKind.Widget
     useRateWidget(),
     useTextWidget(),
     useButtonWidget(),
-    useButtonGroupWidget(),
     useStepsWidget(),
     useTabsWidget(),
     useFormGroupWidget(),
@@ -282,20 +281,19 @@ export function useTextWidget(): FluentFormWidgetFeature<TextComponentSchema> {
   };
 }
 
-export function useButtonWidget(): FluentFormWidgetFeature<ButtonComponentSchema> {
-  return {
-    kind: SchemaKind.Button,
-    type: SchemaType.Component,
-    widget: ButtonWidget
-  };
-}
-
-export function useButtonGroupWidget(): FluentFormWidgetFeature<ButtonGroupComponentSchema> {
-  return {
-    kind: SchemaKind.ButtonGroup,
-    type: SchemaType.ComponentWrapper,
-    widget: ButtonGroupWidget
-  };
+export function useButtonWidget(): [FluentFormWidgetFeature<ButtonComponentSchema>, FluentFormWidgetFeature<ButtonGroupComponentSchema>] {
+  return [
+    {
+      kind: SchemaKind.Button,
+      type: SchemaType.Component,
+      widget: ButtonWidget
+    },
+    {
+      kind: SchemaKind.ButtonGroup,
+      type: SchemaType.ComponentWrapper,
+      widget: ButtonGroupWidget
+    }
+  ];
 }
 
 export function useStepsWidget(): [FluentFormWidgetFeature<StepsComponentSchema>, FluentFormWidgetFeature<StepComponentSchema>] {

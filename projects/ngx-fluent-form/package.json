@@ -17,13 +17,12 @@
   "homepage": "https://github.com/HyperLife1119/ngx-fluent-form",
   "keywords": [
     "angular",
-    "angular14",
-    "form",
-    "reactive-form",
-    "json-form",
     "fluent-api",
+    "reactive-form",
     "fluent-form",
     "dynamic-form",
+    "schema-form",
+    "json-form",
     "ng-zorro",
     "ng-zorro-antd"
   ],

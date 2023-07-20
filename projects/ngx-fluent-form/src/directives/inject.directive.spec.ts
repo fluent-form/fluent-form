@@ -1,8 +1,11 @@
-import { EnvironmentInjector, Injector, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Injector, ProviderToken, TemplateRef, ViewContainerRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { SafeAny } from '@ngify/types';
 import { FluentInjectDirective } from './inject.directive';
 
 describe('FluentInjectDirective', () => {
+  let directive: FluentInjectDirective<ProviderToken<SafeAny>>;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -19,19 +22,16 @@ describe('FluentInjectDirective', () => {
         }
       ]
     });
+
+    directive = TestBed.runInInjectionContext(() => new FluentInjectDirective());
   });
 
   it('should create an instance', () => {
-    const environmentInjector = TestBed.inject(EnvironmentInjector);
-    const directive = environmentInjector.runInContext(() => new FluentInjectDirective());
     FluentInjectDirective.ngTemplateContextGuard(directive, {});
-
     expect(directive).toBeTruthy();
   });
 
   it('fluentInjectHost', () => {
-    const environmentInjector = TestBed.inject(EnvironmentInjector);
-    const directive = environmentInjector.runInContext(() => new FluentInjectDirective());
     directive.fluentInject = Injector;
     directive.fluentInjectHost = true;
     directive.ngOnChanges();
@@ -40,8 +40,6 @@ describe('FluentInjectDirective', () => {
   });
 
   it('fluentInjectSelf', () => {
-    const environmentInjector = TestBed.inject(EnvironmentInjector);
-    const directive = environmentInjector.runInContext(() => new FluentInjectDirective());
     directive.fluentInject = Injector;
     directive.fluentInjectSelf = true;
     directive.ngOnChanges();
@@ -50,8 +48,6 @@ describe('FluentInjectDirective', () => {
   });
 
   it('fluentInjectSkipSelf', () => {
-    const environmentInjector = TestBed.inject(EnvironmentInjector);
-    const directive = environmentInjector.runInContext(() => new FluentInjectDirective());
     directive.fluentInject = Injector;
     directive.fluentInjectSkipSelf = true;
     directive.ngOnChanges();
@@ -60,8 +56,6 @@ describe('FluentInjectDirective', () => {
   });
 
   it('fluentInjectOptional', () => {
-    const environmentInjector = TestBed.inject(EnvironmentInjector);
-    const directive = environmentInjector.runInContext(() => new FluentInjectDirective());
     directive.fluentInject = Injector;
     directive.fluentInjectOptional = true;
     directive.ngOnChanges();

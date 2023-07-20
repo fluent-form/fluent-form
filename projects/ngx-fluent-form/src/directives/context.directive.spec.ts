@@ -1,4 +1,4 @@
-import { EnvironmentInjector, TemplateRef, ViewContainerRef } from '@angular/core';
+import { TemplateRef, ViewContainerRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FluentContextDirective } from './context.directive';
 
@@ -14,8 +14,7 @@ describe('FluentContextDirective', () => {
   });
 
   it('should create an instance', () => {
-    const environmentInjector = TestBed.inject(EnvironmentInjector);
-    const directive = environmentInjector.runInContext(() => new FluentContextDirective());
+    const directive = TestBed.runInInjectionContext(() => new FluentContextDirective());
     directive.fluentContext = class { };
     FluentContextDirective.ngTemplateContextGuard(directive, {});
     expect(directive).toBeTruthy();

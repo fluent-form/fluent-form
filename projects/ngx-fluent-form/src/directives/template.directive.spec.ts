@@ -1,4 +1,4 @@
-import { EnvironmentInjector, TemplateRef } from '@angular/core';
+import { TemplateRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FluentTemplateDirective } from './template.directive';
 
@@ -8,8 +8,7 @@ describe('FluentTemplateDirective', () => {
   });
 
   it('should create an instance', () => {
-    const environmentInjector = TestBed.inject(EnvironmentInjector);
-    const directive = environmentInjector.runInContext(() => new FluentTemplateDirective());
+    const directive = TestBed.runInInjectionContext(() => new FluentTemplateDirective());
     directive.name = 'named';
     expect(directive).toBeTruthy();
   });

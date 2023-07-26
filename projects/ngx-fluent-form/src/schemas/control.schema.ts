@@ -15,7 +15,7 @@ import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { NzTreeSelectComponent } from 'ng-zorro-antd/tree-select';
 import { Observable } from 'rxjs';
 import { AbstractControlSchema, AbstractDateControlSchema, AbstractInputBoxControlSchema, AbstractTextControlSchema } from './abstract.schema';
-import { ComponentControlEventListenerHolder, ComponentPropertyHolder, ElementControlEventListenerHolder, ElementPropertyHolder, PropertyHolder } from './interfaces';
+import { ComponentControlEventListenerHolder, ComponentPropertyHolder, ElementControlEventListenerHolder, ElementPropertyHolder, PropertyHolder, SchemaContext } from './interfaces';
 import { AnySchemaKey, SchemaKey } from './types';
 
 export interface HeadlessControlSchema<Key extends SchemaKey> extends AbstractControlSchema<Key, SafeAny>, PropertyHolder {
@@ -105,7 +105,7 @@ export interface SelectControlSchema<Key extends SchemaKey = SchemaKey, Val = Sa
   size?: NzSelectSizeType;
   suffixIcon?: TemplateRef<SafeAny> | string;
   loading?: boolean;
-  options: AnyObject[] | ((keyword$: Observable<string>) => Observable<AnyObject[]>);
+  options: AnyObject[] | ((keyword$: Observable<string>, ctx: SchemaContext<SelectControlSchema<SchemaKey>>) => Observable<AnyObject[]>);
   config?: {
     labelProperty?: string;
     valueProperty?: string;

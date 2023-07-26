@@ -51,13 +51,15 @@ export class SelectWidgetTemplatePrivateContext {
     this.cdr = injector.get(ChangeDetectorRef);
   }
 
-  init(schema: SelectControlSchema) {
-    if (Array.isArray(schema.options)) {
-      this.options = schema.options;
+  init(schema: SelectControlSchema, model: AnyObject, control: FormControl) {
+    const optionsOrFn = schema.options;
+
+    if (Array.isArray(optionsOrFn)) {
+      this.options = optionsOrFn;
     } else {
       this.keyword$.pipe(
         tap(() => schema.loading = true),
-        schema.options,
+        source => optionsOrFn(source, { schema, model, control }),
       ).subscribe(options => {
         this.options = options;
         schema.loading = false;

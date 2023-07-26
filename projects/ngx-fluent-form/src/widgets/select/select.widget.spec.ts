@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Injector } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormControl } from '@angular/forms';
 import { of, switchMap } from 'rxjs';
 import { SelectWidget, SelectWidgetTemplatePrivateContext } from './select.widget';
 
@@ -31,17 +32,26 @@ describe('SelectWidget', () => {
         ],
       })
     );
-    ctx.init({
-      kind: 'select',
-      options: []
-    });
-    ctx.init({
-      kind: 'select',
-      options: keyword$ =>
-        keyword$.pipe(
-          switchMap(() => of([]))
-        )
-    });
+    const control = new FormControl();
+    ctx.init(
+      {
+        kind: 'select',
+        options: []
+      },
+      {},
+      control
+    );
+    ctx.init(
+      {
+        kind: 'select',
+        options: keyword$ =>
+          keyword$.pipe(
+            switchMap(() => of([]))
+          )
+      },
+      {},
+      control
+    );
     ctx.trigger('keyword');
     ctx.destroy();
     expect(ctx).toBeTruthy();

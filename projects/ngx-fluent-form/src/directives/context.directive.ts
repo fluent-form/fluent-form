@@ -1,4 +1,4 @@
-import { Directive, Injector, Input, TemplateRef, Type, ViewContainerRef, inject } from '@angular/core';
+import { Directive, inject, Injector, Input, TemplateRef, Type, ViewContainerRef } from '@angular/core';
 import { SafeAny } from '@ngify/types';
 
 interface FluentContextContext<T extends Type<SafeAny>> {
@@ -17,6 +17,7 @@ export class FluentContextDirective<T extends Type<SafeAny>>  {
 
   @Input() set fluentContext(value: T) {
     // TODO: ng16 使用 runInInjectionContext + inject 替代手动传入 injector
+    // 届时将增加一个 args 参数，类型为数组，允许对构造方法传参数，并且实现ngOnInit与ngDestroy的自动调用
     this.context.fluentContext = new value(this.injector);
   }
 

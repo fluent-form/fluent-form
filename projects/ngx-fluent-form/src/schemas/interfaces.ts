@@ -67,6 +67,7 @@ interface Tooltip {
 interface Label {
   content: string;
   span?: Cell;
+  width?: string | number;
 }
 
 /** 带标签的 */

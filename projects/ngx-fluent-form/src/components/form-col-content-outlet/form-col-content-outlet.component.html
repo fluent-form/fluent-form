@@ -53,7 +53,10 @@
       [nzTooltipIcon]="schema.tooltip?.icon"
       [nzFor]="schema.id"
       [nzNoColon]="!config.colon"
-      [nzRequired]="schema.required | reactive: model:schema:control">
+      [nzRequired]="schema.required | reactive: model:schema:control"
+      [style.width]="
+        (schema.label.width | typeof: 'number') ? schema.label.width + 'px' : schema.label.width ?? 'unset'
+      ">
       {{ schema.label.content ?? schema.label }}
     </nz-form-label>
     <!-- 在控件被 input-group 包裹的时候，控件状态/提示默认使用的是 input-group 里的第一个控件 -->

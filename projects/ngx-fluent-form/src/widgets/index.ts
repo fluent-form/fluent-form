@@ -13,6 +13,7 @@ export * from './input/input.widget';
 export * from './number/number.widget';
 export * from './radio-group/radio-group.widget';
 export * from './rate/rate.widget';
+export * from './row/row.widget';
 export * from './select/select.widget';
 export * from './slider/silder.widget';
 export * from './steps/steps.widget';

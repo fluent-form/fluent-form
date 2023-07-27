@@ -18,6 +18,10 @@ export const story = defineStory({
         .label({ content: '自定义提示图标', span: 7 })
         .tooltip({ content: '小贴士', icon: 'info-circle' })
         .col(24),
+
+      input('text4')
+        .label({ content: '固定宽度', width: 200 })
+        .col(24),
     ),
     model: {},
     layout: 'horizontal'
@@ -46,6 +50,10 @@ export const source = dedent`
       input('text3')
         .label({ content: '自定义提示图标', span: 7 })
         .tooltip({ content: '小贴士', icon: 'info-circle' })
+        .col(24),
+
+      input('text4')
+        .label({ content: '固定宽度', width: 200 })
         .col(24),
     );
 

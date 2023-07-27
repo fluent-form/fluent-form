@@ -1,38 +1,17 @@
 <ng-template #formColContentTemplate let-schema="schema" let-control="control" let-model="model">
-  <ng-container [ngSwitch]="schema.kind">
+  <ng-container [ngSwitch]="schema.kind | schemaType">
     <ng-container
-      *ngSwitchCase="SchemaKind.Group"
+      *ngSwitchCase="SchemaType.ControlContainer"
       fluentWithInjector
       [ngTemplateOutlet]="schema | template"
       [ngTemplateOutletContext]="{ control: control, schema: schema, model: model[schema.key] }">
     </ng-container>
 
     <ng-container
-      *ngSwitchCase="SchemaKind.Array"
+      *ngSwitchCase="SchemaType.ComponentContainer"
       fluentWithInjector
       [ngTemplateOutlet]="schema | template"
-      [ngTemplateOutletContext]="{ control: control, schema: schema, model: model[schema.key] }">
-    </ng-container>
-
-    <ng-container
-      *ngSwitchCase="SchemaKind.Steps"
-      fluentWithInjector
-      [ngTemplateOutlet]="schema | template"
-      [ngTemplateOutletContext]="{ control, schema, model }">
-    </ng-container>
-
-    <ng-container
-      *ngSwitchCase="SchemaKind.Tabs"
-      fluentWithInjector
-      [ngTemplateOutlet]="schema | template"
-      [ngTemplateOutletContext]="{ control, schema, model }">
-    </ng-container>
-
-    <ng-container
-      *ngSwitchCase="SchemaKind.Row"
-      fluentWithInjector
-      [ngTemplateOutlet]="rowTemplate"
-      [ngTemplateOutletContext]="{ control, schema, model }">
+      [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
     </ng-container>
 
     <ng-container
@@ -83,37 +62,4 @@
         [ngTemplateOutletContext]="{ control, schema, model }"></ng-container>
     </nz-form-control>
   </nz-form-item>
-</ng-template>
-
-<ng-template #rowTemplate let-control="control" let-schema="schema" let-model="model">
-  <nz-row
-    [ngClass]="schema.class"
-    [ngStyle]="schema.style"
-    [nzAlign]="schema.align"
-    [nzJustify]="schema.justify"
-    [nzGutter]="schema.gutter ?? config.gutter"
-    [hidden]="schema.hidden | reactive: model:schema:control"
-    [fluentBinding]="{ schema, control }">
-    <ng-template #colTemplate let-schema="schema" let-control="control" let-model="model">
-      <nz-col
-        [nzSpan]="schema.col | col: 'span'"
-        [nzFlex]="schema.col | col: 'flex'"
-        [nzOffset]="schema.col | col: 'offset'"
-        [nzPush]="schema.col | col: 'push'"
-        [nzPull]="schema.col | col: 'pull'"
-        [nzOrder]="schema.col | col: 'order'"
-        [hidden]="schema.hidden | reactive: model:schema:control">
-        <fluent-form-col-content-outlet
-          [control]="control"
-          [schema]="schema"
-          [model]="model"></fluent-form-col-content-outlet>
-      </nz-col>
-    </ng-template>
-
-    <ng-container
-      *ngFor="let subschema of schema.schemas"
-      [ngTemplateOutlet]="colTemplate"
-      [ngTemplateOutletContext]="{ control: (subschema.key | control: control), schema: subschema, model: model }">
-    </ng-container>
-  </nz-row>
 </ng-template>

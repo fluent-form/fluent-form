@@ -4,7 +4,7 @@ import { CONFIG } from '../tokens';
 
 @Directive({
   // eslint-disable-next-line
-  selector: 'nz-steps, nz-tabset, nz-row[nz-form]',
+  selector: 'nz-steps, nz-tabset, nz-row',
   standalone: true,
   exportAs: 'fluentConfig'
 })

@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { array, group, input, inputGroup, slider, textarea } from '../builders';
 import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
-import { AnySchema, StandardSchema } from '../schemas';
+import { AnySchema, HeadingComponentSchema, StandardSchema } from '../schemas';
 import { schemasUtils, SchemaUtil, standardSchema, standardSchemas } from './schema.utils';
 
 describe('schema.utils', () => {
@@ -22,6 +22,13 @@ describe('schema.utils', () => {
   });
 
   describe('SchemaUtil', () => {
+    describe('patchSchema', () => {
+      it('heading', () => {
+        const schema: HeadingComponentSchema = { kind: 'heading', level: 1, content: '' };
+        expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'heading', level: 1, content: '', col: 24 });
+      });
+    });
+
     it('isAnySchema', () => {
       expect(schemaUtil.isComponentContainerSchema({ kind: 'tab' })).toBeTrue();
       expect(schemaUtil.isComponentSchema({ kind: 'text' })).toBeTrue();

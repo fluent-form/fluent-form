@@ -1,13 +1,13 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <nz-input-group
     #component
-    nzCompact
     [fluentBinding]="{ component, schema, control }"
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
     [nzSize]="schema.size!"
     [nzAddOnBefore]="helper.addon | invoke: schema.before"
     [nzAddOnAfter]="helper.addon | invoke: schema.after"
+    [nzCompact]="schema.compact ?? true"
     [nzPrefix]="helper.addon | invoke: schema.prefix"
     [nzSuffix]="helper.addon | invoke: schema.suffix"
     [nzAddOnBeforeIcon]="helper.addonIcon | invoke: schema.before"

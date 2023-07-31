@@ -19,4 +19,5 @@ export interface InputGroupComponentSchema<Key extends SchemaKey = SchemaKey>
   suffix?: string | TemplateRef<void> | { icon: string };
   size?: NzSizeLDSType;
   primary?: AnySchemaKey;
+  compact?: boolean;
 }

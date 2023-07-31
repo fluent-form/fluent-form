@@ -1,7 +1,7 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <ng-container *ngIf="schema.type === 'link'">
+  <ng-container *ngIf="!(schema.hidden | reactive: model:schema:control)">
     <a
-      *ngIf="!(schema.hidden | reactive: model:schema:control)"
+      *ngIf="schema.type === 'link'"
       nz-button
       [disabled]="schema.disabled | reactive: model:schema:control"
       [fluentBinding]="{ schema, control }"
@@ -16,11 +16,9 @@
       [nzType]="schema.type">
       <ng-container [ngTemplateOutlet]="buttonContentTemplate"></ng-container>
     </a>
-  </ng-container>
 
-  <ng-container *ngIf="schema.type !== 'link'">
     <button
-      *ngIf="!(schema.hidden | reactive: model:schema:control)"
+      *ngIf="schema.type !== 'link'"
       nz-button
       [attr.type]="schema.mode"
       [disabled]="schema.disabled | reactive: model:schema:control"

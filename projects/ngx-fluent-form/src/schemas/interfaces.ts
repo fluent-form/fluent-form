@@ -42,6 +42,7 @@ export enum SchemaKind {
   Template = 'template',
   Text = 'text',
   Button = 'button',
+  Heading = 'heading',
 
   ButtonGroup = 'button-group',
 

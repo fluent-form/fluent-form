@@ -24,7 +24,7 @@
 </ng-template>
 
 <ng-template #formItemTemplate let-control="control" let-schema="schema" let-model="model">
-  <nz-form-item [ngClass]="schema.class">
+  <nz-form-item [ngClass]="schema.class" [style.margin-bottom.px]="schema.kind === SchemaKind.Heading ? 16 : 24">
     <nz-form-label
       *ngIf="schema.label"
       [nzSpan]="schema.label.span"

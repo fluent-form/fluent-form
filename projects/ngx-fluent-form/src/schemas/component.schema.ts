@@ -30,3 +30,10 @@ export interface ButtonComponentSchema<Key extends SchemaKey = SchemaKey>
   icon?: string | Icon;
   content?: string | TemplateRef<void>;
 }
+
+export interface HeadingComponentSchema<Key extends SchemaKey = SchemaKey>
+  extends AbstractSchema<Key>, ElementEventListenerHolder, ElementPropertyHolder<HTMLHeadingElement> {
+  kind: 'heading';
+  level: 1 | 2 | 3 | 4 | 5 | 6;
+  content: string | TemplateRef<void>;
+}

@@ -8,6 +8,7 @@ export * from './date-range/date-range.widget';
 export * from './date/date.widget';
 export * from './form-array/form-array.widget';
 export * from './form-group/form-group.widget';
+export * from './heading/heading.widget';
 export * from './input-group/input-group.widget';
 export * from './input/input.widget';
 export * from './number/number.widget';

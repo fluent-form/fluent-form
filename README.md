@@ -15,7 +15,8 @@ Building dynamic form in Angular with Fluent API or JSON.
 
 - Support using Fluent API and JSON.
 - Based on Angular Template, without Host Element, supports nested layout.
-- Type-safe form schema configuration.
+- Type-safe schema configuration.
+- Import on demand, tree shakeable.
 - Built on top of Angular Reactive Forms.
 - Components and grid layout based on [NG-ZORRO](https://ng.ant.design).
 

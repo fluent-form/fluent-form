@@ -14,7 +14,7 @@ export function button<Key extends SchemaKey>(key?: Key): UnstableBuilder<Button
   return builder<ButtonComponentSchema<Key>>().kind('button').key(key);
 }
 
-export function heading<Key extends SchemaKey>(key?: Key): UnstableBuilder<HeadingComponentSchema<Key>, KindOrKey> {
+function heading<Key extends SchemaKey>(key?: Key): UnstableBuilder<HeadingComponentSchema<Key>, KindOrKey> {
   return builder<HeadingComponentSchema<Key>>().kind('heading').key(key);
 }
 export function heading1<Key extends SchemaKey>(key?: Key): UnstableBuilder<HeadingComponentSchema<Key>, KindOrKeyOrLevel> {

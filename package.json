@@ -74,7 +74,7 @@
     "karma-jasmine": "5.1.0",
     "karma-jasmine-html-reporter": "2.1.0",
     "lint-staged": "^13.1.0",
-    "markdown-to-jsx": "7.1.7",
+    "markdown-to-jsx": "7.3.2",
     "ng-packagr": "15.2.2",
     "prettier": "~2.7.1",
     "prettier-plugin-organize-attributes": "^0.0.5",

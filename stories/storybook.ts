@@ -10,7 +10,7 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NZ_I18N, zh_CN } from 'ng-zorro-antd/i18n';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { AnySchema, FluentFormComponent, FluentFormModule, StandardSchema, withAllWidgets, withStaticExpression } from 'ngx-fluent-form';
+import { AnySchema, FluentFormComponent, FluentFormModule, SchemaType, StandardSchema, withAllWidgets, withSchemaPatchers, withStaticExpression } from 'ngx-fluent-form';
 
 registerLocaleData(zh);
 
@@ -25,7 +25,29 @@ export const defineMeta = (meta?: Meta) => ({
         NzTableModule,
         FluentFormModule.forRoot(
           withAllWidgets(),
-          withStaticExpression()
+          withStaticExpression(),
+          withSchemaPatchers(
+            {
+              selector: SchemaType.Component | SchemaType.ComponentWrapper,
+              patch: schema => schema
+            },
+            {
+              selector: { component: true, controlWrapper: true },
+              patch: schema => schema
+            },
+            {
+              selector: '*',
+              patch: schema => schema
+            },
+            {
+              selector: 'input',
+              patch: schema => schema
+            },
+            {
+              selector: ['input', 'number'],
+              patch: schema => schema
+            }
+          )
         ),
         HttpClientModule,
         BrowserAnimationsModule,

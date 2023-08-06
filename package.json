@@ -45,7 +45,7 @@
     "@babel/core": "7.22.8",
     "@commitlint/cli": "^17.2.0",
     "@commitlint/config-conventional": "^17.2.0",
-    "@compodoc/compodoc": "1.1.19",
+    "@compodoc/compodoc": "1.1.21",
     "@ngify/types": "1.5.1",
     "@storybook/addon-actions": "6.5.16",
     "@storybook/addon-essentials": "6.5.16",

@@ -2,14 +2,18 @@ import { inject, Injectable } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlOrControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, AnySchemaKey, DoubleKeyControlSchema, SchemaKey, StandardSchema } from '../schemas';
 import { SchemaLike, SchemaType } from '../schemas/interfaces';
-import { SCHEMA_MAP } from '../tokens';
+import { SCHEMA_MAP, SCHEMA_PATCHERS } from '../tokens';
 import { isBuilder, StableBuilder } from './builder.utils';
+import { isString } from './is.utils';
+
+const ANY_SCHEMA_SELECTOR = '*';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SchemaUtil {
   private readonly schemaMap = inject(SCHEMA_MAP);
+  private readonly schemaPatchers = inject(SCHEMA_PATCHERS, { optional: true }) ?? [];
 
   patchSchemas<T extends StandardSchema<AnySchema>[]>(schemas: T) {
     return schemas.map(schema => this.patchSchema(schema));
@@ -20,7 +24,23 @@ export class SchemaUtil {
       schema.schemas = this.patchSchemas(schema.schemas);
     }
 
-    return this.schemaMap.get(schema.kind)?.patch?.(schema) ?? schema;
+    return this.schemaPatchers
+      .filter(patcher => {
+        if (isString(patcher.selector)) {
+          return patcher.selector === ANY_SCHEMA_SELECTOR || patcher.selector === schema.kind;
+        }
+
+        if (Array.isArray(patcher.selector)) {
+          return patcher.selector.includes(schema.kind);
+        }
+
+        const schemaConfig = this.schemaMap.get(schema.kind)!;
+
+        return patcher.selector & schemaConfig.type;
+      })
+      .reduce((patchedSchema, patcher) => {
+        return patcher.patch(patchedSchema) as T;
+      }, schema);
   }
 
   /**

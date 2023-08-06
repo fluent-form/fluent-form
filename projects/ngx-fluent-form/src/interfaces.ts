@@ -1,5 +1,6 @@
 import type { QueryList } from '@angular/core';
 import { ValidatorFn } from '@angular/forms';
+import { SafeAny } from '@ngify/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { NzRowDirective } from 'ng-zorro-antd/grid';
 import type { FluentTemplateDirective } from './directives';
@@ -18,8 +19,15 @@ export interface DirectiveQueryContainer {
 
 export interface SchemaConfig<S extends AbstractSchema> {
   type: SchemaType;
-  /** 修补图示，标准化图示时调用 */
-  patch?: (schema: S) => S;
   /** 添加图示自带的验证器 */
   validators?: (schema: S) => ValidatorFn[];
+}
+
+export type SchemaSelector = '*' | string | string[] | SchemaType;
+
+export type SchemaPatchFn<S extends AbstractSchema> = (schema: S & Record<string, SafeAny>) => S;
+
+export interface SchemaPatcher<S extends AbstractSchema = AbstractSchema> {
+  selector: SchemaSelector;
+  patch: SchemaPatchFn<S>;
 }

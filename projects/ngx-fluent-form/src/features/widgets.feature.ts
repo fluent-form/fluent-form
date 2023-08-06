@@ -1,18 +1,20 @@
-import { Type } from '@angular/core';
+import { Provider, Type } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
-import { SchemaConfig } from '../interfaces';
+import { SchemaConfig, SchemaPatchFn } from '../interfaces';
 import { AbstractSchema, AbstractTextControlSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, InputControlSchema, InputGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema, TextareaControlSchema, TextComponentSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { SchemaKind, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP, WIDGET_MAP } from '../tokens';
 import { isNumber } from '../utils';
 import { AbstractWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, FormArrayWidget, FormGroupWidget, HeadingWidget, InputGroupWidget, InputWidget, NumberWidget, RadioGroupWidget, RateWidget, RowWidget, SelectWidget, SilderWidget, StepsWidget, TabsWidget, TextareaWidget, TextWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from '../widgets';
-import { makeFluentFeature } from './helper';
+import { makeFluentFeature, provideSchemaPatcher } from './helper';
 import { FluentFormFeature, FluentFormFeatureKind } from './interface';
 
 export interface FluentFormWidgetFeature<S extends AbstractSchema> extends SchemaConfig<S> {
   kind: string;
   widget?: Type<AbstractWidget<unknown>>;
+  /** 修补图示，标准化图示时调用 */
+  patch?: SchemaPatchFn<S>;
 }
 
 export function withWidgets(...features: (FluentFormWidgetFeature<SafeAny> | FluentFormWidgetFeature<SafeAny>[])[]): FluentFormFeature<FluentFormFeatureKind.Widget> {
@@ -52,7 +54,14 @@ export function withWidgets(...features: (FluentFormWidgetFeature<SafeAny> | Flu
 
         return map;
       }
-    }
+    },
+    // 组件内置的 patcher
+    flattenedFeatures.filter(feature => feature.patch).map<Provider>(feature =>
+      provideSchemaPatcher({
+        selector: feature.kind,
+        patch: feature.patch!
+      })
+    )
   ]);
 }
 

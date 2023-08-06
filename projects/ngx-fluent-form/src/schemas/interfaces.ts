@@ -8,12 +8,12 @@ import { ComponentOutputListenerMap, ComponentPropertyMap, HTMLElementEventListe
 import { AnySchemaKey, Cell, StandardSchema } from './types';
 
 export enum SchemaType {
-  Control,
-  ControlContainer,
-  ControlWrapper,
-  Component,
-  ComponentContainer,
-  ComponentWrapper
+  Control = 1 << 0,
+  ControlContainer = 1 << 1,
+  ControlWrapper = 1 << 2,
+  Component = 1 << 3,
+  ComponentContainer = 1 << 4,
+  ComponentWrapper = 1 << 5
 }
 
 export enum SchemaKind {

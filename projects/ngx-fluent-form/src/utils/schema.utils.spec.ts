@@ -1,12 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
 import { array, group, input, inputGroup, slider, textarea } from '../builders';
-import { withAllWidgets } from '../features';
+import { useButtonWidget, withAllWidgets, withSchemaPatchers, withWidgets } from '../features';
 import { provideFluentForm } from '../provider';
-import { AnySchema, HeadingComponentSchema, StandardSchema } from '../schemas';
+import { AnySchema, ButtonComponentSchema, HeadingComponentSchema, InputControlSchema, NumberInputControlSchema, StandardSchema } from '../schemas';
+import { SchemaType } from '../schemas/interfaces';
 import { schemasUtils, SchemaUtil, standardSchema, standardSchemas } from './schema.utils';
 
-describe('schema.utils', () => {
+describe('SchemaUtil', () => {
   let schemaUtil: SchemaUtil;
 
   beforeEach(() => {
@@ -23,9 +24,11 @@ describe('schema.utils', () => {
 
   describe('SchemaUtil', () => {
     describe('patchSchema', () => {
-      it('heading', () => {
-        const schema: HeadingComponentSchema = { kind: 'heading', level: 1, content: '' };
-        expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'heading', level: 1, content: '', col: 24 });
+      describe('with internal patcher', () => {
+        it('heading patcher', () => {
+          const schema: HeadingComponentSchema = { kind: 'heading', level: 1, content: '' };
+          expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'heading', level: 1, content: '', col: 24 });
+        });
       });
     });
 
@@ -262,5 +265,129 @@ describe('schema.utils', () => {
 
       expect(schema).toBe(null);
     });
+  });
+});
+
+describe('SchemaUtil with patcher feature', () => {
+  let schemaUtil: SchemaUtil;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        provideFluentForm(
+          withAllWidgets(),
+          withSchemaPatchers(
+            {
+              selector: '*',
+              patch: schema => {
+                schema.class = new Set<string>();
+                return schema;
+              }
+            },
+            {
+              selector: 'input',
+              patch: schema => {
+                (schema.class as Set<string>).add('kind-selector');
+                return schema;
+              }
+            },
+            {
+              selector: ['input', 'number'],
+              patch: schema => {
+                (schema.class as Set<string>).add('kind-array-selector');
+                return schema;
+              }
+            },
+            {
+              selector: SchemaType.Control | SchemaType.ControlContainer,
+              patch: schema => {
+                (schema.class as Set<string>).add('schema-type-selector');
+                return schema;
+              }
+            },
+            {
+              selector: {
+                control: true,
+                controlContainer: true,
+                componentWrapper: true,
+                component: true,
+                componentContainer: true,
+                controlWrapper: true
+              },
+              patch: schema => {
+                (schema.class as Set<string>).add('options-selector');
+                return schema;
+              }
+            },
+          )
+        )
+      ]
+    });
+
+    schemaUtil = TestBed.inject(SchemaUtil);
+  });
+
+  it('with * selector', () => {
+    const schema: InputControlSchema = { kind: 'input' };
+    expect(schemaUtil.patchSchema(schema).class).toBeInstanceOf(Set);
+  });
+
+  it('with kind selector', () => {
+    const inputSchema: InputControlSchema = { kind: 'input' };
+    const otherSchema: NumberInputControlSchema = { kind: 'number' };
+    expect(schemaUtil.patchSchema(inputSchema).class).toContain('kind-selector');
+    expect(schemaUtil.patchSchema(otherSchema).class).not.toContain('kind-selector');
+  });
+
+  it('with kind-array selector', () => {
+    const inputSchema: InputControlSchema = { kind: 'input' };
+    const numberSchema: NumberInputControlSchema = { kind: 'number' };
+    expect(schemaUtil.patchSchema(inputSchema).class).toContain('kind-array-selector');
+    expect(schemaUtil.patchSchema(numberSchema).class).toContain('kind-array-selector');
+  });
+
+  it('with schema-kind selector', () => {
+    const inputSchema: InputControlSchema = { kind: 'input' };
+    const buttonSchema: ButtonComponentSchema = { kind: 'button' };
+    expect(schemaUtil.patchSchema(inputSchema).class).toContain('schema-type-selector');
+    expect(schemaUtil.patchSchema(buttonSchema).class).not.toContain('schema-type-selector');
+  });
+
+  it('with options selector', () => {
+    const schema: InputControlSchema = { kind: 'input' };
+    expect(schemaUtil.patchSchema(schema).class).toContain('options-selector');
+  });
+
+  it('with multi patchers', () => {
+    const schema: InputControlSchema = { kind: 'input' };
+    expect(schemaUtil.patchSchema(schema).class).toBeInstanceOf(Set);
+    expect(schemaUtil.patchSchema(schema).class).toContain('kind-selector');
+    expect(schemaUtil.patchSchema(schema).class).toContain('kind-array-selector');
+    expect(schemaUtil.patchSchema(schema).class).toContain('kind-array-selector');
+    expect(schemaUtil.patchSchema(schema).class).toContain('schema-type-selector');
+    expect(schemaUtil.patchSchema(schema).class).toContain('options-selector');
+  });
+});
+
+describe('SchemaUtil with no patcher feature', () => {
+  let schemaUtil: SchemaUtil;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        provideFluentForm(
+          withWidgets(
+            useButtonWidget()
+          )
+        )
+      ]
+    });
+
+    schemaUtil = TestBed.inject(SchemaUtil);
+  });
+
+  it('no patcher', () => {
+    const schema: ButtonComponentSchema = { kind: 'button' };
+    expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'button' });
   });
 });

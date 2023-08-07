@@ -61,7 +61,7 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
     },
     addable: (addable: FormArraySchema['addable']): NonBoolean<FormArraySchema['addable']> | false => {
       if (addable === true || isUndefined(addable)) {
-        return { type: 'dashed', icon: 'plus', block: true };
+        return { type: 'dashed', icon: 'plus', variants: { block: true } };
       }
 
       return addable;

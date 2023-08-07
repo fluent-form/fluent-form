@@ -57,7 +57,7 @@ describe('NestedFormWidget', () => {
 
     it('addable', () => {
       expect(helper.addable(false)).toBe(false);
-      expect(helper.addable(true)).toEqual({ type: 'dashed', icon: 'plus', block: true });
+      expect(helper.addable(true)).toEqual({ type: 'dashed', icon: 'plus', variants: { block: true } });
       expect(helper.addable({})).toEqual({});
     });
   });

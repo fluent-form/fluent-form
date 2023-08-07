@@ -21,14 +21,16 @@ export interface ButtonComponentSchema<Key extends SchemaKey = SchemaKey>
   type?: NzButtonType;
   mode?: 'submit' | 'reset' | 'menu';
   disabled?: boolean | ((ctx: SchemaContext<ButtonComponentSchema<SchemaKey>>) => boolean) | string;
-  ghost?: boolean | ((ctx: SchemaContext<ButtonComponentSchema<SchemaKey>>) => boolean) | string;
-  danger?: boolean | ((ctx: SchemaContext<ButtonComponentSchema<SchemaKey>>) => boolean) | string;
   loading?: boolean | ((ctx: SchemaContext<ButtonComponentSchema<SchemaKey>>) => boolean) | string;
-  shape?: NzButtonShape;
-  size?: NzButtonSize;
-  block?: boolean;
   icon?: string | Icon;
   content?: string | TemplateRef<void>;
+  size?: NzButtonSize;
+  variants?: {
+    block?: boolean;
+    shape?: NzButtonShape;
+    danger?: boolean;
+    ghost?: boolean;
+  }
 }
 
 export interface HeadingComponentSchema<Key extends SchemaKey = SchemaKey>

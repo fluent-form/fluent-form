@@ -64,10 +64,10 @@
       *ngIf="helper.addable | invoke: formSchema.addable as addable"
       nz-button
       [nzType]="addable.type ?? null"
-      [nzBlock]="addable.block"
-      [nzDanger]="addable.danger | reactive: model:formSchema:formArray"
-      [nzGhost]="addable.ghost | reactive: model:formSchema:formArray"
-      [nzShape]="addable.shape!"
+      [nzBlock]="addable.variants?.block"
+      [nzDanger]="addable.variants?.danger"
+      [nzGhost]="addable.variants?.ghost"
+      [nzShape]="addable.variants?.shape!"
       [nzSize]="addable.size!"
       [disabled]="formArray.length === (helper.length.max | invoke: formSchema.length)"
       (click)="push(formArray, formSchema)">

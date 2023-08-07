@@ -61,7 +61,7 @@ export const story = defineStory({
       text().content('文本'),
       button().type('primary').content('普通按钮'),
       button().type('primary').content('带图标的按钮').icon('check'),
-      button().content('危险按钮').danger(true),
+      button().content('危险按钮').variants({ danger: true }),
       button().type('link').content('链接按钮'),
       buttonGroup(
         button().type('primary').content('确认'),
@@ -166,7 +166,7 @@ export const source = dedent`
       text().content('文本'),
       button().type('primary').content('普通按钮'),
       button().type('primary').content('带图标的按钮').icon('check'),
-      button().content('危险按钮').danger(true),
+      button().content('危险按钮').variants({ danger: true }),
       buttonGroup(
         button().type('primary').content('确认'),
         button().content('取消'),

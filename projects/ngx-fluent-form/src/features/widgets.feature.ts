@@ -313,7 +313,13 @@ export function useButtonWidget(): [FluentFormWidgetFeature<ButtonComponentSchem
     {
       kind: SchemaKind.Button,
       type: SchemaType.Component,
-      widget: ButtonWidget
+      widget: ButtonWidget,
+      patch: schema => {
+        if (schema.variants?.block) {
+          schema.col ??= 24;
+        }
+        return schema;
+      }
     },
     {
       kind: SchemaKind.ButtonGroup,

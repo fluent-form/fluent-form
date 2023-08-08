@@ -50,7 +50,8 @@ export enum SchemaKind {
   Step = 'step',
   Tabs = 'tabs',
   Tab = 'tab',
-  Row = 'row'
+  Row = 'row',
+  Space = 'space'
 }
 
 export interface SchemaLike<Key extends AnySchemaKey = AnySchemaKey> {

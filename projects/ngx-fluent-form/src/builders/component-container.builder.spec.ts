@@ -1,5 +1,5 @@
 import { standardSchema } from '../utils';
-import { row, step, steps, tab, tabs } from './component-container.builder';
+import { row, space, step, steps, tab, tabs } from './component-container.builder';
 import { input } from './control.builder';
 
 describe('component-container.builder', () => {
@@ -53,6 +53,16 @@ describe('component-container.builder', () => {
     );
     expect(schema).toEqual({
       kind: 'row',
+      schemas: []
+    });
+  });
+
+  it('space', () => {
+    const schema = standardSchema(
+      space().schemas()
+    );
+    expect(schema).toEqual({
+      kind: 'space',
       schemas: []
     });
   });

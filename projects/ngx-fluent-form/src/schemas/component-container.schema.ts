@@ -1,5 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
+import { NzSpaceAlign, NzSpaceComponent, NzSpaceDirection, NzSpaceSize } from 'ng-zorro-antd/space';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
 import { NzTabComponent, NzTabPosition, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
 import { StableBuilder } from '../utils';
@@ -56,5 +57,16 @@ export interface TabComponentSchema<Key extends SchemaKey = SchemaKey>
 export interface RowComponentSchema<Key extends SchemaKey = SchemaKey>
   extends AbstractSchema<Key>, ElementEventListenerHolder, ElementPropertyHolder<HTMLElement>, Row {
   kind: 'row';
+  schemas: (AnySchema | AnyBuilder)[];
+}
+
+export interface SpaceComponentSchema<Key extends SchemaKey = SchemaKey>
+  extends AbstractSchema<Key>, ComponentEventListenerHolder<NzSpaceComponent>, ComponentPropertyHolder<NzSpaceComponent> {
+  kind: 'space';
+  size?: NzSpaceSize;
+  direction?: NzSpaceDirection;
+  align?: NzSpaceAlign;
+  wrapable?: boolean;
+  split?: NzSpaceComponent['nzSplit'];
   schemas: (AnySchema | AnyBuilder)[];
 }

@@ -1,0 +1,21 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <nz-space
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style"
+    [nzSize]="schema.size ?? 'small'"
+    [nzDirection]="schema.direction ?? 'horizontal'"
+    [nzAlign]="schema.align"
+    [nzWrap]="schema.wrapable"
+    [nzSplit]="schema.split!"
+    [hidden]="schema.hidden | reactive: model:schema:control"
+    [fluentBinding]="{ schema, control }">
+    <ng-container *ngFor="let subschema of schema.schemas">
+      <ng-container *nzSpaceItem>
+        <fluent-form-col-content-outlet
+          [control]="subschema.key | control: control"
+          [schema]="subschema"
+          [model]="model"></fluent-form-col-content-outlet>
+      </ng-container>
+    </ng-container>
+  </nz-space>
+</ng-template>

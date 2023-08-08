@@ -1,4 +1,4 @@
-import { NgClass, NgFor, NgStyle } from '@angular/common';
+import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
@@ -13,6 +13,7 @@ type SpaceWidgetTemplateContext = WidgetTemplateContext<SpaceComponentSchema, Fo
 @Component({
   standalone: true,
   imports: [
+    NgIf,
     NgFor,
     NgClass,
     NgStyle,

@@ -1,7 +1,6 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <nz-steps
     #component
-    #config="fluentConfig"
     [fluentBinding]="{ component, schema, control }"
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
@@ -30,6 +29,7 @@
 
   <nz-row
     *ngFor="let stepSchema of schema.schemas; index as stepIndex"
+    #config="fluentConfig"
     [nzGutter]="config.gutter"
     [hidden]="schema.active !== stepIndex"
     [style.margin-top.px]="16">

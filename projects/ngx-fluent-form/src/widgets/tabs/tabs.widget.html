@@ -1,7 +1,6 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <nz-tabset
     #component
-    #config="fluentConfig"
     [fluentBinding]="{ component, schema, control }"
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
@@ -22,7 +21,7 @@
       [nzTitle]="tabSchema.title"
       [nzDisabled]="tabSchema.disabled | reactive: model:tabSchema:control"
       [hidden]="tabSchema.hidden | reactive: model:tabSchema:control">
-      <nz-row [nzGutter]="config.gutter">
+      <nz-row #config="fluentConfig" [nzGutter]="config.gutter">
         <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
           <nz-col
             [nzSpan]="schema.col | col: 'span'"

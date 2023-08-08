@@ -44,8 +44,8 @@ export const source = dedent`
           input('password').type('password').label('密码').col(24),
           checkbox('remember').content('记住我')
         ),
-        button().type('primary').mode('submit').content('立即登录').variants({ block: true }).col(24)
-      )
+      ),
+      button().type('primary').mode('submit').content('立即登录').variants({ block: true }).col(24)
     );
 
     model = {};

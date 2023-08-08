@@ -10,7 +10,6 @@ Root --- ComponentWrapper
 
 Control --- SingleKeyControl --- AnyKeyControl
 Control --- DoubleKeyControl --- AnyKeyControl
-Control --- BothKeyControl --- AnyKeyControl
 
 AnyKeyControl --- NormalControl
 AnyKeyControl --- ComposableControl
@@ -27,7 +26,6 @@ ControlContainer --- FormGroup
 ControlContainer --- FormArray
 
 ControlWrapper --- InputGroup
-ControlWrapper --- NumberGroup
 
 Component --- Button
 Component --- Text

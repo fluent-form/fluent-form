@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
 import { array, group, input, inputGroup, slider, textarea } from '../builders';
-import { useButtonWidget, withAllWidgets, withSchemaPatchers, withWidgets } from '../features';
+import { useTextWidget, withAllWidgets, withSchemaPatchers, withWidgets } from '../features';
 import { provideFluentForm } from '../provider';
-import { AnySchema, ButtonComponentSchema, HeadingComponentSchema, InputControlSchema, NumberInputControlSchema, StandardSchema } from '../schemas';
+import { AnySchema, ButtonComponentSchema, HeadingComponentSchema, InputControlSchema, NumberInputControlSchema, StandardSchema, TextComponentSchema } from '../schemas';
 import { SchemaType } from '../schemas/interfaces';
 import { schemasUtils, SchemaUtil, standardSchema, standardSchemas } from './schema.utils';
 
@@ -28,6 +28,11 @@ describe('SchemaUtil', () => {
         it('heading patcher', () => {
           const schema: HeadingComponentSchema = { kind: 'heading', level: 1, content: '' };
           expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'heading', level: 1, content: '', col: 24 });
+        });
+
+        it('button patcher', () => {
+          const schema: ButtonComponentSchema = { kind: 'button', variants: { block: true } };
+          expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'button', variants: { block: true }, col: 24 });
         });
       });
     });
@@ -377,7 +382,7 @@ describe('SchemaUtil with no patcher feature', () => {
       providers: [
         provideFluentForm(
           withWidgets(
-            useButtonWidget()
+            useTextWidget()
           )
         )
       ]
@@ -387,7 +392,7 @@ describe('SchemaUtil with no patcher feature', () => {
   });
 
   it('no patcher', () => {
-    const schema: ButtonComponentSchema = { kind: 'button' };
-    expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'button' });
+    const schema: TextComponentSchema = { kind: 'text', content: '' };
+    expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'text', content: '' });
   });
 });

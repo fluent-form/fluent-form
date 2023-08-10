@@ -163,9 +163,11 @@ export interface SliderControlSchema<Key extends AnySchemaKey = AnySchemaKey, Va
 export interface RadioGroupControlSchema<Key extends SchemaKey = SchemaKey, Val = SafeAny>
   extends AbstractControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzRadioGroupComponent, Val>, ComponentPropertyHolder<NzRadioGroupComponent> {
   kind: 'radio-group';
-  button?: NzRadioButtonStyle;
   size?: NzSizeLDSType;
   options: AnyObject[];
+  variants?: {
+    button?: NzRadioButtonStyle;
+  };
   config?: {
     labelProperty?: string;
     valueProperty?: string;

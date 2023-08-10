@@ -41,7 +41,7 @@ export const story = defineStory({
       checkbox('checkbox').label('单个复选框').content('同意').col(12),
       checkboxGroup('checkboxGroup').label('复选框组').options(CHECKBOX_OPTIONS).col(12),
       select('select').label('选择器').options(SELECT_OPTIONS).col(8),
-      select('asyncSelect').label('动态数据选择器').col(8).options(
+      select('asyncSelect').label('动态数据选择器').col(8).fetchOptions(
         $ => $.pipe(
           switchMap(str =>
             timer(1000).pipe(
@@ -151,7 +151,7 @@ export const source = dedent`
       checkbox('checkbox').label('单个复选框').content('同意').col(12),
       checkboxGroup('checkboxGroup').label('复选框组').options(CHECKBOX_OPTIONS).col(12),
       select('select').label('选择器').options(SELECT_OPTIONS).col(12),
-      select('asyncSelect').label('动态数据选择器').col(8).options(
+      select('asyncSelect').label('动态数据选择器').col(8).fetchOptions(
         $ => $.pipe(
           switchMap(str =>
             timer(1000).pipe(

@@ -12,11 +12,11 @@ export class FluentReactivePipe implements PipeTransform {
   private readonly transformer = inject(ValueTransformer);
 
   transform<T>(
-    value: T | string | SchemaReactiveFn<SafeAny, T>,
+    value: string | T | SchemaReactiveFn<SafeAny, T>,
     model: unknown,
     schema: AbstractSchema,
     control: AbstractControl
-  ): T {
+  ): T | SafeAny {
     return this.transformer.transform(value, { model, schema, control });
   }
 

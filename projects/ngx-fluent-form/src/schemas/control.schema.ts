@@ -105,7 +105,8 @@ export interface SelectControlSchema<Key extends SchemaKey = SchemaKey, Val = Sa
   size?: NzSelectSizeType;
   suffixIcon?: TemplateRef<SafeAny> | string;
   loading?: boolean;
-  options: AnyObject[] | ((keyword$: Observable<string>, ctx: SchemaContext<SelectControlSchema<SchemaKey>>) => Observable<AnyObject[]>);
+  options?: AnyObject[];
+  fetchOptions?: (keyword$: Observable<string>, ctx: SchemaContext<SelectControlSchema<SchemaKey>>) => Observable<AnyObject[]>;
   config?: {
     labelProperty?: string;
     valueProperty?: string;
@@ -131,7 +132,8 @@ export interface CascaderControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   trigger?: NzCascaderExpandTrigger;
   /** Support search, cannot be used with `options.load` */
   searchable?: boolean | NzShowSearchOptions;
-  options: NzCascaderOption[] | ((node: NzCascaderOption, index: number) => PromiseLike<SafeAny>);
+  options?: NzCascaderOption[];
+  fetchOptions?: NzCascaderComponent['nzLoadData'];
   config?: {
     labelProperty?: string;
     valueProperty?: string;

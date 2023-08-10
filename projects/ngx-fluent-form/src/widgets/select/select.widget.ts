@@ -5,9 +5,9 @@ import { AnyObject } from '@ngify/types';
 import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { Subject, tap } from 'rxjs';
+import { filter, Subject, tap } from 'rxjs';
 import { FluentBindingDirective, FluentContextDirective, FluentContextGuardDirective, FluentInjectDirective, FluentLifeCycleDirective } from '../../directives';
-import { FluentColumnPipe, FluentReactivePipe, TypeofPipe } from '../../pipes';
+import { FluentColumnPipe, FluentReactivePipe } from '../../pipes';
 import { SelectControlSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -30,7 +30,6 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
     FluentLifeCycleDirective,
     FluentReactivePipe,
     FluentColumnPipe,
-    TypeofPipe
   ],
   templateUrl: './select.widget.html',
   styles: [`nz-select { width: 100% }`]
@@ -45,23 +44,22 @@ export class SelectWidgetTemplatePrivateContext {
   private readonly keyword$ = new Subject<string>();
   private readonly cdr: ChangeDetectorRef;
 
-  options: AnyObject[] = [];
+  open = false;
 
   constructor(injector: Injector) {
     this.cdr = injector.get(ChangeDetectorRef);
   }
 
   init(schema: SelectControlSchema, model: AnyObject, control: FormControl) {
-    const optionsOrFn = schema.options;
+    const fetchOptionsFn = schema.fetchOptions;
 
-    if (Array.isArray(optionsOrFn)) {
-      this.options = optionsOrFn;
-    } else {
+    if (fetchOptionsFn) {
       this.keyword$.pipe(
+        filter(() => this.open), // 选中后关闭浮层也会触发一次 keyword$，此时 open=false，过滤掉
         tap(() => schema.loading = true),
-        source => optionsOrFn(source, { schema, model, control }),
+        source => fetchOptionsFn(source, { schema, model, control }),
       ).subscribe(options => {
-        this.options = options;
+        schema.options = options;
         schema.loading = false;
         this.cdr.detectChanges();
       });

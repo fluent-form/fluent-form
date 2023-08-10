@@ -36,7 +36,7 @@
           [(nzOpen)]="ctx.open"
           (nzOnSearch)="ctx.trigger($event)">
           <nz-option
-            *ngFor="let option of schema.options"
+            *ngFor="let option of schema.options | reactive: model:schema:control"
             [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
             [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
             [nzValue]="option[schema.config?.valueProperty ?? 'value']"
@@ -69,7 +69,7 @@
           [(nzOpen)]="ctx.open"
           (nzOnSearch)="ctx.trigger($event)">
           <nz-option
-            *ngFor="let option of schema.options"
+            *ngFor="let option of schema.options | reactive: model:schema:control"
             [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
             [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
             [nzValue]="option[schema.config?.valueProperty ?? 'value']"

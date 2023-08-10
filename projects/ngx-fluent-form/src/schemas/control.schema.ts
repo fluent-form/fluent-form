@@ -15,7 +15,7 @@ import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { NzTreeSelectComponent } from 'ng-zorro-antd/tree-select';
 import { Observable } from 'rxjs';
 import { AbstractControlSchema, AbstractDateControlSchema, AbstractInputBoxControlSchema, AbstractTextControlSchema } from './abstract.schema';
-import { ComponentControlEventListenerHolder, ComponentPropertyHolder, ElementControlEventListenerHolder, ElementPropertyHolder, PropertyHolder, SchemaContext } from './interfaces';
+import { ComponentControlEventListenerHolder, ComponentPropertyHolder, ElementControlEventListenerHolder, ElementPropertyHolder, PropertyHolder, SchemaContext, SchemaReactiveFn } from './interfaces';
 import { AnySchemaKey, SchemaKey } from './types';
 
 export interface HeadlessControlSchema<Key extends SchemaKey> extends AbstractControlSchema<Key, SafeAny>, PropertyHolder {
@@ -105,8 +105,8 @@ export interface SelectControlSchema<Key extends SchemaKey = SchemaKey, Val = Sa
   size?: NzSelectSizeType;
   suffixIcon?: TemplateRef<SafeAny> | string;
   loading?: boolean;
-  options?: AnyObject[];
-  fetchOptions?: (keyword$: Observable<string>, ctx: SchemaContext<SelectControlSchema<SchemaKey>>) => Observable<AnyObject[]>;
+  options?: AnyObject[] | SchemaReactiveFn<SelectControlSchema<SchemaKey, Val>, AnyObject[]>;
+  fetchOptions?: (keyword$: Observable<string>, ctx: SchemaContext<SelectControlSchema<SchemaKey, Val>>) => Observable<AnyObject[]>;
   config?: {
     labelProperty?: string;
     valueProperty?: string;
@@ -132,7 +132,7 @@ export interface CascaderControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   trigger?: NzCascaderExpandTrigger;
   /** Support search, cannot be used with `options.load` */
   searchable?: boolean | NzShowSearchOptions;
-  options?: NzCascaderOption[];
+  options?: NzCascaderOption[] | SchemaReactiveFn<CascaderControlSchema<SchemaKey, Val>, NzCascaderOption[]>;
   fetchOptions?: NzCascaderComponent['nzLoadData'];
   config?: {
     labelProperty?: string;

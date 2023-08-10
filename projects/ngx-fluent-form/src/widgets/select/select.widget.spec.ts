@@ -52,6 +52,7 @@ describe('SelectWidget', () => {
       {},
       control
     );
+    ctx.open = true;
     ctx.trigger('keyword');
     ctx.destroy();
     expect(ctx).toBeTruthy();

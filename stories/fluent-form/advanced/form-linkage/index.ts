@@ -3,12 +3,6 @@ import { form, input, radioGroup, select, toggle } from 'ngx-fluent-form';
 import { AbstractFluentFormWrapperComponent, defineMeta, defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
-const SELECT_OPTIONS = [
-  { label: 'Jack', value: 'jack' },
-  { label: 'Lucy', value: 'lucy' },
-  { label: 'Disabled', value: 'disabled', disabled: true }
-];
-
 @Component({
   selector: 'fluent-form-wrapper',
   template: `
@@ -36,12 +30,38 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
     super();
 
     this.schemas = form(
-      select('select').label('控制内容').options(SELECT_OPTIONS).col(6).listeners({
-        valueChange: (value, control) => {
-          control.parent?.get('text')?.setValue(value);
-        }
-      }),
-      radioGroup('show').label('控制显隐').col(7).defaultValue(true).options([
+      radioGroup('lang')
+        .label('语言')
+        .variants({ button: 'solid' })
+        .col(6)
+        .defaultValue('zh')
+        .options([
+          { label: '中文', value: 'zh' },
+          { label: '英文', value: 'en' },
+        ]),
+      select('select')
+        .label('控制内容')
+        .col(6)
+        .defaultValue('jack')
+        .options(({ model }) => {
+          if (model.lang === 'zh') {
+            return [
+              { label: '杰克', value: 'jack' },
+              { label: '露西', value: 'lucy' },
+            ];
+          }
+
+          return [
+            { label: 'Jack', value: 'jack' },
+            { label: 'Lucy', value: 'lucy' },
+          ];
+        })
+        .listeners({
+          valueChange: (value, control) => {
+            control.parent?.get('text')?.setValue(value);
+          }
+        }),
+      radioGroup('show').label('控制显隐').col(8).defaultValue(true).options([
         { label: '显示', value: true },
         { label: '隐藏', value: false },
       ]),
@@ -79,12 +99,38 @@ export const source = dedent`
   })
   export class ExampleComponent {
     schemas = form(
-      select('select').label('控制内容').options(SELECT_OPTIONS).col(6).listeners({
-        valueChange: (value, control) => {
-          control.parent?.get('text')?.setValue(value);
-        }
-      }),
-      radioGroup('show').label('控制显隐').col(7).defaultValue(true).options([
+      radioGroup('lang')
+        .label('语言')
+        .variants({ button: 'solid' })
+        .col(6)
+        .defaultValue('zh')
+        .options([
+          { label: '中文', value: 'zh' },
+          { label: '英文', value: 'en' },
+        ]),
+      select('select')
+        .label('控制内容')
+        .col(6)
+        .defaultValue('jack')
+        .options(({ model }) => {
+          if (model.lang === 'zh') {
+            return [
+              { label: '杰克', value: 'jack' },
+              { label: '露西', value: 'lucy' },
+            ];
+          }
+
+          return [
+            { label: 'Jack', value: 'jack' },
+            { label: 'Lucy', value: 'lucy' },
+          ]
+        })
+        .listeners({
+          valueChange: (value, control) => {
+            control.parent?.get('text')?.setValue(value);
+          }
+        }),
+      radioGroup('show').label('控制显隐').col(8).defaultValue(true).options([
         { label: '显示', value: true },
         { label: '隐藏', value: false },
       ]),

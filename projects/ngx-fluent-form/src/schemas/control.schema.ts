@@ -220,7 +220,7 @@ export interface TreeSelectControlSchema<Key extends SchemaKey = SchemaKey, Val 
   expandIcon?: boolean | NzTreeSelectComponent['nzExpandedIcon'];
   line?: boolean;
   async?: boolean;
-  options: NzTreeNodeOptions[];
+  options: NzTreeNodeOptions[] | SchemaReactiveFn<TreeSelectControlSchema<SchemaKey, Val>, NzTreeNodeOptions[]>;
   expandAll?: boolean;
   expandedKeys?: string[];
   backdrop?: boolean;

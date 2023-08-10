@@ -2,7 +2,7 @@ import { TemplateRef } from '@angular/core';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzFormTextComponent } from 'ng-zorro-antd/form';
 import { AbstractSchema } from './abstract.schema';
-import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Icon, Labelful, PropertyHolder, SchemaContext } from './interfaces';
+import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Icon, Labelful, PropertyHolder, SchemaReactiveFn } from './interfaces';
 import { SchemaKey } from './types';
 
 export interface TemplateSchema<Key extends SchemaKey = SchemaKey> extends AbstractSchema<Key>, Labelful, PropertyHolder {
@@ -20,8 +20,8 @@ export interface ButtonComponentSchema<Key extends SchemaKey = SchemaKey>
   kind: 'button';
   type?: NzButtonType;
   mode?: 'submit' | 'reset' | 'menu';
-  disabled?: boolean | ((ctx: SchemaContext<ButtonComponentSchema<SchemaKey>>) => boolean) | string;
-  loading?: boolean | ((ctx: SchemaContext<ButtonComponentSchema<SchemaKey>>) => boolean) | string;
+  disabled?: boolean | string | SchemaReactiveFn<ButtonComponentSchema<SchemaKey>, boolean>;
+  loading?: boolean | string | SchemaReactiveFn<ButtonComponentSchema<SchemaKey>, boolean>;
   icon?: string | Icon;
   content?: string | TemplateRef<void>;
   size?: NzButtonSize;

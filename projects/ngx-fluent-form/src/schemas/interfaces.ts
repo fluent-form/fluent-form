@@ -166,3 +166,5 @@ export interface ElementPropertyHolder<E extends HTMLElement> extends PropertyHo
 }
 
 export type Length = number | { max?: number, min?: number };
+
+export type SchemaReactiveFn<S extends SchemaLike, R> = (ctx: SchemaContext<S>) => R;

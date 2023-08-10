@@ -7,14 +7,14 @@ import { CompareWith, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDateMode, SupportTimeOptions } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { AnyBuilder, AnySchema } from './index.schema';
-import { Col, ControlEventListenerHolder, ControlValueMapper, Labelful, Length, Row, SchemaContext, SchemaLike } from './interfaces';
+import { Col, ControlEventListenerHolder, ControlValueMapper, Labelful, Length, Row, SchemaLike, SchemaReactiveFn } from './interfaces';
 import { AnySchemaKey, Cell } from './types';
 
 /** 抽象图示 */
 export interface AbstractSchema<Key extends AnySchemaKey = AnySchemaKey> extends SchemaLike<Key> {
   /* Used to define the width of the control. */
   col?: Col | Cell;
-  hidden?: boolean | ((ctx: SchemaContext<AbstractSchema>) => boolean) | string;
+  hidden?: boolean | string | SchemaReactiveFn<AbstractSchema, boolean>;
   class?: NgClass['ngClass'];
   style?: NgStyle['ngStyle'];
 }
@@ -27,9 +27,9 @@ export interface AbstractControlSchema<Key extends AnySchemaKey, Val> extends Ab
   /* Used to set the default value of the control. */
   defaultValue?: SafeAny;
   /** Is it a required control */
-  required?: boolean | ((ctx: SchemaContext<AbstractControlSchema<AnySchemaKey, Val>>) => boolean) | string;
+  required?: boolean | string | SchemaReactiveFn<AbstractControlSchema<AnySchemaKey, Val>, boolean>;
   /** Whether to disable control */
-  disabled?: boolean | ((ctx: SchemaContext<AbstractControlSchema<AnySchemaKey, Val>>) => boolean) | string;
+  disabled?: boolean | string | SchemaReactiveFn<AbstractControlSchema<AnySchemaKey, Val>, boolean>;
   feedback?: boolean;
   hint?: string | TemplateRef<void>;
   /** Error message for control */
@@ -65,7 +65,7 @@ export interface AbstractControlContainerSchema<Key extends AnySchemaKey> extend
 export interface AbstractInputBoxControlSchema<Key extends AnySchemaKey, Val, P extends string | [string, string] = string> extends AbstractControlSchema<Key, Val> {
   placeholder?: P;
   autofocus?: boolean;
-  readonly?: boolean | ((ctx: SchemaContext<AbstractInputBoxControlSchema<AnySchemaKey, Val, P>>) => boolean) | string;
+  readonly?: boolean | string | SchemaReactiveFn<AbstractInputBoxControlSchema<AnySchemaKey, Val, P>, boolean>;
   size?: NzSizeLDSType;
   borderless?: boolean;
 }

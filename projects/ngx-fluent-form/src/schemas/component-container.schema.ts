@@ -6,7 +6,7 @@ import { NzTabComponent, NzTabPosition, NzTabSetComponent, NzTabType } from 'ng-
 import { StableBuilder } from '../utils';
 import { AbstractSchema } from './abstract.schema';
 import { AnyBuilder, AnySchema } from './index.schema';
-import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Row, SchemaContext } from './interfaces';
+import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Row, SchemaReactiveFn } from './interfaces';
 import { SchemaKey } from './types';
 
 export interface StepsComponentSchema<Key extends SchemaKey = SchemaKey>
@@ -28,7 +28,7 @@ export interface StepComponentSchema<Key extends SchemaKey = SchemaKey>
   title: string | TemplateRef<void>;
   subtitle?: string | TemplateRef<void>;
   description?: string | TemplateRef<void>;
-  disabled?: boolean | ((ctx: SchemaContext<StepComponentSchema<SchemaKey>>) => boolean) | string;
+  disabled?: boolean | string | SchemaReactiveFn<StepComponentSchema<SchemaKey>, boolean>;
   status?: 'wait' | 'process' | 'finish' | 'error';
   schemas: (AnySchema | AnyBuilder)[];
 }
@@ -50,7 +50,7 @@ export interface TabComponentSchema<Key extends SchemaKey = SchemaKey>
   extends AbstractSchema<Key>, ComponentEventListenerHolder<NzTabComponent>, ComponentPropertyHolder<NzTabComponent> {
   kind: 'tab';
   title: string;
-  disabled?: boolean | ((ctx: SchemaContext<TabComponentSchema<SchemaKey>>) => boolean) | string;
+  disabled?: boolean | string | SchemaReactiveFn<TabComponentSchema<SchemaKey>, boolean>;
   schemas: (AnySchema | AnyBuilder)[];
 }
 

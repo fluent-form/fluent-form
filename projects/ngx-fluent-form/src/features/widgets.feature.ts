@@ -18,7 +18,9 @@ export interface FluentFormWidgetFeature<S extends AbstractSchema> extends Schem
 }
 
 export function withWidgets(...features: (FluentFormWidgetFeature<SafeAny> | FluentFormWidgetFeature<SafeAny>[])[]): FluentFormFeature<FluentFormFeatureKind.Widget> {
-  const flattenedFeatures = features.flat();
+  const flattenedFeatures = features.flat().concat(
+    useRowWidget() // 添加内置 widget
+  );
 
   return makeFluentFeature(FluentFormFeatureKind.Widget, [
     {
@@ -30,9 +32,6 @@ export function withWidgets(...features: (FluentFormWidgetFeature<SafeAny> | Flu
             feature.widget!
           ])
         );
-
-        // 添加内置的 widget
-        map.set(SchemaKind.Row, RowWidget);
 
         return map;
       }
@@ -48,7 +47,6 @@ export function withWidgets(...features: (FluentFormWidgetFeature<SafeAny> | Flu
         );
 
         // 添加内置的 schema
-        map.set(SchemaKind.Row, { type: SchemaType.ComponentContainer });
         map.set(SchemaKind.Headless, { type: SchemaType.Control });
         map.set(SchemaKind.Template, { type: SchemaType.Component });
 
@@ -362,6 +360,17 @@ export function useSpaceWidget(): FluentFormWidgetFeature<TextComponentSchema> {
     kind: SchemaKind.Space,
     type: SchemaType.ComponentContainer,
     widget: SpaceWidget
+  };
+}
+
+/**
+ * @internal
+ */
+function useRowWidget(): FluentFormWidgetFeature<TextComponentSchema> {
+  return {
+    kind: SchemaKind.Row,
+    type: SchemaType.ComponentContainer,
+    widget: RowWidget
   };
 }
 

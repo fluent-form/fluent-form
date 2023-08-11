@@ -14,18 +14,18 @@ Building dynamic form in Angular with Fluent API or JSON.
 ## Features
 
 - Support using Fluent API and JSON.
-- Based on Angular Template, without Host Element, supports nested layout.
+- Based on EmbeddedView, without HostElement, supports nested layout.
 - Type-safe schema configuration.
 - Import on demand, tree shakeable.
 - Built on top of Angular Reactive Forms.
-- Components and grid layout based on [NG-ZORRO](https://ng.ant.design).
+- Components and grid layout based on [Ant Design](https://ng.ant.design).
 
 ## Prerequisites
 
 Before using `ngx-fluent-form`, you should have a basic understanding of the following:
 
 - [Angular Reactive Forms](https://angular.cn/guide/reactive-forms)
-- [NG-ZORRO Components](https://ng.ant.design)
+- [Ant Design Components](https://ng.ant.design)
 
 And make sure your relevant dependency versions meet the following requirements:
 

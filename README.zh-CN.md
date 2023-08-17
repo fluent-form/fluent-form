@@ -82,7 +82,7 @@ export class ExampleComponent {
     input('text').length(15),
     number('count'),
     date('date').format('yyyy/MM/dd'),
-    buttonGroup(
+    buttonGroup().schemas(
       button().content('cancel'),
       button().content('submit')
     )
@@ -144,7 +144,7 @@ export class ExampleComponent {
     input('text').length(15),
     number('count'),
     date('date').format('yyyy/MM/dd'),
-    buttonGroup(
+    buttonGroup().schemas(
       button().content('cancel'),
       button().content('submit')
     )

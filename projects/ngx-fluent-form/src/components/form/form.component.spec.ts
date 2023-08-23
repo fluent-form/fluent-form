@@ -2,21 +2,20 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
-import { form, input } from '../../builders';
+import { form, input } from '../../compose';
 import { withAllWidgets, withStaticExpression } from '../../features';
 import { provideFluentForm } from '../../provider';
-import { FormGroupSchema, StandardSchema } from '../../schemas';
-import { AnySchema } from '../../schemas/index.schema';
+import { FormGroupSchema } from '../../schemas';
 import { FluentFormComponent } from './form.component';
 
 @Component({
   standalone: true,
   imports: [FluentFormComponent],
-  template: `<fluent-form [schemas]="schemas" [(model)]="model" (formChange)="form = $event"></fluent-form>`,
+  template: `<fluent-form [schema]="schema" [(model)]="model" (formChange)="form = $event"></fluent-form>`,
 })
 class TestWarpperComponent<T extends AnyObject> {
   form!: FormGroup;
-  schemas!: StandardSchema<AnySchema>[] | StandardSchema<FormGroupSchema>;
+  schema!: FormGroupSchema;
   model: T = {} as T;
 }
 
@@ -45,9 +44,9 @@ describe('FluentFormComponent', () => {
   });
 
   it('能够配置顶层表单', () => {
-    component.schemas = form(it => it.updateOn('blur').schemas(
-      input('text')
-    ));
+    component.schema = form(() => {
+      input('text');
+    }, { updateOn: 'blur' });
     component.model = {};
     fixture.detectChanges();
 
@@ -55,30 +54,24 @@ describe('FluentFormComponent', () => {
   });
 
   describe('模型应该能正确赋值表单', () => {
-    it('先设置 schemas，后设置 model', () => {
-      component.schemas = form(
-        input('text')
-      );
+    it('先设置 schema，后设置 model', () => {
+      component.schema = form(() => input('text'));
       component.model = { text: 'test' };
       fixture.detectChanges();
 
       expect(component.form.value).toEqual({ text: 'test' });
     });
 
-    it('先设置 model，后设置 schemas', () => {
+    it('先设置 model，后设置 schema', () => {
       component.model = { text: 'test' };
-      component.schemas = form(
-        input('text')
-      );
+      component.schema = form(() => input('text'));
       fixture.detectChanges();
 
       expect(component.form.value).toEqual({ text: 'test' });
     });
 
     it('多次设置 model', () => {
-      component.schemas = form(
-        input('text')
-      );
+      component.schema = form(() => input('text'));
       component.model = { text: 'test' };
       fixture.detectChanges();
 
@@ -92,50 +85,50 @@ describe('FluentFormComponent', () => {
   });
 
   describe('表单应该能正确赋值模型', () => {
-    it('先设置 schemas，后设置 model', () => {
-      component.schemas = form(
-        input('text').col(1).defaultValue('test')
-      );
+    it('先设置 schema，后设置 model', () => {
+      component.schema = form(() => {
+        input('text').col(1).defaultValue('test');
+      });
       component.model = {};
       fixture.detectChanges();
 
       expect(component.model).toEqual({ text: 'test' });
     });
 
-    it('先设置 model，后设置 schemas', () => {
+    it('先设置 model，后设置 schema', () => {
       component.model = {};
-      component.schemas = form(
-        input('text').col(1).defaultValue('test')
-      );
+      component.schema = form(() => {
+        input('text').col(1).defaultValue('test');
+      });
       fixture.detectChanges();
 
       expect(component.model).toEqual({ text: 'test' });
     });
 
-    it('多次设置 schemas', () => {
+    it('多次设置 schema', () => {
       component.model = {};
-      component.schemas = form(
-        input('text').col(1).defaultValue('test')
-      );
+      component.schema = form(() => {
+        input('text').col(1).defaultValue('test');
+      });
       fixture.detectChanges();
 
       expect(component.model).toEqual({ text: 'test' });
 
-      component.schemas = form(
-        input('text').col(1).defaultValue('test change')
-      );
+      component.schema = form(() => {
+        input('text').col(1).defaultValue('test change');
+      });
       fixture.detectChanges();
 
-      expect(component.model).toEqual({ text: 'test change' });
+      expect(component.model).toEqual({ text: 'test' });
     });
   });
 
   it('应该能正确处理控件的 disabled 选项', () => {
-    component.schemas = form(
-      input('a').disabled('true'),
-      input('b').disabled(() => true),
-      input('c').disabled(true)
-    );
+    component.schema = form(() => {
+      input('a').disabled('true');
+      input('b').disabled(() => true);
+      input('c').disabled(true);
+    });
     component.model = {};
     fixture.detectChanges();
 

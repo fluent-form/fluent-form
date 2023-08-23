@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { AnyArray, AnyObject, SafeAny } from '@ngify/types';
-import { FormArraySchema, FormGroupSchema, StandardSchema } from '../schemas';
+import { FormArraySchema, FormGroupSchema } from '../schemas';
 import { AnyControlContainerSchema, AnyControlSchema, AnySchema } from '../schemas/index.schema';
 import { SchemaKind } from '../schemas/interfaces';
 import { ValueTransformer } from '../services';
@@ -17,7 +17,7 @@ export class FormUtil {
   private readonly valueUtil = inject(ValueUtil);
   private readonly valueTransformer = inject(ValueTransformer);
 
-  createFormControl(schema: StandardSchema<AnyControlSchema>, model: AnyObject): FormControl {
+  createFormControl(schema: AnyControlSchema, model: AnyObject): FormControl {
     const validators: ValidatorFn[] = this.schemaUtil.validatorsOf(schema);
     const value = this.valueUtil.valueOfModel(model, schema) ?? schema.defaultValue;
 
@@ -32,11 +32,11 @@ export class FormUtil {
     );
   }
 
-  createFormGroup(schema: StandardSchema<FormGroupSchema>, model: AnyObject): FormGroup;
-  createFormGroup(schemas: StandardSchema<AnySchema>[], model: AnyObject): FormGroup;
-  createFormGroup(schemaOrSchemas: StandardSchema<FormGroupSchema> | StandardSchema<AnySchema>[], model: AnyObject): FormGroup;
-  createFormGroup(schemaOrSchemas: StandardSchema<FormGroupSchema> | StandardSchema<AnySchema>[], model: AnyObject): FormGroup {
-    let schemas: StandardSchema<AnySchema>[];
+  createFormGroup(schema: FormGroupSchema, model: AnyObject): FormGroup;
+  createFormGroup(schemas: AnySchema[], model: AnyObject): FormGroup;
+  createFormGroup(schemaOrSchemas: FormGroupSchema | AnySchema[], model: AnyObject): FormGroup;
+  createFormGroup(schemaOrSchemas: FormGroupSchema | AnySchema[], model: AnyObject): FormGroup {
+    let schemas: AnySchema[];
     let options: AbstractControlOptions = {};
 
     if (Array.isArray(schemaOrSchemas)) {
@@ -56,7 +56,7 @@ export class FormUtil {
     );
   }
 
-  private createControlMap(schemas: StandardSchema<AnySchema>[], model: AnyObject) {
+  private createControlMap(schemas: AnySchema[], model: AnyObject) {
     return schemas.reduce((controls, schema) => {
       if (this.schemaUtil.isNonControlSchema(schema)) {
         return controls;
@@ -78,7 +78,7 @@ export class FormUtil {
     }, {} as Record<string, AbstractControl>);
   }
 
-  createFormArray(schema: StandardSchema<FormArraySchema>, model: AnyArray): FormArray {
+  createFormArray(schema: FormArraySchema, model: AnyArray): FormArray {
     const controls = this.createFormArrayElements(schema.schemas, model);
 
     return new FormArray<SafeAny>(controls, {
@@ -88,7 +88,7 @@ export class FormUtil {
     });
   }
 
-  createFormArrayElements(schemas: StandardSchema<AnySchema>[], model: AnyArray) {
+  createFormArrayElements(schemas: AnySchema[], model: AnyArray) {
     // 只拿第一个，其他的忽略
     const [schema] = this.schemaUtil.filterControlSchemas(schemas);
 
@@ -102,11 +102,11 @@ export class FormUtil {
     });
   }
 
-  createAnyControl(schema: StandardSchema<AnyControlSchema>, model: AnyObject): FormControl;
-  createAnyControl(schema: StandardSchema<FormGroupSchema>, model: AnyObject): FormGroup;
-  createAnyControl(schema: StandardSchema<FormArraySchema>, model: AnyArray): FormArray;
-  createAnyControl(schema: StandardSchema<AnyControlSchema | AnyControlContainerSchema>, model: AnyObject | AnyArray): AbstractControl;
-  createAnyControl(schema: StandardSchema<AnyControlSchema | AnyControlContainerSchema>, model: AnyObject | AnyArray): AbstractControl {
+  createAnyControl(schema: AnyControlSchema, model: AnyObject): FormControl;
+  createAnyControl(schema: FormGroupSchema, model: AnyObject): FormGroup;
+  createAnyControl(schema: FormArraySchema, model: AnyArray): FormArray;
+  createAnyControl(schema: AnyControlSchema | AnyControlContainerSchema, model: AnyObject | AnyArray): AbstractControl;
+  createAnyControl(schema: AnyControlSchema | AnyControlContainerSchema, model: AnyObject | AnyArray): AbstractControl {
     switch (schema.kind) {
       case 'group':
         return this.createFormGroup(schema, (model as AnyObject)[schema.key!] ?? {});
@@ -119,9 +119,9 @@ export class FormUtil {
     }
   }
 
-  updateForm(form: FormGroup, model: AnyObject, schemas: StandardSchema<AnySchema>[], emitEvent?: boolean): void;
-  updateForm(form: FormArray, model: AnyArray, schemas: StandardSchema<AnySchema>[], emitEvent?: boolean): void;
-  updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: StandardSchema<AnySchema>[], emitEvent = true): void {
+  updateForm(form: FormGroup, model: AnyObject, schemas: AnySchema[], emitEvent?: boolean): void;
+  updateForm(form: FormArray, model: AnyArray, schemas: AnySchema[], emitEvent?: boolean): void;
+  updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AnySchema[], emitEvent = true): void {
     schemas.forEach(schema => {
       // 这些图示不包含控件图示，直接跳过
       if (this.schemaUtil.isNonControlSchema(schema)) return;
@@ -167,9 +167,9 @@ export class FormUtil {
     emitEvent && form.updateValueAndValidity({ emitEvent: false });
   }
 
-  updateModel(model: AnyObject, form: FormGroup, schemas: StandardSchema<AnySchema>[]): AnyObject;
-  updateModel(model: AnyArray, form: FormArray, schemas: StandardSchema<AnySchema>[]): AnyArray;
-  updateModel(model: AnyObject, form: FormGroup | FormArray, schemas: StandardSchema<AnySchema>[]): AnyObject | AnyArray {
+  updateModel(model: AnyObject, form: FormGroup, schemas: AnySchema[]): AnyObject;
+  updateModel(model: AnyArray, form: FormArray, schemas: AnySchema[]): AnyArray;
+  updateModel(model: AnyObject, form: FormGroup | FormArray, schemas: AnySchema[]): AnyObject | AnyArray {
     schemas.forEach(schema => {
       // 这些图示不包含控件图示，直接跳过
       if (this.schemaUtil.isNonControlSchema(schema)) return;

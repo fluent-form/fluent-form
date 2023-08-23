@@ -1,12 +1,12 @@
 import { Directive, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
-import { AbstractTextControlSchema, AnySchema, StandardSchema } from '../schemas';
+import { AbstractTextControlSchema, AnySchema } from '../schemas';
 import { Model } from '../types';
 import { isNumber } from '../utils';
 
 export interface WidgetTemplateContext<S extends AnySchema, C extends AbstractControl = FormControl> {
-  schema: StandardSchema<S>;
+  schema: S;
   control: C;
   model: Model<C>;
 }

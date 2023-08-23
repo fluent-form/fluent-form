@@ -9,7 +9,7 @@ import { takeUntil } from 'rxjs';
 import { FluentBindingDirective, FluentTemplateDirective } from '../../directives';
 import { DirectiveQueryContainer, FluentConfig } from '../../interfaces';
 import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe } from '../../pipes';
-import { AnySchema, FormGroupSchema, StandardSchema } from '../../schemas';
+import { AnySchema, FormGroupSchema } from '../../schemas';
 import { SchemaKind } from '../../schemas/interfaces';
 import { CONFIG, DIRECTIVE_QUERY_CONTAINER } from '../../tokens';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
@@ -57,34 +57,27 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig, D
    */
   private internalModel!: T;
   private _model!: T;
+  private _schema!: FormGroupSchema;
 
-  protected schema!: StandardSchema<FormGroupSchema>;
   protected readonly SchemaKind = SchemaKind;
-
-  form!: FormGroup;
-
-  get schemas(): StandardSchema<AnySchema>[] {
+  protected get schemas(): AnySchema[] {
     return this.schema?.schemas;
   }
 
+  form!: FormGroup;
+
   @Input()
-  set schemas(value: StandardSchema<AnySchema>[] | StandardSchema<FormGroupSchema>) {
-    // 这里统一包装为 FormGroupSchema
-    this.schema = this.schemaUtil.patchSchema(
-      Array.isArray(value) ? { kind: 'group', schemas: value } : value
-    );
+  set schema(value: FormGroupSchema) {
+    this._schema = this.schemaUtil.patchSchema(value);
 
     if (this.model) {
       this.createForm();
     }
   }
-
-  /** 模型 */
-  get model(): T {
-    return this._model;
+  get schema(): FormGroupSchema {
+    return this._schema;
   }
 
-  /** 模型 */
   @Input()
   set model(value: T) {
     this._model = value;
@@ -97,6 +90,9 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig, D
         this.createForm();
       }
     }
+  }
+  get model(): T {
+    return this._model;
   }
 
   @Input() layout: NzFormLayoutType = 'vertical';
@@ -141,14 +137,14 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig, D
   private onValueChanges() {
     this.formUtil.updateForm(
       this.form,
-      this.internalModel = this.formUtil.updateModel(
+      this.model = this.internalModel = this.formUtil.updateModel(
         {} as T,
         this.form,
         this.schemas
       ),
       this.schemas
     );
-    this.modelChange.emit(this.internalModel);
+    this.modelChange.emit(this.model);
   }
 
 }

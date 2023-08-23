@@ -3,7 +3,7 @@ import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { startWith, takeUntil } from 'rxjs';
-import { AnyControlContainerSchema, AnySchema, StandardSchema } from '../../schemas';
+import { AnyControlContainerSchema, AnySchema } from '../../schemas';
 import { schemasUtils } from '../../utils';
 import { ControlContainerDirective, FluentControlContainer } from './models/control-container';
 
@@ -21,7 +21,7 @@ import { ControlContainerDirective, FluentControlContainer } from './models/cont
 })
 export class FluentFormKeyDirective<T extends AnyObject | AnyArray> extends ControlContainerDirective<T> implements OnInit {
   /** @internal */
-  schemas!: StandardSchema<AnySchema>[];
+  schemas!: AnySchema[];
   /** @internal */
   form!: AbstractControl;
 
@@ -52,7 +52,7 @@ export class FluentFormKeyDirective<T extends AnyObject | AnyArray> extends Cont
         this.form = this.controlContainer.directive.form.get([this.key])!
       );
       this.schemas = schemasUtils(this.controlContainer.directive.schemas)
-        .find<StandardSchema<AnyControlContainerSchema>>(this.key)!.schemas;
+        .find<AnyControlContainerSchema>(this.key)!.schemas;
 
       this.directives.forEach(directive => this.assignDirective(directive));
     });

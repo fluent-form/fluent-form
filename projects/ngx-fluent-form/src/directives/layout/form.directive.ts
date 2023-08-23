@@ -3,7 +3,7 @@ import { FormControlStatus, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { takeUntil } from 'rxjs';
-import { AnySchema, FormGroupSchema, StandardSchema } from '../../schemas';
+import { AnySchema, FormGroupSchema } from '../../schemas';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
 import { ControlContainerDirective, FluentControlContainer } from './models/control-container';
 
@@ -31,28 +31,25 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
    */
   private internalModel!: T;
   private _model!: T;
-  private schema!: StandardSchema<FormGroupSchema>;
+  private _schema!: FormGroupSchema;
 
   form!: FormGroup;
 
-  get schemas(): StandardSchema<AnySchema>[] {
+  get schemas(): AnySchema[] {
     return this.schema?.schemas;
   }
 
-  @Input('fluentSchemas')
-  set schemas(value: StandardSchema<AnySchema>[] | StandardSchema<FormGroupSchema>) {
+  @Input('fluentSchema')
+  set schema(value: FormGroupSchema) {
     // 这里统一包装为 FormGroupSchema
-    this.schema = this.schemaUtil.patchSchema(
-      Array.isArray(value) ? { kind: 'group', schemas: value } : value
-    );
+    this._schema = this.schemaUtil.patchSchema(value);
 
     if (this.model) {
       this.createForm();
     }
   }
-
-  get model(): T {
-    return this._model;
+  get schema(): FormGroupSchema {
+    return this._schema;
   }
 
   /** 模型 */
@@ -68,6 +65,9 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
         this.createForm();
       }
     }
+  }
+  get model(): T {
+    return this._model;
   }
 
   @Output('fluentModelChange') modelChange: EventEmitter<T> = new EventEmitter();
@@ -108,13 +108,13 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends Control
   private onValueChanges() {
     this.formUtil.updateForm(
       this.form,
-      this.internalModel = this.formUtil.updateModel(
+      this.model = this.internalModel = this.formUtil.updateModel(
         {} as T,
         this.form,
         this.schemas,
       ),
       this.schemas,
     );
-    this.modelChange.emit(this.internalModel);
+    this.modelChange.emit(this.model);
   }
 }

@@ -3,10 +3,10 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
-import { form, group, input, inputGroup } from '../../builders';
+import { form, group, input, inputGroup } from '../../compose';
 import { withAllWidgets } from '../../features';
 import { provideFluentForm } from '../../provider';
-import { AnySchema, FormGroupSchema, StandardSchema } from '../../schemas';
+import { FormGroupSchema } from '../../schemas';
 import { FluentFormKeyDirective } from './form-key.directive';
 import { FluentFormDirective } from './form.directive';
 import { FluentOutletDirective } from './outlet.directive';
@@ -22,7 +22,7 @@ import { FluentOutletDirective } from './outlet.directive';
     FluentOutletDirective
   ],
   template: `
-    <div fluent-form [fluentSchemas]="schemas" [(fluentModel)]="model" (fluentFormChange)="form = $event">
+    <div fluent-form [fluentSchema]="schema" [(fluentModel)]="model" (fluentFormChange)="form = $event">
       <fluent-outlet key="ipt"></fluent-outlet>
       <fluent-outlet key="ipts"></fluent-outlet>
       <ng-container fluentFormKey="group">
@@ -37,7 +37,7 @@ import { FluentOutletDirective } from './outlet.directive';
 })
 class TestingComponent {
   form!: FormGroup;
-  schemas!: StandardSchema<AnySchema>[] | StandardSchema<FormGroupSchema>;
+  schema!: FormGroupSchema;
   model!: AnyObject;
 }
 
@@ -61,21 +61,21 @@ describe('FluentFormDirective', () => {
   });
 
   it('should be the expected model value', () => {
-    component.schemas = form(
-      input('ipt'),
-      inputGroup('ipts').schemas(
-        input('ipt2'),
-      ),
-      group('group').schemas(
-        input('ipt'),
-        inputGroup('ipts').schemas(
-          input('ipt2'),
-        ),
-      ),
+    component.schema = form(() => {
+      input('ipt');
+      inputGroup('ipts').schemas(() => {
+        input('ipt2');
+      });
+      group('group').schemas(() => {
+        input('ipt');
+        inputGroup('ipts').schemas(() => {
+          input('ipt2');
+        });
+      });
       // array('array').schemas(
       //   input()
       // )
-    );
+    });
     component.model = {};
     fixture.detectChanges();
 
@@ -91,22 +91,22 @@ describe('FluentFormDirective', () => {
   });
 
   describe('模型应该能正确赋值表单', () => {
-    it('先设置 schemas，后设置 model', () => {
-      component.schemas = form(
-        input('ipt'),
-        inputGroup('ipts').schemas(
-          input('ipt2'),
-        ),
-        group('group').schemas(
-          input('ipt'),
-          inputGroup('ipts').schemas(
-            input('ipt2'),
-          ),
-        ),
+    it('先设置 schema，后设置 model', () => {
+      component.schema = form(() => {
+        input('ipt');
+        inputGroup('ipts').schemas(() => {
+          input('ipt2');
+        });
+        group('group').schemas(() => {
+          input('ipt');
+          inputGroup('ipts').schemas(() => {
+            input('ipt2');
+          });
+        });
         // array('array').schemas(
         //   input()
         // )
-      );
+      });
       component.model = {
         ipt: 'test',
         ipt2: 'test',
@@ -126,28 +126,28 @@ describe('FluentFormDirective', () => {
       });
     });
 
-    it('先设置 model，后设置 schemas', () => {
+    it('先设置 model，后设置 schema', () => {
       component.model = {
         ipt: 'test',
         ipt2: 'test',
         group: { ipt: 'test', ipt2: 'test' },
         // array: ['test']
       };
-      component.schemas = form(
-        input('ipt'),
-        inputGroup('ipts').schemas(
-          input('ipt2'),
-        ),
-        group('group').schemas(
-          input('ipt'),
-          inputGroup('ipts').schemas(
-            input('ipt2'),
-          ),
-        ),
+      component.schema = form(() => {
+        input('ipt');
+        inputGroup('ipts').schemas(() => {
+          input('ipt2');
+        });
+        group('group').schemas(() => {
+          input('ipt');
+          inputGroup('ipts').schemas(() => {
+            input('ipt2');
+          });
+        });
         // array('array').schemas(
         //   input()
         // )
-      );
+      });
       fixture.detectChanges();
 
       expect(component.form.value).toEqual({
@@ -162,21 +162,21 @@ describe('FluentFormDirective', () => {
     });
 
     it('多次设置 model', () => {
-      component.schemas = form(
-        input('ipt'),
-        inputGroup('ipts').schemas(
-          input('ipt2'),
-        ),
-        group('group').schemas(
-          input('ipt'),
-          inputGroup('ipts').schemas(
-            input('ipt2'),
-          ),
-        ),
+      component.schema = form(() => {
+        input('ipt');
+        inputGroup('ipts').schemas(() => {
+          input('ipt2');
+        });
+        group('group').schemas(() => {
+          input('ipt');
+          inputGroup('ipts').schemas(() => {
+            input('ipt2');
+          });
+        });
         // array('array').schemas(
         //   input()
         // )
-      );
+      });
       component.model = { ipt: 'test' };
       fixture.detectChanges();
 
@@ -206,22 +206,22 @@ describe('FluentFormDirective', () => {
   });
 
   describe('表单应该能正确赋值模型', () => {
-    it('先设置 schemas，后设置 model', () => {
-      component.schemas = form(
-        input('ipt').defaultValue('test'),
-        inputGroup('ipts').schemas(
-          input('ipt2').defaultValue('test'),
-        ),
-        group('group').schemas(
-          input('ipt').defaultValue('test'),
-          inputGroup('ipts').schemas(
-            input('ipt2').defaultValue('test'),
-          ),
-        ),
+    it('先设置 schema，后设置 model', () => {
+      component.schema = form(() => {
+        input('ipt').defaultValue('test');
+        inputGroup('ipts').schemas(() => {
+          input('ipt2').defaultValue('test');
+        });
+        group('group').schemas(() => {
+          input('ipt').defaultValue('test');
+          inputGroup('ipts').schemas(() => {
+            input('ipt2').defaultValue('test');
+          });
+        });
         // array('array').schemas(
         //   input().defaultValue('test')
         // )
-      );
+      });
       component.model = {};
       fixture.detectChanges();
 
@@ -236,23 +236,23 @@ describe('FluentFormDirective', () => {
       });
     });
 
-    it('先设置 model，后设置 schemas', () => {
+    it('先设置 model，后设置 schema', () => {
       component.model = {};
-      component.schemas = form(
-        input('ipt').defaultValue('test'),
-        inputGroup('ipts').schemas(
-          input('ipt2').defaultValue('test'),
-        ),
-        group('group').schemas(
-          input('ipt').defaultValue('test'),
-          inputGroup('ipts').schemas(
-            input('ipt2').defaultValue('test'),
-          ),
-        ),
+      component.schema = form(() => {
+        input('ipt').defaultValue('test');
+        inputGroup('ipts').schemas(() => {
+          input('ipt2').defaultValue('test');
+        });
+        group('group').schemas(() => {
+          input('ipt').defaultValue('test');
+          inputGroup('ipts').schemas(() => {
+            input('ipt2').defaultValue('test');
+          });
+        });
         // array('array').schemas(
         //   input().defaultValue('test')
         // )
-      );
+      });
       fixture.detectChanges();
 
       expect(component.model).toEqual({
@@ -266,23 +266,23 @@ describe('FluentFormDirective', () => {
       });
     });
 
-    it('多次设置 schemas', () => {
+    it('多次设置 schema', () => {
       component.model = {};
-      component.schemas = form(
-        input('ipt').defaultValue('test'),
-        inputGroup('ipts').schemas(
-          input('ipt2'),
-        ),
-        group('group').schemas(
-          input('ipt'),
-          inputGroup('ipts').schemas(
-            input('ipt2'),
-          ),
-        ),
+      component.schema = form(() => {
+        input('ipt').defaultValue('test');
+        inputGroup('ipts').schemas(() => {
+          input('ipt2');
+        });
+        group('group').schemas(() => {
+          input('ipt');
+          inputGroup('ipts').schemas(() => {
+            input('ipt2');
+          });
+        });
         // array('array').schemas(
         //   input()
         // )
-      );
+      });
       fixture.detectChanges();
 
       expect(component.model).toEqual({
@@ -295,25 +295,25 @@ describe('FluentFormDirective', () => {
         // array: [null]
       });
 
-      component.schemas = form(
-        input('ipt').defaultValue('test change'),
-        inputGroup('ipts').schemas(
-          input('ipt2'),
-        ),
-        group('group').schemas(
-          input('ipt'),
-          inputGroup('ipts').schemas(
-            input('ipt2'),
-          ),
-        ),
+      component.schema = form(() => {
+        input('ipt').defaultValue('test change');
+        inputGroup('ipts').schemas(() => {
+          input('ipt2');
+        });
+        group('group').schemas(() => {
+          input('ipt');
+          inputGroup('ipts').schemas(() => {
+            input('ipt2');
+          });
+        });
         // array('array').schemas(
         //   input()
         // )
-      );
+      });
       fixture.detectChanges();
 
       expect(component.model).toEqual({
-        ipt: 'test change',
+        ipt: 'test',
         ipt2: null,
         group: {
           ipt: null,
@@ -325,21 +325,21 @@ describe('FluentFormDirective', () => {
   });
 
   it('should be the expected model value (configure the toplevel form)', () => {
-    component.schemas = form(it => it.updateOn('blur').schemas(
-      input('ipt'),
-      inputGroup('ipts').schemas(
-        input('ipt2'),
-      ),
-      group('group').schemas(
-        input('ipt'),
-        inputGroup('ipts').schemas(
-          input('ipt2'),
-        ),
-      ),
+    component.schema = form(() => {
+      input('ipt');
+      inputGroup('ipts').schemas(() => {
+        input('ipt2');
+      });
+      group('group').schemas(() => {
+        input('ipt');
+        inputGroup('ipts').schemas(() => {
+          input('ipt2');
+        });
+      });
       // array('array').schemas(
       //   input()
       // )
-    ));
+    }, { updateOn: 'blur' });
     component.model = {};
     fixture.detectChanges();
 

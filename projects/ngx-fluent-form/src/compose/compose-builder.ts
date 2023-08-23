@@ -1,13 +1,36 @@
 import { AnyObject, SafeAny } from '@ngify/types';
 
-const BUILDER = Symbol('BUILDER');
+interface Schema {
+  [k: string]: SafeAny;
+  schemas?: Schema[];
+}
 
-export function builder<T>(): Builder<T>
-export function builder<T, R extends keyof T>(rests: readonly R[]): Builder<T, R>
-export function builder<T, R extends keyof T>(rests?: readonly R[]): Builder<T, R> {
-  const builder = new Proxy({} as AnyObject, {
+const CHILDREN_KEY = 'schemas';
+/** 用来维护嵌套 schema 的顺序 */
+const STACK: Schema[] = [];
+
+let currentSchema: Schema | undefined;
+
+export function getCurrentSchema(): Schema | undefined {
+  return currentSchema;
+}
+
+export function setCurrentSchema(schmea: Schema | undefined) {
+  currentSchema = schmea;
+}
+
+const BUILDER = Symbol();
+const BUILD_KEY = 'build';
+
+export function composeBuilder<T>(): Builder<T> {
+  const target: AnyObject = {};
+
+  // 如果当前已经有了 schema，就直接 push 进去作为 subschema
+  currentSchema?.schemas!.push(target);
+
+  const builder = new Proxy(target, {
     get(target, property) {
-      if ('build' === property) {
+      if (BUILD_KEY === property) {
         return () => target;
       }
 
@@ -15,34 +38,43 @@ export function builder<T, R extends keyof T>(rests?: readonly R[]): Builder<T, 
         return true;
       }
 
-      if (rests?.includes(property as R)) {
-        return (...args: unknown[]): unknown => {
-          target[property] = args;
-          return builder;
-        };
-      }
-
       return (arg: unknown): unknown => {
-        if (arg !== target[property]) {
+        // 处理 compose function
+        if (property === CHILDREN_KEY) {
+          if (currentSchema) {
+            STACK.push(currentSchema);
+          }
+          currentSchema = target;
+
+          target[property] = [];
+
+          (arg as Function)();
+
+          if (STACK.length) {
+            currentSchema = STACK.pop();
+          }
+        } else if (arg !== target[property]) {
           target[property] = arg;
         }
+
         return builder;
       };
     }
   });
 
-  return builder as Builder<T, R>;
+  return builder as Builder<T>;
 }
 
 /**
  * 是否为一个构建器
  * @param value
  */
-export const isBuilder = <T = unknown>(value: SafeAny): value is StableBuilder<T> => value[BUILDER] ?? false;
+export function isBuilder<T = unknown>(value: SafeAny): value is StableBuilder<T> {
+  return value[BUILDER] ?? false;
+}
 
-/** 剩余参数类型 */
-type RestParams = undefined | SafeAny[];
-type BuildKey = 'build';
+type ChildrenKey = typeof CHILDREN_KEY;
+type BuildKey = typeof BUILD_KEY;
 type Buildable = Record<BuildKey, unknown>;
 /** 取得接口的非空必填字段 */
 type NonNullableKey<T> = {
@@ -54,7 +86,6 @@ type NonNullableKey<T> = {
  * @template C 候选
  * @template N 必填字段
  * @template S 已选字段
- * @template R 剩余参数字段
  * @template B 可以构建
  */
 type _Builder<
@@ -62,28 +93,17 @@ type _Builder<
   C extends keyof T,
   N extends keyof T,
   S extends keyof T = never,
-  R extends keyof T = never,
   B extends BuildKey = never
 > = {
     // 通过 `keyof Pick` 从原始类型 T 中提取出字段后再遍历就能够携带上字段在 T 中的注释
     [K in keyof Pick<T, Exclude<C, S> | B>]-?: (
       K extends BuildKey
       ? () => Pick<T, S>
-      : K extends R
-      ? (...vals: T[K] extends RestParams ? NonNullable<T[K]> : never) => _Builder<
+      : (val: K extends ChildrenKey ? () => SafeAny : T[K]) => _Builder<
         T,
         C,
         N,
         S | K,
-        R,
-        [N] extends [S | K] ? BuildKey : never
-      >
-      : (val: T[K]) => _Builder<
-        T,
-        C,
-        N,
-        S | K,
-        R,
         [N] extends [S | K] ? BuildKey : never
       >
     )
@@ -91,14 +111,11 @@ type _Builder<
 
 /**
  * @template T 原型
- * @template R 剩余参数字段
  */
-export type Builder<T, R extends keyof T = never> = _Builder<
+export type Builder<T> = _Builder<
   T & Buildable,
   keyof T,
-  NonNullableKey<T>,
-  never,
-  R
+  NonNullableKey<T>
 >;
 
 export type StableBuilder<T> = Record<BuildKey, () => T>;
@@ -106,19 +123,16 @@ export type StableBuilder<T> = Record<BuildKey, () => T>;
 /**
  * @template T 原型
  * @template S 已选字段
- * @template R 剩余参数字段
  * @template N 必填字段
  */
 export type UnstableBuilder<
   T,
   S extends keyof T,
-  R extends keyof T = never,
   N extends keyof T = NonNullableKey<T>
 > = _Builder<
   T & Buildable,
   keyof T,
   N,
   S,
-  R,
   [N] extends [S] ? BuildKey : never
 >;

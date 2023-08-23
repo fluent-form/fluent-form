@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
-import { AnySchema, StandardSchema } from '../schemas';
+import { AnySchema } from '../schemas';
 import { FormUtil } from './form.utils';
 import { ModelUtil } from './model.utils';
 
@@ -24,7 +24,7 @@ describe('ModelUtils', () => {
 
   describe('updateForm', () => {
     it('group', () => {
-      const schemas: StandardSchema<AnySchema>[] = [
+      const schemas: AnySchema[] = [
         { kind: 'input', key: 'input' }
       ];
       const form = formUtil.createFormGroup(schemas, {});
@@ -37,7 +37,7 @@ describe('ModelUtils', () => {
     });
 
     it('group nested group', () => {
-      const schemas: StandardSchema<AnySchema>[] = [
+      const schemas: AnySchema[] = [
         {
           kind: 'group',
           key: 'object',
@@ -56,7 +56,7 @@ describe('ModelUtils', () => {
     });
 
     it('array', () => {
-      const schemas: StandardSchema<AnySchema>[] = [
+      const schemas: AnySchema[] = [
         {
           kind: 'array',
           key: 'array',
@@ -78,7 +78,7 @@ describe('ModelUtils', () => {
     });
 
     it('array nested array', () => {
-      const schemas: StandardSchema<AnySchema>[] = [
+      const schemas: AnySchema[] = [
         {
           kind: 'array',
           key: 'array',
@@ -111,7 +111,7 @@ describe('ModelUtils', () => {
     });
 
     it('array nested object', () => {
-      const schemas: StandardSchema<AnySchema>[] = [
+      const schemas: AnySchema[] = [
         {
           kind: 'array',
           key: 'array',
@@ -138,7 +138,7 @@ describe('ModelUtils', () => {
     });
 
     it('with double key control', () => {
-      const schemas: StandardSchema<AnySchema>[] = [
+      const schemas: AnySchema[] = [
         { kind: 'slider', key: ['start', 'end'] }
       ];
       const form = formUtil.createFormGroup(schemas, {});
@@ -151,7 +151,7 @@ describe('ModelUtils', () => {
     });
 
     it('with control wrapper', () => {
-      const schemas: StandardSchema<AnySchema>[] = [
+      const schemas: AnySchema[] = [
         {
           kind: 'input-group',
           schemas: [
@@ -169,7 +169,7 @@ describe('ModelUtils', () => {
     });
 
     it('with component', () => {
-      const schemas: StandardSchema<AnySchema>[] = [
+      const schemas: AnySchema[] = [
         { kind: 'input', key: 'input' },
         { kind: 'button' }
       ];
@@ -183,7 +183,7 @@ describe('ModelUtils', () => {
     });
 
     it('with component wrapper', () => {
-      const schemas: StandardSchema<AnySchema>[] = [
+      const schemas: AnySchema[] = [
         { kind: 'input', key: 'input' },
         {
           kind: 'button-group',
@@ -202,7 +202,7 @@ describe('ModelUtils', () => {
     });
 
     it('with component container', () => {
-      const schemas: StandardSchema<AnySchema>[] = [
+      const schemas: AnySchema[] = [
         {
           kind: 'row',
           schemas: [

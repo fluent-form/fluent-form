@@ -5,7 +5,7 @@ import { AnyArray, AnyObject } from '@ngify/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { FluentWithInjectorDirective } from '../../directives';
 import { FluentControlPipe, FluentReactivePipe, FluentSchemaPipe, FluentSchemaTypePipe, FluentTemplatePipe, TypeofPipe } from '../../pipes';
-import { AnySchema, StandardSchema } from '../../schemas';
+import { AnySchema } from '../../schemas';
 import { SchemaKind, SchemaType } from '../../schemas/interfaces';
 import { CONFIG } from '../../tokens';
 
@@ -13,7 +13,7 @@ interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
   /** 当前控件 */
   control: AbstractControl;
   /** 当前图示 */
-  schema: StandardSchema<AnySchema>;
+  schema: AnySchema;
   /** 当前模型值 */
   model: T;
 }
@@ -49,7 +49,7 @@ export class FluentFormColContentOutletComponent<T extends AnyObject | AnyArray>
   @ViewChild(TemplateRef, { static: true }) templateRef!: TemplateRef<FluentFormColContentTemplateContext<T>>;
 
   @Input() control!: AbstractControl;
-  @Input() schema!: StandardSchema<AnySchema>;
+  @Input() schema!: AnySchema;
   @Input() model!: T;
 
   ngOnInit(): void {

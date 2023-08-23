@@ -3,9 +3,8 @@ import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzSpaceAlign, NzSpaceComponent, NzSpaceDirection, NzSpaceSize } from 'ng-zorro-antd/space';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
 import { NzTabComponent, NzTabPosition, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
-import { StableBuilder } from '../utils';
 import { AbstractSchema } from './abstract.schema';
-import { AnyBuilder, AnySchema } from './index.schema';
+import { AnySchema } from './index.schema';
 import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Row, SchemaReactiveFn } from './interfaces';
 import { SchemaKey } from './types';
 
@@ -19,7 +18,7 @@ export interface StepsComponentSchema<Key extends SchemaKey = SchemaKey>
   size?: NzSizeDSType;
   status?: NzStatusType;
   start?: number;
-  schemas: StepComponentSchema[] | StableBuilder<StepComponentSchema>[];
+  schemas: StepComponentSchema[];
 }
 
 export interface StepComponentSchema<Key extends SchemaKey = SchemaKey>
@@ -30,7 +29,7 @@ export interface StepComponentSchema<Key extends SchemaKey = SchemaKey>
   description?: string | TemplateRef<void>;
   disabled?: boolean | string | SchemaReactiveFn<StepComponentSchema<SchemaKey>, boolean>;
   status?: 'wait' | 'process' | 'finish' | 'error';
-  schemas: (AnySchema | AnyBuilder)[];
+  schemas: AnySchema[];
 }
 
 export interface TabsComponentSchema<Key extends SchemaKey = SchemaKey>
@@ -43,7 +42,7 @@ export interface TabsComponentSchema<Key extends SchemaKey = SchemaKey>
   position?: NzTabPosition;
   gutter?: number;
   center?: boolean;
-  schemas: (TabComponentSchema | StableBuilder<TabComponentSchema>)[];
+  schemas: TabComponentSchema[];
 }
 
 export interface TabComponentSchema<Key extends SchemaKey = SchemaKey>
@@ -51,13 +50,13 @@ export interface TabComponentSchema<Key extends SchemaKey = SchemaKey>
   kind: 'tab';
   title: string;
   disabled?: boolean | string | SchemaReactiveFn<TabComponentSchema<SchemaKey>, boolean>;
-  schemas: (AnySchema | AnyBuilder)[];
+  schemas: AnySchema[];
 }
 
 export interface RowComponentSchema<Key extends SchemaKey = SchemaKey>
   extends AbstractSchema<Key>, ElementEventListenerHolder, ElementPropertyHolder<HTMLElement>, Row {
   kind: 'row';
-  schemas: (AnySchema | AnyBuilder)[];
+  schemas: AnySchema[];
 }
 
 export interface SpaceComponentSchema<Key extends SchemaKey = SchemaKey>
@@ -68,5 +67,5 @@ export interface SpaceComponentSchema<Key extends SchemaKey = SchemaKey>
   align?: NzSpaceAlign;
   wrapable?: boolean;
   split?: NzSpaceComponent['nzSplit'];
-  schemas: (AnySchema | AnyBuilder)[];
+  schemas: AnySchema[];
 }

@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
-import { AnySchema, StandardSchema } from '../schemas';
+import { AnySchema } from '../schemas';
 import { SchemaKind } from '../schemas/interfaces';
 import { FormUtil } from './form.utils';
 import { SchemaUtil } from './schema.utils';
@@ -15,9 +15,9 @@ export class ModelUtil {
   private readonly valueUtil = inject(ValueUtil);
   private readonly formUtil = inject(FormUtil);
 
-  updateForm(form: FormGroup, model: AnyObject, schemas: StandardSchema<AnySchema>[], emitEvent?: boolean): FormGroup;
-  updateForm(form: FormArray, model: AnyArray, schemas: StandardSchema<AnySchema>[], emitEvent?: boolean): FormArray;
-  updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: StandardSchema<AnySchema>[], emitEvent = true): FormGroup | FormArray {
+  updateForm(form: FormGroup, model: AnyObject, schemas: AnySchema[], emitEvent?: boolean): FormGroup;
+  updateForm(form: FormArray, model: AnyArray, schemas: AnySchema[], emitEvent?: boolean): FormArray;
+  updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AnySchema[], emitEvent = true): FormGroup | FormArray {
     schemas.forEach(schema => {
       // 这些图示不包含控件图示，直接跳过
       if (this.schemaUtil.isNonControlSchema(schema)) return;

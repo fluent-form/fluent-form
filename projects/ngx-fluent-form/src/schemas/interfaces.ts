@@ -5,7 +5,7 @@ import { SafeAny } from '@ngify/types';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
 import { ComponentOutputListenerMap, ComponentPropertyMap, HTMLElementEventListenerMap, HTMLElementPropertyMap } from '../types';
-import { AnySchemaKey, Cell, StandardSchema } from './types';
+import { AnySchemaKey, Cell } from './types';
 
 export enum SchemaType {
   Control = 1 << 0,
@@ -108,7 +108,7 @@ export interface ControlValueMapper<V> {
 }
 
 export interface SchemaContext<S extends SchemaLike> {
-  schema: StandardSchema<S>;
+  schema: S;
   /** 如果当前没有对应的 control，会返回上一级的 control，这时候一般是 form group/array */
   control: AbstractControl;
   model: SafeAny;

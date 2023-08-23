@@ -10,7 +10,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FluentFormColContentOutletComponent } from '../../components';
 import { FluentBindingDirective, FluentConfigDirective, FluentContextGuardDirective } from '../../directives';
 import { FluentColumnPipe, FluentReactivePipe, InvokePipe } from '../../pipes';
-import { FormArraySchema, StandardSchema } from '../../schemas';
+import { FormArraySchema } from '../../schemas';
 import { FormUtil, isNumber, isUndefined, SchemaUtil } from '../../utils';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -44,7 +44,7 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
   private readonly schemaUtil = inject(SchemaUtil);
   private readonly formUtil = inject(FormUtil);
 
-  protected push(control: FormArray, schema: StandardSchema<FormArraySchema>) {
+  protected push(control: FormArray, schema: FormArraySchema) {
     const [elementSchema] = this.schemaUtil.filterControlSchemas(schema.schemas);
 
     control.push(

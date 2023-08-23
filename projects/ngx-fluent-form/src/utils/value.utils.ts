@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
-import { AnyControlSchema, StandardSchema } from '../schemas';
+import { AnyControlSchema } from '../schemas';
 import { isUndefined } from './is.utils';
 import { isDoubleKeyControlSchema } from './schema.utils';
 
@@ -10,7 +10,7 @@ import { isDoubleKeyControlSchema } from './schema.utils';
 })
 export class ValueUtil {
 
-  valueOfModel<M extends AnyObject | AnyArray>(model: M, schema: StandardSchema<AnyControlSchema>): unknown {
+  valueOfModel<M extends AnyObject | AnyArray>(model: M, schema: AnyControlSchema): unknown {
     let value: unknown;
     // 如果从模型中读出来的值为 undefined，说明模型中没有写入该值，这里取图示中提供的默认值
     // 如果是双字段模式，则需要从模型中分别取得这两个字段的值组为一个元组
@@ -37,7 +37,7 @@ export class ValueUtil {
     return value;
   }
 
-  valueOfControl(control: AbstractControl, schema: StandardSchema<AnyControlSchema>): unknown {
+  valueOfControl(control: AbstractControl, schema: AnyControlSchema): unknown {
     const value = control.value;
 
     if (schema.mapper) {

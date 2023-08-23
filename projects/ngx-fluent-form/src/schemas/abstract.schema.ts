@@ -6,7 +6,7 @@ import { AutocompleteDataSource } from 'ng-zorro-antd/auto-complete';
 import { CompareWith, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDateMode, SupportTimeOptions } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
-import { AnyBuilder, AnySchema } from './index.schema';
+import { AnySchema } from './index.schema';
 import { Col, ControlEventListenerHolder, ControlValueMapper, Labelful, Length, Row, SchemaLike, SchemaReactiveFn } from './interfaces';
 import { AnySchemaKey, Cell } from './types';
 
@@ -52,7 +52,7 @@ export interface AbstractControlSchema<Key extends AnySchemaKey, Val> extends Ab
 export interface AbstractControlContainerSchema<Key extends AnySchemaKey> extends AbstractSchema<Key>, ControlEventListenerHolder<SafeAny>, Row {
   /* Used to define the label of the control. */
   label?: string;
-  schemas: (AnySchema | AnyBuilder)[];
+  schemas: AnySchema[];
   /** Validator for the control */
   validators?: ValidatorFn[];
   /** Async validators for control */

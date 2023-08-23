@@ -2,8 +2,8 @@
  * Public API Surface of ngx-fluent-form
  */
 
-export * from './builders';
 export * from './components';
+export * from './compose';
 export * from './directives';
 export * from './features';
 export * from './interfaces';

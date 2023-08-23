@@ -1,9 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
-import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlOrControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, AnySchemaKey, DoubleKeyControlSchema, SchemaKey, StandardSchema } from '../schemas';
+import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlOrControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, AnySchemaKey, DoubleKeyControlSchema, SchemaKey } from '../schemas';
 import { SchemaLike, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP, SCHEMA_PATCHERS } from '../tokens';
-import { isBuilder, StableBuilder } from './builder.utils';
 import { isString } from './is.utils';
 
 const ANY_SCHEMA_SELECTOR = '*';
@@ -15,11 +14,11 @@ export class SchemaUtil {
   private readonly schemaMap = inject(SCHEMA_MAP);
   private readonly schemaPatchers = inject(SCHEMA_PATCHERS, { optional: true }) ?? [];
 
-  patchSchemas<T extends StandardSchema<AnySchema>[]>(schemas: T) {
+  patchSchemas<T extends AnySchema[]>(schemas: T) {
     return schemas.map(schema => this.patchSchema(schema));
   }
 
-  patchSchema<T extends StandardSchema<AnySchema>>(schema: T): T {
+  patchSchema<T extends AnySchema>(schema: T): T {
     if ('schemas' in schema) {
       schema.schemas = this.patchSchemas(schema.schemas);
     }
@@ -47,7 +46,7 @@ export class SchemaUtil {
    * 过滤出第一层的控件/控件容器图示
    * @param schemas
    */
-  filterControlSchemas(schemas: StandardSchema<AnySchema>[]) {
+  filterControlSchemas(schemas: AnySchema[]) {
     return schemas.reduce((schemas, schema) => {
       if (this.isControlWrapperSchema(schema) || this.isComponentContainerSchema(schema)) {
         schemas = schemas.concat(this.filterControlSchemas(schema.schemas));
@@ -56,7 +55,7 @@ export class SchemaUtil {
       }
 
       return schemas;
-    }, [] as StandardSchema<AnyControlSchema | AnyControlContainerSchema>[]);
+    }, [] as (AnyControlSchema | AnyControlContainerSchema)[]);
   }
 
   isControlContainerSchema(schema: SchemaLike): schema is AnyControlContainerSchema {
@@ -95,7 +94,7 @@ export class SchemaUtil {
     return this.schemaMap.get(schema.kind)?.type;
   }
 
-  validatorsOf(schema: StandardSchema<AnyControlSchema>) {
+  validatorsOf(schema: AnyControlSchema) {
     const validators: ValidatorFn[] = this.schemaMap.get(schema.kind)?.validators?.(schema) ?? [];
 
     // TODO required 可能是个函数，需要动态
@@ -115,36 +114,7 @@ export function isDoubleKeyControlSchema(schema: SchemaLike): schema is DoubleKe
   return Array.isArray(schema.key);
 }
 
-/**
- * 标准化图示
- * @param schemaOrSchemaBuilder
- */
-export function standardSchema<T extends AnySchema>(schemaOrSchemaBuilder: T | StableBuilder<T>): StandardSchema<T> {
-  const schema = (isBuilder(schemaOrSchemaBuilder) ? schemaOrSchemaBuilder.build() : { ...schemaOrSchemaBuilder });
-
-  if ('schemas' in schema) {
-    const schemas = standardSchemas(schema.schemas);
-
-    // 如果是数组表单图示，自动补充子图示的名称为索引值
-    if (schema.kind === 'array') {
-      schemas.forEach((schema, index) => schema.key = index);
-    }
-
-    schema.schemas = schemas;
-  }
-
-  return schema as StandardSchema<T>;
-}
-
-/**
- * 标准化所有图示
- * @param schemas
- */
-export function standardSchemas<T extends (AnySchema | StableBuilder<AnySchema>)[]>(schemas: T) {
-  return schemas.map(schema => standardSchema(schema));
-}
-
-export function schemasUtils<S extends StandardSchema<AnySchema>[]>(schemas: S) {
+export function schemasUtils<S extends AnySchema[]>(schemas: S) {
   return new SchemasUtils(schemas);
 }
 

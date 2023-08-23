@@ -67,7 +67,7 @@ bootstrapApplication(RootComponent, {
 });
 ```
 
-2. Add `FluentFormComponent` to your standalone component, configure the `schemas` parameter, and start building the form:
+2. Add `FluentFormComponent` to your standalone component, configure the `schema` parameter, and start building the form:
 
 ```ts
 import { FluentFormComponent, buttonGroup, button, date, form, number, input } from 'ngx-fluent-form';
@@ -131,7 +131,7 @@ import { FluentFormModule } from 'ngx-fluent-form';
 export class YourModule { }
 ```
 
-3. Configure `schemas` parameter to start building form:
+3. Configure `schema` parameter to start building form:
 
 ```ts
 import { buttonGroup, button, date, form, number, input } from 'ngx-fluent-form';

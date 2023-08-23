@@ -468,7 +468,7 @@ describe('form.utils', () => {
               kind: 'group',
               key: 'obj',
               schemas: [
-                { kind: 'toggle', key: 'bool', disabled: ({ model }: any) => model.bool },
+                { kind: 'toggle', key: 'bool', disabled: ({ model }) => model.bool },
               ]
             }
           ];
@@ -484,7 +484,7 @@ describe('form.utils', () => {
               kind: 'array',
               key: 'arr',
               schemas: [
-                { kind: 'toggle', key: 0, disabled: ({ model }: any) => model[0] },
+                { kind: 'toggle', key: 0, disabled: ({ model }) => model[0] },
               ]
             }
           ];
@@ -525,7 +525,7 @@ describe('form.utils', () => {
               kind: 'group',
               key: 'obj',
               schemas: [
-                { kind: 'toggle', key: 'bool', required: ({ model }: any) => model.bool },
+                { kind: 'toggle', key: 'bool', required: ({ model }) => model.bool },
               ]
             }
           ];
@@ -541,7 +541,7 @@ describe('form.utils', () => {
               kind: 'array',
               key: 'arr',
               schemas: [
-                { kind: 'toggle', key: 0, required: ({ model }: any) => model[0] },
+                { kind: 'toggle', key: 0, required: ({ model }) => model[0] },
               ]
             }
           ];

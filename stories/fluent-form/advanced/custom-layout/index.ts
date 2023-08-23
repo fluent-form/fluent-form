@@ -22,7 +22,7 @@ import dedent from 'ts-dedent';
           <tr
             *ngFor="let item of table.data; index as index"
             fluent-form
-            [fluentSchemas]="schemas"
+            [fluentSchema]="schema"
             [(fluentModel)]="list[index]">
             <td>{{ index + 1 }}</td>
             <td>
@@ -54,50 +54,48 @@ import dedent from 'ts-dedent';
   `]
 })
 class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
-  list: any;
+  list = [
+    {
+      firstName: 'John',
+      lastName: 'Brown',
+      age: 32,
+      address: 'New York No. 1 Lake Park',
+      info: {
+        cellphone: '1234567890'
+      },
+      enabled: true
+    },
+    {
+      firstName: 'Jim',
+      lastName: 'Green',
+      age: 42,
+      address: 'London No. 1 Lake Park',
+      enabled: true
+    },
+    {
+      firstName: 'Joe',
+      lastName: 'Black',
+      age: 32,
+      address: 'Sidney No. 1 Lake Park',
+      enabled: false
+    }
+  ];
 
   constructor() {
     super();
 
-    this.schemas = form(
-      inputGroup('name').schemas(
-        input('firstName').col(8),
-        input('lastName').col(16),
-      ),
+    this.schema = form(() => {
+      inputGroup('name').schemas(() => {
+        input('firstName').col(8);
+        input('lastName').col(16);
+      });
       number('age'),
-      textarea('address'),
-      group('info').schemas(
-        input('cellphone'),
-      ),
-      checkbox('enabled')
-    );
-
-    this.list = [
-      {
-        firstName: 'John',
-        lastName: 'Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        info: {
-          cellphone: '1234567890'
-        },
-        enabled: true
-      },
-      {
-        firstName: 'Jim',
-        lastName: 'Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        enabled: true
-      },
-      {
-        firstName: 'Joe',
-        lastName: 'Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        enabled: false
-      }
-    ];
+      textarea('address');
+      group('info').schemas(() => {
+        input('cellphone');
+      });
+      checkbox('enabled');
+    });
   }
 }
 
@@ -129,7 +127,7 @@ export const source = dedent`
           <tr
             *ngFor="let item of table.data; index as index"
             fluent-form
-            [fluentSchemas]="schemas"
+            [fluentSchema]="schema"
             [(fluentModel)]="list[index]">
             <td>{{ index + 1 }}</td>
             <td>
@@ -153,18 +151,18 @@ export const source = dedent`
     \`
   })
   export class ExampleComponent {
-    schemas = form(
-      inputGroup('name').schemas(
-        input('firstName').col(8),
-        input('lastName').col(16),
-      ),
+    schema = form(() => {
+      inputGroup('name').schemas(() => {
+        input('firstName').col(8);
+        input('lastName').col(16);
+      });
       number('age'),
-      textarea('address'),
-      group('info').schemas(
-        input('cellphone'),
-      ),
-      checkbox('enabled')
-    );
+        textarea('address');
+      group('info').schemas(() => {
+        input('cellphone');
+      });
+      checkbox('enabled');
+    });
 
     list = [
       {

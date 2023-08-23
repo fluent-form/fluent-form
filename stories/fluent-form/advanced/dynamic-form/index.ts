@@ -11,7 +11,7 @@ import dedent from 'ts-dedent';
         nz-col
         nzFlex="2"
         [(model)]="model"
-        [schemas]="schemas"
+        [schema]="schema"
         [layout]="layout"
         [colon]="colon"
         [gutter]="gutter"></fluent-form>
@@ -28,35 +28,35 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
   constructor() {
     super();
 
-    this.schemas = form(
-      group('users').col(24).schemas(
-        input('user1').label('用户').col(12),
-      ),
-      buttonGroup().schemas(
+    this.schema = form(() => {
+      group('users').col(24).schemas(() => {
+        input('user1').label('用户').col(12);
+      });
+      buttonGroup().schemas(() => {
         button().type('primary').content('添加控件').listeners({
           click: () => this.add()
-        }),
+        });
         button().content('移除控件').listeners({
           click: () => this.remove()
-        }),
-      )
-    );
+        });
+      });
+    });
 
     this.model = {};
   }
 
   add() {
-    const group = schemasUtils(this.schemas).find<FormGroupSchema>('users')!;
+    const group = schemasUtils(this.schema.schemas).find<FormGroupSchema>('users')!;
     group.schemas.push(
-      input(`user${group.schemas.length + 1}`).label('用户').col(12)
+      input(`user${group.schemas.length + 1}`).label('用户').col(12).build()
     );
-    this.schemas = form(...this.schemas);
+    this.schema = { ...this.schema };
   }
 
   remove() {
-    const array = schemasUtils(this.schemas).find<FormArraySchema>('users')!;
+    const array = schemasUtils(this.schema.schemas).find<FormArraySchema>('users')!;
     array.schemas.pop();
-    this.schemas = form(...this.schemas);
+    this.schema = { ...this.schema };
   }
 }
 
@@ -73,38 +73,38 @@ export const source = dedent`
   @Component({
     selector: 'example-component',
     template: \`
-      <fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>
+      <fluent-form [(model)]="model" [schema]="schema"></fluent-form>
     \`
   })
   export class ExampleComponent {
-    schemas = form(
-      group('users').col(24).schemas(
-        input('user1').label('用户').col(12),
-      ),
-      buttonGroup().schemas(
+    schema = form(() => {
+      group('users').col(24).schemas(() => {
+        input('user1').label('用户').col(12);
+      });
+      buttonGroup().schemas(() => {
         button().type('primary').content('添加控件').listeners({
           click: () => this.add()
-        }),
+        });
         button().content('移除控件').listeners({
           click: () => this.remove()
-        }),
-      )
-    );
+        });
+      });
+    });
 
     model = {};
 
     add() {
-      const group = schemasUtils(this.schemas).find<FormGroupSchema>('users')!;
+      const group = schemasUtils(this.schema.schemas).find<FormGroupSchema>('users')!;
       group.schemas.push(
-        input(\`user\${ group.schemas.length + 1}\`).label('用户').col(12)
+        input(\`user\${group.schemas.length + 1}\`).label('用户').col(12).build()
       );
-      this.schemas = form(...this.schemas);
+      this.schema = { ...this.schema };
     }
 
     remove() {
-      const array = schemasUtils(this.schemas).find<FormArraySchema>('users')!;
+      const array = schemasUtils(this.schema.schemas).find<FormArraySchema>('users')!;
       array.schemas.pop();
-      this.schemas = form(...this.schemas);
+      this.schema = { ...this.schema };
     }
   }
 `;

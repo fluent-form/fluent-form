@@ -1,9 +1,10 @@
+import { form } from 'ngx-fluent-form';
 import { defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
 export const story = defineStory({
   args: {
-    schemas: [
+    schema: form([
       { kind: 'input', key: 'username', label: '用户名', placeholder: '请输入用户名' },
       {
         kind: 'input',
@@ -13,7 +14,7 @@ export const story = defineStory({
         type: 'password',
         disabled: '!model.username'
       },
-    ],
+    ]),
     model: {}
   },
 });
@@ -24,10 +25,10 @@ export const jsonSource = dedent`
 
   @Component({
     selector: 'example-component',
-    template: \`<fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>\`
+    template: \`<fluent-form [(model)]="model" [schema]="schema"></fluent-form>\`
   })
   export class ExampleComponent {
-    schemas: AnySchema[] = [
+    schema = form([
       { kind: 'input', key: 'username', label: '用户名', placeholder: '请输入用户名' },
       {
         kind: 'input',
@@ -36,8 +37,8 @@ export const jsonSource = dedent`
         placeholder: '请输入密码',
         type: 'password',
         disabled: '!model.username'
-      }
-    ];
+      },
+    ]);
 
     model = {};
   }

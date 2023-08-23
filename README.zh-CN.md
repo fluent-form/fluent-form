@@ -75,18 +75,18 @@ import { FluentFormComponent, buttonGroup, button, date, form, number, input } f
 @Component({
   standalone: true,
   imports: [FluentFormComponent],
-  template: `<fluent-form [(model)]="model" [schemas]="schemas"></fluent-form>`
+  template: `<fluent-form [(model)]="model" [schema]="schema"></fluent-form>`
 })
 export class ExampleComponent {
-  schemas = form(
-    input('text').length(15),
-    number('count'),
-    date('date').format('yyyy/MM/dd'),
-    buttonGroup().schemas(
-      button().content('cancel'),
-      button().content('submit')
-    )
-  );
+  schema = form(() => {
+    input('text').length(15);
+    number('count');
+    date('date').format('yyyy/MM/dd');
+    buttonGroup().schemas(() => {
+      button().content('cancel');
+      button().content('submit');
+    });
+  });
 
   model = {
     text: 'I love ngx-fluent-form',
@@ -137,18 +137,18 @@ export class YourModule { }
 import { buttonGroup, button, date, form, number, input } from 'ngx-fluent-form';
 
 @Component({
-  template: `<fluent-form [(model)]="model" [schemas]="schemas"></fluent-form>`
+  template: `<fluent-form [(model)]="model" [schema]="schema"></fluent-form>`
 })
 export class ExampleComponent {
-  schemas = form(
-    input('text').length(15),
-    number('count'),
-    date('date').format('yyyy/MM/dd'),
-    buttonGroup().schemas(
-      button().content('cancel'),
-      button().content('submit')
-    )
-  );
+  schema = form(() => {
+    input('text').length(15);
+    number('count');
+    date('date').format('yyyy/MM/dd');
+    buttonGroup().schemas(() => {
+      button().content('cancel');
+      button().content('submit');
+    });
+  });
 
   model = {
     text: 'I love ngx-fluent-form',

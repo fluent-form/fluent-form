@@ -10,7 +10,7 @@ import dedent from 'ts-dedent';
       <fluent-form
         nz-col
         nzFlex="2"
-        [schemas]="schemas"
+        [schema]="schema"
         [(model)]="model"
         [layout]="layout"
         [colon]="colon"
@@ -46,16 +46,16 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
   constructor() {
     super();
 
-    this.schemas = form(
-      row().col(24).schemas(
-        headless('headless').template('controlTpl'),
-      ),
-      row().schemas(
-        template('namedTpl1'),
-        template('namedTpl2'),
-        template('namedTpl3'),
-      )
-    );
+    this.schema = form(() => {
+      row().col(24).schemas(() => {
+        headless('headless').template('controlTpl');
+      });
+      row().schemas(() => {
+        template('namedTpl1');
+        template('namedTpl2');
+        template('namedTpl3');
+      });
+    });
 
     this.model = {};
   }
@@ -74,7 +74,7 @@ export const source = dedent`
   @Component({
     selector: 'example-component',
     template: \`
-      <fluent-form [schemas]="schemas" [(model)]="model">
+      <fluent-form [(model)]="model" [schema]="schema">
         <input
           *fluentTemplate="'controlTpl'; control as control"
           [formControl]="control"
@@ -95,16 +95,16 @@ export const source = dedent`
     \`
   })
   export class ExampleComponent {
-    schemas = form(
-      row().col(24).schemas(
-        headless('headless').template('controlTpl'),
-      ),
-      row().schemas(
-        template('namedTpl1'),
-        template('namedTpl2'),
-        template('namedTpl3'),
-      )
-    );
+    schema = form(() => {
+      row().col(24).schemas(() => {
+        headless('headless').template('controlTpl');
+      });
+      row().schemas(() => {
+        template('namedTpl1');
+        template('namedTpl2');
+        template('namedTpl3');
+      });
+    });
 
     model = {};
   }

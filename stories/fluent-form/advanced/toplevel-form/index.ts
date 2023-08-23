@@ -4,10 +4,10 @@ import dedent from 'ts-dedent';
 
 export const story = defineStory({
   args: {
-    schemas: form(it => it.updateOn('blur').schemas(
-      input('username').label('Username'),
-      input('password').label('Password').type('password')
-    )),
+    schema: form(() => {
+      input('username').label('Username');
+      input('password').label('Password').type('password');
+    }, { updateOn: 'blur' }),
     model: {}
   }
 });
@@ -19,13 +19,13 @@ export const source = dedent`
 
   @Component({
     selector: 'example-component',
-    template: \`<fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>\`
+    template: \`<fluent-form [(model)]="model" [schema]="schema"></fluent-form>\`
   })
   export class ExampleComponent {
-    schemas = form(it => it.updateOn('blur').schemas(
-      input('username').label('Username'),
-      input('password').label('Password').type('password')
-    ));
+    schema = form(() => {
+      input('username').label('Username');
+      input('password').label('Password').type('password');
+    }, { updateOn: 'blur' });
 
     model = {};
   }

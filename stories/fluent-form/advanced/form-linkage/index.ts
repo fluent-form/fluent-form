@@ -10,7 +10,7 @@ import dedent from 'ts-dedent';
       <fluent-form
         nz-col
         nzFlex="2"
-        [schemas]="schemas"
+        [schema]="schema"
         [(model)]="model"
         [layout]="layout"
         [colon]="colon"
@@ -29,7 +29,7 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
   constructor() {
     super();
 
-    this.schemas = form(
+    this.schema = form(() => {
       radioGroup('lang')
         .label('语言')
         .variants({ button: 'solid' })
@@ -38,7 +38,7 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
         .options([
           { label: '中文', value: 'zh' },
           { label: '英文', value: 'en' },
-        ]),
+        ]);
       select('select')
         .label('控制内容')
         .col(6)
@@ -60,18 +60,18 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
           valueChange: (value, control) => {
             control.parent?.get('text')?.setValue(value);
           }
-        }),
+        });
       radioGroup('show').label('控制显隐').col(8).defaultValue(true).options([
         { label: '显示', value: true },
         { label: '隐藏', value: false },
-      ]),
-      toggle('state').label('状态').col(4).placeholder(['启用', '禁用']),
+      ]);
+      toggle('state').label('状态').col(4).placeholder(['启用', '禁用']);
       input('text')
         .label('文本输入框')
         .col(6)
         .hidden(({ model }) => !model.show)
-        .disabled(({ model }) => !model.state),
-    );
+        .disabled(({ model }) => !model.state);
+    });
 
     this.model = {};
   }
@@ -95,10 +95,10 @@ export const source = dedent`
 
   @Component({
     selector: 'example-component',
-    template: \`<fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>\`
+    template: \`<fluent-form [(model)]="model" [schema]="schema"></fluent-form>\`
   })
   export class ExampleComponent {
-    schemas = form(
+    schema = form(() => {
       radioGroup('lang')
         .label('语言')
         .variants({ button: 'solid' })
@@ -107,7 +107,7 @@ export const source = dedent`
         .options([
           { label: '中文', value: 'zh' },
           { label: '英文', value: 'en' },
-        ]),
+        ]);
       select('select')
         .label('控制内容')
         .col(6)
@@ -123,24 +123,24 @@ export const source = dedent`
           return [
             { label: 'Jack', value: 'jack' },
             { label: 'Lucy', value: 'lucy' },
-          ]
+          ];
         })
         .listeners({
           valueChange: (value, control) => {
             control.parent?.get('text')?.setValue(value);
           }
-        }),
+        });
       radioGroup('show').label('控制显隐').col(8).defaultValue(true).options([
         { label: '显示', value: true },
         { label: '隐藏', value: false },
-      ]),
-      toggle('state').label('状态').col(4).placeholder(['启用', '禁用']),
+      ]);
+      toggle('state').label('状态').col(4).placeholder(['启用', '禁用']);
       input('text')
         .label('文本输入框')
         .col(6)
         .hidden(({ model }) => !model.show)
-        .disabled(({ model }) => !model.state),
-    );
+        .disabled(({ model }) => !model.state);
+    });
 
     model = {};
   }

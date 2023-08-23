@@ -4,9 +4,9 @@ import dedent from 'ts-dedent';
 
 export const story = defineStory({
   args: {
-    schemas: form(
-      dateRange(['start', 'end']).label('日期区间控件').col(12),
-    ),
+    schema: form(() => {
+      dateRange(['start', 'end']).label('日期区间控件').col(12);
+    }),
     model: {}
   }
 });
@@ -17,12 +17,12 @@ export const source = dedent`
 
   @Component({
     selector: 'example-component',
-    template: \`<fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>\`
+    template: \`<fluent-form [(model)]="model" [schema]="schema"></fluent-form>\`
   })
   export class ExampleComponent {
-    schemas = form(
-      dateRange(['start', 'end']).label('日期区间控件').col(12),
-    );
+    schema = form(() => {
+      dateRange(['start', 'end']).label('日期区间控件').col(12);
+    });
 
     model = {};
   }

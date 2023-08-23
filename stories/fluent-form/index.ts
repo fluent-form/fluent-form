@@ -8,7 +8,7 @@ import { AbstractFluentFormWrapperComponent, defineMeta } from 'stories/storyboo
       <fluent-form
         nz-col
         nzFlex="2"
-        [schemas]="schemas"
+        [schema]="schema"
         [(model)]="model"
         [layout]="layout"
         [colon]="colon"

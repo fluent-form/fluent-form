@@ -5,7 +5,7 @@ import dedent from 'ts-dedent';
 
 export const story = defineStory({
   args: {
-    schemas: form(
+    schema: form(() => {
       input('username')
         .label('Username')
         .required(true)
@@ -20,7 +20,7 @@ export const story = defineStory({
               required: 'Please enter your username!'
             }
           }
-        }),
+        });
       input('email')
         .label('Email')
         .type('email')
@@ -34,23 +34,23 @@ export const story = defineStory({
               email: 'The enter is not valid E-mail!',
             }
           }
-        }),
+        });
       input('password')
         .label('Password')
         .type('password')
         .required(true)
         .col(12)
         .feedback(true)
-        .tips({ error: 'Please enter your password!' }),
-      inputGroup().label('First & Last name').col(12).primary('lastName').schemas(
-        input('firstName').col(8),
+        .tips({ error: 'Please enter your password!' });
+      inputGroup().label('First & Last name').col(12).primary('lastName').schemas(() => {
+        input('firstName').col(8);
         input('lastName')
           .col(16)
           .required(true)
-          .validators(Validators.pattern(/[A-Z]{3}/))
-          .tips({ error: 'Please enter three capital letters!' }),
-      ),
-    ),
+          .validators([Validators.pattern(/[A-Z]{3}/)])
+          .tips({ error: 'Please enter three capital letters!' });
+      });
+    }),
     model: {}
   }
 });
@@ -62,10 +62,10 @@ export const source = dedent`
 
   @Component({
     selector: 'example-component',
-    template: \`<fluent-form [schemas]="schemas" [(model)]="model"></fluent-form>\`
+    template: \`<fluent-form [(model)]="model" [schema]="schema"></fluent-form>\`
   })
   export class ExampleComponent {
-    schemas = form(
+    schema = fform(() => {
       input('username')
         .label('Username')
         .required(true)
@@ -80,7 +80,7 @@ export const source = dedent`
               required: 'Please enter your username!'
             }
           }
-        }),
+        });
       input('email')
         .label('Email')
         .type('email')
@@ -94,23 +94,23 @@ export const source = dedent`
               email: 'The enter is not valid E-mail!',
             }
           }
-        }),
+        });
       input('password')
         .label('Password')
         .type('password')
         .required(true)
         .col(12)
         .feedback(true)
-        .tips({ error: 'Please enter your password!' }),
-      inputGroup().label('First & Last name').col(12).primary('lastName').schemas(
-        input('firstName').col(8),
+        .tips({ error: 'Please enter your password!' });
+      inputGroup().label('First & Last name').col(12).primary('lastName').schemas(() => {
+        input('firstName').col(8);
         input('lastName')
           .col(16)
           .required(true)
-          .validators(Validators.pattern(/[A-Z]{3}/))
-          .tips({ error: 'Please enter three capital letters!' }),
-      ),
-    );
+          .validators([Validators.pattern(/[A-Z]{3}/)])
+          .tips({ error: 'Please enter three capital letters!' });
+      });
+    });
 
     model = {};
   }

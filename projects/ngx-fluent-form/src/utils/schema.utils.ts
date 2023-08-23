@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
-import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlOrControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, AnySchemaKey, DoubleKeyControlSchema, SchemaKey } from '../schemas';
+import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, AnySchemaKey, DoubleKeyControlSchema, SchemaKey } from '../schemas';
 import { SchemaLike, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP, SCHEMA_PATCHERS } from '../tokens';
 import { isString } from './is.utils';
@@ -125,13 +125,16 @@ export class SchemasUtils<S extends AnySchema[]> {
   find<T extends AnySchema>(path: [...SchemaKey[], AnySchemaKey]): T | null;
   find<T extends AnySchema>(path: AnySchemaKey | [...SchemaKey[], AnySchemaKey]): T | null;
   find<T extends AnySchema>(path: AnySchemaKey | [...SchemaKey[], AnySchemaKey]): T | null {
-    let schemas = this.schemas as AnySchema[];
+    let schemas: AnySchema[] = this.schemas;
     // 如果是数组，那么除了最后一个元素，其他元素所对应的 schema 一定是 container schema
     if (Array.isArray(path)) {
       const [endPath, ...beforePath] = path.reverse() as [AnySchemaKey, ...SchemaKey[]];
-      schemas = beforePath.reduceRight((schemas, name) => (
-        (schemas.find(o => o.key === name) as AnyContainerSchema).schemas as AnyControlOrControlContainerSchema[]
-      ), schemas as AnyControlOrControlContainerSchema[]);
+      schemas = beforePath.reduceRight(
+        (schemas, name) =>
+          (schemas.find(o => o.key === name) as AnyContainerSchema).schemas
+        ,
+        schemas
+      );
       path = endPath;
     }
 

@@ -1,4 +1,4 @@
-import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, form, heading5, headless, input, inputGroup, number, radioGroup, rate, row, select, slider, space, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
+import { alert, button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, form, heading5, headless, input, inputGroup, number, radioGroup, rate, row, select, slider, space, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
 import { map, switchMap, timer } from 'rxjs';
 import { CASCADER_OPTIONS, CHECKBOX_OPTIONS, RADIO_OPTIONS, SELECT_OPTIONS, TREE_SELECT_OPTIONS } from 'stories/options';
 import { defineStory } from 'stories/storybook';
@@ -74,6 +74,7 @@ export const story = defineStory({
         button().content('看不见我').hidden(() => true);
         button().content('动态').hidden(({ model }) => model.slider < 50);
       });
+      alert().message('Alert info text').icon(true).variants({ banner: true });
       steps().col(24).active(0).schemas(() => {
         step().title('第一步').schemas(() => {
           input('text1InStep1').label('文本输入框').placeholder('第一步的输入框').col(12);
@@ -114,7 +115,7 @@ export const story = defineStory({
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, form, heading5, headless, input, inputGroup, number, radioGroup, rate, row, select, slider, space, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
+  import { alert, button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, form, heading5, headless, input, inputGroup, number, radioGroup, rate, row, select, slider, space, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
 
   @Component({
     selector: 'example-component',
@@ -189,6 +190,7 @@ export const source = dedent`
         button().content('看不见我').hidden(() => true);
         button().content('动态').hidden(({ model }) => model.slider < 50);
       });
+      alert().message('Info Text').icon(true).variants({ banner: true });
       steps().col(24).active(0).schemas(() => {
         step().title('第一步').schemas(() => {
           input('text1InStep1').label('文本输入框').placeholder('第一步的输入框').col(12);

@@ -1,4 +1,5 @@
 import { TemplateRef } from '@angular/core';
+import { NzAlertComponent } from 'ng-zorro-antd/alert';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzFormTextComponent } from 'ng-zorro-antd/form';
 import { AbstractSchema } from './abstract.schema';
@@ -38,4 +39,18 @@ export interface HeadingComponentSchema<Key extends SchemaKey = SchemaKey>
   kind: 'heading';
   level: 1 | 2 | 3 | 4 | 5 | 6;
   content: string | TemplateRef<void>;
+}
+
+export interface AlertComponentSchema<Key extends SchemaKey = SchemaKey>
+  extends AbstractSchema<Key>, ComponentEventListenerHolder<NzAlertComponent>, ComponentPropertyHolder<NzAlertComponent> {
+  kind: 'alert';
+  type?: NzAlertComponent['nzType'];
+  icon?: boolean | string | TemplateRef<void>;
+  action?: string | TemplateRef<void>;
+  closeable?: boolean | { content: string | TemplateRef<void> };
+  message: string | TemplateRef<void>;
+  description?: string | TemplateRef<void>;
+  variants?: {
+    banner?: boolean;
+  }
 }

@@ -1,4 +1,4 @@
-import { button, heading1, heading2, heading3, heading4, heading5, heading6, template, text } from './component';
+import { alert, button, heading1, heading2, heading3, heading4, heading5, heading6, template, text } from './component';
 import { form } from './control-container';
 
 describe('component', () => {
@@ -21,9 +21,7 @@ describe('component', () => {
   });
 
   it('button', () => {
-    const { schemas } = form(() => {
-      button();
-    });
+    const { schemas } = form(() => button());
     expect(schemas).toEqual([
       { kind: 'button' }
     ]);
@@ -36,5 +34,14 @@ describe('component', () => {
     expect(form(() => heading4().content('')).schemas).toEqual([{ kind: 'heading', level: 4, content: '' }]);
     expect(form(() => heading5().content('')).schemas).toEqual([{ kind: 'heading', level: 5, content: '' }]);
     expect(form(() => heading6().content('')).schemas).toEqual([{ kind: 'heading', level: 6, content: '' }]);
+  });
+
+  it('alert', () => {
+    const { schemas } = form(() => {
+      alert().message('');
+    });
+    expect(schemas).toEqual([
+      { kind: 'alert', message: '' }
+    ]);
   });
 });

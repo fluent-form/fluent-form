@@ -1,4 +1,4 @@
-import { ButtonComponentSchema, HeadingComponentSchema, SchemaKey, TemplateSchema, TextComponentSchema } from '../schemas';
+import { AlertComponentSchema, ButtonComponentSchema, HeadingComponentSchema, SchemaKey, TemplateSchema, TextComponentSchema } from '../schemas';
 import { composeBuilder, UnstableBuilder } from './compose-builder';
 import { KindOrKey } from './helper';
 
@@ -34,6 +34,10 @@ export function heading5<Key extends SchemaKey>(key?: Key): UnstableBuilder<Head
 }
 export function heading6<Key extends SchemaKey>(key?: Key): UnstableBuilder<HeadingComponentSchema<Key>, KindOrKeyOrLevel> {
   return heading(key).level(6);
+}
+
+export function alert<Key extends SchemaKey>(key?: Key): UnstableBuilder<AlertComponentSchema<Key>, KindOrKey> {
+  return composeBuilder<AlertComponentSchema<Key>>().kind('alert').key(key);
 }
 
 type KindOrKeyOrLevel = KindOrKey | 'level';

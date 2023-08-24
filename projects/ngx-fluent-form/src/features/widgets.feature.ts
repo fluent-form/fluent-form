@@ -2,11 +2,11 @@ import { Provider, Type } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { SchemaConfig, SchemaPatchFn } from '../interfaces';
-import { AbstractSchema, AbstractTextControlSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, InputControlSchema, InputGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema, TextareaControlSchema, TextComponentSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { AbstractSchema, AbstractTextControlSchema, AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, InputControlSchema, InputGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema, TextareaControlSchema, TextComponentSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { SchemaKind, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP, WIDGET_MAP } from '../tokens';
 import { isNumber } from '../utils';
-import { AbstractWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, FormArrayWidget, FormGroupWidget, HeadingWidget, InputGroupWidget, InputWidget, NumberWidget, RadioGroupWidget, RateWidget, RowWidget, SelectWidget, SilderWidget, SpaceWidget, StepsWidget, TabsWidget, TextareaWidget, TextWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from '../widgets';
+import { AbstractWidget, AlertWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, FormArrayWidget, FormGroupWidget, HeadingWidget, InputGroupWidget, InputWidget, NumberWidget, RadioGroupWidget, RateWidget, RowWidget, SelectWidget, SilderWidget, SpaceWidget, StepsWidget, TabsWidget, TextareaWidget, TextWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from '../widgets';
 import { makeFluentFeature, provideSchemaPatcher } from './helper';
 import { FluentFormFeature, FluentFormFeatureKind } from './interface';
 
@@ -84,6 +84,7 @@ export function withAllWidgets(): FluentFormFeature<FluentFormFeatureKind.Widget
     useHeadingWidget(),
     useTextWidget(),
     useButtonWidget(),
+    useAlertWidget(),
     useStepsWidget(),
     useTabsWidget(),
     useSpaceWidget(),
@@ -299,6 +300,18 @@ export function useHeadingWidget(): FluentFormWidgetFeature<HeadingComponentSche
     kind: SchemaKind.Heading,
     type: SchemaType.Component,
     widget: HeadingWidget,
+    patch: schema => {
+      schema.col ??= 24;
+      return schema;
+    },
+  };
+}
+
+export function useAlertWidget(): FluentFormWidgetFeature<AlertComponentSchema> {
+  return {
+    kind: SchemaKind.Alert,
+    type: SchemaType.Component,
+    widget: AlertWidget,
     patch: schema => {
       schema.col ??= 24;
       return schema;

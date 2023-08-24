@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { array, form, group, input, inputGroup, slider, textarea } from '../compose';
 import { useTextWidget, withAllWidgets, withSchemaPatchers, withWidgets } from '../features';
 import { provideFluentForm } from '../provider';
-import { AnySchema, ButtonComponentSchema, HeadingComponentSchema, InputControlSchema, NumberInputControlSchema, TextComponentSchema } from '../schemas';
+import { AlertComponentSchema, AnySchema, ButtonComponentSchema, HeadingComponentSchema, InputControlSchema, NumberInputControlSchema, TextComponentSchema } from '../schemas';
 import { SchemaType } from '../schemas/interfaces';
 import { schemasUtils, SchemaUtil } from './schema.utils';
 
@@ -33,6 +33,11 @@ describe('SchemaUtil', () => {
         it('button patcher', () => {
           const schema: ButtonComponentSchema = { kind: 'button', variants: { block: true } };
           expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'button', variants: { block: true }, col: 24 });
+        });
+
+        it('alert patcher', () => {
+          const schema: AlertComponentSchema = { kind: 'alert', message: '' };
+          expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'alert', message: '', col: 24 });
         });
       });
     });

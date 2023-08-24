@@ -1,4 +1,5 @@
 export * from './abstract.widget';
+export * from './alert/alert.widget';
 export * from './button-group/button-group.widget';
 export * from './button/button.widget';
 export * from './cascader/cascader.widget';

@@ -1,7 +1,7 @@
 import { StableBuilder } from '../compose';
 import { RowComponentSchema, SpaceComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema } from './component-container.schema';
 import { ButtonGroupComponentSchema } from './component-wrapper.schema';
-import { ButtonComponentSchema, HeadingComponentSchema, TemplateSchema, TextComponentSchema } from './component.schema';
+import { AlertComponentSchema, ButtonComponentSchema, HeadingComponentSchema, TemplateSchema, TextComponentSchema } from './component.schema';
 import { FormArraySchema, FormGroupSchema } from './control-container.schema';
 import { InputGroupComponentSchema } from './control-wrapper.schema';
 import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, HeadlessControlSchema, InputControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from './control.schema';
@@ -67,7 +67,8 @@ export type AnyComponentSchema<Key extends SchemaKey = SchemaKey> =
   | TemplateSchema<Key>
   | ButtonComponentSchema<Key>
   | TextComponentSchema<Key>
-  | HeadingComponentSchema<Key>;
+  | HeadingComponentSchema<Key>
+  | AlertComponentSchema<Key>;
 /** 普通组件构建器 */
 export type AnyComponentBuilder<Key extends SchemaKey = SchemaKey> = StableBuilder<AnyComponentSchema<Key>>;
 

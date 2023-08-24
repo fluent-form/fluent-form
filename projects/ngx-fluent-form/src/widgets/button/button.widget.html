@@ -31,7 +31,7 @@
       [nzLoading]="schema.loading | reactive: model:schema:control"
       [nzShape]="schema.variants?.shape!"
       [nzSize]="schema.size!"
-      [nzType]="schema.type ?? null">
+      [nzType]="schema.type!">
       <ng-container [ngTemplateOutlet]="buttonContentTemplate"></ng-container>
     </button>
   </ng-container>

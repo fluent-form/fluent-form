@@ -11,7 +11,6 @@
     [nzSize]="schema.size ?? 'default'"
     [nzStatus]="schema.status ?? 'process'"
     [nzStartIndex]="schema.start ?? 0"
-    [hidden]="schema.hidden | reactive: model:schema:control"
     (nzIndexChange)="schema.active = $event">
     <nz-step
       *ngFor="let subschema of schema.schemas; index as index"

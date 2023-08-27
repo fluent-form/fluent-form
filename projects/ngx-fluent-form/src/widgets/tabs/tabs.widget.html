@@ -10,8 +10,7 @@
     [nzAnimated]="schema.animate ?? schema.type !== 'card'"
     [nzTabPosition]="schema.position ?? 'top'"
     [nzTabBarGutter]="schema.gutter"
-    [nzCentered]="schema.center"
-    [hidden]="schema.hidden | reactive: model:schema:control">
+    [nzCentered]="schema.center">
     <nz-tab
       *ngFor="let tabSchema of schema.schemas"
       #component

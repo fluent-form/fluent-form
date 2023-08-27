@@ -6,7 +6,6 @@
     [nzAlign]="schema.align!"
     [nzJustify]="schema.justify!"
     [nzGutter]="schema.gutter ?? config.gutter"
-    [hidden]="schema.hidden | reactive: model:schema:control"
     [fluentBinding]="{ schema, control }">
     <ng-template #colTemplate let-schema="schema" let-control="control" let-model="model">
       <nz-col

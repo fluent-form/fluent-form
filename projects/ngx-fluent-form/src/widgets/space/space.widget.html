@@ -7,7 +7,6 @@
     [nzAlign]="schema.align"
     [nzWrap]="schema.wrapable"
     [nzSplit]="schema.split!"
-    [hidden]="schema.hidden | reactive: model:schema:control"
     [fluentBinding]="{ schema, control }">
     <!-- space 不支持 col 属性 -->
     <ng-container *ngFor="let subschema of schema.schemas">

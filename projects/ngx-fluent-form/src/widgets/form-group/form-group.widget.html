@@ -1,8 +1,5 @@
 <ng-template let-formGroup="control" let-formSchema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <nz-divider
-    *ngIf="formSchema.label"
-    [nzText]="formSchema.label"
-    [hidden]="formSchema.hidden | reactive: model:formSchema:formGroup"></nz-divider>
+  <nz-divider *ngIf="formSchema.label" [nzText]="formSchema.label"></nz-divider>
 
   <nz-row
     #config="fluentConfig"
@@ -13,8 +10,7 @@
     [nzLayout]="config.layout"
     [ngClass]="formSchema.class"
     [ngStyle]="formSchema.style"
-    [fluentBinding]="{ schema: formSchema, control: formGroup }"
-    [hidden]="formSchema.hidden | reactive: model:formSchema:formGroup">
+    [fluentBinding]="{ schema: formSchema, control: formGroup }">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
       <nz-col
         [nzSpan]="schema.col | col: 'span'"

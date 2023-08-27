@@ -7,7 +7,7 @@ export const story = defineStory({
     schema: form(() => {
       input('flight').label('航班').required(true).col(11);
       datetime('boardingTime').label('登机时间').required(true).col(11);
-      array('passengers').label('乘客').length({ min: 1, max: 5 }).col(22).schemas(() => {
+      array('passengers').label('乘客').length({ min: 1, max: 5 }).orderable(true).col(22).schemas(() => {
         input().placeholder('请输入姓名').col(24);
       });
     }),
@@ -21,8 +21,6 @@ export const source = dedent`
   import { Component } from '@angular/core';
   import { array, datetime, form, input } from 'ngx-fluent-form';
 
-  const GENDER_OPTIONS = [{ label: '女', value: '女' }, { label: '男', value: '男' }];
-
   @Component({
     selector: 'example-component',
     template: \`<fluent-form [(model)]="model" [schema]="schema"></fluent-form>\`
@@ -31,7 +29,7 @@ export const source = dedent`
     schema = form(() => {
       input('flight').label('航班').required(true).col(11);
       datetime('boardingTime').label('登机时间').required(true).col(11);
-      array('passengers').label('乘客').length({ min: 1, max: 5 }).col(22).schemas(() => {
+      array('passengers').label('乘客').length({ min: 1, max: 5 }).orderable(true).col(22).schemas(() => {
         input().placeholder('请输入姓名').col(24);
       });
     });

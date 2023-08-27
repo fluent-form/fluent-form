@@ -3,12 +3,12 @@ import { Component, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FluentFormColContentOutletComponent } from '../../components';
 import { FluentBindingDirective, FluentConfigDirective, FluentContextGuardDirective } from '../../directives';
+import { labelHelper, tooltipHelper } from '../../helper';
 import { FluentColumnPipe, FluentReactivePipe, InvokePipe } from '../../pipes';
 import { FormArraySchema } from '../../schemas';
 import { FormUtil, isNumber, isUndefined, SchemaUtil } from '../../utils';
@@ -27,7 +27,6 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
     NzGridModule,
     NzFormModule,
     NzButtonModule,
-    NzDividerModule,
     NzIconModule,
     NzOutletModule,
     FluentFormColContentOutletComponent,
@@ -38,7 +37,8 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
     FluentReactivePipe,
     InvokePipe
   ],
-  templateUrl: './form-array.widget.html'
+  templateUrl: './form-array.widget.html',
+  styleUrls: ['./form-array.widget.scss']
 })
 export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateContext> {
   private readonly schemaUtil = inject(SchemaUtil);
@@ -53,11 +53,15 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
   }
 
   protected readonly helper = {
+    label: labelHelper,
+    tooltip: tooltipHelper,
     length: {
-      min: (length: FormArraySchema['length']) =>
-        isNumber(length) ? length : length?.min ?? 0,
-      max: (length: FormArraySchema['length']) =>
-        isNumber(length) ? length : length?.max ?? Infinity,
+      min: (length: FormArraySchema['length']) => {
+        return isNumber(length) ? length : length?.min ?? 0;
+      },
+      max: (length: FormArraySchema['length']) => {
+        return isNumber(length) ? length : length?.max ?? Infinity;
+      },
     },
     addable: (addable: FormArraySchema['addable']): NonBoolean<FormArraySchema['addable']> | false => {
       if (addable === true || isUndefined(addable)) {

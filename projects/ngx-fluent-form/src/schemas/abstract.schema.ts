@@ -50,8 +50,6 @@ export interface AbstractControlSchema<Key extends AnySchemaKey, Val> extends Ab
 
 /** 抽象的容器控件图示 */
 export interface AbstractControlContainerSchema<Key extends AnySchemaKey> extends AbstractSchema<Key>, ControlEventListenerHolder<SafeAny>, Row {
-  /* Used to define the label of the control. */
-  label?: string;
   schemas: AnySchema[];
   /** Validator for the control */
   validators?: ValidatorFn[];

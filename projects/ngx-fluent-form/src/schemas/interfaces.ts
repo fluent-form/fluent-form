@@ -61,13 +61,13 @@ export interface SchemaLike<Key extends AnySchemaKey = AnySchemaKey> {
 }
 
 /** @internal */
-interface Tooltip {
+export interface Tooltip {
   content: string | TemplateRef<void>;
   icon: string | NzFormTooltipIcon;
 }
 
 /** @internal */
-interface Label {
+export interface Label {
   content: string;
   span?: Cell;
   width?: string | number;

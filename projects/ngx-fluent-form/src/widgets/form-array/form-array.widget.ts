@@ -1,3 +1,4 @@
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
@@ -24,6 +25,7 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
     NgClass,
     NgStyle,
     NgTemplateOutlet,
+    DragDropModule,
     NzGridModule,
     NzFormModule,
     NzButtonModule,
@@ -50,6 +52,11 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
     control.push(
       this.formUtil.createAnyControl(elementSchema, {})
     );
+  }
+
+  protected drop(control: FormArray, event: CdkDragDrop<unknown>) {
+    moveItemInArray(control.controls, event.previousIndex, event.currentIndex);
+    control.updateValueAndValidity();
   }
 
   protected readonly helper = {

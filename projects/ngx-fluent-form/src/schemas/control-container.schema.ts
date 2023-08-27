@@ -15,6 +15,7 @@ export interface FormArraySchema<Key extends SchemaKey = SchemaKey> extends Abst
   length?: Length;
   addable?: boolean | AddableButton;
   removable?: boolean;
+  orderable?: boolean;
 }
 
 interface AddableButton {

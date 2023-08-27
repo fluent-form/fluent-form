@@ -1,5 +1,6 @@
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormArray } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { withAllWidgets } from '../../features';
 import { provideFluentForm } from '../../provider';
@@ -28,7 +29,7 @@ describe('NestedFormWidget', () => {
     expect(component).toBeTruthy();
   });
 
-  it('add method', () => {
+  it('push method', () => {
     const formArray = new FormArray<SafeAny>([]);
     component['push'](formArray, {
       kind: 'array',
@@ -38,6 +39,16 @@ describe('NestedFormWidget', () => {
     });
 
     expect(formArray.length).toBe(1);
+  });
+
+  it('drop method', () => {
+    const formArray = new FormBuilder().array([1, 2]);
+
+    expect(formArray.value).toEqual([1, 2]);
+
+    component['drop'](formArray, { previousIndex: 0, currentIndex: 1 } as CdkDragDrop<unknown>);
+
+    expect(formArray.value).toEqual([2, 1]);
   });
 
   describe('helper function', () => {

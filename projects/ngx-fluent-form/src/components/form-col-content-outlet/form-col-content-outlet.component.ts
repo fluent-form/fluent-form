@@ -4,7 +4,8 @@ import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { FluentWithInjectorDirective } from '../../directives';
-import { FluentControlPipe, FluentReactivePipe, FluentSchemaPipe, FluentSchemaTypePipe, FluentTemplatePipe, TypeofPipe } from '../../pipes';
+import { labelHelper, tooltipHelper } from '../../helper';
+import { FluentControlPipe, FluentReactivePipe, FluentSchemaPipe, FluentSchemaTypePipe, FluentTemplatePipe, InvokePipe } from '../../pipes';
 import { AnySchema } from '../../schemas';
 import { SchemaKind, SchemaType } from '../../schemas/interfaces';
 import { CONFIG } from '../../tokens';
@@ -35,7 +36,7 @@ interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
     FluentControlPipe,
     FluentTemplatePipe,
     FluentSchemaTypePipe,
-    TypeofPipe
+    InvokePipe
   ],
   templateUrl: './form-col-content-outlet.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -51,6 +52,11 @@ export class FluentFormColContentOutletComponent<T extends AnyObject | AnyArray>
   @Input() control!: AbstractControl;
   @Input() schema!: AnySchema;
   @Input() model!: T;
+
+  protected readonly helper = {
+    label: labelHelper,
+    tooltip: tooltipHelper
+  };
 
   ngOnInit(): void {
     this.viewContainerRef.createEmbeddedView(this.templateRef, this);

@@ -4,9 +4,9 @@ import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { FluentWithInjectorDirective } from '../../directives';
-import { labelHelper, tooltipHelper } from '../../helper';
 import { FluentControlPipe, FluentReactivePipe, FluentSchemaPipe, FluentSchemaTypePipe, FluentTemplatePipe, InvokePipe } from '../../pipes';
 import { AnySchema } from '../../schemas';
+import { labelHelper, tooltipHelper } from '../../schemas/helper';
 import { SchemaKind, SchemaType } from '../../schemas/interfaces';
 import { CONFIG } from '../../tokens';
 

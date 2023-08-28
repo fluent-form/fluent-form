@@ -9,9 +9,9 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FluentFormColContentOutletComponent } from '../../components';
 import { FluentBindingDirective, FluentConfigDirective, FluentContextGuardDirective } from '../../directives';
-import { labelHelper, tooltipHelper } from '../../helper';
 import { FluentColumnPipe, FluentReactivePipe, InvokePipe } from '../../pipes';
 import { FormArraySchema } from '../../schemas';
+import { labelHelper, tooltipHelper } from '../../schemas/helper';
 import { FormUtil, isNumber, isUndefined, SchemaUtil } from '../../utils';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 

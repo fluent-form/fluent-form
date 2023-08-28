@@ -1,4 +1,4 @@
-import { labelHelper } from './label';
+import { labelHelper, tooltipHelper } from '../schemas/helper';
 
 describe('label helper', () => {
   describe('label', () => {
@@ -22,5 +22,19 @@ describe('label helper', () => {
       expect(labelHelper.width({ content: 'label', width: 1 })).toEqual('1px');
       expect(labelHelper.width({ content: 'label', width: '1rem' })).toEqual('1rem');
     });
+  });
+});
+
+describe('tooltip helper', () => {
+  it('content', () => {
+    expect(tooltipHelper.content(undefined)).toBeUndefined();
+    expect(tooltipHelper.content('tooltip')).toEqual('tooltip');
+    expect(tooltipHelper.content({ content: 'tooltip', icon: 'icon' })).toEqual('tooltip');
+  });
+
+  it('icon', () => {
+    expect(tooltipHelper.icon(undefined)).toBeUndefined();
+    expect(tooltipHelper.icon('tooltip')).toBeNull();
+    expect(tooltipHelper.icon({ content: 'tooltip', icon: 'icon' })).toEqual('icon');
   });
 });

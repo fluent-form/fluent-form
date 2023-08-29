@@ -97,8 +97,7 @@ export class FormUtil {
     }
 
     return model.map((_, index) => {
-      schema.key = index;
-      return this.createAnyControl(schema, model);
+      return this.createAnyControl({ ...schema, key: index }, model);
     });
   }
 
@@ -108,14 +107,14 @@ export class FormUtil {
   createAnyControl(schema: AnyControlSchema | AnyControlContainerSchema, model: AnyObject | AnyArray): AbstractControl;
   createAnyControl(schema: AnyControlSchema | AnyControlContainerSchema, model: AnyObject | AnyArray): AbstractControl {
     switch (schema.kind) {
-      case 'group':
+      case SchemaKind.Group:
         return this.createFormGroup(schema, (model as AnyObject)[schema.key!] ?? {});
 
-      case 'array':
+      case SchemaKind.Array:
         return this.createFormArray(schema, (model as AnyArray)[schema.key as number] ?? []);
 
       default:
-        return this.createFormControl(schema, model);
+        return this.createFormControl(schema as AnyControlSchema, model);
     }
   }
 

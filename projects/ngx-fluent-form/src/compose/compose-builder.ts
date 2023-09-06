@@ -44,14 +44,16 @@ export function composeBuilder<T>(): Builder<T> {
           if (currentSchema) {
             STACK.push(currentSchema);
           }
-          currentSchema = target;
+          setCurrentSchema(target);
 
           target[property] = [];
 
-          (arg as Function)();
-
-          if (STACK.length) {
-            currentSchema = STACK.pop();
+          try {
+            (arg as Function)();
+          } finally {
+            if (STACK.length) {
+              setCurrentSchema(STACK.pop());
+            }
           }
         } else if (arg !== target[property]) {
           target[property] = arg;

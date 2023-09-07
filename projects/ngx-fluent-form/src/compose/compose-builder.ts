@@ -5,60 +5,56 @@ interface Schema {
   schemas?: Schema[];
 }
 
-const CHILDREN_KEY = 'schemas';
-/** 用来维护嵌套 schema 的顺序 */
-const STACK: Schema[] = [];
-
-let currentSchema: Schema | undefined;
+const COMPOSE_KEY = 'schemas';
+const SCHEMA_STACK: Schema[] = [];
 
 export function getCurrentSchema(): Schema | undefined {
-  return currentSchema;
+  return SCHEMA_STACK[SCHEMA_STACK.length - 1];
 }
 
-export function setCurrentSchema(schmea: Schema | undefined) {
-  currentSchema = schmea;
+function enterSchema(schmea: Schema) {
+  SCHEMA_STACK.push(schmea);
 }
 
-const BUILDER = Symbol();
+function leaveSchema() {
+  SCHEMA_STACK.pop();
+}
+
+const IS_BUILDER = Symbol();
 const BUILD_KEY = 'build';
 
 export function composeBuilder<T>(): Builder<T> {
   const target: AnyObject = {};
-
+  const currentSchema = getCurrentSchema();
   // 如果当前已经有了 schema，就直接 push 进去作为 subschema
   currentSchema?.schemas!.push(target);
 
   const builder = new Proxy(target, {
     get(target, property) {
-      if (BUILD_KEY === property) {
-        return () => target;
-      }
+      switch (property) {
+        case IS_BUILDER: return true;
+        case BUILD_KEY: return () => target;
 
-      if (BUILDER === property) {
-        return true;
-      }
+        case COMPOSE_KEY:
+          return (composeFn: Function): unknown => {
+            target[COMPOSE_KEY] = [];
 
-      return (arg: unknown): unknown => {
-        // 处理 compose function
-        if (property === CHILDREN_KEY) {
-          if (currentSchema) {
-            STACK.push(currentSchema);
-          }
-          setCurrentSchema(target);
+            enterSchema(target);
 
-          target[property] = [];
-
-          try {
-            (arg as Function)();
-          } finally {
-            if (STACK.length) {
-              setCurrentSchema(STACK.pop());
+            try {
+              composeFn();
+            } finally {
+              leaveSchema();
             }
-          }
-        } else if (arg !== target[property]) {
-          target[property] = arg;
-        }
 
+            return builder;
+          };
+      }
+
+      return (value: unknown): unknown => {
+        if (value !== target[property]) {
+          target[property] = value;
+        }
         return builder;
       };
     }
@@ -72,10 +68,10 @@ export function composeBuilder<T>(): Builder<T> {
  * @param value
  */
 export function isBuilder<T = unknown>(value: SafeAny): value is StableBuilder<T> {
-  return value[BUILDER] ?? false;
+  return value[IS_BUILDER] ?? false;
 }
 
-type ChildrenKey = typeof CHILDREN_KEY;
+type ComposeKey = typeof COMPOSE_KEY;
 type BuildKey = typeof BUILD_KEY;
 type Buildable = Record<BuildKey, unknown>;
 /** 取得接口的非空必填字段 */
@@ -101,7 +97,7 @@ type _Builder<
     [K in keyof Pick<T, Exclude<C, S> | B>]-?: (
       K extends BuildKey
       ? () => Pick<T, S>
-      : (val: K extends ChildrenKey ? () => SafeAny : T[K]) => _Builder<
+      : (val: K extends ComposeKey ? () => SafeAny : T[K]) => _Builder<
         T,
         C,
         N,

@@ -1,6 +1,6 @@
 import { SafeAny } from '@ngify/types';
 import { AnySchema, FormArraySchema, FormGroupSchema, SchemaKey } from '../schemas';
-import { composeBuilder, getCurrentSchema, setCurrentSchema, UnstableBuilder } from './compose-builder';
+import { composeBuilder, UnstableBuilder } from './compose-builder';
 import { KindOrKey } from './helper';
 
 export function group(): UnstableBuilder<FormGroupSchema<number>, KindOrKey>;
@@ -27,15 +27,11 @@ export function form(fnOrSchemas: AnySchema[] | FormComposeFn, config?: FormConf
     };
   }
 
-  group('root').schemas(fnOrSchemas);
-
-  const schema = getCurrentSchema()!;
+  const schema = group('root').schemas(fnOrSchemas).build();
 
   if (config) {
     Object.assign(schema, config);
   }
-
-  setCurrentSchema(undefined);
 
   return schema as FormGroupSchema;
 }

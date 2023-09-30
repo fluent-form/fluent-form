@@ -1,6 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FluentFormComponent } from './components';
-import { FluentFormDirective, FluentFormKeyDirective, FluentOutletDirective, FluentTemplateDirective } from './directives';
+import { FluentTemplateDirective } from './directives';
 import { FluentFormFeature, FluentFormFeatureKind } from './features';
 import { provideFluentForm } from './provider';
 
@@ -8,16 +8,10 @@ import { provideFluentForm } from './provider';
   imports: [
     FluentFormComponent,
     FluentTemplateDirective,
-    FluentFormDirective,
-    FluentFormKeyDirective,
-    FluentOutletDirective,
   ],
   exports: [
     FluentFormComponent,
     FluentTemplateDirective,
-    FluentFormDirective,
-    FluentFormKeyDirective,
-    FluentOutletDirective,
   ]
 })
 export class FluentFormModule {

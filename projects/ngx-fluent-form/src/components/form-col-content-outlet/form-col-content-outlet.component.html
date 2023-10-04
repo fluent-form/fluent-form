@@ -41,7 +41,7 @@
     <nz-form-control
       *ngIf="
         schema.kind === SchemaKind.InputGroup
-          ? (schema.primary ?? schema.schemas[0].key | schema: schema.schemas)
+          ? (schema.primary ?? schema.schemas[0].key | schema: schema)
           : schema as currentSchema
       "
       [nzValidateStatus]="

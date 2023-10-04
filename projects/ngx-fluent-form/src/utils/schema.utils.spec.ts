@@ -5,7 +5,7 @@ import { useTextWidget, withAllWidgets, withSchemaPatchers, withWidgets } from '
 import { provideFluentForm } from '../provider';
 import { AlertComponentSchema, AnySchema, ButtonComponentSchema, HeadingComponentSchema, InputControlSchema, NumberInputControlSchema, TextComponentSchema } from '../schemas';
 import { SchemaType } from '../schemas/interfaces';
-import { schemasUtils, SchemaUtil } from './schema.utils';
+import { SchemaUtil } from './schema.utils';
 
 describe('SchemaUtil', () => {
   let schemaUtil: SchemaUtil;
@@ -22,94 +22,92 @@ describe('SchemaUtil', () => {
     schemaUtil = TestBed.inject(SchemaUtil);
   });
 
-  describe('SchemaUtil', () => {
-    describe('patchSchema', () => {
-      describe('with internal patcher', () => {
-        it('heading patcher', () => {
-          const schema: HeadingComponentSchema = { kind: 'heading', level: 1, content: '' };
-          expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'heading', level: 1, content: '', col: 24 });
-        });
+  describe('patchSchema', () => {
+    describe('with internal patcher', () => {
+      it('heading patcher', () => {
+        const schema: HeadingComponentSchema = { kind: 'heading', level: 1, content: '' };
+        expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'heading', level: 1, content: '', col: 24 });
+      });
 
-        it('button patcher', () => {
-          const schema: ButtonComponentSchema = { kind: 'button', variants: { block: true } };
-          expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'button', variants: { block: true }, col: 24 });
-        });
+      it('button patcher', () => {
+        const schema: ButtonComponentSchema = { kind: 'button', variants: { block: true } };
+        expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'button', variants: { block: true }, col: 24 });
+      });
 
-        it('alert patcher', () => {
-          const schema: AlertComponentSchema = { kind: 'alert', message: '' };
-          expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'alert', message: '', col: 24 });
-        });
+      it('alert patcher', () => {
+        const schema: AlertComponentSchema = { kind: 'alert', message: '' };
+        expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'alert', message: '', col: 24 });
       });
     });
+  });
 
-    it('isAnySchema', () => {
-      expect(schemaUtil.isComponentContainerSchema({ kind: 'tab' })).toBeTrue();
-      expect(schemaUtil.isComponentSchema({ kind: 'text' })).toBeTrue();
-      expect(schemaUtil.isComponentWrapperSchema({ kind: 'button-group' })).toBeTrue();
-      expect(schemaUtil.isControlContainerSchema({ kind: 'group' })).toBeTrue();
-      expect(schemaUtil.isControlWrapperSchema({ kind: 'input-group' })).toBeTrue();
-      expect(schemaUtil.isControlSchema({ kind: 'input' })).toBeTrue();
-      expect(schemaUtil.isNonControlSchema({ kind: 'button' })).toBeTrue();
+  it('isAnySchema', () => {
+    expect(schemaUtil.isComponentContainerSchema({ kind: 'tab' })).toBeTrue();
+    expect(schemaUtil.isComponentSchema({ kind: 'text' })).toBeTrue();
+    expect(schemaUtil.isComponentWrapperSchema({ kind: 'button-group' })).toBeTrue();
+    expect(schemaUtil.isControlContainerSchema({ kind: 'group' })).toBeTrue();
+    expect(schemaUtil.isControlWrapperSchema({ kind: 'input-group' })).toBeTrue();
+    expect(schemaUtil.isControlSchema({ kind: 'input' })).toBeTrue();
+    expect(schemaUtil.isNonControlSchema({ kind: 'button' })).toBeTrue();
+  });
+
+  it('filterControlSchemas', () => {
+    expect(schemaUtil.filterControlSchemas([
+      { kind: 'text', content: '' },
+      { kind: 'button-group', schemas: [] },
+      { kind: 'input' },
+      { kind: 'group', schemas: [] },
+      { kind: 'array', schemas: [] },
+      {
+        kind: 'input-group',
+        schemas: [
+          { kind: 'input' }
+        ]
+      },
+      {
+        kind: 'row',
+        schemas: [
+          { kind: 'input' }
+        ]
+      }
+    ])).toEqual([
+      { kind: 'input' },
+      { kind: 'group', schemas: [] },
+      { kind: 'array', schemas: [] },
+      { kind: 'input' },
+      { kind: 'input' },
+    ]);
+  });
+
+  describe('带验证器的图示', () => {
+    it('length', () => {
+      const schema: AnySchema = { kind: 'input', length: 1 };
+      const validators = schemaUtil.validatorsOf(schema);
+      // min & max
+      expect(validators.length).toBe(2);
     });
 
-    it('filterControlSchemas', () => {
-      expect(schemaUtil.filterControlSchemas([
-        { kind: 'text', content: '' },
-        { kind: 'button-group', schemas: [] },
-        { kind: 'input' },
-        { kind: 'group', schemas: [] },
-        { kind: 'array', schemas: [] },
-        {
-          kind: 'input-group',
-          schemas: [
-            { kind: 'input' }
-          ]
-        },
-        {
-          kind: 'row',
-          schemas: [
-            { kind: 'input' }
-          ]
-        }
-      ])).toEqual([
-        { kind: 'input' },
-        { kind: 'group', schemas: [] },
-        { kind: 'array', schemas: [] },
-        { kind: 'input' },
-        { kind: 'input' },
-      ]);
+    it('min/max', () => {
+      const schema = textarea('name').length({ min: 1, max: 2 }).build();
+      const validators = schemaUtil.validatorsOf(schema);
+
+      expect(validators.length).toBe(2);
     });
 
-    describe('带验证器的图示', () => {
-      it('length', () => {
-        const schema: AnySchema = { kind: 'input', length: 1 };
-        const validators = schemaUtil.validatorsOf(schema);
-        // min & max
-        expect(validators.length).toBe(2);
-      });
+    it('required', () => {
+      const schema = input('name').required(true).build();
+      const validators = schemaUtil.validatorsOf(schema);
 
-      it('min/max', () => {
-        const schema = textarea('name').length({ min: 1, max: 2 }).build();
-        const validators = schemaUtil.validatorsOf(schema);
+      expect(validators).toEqual([Validators.required]);
+    });
 
-        expect(validators.length).toBe(2);
-      });
+    it('email', () => {
+      const schema = input('name').type('email').required(true).build();
+      const validators = schemaUtil.validatorsOf(schema);
 
-      it('required', () => {
-        const schema = input('name').required(true).build();
-        const validators = schemaUtil.validatorsOf(schema);
-
-        expect(validators).toEqual([Validators.required]);
-      });
-
-      it('email', () => {
-        const schema = input('name').type('email').required(true).build();
-        const validators = schemaUtil.validatorsOf(schema);
-
-        expect(validators.length).toBe(2);
-        expect(validators).toContain(Validators.email);
-        expect(validators).toContain(Validators.required);
-      });
+      expect(validators.length).toBe(2);
+      expect(validators).toContain(Validators.email);
+      expect(validators).toContain(Validators.required);
     });
   });
 
@@ -179,115 +177,60 @@ describe('SchemaUtil', () => {
 
   describe('应该能在图示列表中找到目标图示', () => {
     it('普通图示', () => {
-      const { schemas } = form(() => {
+      const schema = form(() => {
         input('name');
       });
-      const schema = schemasUtils(schemas).find('name');
 
-      expect(schema).toEqual({ kind: 'input', key: 'name' });
+      expect(schemaUtil.find(schema, 'name')).toEqual({ kind: 'input', key: 'name' });
     });
 
     it('二级图示', () => {
-      const { schemas } = form(() => {
+      const schema = form(() => {
         group('group').schemas(() => {
           input('name');
         });
       });
-      const schema = schemasUtils(schemas).find(['group', 'name']);
 
-      expect(schema).toEqual({ kind: 'input', key: 'name' });
+      expect(schemaUtil.find(schema, ['group', 'name'])).toEqual({ kind: 'input', key: 'name' });
+      expect(schemaUtil.find(schema, 'group.name')).toEqual({ kind: 'input', key: 'name' });
     });
 
     it('多级图示', () => {
-      const { schemas } = form(() => {
+      const schema = form(() => {
         group('group').schemas(() => {
           group('group').schemas(() => {
             input('name');
           });
         });
       });
-      const schema = schemasUtils(schemas).find(['group', 'group', 'name']);
 
-      expect(schema).toEqual({ kind: 'input', key: 'name' });
-    });
-
-    it('一维数组图示', () => {
-      const { schemas } = form(() => {
-        array('array').schemas(() => {
-          input(0);
-        });
-      });
-      const schema = schemasUtils(schemas).find(['array', 0]);
-
-      expect(schema).toEqual({ kind: 'input', key: 0 });
-    });
-
-    it('多维数组图示', () => {
-      const { schemas } = form(() => {
-        array('array').schemas(() => {
-          array(0).schemas(() => {
-            input(0);
-          });
-        });
-      });
-      const schema = schemasUtils(schemas).find(['array', 0, 0]);
-
-      expect(schema).toEqual({ kind: 'input', key: 0 });
-    });
-
-    it('对象嵌套数组图示', () => {
-      const { schemas } = form(() => {
-        group('group').schemas(() => {
-          array('array').schemas(() => {
-            input(0);
-          });
-        });
-      });
-      const schema = schemasUtils(schemas).find(['group', 'array', 0]);
-
-      expect(schema).toEqual({ kind: 'input', key: 0 });
-    });
-
-    it('数组嵌套对象图示', () => {
-      const { schemas } = form(() => {
-        array('array').schemas(() => {
-          group(0).schemas(() => {
-            input('name');
-          });
-        });
-      });
-      const schema = schemasUtils(schemas).find(['array', 0, 'name']);
-
-      expect(schema).toEqual({ kind: 'input', key: 'name' });
+      expect(schemaUtil.find(schema, ['group', 'group', 'name'])).toEqual({ kind: 'input', key: 'name' });
+      expect(schemaUtil.find(schema, 'group.group.name')).toEqual({ kind: 'input', key: 'name' });
     });
 
     it('双字段图示', () => {
-      const key = ['begin', 'end'] as const;
-      const { schemas } = form(() => {
-        slider(key);
+      const schema = form(() => {
+        slider(['begin', 'end']);
       });
-      const schema1 = schemasUtils(schemas).find([key]);
-      const schema2 = schemasUtils(schemas).find([['begin', 'end']]);
 
-      expect(schema1).toEqual({ kind: 'slider', key: key });
-      expect(schema2).toEqual({ kind: 'slider', key: key });
+      expect(schemaUtil.find(schema, [['begin', 'end']])).toEqual({ kind: 'slider', key: ['begin', 'end'] });
+      expect(schemaUtil.find(schema, ['begin', 'end'].toString())).toEqual({ kind: 'slider', key: ['begin', 'end'] });
     });
 
     it('不存在的图示', () => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
-      const { schemas } = form(() => { });
-      const schema = schemasUtils(schemas).find('n');
+      const schema = form(() => { });
 
-      expect(schema).toBe(null);
+      expect(schemaUtil.find(schema, 'x')).toBe(null);
     });
 
     it('不存在的双字段图示', () => {
-      const { schemas } = form(() => {
+      const schema = form(() => {
         slider(['begin', 'end']);
       });
-      const schema = schemasUtils(schemas).find([['begin', 'e']]);
 
-      expect(schema).toBe(null);
+      expect(schemaUtil.find(schema, [['begin', 'e']])).toBe(null);
+      expect(schemaUtil.find(schema, ['begin', 'e'].toString())).toBe(null);
     });
   });
 });

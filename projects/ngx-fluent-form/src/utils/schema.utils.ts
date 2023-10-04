@@ -104,6 +104,27 @@ export class SchemaUtil {
 
     return validators;
   }
+
+  find(schema: AnyContainerSchema, key: SchemaKey): AnySchema | null;
+  find(schema: AnyContainerSchema, key: AnySchemaKey[]): AnySchema | null;
+  find(schema: AnyContainerSchema, path: SchemaKey | AnySchemaKey[]): AnySchema | null;
+  find(schema: AnyContainerSchema, path: SchemaKey | AnySchemaKey[]): AnySchema | null {
+    const paths = Array.isArray(path)
+      ? path.map(o => Array.isArray(o) ? o.toString() : o)
+      : path.toString().split('.');
+
+    let _schema: AnySchema | null = schema;
+
+    for (const path of paths) {
+      _schema = (_schema as AnyContainerSchema).schemas.find(o => o.key!.toString() === path) ?? null;
+
+      if (_schema === null) {
+        return _schema;
+      }
+    }
+
+    return _schema;
+  }
 }
 
 /**
@@ -112,51 +133,4 @@ export class SchemaUtil {
  */
 export function isDoubleKeyControlSchema(schema: SchemaLike): schema is DoubleKeyControlSchema {
   return Array.isArray(schema.key);
-}
-
-export function schemasUtils<S extends AnySchema[]>(schemas: S) {
-  return new SchemasUtils(schemas);
-}
-
-export class SchemasUtils<S extends AnySchema[]> {
-  constructor(private readonly schemas: S) { }
-
-  find<T extends AnySchema>(key: AnySchemaKey): T | null;
-  find<T extends AnySchema>(path: [...SchemaKey[], AnySchemaKey]): T | null;
-  find<T extends AnySchema>(path: AnySchemaKey | [...SchemaKey[], AnySchemaKey]): T | null;
-  find<T extends AnySchema>(path: AnySchemaKey | [...SchemaKey[], AnySchemaKey]): T | null {
-    let schemas: AnySchema[] = this.schemas;
-    // 如果是数组，那么除了最后一个元素，其他元素所对应的 schema 一定是 container schema
-    if (Array.isArray(path)) {
-      const [endPath, ...beforePath] = path.reverse() as [AnySchemaKey, ...SchemaKey[]];
-      schemas = beforePath.reduceRight(
-        (schemas, name) =>
-          (schemas.find(o => o.key === name) as AnyContainerSchema).schemas
-        ,
-        schemas
-      );
-      path = endPath;
-    }
-
-    return (schemas.find(o => {
-      // 处理双字段模式
-      if (Array.isArray(o.key) && Array.isArray(path)) {
-        return arraysEqual(o.key, path);
-      }
-
-      return o.key === path;
-    }) ?? null) as T | null;
-  }
-}
-
-/** @internal */
-function arraysEqual(a: unknown[], b: unknown[]): boolean {
-  if (a === b) return true;
-  if (a.length !== b.length) return false;
-
-  for (let i = 0; i < a.length; i++) {
-    if (a[i] !== b[i]) return false;
-  }
-
-  return true;
 }

@@ -1,12 +1,13 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { AnyControlSchema, AnySchema, AnySchemaKey, FormArraySchema, FormGroupSchema } from '../schemas';
-import { schemasUtils } from '../utils';
+import { inject, Pipe, PipeTransform } from '@angular/core';
+import { AnyContainerSchema, AnyControlSchema, AnySchema, AnySchemaKey, FormArraySchema, FormGroupSchema, SchemaKey } from '../schemas';
+import { SchemaUtil } from '../utils';
 
 @Pipe({
   name: 'schema',
   standalone: true
 })
 export class FluentSchemaPipe implements PipeTransform {
+  private readonly schemaUtil = inject(SchemaUtil);
 
   /**
    * 将 value 作为 key，获取 schemas 中的图示
@@ -14,12 +15,12 @@ export class FluentSchemaPipe implements PipeTransform {
    * @param schemas
    * @param type 用来重载方法的返回值
    */
-  transform(value: AnySchemaKey, schemas: AnySchema[], type: 'control'): AnyControlSchema | null;
-  transform(value: AnySchemaKey, schemas: AnySchema[], type: 'group'): FormGroupSchema | null;
-  transform(value: AnySchemaKey, schemas: AnySchema[], type: 'array'): FormArraySchema | null;
-  transform(value: AnySchemaKey, schemas: AnySchema[]): AnySchema | null;
-  transform(value: AnySchemaKey, schemas: AnySchema[]): AnySchema | null {
-    return schemasUtils(schemas).find(value);
+  transform(value: SchemaKey | AnySchemaKey[], schema: AnyContainerSchema, type: 'control'): AnyControlSchema | null;
+  transform(value: SchemaKey | AnySchemaKey[], schema: AnyContainerSchema, type: 'group'): FormGroupSchema | null;
+  transform(value: SchemaKey | AnySchemaKey[], schema: AnyContainerSchema, type: 'array'): FormArraySchema | null;
+  transform(value: SchemaKey | AnySchemaKey[], schema: AnyContainerSchema): AnySchema | null;
+  transform(value: SchemaKey | AnySchemaKey[], schema: AnyContainerSchema): AnySchema | null {
+    return this.schemaUtil.find(schema, value);
   }
 
 }

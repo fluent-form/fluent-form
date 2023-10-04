@@ -1,5 +1,5 @@
 import { Directive, inject } from '@angular/core';
-import { FluentConfig } from '../interfaces';
+import { DEFAULT_CONFIG, FluentConfig } from '../config';
 import { CONFIG } from '../tokens';
 
 @Directive({
@@ -9,7 +9,7 @@ import { CONFIG } from '../tokens';
   exportAs: 'fluentConfig'
 })
 export class FluentConfigDirective implements FluentConfig {
-  protected config = inject(CONFIG);
+  protected config = inject(CONFIG, { optional: true }) ?? DEFAULT_CONFIG;
 
   get layout() { return this.config.layout; }
   get colon() { return this.config.colon; }

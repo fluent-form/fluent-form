@@ -6,8 +6,9 @@ import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { NzFormLayoutType, NzFormModule } from 'ng-zorro-antd/form';
 import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
 import { takeUntil } from 'rxjs';
+import { DEFAULT_CONFIG, FluentConfig } from '../../config';
 import { FluentBindingDirective, FluentTemplateDirective } from '../../directives';
-import { DirectiveQueryContainer, FluentConfig } from '../../interfaces';
+import { DirectiveQueryContainer } from '../../interfaces';
 import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe } from '../../pipes';
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { SchemaKind } from '../../schemas/interfaces';
@@ -95,9 +96,9 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig, D
     return this._model;
   }
 
-  @Input() layout: NzFormLayoutType = 'vertical';
-  @Input() colon = true;
-  @Input() gutter: NzRowDirective['nzGutter'] | null = { xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 };
+  @Input() layout: NzFormLayoutType = DEFAULT_CONFIG.layout;
+  @Input() colon = DEFAULT_CONFIG.colon;
+  @Input() gutter: NzRowDirective['nzGutter'] | null = DEFAULT_CONFIG.gutter;
   @Input() align: NzAlign | null = null;
   @Input() justify: NzJustify | null = null;
 

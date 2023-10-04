@@ -1,17 +1,9 @@
 import type { QueryList } from '@angular/core';
 import { ValidatorFn } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
-import { NzFormLayoutType } from 'ng-zorro-antd/form';
-import { NzRowDirective } from 'ng-zorro-antd/grid';
 import type { FluentTemplateDirective } from './directives';
 import { AbstractSchema } from './schemas';
 import { SchemaType } from './schemas/interfaces';
-
-export interface FluentConfig {
-  layout: NzFormLayoutType;
-  colon: boolean;
-  gutter: NzRowDirective['nzGutter'];
-}
 
 export interface DirectiveQueryContainer {
   templateDirectives: QueryList<FluentTemplateDirective>;

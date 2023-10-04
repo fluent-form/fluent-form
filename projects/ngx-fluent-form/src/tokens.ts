@@ -1,6 +1,7 @@
 import { InjectionToken, Type } from '@angular/core';
 import { SafeAny } from '@ngify/types';
-import { DirectiveQueryContainer, FluentConfig, SchemaConfig, SchemaPatcher } from './interfaces';
+import { FluentConfig } from './config';
+import { DirectiveQueryContainer, SchemaConfig, SchemaPatcher } from './interfaces';
 import { AbstractWidget } from './widgets';
 
 export const WIDGET_MAP = new InjectionToken<Map<string, Type<AbstractWidget<unknown>>>>('WidgetMap');

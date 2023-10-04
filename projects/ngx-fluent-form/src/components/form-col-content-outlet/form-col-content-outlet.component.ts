@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, inject, Input, OnInit, TemplateRef,
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { DEFAULT_CONFIG } from '../../config';
 import { FluentWithInjectorDirective } from '../../directives';
 import { FluentControlPipe, FluentReactivePipe, FluentSchemaPipe, FluentSchemaTypePipe, FluentTemplatePipe, InvokePipe } from '../../pipes';
 import { AnySchema } from '../../schemas';
@@ -42,7 +43,7 @@ interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FluentFormColContentOutletComponent<T extends AnyObject | AnyArray> implements OnInit {
-  protected readonly config = inject(CONFIG);
+  protected readonly config = inject(CONFIG, { optional: true }) ?? DEFAULT_CONFIG;
   protected readonly SchemaKind = SchemaKind;
   protected readonly SchemaType = SchemaType;
   private readonly viewContainerRef = inject(ViewContainerRef);

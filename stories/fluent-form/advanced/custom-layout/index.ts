@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { checkbox, form, group, input, inputGroup, number, textarea } from 'ngx-fluent-form';
+import { checkbox, form, group, input, inputGroup, number } from 'ngx-fluent-form';
 import { AbstractFluentFormWrapperComponent, defineMeta, defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
@@ -13,7 +13,6 @@ import dedent from 'ts-dedent';
             <th>#</th>
             <th>Name</th>
             <th>Age</th>
-            <th nzWidth="175px">Address</th>
             <th>Cellphone</th>
             <th>Enabled</th>
           </tr>
@@ -31,11 +30,8 @@ import dedent from 'ts-dedent';
             <td>
               <fluent-outlet key="age"></fluent-outlet>
             </td>
-            <td nzWidth="175px">
-              <fluent-outlet key="address"></fluent-outlet>
-            </td>
-            <td fluentFormKey="info">
-              <fluent-outlet key="cellphone"></fluent-outlet>
+            <td>
+              <fluent-outlet key="info.cellphone"></fluent-outlet>
             </td>
             <td>
               <fluent-outlet key="enabled"></fluent-outlet>
@@ -59,7 +55,6 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
       firstName: 'John',
       lastName: 'Brown',
       age: 32,
-      address: 'New York No. 1 Lake Park',
       info: {
         cellphone: '1234567890'
       },
@@ -69,14 +64,12 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
       firstName: 'Jim',
       lastName: 'Green',
       age: 42,
-      address: 'London No. 1 Lake Park',
       enabled: true
     },
     {
       firstName: 'Joe',
       lastName: 'Black',
       age: 32,
-      address: 'Sidney No. 1 Lake Park',
       enabled: false
     }
   ];
@@ -89,8 +82,7 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
         input('firstName').col(8);
         input('lastName').col(16);
       });
-      number('age'),
-      textarea('address');
+      number('age');
       group('info').schemas(() => {
         input('cellphone');
       });
@@ -107,7 +99,7 @@ export const story = defineStory();
 
 export const source = dedent`
   import { Component } from '@angular/core';
-  import { checkbox, form, group, input, inputGroup, number, textarea } from 'ngx-fluent-form';
+  import { checkbox, form, group, input, inputGroup, number } from 'ngx-fluent-form';
 
   @Component({
     selector: 'example-component',
@@ -118,7 +110,6 @@ export const source = dedent`
             <th>#</th>
             <th>Name</th>
             <th>Age</th>
-            <th nzWidth="175px">Address</th>
             <th>Cellphone</th>
             <th>Enabled</th>
           </tr>
@@ -136,11 +127,8 @@ export const source = dedent`
             <td>
               <fluent-outlet key="age"></fluent-outlet>
             </td>
-            <td nzWidth="175px">
-              <fluent-outlet key="address"></fluent-outlet>
-            </td>
-            <td fluentFormKey="info">
-              <fluent-outlet key="cellphone"></fluent-outlet>
+            <td>
+              <fluent-outlet key="info.cellphone"></fluent-outlet>
             </td>
             <td>
               <fluent-outlet key="enabled"></fluent-outlet>
@@ -156,8 +144,7 @@ export const source = dedent`
         input('firstName').col(8);
         input('lastName').col(16);
       });
-      number('age'),
-        textarea('address');
+      number('age');
       group('info').schemas(() => {
         input('cellphone');
       });
@@ -169,7 +156,6 @@ export const source = dedent`
         firstName: 'John',
         lastName: 'Brown',
         age: 32,
-        address: 'New York No. 1 Lake Park',
         info: {
           cellphone: '1234567890'
         },
@@ -179,14 +165,12 @@ export const source = dedent`
         firstName: 'Jim',
         lastName: 'Green',
         age: 42,
-        address: 'London No. 1 Lake Park',
         enabled: true
       },
       {
         firstName: 'Joe',
         lastName: 'Black',
         age: 32,
-        address: 'Sidney No. 1 Lake Park',
         enabled: false
       }
     ];

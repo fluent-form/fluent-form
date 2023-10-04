@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { button, buttonGroup, form, FormArraySchema, FormGroupSchema, group, input, schemasUtils } from 'ngx-fluent-form';
+import { Component, inject } from '@angular/core';
+import { button, buttonGroup, form, FormArraySchema, FormGroupSchema, group, input, SchemaUtil } from 'ngx-fluent-form';
 import { AbstractFluentFormWrapperComponent, defineMeta, defineStory } from 'stories/storybook';
 import dedent from 'ts-dedent';
 
@@ -25,6 +25,8 @@ import dedent from 'ts-dedent';
   `]
 })
 class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
+  private readonly schemaUtil = inject(SchemaUtil);
+
   constructor() {
     super();
 
@@ -46,7 +48,7 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
   }
 
   add() {
-    const group = schemasUtils(this.schema.schemas).find<FormGroupSchema>('users')!;
+    const group = this.schemaUtil.find(this.schema, 'users') as FormGroupSchema;
     group.schemas.push(
       input(`user${group.schemas.length + 1}`).label('用户').col(12).build()
     );
@@ -54,7 +56,7 @@ class FluentFormWrapperComponent extends AbstractFluentFormWrapperComponent {
   }
 
   remove() {
-    const array = schemasUtils(this.schema.schemas).find<FormArraySchema>('users')!;
+    const array = this.schemaUtil.find(this.schema, 'users') as FormArraySchema;
     array.schemas.pop();
     this.schema = { ...this.schema };
   }
@@ -67,8 +69,8 @@ export const meta = defineMeta({
 export const story = defineStory();
 
 export const source = dedent`
-  import { Component } from '@angular/core';
-  import { array, button, buttonGroup, form, FormArraySchema, input, schemasUtils } from 'ngx-fluent-form';
+  import { Component, inject } from '@angular/core';
+  import { array, button, buttonGroup, form, FormArraySchema, input, SchemaUtil } from 'ngx-fluent-form';
 
   @Component({
     selector: 'example-component',
@@ -94,7 +96,7 @@ export const source = dedent`
     model = {};
 
     add() {
-      const group = schemasUtils(this.schema.schemas).find<FormGroupSchema>('users')!;
+      const group = this.schemaUtil.find(this.schema, 'users') as FormGroupSchema;
       group.schemas.push(
         input(\`user\${group.schemas.length + 1}\`).label('用户').col(12).build()
       );
@@ -102,7 +104,7 @@ export const source = dedent`
     }
 
     remove() {
-      const array = schemasUtils(this.schema.schemas).find<FormArraySchema>('users')!;
+      const array = this.schemaUtil.find(this.schema, 'users') as FormArraySchema;
       array.schemas.pop();
       this.schema = { ...this.schema };
     }

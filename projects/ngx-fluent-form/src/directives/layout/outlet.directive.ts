@@ -6,18 +6,11 @@ import { TemplateRegistry } from '../../services';
 import { WidgetTemplateContext } from '../../widgets';
 import { FluentControlContainer } from './models/control-container';
 
-// TODO
-// 目前 fluent-outlet 渲染的组件是不支持显示验证状态/控件标签的，考虑将 fluent-outlet 改为组件，
-// 内部把 nz-form-label 和 nz-form-control 渲染一下
-
 @Directive({
   // eslint-disable-next-line
   selector: 'fluent-outlet,[fluentOutlet]',
   exportAs: 'fluentOutlet',
-  standalone: true,
-  host: {
-    '[style.display]': `'none'`
-  }
+  standalone: true
 })
 export class FluentOutletDirective<T extends AnyObject | AnyArray> implements OnInit, OnChanges, OnDestroy, WidgetTemplateContext<AnyComponentSchema | AnyControlSchema, AbstractControl> {
   private readonly registry = inject(TemplateRegistry);
@@ -45,15 +38,14 @@ export class FluentOutletDirective<T extends AnyObject | AnyArray> implements On
   @Input() key!: SchemaKey;
 
   ngOnInit() {
-    this.controlContainer.directive.addDirective(this);
+    this.controlContainer.directive.addOutlet(this);
   }
 
   ngOnChanges() {
-    this.controlContainer.directive.assignDirective(this);
+    this.controlContainer.directive.updateOutlet(this);
   }
 
   ngOnDestroy() {
-    this.controlContainer.directive.removeDirective(this);
+    this.controlContainer.directive.removeOutlet(this);
   }
-
 }

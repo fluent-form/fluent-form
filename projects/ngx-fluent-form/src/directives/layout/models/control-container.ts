@@ -1,8 +1,8 @@
-import { Directive, EventEmitter, Output } from '@angular/core';
+import { Directive, inject } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
-import { AnyComponentSchema, AnyControlSchema, AnySchema } from '../../../schemas';
-import { schemasUtils } from '../../../utils';
+import { AnyComponentSchema, AnyContainerSchema, AnyControlSchema } from '../../../schemas';
+import { SchemaUtil } from '../../../utils';
 import { FluentOutletDirective } from '../outlet.directive';
 
 /**
@@ -10,45 +10,37 @@ import { FluentOutletDirective } from '../outlet.directive';
  */
 export abstract class FluentControlContainer<T extends AnyObject | AnyArray> {
   /** 当前图示 */
-  abstract schemas: AnySchema[];
+  abstract schema: AnyContainerSchema;
   /** 当前表单 */
   abstract form: AbstractControl;
   /** 当前模型 */
   abstract model: T;
 
   /** 当前容器的指令 */
-  abstract get directive(): ControlContainerDirective<T>;
+  abstract get directive(): FluentControlContainerDirective<T>;
 }
 
 @Directive()
-export abstract class ControlContainerDirective<T extends AnyObject | AnyArray> extends FluentControlContainer<T> {
-  @Output('fluentFormChange') formChange: EventEmitter<AbstractControl> = new EventEmitter();
+export abstract class FluentControlContainerDirective<T extends AnyObject | AnyArray> extends FluentControlContainer<T> {
+  protected readonly schemaUtil = inject(SchemaUtil);
+  protected outlets: FluentOutletDirective<T>[] = [];
 
-  protected directives: FluentOutletDirective<T>[] = [];
-
-  /**
-   * 添加子指令
-   * @param directive
-   */
-  addDirective(directive: FluentOutletDirective<T>) {
-    this.assignDirective(directive);
-    this.directives = this.directives.concat(directive);
+  /** @internal */
+  get directive(): FluentControlContainerDirective<T> {
+    return this;
   }
 
-  /**
-   * 分配参数到子指令
-   * @param directive
-   */
-  assignDirective(directive: FluentOutletDirective<T>) {
-    directive.control = this.form.get([directive.key]) ?? this.form;
-    directive.schema = schemasUtils(this.schemas).find<AnyComponentSchema | AnyControlSchema>(directive.key)!;
+  addOutlet(outlet: FluentOutletDirective<T>) {
+    this.outlets.push(outlet);
   }
 
-  /**
-   * 移除子指令
-   * @param directive
-   */
-  removeDirective(directive: FluentOutletDirective<T>) {
-    this.directives = this.directives.filter(o => o !== directive);
+  updateOutlet(outlet: FluentOutletDirective<T>) {
+    outlet.control = this.form.get(outlet.key.toString()) ?? this.form;
+    outlet.schema = this.schemaUtil.find(this.schema, outlet.key) as AnyComponentSchema | AnyControlSchema;
+  }
+
+  removeOutlet(outlet: FluentOutletDirective<T>) {
+    const index = this.outlets.indexOf(outlet);
+    this.outlets.splice(index, 1);
   }
 }

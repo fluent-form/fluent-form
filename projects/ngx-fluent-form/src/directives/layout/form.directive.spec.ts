@@ -1,37 +1,27 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
+import { MinusOutline, PlusOutline } from '@ant-design/icons-angular/icons';
 import { AnyObject } from '@ngify/types';
-import { form, group, input, inputGroup } from '../../compose';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { array, form, group, input, inputGroup } from '../../compose';
 import { withAllWidgets } from '../../features';
 import { provideFluentForm } from '../../provider';
 import { FormGroupSchema } from '../../schemas';
-import { FluentFormKeyDirective } from './form-key.directive';
-import { FluentFormDirective } from './form.directive';
-import { FluentOutletDirective } from './outlet.directive';
-
-// TODO 支持 form array
+import { FluentFormLayoutModule } from './module';
 
 @Component({
   standalone: true,
   imports: [
-    CommonModule,
-    FluentFormDirective,
-    FluentFormKeyDirective,
-    FluentOutletDirective
+    FluentFormLayoutModule
   ],
   template: `
     <div fluent-form [fluentSchema]="schema" [(fluentModel)]="model" (fluentFormChange)="form = $event">
       <fluent-outlet key="ipt"></fluent-outlet>
       <fluent-outlet key="ipts"></fluent-outlet>
-      <ng-container fluentFormKey="group">
-        <fluent-outlet key="ipt"></fluent-outlet>
-        <fluent-outlet key="ipts"></fluent-outlet>
-      </ng-container>
-      <!-- <ng-container #fluentFormKey="fluentFormKey" fluentFormKey="array">
-        <fluent-outlet *ngFor="let item of fluentFormKey.form.controls; index as index" [key]="index"></fluent-outlet>
-      </ng-container> -->
+      <fluent-outlet key="group.ipt"></fluent-outlet>
+      <fluent-outlet key="group.ipts"></fluent-outlet>
+      <fluent-outlet key="array"></fluent-outlet>
     </div>
   `
 })
@@ -47,15 +37,19 @@ describe('FluentFormDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        NzIconModule.forRoot([
+          PlusOutline,
+          MinusOutline
+        ])
+      ],
       providers: [
         provideFluentForm(
           withAllWidgets()
         )
       ]
     });
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(TestingComponent);
     component = fixture.componentInstance;
   });
@@ -72,9 +66,9 @@ describe('FluentFormDirective', () => {
           input('ipt2');
         });
       });
-      // array('array').schemas(
-      //   input()
-      // )
+      array('array').schemas(() => {
+        input();
+      });
     });
     component.model = {};
     fixture.detectChanges();
@@ -86,7 +80,7 @@ describe('FluentFormDirective', () => {
         ipt: null,
         ipt2: null,
       },
-      // array: [null]
+      array: []
     });
   });
 
@@ -103,15 +97,15 @@ describe('FluentFormDirective', () => {
             input('ipt2');
           });
         });
-        // array('array').schemas(
-        //   input()
-        // )
+        array('array').schemas(() => {
+          input();
+        });
       });
       component.model = {
         ipt: 'test',
         ipt2: 'test',
         group: { ipt: 'test', ipt2: 'test' },
-        // array: ['test']
+        array: ['test']
       };
       fixture.detectChanges();
 
@@ -122,7 +116,7 @@ describe('FluentFormDirective', () => {
           ipt: 'test',
           ipt2: 'test',
         },
-        // array: ['test']
+        array: ['test']
       });
     });
 
@@ -131,7 +125,7 @@ describe('FluentFormDirective', () => {
         ipt: 'test',
         ipt2: 'test',
         group: { ipt: 'test', ipt2: 'test' },
-        // array: ['test']
+        array: ['test']
       };
       component.schema = form(() => {
         input('ipt');
@@ -144,9 +138,9 @@ describe('FluentFormDirective', () => {
             input('ipt2');
           });
         });
-        // array('array').schemas(
-        //   input()
-        // )
+        array('array').schemas(() => {
+          input();
+        });
       });
       fixture.detectChanges();
 
@@ -157,7 +151,7 @@ describe('FluentFormDirective', () => {
           ipt: 'test',
           ipt2: 'test',
         },
-        // array: ['test']
+        array: ['test']
       });
     });
 
@@ -173,9 +167,9 @@ describe('FluentFormDirective', () => {
             input('ipt2');
           });
         });
-        // array('array').schemas(
-        //   input()
-        // )
+        array('array').schemas(() => {
+          input();
+        });
       });
       component.model = { ipt: 'test' };
       fixture.detectChanges();
@@ -187,7 +181,7 @@ describe('FluentFormDirective', () => {
           ipt: null,
           ipt2: null,
         },
-        // array: [null]
+        array: []
       });
 
       component.model = { ipt: 'test change' };
@@ -200,7 +194,7 @@ describe('FluentFormDirective', () => {
           ipt: null,
           ipt2: null,
         },
-        // array: [null]
+        array: []
       });
     });
   });
@@ -218,9 +212,9 @@ describe('FluentFormDirective', () => {
             input('ipt2').defaultValue('test');
           });
         });
-        // array('array').schemas(
-        //   input().defaultValue('test')
-        // )
+        array('array').schemas(() => {
+          input().defaultValue('test');
+        });
       });
       component.model = {};
       fixture.detectChanges();
@@ -232,7 +226,7 @@ describe('FluentFormDirective', () => {
           ipt: 'test',
           ipt2: 'test',
         },
-        // array: ['test']
+        array: []
       });
     });
 
@@ -249,9 +243,9 @@ describe('FluentFormDirective', () => {
             input('ipt2').defaultValue('test');
           });
         });
-        // array('array').schemas(
-        //   input().defaultValue('test')
-        // )
+        array('array').schemas(() => {
+          input().defaultValue('test');
+        });
       });
       fixture.detectChanges();
 
@@ -262,7 +256,7 @@ describe('FluentFormDirective', () => {
           ipt: 'test',
           ipt2: 'test',
         },
-        // array: ['test']
+        array: []
       });
     });
 
@@ -279,9 +273,9 @@ describe('FluentFormDirective', () => {
             input('ipt2');
           });
         });
-        // array('array').schemas(
-        //   input()
-        // )
+        array('array').schemas(() => {
+          input();
+        });
       });
       fixture.detectChanges();
 
@@ -292,7 +286,7 @@ describe('FluentFormDirective', () => {
           ipt: null,
           ipt2: null,
         },
-        // array: [null]
+        array: []
       });
 
       component.schema = form(() => {
@@ -306,9 +300,9 @@ describe('FluentFormDirective', () => {
             input('ipt2');
           });
         });
-        // array('array').schemas(
-        //   input()
-        // )
+        array('array').schemas(() => {
+          input();
+        });
       });
       fixture.detectChanges();
 
@@ -319,7 +313,7 @@ describe('FluentFormDirective', () => {
           ipt: null,
           ipt2: null,
         },
-        // array: [null]
+        array: []
       });
     });
   });
@@ -336,9 +330,9 @@ describe('FluentFormDirective', () => {
           input('ipt2');
         });
       });
-      // array('array').schemas(
-      //   input()
-      // )
+      array('array').schemas(() => {
+        input();
+      });
     }, { updateOn: 'blur' });
     component.model = {};
     fixture.detectChanges();
@@ -350,7 +344,7 @@ describe('FluentFormDirective', () => {
         ipt: null,
         ipt2: null,
       },
-      // array: [null]
+      array: []
     });
   });
 });

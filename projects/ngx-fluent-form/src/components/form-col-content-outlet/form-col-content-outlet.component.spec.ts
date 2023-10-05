@@ -3,7 +3,6 @@ import { FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { withAllWidgets } from '../../features';
 import { provideFluentForm } from '../../provider';
-import { CONFIG } from '../../tokens';
 import { FluentFormColContentOutletComponent } from './form-col-content-outlet.component';
 
 describe('FluentFormColContentOutletComponent', () => {
@@ -15,11 +14,7 @@ describe('FluentFormColContentOutletComponent', () => {
       providers: [
         provideFluentForm(
           withAllWidgets()
-        ),
-        {
-          provide: CONFIG,
-          useValue: {}
-        }
+        )
       ]
     });
 

@@ -1,6 +1,5 @@
 import { Directive, inject } from '@angular/core';
-import { DEFAULT_CONFIG, FluentConfig } from '../config';
-import { CONFIG } from '../tokens';
+import { CONFIG, FluentConfig } from '../config';
 
 @Directive({
   // eslint-disable-next-line
@@ -9,7 +8,7 @@ import { CONFIG } from '../tokens';
   exportAs: 'fluentConfig'
 })
 export class FluentConfigDirective implements FluentConfig {
-  protected config = inject(CONFIG, { optional: true }) ?? DEFAULT_CONFIG;
+  protected config = inject(CONFIG);
 
   get layout() { return this.config.layout; }
   get colon() { return this.config.colon; }

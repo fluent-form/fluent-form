@@ -4,6 +4,7 @@
 
 export * from './components';
 export * from './compose';
+export * from './config';
 export * from './directives';
 export * from './features';
 export * from './interfaces';

@@ -1,19 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { CONFIG } from '../tokens';
+import { provideFluentForm } from '../provider';
 import { FluentConfigDirective } from './config.directive';
 
 describe('FluentConfigDirective', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        {
-          provide: CONFIG,
-          useValue: {
-            layout: 'vertical',
-            colon: true,
-            gutter: { xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }
-          }
-        }
+        provideFluentForm()
       ]
     });
   });

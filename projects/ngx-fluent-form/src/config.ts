@@ -1,3 +1,4 @@
+import { InjectionToken } from '@angular/core';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { NzRowDirective } from 'ng-zorro-antd/grid';
 
@@ -12,3 +13,5 @@ export const DEFAULT_CONFIG: FluentConfig = {
   colon: true,
   gutter: { xs: 8, sm: 16, md: 24, lg: 32, xl: 32, xxl: 32 }
 };
+
+export const CONFIG = new InjectionToken<FluentConfig>('FluentConfig');

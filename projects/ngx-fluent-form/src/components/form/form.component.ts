@@ -6,13 +6,13 @@ import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { NzFormLayoutType, NzFormModule } from 'ng-zorro-antd/form';
 import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
 import { takeUntil } from 'rxjs';
-import { DEFAULT_CONFIG, FluentConfig } from '../../config';
+import { CONFIG, FluentConfig } from '../../config';
 import { FluentBindingDirective, FluentTemplateDirective } from '../../directives';
 import { DirectiveQueryContainer } from '../../interfaces';
 import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe } from '../../pipes';
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { SchemaKind } from '../../schemas/interfaces';
-import { CONFIG, DIRECTIVE_QUERY_CONTAINER } from '../../tokens';
+import { DIRECTIVE_QUERY_CONTAINER } from '../../tokens';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
 import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/form-col-content-outlet.component';
 
@@ -96,9 +96,9 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig, D
     return this._model;
   }
 
-  @Input() layout: NzFormLayoutType = DEFAULT_CONFIG.layout;
-  @Input() colon = DEFAULT_CONFIG.colon;
-  @Input() gutter: NzRowDirective['nzGutter'] | null = DEFAULT_CONFIG.gutter;
+  @Input() layout: NzFormLayoutType;
+  @Input() colon: boolean;
+  @Input() gutter: NzRowDirective['nzGutter'] | null;
   @Input() align: NzAlign | null = null;
   @Input() justify: NzJustify | null = null;
 
@@ -108,6 +108,13 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig, D
   @Output() statusChanges: EventEmitter<FormControlStatus> = new EventEmitter();
 
   @ContentChildren(FluentTemplateDirective) templateDirectives!: QueryList<FluentTemplateDirective>;
+
+  constructor() {
+    const config = inject(CONFIG, { skipSelf: true });
+    this.layout = config.layout;
+    this.colon = config.colon;
+    this.gutter = config.gutter;
+  }
 
   private createForm() {
     this.destroy$.next();

@@ -5,7 +5,7 @@ import type { FluentTemplateDirective } from './directives';
 import { AbstractSchema } from './schemas';
 import { SchemaType } from './schemas/interfaces';
 
-export interface DirectiveQueryContainer {
+export interface TemplateDirectivesContainer {
   templateDirectives: QueryList<FluentTemplateDirective>;
 }
 

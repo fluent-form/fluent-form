@@ -8,11 +8,11 @@ import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
 import { takeUntil } from 'rxjs';
 import { CONFIG, FluentConfig } from '../../config';
 import { FluentBindingDirective, FluentTemplateDirective } from '../../directives';
-import { DirectiveQueryContainer } from '../../interfaces';
+import { TemplateDirectivesContainer } from '../../interfaces';
 import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe } from '../../pipes';
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { SchemaKind } from '../../schemas/interfaces';
-import { DIRECTIVE_QUERY_CONTAINER } from '../../tokens';
+import { TEMPLATE_DIRECTIVES_CONTAINER } from '../../tokens';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
 import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/form-col-content-outlet.component';
 
@@ -42,12 +42,12 @@ import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/
       useExisting: forwardRef(() => FluentFormComponent)
     },
     {
-      provide: DIRECTIVE_QUERY_CONTAINER,
+      provide: TEMPLATE_DIRECTIVES_CONTAINER,
       useExisting: forwardRef(() => FluentFormComponent)
     }
   ]
 })
-export class FluentFormComponent<T extends AnyObject> implements FluentConfig, DirectiveQueryContainer {
+export class FluentFormComponent<T extends AnyObject> implements FluentConfig, TemplateDirectivesContainer {
   private readonly destroy$ = inject(NzDestroyService);
   private readonly formUtil = inject(FormUtil);
   private readonly modelUtil = inject(ModelUtil);

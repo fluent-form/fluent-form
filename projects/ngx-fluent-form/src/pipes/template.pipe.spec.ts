@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { WidgetTemplateRegistry } from '../services';
-import { DIRECTIVE_QUERY_CONTAINER } from '../tokens';
+import { TEMPLATE_DIRECTIVES_CONTAINER } from '../tokens';
 import { FluentTemplatePipe } from './template.pipe';
 
 describe('FluentTemplatePipe', () => {
@@ -11,7 +11,7 @@ describe('FluentTemplatePipe', () => {
       useValue: new Map()
     });
 
-    TestBed.overrideProvider(DIRECTIVE_QUERY_CONTAINER, {
+    TestBed.overrideProvider(TEMPLATE_DIRECTIVES_CONTAINER, {
       useValue: {
         templateDirectives: {
           find(fn: Function) {

@@ -5,10 +5,10 @@ import { WidgetTemplateRegistry } from '../services';
 import { TEMPLATE_DIRECTIVES_CONTAINER } from '../tokens';
 
 @Pipe({
-  name: 'template',
+  name: 'widgetTemplate',
   standalone: true
 })
-export class FluentTemplatePipe implements PipeTransform {
+export class FluentWidgetTemplatePipe implements PipeTransform {
   private readonly registry = inject(WidgetTemplateRegistry);
   private readonly directiveContainer = inject(TEMPLATE_DIRECTIVES_CONTAINER, { optional: true });
 

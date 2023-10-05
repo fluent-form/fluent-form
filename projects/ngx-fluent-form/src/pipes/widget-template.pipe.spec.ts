@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { WidgetTemplateRegistry } from '../services';
 import { TEMPLATE_DIRECTIVES_CONTAINER } from '../tokens';
-import { FluentTemplatePipe } from './template.pipe';
+import { FluentWidgetTemplatePipe } from './widget-template.pipe';
 
-describe('FluentTemplatePipe', () => {
-  let pipe: FluentTemplatePipe;
+describe('FluentWidgetTemplatePipe', () => {
+  let pipe: FluentWidgetTemplatePipe;
 
   beforeEach(() => {
     TestBed.overrideProvider(WidgetTemplateRegistry, {
@@ -21,7 +21,7 @@ describe('FluentTemplatePipe', () => {
       }
     });
 
-    pipe = TestBed.runInInjectionContext(() => new FluentTemplatePipe());
+    pipe = TestBed.runInInjectionContext(() => new FluentWidgetTemplatePipe());
   });
 
   it('create an instance', () => {

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentWithInjectorDirective } from '../../directives';
-import { FluentTemplatePipe } from '../../pipes';
+import { FluentWidgetTemplatePipe } from '../../pipes';
 import { ButtonGroupComponentSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -20,7 +20,7 @@ type ButtonGroupWidgetTemplateContext = WidgetTemplateContext<ButtonGroupCompone
     FluentBindingDirective,
     FluentWithInjectorDirective,
     FluentContextGuardDirective,
-    FluentTemplatePipe
+    FluentWidgetTemplatePipe
   ],
   templateUrl: './button-group.widget.html',
 })

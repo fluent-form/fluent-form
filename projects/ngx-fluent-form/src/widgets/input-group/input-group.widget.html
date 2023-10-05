@@ -17,7 +17,7 @@
     <ng-container
       *ngFor="let subschema of schema.schemas"
       fluentWithInjector
-      [ngTemplateOutlet]="subschema | template"
+      [ngTemplateOutlet]="subschema | widgetTemplate"
       [ngTemplateOutletContext]="{ control: subschema.key | control: control, schema: subschema, model: model }">
     </ng-container>
   </nz-input-group>

@@ -3,14 +3,14 @@
     <ng-container
       *ngSwitchCase="SchemaType.ControlContainer"
       fluentWithInjector
-      [ngTemplateOutlet]="schema | template"
+      [ngTemplateOutlet]="schema | widgetTemplate"
       [ngTemplateOutletContext]="{ control: control, schema: schema, model: model[schema.key] }">
     </ng-container>
 
     <ng-container
       *ngSwitchCase="SchemaType.ComponentContainer"
       fluentWithInjector
-      [ngTemplateOutlet]="schema | template"
+      [ngTemplateOutlet]="schema | widgetTemplate"
       [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
     </ng-container>
 
@@ -56,7 +56,7 @@
       [nzExtra]="currentSchema.hint">
       <ng-container
         fluentWithInjector
-        [ngTemplateOutlet]="schema | template"
+        [ngTemplateOutlet]="schema | widgetTemplate"
         [ngTemplateOutletContext]="{ control, schema, model }"></ng-container>
     </nz-form-control>
   </nz-form-item>

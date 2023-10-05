@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { WidgetTemplateRegistry } from '../services';
+import { withAllWidgets } from '../features';
+import { provideFluentForm } from '../provider';
 import { TEMPLATE_DIRECTIVE_CONTAINER } from '../tokens';
 import { FluentWidgetTemplatePipe } from './widget-template.pipe';
 
@@ -7,18 +8,23 @@ describe('FluentWidgetTemplatePipe', () => {
   let pipe: FluentWidgetTemplatePipe;
 
   beforeEach(() => {
-    TestBed.overrideProvider(WidgetTemplateRegistry, {
-      useValue: new Map()
-    });
-
-    TestBed.overrideProvider(TEMPLATE_DIRECTIVE_CONTAINER, {
-      useValue: {
-        templateDirectives: {
-          find(fn: Function) {
-            return fn({ name: 'named' }) ? { templateRef: {} } : null;
+    TestBed.configureTestingModule({
+      providers: [
+        provideFluentForm(
+          withAllWidgets()
+        ),
+        {
+          provide: TEMPLATE_DIRECTIVE_CONTAINER,
+          useValue: {
+            templateDirectives: { // mock QueryList
+              find(fn: Function) {
+                const dir = { name: 'named', templateRef: {} }; // mock FluentTemplateDirective
+                return fn(dir) ? dir : null;
+              }
+            }
           }
         }
-      }
+      ]
     });
 
     pipe = TestBed.runInInjectionContext(() => new FluentWidgetTemplatePipe());

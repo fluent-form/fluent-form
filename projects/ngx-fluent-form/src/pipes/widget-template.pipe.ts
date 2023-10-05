@@ -2,7 +2,7 @@ import { inject, Pipe, PipeTransform, TemplateRef } from '@angular/core';
 import { AnySchema } from '../schemas';
 import { SchemaKind } from '../schemas/interfaces';
 import { WidgetTemplateRegistry } from '../services';
-import { TEMPLATE_DIRECTIVES_CONTAINER } from '../tokens';
+import { TEMPLATE_DIRECTIVE_CONTAINER } from '../tokens';
 
 @Pipe({
   name: 'widgetTemplate',
@@ -10,7 +10,7 @@ import { TEMPLATE_DIRECTIVES_CONTAINER } from '../tokens';
 })
 export class FluentWidgetTemplatePipe implements PipeTransform {
   private readonly registry = inject(WidgetTemplateRegistry);
-  private readonly directiveContainer = inject(TEMPLATE_DIRECTIVES_CONTAINER, { optional: true });
+  private readonly directiveContainer = inject(TEMPLATE_DIRECTIVE_CONTAINER, { optional: true });
 
   transform(value: AnySchema): TemplateRef<unknown> {
     const templateDirectives = this.directiveContainer?.templateDirectives;

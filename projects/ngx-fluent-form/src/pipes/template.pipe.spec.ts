@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { TemplateRegistry } from '../services';
+import { WidgetTemplateRegistry } from '../services';
 import { DIRECTIVE_QUERY_CONTAINER } from '../tokens';
 import { FluentTemplatePipe } from './template.pipe';
 
@@ -7,7 +7,7 @@ describe('FluentTemplatePipe', () => {
   let pipe: FluentTemplatePipe;
 
   beforeEach(() => {
-    TestBed.overrideProvider(TemplateRegistry, {
+    TestBed.overrideProvider(WidgetTemplateRegistry, {
       useValue: new Map()
     });
 

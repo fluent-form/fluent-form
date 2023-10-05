@@ -4,7 +4,7 @@ import { WIDGET_MAP } from '../tokens';
 @Injectable({
   providedIn: 'root'
 })
-export class TemplateRegistry extends Map<string, TemplateRef<unknown>> {
+export class WidgetTemplateRegistry extends Map<string, TemplateRef<unknown>> {
   private readonly environmentInjector = inject(EnvironmentInjector);
   private readonly widgetMap = inject(WIDGET_MAP);
 

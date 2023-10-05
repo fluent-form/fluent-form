@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
-import { TemplateRegistry } from './template-registry.service';
+import { WidgetTemplateRegistry } from './widget-template-registry.service';
 
 describe('WidgetRegistry', () => {
-  let service: TemplateRegistry;
+  let service: WidgetTemplateRegistry;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -14,7 +14,7 @@ describe('WidgetRegistry', () => {
         )
       ]
     });
-    service = TestBed.inject(TemplateRegistry);
+    service = TestBed.inject(WidgetTemplateRegistry);
   });
 
   it('should be created', () => {

@@ -1,7 +1,7 @@
 import { inject, Pipe, PipeTransform, TemplateRef } from '@angular/core';
 import { AnySchema } from '../schemas';
 import { SchemaKind } from '../schemas/interfaces';
-import { TemplateRegistry } from '../services';
+import { WidgetTemplateRegistry } from '../services';
 import { DIRECTIVE_QUERY_CONTAINER } from '../tokens';
 
 @Pipe({
@@ -9,7 +9,7 @@ import { DIRECTIVE_QUERY_CONTAINER } from '../tokens';
   standalone: true
 })
 export class FluentTemplatePipe implements PipeTransform {
-  private readonly registry = inject(TemplateRegistry);
+  private readonly registry = inject(WidgetTemplateRegistry);
   private readonly directiveContainer = inject(DIRECTIVE_QUERY_CONTAINER, { optional: true });
 
   transform(value: AnySchema): TemplateRef<unknown> {

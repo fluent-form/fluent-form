@@ -2,7 +2,7 @@ import { Directive, inject, Input, OnChanges, OnDestroy, OnInit, ViewContainerRe
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { AnyComponentSchema, AnyControlSchema, SchemaKey } from '../../schemas';
-import { TemplateRegistry } from '../../services';
+import { WidgetTemplateRegistry } from '../../services';
 import { WidgetTemplateContext } from '../../widgets';
 import { FluentControlContainer } from './models/control-container';
 
@@ -13,7 +13,7 @@ import { FluentControlContainer } from './models/control-container';
   standalone: true
 })
 export class FluentOutletDirective<T extends AnyObject | AnyArray> implements OnInit, OnChanges, OnDestroy, WidgetTemplateContext<AnyComponentSchema | AnyControlSchema, AbstractControl> {
-  private readonly registry = inject(TemplateRegistry);
+  private readonly registry = inject(WidgetTemplateRegistry);
   private readonly viewContainerRef = inject(ViewContainerRef);
   private readonly controlContainer: FluentControlContainer<T> = inject(FluentControlContainer<T>, { host: true, skipSelf: true });
   private _schema!: AnyComponentSchema | AnyControlSchema;

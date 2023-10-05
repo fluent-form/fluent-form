@@ -3,7 +3,7 @@ import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
 import { WidgetTemplateRegistry } from './widget-template-registry.service';
 
-describe('WidgetRegistry', () => {
+describe('WidgetTemplateRegistry', () => {
   let service: WidgetTemplateRegistry;
 
   beforeEach(() => {

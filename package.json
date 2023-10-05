@@ -34,7 +34,7 @@
     "zone.js": "0.11.6"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "15.2.9",
+    "@angular-devkit/build-angular": "16.2.5",
     "@angular-eslint/builder": "15.2.1",
     "@angular-eslint/eslint-plugin": "15.2.1",
     "@angular-eslint/eslint-plugin-template": "15.2.1",
@@ -52,7 +52,7 @@
     "@storybook/addon-interactions": "6.5.16",
     "@storybook/addon-links": "6.5.16",
     "@storybook/addon-storysource": "6.5.16",
-    "@storybook/angular": "6.5.16",
+    "@storybook/angular": "7.4.6",
     "@storybook/builder-webpack5": "6.5.16",
     "@storybook/manager-webpack5": "6.5.16",
     "@storybook/mdx2-csf": "0.0.3",

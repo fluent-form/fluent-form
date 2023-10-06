@@ -14,13 +14,9 @@ export class SchemaUtil {
   private readonly schemaMap = inject(SCHEMA_MAP);
   private readonly schemaPatchers = inject(SCHEMA_PATCHERS, { optional: true }) ?? [];
 
-  patchSchemas<T extends AnySchema[]>(schemas: T) {
-    return schemas.map(schema => this.patchSchema(schema));
-  }
-
-  patchSchema<T extends AnySchema>(schema: T): T {
+  patch<T extends AnySchema>(schema: T): T {
     if ('schemas' in schema) {
-      schema.schemas = this.patchSchemas(schema.schemas);
+      schema.schemas = schema.schemas.map(schema => this.patch(schema));
     }
 
     return this.schemaPatchers
@@ -43,14 +39,14 @@ export class SchemaUtil {
   }
 
   /**
-   * 过滤出第一层的控件/控件容器图示
+   * 过滤出首层控件/控件容器图示
    * @param schemas
    */
-  filterControlSchemas(schemas: AnySchema[]) {
+  filterControls(schemas: AnySchema[]) {
     return schemas.reduce((schemas, schema) => {
-      if (this.isControlWrapperSchema(schema) || this.isComponentContainerSchema(schema)) {
-        schemas = schemas.concat(this.filterControlSchemas(schema.schemas));
-      } else if (this.isControlContainerSchema(schema) || this.isControlSchema(schema)) {
+      if (this.isControlWrapper(schema) || this.isComponentContainer(schema)) {
+        schemas = schemas.concat(this.filterControls(schema.schemas));
+      } else if (this.isControlContainer(schema) || this.isControl(schema)) {
         schemas.push(schema);
       }
 
@@ -58,36 +54,44 @@ export class SchemaUtil {
     }, [] as (AnyControlSchema | AnyControlContainerSchema)[]);
   }
 
-  isControlContainerSchema(schema: SchemaLike): schema is AnyControlContainerSchema {
+  isControlContainer(schema: SchemaLike): schema is AnyControlContainerSchema {
     return this.typeOf(schema) === SchemaType.ControlContainer;
   }
 
-  isControlWrapperSchema(schema: SchemaLike): schema is AnyControlWrapperSchema {
+  isControlWrapper(schema: SchemaLike): schema is AnyControlWrapperSchema {
     return this.typeOf(schema) === SchemaType.ControlWrapper;
   }
 
-  isControlSchema(schema: SchemaLike): schema is AnyControlSchema {
+  isControl(schema: SchemaLike): schema is AnyControlSchema {
     return this.typeOf(schema) === SchemaType.Control;
   }
 
-  isComponentContainerSchema(schema: SchemaLike): schema is AnyComponentContainerSchema {
+  isComponentContainer(schema: SchemaLike): schema is AnyComponentContainerSchema {
     return this.typeOf(schema) === SchemaType.ComponentContainer;
   }
 
-  isComponentWrapperSchema(schema: SchemaLike): schema is AnyComponentWrapperSchema {
+  isComponentWrapper(schema: SchemaLike): schema is AnyComponentWrapperSchema {
     return this.typeOf(schema) === SchemaType.ComponentWrapper;
   }
 
-  isComponentSchema(schema: SchemaLike): schema is AnyComponentSchema {
+  isComponent(schema: SchemaLike): schema is AnyComponentSchema {
     return this.typeOf(schema) === SchemaType.Component;
+  }
+
+  /**
+   * 是否为双字段图示
+   * @param schema
+   */
+  isDoubleKeyControl(schema: SchemaLike): schema is DoubleKeyControlSchema {
+    return Array.isArray(schema.key);
   }
 
   /**
    * 非控件图示，表示其本身或其子节点不会包含控件图示
    * @param schema
    */
-  isNonControlSchema(schema: SchemaLike): schema is AnyComponentSchema | AnyComponentWrapperSchema {
-    return this.isComponentSchema(schema) || this.isComponentWrapperSchema(schema);
+  isNonControl(schema: SchemaLike): schema is AnyComponentSchema | AnyComponentWrapperSchema {
+    return this.isComponent(schema) || this.isComponentWrapper(schema);
   }
 
   typeOf(schema: SchemaLike) {
@@ -97,7 +101,6 @@ export class SchemaUtil {
   validatorsOf(schema: AnyControlSchema) {
     const validators: ValidatorFn[] = this.schemaMap.get(schema.kind)?.validators?.(schema) ?? [];
 
-    // TODO required 可能是个函数，需要动态
     if (schema.required === true) {
       validators.push(Validators.required);
     }
@@ -125,12 +128,4 @@ export class SchemaUtil {
 
     return _schema;
   }
-}
-
-/**
- * 是否为双字段图示
- * @param schema
- */
-export function isDoubleKeyControlSchema(schema: SchemaLike): schema is DoubleKeyControlSchema {
-  return Array.isArray(schema.key);
 }

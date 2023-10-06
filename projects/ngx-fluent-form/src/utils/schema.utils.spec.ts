@@ -26,33 +26,33 @@ describe('SchemaUtil', () => {
     describe('with internal patcher', () => {
       it('heading patcher', () => {
         const schema: HeadingComponentSchema = { kind: 'heading', level: 1, content: '' };
-        expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'heading', level: 1, content: '', col: 24 });
+        expect(schemaUtil.patch(schema)).toEqual({ kind: 'heading', level: 1, content: '', col: 24 });
       });
 
       it('button patcher', () => {
         const schema: ButtonComponentSchema = { kind: 'button', variants: { block: true } };
-        expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'button', variants: { block: true }, col: 24 });
+        expect(schemaUtil.patch(schema)).toEqual({ kind: 'button', variants: { block: true }, col: 24 });
       });
 
       it('alert patcher', () => {
         const schema: AlertComponentSchema = { kind: 'alert', message: '' };
-        expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'alert', message: '', col: 24 });
+        expect(schemaUtil.patch(schema)).toEqual({ kind: 'alert', message: '', col: 24 });
       });
     });
   });
 
   it('isAnySchema', () => {
-    expect(schemaUtil.isComponentContainerSchema({ kind: 'tab' })).toBeTrue();
-    expect(schemaUtil.isComponentSchema({ kind: 'text' })).toBeTrue();
-    expect(schemaUtil.isComponentWrapperSchema({ kind: 'button-group' })).toBeTrue();
-    expect(schemaUtil.isControlContainerSchema({ kind: 'group' })).toBeTrue();
-    expect(schemaUtil.isControlWrapperSchema({ kind: 'input-group' })).toBeTrue();
-    expect(schemaUtil.isControlSchema({ kind: 'input' })).toBeTrue();
-    expect(schemaUtil.isNonControlSchema({ kind: 'button' })).toBeTrue();
+    expect(schemaUtil.isComponentContainer({ kind: 'tab' })).toBeTrue();
+    expect(schemaUtil.isComponent({ kind: 'text' })).toBeTrue();
+    expect(schemaUtil.isComponentWrapper({ kind: 'button-group' })).toBeTrue();
+    expect(schemaUtil.isControlContainer({ kind: 'group' })).toBeTrue();
+    expect(schemaUtil.isControlWrapper({ kind: 'input-group' })).toBeTrue();
+    expect(schemaUtil.isControl({ kind: 'input' })).toBeTrue();
+    expect(schemaUtil.isNonControl({ kind: 'button' })).toBeTrue();
   });
 
   it('filterControlSchemas', () => {
-    expect(schemaUtil.filterControlSchemas([
+    expect(schemaUtil.filterControls([
       { kind: 'text', content: '' },
       { kind: 'button-group', schemas: [] },
       { kind: 'input' },
@@ -296,43 +296,43 @@ describe('SchemaUtil with patcher feature', () => {
 
   it('with * selector', () => {
     const schema: InputControlSchema = { kind: 'input' };
-    expect(schemaUtil.patchSchema(schema).class).toBeInstanceOf(Set);
+    expect(schemaUtil.patch(schema).class).toBeInstanceOf(Set);
   });
 
   it('with kind selector', () => {
     const inputSchema: InputControlSchema = { kind: 'input' };
     const otherSchema: NumberInputControlSchema = { kind: 'number' };
-    expect(schemaUtil.patchSchema(inputSchema).class).toContain('kind-selector');
-    expect(schemaUtil.patchSchema(otherSchema).class).not.toContain('kind-selector');
+    expect(schemaUtil.patch(inputSchema).class).toContain('kind-selector');
+    expect(schemaUtil.patch(otherSchema).class).not.toContain('kind-selector');
   });
 
   it('with kind-array selector', () => {
     const inputSchema: InputControlSchema = { kind: 'input' };
     const numberSchema: NumberInputControlSchema = { kind: 'number' };
-    expect(schemaUtil.patchSchema(inputSchema).class).toContain('kind-array-selector');
-    expect(schemaUtil.patchSchema(numberSchema).class).toContain('kind-array-selector');
+    expect(schemaUtil.patch(inputSchema).class).toContain('kind-array-selector');
+    expect(schemaUtil.patch(numberSchema).class).toContain('kind-array-selector');
   });
 
   it('with schema-kind selector', () => {
     const inputSchema: InputControlSchema = { kind: 'input' };
     const buttonSchema: ButtonComponentSchema = { kind: 'button' };
-    expect(schemaUtil.patchSchema(inputSchema).class).toContain('schema-type-selector');
-    expect(schemaUtil.patchSchema(buttonSchema).class).not.toContain('schema-type-selector');
+    expect(schemaUtil.patch(inputSchema).class).toContain('schema-type-selector');
+    expect(schemaUtil.patch(buttonSchema).class).not.toContain('schema-type-selector');
   });
 
   it('with options selector', () => {
     const schema: InputControlSchema = { kind: 'input' };
-    expect(schemaUtil.patchSchema(schema).class).toContain('options-selector');
+    expect(schemaUtil.patch(schema).class).toContain('options-selector');
   });
 
   it('with multi patchers', () => {
     const schema: InputControlSchema = { kind: 'input' };
-    expect(schemaUtil.patchSchema(schema).class).toBeInstanceOf(Set);
-    expect(schemaUtil.patchSchema(schema).class).toContain('kind-selector');
-    expect(schemaUtil.patchSchema(schema).class).toContain('kind-array-selector');
-    expect(schemaUtil.patchSchema(schema).class).toContain('kind-array-selector');
-    expect(schemaUtil.patchSchema(schema).class).toContain('schema-type-selector');
-    expect(schemaUtil.patchSchema(schema).class).toContain('options-selector');
+    expect(schemaUtil.patch(schema).class).toBeInstanceOf(Set);
+    expect(schemaUtil.patch(schema).class).toContain('kind-selector');
+    expect(schemaUtil.patch(schema).class).toContain('kind-array-selector');
+    expect(schemaUtil.patch(schema).class).toContain('kind-array-selector');
+    expect(schemaUtil.patch(schema).class).toContain('schema-type-selector');
+    expect(schemaUtil.patch(schema).class).toContain('options-selector');
   });
 });
 
@@ -355,6 +355,6 @@ describe('SchemaUtil with no patcher feature', () => {
 
   it('no patcher', () => {
     const schema: TextComponentSchema = { kind: 'text', content: '' };
-    expect(schemaUtil.patchSchema(schema)).toEqual({ kind: 'text', content: '' });
+    expect(schemaUtil.patch(schema)).toEqual({ kind: 'text', content: '' });
   });
 });

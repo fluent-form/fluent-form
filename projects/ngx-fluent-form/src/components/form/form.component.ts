@@ -69,7 +69,7 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig, T
 
   @Input()
   set schema(value: FormGroupSchema) {
-    this._schema = this.schemaUtil.patchSchema(value);
+    this._schema = this.schemaUtil.patch(value);
 
     if (this.model) {
       this.createForm();

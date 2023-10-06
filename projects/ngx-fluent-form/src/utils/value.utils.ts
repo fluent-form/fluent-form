@@ -1,20 +1,21 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { AnyControlSchema } from '../schemas';
 import { isUndefined } from './is.utils';
-import { isDoubleKeyControlSchema } from './schema.utils';
+import { SchemaUtil } from './schema.utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ValueUtil {
+  private readonly schemaUtil = inject(SchemaUtil);
 
   valueOfModel<M extends AnyObject | AnyArray>(model: M, schema: AnyControlSchema): unknown {
     let value: unknown;
     // 如果从模型中读出来的值为 undefined，说明模型中没有写入该值，这里取图示中提供的默认值
     // 如果是双字段模式，则需要从模型中分别取得这两个字段的值组为一个元组
-    if (isDoubleKeyControlSchema(schema)) {
+    if (this.schemaUtil.isDoubleKeyControl(schema)) {
       value = schema.key!.map((key, index) => {
         const val = model[key as keyof M];
         return isUndefined(val) ? schema.defaultValue?.[index] ?? null : val;

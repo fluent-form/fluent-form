@@ -40,7 +40,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentC
 
   @Input('fluentSchema')
   set schema(value: FormGroupSchema) {
-    this._schema = this.schemaUtil.patchSchema(value);
+    this._schema = this.schemaUtil.patch(value);
 
     if (this.model) {
       this.createForm();

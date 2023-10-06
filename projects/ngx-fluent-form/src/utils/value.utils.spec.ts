@@ -26,7 +26,7 @@ describe('ValueUtils', () => {
     describe('normal', () => {
       it('no init value and default value', () => {
         const model = {};
-        const schema = schemaUtil.patchSchema({ kind: 'number', key: 'num' });
+        const schema = schemaUtil.patch({ kind: 'number', key: 'num' });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBeNull();
@@ -34,7 +34,7 @@ describe('ValueUtils', () => {
 
       it('with init value', () => {
         const model = { num: 1 };
-        const schema = schemaUtil.patchSchema({ kind: 'number', key: 'num' });
+        const schema = schemaUtil.patch({ kind: 'number', key: 'num' });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBe(1);
@@ -42,7 +42,7 @@ describe('ValueUtils', () => {
 
       it('with default value', () => {
         const model = {};
-        const schema = schemaUtil.patchSchema({ kind: 'number', key: 'num', defaultValue: 1 });
+        const schema = schemaUtil.patch({ kind: 'number', key: 'num', defaultValue: 1 });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBe(1);
@@ -50,7 +50,7 @@ describe('ValueUtils', () => {
 
       it('with init value and default value', () => {
         const model = { num: 2 };
-        const schema = schemaUtil.patchSchema({ kind: 'number', key: 'num', defaultValue: 1 });
+        const schema = schemaUtil.patch({ kind: 'number', key: 'num', defaultValue: 1 });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBe(2);
@@ -58,7 +58,7 @@ describe('ValueUtils', () => {
 
       it('with mapper', () => {
         const model = { num: '1' };
-        const schema = schemaUtil.patchSchema({
+        const schema = schemaUtil.patch({
           kind: 'number',
           key: 'num',
           mapper: {
@@ -75,7 +75,7 @@ describe('ValueUtils', () => {
     describe('double key control', () => {
       it('no init value and default value', () => {
         const model = {};
-        const schema = schemaUtil.patchSchema({ kind: 'slider', key: ['start', 'end'], range: true, });
+        const schema = schemaUtil.patch({ kind: 'slider', key: ['start', 'end'], range: true, });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBeNull();
@@ -83,7 +83,7 @@ describe('ValueUtils', () => {
 
       it('with init value', () => {
         const model = { start: 0, end: 100 };
-        const schema = schemaUtil.patchSchema({ kind: 'slider', key: ['start', 'end'], range: true, });
+        const schema = schemaUtil.patch({ kind: 'slider', key: ['start', 'end'], range: true, });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toEqual([0, 100]);
@@ -91,7 +91,7 @@ describe('ValueUtils', () => {
 
       it('with default value', () => {
         const model = {};
-        const schema = schemaUtil.patchSchema({ kind: 'slider', key: ['start', 'end'], range: true, defaultValue: [0, 100] });
+        const schema = schemaUtil.patch({ kind: 'slider', key: ['start', 'end'], range: true, defaultValue: [0, 100] });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toEqual([0, 100]);
@@ -99,7 +99,7 @@ describe('ValueUtils', () => {
 
       it('with init value and default value', () => {
         const model = { start: 1, end: 99 };
-        const schema = schemaUtil.patchSchema({ kind: 'slider', key: ['start', 'end'], range: true, defaultValue: [0, 100] });
+        const schema = schemaUtil.patch({ kind: 'slider', key: ['start', 'end'], range: true, defaultValue: [0, 100] });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toEqual([1, 99]);
@@ -107,7 +107,7 @@ describe('ValueUtils', () => {
 
       it('with mapper', () => {
         const model = { start: '0', end: '100' };
-        const schema = schemaUtil.patchSchema({
+        const schema = schemaUtil.patch({
           kind: 'slider',
           key: ['start', 'end'],
           range: true,
@@ -125,7 +125,7 @@ describe('ValueUtils', () => {
     describe('date control', () => {
       it('with no init value and default value', () => {
         const model = {};
-        const schema = schemaUtil.patchSchema({ kind: 'date', key: 'date' });
+        const schema = schemaUtil.patch({ kind: 'date', key: 'date' });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBeNull();
@@ -134,7 +134,7 @@ describe('ValueUtils', () => {
       it('with init value', () => {
         const now = Date.now();
         const model = { date: now };
-        const schema = schemaUtil.patchSchema({ kind: 'date', key: 'date' });
+        const schema = schemaUtil.patch({ kind: 'date', key: 'date' });
         const value = valueUtil.valueOfModel(model, schema) as Date;
 
         expect(value).toBeInstanceOf(Date);
@@ -144,7 +144,7 @@ describe('ValueUtils', () => {
       it('with default value', () => {
         const now = Date.now();
         const model = {};
-        const schema = schemaUtil.patchSchema({ kind: 'date', key: 'date', defaultValue: now });
+        const schema = schemaUtil.patch({ kind: 'date', key: 'date', defaultValue: now });
         const value = valueUtil.valueOfModel(model, schema) as Date;
 
         expect(value).toBeInstanceOf(Date);
@@ -155,7 +155,7 @@ describe('ValueUtils', () => {
     describe('time control', () => {
       it('with no init value and default value', () => {
         const model = {};
-        const schema = schemaUtil.patchSchema({ kind: 'time', key: 'time' });
+        const schema = schemaUtil.patch({ kind: 'time', key: 'time' });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBeNull();
@@ -164,7 +164,7 @@ describe('ValueUtils', () => {
       it('with init value', () => {
         const now = Date.now();
         const model = { time: now };
-        const schema = schemaUtil.patchSchema({ kind: 'time', key: 'time' });
+        const schema = schemaUtil.patch({ kind: 'time', key: 'time' });
         const value = valueUtil.valueOfModel(model, schema) as Date;
 
         expect(value).toBeInstanceOf(Date);
@@ -174,7 +174,7 @@ describe('ValueUtils', () => {
       it('with default value', () => {
         const now = Date.now();
         const model = {};
-        const schema = schemaUtil.patchSchema({ kind: 'time', key: 'time', defaultValue: now });
+        const schema = schemaUtil.patch({ kind: 'time', key: 'time', defaultValue: now });
         const value = valueUtil.valueOfModel(model, schema) as Date;
 
         expect(value).toBeInstanceOf(Date);
@@ -184,7 +184,7 @@ describe('ValueUtils', () => {
 
     describe('date range control', () => {
       it('with no init value and default value', () => {
-        const schema = schemaUtil.patchSchema({ kind: 'date-range', key: ['begin', 'end'] });
+        const schema = schemaUtil.patch({ kind: 'date-range', key: ['begin', 'end'] });
         const model = {};
         const value = valueUtil.valueOfModel(model, schema);
 
@@ -193,7 +193,7 @@ describe('ValueUtils', () => {
 
       it('with init value', () => {
         const begin = new Date(), end = new Date();
-        const schema = schemaUtil.patchSchema({ kind: 'date-range', key: ['begin', 'end'] });
+        const schema = schemaUtil.patch({ kind: 'date-range', key: ['begin', 'end'] });
         const model = { begin, end };
         const value = valueUtil.valueOfModel(model, schema);
 
@@ -201,7 +201,7 @@ describe('ValueUtils', () => {
       });
 
       it('with init value but is null', () => {
-        const schema = schemaUtil.patchSchema({ kind: 'date-range', key: ['begin', 'end'] });
+        const schema = schemaUtil.patch({ kind: 'date-range', key: ['begin', 'end'] });
         const model = { begin: null, end: null };
         const value = valueUtil.valueOfModel(model, schema);
 
@@ -210,7 +210,7 @@ describe('ValueUtils', () => {
 
       it('with default value', () => {
         const begin = new Date(), end = new Date();
-        const schema = schemaUtil.patchSchema({ kind: 'date-range', key: ['begin', 'end'], defaultValue: [begin, end] });
+        const schema = schemaUtil.patch({ kind: 'date-range', key: ['begin', 'end'], defaultValue: [begin, end] });
         const model = {};
         const value = valueUtil.valueOfModel(model, schema);
 
@@ -219,7 +219,7 @@ describe('ValueUtils', () => {
     });
 
     it('checkbox group control', () => {
-      const schema = schemaUtil.patchSchema({
+      const schema = schemaUtil.patch({
         kind: 'checkbox-group',
         key: 'active',
         options: [
@@ -240,7 +240,7 @@ describe('ValueUtils', () => {
 
   describe('getValueFromControl', () => {
     it('normal', () => {
-      const schema = schemaUtil.patchSchema({ kind: 'number', key: 'num' });
+      const schema = schemaUtil.patch({ kind: 'number', key: 'num' });
       const control = new FormControl(1);
       const value = valueUtil.valueOfControl(control, schema);
 
@@ -248,7 +248,7 @@ describe('ValueUtils', () => {
     });
 
     it('with mapper', () => {
-      const schema = schemaUtil.patchSchema({
+      const schema = schemaUtil.patch({
         kind: 'number',
         key: 'num',
         mapper: {
@@ -264,7 +264,7 @@ describe('ValueUtils', () => {
 
     describe('date control', () => {
       it('with has no value', () => {
-        const schema = schemaUtil.patchSchema({ kind: 'date', key: 'date', });
+        const schema = schemaUtil.patch({ kind: 'date', key: 'date', });
         const control = new FormControl(null);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -273,7 +273,7 @@ describe('ValueUtils', () => {
 
       it('with has value', () => {
         const now = new Date();
-        const schema = schemaUtil.patchSchema({ kind: 'date', key: 'date', });
+        const schema = schemaUtil.patch({ kind: 'date', key: 'date', });
         const control = new FormControl(now);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -283,7 +283,7 @@ describe('ValueUtils', () => {
 
     describe('time control', () => {
       it('with has no value', () => {
-        const schema = schemaUtil.patchSchema({ kind: 'time', key: 'time', });
+        const schema = schemaUtil.patch({ kind: 'time', key: 'time', });
         const control = new FormControl(null);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -292,7 +292,7 @@ describe('ValueUtils', () => {
 
       it('with has value', () => {
         const now = new Date();
-        const schema = schemaUtil.patchSchema({ kind: 'time', key: 'time', });
+        const schema = schemaUtil.patch({ kind: 'time', key: 'time', });
         const control = new FormControl(now);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -302,7 +302,7 @@ describe('ValueUtils', () => {
 
     describe('date range control', () => {
       it('with has no value', () => {
-        const schema = schemaUtil.patchSchema({ kind: 'date-range', key: 'range', });
+        const schema = schemaUtil.patch({ kind: 'date-range', key: 'range', });
         const control = new FormControl(null);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -311,7 +311,7 @@ describe('ValueUtils', () => {
 
       it('with has value', () => {
         const begin = new Date(), end = new Date();
-        const schema = schemaUtil.patchSchema({ kind: 'date-range', key: 'range', });
+        const schema = schemaUtil.patch({ kind: 'date-range', key: 'range', });
         const control = new FormControl([begin, end]);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -320,7 +320,7 @@ describe('ValueUtils', () => {
     });
 
     it('checkbox group control', () => {
-      const schema = schemaUtil.patchSchema({ kind: 'checkbox-group', key: 'active', options: [] });
+      const schema = schemaUtil.patch({ kind: 'checkbox-group', key: 'active', options: [] });
       const control = new FormControl([
         { label: 'one', value: 1, checked: true },
         { label: 'two', value: 2, checked: false },

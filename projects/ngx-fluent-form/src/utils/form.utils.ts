@@ -6,7 +6,7 @@ import { AnyControlContainerSchema, AnyControlSchema, AnySchema } from '../schem
 import { SchemaKind } from '../schemas/interfaces';
 import { ValueTransformer } from '../services';
 import { isUndefined } from './is.utils';
-import { isDoubleKeyControlSchema, SchemaUtil } from './schema.utils';
+import { SchemaUtil } from './schema.utils';
 import { ValueUtil } from './value.utils';
 
 @Injectable({
@@ -58,7 +58,7 @@ export class FormUtil {
 
   private createControlMap(schemas: AnySchema[], model: AnyObject) {
     return schemas.reduce((controls, schema) => {
-      if (this.schemaUtil.isNonControlSchema(schema)) {
+      if (this.schemaUtil.isNonControl(schema)) {
         return controls;
       }
 
@@ -68,7 +68,7 @@ export class FormUtil {
       } else if (schema.kind === SchemaKind.Array) {
         const key = schema.key!.toString();
         controls[key] = this.createFormArray(schema, model[key] ?? []);
-      } else if (this.schemaUtil.isControlWrapperSchema(schema) || this.schemaUtil.isComponentContainerSchema(schema)) {
+      } else if (this.schemaUtil.isControlWrapper(schema) || this.schemaUtil.isComponentContainer(schema)) {
         Object.assign(controls, this.createControlMap(schema.schemas, model));
       } else {
         controls[schema.key!.toString()] = this.createFormControl(schema, model);
@@ -90,7 +90,7 @@ export class FormUtil {
 
   createFormArrayElements(schemas: AnySchema[], model: AnyArray) {
     // 只拿第一个，其他的忽略
-    const [schema] = this.schemaUtil.filterControlSchemas(schemas);
+    const [schema] = this.schemaUtil.filterControls(schemas);
 
     if (!schema) {
       throw Error('FormArray element control schema not found');
@@ -130,7 +130,7 @@ export class FormUtil {
   updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AnySchema[], emitEvent = true): void {
     for (const schema of schemas) {
       // 这些图示不包含控件图示，直接跳过
-      if (this.schemaUtil.isNonControlSchema(schema)) continue;
+      if (this.schemaUtil.isNonControl(schema)) continue;
 
       if (schema.kind === SchemaKind.Group) {
         const key = schema.key!;
@@ -143,14 +143,14 @@ export class FormUtil {
       if (schema.kind === SchemaKind.Array) {
         const key = schema.key!;
         const formArray = form.get([key]) as FormArray;
-        const [elementSchema] = this.schemaUtil.filterControlSchemas(schema.schemas);
+        const [elementSchema] = this.schemaUtil.filterControls(schema.schemas);
         const elementSchemas = formArray.controls.map((_, index) => ({ ...elementSchema, key: index }));
 
         this.updateForm(formArray, model[schema.key!], elementSchemas, false);
         continue;
       }
 
-      if (this.schemaUtil.isControlWrapperSchema(schema) || this.schemaUtil.isComponentContainerSchema(schema)) {
+      if (this.schemaUtil.isControlWrapper(schema) || this.schemaUtil.isComponentContainer(schema)) {
         this.updateForm(form as FormGroup, model, schema.schemas, false);
         continue;
       }
@@ -188,7 +188,7 @@ export class FormUtil {
   updateModel(model: AnyObject, form: FormGroup | FormArray, schemas: AnySchema[]): AnyObject | AnyArray {
     for (const schema of schemas) {
       // 这些图示不包含控件图示，直接跳过
-      if (this.schemaUtil.isNonControlSchema(schema)) continue;
+      if (this.schemaUtil.isNonControl(schema)) continue;
 
       if (schema.kind === SchemaKind.Group) {
         const key = schema.key!;
@@ -201,14 +201,14 @@ export class FormUtil {
       if (schema.kind === SchemaKind.Array) {
         const key = schema.key!;
         const formArray = form.get([key]) as FormArray;
-        const [elementSchema] = this.schemaUtil.filterControlSchemas(schema.schemas);
+        const [elementSchema] = this.schemaUtil.filterControls(schema.schemas);
         const elementSchemas = formArray.controls.map((_, index) => ({ ...elementSchema, key: index }));
 
         this.updateModel(model[key] = [], formArray, elementSchemas);
         continue;
       }
 
-      if (this.schemaUtil.isControlWrapperSchema(schema) || this.schemaUtil.isComponentContainerSchema(schema)) {
+      if (this.schemaUtil.isControlWrapper(schema) || this.schemaUtil.isComponentContainer(schema)) {
         this.updateModel(model, form as FormGroup, schema.schemas);
         continue;
       }
@@ -218,7 +218,7 @@ export class FormUtil {
       const value = this.valueUtil.valueOfControl(control, schema);
 
       // 双字段情况
-      if (isDoubleKeyControlSchema(schema)) {
+      if (this.schemaUtil.isDoubleKeyControl(schema)) {
         schema.key!.map((prop, idx) => {
           model[prop] = (value as [unknown, unknown])?.[idx] ?? null;
         });

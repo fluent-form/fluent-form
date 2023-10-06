@@ -27,7 +27,7 @@ export class ModelUtil {
   updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AnySchema[], emitEvent = true): FormGroup | FormArray {
     for (const schema of schemas) {
       // 这些图示不包含控件图示，直接跳过
-      if (this.schemaUtil.isNonControlSchema(schema)) continue;
+      if (this.schemaUtil.isNonControl(schema)) continue;
 
       if (schema.kind === SchemaKind.Group) {
         const key = schema.key!;
@@ -44,7 +44,7 @@ export class ModelUtil {
 
         // 如果模型数组的长度与数组控件长度一致，则原地更新表单值，否则直接重建数组控件
         if (array.length === formArray.length) {
-          const [elementSchema] = this.schemaUtil.filterControlSchemas(schema.schemas);
+          const [elementSchema] = this.schemaUtil.filterControls(schema.schemas);
           const elementSchemas = array.map((_, index) => ({ ...elementSchema, key: index }));
 
           this.updateForm(formArray, array, elementSchemas, false);
@@ -60,7 +60,7 @@ export class ModelUtil {
         continue;
       }
 
-      if (this.schemaUtil.isComponentContainerSchema(schema) || this.schemaUtil.isControlWrapperSchema(schema)) {
+      if (this.schemaUtil.isComponentContainer(schema) || this.schemaUtil.isControlWrapper(schema)) {
         this.updateForm(form as FormGroup, model, schema.schemas, false);
         continue;
       }

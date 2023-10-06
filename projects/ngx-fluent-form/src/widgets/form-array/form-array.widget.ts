@@ -48,7 +48,7 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
   private readonly formUtil = inject(FormUtil);
 
   protected push(control: FormArray, schema: FormArraySchema) {
-    const [elementSchema] = this.schemaUtil.filterControlSchemas(schema.schemas);
+    const [elementSchema] = this.schemaUtil.filterControls(schema.schemas);
 
     control.push(
       this.formUtil.createAnyControl(elementSchema, {})

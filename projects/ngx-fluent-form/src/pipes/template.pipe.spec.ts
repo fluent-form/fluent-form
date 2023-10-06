@@ -37,7 +37,7 @@ describe('FluentTemplatePipe', () => {
     expect(pipe.transform('#x')).toEqual('#x');
   });
 
-  it('should be find template (with template schema)', () => {
+  it('should be find template', () => {
     expect(pipe.transform('#named')).toBeTruthy();
   });
 });

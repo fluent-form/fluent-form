@@ -118,17 +118,26 @@ export class FormUtil {
     }
   }
 
+  /**
+   * 更新表单状态，目前包括更新 validator 与 enabled / disabled
+   * @param form
+   * @param model
+   * @param schemas
+   * @param emitEvent
+   */
   updateForm(form: FormGroup, model: AnyObject, schemas: AnySchema[], emitEvent?: boolean): void;
   updateForm(form: FormArray, model: AnyArray, schemas: AnySchema[], emitEvent?: boolean): void;
   updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AnySchema[], emitEvent = true): void {
-    schemas.forEach(schema => {
+    for (const schema of schemas) {
       // 这些图示不包含控件图示，直接跳过
-      if (this.schemaUtil.isNonControlSchema(schema)) return;
+      if (this.schemaUtil.isNonControlSchema(schema)) continue;
 
       if (schema.kind === SchemaKind.Group) {
         const key = schema.key!;
         const formGroup = form.get([key]) as FormGroup;
-        return this.updateForm(formGroup, model[key], schema.schemas, false);
+
+        this.updateForm(formGroup, model[key], schema.schemas, false);
+        continue;
       }
 
       if (schema.kind === SchemaKind.Array) {
@@ -137,11 +146,13 @@ export class FormUtil {
         const [elementSchema] = this.schemaUtil.filterControlSchemas(schema.schemas);
         const elementSchemas = formArray.controls.map((_, index) => ({ ...elementSchema, key: index }));
 
-        return this.updateForm(formArray, model[schema.key!], elementSchemas, false);
+        this.updateForm(formArray, model[schema.key!], elementSchemas, false);
+        continue;
       }
 
       if (this.schemaUtil.isControlWrapperSchema(schema) || this.schemaUtil.isComponentContainerSchema(schema)) {
-        return this.updateForm(form as FormGroup, model, schema.schemas, false);
+        this.updateForm(form as FormGroup, model, schema.schemas, false);
+        continue;
       }
 
       const control = form.get([schema.key!.toString()])!;
@@ -161,23 +172,30 @@ export class FormUtil {
       } else {
         control.removeValidators(Validators.required);
       }
-    });
+    }
 
     emitEvent && form.updateValueAndValidity({ emitEvent: false });
   }
 
+  /**
+   * 从 form 赋值到 model
+   * @param model
+   * @param form
+   * @param schemas
+   */
   updateModel(model: AnyObject, form: FormGroup, schemas: AnySchema[]): AnyObject;
   updateModel(model: AnyArray, form: FormArray, schemas: AnySchema[]): AnyArray;
   updateModel(model: AnyObject, form: FormGroup | FormArray, schemas: AnySchema[]): AnyObject | AnyArray {
-    schemas.forEach(schema => {
+    for (const schema of schemas) {
       // 这些图示不包含控件图示，直接跳过
-      if (this.schemaUtil.isNonControlSchema(schema)) return;
+      if (this.schemaUtil.isNonControlSchema(schema)) continue;
 
       if (schema.kind === SchemaKind.Group) {
         const key = schema.key!;
         const formGroup = form.get([key]) as FormGroup;
+
         this.updateModel(model[key] = {}, formGroup, schema.schemas);
-        return;
+        continue;
       }
 
       if (schema.kind === SchemaKind.Array) {
@@ -187,12 +205,12 @@ export class FormUtil {
         const elementSchemas = formArray.controls.map((_, index) => ({ ...elementSchema, key: index }));
 
         this.updateModel(model[key] = [], formArray, elementSchemas);
-        return;
+        continue;
       }
 
       if (this.schemaUtil.isControlWrapperSchema(schema) || this.schemaUtil.isComponentContainerSchema(schema)) {
         this.updateModel(model, form as FormGroup, schema.schemas);
-        return;
+        continue;
       }
 
       const key = schema.key!.toString();
@@ -207,7 +225,7 @@ export class FormUtil {
       } else {
         model[key] = value;
       }
-    });
+    }
 
     return model;
   }

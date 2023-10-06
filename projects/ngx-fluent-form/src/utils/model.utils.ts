@@ -15,18 +15,26 @@ export class ModelUtil {
   private readonly valueUtil = inject(ValueUtil);
   private readonly formUtil = inject(FormUtil);
 
+  /**
+   * 从 model 赋值到 form
+   * @param form
+   * @param model
+   * @param schemas
+   * @param emitEvent
+   */
   updateForm(form: FormGroup, model: AnyObject, schemas: AnySchema[], emitEvent?: boolean): FormGroup;
   updateForm(form: FormArray, model: AnyArray, schemas: AnySchema[], emitEvent?: boolean): FormArray;
   updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AnySchema[], emitEvent = true): FormGroup | FormArray {
-    schemas.forEach(schema => {
+    for (const schema of schemas) {
       // 这些图示不包含控件图示，直接跳过
-      if (this.schemaUtil.isNonControlSchema(schema)) return;
+      if (this.schemaUtil.isNonControlSchema(schema)) continue;
 
       if (schema.kind === SchemaKind.Group) {
         const key = schema.key!;
         const formGroup = form.get([key]) as FormGroup;
+
         this.updateForm(formGroup, model[key] ??= {}, schema.schemas, false);
-        return;
+        continue;
       }
 
       if (schema.kind === SchemaKind.Array) {
@@ -34,6 +42,7 @@ export class ModelUtil {
         const array: AnyArray = model[key] ??= [];
         const formArray = form.get([key]) as FormArray;
 
+        // 如果模型数组的长度与数组控件长度一致，则原地更新表单值，否则直接重建数组控件
         if (array.length === formArray.length) {
           const [elementSchema] = this.schemaUtil.filterControlSchemas(schema.schemas);
           const elementSchemas = array.map((_, index) => ({ ...elementSchema, key: index }));
@@ -48,19 +57,19 @@ export class ModelUtil {
             formArray.push(control, { emitEvent: false });
           }
         }
-        return;
+        continue;
       }
 
       if (this.schemaUtil.isComponentContainerSchema(schema) || this.schemaUtil.isControlWrapperSchema(schema)) {
         this.updateForm(form as FormGroup, model, schema.schemas, false);
-        return;
+        continue;
       }
 
       const key = schema.key!.toString();
       const value = this.valueUtil.valueOfModel(model, schema);
 
       form.get([key])!.setValue(value, { emitEvent: false });
-    });
+    }
 
     emitEvent && form.updateValueAndValidity();
 

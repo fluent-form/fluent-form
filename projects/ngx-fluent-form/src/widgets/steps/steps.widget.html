@@ -18,9 +18,9 @@
       [fluentBinding]="{ component, schema, control }"
       [ngClass]="subschema.class"
       [ngStyle]="subschema.style"
-      [nzTitle]="subschema.title"
-      [nzSubtitle]="subschema.subtitle"
-      [nzDescription]="subschema.description"
+      [nzTitle]="subschema.title | template"
+      [nzSubtitle]="subschema.subtitle | template"
+      [nzDescription]="subschema.description | template"
       [nzDisabled]="subschema.disabled | reactive: model:subschema:control"
       [nzStatus]="subschema.status ?? schema.active === index ? 'process' : 'wait'"
       [hidden]="subschema.hidden | reactive: model:subschema:control"></nz-step>

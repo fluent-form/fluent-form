@@ -26,8 +26,8 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentReactivePipe,
+    FluentColumnPipe,
     InvokePipe,
-    FluentColumnPipe
   ],
   templateUrl: './tree-select.widget.html',
   styles: [`nz-tree-select { width: 100% }`]

@@ -25,8 +25,8 @@ type NumberWidgetTemplateContext = WidgetTemplateContext<NumberInputControlSchem
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentReactivePipe,
+    FluentColumnPipe,
     InvokePipe,
-    FluentColumnPipe
   ],
   templateUrl: './number.widget.html',
   styles: [`nz-input-number { width: 100% }`]

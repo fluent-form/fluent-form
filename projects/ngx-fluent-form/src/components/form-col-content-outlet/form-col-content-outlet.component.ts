@@ -5,7 +5,7 @@ import { AnyArray, AnyObject } from '@ngify/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { CONFIG } from '../../config';
 import { FluentWithInjectorDirective } from '../../directives';
-import { FluentControlPipe, FluentReactivePipe, FluentSchemaPipe, FluentSchemaTypePipe, FluentWidgetTemplatePipe, InvokePipe } from '../../pipes';
+import { FluentControlPipe, FluentReactivePipe, FluentSchemaPipe, FluentSchemaTypePipe, FluentTemplatePipe, FluentWidgetTemplatePipe, InvokePipe } from '../../pipes';
 import { AnySchema } from '../../schemas';
 import { labelHelper, tooltipHelper } from '../../schemas/helper';
 import { SchemaKind, SchemaType } from '../../schemas/interfaces';
@@ -34,6 +34,7 @@ interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
     FluentReactivePipe,
     FluentSchemaPipe,
     FluentControlPipe,
+    FluentTemplatePipe,
     FluentWidgetTemplatePipe,
     FluentSchemaTypePipe,
     InvokePipe

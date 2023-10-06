@@ -27,7 +27,7 @@
         [nzBorderless]="schema.borderless"
         [nzBackdrop]="schema.backdrop!"
         [nzInputReadOnly]="schema.readonly | reactive: model:schema:control"
-        [nzSuffixIcon]="schema.suffixIcon ?? 'clock-circle'">
+        [nzSuffixIcon]="schema.suffixIcon | template: 'clock-circle'">
       </nz-time-picker>
     </ng-container>
 
@@ -50,7 +50,7 @@
         [nzBorderless]="schema.borderless"
         [nzBackdrop]="schema.backdrop!"
         [nzInputReadOnly]="schema.readonly | reactive: model:schema:control"
-        [nzSuffixIcon]="schema.suffixIcon ?? 'clock-circle'">
+        [nzSuffixIcon]="schema.suffixIcon | template: 'clock-circle'">
       </nz-time-picker>
     </ng-template>
   </ng-container>

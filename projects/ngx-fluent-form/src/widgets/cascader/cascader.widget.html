@@ -18,7 +18,7 @@
         [nzAllowClear]="schema.clearable ?? true"
         [nzAutoFocus]="schema.autofocus"
         [nzBackdrop]="schema.backdrop!"
-        [nzExpandIcon]="schema.expandIcon!"
+        [nzExpandIcon]="schema.expandIcon | template: ''"
         [nzExpandTrigger]="schema.trigger!"
         [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
         [nzLoadData]="schema.fetchOptions"
@@ -27,7 +27,7 @@
         [nzShowArrow]="schema.arrow ?? true"
         [nzShowSearch]="schema.searchable!"
         [nzSize]="schema.size!"
-        [nzSuffixIcon]="schema.suffixIcon!"
+        [nzSuffixIcon]="schema.suffixIcon | template: 'down'"
         [nzValueProperty]="schema.config?.valueProperty ?? 'value'">
       </nz-cascader>
     </ng-container>
@@ -42,7 +42,7 @@
         [nzAllowClear]="schema.clearable ?? true"
         [nzAutoFocus]="schema.autofocus"
         [nzBackdrop]="schema.backdrop!"
-        [nzExpandIcon]="schema.expandIcon ?? ''"
+        [nzExpandIcon]="schema.expandIcon | template: ''"
         [nzExpandTrigger]="schema.trigger!"
         [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
         [nzLoadData]="schema.fetchOptions"
@@ -51,7 +51,7 @@
         [nzShowArrow]="schema.arrow ?? true"
         [nzShowSearch]="schema.searchable!"
         [nzSize]="schema.size!"
-        [nzSuffixIcon]="schema.suffixIcon ?? 'down'"
+        [nzSuffixIcon]="schema.suffixIcon | template: 'down'"
         [nzValueProperty]="schema.config?.valueProperty ?? 'value'">
       </nz-cascader>
     </ng-template>

@@ -103,7 +103,7 @@ export interface SelectControlSchema<Key extends SchemaKey = SchemaKey, Val = Sa
   autofocus?: boolean;
   arrow?: boolean;
   size?: NzSelectSizeType;
-  suffixIcon?: TemplateRef<SafeAny> | string;
+  suffixIcon?: string | TemplateRef<SafeAny>;
   loading?: boolean;
   options?: AnyObject[] | SchemaReactiveFn<SelectControlSchema<SchemaKey, Val>, AnyObject[]>;
   fetchOptions?: (keyword$: Observable<string>, ctx: SchemaContext<SelectControlSchema<SchemaKey, Val>>) => Observable<AnyObject[]>;
@@ -202,7 +202,7 @@ export interface RateControlSchema<Key extends SchemaKey = SchemaKey, Val = numb
   /** star count */
   count?: number;
   /** custom character of rate */
-  character?: TemplateRef<void>;
+  character?: string | TemplateRef<void>;
   /** Customize tooltip by each character */
   tooltips?: string[];
   autofocus?: boolean;

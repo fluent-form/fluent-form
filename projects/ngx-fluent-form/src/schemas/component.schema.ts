@@ -45,9 +45,9 @@ export interface AlertComponentSchema<Key extends SchemaKey = SchemaKey>
   extends AbstractSchema<Key>, ComponentEventListenerHolder<NzAlertComponent>, ComponentPropertyHolder<NzAlertComponent> {
   kind: 'alert';
   type?: NzAlertComponent['nzType'];
-  icon?: boolean | string | TemplateRef<void>;
+  icon?: boolean | string;
   action?: string | TemplateRef<void>;
-  closeable?: boolean | { content: string | TemplateRef<void> };
+  closeable?: boolean;
   message: string | TemplateRef<void>;
   description?: string | TemplateRef<void>;
   variants?: {

@@ -5,7 +5,7 @@ import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentInjectDirective } from '../../directives';
-import { FluentColumnPipe, FluentReactivePipe } from '../../pipes';
+import { FluentColumnPipe, FluentReactivePipe, FluentTemplatePipe } from '../../pipes';
 import { TimePickerControlSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -24,7 +24,8 @@ type TimeWidgetTemplateContext = WidgetTemplateContext<TimePickerControlSchema, 
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentReactivePipe,
-    FluentColumnPipe
+    FluentColumnPipe,
+    FluentTemplatePipe
   ],
   templateUrl: './time.widget.html',
   styles: [`nz-time-picker { width: 100% }`]

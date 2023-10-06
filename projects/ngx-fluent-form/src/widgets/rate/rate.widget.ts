@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { FluentBindingDirective, FluentContextGuardDirective } from '../../directives';
+import { FluentTemplatePipe } from '../../pipes';
 import { RateControlSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -17,6 +18,7 @@ type RateWidgetTemplateContext = WidgetTemplateContext<RateControlSchema, FormCo
     NzRateModule,
     FluentBindingDirective,
     FluentContextGuardDirective,
+    FluentTemplatePipe,
   ],
   templateUrl: './rate.widget.html',
 })

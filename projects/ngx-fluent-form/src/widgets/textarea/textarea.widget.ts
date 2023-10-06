@@ -25,8 +25,8 @@ type TextareaWidgetTemplateContext = WidgetTemplateContext<TextareaControlSchema
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentReactivePipe,
+    FluentColumnPipe,
     InvokePipe,
-    FluentColumnPipe
   ],
   templateUrl: './textarea.widget.html',
 })

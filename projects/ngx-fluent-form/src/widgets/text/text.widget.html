@@ -4,6 +4,6 @@
     [fluentBinding]="{ component, schema, control }"
     [ngClass]="schema.class"
     [ngStyle]="schema.style">
-    <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
+    <ng-container *nzStringTemplateOutlet="schema.content | template">{{ schema.content }}</ng-container>
   </nz-form-text>
 </ng-template>

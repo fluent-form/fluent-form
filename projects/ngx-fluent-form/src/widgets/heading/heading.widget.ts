@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { FluentBindingDirective, FluentContextGuardDirective } from '../../directives';
-import { FluentReactivePipe } from '../../pipes';
+import { FluentReactivePipe, FluentTemplatePipe } from '../../pipes';
 import { HeadingComponentSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -23,7 +23,8 @@ type HeadingWidgetTemplateContext = WidgetTemplateContext<HeadingComponentSchema
     NzOutletModule,
     FluentBindingDirective,
     FluentContextGuardDirective,
-    FluentReactivePipe
+    FluentReactivePipe,
+    FluentTemplatePipe
   ],
   templateUrl: './heading.widget.html',
   styleUrls: ['./heading.widget.scss']

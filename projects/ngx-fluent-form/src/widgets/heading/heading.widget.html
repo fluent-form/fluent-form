@@ -33,6 +33,6 @@
   </ng-container>
 
   <ng-template #headingContentTemplate>
-    <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
+    <ng-container *nzStringTemplateOutlet="schema.content | template">{{ schema.content }}</ng-container>
   </ng-template>
 </ng-template>

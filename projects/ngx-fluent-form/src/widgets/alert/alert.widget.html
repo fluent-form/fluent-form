@@ -5,13 +5,11 @@
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
     [nzType]="schema.type ?? 'info'"
-    [nzMessage]="schema.message"
-    [nzDescription]="schema.description!"
+    [nzMessage]="schema.message | template"
+    [nzDescription]="(schema.description | template)!"
     [nzBanner]="schema.variants?.banner"
-    [nzAction]="schema.action!"
+    [nzAction]="(schema.action | template)!"
     [nzCloseable]="!!schema.closeable"
-    [nzCloseText]="(helper.closeText | invoke: schema.closeable)!"
-    [nzIcon]="(helper.icon | invoke: schema.icon)!"
-    [nzIconType]="(helper.iconType | invoke: schema.icon)!"
+    [nzIconType]="(helper.icon | invoke: schema.icon)!"
     [nzShowIcon]="!!schema.icon"></nz-alert>
 </ng-template>

@@ -6,7 +6,7 @@ import { NzCascaderModule } from 'ng-zorro-antd/cascader';
 import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentInjectDirective } from '../../directives';
-import { FluentColumnPipe, FluentReactivePipe } from '../../pipes';
+import { FluentColumnPipe, FluentReactivePipe, FluentTemplatePipe } from '../../pipes';
 import { CascaderControlSchema } from '../../schemas';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -25,7 +25,8 @@ type CascaderWidgetTemplateContext = WidgetTemplateContext<CascaderControlSchema
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentReactivePipe,
-    FluentColumnPipe
+    FluentColumnPipe,
+    FluentTemplatePipe
   ],
   templateUrl: './cascader.widget.html',
   styles: [`nz-cascader { width: 100% }`]

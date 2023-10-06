@@ -7,8 +7,12 @@
     [ngStyle]="schema.style"
     [nzAllowClear]="schema.clearable ?? true"
     [nzAllowHalf]="schema.half"
-    [nzCharacter]="schema.character!"
+    [nzCharacter]="character"
     [nzCount]="schema.count ?? 5"
     [nzTooltips]="schema.tooltips ?? []"
     [nzAutoFocus]="schema.autofocus"></nz-rate>
+
+  <ng-template #character>
+    <ng-container *nzStringTemplateOutlet="schema.character | template">{{ schema.character }}</ng-container>
+  </ng-template>
 </ng-template>

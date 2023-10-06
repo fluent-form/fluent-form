@@ -25,8 +25,8 @@ type InputWidgetTemplateContext = WidgetTemplateContext<InputControlSchema, Form
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentReactivePipe,
+    FluentColumnPipe,
     InvokePipe,
-    FluentColumnPipe
   ],
   templateUrl: './input.widget.html',
 })

@@ -40,12 +40,10 @@
     <span
       *ngIf="helper.icon | invoke: schema.icon as icon"
       nz-icon
-      [nzRotate]="icon.rotate ?? 0"
-      [nzSpin]="icon.spin"
       [nzTheme]="icon.theme ?? 'outline'"
       [nzType]="icon.type"></span>
     <ng-container *ngIf="schema.content">
-      <ng-container *nzStringTemplateOutlet="schema.content">{{ schema.content }}</ng-container>
+      <ng-container *nzStringTemplateOutlet="schema.content | template">{{ schema.content }}</ng-container>
     </ng-container>
   </ng-template>
 </ng-template>

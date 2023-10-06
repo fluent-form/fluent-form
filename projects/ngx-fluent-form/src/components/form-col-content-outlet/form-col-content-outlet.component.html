@@ -48,12 +48,12 @@
         schema.kind === SchemaKind.InputGroup ? (schema.primary ?? schema.schemas[0].key | control: control) : control
       "
       [nzHasFeedback]="currentSchema.feedback"
-      [nzValidatingTip]="currentSchema.tips?.validating"
-      [nzSuccessTip]="currentSchema.tips?.success"
-      [nzWarningTip]="currentSchema.tips?.warning"
-      [nzErrorTip]="currentSchema.tips?.error"
+      [nzValidatingTip]="currentSchema.tips?.validating | template"
+      [nzSuccessTip]="currentSchema.tips?.success | template"
+      [nzWarningTip]="currentSchema.tips?.warning | template"
+      [nzErrorTip]="currentSchema.tips?.error | template"
       [nzAutoTips]="currentSchema.tips?.auto ?? {}"
-      [nzExtra]="currentSchema.hint">
+      [nzExtra]="currentSchema.hint | template">
       <ng-container
         fluentWithInjector
         [ngTemplateOutlet]="schema | widgetTemplate"

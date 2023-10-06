@@ -6,8 +6,8 @@
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
     [nzId]="schema.id!"
-    [nzCheckedChildren]="schema.placeholder?.[0]!"
-    [nzUnCheckedChildren]="schema.placeholder?.[1]!"
+    [nzCheckedChildren]="(schema.placeholder?.[0] | template)!"
+    [nzUnCheckedChildren]="(schema.placeholder?.[1] | template)!"
     [nzSize]="schema.size!">
   </nz-switch>
 </ng-template>

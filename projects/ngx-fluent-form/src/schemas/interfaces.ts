@@ -97,8 +97,6 @@ export interface Col {
 export interface Icon {
   type: string;
   theme?: ThemeType;
-  spin?: boolean;
-  rotate?: number;
 }
 
 export interface ControlValueMapper<V> {

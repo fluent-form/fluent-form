@@ -1,9 +1,7 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { AnyObject, SafeAny } from '@ngify/types';
 import { isFunction, isString } from '../utils';
 import { CodeEvaluator } from './evaluator.service';
-
-const RETURN_STR = 'return ';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +15,6 @@ export class ValueTransformer {
     }
 
     if (isString(value) && this.evaluator) {
-      if (!value.includes(RETURN_STR)) {
-        value = RETURN_STR + value;
-      }
-
       return this.evaluator.evaluate(value, context);
     }
 

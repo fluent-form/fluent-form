@@ -1,7 +1,7 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <ng-container *fluentInject="NzFormNoStatusService as service; optional: true">
+  <ng-container *fluentInject="NzInputGroup as inputGroup; optional: true">
     <ng-container *ngIf="schema.autocomplete as autocomplete; else noAutocompleteTemplate">
-      <ng-container *ngIf="service; else standardTemplate">
+      <ng-container *ngIf="inputGroup; else standardTemplate">
         <input
           *ngIf="!(schema.hidden | reactive: model:schema:control)"
           nz-col
@@ -58,7 +58,7 @@
     </ng-container>
 
     <ng-template #noAutocompleteTemplate>
-      <ng-container *ngIf="service; else standardTemplate">
+      <ng-container *ngIf="inputGroup; else standardTemplate">
         <input
           *ngIf="!(schema.hidden | reactive: model:schema:control)"
           nz-col

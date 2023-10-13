@@ -2,8 +2,8 @@ import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
 import { ChangeDetectorRef, Component, Injector } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
-import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputGroupComponent } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { filter, Subject, tap } from 'rxjs';
 import { FluentBindingDirective, FluentContextDirective, FluentContextGuardDirective, FluentInjectDirective, FluentLifeCycleDirective } from '../../directives';
@@ -36,7 +36,7 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
   styles: [`nz-select { width: 100% }`]
 })
 export class SelectWidget extends AbstractWidget<SelectWidgetTemplateContext> {
-  protected readonly NzFormNoStatusService = NzFormNoStatusService;
+  protected readonly NzInputGroup = NzInputGroupComponent;
   protected readonly infinity = Infinity;
   protected readonly ctxClass = SelectWidgetTemplatePrivateContext;
 }

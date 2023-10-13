@@ -1,6 +1,6 @@
 import { Directive, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
-import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
+import { NzInputGroupComponent } from 'ng-zorro-antd/input';
 import { AbstractTextControlSchema, AnySchema } from '../schemas';
 import { Model } from '../types';
 import { isNumber } from '../utils';
@@ -18,7 +18,7 @@ export abstract class AbstractWidget<C> {
 }
 
 export abstract class AbstractTextControlWidget<C> extends AbstractWidget<C> {
-  protected readonly NzFormNoStatusService = NzFormNoStatusService;
+  protected readonly NzInputGroup = NzInputGroupComponent;
   protected readonly helper = {
     length: {
       min: (length: AbstractTextControlSchema<string>['length']) => {

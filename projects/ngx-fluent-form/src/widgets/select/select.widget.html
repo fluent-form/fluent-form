@@ -1,10 +1,10 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <ng-container *fluentInject="NzFormNoStatusService as service; optional: true">
+  <ng-container *fluentInject="NzInputGroup as inputGroup; optional: true">
     <ng-container
       *fluentContext="ctxClass as ctx"
       (fluentInit)="ctx.init(schema, model, control)"
       (fluentDestroy)="ctx.destroy()">
-      <ng-container *ngIf="service; else standardTemplate">
+      <ng-container *ngIf="inputGroup; else standardTemplate">
         <nz-select
           *ngIf="!(schema.hidden | reactive: model:schema:control)"
           #component

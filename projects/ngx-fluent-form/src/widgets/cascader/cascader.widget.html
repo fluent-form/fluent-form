@@ -1,6 +1,6 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <ng-container *fluentInject="NzFormNoStatusService as service; optional: true">
-    <ng-container *ngIf="service; else standardTemplate">
+  <ng-container *fluentInject="NzInputGroup as inputGroup; optional: true">
+    <ng-container *ngIf="inputGroup; else standardTemplate">
       <nz-cascader
         *ngIf="!(schema.hidden | reactive: model:schema:control)"
         #component

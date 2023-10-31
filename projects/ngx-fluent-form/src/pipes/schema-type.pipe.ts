@@ -2,6 +2,9 @@ import { inject, Pipe, PipeTransform } from '@angular/core';
 import { SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP } from '../tokens';
 
+/**
+ * @internal
+ */
 @Pipe({
   name: 'schemaType',
   standalone: true

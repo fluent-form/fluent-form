@@ -8,6 +8,9 @@ import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type SilderWidgetTemplateContext = WidgetTemplateContext<SliderControlSchema, FormControl<number>>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

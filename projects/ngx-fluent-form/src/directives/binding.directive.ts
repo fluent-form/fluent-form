@@ -13,6 +13,9 @@ function isPropertyPatcher(value: SafeAny): value is PropertyHolder {
   return 'properties' in value;
 }
 
+/**
+ * @internal
+ */
 @Directive({
   selector: '[fluentBinding]',
   standalone: true,

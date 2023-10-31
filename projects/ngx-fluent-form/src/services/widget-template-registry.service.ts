@@ -1,6 +1,9 @@
 import { createComponent, EnvironmentInjector, inject, Injectable, TemplateRef } from '@angular/core';
 import { WIDGET_MAP } from '../tokens';
 
+/**
+ * @internal
+ */
 @Injectable({
   providedIn: 'root'
 })

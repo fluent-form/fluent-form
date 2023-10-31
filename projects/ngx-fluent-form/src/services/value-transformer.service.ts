@@ -3,6 +3,9 @@ import { AnyObject, SafeAny } from '@ngify/types';
 import { isFunction, isString } from '../utils';
 import { CodeEvaluator } from './evaluator.service';
 
+/**
+ * @internal
+ */
 @Injectable({
   providedIn: 'root'
 })

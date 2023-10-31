@@ -11,6 +11,9 @@ export interface WidgetTemplateContext<S extends AnySchema, C extends AbstractCo
   model: Model<C>;
 }
 
+/**
+ * @internal
+ */
 @Directive()
 export abstract class AbstractWidget<C> {
   protected readonly contextGuard!: C;

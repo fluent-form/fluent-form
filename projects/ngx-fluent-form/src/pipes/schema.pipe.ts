@@ -2,6 +2,9 @@ import { inject, Pipe, PipeTransform } from '@angular/core';
 import { AnyContainerSchema, AnyControlSchema, AnySchema, AnySchemaKey, FormArraySchema, FormGroupSchema, SchemaKey } from '../schemas';
 import { SchemaUtil } from '../utils';
 
+/**
+ * @internal
+ */
 @Pipe({
   name: 'schema',
   standalone: true

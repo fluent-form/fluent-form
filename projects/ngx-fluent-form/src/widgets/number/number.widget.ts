@@ -12,6 +12,9 @@ import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type NumberWidgetTemplateContext = WidgetTemplateContext<NumberInputControlSchema, FormControl<number>>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

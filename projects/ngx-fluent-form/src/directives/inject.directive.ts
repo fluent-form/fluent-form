@@ -8,6 +8,7 @@ interface FluentInjectContext<T> {
 type ProviderTokenValue<T> = T extends ProviderToken<infer V> ? V : never;
 
 /**
+ * @internal
  * ```html
  * <ng-container *fluentInject="token as value"></ng-container>
  * ```

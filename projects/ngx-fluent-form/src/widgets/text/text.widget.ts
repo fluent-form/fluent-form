@@ -10,6 +10,9 @@ import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type TextWidgetTemplateContext = WidgetTemplateContext<TextComponentSchema, FormGroup>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

@@ -1,5 +1,8 @@
 import { Directive, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 
+/**
+ * @internal
+ */
 @Directive({
   selector: '[fluentInit],[fluentDestroy]',
   standalone: true

@@ -12,6 +12,9 @@ import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type CascaderWidgetTemplateContext = WidgetTemplateContext<CascaderControlSchema, FormControl<SafeAny[]>>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

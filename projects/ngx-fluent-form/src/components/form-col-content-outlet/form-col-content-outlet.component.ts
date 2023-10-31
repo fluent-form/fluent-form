@@ -19,6 +19,9 @@ interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
   model: T;
 }
 
+/**
+ * @internal
+ */
 @Component({
   selector: 'fluent-form-col-content-outlet',
   standalone: true,

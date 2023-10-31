@@ -11,6 +11,9 @@ import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type TabsWidgetTemplateContext = WidgetTemplateContext<TabsComponentSchema, FormGroup>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

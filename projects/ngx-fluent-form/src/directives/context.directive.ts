@@ -5,6 +5,9 @@ interface FluentContextContext<T extends Type<SafeAny>> {
   fluentContext: InstanceType<T>;
 }
 
+/**
+ * @internal
+ */
 @Directive({
   selector: '[fluentContext]',
   standalone: true

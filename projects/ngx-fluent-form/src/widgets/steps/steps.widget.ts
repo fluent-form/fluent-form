@@ -11,6 +11,9 @@ import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type StepsWidgetTemplateContext = WidgetTemplateContext<StepsComponentSchema, FormGroup>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

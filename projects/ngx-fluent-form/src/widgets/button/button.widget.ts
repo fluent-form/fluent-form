@@ -13,6 +13,9 @@ import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type ButtonWidgetTemplateContext = WidgetTemplateContext<ButtonComponentSchema, FormGroup>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

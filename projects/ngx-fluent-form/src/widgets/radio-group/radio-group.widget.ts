@@ -8,6 +8,9 @@ import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type RadioGroupWidgetTemplateContext = WidgetTemplateContext<RadioGroupControlSchema, FormControl>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

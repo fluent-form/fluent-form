@@ -1,5 +1,8 @@
 import { Directive, Input } from '@angular/core';
 
+/**
+ * @internal
+ */
 @Directive({
   selector: 'ng-template[fluentContextGuard]',
   standalone: true

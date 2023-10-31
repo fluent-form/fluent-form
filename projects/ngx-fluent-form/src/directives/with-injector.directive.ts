@@ -1,6 +1,9 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Directive, inject, ViewContainerRef } from '@angular/core';
 
+/**
+ * @internal
+ */
 @Directive({
   selector: '[ngTemplateOutlet][fluentWithInjector]',
   standalone: true

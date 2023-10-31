@@ -1,6 +1,9 @@
 import { Directive, inject } from '@angular/core';
 import { CONFIG, FluentConfig } from '../config';
 
+/**
+ * @internal
+ */
 @Directive({
   // eslint-disable-next-line
   selector: 'nz-row',

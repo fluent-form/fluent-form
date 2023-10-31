@@ -17,6 +17,9 @@ import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, FormArray>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

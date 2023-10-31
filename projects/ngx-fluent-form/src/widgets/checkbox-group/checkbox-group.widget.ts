@@ -9,6 +9,9 @@ import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type CheckboxGroupWidgetTemplateContext = WidgetTemplateContext<CheckboxGroupControlSchema, FormControl<SafeAny[]>>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

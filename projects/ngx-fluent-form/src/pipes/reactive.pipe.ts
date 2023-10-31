@@ -4,6 +4,9 @@ import { SafeAny } from '@ngify/types';
 import { AbstractSchema, SchemaReactiveFn } from '../schemas';
 import { ValueTransformer } from '../services';
 
+/**
+ * @internal
+ */
 @Pipe({
   name: 'reactive',
   standalone: true

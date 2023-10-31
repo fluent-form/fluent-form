@@ -3,6 +3,9 @@ import { Cell } from '../schemas';
 import { Col } from '../schemas/interfaces';
 import { isNumber } from '../utils';
 
+/**
+ * @internal
+ */
 @Pipe({
   name: 'col',
   standalone: true

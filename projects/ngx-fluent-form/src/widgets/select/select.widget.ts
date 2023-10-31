@@ -13,6 +13,9 @@ import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, FormControl>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

@@ -7,6 +7,9 @@ export abstract class CodeEvaluator {
 
 const RETURN_STR = 'return ';
 
+/**
+ * @internal
+ */
 @Injectable()
 export class DynamicCodeEvaluator implements CodeEvaluator {
 

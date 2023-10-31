@@ -9,6 +9,9 @@ import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type ToggleWidgetTemplateContext = WidgetTemplateContext<ToggleControlSchema, FormControl<boolean>>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

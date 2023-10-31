@@ -13,6 +13,9 @@ import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSchema, FormControl<SafeAny[]>>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

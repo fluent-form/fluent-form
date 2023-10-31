@@ -11,6 +11,9 @@ import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type TimeWidgetTemplateContext = WidgetTemplateContext<TimePickerControlSchema, FormControl<Date>>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

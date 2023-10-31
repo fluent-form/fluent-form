@@ -8,6 +8,9 @@ import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type CheckboxWidgetTemplateContext = WidgetTemplateContext<CheckboxControlSchema, FormControl<boolean>>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

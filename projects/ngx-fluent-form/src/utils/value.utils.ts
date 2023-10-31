@@ -5,6 +5,9 @@ import { AnyControlSchema } from '../schemas';
 import { isUndefined } from './is.utils';
 import { SchemaUtil } from './schema.utils';
 
+/**
+ * @internal
+ */
 @Injectable({
   providedIn: 'root'
 })

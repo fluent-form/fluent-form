@@ -11,6 +11,9 @@ import { AbstractTextControlWidget, WidgetTemplateContext } from '../abstract.wi
 
 type InputWidgetTemplateContext = WidgetTemplateContext<InputControlSchema, FormControl<string>>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

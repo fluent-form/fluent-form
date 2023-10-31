@@ -2,6 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 type Typeof = 'string' | 'number' | 'bigint' | 'boolean' | 'symbol' | 'undefined' | 'object' | 'function';
 
+/**
+ * @internal
+ */
 @Pipe({
   name: 'typeof',
   standalone: true

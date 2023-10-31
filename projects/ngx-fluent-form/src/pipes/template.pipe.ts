@@ -3,6 +3,9 @@ import { SafeAny } from '@ngify/types';
 import { TEMPLATE_DIRECTIVE_CONTAINER } from '../tokens';
 import { isString } from '../utils';
 
+/**
+ * @internal
+ */
 @Pipe({
   name: 'template',
   standalone: true

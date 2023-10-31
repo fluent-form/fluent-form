@@ -2,6 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
 import { AnySchemaKey, SchemaKey } from '../schemas';
 
+/**
+ * @internal
+ */
 @Pipe({
   name: 'control',
   standalone: true

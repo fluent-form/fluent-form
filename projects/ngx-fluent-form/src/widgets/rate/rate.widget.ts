@@ -10,6 +10,9 @@ import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type RateWidgetTemplateContext = WidgetTemplateContext<RateControlSchema, FormControl<number>>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

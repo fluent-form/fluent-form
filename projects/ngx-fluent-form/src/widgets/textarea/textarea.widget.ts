@@ -11,6 +11,9 @@ import { AbstractTextControlWidget, WidgetTemplateContext } from '../abstract.wi
 
 type TextareaWidgetTemplateContext = WidgetTemplateContext<TextareaControlSchema, FormControl<string>>;
 
+/**
+ * @internal
+ */
 @Component({
   standalone: true,
   imports: [

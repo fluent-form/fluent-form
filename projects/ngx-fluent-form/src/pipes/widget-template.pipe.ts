@@ -4,6 +4,9 @@ import { SchemaKind } from '../schemas/interfaces';
 import { WidgetTemplateRegistry } from '../services';
 import { TEMPLATE_DIRECTIVE_CONTAINER } from '../tokens';
 
+/**
+ * @internal
+ */
 @Pipe({
   name: 'widgetTemplate',
   standalone: true

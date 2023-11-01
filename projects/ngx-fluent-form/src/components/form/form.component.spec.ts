@@ -44,9 +44,9 @@ describe('FluentFormComponent', () => {
   });
 
   it('能够配置顶层表单', () => {
-    component.schema = form({ updateOn: 'blur' }, () => {
+    component.schema = form(() => {
       input('text');
-    });
+    }, { updateOn: 'blur' });
     component.model = {};
     fixture.detectChanges();
 

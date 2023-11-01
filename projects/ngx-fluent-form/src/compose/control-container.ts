@@ -1,6 +1,5 @@
 import { SafeAny } from '@ngify/types';
 import { AnySchema, FormArraySchema, FormGroupSchema, SchemaKey } from '../schemas';
-import { isFunction } from '../utils';
 import { composeBuilder, UnstableBuilder } from './compose-builder';
 import { KindOrKey } from './helper';
 
@@ -16,19 +15,9 @@ export function array<Key extends SchemaKey>(key?: Key): UnstableBuilder<FormArr
   return composeBuilder<FormArraySchema<Key>>().kind('array').key(key);
 }
 
-export function form(composeFn: FormComposeFn): FormGroupSchema;
-export function form(schemas: AnySchema[]): FormGroupSchema;
-export function form(config: FormConfig, composeFn: FormComposeFn): FormGroupSchema;
-export function form(config: FormConfig, schemas: AnySchema[]): FormGroupSchema;
-export function form(fnOrSchemasOnConfig: FormComposeFn | AnySchema[] | FormConfig, fnOrSchemas?: FormComposeFn | AnySchema[]): FormGroupSchema {
-  let config: FormConfig = {};
-
-  if (Array.isArray(fnOrSchemasOnConfig) || isFunction(fnOrSchemasOnConfig)) {
-    fnOrSchemas = fnOrSchemasOnConfig;
-  } else {
-    config = fnOrSchemasOnConfig;
-  }
-
+export function form(composeFn: FormComposeFn, config?: FormConfig): FormGroupSchema;
+export function form(schemas: AnySchema[], config?: FormConfig): FormGroupSchema;
+export function form(fnOrSchemas: AnySchema[] | FormComposeFn, config?: FormConfig): FormGroupSchema {
   if (Array.isArray(fnOrSchemas)) {
     return {
       kind: 'group',
@@ -38,13 +27,13 @@ export function form(fnOrSchemasOnConfig: FormComposeFn | AnySchema[] | FormConf
     };
   }
 
-  const schema = group('root').schemas(fnOrSchemas!).build() as FormGroupSchema;
+  const schema = group('root').schemas(fnOrSchemas).build();
 
   if (config) {
     Object.assign(schema, config);
   }
 
-  return schema;
+  return schema as FormGroupSchema;
 }
 
 type FormComposeFn = () => SafeAny;

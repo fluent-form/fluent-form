@@ -5,7 +5,7 @@ describe('control-container', () => {
   describe('form', () => {
     it('factory', () => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
-      const scheam = form(() => { }, { updateOn: 'blur' });
+      const scheam = form({ updateOn: 'blur' }, () => { });
       expect(scheam).toEqual({ kind: 'group', key: 'root', updateOn: 'blur', schemas: [] });
     });
 

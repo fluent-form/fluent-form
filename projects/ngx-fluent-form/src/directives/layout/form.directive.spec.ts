@@ -319,7 +319,7 @@ describe('FluentFormDirective', () => {
   });
 
   it('should be the expected model value (configure the toplevel form)', () => {
-    component.schema = form({ updateOn: 'blur' }, () => {
+    component.schema = form(() => {
       input('ipt');
       inputGroup('ipts').schemas(() => {
         input('ipt2');
@@ -333,7 +333,7 @@ describe('FluentFormDirective', () => {
       array('array').schemas(() => {
         input();
       });
-    });
+    }, { updateOn: 'blur' });
     component.model = {};
     fixture.detectChanges();
 

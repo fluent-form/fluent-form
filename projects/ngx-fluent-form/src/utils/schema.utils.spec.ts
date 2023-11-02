@@ -261,31 +261,31 @@ describe('SchemaUtil with patcher feature', () => {
             {
               selector: ['input', 'number'],
               patch: schema => {
-                (schema.class as Set<string>).add('kind-array-selector');
+                (schema.class as Set<string>).add('multi-kind-selector');
                 return schema;
               }
             },
             {
-              selector: SchemaType.Control | SchemaType.ControlContainer,
+              selector: SchemaType.Control,
               patch: schema => {
                 (schema.class as Set<string>).add('schema-type-selector');
                 return schema;
               }
             },
             {
-              selector: {
-                control: true,
-                controlContainer: true,
-                componentWrapper: true,
-                component: true,
-                componentContainer: true,
-                controlWrapper: true
-              },
+              selector: [SchemaType.Control, SchemaType.Component],
               patch: schema => {
-                (schema.class as Set<string>).add('options-selector');
+                (schema.class as Set<string>).add('multi-schema-type-selector');
                 return schema;
               }
             },
+            {
+              selector: ['button', SchemaType.Control],
+              patch: schema => {
+                (schema.class as Set<string>).add('mix-selector');
+                return schema;
+              }
+            }
           )
         )
       ]
@@ -306,11 +306,11 @@ describe('SchemaUtil with patcher feature', () => {
     expect(schemaUtil.patch(otherSchema).class).not.toContain('kind-selector');
   });
 
-  it('with kind-array selector', () => {
+  it('with multi-kind selector', () => {
     const inputSchema: InputControlSchema = { kind: 'input' };
     const numberSchema: NumberInputControlSchema = { kind: 'number' };
-    expect(schemaUtil.patch(inputSchema).class).toContain('kind-array-selector');
-    expect(schemaUtil.patch(numberSchema).class).toContain('kind-array-selector');
+    expect(schemaUtil.patch(inputSchema).class).toContain('multi-kind-selector');
+    expect(schemaUtil.patch(numberSchema).class).toContain('multi-kind-selector');
   });
 
   it('with schema-kind selector', () => {
@@ -320,19 +320,27 @@ describe('SchemaUtil with patcher feature', () => {
     expect(schemaUtil.patch(buttonSchema).class).not.toContain('schema-type-selector');
   });
 
-  it('with options selector', () => {
-    const schema: InputControlSchema = { kind: 'input' };
-    expect(schemaUtil.patch(schema).class).toContain('options-selector');
+  it('with multi-schema-type selector', () => {
+    const inputSchema: InputControlSchema = { kind: 'input' };
+    const buttonSchema: ButtonComponentSchema = { kind: 'button' };
+    expect(schemaUtil.patch(inputSchema).class).toContain('multi-schema-type-selector');
+    expect(schemaUtil.patch(buttonSchema).class).toContain('multi-schema-type-selector');
+  });
+
+  it('with mix selector', () => {
+    const inputSchema: InputControlSchema = { kind: 'input' };
+    const buttonSchema: ButtonComponentSchema = { kind: 'button' };
+    expect(schemaUtil.patch(inputSchema).class).toContain('mix-selector');
+    expect(schemaUtil.patch(buttonSchema).class).toContain('mix-selector');
   });
 
   it('with multi patchers', () => {
     const schema: InputControlSchema = { kind: 'input' };
-    expect(schemaUtil.patch(schema).class).toBeInstanceOf(Set);
     expect(schemaUtil.patch(schema).class).toContain('kind-selector');
-    expect(schemaUtil.patch(schema).class).toContain('kind-array-selector');
-    expect(schemaUtil.patch(schema).class).toContain('kind-array-selector');
+    expect(schemaUtil.patch(schema).class).toContain('multi-kind-selector');
     expect(schemaUtil.patch(schema).class).toContain('schema-type-selector');
-    expect(schemaUtil.patch(schema).class).toContain('options-selector');
+    expect(schemaUtil.patch(schema).class).toContain('multi-schema-type-selector');
+    expect(schemaUtil.patch(schema).class).toContain('mix-selector');
   });
 });
 

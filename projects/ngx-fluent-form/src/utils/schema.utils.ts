@@ -21,17 +21,17 @@ export class SchemaUtil {
 
     return this.schemaPatchers
       .filter(patcher => {
-        if (isString(patcher.selector)) {
-          return patcher.selector === ANY_SCHEMA_SELECTOR || patcher.selector === schema.kind;
-        }
+        // 将选择器转为数组统一处理
+        const selector = Array.isArray(patcher.selector) ? patcher.selector : [patcher.selector];
+        const { type } = this.schemaMap.get(schema.kind)!;
 
-        if (Array.isArray(patcher.selector)) {
-          return patcher.selector.includes(schema.kind);
-        }
+        return selector.some(kindOrType => {
+          if (isString(kindOrType)) {
+            return kindOrType === ANY_SCHEMA_SELECTOR || kindOrType === schema.kind;
+          }
 
-        const schemaConfig = this.schemaMap.get(schema.kind)!;
-
-        return patcher.selector & schemaConfig.type;
+          return kindOrType === type;
+        });
       })
       .reduce((patchedSchema, patcher) => {
         return patcher.patch(patchedSchema) as T;

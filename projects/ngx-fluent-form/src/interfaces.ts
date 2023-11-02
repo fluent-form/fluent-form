@@ -15,7 +15,7 @@ export interface SchemaConfig<S extends AbstractSchema> {
   validators?: (schema: S) => ValidatorFn[];
 }
 
-export type SchemaSelector = '*' | string | string[] | SchemaType;
+export type SchemaSelector = '*' | string | SchemaType | (string | SchemaType)[];
 
 export type SchemaPatchFn<S extends AbstractSchema> = (schema: S & Record<string, SafeAny>) => S;
 

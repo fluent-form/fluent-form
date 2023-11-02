@@ -22,5 +22,6 @@ type SilderWidgetTemplateContext = WidgetTemplateContext<SliderControlSchema, Fo
     FluentContextGuardDirective,
   ],
   templateUrl: './silder.widget.html',
+  styles: [`nz-slider { display: block; }`]
 })
 export class SilderWidget extends AbstractWidget<SilderWidgetTemplateContext> { }

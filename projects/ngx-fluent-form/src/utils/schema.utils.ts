@@ -19,11 +19,12 @@ export class SchemaUtil {
       schema.schemas = schema.schemas.map(schema => this.patch(schema));
     }
 
+    const { type } = this.schemaMap.get(schema.kind)!;
+
     return this.schemaPatchers
       .filter(patcher => {
         // 将选择器转为数组统一处理
         const selector = Array.isArray(patcher.selector) ? patcher.selector : [patcher.selector];
-        const { type } = this.schemaMap.get(schema.kind)!;
 
         return selector.some(kindOrType => {
           if (isString(kindOrType)) {

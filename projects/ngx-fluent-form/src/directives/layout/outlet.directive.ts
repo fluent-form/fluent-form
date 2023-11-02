@@ -8,7 +8,7 @@ import { FluentControlContainer } from './models/control-container';
 
 @Directive({
   // eslint-disable-next-line
-  selector: 'fluent-outlet,[fluentOutlet]',
+  selector: 'fluent-outlet',
   exportAs: 'fluentOutlet',
   standalone: true
 })

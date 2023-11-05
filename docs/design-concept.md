@@ -98,7 +98,7 @@ const schema = form(() => {
 - `AbstractControlSchema`：所有控件图示的父接口
 - `AbstractControlContainerSchema`：所有控件容器图示的父接口
 
-你可以到 [Schema API](/api/schemas/api) 文档中去检查它们。
+你可以到 [Schema API](../api/schemas/api) 文档中去检查它们。
 
 ## EmbeddedView
 

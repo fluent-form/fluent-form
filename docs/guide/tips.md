@@ -5,15 +5,15 @@ order: 888
 
 ## 更新图示
 
-通常情况下，您无需手动更新图示，因为表单联动和表单数组已经满足了大多数需求。但你仍然可以使用 `SchemaUtil` 提供的 `find` 方法来查找指定图示并进行修改。
+通常情况下，您无需手动更新图示，表单联动和表单数组已经满足了大多数需求。但你仍然可以使用 `SchemaUtil` 提供的 `find` 方法来帮助查找指定图示并进行修改。
 
-由于 `ngx-fluent-form` 组件使用了 `OnPush` 变更检测策略，更新 `schema` 后需要改变对象引用才能触发更新。
+由于 `ngx-fluent-form` 组件使用 `OnPush` 变更检测策略，更新 `schema` 后需要改变对象引用才能够触发更新。
 
 <example name="fluent-form-update-schema-example" />
 
 ## 封装图示
 
-使用 Fluent API，我们可以轻松地封装一些图示函数来提高表单开发效率。
+使用 Fluent API，我们可以轻松地封装图示函数来提高表单开发效率。
 
 ```ts
 import { button, form, toggle, radioGroup, input } from 'ngx-fluent-form';

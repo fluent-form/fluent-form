@@ -7,7 +7,7 @@ order: 7
 
 ## SchemaPatcher
 
-使用 `withSchemaPatchers()` 特性函数，将一个或多个图示修补器添加到配置中。
+使用 `withSchemaPatchers()` 特性函数开启此功能，将一个或多个图示修补器添加到配置中。
 
 ## 用例
 
@@ -60,7 +60,7 @@ interface SchemaPatcher<S extends AbstractSchema = AbstractSchema> {
 - 使用图示类型枚举选择某一类型的图示，例如 `SchemaType.Control`、`SchemaType.Component`。
 - 还可以使用数组组合多种选择规则以灵活匹配图示。
 
-使用 `patch` 字段定义图示修补函数。
+使用 `patch` 字段定义图示修补函数，该函数接受一个 `schema` 参数，并且需要返回修改后的图示。
 
 ```ts
 import { SchemaType } from 'ngx-fluent-form';

@@ -5,7 +5,7 @@
     "dev": "ng build ngx-fluent-form --watch",
     "dev:docs": "docgeni serve --port 4600",
     "build": "npm run build:lib && npm run build:schematics",
-    "build:docs": "docgeni build --base-href=./",
+    "build:docs": "docgeni build --base-href=/ngx-fluent-form/",
     "build:lib": "ng build ngx-fluent-form --configuration production",
     "build:schematics": "cd projects/ngx-fluent-form && npm run build:schematics",
     "postbuild": "copyfiles ./README.md ./README.zh-CN.md ./LICENSE ./dist/ngx-fluent-form/",

@@ -11,7 +11,7 @@ order: 8
 
 静态表达式是一段字符串，允许您在其中编写一些简单的 JavaScript 表达式，其执行上下文为 `{ model, control, schema }`。
 
-使用 `withStaticExpression()` 特性函数，启用静态表达式特性。
+使用 `withStaticExpression()` 特性函数来开启静态表达式功能。
 
 ```ts
 import { provideFluentForm, withWidgets, withStaticExpression } from 'ngx-fluent-form';
@@ -26,4 +26,4 @@ provideFluentForm(
 
 ### 安全性
 
-目前，静态表达式是在一个简易的沙箱环境下运行的，仍然可以通过一些手段逃逸出沙箱环境，开发者需要确保传入的表达式是安全的，可信任的。
+目前静态表达式是在一个简易的沙箱环境下运行的，仍然可以通过一些手段逃逸出沙箱环境，开发者需要确保传入的表达式是安全的，可信任的。

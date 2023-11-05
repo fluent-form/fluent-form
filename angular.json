@@ -40,19 +40,6 @@
             }
           }
         },
-        "storybook": {
-          "builder": "@storybook/angular:start-storybook",
-          "options": {
-            "browserTarget": "angular-cli:build",
-            "port": 4400
-          }
-        },
-        "build-storybook": {
-          "builder": "@storybook/angular:build-storybook",
-          "options": {
-            "browserTarget": "angular-cli:build"
-          }
-        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
@@ -61,43 +48,6 @@
               "projects/ngx-fluent-form/**/*.ts",
               "projects/ngx-fluent-form/**/*.html"
             ]
-          }
-        }
-      }
-    },
-    "storybook": {
-      "projectType": "application",
-      "root": "",
-      "sourceRoot": "stories",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "tsConfig": "tsconfig.json",
-            "styles": [
-              "node_modules/ng-zorro-antd/ng-zorro-antd.css"
-            ],
-            "scripts": [],
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
-                "output": "/assets/"
-              }
-            ]
-          }
-        },
-        "storybook": {
-          "builder": "@storybook/angular:start-storybook",
-          "options": {
-            "browserTarget": "angular-cli:build",
-            "port": 4400
-          }
-        },
-        "build-storybook": {
-          "builder": "@storybook/angular:build-storybook",
-          "options": {
-            "browserTarget": "angular-cli:build"
           }
         }
       }

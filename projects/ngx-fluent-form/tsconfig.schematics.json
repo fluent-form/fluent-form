@@ -10,7 +10,6 @@
     "noImplicitThis": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "rootDir": "schematics",
     "outDir": "../../dist/ngx-fluent-form/schematics",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
@@ -23,9 +22,9 @@
     ]
   },
   "include": [
-    "schematics/**/*"
+    "src/schematics"
   ],
   "exclude": [
-    "schematics/*/files/**/*"
+    "src/schematics/*/files/**/*"
   ]
 }

@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build:schematics": "tsc -p tsconfig.schematics.json",
-    "postbuild:schematics": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/ngx-fluent-form/"
+    "postbuild:schematics": "copyfiles src/schematics/{collection.json,*/schema.json,*/files/**} ../../dist/ngx-fluent-form/ --up=1"
   },
   "repository": {
     "type": "git",

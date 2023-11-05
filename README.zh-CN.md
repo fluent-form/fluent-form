@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./logo.svg" width="150" />
+<img src="./logo.svg" width="130" />
 
 # ngx-fluent-form
 

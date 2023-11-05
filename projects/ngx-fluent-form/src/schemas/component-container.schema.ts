@@ -8,6 +8,9 @@ import { AnySchema } from './index.schema';
 import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Row, SchemaReactiveFn } from './interfaces';
 import { SchemaKey } from './types';
 
+/**
+ * @public
+ */
 export interface StepsComponentSchema<Key extends SchemaKey = SchemaKey>
   extends AbstractSchema<Key>, ComponentEventListenerHolder<NzStepsComponent>, ComponentPropertyHolder<NzStepsComponent> {
   kind: 'steps';
@@ -21,6 +24,9 @@ export interface StepsComponentSchema<Key extends SchemaKey = SchemaKey>
   schemas: StepComponentSchema[];
 }
 
+/**
+ * @public
+ */
 export interface StepComponentSchema<Key extends SchemaKey = SchemaKey>
   extends AbstractSchema<Key>, ComponentEventListenerHolder<NzStepComponent>, ComponentPropertyHolder<NzStepComponent> {
   kind: 'step';
@@ -32,6 +38,9 @@ export interface StepComponentSchema<Key extends SchemaKey = SchemaKey>
   schemas: AnySchema[];
 }
 
+/**
+ * @public
+ */
 export interface TabsComponentSchema<Key extends SchemaKey = SchemaKey>
   extends AbstractSchema<Key>, ComponentEventListenerHolder<NzTabSetComponent>, ComponentPropertyHolder<NzTabSetComponent> {
   kind: 'tabs';
@@ -45,6 +54,9 @@ export interface TabsComponentSchema<Key extends SchemaKey = SchemaKey>
   schemas: TabComponentSchema[];
 }
 
+/**
+ * @public
+ */
 export interface TabComponentSchema<Key extends SchemaKey = SchemaKey>
   extends AbstractSchema<Key>, ComponentEventListenerHolder<NzTabComponent>, ComponentPropertyHolder<NzTabComponent> {
   kind: 'tab';
@@ -53,12 +65,18 @@ export interface TabComponentSchema<Key extends SchemaKey = SchemaKey>
   schemas: AnySchema[];
 }
 
+/**
+ * @public
+ */
 export interface RowComponentSchema<Key extends SchemaKey = SchemaKey>
   extends AbstractSchema<Key>, ElementEventListenerHolder, ElementPropertyHolder<HTMLElement>, Row {
   kind: 'row';
   schemas: AnySchema[];
 }
 
+/**
+ * @public
+ */
 export interface SpaceComponentSchema<Key extends SchemaKey = SchemaKey>
   extends AbstractSchema<Key>, ComponentEventListenerHolder<NzSpaceComponent>, ComponentPropertyHolder<NzSpaceComponent> {
   kind: 'space';

@@ -1,0 +1,13 @@
+[
+  {
+    "kind": "input",
+    "key": "username",
+    "label": "用户名"
+  },
+  {
+    "kind": "input",
+    "key": "password",
+    "label": "密码",
+    "disabled": "!model.username"
+  }
+]

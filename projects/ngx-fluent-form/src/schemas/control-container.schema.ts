@@ -4,12 +4,18 @@ import { AbstractControlContainerSchema } from './abstract.schema';
 import { Labelful, Length } from './interfaces';
 import { SchemaKey } from './types';
 
+/**
+ * @public
+ */
 export interface FormGroupSchema<Key extends SchemaKey = SchemaKey> extends AbstractControlContainerSchema<Key> {
   kind: 'group';
   /* Used to define the label of the control. */
   label?: string;
 }
 
+/**
+ * @public
+ */
 export interface FormArraySchema<Key extends SchemaKey = SchemaKey> extends AbstractControlContainerSchema<Key>, Labelful {
   kind: 'array';
   length?: Length;
@@ -18,6 +24,9 @@ export interface FormArraySchema<Key extends SchemaKey = SchemaKey> extends Abst
   orderable?: boolean;
 }
 
+/**
+ * @public
+ */
 interface AddableButton {
   type?: NzButtonType;
   icon?: string;

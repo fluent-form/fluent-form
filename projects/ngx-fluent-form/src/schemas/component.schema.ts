@@ -6,16 +6,25 @@ import { AbstractSchema } from './abstract.schema';
 import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Icon, Labelful, PropertyHolder, SchemaReactiveFn } from './interfaces';
 import { SchemaKey } from './types';
 
+/**
+ * @public
+ */
 export interface TemplateSchema<Key extends SchemaKey = SchemaKey> extends AbstractSchema<Key>, Labelful, PropertyHolder {
   kind: 'template';
 }
 
+/**
+ * @public
+ */
 export interface TextComponentSchema<Key extends SchemaKey = SchemaKey>
   extends AbstractSchema<Key>, Labelful, ComponentEventListenerHolder<NzFormTextComponent>, ComponentPropertyHolder<NzFormTextComponent> {
   kind: 'text';
   content: string | TemplateRef<void>;
 }
 
+/**
+ * @public
+ */
 export interface ButtonComponentSchema<Key extends SchemaKey = SchemaKey>
   extends AbstractSchema<Key>, Labelful, ElementEventListenerHolder, ElementPropertyHolder<HTMLButtonElement> {
   kind: 'button';
@@ -34,6 +43,9 @@ export interface ButtonComponentSchema<Key extends SchemaKey = SchemaKey>
   }
 }
 
+/**
+ * @public
+ */
 export interface HeadingComponentSchema<Key extends SchemaKey = SchemaKey>
   extends AbstractSchema<Key>, ElementEventListenerHolder, ElementPropertyHolder<HTMLHeadingElement> {
   kind: 'heading';
@@ -41,6 +53,9 @@ export interface HeadingComponentSchema<Key extends SchemaKey = SchemaKey>
   content: string | TemplateRef<void>;
 }
 
+/**
+ * @public
+ */
 export interface AlertComponentSchema<Key extends SchemaKey = SchemaKey>
   extends AbstractSchema<Key>, ComponentEventListenerHolder<NzAlertComponent>, ComponentPropertyHolder<NzAlertComponent> {
   kind: 'alert';

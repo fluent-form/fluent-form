@@ -18,11 +18,17 @@ import { AbstractControlSchema, AbstractDateControlSchema, AbstractInputBoxContr
 import { ComponentControlEventListenerHolder, ComponentPropertyHolder, ElementControlEventListenerHolder, ElementPropertyHolder, PropertyHolder, SchemaContext, SchemaReactiveFn } from './interfaces';
 import { AnySchemaKey, SchemaKey } from './types';
 
+/**
+ * @public
+ */
 export interface HeadlessControlSchema<Key extends SchemaKey> extends AbstractControlSchema<Key, SafeAny>, PropertyHolder {
   kind: 'headless';
   template?: string;
 }
 
+/**
+ * @public
+ */
 export interface InputControlSchema<Key extends SchemaKey = SchemaKey, Val = string>
   extends AbstractTextControlSchema<Key>, ElementControlEventListenerHolder<Val>, ElementPropertyHolder<HTMLInputElement> {
   kind: 'input';
@@ -30,6 +36,9 @@ export interface InputControlSchema<Key extends SchemaKey = SchemaKey, Val = str
   type?: 'text' | 'number' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
 }
 
+/**
+ * @public
+ */
 export interface TextareaControlSchema<Key extends SchemaKey = SchemaKey, Val = string>
   extends AbstractTextControlSchema<Key>, ElementControlEventListenerHolder<Val>, ElementPropertyHolder<HTMLTextAreaElement> {
   kind: 'textarea';
@@ -39,6 +48,9 @@ export interface TextareaControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   autosize?: boolean | { minRows: number, maxRows: number };
 }
 
+/**
+ * @public
+ */
 export interface NumberInputControlSchema<Key extends SchemaKey = SchemaKey, Val = number>
   extends AbstractInputBoxControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzInputNumberComponent, Val>, ComponentPropertyHolder<NzInputNumberComponent> {
   kind: 'number';
@@ -49,17 +61,26 @@ export interface NumberInputControlSchema<Key extends SchemaKey = SchemaKey, Val
   step?: number;
 }
 
+/**
+ * @public
+ */
 export interface DatePickerControlSchema<Key extends SchemaKey = SchemaKey, Val = Date>
   extends AbstractDateControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzDatePickerComponent, Val>, ComponentPropertyHolder<NzDatePickerComponent> {
   kind: 'date';
 }
 
+/**
+ * @public
+ */
 export interface DateRangePickerControlSchema<Key extends AnySchemaKey = AnySchemaKey, Val = [Date, Date]>
   extends AbstractDateControlSchema<Key, Val, [string, string]>, ComponentControlEventListenerHolder<NzRangePickerComponent, Val>, ComponentPropertyHolder<NzRangePickerComponent> {
   kind: 'date-range';
   separator?: string;
 }
 
+/**
+ * @public
+ */
 export interface TimePickerControlSchema<Key extends SchemaKey = SchemaKey, Val = Date>
   extends AbstractInputBoxControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzTimePickerComponent, Val>, ComponentPropertyHolder<NzTimePickerComponent> {
   kind: 'time';
@@ -77,6 +98,9 @@ export interface TimePickerControlSchema<Key extends SchemaKey = SchemaKey, Val 
   suffixIcon?: string | TemplateRef<void>;
 }
 
+/**
+ * @public
+ */
 export interface ToggleControlSchema<Key extends SchemaKey = SchemaKey, Val = boolean>
   extends AbstractControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzSwitchComponent, Val>, ComponentPropertyHolder<NzSwitchComponent> {
   kind: 'toggle';
@@ -85,6 +109,9 @@ export interface ToggleControlSchema<Key extends SchemaKey = SchemaKey, Val = bo
   size?: NzSizeDSType;
 }
 
+/**
+ * @public
+ */
 export interface SelectControlSchema<Key extends SchemaKey = SchemaKey, Val = SafeAny | SafeAny[]>
   extends AbstractControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzSelectComponent, Val>, ComponentPropertyHolder<NzSelectComponent> {
   kind: 'select';
@@ -115,6 +142,9 @@ export interface SelectControlSchema<Key extends SchemaKey = SchemaKey, Val = Sa
   };
 }
 
+/**
+ * @public
+ */
 export interface CascaderControlSchema<Key extends SchemaKey = SchemaKey, Val = SafeAny[]>
   extends AbstractControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzCascaderComponent, Val>, ComponentPropertyHolder<NzCascaderComponent> {
   kind: 'cascader';
@@ -140,6 +170,9 @@ export interface CascaderControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   };
 }
 
+/**
+ * @public
+ */
 export interface SliderControlSchema<Key extends AnySchemaKey = AnySchemaKey, Val = number | [number, number]>
   extends AbstractControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzSliderComponent, Val>, ComponentPropertyHolder<NzSliderComponent> {
   kind: 'slider';
@@ -160,6 +193,9 @@ export interface SliderControlSchema<Key extends AnySchemaKey = AnySchemaKey, Va
   reverse?: boolean;
 }
 
+/**
+ * @public
+ */
 export interface RadioGroupControlSchema<Key extends SchemaKey = SchemaKey, Val = SafeAny>
   extends AbstractControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzRadioGroupComponent, Val>, ComponentPropertyHolder<NzRadioGroupComponent> {
   kind: 'radio-group';
@@ -174,6 +210,9 @@ export interface RadioGroupControlSchema<Key extends SchemaKey = SchemaKey, Val 
   };
 }
 
+/**
+ * @public
+ */
 export interface CheckboxControlSchema<Key extends SchemaKey = SchemaKey, Val = boolean>
   extends AbstractControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzCheckboxComponent, Val>, ComponentPropertyHolder<NzCheckboxComponent> {
   kind: 'checkbox';
@@ -182,6 +221,9 @@ export interface CheckboxControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   indeterminate?: boolean;
 }
 
+/**
+ * @public
+ */
 export interface CheckboxGroupControlSchema<Key extends SchemaKey = SchemaKey, Val = NzCheckBoxOptionInterface[]>
   extends AbstractControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzCheckboxGroupComponent, Val>, ComponentPropertyHolder<NzCheckboxGroupComponent> {
   kind: 'checkbox-group';
@@ -192,6 +234,9 @@ export interface CheckboxGroupControlSchema<Key extends SchemaKey = SchemaKey, V
   };
 }
 
+/**
+ * @public
+ */
 export interface RateControlSchema<Key extends SchemaKey = SchemaKey, Val = number>
   extends AbstractControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzRateComponent, Val>, ComponentPropertyHolder<NzRateComponent> {
   kind: 'rate';
@@ -208,6 +253,9 @@ export interface RateControlSchema<Key extends SchemaKey = SchemaKey, Val = numb
   autofocus?: boolean;
 }
 
+/**
+ * @public
+ */
 export interface TreeSelectControlSchema<Key extends SchemaKey = SchemaKey, Val = SafeAny[]>
   extends AbstractControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzTreeSelectComponent, Val>, ComponentPropertyHolder<NzTreeSelectComponent> {
   kind: 'tree-select';

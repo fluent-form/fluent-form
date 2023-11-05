@@ -120,7 +120,7 @@ export class SchemaUtil {
     let _schema: AnySchema | null = schema;
 
     for (const path of paths) {
-      _schema = (_schema as AnyContainerSchema).schemas.find(o => o.key!.toString() === path) ?? null;
+      _schema = (_schema as AnyContainerSchema).schemas.find(o => o.key?.toString() === path) ?? null;
 
       if (_schema === null) {
         return _schema;

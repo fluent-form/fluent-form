@@ -1,0 +1,8 @@
+<nz-row nzGutter="20">
+  <nz-col nzFlex="2">
+    <fluent-form layout="horizontal" [schema]="schema" [(model)]="model"></fluent-form>
+  </nz-col>
+  <nz-col nzFlex="1">
+    <pre>{{ model | json }}</pre>
+  </nz-col>
+</nz-row>

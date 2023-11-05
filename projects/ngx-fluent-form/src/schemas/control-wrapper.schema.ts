@@ -6,10 +6,16 @@ import { ComposableComponentSchema } from './index.schema';
 import { ComponentEventListenerHolder, ComponentPropertyHolder, Labelful } from './interfaces';
 import { AnySchemaKey, SchemaKey } from './types';
 
+/**
+ * @public
+ */
 export interface ControlWrapper<Key extends SchemaKey> extends AbstractSchema<Key> {
   schemas: ComposableComponentSchema[];
 }
 
+/**
+ * @public
+ */
 export interface InputGroupComponentSchema<Key extends SchemaKey = SchemaKey>
   extends ControlWrapper<Key>, Labelful, ComponentEventListenerHolder<NzInputGroupComponent>, ComponentPropertyHolder<NzInputGroupComponent> {
   kind: 'input-group';

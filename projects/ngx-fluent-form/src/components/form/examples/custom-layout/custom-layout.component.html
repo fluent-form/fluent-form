@@ -1,0 +1,37 @@
+<nz-row nzGutter="20">
+  <nz-col nzFlex="2">
+    <nz-table #table nzSize="middle" [nzData]="list">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Birthday</th>
+          <th>Enabled</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of table.data; index as index"
+          fluent-form
+          [fluentSchema]="schema"
+          [(fluentModel)]="list[index]">
+          <td>
+            <fluent-outlet key="name"></fluent-outlet>
+          </td>
+          <td>
+            <fluent-outlet key="age"></fluent-outlet>
+          </td>
+          <td>
+            <fluent-outlet key="info.birthday"></fluent-outlet>
+          </td>
+          <td>
+            <fluent-outlet key="enabled"></fluent-outlet>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </nz-col>
+  <nz-col nzFlex="1">
+    <pre>{{ list | json }}</pre>
+  </nz-col>
+</nz-row>

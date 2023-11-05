@@ -7,15 +7,21 @@ import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
 import { ComponentOutputListenerMap, ComponentPropertyMap, HTMLElementEventListenerMap, HTMLElementPropertyMap } from '../types';
 import { AnySchemaKey, Cell } from './types';
 
+/**
+ * @public
+ */
 export enum SchemaType {
-  Control = 1 << 0,
-  ControlContainer = 1 << 1,
-  ControlWrapper = 1 << 2,
-  Component = 1 << 3,
-  ComponentContainer = 1 << 4,
-  ComponentWrapper = 1 << 5
+  Control,
+  ControlContainer,
+  ControlWrapper,
+  Component,
+  ComponentContainer,
+  ComponentWrapper
 }
 
+/**
+ * @public
+ */
 export enum SchemaKind {
   Headless = 'headless',
   Input = 'input',

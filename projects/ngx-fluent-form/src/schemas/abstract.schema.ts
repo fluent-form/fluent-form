@@ -10,7 +10,10 @@ import { AnySchema } from './index.schema';
 import { Col, ControlEventListenerHolder, ControlValueMapper, Labelful, Length, Row, SchemaLike, SchemaReactiveFn } from './interfaces';
 import { AnySchemaKey, Cell } from './types';
 
-/** 抽象图示 */
+/**
+ * @public
+ * 抽象图示
+ */
 export interface AbstractSchema<Key extends AnySchemaKey = AnySchemaKey> extends SchemaLike<Key> {
   /* Used to define the width of the control. */
   col?: Col | Cell;
@@ -19,7 +22,10 @@ export interface AbstractSchema<Key extends AnySchemaKey = AnySchemaKey> extends
   style?: NgStyle['ngStyle'];
 }
 
-/** 抽象的真实控件图示 */
+/**
+ * @public
+ * 抽象的真实控件图示
+ */
 export interface AbstractControlSchema<Key extends AnySchemaKey, Val> extends AbstractSchema<Key>, Labelful {
   id?: string;
   /** I/O mapper for control */
@@ -48,7 +54,10 @@ export interface AbstractControlSchema<Key extends AnySchemaKey, Val> extends Ab
   updateOn?: AbstractControlOptions['updateOn'];
 }
 
-/** 抽象的容器控件图示 */
+/**
+ * @public
+ * 抽象的容器控件图示
+ */
 export interface AbstractControlContainerSchema<Key extends AnySchemaKey> extends AbstractSchema<Key>, ControlEventListenerHolder<SafeAny>, Row {
   schemas: AnySchema[];
   /** Validator for the control */
@@ -59,7 +68,10 @@ export interface AbstractControlContainerSchema<Key extends AnySchemaKey> extend
   updateOn?: AbstractControlOptions['updateOn'];
 }
 
-/** 抽象的输入框图示 */
+/**
+ * @public
+ * 抽象的输入框图示
+ */
 export interface AbstractInputBoxControlSchema<Key extends AnySchemaKey, Val, P extends string | [string, string] = string> extends AbstractControlSchema<Key, Val> {
   placeholder?: P;
   autofocus?: boolean;
@@ -68,7 +80,10 @@ export interface AbstractInputBoxControlSchema<Key extends AnySchemaKey, Val, P 
   borderless?: boolean;
 }
 
-/** 抽象的文本控件图示 */
+/**
+ * @public
+ * 抽象的文本控件图示
+ */
 export interface AbstractTextControlSchema<Key extends AnySchemaKey = AnySchemaKey> extends AbstractInputBoxControlSchema<Key, string> {
   length?: Length;
   autocomplete?: {
@@ -79,7 +94,10 @@ export interface AbstractTextControlSchema<Key extends AnySchemaKey = AnySchemaK
   };
 }
 
-/** 抽象的日期控件图示 */
+/**
+ * @public
+ * 抽象的日期控件图示
+ */
 export interface AbstractDateControlSchema<Key extends AnySchemaKey, Val, P extends string | [string, string] = string> extends AbstractInputBoxControlSchema<Key, Val, P> {
   /** Mode of date picker control */
   mode?: NzDateMode;

@@ -1,9 +1,0 @@
-{
-  "disablePrivate": true,
-  "disableProtected": true,
-  "disableInternal": true,
-  "disableLifeCycleHooks": true,
-  "tsconfig": "./tsconfig.json",
-  "exportFormat": "json",
-  "output": "."
-}

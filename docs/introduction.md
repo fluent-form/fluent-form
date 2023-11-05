@@ -5,7 +5,7 @@ order: 1
 
 <div align="center">
 
-<img src="/assets/logo.svg" width="150" />
+<img src="./assets/logo.svg" width="150" />
 
 # ngx-fluent-form
 

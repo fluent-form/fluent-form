@@ -5,8 +5,9 @@ module.exports = {
     mode: 'lite',
     title: 'ngx-fluent-form',
     description: '',
-    logoUrl: '/assets/logo.svg',
+    logoUrl: './assets/logo.svg',
     docsDir: 'docs',
+    outputDir: 'dist/docs-site',
     repoUrl: 'https://github.com/HyperLife1119/ngx-fluent-form',
     footer: 'Open-source MIT Licensed',
     navs: [

@@ -3,7 +3,7 @@ title: 介绍
 order: 1
 ---
 
-<div style="text-align:center">
+<div align="center">
 
 <img src="/assets/logo.svg" width="150" />
 

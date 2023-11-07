@@ -106,6 +106,8 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig, T
   @Output() modelChange: EventEmitter<T> = new EventEmitter();
   @Output() valueChanges: EventEmitter<T> = new EventEmitter();
   @Output() statusChanges: EventEmitter<FormControlStatus> = new EventEmitter();
+  // eslint-disable-next-line @angular-eslint/no-output-native
+  @Output() submit: EventEmitter<SubmitEvent> = new EventEmitter();
 
   @ContentChildren(FluentTemplateDirective) templateDirectives!: QueryList<FluentTemplateDirective>;
 

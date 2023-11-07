@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, forwardRef, inject, Input, Output } from '@angular/core';
+import { Directive, EventEmitter, forwardRef, HostListener, inject, Input, Output } from '@angular/core';
 import { FormControlStatus, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
@@ -72,6 +72,15 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentC
   @Output('fluentModelChange') modelChange: EventEmitter<T> = new EventEmitter();
   @Output('fluentValueChanges') valueChanges: EventEmitter<T> = new EventEmitter();
   @Output('fluentStatusChanges') statusChanges: EventEmitter<FormControlStatus> = new EventEmitter();
+  /** The submit event will only be triggered when the host element is a form element */
+  // eslint-disable-next-line @angular-eslint/no-output-native
+  @Output('fluentSubmit') submit: EventEmitter<SubmitEvent> = new EventEmitter();
+
+  @HostListener('submit', ['$event'])
+  onSubmit(event: SubmitEvent) {
+    this.submit.emit(event);
+    return (event?.target as HTMLFormElement | null)?.method === 'dialog';
+  }
 
   private createForm() {
     this.destroy$.next();

@@ -8,7 +8,8 @@
   [ngClass]="schema.class"
   [ngStyle]="schema.style"
   [formGroup]="form"
-  [fluentBinding]="{ schema, control: form }">
+  [fluentBinding]="{ schema, control: form }"
+  (ngSubmit)="submit.emit($event)">
   <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
     <nz-col
       [nzSpan]="schema.col | col: 'span'"

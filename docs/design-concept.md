@@ -106,14 +106,36 @@ const schema = form(() => {
 
 ### 为什么
 
-由于 Angular 组件具有选择器（selector）的概念，这使得组件在渲染后会增加一层 `<host-element>` 宿主元素，它的存在直接改变了渲染后的 DOM 结构。在嵌套布局中，这可能会影响某些 CSS 样式。
+由于 Angular 组件具有选择器（selector）的概念，这使得组件在渲染后会增加一层 `<host-element>` 宿主元素，它的存在直接改变了渲染后的 DOM 结构。在嵌套布局中，这会直接影响某些 CSS 样式。
 
-以 `<button-group>` 与 `<button>` 嵌套形成的按钮组为例，我们希望 `<button>` 是 `<button-group>` 的**直接**子元素，此时模板定义看起来像是这样的：
+以 `<button-group>` 与 `<button>` 嵌套形成的按钮组为例，这些组件通常来自外部组件库。为了在动态表单中复用它们，我们需要分别为这些组件定义专用的包装组件，然后注册到动态表单：
+
+```ts
+@Component({
+  selector: 'my-button',
+  template: `
+    <button>...</button>
+  `
+})
+class MyButtonComponent { }
+
+@Component({
+  selector: 'my-button-group',
+  template: `
+    <button-group>
+      <my-button></my-button>
+    </button-group>
+  `
+})
+class MyButtonGroupComponent { }
+```
+
+并且我们希望 `<button>` 是 `<button-group>` 的**直接**子元素，此时模板看起来像是这样的：
 
 ```html
-<host-button-group>
-  <host-button></host-button>
-</host-button-group>
+<my-button-group>
+  <my-button></my-button>
+</my-button-group>
 ```
 
 **预期**渲染结果：
@@ -127,13 +149,13 @@ const schema = form(() => {
 **实际**渲染结果：
 
 ```diff
-- <host-button-group>
+- <my-button-group>
     <button-group>
--     <host-button>
+-     <my-button>
         <button></button>
--     </host-button>
+-     </my-button>
     </button-group>
-- </host-button-group>
+- </my-button-group>
 ```
 
 不难发现，由于 `<host-element>` 的出现，破坏了 DOM 结构。在这种情况下，以下 CSS 选择器均无法准确命中元素：

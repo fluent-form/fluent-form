@@ -49,7 +49,7 @@ order: 3
 
 ## 格式化与解析
 
-<alert type="info">这是一项高级功能，基于此功能我们可以定制一些业务组件。</alert>
+<alert type="info">这是一项高级功能，基于此功能我们可以定制一些简单的业务组件。</alert>
 <alert type="warning">`ngx-fluent-form` 默认会将日期控件输出的 `Date` 对象转为时间戳，可使用 `mapper` 选项覆盖此行为。</alert>
 
 使用 `mapper` 选项来设置控件的输入解析与格式化输出。

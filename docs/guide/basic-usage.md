@@ -68,3 +68,23 @@ const schema = form([
 <br>
 
 两种写法都是等效的，您可以根据自己的偏好来选择一种写法。教程中将使用 Fluent API 来作为主要演示。
+
+## 组件使用
+
+### FluentFormComponent
+
+```html
+<fluent-form
+  [schema]="schema"
+  [(model)]="model"
+  (submit)="onSubmit($event)">
+</fluent-form>
+```
+- 使用 `schema` 属性指定表单图示；
+- 使用 `model` 属性绑定模型，支持双向绑定；
+- 使用 `(submit)` 侦听表单提交事件；
+- 使用 `(formChange)` 侦听表单变更，可获得 `FormGroup` 实例；
+- 使用 `(modelChange)` 侦听模型变更；
+- 使用 `(valueChanges)` 侦听表单值变更，参考 [AbstractControl#valueChanges](https://angular.cn/api/forms/AbstractControl#valueChanges)；
+- 使用 `(statusChanges)` 侦听表单状态变更，参考 [AbstractControl#statusChanges](https://angular.cn/api/forms/AbstractControl#statusChanges)；
+- 有关更多组件属性/事件，请查阅 [Component API](../api/form/api)。

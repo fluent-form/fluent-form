@@ -104,4 +104,4 @@ import { SchemaType } from 'ngx-fluent-form';
 
 ## 执行顺序
 
-图示修补器将根据传递给 `withSchemaPatchers()` 函数的参数顺序，按顺序逐个执行修补函数。
+图示修补器将根据它们在 `withSchemaPatchers()` 函数参数中的顺序，按顺序逐个执行修补函数。

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { MinusOutline, PlusOutline } from '@ant-design/icons-angular/icons';
@@ -8,6 +8,7 @@ import { array, form, group, input, inputGroup } from '../../compose';
 import { withAllWidgets } from '../../features';
 import { provideFluentForm } from '../../provider';
 import { FormGroupSchema } from '../../schemas';
+import { FluentFormDirective } from './form.directive';
 import { FluentFormLayoutModule } from './module';
 
 @Component({
@@ -26,6 +27,7 @@ import { FluentFormLayoutModule } from './module';
   `
 })
 class TestingComponent {
+  @ViewChild(FluentFormDirective, { static: true }) fluentFormDirective!: FluentFormDirective<AnyObject>;
   form!: FormGroup;
   schema!: FormGroupSchema;
   model!: AnyObject;
@@ -52,6 +54,10 @@ describe('FluentFormDirective', () => {
 
     fixture = TestBed.createComponent(TestingComponent);
     component = fixture.componentInstance;
+  });
+
+  it('submit event', () => {
+    expect(component.fluentFormDirective.onSubmit({} as SubmitEvent)).toBeFalse();
   });
 
   it('should be the expected model value', () => {

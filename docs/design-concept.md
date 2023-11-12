@@ -52,23 +52,21 @@ const schema = form(() => {
   kind: 'group',
   key: 'root',
   schemas: [
-    [
-      {
-        kind: 'input',
-        key: 'text',
-        label: '文本',
-        placeholder: '请输入'
-      },
-      {
-        kind: 'button-group',
-        schemas: [
-          {
-            kind: 'button',
-            content: '提交'
-          }
-        ]
-      }
-    ]
+    {
+      kind: 'input',
+      key: 'text',
+      label: '文本',
+      placeholder: '请输入'
+    },
+    {
+      kind: 'button-group',
+      schemas: [
+        {
+          kind: 'button',
+          content: '提交'
+        }
+      ]
+    }
   ]
 }
 ```

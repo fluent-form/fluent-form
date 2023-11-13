@@ -73,3 +73,11 @@ order: 3
 并非所有选项都支持联动，我们仅会对必要的选项支持此功能，您可以根据选项的类型判断是否支持该联动。
 
 <example name="fluent-form-control-linkage-example" />
+
+## 远程数据
+
+### select 选择器
+
+一个带有远程搜索，节流控制，请求时序控制，加载状态的示例。
+
+<example name="fluent-form-select-remote-data-example" />

@@ -17,10 +17,10 @@ export class SelectRemoteDataExampleComponent {
     select('user')
       .label('选择用户')
       .placeholder('输入关键字进行检索')
-      .fetchOptions(keywork$ =>
-        keywork$.pipe(
+      .fetchOptions(keyword$ =>
+        keyword$.pipe(
           debounceTime(300),
-          switchMap(keywork => this.searchUsers(keywork))
+          switchMap(keyword => this.searchUsers(keyword))
         )
       )
       .col(6);
@@ -28,12 +28,12 @@ export class SelectRemoteDataExampleComponent {
 
   model = {};
 
-  searchUsers(keywork: string) {
+  searchUsers(keyword: string) {
     return this.http.get('https://api.randomuser.me/?results=5').pipe(
       catchError(() => of({ results: [] })),
       map((res: any) => res.results),
       map((list: any) => list.map((item: any) => {
-        const username = `${item.name.first} ${keywork}`;
+        const username = `${item.name.first} ${keyword}`;
         return {
           value: username,
           label: username

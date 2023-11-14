@@ -12,8 +12,8 @@ order: 2
 
 并且确保你的相关依赖版本符合如下规定：
 
-- `angular >= v15.0.0`
-- `ng-zorro-antd >= v15.0.0`
+- `angular >= v16.0.0`
+- `ng-zorro-antd >= v16.0.0`
 
 ## 安装
 

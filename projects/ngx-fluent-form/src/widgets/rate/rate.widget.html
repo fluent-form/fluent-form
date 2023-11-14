@@ -7,7 +7,7 @@
     [ngStyle]="schema.style"
     [nzAllowClear]="schema.clearable ?? true"
     [nzAllowHalf]="schema.half"
-    [nzCharacter]="character"
+    [nzCharacter]="schema.character ? character : null!"
     [nzCount]="schema.count ?? 5"
     [nzTooltips]="schema.tooltips ?? []"
     [nzAutoFocus]="schema.autofocus"></nz-rate>

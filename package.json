@@ -65,7 +65,7 @@
     "lint-staged": "^15.0.0",
     "ng-packagr": "^16.2.3",
     "prettier": "~2.7.1",
-    "prettier-plugin-organize-attributes": "^0.0.5",
+    "prettier-plugin-organize-attributes": "^1.0.0",
     "typescript": "~5.1.0"
   }
 }

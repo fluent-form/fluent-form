@@ -22,3 +22,9 @@ order: 2
 使用 `row()` 组件创建新的栅格行。
 
 <example name="fluent-form-grid-row-example" />
+
+## 布局类型
+
+用 `<fluent-form>` 组件的 `layout` 参数来配置表单布局类型，默认为 `vertical`。
+
+<example name="fluent-form-layout-type-example" />

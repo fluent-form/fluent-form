@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Injector } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl } from '@angular/forms';
 import { of, switchMap } from 'rxjs';
@@ -9,6 +9,12 @@ describe('SelectWidget', () => {
   let fixture: ComponentFixture<SelectWidget>;
 
   beforeEach(() => {
+    TestBed.overrideProvider(ChangeDetectorRef, {
+      useValue: {
+        // eslint-disable-next-line
+        detectChanges() { }
+      }
+    });
     fixture = TestBed.createComponent(SelectWidget);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -19,20 +25,13 @@ describe('SelectWidget', () => {
   });
 
   it('private context', () => {
-    const ctx = new SelectWidgetTemplatePrivateContext(
-      Injector.create({
-        providers: [
-          {
-            provide: ChangeDetectorRef,
-            useValue: {
-              // eslint-disable-next-line
-              detectChanges() { }
-            }
-          }
-        ],
-      })
-    );
     const control = new FormControl();
+    let ctx!: SelectWidgetTemplatePrivateContext;
+
+    TestBed.runInInjectionContext(() => {
+      ctx = new SelectWidgetTemplatePrivateContext();
+    });
+
     ctx.init(
       {
         kind: 'select',

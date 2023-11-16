@@ -1,11 +1,11 @@
 import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
-import { ChangeDetectorRef, Component, Injector } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputGroupComponent } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { filter, Subject, tap } from 'rxjs';
+import { Subject, filter, tap } from 'rxjs';
 import { FluentBindingDirective, FluentContextDirective, FluentContextGuardDirective, FluentInjectDirective, FluentLifeCycleDirective } from '../../directives';
 import { FluentColumnPipe, FluentReactivePipe, FluentTemplatePipe } from '../../pipes';
 import { SelectControlSchema } from '../../schemas';
@@ -46,13 +46,9 @@ export class SelectWidget extends AbstractWidget<SelectWidgetTemplateContext> {
 
 export class SelectWidgetTemplatePrivateContext {
   private readonly keyword$ = new Subject<string>();
-  private readonly cdr: ChangeDetectorRef;
+  private readonly cdr = inject(ChangeDetectorRef);
 
   open = false;
-
-  constructor(injector: Injector) {
-    this.cdr = injector.get(ChangeDetectorRef);
-  }
 
   init(schema: SelectControlSchema, model: AnyObject, control: FormControl) {
     const fetchOptionsFn = schema.fetchOptions;

@@ -61,7 +61,7 @@ export class AppModule { }
 对于 `standalone` 风格，你只需要将 `FluentFormComponent` 导入到你的独立组件即可：
 
 ```ts
-import { FluentFormComponent, form, number, input } from 'ngx-fluent-form';
+import { FluentFormComponent, button, form, number, input } from 'ngx-fluent-form';
 
 @Component({
   standalone: true,
@@ -72,6 +72,7 @@ export class ExampleComponent {
   schema = form(() => {
     input('text');
     number('count');
+    button().content('submit');
   });
 
   model = {
@@ -97,7 +98,7 @@ export class YourModule { }
 ```
 
 ```ts
-import { form, number, input } from 'ngx-fluent-form';
+import { button, form, number, input } from 'ngx-fluent-form';
 
 @Component({
   template: `<fluent-form [(model)]="model" [schema]="schema"></fluent-form>`
@@ -106,6 +107,7 @@ export class ExampleComponent {
   schema = form(() => {
     input('text');
     number('count');
+    button().content('submit');
   });
 
   model = {

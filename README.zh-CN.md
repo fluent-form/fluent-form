@@ -36,7 +36,7 @@ ng add ngx-fluent-form
 ## 用法
 
 ```ts
-import { FluentFormComponent, form, number, input } from 'ngx-fluent-form';
+import { FluentFormComponent, button, form, number, input } from 'ngx-fluent-form';
 
 @Component({
   standalone: true,
@@ -47,6 +47,7 @@ export class ExampleComponent {
   schema = form(() => {
     input('text');
     number('count');
+    button().content('submit');
   });
 
   model = {

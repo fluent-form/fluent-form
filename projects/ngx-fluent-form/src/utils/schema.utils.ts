@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
+import { throwWidgetNotFoundError } from '../errors';
 import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, AnySchemaKey, DoubleKeyControlSchema, SchemaKey } from '../schemas';
-import { SchemaLike, SchemaType } from '../schemas/interfaces';
+import { SchemaKind, SchemaLike, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP, SCHEMA_PATCHERS } from '../tokens';
 import { isString } from './is.utils';
 
@@ -14,12 +15,23 @@ export class SchemaUtil {
   private readonly schemaMap = inject(SCHEMA_MAP);
   private readonly schemaPatchers = inject(SCHEMA_PATCHERS, { optional: true }) ?? [];
 
-  patch<T extends AnySchema>(schema: T): T {
+  patch<T extends AnySchema>(schema: T, level = 1): T {
     if ('schemas' in schema) {
-      schema.schemas = schema.schemas.map(schema => this.patch(schema));
+      schema.schemas = schema.schemas.map(schema => this.patch(schema, level + 1));
     }
 
-    const { type } = this.schemaMap.get(schema.kind)!;
+    // skip the root group schema
+    if (level === 1 && schema.kind === SchemaKind.Group && schema.key === 'root') {
+      return schema;
+    }
+
+    const config = this.schemaMap.get(schema.kind);
+
+    if (!config) {
+      throwWidgetNotFoundError(schema.kind);
+    }
+
+    const { type } = config;
 
     return this.schemaPatchers
       .filter(patcher => {

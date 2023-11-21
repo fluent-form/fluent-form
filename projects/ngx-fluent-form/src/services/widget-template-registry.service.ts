@@ -1,4 +1,5 @@
 import { createComponent, EnvironmentInjector, inject, Injectable, TemplateRef } from '@angular/core';
+import { throwWidgetNotFoundError } from '../errors';
 import { WIDGET_MAP } from '../tokens';
 
 /**
@@ -19,7 +20,7 @@ export class WidgetTemplateRegistry extends Map<string, TemplateRef<unknown>> {
     const component = this.widgetMap.get(kind);
 
     if (!component) {
-      throw new Error(`The '${kind}' template was not found`);
+      throwWidgetNotFoundError(kind);
     }
 
     const { instance } = createComponent(component, {

@@ -1,4 +1,5 @@
 import { inject, Pipe, PipeTransform, TemplateRef } from '@angular/core';
+import { throwCustomTemplateNotFoundError } from '../errors';
 import { AnySchema } from '../schemas';
 import { SchemaKind } from '../schemas/interfaces';
 import { WidgetTemplateRegistry } from '../services';
@@ -23,7 +24,7 @@ export class FluentWidgetTemplatePipe implements PipeTransform {
         const dir = templateDirectives?.find(o => o.name === value.key);
 
         if (!dir) {
-          throwTemplateNotFoundError(value.key!);
+          throwCustomTemplateNotFoundError(value.key!);
         }
 
         return dir.templateRef;
@@ -34,7 +35,7 @@ export class FluentWidgetTemplatePipe implements PipeTransform {
         const dir = templateDirectives?.find(o => o.name === value.template);
 
         if (!dir) {
-          throwTemplateNotFoundError(value.template!);
+          throwCustomTemplateNotFoundError(value.template!);
         }
 
         return dir.templateRef;
@@ -46,8 +47,4 @@ export class FluentWidgetTemplatePipe implements PipeTransform {
 
   }
 
-}
-
-function throwTemplateNotFoundError(name: string | number): never {
-  throw new Error(`The custom '${name}' template was not found`);
 }

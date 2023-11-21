@@ -29,7 +29,7 @@ export interface ButtonComponentSchema<Key extends SchemaKey = SchemaKey>
   extends AbstractSchema<Key>, Labelful, ElementEventListenerHolder, ElementPropertyHolder<HTMLButtonElement> {
   kind: 'button';
   type?: NzButtonType;
-  mode?: 'submit' | 'reset' | 'menu';
+  mode?: HTMLButtonElement['type'];
   disabled?: boolean | string | SchemaReactiveFn<ButtonComponentSchema<SchemaKey>, boolean>;
   loading?: boolean | string | SchemaReactiveFn<ButtonComponentSchema<SchemaKey>, boolean>;
   icon?: string | Icon;

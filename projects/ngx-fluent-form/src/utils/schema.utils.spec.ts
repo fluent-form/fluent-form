@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
+import { SafeAny } from '@ngify/types';
 import { array, form, group, input, inputGroup, slider, textarea } from '../compose';
 import { useTextWidget, withAllWidgets, withSchemaPatchers, withWidgets } from '../features';
 import { provideFluentForm } from '../provider';
@@ -38,6 +39,10 @@ describe('SchemaUtil', () => {
         const schema: AlertComponentSchema = { kind: 'alert', message: '' };
         expect(schemaUtil.patch(schema)).toEqual({ kind: 'alert', message: '', col: 24 });
       });
+    });
+
+    it('should throw error', () => {
+      expect(() => schemaUtil.patch({ kind: 'undefinded' } as SafeAny)).toThrowError(`The 'undefinded' widget was not found`);
     });
   });
 

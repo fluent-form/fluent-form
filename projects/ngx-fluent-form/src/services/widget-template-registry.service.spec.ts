@@ -22,6 +22,6 @@ describe('WidgetTemplateRegistry', () => {
   });
 
   it('should throw error', () => {
-    expect(() => service.get('undefinded')).toThrowError(`The 'undefinded' template was not found`);
+    expect(() => service.get('undefinded')).toThrowError(`The 'undefinded' widget was not found`);
   });
 });

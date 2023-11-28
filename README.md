@@ -4,7 +4,7 @@
 
 # ngx-fluent-form
 
-An Angular forms library, using the Fluent API or JSON to build dynamic forms.
+An Angular dynamic forms library powered by Fluent API or JSON.
 
 [![npm version](https://img.shields.io/npm/v/ngx-fluent-form/latest.svg)](https://npmjs.com/package/ngx-fluent-form)
 ![Node.js CI](https://github.com/HyperLife1119/ngx-fluent-form/workflows/Node.js%20CI/badge.svg)

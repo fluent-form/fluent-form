@@ -4,7 +4,7 @@
 
 # ngx-fluent-form
 
-一个 Angular 动态表单库，使用 Fluent API 或 JSON 构建动态表单。
+一个 Angular 动态表单库，由 Fluent API 或 JSON 驱动。
 
 [![npm version](https://img.shields.io/npm/v/ngx-fluent-form/latest.svg)](https://npmjs.com/package/ngx-fluent-form)
 ![Node.js CI](https://github.com/HyperLife1119/ngx-fluent-form/workflows/Node.js%20CI/badge.svg)

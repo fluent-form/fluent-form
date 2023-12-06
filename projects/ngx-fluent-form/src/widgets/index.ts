@@ -12,6 +12,7 @@ export * from './form-group/form-group.widget';
 export * from './heading/heading.widget';
 export * from './input-group/input-group.widget';
 export * from './input/input.widget';
+export * from './number-group/number-group.widget';
 export * from './number/number.widget';
 export * from './radio-group/radio-group.widget';
 export * from './rate/rate.widget';

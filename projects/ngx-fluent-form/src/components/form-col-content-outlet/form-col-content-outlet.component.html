@@ -24,7 +24,16 @@
 </ng-template>
 
 <ng-template #formItemTemplate let-control="control" let-schema="schema" let-model="model">
-  <nz-form-item [ngClass]="schema.class" [style.margin-bottom.px]="schema.kind === SchemaKind.Heading ? 16 : null">
+  <!-- 在控件被 input-group 包裹的时候，控件状态/提示/required默认使用的是 input-group 里的第一个控件 -->
+  <!-- 如果需要采用 input-group 内其他控件，则需要使用 input-group 的 primary 参数明确指定 -->
+  <nz-form-item
+    *ngIf="
+      (schema.kind | schemaType) === SchemaType.ControlWrapper
+        ? (schema.primary ?? schema.schemas[0].key | schema: schema)
+        : schema as currentSchema
+    "
+    [ngClass]="schema.class"
+    [style.margin-bottom.px]="schema.kind === SchemaKind.Heading ? 16 : null">
     <nz-form-label
       *ngIf="schema.label"
       [nzSpan]="(helper.label.span | invoke: schema.label)!"
@@ -32,21 +41,13 @@
       [nzTooltipIcon]="(helper.tooltip.icon | invoke: schema.tooltip)!"
       [nzFor]="schema.id"
       [nzNoColon]="!config.colon"
-      [nzRequired]="schema.required | reactive: model:schema:control"
+      [nzRequired]="currentSchema.required | reactive: model:schema:control"
       [style.width]="helper.label.width | invoke: schema.label">
       {{ helper.label.content | invoke: schema.label }}
     </nz-form-label>
-    <!-- 在控件被 input-group 包裹的时候，控件状态/提示默认使用的是 input-group 里的第一个控件 -->
-    <!-- 如果需要采用 input-group 内其他控件的状态/提示，需要使用 input-group 的 primary 参数明确指定 -->
+
     <nz-form-control
-      *ngIf="
-        schema.kind === SchemaKind.InputGroup
-          ? (schema.primary ?? schema.schemas[0].key | schema: schema)
-          : schema as currentSchema
-      "
-      [nzValidateStatus]="
-        schema.kind === SchemaKind.InputGroup ? (schema.primary ?? schema.schemas[0].key | control: control) : control
-      "
+      [nzValidateStatus]="currentSchema.key | control: control"
       [nzHasFeedback]="currentSchema.feedback"
       [nzValidatingTip]="currentSchema.tips?.validating | template"
       [nzSuccessTip]="currentSchema.tips?.success | template"

@@ -3,7 +3,7 @@ import { RowComponentSchema, SpaceComponentSchema, StepComponentSchema, StepsCom
 import { ButtonGroupComponentSchema } from './component-wrapper.schema';
 import { AlertComponentSchema, ButtonComponentSchema, HeadingComponentSchema, TemplateSchema, TextComponentSchema } from './component.schema';
 import { FormArraySchema, FormGroupSchema } from './control-container.schema';
-import { InputGroupComponentSchema } from './control-wrapper.schema';
+import { InputGroupComponentSchema, NumberGroupComponentSchema } from './control-wrapper.schema';
 import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, HeadlessControlSchema, InputControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from './control.schema';
 import { AnySchemaKey, DoubleSchemaKey, SchemaKey } from './types';
 
@@ -32,7 +32,9 @@ export type AnyWrapperSchema = AnyControlWrapperSchema | AnyComponentWrapperSche
 export type AnyWrapperBuilder = StableBuilder<AnyWrapperSchema>;
 
 /** 任意控件包装器图示 */
-export type AnyControlWrapperSchema<Key extends SchemaKey = SchemaKey> = InputGroupComponentSchema<Key>;
+export type AnyControlWrapperSchema<Key extends SchemaKey = SchemaKey> =
+  | InputGroupComponentSchema<Key>
+  | NumberGroupComponentSchema<Key>;
 /** 任意控件包装器构建器 */
 export type AnyControlWrapperBuilder<Key extends SchemaKey = SchemaKey> = StableBuilder<AnyControlWrapperSchema<Key>>;
 

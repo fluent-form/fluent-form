@@ -1,6 +1,6 @@
-import { input } from './control';
+import { input, number } from './control';
 import { form } from './control-container';
-import { inputGroup } from './control-wrapper';
+import { inputGroup, numberGroup } from './control-wrapper';
 
 describe('control-wrapper', () => {
   it('inputGroup', () => {
@@ -13,6 +13,20 @@ describe('control-wrapper', () => {
       kind: 'input-group',
       schemas: [
         { kind: 'input' }
+      ]
+    }]);
+  });
+
+  it('numberGroup', () => {
+    const { schemas } = form(() => {
+      numberGroup().schemas(() => {
+        number();
+      });
+    });
+    expect(schemas).toEqual([{
+      kind: 'number-group',
+      schemas: [
+        { kind: 'number' }
       ]
     }]);
   });

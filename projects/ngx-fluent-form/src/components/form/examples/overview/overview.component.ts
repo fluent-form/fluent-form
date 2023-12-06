@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { alert, button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, FluentFormComponent, form, heading5, headless, input, inputGroup, number, radioGroup, rate, row, select, slider, space, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
+import { alert, button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, FluentFormComponent, form, heading5, headless, input, inputGroup, number, numberGroup, radioGroup, rate, row, select, slider, space, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
 import { map, switchMap, timer } from 'rxjs';
 import { AUTOCOMPLETE_OPTIONS, AUTOCOMPLETE_STRINGS, CASCADER_OPTIONS, CHECKBOX_OPTIONS, RADIO_OPTIONS, SELECT_OPTIONS, TREE_SELECT_OPTIONS } from './options';
 
@@ -34,6 +34,14 @@ export class OverviewExampleComponent {
         options: AUTOCOMPLETE_OPTIONS
       });
       input('last').placeholder('名').col(16);
+    });
+    numberGroup().label('数字输入组').col(8).schemas(() => {
+      number('minNum').placeholder('最小').col(12);
+      number('maxNum').placeholder('最大').col(12);
+    });
+    numberGroup().label('数字混合输入组').col(8).schemas(() => {
+      input('txt').placeholder('文本').col(12);
+      number('num').placeholder('数字').col(12);
     });
     textarea('textarea').label('文本框').col(24).autocomplete({
       options: AUTOCOMPLETE_OPTIONS

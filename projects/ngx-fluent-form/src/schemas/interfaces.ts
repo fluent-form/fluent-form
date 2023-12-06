@@ -41,6 +41,7 @@ export enum SchemaKind {
   TreeSelect = 'tree-select',
 
   InputGroup = 'input-group',
+  NumberGroup = 'number-group',
 
   Group = 'group',
   Array = 'array',

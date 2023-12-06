@@ -29,6 +29,7 @@ order: 999
 ## ControlWrapper
 
 - inputGroup：输入框组
+- numberGroup：数字输入框组
 
 ## ControlContainer
 

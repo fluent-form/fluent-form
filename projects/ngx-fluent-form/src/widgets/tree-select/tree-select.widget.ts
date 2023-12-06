@@ -2,8 +2,8 @@ import { NgClass, NgIf, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
+import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzInputGroupComponent } from 'ng-zorro-antd/input';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentInjectDirective } from '../../directives';
 import { FluentColumnPipe, FluentReactivePipe, InvokePipe } from '../../pipes';
@@ -36,7 +36,7 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
   styles: [`nz-tree-select { width: 100% }`]
 })
 export class TreeSelectWidget extends AbstractWidget<TreeSelectWidgetTemplateContext> {
-  protected readonly NzInputGroup = NzInputGroupComponent;
+  protected readonly InputGroup = NzFormNoStatusService;
   protected readonly helper = {
     checkable: (checkable: TreeSelectControlSchema['checkable']) =>
       isBoolean(checkable) ? checkable : !isUndefined(checkable?.strict),

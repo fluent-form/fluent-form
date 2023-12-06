@@ -1,5 +1,5 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <ng-container *fluentInject="NzInputGroup as inputGroup; optional: true">
+  <ng-container *fluentInject="InputGroup as inputGroup; optional: true">
     <ng-container *ngIf="inputGroup; else standardTemplate">
       <nz-tree-select
         *ngIf="!(schema.hidden | reactive: model:schema:control)"

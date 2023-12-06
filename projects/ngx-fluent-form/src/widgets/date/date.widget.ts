@@ -1,9 +1,9 @@
 import { NgClass, NgIf, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzInputGroupComponent } from 'ng-zorro-antd/input';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentInjectDirective } from '../../directives';
 import { FluentColumnPipe, FluentReactivePipe, FluentTemplatePipe } from '../../pipes';
 import { DatePickerControlSchema } from '../../schemas';
@@ -34,5 +34,5 @@ type DateWidgetTemplateContext = WidgetTemplateContext<DatePickerControlSchema, 
   styles: [`nz-date-picker { width: 100% }`]
 })
 export class DateWidget extends AbstractWidget<DateWidgetTemplateContext> {
-  protected readonly NzInputGroup = NzInputGroupComponent;
+  protected readonly InputGroup = NzFormNoStatusService;
 }

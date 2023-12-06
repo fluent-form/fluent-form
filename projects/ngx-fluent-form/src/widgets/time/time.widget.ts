@@ -1,8 +1,8 @@
 import { NgClass, NgIf, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzInputGroupComponent } from 'ng-zorro-antd/input';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentInjectDirective } from '../../directives';
 import { FluentColumnPipe, FluentReactivePipe, FluentTemplatePipe } from '../../pipes';
@@ -34,5 +34,5 @@ type TimeWidgetTemplateContext = WidgetTemplateContext<TimePickerControlSchema, 
   styles: [`nz-time-picker { width: 100% }`]
 })
 export class TimeWidget extends AbstractWidget<TimeWidgetTemplateContext> {
-  protected readonly NzInputGroup = NzInputGroupComponent;
+  protected readonly InputGroup = NzFormNoStatusService;
 }

@@ -24,15 +24,12 @@ export class FormUtil {
     const validators: ValidatorFn[] = this.schemaUtil.validatorsOf(schema);
     const value = this.valueUtil.valueOfModel(model, schema) ?? schema.defaultValue;
 
-    return new FormControl(
-      schema.mapper ? schema.mapper.parser(value, schema) : value,
-      {
-        nonNullable: !isUndefined(schema.defaultValue),
-        validators: schema.validators ? validators.concat(schema.validators) : validators,
-        asyncValidators: schema.asyncValidators,
-        updateOn: schema.updateOn
-      }
-    );
+    return new FormControl(value, {
+      nonNullable: !isUndefined(schema.defaultValue),
+      validators: schema.validators ? validators.concat(schema.validators) : validators,
+      asyncValidators: schema.asyncValidators,
+      updateOn: schema.updateOn
+    });
   }
 
   createFormGroup(schema: FormGroupSchema, model: AnyObject): FormGroup;

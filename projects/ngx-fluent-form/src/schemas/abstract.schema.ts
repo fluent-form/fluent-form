@@ -26,7 +26,7 @@ export interface AbstractSchema<Key extends AnySchemaKey = AnySchemaKey> extends
  * @public
  * 抽象的真实控件图示
  */
-export interface AbstractControlSchema<Key extends AnySchemaKey, Val> extends AbstractSchema<Key>, Labelful {
+export interface AbstractControlSchema<Key extends AnySchemaKey = AnySchemaKey, Val = SafeAny> extends AbstractSchema<Key>, Labelful {
   id?: string;
   /** I/O mapper for control */
   mapper?: ControlValueMapper<Val>;

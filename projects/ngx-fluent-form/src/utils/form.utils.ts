@@ -25,7 +25,7 @@ export class FormUtil {
     const value = this.valueUtil.valueOfModel(model, schema) ?? schema.defaultValue;
 
     return new FormControl(
-      schema.mapper ? schema.mapper.parser(value) : value,
+      schema.mapper ? schema.mapper.parser(value, schema) : value,
       {
         nonNullable: !isUndefined(schema.defaultValue),
         validators: schema.validators ? validators.concat(schema.validators) : validators,

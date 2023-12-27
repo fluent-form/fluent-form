@@ -5,6 +5,7 @@ import { SafeAny } from '@ngify/types';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
 import { ComponentOutputListenerMap, ComponentPropertyMap, HTMLElementEventListenerMap, HTMLElementPropertyMap } from '../types';
+import { AbstractControlSchema } from './abstract.schema';
 import { AnySchemaKey, Cell } from './types';
 
 /**
@@ -108,9 +109,9 @@ export interface Icon {
 
 export interface ControlValueMapper<V> {
   /** A parser that maps from a model's value to a form control's value */
-  parser: (input: SafeAny) => V | null;
+  parser: (input: SafeAny, schema: AbstractControlSchema) => V | null;
   /** A formatter that maps from a form control's value to a model's value */
-  formatter: (output: V | null) => SafeAny;
+  formatter: (output: V | null, schema: AbstractControlSchema) => SafeAny;
 }
 
 export interface SchemaContext<S extends SchemaLike> {

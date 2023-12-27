@@ -11,10 +11,12 @@ import { date, FluentFormComponent, form } from 'ngx-fluent-form';
 export class ControlMapperExampleComponent {
   schema = form(() => {
     date('date').label('日期控件').mapper({
-      parser: (input?: string) => {
+      parser: (input: string | null) => {
         return input ? new Date(input) : new Date();
       },
-      formatter: (output: Date | null) => {
+      formatter: (output: Date | null, schema) => {
+        console.log(schema);
+
         if (!output) return null;
         return [
           output.getFullYear(),

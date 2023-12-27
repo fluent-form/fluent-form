@@ -5,19 +5,19 @@ import { NzInputNumberGroupComponent } from 'ng-zorro-antd/input-number';
 import { AbstractSchema } from './abstract.schema';
 import { ComposableComponentSchema } from './index.schema';
 import { ComponentEventListenerHolder, ComponentPropertyHolder, Labelful } from './interfaces';
-import { AnySchemaKey, SchemaKey } from './types';
+import { SchemaKey, SingleSchemaKey } from './types';
 
 /**
  * @public
  */
-export interface ControlWrapper<Key extends SchemaKey> extends AbstractSchema<Key> {
+export interface ControlWrapper<Key extends SingleSchemaKey> extends AbstractSchema<Key> {
   schemas: ComposableComponentSchema[];
 }
 
 /**
  * @public
  */
-export interface InputGroupComponentSchema<Key extends SchemaKey = SchemaKey>
+export interface InputGroupComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
   extends ControlWrapper<Key>, Labelful, ComponentEventListenerHolder<NzInputGroupComponent>, ComponentPropertyHolder<NzInputGroupComponent> {
   kind: 'input-group';
   before?: string | TemplateRef<void> | { icon: string };
@@ -25,14 +25,14 @@ export interface InputGroupComponentSchema<Key extends SchemaKey = SchemaKey>
   prefix?: string | TemplateRef<void> | { icon: string };
   suffix?: string | TemplateRef<void> | { icon: string };
   size?: NzSizeLDSType;
-  primary?: AnySchemaKey;
+  primary?: SchemaKey;
   compact?: boolean;
 }
 
 /**
  * @public
  */
-export interface NumberGroupComponentSchema<Key extends SchemaKey = SchemaKey>
+export interface NumberGroupComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
   extends ControlWrapper<Key>, Labelful, ComponentEventListenerHolder<NzInputNumberGroupComponent>, ComponentPropertyHolder<NzInputNumberGroupComponent> {
   kind: 'number-group';
   before?: string | TemplateRef<void> | { icon: string };
@@ -40,6 +40,6 @@ export interface NumberGroupComponentSchema<Key extends SchemaKey = SchemaKey>
   prefix?: string | TemplateRef<void> | { icon: string };
   suffix?: string | TemplateRef<void> | { icon: string };
   size?: NzSizeLDSType;
-  primary?: AnySchemaKey;
+  primary?: SchemaKey;
   compact?: boolean;
 }

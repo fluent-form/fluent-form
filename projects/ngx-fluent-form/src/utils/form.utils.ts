@@ -217,9 +217,9 @@ export class FormUtil {
       const control = form.get([key])!;
       const value = this.valueUtil.valueOfControl(control, schema);
 
-      // 双字段情况
-      if (this.schemaUtil.isDoubleKeyControl(schema)) {
-        schema.key!.map((prop, idx) => {
+      // 多字段情况
+      if (this.schemaUtil.isMultiKeyControl(schema)) {
+        (schema.key as string[]).map((prop, idx) => {
           model[prop] = (value as [unknown, unknown])?.[idx] ?? null;
         });
       } else {

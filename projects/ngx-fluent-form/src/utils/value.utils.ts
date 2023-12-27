@@ -17,9 +17,9 @@ export class ValueUtil {
   valueOfModel<M extends AnyObject | AnyArray>(model: M, schema: AnyControlSchema): unknown {
     let value: unknown;
     // 如果从模型中读出来的值为 undefined，说明模型中没有写入该值，这里取图示中提供的默认值
-    // 如果是双字段模式，则需要从模型中分别取得这两个字段的值组为一个元组
-    if (this.schemaUtil.isDoubleKeyControl(schema)) {
-      value = schema.key!.map((key, index) => {
+    // 如果是多字段模式，则需要从模型中分别取得这这些字段的值组为一个数组
+    if (this.schemaUtil.isMultiKeyControl(schema)) {
+      value = (schema.key as string[]).map((key, index) => {
         const val = model[key as keyof M];
         return isUndefined(val) ? schema.defaultValue?.[index] ?? null : val;
       });

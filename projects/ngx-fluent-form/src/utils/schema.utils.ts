@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { throwWidgetNotFoundError } from '../errors';
-import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, AnySchemaKey, DoubleKeyControlSchema, SchemaKey } from '../schemas';
+import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, SchemaKey, SingleSchemaKey } from '../schemas';
 import { SchemaKind, SchemaLike, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP, SCHEMA_PATCHERS } from '../tokens';
 import { isString } from './is.utils';
@@ -92,10 +92,10 @@ export class SchemaUtil {
   }
 
   /**
-   * 是否为双字段图示
+   * 是否为多字段图示
    * @param schema
    */
-  isDoubleKeyControl(schema: SchemaLike): schema is DoubleKeyControlSchema {
+  isMultiKeyControl(schema: SchemaLike) {
     return Array.isArray(schema.key);
   }
 
@@ -121,10 +121,10 @@ export class SchemaUtil {
     return validators;
   }
 
-  find(schema: AnyContainerSchema, key: SchemaKey): AnySchema | null;
-  find(schema: AnyContainerSchema, key: AnySchemaKey[]): AnySchema | null;
-  find(schema: AnyContainerSchema, path: SchemaKey | AnySchemaKey[]): AnySchema | null;
-  find(schema: AnyContainerSchema, path: SchemaKey | AnySchemaKey[]): AnySchema | null {
+  find(schema: AnyContainerSchema, key: SingleSchemaKey): AnySchema | null;
+  find(schema: AnyContainerSchema, key: SchemaKey[]): AnySchema | null;
+  find(schema: AnyContainerSchema, path: SingleSchemaKey | SchemaKey[]): AnySchema | null;
+  find(schema: AnyContainerSchema, path: SingleSchemaKey | SchemaKey[]): AnySchema | null {
     const paths = Array.isArray(path)
       ? path.map(o => Array.isArray(o) ? o.toString() : o)
       : path.toString().split('.');

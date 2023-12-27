@@ -4,19 +4,19 @@ import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button'
 import { NzFormTextComponent } from 'ng-zorro-antd/form';
 import { AbstractSchema } from './abstract.schema';
 import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Icon, Labelful, PropertyHolder, SchemaReactiveFn } from './interfaces';
-import { SchemaKey } from './types';
+import { SingleSchemaKey } from './types';
 
 /**
  * @public
  */
-export interface TemplateSchema<Key extends SchemaKey = SchemaKey> extends AbstractSchema<Key>, Labelful, PropertyHolder {
+export interface TemplateSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractSchema<Key>, Labelful, PropertyHolder {
   kind: 'template';
 }
 
 /**
  * @public
  */
-export interface TextComponentSchema<Key extends SchemaKey = SchemaKey>
+export interface TextComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
   extends AbstractSchema<Key>, Labelful, ComponentEventListenerHolder<NzFormTextComponent>, ComponentPropertyHolder<NzFormTextComponent> {
   kind: 'text';
   content: string | TemplateRef<void>;
@@ -25,13 +25,13 @@ export interface TextComponentSchema<Key extends SchemaKey = SchemaKey>
 /**
  * @public
  */
-export interface ButtonComponentSchema<Key extends SchemaKey = SchemaKey>
+export interface ButtonComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
   extends AbstractSchema<Key>, Labelful, ElementEventListenerHolder, ElementPropertyHolder<HTMLButtonElement> {
   kind: 'button';
   type?: NzButtonType;
   mode?: HTMLButtonElement['type'];
-  disabled?: boolean | string | SchemaReactiveFn<ButtonComponentSchema<SchemaKey>, boolean>;
-  loading?: boolean | string | SchemaReactiveFn<ButtonComponentSchema<SchemaKey>, boolean>;
+  disabled?: boolean | string | SchemaReactiveFn<ButtonComponentSchema<SingleSchemaKey>, boolean>;
+  loading?: boolean | string | SchemaReactiveFn<ButtonComponentSchema<SingleSchemaKey>, boolean>;
   icon?: string | Icon;
   content?: string | TemplateRef<void>;
   size?: NzButtonSize;
@@ -46,7 +46,7 @@ export interface ButtonComponentSchema<Key extends SchemaKey = SchemaKey>
 /**
  * @public
  */
-export interface HeadingComponentSchema<Key extends SchemaKey = SchemaKey>
+export interface HeadingComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
   extends AbstractSchema<Key>, ElementEventListenerHolder, ElementPropertyHolder<HTMLHeadingElement> {
   kind: 'heading';
   level: 1 | 2 | 3 | 4 | 5 | 6;
@@ -56,7 +56,7 @@ export interface HeadingComponentSchema<Key extends SchemaKey = SchemaKey>
 /**
  * @public
  */
-export interface AlertComponentSchema<Key extends SchemaKey = SchemaKey>
+export interface AlertComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
   extends AbstractSchema<Key>, ComponentEventListenerHolder<NzAlertComponent>, ComponentPropertyHolder<NzAlertComponent> {
   kind: 'alert';
   type?: NzAlertComponent['nzType'];

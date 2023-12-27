@@ -1,17 +1,17 @@
 import { SafeAny } from '@ngify/types';
-import { AnySchema, FormArraySchema, FormGroupSchema, SchemaKey } from '../schemas';
-import { composeBuilder, UnstableBuilder } from './compose-builder';
+import { AnySchema, FormArraySchema, FormGroupSchema, SingleSchemaKey } from '../schemas';
+import { UnstableBuilder, composeBuilder } from './compose-builder';
 import { KindOrKey } from './helper';
 
 export function group(): UnstableBuilder<FormGroupSchema<number>, KindOrKey>;
-export function group<Key extends SchemaKey>(key?: Key): UnstableBuilder<FormGroupSchema<Key>, KindOrKey>;
-export function group<Key extends SchemaKey>(key?: Key): UnstableBuilder<FormGroupSchema<Key>, KindOrKey> {
+export function group<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<FormGroupSchema<Key>, KindOrKey>;
+export function group<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<FormGroupSchema<Key>, KindOrKey> {
   return composeBuilder<FormGroupSchema<Key>>().kind('group').key(key);
 }
 
 export function array(): UnstableBuilder<FormArraySchema<number>, KindOrKey>;
-export function array<Key extends SchemaKey>(key?: Key): UnstableBuilder<FormArraySchema<Key>, KindOrKey>;
-export function array<Key extends SchemaKey>(key?: Key): UnstableBuilder<FormArraySchema<Key>, KindOrKey> {
+export function array<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<FormArraySchema<Key>, KindOrKey>;
+export function array<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<FormArraySchema<Key>, KindOrKey> {
   return composeBuilder<FormArraySchema<Key>>().kind('array').key(key);
 }
 

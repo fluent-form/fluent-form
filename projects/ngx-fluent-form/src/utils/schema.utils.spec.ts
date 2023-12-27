@@ -213,7 +213,7 @@ describe('SchemaUtil', () => {
       expect(schemaUtil.find(schema, 'group.group.name')).toEqual({ kind: 'input', key: 'name' });
     });
 
-    it('双字段图示', () => {
+    it('多字段图示', () => {
       const schema = form(() => {
         slider(['begin', 'end']);
       });
@@ -229,7 +229,7 @@ describe('SchemaUtil', () => {
       expect(schemaUtil.find(schema, 'x')).toBe(null);
     });
 
-    it('不存在的双字段图示', () => {
+    it('不存在的多图示', () => {
       const schema = form(() => {
         slider(['begin', 'end']);
       });

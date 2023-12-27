@@ -1,7 +1,7 @@
 import { Directive, inject, Input, OnChanges, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
-import { AnyComponentSchema, AnyControlSchema, SchemaKey } from '../../schemas';
+import { AnyComponentSchema, AnyControlSchema, SingleSchemaKey } from '../../schemas';
 import { WidgetTemplateRegistry } from '../../services';
 import { WidgetTemplateContext } from '../../widgets';
 import { FluentControlContainer } from './models/control-container';
@@ -35,7 +35,7 @@ export class FluentOutletDirective<T extends AnyObject | AnyArray> implements On
     return this.controlContainer.directive.model;
   }
 
-  @Input() key!: SchemaKey;
+  @Input() key!: SingleSchemaKey;
 
   ngOnInit() {
     this.controlContainer.directive.addOutlet(this);

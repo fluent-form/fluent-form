@@ -8,13 +8,13 @@ import { NzDateMode, SupportTimeOptions } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { AnySchema } from './index.schema';
 import { Col, ControlEventListenerHolder, ControlValueMapper, Labelful, Length, Row, SchemaLike, SchemaReactiveFn } from './interfaces';
-import { AnySchemaKey, Cell } from './types';
+import { Cell, SchemaKey } from './types';
 
 /**
  * @public
  * 抽象图示
  */
-export interface AbstractSchema<Key extends AnySchemaKey = AnySchemaKey> extends SchemaLike<Key> {
+export interface AbstractSchema<Key extends SchemaKey = SchemaKey> extends SchemaLike<Key> {
   /* Used to define the width of the control. */
   col?: Col | Cell;
   hidden?: boolean | string | SchemaReactiveFn<AbstractSchema, boolean>;
@@ -26,16 +26,16 @@ export interface AbstractSchema<Key extends AnySchemaKey = AnySchemaKey> extends
  * @public
  * 抽象的真实控件图示
  */
-export interface AbstractControlSchema<Key extends AnySchemaKey = AnySchemaKey, Val = SafeAny> extends AbstractSchema<Key>, Labelful {
+export interface AbstractControlSchema<Key extends SchemaKey = SchemaKey, Val = SafeAny> extends AbstractSchema<Key>, Labelful {
   id?: string;
   /** I/O mapper for control */
   mapper?: ControlValueMapper<Val>;
   /* Used to set the default value of the control. */
   defaultValue?: SafeAny;
   /** Is it a required control */
-  required?: boolean | string | SchemaReactiveFn<AbstractControlSchema<AnySchemaKey, Val>, boolean>;
+  required?: boolean | string | SchemaReactiveFn<AbstractControlSchema<SchemaKey, Val>, boolean>;
   /** Whether to disable control */
-  disabled?: boolean | string | SchemaReactiveFn<AbstractControlSchema<AnySchemaKey, Val>, boolean>;
+  disabled?: boolean | string | SchemaReactiveFn<AbstractControlSchema<SchemaKey, Val>, boolean>;
   feedback?: boolean;
   hint?: string | TemplateRef<void>;
   /** Error message for control */
@@ -58,7 +58,7 @@ export interface AbstractControlSchema<Key extends AnySchemaKey = AnySchemaKey, 
  * @public
  * 抽象的容器控件图示
  */
-export interface AbstractControlContainerSchema<Key extends AnySchemaKey> extends AbstractSchema<Key>, ControlEventListenerHolder<SafeAny>, Row {
+export interface AbstractControlContainerSchema<Key extends SchemaKey> extends AbstractSchema<Key>, ControlEventListenerHolder<SafeAny>, Row {
   schemas: AnySchema[];
   /** Validator for the control */
   validators?: ValidatorFn[];
@@ -72,10 +72,10 @@ export interface AbstractControlContainerSchema<Key extends AnySchemaKey> extend
  * @public
  * 抽象的输入框图示
  */
-export interface AbstractInputBoxControlSchema<Key extends AnySchemaKey, Val, P extends string | [string, string] = string> extends AbstractControlSchema<Key, Val> {
+export interface AbstractInputBoxControlSchema<Key extends SchemaKey, Val, P extends string | [string, string] = string> extends AbstractControlSchema<Key, Val> {
   placeholder?: P;
   autofocus?: boolean;
-  readonly?: boolean | string | SchemaReactiveFn<AbstractInputBoxControlSchema<AnySchemaKey, Val, P>, boolean>;
+  readonly?: boolean | string | SchemaReactiveFn<AbstractInputBoxControlSchema<SchemaKey, Val, P>, boolean>;
   size?: NzSizeLDSType;
   borderless?: boolean;
 }
@@ -84,7 +84,7 @@ export interface AbstractInputBoxControlSchema<Key extends AnySchemaKey, Val, P 
  * @public
  * 抽象的文本控件图示
  */
-export interface AbstractTextControlSchema<Key extends AnySchemaKey = AnySchemaKey> extends AbstractInputBoxControlSchema<Key, string> {
+export interface AbstractTextControlSchema<Key extends SchemaKey = SchemaKey> extends AbstractInputBoxControlSchema<Key, string> {
   length?: Length;
   autocomplete?: {
     backfill?: boolean;
@@ -98,7 +98,7 @@ export interface AbstractTextControlSchema<Key extends AnySchemaKey = AnySchemaK
  * @public
  * 抽象的日期控件图示
  */
-export interface AbstractDateControlSchema<Key extends AnySchemaKey, Val, P extends string | [string, string] = string> extends AbstractInputBoxControlSchema<Key, Val, P> {
+export interface AbstractDateControlSchema<Key extends SchemaKey, Val, P extends string | [string, string] = string> extends AbstractInputBoxControlSchema<Key, Val, P> {
   /** Mode of date picker control */
   mode?: NzDateMode;
   /** Show clean button */

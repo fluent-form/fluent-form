@@ -58,13 +58,13 @@ order: 3
 
 <example name="fluent-form-control-mapper-example" />
 
-## 双字段控件
+## 多字段控件
 
-对于区间选择控件，例如 `dateRange()` 控件，它将输出一个包含**两个元素**的元组。
+部分控件的控件值为一个数组，例如 `dateRange()`、`cascader()` 控件等。
 
-你可以将它们分别映射到模型（model）里的**两个属性**，只需将一个元组作为控件的 `key` 即可。
+我们可以将数组里的每一个元素映射到模型（model）的多个**属性**当中，只需将一个字符串数组作为控件的 `key` 即可。
 
-<example name="fluent-form-control-double-key-example" />
+<example name="fluent-form-control-multi-key-example" />
 
 ## 表单联动
 

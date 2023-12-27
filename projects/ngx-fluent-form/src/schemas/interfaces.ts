@@ -6,7 +6,7 @@ import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
 import { ComponentOutputListenerMap, ComponentPropertyMap, HTMLElementEventListenerMap, HTMLElementPropertyMap } from '../types';
 import { AbstractControlSchema } from './abstract.schema';
-import { AnySchemaKey, Cell } from './types';
+import { Cell, SchemaKey } from './types';
 
 /**
  * @public
@@ -63,7 +63,7 @@ export enum SchemaKind {
   Space = 'space'
 }
 
-export interface SchemaLike<Key extends AnySchemaKey = AnySchemaKey> {
+export interface SchemaLike<Key extends SchemaKey = SchemaKey> {
   kind: string;
   key?: Key;
 }

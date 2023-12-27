@@ -6,12 +6,12 @@ import { NzTabComponent, NzTabPosition, NzTabSetComponent, NzTabType } from 'ng-
 import { AbstractSchema } from './abstract.schema';
 import { AnySchema } from './index.schema';
 import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Row, SchemaReactiveFn } from './interfaces';
-import { SchemaKey } from './types';
+import { SingleSchemaKey } from './types';
 
 /**
  * @public
  */
-export interface StepsComponentSchema<Key extends SchemaKey = SchemaKey>
+export interface StepsComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
   extends AbstractSchema<Key>, ComponentEventListenerHolder<NzStepsComponent>, ComponentPropertyHolder<NzStepsComponent> {
   kind: 'steps';
   type?: 'default' | 'navigation';
@@ -27,13 +27,13 @@ export interface StepsComponentSchema<Key extends SchemaKey = SchemaKey>
 /**
  * @public
  */
-export interface StepComponentSchema<Key extends SchemaKey = SchemaKey>
+export interface StepComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
   extends AbstractSchema<Key>, ComponentEventListenerHolder<NzStepComponent>, ComponentPropertyHolder<NzStepComponent> {
   kind: 'step';
   title: string | TemplateRef<void>;
   subtitle?: string | TemplateRef<void>;
   description?: string | TemplateRef<void>;
-  disabled?: boolean | string | SchemaReactiveFn<StepComponentSchema<SchemaKey>, boolean>;
+  disabled?: boolean | string | SchemaReactiveFn<StepComponentSchema<SingleSchemaKey>, boolean>;
   status?: 'wait' | 'process' | 'finish' | 'error';
   schemas: AnySchema[];
 }
@@ -41,7 +41,7 @@ export interface StepComponentSchema<Key extends SchemaKey = SchemaKey>
 /**
  * @public
  */
-export interface TabsComponentSchema<Key extends SchemaKey = SchemaKey>
+export interface TabsComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
   extends AbstractSchema<Key>, ComponentEventListenerHolder<NzTabSetComponent>, ComponentPropertyHolder<NzTabSetComponent> {
   kind: 'tabs';
   type?: NzTabType;
@@ -57,18 +57,18 @@ export interface TabsComponentSchema<Key extends SchemaKey = SchemaKey>
 /**
  * @public
  */
-export interface TabComponentSchema<Key extends SchemaKey = SchemaKey>
+export interface TabComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
   extends AbstractSchema<Key>, ComponentEventListenerHolder<NzTabComponent>, ComponentPropertyHolder<NzTabComponent> {
   kind: 'tab';
   title: string;
-  disabled?: boolean | string | SchemaReactiveFn<TabComponentSchema<SchemaKey>, boolean>;
+  disabled?: boolean | string | SchemaReactiveFn<TabComponentSchema<SingleSchemaKey>, boolean>;
   schemas: AnySchema[];
 }
 
 /**
  * @public
  */
-export interface RowComponentSchema<Key extends SchemaKey = SchemaKey>
+export interface RowComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
   extends AbstractSchema<Key>, ElementEventListenerHolder, ElementPropertyHolder<HTMLElement>, Row {
   kind: 'row';
   schemas: AnySchema[];
@@ -77,7 +77,7 @@ export interface RowComponentSchema<Key extends SchemaKey = SchemaKey>
 /**
  * @public
  */
-export interface SpaceComponentSchema<Key extends SchemaKey = SchemaKey>
+export interface SpaceComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
   extends AbstractSchema<Key>, ComponentEventListenerHolder<NzSpaceComponent>, ComponentPropertyHolder<NzSpaceComponent> {
   kind: 'space';
   size?: NzSpaceSize;

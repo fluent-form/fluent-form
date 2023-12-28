@@ -50,6 +50,7 @@
             <button
               *ngIf="first && (formSchema.removable ?? true)"
               class="fluent-array-element-remove-btn"
+              type="button"
               nz-button
               nzShape="circle"
               nzSize="small"
@@ -78,6 +79,7 @@
       <ng-container *ngIf="formSchema.addable ?? true">
         <button
           *ngIf="helper.addable | invoke: formSchema.addable as addable"
+          type="button"
           nz-button
           [nzType]="addable.type ?? null"
           [nzBlock]="addable.variants?.block"

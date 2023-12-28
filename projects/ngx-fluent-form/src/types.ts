@@ -1,6 +1,5 @@
 import { EventEmitter } from '@angular/core';
-import { AbstractControl, FormArray } from '@angular/forms';
-import { AnyArray, AnyObject, PickProperty, SafeAny } from '@ngify/types';
+import { PickProperty, SafeAny } from '@ngify/types';
 import { SchemaContext } from './schemas';
 
 /**
@@ -50,5 +49,3 @@ export type ComponentOutputListenerMap<C> = {
  * @template C 组件的类类型
  */
 export type ComponentPropertyMap<C> = Partial<Omit<C, ComponentOutputName<C>>>;
-
-export type Model<C extends AbstractControl> = C extends FormArray ? AnyArray : AnyObject;

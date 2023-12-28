@@ -1,7 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { AbstractControlContainerSchema } from './abstract.schema';
-import { Labelful, Length } from './interfaces';
+import { Labelful, Length, SchemaReactiveFn } from './interfaces';
 import { SingleSchemaKey } from './types';
 
 /**
@@ -10,7 +10,7 @@ import { SingleSchemaKey } from './types';
 export interface FormGroupSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractControlContainerSchema<Key> {
   kind: 'group';
   /* Used to define the label of the control. */
-  label?: string;
+  label?: string | SchemaReactiveFn<FormGroupSchema, string>;
 }
 
 /**

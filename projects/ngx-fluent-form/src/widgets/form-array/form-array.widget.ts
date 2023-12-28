@@ -10,9 +10,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FluentFormColContentOutletComponent } from '../../components';
 import { FluentBindingDirective, FluentConfigDirective, FluentContextGuardDirective } from '../../directives';
 import { FluentColumnPipe, FluentReactivePipe, FluentTemplatePipe, InvokePipe } from '../../pipes';
-import { FormArraySchema } from '../../schemas';
+import { AbstractSchema, FormArraySchema } from '../../schemas';
 import { labelHelper, tooltipHelper } from '../../schemas/helper';
-import { FormUtil, isNumber, isUndefined, SchemaUtil } from '../../utils';
+import { FormUtil, SchemaUtil, isNumber, isUndefined } from '../../utils';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, FormArray>;
@@ -82,6 +82,10 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
       return addable;
     }
   } as const;
+
+  withIndex(index: number, schema: AbstractSchema): AbstractSchema {
+    return { ...schema, key: index };
+  }
 }
 
 type NonBoolean<T> = T extends boolean ? never : T;

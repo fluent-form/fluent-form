@@ -1,10 +1,10 @@
 import { NgClass, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef, inject } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { CONFIG } from '../../config';
-import { FluentWithInjectorDirective } from '../../directives';
+import { FluentVarDirective, FluentWithInjectorDirective } from '../../directives';
 import { FluentControlPipe, FluentReactivePipe, FluentSchemaPipe, FluentSchemaTypePipe, FluentTemplatePipe, FluentWidgetTemplatePipe, InvokePipe } from '../../pipes';
 import { AnySchema } from '../../schemas';
 import { labelHelper, tooltipHelper } from '../../schemas/helper';
@@ -40,6 +40,7 @@ interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
     FluentTemplatePipe,
     FluentWidgetTemplatePipe,
     FluentSchemaTypePipe,
+    FluentVarDirective,
     InvokePipe
   ],
   templateUrl: './form-col-content-outlet.component.html',

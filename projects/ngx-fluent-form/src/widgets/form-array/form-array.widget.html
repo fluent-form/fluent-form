@@ -69,8 +69,8 @@
             [ngTemplateOutlet]="formColTemplate"
             [ngTemplateOutletContext]="{
               control: control,
-              schema: subschema,
-              model: model,
+              schema: withIndex(index, subschema),
+              model: model[formSchema.key!],
               index: index,
               first: first
             }">

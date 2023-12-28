@@ -1,17 +1,10 @@
 <ng-template #formColContentTemplate let-schema="schema" let-control="control" let-model="model">
-  <ng-container [ngSwitch]="schema.kind | schemaType">
+  <ng-container *fluentVar="schema.kind | schemaType as schemaType" [ngSwitch]="true">
     <ng-container
-      *ngSwitchCase="SchemaType.ControlContainer"
+      *ngSwitchCase="schemaType === SchemaType.ControlContainer || schemaType === SchemaType.ComponentContainer"
       fluentWithInjector
       [ngTemplateOutlet]="schema | widgetTemplate"
-      [ngTemplateOutletContext]="{ control: control, schema: schema, model: model[schema.key] }">
-    </ng-container>
-
-    <ng-container
-      *ngSwitchCase="SchemaType.ComponentContainer"
-      fluentWithInjector
-      [ngTemplateOutlet]="schema | widgetTemplate"
-      [ngTemplateOutletContext]="{ control: control, schema: schema, model: model }">
+      [ngTemplateOutletContext]="{ control, schema, model }">
     </ng-container>
 
     <ng-container

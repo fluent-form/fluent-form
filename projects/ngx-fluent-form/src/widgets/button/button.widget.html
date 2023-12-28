@@ -4,7 +4,7 @@
       *ngIf="schema.type === 'link'"
       nz-button
       [disabled]="schema.disabled | reactive: model:schema:control"
-      [fluentBinding]="{ schema, control }"
+      [fluentBinding]="{ schema, control, model }"
       [ngClass]="schema.class"
       [ngStyle]="schema.style"
       [nzBlock]="schema.variants?.block"
@@ -22,7 +22,7 @@
       nz-button
       [attr.type]="schema.mode"
       [disabled]="schema.disabled | reactive: model:schema:control"
-      [fluentBinding]="{ schema, control }"
+      [fluentBinding]="{ schema, control, model }"
       [ngClass]="schema.class"
       [ngStyle]="schema.style"
       [nzBlock]="schema.variants?.block"

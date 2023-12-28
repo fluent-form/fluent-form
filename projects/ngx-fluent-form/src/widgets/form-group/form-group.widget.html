@@ -10,7 +10,7 @@
     [nzLayout]="config.layout"
     [ngClass]="formSchema.class"
     [ngStyle]="formSchema.style"
-    [fluentBinding]="{ schema: formSchema, control: formGroup }">
+    [fluentBinding]="{ schema: formSchema, control: formGroup, model }">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
       <nz-col
         [nzSpan]="schema.col | col: 'span'"

@@ -37,7 +37,7 @@ export class ControlLinkageExampleComponent {
         ];
       })
       .listeners({
-        valueChange: (value, control) => {
+        valueChange: (value, { control }) => {
           control.parent?.get('text')?.setValue(value);
         }
       })

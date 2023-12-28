@@ -5,7 +5,7 @@
         *ngIf="!(schema.hidden | reactive: model:schema:control)"
         #component
         nz-col
-        [fluentBinding]="{ component, schema, control }"
+        [fluentBinding]="{ component, schema, control, model }"
         [formControl]="control"
         [ngClass]="schema.class"
         [ngStyle]="schema.style"
@@ -37,7 +37,7 @@
     <ng-template #standardTemplate>
       <nz-tree-select
         #component
-        [fluentBinding]="{ component, schema, control }"
+        [fluentBinding]="{ component, schema, control, model }"
         [formControl]="control"
         [ngClass]="schema.class"
         [ngStyle]="schema.style"

@@ -1,7 +1,7 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <nz-form-text
     #component
-    [fluentBinding]="{ component, schema, control }"
+    [fluentBinding]="{ component, schema, control, model }"
     [ngClass]="schema.class"
     [ngStyle]="schema.style">
     <ng-container *nzStringTemplateOutlet="schema.content | template">{{ schema.content }}</ng-container>

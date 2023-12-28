@@ -8,7 +8,7 @@
   [ngClass]="schema.class"
   [ngStyle]="schema.style"
   [formGroup]="form"
-  [fluentBinding]="{ schema, control: form }"
+  [fluentBinding]="{ schema, control: form, model }"
   (submit)="$event.stopPropagation()"
   (ngSubmit)="submit.emit($event)">
   <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">

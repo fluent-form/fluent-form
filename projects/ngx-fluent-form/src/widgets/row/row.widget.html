@@ -6,7 +6,7 @@
     [nzAlign]="schema.align!"
     [nzJustify]="schema.justify!"
     [nzGutter]="schema.gutter ?? config.gutter"
-    [fluentBinding]="{ schema, control }">
+    [fluentBinding]="{ schema, control, model }">
     <ng-template #colTemplate let-schema="schema" let-control="control" let-model="model">
       <nz-col
         [nzSpan]="schema.col | col: 'span'"

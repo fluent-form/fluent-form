@@ -1,6 +1,7 @@
 import { EventEmitter } from '@angular/core';
 import { AbstractControl, FormArray } from '@angular/forms';
 import { AnyArray, AnyObject, PickProperty, SafeAny } from '@ngify/types';
+import { SchemaContext } from './schemas';
 
 /**
  * HTML 元素的事件侦听器对象
@@ -9,7 +10,7 @@ import { AnyArray, AnyObject, PickProperty, SafeAny } from '@ngify/types';
  * ```
  */
 export type HTMLElementEventListenerMap = {
-  [K in keyof HTMLElementEventMap]?: (event: HTMLElementEventMap[K]) => SafeAny
+  [K in keyof HTMLElementEventMap]?: (event: HTMLElementEventMap[K], ctx: SchemaContext) => SafeAny
 };
 
 /**
@@ -38,7 +39,7 @@ type ComponentOutputName<C> = Exclude<
  * @template S 各种控件的图示
  */
 export type ComponentOutputListenerMap<C> = {
-  [K in ComponentOutputName<C>]?: (event: C[K] extends EventEmitter<infer E> ? E : never) => SafeAny
+  [K in ComponentOutputName<C>]?: (event: C[K] extends EventEmitter<infer E> ? E : never, ctx: SchemaContext) => SafeAny
 }
 
 /**

@@ -24,12 +24,12 @@ function emptyFn() { }
   template: `
     <input
       nz-input
-      [fluentBinding]="{ schema: inputSchema, control: inputControl }"
+      [fluentBinding]="{ schema: inputSchema, control: inputControl, model: {} }"
       [formControl]="inputControl">
 
     <nz-rate
       #component
-      [fluentBinding]="{ component, schema: rateSchema, control: rateControl}"
+      [fluentBinding]="{ component, schema: rateSchema, control: rateControl, model: {} }"
       [formControl]="rateControl"></nz-rate>
   `
 })

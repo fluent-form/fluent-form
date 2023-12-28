@@ -1,14 +1,14 @@
-import { Labelful } from '../schemas';
+import { Label, Labelful } from '../schemas';
 import { isNumber, isString } from '../utils';
 
 export const labelHelper = {
-  content: (label?: string | Labelful['label']) => {
+  content: (label?: string | Label) => {
     return isString(label) ? label : label?.content;
   },
-  span: (label?: string | Labelful['label']) => {
+  span: (label?: string | Label) => {
     return isString(label) ? null : label?.span;
   },
-  width: (label?: string | Labelful['label']) => {
+  width: (label?: string | Label) => {
     if (isString(label) || !label?.width) {
       return null;
     }

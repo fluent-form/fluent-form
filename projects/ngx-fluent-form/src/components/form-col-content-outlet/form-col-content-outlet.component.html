@@ -34,17 +34,19 @@
     "
     [ngClass]="schema.class"
     [style.margin-bottom.px]="schema.kind === SchemaKind.Heading ? 16 : null">
-    <nz-form-label
-      *ngIf="schema.label"
-      [nzSpan]="(helper.label.span | invoke: schema.label)!"
-      [nzTooltipTitle]="helper.tooltip.content | invoke: schema.tooltip"
-      [nzTooltipIcon]="(helper.tooltip.icon | invoke: schema.tooltip)!"
-      [nzFor]="schema.id"
-      [nzNoColon]="!config.colon"
-      [nzRequired]="currentSchema.required | reactive: model:schema:control"
-      [style.width]="helper.label.width | invoke: schema.label">
-      {{ helper.label.content | invoke: schema.label }}
-    </nz-form-label>
+    <ng-container *ngIf="schema.label">
+      <nz-form-label
+        *ngIf="schema.label | reactive: model:schema:control as label"
+        [nzSpan]="(helper.label.span | invoke: label)!"
+        [nzTooltipTitle]="helper.tooltip.content | invoke: schema.tooltip"
+        [nzTooltipIcon]="(helper.tooltip.icon | invoke: schema.tooltip)!"
+        [nzFor]="schema.id"
+        [nzNoColon]="!config.colon"
+        [nzRequired]="currentSchema.required | reactive: model:schema:control"
+        [style.width]="helper.label.width | invoke: label">
+        {{ helper.label.content | invoke: label }}
+      </nz-form-label>
+    </ng-container>
 
     <nz-form-control
       [nzValidateStatus]="currentSchema.key | control: control"

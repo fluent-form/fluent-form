@@ -1,14 +1,16 @@
 <ng-template let-formArray="control" let-formSchema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <nz-form-item [ngClass]="formSchema.class">
-    <nz-form-label
-      *ngIf="formSchema.label"
-      [nzSpan]="(helper.label.span | invoke: formSchema.label)!"
-      [nzTooltipTitle]="helper.tooltip.content | invoke: formSchema.tooltip"
-      [nzTooltipIcon]="(helper.tooltip.icon | invoke: formSchema.tooltip)!"
-      [nzNoColon]="!config.colon"
-      [style.width]="helper.label.width | invoke: formSchema.label">
-      {{ helper.label.content | invoke: formSchema.label }}
-    </nz-form-label>
+    <ng-container *ngIf="formSchema.label">
+      <nz-form-label
+        *ngIf="formSchema.label | reactive: model:formSchema:formArray as label"
+        [nzSpan]="(helper.label.span | invoke: label)!"
+        [nzTooltipTitle]="helper.tooltip.content | invoke: formSchema.tooltip"
+        [nzTooltipIcon]="(helper.tooltip.icon | invoke: formSchema.tooltip)!"
+        [nzNoColon]="!config.colon"
+        [style.width]="helper.label.width | invoke: label">
+        {{ helper.label.content | invoke: label }}
+      </nz-form-label>
+    </ng-container>
 
     <nz-form-control>
       <nz-row

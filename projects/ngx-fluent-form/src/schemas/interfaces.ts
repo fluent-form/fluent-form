@@ -83,7 +83,7 @@ export interface Label {
 
 /** 带标签的 */
 export interface Labelful {
-  label?: string | Label;
+  label?: string | Label | SchemaReactiveFn<AbstractSchema, string | Label>;
   tooltip?: string | Tooltip;
 }
 
@@ -174,4 +174,4 @@ export interface ElementPropertyHolder<E extends HTMLElement> extends PropertyHo
 
 export type Length = number | { max?: number, min?: number };
 
-export type SchemaReactiveFn<S extends SchemaLike, R> = (ctx: SchemaContext<S>) => R;
+export type SchemaReactiveFn<S extends AbstractSchema, R> = (ctx: SchemaContext<S>) => R;

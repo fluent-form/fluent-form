@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AnyObject, SafeAny } from '@ngify/types';
 
+const RETURN_STR = 'return ';
+const INTERPOLATION: [string, string] = ['{{', '}}'];
+
 export abstract class CodeEvaluator {
   abstract evaluate(code: string, context: AnyObject): SafeAny;
 }
 
-const RETURN_STR = 'return ';
+export function isStaticExpression(str: string) {
+  return str.startsWith(INTERPOLATION[0]) && str.endsWith(INTERPOLATION[1]);
+}
 
 /**
  * @internal
@@ -14,6 +19,8 @@ const RETURN_STR = 'return ';
 export class DynamicCodeEvaluator implements CodeEvaluator {
 
   evaluate(code: string, context: AnyObject) {
+    code = code.replace(/^{{|}}$/g, '');
+
     if (!code.includes(RETURN_STR)) {
       code = RETURN_STR + code;
     }

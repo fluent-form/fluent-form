@@ -46,13 +46,13 @@ describe('FluentReactivePipe', () => {
 
   describe('正确处理字符串参数', () => {
     it('简写表达式', () => {
-      const expression = 'model.value';
+      const expression = '{{model.value}}';
       const value = pipe.transform(expression, model, schema, ctrl);
       expect(value).toEqual(true);
     });
 
     it('完整表达式', () => {
-      const expression = 'return !model.value';
+      const expression = '{{return !model.value}}';
       const value = pipe.transform(expression, model, schema, ctrl);
       expect(value).toEqual(false);
     });

@@ -15,7 +15,7 @@ export class FluentReactivePipe implements PipeTransform {
   private readonly transformer = inject(ValueTransformer);
 
   transform<T>(
-    value: string | T | SchemaReactiveFn<SafeAny, T>,
+    value: T | SchemaReactiveFn<SafeAny, T>,
     model: unknown,
     schema: AbstractSchema,
     control: AbstractControl

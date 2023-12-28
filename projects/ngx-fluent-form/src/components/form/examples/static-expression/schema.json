@@ -8,6 +8,6 @@
     "kind": "input",
     "key": "password",
     "label": "密码",
-    "disabled": "!model.username"
+    "disabled": "{{ !model.username }}"
   }
 ]

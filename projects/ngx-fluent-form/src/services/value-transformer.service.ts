@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { AnyObject, SafeAny } from '@ngify/types';
 import { isFunction, isString } from '../utils';
-import { CodeEvaluator } from './evaluator.service';
+import { CodeEvaluator, isStaticExpression } from './evaluator.service';
 
 /**
  * @internal
@@ -17,7 +17,7 @@ export class ValueTransformer {
       return value(context);
     }
 
-    if (isString(value) && this.evaluator) {
+    if (isString(value) && this.evaluator && isStaticExpression(value)) {
       return this.evaluator.evaluate(value, context);
     }
 

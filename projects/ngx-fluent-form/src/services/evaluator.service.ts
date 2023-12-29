@@ -19,11 +19,7 @@ export function isStaticExpression(str: string) {
 export class DynamicCodeEvaluator implements CodeEvaluator {
 
   evaluate(code: string, context: AnyObject) {
-    code = code.replace(/^{{|}}$/g, '');
-
-    if (!code.includes(RETURN_STR)) {
-      code = RETURN_STR + code;
-    }
+    code = RETURN_STR + code.replace(/^{{|}}$/g, '');
 
     const fn = new Function('ctx', `with(ctx){${code}}`);
     const proxy = new Proxy(Object.freeze(context), {

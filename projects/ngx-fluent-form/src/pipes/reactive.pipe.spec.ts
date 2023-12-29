@@ -50,11 +50,5 @@ describe('FluentReactivePipe', () => {
       const value = pipe.transform(expression, model, schema, ctrl);
       expect(value).toEqual(true);
     });
-
-    it('完整表达式', () => {
-      const expression = '{{return !model.value}}';
-      const value = pipe.transform(expression, model, schema, ctrl);
-      expect(value).toEqual(false);
-    });
   });
 });

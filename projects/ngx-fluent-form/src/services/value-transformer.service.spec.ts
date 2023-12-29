@@ -48,7 +48,7 @@ describe('ValueTransformerService (enabled static expression support)', () => {
   });
 
   it('正确处理字符串参数', () => {
-    const value = service.transform('{{return 1}}');
+    const value = service.transform('{{1}}');
     expect(value).toEqual(1);
   });
 });

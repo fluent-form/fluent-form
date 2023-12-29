@@ -8,7 +8,7 @@ import { FluentVarDirective, FluentWithInjectorDirective } from '../../directive
 import { FluentControlPipe, FluentReactivePipe, FluentSchemaPipe, FluentSchemaTypePipe, FluentTemplatePipe, FluentWidgetTemplatePipe, InvokePipe } from '../../pipes';
 import { AnySchema } from '../../schemas';
 import { labelHelper, tooltipHelper } from '../../schemas/helper';
-import { SchemaKind, SchemaType } from '../../schemas/interfaces';
+import { SchemaType } from '../../schemas/interfaces';
 
 interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
   /** 当前控件 */
@@ -48,7 +48,6 @@ interface FluentFormColContentTemplateContext<T extends AnyObject | AnyArray> {
 })
 export class FluentFormColContentOutletComponent<T extends AnyObject | AnyArray> implements OnInit {
   protected readonly config = inject(CONFIG);
-  protected readonly SchemaKind = SchemaKind;
   protected readonly SchemaType = SchemaType;
   private readonly viewContainerRef = inject(ViewContainerRef);
 

@@ -1,9 +1,4 @@
 <ng-template let-formGroup="control" let-formSchema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <nz-divider
-    *ngIf="formSchema.label"
-    [nzText]="formSchema.label | reactive: model:formSchema:formGroup"
-    [nzPlain]="true"></nz-divider>
-
   <nz-row
     #config="fluentConfig"
     nz-form
@@ -16,6 +11,7 @@
     [fluentBinding]="{ schema: formSchema, control: formGroup, model }">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
       <nz-col
+        *ngIf="schema.kind !== SchemaKind.Headless || (schema.kind === SchemaKind.Headless && schema.template)"
         [nzSpan]="schema.col | col: 'span'"
         [nzFlex]="schema.col | col: 'flex'"
         [nzOffset]="schema.col | col: 'offset'"

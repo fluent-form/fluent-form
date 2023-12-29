@@ -8,10 +8,9 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FluentFormColContentOutletComponent } from '../../components';
-import { FluentBindingDirective, FluentConfigDirective, FluentContextGuardDirective } from '../../directives';
+import { FluentBindingDirective, FluentConfigDirective, FluentContextGuardDirective, FluentVarDirective } from '../../directives';
 import { FluentColumnPipe, FluentReactivePipe, FluentTemplatePipe, InvokePipe } from '../../pipes';
-import { AbstractSchema, FormArraySchema } from '../../schemas';
-import { labelHelper, tooltipHelper } from '../../schemas/helper';
+import { AbstractSchema, FormArraySchema, SchemaKind } from '../../schemas';
 import { FormUtil, SchemaUtil, isNumber, isUndefined } from '../../utils';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -41,6 +40,7 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
     FluentColumnPipe,
     FluentReactivePipe,
     FluentTemplatePipe,
+    FluentVarDirective,
     InvokePipe
   ],
   templateUrl: './form-array.widget.html',
@@ -49,6 +49,8 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
 export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateContext> {
   private readonly schemaUtil = inject(SchemaUtil);
   private readonly formUtil = inject(FormUtil);
+
+  protected readonly SchemaKind = SchemaKind;
 
   protected push(control: FormArray, schema: FormArraySchema) {
     const [elementSchema] = this.schemaUtil.filterControls(schema.schemas);
@@ -64,8 +66,6 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
   }
 
   protected readonly helper = {
-    label: labelHelper,
-    tooltip: tooltipHelper,
     length: {
       min: (length: FormArraySchema['length']) => {
         return isNumber(length) ? length : length?.min ?? 0;
@@ -74,8 +74,8 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
         return isNumber(length) ? length : length?.max ?? Infinity;
       },
     },
-    addable: (addable: FormArraySchema['addable']): NonBoolean<FormArraySchema['addable']> | false => {
-      if (addable === true || isUndefined(addable)) {
+    addable: (addable: FormArraySchema['addable']): NonNullable<FormArraySchema['addable']> => {
+      if (isUndefined(addable)) {
         return { type: 'dashed', icon: 'plus', variants: { block: true } };
       }
 
@@ -87,5 +87,3 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
     return { ...schema, key: index };
   }
 }
-
-type NonBoolean<T> = T extends boolean ? never : T;

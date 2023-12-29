@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { array, datetime, FluentFormComponent, form, input } from 'ngx-fluent-form';
+import { array, button, datetime, FluentFormComponent, form, input } from 'ngx-fluent-form';
 
 @Component({
   standalone: true,
@@ -21,6 +21,8 @@ export class FormArrayExampleComponent {
       .schemas(() => {
         input().placeholder('请输入姓名').col(24);
       });
+
+    button().content('提交').type('primary').col(22).variants({ block: true });
   });
 
   model = {

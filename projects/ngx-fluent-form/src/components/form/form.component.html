@@ -13,6 +13,7 @@
   (ngSubmit)="submit.emit($event)">
   <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
     <nz-col
+      *ngIf="schema.kind !== SchemaKind.Headless || (schema.kind === SchemaKind.Headless && schema.template)"
       [nzSpan]="schema.col | col: 'span'"
       [nzFlex]="schema.col | col: 'flex'"
       [nzOffset]="schema.col | col: 'offset'"
@@ -27,14 +28,12 @@
     </nz-col>
   </ng-template>
 
-  <ng-container *ngFor="let subschema of schemas">
-    <ng-container
-      *ngIf="subschema.kind !== SchemaKind.Headless || (subschema.kind === SchemaKind.Headless && subschema.template)"
-      [ngTemplateOutlet]="formColTemplate"
-      [ngTemplateOutletContext]="{
-        control: (subschema.key | control: form),
-        schema: subschema,
-        model: model
-      }"></ng-container>
-  </ng-container>
+  <ng-container
+    *ngFor="let subschema of schemas"
+    [ngTemplateOutlet]="formColTemplate"
+    [ngTemplateOutletContext]="{
+      control: (subschema.key | control: form),
+      schema: subschema,
+      model: model
+    }"></ng-container>
 </form>

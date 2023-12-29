@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { FluentFormComponent, form, group, input, number } from 'ngx-fluent-form';
+import { FluentFormComponent, button, form, group, input, number } from 'ngx-fluent-form';
 
 @Component({
   standalone: true,
@@ -17,6 +17,8 @@ export class FormGroupExampleComponent {
       input('cellphone').type('tel').label('手机号').col(12);
       input('email').type('email').label('邮箱').col(12);
     });
+
+    button().content('提交').type('primary').variants({ block: true });
   });
 
   model = {};

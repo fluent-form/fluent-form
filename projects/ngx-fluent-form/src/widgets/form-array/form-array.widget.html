@@ -43,6 +43,7 @@
           nz-button
           nzShape="circle"
           nzSize="small"
+          [nzDanger]="true"
           [disabled]="formArray.length <= (helper.length.min | invoke: formSchema.length)"
           (click)="formArray.removeAt(index)">
           <span nz-icon nzType="minus" nzTheme="outline"></span>

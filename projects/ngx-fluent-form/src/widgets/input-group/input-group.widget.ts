@@ -35,10 +35,10 @@ type InputGroupWidgetTemplateContext = WidgetTemplateContext<InputGroupComponent
 })
 export class InputGroupWidget extends AbstractWidget<InputGroupWidgetTemplateContext> {
   protected readonly helper = {
-    addon: (addon: string | TemplateRef<void> | { icon: string }) =>
+    addon: (addon?: string | TemplateRef<void> | { icon: string }) =>
       isString(addon) || addon instanceof TemplateRef ? addon : undefined
     ,
-    addonIcon: (addon: string | TemplateRef<void> | { icon: string }) =>
+    addonIcon: (addon?: string | TemplateRef<void> | { icon: string }) =>
       isString(addon) || addon instanceof TemplateRef ? undefined : addon?.icon,
   } as const;
 }

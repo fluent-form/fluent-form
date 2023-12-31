@@ -35,10 +35,10 @@ type NumberGroupWidgetTemplateContext = WidgetTemplateContext<NumberGroupCompone
 })
 export class NumberGroupWidget extends AbstractWidget<NumberGroupWidgetTemplateContext> {
   protected readonly helper = {
-    addon: (addon: string | TemplateRef<void> | { icon: string }) =>
+    addon: (addon?: string | TemplateRef<void> | { icon: string }) =>
       isString(addon) || addon instanceof TemplateRef ? addon : undefined
     ,
-    addonIcon: (addon: string | TemplateRef<void> | { icon: string }) =>
+    addonIcon: (addon?: string | TemplateRef<void> | { icon: string }) =>
       isString(addon) || addon instanceof TemplateRef ? undefined : addon?.icon,
   } as const;
 }

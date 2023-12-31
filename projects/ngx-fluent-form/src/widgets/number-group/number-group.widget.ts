@@ -3,7 +3,7 @@ import { Component, TemplateRef } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentWithInjectorDirective } from '../../directives';
-import { FluentControlPipe, FluentTemplatePipe, FluentWidgetTemplatePipe, InvokePipe } from '../../pipes';
+import { FluentControlPipe, FluentReactivePipe, FluentTemplatePipe, FluentWidgetTemplatePipe, InvokePipe } from '../../pipes';
 import { NumberGroupComponentSchema } from '../../schemas';
 import { isString } from '../../utils';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
@@ -28,16 +28,17 @@ type NumberGroupWidgetTemplateContext = WidgetTemplateContext<NumberGroupCompone
     FluentControlPipe,
     FluentWidgetTemplatePipe,
     FluentTemplatePipe,
+    FluentReactivePipe,
     InvokePipe,
   ],
   templateUrl: './number-group.widget.html',
 })
 export class NumberGroupWidget extends AbstractWidget<NumberGroupWidgetTemplateContext> {
   protected readonly helper = {
-    addon: (addon: NumberGroupComponentSchema['before'] | NumberGroupComponentSchema['after']) =>
+    addon: (addon: string | TemplateRef<void> | { icon: string }) =>
       isString(addon) || addon instanceof TemplateRef ? addon : undefined
     ,
-    addonIcon: (addon: NumberGroupComponentSchema['before'] | NumberGroupComponentSchema['after']) =>
+    addonIcon: (addon: string | TemplateRef<void> | { icon: string }) =>
       isString(addon) || addon instanceof TemplateRef ? undefined : addon?.icon,
   } as const;
 }

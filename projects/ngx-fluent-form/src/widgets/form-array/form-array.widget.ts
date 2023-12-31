@@ -10,8 +10,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FluentFormColContentOutletComponent } from '../../components';
 import { FluentBindingDirective, FluentConfigDirective, FluentContextGuardDirective, FluentVarDirective } from '../../directives';
 import { FluentColumnPipe, FluentReactivePipe, FluentTemplatePipe, InvokePipe } from '../../pipes';
-import { AbstractSchema, FormArraySchema, SchemaKind } from '../../schemas';
-import { FormUtil, SchemaUtil, isNumber, isUndefined } from '../../utils';
+import { AbstractSchema, AddableButton, FormArraySchema, SchemaKind } from '../../schemas';
+import { FormUtil, SchemaUtil, isBoolean, isNumber, isUndefined } from '../../utils';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
 type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, FormArray>;
@@ -74,8 +74,8 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
         return isNumber(length) ? length : length?.max ?? Infinity;
       },
     },
-    addable: (addable: FormArraySchema['addable']): NonNullable<FormArraySchema['addable']> => {
-      if (isUndefined(addable)) {
+    addable: (addable?: boolean | AddableButton): AddableButton => {
+      if (isUndefined(addable) || isBoolean(addable)) {
         return { type: 'dashed', icon: 'plus', variants: { block: true } };
       }
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
-import { AnyObject } from '@ngify/types';
+import { AnyObject, SafeAny } from '@ngify/types';
 import { form, input } from '../../compose';
 import { withAllWidgets, withStaticExpression } from '../../features';
 import { provideFluentForm } from '../../provider';
@@ -125,7 +125,7 @@ describe('FluentFormComponent', () => {
 
   it('应该能正确处理控件的 disabled 选项', () => {
     component.schema = form(() => {
-      input('a').disabled('true');
+      input('a').disabled('{{true}}' as SafeAny);
       input('b').disabled(() => true);
       input('c').disabled(true);
     });

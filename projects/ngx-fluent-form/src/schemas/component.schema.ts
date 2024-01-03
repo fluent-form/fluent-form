@@ -3,7 +3,7 @@ import { NzAlertComponent } from 'ng-zorro-antd/alert';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzFormTextComponent } from 'ng-zorro-antd/form';
 import { AbstractSchema } from './abstract.schema';
-import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Icon, Labelful, PropertyHolder, SchemaReactiveFn } from './interfaces';
+import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Icon, Labelful, MaybeSchemaReactiveFn, PropertyHolder } from './interfaces';
 import { SingleSchemaKey } from './types';
 
 /**
@@ -30,8 +30,8 @@ export interface ButtonComponentSchema<Key extends SingleSchemaKey = SingleSchem
   kind: 'button';
   type?: NzButtonType;
   mode?: HTMLButtonElement['type'];
-  disabled?: boolean | string | SchemaReactiveFn<ButtonComponentSchema<SingleSchemaKey>, boolean>;
-  loading?: boolean | string | SchemaReactiveFn<ButtonComponentSchema<SingleSchemaKey>, boolean>;
+  disabled?: MaybeSchemaReactiveFn<ButtonComponentSchema<SingleSchemaKey>, boolean>;
+  loading?: MaybeSchemaReactiveFn<ButtonComponentSchema<SingleSchemaKey>, boolean>;
   icon?: string | Icon;
   content?: string | TemplateRef<void>;
   size?: NzButtonSize;

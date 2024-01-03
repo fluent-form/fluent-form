@@ -7,7 +7,7 @@ import { CompareWith, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDateMode, SupportTimeOptions } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { AnySchema } from './index.schema';
-import { Col, ControlEventListenerHolder, ControlValueMapper, Labelful, Length, Row, SchemaLike, SchemaReactiveFn } from './interfaces';
+import { Col, ControlEventListenerHolder, ControlValueMapper, Labelful, Length, MaybeSchemaReactiveFn, Row, SchemaLike } from './interfaces';
 import { Cell, SchemaKey } from './types';
 
 /**
@@ -17,7 +17,7 @@ import { Cell, SchemaKey } from './types';
 export interface AbstractSchema<Key extends SchemaKey = SchemaKey> extends SchemaLike<Key> {
   /* Used to define the width of the control. */
   col?: Col | Cell;
-  hidden?: boolean | string | SchemaReactiveFn<AbstractSchema, boolean>;
+  hidden?: MaybeSchemaReactiveFn<AbstractSchema, boolean>;
   class?: NgClass['ngClass'];
   style?: NgStyle['ngStyle'];
 }
@@ -33,9 +33,9 @@ export interface AbstractControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   /* Used to set the default value of the control. */
   defaultValue?: SafeAny;
   /** Is it a required control */
-  required?: boolean | string | SchemaReactiveFn<AbstractControlSchema<SchemaKey, Val>, boolean>;
+  required?: MaybeSchemaReactiveFn<AbstractControlSchema<SchemaKey, Val>, boolean>;
   /** Whether to disable control */
-  disabled?: boolean | string | SchemaReactiveFn<AbstractControlSchema<SchemaKey, Val>, boolean>;
+  disabled?: MaybeSchemaReactiveFn<AbstractControlSchema<SchemaKey, Val>, boolean>;
   feedback?: boolean;
   hint?: string | TemplateRef<void>;
   /** Error message for control */
@@ -75,7 +75,7 @@ export interface AbstractControlContainerSchema<Key extends SchemaKey> extends A
 export interface AbstractInputBoxControlSchema<Key extends SchemaKey, Val, P extends string | [string, string] = string> extends AbstractControlSchema<Key, Val> {
   placeholder?: P;
   autofocus?: boolean;
-  readonly?: boolean | string | SchemaReactiveFn<AbstractInputBoxControlSchema<SchemaKey, Val, P>, boolean>;
+  readonly?: MaybeSchemaReactiveFn<AbstractInputBoxControlSchema<SchemaKey, Val, P>, boolean>;
   size?: NzSizeLDSType;
   borderless?: boolean;
 }

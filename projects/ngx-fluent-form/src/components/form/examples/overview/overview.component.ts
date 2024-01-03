@@ -21,7 +21,6 @@ export class OverviewExampleComponent {
       .tooltip('小贴士')
       .col(8)
       .id('ipt')
-      .disabled('{{false}}')
       .autocomplete({
         options: AUTOCOMPLETE_STRINGS
       });

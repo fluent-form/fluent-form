@@ -15,7 +15,7 @@ import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { NzTreeSelectComponent } from 'ng-zorro-antd/tree-select';
 import { Observable } from 'rxjs';
 import { AbstractControlSchema, AbstractDateControlSchema, AbstractInputBoxControlSchema, AbstractTextControlSchema } from './abstract.schema';
-import { ComponentControlEventListenerHolder, ComponentPropertyHolder, ElementControlEventListenerHolder, ElementPropertyHolder, PropertyHolder, SchemaContext, SchemaReactiveFn } from './interfaces';
+import { ComponentControlEventListenerHolder, ComponentPropertyHolder, ElementControlEventListenerHolder, ElementPropertyHolder, MaybeSchemaReactiveFn, PropertyHolder, SchemaContext } from './interfaces';
 import { SchemaKey, SingleSchemaKey } from './types';
 
 /**
@@ -132,7 +132,7 @@ export interface SelectControlSchema<Key extends SingleSchemaKey = SingleSchemaK
   size?: NzSelectSizeType;
   suffixIcon?: string | TemplateRef<SafeAny>;
   loading?: boolean;
-  options?: AnyObject[] | SchemaReactiveFn<SelectControlSchema<SingleSchemaKey, Val>, AnyObject[]>;
+  options?: MaybeSchemaReactiveFn<SelectControlSchema<SingleSchemaKey, Val>, AnyObject[]>;
   fetchOptions?: (keyword$: Observable<string>, ctx: SchemaContext<SelectControlSchema<SingleSchemaKey, Val>>) => Observable<AnyObject[]>;
   config?: {
     labelProperty?: string;
@@ -162,7 +162,7 @@ export interface CascaderControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   trigger?: NzCascaderExpandTrigger;
   /** Support search, cannot be used with `options.load` */
   searchable?: boolean | NzShowSearchOptions;
-  options?: NzCascaderOption[] | SchemaReactiveFn<CascaderControlSchema<SingleSchemaKey, Val>, NzCascaderOption[]>;
+  options?: MaybeSchemaReactiveFn<CascaderControlSchema<SingleSchemaKey, Val>, NzCascaderOption[]>;
   fetchOptions?: NzCascaderComponent['nzLoadData'];
   config?: {
     labelProperty?: string;
@@ -268,7 +268,7 @@ export interface TreeSelectControlSchema<Key extends SingleSchemaKey = SingleSch
   expandIcon?: boolean | NzTreeSelectComponent['nzExpandedIcon'];
   line?: boolean;
   async?: boolean;
-  options: NzTreeNodeOptions[] | SchemaReactiveFn<TreeSelectControlSchema<SingleSchemaKey, Val>, NzTreeNodeOptions[]>;
+  options: MaybeSchemaReactiveFn<TreeSelectControlSchema<SingleSchemaKey, Val>, NzTreeNodeOptions[]>;
   expandAll?: boolean;
   expandedKeys?: string[];
   backdrop?: boolean;

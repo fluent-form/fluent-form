@@ -5,7 +5,7 @@ import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/s
 import { NzTabComponent, NzTabPosition, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
 import { AbstractSchema } from './abstract.schema';
 import { AnySchema } from './index.schema';
-import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, Row, SchemaReactiveFn } from './interfaces';
+import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, MaybeSchemaReactiveFn, Row } from './interfaces';
 import { SingleSchemaKey } from './types';
 
 /**
@@ -33,7 +33,7 @@ export interface StepComponentSchema<Key extends SingleSchemaKey = SingleSchemaK
   title: string | TemplateRef<void>;
   subtitle?: string | TemplateRef<void>;
   description?: string | TemplateRef<void>;
-  disabled?: boolean | string | SchemaReactiveFn<StepComponentSchema<SingleSchemaKey>, boolean>;
+  disabled?: MaybeSchemaReactiveFn<StepComponentSchema<SingleSchemaKey>, boolean>;
   status?: 'wait' | 'process' | 'finish' | 'error';
   schemas: AnySchema[];
 }
@@ -61,7 +61,7 @@ export interface TabComponentSchema<Key extends SingleSchemaKey = SingleSchemaKe
   extends AbstractSchema<Key>, ComponentEventListenerHolder<NzTabComponent>, ComponentPropertyHolder<NzTabComponent> {
   kind: 'tab';
   title: string;
-  disabled?: boolean | string | SchemaReactiveFn<TabComponentSchema<SingleSchemaKey>, boolean>;
+  disabled?: MaybeSchemaReactiveFn<TabComponentSchema<SingleSchemaKey>, boolean>;
   schemas: AnySchema[];
 }
 

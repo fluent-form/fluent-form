@@ -1,9 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { throwWidgetNotFoundError } from '../errors';
+import { SCHEMA_PATCHERS } from '../patcher';
 import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, SchemaKey, SingleSchemaKey } from '../schemas';
 import { SchemaKind, SchemaLike, SchemaType } from '../schemas/interfaces';
-import { SCHEMA_MAP, SCHEMA_PATCHERS } from '../tokens';
+import { SCHEMA_MAP } from '../tokens';
 import { isString } from './is.utils';
 
 const ANY_SCHEMA_SELECTOR = '*';

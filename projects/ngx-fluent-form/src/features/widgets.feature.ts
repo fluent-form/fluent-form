@@ -1,13 +1,14 @@
 import { Provider, Type } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
-import { SchemaConfig, SchemaPatchFn } from '../interfaces';
+import { SchemaConfig } from '../interfaces';
+import { SchemaPatchFn, provideSchemaPatcher } from '../patcher';
 import { AbstractSchema, AbstractTextControlSchema, AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, InputControlSchema, InputGroupComponentSchema, NumberGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema, TextComponentSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { SchemaKind, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP, WIDGET_MAP } from '../tokens';
 import { isNumber } from '../utils';
 import { AbstractWidget, AlertWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, FormArrayWidget, FormGroupWidget, HeadingWidget, InputGroupWidget, InputWidget, NumberGroupWidget, NumberWidget, RadioGroupWidget, RateWidget, RowWidget, SelectWidget, SilderWidget, SpaceWidget, StepsWidget, TabsWidget, TextWidget, TextareaWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from '../widgets';
-import { makeFluentFeature, provideSchemaPatcher } from './helper';
+import { makeFluentFeature } from './helper';
 import { FluentFormFeature, FluentFormFeatureKind } from './interface';
 
 export interface FluentFormWidgetFeature<S extends AbstractSchema> extends SchemaConfig<S> {
@@ -17,7 +18,7 @@ export interface FluentFormWidgetFeature<S extends AbstractSchema> extends Schem
   patch?: SchemaPatchFn<S>;
 }
 
-export function withWidgets(...features: (FluentFormWidgetFeature<SafeAny> | FluentFormWidgetFeature<SafeAny>[])[]): FluentFormFeature<FluentFormFeatureKind.Widget> {
+export function withWidgets(features: (FluentFormWidgetFeature<SafeAny> | FluentFormWidgetFeature<SafeAny>[])[]): FluentFormFeature<FluentFormFeatureKind.Widget> {
   const flattenedFeatures = features.flat().concat(
     useRowWidget() // 添加内置 widget
   );
@@ -64,7 +65,7 @@ export function withWidgets(...features: (FluentFormWidgetFeature<SafeAny> | Flu
 }
 
 export function withAllWidgets(): FluentFormFeature<FluentFormFeatureKind.Widget> {
-  return withWidgets(
+  return withWidgets([
     useInputWidget(),
     useTextareaWidget(),
     useNumberWidget(),
@@ -91,7 +92,7 @@ export function withAllWidgets(): FluentFormFeature<FluentFormFeatureKind.Widget
     useSpaceWidget(),
     useFormGroupWidget(),
     useFormArrayWidget(),
-  );
+  ]);
 }
 
 function validatorsOfTextControl(schema: AbstractTextControlSchema) {

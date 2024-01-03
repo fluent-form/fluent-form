@@ -248,7 +248,7 @@ describe('SchemaUtil with patcher feature', () => {
       providers: [
         provideFluentForm(
           withAllWidgets(),
-          withSchemaPatchers(
+          withSchemaPatchers([
             {
               selector: '*',
               patch: schema => {
@@ -291,7 +291,7 @@ describe('SchemaUtil with patcher feature', () => {
                 return schema;
               }
             }
-          )
+          ])
         )
       ]
     });
@@ -356,9 +356,9 @@ describe('SchemaUtil with no patcher feature', () => {
     TestBed.configureTestingModule({
       providers: [
         provideFluentForm(
-          withWidgets(
+          withWidgets([
             useTextWidget()
-          )
+          ])
         )
       ]
     });

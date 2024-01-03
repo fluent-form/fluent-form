@@ -30,8 +30,8 @@ export interface AddableButton {
   icon?: string;
   content?: string | TemplateRef<void>;
   size?: NzButtonSize;
+  disabled?: boolean;
   variants?: {
-    block?: boolean;
     shape?: NzButtonShape;
     danger?: boolean;
     ghost?: boolean;

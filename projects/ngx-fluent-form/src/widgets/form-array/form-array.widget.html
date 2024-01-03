@@ -67,18 +67,18 @@
 
     <nz-col [nzSpan]="24">
       <nz-form-item>
-        <nz-form-control *fluentVar="formSchema.addable | reactive: model:formSchema:formArray as addable">
+        <nz-form-control>
           <button
-            *fluentVar="helper.addable | invoke: addable as addBtn"
+            *fluentVar="helper.addable | invoke: (formSchema.addable | reactive: model:formSchema:formArray) as addBtn"
             type="button"
             nz-button
             [nzType]="addBtn.type ?? null"
-            [nzBlock]="addBtn.variants?.block"
+            [nzBlock]="true"
             [nzDanger]="addBtn.variants?.danger"
             [nzGhost]="addBtn.variants?.ghost"
             [nzShape]="addBtn.variants?.shape!"
             [nzSize]="addBtn.size!"
-            [disabled]="!addable || formArray.length === (helper.length.max | invoke: formSchema.length)"
+            [disabled]="addBtn.disabled || formArray.length === (helper.length.max | invoke: formSchema.length)"
             (click)="push(formArray, formSchema)">
             <span *ngIf="addBtn.icon" nz-icon nzTheme="outline" [nzType]="addBtn.icon"></span>
             <ng-template *ngIf="addBtn.content" [nzStringTemplateOutlet]="addBtn.content | template">

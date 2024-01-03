@@ -3,7 +3,7 @@ import { AnyObject, SafeAny } from '@ngify/types';
 
 const RETURN_STR = 'return ';
 const STATIC_EXPRESSION_PATTERN = /^{{.+}}$/;
-const WITHOUT_INTERPOLATION_PATTERN = /^{{|}}$/g;
+const INTERPOLATION_PATTERN = /^{{|}}$/g;
 
 export abstract class CodeEvaluator {
   abstract evaluate(code: string, context: AnyObject): SafeAny;
@@ -20,7 +20,7 @@ export function isStaticExpression(str: string) {
 export class DynamicCodeEvaluator implements CodeEvaluator {
 
   evaluate(code: string, context: AnyObject) {
-    code = RETURN_STR + code.replace(WITHOUT_INTERPOLATION_PATTERN, '');
+    code = RETURN_STR + code.replace(INTERPOLATION_PATTERN, '');
 
     const fn = new Function('o', `with(o){${code}}`);
     const proxy = new Proxy(Object.freeze(context), {

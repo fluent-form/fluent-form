@@ -1,14 +1,14 @@
-import { Label, Labelful } from '../schemas';
+import { Labelful, WithOutSchemaReactiveFn } from '../schemas';
 import { isNumber, isString } from '../utils';
 
 export const labelHelper = {
-  content: (label?: string | Label) => {
+  content: (label: WithOutSchemaReactiveFn<Labelful['label']>) => {
     return isString(label) ? label : label?.content;
   },
-  span: (label?: string | Label) => {
+  span: (label: WithOutSchemaReactiveFn<Labelful['label']>) => {
     return isString(label) ? null : label?.span;
   },
-  width: (label?: string | Label) => {
+  width: (label: WithOutSchemaReactiveFn<Labelful['label']>) => {
     if (isString(label) || !label?.width) {
       return null;
     }
@@ -22,10 +22,10 @@ export const labelHelper = {
 };
 
 export const tooltipHelper = {
-  content: (tooltip?: string | Labelful['tooltip']) => {
+  content: (tooltip: WithOutSchemaReactiveFn<Labelful['tooltip']>) => {
     return isString(tooltip) ? tooltip : tooltip?.content;
   },
-  icon: (tooltip?: string | Labelful['tooltip']) => {
+  icon: (tooltip: WithOutSchemaReactiveFn<Labelful['tooltip']>) => {
     return isString(tooltip) ? null : tooltip?.icon;
   },
 };

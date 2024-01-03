@@ -176,4 +176,6 @@ export type Length = number | { max?: number, min?: number };
 
 export type SchemaReactiveFn<S extends AbstractSchema, R> = (ctx: SchemaContext<S>) => R;
 
-export type MaybeSchemaReactiveFn<S extends AbstractSchema, R> = R | SchemaReactiveFn<S, R>
+export type MaybeSchemaReactiveFn<S extends AbstractSchema, R> = R | SchemaReactiveFn<S, R>;
+
+export type WithOutSchemaReactiveFn<T extends MaybeSchemaReactiveFn<AbstractSchema, SafeAny>> = Exclude<T, SchemaReactiveFn<SafeAny, SafeAny>>;

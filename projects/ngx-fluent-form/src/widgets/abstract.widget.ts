@@ -24,15 +24,15 @@ export abstract class AbstractTextControlWidget<C> extends AbstractWidget<C> {
   protected readonly InputGroup = NzFormNoStatusService;
   protected readonly helper = {
     length: {
-      min: (length: AbstractTextControlSchema<string>['length']) => {
+      min: (length: AbstractTextControlSchema['length']) => {
         return isNumber(length) ? length : length?.min;
       },
-      max: (length: AbstractTextControlSchema<string>['length']) => {
+      max: (length: AbstractTextControlSchema['length']) => {
         return isNumber(length) ? length : length?.max;
       },
     },
     autocomplete: {
-      compare: (autocomplete: AbstractTextControlSchema<string>['autocomplete']) =>
+      compare: (autocomplete: AbstractTextControlSchema['autocomplete']) =>
         autocomplete?.compare ?? ((o1: unknown, o2: unknown) => o1 === o2)
     }
   } as const;

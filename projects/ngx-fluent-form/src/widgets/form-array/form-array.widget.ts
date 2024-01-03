@@ -10,7 +10,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FluentFormColContentOutletComponent } from '../../components';
 import { FluentBindingDirective, FluentConfigDirective, FluentContextGuardDirective, FluentVarDirective } from '../../directives';
 import { FluentColumnPipe, FluentReactivePipe, FluentTemplatePipe, InvokePipe } from '../../pipes';
-import { AbstractSchema, AddableButton, FormArraySchema, SchemaKind } from '../../schemas';
+import { AbstractSchema, AddableButton, FormArraySchema, SchemaKind, WithOutSchemaReactiveFn } from '../../schemas';
 import { FormUtil, SchemaUtil, isBoolean, isNumber, isUndefined } from '../../utils';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -74,7 +74,7 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
         return isNumber(length) ? length : length?.max ?? Infinity;
       },
     },
-    addable: (addable?: boolean | AddableButton): AddableButton => {
+    addable: (addable: WithOutSchemaReactiveFn<FormArraySchema['addable']>): AddableButton => {
       if (isUndefined(addable) || isBoolean(addable)) {
         return {
           type: 'dashed',

@@ -10,19 +10,19 @@ import { array, button, datetime, FluentFormComponent, form, input } from 'ngx-f
 })
 export class FormArrayExampleComponent {
   schema = form(() => {
-    input('flight').label('航班').col(11);
-    datetime('boardingTime').label('登机时间').col(11);
+    input('flight').label('航班').col(12);
+    datetime('boardingTime').label('登机时间').col(12);
 
     array('passengers')
       .label('乘客')
       .length({ min: 1, max: 5 })
       .orderable(true)
-      .col(22)
+      .col(24)
       .schemas(() => {
         input().placeholder('请输入姓名').col(24);
       });
 
-    button().content('提交').type('primary').col(22).variants({ block: true });
+    button().content('提交').type('primary').col(24).variants({ block: true });
   });
 
   model = {

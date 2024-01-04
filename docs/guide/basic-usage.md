@@ -13,11 +13,11 @@ order: 1
 import { provideFluentForm, withWidgets, useInputWidget, useNumberWidget } from 'ngx-fluent-form';
 
 provideFluentForm(
-  withWidgets(
+  withWidgets([
     useInputWidget(),
     useNumberWidget(),
     ...
-  )
+  ])
 )
 ```
 

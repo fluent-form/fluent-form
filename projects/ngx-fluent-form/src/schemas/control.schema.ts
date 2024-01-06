@@ -152,6 +152,7 @@ export interface CascaderControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   placeholder?: string;
   /** Show clean button */
   clearable?: boolean;
+  changeOnSelect?: boolean;
   autofocus?: boolean;
   backdrop?: boolean;
   expandIcon?: string | TemplateRef<void>;

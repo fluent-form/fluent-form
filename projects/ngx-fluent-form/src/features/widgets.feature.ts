@@ -156,7 +156,10 @@ export function useDateWidget(): FluentFormWidgetFeature<DatePickerControlSchema
     patch: schema => {
       schema.mapper ??= {
         parser: (value: string | number | Date) => value ? new Date(value) : null,
-        formatter: value => (schema.time ? value?.getTime() : value?.setHours(0, 0, 0, 0)) ?? null
+        formatter: value => {
+          if (!value) return null;
+          return schema.time ? value.getTime() : new Date(value).setHours(0, 0, 0, 0);
+        }
       };
       return schema;
     }
@@ -171,7 +174,10 @@ export function useDateRangeWidget(): FluentFormWidgetFeature<DateRangePickerCon
     patch: schema => {
       schema.mapper ??= {
         parser: (value: [string | number | Date, string | number | Date]) => value?.map(o => new Date(o)) as [Date, Date] ?? null,
-        formatter: value => value?.map(date => schema.time ? date.getTime() : date.setHours(0, 0, 0, 0)) ?? null
+        formatter: value => {
+          if (!value) return null;
+          return value.map(date => schema.time ? date.getTime() : new Date(date).setHours(0, 0, 0, 0));
+        }
       };
       return schema;
     }

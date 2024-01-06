@@ -22,7 +22,7 @@ describe('ValueUtils', () => {
     schemaUtil = TestBed.inject(SchemaUtil);
   });
 
-  describe('getValueFromModel', () => {
+  describe('get value from model', () => {
     describe('normal', () => {
       it('no init value and default value', () => {
         const model = {};
@@ -238,7 +238,7 @@ describe('ValueUtils', () => {
     });
   });
 
-  describe('getValueFromControl', () => {
+  describe('get value from control', () => {
     it('normal', () => {
       const schema = schemaUtil.patch({ kind: 'number', key: 'num' });
       const control = new FormControl(1);
@@ -277,6 +277,15 @@ describe('ValueUtils', () => {
         const control = new FormControl(now);
         const value = valueUtil.valueOfControl(control, schema);
 
+        expect(value).toBe(new Date().setHours(0, 0, 0, 0));
+      });
+
+      it('with has value (time mode)', () => {
+        const now = new Date();
+        const schema = schemaUtil.patch({ kind: 'date', key: 'date', time: true });
+        const control = new FormControl(now);
+        const value = valueUtil.valueOfControl(control, schema);
+
         expect(value).toBe(now.getTime());
       });
     });
@@ -312,6 +321,15 @@ describe('ValueUtils', () => {
       it('with has value', () => {
         const begin = new Date(), end = new Date();
         const schema = schemaUtil.patch({ kind: 'date-range', key: 'range', });
+        const control = new FormControl([begin, end]);
+        const value = valueUtil.valueOfControl(control, schema);
+
+        expect(value).toEqual([new Date().setHours(0, 0, 0, 0), new Date().setHours(0, 0, 0, 0)]);
+      });
+
+      it('with has value (time mode)', () => {
+        const begin = new Date(), end = new Date();
+        const schema = schemaUtil.patch({ kind: 'date-range', key: 'range', time: true });
         const control = new FormControl([begin, end]);
         const value = valueUtil.valueOfControl(control, schema);
 

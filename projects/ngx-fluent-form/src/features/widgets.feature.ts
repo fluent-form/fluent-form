@@ -156,7 +156,7 @@ export function useDateWidget(): FluentFormWidgetFeature<DatePickerControlSchema
     patch: schema => {
       schema.mapper ??= {
         parser: (value: string | number | Date) => value ? new Date(value) : null,
-        formatter: value => value?.setHours(0, 0, 0, 0) ?? null
+        formatter: value => (schema.time ? value?.getTime() : value?.setHours(0, 0, 0, 0)) ?? null
       };
       return schema;
     }

@@ -1,5 +1,5 @@
 import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, forwardRef, inject, Input, Output, QueryList } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, forwardRef, inject } from '@angular/core';
 import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
@@ -47,7 +47,7 @@ import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/
     }
   ]
 })
-export class FluentFormComponent<T extends AnyObject> implements FluentConfig, TemplateDirectiveContainer {
+export class FluentFormComponent<T extends AnyObject> implements OnChanges, FluentConfig, TemplateDirectiveContainer {
   private readonly destroy$ = inject(NzDestroyService);
   private readonly formUtil = inject(FormUtil);
   private readonly modelUtil = inject(ModelUtil);
@@ -57,7 +57,6 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig, T
    * - 用来跟公开的模型值进行引用比较，判断变更是内部发出的还是外部传入的，如果引用一致则为内部变更
    */
   private internalModel!: T;
-  private _model!: T;
   private _schema!: FormGroupSchema;
 
   protected readonly SchemaKind = SchemaKind;
@@ -67,34 +66,15 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig, T
 
   form!: FormGroup;
 
-  @Input()
+  @Input({ required: true })
   set schema(value: FormGroupSchema) {
     this._schema = this.schemaUtil.patch(value);
-
-    if (this.model) {
-      this.createForm();
-    }
   }
   get schema(): FormGroupSchema {
     return this._schema;
   }
 
-  @Input()
-  set model(value: T) {
-    this._model = value;
-
-    // 如果是外部变更，就赋值到表单
-    if (this.model !== this.internalModel) {
-      if (this.form) {
-        this.updateForm();
-      } else if (this.schema) {
-        this.createForm();
-      }
-    }
-  }
-  get model(): T {
-    return this._model;
-  }
+  @Input({ required: true }) model!: T;
 
   @Input() layout: NzFormLayoutType;
   @Input() colon: boolean;
@@ -116,6 +96,20 @@ export class FluentFormComponent<T extends AnyObject> implements FluentConfig, T
     this.layout = config.layout;
     this.colon = config.colon;
     this.gutter = config.gutter;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const schemaChange = changes['schema'];
+    const modelChange = changes['model'];
+
+    if (schemaChange) {
+      this.createForm();
+    } else if (modelChange) {
+      // 如果是外部变更，就赋值到表单
+      if (this.model !== this.internalModel) {
+        this.updateForm();
+      }
+    }
   }
 
   private createForm() {

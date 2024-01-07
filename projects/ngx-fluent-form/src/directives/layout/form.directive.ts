@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, forwardRef, HostListener, inject, Input, Output } from '@angular/core';
+import { Directive, EventEmitter, forwardRef, HostListener, inject, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormControlStatus, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
@@ -20,7 +20,7 @@ import { FluentControlContainer, FluentControlContainerDirective } from './model
     }
   ]
 })
-export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentControlContainerDirective<T> {
+export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentControlContainerDirective<T> implements OnChanges {
   private readonly destroy$ = inject(NzDestroyService);
   private readonly formUtil = inject(FormUtil);
   private readonly modelUtil = inject(ModelUtil);
@@ -29,7 +29,6 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentC
    * - 用来跟公开的模型值进行引用比较，判断变更是内部发出的还是外部传入的，如果引用一致则为内部变更
    */
   private internalModel!: T;
-  private _model!: T;
   private _schema!: FormGroupSchema;
 
   form!: FormGroup;
@@ -38,35 +37,15 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentC
     return this.schema?.schemas;
   }
 
-  @Input('fluentSchema')
+  @Input({ alias: 'fluentSchema', required: true })
   set schema(value: FormGroupSchema) {
     this._schema = this.schemaUtil.patch(value);
-
-    if (this.model) {
-      this.createForm();
-    }
   }
   get schema(): FormGroupSchema {
     return this._schema;
   }
 
-  /** 模型 */
-  @Input('fluentModel')
-  set model(value: T) {
-    this._model = value;
-
-    // 如果是外部变更，就赋值到表单
-    if (this.model !== this.internalModel) {
-      if (this.form) {
-        this.updateForm();
-      } else if (this.schema) {
-        this.createForm();
-      }
-    }
-  }
-  get model(): T {
-    return this._model;
-  }
+  @Input({ alias: 'fluentModel', required: true }) model!: T;
 
   @Output('fluentFormChange') formChange: EventEmitter<FormGroup> = new EventEmitter();
   @Output('fluentModelChange') modelChange: EventEmitter<T> = new EventEmitter();
@@ -75,6 +54,20 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentC
   /** The submit event will only be triggered when the host element is a form element */
   // eslint-disable-next-line @angular-eslint/no-output-native
   @Output('fluentSubmit') submit: EventEmitter<SubmitEvent> = new EventEmitter();
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const schemaChange = changes['schema'];
+    const modelChange = changes['model'];
+
+    if (schemaChange) {
+      this.createForm();
+    } else if (modelChange) {
+      // 如果是外部变更，就赋值到表单
+      if (this.model !== this.internalModel) {
+        this.updateForm();
+      }
+    }
+  }
 
   @HostListener('submit', ['$event'])
   onSubmit(event: SubmitEvent) {

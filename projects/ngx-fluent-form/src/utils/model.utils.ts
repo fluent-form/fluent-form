@@ -23,11 +23,11 @@ export class ModelUtil {
    * @param form
    * @param model
    * @param schemas
-   * @param emitEvent
+   * @param completed
    */
-  updateForm(form: FormGroup, model: AnyObject, schemas: AnySchema[], emitEvent?: boolean): FormGroup;
-  updateForm(form: FormArray, model: AnyArray, schemas: AnySchema[], emitEvent?: boolean): FormArray;
-  updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AnySchema[], emitEvent = true): FormGroup | FormArray {
+  updateForm(form: FormGroup, model: AnyObject, schemas: AnySchema[], completed?: boolean): FormGroup;
+  updateForm(form: FormArray, model: AnyArray, schemas: AnySchema[], completed?: boolean): FormArray;
+  updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AnySchema[], completed = true): FormGroup | FormArray {
     for (const schema of schemas) {
       // 这些图示不包含控件图示，直接跳过
       if (this.schemaUtil.isNonControl(schema)) continue;
@@ -55,10 +55,10 @@ export class ModelUtil {
           const controls = this.formUtil.createFormArrayElements(schema.schemas, array);
 
           formArray.clear({ emitEvent: false });
-
           for (const control of controls) {
             formArray.push(control, { emitEvent: false });
           }
+          formArray.updateValueAndValidity({ onlySelf: true });
         }
         continue;
       }
@@ -71,10 +71,11 @@ export class ModelUtil {
       const key = schema.key!.toString();
       const value = this.valueUtil.valueOfModel(model, schema);
 
-      form.get([key])!.setValue(value, { emitEvent: false });
+      form.get([key])!.setValue(value, { onlySelf: true });
     }
 
-    emitEvent && form.updateValueAndValidity();
+    // 仅在完成全部子更新时，再关闭 onlySelf
+    form.updateValueAndValidity({ onlySelf: !completed });
 
     return form;
   }

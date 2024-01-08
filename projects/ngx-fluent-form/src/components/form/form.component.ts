@@ -121,13 +121,10 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges, Flue
 
     this.onValueChanges();
 
-    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(value => {
       this.onValueChanges();
+      this.valueChanges.emit(value);
     });
-
-    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(o =>
-      this.valueChanges.emit(o)
-    );
 
     this.form.statusChanges.pipe(takeUntil(this.destroy$)).subscribe(o =>
       this.statusChanges.emit(o)

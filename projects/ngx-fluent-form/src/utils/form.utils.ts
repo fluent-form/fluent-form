@@ -123,11 +123,11 @@ export class FormUtil {
    * @param form
    * @param model
    * @param schemas
-   * @param emitEvent
+   * @param completed
    */
-  updateForm(form: FormGroup, model: AnyObject, schemas: AnySchema[], emitEvent?: boolean): void;
-  updateForm(form: FormArray, model: AnyArray, schemas: AnySchema[], emitEvent?: boolean): void;
-  updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AnySchema[], emitEvent = true): void {
+  updateForm(form: FormGroup, model: AnyObject, schemas: AnySchema[], completed?: boolean): void;
+  updateForm(form: FormArray, model: AnyArray, schemas: AnySchema[], completed?: boolean): void;
+  updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AnySchema[], completed = true): void {
     for (const schema of schemas) {
       // 这些图示不包含控件图示，直接跳过
       if (this.schemaUtil.isNonControl(schema)) continue;
@@ -159,11 +159,10 @@ export class FormUtil {
 
       // update disabled
       const disabled = this.valueTransformer.transform(schema.disabled, { model, schema, control });
-      const options = { emitEvent: false };
       if (disabled) {
-        control.disable(options);
+        control.disable({ onlySelf: true });
       } else {
-        control.enable(options);
+        control.enable({ onlySelf: true });
       }
       // update required validator
       const required = this.valueTransformer.transform(schema.required, { model, schema, control });
@@ -174,7 +173,7 @@ export class FormUtil {
       }
     }
 
-    emitEvent && form.updateValueAndValidity({ emitEvent: false });
+    completed && form.updateValueAndValidity({ emitEvent: false });
   }
 
   /**

@@ -15,5 +15,7 @@ export class LayoutTypeExampleComponent {
     input('text-3').label('控件标签').col(12);
   });
 
-  model = {};
+  model1 = {};
+  model2 = {};
+  model3 = {};
 }

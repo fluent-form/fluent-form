@@ -159,10 +159,12 @@ export class FormUtil {
 
       // update disabled
       const disabled = this.valueTransformer.transform(schema.disabled, { model, schema, control });
-      if (disabled) {
-        control.disable({ onlySelf: true });
-      } else {
-        control.enable({ onlySelf: true });
+      if (control.enabled !== !disabled) { // 不一致才更新
+        if (disabled) {
+          control.disable({ onlySelf: true });
+        } else {
+          control.enable({ onlySelf: true });
+        }
       }
       // update required validator
       const required = this.valueTransformer.transform(schema.required, { model, schema, control });

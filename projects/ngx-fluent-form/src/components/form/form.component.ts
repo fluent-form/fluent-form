@@ -12,7 +12,7 @@ import { TemplateDirectiveContainer } from '../../interfaces';
 import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe } from '../../pipes';
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { SchemaKind } from '../../schemas/interfaces';
-import { resolvedPromise } from '../../shared';
+import { queueMicrotask } from '../../shared';
 import { TEMPLATE_DIRECTIVE_CONTAINER } from '../../tokens';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
 import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/form-col-content-outlet.component';
@@ -138,7 +138,7 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges, Flue
 
   private onValueChanges() {
     // NG0100，防止在更新模型之前在模板中读取模型
-    resolvedPromise.then(() => {
+    queueMicrotask(() => {
       this.formUtil.updateForm(
         this.form,
         this.model = this.internalModel = this.formUtil.updateModel(

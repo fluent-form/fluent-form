@@ -6,6 +6,7 @@ import { form, input } from '../../compose';
 import { withAllWidgets, withStaticExpression } from '../../features';
 import { provideFluentForm } from '../../provider';
 import { FormGroupSchema } from '../../schemas';
+import { queueMicrotask } from '../../shared';
 import { FluentFormComponent } from './form.component';
 
 @Component({
@@ -43,14 +44,16 @@ describe('FluentFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('能够配置顶层表单', () => {
+  it('能够配置顶层表单', async () => {
     component.schema = form(() => {
       input('text');
     }, { updateOn: 'blur' });
     component.model = {};
     fixture.detectChanges();
 
-    expect(component.model).toEqual({ text: null });
+    await queueMicrotask(() => {
+      expect(component.model).toEqual({ text: null });
+    });
   });
 
   describe('模型应该能正确赋值表单', () => {
@@ -70,60 +73,72 @@ describe('FluentFormComponent', () => {
       expect(component.form.value).toEqual({ text: 'test' });
     });
 
-    it('多次设置 model', () => {
+    it('多次设置 model', async () => {
       component.schema = form(() => input('text'));
       component.model = { text: 'test' };
       fixture.detectChanges();
 
-      expect(component.form.value).toEqual({ text: 'test' });
+      await queueMicrotask(() => {
+        expect(component.form.value).toEqual({ text: 'test' });
+      });
 
       component.model = { text: 'test change' };
       fixture.detectChanges();
 
-      expect(component.form.value).toEqual({ text: 'test change' });
+      await queueMicrotask(() => {
+        expect(component.form.value).toEqual({ text: 'test change' });
+      });
     });
   });
 
   describe('表单应该能正确赋值模型', () => {
-    it('先设置 schema，后设置 model', () => {
+    it('先设置 schema，后设置 model', async () => {
       component.schema = form(() => {
         input('text').col(1).defaultValue('test');
       });
       component.model = {};
       fixture.detectChanges();
 
-      expect(component.model).toEqual({ text: 'test' });
+      await queueMicrotask(() => {
+        expect(component.model).toEqual({ text: 'test' });
+      });
     });
 
-    it('先设置 model，后设置 schema', () => {
+    it('先设置 model，后设置 schema', async () => {
       component.model = {};
       component.schema = form(() => {
         input('text').col(1).defaultValue('test');
       });
       fixture.detectChanges();
 
-      expect(component.model).toEqual({ text: 'test' });
+      await queueMicrotask(() => {
+        expect(component.model).toEqual({ text: 'test' });
+      });
     });
 
-    it('多次设置 schema', () => {
+    it('多次设置 schema', async () => {
       component.model = {};
       component.schema = form(() => {
         input('text').col(1).defaultValue('test');
       });
       fixture.detectChanges();
 
-      expect(component.model).toEqual({ text: 'test' });
+      await queueMicrotask(() => {
+        expect(component.model).toEqual({ text: 'test' });
+      });
 
       component.schema = form(() => {
         input('text').col(1).defaultValue('test change');
       });
       fixture.detectChanges();
 
-      expect(component.model).toEqual({ text: 'test' });
+      await queueMicrotask(() => {
+        expect(component.model).toEqual({ text: 'test' });
+      });
     });
   });
 
-  it('应该能正确处理控件的 disabled 选项', () => {
+  it('应该能正确处理控件的 disabled 选项', async () => {
     component.schema = form(() => {
       input('a').disabled('{{true}}' as SafeAny);
       input('b').disabled(() => true);
@@ -132,8 +147,10 @@ describe('FluentFormComponent', () => {
     component.model = {};
     fixture.detectChanges();
 
-    expect(component.form.get('a')!.disabled).toEqual(true);
-    expect(component.form.get('b')!.disabled).toEqual(true);
-    expect(component.form.get('c')!.disabled).toEqual(true);
+    await queueMicrotask(() => {
+      expect(component.form.get('a')!.disabled).toEqual(true);
+      expect(component.form.get('b')!.disabled).toEqual(true);
+      expect(component.form.get('c')!.disabled).toEqual(true);
+    });
   });
 });

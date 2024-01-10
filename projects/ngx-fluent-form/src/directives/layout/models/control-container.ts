@@ -35,8 +35,11 @@ export abstract class FluentControlContainerDirective<T extends AnyObject | AnyA
   }
 
   updateOutlet(outlet: FluentOutletDirective<T>) {
-    outlet.control = this.form.get(outlet.key.toString()) ?? this.form;
-    outlet.schema = this.schemaUtil.find(this.schema, outlet.key) as AnyComponentSchema | AnyControlSchema;
+    const schema = this.schemaUtil.find(this.schema, outlet.key) as AnyComponentSchema | AnyControlSchema | null;
+    if (schema) {
+      outlet.control = this.form.get(outlet.key.toString()) ?? this.form;
+      outlet.schema = schema;
+    }
   }
 
   removeOutlet(outlet: FluentOutletDirective<T>) {

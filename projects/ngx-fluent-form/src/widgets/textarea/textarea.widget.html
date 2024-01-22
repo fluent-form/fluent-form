@@ -3,7 +3,7 @@
     <ng-container *ngIf="schema.autocomplete as autocomplete; else noAutocompleteTemplate">
       <ng-container *ngIf="inputGroup; else standardTemplate">
         <textarea
-          *ngIf="!(schema.hidden | reactive: model:schema:control)"
+          *ngIf="!(schema.hidden | reactive: model : schema : control)"
           nz-col
           nz-input
           [attr.id]="schema.id"
@@ -25,7 +25,7 @@
           [placeholder]="schema.placeholder ?? ''"
           [rows]="schema.rows"
           [autofocus]="schema.autofocus"
-          [readonly]="schema.readonly | reactive: model:schema:control"
+          [readonly]="schema.readonly | reactive: model : schema : control"
           [nzSize]="schema.size!"
           [nzBorderless]="schema.borderless"></textarea>
       </ng-container>
@@ -46,7 +46,7 @@
           [placeholder]="schema.placeholder ?? ''"
           [rows]="schema.rows"
           [autofocus]="schema.autofocus"
-          [readonly]="schema.readonly | reactive: model:schema:control"
+          [readonly]="schema.readonly | reactive: model : schema : control"
           [nzSize]="schema.size!"
           [nzBorderless]="schema.borderless"></textarea>
       </ng-template>
@@ -62,7 +62,7 @@
     <ng-template #noAutocompleteTemplate>
       <ng-container *ngIf="inputGroup; else standardTemplate">
         <textarea
-          *ngIf="!(schema.hidden | reactive: model:schema:control)"
+          *ngIf="!(schema.hidden | reactive: model : schema : control)"
           nz-col
           nz-input
           [attr.id]="schema.id"
@@ -83,7 +83,7 @@
           [placeholder]="schema.placeholder ?? ''"
           [rows]="schema.rows"
           [autofocus]="schema.autofocus"
-          [readonly]="schema.readonly | reactive: model:schema:control"
+          [readonly]="schema.readonly | reactive: model : schema : control"
           [nzSize]="schema.size!"
           [nzBorderless]="schema.borderless"></textarea>
       </ng-container>
@@ -103,7 +103,7 @@
           [placeholder]="schema.placeholder ?? ''"
           [rows]="schema.rows"
           [autofocus]="schema.autofocus"
-          [readonly]="schema.readonly | reactive: model:schema:control"
+          [readonly]="schema.readonly | reactive: model : schema : control"
           [nzSize]="schema.size!"
           [nzBorderless]="schema.borderless"></textarea>
       </ng-template>

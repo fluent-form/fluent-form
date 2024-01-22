@@ -2,7 +2,7 @@
   <ng-container *fluentInject="InputGroup as inputGroup; optional: true">
     <ng-container *ngIf="inputGroup; else standardTemplate">
       <nz-tree-select
-        *ngIf="!(schema.hidden | reactive: model:schema:control)"
+        *ngIf="!(schema.hidden | reactive: model : schema : control)"
         #component
         nz-col
         [fluentBinding]="{ component, schema, control, model }"
@@ -27,7 +27,7 @@
         [nzExpandedIcon]="helper.expandedIcon | invoke: schema.expandIcon"
         [nzShowLine]="schema.line"
         [nzAsyncData]="schema.async"
-        [nzNodes]="schema.options | reactive: model:schema:control"
+        [nzNodes]="schema.options | reactive: model : schema : control"
         [nzPlaceHolder]="schema.placeholder!"
         [nzDefaultExpandAll]="schema.expandAll"
         [nzExpandedKeys]="schema.expandedKeys!"
@@ -53,7 +53,7 @@
         [nzExpandedIcon]="helper.expandedIcon | invoke: schema.expandIcon"
         [nzShowLine]="schema.line"
         [nzAsyncData]="schema.async"
-        [nzNodes]="schema.options | reactive: model:schema:control"
+        [nzNodes]="schema.options | reactive: model : schema : control"
         [nzPlaceHolder]="schema.placeholder!"
         [nzDefaultExpandAll]="schema.expandAll"
         [nzExpandedKeys]="schema.expandedKeys!"

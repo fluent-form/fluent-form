@@ -6,7 +6,7 @@
       (fluentDestroy)="ctx.destroy()">
       <ng-container *ngIf="inputGroup; else standardTemplate">
         <nz-select
-          *ngIf="!(schema.hidden | reactive: model:schema:control)"
+          *ngIf="!(schema.hidden | reactive: model : schema : control)"
           #component
           nz-col
           [fluentBinding]="{ component, schema, control, model }"
@@ -36,7 +36,7 @@
           [(nzOpen)]="ctx.open"
           (nzOnSearch)="ctx.trigger($event)">
           <nz-option
-            *ngFor="let option of schema.options | reactive: model:schema:control"
+            *ngFor="let option of schema.options | reactive: model : schema : control"
             [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
             [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
             [nzValue]="option[schema.config?.valueProperty ?? 'value']"
@@ -69,7 +69,7 @@
           [(nzOpen)]="ctx.open"
           (nzOnSearch)="ctx.trigger($event)">
           <nz-option
-            *ngFor="let option of schema.options | reactive: model:schema:control"
+            *ngFor="let option of schema.options | reactive: model : schema : control"
             [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
             [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
             [nzValue]="option[schema.config?.valueProperty ?? 'value']"

@@ -18,8 +18,8 @@
       [ngClass]="tabSchema.class"
       [ngStyle]="tabSchema.style"
       [nzTitle]="tabSchema.title"
-      [nzDisabled]="tabSchema.disabled | reactive: model:tabSchema:control"
-      [hidden]="tabSchema.hidden | reactive: model:tabSchema:control">
+      [nzDisabled]="tabSchema.disabled | reactive: model : tabSchema : control"
+      [hidden]="tabSchema.hidden | reactive: model : tabSchema : control">
       <nz-row #config="fluentConfig" [nzGutter]="config.gutter">
         <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
           <nz-col
@@ -29,9 +29,8 @@
             [nzPush]="schema.col | col: 'push'"
             [nzPull]="schema.col | col: 'pull'"
             [nzOrder]="schema.col | col: 'order'"
-            [hidden]="schema.hidden | reactive: model:schema:control">
-            <fluent-form-col-content-outlet [control]="control" [schema]="schema" [model]="model">
-            </fluent-form-col-content-outlet>
+            [hidden]="schema.hidden | reactive: model : schema : control">
+            <fluent-form-col-content-outlet [control]="control" [schema]="schema" [model]="model" />
           </nz-col>
         </ng-template>
 

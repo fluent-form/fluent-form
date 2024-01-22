@@ -31,9 +31,8 @@
         [nzPush]="schema.col | col: 'push'"
         [nzPull]="schema.col | col: 'pull'"
         [nzOrder]="schema.col | col: 'order'"
-        [hidden]="schema.hidden | reactive: model:schema:control">
-        <fluent-form-col-content-outlet [control]="control" [schema]="schema" [model]="model">
-        </fluent-form-col-content-outlet>
+        [hidden]="schema.hidden | reactive: model : schema : control">
+        <fluent-form-col-content-outlet [control]="control" [schema]="schema" [model]="model" />
 
         <!-- form array 的 schemas 可能会有多个，只在第一个时渲染移除按钮 -->
         <button
@@ -69,7 +68,9 @@
       <nz-form-item>
         <nz-form-control>
           <button
-            *fluentVar="helper.addable | invoke: (formSchema.addable | reactive: model:formSchema:formArray) as addBtn"
+            *fluentVar="
+              helper.addable | invoke: (formSchema.addable | reactive: model : formSchema : formArray) as addBtn
+            "
             type="button"
             nz-button
             [nzType]="addBtn.type ?? null"

@@ -18,11 +18,8 @@
         [nzPush]="schema.col | col: 'push'"
         [nzPull]="schema.col | col: 'pull'"
         [nzOrder]="schema.col | col: 'order'"
-        [hidden]="schema.hidden | reactive: model:schema:control">
-        <fluent-form-col-content-outlet
-          [control]="control"
-          [schema]="schema"
-          [model]="model"></fluent-form-col-content-outlet>
+        [hidden]="schema.hidden | reactive: model : schema : control">
+        <fluent-form-col-content-outlet [control]="control" [schema]="schema" [model]="model" />
       </nz-col>
     </ng-template>
 

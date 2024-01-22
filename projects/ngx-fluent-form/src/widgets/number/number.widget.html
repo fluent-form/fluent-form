@@ -2,7 +2,7 @@
   <ng-container *fluentInject="InputGroup as inputGroup; optional: true">
     <ng-container *ngIf="inputGroup; else standardTemplate">
       <nz-input-number
-        *ngIf="!(schema.hidden | reactive: model:schema:control)"
+        *ngIf="!(schema.hidden | reactive: model : schema : control)"
         #component
         nz-col
         [fluentBinding]="{ component, schema, control, model }"
@@ -23,7 +23,7 @@
         [nzPrecisionMode]="helper.precisionMode | invoke: schema.precision"
         [nzStep]="schema.step ?? 1"
         [nzAutoFocus]="schema.autofocus"
-        [nzReadOnly]="schema.readonly | reactive: model:schema:control"
+        [nzReadOnly]="schema.readonly | reactive: model : schema : control"
         [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless">
       </nz-input-number>
@@ -44,7 +44,7 @@
         [nzPrecisionMode]="helper.precisionMode | invoke: schema.precision"
         [nzStep]="schema.step ?? 1"
         [nzAutoFocus]="schema.autofocus"
-        [nzReadOnly]="schema.readonly | reactive: model:schema:control"
+        [nzReadOnly]="schema.readonly | reactive: model : schema : control"
         [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless">
       </nz-input-number>

@@ -3,7 +3,7 @@
     <ng-container *ngIf="schema.autocomplete as autocomplete; else noAutocompleteTemplate">
       <ng-container *ngIf="inputGroup; else standardTemplate">
         <input
-          *ngIf="!(schema.hidden | reactive: model:schema:control)"
+          *ngIf="!(schema.hidden | reactive: model : schema : control)"
           nz-col
           nz-input
           [attr.id]="schema.id"
@@ -24,7 +24,7 @@
           [placeholder]="schema.placeholder ?? ''"
           [type]="schema.type ?? 'text'"
           [autofocus]="schema.autofocus"
-          [readonly]="schema.readonly | reactive: model:schema:control"
+          [readonly]="schema.readonly | reactive: model : schema : control"
           [nzSize]="schema.size!"
           [nzBorderless]="schema.borderless" />
       </ng-container>
@@ -44,7 +44,7 @@
           [placeholder]="schema.placeholder ?? ''"
           [type]="schema.type ?? 'text'"
           [autofocus]="schema.autofocus"
-          [readonly]="schema.readonly | reactive: model:schema:control"
+          [readonly]="schema.readonly | reactive: model : schema : control"
           [nzSize]="schema.size!"
           [nzBorderless]="schema.borderless" />
       </ng-template>
@@ -60,7 +60,7 @@
     <ng-template #noAutocompleteTemplate>
       <ng-container *ngIf="inputGroup; else standardTemplate">
         <input
-          *ngIf="!(schema.hidden | reactive: model:schema:control)"
+          *ngIf="!(schema.hidden | reactive: model : schema : control)"
           nz-col
           nz-input
           [attr.id]="schema.id"
@@ -80,7 +80,7 @@
           [placeholder]="schema.placeholder ?? ''"
           [type]="schema.type ?? 'text'"
           [autofocus]="schema.autofocus"
-          [readonly]="schema.readonly | reactive: model:schema:control"
+          [readonly]="schema.readonly | reactive: model : schema : control"
           [nzSize]="schema.size!"
           [nzBorderless]="schema.borderless" />
       </ng-container>
@@ -99,7 +99,7 @@
           [placeholder]="schema.placeholder ?? ''"
           [type]="schema.type ?? 'text'"
           [autofocus]="schema.autofocus"
-          [readonly]="schema.readonly | reactive: model:schema:control"
+          [readonly]="schema.readonly | reactive: model : schema : control"
           [nzSize]="schema.size!"
           [nzBorderless]="schema.borderless" />
       </ng-template>

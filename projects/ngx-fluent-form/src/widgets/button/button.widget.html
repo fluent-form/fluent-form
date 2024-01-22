@@ -1,16 +1,16 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <ng-container *ngIf="!(schema.hidden | reactive: model:schema:control)">
+  <ng-container *ngIf="!(schema.hidden | reactive: model : schema : control)">
     <a
       *ngIf="schema.type === 'link'"
       nz-button
-      [disabled]="schema.disabled | reactive: model:schema:control"
+      [disabled]="schema.disabled | reactive: model : schema : control"
       [fluentBinding]="{ schema, control, model }"
       [ngClass]="schema.class"
       [ngStyle]="schema.style"
       [nzBlock]="schema.variants?.block"
       [nzDanger]="schema.variants?.danger"
       [nzGhost]="schema.variants?.ghost"
-      [nzLoading]="schema.loading | reactive: model:schema:control"
+      [nzLoading]="schema.loading | reactive: model : schema : control"
       [nzShape]="schema.variants?.shape!"
       [nzSize]="schema.size!"
       [nzType]="schema.type">
@@ -21,14 +21,14 @@
       *ngIf="schema.type !== 'link'"
       nz-button
       [attr.type]="schema.mode"
-      [disabled]="schema.disabled | reactive: model:schema:control"
+      [disabled]="schema.disabled | reactive: model : schema : control"
       [fluentBinding]="{ schema, control, model }"
       [ngClass]="schema.class"
       [ngStyle]="schema.style"
       [nzBlock]="schema.variants?.block"
       [nzDanger]="schema.variants?.danger"
       [nzGhost]="schema.variants?.ghost"
-      [nzLoading]="schema.loading | reactive: model:schema:control"
+      [nzLoading]="schema.loading | reactive: model : schema : control"
       [nzShape]="schema.variants?.shape!"
       [nzSize]="schema.size!"
       [nzType]="schema.type!">

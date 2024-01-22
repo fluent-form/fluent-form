@@ -2,7 +2,7 @@
   <ng-container *fluentInject="InputGroup as inputGroup; optional: true">
     <ng-container *ngIf="inputGroup; else standardTemplate">
       <nz-range-picker
-        *ngIf="!(schema.hidden | reactive: model:schema:control)"
+        *ngIf="!(schema.hidden | reactive: model : schema : control)"
         #component
         nz-col
         [fluentBinding]="{ component, schema, control, model }"
@@ -27,7 +27,7 @@
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzSuffixIcon]="schema.suffixIcon | template: 'calendar'"
         [nzAutoFocus]="schema.autofocus"
-        [nzInputReadOnly]="schema.readonly | reactive: model:schema:control"
+        [nzInputReadOnly]="schema.readonly | reactive: model : schema : control"
         [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless"
         [nzShowToday]="schema.today ?? true"
@@ -54,7 +54,7 @@
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzSuffixIcon]="schema.suffixIcon | template: 'calendar'"
         [nzAutoFocus]="schema.autofocus"
-        [nzInputReadOnly]="schema.readonly | reactive: model:schema:control"
+        [nzInputReadOnly]="schema.readonly | reactive: model : schema : control"
         [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless"
         [nzShowToday]="schema.today ?? true"

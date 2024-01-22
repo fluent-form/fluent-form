@@ -6,7 +6,7 @@ import { isObject } from '../../../utils';
 
 type Col = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 type Span = Col | 'fill' | null;
-type Offset = Col | 'auto';
+type Offset = Col | 'auto' | null;
 
 @Component({
   selector: 'fluent-col,[fluent-col]',
@@ -45,7 +45,7 @@ export class FluentColComponent implements OnInit, OnChanges {
 
     if (offset) {
       if (isObject(offset)) {
-        for (const [breakpoint, size] of Object.entries(offset || {})) {
+        for (const [breakpoint, size] of Object.entries(offset)) {
           classes.push(createColumnOffsetClass(size, breakpoint as keyof Breakpoints));
         }
       } else {

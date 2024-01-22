@@ -78,7 +78,8 @@ export class FluentRowComponent {
         // TODO：zoneless
         this.cdr.markForCheck();
       })
-    )
+    ),
+    { initialValue: [] }
   );
 
   @Input('gap') set level(value: Gap | Stringify<Gap> | [x: Gap, y: Gap] | Partial<Record<keyof Breakpoints, Gap | [x: Gap, y: Gap]>>) {
@@ -93,7 +94,7 @@ export class FluentRowComponent {
 
   protected gap = computed(() => {
     const level = this._level();
-    const breakpoints = this.breakpoints() || [];
+    const breakpoints = this.breakpoints();
 
     if (Array.isArray(level) || isNumber(level) || isString(level)) {
       return getGap(level);

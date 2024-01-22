@@ -49,3 +49,5 @@ export type ComponentOutputListenerMap<C> = {
  * @template C 组件的类类型
  */
 export type ComponentPropertyMap<C> = Partial<Omit<C, ComponentOutputName<C>>>;
+
+export type Stringify<T> = T extends number ? `${T}` : never;

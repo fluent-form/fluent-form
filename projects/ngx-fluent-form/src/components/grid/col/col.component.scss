@@ -1,0 +1,51 @@
+@use "sass:map";
+@import "../../../styles/variables";
+@import "../../../styles/breakpoints";
+
+@mixin make-col-fit() {
+  flex: 0 0 auto;
+  min-width: auto;
+}
+
+@mixin make-cols($breakpoint) {
+  $infix: "";
+  $width: map-get($breakpoints, $breakpoint);
+
+  @if $width > 0 {
+    $infix: -$breakpoint;
+  }
+
+  .fluent-col#{$infix}-fill {
+    flex: 1 0 0;
+  }
+
+  .fluent-col-offset#{$infix}-auto {
+    margin-left: auto;
+  }
+
+  @for $span from 1 through $grid-columns {
+    .fluent-col#{$infix}-#{$span} {
+      @if $span {
+        flex: 0 0 auto;
+        width: calc(100% / 12 * $span);
+      } @else {
+        @include make-col-fit();
+      }
+    }
+
+    .fluent-col-offset#{$infix}-#{$span} {
+      margin-left: calc(100% / 12 * $span);
+    }
+  }
+}
+
+.fluent-col {
+  padding: calc(var(--gap-x) / 2) calc(var(--gap-y) / 2);
+  @include make-col-fit();
+}
+
+@each $breakpoint, $width in $breakpoints {
+  @include with-media-breakpoint($breakpoint, $width) {
+    @include make-cols($breakpoint);
+  }
+}

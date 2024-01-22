@@ -54,7 +54,7 @@
     "copyfiles": "^2.4.1",
     "eslint": "^8.39.0",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-prettier": "^5.0.0",
     "husky": "^8.0.2",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.1",
@@ -64,8 +64,8 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "lint-staged": "^15.0.0",
     "ng-packagr": "^16.2.3",
-    "prettier": "~2.7.1",
-    "prettier-plugin-organize-attributes": "^0.0.5",
+    "prettier": "^3.0.0",
+    "prettier-plugin-organize-attributes": "^1.0.0",
     "typescript": "~5.1.0"
   }
 }

@@ -39,6 +39,6 @@
     "ng-zorro-antd": ">=16.0.0"
   },
   "dependencies": {
-    "@ngify/types": "~1.5.0"
+    "@ngify/types": "~1.6.0"
   }
 }

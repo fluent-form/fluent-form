@@ -6,9 +6,10 @@ import { AutocompleteDataSource } from 'ng-zorro-antd/auto-complete';
 import { CompareWith, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDateMode, SupportTimeOptions } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
+import { FluentColDirective } from '../components';
 import { AnySchema } from './index.schema';
-import { Col, ControlEventListenerHolder, ControlValueMapper, Labelful, Length, MaybeSchemaReactiveFn, Row, SchemaLike } from './interfaces';
-import { Cell, SchemaKey } from './types';
+import { Column, ControlEventListenerHolder, ControlValueMapper, Labelful, Length, MaybeSchemaReactiveFn, Row, SchemaLike } from './interfaces';
+import { SchemaKey } from './types';
 
 /**
  * @public
@@ -16,7 +17,7 @@ import { Cell, SchemaKey } from './types';
  */
 export interface AbstractSchema<Key extends SchemaKey = SchemaKey> extends SchemaLike<Key> {
   /* Used to define the width of the control. */
-  col?: Col | Cell;
+  col?: Column | FluentColDirective['span'];
   hidden?: MaybeSchemaReactiveFn<AbstractSchema, boolean>;
   class?: NgClass['ngClass'];
   style?: NgStyle['ngStyle'];

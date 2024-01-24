@@ -3,10 +3,10 @@ import { AbstractControl, FormControlStatus } from '@angular/forms';
 import { ThemeType } from '@ant-design/icons-angular';
 import { SafeAny } from '@ngify/types';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
-import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
+import { FluentColDirective, FluentRowDirective } from '../components';
 import { ComponentOutputListenerMap, ComponentPropertyMap, HTMLElementEventListenerMap, HTMLElementPropertyMap } from '../types';
 import { AbstractControlSchema, AbstractSchema } from './abstract.schema';
-import { Cell, SchemaKey } from './types';
+import { SchemaKey } from './types';
 
 /**
  * @public
@@ -77,7 +77,7 @@ export interface Tooltip {
 /** @internal */
 export interface Label {
   content: string;
-  span?: Cell;
+  span?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24;
   width?: string | number;
 }
 
@@ -88,18 +88,15 @@ export interface Labelful {
 }
 
 export interface Row {
-  align?: NzAlign;
-  justify?: NzJustify;
-  gutter?: NzRowDirective['nzGutter'];
+  align?: FluentRowDirective['align'];
+  justify?: FluentRowDirective['justify'];
+  gap?: FluentRowDirective['gap'];
 }
 
-export interface Col {
-  span?: Cell;
-  offset?: Cell;
-  flex?: number | string;
-  push?: Cell;
-  pull?: Cell;
-  order?: number;
+export interface Column {
+  span?: FluentColDirective['span'];
+  offset?: FluentColDirective['offset'];
+  flex?: FluentColDirective['flex'];
 }
 
 export interface Icon {

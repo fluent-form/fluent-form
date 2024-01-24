@@ -1,5 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
+import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { AbstractControlContainerSchema } from './abstract.schema';
 import { Labelful, Length, MaybeSchemaReactiveFn } from './interfaces';
 import { SingleSchemaKey } from './types';
@@ -9,6 +10,7 @@ import { SingleSchemaKey } from './types';
  */
 export interface FormGroupSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractControlContainerSchema<Key>, Labelful {
   kind: 'group';
+  layout?: NzFormLayoutType;
 }
 
 /**
@@ -16,6 +18,7 @@ export interface FormGroupSchema<Key extends SingleSchemaKey = SingleSchemaKey> 
  */
 export interface FormArraySchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractControlContainerSchema<Key>, Labelful {
   kind: 'array';
+  layout?: NzFormLayoutType;
   length?: Length;
   addable?: MaybeSchemaReactiveFn<FormArraySchema, boolean | AddableButton>;
   removable?: boolean;

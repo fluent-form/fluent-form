@@ -9,7 +9,6 @@ import { FormUtil, ModelUtil } from '../../utils';
 import { FluentControlContainer, FluentControlContainerDirective } from './models/control-container';
 
 @Directive({
-  // eslint-disable-next-line
   selector: '[fluent-form]',
   exportAs: 'fluentForm',
   standalone: true,

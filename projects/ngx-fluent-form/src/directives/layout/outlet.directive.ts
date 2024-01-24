@@ -7,7 +7,6 @@ import { WidgetTemplateContext } from '../../widgets';
 import { FluentControlContainer } from './models/control-container';
 
 @Directive({
-  // eslint-disable-next-line
   selector: 'fluent-outlet',
   exportAs: 'fluentOutlet',
   standalone: true

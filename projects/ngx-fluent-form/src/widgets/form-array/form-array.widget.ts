@@ -5,10 +5,9 @@ import { FormArray } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { FluentFormColContentOutletComponent } from '../../components';
-import { FluentBindingDirective, FluentConfigDirective, FluentContextGuardDirective, FluentVarDirective } from '../../directives';
+import { FluentFormColContentOutletComponent, FluentGridModule } from '../../components';
+import { FluentBindingDirective, FluentContextGuardDirective, FluentParentRowDirective, FluentVarDirective } from '../../directives';
 import { FluentColumnPipe, FluentReactivePipe, FluentTemplatePipe, InvokePipe } from '../../pipes';
 import { AbstractSchema, AddableButton, FormArraySchema, SchemaKind, WithOutSchemaReactiveFn } from '../../schemas';
 import { FormUtil, SchemaUtil, isBoolean, isNumber, isUndefined } from '../../utils';
@@ -28,15 +27,15 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
     NgStyle,
     NgTemplateOutlet,
     DragDropModule,
-    NzGridModule,
     NzFormModule,
     NzButtonModule,
     NzIconModule,
     NzOutletModule,
+    FluentGridModule,
     FluentFormColContentOutletComponent,
     FluentBindingDirective,
     FluentContextGuardDirective,
-    FluentConfigDirective,
+    FluentParentRowDirective,
     FluentColumnPipe,
     FluentReactivePipe,
     FluentTemplatePipe,

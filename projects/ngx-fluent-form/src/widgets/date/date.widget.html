@@ -4,17 +4,14 @@
       <nz-date-picker
         *ngIf="!(schema.hidden | reactive: model : schema : control)"
         #component
-        nz-col
+        fluent-col
         [fluentBinding]="{ component, schema, control, model }"
         [formControl]="control"
         [ngClass]="schema.class"
         [ngStyle]="schema.style"
-        [nzSpan]="schema.col | col: 'span'"
-        [nzFlex]="schema.col | col: 'flex'"
-        [nzOffset]="schema.col | col: 'offset'"
-        [nzPush]="schema.col | col: 'push'"
-        [nzPull]="schema.col | col: 'pull'"
-        [nzOrder]="schema.col | col: 'order'"
+        [span]="schema.col | col: 'span'"
+        [flex]="schema.col | col: 'flex'"
+        [offset]="schema.col | col: 'offset'"
         [nzAllowClear]="schema.clearable"
         [nzFormat]="schema.format!"
         [nzId]="schema.id!"

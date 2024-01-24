@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
-import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
+import { FluentGridModule } from '../../components';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentInjectDirective } from '../../directives';
 import { FluentColumnPipe, FluentReactivePipe, InvokePipe } from '../../pipes';
 import { TreeSelectControlSchema } from '../../schemas';
@@ -23,8 +23,8 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
     NgClass,
     NgStyle,
     ReactiveFormsModule,
-    NzGridModule,
     NzTreeSelectModule,
+    FluentGridModule,
     FluentInjectDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,

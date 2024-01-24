@@ -4,7 +4,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { NzCascaderModule } from 'ng-zorro-antd/cascader';
 import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
-import { NzGridModule } from 'ng-zorro-antd/grid';
+import { FluentGridModule } from '../../components';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentInjectDirective } from '../../directives';
 import { FluentColumnPipe, FluentReactivePipe, FluentTemplatePipe } from '../../pipes';
 import { CascaderControlSchema } from '../../schemas';
@@ -22,8 +22,8 @@ type CascaderWidgetTemplateContext = WidgetTemplateContext<CascaderControlSchema
     NgClass,
     NgStyle,
     ReactiveFormsModule,
-    NzGridModule,
     NzCascaderModule,
+    FluentGridModule,
     FluentInjectDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,

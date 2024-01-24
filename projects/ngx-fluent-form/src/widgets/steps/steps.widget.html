@@ -26,23 +26,20 @@
       [hidden]="subschema.hidden | reactive: model : subschema : control"></nz-step>
   </nz-steps>
 
-  <nz-row
+  <fluent-row
     *ngFor="let stepSchema of schema.schemas; index as stepIndex"
-    #config="fluentConfig"
-    [nzGutter]="config.gutter"
+    #parentRow="fluentParentRow"
+    [gap]="parentRow.gap"
     [hidden]="schema.active !== stepIndex"
     [style.margin-top.px]="16">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
-      <nz-col
-        [nzSpan]="schema.col | col: 'span'"
-        [nzFlex]="schema.col | col: 'flex'"
-        [nzOffset]="schema.col | col: 'offset'"
-        [nzPush]="schema.col | col: 'push'"
-        [nzPull]="schema.col | col: 'pull'"
-        [nzOrder]="schema.col | col: 'order'"
+      <fluent-col
+        [span]="schema.col | col: 'span'"
+        [flex]="schema.col | col: 'flex'"
+        [offset]="schema.col | col: 'offset'"
         [hidden]="schema.hidden | reactive: model : schema : control">
         <fluent-form-col-content-outlet [control]="control" [schema]="schema" [model]="model" />
-      </nz-col>
+      </fluent-col>
     </ng-template>
 
     <ng-container
@@ -50,5 +47,5 @@
       [ngTemplateOutlet]="formColTemplate"
       [ngTemplateOutletContext]="{ control: (subschema.key | control: control), schema: subschema, model: model }">
     </ng-container>
-  </nz-row>
+  </fluent-row>
 </ng-template>

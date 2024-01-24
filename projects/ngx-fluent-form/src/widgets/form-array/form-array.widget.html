@@ -1,15 +1,15 @@
 <ng-template let-formArray="control" let-formSchema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <nz-row
-    #nzRow
-    #config="fluentConfig"
+  <fluent-row
+    #row
+    #parentRow="fluentParentRow"
     nz-form
     cdkDropList
     [cdkDropListDisabled]="!formSchema.orderable"
     [class.cdk-drop-list-disabled]="!formSchema.orderable"
-    [nzGutter]="formSchema.gutter ?? config.gutter"
-    [nzAlign]="formSchema.align!"
-    [nzJustify]="formSchema.justify!"
-    [nzLayout]="config.layout"
+    [gap]="formSchema.gap ?? parentRow.gap"
+    [align]="formSchema.align"
+    [justify]="formSchema.justify"
+    [nzLayout]="formSchema.layout!"
     [ngClass]="formSchema.class"
     [ngStyle]="formSchema.style"
     [fluentBinding]="{ schema: formSchema, control: formArray, model }"
@@ -21,16 +21,14 @@
       let-model="model"
       let-index="index"
       let-first="first">
-      <nz-col
+      <fluent-col
         *ngIf="schema.kind !== SchemaKind.Headless || (schema.kind === SchemaKind.Headless && schema.template)"
         cdkDrag
-        [cdkDragBoundary]="nzRow"
-        [nzSpan]="schema.col | col: 'span'"
-        [nzFlex]="schema.col | col: 'flex'"
-        [nzOffset]="schema.col | col: 'offset'"
-        [nzPush]="schema.col | col: 'push'"
-        [nzPull]="schema.col | col: 'pull'"
-        [nzOrder]="schema.col | col: 'order'"
+        cdkDragPreviewContainer="parent"
+        [cdkDragBoundary]="row"
+        [span]="schema.col | col: 'span'"
+        [flex]="schema.col | col: 'flex'"
+        [offset]="schema.col | col: 'offset'"
         [hidden]="schema.hidden | reactive: model : schema : control">
         <fluent-form-col-content-outlet [control]="control" [schema]="schema" [model]="model" />
 
@@ -47,7 +45,7 @@
           (click)="formArray.removeAt(index)">
           <span nz-icon nzType="minus" nzTheme="outline"></span>
         </button>
-      </nz-col>
+      </fluent-col>
     </ng-template>
 
     <ng-container *ngFor="let control of formArray.controls; index as index">
@@ -64,7 +62,7 @@
       </ng-container>
     </ng-container>
 
-    <nz-col [nzSpan]="24">
+    <fluent-col span="12">
       <nz-form-item>
         <nz-form-control>
           <button
@@ -88,6 +86,6 @@
           </button>
         </nz-form-control>
       </nz-form-item>
-    </nz-col>
-  </nz-row>
+    </fluent-col>
+  </fluent-row>
 </ng-template>

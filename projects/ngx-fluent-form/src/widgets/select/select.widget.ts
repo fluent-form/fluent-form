@@ -3,9 +3,9 @@ import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
 import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
-import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { Subject, filter, tap } from 'rxjs';
+import { FluentGridModule } from '../../components';
 import { FluentBindingDirective, FluentContextDirective, FluentContextGuardDirective, FluentInjectDirective, FluentLifeCycleDirective } from '../../directives';
 import { FluentColumnPipe, FluentReactivePipe, FluentTemplatePipe } from '../../pipes';
 import { SelectControlSchema } from '../../schemas';
@@ -24,8 +24,8 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
     NgClass,
     NgStyle,
     ReactiveFormsModule,
-    NzGridModule,
     NzSelectModule,
+    FluentGridModule,
     FluentInjectDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,

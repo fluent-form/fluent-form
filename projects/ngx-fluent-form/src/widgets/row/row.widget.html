@@ -1,23 +1,20 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <nz-row
-    #config="fluentConfig"
+  <fluent-row
+    #parentRow="fluentParentRow"
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
-    [nzAlign]="schema.align!"
-    [nzJustify]="schema.justify!"
-    [nzGutter]="schema.gutter ?? config.gutter"
+    [align]="schema.align"
+    [justify]="schema.justify"
+    [gap]="schema.gap ?? parentRow.gap"
     [fluentBinding]="{ schema, control, model }">
     <ng-template #colTemplate let-schema="schema" let-control="control" let-model="model">
-      <nz-col
-        [nzSpan]="schema.col | col: 'span'"
-        [nzFlex]="schema.col | col: 'flex'"
-        [nzOffset]="schema.col | col: 'offset'"
-        [nzPush]="schema.col | col: 'push'"
-        [nzPull]="schema.col | col: 'pull'"
-        [nzOrder]="schema.col | col: 'order'"
+      <fluent-col
+        [span]="schema.col | col: 'span'"
+        [flex]="schema.col | col: 'flex'"
+        [offset]="schema.col | col: 'offset'"
         [hidden]="schema.hidden | reactive: model : schema : control">
         <fluent-form-col-content-outlet [control]="control" [schema]="schema" [model]="model" />
-      </nz-col>
+      </fluent-col>
     </ng-template>
 
     <ng-container
@@ -25,5 +22,5 @@
       [ngTemplateOutlet]="colTemplate"
       [ngTemplateOutletContext]="{ control: (subschema.key | control: control), schema: subschema, model: model }">
     </ng-container>
-  </nz-row>
+  </fluent-row>
 </ng-template>

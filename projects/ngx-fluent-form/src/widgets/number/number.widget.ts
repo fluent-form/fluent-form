@@ -2,8 +2,8 @@ import { NgClass, NgIf, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
-import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { FluentGridModule } from '../../components';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentInjectDirective } from '../../directives';
 import { FluentColumnPipe, FluentReactivePipe, InvokePipe } from '../../pipes';
 import { NumberInputControlSchema } from '../../schemas';
@@ -22,8 +22,8 @@ type NumberWidgetTemplateContext = WidgetTemplateContext<NumberInputControlSchem
     NgClass,
     NgStyle,
     ReactiveFormsModule,
-    NzGridModule,
     NzInputNumberModule,
+    FluentGridModule,
     FluentInjectDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,

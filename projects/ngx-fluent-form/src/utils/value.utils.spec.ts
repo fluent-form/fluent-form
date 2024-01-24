@@ -75,7 +75,7 @@ describe('ValueUtils', () => {
     describe('double key control', () => {
       it('no init value and default value', () => {
         const model = {};
-        const schema = schemaUtil.patch({ kind: 'slider', key: ['start', 'end'], range: true, });
+        const schema = schemaUtil.patch({ kind: 'slider', key: ['start', 'end'], type: 'range', });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBeNull();
@@ -83,7 +83,7 @@ describe('ValueUtils', () => {
 
       it('with init value', () => {
         const model = { start: 0, end: 100 };
-        const schema = schemaUtil.patch({ kind: 'slider', key: ['start', 'end'], range: true, });
+        const schema = schemaUtil.patch({ kind: 'slider', key: ['start', 'end'], type: 'range', });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toEqual([0, 100]);
@@ -91,7 +91,7 @@ describe('ValueUtils', () => {
 
       it('with default value', () => {
         const model = {};
-        const schema = schemaUtil.patch({ kind: 'slider', key: ['start', 'end'], range: true, defaultValue: [0, 100] });
+        const schema = schemaUtil.patch({ kind: 'slider', key: ['start', 'end'], type: 'range', defaultValue: [0, 100] });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toEqual([0, 100]);
@@ -99,7 +99,7 @@ describe('ValueUtils', () => {
 
       it('with init value and default value', () => {
         const model = { start: 1, end: 99 };
-        const schema = schemaUtil.patch({ kind: 'slider', key: ['start', 'end'], range: true, defaultValue: [0, 100] });
+        const schema = schemaUtil.patch({ kind: 'slider', key: ['start', 'end'], type: 'range', defaultValue: [0, 100] });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toEqual([1, 99]);
@@ -110,7 +110,7 @@ describe('ValueUtils', () => {
         const schema = schemaUtil.patch({
           kind: 'slider',
           key: ['start', 'end'],
-          range: true,
+          type: 'range',
           mapper: {
             parser: (value: [string, string]) => value.map(Number) as [number, number],
             formatter: (value?: [number, number] | number | null) => (value as [number, number]).map(String) as [string, string]

@@ -1,19 +1,18 @@
 import { JsonPipe, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { date, FluentFormLayoutModule, form, group, input, inputGroup, slider, toggle } from 'ngx-fluent-form';
+import { FluentFormLayoutModule, FluentGridModule, date, form, group, input, inputGroup, slider, toggle } from 'ngx-fluent-form';
 
 @Component({
   standalone: true,
-  imports: [NgFor, FluentFormLayoutModule, NzGridModule, NzTableModule, JsonPipe],
+  imports: [NgFor, FluentFormLayoutModule, FluentGridModule, NzTableModule, JsonPipe],
   templateUrl: './custom-layout.component.html'
 })
 export class CustomLayoutExampleComponent {
   schema = form(() => {
     inputGroup('name').schemas(() => {
-      input('firstName').col(12);
-      input('lastName').col(12);
+      input('firstName').col(6);
+      input('lastName').col(6);
     });
     slider('age').style({ width: '120px' });
     group('info').schemas(() => {

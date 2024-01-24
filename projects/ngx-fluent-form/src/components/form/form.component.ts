@@ -3,10 +3,8 @@ import { ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Inpu
 import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
-import { NzFormLayoutType, NzFormModule } from 'ng-zorro-antd/form';
-import { NzAlign, NzJustify, NzRowDirective } from 'ng-zorro-antd/grid';
+import { NzFormModule } from 'ng-zorro-antd/form';
 import { takeUntil } from 'rxjs';
-import { CONFIG, FluentConfig } from '../../config';
 import { FluentBindingDirective, FluentTemplateDirective } from '../../directives';
 import { TemplateDirectiveContainer } from '../../interfaces';
 import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe } from '../../pipes';
@@ -16,6 +14,7 @@ import { queueMicrotask } from '../../shared';
 import { TEMPLATE_DIRECTIVE_CONTAINER } from '../../tokens';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
 import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/form-col-content-outlet.component';
+import { FluentGridModule } from '../grid';
 
 @Component({
   selector: 'fluent-form',
@@ -28,6 +27,7 @@ import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/
     NgTemplateOutlet,
     ReactiveFormsModule,
     NzFormModule,
+    FluentGridModule,
     FluentFormColContentOutletComponent,
     FluentBindingDirective,
     FluentReactivePipe,
@@ -39,16 +39,12 @@ import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/
   providers: [
     NzDestroyService,
     {
-      provide: CONFIG,
-      useExisting: forwardRef(() => FluentFormComponent)
-    },
-    {
       provide: TEMPLATE_DIRECTIVE_CONTAINER,
       useExisting: forwardRef(() => FluentFormComponent)
     }
   ]
 })
-export class FluentFormComponent<T extends AnyObject> implements OnChanges, FluentConfig, TemplateDirectiveContainer {
+export class FluentFormComponent<T extends AnyObject> implements OnChanges, TemplateDirectiveContainer {
   private readonly destroy$ = inject(NzDestroyService);
   private readonly formUtil = inject(FormUtil);
   private readonly modelUtil = inject(ModelUtil);
@@ -77,12 +73,6 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges, Flue
 
   @Input({ required: true }) model!: T;
 
-  @Input() layout: NzFormLayoutType;
-  @Input() colon: boolean;
-  @Input() gutter: NzRowDirective['nzGutter'] | null;
-  @Input() align: NzAlign | null = null;
-  @Input() justify: NzJustify | null = null;
-
   @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
   @Output() modelChange: EventEmitter<T> = new EventEmitter();
   @Output() valueChanges: EventEmitter<T> = new EventEmitter();
@@ -91,13 +81,6 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges, Flue
   @Output() submit: EventEmitter<SubmitEvent> = new EventEmitter();
 
   @ContentChildren(FluentTemplateDirective) templateDirectives!: QueryList<FluentTemplateDirective>;
-
-  constructor() {
-    const config = inject(CONFIG, { skipSelf: true });
-    this.layout = config.layout;
-    this.colon = config.colon;
-    this.gutter = config.gutter;
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     const schemaChange = changes['schema'];

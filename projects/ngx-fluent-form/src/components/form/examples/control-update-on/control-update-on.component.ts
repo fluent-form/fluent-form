@@ -1,11 +1,10 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { button, FluentFormComponent, form, input } from 'ngx-fluent-form';
+import { button, FluentFormComponent, FluentGridModule, form, input } from 'ngx-fluent-form';
 
 @Component({
   standalone: true,
-  imports: [FluentFormComponent, NzGridModule, JsonPipe],
+  imports: [FluentFormComponent, FluentGridModule, JsonPipe],
   templateUrl: './control-update-on.component.html'
 })
 export class ControlUpdateOnExampleComponent {
@@ -14,7 +13,7 @@ export class ControlUpdateOnExampleComponent {
     input('text-2').label('失焦时').updateOn('blur');
     input('text-3').label('提交时').updateOn('submit');
 
-    button().type('primary').content('提交').col(24);
+    button().type('primary').content('提交').col(12);
   });
 
   model = {};

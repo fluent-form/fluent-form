@@ -1,11 +1,10 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { date, FluentFormComponent, form } from 'ngx-fluent-form';
+import { date, FluentFormComponent, FluentGridModule, form } from 'ngx-fluent-form';
 
 @Component({
   standalone: true,
-  imports: [FluentFormComponent, NzGridModule, JsonPipe],
+  imports: [FluentFormComponent, FluentGridModule, JsonPipe],
   templateUrl: './control-mapper.component.html'
 })
 export class ControlMapperExampleComponent {

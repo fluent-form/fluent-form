@@ -1,11 +1,10 @@
 import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { button, buttonGroup, FluentFormComponent, form, FormGroupSchema, group, input, SchemaUtil } from 'ngx-fluent-form';
+import { FluentFormComponent, FluentGridModule, FormGroupSchema, SchemaUtil, button, buttonGroup, form, group, input } from 'ngx-fluent-form';
 
 @Component({
   standalone: true,
-  imports: [FluentFormComponent, NzGridModule, JsonPipe],
+  imports: [FluentFormComponent, FluentGridModule, JsonPipe],
   templateUrl: './update-schema.component.html'
 })
 export class UpdateSchemaExampleComponent {
@@ -20,8 +19,8 @@ export class UpdateSchemaExampleComponent {
         click: () => this.remove()
       });
     });
-    group('users').col(24).schemas(() => {
-      input('user-1').label('用户').col(12);
+    group('users').col(12).schemas(() => {
+      input('user-1').label('用户').col(6);
     });
   });
 
@@ -30,7 +29,7 @@ export class UpdateSchemaExampleComponent {
   add() {
     const group = this.schemaUtil.find(this.schema, 'users') as FormGroupSchema;
     group.schemas.push(
-      input(`user-${group.schemas.length + 1}`).label('用户').col(12).build()
+      input(`user-${group.schemas.length + 1}`).label('用户').col(6).build()
     );
     this.schema = { ...this.schema };
   }

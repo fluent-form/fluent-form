@@ -1,13 +1,12 @@
 import { JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { FluentFormComponent, form, select } from 'ngx-fluent-form';
+import { FluentFormComponent, FluentGridModule, form, select } from 'ngx-fluent-form';
 import { catchError, debounceTime, map, of, switchMap } from 'rxjs';
 
 @Component({
   standalone: true,
-  imports: [FluentFormComponent, NzGridModule, JsonPipe],
+  imports: [FluentFormComponent, FluentGridModule, JsonPipe],
   templateUrl: './select-remote-data.component.html'
 })
 export class SelectRemoteDataExampleComponent {
@@ -23,7 +22,7 @@ export class SelectRemoteDataExampleComponent {
           switchMap(keyword => this.searchUsers(keyword))
         )
       )
-      .col(6);
+      .col(4);
   });
 
   model = {};

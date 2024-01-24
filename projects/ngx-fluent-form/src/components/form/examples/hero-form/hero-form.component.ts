@@ -1,7 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { FluentFormComponent, form, headless, input, number, rate, textarea, toggle } from 'ngx-fluent-form';
+import { FluentFormComponent, FluentGridModule, form, headless, input, number, rate, textarea, toggle } from 'ngx-fluent-form';
 
 interface Hero {
   id: number;
@@ -19,7 +18,7 @@ interface Hero {
 
 @Component({
   standalone: true,
-  imports: [FluentFormComponent, NzGridModule, JsonPipe],
+  imports: [FluentFormComponent, FluentGridModule, JsonPipe],
   templateUrl: './hero-form.component.html'
 })
 export class HeroFormExampleComponent {

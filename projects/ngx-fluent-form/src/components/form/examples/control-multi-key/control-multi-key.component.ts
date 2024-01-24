@@ -1,11 +1,10 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { dateRange, FluentFormComponent, form } from 'ngx-fluent-form';
+import { dateRange, FluentFormComponent, FluentGridModule, form } from 'ngx-fluent-form';
 
 @Component({
   standalone: true,
-  imports: [FluentFormComponent, NzGridModule, JsonPipe],
+  imports: [FluentFormComponent, FluentGridModule, JsonPipe],
   templateUrl: './control-multi-key.component.html'
 })
 export class ControlMultiKeyExampleComponent {

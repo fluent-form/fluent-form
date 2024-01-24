@@ -1,11 +1,10 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { FluentFormComponent, form, input, radioGroup, select, toggle } from 'ngx-fluent-form';
+import { FluentFormComponent, FluentGridModule, form, input, radioGroup, select, toggle } from 'ngx-fluent-form';
 
 @Component({
   standalone: true,
-  imports: [FluentFormComponent, NzGridModule, JsonPipe],
+  imports: [FluentFormComponent, FluentGridModule, JsonPipe],
   templateUrl: './control-linkage.component.html'
 })
 export class ControlLinkageExampleComponent {
@@ -13,7 +12,7 @@ export class ControlLinkageExampleComponent {
     radioGroup('lang')
       .label('语言')
       .variants({ button: 'solid' })
-      .col(6)
+      .col(3)
       .defaultValue('zh')
       .options([
         { label: '中文', value: 'zh' },
@@ -41,7 +40,7 @@ export class ControlLinkageExampleComponent {
           control.parent?.get('text')?.setValue(value);
         }
       })
-      .col(6);
+      .col(3);
 
     radioGroup('show')
       .label('控制显隐')
@@ -50,15 +49,15 @@ export class ControlLinkageExampleComponent {
         { label: '显示', value: true },
         { label: '隐藏', value: false },
       ])
-      .col(6);
+      .col(3);
 
-    toggle('state').label('状态').placeholder(['启用', '禁用']).col(6);
+    toggle('state').label('状态').placeholder(['启用', '禁用']).col(3);
 
     input('text')
       .label('文本输入框')
       .hidden(({ model }) => !model.show)
       .disabled(({ model }) => !model.state)
-      .col(6);
+      .col(3);
   });
 
   model = {};

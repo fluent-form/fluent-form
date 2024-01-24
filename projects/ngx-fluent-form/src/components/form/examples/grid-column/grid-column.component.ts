@@ -9,17 +9,13 @@ import { alert, FluentFormComponent, form, heading5 } from 'ngx-fluent-form';
 export class GridColExampleComponent {
   schema = form(() => {
     heading5().content('基本');
-    alert().message('col-6').col(6);
-    alert().message('col-8').col(8);
-    alert().message('col-10').col(10);
+    alert().message('col-3').col(3);
+    alert().message('col-4').col(4);
+    alert().message('col-5').col(5);
 
     heading5().content('偏移');
-    alert().message('col-6-offset-6').col({ span: 6, offset: 6 });
-    alert().message('col-6-offset-6').col({ span: 6, offset: 6 });
-
-    heading5().content('左右平移');
-    alert().message('col-18-push-6').col({ span: 18, push: 6 });
-    alert().message('col-6-pull-18').col({ span: 6, pull: 18 });
+    alert().message('col-3-offset-3').col({ span: 3, offset: 3 });
+    alert().message('col-3-offset-3').col({ span: 3, offset: 3 });
   });
 
   model = {};

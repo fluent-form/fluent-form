@@ -1,5 +1,5 @@
-<nz-row nzGutter="20">
-  <nz-col nzFlex="2">
+<fluent-row gap="6">
+  <fluent-col flex="2">
     <fluent-form [schema]="schema" [(model)]="model">
       <input
         *fluentTemplate="'controlTpl'; let control = control"
@@ -18,8 +18,8 @@
         <button>{{ model | json }}</button>
       </ng-template>
     </fluent-form>
-  </nz-col>
-  <nz-col nzFlex="1">
+  </fluent-col>
+  <fluent-col flex="1">
     <pre>{{ model | json }}</pre>
-  </nz-col>
-</nz-row>
+  </fluent-col>
+</fluent-row>

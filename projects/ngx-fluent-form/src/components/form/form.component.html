@@ -1,10 +1,10 @@
 <form
-  nz-row
   nz-form
-  [nzGutter]="schema.gutter ?? gutter"
-  [nzAlign]="schema.align ?? align"
-  [nzJustify]="schema.justify ?? justify"
-  [nzLayout]="layout"
+  fluent-row
+  [gap]="schema.gap"
+  [justify]="schema.justify"
+  [align]="schema.align"
+  [nzLayout]="schema.layout!"
   [ngClass]="schema.class"
   [ngStyle]="schema.style"
   [formGroup]="form"
@@ -12,20 +12,14 @@
   (submit)="$event.stopPropagation()"
   (ngSubmit)="submit.emit($event)">
   <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
-    <nz-col
+    <fluent-col
       *ngIf="schema.kind !== SchemaKind.Headless || (schema.kind === SchemaKind.Headless && schema.template)"
-      [nzSpan]="schema.col | col: 'span'"
-      [nzFlex]="schema.col | col: 'flex'"
-      [nzOffset]="schema.col | col: 'offset'"
-      [nzPush]="schema.col | col: 'push'"
-      [nzPull]="schema.col | col: 'pull'"
-      [nzOrder]="schema.col | col: 'order'"
-      [hidden]="schema.hidden | reactive: model:schema:control">
-      <fluent-form-col-content-outlet
-        [control]="control"
-        [schema]="schema"
-        [model]="model"></fluent-form-col-content-outlet>
-    </nz-col>
+      [span]="schema.col | col: 'span'"
+      [flex]="schema.col | col: 'flex'"
+      [offset]="schema.col | col: 'offset'"
+      [hidden]="schema.hidden | reactive: model : schema : control">
+      <fluent-form-col-content-outlet [control]="control" [schema]="schema" [model]="model" />
+    </fluent-col>
   </ng-template>
 
   <ng-container

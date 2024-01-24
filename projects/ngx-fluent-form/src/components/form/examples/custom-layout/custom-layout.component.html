@@ -1,5 +1,5 @@
-<nz-row nzGutter="20">
-  <nz-col nzFlex="2">
+<fluent-row gap="6">
+  <fluent-col flex="2">
     <nz-table #table nzSize="middle" [nzData]="list">
       <thead>
         <tr>
@@ -30,8 +30,8 @@
         </tr>
       </tbody>
     </nz-table>
-  </nz-col>
-  <nz-col nzFlex="1">
+  </fluent-col>
+  <fluent-col flex="1">
     <pre>{{ list | json }}</pre>
-  </nz-col>
-</nz-row>
+  </fluent-col>
+</fluent-row>

@@ -5,7 +5,7 @@ import { map, tap } from 'rxjs';
 import { Breakpoints } from '../../../breakpoints';
 import { withStyle } from '../../../style';
 import { Stringify } from '../../../types';
-import { isNumber, isString } from '../../../utils';
+import { isArray, isNumber, isString } from '../../../utils';
 
 type Gap = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 type Justify = 'start' | 'end' | 'center' | 'space-around' | 'space-between' | 'space-evenly';
@@ -96,7 +96,7 @@ export class FluentRowDirective {
       return getGapPixel(0);
     }
 
-    if (Array.isArray(gap) || isNumber(gap) || isString(gap)) {
+    if (isArray(gap) || isNumber(gap) || isString(gap)) {
       return getGapPixel(gap);
     }
 
@@ -115,7 +115,7 @@ export class FluentRowDirective {
 }
 
 function getGapPixel(level: Gap | Stringify<Gap> | [x: Gap, y: Gap]): [number, number?] {
-  if (Array.isArray(level)) {
+  if (isArray(level)) {
     return [GAPS[level[0]], GAPS[level[1]]];
   }
 

@@ -5,7 +5,7 @@ import { FormArraySchema, FormGroupSchema } from '../schemas';
 import { AnyControlContainerSchema, AnyControlSchema, AnySchema } from '../schemas/index.schema';
 import { SchemaKind } from '../schemas/interfaces';
 import { ValueTransformer } from '../services';
-import { isUndefined } from './is.utils';
+import { isArray, isUndefined } from './is.utils';
 import { SchemaUtil } from './schema.utils';
 import { ValueUtil } from './value.utils';
 
@@ -39,7 +39,7 @@ export class FormUtil {
     let schemas: AnySchema[];
     let options: AbstractControlOptions = {};
 
-    if (Array.isArray(schemaOrSchemas)) {
+    if (isArray(schemaOrSchemas)) {
       schemas = schemaOrSchemas;
     } else {
       schemas = schemaOrSchemas.schemas;

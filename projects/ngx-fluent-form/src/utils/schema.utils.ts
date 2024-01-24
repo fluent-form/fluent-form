@@ -5,7 +5,7 @@ import { SCHEMA_PATCHERS } from '../patcher';
 import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, SchemaKey, SingleSchemaKey } from '../schemas';
 import { SchemaLike, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP } from '../tokens';
-import { isString } from './is.utils';
+import { isArray, isString } from './is.utils';
 
 const ANY_SCHEMA_SELECTOR = '*';
 
@@ -32,7 +32,7 @@ export class SchemaUtil {
     return this.schemaPatchers
       .filter(patcher => {
         // 将选择器转为数组统一处理
-        const selector = Array.isArray(patcher.selector) ? patcher.selector : [patcher.selector];
+        const selector = isArray(patcher.selector) ? patcher.selector : [patcher.selector];
 
         return selector.some(kindOrType => {
           if (isString(kindOrType)) {
@@ -92,7 +92,7 @@ export class SchemaUtil {
    * @param schema
    */
   isMultiKeyControl(schema: SchemaLike) {
-    return Array.isArray(schema.key);
+    return isArray(schema.key);
   }
 
   /**
@@ -121,8 +121,8 @@ export class SchemaUtil {
   find(schema: AnyContainerSchema, key: SchemaKey[]): AnySchema | null;
   find(schema: AnyContainerSchema, path: SingleSchemaKey | SchemaKey[]): AnySchema | null;
   find(schema: AnyContainerSchema, path: SingleSchemaKey | SchemaKey[]): AnySchema | null {
-    const paths = Array.isArray(path)
-      ? path.map(o => Array.isArray(o) ? o.toString() : o)
+    const paths = isArray(path)
+      ? path.map(o => isArray(o) ? o.toString() : o)
       : path.toString().split('.');
 
     let _schema: AnySchema | null = schema;

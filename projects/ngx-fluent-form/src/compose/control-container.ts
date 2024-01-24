@@ -1,6 +1,6 @@
 import { SafeAny } from '@ngify/types';
 import { AbstractControlContainerSchema, AnySchema, FormArraySchema, FormGroupSchema, SchemaKey, SingleSchemaKey } from '../schemas';
-import { isFunction } from '../utils';
+import { isArray, isFunction } from '../utils';
 import { StableBuilder, UnstableBuilder, composeBuilder } from './compose-builder';
 import { KindOrKey } from './helper';
 
@@ -20,7 +20,7 @@ export function form(composeFn: FormComposeFn): FormGroupSchema;
 export function form(schemas: AnySchema[]): FormGroupSchema;
 export function form(builder: StableBuilder<AbstractControlContainerSchema<SchemaKey>>): FormGroupSchema;
 export function form(fnOrSchemasOrBuilder: AnySchema[] | FormComposeFn | StableBuilder<AbstractControlContainerSchema<SchemaKey>>): FormGroupSchema {
-  if (Array.isArray(fnOrSchemasOrBuilder)) {
+  if (isArray(fnOrSchemasOrBuilder)) {
     return {
       kind: 'group',
       key: 'root',

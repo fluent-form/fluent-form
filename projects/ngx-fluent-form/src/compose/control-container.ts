@@ -1,6 +1,7 @@
 import { SafeAny } from '@ngify/types';
-import { AnySchema, FormArraySchema, FormGroupSchema, SingleSchemaKey } from '../schemas';
-import { UnstableBuilder, composeBuilder } from './compose-builder';
+import { AbstractControlContainerSchema, AnySchema, FormArraySchema, FormGroupSchema, SchemaKey, SingleSchemaKey } from '../schemas';
+import { isFunction } from '../utils';
+import { StableBuilder, UnstableBuilder, composeBuilder } from './compose-builder';
 import { KindOrKey } from './helper';
 
 export function group(): UnstableBuilder<FormGroupSchema<number>, KindOrKey>;
@@ -15,26 +16,26 @@ export function array<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<F
   return composeBuilder<FormArraySchema<Key>>().kind('array').key(key);
 }
 
-export function form(composeFn: FormComposeFn, config?: FormConfig): FormGroupSchema;
-export function form(schemas: AnySchema[], config?: FormConfig): FormGroupSchema;
-export function form(fnOrSchemas: AnySchema[] | FormComposeFn, config?: FormConfig): FormGroupSchema {
-  if (Array.isArray(fnOrSchemas)) {
+export function form(composeFn: FormComposeFn): FormGroupSchema;
+export function form(schemas: AnySchema[]): FormGroupSchema;
+export function form(builder: StableBuilder<AbstractControlContainerSchema<SchemaKey>>): FormGroupSchema;
+export function form(fnOrSchemasOrBuilder: AnySchema[] | FormComposeFn | StableBuilder<AbstractControlContainerSchema<SchemaKey>>): FormGroupSchema {
+  if (Array.isArray(fnOrSchemasOrBuilder)) {
     return {
       kind: 'group',
       key: 'root',
-      schemas: fnOrSchemas,
-      ...config
+      schemas: fnOrSchemasOrBuilder,
     };
   }
 
-  const schema = group('root').schemas(fnOrSchemas).build();
-
-  if (config) {
-    Object.assign(schema, config);
+  if (isFunction(fnOrSchemasOrBuilder)) {
+    return group('root').schemas(fnOrSchemasOrBuilder).build();
   }
 
-  return schema as FormGroupSchema;
+  const scheam = fnOrSchemasOrBuilder.build() as FormGroupSchema;
+  scheam.key = 'root';
+
+  return scheam;
 }
 
 type FormComposeFn = () => SafeAny;
-type FormConfig = Omit<FormGroupSchema, KindOrKey | 'label' | 'schemas'>;

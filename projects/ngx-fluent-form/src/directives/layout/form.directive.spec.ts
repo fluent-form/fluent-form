@@ -27,7 +27,7 @@ import { FluentFormLayoutModule } from './module';
     </div>
   `
 })
-class TestingComponent {
+class TestComponent {
   @ViewChild(FluentFormDirective, { static: true }) fluentFormDirective!: FluentFormDirective<AnyObject>;
   form!: FormGroup;
   schema!: FormGroupSchema;
@@ -35,8 +35,8 @@ class TestingComponent {
 }
 
 describe('FluentFormDirective', () => {
-  let component: TestingComponent;
-  let fixture: ComponentFixture<TestingComponent>;
+  let component: TestComponent;
+  let fixture: ComponentFixture<TestComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -53,7 +53,7 @@ describe('FluentFormDirective', () => {
       ]
     });
 
-    fixture = TestBed.createComponent(TestingComponent);
+    fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
   });
 
@@ -338,21 +338,23 @@ describe('FluentFormDirective', () => {
   });
 
   it('should be the expected model value (configure the toplevel form)', async () => {
-    component.schema = form(() => {
-      input('ipt');
-      inputGroup('ipts').schemas(() => {
-        input('ipt2');
-      });
-      group('group').schemas(() => {
+    component.schema = form(
+      group().updateOn('blur').schemas(() => {
         input('ipt');
         inputGroup('ipts').schemas(() => {
           input('ipt2');
         });
-      });
-      array('array').schemas(() => {
-        input();
-      });
-    }, { updateOn: 'blur' });
+        group('group').schemas(() => {
+          input('ipt');
+          inputGroup('ipts').schemas(() => {
+            input('ipt2');
+          });
+        });
+        array('array').schemas(() => {
+          input();
+        });
+      })
+    );
     component.model = {};
     fixture.detectChanges();
 

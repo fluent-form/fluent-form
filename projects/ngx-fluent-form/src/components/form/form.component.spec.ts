@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { AnyObject, SafeAny } from '@ngify/types';
-import { form, input } from '../../compose';
+import { form, group, input } from '../../compose';
 import { withAllWidgets, withStaticExpression } from '../../features';
 import { provideFluentForm } from '../../provider';
 import { FormGroupSchema } from '../../schemas';
@@ -14,15 +14,15 @@ import { FluentFormComponent } from './form.component';
   imports: [FluentFormComponent],
   template: `<fluent-form [schema]="schema" [(model)]="model" (formChange)="form = $event"></fluent-form>`,
 })
-class TestWarpperComponent<T extends AnyObject> {
+class TestComponent<T extends AnyObject> {
   form!: FormGroup;
   schema!: FormGroupSchema;
   model: T = {} as T;
 }
 
 describe('FluentFormComponent', () => {
-  let component: TestWarpperComponent<{}>;
-  let fixture: ComponentFixture<TestWarpperComponent<{}>>;
+  let component: TestComponent<{}>;
+  let fixture: ComponentFixture<TestComponent<{}>>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -36,7 +36,7 @@ describe('FluentFormComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestWarpperComponent);
+    fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
   });
 
@@ -45,9 +45,11 @@ describe('FluentFormComponent', () => {
   });
 
   it('能够配置顶层表单', async () => {
-    component.schema = form(() => {
-      input('text');
-    }, { updateOn: 'blur' });
+    component.schema = form(
+      group().updateOn('blur').schemas(() => {
+        input('text');
+      })
+    );
     component.model = {};
     fixture.detectChanges();
 

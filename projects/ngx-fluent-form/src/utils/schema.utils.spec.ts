@@ -27,17 +27,17 @@ describe('SchemaUtil', () => {
     describe('with internal patcher', () => {
       it('heading patcher', () => {
         const schema: HeadingComponentSchema = { kind: 'heading', level: 1, content: '' };
-        expect(schemaUtil.patch(schema)).toEqual({ kind: 'heading', level: 1, content: '', col: 24 });
+        expect(schemaUtil.patch(schema)).toEqual({ kind: 'heading', level: 1, content: '', col: 12 });
       });
 
       it('button patcher', () => {
         const schema: ButtonComponentSchema = { kind: 'button', variants: { block: true } };
-        expect(schemaUtil.patch(schema)).toEqual({ kind: 'button', variants: { block: true }, col: 24 });
+        expect(schemaUtil.patch(schema)).toEqual({ kind: 'button', variants: { block: true }, col: 12 });
       });
 
       it('alert patcher', () => {
         const schema: AlertComponentSchema = { kind: 'alert', message: '' };
-        expect(schemaUtil.patch(schema)).toEqual({ kind: 'alert', message: '', col: 24 });
+        expect(schemaUtil.patch(schema)).toEqual({ kind: 'alert', message: '', col: 12 });
       });
     });
 

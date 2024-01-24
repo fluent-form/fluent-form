@@ -301,7 +301,7 @@ export function useHeadingWidget(): FluentFormWidgetFeature<HeadingComponentSche
     type: SchemaType.Component,
     widget: HeadingWidget,
     patch: schema => {
-      schema.col ??= 24;
+      schema.col ??= 12;
       return schema;
     },
   };
@@ -329,7 +329,7 @@ export function useAlertWidget(): FluentFormWidgetFeature<AlertComponentSchema> 
     type: SchemaType.Component,
     widget: AlertWidget,
     patch: schema => {
-      schema.col ??= 24;
+      schema.col ??= 12;
       return schema;
     },
   };
@@ -343,7 +343,7 @@ export function useButtonWidget(): [FluentFormWidgetFeature<ButtonComponentSchem
       widget: ButtonWidget,
       patch: schema => {
         if (schema.variants?.block) {
-          schema.col ??= 24;
+          schema.col ??= 12;
         }
         return schema;
       }
@@ -407,7 +407,12 @@ export function useFormGroupWidget(): FluentFormWidgetFeature<FormGroupSchema> {
   return {
     kind: SchemaKind.Group,
     type: SchemaType.ControlContainer,
-    widget: FormGroupWidget
+    widget: FormGroupWidget,
+    patch: schema => {
+      schema.layout ??= 'vertical';
+      schema.gap ??= { xs: 1, sm: 2, md: 3, lg: 4, xl: 5 };
+      return schema;
+    }
   };
 }
 

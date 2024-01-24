@@ -1,7 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Cell } from '../schemas';
-import { Col } from '../schemas/interfaces';
-import { isNumber } from '../utils';
+import { AbstractSchema } from '../schemas';
+import { Column } from '../schemas/interfaces';
+import { isObject } from '../utils';
+
+function isColumn(value: object): value is Column {
+  return 'span' in value || 'flex' in value || 'offset' in value;
+}
 
 /**
  * @internal
@@ -12,12 +16,16 @@ import { isNumber } from '../utils';
 })
 export class FluentColumnPipe implements PipeTransform {
 
-  transform<T extends keyof Col>(value: Col | Cell | undefined, type: keyof Col): NonNullable<Col[T]> | null {
-    if (isNumber(value)) {
-      return type === 'span' ? value : null;
+  transform<T extends keyof Column>(value: AbstractSchema['col'], type: T): Column[T] {
+    if (!value) {
+      return null;
     }
 
-    return (value?.[type] as NonNullable<Col[T]>) ?? null;
+    if (isObject(value) && isColumn(value)) {
+      return value[type] ?? null;
+    }
+
+    return type === 'span' ? (value as Column[T]) : null;
   }
 
 }

@@ -121,8 +121,8 @@ export interface SelectControlSchema<Key extends SingleSchemaKey = SingleSchemaK
   clearable?: boolean;
   /** Mode of select control */
   mode?: NzSelectModeType;
-  /** Max selected */
-  limit?: number;
+  /** Max selected count */
+  length?: { max: number };
   /** Support search */
   searchable?: boolean;
   backdrop?: boolean;
@@ -181,12 +181,10 @@ export interface SliderControlSchema<Key extends SchemaKey = SchemaKey, Val = nu
   placeholder?: never;
   /** Containment relationship */
   included?: boolean;
-  /** Maximum value */
-  max?: number;
-  /** Minimum value */
-  min?: number;
-  /** Range slider mode */
-  range?: boolean;
+  /** range of value */
+  range?: { max?: number, min?: number }
+  /** slider type */
+  type?: 'range' | 'single'
   /** Step length */
   step?: number;
   dots?: boolean;

@@ -92,14 +92,6 @@
             "args": "none"
           }
         ],
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": "fluent",
-            "style": "camelCase"
-          }
-        ],
         "@angular-eslint/component-selector": [
           "error",
           {

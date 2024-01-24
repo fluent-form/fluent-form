@@ -1,21 +1,18 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FluentRowComponent } from './row.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FluentRowDirective } from './row.component';
 
 @Component({
   standalone: true,
-  imports: [FluentRowComponent],
+  imports: [FluentRowDirective],
   template: `<fluent-row [gap]="gap" [justify]="justify" [align]="align" />`,
 })
 class TestComponent {
-  @ViewChild(FluentRowComponent)
-    rowComponent!: FluentRowComponent;
-  @ViewChild(FluentRowComponent, { read: ElementRef })
-    rowElementRef!: ElementRef<HTMLElement>;
-  gap: FluentRowComponent['level'] = 0;
-  justify: FluentRowComponent['justify'];
-  align: FluentRowComponent['align'];
+  @ViewChild(FluentRowDirective, { static: true }) rowComponent!: FluentRowDirective;
+  @ViewChild(FluentRowDirective, { read: ElementRef, static: true }) rowElementRef!: ElementRef<HTMLElement>;
+  gap: FluentRowDirective['gap'] = 0;
+  justify: FluentRowDirective['justify'];
+  align: FluentRowDirective['align'];
 }
 
 describe('FluentRowComponent', () => {

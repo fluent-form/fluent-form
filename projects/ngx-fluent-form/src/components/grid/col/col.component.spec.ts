@@ -1,18 +1,18 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FluentColComponent } from './col.component';
+import { FluentColDirective } from './col.component';
 
 @Component({
   standalone: true,
-  imports: [FluentColComponent],
+  imports: [FluentColDirective],
   template: `<fluent-col [span]="span" [flex]="flex" [offset]="offset" />`,
 })
 class TestComponent {
-  @ViewChild(FluentColComponent, { read: ElementRef })
+  @ViewChild(FluentColDirective, { read: ElementRef, static: true })
     colElementRef!: ElementRef<HTMLElement>;
-  span: FluentColComponent['span'];
-  flex: FluentColComponent['flex'];
-  offset: FluentColComponent['offset'];
+  span: FluentColDirective['span'];
+  flex: FluentColDirective['flex'];
+  offset: FluentColDirective['offset'];
 }
 
 describe('FluentColComponent', () => {

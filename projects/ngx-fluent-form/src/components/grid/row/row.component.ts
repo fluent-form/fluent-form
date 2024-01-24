@@ -1,8 +1,9 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncapsulation, computed, inject, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, Directive, Input, ViewEncapsulation, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map, tap } from 'rxjs';
 import { Breakpoints } from '../../../breakpoints';
+import { withStyle } from '../../../style';
 import { Stringify } from '../../../types';
 import { isNumber, isString } from '../../../utils';
 
@@ -30,42 +31,33 @@ const BREAKPOINTS: string[] = [
   Breakpoints.xxl,
 ];
 
-function getGap(level: Gap | Stringify<Gap> | [x: Gap, y: Gap]): [number, number?] {
-  if (Array.isArray(level)) {
-    return [GAPS[level[0]], GAPS[level[1]]];
-  }
-
-  return [0, GAPS[level]];
-}
-
-function parseJustifyOrAlign(value?: Justify | Align) {
-  if (value === 'start' || value === 'end') {
-    return `flex-${value}`;
-  }
-
-  return value;
-}
-
 @Component({
-  selector: 'fluent-row,[fluent-row]',
+  selector: 'fluent-row',
   standalone: true,
-  templateUrl: './row.component.html',
+  template: '',
   styleUrls: ['./row.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+})
+class FluentRowComponent { }
+
+@Directive({
+  selector: 'fluent-row,[fluent-row]',
+  exportAs: 'fluentRow',
+  standalone: true,
   host: {
     class: 'fluent-row',
-    '[style.--gap-x.px]': 'gap()[0]',
-    '[style.--gap-y.px]': 'gap()[1]',
+    '[style.--gap-x.px]': 'gapPx()[0]',
+    '[style.--gap-y.px]': 'gapPx()[1]',
     '[style.justify-content]': 'justifyContent()',
     '[style.align-items]': 'alignItems()',
-  },
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  }
 })
-export class FluentRowComponent {
-  private _level = signal<Gap | Stringify<Gap> | [x: Gap, y: Gap] | Partial<Record<keyof Breakpoints, Gap | [x: Gap, y: Gap]>>>(0);
-  private _justify = signal<Justify | undefined>(undefined);
-  private _align = signal<Align | undefined>(undefined);
-  private cdr = inject(ChangeDetectorRef);
+export class FluentRowDirective {
+  private readonly cdr = inject(ChangeDetectorRef);
+
+  private _gap = signal<Gap | Stringify<Gap> | [x: Gap, y: Gap] | Partial<Record<keyof Breakpoints, Gap | [x: Gap, y: Gap]>> | null | undefined>(null);
+  private _justify = signal<Justify | null | undefined>(null);
+  private _align = signal<Align | null | undefined>(null);
   /** 当前匹配的断点 */
   private breakpoints = toSignal(
     inject(BreakpointObserver).observe(BREAKPOINTS).pipe(
@@ -82,34 +74,58 @@ export class FluentRowComponent {
     { initialValue: [] }
   );
 
-  @Input('gap') set level(value: Gap | Stringify<Gap> | [x: Gap, y: Gap] | Partial<Record<keyof Breakpoints, Gap | [x: Gap, y: Gap]>>) {
-    this._level.set(value);
+  @Input() set gap(value: Gap | Stringify<Gap> | [x: Gap, y: Gap] | Partial<Record<keyof Breakpoints, Gap | [x: Gap, y: Gap]>> | null | undefined) {
+    this._gap.set(value);
   }
-  @Input() set justify(value: Justify | undefined) {
+  @Input() set justify(value: Justify | null | undefined) {
     this._justify.set(value);
   }
-  @Input() set align(value: Align | undefined) {
+  @Input() set align(value: Align | null | undefined) {
     this._align.set(value);
   }
 
-  protected gap = computed(() => {
-    const level = this._level();
+  constructor() {
+    withStyle(FluentRowComponent);
+  }
+
+  protected gapPx = computed(() => {
+    const gap = this._gap();
     const breakpoints = this.breakpoints();
 
-    if (Array.isArray(level) || isNumber(level) || isString(level)) {
-      return getGap(level);
+    if (!gap) {
+      return getGapPixel(0);
+    }
+
+    if (Array.isArray(gap) || isNumber(gap) || isString(gap)) {
+      return getGapPixel(gap);
     }
 
     for (const breakpointValue of breakpoints) {
-      for (const breakpointName of Object.keys(level)) {
+      for (const breakpointName of Object.keys(gap)) {
         if (Breakpoints[breakpointName as keyof Breakpoints] === breakpointValue) {
-          return getGap(level[breakpointName as keyof Breakpoints]!);
+          return getGapPixel(gap[breakpointName as keyof Breakpoints]!);
         }
       }
     }
 
-    return getGap(0);
+    return getGapPixel(0);
   });
   protected justifyContent = computed(() => parseJustifyOrAlign(this._justify()));
   protected alignItems = computed(() => parseJustifyOrAlign(this._align()));
+}
+
+function getGapPixel(level: Gap | Stringify<Gap> | [x: Gap, y: Gap]): [number, number?] {
+  if (Array.isArray(level)) {
+    return [GAPS[level[0]], GAPS[level[1]]];
+  }
+
+  return [0, GAPS[level]];
+}
+
+function parseJustifyOrAlign(value?: Justify | Align | null) {
+  if (value === 'start' || value === 'end') {
+    return `flex-${value}`;
+  }
+
+  return value;
 }

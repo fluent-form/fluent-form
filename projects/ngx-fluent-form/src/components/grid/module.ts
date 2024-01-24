@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { FluentColComponent } from './col/col.component';
-import { FluentRowComponent } from './row/row.component';
+import { FluentColDirective } from './col/col.component';
+import { FluentRowDirective } from './row/row.component';
 
 @NgModule({
-  imports: [FluentRowComponent, FluentColComponent],
-  exports: [FluentRowComponent, FluentColComponent],
+  imports: [FluentRowDirective, FluentColDirective],
+  exports: [FluentRowDirective, FluentColDirective],
 })
 export class FluentGridModule { }

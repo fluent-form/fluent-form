@@ -1,42 +1,58 @@
-import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, ViewEncapsulation, inject } from '@angular/core';
+import { Component, Directive, ElementRef, Input, OnChanges, OnInit, Renderer2, ViewEncapsulation, inject } from '@angular/core';
 import { Breakpoints, createBreakpointInfix } from '../../../breakpoints';
+import { withStyle } from '../../../style';
 import { Stringify } from '../../../types';
 import { isObject } from '../../../utils';
 
-type Col = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-type Span = Col | 'fill' | null;
-type Offset = Col | 'auto' | null;
+type Cell = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+type Span = Cell | 'fill' | null;
+type Offset = Cell | 'auto' | null;
 
 @Component({
-  selector: 'fluent-col,[fluent-col]',
+  selector: 'fluent-col',
   standalone: true,
-  templateUrl: './col.component.html',
+  template: '',
   styleUrls: ['./col.component.scss'],
+  encapsulation: ViewEncapsulation.None
+})
+class FluentColComponent { }
+
+@Directive({
+  selector: 'fluent-col,[fluent-col]',
+  exportAs: 'fluentCol',
+  standalone: true,
   host: {
     class: 'fluent-col',
     '[style.flex]': 'flex'
-  },
-  hostDirectives: [NgClass],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  }
 })
-export class FluentColComponent implements OnInit, OnChanges {
-  private readonly ngClass = inject(NgClass);
+export class FluentColDirective implements OnInit, OnChanges {
+  private classes: string[] = [];
+  private readonly renderer = inject(Renderer2);
+  private readonly elementRef = inject(ElementRef);
 
   @Input() span?: Span | Stringify<Span> | Partial<Record<keyof Breakpoints, Span>>;
-  @Input() flex?: string | number;
+  @Input() flex?: string | number | null;
   @Input() offset?: Offset | Stringify<Offset> | Partial<Record<keyof Breakpoints, Offset>>;
+
+  constructor() {
+    withStyle(FluentColComponent);
+  }
 
   ngOnInit(): void {
     const span = this.span;
     const offset = this.offset;
     const classes: string[] = [];
 
+    // clear old classes
+    for (const clazz of this.classes) {
+      this.renderer.removeClass(this.elementRef.nativeElement, clazz);
+    }
+
     if (span) {
       if (isObject(span)) {
-        for (const [breakpoint, size] of Object.entries(span)) {
-          classes.push(createColumnClass(size, breakpoint as keyof Breakpoints));
+        for (const [breakpoint, _span] of Object.entries(span)) {
+          classes.push(createColumnClass(_span, breakpoint as keyof Breakpoints));
         }
       } else {
         classes.push(createColumnClass(span));
@@ -45,15 +61,20 @@ export class FluentColComponent implements OnInit, OnChanges {
 
     if (offset) {
       if (isObject(offset)) {
-        for (const [breakpoint, size] of Object.entries(offset)) {
-          classes.push(createColumnOffsetClass(size, breakpoint as keyof Breakpoints));
+        for (const [breakpoint, _offset] of Object.entries(offset)) {
+          classes.push(createColumnOffsetClass(_offset, breakpoint as keyof Breakpoints));
         }
       } else {
         classes.push(createColumnOffsetClass(offset));
       }
     }
 
-    this.ngClass.ngClass = classes;
+    // apply new classes
+    for (const clazz of classes) {
+      this.renderer.addClass(this.elementRef.nativeElement, clazz);
+    }
+
+    this.classes = classes;
   }
 
   ngOnChanges(): void {

@@ -28,6 +28,7 @@
       @if $span {
         flex: 0 0 auto;
         width: calc(100% / 12 * $span);
+        max-width: calc(100% / 12 * $span);
       } @else {
         @include make-col-fit();
       }
@@ -40,7 +41,7 @@
 }
 
 .fluent-col {
-  padding: calc(var(--gap-x) / 2) calc(var(--gap-y) / 2);
+  position: relative;
   @include make-col-fit();
 }
 

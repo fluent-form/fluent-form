@@ -3,7 +3,7 @@ import { ValidatorFn, Validators } from '@angular/forms';
 import { throwWidgetNotFoundError } from '../errors';
 import { SCHEMA_PATCHERS } from '../patcher';
 import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, SchemaKey, SingleSchemaKey } from '../schemas';
-import { SchemaKind, SchemaLike, SchemaType } from '../schemas/interfaces';
+import { SchemaLike, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP } from '../tokens';
 import { isString } from './is.utils';
 
@@ -16,14 +16,9 @@ export class SchemaUtil {
   private readonly schemaMap = inject(SCHEMA_MAP);
   private readonly schemaPatchers = inject(SCHEMA_PATCHERS, { optional: true }) ?? [];
 
-  patch<T extends AnySchema>(schema: T, level = 1): T {
+  patch<T extends AnySchema>(schema: T): T {
     if ('schemas' in schema) {
-      schema.schemas = schema.schemas.map(schema => this.patch(schema, level + 1));
-    }
-
-    // skip the root group schema
-    if (level === 1 && schema.kind === SchemaKind.Group && schema.key === 'root') {
-      return schema;
+      schema.schemas = schema.schemas.map(schema => this.patch(schema));
     }
 
     const config = this.schemaMap.get(schema.kind);

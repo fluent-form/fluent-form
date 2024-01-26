@@ -18,7 +18,7 @@ type Offset = Cell | 'auto' | null;
 class FluentColComponent { }
 
 @Directive({
-  selector: 'fluent-col,[fluent-col]',
+  selector: 'fluent-col,[fluentCol]',
   exportAs: 'fluentCol',
   standalone: true,
   host: {

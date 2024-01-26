@@ -4,7 +4,7 @@
       <nz-tree-select
         *ngIf="!(schema.hidden | reactive: model : schema : control)"
         #component
-        fluent-col
+        fluentCol
         [fluentBinding]="{ component, schema, control, model }"
         [formControl]="control"
         [ngClass]="schema.class"

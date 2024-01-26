@@ -4,7 +4,7 @@
       <ng-container *ngIf="inputGroup; else standardTemplate">
         <input
           *ngIf="!(schema.hidden | reactive: model : schema : control)"
-          fluent-col
+          fluentCol
           nz-input
           [attr.id]="schema.id"
           [attr.name]="schema.key"
@@ -58,7 +58,7 @@
       <ng-container *ngIf="inputGroup; else standardTemplate">
         <input
           *ngIf="!(schema.hidden | reactive: model : schema : control)"
-          fluent-col
+          fluentCol
           nz-input
           [attr.id]="schema.id"
           [attr.name]="schema.key"

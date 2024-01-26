@@ -41,7 +41,7 @@ const BREAKPOINTS: string[] = [
 class FluentRowComponent { }
 
 @Directive({
-  selector: 'fluent-row,[fluent-row]',
+  selector: 'fluent-row,[fluentRow]',
   exportAs: 'fluentRow',
   standalone: true,
   host: {

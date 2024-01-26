@@ -1,4 +1,4 @@
-import { RowComponentSchema, SingleSchemaKey, SpaceComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema } from '../schemas';
+import { RowComponentSchema, SingleSchemaKey, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema } from '../schemas';
 import { UnstableBuilder, composeBuilder } from './compose-builder';
 import { KindOrKey } from './helper';
 
@@ -20,8 +20,4 @@ export function tab<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<Tab
 
 export function row<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<RowComponentSchema<Key>, KindOrKey> {
   return composeBuilder<RowComponentSchema<Key>>().kind('row').key(key);
-}
-
-export function space<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<SpaceComponentSchema<Key>, KindOrKey> {
-  return composeBuilder<SpaceComponentSchema<Key>>().kind('space').key(key);
 }

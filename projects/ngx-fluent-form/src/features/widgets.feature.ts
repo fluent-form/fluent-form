@@ -7,7 +7,7 @@ import { AbstractSchema, AbstractTextControlSchema, AlertComponentSchema, Button
 import { SchemaKind, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP, WIDGET_MAP } from '../tokens';
 import { isNumber } from '../utils';
-import { AbstractWidget, AlertWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, FormArrayWidget, FormGroupWidget, HeadingWidget, InputGroupWidget, InputWidget, NumberGroupWidget, NumberWidget, RadioGroupWidget, RateWidget, RowWidget, SelectWidget, SilderWidget, SpaceWidget, StepsWidget, TabsWidget, TextWidget, TextareaWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from '../widgets';
+import { AbstractWidget, AlertWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, FormArrayWidget, FormGroupWidget, HeadingWidget, InputGroupWidget, InputWidget, NumberGroupWidget, NumberWidget, RadioGroupWidget, RateWidget, RowWidget, SelectWidget, SilderWidget, StepsWidget, TabsWidget, TextWidget, TextareaWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from '../widgets';
 import { makeFluentFeature } from './helper';
 import { FluentFormFeature, FluentFormFeatureKind } from './interface';
 
@@ -89,7 +89,6 @@ export function withAllWidgets(): FluentFormFeature<FluentFormFeatureKind.Widget
     useAlertWidget(),
     useStepsWidget(),
     useTabsWidget(),
-    useSpaceWidget(),
     useFormGroupWidget(),
     useFormArrayWidget(),
   ]);
@@ -382,14 +381,6 @@ export function useTabsWidget(): [FluentFormWidgetFeature<TabsComponentSchema>, 
       type: SchemaType.ComponentContainer,
     }
   ];
-}
-
-export function useSpaceWidget(): FluentFormWidgetFeature<TextComponentSchema> {
-  return {
-    kind: SchemaKind.Space,
-    type: SchemaType.ComponentContainer,
-    widget: SpaceWidget
-  };
 }
 
 /**

@@ -1,4 +1,4 @@
-import { row, space, step, steps, tab, tabs } from './component-container';
+import { row, step, steps, tab, tabs } from './component-container';
 import { input } from './control';
 import { form } from './control-container';
 
@@ -54,17 +54,6 @@ describe('component-container', () => {
     });
     expect(schemas).toEqual([{
       kind: 'row',
-      schemas: []
-    }]);
-  });
-
-  it('space', () => {
-    const { schemas } = form(() => {
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      space().schemas(() => { });
-    });
-    expect(schemas).toEqual([{
-      kind: 'space',
       schemas: []
     }]);
   });

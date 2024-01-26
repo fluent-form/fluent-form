@@ -60,7 +60,6 @@ export enum SchemaKind {
   Tabs = 'tabs',
   Tab = 'tab',
   Row = 'row',
-  Space = 'space'
 }
 
 export interface SchemaLike<Key extends SchemaKey = SchemaKey> {

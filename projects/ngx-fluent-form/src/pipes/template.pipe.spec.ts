@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { TEMPLATE_DIRECTIVE_CONTAINER } from '../tokens';
+import { TEMPLATE_DIRECTIVES } from '../tokens';
 import { FluentTemplatePipe } from './template.pipe';
 
 describe('FluentTemplatePipe', () => {
@@ -9,13 +9,11 @@ describe('FluentTemplatePipe', () => {
     TestBed.configureTestingModule({
       providers: [
         {
-          provide: TEMPLATE_DIRECTIVE_CONTAINER,
-          useValue: {
-            templateDirectives: { // mock QueryList
-              find(fn: Function) {
-                const dir = { name: 'named', templateRef: {} }; // mock FluentTemplateDirective
-                return fn(dir) ? dir : null;
-              }
+          provide: TEMPLATE_DIRECTIVES,
+          useValue: { // mock QueryList
+            find(fn: Function) {
+              const dir = { name: 'named', templateRef: {} }; // mock FluentTemplateDirective
+              return fn(dir) ? dir : null;
             }
           }
         }

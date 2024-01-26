@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
-import { TEMPLATE_DIRECTIVE_CONTAINER } from '../tokens';
+import { TEMPLATE_DIRECTIVES } from '../tokens';
 import { FluentWidgetTemplatePipe } from './widget-template.pipe';
 
 describe('FluentWidgetTemplatePipe', () => {
@@ -14,13 +14,11 @@ describe('FluentWidgetTemplatePipe', () => {
           withAllWidgets()
         ),
         {
-          provide: TEMPLATE_DIRECTIVE_CONTAINER,
-          useValue: {
-            templateDirectives: { // mock QueryList
-              find(fn: Function) {
-                const dir = { name: 'named', templateRef: {} }; // mock FluentTemplateDirective
-                return fn(dir) ? dir : null;
-              }
+          provide: TEMPLATE_DIRECTIVES,
+          useValue: {  // mock QueryList
+            find(fn: Function) {
+              const dir = { name: 'named', templateRef: {} }; // mock FluentTemplateDirective
+              return fn(dir) ? dir : null;
             }
           }
         }

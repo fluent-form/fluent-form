@@ -1,6 +1,6 @@
 import { inject, Pipe, PipeTransform, TemplateRef } from '@angular/core';
 import { SafeAny } from '@ngify/types';
-import { TEMPLATE_DIRECTIVE_CONTAINER } from '../tokens';
+import { TEMPLATE_DIRECTIVES } from '../tokens';
 import { isString } from '../utils';
 
 /**
@@ -11,7 +11,7 @@ import { isString } from '../utils';
   standalone: true
 })
 export class FluentTemplatePipe implements PipeTransform {
-  private readonly container = inject(TEMPLATE_DIRECTIVE_CONTAINER, { optional: true });
+  private readonly templateDirectives = inject(TEMPLATE_DIRECTIVES, { optional: true });
 
   transform<T>(value: T): T | TemplateRef<SafeAny>
   transform<T, U>(value: T, defaultValue: U): NonNullable<T> | U | TemplateRef<SafeAny>
@@ -19,7 +19,7 @@ export class FluentTemplatePipe implements PipeTransform {
     // 如果是以 # 开头的字符串，则尝试查询外部注册的模板并返回
     if (isString(value) && value.startsWith('#')) {
       const name = value.slice(1); // remove the '#'
-      const dir = this.container?.templateDirectives?.find(o => o.name === name);
+      const dir = this.templateDirectives?.find(o => o.name === name);
 
       if (dir) {
         return dir.templateRef;

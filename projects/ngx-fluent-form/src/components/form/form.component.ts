@@ -1,17 +1,16 @@
 import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, forwardRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, inject } from '@angular/core';
 import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { takeUntil } from 'rxjs';
 import { FluentBindingDirective, FluentTemplateDirective } from '../../directives';
-import { TemplateDirectiveContainer } from '../../interfaces';
 import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe } from '../../pipes';
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { SchemaKind } from '../../schemas/interfaces';
 import { queueMicrotask } from '../../shared';
-import { TEMPLATE_DIRECTIVE_CONTAINER } from '../../tokens';
+import { TEMPLATE_DIRECTIVES } from '../../tokens';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
 import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/form-col-content-outlet.component';
 import { FluentGridModule } from '../grid';
@@ -39,12 +38,12 @@ import { FluentGridModule } from '../grid';
   providers: [
     NzDestroyService,
     {
-      provide: TEMPLATE_DIRECTIVE_CONTAINER,
-      useExisting: forwardRef(() => FluentFormComponent)
+      provide: TEMPLATE_DIRECTIVES,
+      useFactory: () => inject(FluentFormComponent).templateDirectives
     }
   ]
 })
-export class FluentFormComponent<T extends AnyObject> implements OnChanges, TemplateDirectiveContainer {
+export class FluentFormComponent<T extends AnyObject> implements OnChanges {
   private readonly destroy$ = inject(NzDestroyService);
   private readonly formUtil = inject(FormUtil);
   private readonly modelUtil = inject(ModelUtil);

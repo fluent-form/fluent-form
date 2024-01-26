@@ -3,7 +3,7 @@ import { throwCustomTemplateNotFoundError } from '../errors';
 import { AnySchema } from '../schemas';
 import { SchemaKind } from '../schemas/interfaces';
 import { WidgetTemplateRegistry } from '../services';
-import { TEMPLATE_DIRECTIVE_CONTAINER } from '../tokens';
+import { TEMPLATE_DIRECTIVES } from '../tokens';
 
 /**
  * @internal
@@ -14,10 +14,10 @@ import { TEMPLATE_DIRECTIVE_CONTAINER } from '../tokens';
 })
 export class FluentWidgetTemplatePipe implements PipeTransform {
   private readonly registry = inject(WidgetTemplateRegistry);
-  private readonly directiveContainer = inject(TEMPLATE_DIRECTIVE_CONTAINER, { optional: true });
+  private readonly templateDirectives = inject(TEMPLATE_DIRECTIVES, { optional: true });
 
   transform(value: AnySchema): TemplateRef<unknown> {
-    const templateDirectives = this.directiveContainer?.templateDirectives;
+    const templateDirectives = this.templateDirectives;
 
     switch (value.kind) {
       case SchemaKind.Template: {

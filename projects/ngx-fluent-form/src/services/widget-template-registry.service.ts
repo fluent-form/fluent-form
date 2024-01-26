@@ -9,22 +9,22 @@ import { WIDGET_MAP } from '../tokens';
   providedIn: 'root'
 })
 export class WidgetTemplateRegistry extends Map<string, TemplateRef<unknown>> {
-  private readonly environmentInjector = inject(EnvironmentInjector);
-  private readonly widgetMap = inject(WIDGET_MAP);
+  private readonly envInjector = inject(EnvironmentInjector);
+  private readonly map = inject(WIDGET_MAP);
 
   override get(kind: string): TemplateRef<unknown> {
     return super.get(kind) ?? this.register(kind);
   }
 
   private register(kind: string) {
-    const component = this.widgetMap.get(kind);
+    const component = this.map.get(kind);
 
     if (!component) {
       throwWidgetNotFoundError(kind);
     }
 
     const { instance } = createComponent(component, {
-      environmentInjector: this.environmentInjector
+      environmentInjector: this.envInjector
     });
 
     this.set(kind, instance.templateRef);

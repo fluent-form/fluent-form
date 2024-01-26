@@ -2,7 +2,7 @@ import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
-import { FluentFormColContentOutletComponent, FluentGridModule } from '../../components';
+import { FluentFormItemOutletComponent, FluentGridModule } from '../../components';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentParentRowDirective } from '../../directives';
 import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe } from '../../pipes';
 import { FormGroupSchema, SchemaKind } from '../../schemas';
@@ -23,7 +23,7 @@ type FormGroupWidgetTemplateContext = WidgetTemplateContext<FormGroupSchema, For
     NgTemplateOutlet,
     NzFormModule,
     FluentGridModule,
-    FluentFormColContentOutletComponent,
+    FluentFormItemOutletComponent,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentParentRowDirective,

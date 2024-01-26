@@ -29,9 +29,10 @@
         [span]="schema.col | col: 'span'"
         [flex]="schema.col | col: 'flex'"
         [offset]="schema.col | col: 'offset'"
-        [hidden]="schema.hidden | reactive: model : schema : control">
-        <fluent-form-col-content-outlet [control]="control" [schema]="schema" [model]="model" />
-
+        [hidden]="schema.hidden | reactive: model : schema : control"
+        [control]="control"
+        [schema]="schema"
+        [model]="model">
         <!-- form array 的 schemas 可能会有多个，只在第一个时渲染移除按钮 -->
         <button
           *ngIf="first && (formSchema.removable ?? true)"

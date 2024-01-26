@@ -1,20 +1,20 @@
-<ng-template #formColContentTemplate let-schema="schema" let-control="control" let-model="model">
-  <ng-container *fluentVar="schema.kind | schemaType as schemaType" [ngSwitch]="true">
-    <ng-container
-      *ngSwitchCase="schemaType === SchemaType.ComponentContainer"
-      fluentWithInjector
-      [ngTemplateOutlet]="schema | widgetTemplate"
-      [ngTemplateOutletContext]="{ control, schema, model }">
-    </ng-container>
-
-    <ng-container
-      *ngSwitchDefault
-      fluentWithInjector
-      [ngTemplateOutlet]="formItemTemplate"
-      [ngTemplateOutletContext]="{ control, schema, model, schemaType }">
-    </ng-container>
+<ng-container *fluentVar="schema.kind | schemaType as schemaType" [ngSwitch]="true">
+  <ng-container
+    *ngSwitchCase="schemaType === SchemaType.ComponentContainer"
+    fluentWithInjector
+    [ngTemplateOutlet]="schema | widgetTemplate"
+    [ngTemplateOutletContext]="{ control, schema, model }">
   </ng-container>
-</ng-template>
+
+  <ng-container
+    *ngSwitchDefault
+    fluentWithInjector
+    [ngTemplateOutlet]="formItemTemplate"
+    [ngTemplateOutletContext]="{ control, schema, model, schemaType }">
+  </ng-container>
+</ng-container>
+
+<ng-content />
 
 <ng-template #formItemTemplate let-control="control" let-schema="schema" let-model="model" let-schemaType="schemaType">
   <!-- 在控件被 input-group 包裹的时候，控件状态/提示/required默认使用的是 input-group 里的第一个控件 -->

@@ -12,7 +12,7 @@ import { SchemaKind } from '../../schemas/interfaces';
 import { queueMicrotask } from '../../shared';
 import { TEMPLATE_DIRECTIVES } from '../../tokens';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
-import { FluentFormColContentOutletComponent } from '../form-col-content-outlet/form-col-content-outlet.component';
+import { FluentFormItemOutletComponent } from '../form-item-outlet/form-item-outlet.component';
 import { FluentGridModule } from '../grid';
 
 @Component({
@@ -27,7 +27,7 @@ import { FluentGridModule } from '../grid';
     ReactiveFormsModule,
     NzFormModule,
     FluentGridModule,
-    FluentFormColContentOutletComponent,
+    FluentFormItemOutletComponent,
     FluentBindingDirective,
     FluentReactivePipe,
     FluentControlPipe,

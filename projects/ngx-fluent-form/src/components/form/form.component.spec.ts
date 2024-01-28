@@ -6,7 +6,7 @@ import { form, group, input } from '../../compose';
 import { withAllWidgets, withStaticExpression } from '../../features';
 import { provideFluentForm } from '../../provider';
 import { FormGroupSchema } from '../../schemas';
-import { queueMicrotask } from '../../shared';
+import { runMicrotask } from '../../shared';
 import { FluentFormComponent } from './form.component';
 
 @Component({
@@ -53,7 +53,7 @@ describe('FluentFormComponent', () => {
     component.model = {};
     fixture.detectChanges();
 
-    await queueMicrotask(() => {
+    await runMicrotask(() => {
       expect(component.model).toEqual({ text: null });
     });
   });
@@ -80,14 +80,14 @@ describe('FluentFormComponent', () => {
       component.model = { text: 'test' };
       fixture.detectChanges();
 
-      await queueMicrotask(() => {
+      await runMicrotask(() => {
         expect(component.form.value).toEqual({ text: 'test' });
       });
 
       component.model = { text: 'test change' };
       fixture.detectChanges();
 
-      await queueMicrotask(() => {
+      await runMicrotask(() => {
         expect(component.form.value).toEqual({ text: 'test change' });
       });
     });
@@ -101,7 +101,7 @@ describe('FluentFormComponent', () => {
       component.model = {};
       fixture.detectChanges();
 
-      await queueMicrotask(() => {
+      await runMicrotask(() => {
         expect(component.model).toEqual({ text: 'test' });
       });
     });
@@ -113,7 +113,7 @@ describe('FluentFormComponent', () => {
       });
       fixture.detectChanges();
 
-      await queueMicrotask(() => {
+      await runMicrotask(() => {
         expect(component.model).toEqual({ text: 'test' });
       });
     });
@@ -125,7 +125,7 @@ describe('FluentFormComponent', () => {
       });
       fixture.detectChanges();
 
-      await queueMicrotask(() => {
+      await runMicrotask(() => {
         expect(component.model).toEqual({ text: 'test' });
       });
 
@@ -134,7 +134,7 @@ describe('FluentFormComponent', () => {
       });
       fixture.detectChanges();
 
-      await queueMicrotask(() => {
+      await runMicrotask(() => {
         expect(component.model).toEqual({ text: 'test' });
       });
     });
@@ -149,7 +149,7 @@ describe('FluentFormComponent', () => {
     component.model = {};
     fixture.detectChanges();
 
-    await queueMicrotask(() => {
+    await runMicrotask(() => {
       expect(component.form.get('a')!.disabled).toEqual(true);
       expect(component.form.get('b')!.disabled).toEqual(true);
       expect(component.form.get('c')!.disabled).toEqual(true);

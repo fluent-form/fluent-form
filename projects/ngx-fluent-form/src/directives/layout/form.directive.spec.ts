@@ -8,7 +8,7 @@ import { array, form, group, input, inputGroup } from '../../compose';
 import { withAllWidgets } from '../../features';
 import { provideFluentForm } from '../../provider';
 import { FormGroupSchema } from '../../schemas';
-import { queueMicrotask } from '../../shared';
+import { runMicrotask } from '../../shared';
 import { FluentFormDirective } from './form.directive';
 import { FluentFormLayoutModule } from './module';
 
@@ -80,7 +80,7 @@ describe('FluentFormDirective', () => {
     component.model = {};
     fixture.detectChanges();
 
-    await queueMicrotask(() => {
+    await runMicrotask(() => {
       expect(component.model).toEqual({
         ipt: null,
         ipt2: null,
@@ -118,7 +118,7 @@ describe('FluentFormDirective', () => {
       };
       fixture.detectChanges();
 
-      await queueMicrotask(() => {
+      await runMicrotask(() => {
         expect(component.model).toEqual({
           ipt: 'test',
           ipt2: 'test',
@@ -230,7 +230,7 @@ describe('FluentFormDirective', () => {
       component.model = {};
       fixture.detectChanges();
 
-      await queueMicrotask(() => {
+      await runMicrotask(() => {
         expect(component.model).toEqual({
           ipt: 'test',
           ipt2: 'test',
@@ -262,7 +262,7 @@ describe('FluentFormDirective', () => {
       });
       fixture.detectChanges();
 
-      await queueMicrotask(() => {
+      await runMicrotask(() => {
         expect(component.model).toEqual({
           ipt: 'test',
           ipt2: 'test',
@@ -294,7 +294,7 @@ describe('FluentFormDirective', () => {
       });
       fixture.detectChanges();
 
-      await queueMicrotask(() => {
+      await runMicrotask(() => {
         expect(component.model).toEqual({
           ipt: 'test',
           ipt2: null,
@@ -323,7 +323,7 @@ describe('FluentFormDirective', () => {
       });
       fixture.detectChanges();
 
-      await queueMicrotask(() => {
+      await runMicrotask(() => {
         expect(component.model).toEqual({
           ipt: 'test',
           ipt2: null,
@@ -358,7 +358,7 @@ describe('FluentFormDirective', () => {
     component.model = {};
     fixture.detectChanges();
 
-    await queueMicrotask(() => {
+    await runMicrotask(() => {
       expect(component.model).toEqual({
         ipt: null,
         ipt2: null,

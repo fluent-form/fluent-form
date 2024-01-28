@@ -9,7 +9,7 @@ import { FluentBindingDirective, FluentTemplateDirective } from '../../directive
 import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe } from '../../pipes';
 import { AnySchema, FormGroupSchema } from '../../schemas';
 import { SchemaKind } from '../../schemas/interfaces';
-import { queueMicrotask } from '../../shared';
+import { runMicrotask } from '../../shared';
 import { TEMPLATE_DIRECTIVES } from '../../tokens';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
 import { FluentFormItemOutletComponent } from '../form-item-outlet/form-item-outlet.component';
@@ -120,7 +120,7 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges {
 
   private onValueChanges() {
     // NG0100，防止在更新模型之前在模板中读取模型
-    queueMicrotask(() => {
+    runMicrotask(() => {
       this.formUtil.updateForm(
         this.form,
         this.model = this.internalModel = this.formUtil.updateModel(

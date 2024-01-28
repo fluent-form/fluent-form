@@ -1,5 +1,5 @@
 const resolvedPromise = Promise.resolve();
 
-export function queueMicrotask(callback: () => void) {
+export function runMicrotask(callback: () => void) {
   return resolvedPromise.then(callback);
 }

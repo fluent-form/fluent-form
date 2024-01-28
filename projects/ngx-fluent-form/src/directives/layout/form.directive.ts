@@ -4,7 +4,7 @@ import { AnyArray, AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { takeUntil } from 'rxjs';
 import { AnySchema, FormGroupSchema } from '../../schemas';
-import { queueMicrotask } from '../../shared';
+import { runMicrotask } from '../../shared';
 import { FormUtil, ModelUtil } from '../../utils';
 import { FluentControlContainer, FluentControlContainerDirective } from './models/control-container';
 
@@ -102,7 +102,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentC
 
   private onValueChanges() {
     // NG0100，防止在更新模型之前在模板中读取模型
-    queueMicrotask(() => {
+    runMicrotask(() => {
       this.formUtil.updateForm(
         this.form,
         this.model = this.internalModel = this.formUtil.updateModel(

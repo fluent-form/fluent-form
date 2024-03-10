@@ -1,0 +1,12 @@
+<fluent-row gap="6">
+  <fluent-col flex="2">
+    <fluent-form [schema]="schema" [(model)]="model">
+      <ng-template fluentTemplate="optionTpl" let-option>
+        <nz-tag nzColor="magenta">Label</nz-tag>{{ option.label }}
+      </ng-template>
+    </fluent-form>
+  </fluent-col>
+  <fluent-col flex="1">
+    <pre>{{ model | json }}</pre>
+  </fluent-col>
+</fluent-row>

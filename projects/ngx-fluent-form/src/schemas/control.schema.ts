@@ -132,6 +132,7 @@ export interface SelectControlSchema<Key extends SingleSchemaKey = SingleSchemaK
   size?: NzSelectSizeType;
   suffixIcon?: string | TemplateRef<SafeAny>;
   loading?: boolean;
+  option?: string | TemplateRef<{ $implicit: SafeAny }>;
   options?: MaybeSchemaReactiveFn<SelectControlSchema<SingleSchemaKey, Val>, AnyObject[]>;
   fetchOptions?: (keyword$: Observable<string>, ctx: SchemaContext<SelectControlSchema<SingleSchemaKey, Val>>) => Observable<AnyObject[]>;
   config?: {

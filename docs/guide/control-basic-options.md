@@ -74,10 +74,16 @@ order: 3
 
 <example name="fluent-form-control-linkage-example" />
 
-## 远程数据
+## 选择器控件
 
-### select 选择器
+### 远程数据
 
 一个带有远程搜索，节流控制，请求时序控制，加载状态的示例。
 
 <example name="fluent-form-select-remote-data-example" />
+
+### 自定义视图
+
+使用 `option` 选项自定义选项视图。
+
+<example name="fluent-form-select-custom-option-content-example" />

@@ -3,7 +3,7 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { AnySchema } from '../schemas';
 import { SchemaKind } from '../schemas/interfaces';
-import { FormUtil } from './form.utils';
+import { FormUtil, getChildControl } from './form.utils';
 import { SchemaUtil } from './schema.utils';
 import { ValueUtil } from './value.utils';
 
@@ -34,7 +34,7 @@ export class ModelUtil {
 
       if (schema.kind === SchemaKind.Group) {
         const key = schema.key!;
-        const formGroup = form.get([key]) as FormGroup;
+        const formGroup = getChildControl(form, key) as FormGroup;
 
         this.updateForm(formGroup, model[key] ??= {}, schema.schemas, false);
         continue;
@@ -43,7 +43,7 @@ export class ModelUtil {
       if (schema.kind === SchemaKind.Array) {
         const key = schema.key!;
         const array: AnyArray = model[key] ??= [];
-        const formArray = form.get([key]) as FormArray;
+        const formArray = getChildControl(form, key) as FormArray;
 
         // 如果模型数组的长度与数组控件长度一致，则原地更新表单值，否则直接重建数组控件
         if (array.length === formArray.length) {
@@ -68,10 +68,10 @@ export class ModelUtil {
         continue;
       }
 
-      const key = schema.key!.toString();
       const value = this.valueUtil.valueOfModel(model, schema);
+      const control = getChildControl(form, schema.key!)!;
 
-      form.get([key])!.setValue(value, { onlySelf: true });
+      control.setValue(value, { onlySelf: true });
     }
 
     // 仅在完成全部子更新时，再关闭 onlySelf

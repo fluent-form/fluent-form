@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { AnyArray, AnyObject, SafeAny } from '@ngify/types';
-import { FormArraySchema, FormGroupSchema } from '../schemas';
+import { FormArraySchema, FormGroupSchema, SchemaKey } from '../schemas';
 import { AnyControlContainerSchema, AnyControlSchema, AnySchema } from '../schemas/index.schema';
 import { SchemaKind } from '../schemas/interfaces';
 import { ValueTransformer } from '../services';
@@ -70,6 +70,23 @@ export class FormUtil {
         controls[key] = this.createFormArray(schema, model[key] ?? []);
       } else if (this.schemaUtil.isControlWrapper(schema) || this.schemaUtil.isComponentContainer(schema)) {
         Object.assign(controls, this.createControlMap(schema.schemas, model));
+      } else if (this.schemaUtil.isPathKeyControl(schema)) {
+        const paths = this.schemaUtil.parsePathKey(schema.key as string);
+        const key = paths.pop()!;
+
+        let parent: FormGroup = paths.reduce((previousGroup, path) => {
+          const _group = previousGroup.get(path) as FormGroup;
+
+          if (_group) {
+            return _group;
+          }
+
+          const group = new FormGroup({});
+          previousGroup.addControl(path, group);
+          return group;
+        }, (controls[paths.shift()!] ??= new FormGroup({})) as FormGroup);
+
+        parent.addControl(key, this.createFormControl(schema, model));
       } else {
         controls[schema.key!.toString()] = this.createFormControl(schema, model);
       }
@@ -134,7 +151,7 @@ export class FormUtil {
 
       if (schema.kind === SchemaKind.Group) {
         const key = schema.key!;
-        const formGroup = form.get([key]) as FormGroup;
+        const formGroup = getChildControl(form, key) as FormGroup;
 
         this.updateForm(formGroup, model[key], schema.schemas, false);
         continue;
@@ -142,7 +159,7 @@ export class FormUtil {
 
       if (schema.kind === SchemaKind.Array) {
         const key = schema.key!;
-        const formArray = form.get([key]) as FormArray;
+        const formArray = getChildControl(form, key) as FormArray;
         const [elementSchema] = this.schemaUtil.filterControls(schema.schemas);
         const elementSchemas = formArray.controls.map((_, index) => ({ ...elementSchema, key: index }));
 
@@ -155,7 +172,7 @@ export class FormUtil {
         continue;
       }
 
-      const control = form.get([schema.key!.toString()])!;
+      const control = getChildControl(form, schema.key!)!;
 
       // update disabled
       const disabled = this.valueTransformer.transform(schema.disabled, { model, schema, control });
@@ -193,7 +210,7 @@ export class FormUtil {
 
       if (schema.kind === SchemaKind.Group) {
         const key = schema.key!;
-        const formGroup = form.get([key]) as FormGroup;
+        const formGroup = getChildControl(form, key) as FormGroup;
 
         this.updateModel(model[key] = {}, formGroup, schema.schemas);
         continue;
@@ -201,7 +218,7 @@ export class FormUtil {
 
       if (schema.kind === SchemaKind.Array) {
         const key = schema.key!;
-        const formArray = form.get([key]) as FormArray;
+        const formArray = getChildControl(form, key) as FormArray;
         const [elementSchema] = this.schemaUtil.filterControls(schema.schemas);
         const elementSchemas = formArray.controls.map((_, index) => ({ ...elementSchema, key: index }));
 
@@ -215,7 +232,7 @@ export class FormUtil {
       }
 
       const key = schema.key!.toString();
-      const control = form.get([key])!;
+      const control = getChildControl(form, key)!;
       const value = this.valueUtil.valueOfControl(control, schema);
 
       // 多字段情况
@@ -223,6 +240,14 @@ export class FormUtil {
         (schema.key as string[]).map((prop, idx) => {
           model[prop] = (value as [unknown, unknown])?.[idx] ?? null;
         });
+      } else if (this.schemaUtil.isPathKeyControl(schema)) {
+        const paths = this.schemaUtil.parsePathKey(schema.key as string);
+        let _model = model;
+        for (let i = 0; i < paths.length - 1; i++) {
+          const path = paths[i];
+          _model = _model[path] ??= {};
+        }
+        _model[paths.pop()!] = value;
       } else {
         model[key] = value;
       }
@@ -230,4 +255,14 @@ export class FormUtil {
 
     return model;
   }
+}
+
+/**
+ * 根据 form 的类型自动选择使用 .get() 还是 .at() 来获取子控件
+ * @param form
+ * @param key
+ * @returns
+ */
+export function getChildControl(form: FormGroup | FormArray, key: SchemaKey): AbstractControl | null {
+  return form instanceof FormArray ? form.at(key as number) : form.get(key.toString() as string);
 }

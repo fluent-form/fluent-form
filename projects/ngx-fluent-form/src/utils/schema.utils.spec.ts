@@ -46,6 +46,15 @@ describe('SchemaUtil', () => {
     });
   });
 
+  it('isPathKeyControl', () => {
+    expect(schemaUtil.isPathKeyControl({ kind: 'input', key: 'name' })).toBeFalse();
+    expect(schemaUtil.isPathKeyControl({ kind: 'input', key: 'name.first' })).toBeTrue();
+  });
+
+  it('parsePathKey', () => {
+    expect(schemaUtil.parsePathKey('name.first')).toEqual(['name', 'first']);
+  });
+
   it('isAnySchema', () => {
     expect(schemaUtil.isComponentContainer({ kind: 'tab' })).toBeTrue();
     expect(schemaUtil.isComponent({ kind: 'text' })).toBeTrue();

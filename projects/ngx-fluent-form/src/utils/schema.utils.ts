@@ -96,6 +96,14 @@ export class SchemaUtil {
   }
 
   /**
+   * 是否为路径字段图示
+   * @param schema
+   */
+  isPathKeyControl(schema: SchemaLike) {
+    return isString(schema.key) && schema.key.includes('.');
+  }
+
+  /**
    * 非控件图示，表示其本身或其子节点不会包含控件图示
    * @param schema
    */
@@ -115,6 +123,10 @@ export class SchemaUtil {
     }
 
     return validators;
+  }
+
+  parsePathKey(key: string) {
+    return key.split('.');
   }
 
   find(schema: AnyContainerSchema, key: SingleSchemaKey): AnySchema | null;

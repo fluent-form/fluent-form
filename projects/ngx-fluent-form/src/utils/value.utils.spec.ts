@@ -72,6 +72,55 @@ describe('ValueUtils', () => {
       });
     });
 
+    describe('path key schema', () => {
+      it('no init value and default value', () => {
+        const model = {};
+        const schema = schemaUtil.patch({ kind: 'number', key: 'user.age' });
+        const value = valueUtil.valueOfModel(model, schema);
+
+        expect(value).toBeNull();
+      });
+
+      it('with init value', () => {
+        const model = { user: { age: 1 } };
+        const schema = schemaUtil.patch({ kind: 'number', key: 'user.age' });
+        const value = valueUtil.valueOfModel(model, schema);
+
+        expect(value).toBe(1);
+      });
+
+      it('with default value', () => {
+        const model = {};
+        const schema = schemaUtil.patch({ kind: 'number', key: 'user.age', defaultValue: 1 });
+        const value = valueUtil.valueOfModel(model, schema);
+
+        expect(value).toBe(1);
+      });
+
+      it('with init value and default value', () => {
+        const model = { user: { age: 2 } };
+        const schema = schemaUtil.patch({ kind: 'number', key: 'user.age', defaultValue: 1 });
+        const value = valueUtil.valueOfModel(model, schema);
+
+        expect(value).toBe(2);
+      });
+
+      it('with mapper', () => {
+        const model = { user: { age: '1' } };
+        const schema = schemaUtil.patch({
+          kind: 'number',
+          key: 'user.age',
+          mapper: {
+            parser: (value: string) => Number(value),
+            formatter: value => String(value)
+          }
+        });
+        const value = valueUtil.valueOfModel(model, schema);
+
+        expect(value).toBe(1);
+      });
+    });
+
     describe('double key control', () => {
       it('no init value and default value', () => {
         const model = {};

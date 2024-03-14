@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
 import { AnySchema } from '../schemas';
-import { FormUtil } from './form.utils';
+import { FormUtil, getChildControl } from './form.utils';
 
 describe('form.utils', () => {
   let util: FormUtil;
@@ -196,6 +196,24 @@ describe('form.utils', () => {
         ], {});
 
         expect(form.value).toEqual({ input: null });
+      });
+
+      it('with path key schema', () => {
+        const form = util.createFormGroup([
+          { kind: 'input', key: 'a.b.c', defaultValue: 'hello' },
+          { kind: 'input', key: 'a.b.d', defaultValue: 'world' },
+          { kind: 'input', key: 'a.b.e.f', defaultValue: '!' },
+        ], {});
+
+        expect(form.value).toEqual({
+          a: {
+            b: {
+              c: 'hello',
+              d: 'world',
+              e: { f: '!' }
+            }
+          }
+        });
       });
     });
 
@@ -434,6 +452,25 @@ describe('form.utils', () => {
 
         expect(util.updateModel({}, form, schemas)).toEqual({ array: [1, 2] });
       });
+
+      it('with path key schema', () => {
+        const schemas: AnySchema[] = [
+          { kind: 'input', key: 'a.b.c', defaultValue: 'hello' },
+          { kind: 'input', key: 'a.b.d', defaultValue: 'world' },
+          { kind: 'input', key: 'a.b.e.f', defaultValue: '!' },
+        ];
+        const form = util.createFormGroup(schemas, {});
+
+        expect(util.updateModel({}, form, schemas)).toEqual({
+          a: {
+            b: {
+              c: 'hello',
+              d: 'world',
+              e: { f: '!' }
+            }
+          }
+        });
+      });
     });
 
     describe('updateForm', () => {
@@ -552,5 +589,23 @@ describe('form.utils', () => {
         });
       });
     });
+  });
+
+  it('getChildControl', () => {
+    const group = util.createFormGroup([
+      { kind: 'input', key: 'input' }
+    ], {});
+    const array = util.createFormArray({
+      kind: 'array',
+      schemas: [
+        { kind: 'input' }
+      ]
+    }, ['str']);
+
+    expect(getChildControl(group, 'input')).toBeTruthy();
+    expect(getChildControl(group, 'none')).toBeNull();
+    expect(getChildControl(array, 0)).toBeTruthy();
+    expect(getChildControl(array, 1)).toBeUndefined();
+    expect(getChildControl(array, 'none')).toBeUndefined();
   });
 });

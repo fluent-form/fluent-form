@@ -27,11 +27,15 @@ export class ValueUtil {
       if ((value as []).every(o => o === null)) {
         value = null;
       }
+    } else if (this.schemaUtil.isPathKeyControl(schema)) {
+      const paths = this.schemaUtil.parsePathKey(schema.key as string);
+      value = paths.reduce((obj, key) => obj?.[key as keyof M] as M, model);
     } else {
       value = model[schema.key as keyof M];
-      if (isUndefined(value)) {
-        value = schema.defaultValue ?? null;
-      }
+    }
+
+    if (isUndefined(value)) {
+      value = schema.defaultValue ?? null;
     }
 
     if (schema.mapper) {

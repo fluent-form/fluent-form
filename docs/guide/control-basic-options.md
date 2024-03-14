@@ -66,6 +66,14 @@ order: 3
 
 <example name="fluent-form-control-multi-key-example" />
 
+## 对象路径键
+
+在需要构造包含子对象表单时，除了使用 `group()` 控件容器图示之外，还可以使用**对象路径键**作为控件图示的 `key`，这是一种更便捷、扁平的方法。
+
+<alert type="info">**对象路径键**是一种使用特定规则编写字符串，它通过 `.` 来连接对象的每一层路径，例如：`'a.b'` 代表了在对象 `{ a: { b: 1 } }` 中的 `b` 属性。</alert>
+
+<example name="fluent-form-control-path-key-example" />
+
 ## 表单联动
 
 部分组件/控件的选项支持传入一个函数，以实现控件之间的联动。该函数接受一个对象作为输入参数，对象类型为 `{ model, control, schema }`。

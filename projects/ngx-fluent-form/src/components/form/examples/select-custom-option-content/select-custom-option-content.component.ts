@@ -1,6 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { FluentFormModule, FluentGridModule, form, select } from 'ngx-fluent-form';
 
@@ -10,8 +9,6 @@ import { FluentFormModule, FluentGridModule, form, select } from 'ngx-fluent-for
   templateUrl: './select-custom-option-content.component.html'
 })
 export class SelectCustomOptionContentExampleComponent {
-  http = inject(HttpClient);
-
   schema = form(() => {
     select('user')
       .label('选择用户')

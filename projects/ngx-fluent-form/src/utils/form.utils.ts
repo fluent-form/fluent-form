@@ -75,14 +75,13 @@ export class FormUtil {
         const key = paths.pop()!;
 
         const parent: FormGroup = paths.reduce((previousGroup, path) => {
-          const _group = previousGroup.get(path) as FormGroup;
+          let group = previousGroup.get(path) as FormGroup;
 
-          if (_group) {
-            return _group;
+          if (!group) {
+            group = new FormGroup({});
+            previousGroup.addControl(path, group);
           }
 
-          const group = new FormGroup({});
-          previousGroup.addControl(path, group);
           return group;
         }, (controls[paths.shift()!] ??= new FormGroup({})) as FormGroup);
 

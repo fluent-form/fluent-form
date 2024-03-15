@@ -11,6 +11,7 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "outDir": "../../dist/ngx-fluent-form/schematics",
+    "rootDir": "src/schematics",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,

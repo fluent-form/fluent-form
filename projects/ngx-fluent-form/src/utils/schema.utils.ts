@@ -91,7 +91,7 @@ export class SchemaUtil {
    * 是否为多字段图示
    * @param schema
    */
-  isMultiKeyControl(schema: SchemaLike) {
+  isMultiKeySchema(schema: SchemaLike) {
     return isArray(schema.key);
   }
 
@@ -99,7 +99,7 @@ export class SchemaUtil {
    * 是否为路径字段图示
    * @param schema
    */
-  isPathKeyControl(schema: SchemaLike) {
+  isPathKeySchema(schema: SchemaLike) {
     return isString(schema.key) && schema.key.includes('.');
   }
 

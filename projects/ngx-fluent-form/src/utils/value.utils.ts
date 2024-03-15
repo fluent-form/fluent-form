@@ -18,7 +18,7 @@ export class ValueUtil {
     let value: unknown;
     // 如果从模型中读出来的值为 undefined，说明模型中没有写入该值，这里取图示中提供的默认值
     // 如果是多字段模式，则需要从模型中分别取得这这些字段的值组为一个数组
-    if (this.schemaUtil.isMultiKeyControl(schema)) {
+    if (this.schemaUtil.isMultiKeySchema(schema)) {
       value = (schema.key as string[]).map((key, index) => {
         const val = model[key as keyof M];
         return isUndefined(val) ? schema.defaultValue?.[index] ?? null : val;
@@ -27,7 +27,7 @@ export class ValueUtil {
       if ((value as []).every(o => o === null)) {
         value = null;
       }
-    } else if (this.schemaUtil.isPathKeyControl(schema)) {
+    } else if (this.schemaUtil.isPathKeySchema(schema)) {
       const paths = this.schemaUtil.parsePathKey(schema.key as string);
       value = paths.reduce((obj, key) => obj?.[key as keyof M] as M, model);
     } else {

@@ -47,8 +47,8 @@ describe('SchemaUtil', () => {
   });
 
   it('isPathKeyControl', () => {
-    expect(schemaUtil.isPathKeyControl({ kind: 'input', key: 'name' })).toBeFalse();
-    expect(schemaUtil.isPathKeyControl({ kind: 'input', key: 'name.first' })).toBeTrue();
+    expect(schemaUtil.isPathKeySchema({ kind: 'input', key: 'name' })).toBeFalse();
+    expect(schemaUtil.isPathKeySchema({ kind: 'input', key: 'name.first' })).toBeTrue();
   });
 
   it('parsePathKey', () => {

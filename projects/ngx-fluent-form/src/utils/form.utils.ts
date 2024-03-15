@@ -70,11 +70,11 @@ export class FormUtil {
         controls[key] = this.createFormArray(schema, model[key] ?? []);
       } else if (this.schemaUtil.isControlWrapper(schema) || this.schemaUtil.isComponentContainer(schema)) {
         Object.assign(controls, this.createControlMap(schema.schemas, model));
-      } else if (this.schemaUtil.isPathKeyControl(schema)) {
+      } else if (this.schemaUtil.isPathKeySchema(schema)) {
         const paths = this.schemaUtil.parsePathKey(schema.key as string);
         const key = paths.pop()!;
 
-        let parent: FormGroup = paths.reduce((previousGroup, path) => {
+        const parent: FormGroup = paths.reduce((previousGroup, path) => {
           const _group = previousGroup.get(path) as FormGroup;
 
           if (_group) {
@@ -236,11 +236,11 @@ export class FormUtil {
       const value = this.valueUtil.valueOfControl(control, schema);
 
       // 多字段情况
-      if (this.schemaUtil.isMultiKeyControl(schema)) {
+      if (this.schemaUtil.isMultiKeySchema(schema)) {
         (schema.key as string[]).map((prop, idx) => {
           model[prop] = (value as [unknown, unknown])?.[idx] ?? null;
         });
-      } else if (this.schemaUtil.isPathKeyControl(schema)) {
+      } else if (this.schemaUtil.isPathKeySchema(schema)) {
         const paths = this.schemaUtil.parsePathKey(schema.key as string);
         let _model = model;
         for (let i = 0; i < paths.length - 1; i++) {

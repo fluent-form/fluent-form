@@ -139,11 +139,10 @@ export class FormUtil {
    * @param form
    * @param model
    * @param schemas
-   * @param completed
    */
-  updateForm(form: FormGroup, model: AnyObject, schemas: AnySchema[], completed?: boolean): void;
-  updateForm(form: FormArray, model: AnyArray, schemas: AnySchema[], completed?: boolean): void;
-  updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AnySchema[], completed = true): void {
+  updateForm(form: FormGroup, model: AnyObject, schemas: AnySchema[]): void;
+  updateForm(form: FormArray, model: AnyArray, schemas: AnySchema[]): void;
+  updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AnySchema[]): void {
     for (const schema of schemas) {
       // 这些图示不包含控件图示，直接跳过
       if (this.schemaUtil.isNonControl(schema)) continue;
@@ -152,7 +151,7 @@ export class FormUtil {
         const key = schema.key!;
         const formGroup = getChildControl(form, key) as FormGroup;
 
-        this.updateForm(formGroup, model[key], schema.schemas, false);
+        this.updateForm(formGroup, model[key], schema.schemas);
         continue;
       }
 
@@ -162,12 +161,12 @@ export class FormUtil {
         const [elementSchema] = this.schemaUtil.filterControls(schema.schemas);
         const elementSchemas = formArray.controls.map((_, index) => ({ ...elementSchema, key: index }));
 
-        this.updateForm(formArray, model[schema.key!], elementSchemas, false);
+        this.updateForm(formArray, model[schema.key!], elementSchemas);
         continue;
       }
 
       if (this.schemaUtil.isControlWrapper(schema) || this.schemaUtil.isComponentContainer(schema)) {
-        this.updateForm(form as FormGroup, model, schema.schemas, false);
+        this.updateForm(form as FormGroup, model, schema.schemas);
         continue;
       }
 
@@ -189,9 +188,9 @@ export class FormUtil {
       } else {
         control.removeValidators(Validators.required);
       }
-    }
 
-    completed && form.updateValueAndValidity({ emitEvent: false });
+      control.updateValueAndValidity({ emitEvent: false });
+    }
   }
 
   /**

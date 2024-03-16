@@ -535,14 +535,20 @@ describe('form.utils', () => {
       describe('required', () => {
         it('normal', () => {
           const schemas: AnySchema[] = [
-            { kind: 'toggle', key: 'bool', required: ({ model }) => model.bool },
+            { kind: 'toggle', key: 'required' },
+            { kind: 'input', key: 'text', required: ({ model }) => model.required },
           ];
           const form = util.createFormGroup(schemas, {});
 
-          util.updateForm(form, { bool: true }, schemas);
-          expect(form.get('bool')!.hasValidator(Validators.required)).toBeTrue();
-          util.updateForm(form, { bool: false }, schemas);
-          expect(form.get('bool')!.hasValidator(Validators.required)).toBeFalse();
+          form.patchValue({ required: true });
+          util.updateForm(form, { required: true }, schemas);
+          expect(form.get('text')!.hasValidator(Validators.required)).toBeTrue();
+          expect(form.valid).toBeFalse();
+
+          form.patchValue({ required: false });
+          util.updateForm(form, { required: false }, schemas);
+          expect(form.get('text')!.hasValidator(Validators.required)).toBeFalse();
+          expect(form.valid).toBeTrue();
         });
 
         it('with component', () => {
@@ -562,14 +568,22 @@ describe('form.utils', () => {
               kind: 'group',
               key: 'obj',
               schemas: [
-                { kind: 'toggle', key: 'bool', required: ({ model }) => model.bool },
+                { kind: 'toggle', key: 'required' },
+                { kind: 'input', key: 'text', required: ({ model }) => model.required },
               ]
             }
           ];
           const form = util.createFormGroup(schemas, {});
 
-          util.updateForm(form, { obj: { bool: true } }, schemas);
-          expect(form.get('obj.bool')!.hasValidator(Validators.required)).toBeTrue();
+          form.patchValue({ obj: { required: true } });
+          util.updateForm(form, { obj: { required: true } }, schemas);
+          expect(form.get('obj.text')!.hasValidator(Validators.required)).toBeTrue();
+          expect(form.valid).toBeFalse();
+
+          form.patchValue({ obj: { required: false } });
+          util.updateForm(form, { obj: { required: false } }, schemas);
+          expect(form.get('obj.text')!.hasValidator(Validators.required)).toBeFalse();
+          expect(form.valid).toBeTrue();
         });
 
         it('with array', () => {

@@ -14,6 +14,7 @@ type NumberGroupWidgetTemplateContext = WidgetTemplateContext<NumberGroupCompone
  * @internal
  */
 @Component({
+  selector: 'fluent-number-group',
   standalone: true,
   imports: [
     NgFor,

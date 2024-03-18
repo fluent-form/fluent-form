@@ -23,9 +23,9 @@ ng add ngx-fluent-form
 
 ## 配置
 
-`ngx-fluent-form` 支持 `ngModule` 与 `standalone` 两种风格的用法。
+`ngx-fluent-form` 支持 `NgModule` 与 `Standalone` 两种风格的用法。
 
-对于 `standalone` 风格，您需要配置 `provideFluentForm()` 并将其添加到 `bootstrapApplication()` 中：
+对于 `Standalone` 风格，您需要配置 `provideFluentForm()` 并将其添加到 `bootstrapApplication()` 中：
 
 ```ts
 import { provideFluentForm, withAllWidgets } from 'ngx-fluent-form';
@@ -41,14 +41,14 @@ bootstrapApplication(RootComponent, {
 
 <br>
 
-对于 `ngModule` 风格，则需要配置 `FluentFormModule.forRoot()` 并添加到你的根 `NgModule`，通常是 `AppModule`：
+对于 `NgModule` 风格，则需要配置 `provideFluentForm()` 并添加到你的根 `NgModule`，通常是 `AppModule`：
 
 ```ts
-import { FluentFormModule, withAllWidgets } from 'ngx-fluent-form';
+import { provideFluentForm, withAllWidgets } from 'ngx-fluent-form';
 
 @NgModule({
-  imports: [
-    FluentFormModule.forRoot(
+  providers: [
+    provideFluentForm(
       withAllWidgets()
     )
   ]
@@ -85,7 +85,7 @@ export class ExampleComponent {
 
 <br>
 
-对于 `ngModule` 风格，则需要将 `FluentFormModule` 导入到你的 `NgModule`：
+对于 `NgModule` 风格，则需要将 `FluentFormModule` 导入到你的 `NgModule`：
 
 ```ts
 import { FluentFormModule } from 'ngx-fluent-form';

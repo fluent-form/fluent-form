@@ -20,7 +20,9 @@ export interface FluentFormWidgetFeature<S extends AbstractSchema> extends Schem
 
 export function withWidgets(features: (FluentFormWidgetFeature<SafeAny> | FluentFormWidgetFeature<SafeAny>[])[]): FluentFormFeature<FluentFormFeatureKind.Widget> {
   const flattenedFeatures = features.flat().concat(
-    useRowWidget() // 添加内置 widget
+    // 添加内置 widget,
+    useRowWidget(),
+    useFormGroupWidget(),
   );
 
   return makeFluentFeature(FluentFormFeatureKind.Widget, [

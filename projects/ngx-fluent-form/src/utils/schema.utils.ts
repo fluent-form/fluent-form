@@ -16,14 +16,9 @@ export class SchemaUtil {
   private readonly schemaMap = inject(SCHEMA_MAP);
   private readonly schemaPatchers = inject(SCHEMA_PATCHERS, { optional: true }) ?? [];
 
-  patch<T extends AnySchema>(schema: T, level = 1): T {
+  patch<T extends AnySchema>(schema: T): T {
     if ('schemas' in schema) {
-      schema.schemas = schema.schemas.map(schema => this.patch(schema, ++level));
-    }
-
-    // skip patching for the root schema
-    if (level === 1 && schema.key === 'root') {
-      return schema;
+      schema.schemas = schema.schemas.map(schema => this.patch(schema));
     }
 
     const config = this.schemaMap.get(schema.kind);

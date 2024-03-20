@@ -356,11 +356,6 @@ describe('SchemaUtil with patcher feature', () => {
     expect(schemaUtil.patch(schema).class).toContain('multi-schema-type-selector');
     expect(schemaUtil.patch(schema).class).toContain('mix-selector');
   });
-
-  it('should skip patching for the root schema', () => {
-    const schema: AnySchema = { kind: 'group', key: 'root', schemas: [] };
-    expect(schemaUtil.patch(schema)).toEqual({ kind: 'group', key: 'root', schemas: [] });
-  });
 });
 
 describe('SchemaUtil with no patcher feature', () => {

@@ -41,6 +41,10 @@ export class OverviewExampleComponent {
       input('txt').placeholder('文本').col(6);
       number('num').placeholder('数字').col(6);
     });
+    inputGroup().label('输入框与按钮').col(4).schemas(() => {
+      input('text').placeholder('输入关键字').col({ flex: 'auto' });
+      button().type('primary').content('搜索').variants({ ghost: true });
+    });
     textarea('textarea').label('文本框').col(12).autocomplete({
       options: AUTOCOMPLETE_OPTIONS
     });
@@ -106,7 +110,7 @@ export class OverviewExampleComponent {
       });
     });
     row().col(12).justify('space-between').schemas(() => {
-      date('dateInRow').label('居左').col(4);
+      date('dateInRow').label('居左').col(6);
       dateRange('dateRangeInRow').label('居右').col(4);
     });
   });

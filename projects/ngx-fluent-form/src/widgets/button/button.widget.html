@@ -1,5 +1,54 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <ng-container *ngIf="!(schema.hidden | reactive: model : schema : control)">
+    <ng-container *fluentInject="InputGroup as inputGroup; optional: true">
+      <ng-container *ngIf="inputGroup; else standardTemplate">
+        <a
+          *ngIf="schema.type === 'link'"
+          nz-button
+          fluentCol
+          [disabled]="schema.disabled | reactive: model : schema : control"
+          [fluentBinding]="{ schema, control, model }"
+          [ngClass]="schema.class"
+          [ngStyle]="schema.style"
+          [nzBlock]="schema.variants?.block"
+          [nzDanger]="schema.variants?.danger"
+          [nzGhost]="schema.variants?.ghost"
+          [nzLoading]="schema.loading | reactive: model : schema : control"
+          [nzShape]="schema.variants?.shape!"
+          [nzSize]="schema.size!"
+          [nzType]="schema.type"
+          [span]="schema.col | col: 'span'"
+          [flex]="schema.col | col: 'flex'"
+          [offset]="schema.col | col: 'offset'">
+          <ng-container [ngTemplateOutlet]="buttonContentTemplate"></ng-container>
+        </a>
+
+        <button
+          *ngIf="schema.type !== 'link'"
+          nz-button
+          fluentCol
+          [attr.type]="schema.mode"
+          [disabled]="schema.disabled | reactive: model : schema : control"
+          [fluentBinding]="{ schema, control, model }"
+          [ngClass]="schema.class"
+          [ngStyle]="schema.style"
+          [nzBlock]="schema.variants?.block"
+          [nzDanger]="schema.variants?.danger"
+          [nzGhost]="schema.variants?.ghost"
+          [nzLoading]="schema.loading | reactive: model : schema : control"
+          [nzShape]="schema.variants?.shape!"
+          [nzSize]="schema.size!"
+          [nzType]="schema.type!"
+          [span]="schema.col | col: 'span'"
+          [flex]="schema.col | col: 'flex'"
+          [offset]="schema.col | col: 'offset'">
+          <ng-container [ngTemplateOutlet]="buttonContentTemplate"></ng-container>
+        </button>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #standardTemplate>
     <a
       *ngIf="schema.type === 'link'"
       nz-button
@@ -34,7 +83,7 @@
       [nzType]="schema.type!">
       <ng-container [ngTemplateOutlet]="buttonContentTemplate"></ng-container>
     </button>
-  </ng-container>
+  </ng-template>
 
   <ng-template #buttonContentTemplate>
     <span

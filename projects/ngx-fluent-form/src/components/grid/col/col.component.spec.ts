@@ -5,7 +5,7 @@ import { FluentColDirective } from './col.component';
 @Component({
   standalone: true,
   imports: [FluentColDirective],
-  template: `<fluent-column [span]="span" [flex]="flex" [offset]="offset" />`,
+  template: `<fluent-col [span]="span" [flex]="flex" [offset]="offset" />`,
 })
 class TestComponent {
   @ViewChild(FluentColDirective, { read: ElementRef, static: true })

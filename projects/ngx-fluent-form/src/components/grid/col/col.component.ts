@@ -22,7 +22,7 @@ class FluentColComponent { }
   exportAs: 'fluentCol',
   standalone: true,
   host: {
-    class: 'fluent-col',
+    class: 'fluent-column',
     '[style.flex]': 'flex'
   }
 })
@@ -83,7 +83,7 @@ export class FluentColDirective implements OnInit, OnChanges {
 }
 
 function createColumnClass(span: Span | Stringify<Span>, breakpoint?: keyof Breakpoints) {
-  let clazz = `fluent-col`;
+  let clazz = `fluent-column`;
 
   if (breakpoint) {
     clazz += createBreakpointInfix(breakpoint);
@@ -97,7 +97,7 @@ function createColumnClass(span: Span | Stringify<Span>, breakpoint?: keyof Brea
 }
 
 function createColumnOffsetClass(offset: Offset | Stringify<Offset>, breakpoint?: keyof Breakpoints) {
-  let clazz = `fluent-col-offset`;
+  let clazz = `fluent-column-offset`;
 
   if (breakpoint) {
     clazz += createBreakpointInfix(breakpoint);

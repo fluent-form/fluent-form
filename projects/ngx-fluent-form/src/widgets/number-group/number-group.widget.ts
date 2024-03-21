@@ -33,6 +33,7 @@ type NumberGroupWidgetTemplateContext = WidgetTemplateContext<NumberGroupCompone
     InvokePipe,
   ],
   templateUrl: './number-group.widget.html',
+  styleUrls: ['./number-group.widget.scss']
 })
 export class NumberGroupWidget extends AbstractWidget<NumberGroupWidgetTemplateContext> {
   protected readonly helper = {

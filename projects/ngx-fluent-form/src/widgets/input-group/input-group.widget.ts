@@ -32,6 +32,7 @@ type InputGroupWidgetTemplateContext = WidgetTemplateContext<InputGroupComponent
     InvokePipe,
   ],
   templateUrl: './input-group.widget.html',
+  styleUrls: ['./input-group.widget.scss']
 })
 export class InputGroupWidget extends AbstractWidget<InputGroupWidgetTemplateContext> {
   protected readonly helper = {

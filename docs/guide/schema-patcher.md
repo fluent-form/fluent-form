@@ -20,7 +20,7 @@ import { provideFluentForm, withWidgets, withSchemaPatchers } from 'ngx-fluent-f
 
 provideFluentForm(
   withWidgets(...),
-  withSchemaPatchers(
+  withSchemaPatchers([
     {
       selector: 'input',
       patch: schema => {
@@ -36,7 +36,7 @@ provideFluentForm(
         return schema;
       }
     }
-  )
+  ])
 )
 ```
 

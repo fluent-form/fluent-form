@@ -1,6 +1,8 @@
 import { TemplateRef } from '@angular/core';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
+import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
+import { NzTabPosition } from 'ng-zorro-antd/tabs';
 import { AbstractControlContainerSchema } from './abstract.schema';
 import { Labelful, Length, MaybeSchemaReactiveFn } from './interfaces';
 import { SingleSchemaKey } from './types';
@@ -39,4 +41,20 @@ export interface AddableButton {
     danger?: boolean;
     ghost?: boolean;
   }
+}
+
+/**
+ * @public
+ */
+export interface TabsArraySchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractControlContainerSchema<Key>, Labelful {
+  kind: 'tabs-array';
+  layout?: NzFormLayoutType;
+  size?: NzSizeLDSType;
+  position?: NzTabPosition;
+  gutter?: number;
+  centered?: boolean;
+  length?: Length;
+  addable?: MaybeSchemaReactiveFn<TabsArraySchema, boolean>;
+  removable?: boolean;
+  // orderable?: boolean;
 }

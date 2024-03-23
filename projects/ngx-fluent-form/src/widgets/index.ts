@@ -20,6 +20,7 @@ export * from './row/row.widget';
 export * from './select/select.widget';
 export * from './slider/silder.widget';
 export * from './steps/steps.widget';
+export * from './tabs-array/tabs-array.widget';
 export * from './tabs/tabs.widget';
 export * from './text/text.widget';
 export * from './textarea/textarea.widget';

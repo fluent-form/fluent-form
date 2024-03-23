@@ -3,11 +3,11 @@ import { ValidatorFn, Validators } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { SchemaConfig } from '../interfaces';
 import { SchemaPatchFn, provideSchemaPatcher } from '../patcher';
-import { AbstractSchema, AbstractTextControlSchema, AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, InputControlSchema, InputGroupComponentSchema, NumberGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema, TextComponentSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { AbstractSchema, AbstractTextControlSchema, AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, InputControlSchema, InputGroupComponentSchema, NumberGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextComponentSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { SchemaKind, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP, WIDGET_MAP } from '../tokens';
 import { isNumber } from '../utils';
-import { AbstractWidget, AlertWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, FormArrayWidget, FormGroupWidget, HeadingWidget, InputGroupWidget, InputWidget, NumberGroupWidget, NumberWidget, RadioGroupWidget, RateWidget, RowWidget, SelectWidget, SilderWidget, StepsWidget, TabsWidget, TextWidget, TextareaWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from '../widgets';
+import { AbstractWidget, AlertWidget, ButtonGroupWidget, ButtonWidget, CascaderWidget, CheckboxGroupWidget, CheckboxWidget, DateRangeWidget, DateWidget, FormArrayWidget, FormGroupWidget, HeadingWidget, InputGroupWidget, InputWidget, NumberGroupWidget, NumberWidget, RadioGroupWidget, RateWidget, RowWidget, SelectWidget, SilderWidget, StepsWidget, TabsArrayWidget, TabsWidget, TextWidget, TextareaWidget, TimeWidget, ToggleWidget, TreeSelectWidget } from '../widgets';
 import { makeFluentFeature } from './helper';
 import { FluentFormFeature, FluentFormFeatureKind } from './interface';
 
@@ -21,8 +21,7 @@ export interface FluentFormWidgetFeature<S extends AbstractSchema> extends Schem
 export function withWidgets(features: (FluentFormWidgetFeature<SafeAny> | FluentFormWidgetFeature<SafeAny>[])[]): FluentFormFeature<FluentFormFeatureKind.Widget> {
   const flattenedFeatures = features.flat().concat(
     // 添加内置 widget,
-    useRowWidget(),
-    useFormGroupWidget(),
+    useRowWidget()
   );
 
   return makeFluentFeature(FluentFormFeatureKind.Widget, [
@@ -62,7 +61,16 @@ export function withWidgets(features: (FluentFormWidgetFeature<SafeAny> | Fluent
         selector: feature.kind,
         patch: feature.patch!
       })
-    )
+    ),
+    // 添加内置的 patcher
+    provideSchemaPatcher({
+      selector: 'group',
+      patch: (schema: SafeAny) => {
+        schema.layout ??= 'vertical';
+        schema.gap ??= { xs: 1, sm: 2, md: 3, lg: 4, xl: 5 };
+        return schema;
+      }
+    })
   ]);
 }
 
@@ -93,6 +101,7 @@ export function withAllWidgets(): FluentFormFeature<FluentFormFeatureKind.Widget
     useTabsWidget(),
     useFormGroupWidget(),
     useFormArrayWidget(),
+    useTabsArrayWidget(),
   ]);
 }
 
@@ -399,20 +408,23 @@ function useRowWidget(): FluentFormWidgetFeature<TextComponentSchema> {
 export function useFormGroupWidget(): FluentFormWidgetFeature<FormGroupSchema> {
   return {
     kind: SchemaKind.Group,
-    type: SchemaType.ControlContainer,
-    widget: FormGroupWidget,
-    patch: schema => {
-      schema.layout ??= 'vertical';
-      schema.gap ??= { xs: 1, sm: 2, md: 3, lg: 4, xl: 5 };
-      return schema;
-    }
+    type: SchemaType.ControlGroup,
+    widget: FormGroupWidget
   };
 }
 
 export function useFormArrayWidget(): FluentFormWidgetFeature<FormArraySchema> {
   return {
     kind: SchemaKind.Array,
-    type: SchemaType.ControlContainer,
+    type: SchemaType.ControlArray,
     widget: FormArrayWidget
+  };
+}
+
+export function useTabsArrayWidget(): FluentFormWidgetFeature<TabsArraySchema> {
+  return {
+    kind: SchemaKind.TabsArray,
+    type: SchemaType.ControlArray,
+    widget: TabsArrayWidget
   };
 }

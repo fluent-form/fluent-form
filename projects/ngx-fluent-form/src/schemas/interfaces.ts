@@ -13,7 +13,8 @@ import { SchemaKey } from './types';
  */
 export enum SchemaType {
   Control,
-  ControlContainer,
+  ControlGroup,
+  ControlArray,
   ControlWrapper,
   Component,
   ComponentContainer,
@@ -46,6 +47,7 @@ export enum SchemaKind {
 
   Group = 'group',
   Array = 'array',
+  TabsArray = 'tabs-array',
 
   Template = 'template',
   Text = 'text',

@@ -1,5 +1,5 @@
 import { input } from './control';
-import { array, form, group } from './control-container';
+import { array, form, group, tabsArray } from './control-container';
 
 describe('control-container', () => {
   describe('form', () => {
@@ -48,6 +48,18 @@ describe('control-container', () => {
     expect(schemas).toEqual([{
       kind: 'array',
       key: 'array',
+      schemas: []
+    }]);
+  });
+
+  it('tabs-array', () => {
+    const { schemas } = form(() => {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      tabsArray('tabs-array').schemas(() => { });
+    });
+    expect(schemas).toEqual([{
+      kind: 'tabs-array',
+      key: 'tabs-array',
       schemas: []
     }]);
   });

@@ -9,7 +9,7 @@ import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { FluentColDirective } from '../components';
 import { AnySchema } from './index.schema';
 import { Column, ControlEventListenerHolder, ControlValueMapper, Labelful, Length, MaybeSchemaReactiveFn, Row, SchemaLike } from './interfaces';
-import { SchemaKey } from './types';
+import { SchemaKey, SingleSchemaKey } from './types';
 
 /**
  * @public
@@ -59,7 +59,7 @@ export interface AbstractControlSchema<Key extends SchemaKey = SchemaKey, Val = 
  * @public
  * 抽象的容器控件图示
  */
-export interface AbstractControlContainerSchema<Key extends SchemaKey> extends AbstractSchema<Key>, ControlEventListenerHolder<SafeAny>, Row {
+export interface AbstractControlContainerSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractSchema<Key>, ControlEventListenerHolder<SafeAny>, Row {
   schemas: AnySchema[];
   /** Validator for the control */
   validators?: ValidatorFn[];

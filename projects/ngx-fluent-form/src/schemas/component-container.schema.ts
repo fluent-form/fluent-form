@@ -45,11 +45,10 @@ export interface TabsComponentSchema<Key extends SingleSchemaKey = SingleSchemaK
   kind: 'tabs';
   type?: NzTabType;
   active?: number;
-  animate?: boolean;
   size?: NzSizeLDSType;
   position?: NzTabPosition;
   gutter?: number;
-  center?: boolean;
+  centered?: boolean;
   schemas: TabComponentSchema[];
 }
 

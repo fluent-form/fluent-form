@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { throwWidgetNotFoundError } from '../errors';
 import { SCHEMA_PATCHERS } from '../patcher';
-import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlContainerSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, SchemaKey, SingleSchemaKey } from '../schemas';
+import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlArraySchema, AnyControlContainerSchema, AnyControlGroupSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, SchemaKey, SingleSchemaKey } from '../schemas';
 import { SchemaLike, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP } from '../tokens';
 import { isArray, isString } from './is.utils';
@@ -55,7 +55,7 @@ export class SchemaUtil {
     return schemas.reduce((schemas, schema) => {
       if (this.isControlWrapper(schema) || this.isComponentContainer(schema)) {
         schemas = schemas.concat(this.filterControls(schema.schemas));
-      } else if (this.isControlContainer(schema) || this.isControl(schema)) {
+      } else if (this.isControl(schema) || this.isControlGroup(schema) || this.isControlArray(schema)) {
         schemas.push(schema);
       }
 
@@ -63,8 +63,12 @@ export class SchemaUtil {
     }, [] as (AnyControlSchema | AnyControlContainerSchema)[]);
   }
 
-  isControlContainer(schema: SchemaLike): schema is AnyControlContainerSchema {
-    return this.typeOf(schema) === SchemaType.ControlContainer;
+  isControlGroup(schema: SchemaLike): schema is AnyControlGroupSchema {
+    return this.typeOf(schema) === SchemaType.ControlGroup;
+  }
+
+  isControlArray(schema: SchemaLike): schema is AnyControlArraySchema {
+    return this.typeOf(schema) === SchemaType.ControlArray;
   }
 
   isControlWrapper(schema: SchemaLike): schema is AnyControlWrapperSchema {

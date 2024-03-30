@@ -33,7 +33,7 @@
         [control]="control"
         [schema]="schema"
         [model]="model">
-        <!-- form array 的 schemas 可能会有多个，只在第一个时渲染移除按钮 -->
+        <!-- form array 的 schemas 可能会有多个，只在第一个时渲染 remove button -->
         <button
           *ngIf="first && (formSchema.removable ?? true)"
           class="fluent-array-element-remove-btn"
@@ -63,6 +63,7 @@
       </ng-container>
     </ng-container>
 
+    <!-- add button -->
     <fluent-col span="12">
       <nz-form-item>
         <nz-form-control>

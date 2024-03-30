@@ -2,7 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { array, form, group, input, inputGroup, slider, textarea } from '../compose';
-import { useTextWidget, withAllWidgets, withSchemaPatchers, withWidgets } from '../features';
+import { withAllWidgets, withSchemaPatchers } from '../features';
+import { SCHEMA_PATCHERS } from '../patcher';
 import { provideFluentForm } from '../provider';
 import { AlertComponentSchema, AnySchema, ButtonComponentSchema, HeadingComponentSchema, InputControlSchema, NumberInputControlSchema, TextComponentSchema } from '../schemas';
 import { SchemaType } from '../schemas/interfaces';
@@ -59,7 +60,8 @@ describe('SchemaUtil', () => {
     expect(schemaUtil.isComponentContainer({ kind: 'tab' })).toBeTrue();
     expect(schemaUtil.isComponent({ kind: 'text' })).toBeTrue();
     expect(schemaUtil.isComponentWrapper({ kind: 'button-group' })).toBeTrue();
-    expect(schemaUtil.isControlContainer({ kind: 'group' })).toBeTrue();
+    expect(schemaUtil.isControlGroup({ kind: 'group' })).toBeTrue();
+    expect(schemaUtil.isControlArray({ kind: 'array' })).toBeTrue();
     expect(schemaUtil.isControlWrapper({ kind: 'input-group' })).toBeTrue();
     expect(schemaUtil.isControl({ kind: 'input' })).toBeTrue();
     expect(schemaUtil.isNonControl({ kind: 'button' })).toBeTrue();
@@ -365,13 +367,11 @@ describe('SchemaUtil with no patcher feature', () => {
     TestBed.configureTestingModule({
       providers: [
         provideFluentForm(
-          withWidgets([
-            useTextWidget()
-          ])
+          withAllWidgets()
         )
       ]
     });
-
+    TestBed.overrideProvider(SCHEMA_PATCHERS, { useFactory: () => null });
     schemaUtil = TestBed.inject(SchemaUtil);
   });
 

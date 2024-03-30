@@ -2,7 +2,6 @@ import { inject, Injectable } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { AnySchema } from '../schemas';
-import { SchemaKind } from '../schemas/interfaces';
 import { FormUtil, getChildControl } from './form.utils';
 import { SchemaUtil } from './schema.utils';
 import { ValueUtil } from './value.utils';
@@ -32,7 +31,7 @@ export class ModelUtil {
       // 这些图示不包含控件图示，直接跳过
       if (this.schemaUtil.isNonControl(schema)) continue;
 
-      if (schema.kind === SchemaKind.Group) {
+      if (this.schemaUtil.isControlGroup(schema)) {
         const key = schema.key!;
         const formGroup = getChildControl(form, key) as FormGroup;
 
@@ -40,7 +39,7 @@ export class ModelUtil {
         continue;
       }
 
-      if (schema.kind === SchemaKind.Array) {
+      if (this.schemaUtil.isControlArray(schema)) {
         const key = schema.key!;
         const array: AnyArray = model[key] ??= [];
         const formArray = getChildControl(form, key) as FormArray;

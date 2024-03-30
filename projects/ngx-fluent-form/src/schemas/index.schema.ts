@@ -2,7 +2,7 @@ import { StableBuilder } from '../compose';
 import { RowComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema } from './component-container.schema';
 import { ButtonGroupComponentSchema } from './component-wrapper.schema';
 import { AlertComponentSchema, ButtonComponentSchema, HeadingComponentSchema, TemplateSchema, TextComponentSchema } from './component.schema';
-import { FormArraySchema, FormGroupSchema } from './control-container.schema';
+import { FormArraySchema, FormGroupSchema, TabsArraySchema } from './control-container.schema';
 import { InputGroupComponentSchema, NumberGroupComponentSchema } from './control-wrapper.schema';
 import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, HeadlessControlSchema, InputControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from './control.schema';
 import { SingleSchemaKey } from './types';
@@ -48,8 +48,23 @@ export type AnyComponentContainerSchema<Key extends SingleSchemaKey = SingleSche
 /** 任意组件容器构建器 */
 export type AnyComponentContainerBuilder<Key extends SingleSchemaKey = SingleSchemaKey> = StableBuilder<AnyComponentContainerSchema<Key>>;
 
+/** 任意控件组图示 */
+export type AnyControlGroupSchema<Key extends SingleSchemaKey = SingleSchemaKey> =
+  | FormGroupSchema<Key>;
+/** 任意控件组构建器 */
+export type AnyControlGroupBuilder<Key extends SingleSchemaKey = SingleSchemaKey> = StableBuilder<AnyControlGroupSchema<Key>>;
+
+/** 任意控件数组图示 */
+export type AnyControlArraySchema<Key extends SingleSchemaKey = SingleSchemaKey> =
+  | FormArraySchema<Key>
+  | TabsArraySchema<Key>;
+/** 任意控件数组构建器 */
+export type AnyControlArrayBuilder<Key extends SingleSchemaKey = SingleSchemaKey> = StableBuilder<AnyControlArraySchema<Key>>;
+
 /** 任意控件容器图示 */
-export type AnyControlContainerSchema<Key extends SingleSchemaKey = SingleSchemaKey> = FormGroupSchema<Key> | FormArraySchema<Key>;
+export type AnyControlContainerSchema<Key extends SingleSchemaKey = SingleSchemaKey> =
+  | AnyControlGroupSchema<Key>
+  | AnyControlArraySchema<Key>
 /** 任意控件容器构建器 */
 export type AnyControlContainerBuilder<Key extends SingleSchemaKey = SingleSchemaKey> = StableBuilder<AnyControlContainerSchema<Key>>;
 

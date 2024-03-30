@@ -43,8 +43,8 @@ describe('FluentSchemaTypePipe', () => {
   });
 
   it('should transform the control container schema type', () => {
-    expect(pipe.transform(SchemaKind.Group)).toBe(SchemaType.ControlContainer);
-    expect(pipe.transform(SchemaKind.Array)).toBe(SchemaType.ControlContainer);
+    expect(pipe.transform(SchemaKind.Group)).toBe(SchemaType.ControlGroup);
+    expect(pipe.transform(SchemaKind.Array)).toBe(SchemaType.ControlArray);
   });
 
   it('should transform the control wrapper schema type', () => {

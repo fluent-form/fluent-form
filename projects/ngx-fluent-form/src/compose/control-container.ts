@@ -1,5 +1,5 @@
 import { SafeAny } from '@ngify/types';
-import { AbstractControlContainerSchema, AnySchema, FormArraySchema, FormGroupSchema, SchemaKey, SingleSchemaKey } from '../schemas';
+import { AbstractControlContainerSchema, AnySchema, FormArraySchema, FormGroupSchema, SingleSchemaKey, TabsArraySchema } from '../schemas';
 import { isArray, isFunction } from '../utils';
 import { StableBuilder, UnstableBuilder, composeBuilder } from './compose-builder';
 import { KindOrKey } from './helper';
@@ -16,10 +16,16 @@ export function array<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<F
   return composeBuilder<FormArraySchema<Key>>().kind('array').key(key);
 }
 
+export function tabsArray(): UnstableBuilder<TabsArraySchema<number>, KindOrKey>;
+export function tabsArray<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<TabsArraySchema<Key>, KindOrKey>;
+export function tabsArray<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<TabsArraySchema<Key>, KindOrKey> {
+  return composeBuilder<TabsArraySchema<Key>>().kind('tabs-array').key(key);
+}
+
 export function form(composeFn: FormComposeFn): FormGroupSchema;
 export function form(schemas: AnySchema[]): FormGroupSchema;
-export function form(builder: StableBuilder<AbstractControlContainerSchema<SchemaKey>>): FormGroupSchema;
-export function form(fnOrSchemasOrBuilder: AnySchema[] | FormComposeFn | StableBuilder<AbstractControlContainerSchema<SchemaKey>>): FormGroupSchema {
+export function form(builder: StableBuilder<AbstractControlContainerSchema>): FormGroupSchema;
+export function form(fnOrSchemasOrBuilder: AnySchema[] | FormComposeFn | StableBuilder<AbstractControlContainerSchema>): FormGroupSchema {
   if (isArray(fnOrSchemasOrBuilder)) {
     return {
       kind: 'group',

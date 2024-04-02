@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
-import { AnySchema } from '../schemas';
+import { AbstractSchema } from '../schemas';
 import { FormUtil, getChildControl } from './form.utils';
 import { SchemaUtil } from './schema.utils';
 import { ValueUtil } from './value.utils';
@@ -24,9 +24,9 @@ export class ModelUtil {
    * @param schemas
    * @param completed
    */
-  updateForm(form: FormGroup, model: AnyObject, schemas: AnySchema[], completed?: boolean): FormGroup;
-  updateForm(form: FormArray, model: AnyArray, schemas: AnySchema[], completed?: boolean): FormArray;
-  updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AnySchema[], completed = true): FormGroup | FormArray {
+  updateForm(form: FormGroup, model: AnyObject, schemas: AbstractSchema[], completed?: boolean): FormGroup;
+  updateForm(form: FormArray, model: AnyArray, schemas: AbstractSchema[], completed?: boolean): FormArray;
+  updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AbstractSchema[], completed = true): FormGroup | FormArray {
     for (const schema of schemas) {
       // 这些图示不包含控件图示，直接跳过
       if (this.schemaUtil.isNonControl(schema)) continue;

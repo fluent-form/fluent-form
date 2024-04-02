@@ -1,5 +1,5 @@
 import { inject, Pipe, PipeTransform } from '@angular/core';
-import { AnyContainerSchema, AnyControlSchema, AnySchema, FormArraySchema, FormGroupSchema, SchemaKey, SingleSchemaKey } from '../schemas';
+import { AbstractControlContainerSchema, AbstractControlSchema, AnyContainerSchema, SchemaKey, SingleSchemaKey } from '../schemas';
 import { SchemaUtil } from '../utils';
 
 /**
@@ -18,12 +18,12 @@ export class FluentSchemaPipe implements PipeTransform {
    * @param schemas
    * @param type 用来重载方法的返回值
    */
-  transform(value: SingleSchemaKey | SchemaKey[], schema: AnyContainerSchema, type: 'control'): AnyControlSchema | null;
-  transform(value: SingleSchemaKey | SchemaKey[], schema: AnyContainerSchema, type: 'group'): FormGroupSchema | null;
-  transform(value: SingleSchemaKey | SchemaKey[], schema: AnyContainerSchema, type: 'array'): FormArraySchema | null;
-  transform(value: SingleSchemaKey | SchemaKey[], schema: AnyContainerSchema): AnySchema | null;
-  transform(value: SingleSchemaKey | SchemaKey[], schema: AnyContainerSchema): AnySchema | null {
-    return this.schemaUtil.find(schema, value);
+  transform(value: SingleSchemaKey | SchemaKey[], schema: AnyContainerSchema, type: 'control'): AbstractControlSchema | null;
+  transform(value: SingleSchemaKey | SchemaKey[], schema: AnyContainerSchema, type: 'group'): AbstractControlContainerSchema | null;
+  transform(value: SingleSchemaKey | SchemaKey[], schema: AnyContainerSchema, type: 'array'): AbstractControlContainerSchema | null;
+  transform(value: SingleSchemaKey | SchemaKey[], schema: AnyContainerSchema): AbstractControlSchema | AbstractControlContainerSchema | null;
+  transform(value: SingleSchemaKey | SchemaKey[], schema: AnyContainerSchema): AbstractControlSchema | AbstractControlContainerSchema | null {
+    return this.schemaUtil.find(schema, value) as AbstractControlSchema | AbstractControlContainerSchema | null;
   }
 
 }

@@ -1,7 +1,7 @@
 import { Directive, inject } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
-import { AnyComponentSchema, AnyContainerSchema, AnyControlSchema } from '../../../schemas';
+import { AnyContainerSchema } from '../../../schemas';
 import { SchemaUtil } from '../../../utils';
 import { FluentOutletDirective } from '../outlet.directive';
 
@@ -35,7 +35,7 @@ export abstract class FluentControlContainerDirective<T extends AnyObject | AnyA
   }
 
   updateOutlet(outlet: FluentOutletDirective<T>) {
-    const schema = this.schemaUtil.find(this.schema, outlet.key) as AnyComponentSchema | AnyControlSchema | null;
+    const schema = this.schemaUtil.find(this.schema, outlet.key);
     if (schema) {
       outlet.control = this.form.get(outlet.key.toString()) ?? this.form;
       outlet.schema = schema;

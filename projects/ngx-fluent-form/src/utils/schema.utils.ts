@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { throwWidgetNotFoundError } from '../errors';
 import { SCHEMA_PATCHERS } from '../patcher';
-import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlArraySchema, AnyControlContainerSchema, AnyControlGroupSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, SchemaKey, SingleSchemaKey } from '../schemas';
+import { AbstractControlContainerSchema, AbstractControlSchema, AbstractSchema, AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlArraySchema, AnyControlGroupSchema, AnyControlWrapperSchema, AnySchema, SchemaKey, SingleSchemaKey } from '../schemas';
 import { SchemaLike, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP } from '../tokens';
 import { isArray, isString } from './is.utils';
@@ -60,7 +60,7 @@ export class SchemaUtil {
       }
 
       return schemas;
-    }, [] as (AnyControlSchema | AnyControlContainerSchema)[]);
+    }, [] as (AbstractControlSchema | AbstractControlContainerSchema)[]);
   }
 
   isControlGroup(schema: SchemaLike): schema is AnyControlGroupSchema {
@@ -75,7 +75,7 @@ export class SchemaUtil {
     return this.typeOf(schema) === SchemaType.ControlWrapper;
   }
 
-  isControl(schema: SchemaLike): schema is AnyControlSchema {
+  isControl(schema: SchemaLike): schema is AbstractControlSchema {
     return this.typeOf(schema) === SchemaType.Control;
   }
 
@@ -119,7 +119,7 @@ export class SchemaUtil {
     return this.schemaMap.get(schema.kind)?.type;
   }
 
-  validatorsOf(schema: AnyControlSchema) {
+  validatorsOf(schema: AbstractControlSchema) {
     const validators: ValidatorFn[] = this.schemaMap.get(schema.kind)?.validators?.(schema) ?? [];
 
     if (schema.required === true) {
@@ -133,10 +133,10 @@ export class SchemaUtil {
     return key.split('.');
   }
 
-  find(schema: AnyContainerSchema, key: SingleSchemaKey): AnySchema | null;
-  find(schema: AnyContainerSchema, key: SchemaKey[]): AnySchema | null;
-  find(schema: AnyContainerSchema, path: SingleSchemaKey | SchemaKey[]): AnySchema | null;
-  find(schema: AnyContainerSchema, path: SingleSchemaKey | SchemaKey[]): AnySchema | null {
+  find(schema: AnyContainerSchema, key: SingleSchemaKey): AbstractSchema | null;
+  find(schema: AnyContainerSchema, key: SchemaKey[]): AbstractSchema | null;
+  find(schema: AnyContainerSchema, path: SingleSchemaKey | SchemaKey[]): AbstractSchema | null;
+  find(schema: AnyContainerSchema, path: SingleSchemaKey | SchemaKey[]): AbstractSchema | null {
     const paths = isArray(path)
       ? path.map(o => isArray(o) ? o.toString() : o)
       : path.toString().split('.');

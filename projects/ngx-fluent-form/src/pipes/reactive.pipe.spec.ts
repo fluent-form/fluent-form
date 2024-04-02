@@ -3,13 +3,13 @@ import { FormControl } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
 import { withAllWidgets, withStaticExpression } from '../features';
 import { provideFluentForm } from '../provider';
-import { AnyControlSchema } from '../schemas';
+import { AbstractControlSchema } from '../schemas';
 import { FormUtil } from '../utils';
 import { FluentReactivePipe } from './reactive.pipe';
 
 describe('FluentReactivePipe', () => {
   let model: AnyObject;
-  let schema: AnyControlSchema;
+  let schema: AbstractControlSchema;
   let ctrl: FormControl;
   let pipe: FluentReactivePipe;
 

@@ -57,10 +57,6 @@ export class FormUtil {
 
   private createControlMap(schemas: AnySchema[], model: AnyObject) {
     return schemas.reduce((controls, schema) => {
-      if (this.schemaUtil.isNonControl(schema)) {
-        return controls;
-      }
-
       if (this.schemaUtil.isControlGroup(schema)) {
         const key = schema.key!.toString();
         controls[key] = this.createFormGroup(schema, model[key] ?? {});
@@ -69,24 +65,25 @@ export class FormUtil {
         controls[key] = this.createFormArray(schema, model[key] ?? []);
       } else if (this.schemaUtil.isControlWrapper(schema) || this.schemaUtil.isComponentContainer(schema)) {
         Object.assign(controls, this.createControlMap(schema.schemas, model));
-      } else if (this.schemaUtil.isPathKeySchema(schema)) {
-        const paths = this.schemaUtil.parsePathKey(schema.key as string);
-        const key = paths.pop()!;
+      } else if (this.schemaUtil.isControl(schema)) {
+        if (this.schemaUtil.isPathKeySchema(schema)) {
+          const paths = this.schemaUtil.parsePathKey(schema.key as string);
+          const key = paths.pop()!;
 
-        const parent: FormGroup = paths.reduce((previousGroup, path) => {
-          let group = previousGroup.get(path) as FormGroup;
+          const parent: FormGroup = paths.reduce((previousGroup, path) => {
+            let group = previousGroup.get(path) as FormGroup;
 
-          if (!group) {
-            group = new FormGroup({});
-            previousGroup.addControl(path, group);
-          }
+            if (!group) {
+              group = new FormGroup({});
+              previousGroup.addControl(path, group);
+            }
 
-          return group;
-        }, (controls[paths.shift()!] ??= new FormGroup({})) as FormGroup);
-
-        parent.addControl(key, this.createFormControl(schema, model));
-      } else {
-        controls[schema.key!.toString()] = this.createFormControl(schema, model);
+            return group;
+          }, (controls[paths.shift()!] ??= new FormGroup({})) as FormGroup);
+          parent.addControl(key, this.createFormControl(schema, model));
+        } else {
+          controls[schema.key!.toString()] = this.createFormControl(schema, model);
+        }
       }
 
       return controls;
@@ -138,9 +135,6 @@ export class FormUtil {
   updateForm(form: FormArray, model: AnyArray, schemas: AbstractSchema[]): void;
   updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AbstractSchema[]): void {
     for (const schema of schemas) {
-      // 这些图示不包含控件图示，直接跳过
-      if (this.schemaUtil.isNonControl(schema)) continue;
-
       if (this.schemaUtil.isControlGroup(schema)) {
         const key = schema.key!;
         const formGroup = getChildControl(form, key) as FormGroup;
@@ -199,9 +193,6 @@ export class FormUtil {
   updateModel(model: AnyArray, form: FormArray, schemas: AbstractSchema[]): AnyArray;
   updateModel(model: AnyObject, form: FormGroup | FormArray, schemas: AbstractSchema[]): AnyObject | AnyArray {
     for (const schema of schemas) {
-      // 这些图示不包含控件图示，直接跳过
-      if (this.schemaUtil.isNonControl(schema)) continue;
-
       if (this.schemaUtil.isControlGroup(schema)) {
         const key = schema.key!;
         const formGroup = getChildControl(form, key) as FormGroup;
@@ -225,25 +216,27 @@ export class FormUtil {
         continue;
       }
 
-      const key = schema.key!.toString();
-      const control = getChildControl(form, key)!;
-      const value = this.valueUtil.valueOfControl(control, schema);
+      if (this.schemaUtil.isControl(schema)) {
+        const key = schema.key!.toString();
+        const control = getChildControl(form, key)!;
+        const value = this.valueUtil.valueOfControl(control, schema);
 
-      // 多字段情况
-      if (this.schemaUtil.isMultiKeySchema(schema)) {
-        (schema.key as string[]).map((prop, idx) => {
-          model[prop] = (value as [unknown, unknown])?.[idx] ?? null;
-        });
-      } else if (this.schemaUtil.isPathKeySchema(schema)) {
-        const paths = this.schemaUtil.parsePathKey(schema.key as string);
-        let _model = model;
-        for (let i = 0; i < paths.length - 1; i++) {
-          const path = paths[i];
-          _model = _model[path] ??= {};
+        // 多字段情况
+        if (this.schemaUtil.isMultiKeySchema(schema)) {
+          (schema.key as string[]).map((prop, idx) => {
+            model[prop] = (value as [unknown, unknown])?.[idx] ?? null;
+          });
+        } else if (this.schemaUtil.isPathKeySchema(schema)) {
+          const paths = this.schemaUtil.parsePathKey(schema.key as string);
+          let _model = model;
+          for (let i = 0; i < paths.length - 1; i++) {
+            const path = paths[i];
+            _model = _model[path] ??= {};
+          }
+          _model[paths.pop()!] = value;
+        } else {
+          model[key] = value;
         }
-        _model[paths.pop()!] = value;
-      } else {
-        model[key] = value;
       }
     }
 

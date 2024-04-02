@@ -28,9 +28,6 @@ export class ModelUtil {
   updateForm(form: FormArray, model: AnyArray, schemas: AbstractSchema[], completed?: boolean): FormArray;
   updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AbstractSchema[], completed = true): FormGroup | FormArray {
     for (const schema of schemas) {
-      // 这些图示不包含控件图示，直接跳过
-      if (this.schemaUtil.isNonControl(schema)) continue;
-
       if (this.schemaUtil.isControlGroup(schema)) {
         const key = schema.key!;
         const formGroup = getChildControl(form, key) as FormGroup;
@@ -67,10 +64,12 @@ export class ModelUtil {
         continue;
       }
 
-      const value = this.valueUtil.valueOfModel(model, schema);
-      const control = getChildControl(form, schema.key!)!;
+      if (this.schemaUtil.isControl(schema)) {
+        const value = this.valueUtil.valueOfModel(model, schema);
+        const control = getChildControl(form, schema.key!)!;
 
-      control.setValue(value, { onlySelf: true });
+        control.setValue(value, { onlySelf: true });
+      }
     }
 
     // 仅在完成全部子更新时，再关闭 onlySelf

@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { throwWidgetNotFoundError } from '../errors';
 import { SCHEMA_PATCHERS } from '../patcher';
-import { AbstractControlContainerSchema, AbstractControlSchema, AbstractSchema, AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlArraySchema, AnyControlGroupSchema, AnyControlWrapperSchema, AnySchema, SchemaKey, SingleSchemaKey } from '../schemas';
+import { AbstractControlContainerSchema, AbstractControlSchema, AbstractSchema, AnyComponentContainerSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlWrapperSchema, AnySchema, SchemaKey, SingleSchemaKey } from '../schemas';
 import { SchemaLike, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP } from '../tokens';
 import { isArray, isString } from './is.utils';
@@ -63,11 +63,11 @@ export class SchemaUtil {
     }, [] as (AbstractControlSchema | AbstractControlContainerSchema)[]);
   }
 
-  isControlGroup(schema: SchemaLike): schema is AnyControlGroupSchema {
+  isControlGroup(schema: SchemaLike): schema is AbstractControlContainerSchema {
     return this.typeOf(schema) === SchemaType.ControlGroup;
   }
 
-  isControlArray(schema: SchemaLike): schema is AnyControlArraySchema {
+  isControlArray(schema: SchemaLike): schema is AbstractControlContainerSchema {
     return this.typeOf(schema) === SchemaType.ControlArray;
   }
 
@@ -87,7 +87,7 @@ export class SchemaUtil {
     return this.typeOf(schema) === SchemaType.ComponentWrapper;
   }
 
-  isComponent(schema: SchemaLike): schema is AnyComponentSchema {
+  isComponent(schema: SchemaLike): schema is AbstractSchema {
     return this.typeOf(schema) === SchemaType.Component;
   }
 
@@ -111,7 +111,7 @@ export class SchemaUtil {
    * 非控件图示，表示其本身或其子节点不会包含控件图示
    * @param schema
    */
-  isNonControl(schema: SchemaLike): schema is AnyComponentSchema | AnyComponentWrapperSchema {
+  isNonControl(schema: SchemaLike): schema is AbstractSchema {
     return this.isComponent(schema) || this.isComponentWrapper(schema);
   }
 

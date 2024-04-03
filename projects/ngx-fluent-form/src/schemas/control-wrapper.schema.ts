@@ -10,7 +10,7 @@ import { SchemaKey, SingleSchemaKey } from './types';
 /**
  * @public
  */
-export interface ControlWrapper<Key extends SingleSchemaKey> extends AbstractSchema<Key> {
+export interface AbstractControlWrapperSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractSchema<Key> {
   schemas: ComposableComponentSchema[];
 }
 
@@ -18,7 +18,7 @@ export interface ControlWrapper<Key extends SingleSchemaKey> extends AbstractSch
  * @public
  */
 export interface InputGroupComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends ControlWrapper<Key>, Labelful, ComponentEventListenerHolder<NzInputGroupComponent>, ComponentPropertyHolder<NzInputGroupComponent> {
+  extends AbstractControlWrapperSchema<Key>, Labelful, ComponentEventListenerHolder<NzInputGroupComponent>, ComponentPropertyHolder<NzInputGroupComponent> {
   kind: 'input-group';
   before?: MaybeSchemaReactiveFn<InputGroupComponentSchema, string | TemplateRef<void> | { icon: string } | null>;
   after?: MaybeSchemaReactiveFn<InputGroupComponentSchema, string | TemplateRef<void> | { icon: string } | null>;
@@ -33,7 +33,7 @@ export interface InputGroupComponentSchema<Key extends SingleSchemaKey = SingleS
  * @public
  */
 export interface NumberGroupComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends ControlWrapper<Key>, Labelful, ComponentEventListenerHolder<NzInputNumberGroupComponent>, ComponentPropertyHolder<NzInputNumberGroupComponent> {
+  extends AbstractControlWrapperSchema<Key>, Labelful, ComponentEventListenerHolder<NzInputNumberGroupComponent>, ComponentPropertyHolder<NzInputNumberGroupComponent> {
   kind: 'number-group';
   before?: MaybeSchemaReactiveFn<NumberGroupComponentSchema, string | TemplateRef<void> | { icon: string } | null>;
   after?: MaybeSchemaReactiveFn<NumberGroupComponentSchema, string | TemplateRef<void> | { icon: string } | null>;

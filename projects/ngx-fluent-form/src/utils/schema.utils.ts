@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { throwWidgetNotFoundError } from '../errors';
 import { SCHEMA_PATCHERS } from '../patcher';
-import { AbstractControlContainerSchema, AbstractControlSchema, AbstractSchema, AnyComponentContainerSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlWrapperSchema, AnySchema, SchemaKey, SingleSchemaKey } from '../schemas';
+import { AbstractControlContainerSchema, AbstractControlSchema, AbstractControlWrapperSchema, AbstractSchema, AnyComponentContainerSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnySchema, SchemaKey, SingleSchemaKey } from '../schemas';
 import { SchemaLike, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP } from '../tokens';
 import { isArray, isString } from './is.utils';
@@ -71,7 +71,7 @@ export class SchemaUtil {
     return this.typeOf(schema) === SchemaType.ControlArray;
   }
 
-  isControlWrapper(schema: SchemaLike): schema is AnyControlWrapperSchema {
+  isControlWrapper(schema: SchemaLike): schema is AbstractControlWrapperSchema {
     return this.typeOf(schema) === SchemaType.ControlWrapper;
   }
 

@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
-import { AnySchema } from '../schemas';
+import { AbstractSchema } from '../schemas';
+import { Indexable } from '../types';
 import { FormUtil } from './form.utils';
 import { ModelUtil } from './model.utils';
 
@@ -24,7 +25,7 @@ describe('ModelUtils', () => {
 
   describe('updateForm', () => {
     it('group', () => {
-      const schemas: AnySchema[] = [
+      const schemas: Indexable<AbstractSchema>[] = [
         { kind: 'input', key: 'input' }
       ];
       const form = formUtil.createFormGroup(schemas, {});
@@ -37,7 +38,7 @@ describe('ModelUtils', () => {
     });
 
     it('group nested group', () => {
-      const schemas: AnySchema[] = [
+      const schemas: Indexable<AbstractSchema>[] = [
         {
           kind: 'group',
           key: 'object',
@@ -56,7 +57,7 @@ describe('ModelUtils', () => {
     });
 
     it('array', () => {
-      const schemas: AnySchema[] = [
+      const schemas: Indexable<AbstractSchema>[] = [
         {
           kind: 'array',
           key: 'array',
@@ -78,7 +79,7 @@ describe('ModelUtils', () => {
     });
 
     it('array nested array', () => {
-      const schemas: AnySchema[] = [
+      const schemas: Indexable<AbstractSchema>[] = [
         {
           kind: 'array',
           key: 'array',
@@ -111,7 +112,7 @@ describe('ModelUtils', () => {
     });
 
     it('array nested object', () => {
-      const schemas: AnySchema[] = [
+      const schemas: Indexable<AbstractSchema>[] = [
         {
           kind: 'array',
           key: 'array',
@@ -138,7 +139,7 @@ describe('ModelUtils', () => {
     });
 
     it('with double key control', () => {
-      const schemas: AnySchema[] = [
+      const schemas: Indexable<AbstractSchema>[] = [
         { kind: 'slider', key: ['start', 'end'] }
       ];
       const form = formUtil.createFormGroup(schemas, {});
@@ -151,7 +152,7 @@ describe('ModelUtils', () => {
     });
 
     it('with control wrapper', () => {
-      const schemas: AnySchema[] = [
+      const schemas: Indexable<AbstractSchema>[] = [
         {
           kind: 'input-group',
           schemas: [
@@ -169,7 +170,7 @@ describe('ModelUtils', () => {
     });
 
     it('with component', () => {
-      const schemas: AnySchema[] = [
+      const schemas: Indexable<AbstractSchema>[] = [
         { kind: 'input', key: 'input' },
         { kind: 'button' }
       ];
@@ -183,7 +184,7 @@ describe('ModelUtils', () => {
     });
 
     it('with component wrapper', () => {
-      const schemas: AnySchema[] = [
+      const schemas: Indexable<AbstractSchema>[] = [
         { kind: 'input', key: 'input' },
         {
           kind: 'button-group',
@@ -202,7 +203,7 @@ describe('ModelUtils', () => {
     });
 
     it('with component container', () => {
-      const schemas: AnySchema[] = [
+      const schemas: Indexable<AbstractSchema>[] = [
         {
           kind: 'row',
           schemas: [

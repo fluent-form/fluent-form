@@ -5,9 +5,10 @@ import { AnyArray, AnyObject } from '@ngify/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { FluentVarDirective, FluentWithInjectorDirective } from '../../directives';
 import { FluentControlPipe, FluentReactivePipe, FluentSchemaPipe, FluentSchemaTypePipe, FluentTemplatePipe, FluentWidgetTemplatePipe, InvokePipe } from '../../pipes';
-import { AnySchema } from '../../schemas';
+import { AbstractSchema } from '../../schemas';
 import { labelHelper, tooltipHelper } from '../../schemas/helper';
 import { SchemaType } from '../../schemas/interfaces';
+import { Indexable } from '../../types';
 
 /**
  * @internal
@@ -40,7 +41,7 @@ export class FluentFormItemOutletComponent<T extends AnyObject | AnyArray> {
   protected readonly SchemaType = SchemaType;
 
   @Input() control!: AbstractControl;
-  @Input() schema!: AnySchema;
+  @Input() schema!: Indexable<AbstractSchema>;
   @Input() model!: T;
 
   protected readonly helper = {

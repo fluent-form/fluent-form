@@ -1,11 +1,26 @@
 import { TemplateRef } from '@angular/core';
+import { AbstractControlOptions, AsyncValidatorFn, ValidatorFn } from '@angular/forms';
+import { SafeAny } from '@ngify/types';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { NzTabPosition } from 'ng-zorro-antd/tabs';
-import { AbstractControlContainerSchema } from './abstract.schema';
-import { Labelful, Length, MaybeSchemaReactiveFn } from './interfaces';
+import { AbstractBranchSchema } from './abstract.schema';
+import { ControlEventListenerHolder, Labelful, Length, MaybeSchemaReactiveFn, Row } from './interfaces';
 import { SingleSchemaKey } from './types';
+
+/**
+ * @public
+ * 抽象的容器控件图示
+ */
+export interface AbstractControlContainerSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractBranchSchema<Key>, ControlEventListenerHolder<SafeAny>, Row {
+  /** Validator for the control */
+  validators?: ValidatorFn[];
+  /** Async validators for control */
+  asyncValidators?: AsyncValidatorFn[];
+  /** The event name for control to update upon. */
+  updateOn?: AbstractControlOptions['updateOn'];
+}
 
 /**
  * @public

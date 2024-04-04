@@ -1,8 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
+import { SafeAny } from '@ngify/types';
 import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
-import { AnySchema } from '../schemas';
+import { AbstractSchema } from '../schemas';
+import { Indexable } from '../types';
 import { FormUtil, getChildControl } from './form.utils';
 
 describe('form.utils', () => {
@@ -345,13 +347,13 @@ describe('form.utils', () => {
 
     describe('createAnyControl', () => {
       it('normal', () => {
-        const schema: AnySchema = { kind: 'input', key: 'input' };
+        const schema: Indexable<AbstractSchema> = { kind: 'input', key: 'input' };
         const control = util.createAnyControl(schema, {});
         expect(control.value).toEqual(null);
       });
 
       it('group', () => {
-        const schema: AnySchema = {
+        const schema: Indexable<AbstractSchema> = {
           kind: 'group',
           key: 'group',
           schemas: [
@@ -363,7 +365,7 @@ describe('form.utils', () => {
       });
 
       it('array', () => {
-        const schema: AnySchema = {
+        const schema: Indexable<AbstractSchema> = {
           kind: 'array',
           key: 'array',
           schemas: [
@@ -377,7 +379,7 @@ describe('form.utils', () => {
 
     describe('updateModel', () => {
       it('with control', () => {
-        const schemas: AnySchema[] = [
+        const schemas: Indexable<AbstractSchema>[] = [
           { kind: 'number', key: 'num', defaultValue: 1 }
         ];
         const form = util.createFormGroup(schemas, {});
@@ -387,7 +389,7 @@ describe('form.utils', () => {
 
       describe('with double key control', () => {
         it('normal', () => {
-          const schemas: AnySchema[] = [
+          const schemas: Indexable<AbstractSchema>[] = [
             { kind: 'slider', key: ['start', 'end'] }
           ];
           const form = util.createFormGroup(schemas, {});
@@ -396,7 +398,7 @@ describe('form.utils', () => {
         });
 
         it('with default value', () => {
-          const schemas: AnySchema[] = [
+          const schemas: Indexable<AbstractSchema>[] = [
             { kind: 'slider', key: ['start', 'end'], defaultValue: [0, 100] }
           ];
           const form = util.createFormGroup(schemas, {});
@@ -406,7 +408,7 @@ describe('form.utils', () => {
       });
 
       it('with component', () => {
-        const schemas: AnySchema[] = [
+        const schemas: Indexable<AbstractSchema>[] = [
           { kind: 'button' }
         ];
         const form = util.createFormGroup(schemas, {});
@@ -415,7 +417,7 @@ describe('form.utils', () => {
       });
 
       it('with component wrapper', () => {
-        const schemas: AnySchema[] = [
+        const schemas: Indexable<AbstractSchema>[] = [
           { kind: 'button-group', schemas: [] }
         ];
         const form = util.createFormGroup(schemas, {});
@@ -424,7 +426,7 @@ describe('form.utils', () => {
       });
 
       it('with group', () => {
-        const schemas: AnySchema[] = [
+        const schemas: Indexable<AbstractSchema>[] = [
           {
             kind: 'group',
             key: 'obj',
@@ -439,7 +441,7 @@ describe('form.utils', () => {
       });
 
       it('with array', () => {
-        const schemas: AnySchema[] = [
+        const schemas: Indexable<AbstractSchema>[] = [
           {
             kind: 'array',
             key: 'array',
@@ -454,7 +456,7 @@ describe('form.utils', () => {
       });
 
       it('with path key schema', () => {
-        const schemas: AnySchema[] = [
+        const schemas: Indexable<AbstractSchema>[] = [
           { kind: 'input', key: 'a.b.c', defaultValue: 'hello' },
           { kind: 'input', key: 'a.b.d', defaultValue: 'world' },
           { kind: 'input', key: 'a.b.e.f', defaultValue: '!' },
@@ -476,8 +478,8 @@ describe('form.utils', () => {
     describe('updateForm', () => {
       describe('disbaled', () => {
         it('normal', () => {
-          const schemas: AnySchema[] = [
-            { kind: 'toggle', key: 'bool', disabled: ({ model }) => model.bool },
+          const schemas: Indexable<AbstractSchema>[] = [
+            { kind: 'toggle', key: 'bool', disabled: (ctx: SafeAny) => ctx.model.bool },
           ];
           const form = util.createFormGroup(schemas, {});
 
@@ -489,9 +491,9 @@ describe('form.utils', () => {
         });
 
         it('with component', () => {
-          const schemas: AnySchema[] = [
+          const schemas: Indexable<AbstractSchema>[] = [
             { kind: 'button' },
-            { kind: 'toggle', key: 'bool', disabled: ({ model }) => model.bool },
+            { kind: 'toggle', key: 'bool', disabled: (ctx: SafeAny) => ctx.model.bool },
           ];
           const form = util.createFormGroup(schemas, {});
 
@@ -500,12 +502,12 @@ describe('form.utils', () => {
         });
 
         it('with group', () => {
-          const schemas: AnySchema[] = [
+          const schemas: Indexable<AbstractSchema>[] = [
             {
               kind: 'group',
               key: 'obj',
               schemas: [
-                { kind: 'toggle', key: 'bool', disabled: ({ model }) => model.bool },
+                { kind: 'toggle', key: 'bool', disabled: (ctx: SafeAny) => ctx.model.bool },
               ]
             }
           ];
@@ -516,12 +518,12 @@ describe('form.utils', () => {
         });
 
         it('with array', () => {
-          const schemas: AnySchema[] = [
+          const schemas: Indexable<AbstractSchema>[] = [
             {
               kind: 'array',
               key: 'arr',
               schemas: [
-                { kind: 'toggle', key: 0, disabled: ({ model }) => model[0] },
+                { kind: 'toggle', key: 0, disabled: (ctx: SafeAny) => ctx.model[0] },
               ]
             }
           ];
@@ -534,9 +536,9 @@ describe('form.utils', () => {
 
       describe('required', () => {
         it('normal', () => {
-          const schemas: AnySchema[] = [
+          const schemas: Indexable<AbstractSchema>[] = [
             { kind: 'toggle', key: 'required' },
-            { kind: 'input', key: 'text', required: ({ model }) => model.required },
+            { kind: 'input', key: 'text', required: (ctx: SafeAny) => ctx.model.required },
           ];
           const form = util.createFormGroup(schemas, {});
 
@@ -552,9 +554,9 @@ describe('form.utils', () => {
         });
 
         it('with component', () => {
-          const schemas: AnySchema[] = [
+          const schemas: Indexable<AbstractSchema>[] = [
             { kind: 'button' },
-            { kind: 'toggle', key: 'bool', required: ({ model }) => model.bool },
+            { kind: 'toggle', key: 'bool', required: (ctx: SafeAny) => ctx.model.bool },
           ];
           const form = util.createFormGroup(schemas, {});
 
@@ -563,13 +565,13 @@ describe('form.utils', () => {
         });
 
         it('with group', () => {
-          const schemas: AnySchema[] = [
+          const schemas: Indexable<AbstractSchema>[] = [
             {
               kind: 'group',
               key: 'obj',
               schemas: [
                 { kind: 'toggle', key: 'required' },
-                { kind: 'input', key: 'text', required: ({ model }) => model.required },
+                { kind: 'input', key: 'text', required: (ctx: SafeAny) => ctx.model.required },
               ]
             }
           ];
@@ -587,12 +589,12 @@ describe('form.utils', () => {
         });
 
         it('with array', () => {
-          const schemas: AnySchema[] = [
+          const schemas: Indexable<AbstractSchema>[] = [
             {
               kind: 'array',
               key: 'arr',
               schemas: [
-                { kind: 'toggle', key: 0, required: ({ model }) => model[0] },
+                { kind: 'toggle', key: 0, required: (ctx: SafeAny) => ctx.model[0] },
               ]
             }
           ];

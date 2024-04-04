@@ -51,3 +51,5 @@ export type ComponentOutputListenerMap<C> = {
 export type ComponentPropertyMap<C> = Partial<Omit<C, ComponentOutputName<C>>>;
 
 export type Stringify<T> = T extends number ? `${T}` : never;
+
+export type Indexable<T> = T & Record<string, SafeAny>;

@@ -2,9 +2,10 @@ import { inject, Injectable } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { throwWidgetNotFoundError } from '../errors';
 import { SCHEMA_PATCHERS } from '../patcher';
-import { AnyComponentContainerSchema, AnyComponentSchema, AnyComponentWrapperSchema, AnyContainerSchema, AnyControlArraySchema, AnyControlContainerSchema, AnyControlGroupSchema, AnyControlSchema, AnyControlWrapperSchema, AnySchema, SchemaKey, SingleSchemaKey } from '../schemas';
+import { AbstractBranchSchema, AbstractComponentContainerSchema, AbstractComponentWrapperSchema, AbstractControlContainerSchema, AbstractControlSchema, AbstractControlWrapperSchema, AbstractSchema, SchemaKey, SingleSchemaKey } from '../schemas';
 import { SchemaLike, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP } from '../tokens';
+import { Indexable } from '../types';
 import { isArray, isString } from './is.utils';
 
 const ANY_SCHEMA_SELECTOR = '*';
@@ -16,8 +17,13 @@ export class SchemaUtil {
   private readonly schemaMap = inject(SCHEMA_MAP);
   private readonly schemaPatchers = inject(SCHEMA_PATCHERS, { optional: true }) ?? [];
 
-  patch<T extends AnySchema>(schema: T): T {
-    if ('schemas' in schema) {
+  patch<T extends Indexable<AbstractSchema>>(schema: T): T {
+    if (
+      this.isControlWrapper(schema) ||
+      this.isComponentWrapper(schema) ||
+      this.isControlContainer(schema) ||
+      this.isComponentContainer(schema)
+    ) {
       schema.schemas = schema.schemas.map(schema => this.patch(schema));
     }
 
@@ -51,43 +57,47 @@ export class SchemaUtil {
    * 过滤出首层控件/控件容器图示
    * @param schemas
    */
-  filterControls(schemas: AnySchema[]) {
+  filterControls(schemas: Indexable<AbstractSchema>[]) {
     return schemas.reduce((schemas, schema) => {
       if (this.isControlWrapper(schema) || this.isComponentContainer(schema)) {
         schemas = schemas.concat(this.filterControls(schema.schemas));
-      } else if (this.isControl(schema) || this.isControlGroup(schema) || this.isControlArray(schema)) {
+      } else if (this.isControl(schema) || this.isControlContainer(schema)) {
         schemas.push(schema);
       }
 
       return schemas;
-    }, [] as (AnyControlSchema | AnyControlContainerSchema)[]);
+    }, [] as (AbstractControlSchema | AbstractControlContainerSchema)[]);
   }
 
-  isControlGroup(schema: SchemaLike): schema is AnyControlGroupSchema {
+  isControlGroup(schema: SchemaLike): schema is AbstractControlContainerSchema {
     return this.typeOf(schema) === SchemaType.ControlGroup;
   }
 
-  isControlArray(schema: SchemaLike): schema is AnyControlArraySchema {
+  isControlArray(schema: SchemaLike): schema is AbstractControlContainerSchema {
     return this.typeOf(schema) === SchemaType.ControlArray;
   }
 
-  isControlWrapper(schema: SchemaLike): schema is AnyControlWrapperSchema {
+  isControlContainer(schema: SchemaLike): schema is AbstractControlContainerSchema {
+    return this.isControlGroup(schema) || this.isControlArray(schema);
+  }
+
+  isControlWrapper(schema: SchemaLike): schema is AbstractControlWrapperSchema {
     return this.typeOf(schema) === SchemaType.ControlWrapper;
   }
 
-  isControl(schema: SchemaLike): schema is AnyControlSchema {
+  isControl(schema: SchemaLike): schema is AbstractControlSchema {
     return this.typeOf(schema) === SchemaType.Control;
   }
 
-  isComponentContainer(schema: SchemaLike): schema is AnyComponentContainerSchema {
+  isComponentContainer(schema: SchemaLike): schema is AbstractComponentContainerSchema {
     return this.typeOf(schema) === SchemaType.ComponentContainer;
   }
 
-  isComponentWrapper(schema: SchemaLike): schema is AnyComponentWrapperSchema {
+  isComponentWrapper(schema: SchemaLike): schema is AbstractComponentWrapperSchema {
     return this.typeOf(schema) === SchemaType.ComponentWrapper;
   }
 
-  isComponent(schema: SchemaLike): schema is AnyComponentSchema {
+  isComponent(schema: SchemaLike): schema is AbstractSchema {
     return this.typeOf(schema) === SchemaType.Component;
   }
 
@@ -111,7 +121,7 @@ export class SchemaUtil {
    * 非控件图示，表示其本身或其子节点不会包含控件图示
    * @param schema
    */
-  isNonControl(schema: SchemaLike): schema is AnyComponentSchema | AnyComponentWrapperSchema {
+  isNonControl(schema: SchemaLike): schema is AbstractSchema {
     return this.isComponent(schema) || this.isComponentWrapper(schema);
   }
 
@@ -119,7 +129,7 @@ export class SchemaUtil {
     return this.schemaMap.get(schema.kind)?.type;
   }
 
-  validatorsOf(schema: AnyControlSchema) {
+  validatorsOf(schema: AbstractControlSchema) {
     const validators: ValidatorFn[] = this.schemaMap.get(schema.kind)?.validators?.(schema) ?? [];
 
     if (schema.required === true) {
@@ -133,18 +143,18 @@ export class SchemaUtil {
     return key.split('.');
   }
 
-  find(schema: AnyContainerSchema, key: SingleSchemaKey): AnySchema | null;
-  find(schema: AnyContainerSchema, key: SchemaKey[]): AnySchema | null;
-  find(schema: AnyContainerSchema, path: SingleSchemaKey | SchemaKey[]): AnySchema | null;
-  find(schema: AnyContainerSchema, path: SingleSchemaKey | SchemaKey[]): AnySchema | null {
+  find(schema: Indexable<AbstractBranchSchema>, key: SingleSchemaKey): AbstractSchema | null;
+  find(schema: Indexable<AbstractBranchSchema>, key: SchemaKey[]): AbstractSchema | null;
+  find(schema: Indexable<AbstractBranchSchema>, path: SingleSchemaKey | SchemaKey[]): AbstractSchema | null;
+  find(schema: Indexable<AbstractBranchSchema>, path: SingleSchemaKey | SchemaKey[]): AbstractSchema | null {
     const paths = isArray(path)
       ? path.map(o => isArray(o) ? o.toString() : o)
       : path.toString().split('.');
 
-    let _schema: AnySchema | null = schema;
+    let _schema: Indexable<AbstractSchema> | null = schema;
 
     for (const path of paths) {
-      _schema = (_schema as AnyContainerSchema).schemas.find(o => o.key?.toString() === path) ?? null;
+      _schema = _schema['schemas'].find((o: AbstractSchema) => o.key?.toString() === path) ?? null;
 
       if (_schema === null) {
         return _schema;

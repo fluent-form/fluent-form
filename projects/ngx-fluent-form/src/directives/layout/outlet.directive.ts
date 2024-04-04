@@ -1,7 +1,7 @@
 import { Directive, inject, Input, OnChanges, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
-import { AnyComponentSchema, AnyControlSchema, SingleSchemaKey } from '../../schemas';
+import { AbstractSchema, SingleSchemaKey } from '../../schemas';
 import { WidgetTemplateRegistry } from '../../services';
 import { WidgetTemplateContext } from '../../widgets';
 import { FluentControlContainer } from './models/control-container';
@@ -11,14 +11,14 @@ import { FluentControlContainer } from './models/control-container';
   exportAs: 'fluentOutlet',
   standalone: true
 })
-export class FluentOutletDirective<T extends AnyObject | AnyArray> implements OnInit, OnChanges, OnDestroy, WidgetTemplateContext<AnyComponentSchema | AnyControlSchema, AbstractControl> {
+export class FluentOutletDirective<T extends AnyObject | AnyArray> implements OnInit, OnChanges, OnDestroy, WidgetTemplateContext<AbstractSchema, AbstractControl> {
   private readonly registry = inject(WidgetTemplateRegistry);
   private readonly viewContainerRef = inject(ViewContainerRef);
   private readonly controlContainer: FluentControlContainer<T> = inject(FluentControlContainer<T>, { host: true, skipSelf: true });
-  private _schema!: AnyComponentSchema | AnyControlSchema;
+  private _schema!: AbstractSchema;
 
   /** @internal */
-  set schema(value: AnyComponentSchema | AnyControlSchema) {
+  set schema(value: AbstractSchema) {
     this._schema = value;
     this.viewContainerRef.length && this.viewContainerRef.clear();
     this.viewContainerRef.createEmbeddedView(this.registry.get(value.kind), this);

@@ -7,9 +7,9 @@ import { CompareWith, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDateMode, SupportTimeOptions } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { FluentColDirective } from '../components';
-import { AnySchema } from './index.schema';
-import { Column, ControlEventListenerHolder, ControlValueMapper, Labelful, Length, MaybeSchemaReactiveFn, Row, SchemaLike } from './interfaces';
-import { SchemaKey, SingleSchemaKey } from './types';
+import { Indexable } from '../types';
+import { Column, ControlValueMapper, Labelful, Length, MaybeSchemaReactiveFn, SchemaLike } from './interfaces';
+import { SchemaKey } from './types';
 
 /**
  * @public
@@ -21,6 +21,13 @@ export interface AbstractSchema<Key extends SchemaKey = SchemaKey> extends Schem
   hidden?: MaybeSchemaReactiveFn<AbstractSchema, boolean>;
   class?: NgClass['ngClass'];
   style?: NgStyle['ngStyle'];
+}
+
+/**
+ * @public
+ */
+export interface AbstractBranchSchema<Key extends SchemaKey = SchemaKey> extends AbstractSchema<Key> {
+  schemas: Indexable<AbstractSchema>[];
 }
 
 /**
@@ -47,20 +54,6 @@ export interface AbstractControlSchema<Key extends SchemaKey = SchemaKey, Val = 
     validating?: string | TemplateRef<{ $implicit: FormControl<Val> }>;
     auto?: Record<'default' | (string & {}), Record<string, string>>;
   };
-  /** Validator for the control */
-  validators?: ValidatorFn[];
-  /** Async validators for control */
-  asyncValidators?: AsyncValidatorFn[];
-  /** The event name for control to update upon. */
-  updateOn?: AbstractControlOptions['updateOn'];
-}
-
-/**
- * @public
- * 抽象的容器控件图示
- */
-export interface AbstractControlContainerSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractSchema<Key>, ControlEventListenerHolder<SafeAny>, Row {
-  schemas: AnySchema[];
   /** Validator for the control */
   validators?: ValidatorFn[];
   /** Async validators for control */

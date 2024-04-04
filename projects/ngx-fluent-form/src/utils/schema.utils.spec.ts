@@ -5,8 +5,9 @@ import { array, form, group, input, inputGroup, slider, textarea } from '../comp
 import { withAllWidgets, withSchemaPatchers } from '../features';
 import { SCHEMA_PATCHERS } from '../patcher';
 import { provideFluentForm } from '../provider';
-import { AlertComponentSchema, AnySchema, ButtonComponentSchema, HeadingComponentSchema, InputControlSchema, NumberInputControlSchema, TextComponentSchema } from '../schemas';
+import { AbstractSchema, AlertComponentSchema, ButtonComponentSchema, HeadingComponentSchema, InputControlSchema, NumberInputControlSchema, TextComponentSchema } from '../schemas';
 import { SchemaType } from '../schemas/interfaces';
+import { Indexable } from '../types';
 import { SchemaUtil } from './schema.utils';
 
 describe('SchemaUtil', () => {
@@ -62,6 +63,8 @@ describe('SchemaUtil', () => {
     expect(schemaUtil.isComponentWrapper({ kind: 'button-group' })).toBeTrue();
     expect(schemaUtil.isControlGroup({ kind: 'group' })).toBeTrue();
     expect(schemaUtil.isControlArray({ kind: 'array' })).toBeTrue();
+    expect(schemaUtil.isControlContainer({ kind: 'group' })).toBeTrue();
+    expect(schemaUtil.isControlContainer({ kind: 'array' })).toBeTrue();
     expect(schemaUtil.isControlWrapper({ kind: 'input-group' })).toBeTrue();
     expect(schemaUtil.isControl({ kind: 'input' })).toBeTrue();
     expect(schemaUtil.isNonControl({ kind: 'button' })).toBeTrue();
@@ -97,7 +100,7 @@ describe('SchemaUtil', () => {
 
   describe('带验证器的图示', () => {
     it('length', () => {
-      const schema: AnySchema = { kind: 'input', length: 1 };
+      const schema: Indexable<AbstractSchema> = { kind: 'input', length: 1 };
       const validators = schemaUtil.validatorsOf(schema);
       // min & max
       expect(validators.length).toBe(2);

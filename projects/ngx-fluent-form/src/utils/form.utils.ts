@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { AnyArray, AnyObject, SafeAny } from '@ngify/types';
-import { AbstractControlContainerSchema, FormArraySchema, FormGroupSchema, SchemaKey } from '../schemas';
-import { AnyControlContainerSchema, AnyControlSchema, AnySchema } from '../schemas/index.schema';
+import { AbstractControlContainerSchema, AbstractControlSchema, AbstractSchema, SchemaKey } from '../schemas';
 import { ValueTransformer } from '../services';
+import { Indexable } from '../types';
 import { isArray, isUndefined } from './is.utils';
 import { SchemaUtil } from './schema.utils';
 import { ValueUtil } from './value.utils';
@@ -19,7 +19,7 @@ export class FormUtil {
   private readonly valueUtil = inject(ValueUtil);
   private readonly valueTransformer = inject(ValueTransformer);
 
-  createFormControl(schema: AnyControlSchema, model: AnyObject): FormControl {
+  createFormControl(schema: AbstractControlSchema, model: AnyObject): FormControl {
     const validators: ValidatorFn[] = this.schemaUtil.validatorsOf(schema);
     const value = this.valueUtil.valueOfModel(model, schema) ?? schema.defaultValue;
 
@@ -32,10 +32,10 @@ export class FormUtil {
   }
 
   createFormGroup(schema: AbstractControlContainerSchema, model: AnyObject): FormGroup;
-  createFormGroup(schemas: AnySchema[], model: AnyObject): FormGroup;
-  createFormGroup(schemaOrSchemas: AbstractControlContainerSchema | AnySchema[], model: AnyObject): FormGroup;
-  createFormGroup(schemaOrSchemas: AbstractControlContainerSchema | AnySchema[], model: AnyObject): FormGroup {
-    let schemas: AnySchema[];
+  createFormGroup(schemas: Indexable<AbstractSchema>[], model: AnyObject): FormGroup;
+  createFormGroup(schemaOrSchemas: AbstractControlContainerSchema | Indexable<AbstractSchema>[], model: AnyObject): FormGroup;
+  createFormGroup(schemaOrSchemas: AbstractControlContainerSchema | Indexable<AbstractSchema>[], model: AnyObject): FormGroup {
+    let schemas: Indexable<AbstractSchema>[];
     let options: AbstractControlOptions = {};
 
     if (isArray(schemaOrSchemas)) {
@@ -55,12 +55,8 @@ export class FormUtil {
     );
   }
 
-  private createControlMap(schemas: AnySchema[], model: AnyObject) {
+  private createControlMap(schemas: Indexable<AbstractSchema>[], model: AnyObject) {
     return schemas.reduce((controls, schema) => {
-      if (this.schemaUtil.isNonControl(schema)) {
-        return controls;
-      }
-
       if (this.schemaUtil.isControlGroup(schema)) {
         const key = schema.key!.toString();
         controls[key] = this.createFormGroup(schema, model[key] ?? {});
@@ -69,24 +65,25 @@ export class FormUtil {
         controls[key] = this.createFormArray(schema, model[key] ?? []);
       } else if (this.schemaUtil.isControlWrapper(schema) || this.schemaUtil.isComponentContainer(schema)) {
         Object.assign(controls, this.createControlMap(schema.schemas, model));
-      } else if (this.schemaUtil.isPathKeySchema(schema)) {
-        const paths = this.schemaUtil.parsePathKey(schema.key as string);
-        const key = paths.pop()!;
+      } else if (this.schemaUtil.isControl(schema)) {
+        if (this.schemaUtil.isPathKeySchema(schema)) {
+          const paths = this.schemaUtil.parsePathKey(schema.key as string);
+          const key = paths.pop()!;
 
-        const parent: FormGroup = paths.reduce((previousGroup, path) => {
-          let group = previousGroup.get(path) as FormGroup;
+          const parent: FormGroup = paths.reduce((previousGroup, path) => {
+            let group = previousGroup.get(path) as FormGroup;
 
-          if (!group) {
-            group = new FormGroup({});
-            previousGroup.addControl(path, group);
-          }
+            if (!group) {
+              group = new FormGroup({});
+              previousGroup.addControl(path, group);
+            }
 
-          return group;
-        }, (controls[paths.shift()!] ??= new FormGroup({})) as FormGroup);
-
-        parent.addControl(key, this.createFormControl(schema, model));
-      } else {
-        controls[schema.key!.toString()] = this.createFormControl(schema, model);
+            return group;
+          }, (controls[paths.shift()!] ??= new FormGroup({})) as FormGroup);
+          parent.addControl(key, this.createFormControl(schema, model));
+        } else {
+          controls[schema.key!.toString()] = this.createFormControl(schema, model);
+        }
       }
 
       return controls;
@@ -103,7 +100,7 @@ export class FormUtil {
     });
   }
 
-  createFormArrayElements(schemas: AnySchema[], model: AnyArray) {
+  createFormArrayElements(schemas: Indexable<AbstractSchema>[], model: AnyArray) {
     // 只拿第一个，其他的忽略
     const [schema] = this.schemaUtil.filterControls(schemas);
 
@@ -116,11 +113,7 @@ export class FormUtil {
     });
   }
 
-  createAnyControl(schema: AnyControlSchema, model: AnyObject): FormControl;
-  createAnyControl(schema: FormGroupSchema, model: AnyObject): FormGroup;
-  createAnyControl(schema: FormArraySchema, model: AnyArray): FormArray;
-  createAnyControl(schema: AnyControlSchema | AnyControlContainerSchema, model: AnyObject | AnyArray): AbstractControl;
-  createAnyControl(schema: AnyControlSchema | AnyControlContainerSchema, model: AnyObject | AnyArray): AbstractControl {
+  createAnyControl(schema: AbstractControlSchema, model: AnyObject | AnyArray): AbstractControl {
     if (this.schemaUtil.isControlGroup(schema)) {
       return this.createFormGroup(schema, (model as AnyObject)[schema.key!] ?? {});
     }
@@ -129,7 +122,7 @@ export class FormUtil {
       return this.createFormArray(schema, (model as AnyArray)[schema.key as number] ?? []);
     }
 
-    return this.createFormControl(schema as AnyControlSchema, model);
+    return this.createFormControl(schema, model);
   }
 
   /**
@@ -138,13 +131,10 @@ export class FormUtil {
    * @param model
    * @param schemas
    */
-  updateForm(form: FormGroup, model: AnyObject, schemas: AnySchema[]): void;
-  updateForm(form: FormArray, model: AnyArray, schemas: AnySchema[]): void;
-  updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AnySchema[]): void {
+  updateForm(form: FormGroup, model: AnyObject, schemas: AbstractSchema[]): void;
+  updateForm(form: FormArray, model: AnyArray, schemas: AbstractSchema[]): void;
+  updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AbstractSchema[]): void {
     for (const schema of schemas) {
-      // 这些图示不包含控件图示，直接跳过
-      if (this.schemaUtil.isNonControl(schema)) continue;
-
       if (this.schemaUtil.isControlGroup(schema)) {
         const key = schema.key!;
         const formGroup = getChildControl(form, key) as FormGroup;
@@ -168,26 +158,28 @@ export class FormUtil {
         continue;
       }
 
-      const control = getChildControl(form, schema.key!)!;
+      if (this.schemaUtil.isControl(schema)) {
+        const control = getChildControl(form, schema.key!)!;
 
-      // update disabled
-      const disabled = this.valueTransformer.transform(schema.disabled, { model, schema, control });
-      if (control.enabled !== !disabled) { // 不一致才更新
-        if (disabled) {
-          control.disable({ onlySelf: true });
-        } else {
-          control.enable({ onlySelf: true });
+        // update disabled
+        const disabled = this.valueTransformer.transform(schema.disabled, { model, schema, control });
+        if (control.enabled !== !disabled) { // 不一致才更新
+          if (disabled) {
+            control.disable({ onlySelf: true });
+          } else {
+            control.enable({ onlySelf: true });
+          }
         }
-      }
-      // update required validator
-      const required = this.valueTransformer.transform(schema.required, { model, schema, control });
-      if (required) {
-        control.addValidators(Validators.required);
-      } else {
-        control.removeValidators(Validators.required);
-      }
+        // update required validator
+        const required = this.valueTransformer.transform(schema.required, { model, schema, control });
+        if (required) {
+          control.addValidators(Validators.required);
+        } else {
+          control.removeValidators(Validators.required);
+        }
 
-      control.updateValueAndValidity({ emitEvent: false });
+        control.updateValueAndValidity({ emitEvent: false });
+      }
     }
   }
 
@@ -197,13 +189,10 @@ export class FormUtil {
    * @param form
    * @param schemas
    */
-  updateModel(model: AnyObject, form: FormGroup, schemas: AnySchema[]): AnyObject;
-  updateModel(model: AnyArray, form: FormArray, schemas: AnySchema[]): AnyArray;
-  updateModel(model: AnyObject, form: FormGroup | FormArray, schemas: AnySchema[]): AnyObject | AnyArray {
+  updateModel(model: AnyObject, form: FormGroup, schemas: AbstractSchema[]): AnyObject;
+  updateModel(model: AnyArray, form: FormArray, schemas: AbstractSchema[]): AnyArray;
+  updateModel(model: AnyObject, form: FormGroup | FormArray, schemas: AbstractSchema[]): AnyObject | AnyArray {
     for (const schema of schemas) {
-      // 这些图示不包含控件图示，直接跳过
-      if (this.schemaUtil.isNonControl(schema)) continue;
-
       if (this.schemaUtil.isControlGroup(schema)) {
         const key = schema.key!;
         const formGroup = getChildControl(form, key) as FormGroup;
@@ -227,25 +216,27 @@ export class FormUtil {
         continue;
       }
 
-      const key = schema.key!.toString();
-      const control = getChildControl(form, key)!;
-      const value = this.valueUtil.valueOfControl(control, schema);
+      if (this.schemaUtil.isControl(schema)) {
+        const key = schema.key!.toString();
+        const control = getChildControl(form, key)!;
+        const value = this.valueUtil.valueOfControl(control, schema);
 
-      // 多字段情况
-      if (this.schemaUtil.isMultiKeySchema(schema)) {
-        (schema.key as string[]).map((prop, idx) => {
-          model[prop] = (value as [unknown, unknown])?.[idx] ?? null;
-        });
-      } else if (this.schemaUtil.isPathKeySchema(schema)) {
-        const paths = this.schemaUtil.parsePathKey(schema.key as string);
-        let _model = model;
-        for (let i = 0; i < paths.length - 1; i++) {
-          const path = paths[i];
-          _model = _model[path] ??= {};
+        // 多字段情况
+        if (this.schemaUtil.isMultiKeySchema(schema)) {
+          (schema.key as string[]).map((prop, idx) => {
+            model[prop] = (value as [unknown, unknown])?.[idx] ?? null;
+          });
+        } else if (this.schemaUtil.isPathKeySchema(schema)) {
+          const paths = this.schemaUtil.parsePathKey(schema.key as string);
+          let _model = model;
+          for (let i = 0; i < paths.length - 1; i++) {
+            const path = paths[i];
+            _model = _model[path] ??= {};
+          }
+          _model[paths.pop()!] = value;
+        } else {
+          model[key] = value;
         }
-        _model[paths.pop()!] = value;
-      } else {
-        model[key] = value;
       }
     }
 

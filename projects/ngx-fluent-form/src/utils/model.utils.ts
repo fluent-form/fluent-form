@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { AbstractSchema } from '../schemas';
+import { Indexable } from '../types';
 import { FormUtil, getChildControl } from './form.utils';
 import { SchemaUtil } from './schema.utils';
 import { ValueUtil } from './value.utils';
@@ -24,9 +25,9 @@ export class ModelUtil {
    * @param schemas
    * @param completed
    */
-  updateForm(form: FormGroup, model: AnyObject, schemas: AbstractSchema[], completed?: boolean): FormGroup;
-  updateForm(form: FormArray, model: AnyArray, schemas: AbstractSchema[], completed?: boolean): FormArray;
-  updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: AbstractSchema[], completed = true): FormGroup | FormArray {
+  updateForm(form: FormGroup, model: AnyObject, schemas: Indexable<AbstractSchema>[], completed?: boolean): FormGroup;
+  updateForm(form: FormArray, model: AnyArray, schemas: Indexable<AbstractSchema>[], completed?: boolean): FormArray;
+  updateForm(form: FormGroup | FormArray, model: AnyObject, schemas: Indexable<AbstractSchema>[], completed = true): FormGroup | FormArray {
     for (const schema of schemas) {
       if (this.schemaUtil.isControlGroup(schema)) {
         const key = schema.key!;

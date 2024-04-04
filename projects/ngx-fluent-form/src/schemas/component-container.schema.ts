@@ -2,16 +2,20 @@ import { TemplateRef } from '@angular/core';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
 import { NzTabComponent, NzTabPosition, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
-import { AbstractSchema } from './abstract.schema';
-import { AnySchema } from './index.schema';
+import { AbstractBranchSchema } from './abstract.schema';
 import { ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, MaybeSchemaReactiveFn, Row } from './interfaces';
 import { SingleSchemaKey } from './types';
 
 /**
  * @public
  */
+export type AbstractComponentContainerSchema<Key extends SingleSchemaKey = SingleSchemaKey> = AbstractBranchSchema<Key>
+
+/**
+ * @public
+ */
 export interface StepsComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractSchema<Key>, ComponentEventListenerHolder<NzStepsComponent>, ComponentPropertyHolder<NzStepsComponent> {
+  extends AbstractComponentContainerSchema<Key>, ComponentEventListenerHolder<NzStepsComponent>, ComponentPropertyHolder<NzStepsComponent> {
   kind: 'steps';
   type?: 'default' | 'navigation';
   active?: number;
@@ -27,21 +31,20 @@ export interface StepsComponentSchema<Key extends SingleSchemaKey = SingleSchema
  * @public
  */
 export interface StepComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractSchema<Key>, ComponentEventListenerHolder<NzStepComponent>, ComponentPropertyHolder<NzStepComponent> {
+  extends AbstractComponentContainerSchema<Key>, ComponentEventListenerHolder<NzStepComponent>, ComponentPropertyHolder<NzStepComponent> {
   kind: 'step';
   title: string | TemplateRef<void>;
   subtitle?: string | TemplateRef<void>;
   description?: string | TemplateRef<void>;
   disabled?: MaybeSchemaReactiveFn<StepComponentSchema<SingleSchemaKey>, boolean>;
   status?: 'wait' | 'process' | 'finish' | 'error';
-  schemas: AnySchema[];
 }
 
 /**
  * @public
  */
 export interface TabsComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractSchema<Key>, ComponentEventListenerHolder<NzTabSetComponent>, ComponentPropertyHolder<NzTabSetComponent> {
+  extends AbstractComponentContainerSchema<Key>, ComponentEventListenerHolder<NzTabSetComponent>, ComponentPropertyHolder<NzTabSetComponent> {
   kind: 'tabs';
   type?: NzTabType;
   active?: number;
@@ -56,18 +59,16 @@ export interface TabsComponentSchema<Key extends SingleSchemaKey = SingleSchemaK
  * @public
  */
 export interface TabComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractSchema<Key>, ComponentEventListenerHolder<NzTabComponent>, ComponentPropertyHolder<NzTabComponent> {
+  extends AbstractComponentContainerSchema<Key>, ComponentEventListenerHolder<NzTabComponent>, ComponentPropertyHolder<NzTabComponent> {
   kind: 'tab';
   title: string;
   disabled?: MaybeSchemaReactiveFn<TabComponentSchema<SingleSchemaKey>, boolean>;
-  schemas: AnySchema[];
 }
 
 /**
  * @public
  */
 export interface RowComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractSchema<Key>, ElementEventListenerHolder, ElementPropertyHolder<HTMLElement>, Row {
+  extends AbstractComponentContainerSchema<Key>, ElementEventListenerHolder, ElementPropertyHolder<HTMLElement>, Row {
   kind: 'row';
-  schemas: AnySchema[];
 }

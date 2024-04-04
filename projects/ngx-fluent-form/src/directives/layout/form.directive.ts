@@ -3,8 +3,9 @@ import { FormControlStatus, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { takeUntil } from 'rxjs';
-import { AnySchema, FormGroupSchema } from '../../schemas';
+import { AbstractSchema, FormGroupSchema } from '../../schemas';
 import { runMicrotask } from '../../shared';
+import { Indexable } from '../../types';
 import { FormUtil, ModelUtil } from '../../utils';
 import { FluentControlContainer, FluentControlContainerDirective } from './models/control-container';
 
@@ -33,7 +34,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentC
 
   form!: FormGroup;
 
-  get schemas(): AnySchema[] {
+  get schemas(): Indexable<AbstractSchema>[] {
     return this.schema?.schemas;
   }
 

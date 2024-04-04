@@ -1,9 +1,10 @@
 import { inject, Pipe, PipeTransform, TemplateRef } from '@angular/core';
 import { throwCustomTemplateNotFoundError } from '../errors';
-import { AnySchema } from '../schemas';
+import { AbstractSchema } from '../schemas';
 import { SchemaKind } from '../schemas/interfaces';
 import { WidgetTemplateRegistry } from '../services';
 import { TEMPLATE_DIRECTIVES } from '../tokens';
+import { Indexable } from '../types';
 
 /**
  * @internal
@@ -16,7 +17,7 @@ export class FluentWidgetTemplatePipe implements PipeTransform {
   private readonly registry = inject(WidgetTemplateRegistry);
   private readonly templateDirectives = inject(TEMPLATE_DIRECTIVES, { optional: true });
 
-  transform(value: AnySchema): TemplateRef<unknown> {
+  transform(value: Indexable<AbstractSchema>): TemplateRef<unknown> {
     const templateDirectives = this.templateDirectives;
 
     switch (value.kind) {
@@ -24,7 +25,7 @@ export class FluentWidgetTemplatePipe implements PipeTransform {
         const dir = templateDirectives?.find(o => o.name === value.key);
 
         if (!dir) {
-          throwCustomTemplateNotFoundError(value.key!);
+          throwCustomTemplateNotFoundError(value.key as string);
         }
 
         return dir.templateRef;
@@ -32,10 +33,10 @@ export class FluentWidgetTemplatePipe implements PipeTransform {
 
       case SchemaKind.Headless: {
         // 这里假设在外层已经判断 value.template 是否存在了
-        const dir = templateDirectives?.find(o => o.name === value.template);
+        const dir = templateDirectives?.find(o => o.name === value['template']);
 
         if (!dir) {
-          throwCustomTemplateNotFoundError(value.template!);
+          throwCustomTemplateNotFoundError(value['template']!);
         }
 
         return dir.templateRef;

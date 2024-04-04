@@ -7,10 +7,11 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { takeUntil } from 'rxjs';
 import { FluentBindingDirective, FluentTemplateDirective } from '../../directives';
 import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe } from '../../pipes';
-import { AnySchema, FormGroupSchema } from '../../schemas';
+import { AbstractSchema, FormGroupSchema } from '../../schemas';
 import { SchemaKind } from '../../schemas/interfaces';
 import { runMicrotask } from '../../shared';
 import { TEMPLATE_DIRECTIVES } from '../../tokens';
+import { Indexable } from '../../types';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
 import { FluentFormItemOutletComponent } from '../form-item-outlet/form-item-outlet.component';
 import { FluentGridModule } from '../grid';
@@ -56,7 +57,7 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges {
   private _schema!: FormGroupSchema;
 
   protected readonly SchemaKind = SchemaKind;
-  protected get schemas(): AnySchema[] {
+  protected get schemas(): Indexable<AbstractSchema>[] {
     return this.schema?.schemas;
   }
 

@@ -1,7 +1,7 @@
 import { Directive, inject } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
-import { AnyContainerSchema } from '../../../schemas';
+import { AbstractControlContainerSchema } from '../../../schemas';
 import { SchemaUtil } from '../../../utils';
 import { FluentOutletDirective } from '../outlet.directive';
 
@@ -10,7 +10,7 @@ import { FluentOutletDirective } from '../outlet.directive';
  */
 export abstract class FluentControlContainer<T extends AnyObject | AnyArray> {
   /** 当前图示 */
-  abstract schema: AnyContainerSchema;
+  abstract schema: AbstractControlContainerSchema;
   /** 当前表单 */
   abstract form: AbstractControl;
   /** 当前模型 */

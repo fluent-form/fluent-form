@@ -2,8 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { AnyArray, AnyObject, SafeAny } from '@ngify/types';
 import { AbstractControlContainerSchema, AbstractControlSchema, AbstractSchema, SchemaKey } from '../schemas';
-import { AnySchema } from '../schemas/index.schema';
 import { ValueTransformer } from '../services';
+import { Indexable } from '../types';
 import { isArray, isUndefined } from './is.utils';
 import { SchemaUtil } from './schema.utils';
 import { ValueUtil } from './value.utils';
@@ -32,10 +32,10 @@ export class FormUtil {
   }
 
   createFormGroup(schema: AbstractControlContainerSchema, model: AnyObject): FormGroup;
-  createFormGroup(schemas: AnySchema[], model: AnyObject): FormGroup;
-  createFormGroup(schemaOrSchemas: AbstractControlContainerSchema | AnySchema[], model: AnyObject): FormGroup;
-  createFormGroup(schemaOrSchemas: AbstractControlContainerSchema | AnySchema[], model: AnyObject): FormGroup {
-    let schemas: AnySchema[];
+  createFormGroup(schemas: Indexable<AbstractSchema>[], model: AnyObject): FormGroup;
+  createFormGroup(schemaOrSchemas: AbstractControlContainerSchema | Indexable<AbstractSchema>[], model: AnyObject): FormGroup;
+  createFormGroup(schemaOrSchemas: AbstractControlContainerSchema | Indexable<AbstractSchema>[], model: AnyObject): FormGroup {
+    let schemas: Indexable<AbstractSchema>[];
     let options: AbstractControlOptions = {};
 
     if (isArray(schemaOrSchemas)) {
@@ -55,7 +55,7 @@ export class FormUtil {
     );
   }
 
-  private createControlMap(schemas: AnySchema[], model: AnyObject) {
+  private createControlMap(schemas: Indexable<AbstractSchema>[], model: AnyObject) {
     return schemas.reduce((controls, schema) => {
       if (this.schemaUtil.isControlGroup(schema)) {
         const key = schema.key!.toString();
@@ -100,7 +100,7 @@ export class FormUtil {
     });
   }
 
-  createFormArrayElements(schemas: AnySchema[], model: AnyArray) {
+  createFormArrayElements(schemas: Indexable<AbstractSchema>[], model: AnyArray) {
     // 只拿第一个，其他的忽略
     const [schema] = this.schemaUtil.filterControls(schemas);
 

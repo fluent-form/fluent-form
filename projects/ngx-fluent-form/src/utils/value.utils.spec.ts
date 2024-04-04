@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { FormControl } from '@angular/forms';
+import { SafeAny } from '@ngify/types';
 import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
 import { SchemaUtil } from './schema.utils';
@@ -63,7 +64,7 @@ describe('ValueUtils', () => {
           key: 'num',
           mapper: {
             parser: (value: string) => Number(value),
-            formatter: value => String(value)
+            formatter: (value: any) => String(value)
           }
         });
         const value = valueUtil.valueOfModel(model, schema);
@@ -112,7 +113,7 @@ describe('ValueUtils', () => {
           key: 'user.age',
           mapper: {
             parser: (value: string) => Number(value),
-            formatter: value => String(value)
+            formatter: (value: any) => String(value)
           }
         });
         const value = valueUtil.valueOfModel(model, schema);
@@ -302,7 +303,7 @@ describe('ValueUtils', () => {
         key: 'num',
         mapper: {
           parser: (value: string) => Number(value),
-          formatter: value => String(value)
+          formatter: (value: SafeAny) => String(value)
         }
       });
       const control = new FormControl(1);

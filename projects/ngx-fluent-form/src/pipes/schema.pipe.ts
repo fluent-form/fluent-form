@@ -1,5 +1,6 @@
 import { inject, Pipe, PipeTransform } from '@angular/core';
-import { AbstractControlContainerSchema, AbstractControlSchema, AnyContainerSchema, SchemaKey, SingleSchemaKey } from '../schemas';
+import { AbstractBranchSchema, AbstractControlContainerSchema, AbstractControlSchema, SchemaKey, SingleSchemaKey } from '../schemas';
+import { Indexable } from '../types';
 import { SchemaUtil } from '../utils';
 
 /**
@@ -18,11 +19,11 @@ export class FluentSchemaPipe implements PipeTransform {
    * @param schemas
    * @param type 用来重载方法的返回值
    */
-  transform(value: SingleSchemaKey | SchemaKey[], schema: AnyContainerSchema, type: 'control'): AbstractControlSchema | null;
-  transform(value: SingleSchemaKey | SchemaKey[], schema: AnyContainerSchema, type: 'group'): AbstractControlContainerSchema | null;
-  transform(value: SingleSchemaKey | SchemaKey[], schema: AnyContainerSchema, type: 'array'): AbstractControlContainerSchema | null;
-  transform(value: SingleSchemaKey | SchemaKey[], schema: AnyContainerSchema): AbstractControlSchema | AbstractControlContainerSchema | null;
-  transform(value: SingleSchemaKey | SchemaKey[], schema: AnyContainerSchema): AbstractControlSchema | AbstractControlContainerSchema | null {
+  transform(value: SingleSchemaKey | SchemaKey[], schema: Indexable<AbstractBranchSchema>, type: 'control'): AbstractControlSchema | null;
+  transform(value: SingleSchemaKey | SchemaKey[], schema: Indexable<AbstractBranchSchema>, type: 'group'): AbstractControlContainerSchema | null;
+  transform(value: SingleSchemaKey | SchemaKey[], schema: Indexable<AbstractBranchSchema>, type: 'array'): AbstractControlContainerSchema | null;
+  transform(value: SingleSchemaKey | SchemaKey[], schema: Indexable<AbstractBranchSchema>): AbstractControlSchema | AbstractControlContainerSchema | null;
+  transform(value: SingleSchemaKey | SchemaKey[], schema: Indexable<AbstractBranchSchema>): AbstractControlSchema | AbstractControlContainerSchema | null {
     return this.schemaUtil.find(schema, value) as AbstractControlSchema | AbstractControlContainerSchema | null;
   }
 

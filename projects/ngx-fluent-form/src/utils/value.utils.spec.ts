@@ -64,7 +64,7 @@ describe('ValueUtils', () => {
           key: 'num',
           mapper: {
             parser: (value: string) => Number(value),
-            formatter: (value: any) => String(value)
+            formatter: (value: SafeAny) => String(value)
           }
         });
         const value = valueUtil.valueOfModel(model, schema);
@@ -113,7 +113,7 @@ describe('ValueUtils', () => {
           key: 'user.age',
           mapper: {
             parser: (value: string) => Number(value),
-            formatter: (value: any) => String(value)
+            formatter: (value: SafeAny) => String(value)
           }
         });
         const value = valueUtil.valueOfModel(model, schema);

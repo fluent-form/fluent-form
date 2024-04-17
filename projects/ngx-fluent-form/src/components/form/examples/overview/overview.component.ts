@@ -2,7 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { alert, button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, FluentFormComponent, FluentGridModule, form, heading4, headless, input, inputGroup, number, numberGroup, radioGroup, rate, row, select, slider, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
 import { map, switchMap, timer } from 'rxjs';
-import { AUTOCOMPLETE_OPTIONS, AUTOCOMPLETE_STRINGS, CASCADER_OPTIONS, CHECKBOX_OPTIONS, RADIO_OPTIONS, SELECT_OPTIONS, TREE_SELECT_OPTIONS } from './options';
+import { CASCADER_OPTIONS, CHECKBOX_OPTIONS, RADIO_OPTIONS, SELECT_OPTIONS, TREE_SELECT_OPTIONS } from './options';
 
 @Component({
   standalone: true,
@@ -19,18 +19,13 @@ export class OverviewExampleComponent {
       .label('文本输入框')
       .tooltip('小贴士')
       .col(4)
-      .id('ipt')
-      .autocomplete({
-        options: AUTOCOMPLETE_STRINGS
-      });
+      .id('ipt');
     number('number').label('数字输入框').col(4).disabled(ctx => {
       console.log(ctx);
       return false;
     });
     inputGroup().label('姓与名称').col(4).schemas(() => {
-      input('first').placeholder('姓').col(4).autocomplete({
-        options: AUTOCOMPLETE_OPTIONS
-      });
+      input('first').placeholder('姓').col(4);
       input('last').placeholder('名').col(8);
     });
     numberGroup().label('数字输入组').col(4).schemas(() => {
@@ -45,9 +40,7 @@ export class OverviewExampleComponent {
       input('text').placeholder('输入关键字').col({ flex: 'auto' });
       button().type('primary').content('搜索').variants({ ghost: true });
     });
-    textarea('textarea').label('文本框').col(12).autocomplete({
-      options: AUTOCOMPLETE_OPTIONS
-    });
+    textarea('textarea').label('文本框').col(12);
     date('date').label('日期录入框').col(3).class('custom-class');
     dateRange('date-range').label('区间日期录入框').col(3);
     datetime('datetime').label('日期时间录入框').col(3);

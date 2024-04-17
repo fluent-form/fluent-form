@@ -2,8 +2,7 @@ import { NgClass, NgStyle } from '@angular/common';
 import { TemplateRef } from '@angular/core';
 import { AbstractControlOptions, AsyncValidatorFn, FormControl, ValidatorFn } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
-import { AutocompleteDataSource } from 'ng-zorro-antd/auto-complete';
-import { CompareWith, NzSizeLDSType } from 'ng-zorro-antd/core/types';
+import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDateMode, SupportTimeOptions } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { FluentColDirective } from '../components';
@@ -80,12 +79,6 @@ export interface AbstractInputBoxControlSchema<Key extends SchemaKey, Val, P ext
  */
 export interface AbstractTextControlSchema<Key extends SchemaKey = SchemaKey> extends AbstractInputBoxControlSchema<Key, string> {
   length?: Length;
-  autocomplete?: {
-    backfill?: boolean;
-    options: AutocompleteDataSource;
-    width?: number;
-    compare?: CompareWith;
-  };
 }
 
 /**

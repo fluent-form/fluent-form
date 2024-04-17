@@ -1,102 +1,46 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <ng-container *fluentInject="InputGroup as inputGroup; optional: true">
-    <ng-container *ngIf="schema.autocomplete as autocomplete; else noAutocompleteTemplate">
-      <ng-container *ngIf="inputGroup; else standardTemplate">
-        <input
-          *ngIf="!(schema.hidden | reactive: model : schema : control)"
-          fluentCol
-          nz-input
-          [attr.id]="schema.id"
-          [attr.name]="schema.key"
-          [attr.maxlength]="helper.length.max | invoke: schema.length"
-          [attr.minlength]="helper.length.min | invoke: schema.length"
-          [fluentBinding]="{ schema, control, model }"
-          [formControl]="control"
-          [ngClass]="schema.class"
-          [ngStyle]="schema.style"
-          [span]="schema.col | col: 'span'"
-          [flex]="schema.col | col: 'flex'"
-          [offset]="schema.col | col: 'offset'"
-          [nzAutocomplete]="autocompleteComponent"
-          [placeholder]="schema.placeholder ?? ''"
-          [type]="schema.type ?? 'text'"
-          [autofocus]="schema.autofocus"
-          [readonly]="schema.readonly | reactive: model : schema : control"
-          [nzSize]="schema.size!"
-          [nzBorderless]="schema.borderless" />
-      </ng-container>
-
-      <ng-template #standardTemplate>
-        <input
-          nz-input
-          [attr.id]="schema.id"
-          [attr.name]="schema.key"
-          [attr.maxlength]="helper.length.max | invoke: schema.length"
-          [attr.minlength]="helper.length.min | invoke: schema.length"
-          [fluentBinding]="{ schema, control, model }"
-          [ngClass]="schema.class"
-          [ngStyle]="schema.style"
-          [formControl]="control"
-          [nzAutocomplete]="autocompleteComponent"
-          [placeholder]="schema.placeholder ?? ''"
-          [type]="schema.type ?? 'text'"
-          [autofocus]="schema.autofocus"
-          [readonly]="schema.readonly | reactive: model : schema : control"
-          [nzSize]="schema.size!"
-          [nzBorderless]="schema.borderless" />
-      </ng-template>
-
-      <nz-autocomplete
-        #autocompleteComponent
-        [compareWith]="helper.autocomplete.compare | invoke: autocomplete"
-        [nzBackfill]="autocomplete.backfill"
-        [nzDataSource]="autocomplete.options"
-        [nzWidth]="autocomplete.width"></nz-autocomplete>
+    <ng-container *ngIf="inputGroup; else standardTemplate">
+      <input
+        *ngIf="!(schema.hidden | reactive: model : schema : control)"
+        fluentCol
+        nz-input
+        [attr.id]="schema.id"
+        [attr.name]="schema.key"
+        [attr.maxlength]="helper.length.max | invoke: schema.length"
+        [attr.minlength]="helper.length.min | invoke: schema.length"
+        [fluentBinding]="{ schema, control, model }"
+        [formControl]="control"
+        [ngClass]="schema.class"
+        [ngStyle]="schema.style"
+        [span]="schema.col | col: 'span'"
+        [flex]="schema.col | col: 'flex'"
+        [offset]="schema.col | col: 'offset'"
+        [placeholder]="schema.placeholder ?? ''"
+        [type]="schema.type ?? 'text'"
+        [autofocus]="schema.autofocus"
+        [readonly]="schema.readonly | reactive: model : schema : control"
+        [nzSize]="schema.size!"
+        [nzBorderless]="schema.borderless" />
     </ng-container>
 
-    <ng-template #noAutocompleteTemplate>
-      <ng-container *ngIf="inputGroup; else standardTemplate">
-        <input
-          *ngIf="!(schema.hidden | reactive: model : schema : control)"
-          fluentCol
-          nz-input
-          [attr.id]="schema.id"
-          [attr.name]="schema.key"
-          [attr.maxlength]="helper.length.max | invoke: schema.length"
-          [attr.minlength]="helper.length.min | invoke: schema.length"
-          [fluentBinding]="{ schema, control, model }"
-          [formControl]="control"
-          [ngClass]="schema.class"
-          [ngStyle]="schema.style"
-          [span]="schema.col | col: 'span'"
-          [flex]="schema.col | col: 'flex'"
-          [offset]="schema.col | col: 'offset'"
-          [placeholder]="schema.placeholder ?? ''"
-          [type]="schema.type ?? 'text'"
-          [autofocus]="schema.autofocus"
-          [readonly]="schema.readonly | reactive: model : schema : control"
-          [nzSize]="schema.size!"
-          [nzBorderless]="schema.borderless" />
-      </ng-container>
-
-      <ng-template #standardTemplate>
-        <input
-          nz-input
-          [attr.id]="schema.id"
-          [attr.name]="schema.key"
-          [attr.maxlength]="helper.length.max | invoke: schema.length"
-          [attr.minlength]="helper.length.min | invoke: schema.length"
-          [fluentBinding]="{ schema, control, model }"
-          [ngClass]="schema.class"
-          [ngStyle]="schema.style"
-          [formControl]="control"
-          [placeholder]="schema.placeholder ?? ''"
-          [type]="schema.type ?? 'text'"
-          [autofocus]="schema.autofocus"
-          [readonly]="schema.readonly | reactive: model : schema : control"
-          [nzSize]="schema.size!"
-          [nzBorderless]="schema.borderless" />
-      </ng-template>
+    <ng-template #standardTemplate>
+      <input
+        nz-input
+        [attr.id]="schema.id"
+        [attr.name]="schema.key"
+        [attr.maxlength]="helper.length.max | invoke: schema.length"
+        [attr.minlength]="helper.length.min | invoke: schema.length"
+        [fluentBinding]="{ schema, control, model }"
+        [ngClass]="schema.class"
+        [ngStyle]="schema.style"
+        [formControl]="control"
+        [placeholder]="schema.placeholder ?? ''"
+        [type]="schema.type ?? 'text'"
+        [autofocus]="schema.autofocus"
+        [readonly]="schema.readonly | reactive: model : schema : control"
+        [nzSize]="schema.size!"
+        [nzBorderless]="schema.borderless" />
     </ng-template>
   </ng-container>
 </ng-template>

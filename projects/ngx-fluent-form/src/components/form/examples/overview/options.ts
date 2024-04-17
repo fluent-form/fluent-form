@@ -78,15 +78,3 @@ export const RADIO_OPTIONS = [
   { label: '女', value: '女' },
   { label: '男', value: '男' }
 ];
-
-export const AUTOCOMPLETE_STRINGS = [
-  'A',
-  'B',
-  'C',
-];
-
-export const AUTOCOMPLETE_OPTIONS = [
-  { label: 'A', value: 'a' },
-  { label: 'B', value: 'b' },
-  { label: 'C', value: 'c' }
-];

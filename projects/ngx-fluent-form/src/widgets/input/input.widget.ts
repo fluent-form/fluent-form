@@ -1,7 +1,6 @@
 import { NgClass, NgIf, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { FluentGridModule } from '../../components';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentInjectDirective } from '../../directives';
@@ -23,7 +22,6 @@ type InputWidgetTemplateContext = WidgetTemplateContext<InputControlSchema, Form
     ReactiveFormsModule,
     NzInputModule,
     FluentGridModule,
-    NzAutocompleteModule,
     FluentInjectDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,

@@ -68,6 +68,7 @@ describe('SchemaUtil', () => {
     expect(schemaUtil.isControlWrapper({ kind: 'input-group' })).toBeTrue();
     expect(schemaUtil.isControl({ kind: 'input' })).toBeTrue();
     expect(schemaUtil.isNonControl({ kind: 'button' })).toBeTrue();
+    expect(schemaUtil.isNonControl({ kind: 'button-group' })).toBeTrue();
   });
 
   it('filterControlSchemas', () => {

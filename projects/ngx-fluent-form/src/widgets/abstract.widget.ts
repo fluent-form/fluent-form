@@ -30,10 +30,6 @@ export abstract class AbstractTextControlWidget<C> extends AbstractWidget<C> {
       max: (length: AbstractTextControlSchema['length']) => {
         return isNumber(length) ? length : length?.max;
       },
-    },
-    autocomplete: {
-      compare: (autocomplete: AbstractTextControlSchema['autocomplete']) =>
-        autocomplete?.compare ?? ((o1: unknown, o2: unknown) => o1 === o2)
     }
   } as const;
 }

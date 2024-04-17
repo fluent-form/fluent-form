@@ -25,14 +25,5 @@ describe('AbstractTextControlWidget', () => {
       expect(helper.length.max({ min: 1 })).toBeUndefined();
       expect(helper.length.max({ max: 1 })).toBe(1);
     });
-
-    it('autocomplete.compare', () => {
-      const fn = (a: unknown, b: unknown) => a === b;
-      expect(helper.autocomplete.compare(undefined)).toBeTruthy();
-      expect(helper.autocomplete.compare(undefined)(1, 1)).toBeTrue();
-      expect(helper.autocomplete.compare(undefined)(1, 2)).toBeFalse();
-      expect(helper.autocomplete.compare({ options: [] })).toBeTruthy();
-      expect(helper.autocomplete.compare({ options: [], compare: fn })).toBe(fn);
-    });
   });
 });

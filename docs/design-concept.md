@@ -32,7 +32,8 @@ order: 3
 
 ## Fluent API
 
-为了更加便捷地编写图示，我们引入了一种可组合的、支持有限链式调用的 Builder-like API，称之为 Fluent API。
+为了简化图示的编写过程，我们引入了一种支持链式调用的、可组合的 Builder-like API，称之为 Fluent API。
+这套 Fluent API 作为一种领域特定语言（DSL），提供了一种直观的方式来创建图示。
 
 ```ts
 import { buttonGroup, button, form, input } from 'ngx-fluent-form';

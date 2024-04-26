@@ -11,7 +11,7 @@
     [fluentBinding]="{ schema: formSchema, control: formGroup, model }">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
       <fluent-col
-        *ngIf="schema.kind !== SchemaKind.Headless || (schema.kind === SchemaKind.Headless && schema.template)"
+        *ngIf="schema | renderable"
         [span]="schema.col | col: 'span'"
         [flex]="schema.col | col: 'flex'"
         [offset]="schema.col | col: 'offset'"

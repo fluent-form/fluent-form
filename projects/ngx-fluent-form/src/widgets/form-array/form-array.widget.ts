@@ -8,8 +8,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FluentFormItemOutletComponent, FluentGridModule } from '../../components';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentParentRowDirective, FluentVarDirective } from '../../directives';
-import { FluentColumnPipe, FluentReactivePipe, FluentTemplatePipe, InvokePipe } from '../../pipes';
-import { AbstractSchema, AddableButton, FormArraySchema, SchemaKind, WithOutSchemaReactiveFn } from '../../schemas';
+import { FluentColumnPipe, FluentReactivePipe, FluentTemplatePipe, InvokePipe, RenderablePipe } from '../../pipes';
+import { AbstractSchema, AddableButton, FormArraySchema, WithOutSchemaReactiveFn } from '../../schemas';
 import { FormUtil, SchemaUtil, isBoolean, isNumber, isUndefined } from '../../utils';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -40,7 +40,8 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
     FluentReactivePipe,
     FluentTemplatePipe,
     FluentVarDirective,
-    InvokePipe
+    InvokePipe,
+    RenderablePipe
   ],
   templateUrl: './form-array.widget.html',
   styleUrls: ['./form-array.widget.scss']
@@ -48,8 +49,6 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
 export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateContext> {
   private readonly schemaUtil = inject(SchemaUtil);
   private readonly formUtil = inject(FormUtil);
-
-  protected readonly SchemaKind = SchemaKind;
 
   protected push(control: FormArray, schema: FormArraySchema) {
     const [elementSchema] = this.schemaUtil.filterControls(schema.schemas);

@@ -165,7 +165,7 @@ export interface CascaderControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   /** Support search, cannot be used with `options.load` */
   searchable?: boolean | NzShowSearchOptions;
   options?: MaybeSchemaReactiveFn<CascaderControlSchema<SingleSchemaKey, Val>, NzCascaderOption[]>;
-  fetchOptions?: NzCascaderComponent['nzLoadData'];
+  fetchOptions?: (node: NzCascaderOption, index: number, ctx: SchemaContext<CascaderControlSchema<SchemaKey, Val>>) => PromiseLike<SafeAny> | Observable<SafeAny>;
   config?: {
     labelProperty?: string;
     valueProperty?: string;

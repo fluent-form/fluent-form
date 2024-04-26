@@ -40,6 +40,54 @@ export const CASCADER_OPTIONS = [
   }
 ];
 
+export const PROVINCES_OPTIONS = [
+  {
+    value: 'zhejiang',
+    label: 'Zhejiang'
+  },
+  {
+    value: 'jiangsu',
+    label: 'Jiangsu'
+  }
+];
+
+export const CITIES_OPTIONS: { [key: string]: Array<{ value: string; label: string; isLeaf?: boolean }> } = {
+  zhejiang: [
+    {
+      value: 'hangzhou',
+      label: 'Hangzhou'
+    },
+    {
+      value: 'ningbo',
+      label: 'Ningbo',
+      isLeaf: true
+    }
+  ],
+  jiangsu: [
+    {
+      value: 'nanjing',
+      label: 'Nanjing'
+    }
+  ]
+};
+
+export const SCENICSPOTS_OPTIONS: { [key: string]: Array<{ value: string; label: string; isLeaf?: boolean }> } = {
+  hangzhou: [
+    {
+      value: 'xihu',
+      label: 'West Lake',
+      isLeaf: true
+    }
+  ],
+  nanjing: [
+    {
+      value: 'zhonghuamen',
+      label: 'Zhong Hua Men',
+      isLeaf: true
+    }
+  ]
+};
+
 export const SELECT_OPTIONS = [
   { label: 'Jack', value: 'jack' },
   { label: 'Lucy', value: 'lucy' },

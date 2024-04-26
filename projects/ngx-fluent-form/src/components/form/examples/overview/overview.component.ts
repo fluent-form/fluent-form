@@ -2,7 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { alert, button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, FluentFormComponent, FluentGridModule, form, heading4, headless, input, inputGroup, number, numberGroup, radioGroup, rate, row, select, slider, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from 'ngx-fluent-form';
 import { map, switchMap, timer } from 'rxjs';
-import { CASCADER_OPTIONS, CHECKBOX_OPTIONS, RADIO_OPTIONS, SELECT_OPTIONS, TREE_SELECT_OPTIONS } from './options';
+import { CASCADER_OPTIONS, CHECKBOX_OPTIONS, CITIES_OPTIONS, PROVINCES_OPTIONS, RADIO_OPTIONS, SCENICSPOTS_OPTIONS, SELECT_OPTIONS, TREE_SELECT_OPTIONS } from './options';
 
 @Component({
   standalone: true,
@@ -50,7 +50,7 @@ export class OverviewExampleComponent {
     checkbox('checkbox').label('单个复选框').content('同意').col(3);
     checkboxGroup('checkboxGroup').label('复选框组').options(CHECKBOX_OPTIONS).col(3);
     select('select').label('选择器').options(SELECT_OPTIONS).col(3);
-    select('asyncSelect').label('动态数据选择器').col(3).fetchOptions(
+    select('asyncSelect').label('动态选择器').col(3).fetchOptions(
       $ => $.pipe(
         switchMap(str =>
           timer(1000).pipe(
@@ -64,6 +64,22 @@ export class OverviewExampleComponent {
       )
     );
     cascader('cascader').label('联级选择器').options(CASCADER_OPTIONS).col(3);
+    cascader('asyncCascader')
+      .label('动态联级选择器')
+      .fetchOptions((node, index) => new Promise<void>(resolve => {
+        setTimeout(() => {
+          if (index < 0) {
+            // if index less than 0 it is root node
+            node.children = PROVINCES_OPTIONS;
+          } else if (index === 0) {
+            node.children = CITIES_OPTIONS[node.value];
+          } else {
+            node.children = SCENICSPOTS_OPTIONS[node.value];
+          }
+          resolve();
+        }, 500);
+      }))
+      .col(3);
     treeSelect('treeSelect').label('树形选择器').options(TREE_SELECT_OPTIONS).expandedKeys(['100', '1001']).col(3);
     rate('rate').label('评分').defaultValue(2.5).col(6);
     slider('slider').label('滑动条').defaultValue(30).col(6);

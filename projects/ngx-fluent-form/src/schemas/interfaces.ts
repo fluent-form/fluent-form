@@ -24,7 +24,7 @@ export enum SchemaType {
 /**
  * @public
  */
-export enum SchemaKind {
+export const enum SchemaKind {
   Headless = 'headless',
   Input = 'input',
   Textarea = 'textarea',

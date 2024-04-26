@@ -22,7 +22,7 @@
       let-index="index"
       let-first="first">
       <fluent-col
-        *ngIf="schema.kind !== SchemaKind.Headless || (schema.kind === SchemaKind.Headless && schema.template)"
+        *ngIf="schema | renderable"
         cdkDrag
         cdkDragPreviewContainer="parent"
         [cdkDragBoundary]="row"

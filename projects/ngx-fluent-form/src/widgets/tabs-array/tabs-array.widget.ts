@@ -7,8 +7,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { FluentFormItemOutletComponent, FluentGridModule } from '../../components';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentParentRowDirective, FluentVarDirective } from '../../directives';
-import { FluentColumnPipe, FluentReactivePipe, FluentTemplatePipe, InvokePipe } from '../../pipes';
-import { AbstractSchema, SchemaKind, TabsArraySchema } from '../../schemas';
+import { FluentColumnPipe, FluentReactivePipe, FluentTemplatePipe, InvokePipe, RenderablePipe } from '../../pipes';
+import { AbstractSchema, TabsArraySchema } from '../../schemas';
 import { FormUtil, SchemaUtil, isNumber } from '../../utils';
 import { AbstractWidget, WidgetTemplateContext } from '../abstract.widget';
 
@@ -38,15 +38,14 @@ type TabsArrayWidgetTemplateContext = WidgetTemplateContext<TabsArraySchema, For
     FluentReactivePipe,
     FluentTemplatePipe,
     FluentVarDirective,
-    InvokePipe
+    InvokePipe,
+    RenderablePipe
   ],
   templateUrl: './tabs-array.widget.html'
 })
 export class TabsArrayWidget extends AbstractWidget<TabsArrayWidgetTemplateContext> {
   private readonly schemaUtil = inject(SchemaUtil);
   private readonly formUtil = inject(FormUtil);
-
-  protected readonly SchemaKind = SchemaKind;
 
   protected push(control: FormArray, schema: TabsArraySchema) {
     const [elementSchema] = this.schemaUtil.filterControls(schema.schemas);

@@ -6,9 +6,8 @@ import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { takeUntil } from 'rxjs';
 import { FluentBindingDirective, FluentTemplateDirective } from '../../directives';
-import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe } from '../../pipes';
+import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe, RenderablePipe } from '../../pipes';
 import { AbstractSchema, FormGroupSchema } from '../../schemas';
-import { SchemaKind } from '../../schemas/interfaces';
 import { runMicrotask } from '../../shared';
 import { TEMPLATE_DIRECTIVES } from '../../tokens';
 import { Indexable } from '../../types';
@@ -32,7 +31,8 @@ import { FluentGridModule } from '../grid';
     FluentBindingDirective,
     FluentReactivePipe,
     FluentControlPipe,
-    FluentColumnPipe
+    FluentColumnPipe,
+    RenderablePipe
   ],
   templateUrl: './form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -56,7 +56,6 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges {
   private internalModel!: T;
   private _schema!: FormGroupSchema;
 
-  protected readonly SchemaKind = SchemaKind;
   protected get schemas(): Indexable<AbstractSchema>[] {
     return this.schema?.schemas;
   }

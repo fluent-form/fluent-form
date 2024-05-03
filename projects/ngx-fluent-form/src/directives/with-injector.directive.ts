@@ -12,8 +12,8 @@ export class FluentWithInjectorDirective {
 
   constructor() {
     const outlet = inject(NgTemplateOutlet);
-    const { parentInjector } = inject(ViewContainerRef);
-    outlet.ngTemplateOutletInjector = parentInjector;
+    const { injector } = inject(ViewContainerRef);
+    outlet.ngTemplateOutletInjector = injector;
   }
 
 }

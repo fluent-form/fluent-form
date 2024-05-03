@@ -12,4 +12,4 @@ export const SCHEMA_MAP = new InjectionToken<Map<string, SchemaConfig<SafeAny>>>
 
 export const TEMPLATE_DIRECTIVES = new InjectionToken<QueryList<FluentTemplateDirective>>('TemplateDirectives');
 
-export const FORM_CONTENT = new InjectionToken<Type<TemplateRefHolder<{ form: FormGroup, model: AnyObject, schema: AbstractSchema, submit: EventEmitter<SafeAny> }>>>('FormContent');
+export const FLUENT_FORM_CONTENT = new InjectionToken<Type<TemplateRefHolder<{ form: FormGroup, model: AnyObject, schema: AbstractSchema, submit: EventEmitter<SafeAny> }>>>('FormContent');

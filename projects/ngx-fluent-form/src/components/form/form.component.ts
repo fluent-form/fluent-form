@@ -7,7 +7,7 @@ import { FluentTemplateDirective } from '../../directives';
 import { FormGroupSchema } from '../../schemas';
 import { DestroyedSubject } from '../../services';
 import { runMicrotask } from '../../shared';
-import { FORM_CONTENT, TEMPLATE_DIRECTIVES } from '../../tokens';
+import { FLUENT_FORM_CONTENT, TEMPLATE_DIRECTIVES } from '../../tokens';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
 
 @Component({
@@ -38,7 +38,7 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges {
   private internalModel!: T;
   private _schema!: FormGroupSchema;
 
-  templateRef = createComponent(inject(FORM_CONTENT), {
+  templateRef = createComponent(inject(FLUENT_FORM_CONTENT), {
     environmentInjector: inject(EnvironmentInjector),
     elementInjector: inject(Injector)
   }).instance.templateRef;

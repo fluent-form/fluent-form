@@ -1,43 +1,25 @@
-import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, inject } from '@angular/core';
-import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ContentChildren, EnvironmentInjector, EventEmitter, Injector, Input, OnChanges, Output, QueryList, SimpleChanges, createComponent, inject } from '@angular/core';
+import { FormControlStatus, FormGroup } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
-import { NzDestroyService } from 'ng-zorro-antd/core/services';
-import { NzFormModule } from 'ng-zorro-antd/form';
 import { takeUntil } from 'rxjs';
-import { FluentBindingDirective, FluentTemplateDirective } from '../../directives';
-import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe, RenderablePipe } from '../../pipes';
-import { AbstractSchema, FormGroupSchema } from '../../schemas';
+import { FluentTemplateDirective } from '../../directives';
+import { FormGroupSchema } from '../../schemas';
+import { DestroyedSubject } from '../../services';
 import { runMicrotask } from '../../shared';
-import { TEMPLATE_DIRECTIVES } from '../../tokens';
-import { Indexable } from '../../types';
+import { FORM_CONTENT, TEMPLATE_DIRECTIVES } from '../../tokens';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
-import { FluentFormItemOutletComponent } from '../form-item-outlet/form-item-outlet.component';
-import { FluentGridModule } from '../grid';
 
 @Component({
   selector: 'fluent-form',
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
-    NgClass,
-    NgStyle,
-    NgTemplateOutlet,
-    ReactiveFormsModule,
-    NzFormModule,
-    FluentGridModule,
-    FluentFormItemOutletComponent,
-    FluentBindingDirective,
-    FluentReactivePipe,
-    FluentControlPipe,
-    FluentColumnPipe,
-    RenderablePipe
+    NgTemplateOutlet
   ],
   templateUrl: './form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    NzDestroyService,
+    DestroyedSubject,
     {
       provide: TEMPLATE_DIRECTIVES,
       useFactory: () => inject(FluentFormComponent).templateDirectives
@@ -45,7 +27,7 @@ import { FluentGridModule } from '../grid';
   ]
 })
 export class FluentFormComponent<T extends AnyObject> implements OnChanges {
-  private readonly destroy$ = inject(NzDestroyService);
+  private readonly destroyed$ = inject(DestroyedSubject);
   private readonly formUtil = inject(FormUtil);
   private readonly modelUtil = inject(ModelUtil);
   private readonly schemaUtil = inject(SchemaUtil);
@@ -56,9 +38,10 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges {
   private internalModel!: T;
   private _schema!: FormGroupSchema;
 
-  protected get schemas(): Indexable<AbstractSchema>[] {
-    return this.schema?.schemas;
-  }
+  templateRef = createComponent(inject(FORM_CONTENT), {
+    environmentInjector: inject(EnvironmentInjector),
+    elementInjector: inject(Injector)
+  }).instance.templateRef;
 
   form!: FormGroup;
 
@@ -96,7 +79,7 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges {
   }
 
   private createForm() {
-    this.destroy$.next();
+    this.destroyed$.next();
 
     this.formChange.emit(
       this.form = this.formUtil.createFormGroup(this.schema, this.model)
@@ -104,18 +87,18 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges {
 
     this.onValueChanges();
 
-    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(value => {
+    this.form.valueChanges.pipe(takeUntil(this.destroyed$)).subscribe(value => {
       this.onValueChanges();
       this.valueChanges.emit(value);
     });
 
-    this.form.statusChanges.pipe(takeUntil(this.destroy$)).subscribe(o =>
+    this.form.statusChanges.pipe(takeUntil(this.destroyed$)).subscribe(o =>
       this.statusChanges.emit(o)
     );
   }
 
   private updateForm() {
-    return this.modelUtil.updateForm(this.form, this.model, this.schemas);
+    return this.modelUtil.updateForm(this.form, this.model, this.schema.schemas);
   }
 
   private onValueChanges() {
@@ -126,9 +109,9 @@ export class FluentFormComponent<T extends AnyObject> implements OnChanges {
         this.model = this.internalModel = this.formUtil.updateModel(
           {} as T,
           this.form,
-          this.schemas
+          this.schema.schemas
         ),
-        this.schemas
+        this.schema.schemas
       );
       this.modelChange.emit(this.model);
     });

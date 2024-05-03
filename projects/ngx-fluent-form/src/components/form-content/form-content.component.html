@@ -1,0 +1,37 @@
+<ng-template let-schema="schema" let-form="form" let-model="model" let-submit="submit">
+  <form
+    nz-form
+    fluentRow
+    [gap]="schema.gap"
+    [justify]="schema.justify"
+    [align]="schema.align"
+    [nzLayout]="schema.layout!"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style"
+    [formGroup]="form"
+    [fluentBinding]="{ schema, control: form, model }"
+    (submit)="$event.stopPropagation()"
+    (ngSubmit)="submit.emit($event)">
+    <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
+      <fluent-col
+        *ngIf="schema | renderable"
+        [span]="schema.col | col: 'span'"
+        [flex]="schema.col | col: 'flex'"
+        [offset]="schema.col | col: 'offset'"
+        [hidden]="schema.hidden | reactive: model : schema : control"
+        [control]="control"
+        [schema]="schema"
+        [model]="model">
+      </fluent-col>
+    </ng-template>
+
+    <ng-container
+      *ngFor="let subschema of schema.schemas"
+      [ngTemplateOutlet]="formColTemplate"
+      [ngTemplateOutletContext]="{
+        control: (subschema.key | control: form),
+        schema: subschema,
+        model: model
+      }"></ng-container>
+  </form>
+</ng-template>

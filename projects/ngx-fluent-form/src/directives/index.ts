@@ -5,6 +5,7 @@ export * from './inject.directive';
 export * from './layout';
 export * from './life-cycle.directive';
 export * from './parent-row.directive';
+export * from './template-ref-holder.directive';
 export * from './template.directive';
 export * from './var.directive';
 export * from './with-injector.directive';

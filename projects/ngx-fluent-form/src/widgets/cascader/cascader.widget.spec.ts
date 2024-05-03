@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormControl } from '@angular/forms';
+import { CascaderControlSchema } from '../../schemas';
 import { CascaderWidget } from './cascader.widget';
 
 describe('CascaderWidget', () => {
@@ -13,5 +15,19 @@ describe('CascaderWidget', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should fetch options be work', async () => {
+    const model = {};
+    const schema: CascaderControlSchema = {
+      kind: 'cascader',
+      fetchOptions: () => new Promise<void>(resolve => {
+        resolve();
+      })
+    };
+    const control = new FormControl([]);
+    const fetchOptions = component.fetchOptions(model, schema, control);
+
+    expect(fetchOptions({}, 0)).toBeInstanceOf(Promise);
   });
 });

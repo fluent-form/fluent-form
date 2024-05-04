@@ -1,13 +1,16 @@
 import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
-import { Component, EventEmitter } from '@angular/core';
+import { Component, Directive, EventEmitter } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { AnyObject, SafeAny } from '@ngify/types';
+import { AnyObject } from '@ngify/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { FluentBindingDirective, TemplateRefHolder } from '../../directives';
 import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe, RenderablePipe } from '../../pipes';
 import { AbstractSchema } from '../../schemas';
 import { FluentFormItemOutletComponent } from '../form-item-outlet/form-item-outlet.component';
 import { FluentGridModule } from '../grid';
+
+@Directive()
+export abstract class AbstractFormContentComponent extends TemplateRefHolder<{ form: FormGroup, model: AnyObject, schema: AbstractSchema, submit: EventEmitter<SubmitEvent> }> { }
 
 @Component({
   standalone: true,
@@ -29,4 +32,4 @@ import { FluentGridModule } from '../grid';
   ],
   templateUrl: './form-content.component.html'
 })
-export class FormContentComponent extends TemplateRefHolder<{ form: FormGroup, model: AnyObject, schema: AbstractSchema, submit: EventEmitter<SafeAny> }> { }
+export class FormContentComponent extends AbstractFormContentComponent { }

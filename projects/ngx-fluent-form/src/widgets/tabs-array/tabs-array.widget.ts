@@ -5,7 +5,7 @@ import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { FluentFormItemOutletComponent, FluentGridModule } from '../../components';
+import { FluentFormItemContentComponent, FluentGridModule } from '../../components';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentParentRowDirective, FluentVarDirective } from '../../directives';
 import { FluentColumnPipe, FluentReactivePipe, FluentTemplatePipe, InvokePipe, RenderablePipe } from '../../pipes';
 import { AbstractSchema, TabsArraySchema } from '../../schemas';
@@ -30,7 +30,7 @@ type TabsArrayWidgetTemplateContext = WidgetTemplateContext<TabsArraySchema, For
     NzTabsModule,
     NzOutletModule,
     FluentGridModule,
-    FluentFormItemOutletComponent,
+    FluentFormItemContentComponent,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentParentRowDirective,

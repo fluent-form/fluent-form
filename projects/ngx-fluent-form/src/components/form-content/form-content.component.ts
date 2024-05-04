@@ -6,7 +6,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { FluentBindingDirective, TemplateRefHolder } from '../../directives';
 import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe, RenderablePipe } from '../../pipes';
 import { AbstractSchema } from '../../schemas';
-import { FluentFormItemOutletComponent } from '../form-item-outlet/form-item-outlet.component';
+import { FluentFormItemContentComponent } from '../form-item-content/form-item-content.component';
 import { FluentGridModule } from '../grid';
 
 @Directive()
@@ -23,7 +23,7 @@ export abstract class AbstractFormContentComponent extends TemplateRefHolder<{ f
     ReactiveFormsModule,
     NzFormModule,
     FluentGridModule,
-    FluentFormItemOutletComponent,
+    FluentFormItemContentComponent,
     FluentBindingDirective,
     FluentReactivePipe,
     FluentControlPipe,

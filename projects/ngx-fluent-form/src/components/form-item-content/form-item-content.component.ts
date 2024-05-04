@@ -14,7 +14,7 @@ import { Indexable } from '../../types';
  * @internal
  */
 @Component({
-  selector: 'fluent-col[schema],[fluentFormItemOutlet]',
+  selector: 'fluent-col[schema],[fluentFormItemContent]',
   standalone: true,
   imports: [
     NgIf,
@@ -34,10 +34,10 @@ import { Indexable } from '../../types';
     FluentSchemaTypePipe,
     InvokePipe
   ],
-  templateUrl: './form-item-outlet.component.html',
+  templateUrl: './form-item-content.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FluentFormItemOutletComponent<T extends AnyObject | AnyArray> {
+export class FluentFormItemContentComponent<T extends AnyObject | AnyArray> {
   protected readonly SchemaType = SchemaType;
 
   @Input() control!: AbstractControl;

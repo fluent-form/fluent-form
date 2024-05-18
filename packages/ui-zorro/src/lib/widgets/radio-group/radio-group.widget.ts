@@ -1,0 +1,27 @@
+import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, WidgetTemplateContext } from '@fluent-form/core';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { RadioGroupControlSchema } from '../../schemas';
+
+type RadioGroupWidgetTemplateContext = WidgetTemplateContext<RadioGroupControlSchema, FormControl>;
+
+/**
+ * @internal
+ */
+@Component({
+  standalone: true,
+  imports: [
+    NgIf,
+    NgFor,
+    NgClass,
+    NgStyle,
+    ReactiveFormsModule,
+    NzRadioModule,
+    FluentBindingDirective,
+    FluentContextGuardDirective,
+  ],
+  templateUrl: './radio-group.widget.html',
+})
+export class RadioGroupWidget extends AbstractWidget<RadioGroupWidgetTemplateContext> { }

@@ -1,0 +1,40 @@
+{
+  "name": "@fluent-form/core",
+  "version": "0.0.1",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build:schematics": "tsc -p tsconfig.schematics.json",
+    "postbuild:schematics": "copyfiles src/schematics/{collection.json,*/schema.json,*/files/**} ../../dist/packages/core/ --up=1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fluent-form/fluent-form.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fluent-form/fluent-form/issues"
+  },
+  "homepage": "https://github.com/fluent-form/fluent-form",
+  "keywords": [
+    "angular",
+    "reactive-form",
+    "dynamic-form",
+    "json-form",
+    "fluent-form",
+    "fluent-api"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "schematics": "./schematics/collection.json",
+  "ng-add": {
+    "save": "dependencies"
+  },
+  "peerDependencies": {
+    "@angular/forms": ">=16.0.0",
+    "@angular/core": ">=16.0.0"
+  },
+  "dependencies": {
+    "@ngify/types": "~1.5.0"
+  }
+}

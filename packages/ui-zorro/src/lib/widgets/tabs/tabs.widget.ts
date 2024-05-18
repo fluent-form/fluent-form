@@ -1,0 +1,33 @@
+import { NgClass, NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlPipe, FluentGridModule, FluentParentRowDirective, FluentReactivePipe, WidgetTemplateContext } from '@fluent-form/core';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { FluentFormItemContentComponent } from '../../components';
+import { TabsComponentSchema } from '../../schemas';
+
+type TabsWidgetTemplateContext = WidgetTemplateContext<TabsComponentSchema, FormGroup>;
+
+/**
+ * @internal
+ */
+@Component({
+  standalone: true,
+  imports: [
+    NgFor,
+    NgClass,
+    NgStyle,
+    NgTemplateOutlet,
+    NzTabsModule,
+    FluentGridModule,
+    FluentFormItemContentComponent,
+    FluentBindingDirective,
+    FluentParentRowDirective,
+    FluentContextGuardDirective,
+    FluentReactivePipe,
+    FluentControlPipe,
+    FluentColumnPipe
+  ],
+  templateUrl: './tabs.widget.html',
+})
+export class TabsWidget extends AbstractWidget<TabsWidgetTemplateContext> { }

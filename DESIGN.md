@@ -22,8 +22,11 @@ ComposableControl --- Input
 ComposableControl --- Number
 ComposableControl --- ....
 
-ControlContainer --- FormGroup
-ControlContainer --- FormArray
+ControlContainer --- ControlGroup
+ControlContainer --- ControlArray
+
+ControlGroup --- FormGroup
+ControlArray --- FormArray
 
 ControlWrapper --- InputGroup
 

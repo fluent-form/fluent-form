@@ -1,0 +1,35 @@
+import { NgClass, NgIf, NgStyle } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
+import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { DatePickerControlSchema } from '../../schemas';
+
+type DateWidgetTemplateContext = WidgetTemplateContext<DatePickerControlSchema, FormControl<Date>>;
+
+/**
+ * @internal
+ */
+@Component({
+  standalone: true,
+  imports: [
+    NgIf,
+    NgClass,
+    NgStyle,
+    ReactiveFormsModule,
+    NzDatePickerModule,
+    FluentGridModule,
+    FluentInjectDirective,
+    FluentBindingDirective,
+    FluentContextGuardDirective,
+    FluentReactivePipe,
+    FluentColumnPipe,
+    FluentTemplatePipe
+  ],
+  templateUrl: './date.widget.html',
+  styles: [`nz-date-picker { width: 100% }`]
+})
+export class DateWidget extends AbstractWidget<DateWidgetTemplateContext> {
+  protected readonly InputGroup = NzFormNoStatusService;
+}

@@ -1,4 +1,3 @@
-export * from './form-content.feature';
 export * from './helper';
 export * from './interface';
 export * from './schema-patcher.feature';

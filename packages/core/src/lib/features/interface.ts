@@ -2,8 +2,6 @@ import { Provider } from '@angular/core';
 
 export const enum FluentFormFeatureKind {
   UIAdapter,
-  FormContent,
-  Widget,
   StaticExpression,
   SchemaPatcher
 }

@@ -1,0 +1,11 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <input
+    nz-input
+    [attr.id]="schema.id"
+    [attr.name]="schema.key"
+    [fluentBinding]="{ schema, control, model }"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style"
+    [formControl]="control"
+    [type]="schema.type ?? 'text'" />
+</ng-template>

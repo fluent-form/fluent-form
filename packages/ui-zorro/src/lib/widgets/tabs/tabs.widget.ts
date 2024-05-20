@@ -1,9 +1,8 @@
 import { NgClass, NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlPipe, FluentGridModule, FluentParentRowDirective, FluentReactivePipe, WidgetTemplateContext } from '@fluent-form/core';
+import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlPipe, FluentFormItemOutletDirective, FluentGridModule, FluentParentRowDirective, FluentReactivePipe, WidgetTemplateContext } from '@fluent-form/core';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { FluentFormItemContentComponent } from '../../components';
 import { TabsComponentSchema } from '../../schemas';
 
 type TabsWidgetTemplateContext = WidgetTemplateContext<TabsComponentSchema, FormGroup>;
@@ -20,7 +19,7 @@ type TabsWidgetTemplateContext = WidgetTemplateContext<TabsComponentSchema, Form
     NgTemplateOutlet,
     NzTabsModule,
     FluentGridModule,
-    FluentFormItemContentComponent,
+    FluentFormItemOutletDirective,
     FluentBindingDirective,
     FluentParentRowDirective,
     FluentContextGuardDirective,

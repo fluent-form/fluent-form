@@ -1,12 +1,11 @@
 import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
-import { AbstractSchema, AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentGridModule, FluentParentRowDirective, FluentReactivePipe, FluentTemplatePipe, FluentVarDirective, FormUtil, InvokePipe, RenderablePipe, SchemaUtil, WidgetTemplateContext, isNumber } from '@fluent-form/core';
+import { AbstractSchema, AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentFormItemOutletDirective, FluentGridModule, FluentParentRowDirective, FluentReactivePipe, FluentTemplatePipe, FluentVarDirective, FormUtil, InvokePipe, RenderablePipe, SchemaUtil, WidgetTemplateContext, isNumber } from '@fluent-form/core';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { FluentFormItemContentComponent } from '../../components';
 import { TabsArraySchema } from '../../schemas';
 
 type TabsArrayWidgetTemplateContext = WidgetTemplateContext<TabsArraySchema, FormArray>;
@@ -27,7 +26,7 @@ type TabsArrayWidgetTemplateContext = WidgetTemplateContext<TabsArraySchema, For
     NzTabsModule,
     NzOutletModule,
     FluentGridModule,
-    FluentFormItemContentComponent,
+    FluentFormItemOutletDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentParentRowDirective,

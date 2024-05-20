@@ -11,4 +11,4 @@ export * from './lib/schemas';
 export * from './lib/tokens';
 export * from './lib/types';
 export * from './lib/utils';
-export * from './lib/widget';
+export * from './lib/widgets';

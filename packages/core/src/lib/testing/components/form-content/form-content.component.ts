@@ -1,9 +1,10 @@
 import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, Directive, EventEmitter } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { AbstractSchema, FluentBindingDirective, FluentColumnPipe, FluentControlPipe, FluentFormItemOutletDirective, FluentGridModule, FluentReactivePipe, RenderablePipe, TemplateRefHolder } from '@fluent-form/core';
 import { AnyObject } from '@ngify/types';
-import { NzFormModule } from 'ng-zorro-antd/form';
+import { FluentBindingDirective, FluentFormItemOutletDirective, FluentGridModule, TemplateRefHolder } from '../../../directives';
+import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe, RenderablePipe } from '../../../pipes';
+import { AbstractSchema } from '../../../schemas';
 
 @Directive()
 export abstract class AbstractFormContentComponent extends TemplateRefHolder<{ form: FormGroup, model: AnyObject, schema: AbstractSchema, submit: EventEmitter<SubmitEvent> }> { }
@@ -17,7 +18,6 @@ export abstract class AbstractFormContentComponent extends TemplateRefHolder<{ f
     NgStyle,
     NgTemplateOutlet,
     ReactiveFormsModule,
-    NzFormModule,
     FluentGridModule,
     FluentFormItemOutletDirective,
     FluentBindingDirective,

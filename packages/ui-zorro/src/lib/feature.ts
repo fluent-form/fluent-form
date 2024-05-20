@@ -1,7 +1,7 @@
 import { Provider } from '@angular/core';
-import { FLUENT_FORM_CONTENT, FluentFormFeatureKind, FluentFormWidgetFeature, makeFluentFeature, provideSchemaPatcher, provideSchemas, provideWidgets } from '@fluent-form/core';
+import { FLUENT_FORM_CONTENT, FLUENT_FORM_ITEM_CONTENT, FluentFormFeatureKind, FluentFormWidgetFeature, makeFluentFeature, provideSchemaPatcher, provideSchemas, provideWidgets } from '@fluent-form/core';
 import { SafeAny } from '@ngify/types';
-import { FormContentComponent } from './components';
+import { FluentFormItemContentComponent, FormContentComponent } from './components';
 
 export function withZorro(widgets: (FluentFormWidgetFeature<SafeAny> | FluentFormWidgetFeature<SafeAny>[])[]) {
   const flattenedWidgets = widgets.flat();
@@ -10,6 +10,10 @@ export function withZorro(widgets: (FluentFormWidgetFeature<SafeAny> | FluentFor
     {
       provide: FLUENT_FORM_CONTENT,
       useValue: FormContentComponent
+    },
+    {
+      provide: FLUENT_FORM_ITEM_CONTENT,
+      useValue: FluentFormItemContentComponent
     },
     provideWidgets(flattenedWidgets),
     provideSchemas(flattenedWidgets),

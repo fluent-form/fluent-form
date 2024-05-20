@@ -1,8 +1,8 @@
 import { Directive } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
-import { TemplateRefHolder } from './directives';
-import { AbstractSchema } from './schemas';
+import { TemplateRefHolder } from '../directives';
+import { AbstractSchema } from '../schemas';
 
 export interface WidgetTemplateContext<S extends AbstractSchema, C extends AbstractControl = FormControl> {
   schema: S;

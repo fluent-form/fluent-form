@@ -1,8 +1,9 @@
 import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlPipe, FluentFormItemOutletDirective, FluentGridModule, FluentParentRowDirective, FluentReactivePipe, RenderablePipe, WidgetTemplateContext } from '@fluent-form/core';
-import { NzFormModule } from 'ng-zorro-antd/form';
+import { FluentBindingDirective, FluentContextGuardDirective, FluentFormItemOutletDirective, FluentGridModule, FluentParentRowDirective } from '../../../directives';
+import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe, RenderablePipe } from '../../../pipes';
+import { AbstractWidget, WidgetTemplateContext } from '../../../widgets/widget';
 import { FormGroupSchema } from '../../schemas';
 
 type FormGroupWidgetTemplateContext = WidgetTemplateContext<FormGroupSchema, FormGroup>;
@@ -18,7 +19,6 @@ type FormGroupWidgetTemplateContext = WidgetTemplateContext<FormGroupSchema, For
     NgClass,
     NgStyle,
     NgTemplateOutlet,
-    NzFormModule,
     FluentGridModule,
     FluentFormItemOutletDirective,
     FluentBindingDirective,

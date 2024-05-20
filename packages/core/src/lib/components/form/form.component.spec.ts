@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { AnyObject, SafeAny } from '@ngify/types';
-import { form, input } from '../../compose';
+import { form } from '../../compose';
 import { withStaticExpression } from '../../features';
 import { provideFluentForm } from '../../provider';
 import { AbstractFormGroupSchema } from '../../schemas';
@@ -28,6 +28,7 @@ describe('FluentFormComponent', () => {
     TestBed.configureTestingModule({
       providers: [
         provideFluentForm(
+
           withStaticExpression()
         )
       ]

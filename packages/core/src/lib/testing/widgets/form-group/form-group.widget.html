@@ -1,17 +1,12 @@
-<ng-template let-schema="schema" let-form="form" let-model="model" let-submit="submit">
-  <form
-    nz-form
-    fluentRow
-    [gap]="schema.gap"
-    [justify]="schema.justify"
-    [align]="schema.align"
-    [nzLayout]="schema.layout!"
-    [ngClass]="schema.class"
-    [ngStyle]="schema.style"
-    [formGroup]="form"
-    [fluentBinding]="{ schema, control: form, model }"
-    (submit)="$event.stopPropagation()"
-    (ngSubmit)="submit.emit($event)">
+<ng-template let-formGroup="control" let-formSchema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <fluent-row
+    #parentRow="fluentParentRow"
+    [gap]="formSchema.gap ?? parentRow.gap"
+    [align]="formSchema.align"
+    [justify]="formSchema.justify"
+    [ngClass]="formSchema.class"
+    [ngStyle]="formSchema.style"
+    [fluentBinding]="{ schema: formSchema, control: formGroup, model }">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
       <fluent-col
         *ngIf="schema | renderable"
@@ -24,12 +19,13 @@
     </ng-template>
 
     <ng-container
-      *ngFor="let subschema of schema.schemas"
+      *ngFor="let subschema of formSchema.schemas"
       [ngTemplateOutlet]="formColTemplate"
       [ngTemplateOutletContext]="{
-        control: (subschema.key | control: form),
+        control: (subschema.key | control: formGroup),
         schema: subschema,
-        model: model
-      }"></ng-container>
-  </form>
+        model: model[formSchema.key!]
+      }">
+    </ng-container>
+  </fluent-row>
 </ng-template>

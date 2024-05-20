@@ -32,10 +32,8 @@
             [span]="schema.col | col: 'span'"
             [flex]="schema.col | col: 'flex'"
             [offset]="schema.col | col: 'offset'"
-            [hidden]="schema.hidden | reactive: model : schema : control"
-            [control]="control"
-            [schema]="schema"
-            [model]="model">
+            [hidden]="schema.hidden | reactive: model : schema : control">
+            <ng-container [fluentFormItemOutlet]="{ schema, control, model }"></ng-container>
           </fluent-col>
         </ng-template>
 

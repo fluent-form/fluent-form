@@ -2,12 +2,11 @@ import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-
 import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
-import { AbstractSchema, AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentGridModule, FluentParentRowDirective, FluentReactivePipe, FluentTemplatePipe, FluentVarDirective, FormUtil, InvokePipe, RenderablePipe, SchemaUtil, WidgetTemplateContext, WithOutSchemaReactiveFn, isBoolean, isNumber, isUndefined } from '@fluent-form/core';
+import { AbstractSchema, AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentFormItemOutletDirective, FluentGridModule, FluentParentRowDirective, FluentReactivePipe, FluentTemplatePipe, FluentVarDirective, FormUtil, InvokePipe, RenderablePipe, SchemaUtil, WidgetTemplateContext, WithOutSchemaReactiveFn, isBoolean, isNumber, isUndefined } from '@fluent-form/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { FluentFormItemContentComponent } from '../../components';
 import { AddableButton, FormArraySchema } from '../../schemas';
 
 type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, FormArray>;
@@ -29,7 +28,7 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
     NzIconModule,
     NzOutletModule,
     FluentGridModule,
-    FluentFormItemContentComponent,
+    FluentFormItemOutletDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentParentRowDirective,

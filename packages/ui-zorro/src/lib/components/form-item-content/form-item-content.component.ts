@@ -1,8 +1,6 @@
 import { NgClass, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
-import { AbstractSchema, FluentControlPipe, FluentReactivePipe, FluentSchemaPipe, FluentSchemaTypePipe, FluentTemplatePipe, FluentVarDirective, FluentWidgetTemplatePipe, FluentWithInjectorDirective, Indexable, InvokePipe, SchemaType } from '@fluent-form/core';
-import { AnyArray, AnyObject } from '@ngify/types';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AbstractFormItemContentComponent, FluentControlPipe, FluentReactivePipe, FluentSchemaPipe, FluentSchemaTypePipe, FluentTemplatePipe, FluentVarDirective, FluentWidgetTemplatePipe, FluentWithInjectorDirective, InvokePipe, SchemaType } from '@fluent-form/core';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { labelHelper, tooltipHelper } from '../../helper';
 
@@ -10,7 +8,6 @@ import { labelHelper, tooltipHelper } from '../../helper';
  * @internal
  */
 @Component({
-  selector: 'fluent-col[schema],[fluentFormItemContent]',
   standalone: true,
   imports: [
     NgIf,
@@ -33,12 +30,8 @@ import { labelHelper, tooltipHelper } from '../../helper';
   templateUrl: './form-item-content.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FluentFormItemContentComponent<T extends AnyObject | AnyArray> {
+export class FluentFormItemContentComponent extends AbstractFormItemContentComponent {
   protected readonly SchemaType = SchemaType;
-
-  @Input() control!: AbstractControl;
-  @Input() schema!: Indexable<AbstractSchema>;
-  @Input() model!: T;
 
   protected readonly helper = {
     label: labelHelper,

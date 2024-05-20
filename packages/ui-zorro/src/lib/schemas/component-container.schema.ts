@@ -1,5 +1,5 @@
 import { TemplateRef } from '@angular/core';
-import { AbstractComponentContainerSchema, ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, MaybeSchemaReactiveFn, Row, SingleSchemaKey } from '@fluent-form/core';
+import { AbstractComponentContainerSchema, ComponentEventListenerHolder, ComponentPropertyHolder, MaybeSchemaReactiveFn, SingleSchemaKey } from '@fluent-form/core';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
 import { NzTabComponent, NzTabPosition, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
@@ -56,12 +56,4 @@ export interface TabComponentSchema<Key extends SingleSchemaKey = SingleSchemaKe
   kind: 'tab';
   title: string;
   disabled?: MaybeSchemaReactiveFn<TabComponentSchema<SingleSchemaKey>, boolean>;
-}
-
-/**
- * @public
- */
-export interface RowComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractComponentContainerSchema<Key>, ElementEventListenerHolder, ElementPropertyHolder<HTMLElement>, Row {
-  kind: 'row';
 }

@@ -18,7 +18,6 @@ import { NumberGroupWidget } from './number-group/number-group.widget';
 import { NumberWidget } from './number/number.widget';
 import { RadioGroupWidget } from './radio-group/radio-group.widget';
 import { RateWidget } from './rate/rate.widget';
-import { RowWidget } from './row/row.widget';
 import { SelectWidget } from './select/select.widget';
 import { SilderWidget } from './slider/silder.widget';
 import { StepsWidget } from './steps/steps.widget';
@@ -348,14 +347,6 @@ export function useTabsWidget(): [FluentFormWidgetFeature<TabsComponentSchema>, 
       type: SchemaType.ComponentContainer,
     }
   ];
-}
-
-export function useRowWidget(): FluentFormWidgetFeature<TextComponentSchema> {
-  return {
-    kind: 'row',
-    type: SchemaType.ComponentContainer,
-    widget: RowWidget
-  };
 }
 
 export function useFormGroupWidget(): FluentFormWidgetFeature<FormGroupSchema> {

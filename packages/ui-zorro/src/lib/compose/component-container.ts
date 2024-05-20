@@ -1,4 +1,4 @@
-import { RowComponentSchema, SingleSchemaKey, UnstableBuilder, composeBuilder } from '@fluent-form/core';
+import { SingleSchemaKey, UnstableBuilder, composeBuilder } from '@fluent-form/core';
 import { StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema } from '../schemas';
 import { KindOrKey } from './helper';
 
@@ -16,8 +16,4 @@ export function tabs<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<Ta
 
 export function tab<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<TabComponentSchema<Key>, KindOrKey> {
   return composeBuilder<TabComponentSchema<Key>>().kind('tab').key(key);
-}
-
-export function row<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<RowComponentSchema<Key>, KindOrKey> {
-  return composeBuilder<RowComponentSchema<Key>>().kind('row').key(key);
 }

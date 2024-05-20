@@ -6,6 +6,7 @@ import { AbstractSchema } from '../schemas';
 import { SchemaKind, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP, WIDGET_MAP } from '../tokens';
 import { AbstractWidget } from '../widgets';
+import { useRowWidget } from '../widgets/use';
 import { makeFluentFeature } from './helper';
 import { FluentFormFeature, FluentFormFeatureKind } from './interface';
 
@@ -54,6 +55,8 @@ export function provideSchemas(widgets: FluentFormWidgetFeature<SafeAny>[]): Pro
 
 export function withWidgets(features: (FluentFormWidgetFeature<SafeAny> | FluentFormWidgetFeature<SafeAny>[])[]): FluentFormFeature<FluentFormFeatureKind.Widget> {
   const flattenedFeatures = features.flat();
+  // 添加内置 widget,
+  flattenedFeatures.push(useRowWidget());
 
   return makeFluentFeature(FluentFormFeatureKind.Widget, [
     {

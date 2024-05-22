@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
-import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
+import { withTesting } from '../testing';
 import { FormUtil } from '../utils';
 import { FluentControlPipe } from './control.pipe';
 
@@ -13,7 +13,7 @@ describe('FluentControlPipe', () => {
     TestBed.configureTestingModule({
       providers: [
         provideFluentForm(
-          withAllWidgets()
+          withTesting()
         ),
         FluentControlPipe
       ]
@@ -22,7 +22,7 @@ describe('FluentControlPipe', () => {
     pipe = TestBed.inject(FluentControlPipe);
     formGroup = TestBed.inject(FormUtil).createFormGroup([
       { kind: 'input', key: 'a' },
-      { kind: 'date-range', key: ['b', 'c'] }
+      { kind: 'range', key: ['b', 'c'] }
     ], {});
   });
 

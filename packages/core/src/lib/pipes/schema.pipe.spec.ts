@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { form } from '../compose';
-import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
+import { withTesting } from '../testing';
 import { FluentSchemaPipe } from './schema.pipe';
 
 describe('FluentSchemaPipe', () => {
@@ -11,7 +11,7 @@ describe('FluentSchemaPipe', () => {
     TestBed.configureTestingModule({
       providers: [
         provideFluentForm(
-          withAllWidgets()
+          withTesting()
         )
       ]
     });

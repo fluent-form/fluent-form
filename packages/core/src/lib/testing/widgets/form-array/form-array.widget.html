@@ -1,0 +1,65 @@
+<ng-template let-formArray="control" let-formSchema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <fluent-row
+    #row
+    #parentRow="fluentParentRow"
+    cdkDropList
+    [gap]="formSchema.gap ?? parentRow.gap"
+    [align]="formSchema.align"
+    [justify]="formSchema.justify"
+    [ngClass]="formSchema.class"
+    [ngStyle]="formSchema.style"
+    [fluentBinding]="{ schema: formSchema, control: formArray, model }"
+    (cdkDropListDropped)="drop(formArray, $event)">
+    <ng-template
+      #formColTemplate
+      let-schema="schema"
+      let-control="control"
+      let-model="model"
+      let-index="index"
+      let-first="first">
+      <fluent-col
+        *ngIf="schema | renderable"
+        cdkDrag
+        cdkDragPreviewContainer="parent"
+        [cdkDragBoundary]="row"
+        [span]="schema.col | col: 'span'"
+        [flex]="schema.col | col: 'flex'"
+        [offset]="schema.col | col: 'offset'"
+        [hidden]="schema.hidden | reactive: model : schema : control">
+        <ng-container [fluentFormItemOutlet]="{ schema, control, model }"></ng-container>
+        <!-- form array 的 schemas 可能会有多个，只在第一个时渲染 remove button -->
+        <button
+          class="fluent-array-element-remove-btn"
+          type="button"
+          [disabled]="formArray.length <= (helper.length.min | invoke: formSchema.length)"
+          (click)="formArray.removeAt(index)">
+          -
+        </button>
+      </fluent-col>
+    </ng-template>
+
+    <ng-container *ngFor="let control of formArray.controls; index as index">
+      <ng-container
+        *ngFor="let subschema of formSchema.schemas; first as first"
+        [ngTemplateOutlet]="formColTemplate"
+        [ngTemplateOutletContext]="{
+          control: control,
+          schema: withIndex(index, subschema),
+          model: model[formSchema.key!],
+          index: index,
+          first: first
+        }">
+      </ng-container>
+    </ng-container>
+
+    <!-- add button -->
+    <fluent-col span="12">
+      <button
+        type="button"
+        [disabled]="formArray.length === (helper.length.max | invoke: formSchema.length)"
+        (click)="push(formArray, formSchema)">
+        +
+      </button>
+    </fluent-col>
+  </fluent-row>
+</ng-template>

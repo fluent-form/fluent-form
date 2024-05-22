@@ -8,7 +8,7 @@
     "build": {
       "executor": "@nx/angular:package",
       "outputs": [
-        "{workspaceRoot}/dist/{projectRoot}"
+        "{workspaceRoot}/dist/ui-zorro"
       ],
       "options": {
         "project": "packages/ui-zorro/ng-package.json"
@@ -26,7 +26,7 @@
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
+        "{workspaceRoot}/coverage/ui-zorro"
       ],
       "options": {
         "jestConfig": "packages/ui-zorro/jest.config.ts"

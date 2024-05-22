@@ -8,7 +8,7 @@
     "build": {
       "executor": "@nx/angular:package",
       "outputs": [
-        "{workspaceRoot}/dist/{projectRoot}"
+        "{workspaceRoot}/dist/core"
       ],
       "options": {
         "project": "packages/core/ng-package.json"
@@ -26,7 +26,7 @@
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
+        "{workspaceRoot}/coverage/core"
       ],
       "options": {
         "jestConfig": "packages/core/jest.config.ts"

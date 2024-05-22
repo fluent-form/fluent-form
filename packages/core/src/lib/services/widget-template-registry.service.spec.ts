@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
+import { withTesting } from '../testing';
 import { WidgetTemplateRegistry } from './widget-template-registry.service';
 
 describe('WidgetTemplateRegistry', () => {
@@ -10,7 +10,7 @@ describe('WidgetTemplateRegistry', () => {
     TestBed.configureTestingModule({
       providers: [
         provideFluentForm(
-          withAllWidgets()
+          withTesting()
         )
       ]
     });
@@ -22,6 +22,6 @@ describe('WidgetTemplateRegistry', () => {
   });
 
   it('should throw error', () => {
-    expect(() => service.get('undefinded')).toThrowError(`The 'undefinded' widget was not found`);
+    expect(() => service.get('undefinded')).toThrow(`The 'undefinded' widget was not found`);
   });
 });

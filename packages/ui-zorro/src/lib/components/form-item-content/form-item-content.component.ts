@@ -30,7 +30,7 @@ import { labelHelper, tooltipHelper } from '../../helper';
   templateUrl: './form-item-content.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FluentFormItemContentComponent extends AbstractFormItemContentComponent {
+export class FormItemContentComponent extends AbstractFormItemContentComponent {
   protected readonly SchemaType = SchemaType;
 
   protected readonly helper = {

@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { FormControl } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
-import { withAllWidgets, withStaticExpression } from '../features';
+import { withStaticExpression } from '../features';
 import { provideFluentForm } from '../provider';
 import { AbstractControlSchema } from '../schemas';
+import { withTesting } from '../testing';
 import { FormUtil } from '../utils';
 import { FluentReactivePipe } from './reactive.pipe';
 
@@ -17,7 +18,7 @@ describe('FluentReactivePipe', () => {
     TestBed.configureTestingModule({
       providers: [
         provideFluentForm(
-          withAllWidgets(),
+          withTesting(),
           withStaticExpression()
         ),
         FluentReactivePipe

@@ -1,7 +1,7 @@
 import { AbstractControlOptions, AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { AbstractBranchSchema } from './abstract.schema';
-import { ControlEventListenerHolder, Row } from './interfaces';
+import { ControlEventListenerHolder, Length, Row } from './interfaces';
 import { SingleSchemaKey } from './types';
 
 /**
@@ -22,4 +22,11 @@ export interface AbstractControlContainerSchema<Key extends SingleSchemaKey = Si
  */
 export interface AbstractFormGroupSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractControlContainerSchema<Key> {
   kind: 'group';
+}
+
+/**
+ * @public
+ */
+export interface AbstractFormArraySchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractControlContainerSchema<Key> {
+  length?: Length
 }

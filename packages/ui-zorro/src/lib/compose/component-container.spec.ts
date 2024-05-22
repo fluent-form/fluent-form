@@ -1,5 +1,5 @@
 import { form } from '@fluent-form/core';
-import { row, step, steps, tab, tabs } from './component-container';
+import { step, steps, tab, tabs } from './component-container';
 import { input } from './control';
 
 describe('component-container', () => {
@@ -44,17 +44,6 @@ describe('component-container', () => {
           ]
         }
       ]
-    }]);
-  });
-
-  it('row', () => {
-    const { schemas } = form(() => {
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      row().schemas(() => { });
-    });
-    expect(schemas).toEqual([{
-      kind: 'row',
-      schemas: []
     }]);
   });
 });

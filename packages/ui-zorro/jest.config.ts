@@ -3,7 +3,7 @@ export default {
   displayName: 'ui-zorro',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/packages/ui-zorro',
+  coverageDirectory: '../../coverage/ui-zorro',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

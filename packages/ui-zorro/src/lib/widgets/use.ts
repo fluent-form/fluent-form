@@ -1,5 +1,5 @@
 import { ValidatorFn, Validators } from '@angular/forms';
-import { FluentFormWidgetFeature, SchemaType, isNumber } from '@fluent-form/core';
+import { FluentFormWidgetConfig, SchemaType, isNumber } from '@fluent-form/core';
 import { AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, InputControlSchema, InputGroupComponentSchema, NumberGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextComponentSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { AlertWidget } from './alert/alert.widget';
 import { ButtonGroupWidget } from './button-group/button-group.widget';
@@ -79,7 +79,7 @@ function validatorsOfTextControl(schema: InputControlSchema | TextareaControlSch
   return validators;
 }
 
-export function useInputWidget(): FluentFormWidgetFeature<InputControlSchema> {
+export function useInputWidget(): FluentFormWidgetConfig<InputControlSchema> {
   return {
     kind: 'input',
     type: SchemaType.Control,
@@ -96,7 +96,7 @@ export function useInputWidget(): FluentFormWidgetFeature<InputControlSchema> {
   };
 }
 
-export function useTextareaWidget(): FluentFormWidgetFeature<TextareaControlSchema> {
+export function useTextareaWidget(): FluentFormWidgetConfig<TextareaControlSchema> {
   return {
     kind: 'textarea',
     type: SchemaType.Control,
@@ -105,7 +105,7 @@ export function useTextareaWidget(): FluentFormWidgetFeature<TextareaControlSche
   };
 }
 
-export function useNumberWidget(): FluentFormWidgetFeature<NumberInputControlSchema> {
+export function useNumberWidget(): FluentFormWidgetConfig<NumberInputControlSchema> {
   return {
     kind: 'number',
     type: SchemaType.Control,
@@ -113,7 +113,7 @@ export function useNumberWidget(): FluentFormWidgetFeature<NumberInputControlSch
   };
 }
 
-export function useDateWidget(): FluentFormWidgetFeature<DatePickerControlSchema> {
+export function useDateWidget(): FluentFormWidgetConfig<DatePickerControlSchema> {
   return {
     kind: 'date',
     type: SchemaType.Control,
@@ -131,7 +131,7 @@ export function useDateWidget(): FluentFormWidgetFeature<DatePickerControlSchema
   };
 }
 
-export function useDateRangeWidget(): FluentFormWidgetFeature<DateRangePickerControlSchema> {
+export function useDateRangeWidget(): FluentFormWidgetConfig<DateRangePickerControlSchema> {
   return {
     kind: 'date-range',
     type: SchemaType.Control,
@@ -149,7 +149,7 @@ export function useDateRangeWidget(): FluentFormWidgetFeature<DateRangePickerCon
   };
 }
 
-export function useTimeWidget(): FluentFormWidgetFeature<TimePickerControlSchema> {
+export function useTimeWidget(): FluentFormWidgetConfig<TimePickerControlSchema> {
   return {
     kind: 'time',
     type: SchemaType.Control,
@@ -164,7 +164,7 @@ export function useTimeWidget(): FluentFormWidgetFeature<TimePickerControlSchema
   };
 }
 
-export function useToggleWidget(): FluentFormWidgetFeature<ToggleControlSchema> {
+export function useToggleWidget(): FluentFormWidgetConfig<ToggleControlSchema> {
   return {
     kind: 'toggle',
     type: SchemaType.Control,
@@ -172,7 +172,7 @@ export function useToggleWidget(): FluentFormWidgetFeature<ToggleControlSchema> 
   };
 }
 
-export function useSelectWidget(): FluentFormWidgetFeature<SelectControlSchema> {
+export function useSelectWidget(): FluentFormWidgetConfig<SelectControlSchema> {
   return {
     kind: 'select',
     type: SchemaType.Control,
@@ -180,7 +180,7 @@ export function useSelectWidget(): FluentFormWidgetFeature<SelectControlSchema> 
   };
 }
 
-export function useCascaderWidget(): FluentFormWidgetFeature<CascaderControlSchema> {
+export function useCascaderWidget(): FluentFormWidgetConfig<CascaderControlSchema> {
   return {
     kind: 'cascader',
     type: SchemaType.Control,
@@ -188,7 +188,7 @@ export function useCascaderWidget(): FluentFormWidgetFeature<CascaderControlSche
   };
 }
 
-export function useTreeSelectWidget(): FluentFormWidgetFeature<TreeSelectControlSchema> {
+export function useTreeSelectWidget(): FluentFormWidgetConfig<TreeSelectControlSchema> {
   return {
     kind: 'tree-select',
     type: SchemaType.Control,
@@ -196,7 +196,7 @@ export function useTreeSelectWidget(): FluentFormWidgetFeature<TreeSelectControl
   };
 }
 
-export function useSliderWidget(): FluentFormWidgetFeature<SliderControlSchema> {
+export function useSliderWidget(): FluentFormWidgetConfig<SliderControlSchema> {
   return {
     kind: 'slider',
     type: SchemaType.Control,
@@ -204,7 +204,7 @@ export function useSliderWidget(): FluentFormWidgetFeature<SliderControlSchema> 
   };
 }
 
-export function useRadioGroupWidget(): FluentFormWidgetFeature<RadioGroupControlSchema> {
+export function useRadioGroupWidget(): FluentFormWidgetConfig<RadioGroupControlSchema> {
   return {
     kind: 'radio-group',
     type: SchemaType.Control,
@@ -212,7 +212,7 @@ export function useRadioGroupWidget(): FluentFormWidgetFeature<RadioGroupControl
   };
 }
 
-export function useCheckboxWidget(): FluentFormWidgetFeature<CheckboxControlSchema> {
+export function useCheckboxWidget(): FluentFormWidgetConfig<CheckboxControlSchema> {
   return {
     kind: 'checkbox',
     type: SchemaType.Control,
@@ -220,7 +220,7 @@ export function useCheckboxWidget(): FluentFormWidgetFeature<CheckboxControlSche
   };
 }
 
-export function useCheckboxGroupWidget(): FluentFormWidgetFeature<CheckboxGroupControlSchema> {
+export function useCheckboxGroupWidget(): FluentFormWidgetConfig<CheckboxGroupControlSchema> {
   return {
     kind: 'checkbox-group',
     type: SchemaType.Control,
@@ -244,7 +244,7 @@ export function useCheckboxGroupWidget(): FluentFormWidgetFeature<CheckboxGroupC
   };
 }
 
-export function useRateWidget(): FluentFormWidgetFeature<RateControlSchema> {
+export function useRateWidget(): FluentFormWidgetConfig<RateControlSchema> {
   return {
     kind: 'rate',
     type: SchemaType.Control,
@@ -252,7 +252,7 @@ export function useRateWidget(): FluentFormWidgetFeature<RateControlSchema> {
   };
 }
 
-export function useTextWidget(): FluentFormWidgetFeature<TextComponentSchema> {
+export function useTextWidget(): FluentFormWidgetConfig<TextComponentSchema> {
   return {
     kind: 'text',
     type: SchemaType.Component,
@@ -260,7 +260,7 @@ export function useTextWidget(): FluentFormWidgetFeature<TextComponentSchema> {
   };
 }
 
-export function useHeadingWidget(): FluentFormWidgetFeature<HeadingComponentSchema> {
+export function useHeadingWidget(): FluentFormWidgetConfig<HeadingComponentSchema> {
   return {
     kind: 'heading',
     type: SchemaType.Component,
@@ -272,7 +272,7 @@ export function useHeadingWidget(): FluentFormWidgetFeature<HeadingComponentSche
   };
 }
 
-export function useInputGroupWidget(): FluentFormWidgetFeature<InputGroupComponentSchema> {
+export function useInputGroupWidget(): FluentFormWidgetConfig<InputGroupComponentSchema> {
   return {
     kind: 'input-group',
     type: SchemaType.ControlWrapper,
@@ -280,7 +280,7 @@ export function useInputGroupWidget(): FluentFormWidgetFeature<InputGroupCompone
   };
 }
 
-export function useNumberGroupWidget(): FluentFormWidgetFeature<NumberGroupComponentSchema> {
+export function useNumberGroupWidget(): FluentFormWidgetConfig<NumberGroupComponentSchema> {
   return {
     kind: 'number-group',
     type: SchemaType.ControlWrapper,
@@ -288,7 +288,7 @@ export function useNumberGroupWidget(): FluentFormWidgetFeature<NumberGroupCompo
   };
 }
 
-export function useAlertWidget(): FluentFormWidgetFeature<AlertComponentSchema> {
+export function useAlertWidget(): FluentFormWidgetConfig<AlertComponentSchema> {
   return {
     kind: 'alert',
     type: SchemaType.Component,
@@ -300,7 +300,7 @@ export function useAlertWidget(): FluentFormWidgetFeature<AlertComponentSchema> 
   };
 }
 
-export function useButtonWidget(): [FluentFormWidgetFeature<ButtonComponentSchema>, FluentFormWidgetFeature<ButtonGroupComponentSchema>] {
+export function useButtonWidget(): [FluentFormWidgetConfig<ButtonComponentSchema>, FluentFormWidgetConfig<ButtonGroupComponentSchema>] {
   return [
     {
       kind: 'button',
@@ -321,7 +321,7 @@ export function useButtonWidget(): [FluentFormWidgetFeature<ButtonComponentSchem
   ];
 }
 
-export function useStepsWidget(): [FluentFormWidgetFeature<StepsComponentSchema>, FluentFormWidgetFeature<StepComponentSchema>] {
+export function useStepsWidget(): [FluentFormWidgetConfig<StepsComponentSchema>, FluentFormWidgetConfig<StepComponentSchema>] {
   return [
     {
       kind: 'steps',
@@ -335,7 +335,7 @@ export function useStepsWidget(): [FluentFormWidgetFeature<StepsComponentSchema>
   ];
 }
 
-export function useTabsWidget(): [FluentFormWidgetFeature<TabsComponentSchema>, FluentFormWidgetFeature<TabComponentSchema>] {
+export function useTabsWidget(): [FluentFormWidgetConfig<TabsComponentSchema>, FluentFormWidgetConfig<TabComponentSchema>] {
   return [
     {
       kind: 'tabs',
@@ -349,7 +349,7 @@ export function useTabsWidget(): [FluentFormWidgetFeature<TabsComponentSchema>, 
   ];
 }
 
-export function useFormGroupWidget(): FluentFormWidgetFeature<FormGroupSchema> {
+export function useFormGroupWidget(): FluentFormWidgetConfig<FormGroupSchema> {
   return {
     kind: 'group',
     type: SchemaType.ControlGroup,
@@ -357,7 +357,7 @@ export function useFormGroupWidget(): FluentFormWidgetFeature<FormGroupSchema> {
   };
 }
 
-export function useFormArrayWidget(): FluentFormWidgetFeature<FormArraySchema> {
+export function useFormArrayWidget(): FluentFormWidgetConfig<FormArraySchema> {
   return {
     kind: 'array',
     type: SchemaType.ControlArray,
@@ -365,7 +365,7 @@ export function useFormArrayWidget(): FluentFormWidgetFeature<FormArraySchema> {
   };
 }
 
-export function useTabsArrayWidget(): FluentFormWidgetFeature<TabsArraySchema> {
+export function useTabsArrayWidget(): FluentFormWidgetConfig<TabsArraySchema> {
   return {
     kind: 'tabs-array',
     type: SchemaType.ControlArray,

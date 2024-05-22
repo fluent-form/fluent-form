@@ -1,11 +1,8 @@
-import { Provider } from '@angular/core';
-import { FLUENT_FORM_CONTENT, FLUENT_FORM_ITEM_CONTENT, FluentFormFeatureKind, FluentFormWidgetFeature, makeFluentFeature, provideSchemaPatcher, provideSchemas, provideWidgets } from '@fluent-form/core';
+import { FLUENT_FORM_CONTENT, FLUENT_FORM_ITEM_CONTENT, FluentFormFeatureKind, FluentFormWidgetConfig, makeFluentFeature, provideSchemaPatcher, provideWidgetConfigs } from '@fluent-form/core';
 import { SafeAny } from '@ngify/types';
-import { FluentFormItemContentComponent, FormContentComponent } from './components';
+import { FormContentComponent, FormItemContentComponent } from './components';
 
-export function withZorro(widgets: (FluentFormWidgetFeature<SafeAny> | FluentFormWidgetFeature<SafeAny>[])[]) {
-  const flattenedWidgets = widgets.flat();
-
+export function withZorro(widgets: (FluentFormWidgetConfig<SafeAny> | FluentFormWidgetConfig<SafeAny>[])[]) {
   return makeFluentFeature(FluentFormFeatureKind.UIAdapter, [
     {
       provide: FLUENT_FORM_CONTENT,
@@ -13,17 +10,9 @@ export function withZorro(widgets: (FluentFormWidgetFeature<SafeAny> | FluentFor
     },
     {
       provide: FLUENT_FORM_ITEM_CONTENT,
-      useValue: FluentFormItemContentComponent
+      useValue: FormItemContentComponent
     },
-    provideWidgets(flattenedWidgets),
-    provideSchemas(flattenedWidgets),
-    // 组件内置的 patcher
-    flattenedWidgets.filter(feature => feature.patch).map<Provider>(feature =>
-      provideSchemaPatcher({
-        selector: feature.kind,
-        patch: feature.patch!
-      })
-    ),
+    provideWidgetConfigs(widgets),
     // 添加内置的 patcher
     provideSchemaPatcher({
       selector: 'group',

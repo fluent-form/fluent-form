@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
 import { AbstractSchema } from '../schemas';
+import { withTesting } from '../testing';
 import { Indexable } from '../types';
 import { FormUtil } from './form.utils';
 import { ModelUtil } from './model.utils';
@@ -14,7 +14,7 @@ describe('ModelUtils', () => {
     TestBed.configureTestingModule({
       providers: [
         provideFluentForm(
-          withAllWidgets()
+          withTesting()
         )
       ]
     });
@@ -140,7 +140,7 @@ describe('ModelUtils', () => {
 
     it('with double key control', () => {
       const schemas: Indexable<AbstractSchema>[] = [
-        { kind: 'slider', key: ['start', 'end'] }
+        { kind: 'range', key: ['start', 'end'] }
       ];
       const form = formUtil.createFormGroup(schemas, {});
 

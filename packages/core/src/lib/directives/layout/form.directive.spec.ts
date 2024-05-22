@@ -4,11 +4,11 @@ import { FormGroup } from '@angular/forms';
 import { MinusOutline, PlusOutline } from '@ant-design/icons-angular/icons';
 import { AnyObject } from '@ngify/types';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { array, form, group, input, inputGroup } from '../../compose';
-import { withAllWidgets } from '../../features';
+import { form } from '../../compose';
 import { provideFluentForm } from '../../provider';
-import { FormGroupSchema } from '../../schemas';
+import { AbstractFormGroupSchema } from '../../schemas';
 import { runMicrotask } from '../../shared';
+import { array, group, input, inputGroup, withTesting } from '../../testing';
 import { FluentFormDirective } from './form.directive';
 import { FluentFormLayoutModule } from './module';
 
@@ -30,7 +30,7 @@ import { FluentFormLayoutModule } from './module';
 class TestComponent {
   @ViewChild(FluentFormDirective, { static: true }) fluentFormDirective!: FluentFormDirective<AnyObject>;
   form!: FormGroup;
-  schema!: FormGroupSchema;
+  schema!: AbstractFormGroupSchema;
   model!: AnyObject;
 }
 
@@ -48,7 +48,7 @@ describe('FluentFormDirective', () => {
       ],
       providers: [
         provideFluentForm(
-          withAllWidgets()
+          withTesting()
         )
       ]
     });

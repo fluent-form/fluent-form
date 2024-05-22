@@ -6,5 +6,4 @@ export * from './renderable.pipe';
 export * from './schema-type.pipe';
 export * from './schema.pipe';
 export * from './template.pipe';
-export * from './typeof.pipe';
 export * from './widget-template.pipe';

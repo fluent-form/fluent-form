@@ -3,10 +3,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { AnyObject, SafeAny } from '@ngify/types';
 import { form } from '../../compose';
-import { withStaticExpression } from '../../features';
 import { provideFluentForm } from '../../provider';
 import { AbstractFormGroupSchema } from '../../schemas';
 import { runMicrotask } from '../../shared';
+import { input, withTesting } from '../../testing';
 import { FluentFormComponent } from './form.component';
 
 @Component({
@@ -28,8 +28,7 @@ describe('FluentFormComponent', () => {
     TestBed.configureTestingModule({
       providers: [
         provideFluentForm(
-
-          withStaticExpression()
+          withTesting()
         )
       ]
     });

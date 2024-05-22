@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
-import { withAllWidgets } from '../features';
 import { provideFluentForm } from '../provider';
 import { AbstractSchema } from '../schemas';
+import { withTesting } from '../testing';
 import { Indexable } from '../types';
 import { FormUtil, getChildControl } from './form.utils';
 
@@ -14,7 +14,7 @@ describe('form.utils', () => {
     TestBed.configureTestingModule({
       providers: [
         provideFluentForm(
-          withAllWidgets()
+          withTesting()
         )
       ]
     });
@@ -98,7 +98,7 @@ describe('form.utils', () => {
       describe('with double key control', () => {
         it('normal', () => {
           const form = util.createFormGroup([
-            { kind: 'slider', key: ['start', 'end'] }
+            { kind: 'range', key: ['start', 'end'] }
           ], {});
 
           expect(form.value).toEqual({ 'start,end': null });
@@ -106,7 +106,7 @@ describe('form.utils', () => {
 
         it('with model default value', () => {
           const form = util.createFormGroup([
-            { kind: 'slider', key: ['start', 'end'] }
+            { kind: 'range', key: ['start', 'end'] }
           ], { start: 1, end: 100 });
 
           expect(form.value).toEqual({ 'start,end': [1, 100] });
@@ -380,17 +380,17 @@ describe('form.utils', () => {
     describe('updateModel', () => {
       it('with control', () => {
         const schemas: Indexable<AbstractSchema>[] = [
-          { kind: 'number', key: 'num', defaultValue: 1 }
+          { kind: 'input', key: 'txt', defaultValue: '1' }
         ];
         const form = util.createFormGroup(schemas, {});
 
-        expect(util.updateModel({}, form, schemas)).toEqual({ num: 1 });
+        expect(util.updateModel({}, form, schemas)).toEqual({ txt: '1' });
       });
 
       describe('with double key control', () => {
         it('normal', () => {
           const schemas: Indexable<AbstractSchema>[] = [
-            { kind: 'slider', key: ['start', 'end'] }
+            { kind: 'range', key: ['start', 'end'] }
           ];
           const form = util.createFormGroup(schemas, {});
 
@@ -399,11 +399,11 @@ describe('form.utils', () => {
 
         it('with default value', () => {
           const schemas: Indexable<AbstractSchema>[] = [
-            { kind: 'slider', key: ['start', 'end'], defaultValue: [0, 100] }
+            { kind: 'range', key: ['start', 'end'], defaultValue: [0, 10] }
           ];
           const form = util.createFormGroup(schemas, {});
 
-          expect(util.updateModel({}, form, schemas)).toEqual({ start: 0, end: 100 });
+          expect(util.updateModel({}, form, schemas)).toEqual({ start: 0, end: 10 });
         });
       });
 
@@ -431,13 +431,13 @@ describe('form.utils', () => {
             kind: 'group',
             key: 'obj',
             schemas: [
-              { kind: 'number', key: 'num', defaultValue: 1 }
+              { kind: 'input', key: 'txt', defaultValue: '1' }
             ]
           }
         ];
         const form = util.createFormGroup(schemas, {});
 
-        expect(util.updateModel({}, form, schemas)).toEqual({ obj: { num: 1 } });
+        expect(util.updateModel({}, form, schemas)).toEqual({ obj: { txt: '1' } });
       });
 
       it('with array', () => {
@@ -446,7 +446,7 @@ describe('form.utils', () => {
             kind: 'array',
             key: 'array',
             schemas: [
-              { kind: 'number' }
+              { kind: 'input' }
             ]
           }
         ];
@@ -479,26 +479,26 @@ describe('form.utils', () => {
       describe('disbaled', () => {
         it('normal', () => {
           const schemas: Indexable<AbstractSchema>[] = [
-            { kind: 'toggle', key: 'bool', disabled: (ctx: SafeAny) => ctx.model.bool },
+            { kind: 'input', key: 'txt', disabled: (ctx: SafeAny) => ctx.model.txt },
           ];
           const form = util.createFormGroup(schemas, {});
 
-          util.updateForm(form, { bool: true }, schemas);
-          expect(form.get('bool')!.disabled).toBe(true);
+          util.updateForm(form, { txt: true }, schemas);
+          expect(form.get('txt')!.disabled).toBe(true);
 
-          util.updateForm(form, { bool: false }, schemas);
-          expect(form.get('bool')!.enabled).toBe(true);
+          util.updateForm(form, { txt: false }, schemas);
+          expect(form.get('txt')!.enabled).toBe(true);
         });
 
         it('with component', () => {
           const schemas: Indexable<AbstractSchema>[] = [
             { kind: 'button' },
-            { kind: 'toggle', key: 'bool', disabled: (ctx: SafeAny) => ctx.model.bool },
+            { kind: 'input', key: 'txt', disabled: (ctx: SafeAny) => ctx.model.txt },
           ];
           const form = util.createFormGroup(schemas, {});
 
-          util.updateForm(form, { bool: true }, schemas);
-          expect(form.get('bool')!.disabled).toBe(true);
+          util.updateForm(form, { txt: 'true' }, schemas);
+          expect(form.get('txt')!.disabled).toBe(true);
         });
 
         it('with group', () => {
@@ -507,14 +507,14 @@ describe('form.utils', () => {
               kind: 'group',
               key: 'obj',
               schemas: [
-                { kind: 'toggle', key: 'bool', disabled: (ctx: SafeAny) => ctx.model.bool },
+                { kind: 'input', key: 'txt', disabled: (ctx: SafeAny) => ctx.model.txt },
               ]
             }
           ];
           const form = util.createFormGroup(schemas, {});
 
-          util.updateForm(form, { obj: { bool: true } }, schemas);
-          expect(form.get('obj.bool')!.disabled).toBe(true);
+          util.updateForm(form, { obj: { txt: 'true' } }, schemas);
+          expect(form.get('obj.txt')!.disabled).toBe(true);
         });
 
         it('with array', () => {
@@ -523,7 +523,7 @@ describe('form.utils', () => {
               kind: 'array',
               key: 'arr',
               schemas: [
-                { kind: 'toggle', key: 0, disabled: (ctx: SafeAny) => ctx.model[0] },
+                { kind: 'input', key: 0, disabled: (ctx: SafeAny) => ctx.model[0] },
               ]
             }
           ];
@@ -556,12 +556,12 @@ describe('form.utils', () => {
         it('with component', () => {
           const schemas: Indexable<AbstractSchema>[] = [
             { kind: 'button' },
-            { kind: 'toggle', key: 'bool', required: (ctx: SafeAny) => ctx.model.bool },
+            { kind: 'input', key: 'txt', required: (ctx: SafeAny) => ctx.model.txt },
           ];
           const form = util.createFormGroup(schemas, {});
 
-          util.updateForm(form, { bool: true }, schemas);
-          expect(form.get('bool')!.hasValidator(Validators.required)).toBe(true);
+          util.updateForm(form, { txt: 'true' }, schemas);
+          expect(form.get('txt')!.hasValidator(Validators.required)).toBe(true);
         });
 
         it('with group', () => {
@@ -594,7 +594,7 @@ describe('form.utils', () => {
               kind: 'array',
               key: 'arr',
               schemas: [
-                { kind: 'toggle', key: 0, required: (ctx: SafeAny) => ctx.model[0] },
+                { kind: 'input', key: 0, required: (ctx: SafeAny) => ctx.model[0] },
               ]
             }
           ];

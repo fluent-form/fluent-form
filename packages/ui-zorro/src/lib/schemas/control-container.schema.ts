@@ -1,5 +1,5 @@
 import { TemplateRef } from '@angular/core';
-import { AbstractControlContainerSchema, AbstractFormGroupSchema, Length, MaybeSchemaReactiveFn, SingleSchemaKey } from '@fluent-form/core';
+import { AbstractFormArraySchema, AbstractFormGroupSchema, MaybeSchemaReactiveFn, SingleSchemaKey } from '@fluent-form/core';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
@@ -16,10 +16,9 @@ export interface FormGroupSchema<Key extends SingleSchemaKey = SingleSchemaKey> 
 /**
  * @public
  */
-export interface FormArraySchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractControlContainerSchema<Key>, Labelful {
+export interface FormArraySchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractFormArraySchema<Key>, Labelful {
   kind: 'array';
   layout?: NzFormLayoutType;
-  length?: Length;
   addable?: MaybeSchemaReactiveFn<FormArraySchema, boolean | AddableButton>;
   removable?: boolean;
   orderable?: boolean;
@@ -44,14 +43,13 @@ export interface AddableButton {
 /**
  * @public
  */
-export interface TabsArraySchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractControlContainerSchema<Key>, Labelful {
+export interface TabsArraySchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractFormArraySchema<Key>, Labelful {
   kind: 'tabs-array';
   layout?: NzFormLayoutType;
   size?: NzSizeLDSType;
   position?: NzTabPosition;
   gutter?: number;
   centered?: boolean;
-  length?: Length;
   addable?: MaybeSchemaReactiveFn<TabsArraySchema, boolean>;
   removable?: boolean;
   // orderable?: boolean;

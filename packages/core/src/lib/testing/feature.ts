@@ -1,13 +1,10 @@
-import { Provider } from '@angular/core';
 import { SafeAny } from '@ngify/types';
-import { FluentFormFeatureKind, FluentFormWidgetFeature, makeFluentFeature, provideSchemas, provideWidgets } from '../features';
-import { provideSchemaPatcher } from '../patcher';
+import { FluentFormFeatureKind, FluentFormWidgetConfig, makeFluentFeature, provideWidgetConfigs } from '../features';
 import { FLUENT_FORM_CONTENT, FLUENT_FORM_ITEM_CONTENT } from '../tokens';
 import { FormContentComponent, FormItemContentComponent } from './components';
+import { useAllWidgets } from './widgets';
 
-export function withTestingUI(widgets: (FluentFormWidgetFeature<SafeAny> | FluentFormWidgetFeature<SafeAny>[])[]) {
-  const flattenedWidgets = widgets.flat();
-
+export function withTesting(widgets: (FluentFormWidgetConfig<SafeAny> | FluentFormWidgetConfig<SafeAny>[])[] = useAllWidgets()) {
   return makeFluentFeature(FluentFormFeatureKind.UIAdapter, [
     {
       provide: FLUENT_FORM_CONTENT,
@@ -17,14 +14,6 @@ export function withTestingUI(widgets: (FluentFormWidgetFeature<SafeAny> | Fluen
       provide: FLUENT_FORM_ITEM_CONTENT,
       useValue: FormItemContentComponent
     },
-    provideWidgets(flattenedWidgets),
-    provideSchemas(flattenedWidgets),
-    // 组件内置的 patcher
-    flattenedWidgets.filter(feature => feature.patch).map<Provider>(feature =>
-      provideSchemaPatcher({
-        selector: feature.kind,
-        patch: feature.patch!
-      })
-    )
+    provideWidgetConfigs(widgets),
   ]);
 }

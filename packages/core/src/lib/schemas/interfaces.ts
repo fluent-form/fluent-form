@@ -22,6 +22,7 @@ export enum SchemaType {
 export const enum SchemaKind {
   Headless = 'headless',
   Template = 'template',
+  Row = 'row'
 }
 
 export interface SchemaLike<Key extends SchemaKey = SchemaKey> {

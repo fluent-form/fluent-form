@@ -1,5 +1,5 @@
-import { headless } from './control';
-import { form, group } from './control-container';
+import { group, input } from '../testing';
+import { form } from './control-container';
 
 describe('control-container', () => {
   describe('form', () => {
@@ -16,13 +16,13 @@ describe('control-container', () => {
 
     it('compose', () => {
       const schema = form(() => {
-        headless('input');
+        input('input');
       });
       expect(schema).toEqual({
         kind: 'group',
         key: 'root',
         schemas: [
-          { kind: 'headless', key: 'input' }
+          { kind: 'input', key: 'input' }
         ]
       });
     });

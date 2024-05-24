@@ -1,4 +1,4 @@
-import { NgClass, NgIf, NgStyle } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, InvokePipe, WidgetTemplateContext, isNumber } from '@fluent-form/core';
@@ -14,7 +14,6 @@ type NumberWidgetTemplateContext = WidgetTemplateContext<NumberInputControlSchem
 @Component({
   standalone: true,
   imports: [
-    NgIf,
     NgClass,
     NgStyle,
     ReactiveFormsModule,
@@ -25,7 +24,7 @@ type NumberWidgetTemplateContext = WidgetTemplateContext<NumberInputControlSchem
     FluentContextGuardDirective,
     FluentReactivePipe,
     FluentColumnPipe,
-    InvokePipe,
+    InvokePipe
   ],
   templateUrl: './number.widget.html',
   styles: [`nz-input-number { width: 100% }`]

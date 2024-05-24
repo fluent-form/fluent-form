@@ -1,18 +1,19 @@
 <ng-template let-control="control" let-schema="schema" let-model="model">
-  <ng-container *fluentVar="schema.kind | schemaType as schemaType" [ngSwitch]="true">
-    <ng-container
-      *ngSwitchCase="schemaType === SchemaType.ComponentContainer"
-      fluentWithInjector
-      [ngTemplateOutlet]="schema | widgetTemplate"
-      [ngTemplateOutletContext]="{ control, schema, model }">
-    </ng-container>
-
-    <ng-container
-      *ngSwitchDefault
-      fluentWithInjector
-      [ngTemplateOutlet]="formItemTemplate"
-      [ngTemplateOutletContext]="{ control, schema, model, schemaType }">
-    </ng-container>
+  <ng-container *fluentVar="schema.kind | schemaType as schemaType">
+    @switch (true) {
+      @case (schemaType === SchemaType.ComponentContainer) {
+        <ng-container
+          fluentWithInjector
+          [ngTemplateOutlet]="schema | widgetTemplate"
+          [ngTemplateOutletContext]="{ control, schema, model }" />
+      }
+      @default {
+        <ng-container
+          fluentWithInjector
+          [ngTemplateOutlet]="formItemTemplate"
+          [ngTemplateOutletContext]="{ control, schema, model, schemaType }" />
+      }
+    }
   </ng-container>
 </ng-template>
 
@@ -29,18 +30,19 @@
     [style.margin-bottom.px]="
       schemaType === SchemaType.ControlGroup || schemaType === SchemaType.ControlArray ? 0 : null
     ">
-    <ng-container *ngIf="schema.label">
-      <nz-form-label
-        *ngIf="schema.label | reactive: model : schema : control as label"
-        [nzSpan]="(helper.label.span | invoke: label)!"
-        [nzTooltipTitle]="helper.tooltip.content | invoke: schema.tooltip"
-        [nzTooltipIcon]="(helper.tooltip.icon | invoke: schema.tooltip)!"
-        [nzFor]="schema.id"
-        [nzRequired]="currentSchema.required | reactive: model : schema : control"
-        [style.width]="helper.label.width | invoke: label">
-        {{ helper.label.content | invoke: label }}
-      </nz-form-label>
-    </ng-container>
+    @if (schema.label) {
+      @if (schema.label | reactive: model : schema : control; as label) {
+        <nz-form-label
+          [nzSpan]="(helper.label.span | invoke: label)!"
+          [nzTooltipTitle]="helper.tooltip.content | invoke: schema.tooltip"
+          [nzTooltipIcon]="(helper.tooltip.icon | invoke: schema.tooltip)!"
+          [nzFor]="schema.id"
+          [nzRequired]="currentSchema.required | reactive: model : schema : control"
+          [style.width]="helper.label.width | invoke: label">
+          {{ helper.label.content | invoke: label }}
+        </nz-form-label>
+      }
+    }
 
     <nz-form-control
       [nzValidateStatus]="currentSchema.key | control: control"
@@ -54,7 +56,7 @@
       <ng-container
         fluentWithInjector
         [ngTemplateOutlet]="schema | widgetTemplate"
-        [ngTemplateOutletContext]="{ control, schema, model }"></ng-container>
+        [ngTemplateOutletContext]="{ control, schema, model }" />
     </nz-form-control>
   </nz-form-item>
 </ng-template>

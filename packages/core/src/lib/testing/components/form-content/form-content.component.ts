@@ -1,4 +1,4 @@
-import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, Directive, EventEmitter } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
@@ -12,8 +12,6 @@ export abstract class AbstractFormContentComponent extends TemplateRefHolder<{ f
 @Component({
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
     NgClass,
     NgStyle,
     NgTemplateOutlet,

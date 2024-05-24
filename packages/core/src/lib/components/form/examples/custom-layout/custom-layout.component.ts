@@ -1,11 +1,11 @@
-import { JsonPipe, NgFor } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { FluentFormLayoutModule, FluentGridModule, date, form, group, input, inputGroup, slider, toggle } from 'ngx-fluent-form';
 
 @Component({
   standalone: true,
-  imports: [NgFor, FluentFormLayoutModule, FluentGridModule, NzTableModule, JsonPipe],
+  imports: [FluentFormLayoutModule, FluentGridModule, NzTableModule, JsonPipe],
   templateUrl: './custom-layout.component.html'
 })
 export class CustomLayoutExampleComponent {

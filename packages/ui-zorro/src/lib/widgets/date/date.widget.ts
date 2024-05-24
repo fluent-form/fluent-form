@@ -1,4 +1,4 @@
-import { NgClass, NgIf, NgStyle } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
@@ -14,7 +14,6 @@ type DateWidgetTemplateContext = WidgetTemplateContext<DatePickerControlSchema, 
 @Component({
   standalone: true,
   imports: [
-    NgIf,
     NgClass,
     NgStyle,
     ReactiveFormsModule,

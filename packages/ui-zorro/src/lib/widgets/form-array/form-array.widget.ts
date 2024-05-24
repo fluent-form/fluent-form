@@ -1,5 +1,5 @@
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
-import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import { AbstractSchema, AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentFormItemOutletDirective, FluentGridModule, FluentParentRowDirective, FluentReactivePipe, FluentTemplatePipe, FluentVarDirective, FormUtil, InvokePipe, RenderablePipe, SchemaUtil, WidgetTemplateContext, WithOutSchemaReactiveFn, isBoolean, isNumber, isUndefined } from '@fluent-form/core';
@@ -17,8 +17,6 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
 @Component({
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
     NgClass,
     NgStyle,
     NgTemplateOutlet,

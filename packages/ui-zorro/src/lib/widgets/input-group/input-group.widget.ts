@@ -1,4 +1,4 @@
-import { NgClass, NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, TemplateRef } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, FluentControlPipe, FluentReactivePipe, FluentTemplatePipe, FluentWidgetTemplatePipe, FluentWithInjectorDirective, InvokePipe, WidgetTemplateContext, WithOutSchemaReactiveFn, isString } from '@fluent-form/core';
@@ -13,7 +13,6 @@ type InputGroupWidgetTemplateContext = WidgetTemplateContext<InputGroupComponent
 @Component({
   standalone: true,
   imports: [
-    NgFor,
     NgClass,
     NgStyle,
     NgTemplateOutlet,
@@ -26,7 +25,7 @@ type InputGroupWidgetTemplateContext = WidgetTemplateContext<InputGroupComponent
     FluentWidgetTemplatePipe,
     FluentTemplatePipe,
     FluentReactivePipe,
-    InvokePipe,
+    InvokePipe
   ],
   templateUrl: './input-group.widget.html',
   styleUrls: ['./input-group.widget.scss']

@@ -7,16 +7,17 @@
     [ngStyle]="schema.style"
     [nzButtonStyle]="schema.variants?.button ?? 'outline'"
     [nzSize]="schema.size!">
-    <ng-container *ngFor="let option of schema.options">
-      <label
-        *ngIf="schema.variants?.button"
-        nz-radio-button
-        [nzValue]="option[schema.config?.valueProperty ?? 'value']">
-        {{ option[schema.config?.labelProperty ?? 'label'] }}
-      </label>
-      <label *ngIf="!schema.variants?.button" nz-radio [nzValue]="option[schema.config?.valueProperty ?? 'value']">
-        {{ option[schema.config?.labelProperty ?? 'label'] }}
-      </label>
-    </ng-container>
+    @for (option of schema.options; track option) {
+      @if (schema.variants?.button) {
+        <label nz-radio-button [nzValue]="option[schema.config?.valueProperty ?? 'value']">
+          {{ option[schema.config?.labelProperty ?? 'label'] }}
+        </label>
+      }
+      @if (!schema.variants?.button) {
+        <label nz-radio [nzValue]="option[schema.config?.valueProperty ?? 'value']">
+          {{ option[schema.config?.labelProperty ?? 'label'] }}
+        </label>
+      }
+    }
   </nz-radio-group>
 </ng-template>

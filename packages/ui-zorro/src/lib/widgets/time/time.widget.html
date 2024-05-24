@@ -1,34 +1,32 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <ng-container *fluentInject="InputGroup as inputGroup; optional: true">
-    <ng-container *ngIf="inputGroup; else standardTemplate">
-      <nz-time-picker
-        *ngIf="!(schema.hidden | reactive: model : schema : control)"
-        #component
-        fluentCol
-        [fluentBinding]="{ component, schema, control, model }"
-        [formControl]="control"
-        [ngClass]="schema.class"
-        [ngStyle]="schema.style"
-        [span]="schema.col | col: 'span'"
-        [flex]="schema.col | col: 'flex'"
-        [offset]="schema.col | col: 'offset'"
-        [nzId]="schema.id!"
-        [nzAllowEmpty]="schema.clearable"
-        [nzFormat]="schema.format ?? 'HH:mm:ss'"
-        [nzHourStep]="schema.step?.hour!"
-        [nzMinuteStep]="schema.step?.minute!"
-        [nzSecondStep]="schema.step?.second!"
-        [nzPlaceHolder]="schema.placeholder!"
-        [nzAutoFocus]="schema.autofocus"
-        [nzSize]="schema.size!"
-        [nzBorderless]="schema.borderless"
-        [nzBackdrop]="schema.backdrop!"
-        [nzInputReadOnly]="schema.readonly | reactive: model : schema : control"
-        [nzSuffixIcon]="schema.suffixIcon | template: 'clock-circle'">
-      </nz-time-picker>
-    </ng-container>
-
-    <ng-template #standardTemplate>
+    @if (inputGroup) {
+      @if (!(schema.hidden | reactive: model : schema : control)) {
+        <nz-time-picker
+          #component
+          fluentCol
+          [fluentBinding]="{ component, schema, control, model }"
+          [formControl]="control"
+          [ngClass]="schema.class"
+          [ngStyle]="schema.style"
+          [span]="schema.col | col: 'span'"
+          [flex]="schema.col | col: 'flex'"
+          [offset]="schema.col | col: 'offset'"
+          [nzId]="schema.id!"
+          [nzAllowEmpty]="schema.clearable"
+          [nzFormat]="schema.format ?? 'HH:mm:ss'"
+          [nzHourStep]="schema.step?.hour!"
+          [nzMinuteStep]="schema.step?.minute!"
+          [nzSecondStep]="schema.step?.second!"
+          [nzPlaceHolder]="schema.placeholder!"
+          [nzAutoFocus]="schema.autofocus"
+          [nzSize]="schema.size!"
+          [nzBorderless]="schema.borderless"
+          [nzBackdrop]="schema.backdrop!"
+          [nzInputReadOnly]="schema.readonly | reactive: model : schema : control"
+          [nzSuffixIcon]="schema.suffixIcon | template: 'clock-circle'" />
+      }
+    } @else {
       <nz-time-picker
         #component
         [fluentBinding]="{ component, schema, control, model }"
@@ -47,8 +45,7 @@
         [nzBorderless]="schema.borderless"
         [nzBackdrop]="schema.backdrop!"
         [nzInputReadOnly]="schema.readonly | reactive: model : schema : control"
-        [nzSuffixIcon]="schema.suffixIcon | template: 'clock-circle'">
-      </nz-time-picker>
-    </ng-template>
+        [nzSuffixIcon]="schema.suffixIcon | template: 'clock-circle'" />
+    }
   </ng-container>
 </ng-template>

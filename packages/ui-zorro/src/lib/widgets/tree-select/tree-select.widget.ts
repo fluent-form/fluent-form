@@ -1,4 +1,4 @@
-import { NgClass, NgIf, NgStyle } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, InvokePipe, WidgetTemplateContext, isBoolean, isUndefined } from '@fluent-form/core';
@@ -15,7 +15,6 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
 @Component({
   standalone: true,
   imports: [
-    NgIf,
     NgClass,
     NgStyle,
     ReactiveFormsModule,
@@ -26,7 +25,7 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
     FluentContextGuardDirective,
     FluentReactivePipe,
     FluentColumnPipe,
-    InvokePipe,
+    InvokePipe
   ],
   templateUrl: './tree-select.widget.html',
   styles: [`nz-tree-select { width: 100% }`]

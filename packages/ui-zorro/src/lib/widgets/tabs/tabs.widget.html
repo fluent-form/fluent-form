@@ -10,32 +10,36 @@
     [nzTabPosition]="schema.position ?? 'top'"
     [nzTabBarGutter]="schema.gutter"
     [nzCentered]="schema.centered">
-    <nz-tab
-      *ngFor="let tabSchema of schema.schemas"
-      #component
-      [fluentBinding]="{ component, schema, control, model }"
-      [ngClass]="tabSchema.class"
-      [ngStyle]="tabSchema.style"
-      [nzTitle]="tabSchema.title"
-      [nzDisabled]="tabSchema.disabled | reactive: model : tabSchema : control"
-      [hidden]="tabSchema.hidden | reactive: model : tabSchema : control">
-      <fluent-row #parentRow="fluentParentRow" [gap]="parentRow.gap">
-        <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
-          <fluent-col
-            [span]="schema.col | col: 'span'"
-            [flex]="schema.col | col: 'flex'"
-            [offset]="schema.col | col: 'offset'"
-            [hidden]="schema.hidden | reactive: model : schema : control">
-            <ng-container [fluentFormItemOutlet]="{ schema, control, model }"></ng-container>
-          </fluent-col>
-        </ng-template>
-
-        <ng-container
-          *ngFor="let subschema of tabSchema.schemas"
-          [ngTemplateOutlet]="formColTemplate"
-          [ngTemplateOutletContext]="{ control: (subschema.key | control: control), schema: subschema, model: model }">
-        </ng-container>
-      </fluent-row>
-    </nz-tab>
+    @for (tabSchema of schema.schemas; track tabSchema) {
+      <nz-tab
+        #component
+        [fluentBinding]="{ component, schema, control, model }"
+        [ngClass]="tabSchema.class"
+        [ngStyle]="tabSchema.style"
+        [nzTitle]="tabSchema.title"
+        [nzDisabled]="tabSchema.disabled | reactive: model : tabSchema : control"
+        [hidden]="tabSchema.hidden | reactive: model : tabSchema : control">
+        <fluent-row #parentRow="fluentParentRow" [gap]="parentRow.gap">
+          <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
+            <fluent-col
+              [span]="schema.col | col: 'span'"
+              [flex]="schema.col | col: 'flex'"
+              [offset]="schema.col | col: 'offset'"
+              [hidden]="schema.hidden | reactive: model : schema : control">
+              <ng-container [fluentFormItemOutlet]="{ schema, control, model }" />
+            </fluent-col>
+          </ng-template>
+          @for (subschema of tabSchema.schemas; track subschema) {
+            <ng-container
+              [ngTemplateOutlet]="formColTemplate"
+              [ngTemplateOutletContext]="{
+                control: (subschema.key | control: control),
+                schema: subschema,
+                model: model
+              }" />
+          }
+        </fluent-row>
+      </nz-tab>
+    }
   </nz-tabset>
 </ng-template>

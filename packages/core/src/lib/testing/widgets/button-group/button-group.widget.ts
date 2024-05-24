@@ -1,4 +1,4 @@
-import { NgClass, NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, FluentControlPipe, FluentReactivePipe, FluentTemplatePipe, FluentWidgetTemplatePipe, FluentWithInjectorDirective, InvokePipe, WidgetTemplateContext } from '@fluent-form/core';
@@ -12,7 +12,6 @@ type ButtonGroupWidgetTemplateContext = WidgetTemplateContext<ButtonGroupCompone
 @Component({
   standalone: true,
   imports: [
-    NgFor,
     NgClass,
     NgStyle,
     NgTemplateOutlet,
@@ -24,7 +23,7 @@ type ButtonGroupWidgetTemplateContext = WidgetTemplateContext<ButtonGroupCompone
     FluentWidgetTemplatePipe,
     FluentTemplatePipe,
     FluentReactivePipe,
-    InvokePipe,
+    InvokePipe
   ],
   templateUrl: './button-group.widget.html',
 })

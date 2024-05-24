@@ -13,23 +13,25 @@
     (submit)="$event.stopPropagation()"
     (ngSubmit)="submit.emit($event)">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
-      <fluent-col
-        *ngIf="schema | renderable"
-        [span]="schema.col | col: 'span'"
-        [flex]="schema.col | col: 'flex'"
-        [offset]="schema.col | col: 'offset'"
-        [hidden]="schema.hidden | reactive: model : schema : control">
-        <ng-container [fluentFormItemOutlet]="{ schema, control, model }"></ng-container>
-      </fluent-col>
+      @if (schema | renderable) {
+        <fluent-col
+          [span]="schema.col | col: 'span'"
+          [flex]="schema.col | col: 'flex'"
+          [offset]="schema.col | col: 'offset'"
+          [hidden]="schema.hidden | reactive: model : schema : control">
+          <ng-container [fluentFormItemOutlet]="{ schema, control, model }" />
+        </fluent-col>
+      }
     </ng-template>
 
-    <ng-container
-      *ngFor="let subschema of schema.schemas"
-      [ngTemplateOutlet]="formColTemplate"
-      [ngTemplateOutletContext]="{
-        control: (subschema.key | control: form),
-        schema: subschema,
-        model: model
-      }"></ng-container>
+    @for (subschema of schema.schemas; track subschema) {
+      <ng-container
+        [ngTemplateOutlet]="formColTemplate"
+        [ngTemplateOutletContext]="{
+          control: (subschema.key | control: form),
+          schema: subschema,
+          model: model
+        }" />
+    }
   </form>
 </ng-template>

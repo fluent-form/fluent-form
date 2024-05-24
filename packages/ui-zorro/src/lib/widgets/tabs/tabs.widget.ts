@@ -1,4 +1,4 @@
-import { NgClass, NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlPipe, FluentFormItemOutletDirective, FluentGridModule, FluentParentRowDirective, FluentReactivePipe, WidgetTemplateContext } from '@fluent-form/core';
@@ -13,7 +13,6 @@ type TabsWidgetTemplateContext = WidgetTemplateContext<TabsComponentSchema, Form
 @Component({
   standalone: true,
   imports: [
-    NgFor,
     NgClass,
     NgStyle,
     NgTemplateOutlet,

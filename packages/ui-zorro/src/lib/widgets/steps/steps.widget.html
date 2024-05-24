@@ -12,40 +12,45 @@
     [nzStatus]="schema.status ?? 'process'"
     [nzStartIndex]="schema.start ?? 0"
     (nzIndexChange)="schema.active = $event">
-    <nz-step
-      *ngFor="let subschema of schema.schemas; index as index"
-      #component
-      [fluentBinding]="{ component, schema, control, model }"
-      [ngClass]="subschema.class"
-      [ngStyle]="subschema.style"
-      [nzTitle]="subschema.title | template"
-      [nzSubtitle]="subschema.subtitle | template"
-      [nzDescription]="subschema.description | template"
-      [nzDisabled]="subschema.disabled | reactive: model : subschema : control"
-      [nzStatus]="subschema.status ?? schema.active === index ? 'process' : 'wait'"
-      [hidden]="subschema.hidden | reactive: model : subschema : control"></nz-step>
+    @for (subschema of schema.schemas; track subschema; let index = $index) {
+      <nz-step
+        #component
+        [fluentBinding]="{ component, schema, control, model }"
+        [ngClass]="subschema.class"
+        [ngStyle]="subschema.style"
+        [nzTitle]="subschema.title | template"
+        [nzSubtitle]="subschema.subtitle | template"
+        [nzDescription]="subschema.description | template"
+        [nzDisabled]="subschema.disabled | reactive: model : subschema : control"
+        [nzStatus]="subschema.status ?? schema.active === index ? 'process' : 'wait'"
+        [hidden]="subschema.hidden | reactive: model : subschema : control" />
+    }
   </nz-steps>
 
-  <fluent-row
-    *ngFor="let stepSchema of schema.schemas; index as stepIndex"
-    #parentRow="fluentParentRow"
-    [gap]="parentRow.gap"
-    [hidden]="schema.active !== stepIndex"
-    [style.margin-top.px]="16">
-    <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
-      <fluent-col
-        [span]="schema.col | col: 'span'"
-        [flex]="schema.col | col: 'flex'"
-        [offset]="schema.col | col: 'offset'"
-        [hidden]="schema.hidden | reactive: model : schema : control">
-        <ng-container [fluentFormItemOutlet]="{ schema, control, model }"></ng-container>
-      </fluent-col>
-    </ng-template>
-
-    <ng-container
-      *ngFor="let subschema of stepSchema.schemas"
-      [ngTemplateOutlet]="formColTemplate"
-      [ngTemplateOutletContext]="{ control: (subschema.key | control: control), schema: subschema, model: model }">
-    </ng-container>
-  </fluent-row>
+  @for (stepSchema of schema.schemas; track stepSchema; let stepIndex = $index) {
+    <fluent-row
+      #parentRow="fluentParentRow"
+      [gap]="parentRow.gap"
+      [hidden]="schema.active !== stepIndex"
+      [style.margin-top.px]="16">
+      <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
+        <fluent-col
+          [span]="schema.col | col: 'span'"
+          [flex]="schema.col | col: 'flex'"
+          [offset]="schema.col | col: 'offset'"
+          [hidden]="schema.hidden | reactive: model : schema : control">
+          <ng-container [fluentFormItemOutlet]="{ schema, control, model }" />
+        </fluent-col>
+      </ng-template>
+      @for (subschema of stepSchema.schemas; track subschema) {
+        <ng-container
+          [ngTemplateOutlet]="formColTemplate"
+          [ngTemplateOutletContext]="{
+            control: (subschema.key | control: control),
+            schema: subschema,
+            model: model
+          }" />
+      }
+    </fluent-row>
+  }
 </ng-template>

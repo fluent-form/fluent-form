@@ -21,45 +21,47 @@
       let-model="model"
       let-index="index"
       let-first="first">
-      <fluent-col
-        *ngIf="schema | renderable"
-        cdkDrag
-        cdkDragPreviewContainer="parent"
-        [cdkDragBoundary]="row"
-        [span]="schema.col | col: 'span'"
-        [flex]="schema.col | col: 'flex'"
-        [offset]="schema.col | col: 'offset'"
-        [hidden]="schema.hidden | reactive: model : schema : control">
-        <ng-container [fluentFormItemOutlet]="{ schema, control, model }"></ng-container>
-        <!-- form array 的 schemas 可能会有多个，只在第一个时渲染 remove button -->
-        <button
-          *ngIf="first && (formSchema.removable ?? true)"
-          class="fluent-array-element-remove-btn"
-          type="button"
-          nz-button
-          nzShape="circle"
-          nzSize="small"
-          [nzDanger]="true"
-          [disabled]="formArray.length <= (helper.length.min | invoke: formSchema.length)"
-          (click)="formArray.removeAt(index)">
-          <span nz-icon nzType="minus" nzTheme="outline"></span>
-        </button>
-      </fluent-col>
+      @if (schema | renderable) {
+        <fluent-col
+          cdkDrag
+          cdkDragPreviewContainer="parent"
+          [cdkDragBoundary]="row"
+          [span]="schema.col | col: 'span'"
+          [flex]="schema.col | col: 'flex'"
+          [offset]="schema.col | col: 'offset'"
+          [hidden]="schema.hidden | reactive: model : schema : control">
+          <ng-container [fluentFormItemOutlet]="{ schema, control, model }" />
+          <!-- form array 的 schemas 可能会有多个，只在第一个时渲染 remove button -->
+          @if (first && (formSchema.removable ?? true)) {
+            <button
+              class="fluent-array-element-remove-btn"
+              type="button"
+              nz-button
+              nzShape="circle"
+              nzSize="small"
+              [nzDanger]="true"
+              [disabled]="formArray.length <= (helper.length.min | invoke: formSchema.length)"
+              (click)="formArray.removeAt(index)">
+              <span nz-icon nzType="minus" nzTheme="outline"></span>
+            </button>
+          }
+        </fluent-col>
+      }
     </ng-template>
 
-    <ng-container *ngFor="let control of formArray.controls; index as index">
-      <ng-container
-        *ngFor="let subschema of formSchema.schemas; first as first"
-        [ngTemplateOutlet]="formColTemplate"
-        [ngTemplateOutletContext]="{
-          control: control,
-          schema: withIndex(index, subschema),
-          model: model[formSchema.key!],
-          index: index,
-          first: first
-        }">
-      </ng-container>
-    </ng-container>
+    @for (control of formArray.controls; track control; let index = $index) {
+      @for (subschema of formSchema.schemas; track subschema; let first = $first) {
+        <ng-container
+          [ngTemplateOutlet]="formColTemplate"
+          [ngTemplateOutletContext]="{
+            control: control,
+            schema: withIndex(index, subschema),
+            model: model[formSchema.key!],
+            index: index,
+            first: first
+          }" />
+      }
+    }
 
     <!-- add button -->
     <fluent-col span="12">
@@ -79,10 +81,14 @@
             [nzSize]="addBtn.size!"
             [disabled]="addBtn.disabled || formArray.length === (helper.length.max | invoke: formSchema.length)"
             (click)="push(formArray, formSchema)">
-            <span *ngIf="addBtn.icon" nz-icon nzTheme="outline" [nzType]="addBtn.icon"></span>
-            <ng-template *ngIf="addBtn.content" [nzStringTemplateOutlet]="addBtn.content | template">
-              {{ addBtn.content }}
-            </ng-template>
+            @if (addBtn.icon) {
+              <span nz-icon nzTheme="outline" [nzType]="addBtn.icon"></span>
+            }
+            @if (addBtn.content) {
+              <ng-template [nzStringTemplateOutlet]="addBtn.content | template">
+                {{ addBtn.content }}
+              </ng-template>
+            }
           </button>
         </nz-form-control>
       </nz-form-item>

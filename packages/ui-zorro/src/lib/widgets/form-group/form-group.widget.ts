@@ -1,4 +1,4 @@
-import { NgClass, NgFor, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlPipe, FluentFormItemOutletDirective, FluentGridModule, FluentParentRowDirective, FluentReactivePipe, RenderablePipe, WidgetTemplateContext } from '@fluent-form/core';
@@ -13,8 +13,6 @@ type FormGroupWidgetTemplateContext = WidgetTemplateContext<FormGroupSchema, For
 @Component({
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
     NgClass,
     NgStyle,
     NgTemplateOutlet,

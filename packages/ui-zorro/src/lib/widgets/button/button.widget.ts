@@ -1,4 +1,4 @@
-import { NgClass, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, FluentTemplatePipe, InvokePipe, WidgetTemplateContext, isString, isUndefined } from '@fluent-form/core';
@@ -16,7 +16,6 @@ type ButtonWidgetTemplateContext = WidgetTemplateContext<ButtonComponentSchema, 
 @Component({
   standalone: true,
   imports: [
-    NgIf,
     NgClass,
     NgStyle,
     NgTemplateOutlet,
@@ -30,7 +29,7 @@ type ButtonWidgetTemplateContext = WidgetTemplateContext<ButtonComponentSchema, 
     FluentTemplatePipe,
     FluentGridModule,
     FluentColumnPipe,
-    InvokePipe,
+    InvokePipe
   ],
   templateUrl: './button.widget.html',
 })

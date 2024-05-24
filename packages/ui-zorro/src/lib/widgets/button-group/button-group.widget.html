@@ -5,11 +5,11 @@
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
     [nzSize]="schema.size!">
-    <ng-container
-      *ngFor="let subschema of schema.schemas"
-      fluentWithInjector
-      [ngTemplateOutlet]="subschema | widgetTemplate"
-      [ngTemplateOutletContext]="{ control: control, schema: subschema, model: model }">
-    </ng-container>
+    @for (subschema of schema.schemas; track subschema) {
+      <ng-container
+        fluentWithInjector
+        [ngTemplateOutlet]="subschema | widgetTemplate"
+        [ngTemplateOutletContext]="{ control: control, schema: subschema, model: model }" />
+    }
   </nz-button-group>
 </ng-template>

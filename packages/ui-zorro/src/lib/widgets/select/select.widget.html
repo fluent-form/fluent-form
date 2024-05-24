@@ -4,20 +4,57 @@
       *fluentContext="ctxClass as ctx"
       (fluentInit)="ctx.init(schema, model, control)"
       (fluentDestroy)="ctx.destroy()">
-      <ng-container *ngIf="inputGroup; else standardTemplate">
+      @if (inputGroup) {
+        @if (!(schema.hidden | reactive: model : schema : control)) {
+          <nz-select
+            #component
+            fluentCol
+            [fluentBinding]="{ component, schema, control, model }"
+            [formControl]="control"
+            [ngClass]="schema.class"
+            [ngStyle]="schema.style"
+            [span]="schema.col | col: 'span'"
+            [flex]="schema.col | col: 'flex'"
+            [offset]="schema.col | col: 'offset'"
+            [nzId]="schema.id!"
+            [nzAllowClear]="schema.clearable"
+            [nzMaxMultipleCount]="schema.length?.max ?? infinity"
+            [nzMode]="schema.mode ?? 'default'"
+            [nzPlaceHolder]="schema.placeholder!"
+            [nzShowSearch]="schema.searchable || !!schema.fetchOptions"
+            [nzBackdrop]="schema.backdrop!"
+            [nzBorderless]="schema.borderless"
+            [nzAutoFocus]="schema.autofocus"
+            [nzShowArrow]="(schema.arrow ?? !schema.mode) || schema.mode === 'default'"
+            [nzSize]="schema.size!"
+            [nzSuffixIcon]="(schema.suffixIcon | template)!"
+            [nzLoading]="schema.loading"
+            [nzServerSearch]="!!schema.fetchOptions"
+            [(nzOpen)]="ctx.open"
+            (nzOnSearch)="ctx.trigger($event)">
+            @for (option of schema.options | reactive: model : schema : control; track option) {
+              <nz-option
+                [nzCustomContent]="!!schema.option"
+                [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
+                [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
+                [nzValue]="option[schema.config?.valueProperty ?? 'value']"
+                [nzHide]="option[schema.config?.hideProperty ?? 'hide']">
+                <ng-template
+                  [nzStringTemplateOutlet]="schema.option | template"
+                  [nzStringTemplateOutletContext]="{ $implicit: option }" />
+              </nz-option>
+            }
+          </nz-select>
+        }
+      } @else {
         <nz-select
-          *ngIf="!(schema.hidden | reactive: model : schema : control)"
           #component
-          fluentCol
           [fluentBinding]="{ component, schema, control, model }"
           [formControl]="control"
           [ngClass]="schema.class"
           [ngStyle]="schema.style"
-          [span]="schema.col | col: 'span'"
-          [flex]="schema.col | col: 'flex'"
-          [offset]="schema.col | col: 'offset'"
-          [nzId]="schema.id!"
           [nzAllowClear]="schema.clearable"
+          [nzId]="schema.id!"
           [nzMaxMultipleCount]="schema.length?.max ?? infinity"
           [nzMode]="schema.mode ?? 'default'"
           [nzPlaceHolder]="schema.placeholder!"
@@ -32,56 +69,20 @@
           [nzServerSearch]="!!schema.fetchOptions"
           [(nzOpen)]="ctx.open"
           (nzOnSearch)="ctx.trigger($event)">
-          <nz-option
-            *ngFor="let option of schema.options | reactive: model : schema : control"
-            [nzCustomContent]="!!schema.option"
-            [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
-            [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
-            [nzValue]="option[schema.config?.valueProperty ?? 'value']"
-            [nzHide]="option[schema.config?.hideProperty ?? 'hide']">
-            <ng-template
-              [nzStringTemplateOutlet]="schema.option | template"
-              [nzStringTemplateOutletContext]="{ $implicit: option }" />
-          </nz-option>
+          @for (option of schema.options | reactive: model : schema : control; track option) {
+            <nz-option
+              [nzCustomContent]="!!schema.option"
+              [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
+              [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
+              [nzValue]="option[schema.config?.valueProperty ?? 'value']"
+              [nzHide]="option[schema.config?.hideProperty ?? 'hide']">
+              <ng-template
+                [nzStringTemplateOutlet]="schema.option | template"
+                [nzStringTemplateOutletContext]="{ $implicit: option }" />
+            </nz-option>
+          }
         </nz-select>
-      </ng-container>
-
-      <ng-template #standardTemplate>
-        <nz-select
-          #component
-          [fluentBinding]="{ component, schema, control, model }"
-          [formControl]="control"
-          [ngClass]="schema.class"
-          [ngStyle]="schema.style"
-          [nzAllowClear]="schema.clearable"
-          [nzId]="schema.id!"
-          [nzMaxMultipleCount]="schema.length?.max ?? infinity"
-          [nzMode]="schema.mode ?? 'default'"
-          [nzPlaceHolder]="schema.placeholder!"
-          [nzShowSearch]="schema.searchable || !!schema.fetchOptions"
-          [nzBackdrop]="schema.backdrop!"
-          [nzBorderless]="schema.borderless"
-          [nzAutoFocus]="schema.autofocus"
-          [nzShowArrow]="(schema.arrow ?? !schema.mode) || schema.mode === 'default'"
-          [nzSize]="schema.size!"
-          [nzSuffixIcon]="(schema.suffixIcon | template)!"
-          [nzLoading]="schema.loading"
-          [nzServerSearch]="!!schema.fetchOptions"
-          [(nzOpen)]="ctx.open"
-          (nzOnSearch)="ctx.trigger($event)">
-          <nz-option
-            *ngFor="let option of schema.options | reactive: model : schema : control"
-            [nzCustomContent]="!!schema.option"
-            [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
-            [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
-            [nzValue]="option[schema.config?.valueProperty ?? 'value']"
-            [nzHide]="option[schema.config?.hideProperty ?? 'hide']">
-            <ng-template
-              [nzStringTemplateOutlet]="schema.option | template"
-              [nzStringTemplateOutletContext]="{ $implicit: option }" />
-          </nz-option>
-        </nz-select>
-      </ng-template>
+      }
     </ng-container>
   </ng-container>
 </ng-template>

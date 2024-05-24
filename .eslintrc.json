@@ -119,7 +119,11 @@
         "plugin:@angular-eslint/template/recommended",
         "plugin:prettier/recommended"
       ],
-      "rules": {}
+      "rules": {
+        "@angular-eslint/template/no-interpolation-in-attributes": "error",
+        "@angular-eslint/template/prefer-control-flow": "error",
+        "@angular-eslint/template/prefer-self-closing-tags": "error"
+      }
     },
     {
       "files": [

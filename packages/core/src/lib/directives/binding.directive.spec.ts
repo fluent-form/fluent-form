@@ -26,7 +26,7 @@ function emptyFn() { }
     <fluent-range
       #component
       [fluentBinding]="{ component, schema: rangeSchema, control: rangeControl, model: {} }"
-      [formControl]="rangeControl"></fluent-range>
+      [formControl]="rangeControl" />
   `
 })
 class TestingComponent {

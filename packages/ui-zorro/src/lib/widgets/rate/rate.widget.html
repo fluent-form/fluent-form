@@ -10,7 +10,7 @@
     [nzCharacter]="schema.character ? character : null!"
     [nzCount]="schema.count ?? 5"
     [nzTooltips]="schema.tooltips ?? []"
-    [nzAutoFocus]="schema.autofocus"></nz-rate>
+    [nzAutoFocus]="schema.autofocus" />
 
   <ng-template #character>
     <ng-container *nzStringTemplateOutlet="schema.character | template">{{ schema.character }}</ng-container>

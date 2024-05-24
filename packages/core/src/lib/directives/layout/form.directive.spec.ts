@@ -17,11 +17,11 @@ import { FluentFormLayoutModule } from './module';
   ],
   template: `
     <div fluent-form [fluentSchema]="schema" [(fluentModel)]="model" (fluentFormChange)="form = $event">
-      <fluent-outlet key="ipt"></fluent-outlet>
-      <fluent-outlet key="ipts"></fluent-outlet>
-      <fluent-outlet key="group.ipt"></fluent-outlet>
-      <fluent-outlet key="group.ipts"></fluent-outlet>
-      <fluent-outlet key="array"></fluent-outlet>
+      <fluent-outlet key="ipt" />
+      <fluent-outlet key="ipts" />
+      <fluent-outlet key="group.ipt" />
+      <fluent-outlet key="group.ipts" />
+      <fluent-outlet key="array" />
     </div>
   `
 })

@@ -12,7 +12,7 @@ import { FluentFormComponent } from './form.component';
 @Component({
   standalone: true,
   imports: [FluentFormComponent],
-  template: `<fluent-form [schema]="schema" [(model)]="model" (formChange)="form = $event"></fluent-form>`,
+  template: `<fluent-form [schema]="schema" [(model)]="model" (formChange)="form = $event" />`,
 })
 class TestComponent<T extends AnyObject> {
   form!: FormGroup;

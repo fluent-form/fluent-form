@@ -11,7 +11,7 @@ import { FluentParentRowDirective } from './parent-row.directive';
       <fluent-row #row2 #parentRow1="fluentParentRow" [gap]="parentRow1.gap">
         <fluent-row #row3 #parentRow2="fluentParentRow" [gap]="parentRow2.gap">
           <fluent-row #row4 [gap]="[3,4]">
-            <fluent-row #row5 #parentRow3="fluentParentRow" [gap]="parentRow3.gap"></fluent-row>
+            <fluent-row #row5 #parentRow3="fluentParentRow" [gap]="parentRow3.gap" />
           </fluent-row>
         </fluent-row>
       </fluent-row>

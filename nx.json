@@ -58,5 +58,7 @@
       },
       "projectChangelogs": true
     }
-  }
+  },
+  "nxCloudAccessToken": "ZmI4MGM0NzgtZWMwZi00ODUwLTkwMjEtYTM3MzBlNjJmYjk1fHJlYWQtd3JpdGU=",
+  "useInferencePlugins": false
 }

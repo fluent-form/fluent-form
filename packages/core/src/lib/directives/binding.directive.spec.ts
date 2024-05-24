@@ -2,10 +2,9 @@ import { Component, DebugElement, inject } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzRateComponent, NzRateModule } from 'ng-zorro-antd/rate';
 import { provideFluentForm } from '../provider';
 import { InputControlSchema, withTesting } from '../testing';
+import { RangeComponent } from '../testing/components';
 import { FormUtil } from '../utils';
 import { FluentBindingDirective } from './binding.directive';
 
@@ -15,21 +14,19 @@ function emptyFn() { }
 @Component({
   standalone: true,
   imports: [
-    NzInputModule,
-    NzRateModule,
+    RangeComponent,
     ReactiveFormsModule,
     FluentBindingDirective
   ],
   template: `
     <input
-      nz-input
       [fluentBinding]="{ schema: inputSchema, control: inputControl, model: {} }"
       [formControl]="inputControl">
 
-    <nz-rate
+    <fluent-range
       #component
-      [fluentBinding]="{ component, schema: rateSchema, control: rateControl, model: {} }"
-      [formControl]="rateControl"></nz-rate>
+      [fluentBinding]="{ component, schema: rangeSchema, control: rangeControl, model: {} }"
+      [formControl]="rangeControl"></fluent-range>
   `
 })
 class TestingComponent {
@@ -47,20 +44,21 @@ class TestingComponent {
       statusChange: emptyFn,
     }
   };
-  rateSchema = {
-    kind: 'rate',
+  rangeSchema = {
+    kind: 'range',
+    key: 'range',
     properties: {
-      nzAutoFocus: true
+      min: 5
     },
     listeners: {
       valueChange: emptyFn,
       statusChange: emptyFn,
-      nzOnFocus: emptyFn
+      testChange: emptyFn
     }
   };
 
   inputControl = this.formUtil.createFormControl(this.inputSchema, {});
-  rateControl = this.formUtil.createFormControl(this.rateSchema, {});
+  rangeControl = this.formUtil.createFormControl(this.rangeSchema, {});
 }
 
 describe('FluentBindingDirective', () => {
@@ -89,10 +87,9 @@ describe('FluentBindingDirective', () => {
     expect(input.readOnly).toBe(true);
   });
 
-  // TODO
-  xit('rate should be auto focus', () => {
-    const rate = debugElement.query(By.directive(NzRateComponent)).componentInstance;
-    rate.nzOnFocus.emit();
-    expect(rate.nzAutoFocus).toBe(true);
+  it('rate should be auto focus', () => {
+    const rangeCmp: RangeComponent = debugElement.query(By.directive(RangeComponent)).componentInstance;
+    rangeCmp.testChange.emit();
+    expect(rangeCmp.min).toBe(5);
   });
 });

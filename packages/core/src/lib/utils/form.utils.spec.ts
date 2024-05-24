@@ -29,7 +29,7 @@ describe('form.utils', () => {
         expect(control).toBeTruthy();
       });
 
-      describe('with double key control', () => {
+      describe('with mulit key control', () => {
         it('normal', () => {
           const form = util.createFormControl({ kind: 'slider', key: ['start', 'end'] }, {});
 
@@ -95,7 +95,7 @@ describe('form.utils', () => {
         expect(form.value).toEqual({ input: 'model value' });
       });
 
-      describe('with double key control', () => {
+      describe('with mulit key control', () => {
         it('normal', () => {
           const form = util.createFormGroup([
             { kind: 'range', key: ['start', 'end'] }
@@ -387,7 +387,7 @@ describe('form.utils', () => {
         expect(util.updateModel({}, form, schemas)).toEqual({ txt: '1' });
       });
 
-      describe('with double key control', () => {
+      describe('with mulit key control', () => {
         it('normal', () => {
           const schemas: Indexable<AbstractSchema>[] = [
             { kind: 'range', key: ['start', 'end'] }

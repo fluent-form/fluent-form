@@ -1,10 +1,10 @@
-import { Directive, ElementRef, EventEmitter, Injectable, Input } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AnyObject, SafeAny } from '@ngify/types';
-import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { fromEvent, takeUntil } from 'rxjs';
 import { AbstractSchema } from '../schemas';
 import { EventListenerHolder, PropertyHolder, SchemaContext } from '../schemas/interfaces';
+import { DestroyedSubject } from '../services';
 
 function isEventListener(value: SafeAny): value is EventListenerHolder {
   return 'listeners' in value;
@@ -14,17 +14,13 @@ function isPropertyPatcher(value: SafeAny): value is PropertyHolder {
   return 'properties' in value;
 }
 
-// TODO：改为 NzDestroyService 会导致 select option 联动有问题，这里更换一个 token 来解决
-@Injectable()
-class DestroyService extends NzDestroyService { }
-
 /**
  * @internal
  */
 @Directive({
   selector: '[fluentBinding]',
   standalone: true,
-  providers: [DestroyService],
+  providers: [DestroyedSubject],
 })
 export class FluentBindingDirective<E extends HTMLElement, C extends object, S extends AbstractSchema> {
 
@@ -32,7 +28,7 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
     const { component, schema, control, model } = value;
     const host = component ?? this.elementRef.nativeElement;
 
-    this.destory$.next();
+    this.destroyed.next();
 
     if (isPropertyPatcher(schema) && schema.properties) {
       for (const [property, value] of Object.entries(schema.properties)) {
@@ -46,7 +42,7 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
       for (const [eventName, listener] of Object.entries(schema.listeners)) {
         if (eventName === 'valueChange') {
           control.valueChanges.pipe(
-            takeUntil(this.destory$),
+            takeUntil(this.destroyed),
           ).subscribe(value => {
             listener!(value, context);
           });
@@ -55,7 +51,7 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
 
         if (eventName === 'statusChange') {
           control.statusChanges.pipe(
-            takeUntil(this.destory$),
+            takeUntil(this.destroyed),
           ).subscribe(status => {
             listener!(status, context);
           });
@@ -64,7 +60,7 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
 
         if (host instanceof HTMLElement) {
           fromEvent(host, eventName).pipe(
-            takeUntil(this.destory$)
+            takeUntil(this.destroyed)
           ).subscribe(event => {
             listener!(event, context);
           });
@@ -72,7 +68,7 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
         }
 
         (host[eventName as keyof C] as EventEmitter<SafeAny>).pipe(
-          takeUntil(this.destory$)
+          takeUntil(this.destroyed)
         ).subscribe(event => {
           listener!(event, context);
         });
@@ -82,7 +78,7 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
 
   constructor(
     private elementRef: ElementRef<E>,
-    private destory$: DestroyService
+    private destroyed: DestroyedSubject
   ) { }
 
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -26,8 +26,10 @@ export class RangeComponent implements ControlValueAccessor {
   @Input() min = 0;
   @Input() max = 10;
 
+  @Output() testChange = new EventEmitter<void>();
+
   writeValue(value: [number, number]): void {
-    this.value = value;
+    this.value = value ?? [];
   }
 
   registerOnChange(fn: (value: [number, number]) => void): void {

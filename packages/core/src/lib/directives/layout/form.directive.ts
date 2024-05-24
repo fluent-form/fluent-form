@@ -1,9 +1,9 @@
 import { Directive, EventEmitter, forwardRef, HostListener, inject, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormControlStatus, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
-import { NzDestroyService } from 'ng-zorro-antd/core/services';
 import { takeUntil } from 'rxjs';
 import { AbstractFormGroupSchema, AbstractSchema } from '../../schemas';
+import { DestroyedSubject } from '../../services';
 import { runMicrotask } from '../../shared';
 import { Indexable } from '../../types';
 import { FormUtil, ModelUtil } from '../../utils';
@@ -14,7 +14,7 @@ import { FluentControlContainer, FluentControlContainerDirective } from './model
   exportAs: 'fluentForm',
   standalone: true,
   providers: [
-    NzDestroyService,
+    DestroyedSubject,
     {
       provide: FluentControlContainer,
       useExisting: forwardRef(() => FluentFormDirective)
@@ -22,7 +22,7 @@ import { FluentControlContainer, FluentControlContainerDirective } from './model
   ]
 })
 export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentControlContainerDirective<T> implements OnChanges {
-  private readonly destroy$ = inject(NzDestroyService);
+  private readonly destroyed = inject(DestroyedSubject);
   private readonly formUtil = inject(FormUtil);
   private readonly modelUtil = inject(ModelUtil);
   /**
@@ -77,7 +77,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentC
   }
 
   private createForm() {
-    this.destroy$.next();
+    this.destroyed.next();
 
     this.formChange.emit(
       this.form = this.formUtil.createFormGroup(this.schema, this.model)
@@ -85,12 +85,12 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentC
 
     this.onValueChanges();
 
-    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(value => {
+    this.form.valueChanges.pipe(takeUntil(this.destroyed)).subscribe(value => {
       this.onValueChanges();
       this.valueChanges.emit(value);
     });
 
-    this.form.statusChanges.pipe(takeUntil(this.destroy$)).subscribe(o =>
+    this.form.statusChanges.pipe(takeUntil(this.destroyed)).subscribe(o =>
       this.statusChanges.emit(o)
     );
 

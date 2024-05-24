@@ -122,7 +122,7 @@ describe('ValueUtils', () => {
       });
     });
 
-    describe('double key control', () => {
+    describe('mulit key control', () => {
       it('no init value and default value', () => {
         const model = {};
         const schema = schemaUtil.patch({ kind: 'range', key: ['start', 'end'], type: 'range', });

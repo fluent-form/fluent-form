@@ -1,9 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
-import { MinusOutline, PlusOutline } from '@ant-design/icons-angular/icons';
 import { AnyObject } from '@ngify/types';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { form } from '../../compose';
 import { provideFluentForm } from '../../provider';
 import { AbstractFormGroupSchema } from '../../schemas';
@@ -40,12 +38,6 @@ describe('FluentFormDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        NzIconModule.forRoot([
-          PlusOutline,
-          MinusOutline
-        ])
-      ],
       providers: [
         provideFluentForm(
           withTesting()

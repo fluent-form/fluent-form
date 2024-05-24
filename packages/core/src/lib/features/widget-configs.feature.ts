@@ -51,10 +51,10 @@ export function provideWidgetConfigs(configs: (FluentFormWidgetConfig<SafeAny> |
       }
     },
     // 组件内置的 patcher
-    _configs.filter(config => config.patch).map<Provider>(feature =>
+    _configs.filter(config => config.patch).map<Provider>(config =>
       provideSchemaPatcher({
-        selector: feature.kind,
-        patch: feature.patch!
+        selector: config.kind,
+        patch: config.patch!
       })
     ),
   ];

@@ -138,7 +138,7 @@ describe('ModelUtils', () => {
       expect(form.value).toEqual({ array: [{ input: 'input' }] });
     });
 
-    it('with double key control', () => {
+    it('with mulit key control', () => {
       const schemas: Indexable<AbstractSchema>[] = [
         { kind: 'range', key: ['start', 'end'] }
       ];

@@ -22,8 +22,7 @@
             [offset]="schema.col | col: 'offset'">
             <ng-container [ngTemplateOutlet]="buttonContentTemplate" />
           </a>
-        }
-        @if (schema.type !== 'link') {
+        } @else {
           <button
             nz-button
             fluentCol
@@ -62,8 +61,7 @@
             [nzType]="schema.type">
             <ng-container [ngTemplateOutlet]="buttonContentTemplate" />
           </a>
-        }
-        @if (schema.type !== 'link') {
+        } @else {
           <button
             nz-button
             [attr.type]="schema.mode"

@@ -12,8 +12,7 @@
         <label nz-radio-button [nzValue]="option[schema.config?.valueProperty ?? 'value']">
           {{ option[schema.config?.labelProperty ?? 'label'] }}
         </label>
-      }
-      @if (!schema.variants?.button) {
+      } @else {
         <label nz-radio [nzValue]="option[schema.config?.valueProperty ?? 'value']">
           {{ option[schema.config?.labelProperty ?? 'label'] }}
         </label>

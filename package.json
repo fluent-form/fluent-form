@@ -47,8 +47,6 @@
     "@babel/core": "^7.22.8",
     "@commitlint/cli": "^19.0.0",
     "@commitlint/config-conventional": "^19.0.0",
-    "@docgeni/cli": "^2.3.0",
-    "@docgeni/template": "^2.3.0",
     "@ngify/types": "^1.5.1",
     "@nx/angular": "19.0.8",
     "@nx/eslint": "19.0.8",

@@ -8,8 +8,10 @@ import { RangeComponent } from '../testing/components';
 import { FormUtil } from '../utils';
 import { FluentBindingDirective } from './binding.directive';
 
-// eslint-disable-next-line
-function emptyFn() { }
+const statusChangeFn = jest.fn();
+const valueChangeFn = jest.fn();
+const testChangeFn = jest.fn();
+const inputChangeFn = jest.fn();
 
 @Component({
   standalone: true,
@@ -39,9 +41,9 @@ class TestingComponent {
       readOnly: true
     },
     listeners: {
-      input: emptyFn,
-      valueChange: emptyFn,
-      statusChange: emptyFn,
+      valueChange: valueChangeFn,
+      statusChange: statusChangeFn,
+      input: inputChangeFn,
     }
   };
   rangeSchema = {
@@ -51,9 +53,9 @@ class TestingComponent {
       min: 5
     },
     listeners: {
-      valueChange: emptyFn,
-      statusChange: emptyFn,
-      testChange: emptyFn
+      valueChange: valueChangeFn,
+      statusChange: statusChangeFn,
+      testChange: testChangeFn
     }
   };
 
@@ -89,7 +91,30 @@ describe('FluentBindingDirective', () => {
 
   it('rate should be auto focus', () => {
     const rangeCmp: RangeComponent = debugElement.query(By.directive(RangeComponent)).componentInstance;
-    rangeCmp.testChange.emit();
     expect(rangeCmp.min).toBe(5);
+  });
+
+  it('should listen to nativeElement event', () => {
+    const input = debugElement.nativeElement.querySelector('input');
+    input.dispatchEvent(new InputEvent('input'));
+    expect(inputChangeFn).toHaveBeenCalled();
+  });
+
+  it('should listen to valueChange event', () => {
+    const input = debugElement.nativeElement.querySelector('input');
+    input.dispatchEvent(new InputEvent('input'));
+    expect(valueChangeFn).toHaveBeenCalled();
+  });
+
+  it('should listen to statusChange event', () => {
+    const input = debugElement.nativeElement.querySelector('input');
+    input.dispatchEvent(new InputEvent('input'));
+    expect(statusChangeFn).toHaveBeenCalled();
+  });
+
+  it('should listen to custom event', () => {
+    const rangeCmp: RangeComponent = debugElement.query(By.directive(RangeComponent)).componentInstance;
+    rangeCmp.testChange.emit();
+    expect(testChangeFn).toHaveBeenCalled();
   });
 });

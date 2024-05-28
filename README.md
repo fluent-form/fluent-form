@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./logo/outline-padding.png" height="80" />
+<img src="./logo/outline-padding.png" height="75" />
 
 An Angular dynamic forms library powered by Fluent API and JSON.
 

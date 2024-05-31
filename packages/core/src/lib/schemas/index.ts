@@ -1,4 +1,5 @@
 export * from './abstract.schema';
+export * from './component';
 export * from './component-container.schema';
 export * from './component-wrapper.schema';
 export * from './control-container.schema';

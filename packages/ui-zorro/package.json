@@ -3,10 +3,6 @@
   "version": "0.0.1",
   "license": "MIT",
   "sideEffects": false,
-  "scripts": {
-    "build:schematics": "tsc -p tsconfig.schematics.json",
-    "postbuild:schematics": "copyfiles src/schematics/{collection.json,*/schema.json,*/files/**} ../../dist/packages/ui-zorro/ --up=1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fluent-form/fluent-form.git"

@@ -9,7 +9,7 @@
     "noImplicitThis": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "outDir": "../../dist/packages/core/schematics",
+    "outDir": "../../dist/core/schematics",
     "rootDir": "src/schematics",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,

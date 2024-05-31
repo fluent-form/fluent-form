@@ -1,8 +1,8 @@
 {
-  "$schema": "../../../../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "$schema": "../../../../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
     "ng-add": {
-      "description": "Add ngx-fluent-form to the project.",
+      "description": "Add @fluent-form/ui-zorro to the project.",
       "factory": "./add/index#ngAdd"
     }
   }

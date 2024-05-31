@@ -9,7 +9,7 @@
     "noImplicitThis": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "outDir": "../../dist/packages/ui-zorro/schematics",
+    "outDir": "../../dist/ui-zorro/schematics",
     "rootDir": "src/schematics",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,

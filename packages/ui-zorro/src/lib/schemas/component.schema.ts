@@ -1,5 +1,5 @@
 import { TemplateRef } from '@angular/core';
-import { AbstractSchema, ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, MaybeSchemaReactiveFn, PropertyHolder, SingleSchemaKey } from '@fluent-form/core';
+import { AbstractComponenSchema, AbstractSchema, ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, MaybeSchemaReactiveFn, PropertyHolder, SingleSchemaKey } from '@fluent-form/core';
 import { NzAlertComponent } from 'ng-zorro-antd/alert';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzFormTextComponent } from 'ng-zorro-antd/form';
@@ -8,7 +8,7 @@ import { Icon, Labelful } from './interfaces';
 /**
  * @public
  */
-export interface TemplateSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractSchema<Key>, Labelful, PropertyHolder {
+export interface TemplateSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractComponenSchema<Key>, Labelful, PropertyHolder {
   kind: 'template';
 }
 
@@ -16,7 +16,7 @@ export interface TemplateSchema<Key extends SingleSchemaKey = SingleSchemaKey> e
  * @public
  */
 export interface TextComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractSchema<Key>, Labelful, ComponentEventListenerHolder<NzFormTextComponent>, ComponentPropertyHolder<NzFormTextComponent> {
+  extends AbstractComponenSchema<Key>, Labelful, ComponentEventListenerHolder<NzFormTextComponent>, ComponentPropertyHolder<NzFormTextComponent> {
   kind: 'text';
   content: string | TemplateRef<void>;
 }
@@ -25,7 +25,7 @@ export interface TextComponentSchema<Key extends SingleSchemaKey = SingleSchemaK
  * @public
  */
 export interface ButtonComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractSchema<Key>, Labelful, ElementEventListenerHolder, ElementPropertyHolder<HTMLButtonElement> {
+  extends AbstractComponenSchema<Key>, Labelful, ElementEventListenerHolder, ElementPropertyHolder<HTMLButtonElement> {
   kind: 'button';
   type?: NzButtonType;
   mode?: HTMLButtonElement['type'];

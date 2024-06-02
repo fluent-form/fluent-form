@@ -42,4 +42,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
-.docgeni/site
+.angular
+
+## NgDoc folder
+/ng-doc

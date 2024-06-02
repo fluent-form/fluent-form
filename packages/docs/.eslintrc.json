@@ -1,11 +1,9 @@
 {
-  "$schema": "https://json.schemastore.org/eslintrc",
-  "root": true,
-  "ignorePatterns": [
-    "**/*"
+  "extends": [
+    "../../.eslintrc.json"
   ],
-  "plugins": [
-    "@nx"
+  "ignorePatterns": [
+    "!**/*"
   ],
   "overrides": [
     {
@@ -91,60 +89,14 @@
           "error",
           {
             "type": "element",
-            "prefix": "fluent",
+            "prefix": "app",
             "style": "kebab-case"
-          }
-        ],
-        "@angular-eslint/component-class-suffix": [
-          "error",
-          {
-            "suffixes": [
-              "Component",
-              "Widget"
-            ]
           }
         ],
         "@angular-eslint/no-input-rename": "off",
         "@angular-eslint/no-output-rename": "off",
         "@angular-eslint/no-host-metadata-property": "off"
       }
-    },
-    {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:prettier/recommended",
-        "plugin:@nx/angular-template",
-        "plugin:@angular-eslint/template/recommended"
-      ],
-      "rules": {
-        "@angular-eslint/template/no-interpolation-in-attributes": "error",
-        "@angular-eslint/template/prefer-control-flow": "error",
-        "@angular-eslint/template/prefer-self-closing-tags": "error"
-      }
-    },
-    {
-      "files": [
-        "*.spec.ts",
-        "*.spec.tsx",
-        "*.spec.js",
-        "*.spec.jsx"
-      ],
-      "env": {
-        "jest": true
-      },
-      "rules": {}
-    },
-    {
-      "files": [
-        "*.js",
-        "*.jsx"
-      ],
-      "extends": [
-        "plugin:@nx/javascript"
-      ],
-      "rules": {}
     }
   ]
 }

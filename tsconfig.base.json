@@ -21,6 +21,12 @@
       ],
       "@fluent-form/ui-zorro": [
         "packages/ui-zorro/src/index.ts"
+      ],
+      "@ng-doc/generated": [
+        "ng-doc/docs/index.ts"
+      ],
+      "@ng-doc/generated/*": [
+        "ng-doc/docs/*"
       ]
     }
   },

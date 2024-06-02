@@ -4,6 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "docs": "nx serve docs",
     "build": "nx run-many --target=build,build:schematics",
     "test": "nx run-many --target=test",
     "test:coverage": "nx run-many --target=test --code-coverage",

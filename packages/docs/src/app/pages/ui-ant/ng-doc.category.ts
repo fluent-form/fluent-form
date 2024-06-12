@@ -1,7 +1,7 @@
 import { NgDocCategory } from '@ng-doc/core';
 
 const UIZorroCategory: NgDocCategory = {
-  title: 'Zorro UI',
+  title: 'Ant UI',
   order: 2
 };
 

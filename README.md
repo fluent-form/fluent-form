@@ -8,7 +8,7 @@
   [![npm version](https://img.shields.io/npm/v/ngx-fluent-form/latest.svg)](https://npmjs.com/package/ngx-fluent-form)
   ![Node.js CI](https://github.com/fluent-form/fluent-form/workflows/Node.js%20CI/badge.svg)
   ![License](https://img.shields.io/badge/License-MIT-blue.svg)
-  [![Angular](https://img.shields.io/badge/Build%20with-Angular-red?logo=angular)](https://www.github.com/angular/angular)
+  [![Angular](https://img.shields.io/badge/Build%20with-Angular%20CLI-red?logo=angular)](https://www.github.com/angular/angular)
   [![codecov](https://codecov.io/gh/fluent-form/fluent-form/branch/main/graph/badge.svg?token=070GEU44U0)](https://codecov.io/gh/fluent-form/fluent-form)
   [![CodeFactor](https://www.codefactor.io/repository/github/fluent-form/fluent-form/badge)](https://www.codefactor.io/repository/github/fluent-form/fluent-form)
 </div>
@@ -40,7 +40,7 @@ import { button, number, input } from '@fluent-form/ui-zorro';
 @Component({
   standalone: true,
   imports: [FluentFormComponent],
-  template: `<fluent-form [(model)]="model" [schema]="schema"></fluent-form>`
+  template: `<fluent-form [(model)]="model" [schema]="schema" />`
 })
 export class ExampleComponent {
   schema = form(() => {

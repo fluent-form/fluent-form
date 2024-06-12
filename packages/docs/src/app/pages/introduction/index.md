@@ -52,7 +52,7 @@ Currently in beta, we look forward to your active trial, we will continue to act
 
 ## Support
 
-Do you love ✨ {% include "../../markdowns/brand.md" %} ✨ ? Star for [this project](https://github.com/fluent-form/fluent-form)!
+Do you love ✨ {% include "../../markdowns/brand.md" %} ✨ ? Star for [this](https://github.com/fluent-form/fluent-form) project!
 
 ##  Special thanks
 

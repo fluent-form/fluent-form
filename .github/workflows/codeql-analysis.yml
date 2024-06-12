@@ -15,12 +15,12 @@ on:
   push:
     branches: ["main"]
     paths:
-      - projects/ngx-fluent-form
+      - packages
   pull_request:
     # The branches below must be a subset of the branches above
     branches: ["main"]
     paths:
-      - projects/ngx-fluent-form
+      - packages
   schedule:
     - cron: "36 8 * * 6"
 

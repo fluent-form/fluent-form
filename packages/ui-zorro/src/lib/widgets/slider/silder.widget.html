@@ -1,0 +1,16 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <nz-slider
+    #component
+    [fluentBinding]="{ component, schema, control, model }"
+    [formControl]="control"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style"
+    [nzIncluded]="schema.included ?? true"
+    [nzMax]="schema.range?.max ?? 100"
+    [nzMin]="schema.range?.min"
+    [nzRange]="schema.type === 'range'"
+    [nzStep]="schema.step ?? 1"
+    [nzDots]="schema.dots"
+    [nzVertical]="schema.vertical"
+    [nzReverse]="schema.reverse" />
+</ng-template>

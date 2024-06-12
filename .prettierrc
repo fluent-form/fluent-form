@@ -9,7 +9,7 @@
           "prettier-plugin-organize-attributes"
         ],
         "singleQuote": true,
-        "trailingComma": "all",
+        "trailingComma": "none",
         "quoteProps": "preserve",
         "arrowParens": "avoid",
         "printWidth": 120,

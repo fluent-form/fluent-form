@@ -1,0 +1,49 @@
+{
+  "name": "ui-zorro",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/ui-zorro/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": [
+        "{workspaceRoot}/dist/ui-zorro"
+      ],
+      "options": {
+        "project": "packages/ui-zorro/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "packages/ui-zorro/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "packages/ui-zorro/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "build:schematics": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "tsc -p packages/ui-zorro/tsconfig.schematics.json",
+          "copyfiles packages/ui-zorro/src/schematics/{*.json,*/files/**} dist/ui-zorro/ --up=3"
+        ],
+        "parallel": false
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/ui-zorro"
+      ],
+      "options": {
+        "jestConfig": "packages/ui-zorro/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<ng-template let-formGroup="control" let-formSchema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <fluent-row
+    #parentRow="fluentParentRow"
+    [gap]="formSchema.gap ?? parentRow.gap"
+    [align]="formSchema.align"
+    [justify]="formSchema.justify"
+    [ngClass]="formSchema.class"
+    [ngStyle]="formSchema.style"
+    [fluentBinding]="{ schema: formSchema, control: formGroup, model }">
+    <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
+      @if (schema | renderable) {
+        <fluent-col
+          [span]="schema.col | col: 'span'"
+          [flex]="schema.col | col: 'flex'"
+          [offset]="schema.col | col: 'offset'"
+          [hidden]="schema.hidden | reactive: model : schema : control">
+          <ng-container [fluentFormItemOutlet]="{ schema, control, model }" />
+        </fluent-col>
+      }
+    </ng-template>
+
+    @for (subschema of formSchema.schemas; track subschema) {
+      <ng-container
+        [ngTemplateOutlet]="formColTemplate"
+        [ngTemplateOutletContext]="{
+          control: (subschema.key | control: formGroup),
+          schema: subschema,
+          model: model[formSchema.key!]
+        }" />
+    }
+  </fluent-row>
+</ng-template>

@@ -8,31 +8,23 @@ Root --- Component
 Root --- ComponentContainer
 Root --- ComponentWrapper
 
-Control --- SingleKeyControl --- AnyKeyControl
-Control --- MultiKeyControl --- AnyKeyControl
+Control --- SingleKeyControl
+Control --- MultiKeyControl
 
-AnyKeyControl --- NormalControl
-AnyKeyControl --- ComposableControl
+SingleKeyControl --- Input
+MultiKeyControl --- Range
 
-NormalControl --- Toggle
-NormalControl --- Slider
-NormalControl --- ...
+ControlContainer --- ControlGroup
+ControlContainer --- ControlArray
 
-ComposableControl --- Input
-ComposableControl --- Number
-ComposableControl --- ....
-
-ControlContainer --- FormGroup
-ControlContainer --- FormArray
+ControlGroup --- FormGroup
+ControlArray --- FormArray
 
 ControlWrapper --- InputGroup
 
 Component --- Button
-Component --- Text
-Component --- .....
 
-ComponentContainer --- Tabs
-ComponentContainer --- Steps
+ComponentContainer --- Row
 
 ComponentWrapper --- ButtonGroup
 ```

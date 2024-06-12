@@ -1,4 +1,6 @@
 dist
+.nx
+.angular
 *.js
 *.ts
 *.sass

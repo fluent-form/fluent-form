@@ -1,0 +1,18 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <nz-rate
+    #component
+    [fluentBinding]="{ component, schema, control, model }"
+    [formControl]="control"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style"
+    [nzAllowClear]="schema.clearable ?? true"
+    [nzAllowHalf]="schema.half"
+    [nzCharacter]="schema.character ? character : null!"
+    [nzCount]="schema.count ?? 5"
+    [nzTooltips]="schema.tooltips ?? []"
+    [nzAutoFocus]="schema.autofocus" />
+
+  <ng-template #character>
+    <ng-container *nzStringTemplateOutlet="schema.character | template">{{ schema.character }}</ng-container>
+  </ng-template>
+</ng-template>

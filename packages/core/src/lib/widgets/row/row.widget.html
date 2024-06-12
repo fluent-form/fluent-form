@@ -1,0 +1,26 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <fluent-row
+    #parentRow="fluentParentRow"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style"
+    [align]="schema.align"
+    [justify]="schema.justify"
+    [gap]="schema.gap ?? parentRow.gap"
+    [fluentBinding]="{ schema, control, model }">
+    <ng-template #colTemplate let-schema="schema" let-control="control" let-model="model">
+      <fluent-col
+        [span]="schema.col | col: 'span'"
+        [flex]="schema.col | col: 'flex'"
+        [offset]="schema.col | col: 'offset'"
+        [hidden]="schema.hidden | reactive: model : schema : control">
+        <ng-container [fluentFormItemOutlet]="{ schema, control, model }" />
+      </fluent-col>
+    </ng-template>
+
+    @for (subschema of schema.schemas; track subschema) {
+      <ng-container
+        [ngTemplateOutlet]="colTemplate"
+        [ngTemplateOutletContext]="{ control: (subschema.key | control: control), schema: subschema, model: model }" />
+    }
+  </fluent-row>
+</ng-template>

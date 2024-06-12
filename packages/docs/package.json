@@ -1,0 +1,21 @@
+{
+  "name": "@fluent-form/docs",
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fluent-form/fluent-form.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fluent-form/fluent-form/issues"
+  },
+  "homepage": "https://github.com/fluent-form/fluent-form",
+  "dependencies": {
+    "@ng-doc/app": "^17.6.10",
+    "@ng-doc/builder": "^17.6.10",
+    "@ng-doc/core": "^17.6.10",
+    "@ng-doc/keywords-loaders": "^17.6.10",
+    "@ng-doc/ui-kit": "^17.6.10"
+  }
+}

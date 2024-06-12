@@ -1,0 +1,37 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2022",
+    "module": "esnext",
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@fluent-form/core": [
+        "packages/core/src/index.ts"
+      ],
+      "@fluent-form/ui-zorro": [
+        "packages/ui-zorro/src/index.ts"
+      ],
+      "@ng-doc/generated": [
+        "ng-doc/docs/index.ts"
+      ],
+      "@ng-doc/generated/*": [
+        "ng-doc/docs/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
+}

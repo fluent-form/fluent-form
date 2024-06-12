@@ -2,28 +2,23 @@
   "$schema": "https://json.schemastore.org/eslintrc",
   "root": true,
   "ignorePatterns": [
-    "projects/**/*"
+    "**/*"
+  ],
+  "plugins": [
+    "@nx"
   ],
   "overrides": [
     {
       "files": [
         "*.ts"
       ],
-      "parser": "@typescript-eslint/parser",
-      "parserOptions": {
-        "project": [
-          "tsconfig.json"
-        ],
-        "createDefaultProgram": true
-      },
       "extends": [
         "eslint:recommended",
+        "plugin:@nx/typescript",
+        "plugin:@nx/angular",
         "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
-      ],
-      "plugins": [
-        "@typescript-eslint"
       ],
       "rules": {
         "indent": [
@@ -119,8 +114,35 @@
         "*.html"
       ],
       "extends": [
-        "plugin:@angular-eslint/template/recommended",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "plugin:@nx/angular-template",
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {
+        "@angular-eslint/template/no-interpolation-in-attributes": "error",
+        "@angular-eslint/template/prefer-control-flow": "error",
+        "@angular-eslint/template/prefer-self-closing-tags": "error"
+      }
+    },
+    {
+      "files": [
+        "*.spec.ts",
+        "*.spec.tsx",
+        "*.spec.js",
+        "*.spec.jsx"
+      ],
+      "env": {
+        "jest": true
+      },
+      "rules": {}
+    },
+    {
+      "files": [
+        "*.js",
+        "*.jsx"
+      ],
+      "extends": [
+        "plugin:@nx/javascript"
       ],
       "rules": {}
     }

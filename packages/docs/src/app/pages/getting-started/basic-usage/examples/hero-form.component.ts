@@ -1,6 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FluentFormComponent, FluentGridModule, form, headless, input, number, rate, textarea, toggle } from 'ngx-fluent-form';
+import { FluentFormComponent, form } from '@fluent-form/core';
+import { headless, input, number, rate, textarea, toggle } from '@fluent-form/ui-zorro';
 
 interface Hero {
   id: number;
@@ -17,9 +18,13 @@ interface Hero {
 }
 
 @Component({
+  selector: 'hero-form-example',
   standalone: true,
-  imports: [FluentFormComponent, FluentGridModule, JsonPipe],
-  templateUrl: './hero-form.component.html'
+  imports: [FluentFormComponent, JsonPipe],
+  template: `
+    <fluent-form [schema]="schema" [(model)]="model" />
+    <pre>{{ model | json }}</pre>
+  `
 })
 export class HeroFormExampleComponent {
   schema = form(() => {

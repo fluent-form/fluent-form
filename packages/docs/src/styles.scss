@@ -2,4 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --ng-doc-code-max-height: 600px;
+  --ng-doc-app-max-width: 1536px;
+}
+
+.ng-doc-demo pre {
+  padding: 8px 10px;
+  color: #334155;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+}

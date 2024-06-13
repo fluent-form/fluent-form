@@ -5,6 +5,7 @@ const InstallationPage: NgDocPage = {
   title: 'Installation',
   mdFile: './index.md',
   category: GettingStartedCategory,
+  order: 1
 };
 
 export default InstallationPage;

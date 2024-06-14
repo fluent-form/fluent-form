@@ -8,7 +8,7 @@ import { RootFormExampleComponent } from './examples/root-form.component';
 import { TabsArrayExampleComponent } from './examples/tabs-array.component';
 
 const ControlContainerPage: NgDocPage = {
-  title: 'ControlContainer',
+  title: 'Control Container',
   mdFile: './index.md',
   category: UIZorroCategory,
   demos: {

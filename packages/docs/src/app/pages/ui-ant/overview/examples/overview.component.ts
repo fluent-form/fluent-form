@@ -10,7 +10,7 @@ import { CASCADER_OPTIONS, CHECKBOX_OPTIONS, CITIES_OPTIONS, PROVINCES_OPTIONS, 
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model"></fluent-form>
+    <fluent-form [schema]="schema" [(model)]="model" />
     <pre>{{ model | json }}</pre>
   `
 })

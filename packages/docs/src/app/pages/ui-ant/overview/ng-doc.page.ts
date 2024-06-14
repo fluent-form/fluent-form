@@ -11,7 +11,8 @@ const OverviewPage: NgDocPage = {
     OverviewExampleComponent,
     ZorroStyleComponent
   },
-  order: Infinity
+  order: Infinity,
+  hidden: true
 };
 
 export default OverviewPage;

@@ -37,6 +37,11 @@
             "glob": "**/*",
             "input": "ng-doc/docs/assets",
             "output": "assets/ng-doc"
+          },
+          {
+            "glob": "**/*",
+            "input": "node_modules/@ant-design/icons-angular/src/inline-svg/",
+            "output": "assets"
           }
         ],
         "styles": [

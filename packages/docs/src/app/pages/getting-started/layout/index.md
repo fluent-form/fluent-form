@@ -1,5 +1,7 @@
 # {{ NgDocPage.title }}
 
+{{ NgDocActions.demo("ZorroStyleComponent", { container: false }) }}
+
 {% include "../../../markdowns/brand.md" %} 内置了一个包含 12 列的栅格系统（Grid System），支持六个屏幕响应断点（xs、sm、md、lg、xl、xxl）。
 
 该系统由 `<fluent-row>` 和 `<fluent-col>` 组件构成，整个表单布局是建立在该栅格系统之上的。`<fluent-row>` 组件代表一个栅格行，而 `<fluent-col>` 组件代表栅格行内的一列。例如：
@@ -34,5 +36,3 @@
 {{ NgDocActions.demo("GridLayoutExampleComponent") }}
 
 在实际项目中，我们建议你根据内容的复杂性和屏幕尺寸的变化来灵活使用这个栅格系统。记住，一个好的布局应该在所有屏幕尺寸上都能提供良好的用户体验。
-
-{{ NgDocActions.demo("ZorroStyleComponent", { container: false }) }}

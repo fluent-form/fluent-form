@@ -1,5 +1,7 @@
 # {{ NgDocPage.title }}
 
+{{ NgDocActions.demo("ZorroStyleComponent", { container: false }) }}
+
 本文档将详细介绍 {% include "../../../markdowns/brand.md" %} 的基本用法。
 
 ## 选择 UI 库
@@ -181,5 +183,3 @@ const schema = form(() => {
 {{ NgDocActions.demo("HeroFormExampleComponent") }}
 
 此时我们可以看到表单里的控件都挤在一起，这是因为我们没有配置布局选项导致的。在下一章中，我们将学习如何配置排版与布局。
-
-{{ NgDocActions.demo("ZorroStyleComponent", { container: false }) }}

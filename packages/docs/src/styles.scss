@@ -7,10 +7,15 @@
   --ng-doc-app-max-width: 1536px;
 }
 
-.ng-doc-demo pre {
-  padding: 8px 10px;
-  color: #334155;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
+.ng-doc-demo {
+  overflow: visible !important;
+
+  pre {
+    font-size: 12px;
+    padding: 8px 10px;
+    color: #334155;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+  }
 }

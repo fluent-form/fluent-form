@@ -1,11 +1,16 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { button, checkbox, FluentFormComponent, FluentGridModule, form, input, password, tab, tabs } from 'ngx-fluent-form';
+import { FluentFormComponent, form } from '@fluent-form/core';
+import { button, checkbox, input, password, tab, tabs } from '@fluent-form/ui-zorro';
 
 @Component({
+  selector: 'tabs-form-example',
   standalone: true,
-  imports: [FluentFormComponent, FluentGridModule, JsonPipe],
-  templateUrl: './tabs-form.component.html'
+  imports: [FluentFormComponent, JsonPipe],
+  template: `
+    <fluent-form [schema]="schema" [(model)]="model" />
+    <pre>{{ model | json }}</pre>
+  `
 })
 export class TabsFormExampleComponent {
   schema = form(() => {

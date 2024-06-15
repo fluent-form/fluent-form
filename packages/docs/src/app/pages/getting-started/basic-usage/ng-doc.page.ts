@@ -4,7 +4,7 @@ import GettingStartedCategory from '../ng-doc.category';
 import { HeroFormExampleComponent } from './examples/hero-form.component';
 
 const BasicUsagePage: NgDocPage = {
-  title: 'Basic usage',
+  title: 'Basic Usage',
   mdFile: './index.md',
   category: GettingStartedCategory,
   demos: {

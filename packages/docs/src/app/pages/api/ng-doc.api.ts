@@ -1,7 +1,7 @@
 import { NgDocApi } from '@ng-doc/core';
 
 const Api: NgDocApi = {
-  title: 'API',
+  title: 'API Reference',
   order: Infinity,
   scopes: [
     {

@@ -1,9 +1,8 @@
-import { template } from '@angular-devkit/core';
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FluentFormModule, form, row } from '@fluent-form/core';
-import { headless } from '@fluent-form/ui-zorro';
+import { headless, template } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'custom-template-example',

@@ -12,6 +12,8 @@
   },
   "homepage": "https://github.com/fluent-form/fluent-form",
   "dependencies": {
+    "@fluent-form/core": "0.0.1",
+    "@fluent-form/ui-zorro": "0.0.1",
     "@ng-doc/app": "^17.6.13",
     "@ng-doc/builder": "^17.6.13",
     "@ng-doc/core": "^17.6.13",

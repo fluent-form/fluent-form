@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: npm ci
+      - run: npm ci --include=optional
       - run: npm run test:coverage
       - uses: codecov/codecov-action@v4
         with:

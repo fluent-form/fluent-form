@@ -38,7 +38,7 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --include=optional
         working-directory: ${{ env.BUILD_PATH }}
       - name: Build docs
         run: npx nx build docs

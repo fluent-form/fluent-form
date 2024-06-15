@@ -1,11 +1,14 @@
+import { template } from '@angular-devkit/core';
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FluentFormModule, FluentGridModule, form, headless, row, template } from 'ngx-fluent-form';
+import { FluentFormModule, form, row } from '@fluent-form/core';
+import { headless } from '@fluent-form/ui-zorro';
 
 @Component({
+  selector: 'custom-template-example',
   standalone: true,
-  imports: [FluentFormModule, FluentGridModule, JsonPipe, ReactiveFormsModule],
+  imports: [FluentFormModule, JsonPipe, ReactiveFormsModule],
   templateUrl: './custom-template.component.html'
 })
 export class CustomTemplateExampleComponent {

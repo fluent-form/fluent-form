@@ -5,7 +5,7 @@
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
     [nzSize]="schema.size!"
-    [nzCompact]="schema.compact ?? true"
+    [nzCompact]="schema.schemas.length > 1"
     [nzAddOnBefore]="helper.addon | invoke: (schema.before | reactive: model : schema : control) | template"
     [nzAddOnAfter]="helper.addon | invoke: (schema.after | reactive: model : schema : control) | template"
     [nzPrefix]="helper.addon | invoke: (schema.prefix | reactive: model : schema : control) | template"

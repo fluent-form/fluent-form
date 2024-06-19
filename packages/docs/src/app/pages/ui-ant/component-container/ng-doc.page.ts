@@ -13,7 +13,7 @@ const ComponentContainerPage: NgDocPage = {
     TabsFormExampleComponent,
     ZorroStyleComponent
   },
-  order: 3
+  order: 6
 };
 
 export default ComponentContainerPage;

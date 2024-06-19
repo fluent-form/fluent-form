@@ -97,7 +97,7 @@ const schema = form([
 > **NOTE**
 > 两种写法都是等效的，您可以根据自己的偏好和项目的需求来选择。教程中将主要使用 Fluent API 来演示。
 
-## 组件使用
+## 核心组件
 
 `FluentFormComponent` 是 {% include "../../../markdowns/brand.md" %} 的核心组件，它用于创建和管理表单。
 

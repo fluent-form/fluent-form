@@ -62,8 +62,6 @@ Currently in beta, we look forward to your active trial, we will continue to act
 
 ## Support
 
-## Support
-
 Do you love ✨ fluent-form ✨ ? Star for [this](https://github.com/fluent-form/fluent-form) project!
 
 ##  Special thanks

@@ -25,10 +25,13 @@
     },
     "build:schematics": {
       "executor": "nx:run-commands",
+      "dependsOn": [
+        "build"
+      ],
       "options": {
         "commands": [
           "tsc -p packages/core/tsconfig.schematics.json",
-          "copyfiles packages/core/src/schematics/{*.json,*/files/**} dist/core/ --up=3"
+          "copyfiles packages/core/src/schematics/**/**/{*.json,*/files/**} dist/core/ --up=3"
         ],
         "parallel": false
       }

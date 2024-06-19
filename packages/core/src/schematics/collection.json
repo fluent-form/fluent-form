@@ -3,7 +3,8 @@
   "schematics": {
     "ng-add": {
       "description": "Add @fluent-form/core to the project.",
-      "factory": "./add/index#ngAdd"
+      "factory": "./add/index",
+      "schema": "./add/schema.json"
     }
   }
 }

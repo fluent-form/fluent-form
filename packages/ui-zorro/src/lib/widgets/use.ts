@@ -1,6 +1,6 @@
 import { ValidatorFn, Validators } from '@angular/forms';
 import { FluentFormWidgetConfig, SchemaType, isNumber } from '@fluent-form/core';
-import { AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, InputControlSchema, InputGroupComponentSchema, NumberGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextComponentSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, InputControlSchema, InputGroupComponentSchema, NumberGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { AlertWidget } from './alert/alert.widget';
 import { ButtonGroupWidget } from './button-group/button-group.widget';
 import { ButtonWidget } from './button/button.widget';
@@ -23,7 +23,6 @@ import { SilderWidget } from './slider/silder.widget';
 import { StepsWidget } from './steps/steps.widget';
 import { TabsArrayWidget } from './tabs-array/tabs-array.widget';
 import { TabsWidget } from './tabs/tabs.widget';
-import { TextWidget } from './text/text.widget';
 import { TextareaWidget } from './textarea/textarea.widget';
 import { TimeWidget } from './time/time.widget';
 import { ToggleWidget } from './toggle/toggle.widget';
@@ -49,7 +48,6 @@ export function useAllWidgets() {
     useHeadingWidget(),
     useInputGroupWidget(),
     useNumberGroupWidget(),
-    useTextWidget(),
     useButtonWidget(),
     useAlertWidget(),
     useStepsWidget(),
@@ -249,14 +247,6 @@ export function useRateWidget(): FluentFormWidgetConfig<RateControlSchema> {
     kind: 'rate',
     type: SchemaType.Control,
     widget: RateWidget
-  };
-}
-
-export function useTextWidget(): FluentFormWidgetConfig<TextComponentSchema> {
-  return {
-    kind: 'text',
-    type: SchemaType.Component,
-    widget: TextWidget
   };
 }
 

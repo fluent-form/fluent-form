@@ -14,10 +14,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "schematics": "./schematics/collection.json",
-  "ng-add": {
-    "save": "dependencies"
-  },
   "peerDependencies": {
     "@angular/forms": ">=17.0.0",
     "@angular/cdk": ">=17.0.0",

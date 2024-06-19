@@ -23,16 +23,6 @@
       },
       "defaultConfiguration": "production"
     },
-    "build:schematics": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          "tsc -p packages/ui-zorro/tsconfig.schematics.json",
-          "copyfiles packages/ui-zorro/src/schematics/{*.json,*/files/**} dist/ui-zorro/ --up=3"
-        ],
-        "parallel": false
-      }
-    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": [

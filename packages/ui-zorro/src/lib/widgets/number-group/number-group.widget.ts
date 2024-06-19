@@ -33,10 +33,10 @@ type NumberGroupWidgetTemplateContext = WidgetTemplateContext<NumberGroupCompone
 })
 export class NumberGroupWidget extends AbstractWidget<NumberGroupWidgetTemplateContext> {
   protected readonly helper = {
-    addon: (addon?: WithOutSchemaReactiveFn<NumberGroupComponentSchema['before']>) =>
+    addon: (addon?: WithOutSchemaReactiveFn<NonNullable<NumberGroupComponentSchema['addons']>['before']>) =>
       isString(addon) || addon instanceof TemplateRef ? addon : undefined
     ,
-    addonIcon: (addon?: WithOutSchemaReactiveFn<NumberGroupComponentSchema['before']>) =>
+    addonIcon: (addon?: WithOutSchemaReactiveFn<NonNullable<NumberGroupComponentSchema['addons']>['before']>) =>
       isString(addon) || addon instanceof TemplateRef ? undefined : addon?.icon,
   } as const;
 }

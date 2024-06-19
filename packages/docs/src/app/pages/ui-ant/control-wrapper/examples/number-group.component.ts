@@ -26,10 +26,10 @@ export class NumberGroupExampleComponent {
       number('num4').placeholder('请输入数字').col({ flex: 'auto' });
       button().type('primary').variants({ ghost: true }).content('确认');
     });
-    numberGroup().label('输入框与图标').before({ icon: 'user' }).col(4).schemas(() => {
+    numberGroup().label('输入框与图标').addons({ before: { icon: 'user' } }).col(4).schemas(() => {
       number('num5').placeholder('请输入数字').col({ flex: 'auto' });
     })
-    numberGroup().label('输入框与修饰符').prefix('￥').suffix('RMB').col(4).schemas(() => {
+    numberGroup().label('输入框与修饰符').affixes({ prefix: '￥', suffix: 'RMB' }).col(4).schemas(() => {
       number('num6').placeholder('请输入数字').col({ flex: 'auto' });
     })
   });

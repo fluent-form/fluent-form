@@ -6,14 +6,14 @@
     [ngStyle]="schema.style"
     [nzSize]="schema.size!"
     [nzCompact]="schema.schemas.length > 1"
-    [nzAddOnBefore]="helper.addon | invoke: (schema.before | reactive: model : schema : control) | template"
-    [nzAddOnAfter]="helper.addon | invoke: (schema.after | reactive: model : schema : control) | template"
-    [nzPrefix]="helper.addon | invoke: (schema.prefix | reactive: model : schema : control) | template"
-    [nzSuffix]="helper.addon | invoke: (schema.suffix | reactive: model : schema : control) | template"
-    [nzAddOnBeforeIcon]="helper.addonIcon | invoke: (schema.before | reactive: model : schema : control)"
-    [nzAddOnAfterIcon]="helper.addonIcon | invoke: (schema.after | reactive: model : schema : control)"
-    [nzPrefixIcon]="helper.addonIcon | invoke: (schema.prefix | reactive: model : schema : control)"
-    [nzSuffixIcon]="helper.addonIcon | invoke: (schema.suffix | reactive: model : schema : control)">
+    [nzAddOnBefore]="helper.addon | invoke: (schema.addons?.before | reactive: model : schema : control) | template"
+    [nzAddOnAfter]="helper.addon | invoke: (schema.addons?.after | reactive: model : schema : control) | template"
+    [nzPrefix]="helper.addon | invoke: (schema.affixes?.prefix | reactive: model : schema : control) | template"
+    [nzSuffix]="helper.addon | invoke: (schema.affixes?.suffix | reactive: model : schema : control) | template"
+    [nzAddOnBeforeIcon]="helper.addonIcon | invoke: (schema.addons?.before | reactive: model : schema : control)"
+    [nzAddOnAfterIcon]="helper.addonIcon | invoke: (schema.addons?.after | reactive: model : schema : control)"
+    [nzPrefixIcon]="helper.addonIcon | invoke: (schema.affixes?.prefix | reactive: model : schema : control)"
+    [nzSuffixIcon]="helper.addonIcon | invoke: (schema.affixes?.suffix | reactive: model : schema : control)">
     @for (subschema of schema.schemas; track subschema) {
       <ng-container
         fluentWithInjector

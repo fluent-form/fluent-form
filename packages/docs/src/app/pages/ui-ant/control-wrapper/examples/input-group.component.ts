@@ -22,10 +22,10 @@ export class InputGroupExampleComponent {
       text('keyword').placeholder('请输入关键字').col({ flex: 'auto' });
       button().type('primary').variants({ ghost: true }).content('搜索');
     })
-    inputGroup().label('输入框与图标').before({ icon: 'user' }).col(4).schemas(() => {
+    inputGroup().label('输入框与图标').addons({ before: { icon: 'user' } }).col(4).schemas(() => {
       text('username').placeholder('请输入').col({ flex: 'auto' });
     })
-    inputGroup().label('输入框与修饰符').prefix('￥').suffix('RMB').col(4).schemas(() => {
+    inputGroup().label('输入框与修饰符').affixes({ prefix: '￥', suffix: 'RMB' }).col(4).schemas(() => {
       text('rmb').placeholder('请输入').col({ flex: 'auto' });
     })
   });

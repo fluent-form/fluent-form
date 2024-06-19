@@ -16,7 +16,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 })
 export class NamedemplateExampleComponent {
   schema = form(() => {
-    inputGroup().before('Https://').after('#tld').schemas(() => {
+    inputGroup().addons({ before: 'Https://', after: '#tld' }).schemas(() => {
       text('text').col(12);
     });
   });

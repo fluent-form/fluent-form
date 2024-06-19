@@ -7,7 +7,7 @@ import { SCHEMA_PATCHERS } from '../patcher';
 import { provideFluentForm } from '../provider';
 import { AbstractSchema } from '../schemas';
 import { SchemaType } from '../schemas/interfaces';
-import { array, group, input, inputGroup, range, withTesting } from '../testing';
+import { array, group, inputGroup, range, text, withTesting } from '../testing';
 import { SchemaUtil } from './schema.utils';
 
 describe('SchemaUtil', () => {
@@ -50,8 +50,8 @@ describe('SchemaUtil', () => {
   });
 
   it('isPathKeyControl', () => {
-    expect(schemaUtil.isPathKeySchema({ kind: 'input', key: 'name' })).toBe(false);
-    expect(schemaUtil.isPathKeySchema({ kind: 'input', key: 'name.first' })).toBe(true);
+    expect(schemaUtil.isPathKeySchema({ kind: 'text', key: 'name' })).toBe(false);
+    expect(schemaUtil.isPathKeySchema({ kind: 'text', key: 'name.first' })).toBe(true);
   });
 
   it('parsePathKey', () => {
@@ -67,64 +67,63 @@ describe('SchemaUtil', () => {
     expect(schemaUtil.isControlContainer({ kind: 'group' })).toBe(true);
     expect(schemaUtil.isControlContainer({ kind: 'array' })).toBe(true);
     expect(schemaUtil.isControlWrapper({ kind: 'input-group' })).toBe(true);
-    expect(schemaUtil.isControl({ kind: 'input' })).toBe(true);
+    expect(schemaUtil.isControl({ kind: 'text' })).toBe(true);
     expect(schemaUtil.isNonControl({ kind: 'button' })).toBe(true);
     expect(schemaUtil.isNonControl({ kind: 'button-group' })).toBe(true);
   });
 
   it('filterControlSchemas', () => {
     expect(schemaUtil.filterControls([
-      { kind: 'text', content: '' },
       { kind: 'button-group', schemas: [] },
-      { kind: 'input' },
+      { kind: 'text' },
       { kind: 'group', schemas: [] },
       { kind: 'array', schemas: [] },
       {
         kind: 'input-group',
         schemas: [
-          { kind: 'input' }
+          { kind: 'text' }
         ]
       },
       {
         kind: 'row',
         schemas: [
-          { kind: 'input' }
+          { kind: 'text' }
         ]
       }
     ])).toEqual([
-      { kind: 'input' },
+      { kind: 'text' },
       { kind: 'group', schemas: [] },
       { kind: 'array', schemas: [] },
-      { kind: 'input' },
-      { kind: 'input' },
+      { kind: 'text' },
+      { kind: 'text' },
     ]);
   });
 
   describe('带验证器的图示', () => {
     // TODO
     // xit('length', () => {
-    //   const schema: Indexable<AbstractSchema> = { kind: 'input', length: 1 };
+    //   const schema: Indexable<AbstractSchema> = { kind: 'text', length: 1 };
     //   const validators = schemaUtil.validatorsOf(schema);
     //   // min & max
     //   expect(validators.length).toBe(2);
     // });
 
     // xit('min/max', () => {
-    //   const schema = input('name').length({ min: 1, max: 2 }).build();
+    //   const schema = text('name').length({ min: 1, max: 2 }).build();
     //   const validators = schemaUtil.validatorsOf(schema);
 
     //   expect(validators.length).toBe(2);
     // });
 
     it('required', () => {
-      const schema = input('name').required(true).build();
+      const schema = text('name').required(true).build();
       const validators = schemaUtil.validatorsOf(schema);
 
       expect(validators).toEqual([Validators.required]);
     });
 
     it('email', () => {
-      const schema = input('name').type('email').required(true).build();
+      const schema = text('name').type('email').required(true).build();
       const validators = schemaUtil.validatorsOf(schema);
 
       expect(validators.length).toBe(2);
@@ -136,16 +135,16 @@ describe('SchemaUtil', () => {
   describe('应该能正确标准化图示', () => {
     it('普通图示', () => {
       const { schemas } = form(() => {
-        input('name');
+        text('name');
       });
-      expect(schemas).toEqual([{ kind: 'input', key: 'name' }]);
+      expect(schemas).toEqual([{ kind: 'text', key: 'name' }]);
     });
 
     describe('嵌套图示', () => {
       it('group', () => {
         const { schemas } = form(() => {
           group('name').schemas(() => {
-            input('name');
+            text('name');
           });
         });
 
@@ -153,7 +152,7 @@ describe('SchemaUtil', () => {
           kind: 'group',
           key: 'name',
           schemas: [
-            { kind: 'input', key: 'name' }
+            { kind: 'text', key: 'name' }
           ]
         }]);
       });
@@ -162,7 +161,7 @@ describe('SchemaUtil', () => {
         const { schemas } = form(() => {
           array('name').schemas(() => {
             group(0).schemas(() => {
-              input('name');
+              text('name');
             });
           });
         });
@@ -174,7 +173,7 @@ describe('SchemaUtil', () => {
             kind: 'group',
             key: 0,
             schemas: [
-              { kind: 'input', key: 'name' }
+              { kind: 'text', key: 'name' }
             ]
           }]
         }]);
@@ -183,14 +182,14 @@ describe('SchemaUtil', () => {
       it('input-group', () => {
         const { schemas } = form(() => {
           inputGroup().schemas(() => {
-            input('name');
+            text('name');
           });
         });
 
         expect(schemas).toEqual([{
           kind: 'input-group',
           schemas: [
-            { kind: 'input', key: 'name' }
+            { kind: 'text', key: 'name' }
           ]
         }]);
       });
@@ -200,34 +199,34 @@ describe('SchemaUtil', () => {
   describe('应该能在图示列表中找到目标图示', () => {
     it('普通图示', () => {
       const schema = form(() => {
-        input('name');
+        text('name');
       });
 
-      expect(schemaUtil.find(schema, 'name')).toEqual({ kind: 'input', key: 'name' });
+      expect(schemaUtil.find(schema, 'name')).toEqual({ kind: 'text', key: 'name' });
     });
 
     it('二级图示', () => {
       const schema = form(() => {
         group('group').schemas(() => {
-          input('name');
+          text('name');
         });
       });
 
-      expect(schemaUtil.find(schema, ['group', 'name'])).toEqual({ kind: 'input', key: 'name' });
-      expect(schemaUtil.find(schema, 'group.name')).toEqual({ kind: 'input', key: 'name' });
+      expect(schemaUtil.find(schema, ['group', 'name'])).toEqual({ kind: 'text', key: 'name' });
+      expect(schemaUtil.find(schema, 'group.name')).toEqual({ kind: 'text', key: 'name' });
     });
 
     it('多级图示', () => {
       const schema = form(() => {
         group('group').schemas(() => {
           group('group').schemas(() => {
-            input('name');
+            text('name');
           });
         });
       });
 
-      expect(schemaUtil.find(schema, ['group', 'group', 'name'])).toEqual({ kind: 'input', key: 'name' });
-      expect(schemaUtil.find(schema, 'group.group.name')).toEqual({ kind: 'input', key: 'name' });
+      expect(schemaUtil.find(schema, ['group', 'group', 'name'])).toEqual({ kind: 'text', key: 'name' });
+      expect(schemaUtil.find(schema, 'group.group.name')).toEqual({ kind: 'text', key: 'name' });
     });
 
     it('多字段图示', () => {
@@ -274,14 +273,14 @@ describe('SchemaUtil with patcher feature', () => {
               }
             },
             {
-              selector: 'input',
+              selector: 'text',
               patch: schema => {
                 (schema.class as Set<string>).add('kind-selector');
                 return schema;
               }
             },
             {
-              selector: ['input', 'range'],
+              selector: ['text', 'range'],
               patch: schema => {
                 (schema.class as Set<string>).add('multi-kind-selector');
                 return schema;
@@ -317,47 +316,47 @@ describe('SchemaUtil with patcher feature', () => {
   });
 
   it('with * selector', () => {
-    const schema: AbstractSchema = { kind: 'input' };
+    const schema: AbstractSchema = { kind: 'text' };
     expect(schemaUtil.patch(schema).class).toBeInstanceOf(Set);
   });
 
   it('with kind selector', () => {
-    const inputSchema: AbstractSchema = { kind: 'input' };
+    const inputSchema: AbstractSchema = { kind: 'text' };
     const otherSchema: AbstractSchema = { kind: 'range' };
     expect(schemaUtil.patch(inputSchema).class).toContain('kind-selector');
     expect(schemaUtil.patch(otherSchema).class).not.toContain('kind-selector');
   });
 
   it('with multi-kind selector', () => {
-    const inputSchema: AbstractSchema = { kind: 'input' };
+    const inputSchema: AbstractSchema = { kind: 'text' };
     const rangeSchema: AbstractSchema = { kind: 'range' };
     expect(schemaUtil.patch(inputSchema).class).toContain('multi-kind-selector');
     expect(schemaUtil.patch(rangeSchema).class).toContain('multi-kind-selector');
   });
 
   it('with schema-kind selector', () => {
-    const inputSchema: AbstractSchema = { kind: 'input' };
+    const inputSchema: AbstractSchema = { kind: 'text' };
     const buttonSchema: AbstractSchema = { kind: 'button' };
     expect(schemaUtil.patch(inputSchema).class).toContain('schema-type-selector');
     expect(schemaUtil.patch(buttonSchema).class).not.toContain('schema-type-selector');
   });
 
   it('with multi-schema-type selector', () => {
-    const inputSchema: AbstractSchema = { kind: 'input' };
+    const inputSchema: AbstractSchema = { kind: 'text' };
     const buttonSchema: AbstractSchema = { kind: 'button' };
     expect(schemaUtil.patch(inputSchema).class).toContain('multi-schema-type-selector');
     expect(schemaUtil.patch(buttonSchema).class).toContain('multi-schema-type-selector');
   });
 
   it('with mix selector', () => {
-    const inputSchema: AbstractSchema = { kind: 'input' };
+    const inputSchema: AbstractSchema = { kind: 'text' };
     const buttonSchema: AbstractSchema = { kind: 'button' };
     expect(schemaUtil.patch(inputSchema).class).toContain('mix-selector');
     expect(schemaUtil.patch(buttonSchema).class).toContain('mix-selector');
   });
 
   it('with multi patchers', () => {
-    const schema: AbstractSchema = { kind: 'input' };
+    const schema: AbstractSchema = { kind: 'text' };
     expect(schemaUtil.patch(schema).class).toContain('kind-selector');
     expect(schemaUtil.patch(schema).class).toContain('multi-kind-selector');
     expect(schemaUtil.patch(schema).class).toContain('schema-type-selector');

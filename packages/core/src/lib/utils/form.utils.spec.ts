@@ -25,7 +25,7 @@ describe('form.utils', () => {
   describe('FormUtil', () => {
     describe('createFormControl', () => {
       it('normal', () => {
-        const control = util.createFormControl({ kind: 'input' }, {});
+        const control = util.createFormControl({ kind: 'text' }, {});
         expect(control).toBeTruthy();
       });
 
@@ -48,7 +48,7 @@ describe('form.utils', () => {
 
       it('with mapper', () => {
         const control = util.createFormControl({
-          kind: 'input',
+          kind: 'text',
           key: 'input',
           mapper: {
             parser: (value: number) => value?.toString(),
@@ -60,7 +60,7 @@ describe('form.utils', () => {
 
       it('with validators', () => {
         const control = util.createFormControl({
-          kind: 'input',
+          kind: 'text',
           validators: [Validators.email]
         }, {});
         expect(control.hasValidator(Validators.email)).toBe(true);
@@ -72,7 +72,7 @@ describe('form.utils', () => {
         const form = util.createFormGroup({
           kind: 'group',
           schemas: [
-            { kind: 'input', key: 'input' }
+            { kind: 'text', key: 'input' }
           ]
         }, {});
 
@@ -81,7 +81,7 @@ describe('form.utils', () => {
 
       it('with control default value', () => {
         const form = util.createFormGroup([
-          { kind: 'input', key: 'input', defaultValue: 'control default value' }
+          { kind: 'text', key: 'input', defaultValue: 'control default value' }
         ], {});
 
         expect(form.value).toEqual({ input: 'control default value' });
@@ -89,7 +89,7 @@ describe('form.utils', () => {
 
       it('with model default value', () => {
         const form = util.createFormGroup([
-          { kind: 'input', key: 'input', defaultValue: 'control default value' }
+          { kind: 'text', key: 'input', defaultValue: 'control default value' }
         ], { input: 'model value' });
 
         expect(form.value).toEqual({ input: 'model value' });
@@ -115,12 +115,12 @@ describe('form.utils', () => {
 
       it('nested group', () => {
         const form = util.createFormGroup([
-          { kind: 'input', key: 'input' },
+          { kind: 'text', key: 'input' },
           {
             kind: 'group',
             key: 'group',
             schemas: [
-              { kind: 'input', key: 'input' }
+              { kind: 'text', key: 'input' }
             ]
           }
         ], {});
@@ -135,12 +135,12 @@ describe('form.utils', () => {
 
       it('nested array', () => {
         const form = util.createFormGroup([
-          { kind: 'input', key: 'input' },
+          { kind: 'text', key: 'input' },
           {
             kind: 'array',
             key: 'array',
             schemas: [
-              { kind: 'input' }
+              { kind: 'text' }
             ]
           }
         ], {});
@@ -156,7 +156,7 @@ describe('form.utils', () => {
           {
             kind: 'input-group',
             schemas: [
-              { kind: 'input', key: 'input' }
+              { kind: 'text', key: 'input' }
             ]
           }
         ], {});
@@ -166,7 +166,7 @@ describe('form.utils', () => {
 
       it('with component', () => {
         const form = util.createFormGroup([
-          { kind: 'input', key: 'input' },
+          { kind: 'text', key: 'input' },
           { kind: 'button' }
         ], {});
 
@@ -175,7 +175,7 @@ describe('form.utils', () => {
 
       it('with component wrapper', () => {
         const form = util.createFormGroup([
-          { kind: 'input', key: 'input' },
+          { kind: 'text', key: 'input' },
           {
             kind: 'button-group',
             schemas: [
@@ -192,7 +192,7 @@ describe('form.utils', () => {
           {
             kind: 'row',
             schemas: [
-              { kind: 'input', key: 'input' },
+              { kind: 'text', key: 'input' },
             ]
           }
         ], {});
@@ -202,9 +202,9 @@ describe('form.utils', () => {
 
       it('with path key schema', () => {
         const form = util.createFormGroup([
-          { kind: 'input', key: 'a.b.c', defaultValue: 'hello' },
-          { kind: 'input', key: 'a.b.d', defaultValue: 'world' },
-          { kind: 'input', key: 'a.b.e.f', defaultValue: '!' },
+          { kind: 'text', key: 'a.b.c', defaultValue: 'hello' },
+          { kind: 'text', key: 'a.b.d', defaultValue: 'world' },
+          { kind: 'text', key: 'a.b.e.f', defaultValue: '!' },
         ], {});
 
         expect(form.value).toEqual({
@@ -224,7 +224,7 @@ describe('form.utils', () => {
         const form = util.createFormArray({
           kind: 'array',
           schemas: [
-            { kind: 'input' }
+            { kind: 'text' }
           ]
         }, []);
 
@@ -244,7 +244,7 @@ describe('form.utils', () => {
         const form = util.createFormArray({
           kind: 'array',
           schemas: [
-            { kind: 'input' }
+            { kind: 'text' }
           ]
         }, ['hello', 'world']);
 
@@ -258,7 +258,7 @@ describe('form.utils', () => {
             {
               kind: 'input-group',
               schemas: [
-                { kind: 'input' }
+                { kind: 'text' }
               ]
             }
           ]
@@ -271,7 +271,7 @@ describe('form.utils', () => {
         const form = util.createFormArray({
           kind: 'array',
           schemas: [
-            { kind: 'input' },
+            { kind: 'text' },
             { kind: 'button' }
           ]
         }, ['hello', 'world']);
@@ -283,7 +283,7 @@ describe('form.utils', () => {
         const form = util.createFormArray({
           kind: 'array',
           schemas: [
-            { kind: 'input' },
+            { kind: 'text' },
             {
               kind: 'button-group',
               schemas: [
@@ -303,7 +303,7 @@ describe('form.utils', () => {
             {
               kind: 'row',
               schemas: [
-                { kind: 'input' }
+                { kind: 'text' }
               ]
             }
           ]
@@ -319,7 +319,7 @@ describe('form.utils', () => {
             {
               kind: 'group',
               schemas: [
-                { kind: 'input', key: 'input' }
+                { kind: 'text', key: 'input' }
               ]
             }
           ]
@@ -335,7 +335,7 @@ describe('form.utils', () => {
             {
               kind: 'array',
               schemas: [
-                { kind: 'input' }
+                { kind: 'text' }
               ]
             }
           ]
@@ -347,7 +347,7 @@ describe('form.utils', () => {
 
     describe('createAnyControl', () => {
       it('normal', () => {
-        const schema: Indexable<AbstractSchema> = { kind: 'input', key: 'input' };
+        const schema: Indexable<AbstractSchema> = { kind: 'text', key: 'input' };
         const control = util.createAnyControl(schema, {});
         expect(control.value).toEqual(null);
       });
@@ -357,7 +357,7 @@ describe('form.utils', () => {
           kind: 'group',
           key: 'group',
           schemas: [
-            { kind: 'input', key: 'input' }
+            { kind: 'text', key: 'input' }
           ]
         };
         const control = util.createAnyControl(schema, {});
@@ -369,7 +369,7 @@ describe('form.utils', () => {
           kind: 'array',
           key: 'array',
           schemas: [
-            { kind: 'input' }
+            { kind: 'text' }
           ]
         };
         const control = util.createAnyControl(schema, {});
@@ -380,7 +380,7 @@ describe('form.utils', () => {
     describe('updateModel', () => {
       it('with control', () => {
         const schemas: Indexable<AbstractSchema>[] = [
-          { kind: 'input', key: 'txt', defaultValue: '1' }
+          { kind: 'text', key: 'txt', defaultValue: '1' }
         ];
         const form = util.createFormGroup(schemas, {});
 
@@ -431,7 +431,7 @@ describe('form.utils', () => {
             kind: 'group',
             key: 'obj',
             schemas: [
-              { kind: 'input', key: 'txt', defaultValue: '1' }
+              { kind: 'text', key: 'txt', defaultValue: '1' }
             ]
           }
         ];
@@ -446,7 +446,7 @@ describe('form.utils', () => {
             kind: 'array',
             key: 'array',
             schemas: [
-              { kind: 'input' }
+              { kind: 'text' }
             ]
           }
         ];
@@ -457,9 +457,9 @@ describe('form.utils', () => {
 
       it('with path key schema', () => {
         const schemas: Indexable<AbstractSchema>[] = [
-          { kind: 'input', key: 'a.b.c', defaultValue: 'hello' },
-          { kind: 'input', key: 'a.b.d', defaultValue: 'world' },
-          { kind: 'input', key: 'a.b.e.f', defaultValue: '!' },
+          { kind: 'text', key: 'a.b.c', defaultValue: 'hello' },
+          { kind: 'text', key: 'a.b.d', defaultValue: 'world' },
+          { kind: 'text', key: 'a.b.e.f', defaultValue: '!' },
         ];
         const form = util.createFormGroup(schemas, {});
 
@@ -479,7 +479,7 @@ describe('form.utils', () => {
       describe('disbaled', () => {
         it('normal', () => {
           const schemas: Indexable<AbstractSchema>[] = [
-            { kind: 'input', key: 'txt', disabled: (ctx: SafeAny) => ctx.model.txt },
+            { kind: 'text', key: 'txt', disabled: (ctx: SafeAny) => ctx.model.txt },
           ];
           const form = util.createFormGroup(schemas, {});
 
@@ -493,7 +493,7 @@ describe('form.utils', () => {
         it('with component', () => {
           const schemas: Indexable<AbstractSchema>[] = [
             { kind: 'button' },
-            { kind: 'input', key: 'txt', disabled: (ctx: SafeAny) => ctx.model.txt },
+            { kind: 'text', key: 'txt', disabled: (ctx: SafeAny) => ctx.model.txt },
           ];
           const form = util.createFormGroup(schemas, {});
 
@@ -507,7 +507,7 @@ describe('form.utils', () => {
               kind: 'group',
               key: 'obj',
               schemas: [
-                { kind: 'input', key: 'txt', disabled: (ctx: SafeAny) => ctx.model.txt },
+                { kind: 'text', key: 'txt', disabled: (ctx: SafeAny) => ctx.model.txt },
               ]
             }
           ];
@@ -523,7 +523,7 @@ describe('form.utils', () => {
               kind: 'array',
               key: 'arr',
               schemas: [
-                { kind: 'input', key: 0, disabled: (ctx: SafeAny) => ctx.model[0] },
+                { kind: 'text', key: 0, disabled: (ctx: SafeAny) => ctx.model[0] },
               ]
             }
           ];
@@ -538,7 +538,7 @@ describe('form.utils', () => {
         it('normal', () => {
           const schemas: Indexable<AbstractSchema>[] = [
             { kind: 'toggle', key: 'required' },
-            { kind: 'input', key: 'text', required: (ctx: SafeAny) => ctx.model.required },
+            { kind: 'text', key: 'text', required: (ctx: SafeAny) => ctx.model.required },
           ];
           const form = util.createFormGroup(schemas, {});
 
@@ -556,7 +556,7 @@ describe('form.utils', () => {
         it('with component', () => {
           const schemas: Indexable<AbstractSchema>[] = [
             { kind: 'button' },
-            { kind: 'input', key: 'txt', required: (ctx: SafeAny) => ctx.model.txt },
+            { kind: 'text', key: 'txt', required: (ctx: SafeAny) => ctx.model.txt },
           ];
           const form = util.createFormGroup(schemas, {});
 
@@ -571,7 +571,7 @@ describe('form.utils', () => {
               key: 'obj',
               schemas: [
                 { kind: 'toggle', key: 'required' },
-                { kind: 'input', key: 'text', required: (ctx: SafeAny) => ctx.model.required },
+                { kind: 'text', key: 'text', required: (ctx: SafeAny) => ctx.model.required },
               ]
             }
           ];
@@ -594,7 +594,7 @@ describe('form.utils', () => {
               kind: 'array',
               key: 'arr',
               schemas: [
-                { kind: 'input', key: 0, required: (ctx: SafeAny) => ctx.model[0] },
+                { kind: 'text', key: 0, required: (ctx: SafeAny) => ctx.model[0] },
               ]
             }
           ];
@@ -609,12 +609,12 @@ describe('form.utils', () => {
 
   it('getChildControl', () => {
     const group = util.createFormGroup([
-      { kind: 'input', key: 'input' }
+      { kind: 'text', key: 'input' }
     ], {});
     const array = util.createFormArray({
       kind: 'array',
       schemas: [
-        { kind: 'input' }
+        { kind: 'text' }
       ]
     }, ['str']);
 

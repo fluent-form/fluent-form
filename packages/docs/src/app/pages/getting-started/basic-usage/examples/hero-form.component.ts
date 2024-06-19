@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { headless, input, number, rate, textarea, toggle } from '@fluent-form/ui-zorro';
+import { headless, number, rate, text, textarea, toggle } from '@fluent-form/ui-zorro';
 
 interface Hero {
   id: number;
@@ -29,7 +29,7 @@ interface Hero {
 export class HeroFormExampleComponent {
   schema = form(() => {
     headless('id');
-    input('name').label('名称').required(true);
+    text('name').label('名称').required(true);
     textarea('power').label('能力').required(true);
     number('height').label('身高');
     rate('popularity').label('声望');

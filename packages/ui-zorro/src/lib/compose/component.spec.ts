@@ -1,5 +1,5 @@
 import { form } from '@fluent-form/core';
-import { alert, button, heading1, heading2, heading3, heading4, heading5, heading6, template, text } from './component';
+import { alert, button, heading1, heading2, heading3, heading4, heading5, heading6, template } from './component';
 
 describe('component', () => {
   it('template', () => {
@@ -8,15 +8,6 @@ describe('component', () => {
     });
     expect(schemas).toEqual([
       { kind: 'template', key: 'named' }
-    ]);
-  });
-
-  it('text', () => {
-    const { schemas } = form(() => {
-      text().content('');
-    });
-    expect(schemas).toEqual([
-      { kind: 'text', content: '' }
     ]);
   });
 

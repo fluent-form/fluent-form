@@ -10,7 +10,7 @@
 
 一个自动补充输入框的 `placeholder` 占位提示的例子。
 
-我们定义了两个图示修补器，分别对 `input` 与 `number` 图示进行修补。
+我们定义了两个图示修补器，分别对 `text` 与 `number` 图示进行修补。
 
 ```ts
 import { provideFluentForm, withSchemaPatchers } from '@fluent-form/core';
@@ -19,7 +19,7 @@ provideFluentForm(
   ...
   withSchemaPatchers([
     {
-      selector: 'input',
+      selector: 'text',
       patch: schema => {
         const label = schema.label || '文本';
         schema.placeholder ||= `请输入${label}`;
@@ -53,7 +53,7 @@ interface SchemaPatcher<S extends AbstractSchema = AbstractSchema> {
 使用 `selector` 字段定义要选择的图示，支持多种选择规则：
 
 - 使用 `*` 通配符选择任意图示。
-- 使用图示名称（schema.kind）选择具体的图示，例如 `input`、`number`。
+- 使用图示名称（schema.kind）选择具体的图示，例如 `text`、`number`。
 - 使用图示类型枚举选择某一类型的图示，例如 `SchemaType.Control`、`SchemaType.Component`。
 - 还可以使用数组组合多种选择规则以灵活匹配图示。
 
@@ -68,15 +68,15 @@ import { SchemaType } from '@fluent-form/core';
   patch: schema => schema
 }
 
-// 选择 input 图示
+// 选择 text 图示
 {
-  selector: 'input',
+  selector: 'text',
   patch: schema => schema
 }
 
-// 选择 input 与 number 图示
+// 选择 text 与 number 图示
 {
-  selector: ['input', 'number'],
+  selector: ['text', 'number'],
   patch: schema => schema
 }
 

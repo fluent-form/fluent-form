@@ -1,5 +1,5 @@
 import { form } from '@fluent-form/core';
-import { cascader, checkbox, checkboxGroup, date, dateRange, datetime, headless, input, number, password, radioGroup, rate, select, slider, textarea, time, toggle, treeSelect } from './control';
+import { cascader, checkbox, checkboxGroup, date, dateRange, datetime, headless, number, password, radioGroup, rate, select, slider, text, textarea, time, toggle, treeSelect } from './control';
 
 describe('control', () => {
   it('headless', () => {
@@ -7,14 +7,14 @@ describe('control', () => {
     expect(schemas).toEqual([{ kind: 'headless', key: 'headless' }]);
   });
 
-  it('input', () => {
-    const { schemas } = form(() => input('input'));
-    expect(schemas).toEqual([{ kind: 'input', key: 'input' }]);
+  it('text', () => {
+    const { schemas } = form(() => text('txt'));
+    expect(schemas).toEqual([{ kind: 'text', key: 'txt' }]);
   });
 
   it('password', () => {
     const { schemas } = form(() => password('password'));
-    expect(schemas).toEqual([{ kind: 'input', key: 'password', type: 'password' }]);
+    expect(schemas).toEqual([{ kind: 'text', key: 'password', type: 'password' }]);
   });
 
   it('textarea', () => {

@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { button, input, number, numberGroup } from '@fluent-form/ui-zorro';
+import { button, number, numberGroup, text } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'number-group-example',
@@ -20,7 +20,7 @@ export class NumberGroupExampleComponent {
     });
     numberGroup().label('数值与文本').col(4).schemas(() => {
       number('num3').placeholder('请输入数字').col(6);
-      input('text').placeholder('请输入文本').col(6);
+      text('text').placeholder('请输入文本').col(6);
     });
     numberGroup().label('输入框与按钮').col(4).schemas(() => {
       number('num4').placeholder('请输入数字').col({ flex: 'auto' });

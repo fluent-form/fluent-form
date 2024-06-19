@@ -35,7 +35,7 @@ describe('NestedFormWidget', () => {
     component['push'](formArray, {
       kind: 'array',
       schemas: [
-        { kind: 'input' }
+        { kind: 'text' }
       ]
     });
 

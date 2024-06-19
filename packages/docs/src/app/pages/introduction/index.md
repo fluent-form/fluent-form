@@ -25,7 +25,7 @@
 
 ```ts
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { button, number, input } from '@fluent-form/ui-zorro';
+import { button, number, text } from '@fluent-form/ui-zorro';
 
 @Component({
   standalone: true,
@@ -34,7 +34,7 @@ import { button, number, input } from '@fluent-form/ui-zorro';
 })
 export class ExampleComponent {
   schema = form(() => {
-    input('text');
+    text('text');
     number('count');
     button().content('submit');
   });

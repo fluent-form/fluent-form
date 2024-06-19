@@ -1,13 +1,13 @@
 import { form } from '@fluent-form/core';
 import { step, steps, tab, tabs } from './component-container';
-import { input } from './control';
+import { text } from './control';
 
 describe('component-container', () => {
   it('steps', () => {
     const { schemas } = form(() => {
       steps().schemas(() => {
         step().title('title').schemas(() => {
-          input('ipt');
+          text('ipt');
         });
       });
     });
@@ -18,7 +18,7 @@ describe('component-container', () => {
           kind: 'step',
           title: 'title',
           schemas: [
-            { kind: 'input', key: 'ipt' }
+            { kind: 'text', key: 'ipt' }
           ]
         }
       ]
@@ -29,7 +29,7 @@ describe('component-container', () => {
     const { schemas } = form(() => {
       tabs().schemas(() => {
         tab().title('title').schemas(() => {
-          input('ipt');
+          text('ipt');
         });
       });
     });
@@ -40,7 +40,7 @@ describe('component-container', () => {
           kind: 'tab',
           title: 'title',
           schemas: [
-            { kind: 'input', key: 'ipt' }
+            { kind: 'text', key: 'ipt' }
           ]
         }
       ]

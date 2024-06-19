@@ -21,7 +21,7 @@ describe('FluentControlPipe', () => {
 
     pipe = TestBed.inject(FluentControlPipe);
     formGroup = TestBed.inject(FormUtil).createFormGroup([
-      { kind: 'input', key: 'a' },
+      { kind: 'text', key: 'a' },
       { kind: 'range', key: ['b', 'c'] }
     ], {});
   });

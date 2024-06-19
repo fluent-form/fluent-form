@@ -24,7 +24,7 @@ describe('FluentSchemaPipe', () => {
   });
 
   it('should be can find schema by key', () => {
-    const schema = form([{ kind: 'input', key: 'text' }]);
+    const schema = form([{ kind: 'text', key: 'text' }]);
     expect(pipe.transform('text', schema)).toBe(schema.schemas[0]);
   });
 });

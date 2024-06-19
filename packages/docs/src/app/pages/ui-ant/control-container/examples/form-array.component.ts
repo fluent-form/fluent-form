@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { array, button, datetime, input } from '@fluent-form/ui-zorro';
+import { array, button, datetime, text } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'form-array-example',
@@ -14,7 +14,7 @@ import { array, button, datetime, input } from '@fluent-form/ui-zorro';
 })
 export class FormArrayExampleComponent {
   schema = form(() => {
-    input('flight').label('航班').col(12);
+    text('flight').label('航班').col(12);
     datetime('boardingTime').label('登机时间').col(12);
 
     array('passengers')
@@ -23,7 +23,7 @@ export class FormArrayExampleComponent {
       .orderable(true)
       .col(12)
       .schemas(() => {
-        input().placeholder('请输入姓名').col(12);
+        text().placeholder('请输入姓名').col(12);
       });
 
     button().content('提交').type('primary').col(12).variants({ block: true });

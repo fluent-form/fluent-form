@@ -81,9 +81,9 @@ export interface HeadlessControlSchema<Key extends SingleSchemaKey = SingleSchem
 /**
  * @public
  */
-export interface InputControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = string>
+export interface TextControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = string>
   extends AbstractTextControlSchema<Key>, ElementControlEventListenerHolder<Val>, ElementPropertyHolder<HTMLInputElement> {
-  kind: 'input';
+  kind: 'text';
   /* A type of input. */
   type?: 'text' | 'number' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
 }

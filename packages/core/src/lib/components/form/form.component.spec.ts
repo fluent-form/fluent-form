@@ -6,7 +6,7 @@ import { form } from '../../compose';
 import { provideFluentForm } from '../../provider';
 import { AbstractFormGroupSchema } from '../../schemas';
 import { runMicrotask } from '../../shared';
-import { input, withTesting } from '../../testing';
+import { text, withTesting } from '../../testing';
 import { FluentFormComponent } from './form.component';
 
 @Component({
@@ -45,7 +45,7 @@ describe('FluentFormComponent', () => {
 
   describe('模型应该能正确赋值表单', () => {
     it('先设置 schema，后设置 model', () => {
-      component.schema = form(() => input('text'));
+      component.schema = form(() => text('text'));
       component.model = { text: 'test' };
       fixture.detectChanges();
 
@@ -54,14 +54,14 @@ describe('FluentFormComponent', () => {
 
     it('先设置 model，后设置 schema', () => {
       component.model = { text: 'test' };
-      component.schema = form(() => input('text'));
+      component.schema = form(() => text('text'));
       fixture.detectChanges();
 
       expect(component.form.value).toEqual({ text: 'test' });
     });
 
     it('多次设置 model', async () => {
-      component.schema = form(() => input('text'));
+      component.schema = form(() => text('text'));
       component.model = { text: 'test' };
       fixture.detectChanges();
 
@@ -81,7 +81,7 @@ describe('FluentFormComponent', () => {
   describe('表单应该能正确赋值模型', () => {
     it('先设置 schema，后设置 model', async () => {
       component.schema = form(() => {
-        input('text').col(1).defaultValue('test');
+        text('text').col(1).defaultValue('test');
       });
       component.model = {};
       fixture.detectChanges();
@@ -94,7 +94,7 @@ describe('FluentFormComponent', () => {
     it('先设置 model，后设置 schema', async () => {
       component.model = {};
       component.schema = form(() => {
-        input('text').col(1).defaultValue('test');
+        text('text').col(1).defaultValue('test');
       });
       fixture.detectChanges();
 
@@ -106,7 +106,7 @@ describe('FluentFormComponent', () => {
     it('多次设置 schema', async () => {
       component.model = {};
       component.schema = form(() => {
-        input('text').col(1).defaultValue('test');
+        text('text').col(1).defaultValue('test');
       });
       fixture.detectChanges();
 
@@ -115,7 +115,7 @@ describe('FluentFormComponent', () => {
       });
 
       component.schema = form(() => {
-        input('text').col(1).defaultValue('test change');
+        text('text').col(1).defaultValue('test change');
       });
       fixture.detectChanges();
 
@@ -127,9 +127,9 @@ describe('FluentFormComponent', () => {
 
   it('应该能正确处理控件的 disabled 选项', async () => {
     component.schema = form(() => {
-      input('a').disabled('{{true}}' as SafeAny);
-      input('b').disabled(() => true);
-      input('c').disabled(true);
+      text('a').disabled('{{true}}' as SafeAny);
+      text('b').disabled(() => true);
+      text('c').disabled(true);
     });
     component.model = {};
     fixture.detectChanges();

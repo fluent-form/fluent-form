@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormModule, form } from '@fluent-form/core';
-import { input, inputGroup } from '@fluent-form/ui-zorro';
+import { inputGroup, text } from '@fluent-form/ui-zorro';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 @Component({
@@ -17,7 +17,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 export class NamedemplateExampleComponent {
   schema = form(() => {
     inputGroup().before('Https://').after('#tld').schemas(() => {
-      input('text').col(12);
+      text('text').col(12);
     });
   });
 

@@ -57,10 +57,10 @@ Fluent API 是一种可组合的、有限链式调用的 Builder-like API。它�
 
 ```ts
 import { form } from '@fluent-form/core';
-import { buttonGroup, button, input } from '@fluent-form/ui-zorro';
+import { buttonGroup, button, text } from '@fluent-form/ui-zorro';
 
 const schema = form(() => {
-  input('text').label('文本').placeholder('请输入');
+  text('text').label('文本').placeholder('请输入');
 
   buttonGroup().schemas(() => {
     button().content('提交');
@@ -77,7 +77,7 @@ import { form } from '@fluent-form/core';
 
 const schema = form([
   {
-    kind: 'input',
+    kind: 'text',
     key: 'text',
     label: '文本',
     placeholder: '请输入'
@@ -146,11 +146,11 @@ interface Hero {
 
 ```ts
 import { form } from '@fluent-form/core';
-import { input, number, rate, textarea, toggle } from '@fluent-form/ui-zorro';
+import { text, number, rate, textarea, toggle } from '@fluent-form/ui-zorro';
 
 const schema = form(() => {
   number('id').label('ID').required(true);
-  input('name').label('名称').required(true);
+  text('name').label('名称').required(true);
   textarea('power').label('能力').required(true);
   number('height').label('身高');
   rate('popularity').label('声望');

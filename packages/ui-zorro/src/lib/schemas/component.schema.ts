@@ -2,7 +2,6 @@ import { TemplateRef } from '@angular/core';
 import { AbstractComponentSchema, AbstractSchema, ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, MaybeSchemaReactiveFn, PropertyHolder, SingleSchemaKey } from '@fluent-form/core';
 import { NzAlertComponent } from 'ng-zorro-antd/alert';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
-import { NzFormTextComponent } from 'ng-zorro-antd/form';
 import { Icon, Labelful } from './interfaces';
 
 /**
@@ -10,15 +9,6 @@ import { Icon, Labelful } from './interfaces';
  */
 export interface TemplateSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractComponentSchema<Key>, Labelful, PropertyHolder {
   kind: 'template';
-}
-
-/**
- * @public
- */
-export interface TextComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractComponentSchema<Key>, Labelful, ComponentEventListenerHolder<NzFormTextComponent>, ComponentPropertyHolder<NzFormTextComponent> {
-  kind: 'text';
-  content: string | TemplateRef<void>;
 }
 
 /**

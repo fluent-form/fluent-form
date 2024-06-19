@@ -1,18 +1,18 @@
 import { form } from '@fluent-form/core';
-import { input, number } from './control';
+import { number, text } from './control';
 import { inputGroup, numberGroup } from './control-wrapper';
 
 describe('control-wrapper', () => {
   it('inputGroup', () => {
     const { schemas } = form(() => {
       inputGroup().schemas(() => {
-        input();
+        text();
       });
     });
     expect(schemas).toEqual([{
       kind: 'input-group',
       schemas: [
-        { kind: 'input' }
+        { kind: 'text' }
       ]
     }]);
   });

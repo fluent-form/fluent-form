@@ -1,13 +1,9 @@
 import { SingleSchemaKey, UnstableBuilder, composeBuilder } from '@fluent-form/core';
-import { AlertComponentSchema, ButtonComponentSchema, HeadingComponentSchema, TemplateSchema, TextComponentSchema } from '../schemas';
+import { AlertComponentSchema, ButtonComponentSchema, HeadingComponentSchema, TemplateSchema } from '../schemas';
 import { KindOrKey } from './helper';
 
 export function template<Key extends SingleSchemaKey>(key: Key): UnstableBuilder<TemplateSchema<Key>, KindOrKey> {
   return composeBuilder<TemplateSchema<Key>>().kind('template').key(key);
-}
-
-export function text<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<TextComponentSchema<Key>, KindOrKey> {
-  return composeBuilder<TextComponentSchema<Key>>().kind('text').key(key);
 }
 
 export function button<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<ButtonComponentSchema<Key>, KindOrKey> {

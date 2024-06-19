@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { input } from '@fluent-form/ui-zorro';
+import { text } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'control-hint-example',
@@ -14,7 +14,7 @@ import { input } from '@fluent-form/ui-zorro';
 })
 export class ControlHintExampleComponent {
   schema = form(() => {
-    input('text').label('控件标签').hint('这是一段控件提示');
+    text('text').label('控件标签').hint('这是一段控件提示');
   });
 
   model = {};

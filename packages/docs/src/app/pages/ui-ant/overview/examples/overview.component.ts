@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form, row } from '@fluent-form/core';
-import { alert, button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, heading4, headless, input, inputGroup, number, numberGroup, radioGroup, rate, select, slider, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from '@fluent-form/ui-zorro';
+import { alert, button, buttonGroup, cascader, checkbox, checkboxGroup, date, dateRange, datetime, heading4, headless, inputGroup, number, numberGroup, radioGroup, rate, select, slider, step, steps, tab, tabs, text, textarea, time, toggle, treeSelect } from '@fluent-form/ui-zorro';
 import { map, switchMap, timer } from 'rxjs';
 import { CASCADER_OPTIONS, CHECKBOX_OPTIONS, CITIES_OPTIONS, PROVINCES_OPTIONS, RADIO_OPTIONS, SCENICSPOTS_OPTIONS, SELECT_OPTIONS, TREE_SELECT_OPTIONS } from './options';
 
@@ -20,7 +20,7 @@ export class OverviewExampleComponent {
       heading4().content('基本示例');
     }
     headless('headless');
-    input('text')
+    text('text')
       .label('文本输入框')
       .tooltip('小贴士')
       .col(4)
@@ -30,19 +30,19 @@ export class OverviewExampleComponent {
       return false;
     });
     inputGroup().label('姓与名称').col(4).schemas(() => {
-      input('first').placeholder('姓').col(4);
-      input('last').placeholder('名').col(8);
+      text('first').placeholder('姓').col(4);
+      text('last').placeholder('名').col(8);
     });
     numberGroup().label('数字输入组').col(4).schemas(() => {
       number('minNum').placeholder('最小').col(6);
       number('maxNum').placeholder('最大').col(6);
     });
     numberGroup().label('数字混合输入组').col(4).schemas(() => {
-      input('txt').placeholder('文本').col(6);
+      text('txt').placeholder('文本').col(6);
       number('num').placeholder('数字').col(6);
     });
     inputGroup().label('输入框与按钮').col(4).schemas(() => {
-      input('text').placeholder('输入关键字').col({ flex: 'auto' });
+      text('text').placeholder('输入关键字').col({ flex: 'auto' });
       button().type('primary').content('搜索').variants({ ghost: true });
     });
     textarea('textarea').label('文本框').col(12);
@@ -88,7 +88,6 @@ export class OverviewExampleComponent {
     treeSelect('treeSelect').label('树形选择器').options(TREE_SELECT_OPTIONS).expandedKeys(['100', '1001']).col(3);
     rate('rate').label('评分').defaultValue(2.5).col(6);
     slider('slider').label('滑动条').defaultValue(30).col(6);
-    text().content('文本');
     button().type('primary').content('普通按钮');
     button().type('primary').content('带图标的按钮').icon('check');
     button().content('危险按钮').variants({ danger: true });
@@ -102,25 +101,25 @@ export class OverviewExampleComponent {
     alert().message('Alert info text').icon(true).variants({ banner: true });
     steps().col(12).active(0).schemas(() => {
       step().title('第一步').schemas(() => {
-        input('text1InStep1').label('文本输入框').placeholder('第一步的输入框');
-        input('text2InStep1').label('文本输入框').placeholder('第一步的输入框');
+        text('text1InStep1').label('文本输入框').placeholder('第一步的输入框');
+        text('text2InStep1').label('文本输入框').placeholder('第一步的输入框');
       });
       step().title('第二步').schemas(() => {
-        input('textInStep2').label('文本输入框').placeholder('第二步的输入框');
+        text('textInStep2').label('文本输入框').placeholder('第二步的输入框');
       });
       step().title('第三步').schemas(() => {
-        input('textInStep3').label('文本输入框').placeholder('第三步的输入框');
+        text('textInStep3').label('文本输入框').placeholder('第三步的输入框');
       });
     });
     tabs().col(12).schemas(() => {
       tab().title('账号').schemas(() => {
-        input('textInTab1').label('账号');
+        text('textInTab1').label('账号');
       });
       tab().title('手机号').schemas(() => {
-        input('textInTab2').label('手机号');
+        text('textInTab2').label('手机号');
       });
       tab().title('禁用').disabled(true).schemas(() => {
-        input('textInTab3');
+        text('textInTab3');
       });
     });
     row().col(12).justify('space-between').schemas(() => {

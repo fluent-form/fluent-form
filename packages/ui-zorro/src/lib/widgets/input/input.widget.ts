@@ -4,9 +4,9 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, InvokePipe, Length, WidgetTemplateContext, isNumber } from '@fluent-form/core';
 import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { InputControlSchema } from '../../schemas';
+import { TextControlSchema } from '../../schemas';
 
-type InputWidgetTemplateContext = WidgetTemplateContext<InputControlSchema, FormControl<string>>;
+type InputWidgetTemplateContext = WidgetTemplateContext<TextControlSchema, FormControl<string>>;
 
 /**
  * @internal

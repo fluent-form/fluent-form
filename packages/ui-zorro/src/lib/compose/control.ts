@@ -1,21 +1,21 @@
 import { SchemaKey, SingleSchemaKey, UnstableBuilder, composeBuilder } from '@fluent-form/core';
-import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, HeadlessControlSchema, InputControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, HeadlessControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { KindOrKey } from './helper';
 
 export function headless<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<HeadlessControlSchema<Key>, KindOrKey> {
   return composeBuilder<HeadlessControlSchema<Key>>().kind('headless').key(key);
 }
 
-export function input(): UnstableBuilder<InputControlSchema<number>, KindOrKey>;
-export function input<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<InputControlSchema<Key>, KindOrKey>;
-export function input<Key extends SingleSchemaKey>(key?: Key) {
-  return composeBuilder<InputControlSchema<Key>>().kind('input').key(key);
+export function text(): UnstableBuilder<TextControlSchema<number>, KindOrKey>;
+export function text<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<TextControlSchema<Key>, KindOrKey>;
+export function text<Key extends SingleSchemaKey>(key?: Key) {
+  return composeBuilder<TextControlSchema<Key>>().kind('text').key(key);
 }
 
-export function password(): UnstableBuilder<InputControlSchema<number>, KindOrKeyOrType>;
-export function password<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<InputControlSchema<Key>, KindOrKeyOrType>;
+export function password(): UnstableBuilder<TextControlSchema<number>, KindOrKeyOrType>;
+export function password<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<TextControlSchema<Key>, KindOrKeyOrType>;
 export function password<Key extends SingleSchemaKey>(key?: Key) {
-  return input(key).type('password');
+  return text(key).type('password');
 }
 
 export function textarea(): UnstableBuilder<TextareaControlSchema<number>, KindOrKey>;

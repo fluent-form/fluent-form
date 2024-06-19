@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormLayoutModule, form } from '@fluent-form/core';
-import { date, group, input, inputGroup, slider, toggle } from '@fluent-form/ui-zorro';
+import { date, group, inputGroup, slider, text, toggle } from '@fluent-form/ui-zorro';
 import { NzTableModule } from 'ng-zorro-antd/table';
 
 @Component({
@@ -13,8 +13,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 export class CustomLayoutExampleComponent {
   schema = form(() => {
     inputGroup('name').schemas(() => {
-      input('firstName').col(6);
-      input('lastName').col(6);
+      text('firstName').col(6);
+      text('lastName').col(6);
     });
     slider('age').style({ width: '120px' });
     group('info').schemas(() => {

@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { provideFluentForm } from '../provider';
-import { InputControlSchema, withTesting } from '../testing';
+import { TextControlSchema, withTesting } from '../testing';
 import { RangeComponent } from '../testing/components';
 import { FormUtil } from '../utils';
 import { FluentBindingDirective } from './binding.directive';
@@ -34,8 +34,8 @@ const inputChangeFn = jest.fn();
 class TestingComponent {
   readonly formUtil = inject(FormUtil);
 
-  inputSchema: InputControlSchema = {
-    kind: 'input',
+  inputSchema: TextControlSchema = {
+    kind: 'text',
     key: 'ipt',
     properties: {
       readOnly: true

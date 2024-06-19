@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { input } from '@fluent-form/ui-zorro';
+import { text } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'control-disabled-example',
@@ -14,11 +14,11 @@ import { input } from '@fluent-form/ui-zorro';
 })
 export class ControlDisabledExampleComponent {
   schema = form(() => {
-    input('text-1').disabled(true);
-    input('text-2').disabled(() => true);
+    text('text-1').disabled(true);
+    text('text-2').disabled(() => true);
 
-    input('text-3').disabled(true).hidden(true);
-    input('text-4').disabled(true).hidden(({ control }) => control.disabled);
+    text('text-3').disabled(true).hidden(true);
+    text('text-4').disabled(true).hidden(({ control }) => control.disabled);
   });
 
   model = {};

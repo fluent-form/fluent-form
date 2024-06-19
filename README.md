@@ -1,6 +1,6 @@
 <div align="center">
   <h1>
-    <img src="./logo/outline.png" height="60" />
+    <img src="./logo/outline.png" height="65" />
   </h1>
 
   An Angular dynamic forms library powered by Fluent API and JSON.

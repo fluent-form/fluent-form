@@ -17,7 +17,6 @@ export interface InputGroupComponentSchema<Key extends SingleSchemaKey = SingleS
   suffix?: MaybeSchemaReactiveFn<InputGroupComponentSchema, string | TemplateRef<void> | { icon: string } | null>;
   size?: NzSizeLDSType;
   primary?: SchemaKey;
-  compact?: boolean;
 }
 
 /**
@@ -32,5 +31,4 @@ export interface NumberGroupComponentSchema<Key extends SingleSchemaKey = Single
   suffix?: MaybeSchemaReactiveFn<NumberGroupComponentSchema, string | TemplateRef<void> | { icon: string } | null>;
   size?: NzSizeLDSType;
   primary?: SchemaKey;
-  compact?: boolean;
 }

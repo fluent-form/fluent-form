@@ -44,8 +44,8 @@
 - 使用 `validators`、`asyncValidators` 选项来添加额外的验证器。
 - 使用 `feedback` 选项来开启验证状态图标。
 - 使用 `tips` 选项来设置验证提示，支持设置五种提示，分别有：`success` 、`warning`、`error`、`validating`、[`auto`](https://ng.ant.design/components/form/zh#components-form-demo-auto-tips)。
-- 使用 `length` 选项来设置 `input()` 和 `textarea()` 控件的输入长度验证。
-- 对于 `type` 为 `email` 的 `input()` 控件，会自动添加邮箱验证。
+- 使用 `length` 选项来设置 `text()` 和 `textarea()` 控件的输入长度验证。
+- 对于 `type` 为 `email` 的 `text()` 控件，会自动添加邮箱验证。
 - 如果控件处在 `input-group()` 中，此时只会显示一个控件的验证状态与提示。默认选用组内的第一个控件，可以使用 `primary` 选项指定其他控件。
 
 {{ NgDocActions.demo("ControlValidationExampleComponent") }}

@@ -6,7 +6,7 @@ import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { TextControlSchema } from '../../schemas';
 
-type InputWidgetTemplateContext = WidgetTemplateContext<TextControlSchema, FormControl<string>>;
+type TextWidgetTemplateContext = WidgetTemplateContext<TextControlSchema, FormControl<string>>;
 
 /**
  * @internal
@@ -26,9 +26,9 @@ type InputWidgetTemplateContext = WidgetTemplateContext<TextControlSchema, FormC
     FluentColumnPipe,
     InvokePipe
   ],
-  templateUrl: './input.widget.html',
+  templateUrl: './text.widget.html',
 })
-export class InputWidget extends AbstractWidget<InputWidgetTemplateContext> {
+export class TextWidget extends AbstractWidget<TextWidgetTemplateContext> {
   protected readonly InputGroup = NzFormNoStatusService;
   protected readonly helper = {
     length: {

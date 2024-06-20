@@ -13,7 +13,6 @@ import { FormArrayWidget } from './form-array/form-array.widget';
 import { FormGroupWidget } from './form-group/form-group.widget';
 import { HeadingWidget } from './heading/heading.widget';
 import { InputGroupWidget } from './input-group/input-group.widget';
-import { InputWidget } from './input/input.widget';
 import { NumberGroupWidget } from './number-group/number-group.widget';
 import { NumberWidget } from './number/number.widget';
 import { RadioGroupWidget } from './radio-group/radio-group.widget';
@@ -23,6 +22,7 @@ import { SilderWidget } from './slider/silder.widget';
 import { StepsWidget } from './steps/steps.widget';
 import { TabsArrayWidget } from './tabs-array/tabs-array.widget';
 import { TabsWidget } from './tabs/tabs.widget';
+import { TextWidget } from './text/text.widget';
 import { TextareaWidget } from './textarea/textarea.widget';
 import { TimeWidget } from './time/time.widget';
 import { ToggleWidget } from './toggle/toggle.widget';
@@ -81,7 +81,7 @@ export function useInputWidget(): FluentFormWidgetConfig<TextControlSchema> {
   return {
     kind: 'text',
     type: SchemaType.Control,
-    widget: InputWidget,
+    widget: TextWidget,
     validators: schema => {
       const validators = validatorsOfTextControl(schema);
 

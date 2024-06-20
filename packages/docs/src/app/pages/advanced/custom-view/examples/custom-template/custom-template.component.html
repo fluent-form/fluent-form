@@ -1,0 +1,20 @@
+<fluent-form [schema]="schema" [(model)]="model">
+  <input
+    *fluentTemplate="'controlTpl'; let control = control"
+    placeholder="一个原生样式的输入框"
+    [formControl]="control" />
+
+  <ng-container *fluentTemplate="'namedTpl1'">
+    <button>click me</button>
+  </ng-container>
+
+  <ng-container *fluentTemplate="'namedTpl2'; schema as schema">
+    <button>{{ schema.kind }}</button>
+  </ng-container>
+
+  <ng-template fluentTemplate="namedTpl3" let-model="model">
+    <button>{{ model | json }}</button>
+  </ng-template>
+</fluent-form>
+
+<pre>{{ model | json }}</pre>

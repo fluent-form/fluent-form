@@ -1,0 +1,102 @@
+{
+  "extends": [
+    "../../.eslintrc.json"
+  ],
+  "ignorePatterns": [
+    "!**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@nx/typescript",
+        "plugin:@nx/angular",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "indent": [
+          "error",
+          2,
+          {
+            "SwitchCase": 1
+          }
+        ],
+        "linebreak-style": [
+          "error",
+          "unix"
+        ],
+        "quotes": [
+          "error",
+          "single",
+          {
+            "avoidEscape": true,
+            "allowTemplateLiterals": true
+          }
+        ],
+        "semi": [
+          "error",
+          "always"
+        ],
+        "prefer-const": "off",
+        "no-multiple-empty-lines": [
+          "error",
+          {
+            "max": 1,
+            "maxEOF": 1,
+            "maxBOF": 0
+          }
+        ],
+        "keyword-spacing": [
+          "error",
+          {
+            "before": true
+          }
+        ],
+        "space-before-blocks": [
+          "error",
+          "always"
+        ],
+        "block-spacing": [
+          "error",
+          "always"
+        ],
+        "object-curly-spacing": [
+          "error",
+          "always"
+        ],
+        "space-infix-ops": "error",
+        "key-spacing": [
+          "error",
+          {
+            "beforeColon": false,
+            "afterColon": true
+          }
+        ],
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "args": "none"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/no-input-rename": "off",
+        "@angular-eslint/no-output-rename": "off",
+        "@angular-eslint/no-host-metadata-property": "off"
+      }
+    }
+  ]
+}

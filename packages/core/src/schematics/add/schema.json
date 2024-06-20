@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "fluent-form-ng-add",
+  "title": "fluent-form ng-add schematic",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "Name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "ui": {
+      "type": "string",
+      "description": "The UI library to be used by fluent-form.",
+      "enum": [
+        "ng-zorro-antd"
+      ],
+      "x-prompt": {
+        "message": "Which UI library do you want to use?",
+        "type": "list",
+        "items": [
+          {
+            "value": "ng-zorro-antd",
+            "label": "ng-zorro-antd - [ https://ng.ant.design ]"
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "project",
+    "ui"
+  ]
+}

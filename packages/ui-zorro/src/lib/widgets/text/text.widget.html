@@ -1,0 +1,45 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <ng-container *fluentInject="InputGroup as inputGroup; optional: true">
+    @if (inputGroup) {
+      @if (!(schema.hidden | reactive: model : schema : control)) {
+        <input
+          fluentCol
+          nz-input
+          [attr.id]="schema.id"
+          [attr.name]="schema.key"
+          [attr.maxlength]="helper.length.max | invoke: schema.length"
+          [attr.minlength]="helper.length.min | invoke: schema.length"
+          [fluentBinding]="{ schema, control, model }"
+          [formControl]="control"
+          [ngClass]="schema.class"
+          [ngStyle]="schema.style"
+          [span]="schema.col | col: 'span'"
+          [flex]="schema.col | col: 'flex'"
+          [offset]="schema.col | col: 'offset'"
+          [placeholder]="schema.placeholder ?? ''"
+          [type]="schema.type ?? 'text'"
+          [autofocus]="schema.autofocus"
+          [readonly]="schema.readonly | reactive: model : schema : control"
+          [nzSize]="schema.size!"
+          [nzBorderless]="schema.borderless" />
+      }
+    } @else {
+      <input
+        nz-input
+        [attr.id]="schema.id"
+        [attr.name]="schema.key"
+        [attr.maxlength]="helper.length.max | invoke: schema.length"
+        [attr.minlength]="helper.length.min | invoke: schema.length"
+        [fluentBinding]="{ schema, control, model }"
+        [ngClass]="schema.class"
+        [ngStyle]="schema.style"
+        [formControl]="control"
+        [placeholder]="schema.placeholder ?? ''"
+        [type]="schema.type ?? 'text'"
+        [autofocus]="schema.autofocus"
+        [readonly]="schema.readonly | reactive: model : schema : control"
+        [nzSize]="schema.size!"
+        [nzBorderless]="schema.borderless" />
+    }
+  </ng-container>
+</ng-template>

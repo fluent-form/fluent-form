@@ -1,0 +1,27 @@
+{
+  "name": "@fluent-form/ui-zorro",
+  "version": "0.0.1",
+  "license": "MIT",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fluent-form/fluent-form.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fluent-form/fluent-form/issues"
+  },
+  "homepage": "https://github.com/fluent-form/fluent-form",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@angular/forms": ">=17.0.0",
+    "@angular/cdk": ">=17.0.0",
+    "@angular/core": ">=17.0.0",
+    "ng-zorro-antd": ">=17.0.0"
+  },
+  "dependencies": {
+    "@fluent-form/core": "0.0.1",
+    "@ngify/types": "~1.5.0"
+  }
+}

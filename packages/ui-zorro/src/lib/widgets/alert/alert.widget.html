@@ -1,0 +1,15 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <nz-alert
+    #component
+    [fluentBinding]="{ component, schema, control, model }"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style"
+    [nzType]="schema.type ?? 'info'"
+    [nzMessage]="schema.message | template"
+    [nzDescription]="(schema.description | template)!"
+    [nzBanner]="schema.variants?.banner"
+    [nzAction]="(schema.action | template)!"
+    [nzCloseable]="!!schema.closeable"
+    [nzIconType]="(helper.icon | invoke: schema.icon)!"
+    [nzShowIcon]="!!schema.icon" />
+</ng-template>

@@ -1,0 +1,30 @@
+<nz-table #table nzSize="middle" [nzData]="list">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Birthday</th>
+      <th>Enabled</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of table.data; track item; let index = $index) {
+      <tr fluent-form [fluentSchema]="schema" [(fluentModel)]="list[index]">
+        <td>
+          <fluent-outlet key="name"></fluent-outlet>
+        </td>
+        <td>
+          <fluent-outlet key="age"></fluent-outlet>
+        </td>
+        <td>
+          <fluent-outlet key="info.birthday"></fluent-outlet>
+        </td>
+        <td>
+          <fluent-outlet key="enabled"></fluent-outlet>
+        </td>
+      </tr>
+    }
+  </tbody>
+</nz-table>
+
+<pre>{{ list | json }}</pre>

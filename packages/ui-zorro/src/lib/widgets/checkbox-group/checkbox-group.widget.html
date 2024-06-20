@@ -1,0 +1,8 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <nz-checkbox-group
+    #component
+    [fluentBinding]="{ component, schema, control, model }"
+    [formControl]="control"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style" />
+</ng-template>

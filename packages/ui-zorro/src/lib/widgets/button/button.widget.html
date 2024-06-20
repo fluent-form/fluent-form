@@ -1,0 +1,94 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  @if (!(schema.hidden | reactive: model : schema : control)) {
+    <ng-container *fluentInject="InputGroup as inputGroup; optional: true">
+      @if (inputGroup) {
+        @if (schema.type === 'link') {
+          <a
+            nz-button
+            fluentCol
+            [disabled]="schema.disabled | reactive: model : schema : control"
+            [fluentBinding]="{ schema, control, model }"
+            [ngClass]="schema.class"
+            [ngStyle]="schema.style"
+            [nzBlock]="schema.variants?.block"
+            [nzDanger]="schema.variants?.danger"
+            [nzGhost]="schema.variants?.ghost"
+            [nzLoading]="schema.loading | reactive: model : schema : control"
+            [nzShape]="schema.variants?.shape!"
+            [nzSize]="schema.size!"
+            [nzType]="schema.type"
+            [span]="schema.col | col: 'span'"
+            [flex]="schema.col | col: 'flex'"
+            [offset]="schema.col | col: 'offset'">
+            <ng-container [ngTemplateOutlet]="buttonContentTemplate" />
+          </a>
+        } @else {
+          <button
+            nz-button
+            fluentCol
+            [attr.type]="schema.mode"
+            [disabled]="schema.disabled | reactive: model : schema : control"
+            [fluentBinding]="{ schema, control, model }"
+            [ngClass]="schema.class"
+            [ngStyle]="schema.style"
+            [nzBlock]="schema.variants?.block"
+            [nzDanger]="schema.variants?.danger"
+            [nzGhost]="schema.variants?.ghost"
+            [nzLoading]="schema.loading | reactive: model : schema : control"
+            [nzShape]="schema.variants?.shape!"
+            [nzSize]="schema.size!"
+            [nzType]="schema.type!"
+            [span]="schema.col | col: 'span'"
+            [flex]="schema.col | col: 'flex'"
+            [offset]="schema.col | col: 'offset'">
+            <ng-container [ngTemplateOutlet]="buttonContentTemplate" />
+          </button>
+        }
+      } @else {
+        @if (schema.type === 'link') {
+          <a
+            nz-button
+            [disabled]="schema.disabled | reactive: model : schema : control"
+            [fluentBinding]="{ schema, control, model }"
+            [ngClass]="schema.class"
+            [ngStyle]="schema.style"
+            [nzBlock]="schema.variants?.block"
+            [nzDanger]="schema.variants?.danger"
+            [nzGhost]="schema.variants?.ghost"
+            [nzLoading]="schema.loading | reactive: model : schema : control"
+            [nzShape]="schema.variants?.shape!"
+            [nzSize]="schema.size!"
+            [nzType]="schema.type">
+            <ng-container [ngTemplateOutlet]="buttonContentTemplate" />
+          </a>
+        } @else {
+          <button
+            nz-button
+            [attr.type]="schema.mode"
+            [disabled]="schema.disabled | reactive: model : schema : control"
+            [fluentBinding]="{ schema, control, model }"
+            [ngClass]="schema.class"
+            [ngStyle]="schema.style"
+            [nzBlock]="schema.variants?.block"
+            [nzDanger]="schema.variants?.danger"
+            [nzGhost]="schema.variants?.ghost"
+            [nzLoading]="schema.loading | reactive: model : schema : control"
+            [nzShape]="schema.variants?.shape!"
+            [nzSize]="schema.size!"
+            [nzType]="schema.type!">
+            <ng-container [ngTemplateOutlet]="buttonContentTemplate" />
+          </button>
+        }
+      }
+    </ng-container>
+  }
+
+  <ng-template #buttonContentTemplate>
+    @if (helper.icon | invoke: schema.icon; as icon) {
+      <span nz-icon [nzTheme]="icon.theme ?? 'outline'" [nzType]="icon.type"></span>
+    }
+    @if (schema.content) {
+      <ng-container *nzStringTemplateOutlet="schema.content | template">{{ schema.content }}</ng-container>
+    }
+  </ng-template>
+</ng-template>

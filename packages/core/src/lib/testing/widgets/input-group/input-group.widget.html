@@ -1,0 +1,14 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <div
+    #component
+    [fluentBinding]="{ component, schema, control, model }"
+    [ngClass]="schema.class"
+    [ngStyle]="schema.style">
+    @for (subschema of schema.schemas; track subschema) {
+      <ng-container
+        fluentWithInjector
+        [ngTemplateOutlet]="subschema | widgetTemplate"
+        [ngTemplateOutletContext]="{ control: subschema.key | control: control, schema: subschema, model: model }" />
+    }
+  </div>
+</ng-template>

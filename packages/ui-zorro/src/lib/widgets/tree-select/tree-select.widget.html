@@ -1,0 +1,59 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <ng-container *fluentInject="InputGroup as inputGroup; optional: true">
+    @if (inputGroup) {
+      @if (!(schema.hidden | reactive: model : schema : control)) {
+        <nz-tree-select
+          #component
+          fluentCol
+          [fluentBinding]="{ component, schema, control, model }"
+          [formControl]="control"
+          [ngClass]="schema.class"
+          [ngStyle]="schema.style"
+          [span]="schema.col | col: 'span'"
+          [flex]="schema.col | col: 'flex'"
+          [offset]="schema.col | col: 'offset'"
+          [nzId]="schema.id!"
+          [nzAllowClear]="schema.clearable ?? true"
+          [nzBackdrop]="schema.backdrop!"
+          [nzShowIcon]="schema.icon"
+          [nzShowSearch]="schema.searchable"
+          [nzSize]="schema.size!"
+          [nzCheckable]="helper.checkable | invoke: schema.checkable"
+          [nzCheckStrictly]="helper.checkStrictly | invoke: schema.checkable"
+          [nzShowExpand]="helper.showExpand | invoke: schema.expandIcon"
+          [nzExpandedIcon]="helper.expandedIcon | invoke: schema.expandIcon"
+          [nzShowLine]="schema.line"
+          [nzAsyncData]="schema.async"
+          [nzNodes]="schema.options | reactive: model : schema : control"
+          [nzPlaceHolder]="schema.placeholder!"
+          [nzDefaultExpandAll]="schema.expandAll"
+          [nzExpandedKeys]="schema.expandedKeys!"
+          [nzMultiple]="schema.multiple" />
+      }
+    } @else {
+      <nz-tree-select
+        #component
+        [fluentBinding]="{ component, schema, control, model }"
+        [formControl]="control"
+        [ngClass]="schema.class"
+        [ngStyle]="schema.style"
+        [nzId]="schema.id!"
+        [nzAllowClear]="schema.clearable ?? true"
+        [nzBackdrop]="schema.backdrop!"
+        [nzShowIcon]="schema.icon"
+        [nzShowSearch]="schema.searchable"
+        [nzSize]="schema.size!"
+        [nzCheckable]="helper.checkable | invoke: schema.checkable"
+        [nzCheckStrictly]="helper.checkStrictly | invoke: schema.checkable"
+        [nzShowExpand]="helper.showExpand | invoke: schema.expandIcon"
+        [nzExpandedIcon]="helper.expandedIcon | invoke: schema.expandIcon"
+        [nzShowLine]="schema.line"
+        [nzAsyncData]="schema.async"
+        [nzNodes]="schema.options | reactive: model : schema : control"
+        [nzPlaceHolder]="schema.placeholder!"
+        [nzDefaultExpandAll]="schema.expandAll"
+        [nzExpandedKeys]="schema.expandedKeys!"
+        [nzMultiple]="schema.multiple" />
+    }
+  </ng-container>
+</ng-template>

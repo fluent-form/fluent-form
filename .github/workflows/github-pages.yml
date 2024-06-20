@@ -19,7 +19,7 @@ concurrency:
 
 env:
   BUILD_PATH: "."
-  DOCS_SITE_PATH: "./dist/docs-site"
+  DOCS_SITE_PATH: "./dist/docs/browser"
 
 jobs:
   build:
@@ -41,7 +41,7 @@ jobs:
         run: npm ci
         working-directory: ${{ env.BUILD_PATH }}
       - name: Build docs
-        run: npm run build:docs
+        run: npx nx build docs
         working-directory: ${{ env.BUILD_PATH }}
       - name: Create 404.html
         run: cp ${{ env.DOCS_SITE_PATH }}/index.html ${{ env.DOCS_SITE_PATH }}/404.html

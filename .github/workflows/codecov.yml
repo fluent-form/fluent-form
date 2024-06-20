@@ -5,6 +5,7 @@ name: Codecov
 
 env:
   NODE_OPTIONS: --max-old-space-size=6144
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 on:
   push:
@@ -33,3 +34,5 @@ jobs:
       - uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/core/clover.xml,./coverage/ui-zorro/clover.xml
+          fail_ci_if_error: true

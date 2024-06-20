@@ -11,7 +11,7 @@ import { RangeWidget } from './range/range.widget';
 
 export function useAllWidgets() {
   return [
-    useInputWidget(),
+    useTextWidget(),
     useRangeWidget(),
     useInputGroupWidget(),
     useButtonWidget(),
@@ -21,7 +21,7 @@ export function useAllWidgets() {
   ];
 }
 
-export function useInputWidget(): FluentFormWidgetConfig<TextControlSchema> {
+export function useTextWidget(): FluentFormWidgetConfig<TextControlSchema> {
   return {
     kind: 'text',
     type: SchemaType.Control,

@@ -26,13 +26,13 @@
 
 ```ts
 import { provideFluentForm } from '@fluent-form/core';
-import { withZorro, useInputWidget, useNumberWidget } from '@fluent-form/ui-zorro';
+import { withZorro, useTextWidget, useNumberWidget } from '@fluent-form/ui-zorro';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideFluentForm(
       withZorro([
-        useInputWidget(),
+        useTextWidget(),
         useNumberWidget(),
         ...
       ])
@@ -43,7 +43,7 @@ export const appConfig: ApplicationConfig = {
 
 在上述代码中，我们使用 `provideFluentForm` 辅助函数来配置 {% include "../../../markdowns/brand.md" %}，然后使用 `withZorro` 函数来注册 UI 库与部件，它接收一个部件数组作为参数。
 
-`useInputWidget` 和 `useNumberWidget` 都是部件工厂函数，它们分别创建一个输入部件和一个数字部件。
+`useTextWidget` 和 `useNumberWidget` 都是部件工厂函数，它们分别创建一个输入部件和一个数字部件。
 
 要查看更多部件，请查阅 [API 文档](/api)。
 

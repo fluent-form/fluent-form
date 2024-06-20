@@ -30,7 +30,7 @@ import { TreeSelectWidget } from './tree-select/tree-select.widget';
 
 export function useAllWidgets() {
   return [
-    useInputWidget(),
+    useTextWidget(),
     useTextareaWidget(),
     useNumberWidget(),
     useDateWidget(),
@@ -77,7 +77,7 @@ function validatorsOfTextControl(schema: TextControlSchema | TextareaControlSche
   return validators;
 }
 
-export function useInputWidget(): FluentFormWidgetConfig<TextControlSchema> {
+export function useTextWidget(): FluentFormWidgetConfig<TextControlSchema> {
   return {
     kind: 'text',
     type: SchemaType.Control,

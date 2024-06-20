@@ -9,12 +9,21 @@
   "targetDefaults": {
     "@nx/angular:package": {
       "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["default", "^default"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "default",
+        "^default"
+      ]
     },
     "@nx/jest:jest": {
       "cache": true,
-      "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],
+      "inputs": [
+        "default",
+        "^default",
+        "{workspaceRoot}/jest.preset.js"
+      ],
       "options": {
         "passWithNoTests": true
       },
@@ -36,8 +45,13 @@
     },
     "@angular-devkit/build-angular:application": {
       "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["default", "^default"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "default",
+        "^default"
+      ]
     }
   },
   "generators": {
@@ -56,14 +70,16 @@
     }
   },
   "release": {
-    "version": {
-      "conventionalCommits": true
-    },
     "changelog": {
       "workspaceChangelog": {
         "createRelease": "github"
       },
       "projectChangelogs": true
+    },
+    "version": {
+      "generatorOptions": {
+        "skipLockFileUpdate": true
+      }
     }
   },
   "nxCloudAccessToken": "ZmI4MGM0NzgtZWMwZi00ODUwLTkwMjEtYTM3MzBlNjJmYjk1fHJlYWQtd3JpdGU=",

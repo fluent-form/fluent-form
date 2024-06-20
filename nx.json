@@ -52,6 +52,11 @@
         "default",
         "^default"
       ]
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/{projectName}"
+      }
     }
   },
   "generators": {
@@ -78,6 +83,7 @@
     },
     "version": {
       "generatorOptions": {
+        "packageRoot": "dist/{projectName}",
         "skipLockFileUpdate": true
       }
     }

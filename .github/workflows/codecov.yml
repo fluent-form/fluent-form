@@ -35,6 +35,4 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/core/clover.xml,./coverage/ui-zorro/clover.xml
-          exclude: ./coverage/docs
           fail_ci_if_error: true
-          verbose: true

@@ -1,6 +1,6 @@
 {
   "name": "@fluent-form/ui-zorro",
-  "version": "0.24.1",
+  "version": "0.24.2",
   "license": "MIT",
   "sideEffects": false,
   "repository": {
@@ -21,7 +21,7 @@
     "ng-zorro-antd": ">=17.0.0"
   },
   "dependencies": {
-    "@fluent-form/core": "0.24.1",
+    "@fluent-form/core": "0.24.2",
     "@ngify/types": "~1.5.0"
   }
 }

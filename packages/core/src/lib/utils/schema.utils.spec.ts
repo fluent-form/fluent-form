@@ -26,24 +26,6 @@ describe('SchemaUtil', () => {
   });
 
   describe('patchSchema', () => {
-    // TODO
-    xdescribe('with internal patcher', () => {
-      it('heading patcher', () => {
-        const schema = { kind: 'heading', level: 1, content: '' };
-        expect(schemaUtil.patch(schema)).toEqual({ kind: 'heading', level: 1, content: '', col: 12 });
-      });
-
-      it('button patcher', () => {
-        const schema = { kind: 'button', variants: { block: true } };
-        expect(schemaUtil.patch(schema)).toEqual({ kind: 'button', variants: { block: true }, col: 12 });
-      });
-
-      it('alert patcher', () => {
-        const schema = { kind: 'alert', message: '' };
-        expect(schemaUtil.patch(schema)).toEqual({ kind: 'alert', message: '', col: 12 });
-      });
-    });
-
     it('should throw error', () => {
       expect(() => schemaUtil.patch({ kind: 'undefinded' } as SafeAny)).toThrow(`The 'undefinded' widget was not found`);
     });
@@ -100,21 +82,6 @@ describe('SchemaUtil', () => {
   });
 
   describe('带验证器的图示', () => {
-    // TODO
-    // xit('length', () => {
-    //   const schema: Indexable<AbstractSchema> = { kind: 'text', length: 1 };
-    //   const validators = schemaUtil.validatorsOf(schema);
-    //   // min & max
-    //   expect(validators.length).toBe(2);
-    // });
-
-    // xit('min/max', () => {
-    //   const schema = text('name').length({ min: 1, max: 2 }).build();
-    //   const validators = schemaUtil.validatorsOf(schema);
-
-    //   expect(validators.length).toBe(2);
-    // });
-
     it('required', () => {
       const schema = text('name').required(true).build();
       const validators = schemaUtil.validatorsOf(schema);

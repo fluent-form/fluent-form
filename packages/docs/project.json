@@ -56,7 +56,8 @@
         },
         "allowedCommonJsDependencies": [
           "@ng-doc/core"
-        ]
+        ],
+        "baseHref": "/fluent-form/"
       },
       "configurations": {
         "production": {

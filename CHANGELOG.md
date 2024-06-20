@@ -1,3 +1,14 @@
+## 0.24.5 (2024-06-20)
+
+
+### 🩹 Fixes
+
+- fix typo ([4dd300c6](https://github.com/fluent-form/fluent-form/commit/4dd300c6))
+
+### ❤️  Thank You
+
+- hyperlife1119 @HyperLife1119
+
 ## 0.24.4 (2024-06-20)
 
 This was a version bump only, there were no code changes.

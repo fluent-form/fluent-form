@@ -15,6 +15,7 @@ const LayoutPage: NgDocPage = {
     GridLayoutExampleComponent,
     ZorroStyleComponent
   },
+  order: 3
 };
 
 export default LayoutPage;

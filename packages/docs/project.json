@@ -56,8 +56,7 @@
         },
         "allowedCommonJsDependencies": [
           "@ng-doc/core"
-        ],
-        "baseHref": "/fluent-form/"
+        ]
       },
       "configurations": {
         "production": {
@@ -73,7 +72,8 @@
               "maximumError": "1mb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "baseHref": "/fluent-form/"
         },
         "development": {
           "optimization": false,

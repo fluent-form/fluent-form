@@ -9,6 +9,7 @@
     "test": "nx run-many --target=test",
     "test:coverage": "nx run-many --target=test --code-coverage",
     "lint": "nx run-many --target=lint",
+    "release": "export npm_config_legacy_peer_deps=false && nx release",
     "prepare": "husky install"
   },
   "workspaces": [

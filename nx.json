@@ -84,8 +84,7 @@
     "version": {
       "generatorOptions": {
         "packageRoot": "dist/{projectName}",
-        "currentVersionResolver": "git-tag",
-        "skipLockFileUpdate": true
+        "currentVersionResolver": "git-tag"
       }
     }
   },

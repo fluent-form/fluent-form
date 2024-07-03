@@ -119,7 +119,7 @@ function getGapPixel(level: Gap | Stringify<Gap> | [x: Gap, y: Gap]): [number, n
     return [GAPS[level[0]], GAPS[level[1]]];
   }
 
-  return [0, GAPS[level]];
+  return [GAPS[level], 0];
 }
 
 function parseJustifyOrAlign(value?: Justify | Align | null) {

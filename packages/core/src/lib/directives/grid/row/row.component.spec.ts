@@ -57,10 +57,15 @@ describe('FluentRowComponent', () => {
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-x')).toEqual('32px');
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-y')).toEqual('48px');
 
-    component.gap = { xl: 1 };
+    component.gap = 1;
     fixture.detectChanges();
-    expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-x')).toEqual('0px');
-    expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-y')).toEqual('4px');
+    expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-x')).toEqual('4px');
+    expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-y')).toEqual('0px');
+
+    component.gap = { xl: 2 };
+    fixture.detectChanges();
+    expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-x')).toEqual('8px');
+    expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-y')).toEqual('0px');
 
     component.gap = { xl: [1, 1] };
     fixture.detectChanges();

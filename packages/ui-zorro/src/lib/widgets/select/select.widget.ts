@@ -54,7 +54,7 @@ export class SelectWidgetTemplatePrivateContext {
       this.keyword$.pipe(
         filter(() => this.open), // 选中后关闭浮层也会触发一次 keyword$，此时 open=false，过滤掉
         tap(() => schema.loading = true),
-        source => fetchOptionsFn(source, { schema, model, control }),
+        source => fetchOptionsFn(source, { schema, model, control }), // TODO: bug, model 始终是空对象 {}，不会更新
       ).subscribe(options => {
         schema.options = options;
         schema.loading = false;

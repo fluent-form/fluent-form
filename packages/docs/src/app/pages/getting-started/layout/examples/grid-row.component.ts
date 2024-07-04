@@ -14,7 +14,7 @@ export class GridRowExampleComponent {
     row().col(12).schemas(() => {
       alert().message('flex-1').col({ flex: 1 });
       alert().message('flex-2').col({ flex: 2 });
-      alert().message('flex-auto').col({ flex: 'auto' });
+      alert().message('fill').col('fill');
     });
 
     heading5().content('排版');

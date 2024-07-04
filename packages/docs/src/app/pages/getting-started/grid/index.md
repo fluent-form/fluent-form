@@ -4,11 +4,15 @@
 
 {{ NgDocActions.demo("GridBasicExampleComponent") }}
 
+## Gap
+
+{{ NgDocActions.demo("GridGapExampleComponent") }}
+
 ## Alignment
 
 {{ NgDocActions.demo("GridAlignExampleComponent") }}
 
-## Gutter
+## Fill
 
 {{ NgDocActions.demo("GridFillExampleComponent") }}
 

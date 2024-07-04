@@ -123,9 +123,16 @@ export class OverviewExampleComponent {
       });
     });
     row().col(12).justify('space-between').schemas(() => {
-      date('dateInRow').label('居左').col(6);
+      date('dateInRow').label('居左').col(6).listeners;
       dateRange('dateRangeInRow').label('居右').col(4);
     });
+    inputGroup().label('输入框组').col(12).schemas(() => {
+      const fakeText = () => text('_').readonly(true).col({ flex: '75px' }).style({ padding: 0, textAlign: 'center' })
+      text('week').col('fill')
+      fakeText().placeholder('周')
+      text('day').col('fill')
+      fakeText().placeholder('天')
+    })
   });
 
   model = {};

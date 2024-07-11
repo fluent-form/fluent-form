@@ -88,7 +88,7 @@
 
 表单联动可以帮助您实现复杂的交互效果。部分组件/控件的选项支持传入一个函数，以实现控件之间的联动。该函数接受一个对象作为输入参数，对象类型为 `{ model, control, schema }`。
 
-并非所有选项都支持联动，我们仅会对必要的选项支持此功能，您可以根据选项的类型判断是否支持该联动。
+并非所有选项都支持联动，我们仅会对必要的选项支持此功能，您可以根据选项的类型判断是否支持该联动。如有需要，请随时向我们[提出](https://github.com/fluent-form/fluent-form/issues)需求。
 
 {{ NgDocActions.demo("ControlLinkageExampleComponent") }}
 

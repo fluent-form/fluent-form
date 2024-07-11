@@ -43,7 +43,7 @@ export const appConfig: ApplicationConfig = {
 
 在上述代码中，我们使用 `provideFluentForm` 辅助函数来配置 {% include "../../../markdowns/brand.md" %}，然后使用 `withZorro` 函数来注册 UI 库与部件，它接收一个部件数组作为参数。
 
-`useTextWidget` 和 `useNumberWidget` 都是部件工厂函数，它们分别创建一个输入部件和一个数字部件。
+`useTextWidget` 和 `useNumberWidget` 都是部件工厂函数，它们分别创建一个文本输入部件和一个数字部件。
 
 要查看更多部件，请查阅 [API 文档](/api)。
 
@@ -108,7 +108,7 @@ const schema = form([
 - `schema` 属性用于指定表单图示；
 - `model` 属性用于绑定模型，支持双向绑定；
 - `(submit)` 事件用于侦听表单提交事件；
-- `(formChange)` 事件用于侦听表单变更，可以获取 `FormGroup` 实例；
+- `(formChange)` 事件用于侦听表单变更，可以用于获取 `FormGroup` 实例；
 - `(modelChange)` 事件用于侦听模型变更；
 - `(valueChanges)` 事件用于侦听表单值变更，参考 [AbstractControl#valueChanges](https://angular.cn/api/forms/AbstractControl#valueChanges)；
 - `(statusChanges)` 事件用于侦听表单状态变更，参考 [AbstractControl#statusChanges](https://angular.cn/api/forms/AbstractControl#statusChanges)；
@@ -138,7 +138,7 @@ interface Hero {
 ```
 
 > **Note**
-> 注意，Hero 的 `height` 和 `popularity` 属性都是可选的，这意味着在表单中它们属于非必填项。
+> 注意，Hero 的 `height` 和 `popularity` 属性都是可选的，这意味着在表单中它们属于**非必填**项。
 
 ### 创建表单图示
 
@@ -158,11 +158,11 @@ const schema = form(() => {
 });
 ```
 
-在这个例子中，我们使用了 `number`、`input`、`textarea`、`rate` 和 `toggle` 这几种控件。每个控件都有一些配置选项，例如 `label` 用于设置控件的标签，`required` 用于设置控件是否必填。
+在这个例子中，我们使用了 `number`、`text`、`textarea`、`rate` 和 `toggle` 这几种控件。每个控件都有一些配置选项，例如 `label` 用于设置控件的标签，`required` 用于设置控件是否必填。
 
 然后，我们需要解决两个问题：
 
-1. `Hero.id` 可能由服务端生成，我们不希望用户可以编辑它。
+1. `Hero.id` 可能由服务端生成，我们不希望用户可以**编辑**它。
 2. 我们希望 `Hero.enabled` 默认为 `true`。
 
 对于第一个问题，我们可以使用 `headless` 控件来处理。`headless` 控件是一个“无头”控件，它可以**完全不渲染**控件视图，但仍然可以在表单模型中保留对应的字段。

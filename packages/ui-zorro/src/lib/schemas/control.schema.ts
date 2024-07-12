@@ -230,8 +230,6 @@ export interface CascaderControlSchema<Key extends SchemaKey = SchemaKey, Val = 
 export interface SliderControlSchema<Key extends SchemaKey = SchemaKey, Val = number | [number, number]>
   extends AbstractZorroControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzSliderComponent, Val>, ComponentPropertyHolder<NzSliderComponent> {
   kind: 'slider';
-  /** Placeholder text */
-  placeholder?: never;
   /** Containment relationship */
   included?: boolean;
   /** range of value */

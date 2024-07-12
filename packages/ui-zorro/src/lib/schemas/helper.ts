@@ -1,14 +1,14 @@
-import { WithOutSchemaReactiveFn, isNumber, isString } from '@fluent-form/core';
+import { WithoutSchemaReactiveFn, isNumber, isString } from '@fluent-form/core';
 import { Labelful } from './interfaces';
 
 export const labelHelper = {
-  content: (label: WithOutSchemaReactiveFn<Labelful['label']>) => {
+  content: (label: WithoutSchemaReactiveFn<Labelful['label']>) => {
     return isString(label) ? label : label?.content;
   },
-  span: (label: WithOutSchemaReactiveFn<Labelful['label']>) => {
+  span: (label: WithoutSchemaReactiveFn<Labelful['label']>) => {
     return isString(label) ? null : label?.span;
   },
-  width: (label: WithOutSchemaReactiveFn<Labelful['label']>) => {
+  width: (label: WithoutSchemaReactiveFn<Labelful['label']>) => {
     if (isString(label) || !label?.width) {
       return null;
     }
@@ -22,10 +22,10 @@ export const labelHelper = {
 };
 
 export const tooltipHelper = {
-  content: (tooltip: WithOutSchemaReactiveFn<Labelful['tooltip']>) => {
+  content: (tooltip: WithoutSchemaReactiveFn<Labelful['tooltip']>) => {
     return isString(tooltip) ? tooltip : tooltip?.content;
   },
-  icon: (tooltip: WithOutSchemaReactiveFn<Labelful['tooltip']>) => {
+  icon: (tooltip: WithoutSchemaReactiveFn<Labelful['tooltip']>) => {
     return isString(tooltip) ? null : tooltip?.icon;
   },
 };

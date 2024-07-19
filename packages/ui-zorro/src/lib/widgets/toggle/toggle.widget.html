@@ -6,7 +6,7 @@
     [ngClass]="schema.class"
     [ngStyle]="schema.style"
     [nzId]="schema.id!"
-    [nzCheckedChildren]="(schema.placeholder?.[0] | template)!"
-    [nzUnCheckedChildren]="(schema.placeholder?.[1] | template)!"
+    [nzCheckedChildren]="(schema.placeholder | reactive: model : schema : control)?.[0] | template"
+    [nzUnCheckedChildren]="(schema.placeholder | reactive: model : schema : control)?.[1] | template"
     [nzSize]="schema.size!" />
 </ng-template>

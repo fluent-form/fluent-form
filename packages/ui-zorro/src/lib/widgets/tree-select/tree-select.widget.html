@@ -25,7 +25,7 @@
           [nzShowLine]="schema.line"
           [nzAsyncData]="schema.async"
           [nzNodes]="schema.options | reactive: model : schema : control"
-          [nzPlaceHolder]="schema.placeholder!"
+          [nzPlaceHolder]="schema.placeholder | reactive: model : schema : control"
           [nzDefaultExpandAll]="schema.expandAll"
           [nzExpandedKeys]="schema.expandedKeys!"
           [nzMultiple]="schema.multiple" />
@@ -50,7 +50,7 @@
         [nzShowLine]="schema.line"
         [nzAsyncData]="schema.async"
         [nzNodes]="schema.options | reactive: model : schema : control"
-        [nzPlaceHolder]="schema.placeholder!"
+        [nzPlaceHolder]="schema.placeholder | reactive: model : schema : control"
         [nzDefaultExpandAll]="schema.expandAll"
         [nzExpandedKeys]="schema.expandedKeys!"
         [nzMultiple]="schema.multiple" />

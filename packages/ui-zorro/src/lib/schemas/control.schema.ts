@@ -36,7 +36,7 @@ export interface AbstractZorroControlSchema<Key extends SchemaKey = SchemaKey, V
  * 抽象的输入框图示
  */
 interface AbstractInputBoxControlSchema<Key extends SchemaKey, Val, P extends string | [string, string] = string> extends AbstractZorroControlSchema<Key, Val> {
-  placeholder?: P;
+  placeholder?: MaybeSchemaReactiveFn<AbstractInputBoxControlSchema<SchemaKey, Val, P>, P>;
   autofocus?: boolean;
   readonly?: MaybeSchemaReactiveFn<AbstractInputBoxControlSchema<SchemaKey, Val, P>, boolean>;
   size?: NzSizeLDSType;
@@ -157,7 +157,7 @@ export interface ToggleControlSchema<Key extends SingleSchemaKey = SingleSchemaK
   extends AbstractZorroControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzSwitchComponent, Val>, ComponentPropertyHolder<NzSwitchComponent> {
   kind: 'toggle';
   /** Placeholder text */
-  placeholder?: [string | TemplateRef<void>, string | TemplateRef<void>];
+  placeholder?: MaybeSchemaReactiveFn<ToggleControlSchema<Key, Val>, [string, string]>;
   size?: NzSizeDSType;
 }
 
@@ -168,7 +168,7 @@ export interface SelectControlSchema<Key extends SingleSchemaKey = SingleSchemaK
   extends AbstractZorroControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzSelectComponent, Val>, ComponentPropertyHolder<NzSelectComponent> {
   kind: 'select';
   /** Placeholder text */
-  placeholder?: string;
+  placeholder?: MaybeSchemaReactiveFn<SelectControlSchema<Key, Val>, string>;
   /** Show clean button */
   clearable?: boolean;
   /** Mode of select control */
@@ -202,7 +202,7 @@ export interface CascaderControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   extends AbstractZorroControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzCascaderComponent, Val>, ComponentPropertyHolder<NzCascaderComponent> {
   kind: 'cascader';
   /** Placeholder text */
-  placeholder?: string;
+  placeholder?: MaybeSchemaReactiveFn<CascaderControlSchema<Key, Val>, string>;
   /** Show clean button */
   clearable?: boolean;
   changeOnSelect?: boolean;
@@ -310,7 +310,7 @@ export interface TreeSelectControlSchema<Key extends SingleSchemaKey = SingleSch
   extends AbstractZorroControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzTreeSelectComponent, Val>, ComponentPropertyHolder<NzTreeSelectComponent> {
   kind: 'tree-select';
   clearable?: boolean;
-  placeholder?: string;
+  placeholder?: MaybeSchemaReactiveFn<TreeSelectControlSchema<Key, Val>, string>;
   icon?: boolean;
   searchable?: boolean;
   size?: NzSizeLDSType;

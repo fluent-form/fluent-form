@@ -34,6 +34,7 @@
           [nzTooltipTitle]="helper.tooltip.content | invoke: schema.tooltip"
           [nzTooltipIcon]="(helper.tooltip.icon | invoke: schema.tooltip)!"
           [nzFor]="schema.id"
+          [nzLabelWrap]="(helper.label.wrap | invoke: label)!"
           [nzRequired]="currentSchema.required | reactive: model : schema : control"
           [style.width]="helper.label.width | invoke: label">
           {{ helper.label.content | invoke: label }}

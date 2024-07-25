@@ -27,6 +27,7 @@ export class ControlLabelExampleComponent {
         .label({ content: '自定义图标', span: 4 })
         .tooltip({ content: '小贴士', icon: 'info-circle' })
         .col(12);
+      text('text-6').label({ content: '长文本长文本长文本自动换行', wrap: true, span: 4 }).col(12);
     })
   );
 

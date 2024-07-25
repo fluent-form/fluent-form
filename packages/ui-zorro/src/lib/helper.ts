@@ -19,6 +19,9 @@ export const labelHelper = {
 
     return label.width;
   },
+  wrap: (label: WithoutSchemaReactiveFn<Labelful['label']>) => {
+    return isString(label) ? false : label?.wrap;
+  },
 };
 
 export const tooltipHelper = {

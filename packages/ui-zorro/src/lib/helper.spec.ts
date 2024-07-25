@@ -1,4 +1,4 @@
-import { labelHelper, tooltipHelper } from '../schemas/helper';
+import { labelHelper, tooltipHelper } from './helper';
 
 describe('label helper', () => {
   describe('label', () => {
@@ -21,6 +21,13 @@ describe('label helper', () => {
       expect(labelHelper.width({ content: 'label' })).toBeNull();
       expect(labelHelper.width({ content: 'label', width: 1 })).toEqual('1px');
       expect(labelHelper.width({ content: 'label', width: '1rem' })).toEqual('1rem');
+    });
+
+    it('wrap', () => {
+      expect(labelHelper.wrap(undefined)).toBeFalsy();
+      expect(labelHelper.wrap('label')).toBeFalsy();
+      expect(labelHelper.wrap({ content: 'label' })).toBeFalsy();
+      expect(labelHelper.wrap({ content: 'label', wrap: true })).toBe(true);
     });
   });
 });

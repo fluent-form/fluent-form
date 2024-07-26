@@ -1,3 +1,15 @@
+## 0.24.14 (2024-07-26)
+
+
+### 🩹 Fixes
+
+- **core:** fix bug of grid
+
+
+### ❤️  Thank You
+
+- hyperlife1119
+
 ## 0.24.13 (2024-06-24)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

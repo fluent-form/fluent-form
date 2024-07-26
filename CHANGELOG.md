@@ -1,3 +1,19 @@
+## 0.24.14 (2024-07-26)
+
+
+### 🚀 Features
+
+- **ui-zorro:** make placeholder support reactive fn ([8120f4b5](https://github.com/fluent-form/fluent-form/commit/8120f4b5))
+- **ui-zorro:** support label wrap ([2438451c](https://github.com/fluent-form/fluent-form/commit/2438451c))
+
+### 🩹 Fixes
+
+- **core:** fix bug of grid ([22e7cc37](https://github.com/fluent-form/fluent-form/commit/22e7cc37))
+
+### ❤️  Thank You
+
+- hyperlife1119 @HyperLife1119
+
 ## 0.24.13 (2024-06-24)
 
 This was a version bump only, there were no code changes.

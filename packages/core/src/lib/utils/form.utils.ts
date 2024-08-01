@@ -165,6 +165,7 @@ export class FormUtil {
         const disabled = this.valueTransformer.transform(schema.disabled, { model, schema, control });
         if (control.enabled !== !disabled) { // 不一致才更新
           if (disabled) {
+            // 这里使用 onlySelf: true 而不是 emitEvent: false，因为需要维持控件本身的 value/statusChanges 事件能正常触发
             control.disable({ onlySelf: true });
           } else {
             control.enable({ onlySelf: true });

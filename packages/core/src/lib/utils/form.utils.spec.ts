@@ -480,14 +480,17 @@ describe('form.utils', () => {
         it('normal', () => {
           const schemas: Indexable<AbstractSchema>[] = [
             { kind: 'text', key: 'txt', disabled: (ctx: SafeAny) => ctx.model.txt },
+            { kind: 'text', key: 'txt2' },
           ];
           const form = util.createFormGroup(schemas, {});
 
           util.updateForm(form, { txt: true }, schemas);
           expect(form.get('txt')!.disabled).toBe(true);
+          expect(form.value).toEqual({ txt2: null });
 
           util.updateForm(form, { txt: false }, schemas);
           expect(form.get('txt')!.enabled).toBe(true);
+          expect(form.value).toEqual({ txt: null, txt2: null });
         });
 
         it('with component', () => {

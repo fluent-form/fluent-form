@@ -235,42 +235,42 @@ describe('SchemaUtil with patcher feature', () => {
             {
               selector: '*',
               patch: schema => {
-                schema.class = new Set<string>();
+                schema.class = [];
                 return schema;
               }
             },
             {
               selector: 'text',
               patch: schema => {
-                (schema.class as Set<string>).add('kind-selector');
+                (schema.class as string[]).push('kind-selector');
                 return schema;
               }
             },
             {
               selector: ['text', 'range'],
               patch: schema => {
-                (schema.class as Set<string>).add('multi-kind-selector');
+                (schema.class as string[]).push('multi-kind-selector');
                 return schema;
               }
             },
             {
               selector: SchemaType.Control,
               patch: schema => {
-                (schema.class as Set<string>).add('schema-type-selector');
+                (schema.class as string[]).push('schema-type-selector');
                 return schema;
               }
             },
             {
               selector: [SchemaType.Control, SchemaType.Component],
               patch: schema => {
-                (schema.class as Set<string>).add('multi-schema-type-selector');
+                (schema.class as string[]).push('multi-schema-type-selector');
                 return schema;
               }
             },
             {
               selector: ['button', SchemaType.Control],
               patch: schema => {
-                (schema.class as Set<string>).add('mix-selector');
+                (schema.class as string[]).push('mix-selector');
                 return schema;
               }
             }
@@ -284,7 +284,7 @@ describe('SchemaUtil with patcher feature', () => {
 
   it('with * selector', () => {
     const schema: AbstractSchema = { kind: 'text' };
-    expect(schemaUtil.patch(schema).class).toBeInstanceOf(Set);
+    expect(schemaUtil.patch(schema).class).toBeInstanceOf(Array);
   });
 
   it('with kind selector', () => {

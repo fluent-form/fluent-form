@@ -1,4 +1,4 @@
-import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, TemplateRef } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, FluentControlPipe, FluentReactivePipe, FluentTemplatePipe, FluentWidgetTemplatePipe, FluentWithInjectorDirective, InvokePipe, WidgetTemplateContext, WithoutSchemaReactiveFn, isString } from '@fluent-form/core';
@@ -14,7 +14,6 @@ type NumberGroupWidgetTemplateContext = WidgetTemplateContext<NumberGroupCompone
   selector: 'fluent-number-group',
   standalone: true,
   imports: [
-    NgClass,
     NgStyle,
     NgTemplateOutlet,
     ReactiveFormsModule,

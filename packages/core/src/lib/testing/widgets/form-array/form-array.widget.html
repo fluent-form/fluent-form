@@ -6,7 +6,7 @@
     [gap]="formSchema.gap ?? parentRow.gap"
     [align]="formSchema.align"
     [justify]="formSchema.justify"
-    [ngClass]="formSchema.class"
+    [class]="formSchema.class"
     [ngStyle]="formSchema.style"
     [fluentBinding]="{ schema: formSchema, control: formArray, model }"
     (cdkDropListDropped)="drop(formArray, $event)">

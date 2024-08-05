@@ -1,4 +1,4 @@
-import { NgClass, NgStyle } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
@@ -13,7 +13,6 @@ type ToggleWidgetTemplateContext = WidgetTemplateContext<ToggleControlSchema, Fo
 @Component({
   standalone: true,
   imports: [
-    NgClass,
     NgStyle,
     ReactiveFormsModule,
     NzSwitchModule,

@@ -2,7 +2,7 @@
   <div
     #component
     [fluentBinding]="{ component, schema, control, model }"
-    [ngClass]="schema.class"
+    [class]="schema.class"
     [ngStyle]="schema.style">
     @for (subschema of schema.schemas; track subschema) {
       <ng-container

@@ -23,7 +23,7 @@
         ? (schema.primary ?? schema.schemas[0].key | schema: schema)
         : schema as currentSchema
     "
-    [ngClass]="schema.class"
+    [class]="schema.class"
     [style.margin-bottom.px]="
       schemaType === SchemaType.ControlGroup || schemaType === SchemaType.ControlArray ? 0 : null
     ">

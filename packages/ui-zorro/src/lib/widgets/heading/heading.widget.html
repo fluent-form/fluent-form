@@ -1,32 +1,32 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   @switch (schema.level) {
     @case (1) {
-      <h1 nz-typography [fluentBinding]="{ schema, control, model }" [ngClass]="schema.class" [ngStyle]="schema.style">
+      <h1 nz-typography [fluentBinding]="{ schema, control, model }" [class]="schema.class" [ngStyle]="schema.style">
         <ng-container [ngTemplateOutlet]="headingContentTemplate" />
       </h1>
     }
     @case (2) {
-      <h2 nz-typography [fluentBinding]="{ schema, control, model }" [ngClass]="schema.class" [ngStyle]="schema.style">
+      <h2 nz-typography [fluentBinding]="{ schema, control, model }" [class]="schema.class" [ngStyle]="schema.style">
         <ng-container [ngTemplateOutlet]="headingContentTemplate" />
       </h2>
     }
     @case (3) {
-      <h3 nz-typography [fluentBinding]="{ schema, control, model }" [ngClass]="schema.class" [ngStyle]="schema.style">
+      <h3 nz-typography [fluentBinding]="{ schema, control, model }" [class]="schema.class" [ngStyle]="schema.style">
         <ng-container [ngTemplateOutlet]="headingContentTemplate" />
       </h3>
     }
     @case (4) {
-      <h4 nz-typography [fluentBinding]="{ schema, control, model }" [ngClass]="schema.class" [ngStyle]="schema.style">
+      <h4 nz-typography [fluentBinding]="{ schema, control, model }" [class]="schema.class" [ngStyle]="schema.style">
         <ng-container [ngTemplateOutlet]="headingContentTemplate" />
       </h4>
     }
     @case (5) {
-      <h5 nz-typography [fluentBinding]="{ schema, control, model }" [ngClass]="schema.class" [ngStyle]="schema.style">
+      <h5 nz-typography [fluentBinding]="{ schema, control, model }" [class]="schema.class" [ngStyle]="schema.style">
         <ng-container [ngTemplateOutlet]="headingContentTemplate" />
       </h5>
     }
     @case (6) {
-      <h6 nz-typography [fluentBinding]="{ schema, control, model }" [ngClass]="schema.class" [ngStyle]="schema.style">
+      <h6 nz-typography [fluentBinding]="{ schema, control, model }" [class]="schema.class" [ngStyle]="schema.style">
         <ng-container [ngTemplateOutlet]="headingContentTemplate" />
       </h6>
     }

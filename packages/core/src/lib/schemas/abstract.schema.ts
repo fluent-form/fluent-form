@@ -1,4 +1,4 @@
-import { NgClass, NgStyle } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import { FluentColDirective } from '../directives';
 import { Indexable } from '../types';
 import { Column, MaybeSchemaReactiveFn, SchemaLike } from './interfaces';
@@ -12,7 +12,7 @@ export interface AbstractSchema<Key extends SchemaKey = SchemaKey> extends Schem
   /* Used to define the width of the control. */
   col?: Column | FluentColDirective['span'];
   hidden?: MaybeSchemaReactiveFn<AbstractSchema, boolean>;
-  class?: NgClass['ngClass'];
+  class?: null | string | string[] | { [className: string]: boolean | undefined | null };
   style?: NgStyle['ngStyle'];
 }
 

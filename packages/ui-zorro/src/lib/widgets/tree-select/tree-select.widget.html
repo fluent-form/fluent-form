@@ -7,7 +7,7 @@
           fluentCol
           [fluentBinding]="{ component, schema, control, model }"
           [formControl]="control"
-          [ngClass]="schema.class"
+          [class]="schema.class"
           [ngStyle]="schema.style"
           [span]="schema.col | col: 'span'"
           [flex]="schema.col | col: 'flex'"
@@ -35,7 +35,7 @@
         #component
         [fluentBinding]="{ component, schema, control, model }"
         [formControl]="control"
-        [ngClass]="schema.class"
+        [class]="schema.class"
         [ngStyle]="schema.style"
         [nzId]="schema.id!"
         [nzAllowClear]="schema.clearable ?? true"

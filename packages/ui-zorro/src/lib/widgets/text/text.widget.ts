@@ -1,4 +1,4 @@
-import { NgClass, NgStyle } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, InvokePipe, Length, WidgetTemplateContext, isNumber } from '@fluent-form/core';
@@ -14,7 +14,6 @@ type TextWidgetTemplateContext = WidgetTemplateContext<TextControlSchema, FormCo
 @Component({
   standalone: true,
   imports: [
-    NgClass,
     NgStyle,
     ReactiveFormsModule,
     NzInputModule,

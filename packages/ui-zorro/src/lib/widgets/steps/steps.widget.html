@@ -2,7 +2,7 @@
   <nz-steps
     #component
     [fluentBinding]="{ component, schema, control, model }"
-    [ngClass]="schema.class"
+    [class]="schema.class"
     [ngStyle]="schema.style"
     [nzType]="schema.type ?? 'default'"
     [nzCurrent]="schema.active ?? 0"
@@ -16,7 +16,7 @@
       <nz-step
         #component
         [fluentBinding]="{ component, schema, control, model }"
-        [ngClass]="subschema.class"
+        [class]="subschema.class"
         [ngStyle]="subschema.style"
         [nzTitle]="subschema.title | template"
         [nzSubtitle]="subschema.subtitle | template"

@@ -1,4 +1,4 @@
-import { NgClass, NgStyle } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, FluentTemplatePipe, InvokePipe, WidgetTemplateContext, isBoolean } from '@fluent-form/core';
@@ -13,7 +13,6 @@ type AlertWidgetTemplateContext = WidgetTemplateContext<AlertComponentSchema, Fo
 @Component({
   standalone: true,
   imports: [
-    NgClass,
     NgStyle,
     NzAlertModule,
     FluentBindingDirective,

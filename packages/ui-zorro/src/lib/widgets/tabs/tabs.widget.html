@@ -2,7 +2,7 @@
   <nz-tabset
     #component
     [fluentBinding]="{ component, schema, control, model }"
-    [ngClass]="schema.class"
+    [class]="schema.class"
     [ngStyle]="schema.style"
     [nzSelectedIndex]="schema.active"
     [nzType]="schema.type ?? 'line'"
@@ -14,7 +14,7 @@
       <nz-tab
         #component
         [fluentBinding]="{ component, schema, control, model }"
-        [ngClass]="tabSchema.class"
+        [class]="tabSchema.class"
         [ngStyle]="tabSchema.style"
         [nzTitle]="tabSchema.title"
         [nzDisabled]="tabSchema.disabled | reactive: model : tabSchema : control"

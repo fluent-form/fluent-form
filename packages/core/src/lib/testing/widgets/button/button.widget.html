@@ -4,7 +4,7 @@
     [attr.type]="schema.mode"
     [disabled]="schema.disabled | reactive: model : schema : control"
     [fluentBinding]="{ schema, control, model }"
-    [ngClass]="schema.class"
+    [class]="schema.class"
     [ngStyle]="schema.style"
     [span]="schema.col | col: 'span'"
     [flex]="schema.col | col: 'flex'"

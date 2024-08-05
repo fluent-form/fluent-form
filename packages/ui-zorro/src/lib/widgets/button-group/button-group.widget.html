@@ -2,7 +2,7 @@
   <nz-button-group
     #component
     [fluentBinding]="{ component, schema, control, model }"
-    [ngClass]="schema.class"
+    [class]="schema.class"
     [ngStyle]="schema.style"
     [nzSize]="schema.size!">
     @for (subschema of schema.schemas; track subschema) {

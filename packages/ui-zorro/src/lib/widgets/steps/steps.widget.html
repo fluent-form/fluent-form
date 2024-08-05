@@ -3,7 +3,7 @@
     #component
     [fluentBinding]="{ component, schema, control, model }"
     [class]="schema.class"
-    [ngStyle]="schema.style"
+    [style]="schema.style"
     [nzType]="schema.type ?? 'default'"
     [nzCurrent]="schema.active ?? 0"
     [nzLabelPlacement]="schema.placement ?? 'horizontal'"
@@ -17,7 +17,7 @@
         #component
         [fluentBinding]="{ component, schema, control, model }"
         [class]="subschema.class"
-        [ngStyle]="subschema.style"
+        [style]="subschema.style"
         [nzTitle]="subschema.title | template"
         [nzSubtitle]="subschema.subtitle | template"
         [nzDescription]="subschema.description | template"

@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, WidgetTemplateContext } from '@fluent-form/core';
@@ -14,7 +13,6 @@ type CheckboxGroupWidgetTemplateContext = WidgetTemplateContext<CheckboxGroupCon
 @Component({
   standalone: true,
   imports: [
-    NgStyle,
     ReactiveFormsModule,
     NzCheckboxModule,
     FluentBindingDirective,

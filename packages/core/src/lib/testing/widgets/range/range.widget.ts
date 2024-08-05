@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FluentBindingDirective, FluentContextGuardDirective } from '../../../directives';
@@ -14,7 +13,6 @@ type RangeWidgetTemplateContext = WidgetTemplateContext<RangeControlSchema, Form
 @Component({
   standalone: true,
   imports: [
-    NgStyle,
     ReactiveFormsModule,
     RangeComponent,
     FluentBindingDirective,

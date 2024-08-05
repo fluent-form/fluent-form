@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FluentBindingDirective, FluentContextGuardDirective } from '../../../directives';
@@ -13,7 +12,6 @@ type InputWidgetTemplateContext = WidgetTemplateContext<TextControlSchema, FormC
 @Component({
   standalone: true,
   imports: [
-    NgStyle,
     ReactiveFormsModule,
     FluentBindingDirective,
     FluentContextGuardDirective,

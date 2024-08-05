@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextDirective, FluentContextGuardDirective, FluentGridModule, FluentInjectDirective, FluentLifeCycleDirective, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
@@ -17,7 +16,6 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
 @Component({
   standalone: true,
   imports: [
-    NgStyle,
     ReactiveFormsModule,
     NzSelectModule,
     NzOutletModule,

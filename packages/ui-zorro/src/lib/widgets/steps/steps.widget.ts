@@ -1,4 +1,4 @@
-import { NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlPipe, FluentFormItemOutletDirective, FluentGridModule, FluentParentRowDirective, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
@@ -13,7 +13,6 @@ type StepsWidgetTemplateContext = WidgetTemplateContext<StepsComponentSchema, Fo
 @Component({
   standalone: true,
   imports: [
-    NgStyle,
     NgTemplateOutlet,
     NzStepsModule,
     FluentGridModule,

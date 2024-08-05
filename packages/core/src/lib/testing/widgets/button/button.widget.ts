@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentGridModule } from '../../../directives';
@@ -14,7 +13,6 @@ type ButtonWidgetTemplateContext = WidgetTemplateContext<ButtonComponentSchema, 
 @Component({
   standalone: true,
   imports: [
-    NgStyle,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentReactivePipe,

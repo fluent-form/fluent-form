@@ -3,7 +3,7 @@
     #component
     [fluentBinding]="{ component, schema, control, model }"
     [class]="schema.class"
-    [ngStyle]="schema.style"
+    [style]="schema.style"
     [nzSize]="schema.size!"
     [nzCompact]="schema.schemas.length > 1"
     [nzAddOnBefore]="helper.addon | invoke: (schema.addons?.before | reactive: model : schema : control) | template"

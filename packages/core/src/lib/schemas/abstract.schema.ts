@@ -1,4 +1,4 @@
-import { NgStyle } from '@angular/common';
+import { SafeAny } from '@ngify/types';
 import { FluentColDirective } from '../directives';
 import { Indexable } from '../types';
 import { Column, MaybeSchemaReactiveFn, SchemaLike } from './interfaces';
@@ -13,7 +13,7 @@ export interface AbstractSchema<Key extends SchemaKey = SchemaKey> extends Schem
   col?: Column | FluentColDirective['span'];
   hidden?: MaybeSchemaReactiveFn<AbstractSchema, boolean>;
   class?: null | string | string[] | { [className: string]: boolean | undefined | null };
-  style?: NgStyle['ngStyle'];
+  style?: string | undefined | null | { [styleName: string]: SafeAny };
 }
 
 /**

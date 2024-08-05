@@ -5,7 +5,7 @@
     [align]="formSchema.align"
     [justify]="formSchema.justify"
     [class]="formSchema.class"
-    [ngStyle]="formSchema.style"
+    [style]="formSchema.style"
     [fluentBinding]="{ schema: formSchema, control: formGroup, model }">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
       @if (schema | renderable) {

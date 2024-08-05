@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, WidgetTemplateContext } from '@fluent-form/core';
@@ -13,7 +12,6 @@ type SilderWidgetTemplateContext = WidgetTemplateContext<SliderControlSchema, Fo
 @Component({
   standalone: true,
   imports: [
-    NgStyle,
     ReactiveFormsModule,
     NzSliderModule,
     FluentBindingDirective,

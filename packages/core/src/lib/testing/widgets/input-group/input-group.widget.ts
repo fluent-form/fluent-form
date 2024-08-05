@@ -1,4 +1,4 @@
-import { NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, FluentControlPipe, FluentReactivePipe, FluentTemplatePipe, FluentWidgetTemplatePipe, FluentWithInjectorDirective, InvokePipe, WidgetTemplateContext } from '@fluent-form/core';
@@ -12,7 +12,6 @@ type InputGroupWidgetTemplateContext = WidgetTemplateContext<InputGroupComponent
 @Component({
   standalone: true,
   imports: [
-    NgStyle,
     NgTemplateOutlet,
     ReactiveFormsModule,
     FluentBindingDirective,

@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
@@ -14,7 +13,6 @@ type TimeWidgetTemplateContext = WidgetTemplateContext<TimePickerControlSchema, 
 @Component({
   standalone: true,
   imports: [
-    NgStyle,
     ReactiveFormsModule,
     NzTimePickerModule,
     FluentGridModule,

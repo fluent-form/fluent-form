@@ -1,4 +1,4 @@
-import { NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import { AbstractSchema, AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentFormItemOutletDirective, FluentGridModule, FluentParentRowDirective, FluentReactivePipe, FluentTemplatePipe, FluentVarDirective, FormUtil, InvokePipe, RenderablePipe, SchemaUtil, WidgetTemplateContext, isNumber } from '@fluent-form/core';
@@ -16,7 +16,6 @@ type TabsArrayWidgetTemplateContext = WidgetTemplateContext<TabsArraySchema, For
 @Component({
   standalone: true,
   imports: [
-    NgStyle,
     NgTemplateOutlet,
     NzEmptyModule,
     NzFormModule,

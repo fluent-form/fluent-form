@@ -52,6 +52,10 @@ describe('NestedFormWidget', () => {
     expect(formArray.value).toEqual([2, 1]);
   });
 
+  it('withIndex method', () => {
+    expect(component['withIndex'](0, { kind: 'text' })).toEqual({ kind: 'text', key: 0 });
+  });
+
   describe('helper function', () => {
     describe('length', () => {
       it('min', () => {

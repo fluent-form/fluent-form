@@ -26,8 +26,8 @@ describe('CascaderWidget', () => {
       })
     };
     const control = new FormControl([]);
-    const fetchOptions = component.fetchOptions(model, schema, control);
 
-    expect(fetchOptions({}, 0)).toBeInstanceOf(Promise);
+    expect(component.fetchOptions(model, { kind: 'cascader' }, control)({}, 0)).toBeUndefined();
+    expect(component.fetchOptions(model, schema, control)({}, 0)).toBeInstanceOf(Promise);
   });
 });

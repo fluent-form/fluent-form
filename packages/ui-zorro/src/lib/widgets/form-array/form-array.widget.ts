@@ -42,19 +42,6 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
   private readonly schemaUtil = inject(SchemaUtil);
   private readonly formUtil = inject(FormUtil);
 
-  protected push(control: FormArray, schema: FormArraySchema) {
-    const [elementSchema] = this.schemaUtil.filterControls(schema.schemas);
-
-    control.push(
-      this.formUtil.createAnyControl(elementSchema, {})
-    );
-  }
-
-  protected drop(control: FormArray, event: CdkDragDrop<unknown>) {
-    moveItemInArray(control.controls, event.previousIndex, event.currentIndex);
-    control.updateValueAndValidity();
-  }
-
   protected readonly helper = {
     length: {
       min: (length: FormArraySchema['length']) => {
@@ -77,7 +64,20 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
     }
   } as const;
 
-  withIndex(index: number, schema: AbstractSchema): AbstractSchema {
+  protected push(control: FormArray, schema: FormArraySchema) {
+    const [elementSchema] = this.schemaUtil.filterControls(schema.schemas);
+
+    control.push(
+      this.formUtil.createAnyControl(elementSchema, {})
+    );
+  }
+
+  protected drop(control: FormArray, event: CdkDragDrop<unknown>) {
+    moveItemInArray(control.controls, event.previousIndex, event.currentIndex);
+    control.updateValueAndValidity();
+  }
+
+  protected withIndex(index: number, schema: AbstractSchema): AbstractSchema {
     return { ...schema, key: index };
   }
 }

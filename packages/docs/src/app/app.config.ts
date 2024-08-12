@@ -22,7 +22,10 @@ export const appConfig: ApplicationConfig = {
       NG_DOC_ROUTING.concat({ path: '**', redirectTo: '/introduction' }),
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' })
     ),
-    provideHttpClient(withInterceptorsFromDi(), withFetch()),
+    provideHttpClient(
+      withInterceptorsFromDi(),
+      withFetch()
+    ),
     provideNgDocContext(),
     provideNgDocApp({ defaultThemeId: 'auto' }),
     provideSearchEngine(NgDocDefaultSearchEngine),

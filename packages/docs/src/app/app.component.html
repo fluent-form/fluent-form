@@ -2,7 +2,7 @@
   <ng-doc-navbar [leftContent]="leftContent" [rightContent]="rightContent">
     <ng-template #leftContent>
       <app-brand class="text-3xl">
-        <sup class="opacity-50 text-sm ml-1 tracking-tighter">v{{ version }}</sup>
+        <sup class="opacity-50 text-sm ml-1 tracking-tighter">{{ version$ | async }}</sup>
       </app-brand>
     </ng-template>
 

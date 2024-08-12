@@ -1,16 +1,19 @@
-import { Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { version } from '@fluent-form/core/package.json';
 import { NgDocNavbarComponent, NgDocRootComponent, NgDocSidebarComponent, NgDocThemeToggleComponent } from '@ng-doc/app';
 import { NgDocButtonIconComponent, NgDocIconComponent, NgDocTooltipDirective } from '@ng-doc/ui-kit';
+import { map, shareReplay } from 'rxjs';
 import { BrandComponent } from './components';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    BrandComponent,
+    AsyncPipe,
     RouterOutlet,
+    BrandComponent,
     NgDocRootComponent,
     NgDocNavbarComponent,
     NgDocSidebarComponent,
@@ -23,5 +26,9 @@ import { BrandComponent } from './components';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  version = version;
+  version$ = inject(HttpClient)
+    .get<{ name: string }[]>('https://api.github.com/repos/fluent-form/fluent-form/tags').pipe(
+      map(tags => tags[0].name),
+      shareReplay(1)
+    );
 }

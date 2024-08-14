@@ -11,9 +11,9 @@ import { button, buttonGroup } from '@fluent-form/ui-zorro';
 export class ButtonGroupExampleComponent {
   schema = form(() => {
     buttonGroup().schemas(() => {
-      button().content('取消');
-      button().type('primary').content('确认');
-    })
+      button().content('Cancel');
+      button().type('primary').content('Confirm');
+    });
   })
 
   model = {};

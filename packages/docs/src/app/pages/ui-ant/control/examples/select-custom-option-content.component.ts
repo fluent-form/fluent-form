@@ -5,7 +5,7 @@ import { select } from '@fluent-form/ui-zorro';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 
 @Component({
-  selector: 'control-select-custom-option-content-example',
+  selector: 'select-custom-option-content-example',
   standalone: true,
   imports: [FluentFormModule, NzTagModule, JsonPipe],
   template: `
@@ -17,10 +17,10 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
     <pre>{{ model | json }}</pre>
   `
 })
-export class ControlSelectCustomOptionContentExampleComponent {
+export class SelectCustomOptionContentExampleComponent {
   schema = form(() => {
     select('user')
-      .label('选择用户')
+      .placeholder('Please select user')
       .option('#optionTpl')
       .options([
         { label: 'Jack', value: 'jack' },

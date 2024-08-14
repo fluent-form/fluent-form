@@ -11,7 +11,7 @@ const ComponentWrapperPage: NgDocPage = {
     ButtonGroupExampleComponent,
     ZorroStyleComponent
   },
-  order: 5
+  order: 6
 };
 
 export default ComponentWrapperPage;

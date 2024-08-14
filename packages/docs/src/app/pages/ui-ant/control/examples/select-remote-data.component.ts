@@ -6,7 +6,7 @@ import { select } from '@fluent-form/ui-zorro';
 import { catchError, debounceTime, map, of, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'control-select-remote-data-example',
+  selector: 'select-remote-data-example',
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
@@ -14,13 +14,12 @@ import { catchError, debounceTime, map, of, switchMap } from 'rxjs';
     <pre>{{ model | json }}</pre>
   `
 })
-export class ControlSelectRemoteDataExampleComponent {
+export class SelectRemoteDataExampleComponent {
   http = inject(HttpClient);
 
   schema = form(() => {
     select('user')
-      .label('选择用户')
-      .placeholder('输入关键字进行检索')
+      .placeholder('Please enter keywords to search')
       .fetchOptions(keyword$ =>
         keyword$.pipe(
           debounceTime(300),

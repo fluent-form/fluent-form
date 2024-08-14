@@ -13,7 +13,7 @@ const ControlWrapperPage: NgDocPage = {
     NumberGroupExampleComponent,
     ZorroStyleComponent
   },
-  order: 2
+  order: 3
 };
 
 export default ControlWrapperPage;

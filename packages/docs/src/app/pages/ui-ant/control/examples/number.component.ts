@@ -1,10 +1,10 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { text } from '@fluent-form/ui-zorro';
+import { number } from '@fluent-form/ui-zorro';
 
 @Component({
-  selector: 'control-hint-example',
+  selector: 'number-example',
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
@@ -12,9 +12,9 @@ import { text } from '@fluent-form/ui-zorro';
     <pre>{{ model | json }}</pre>
   `
 })
-export class ControlHintExampleComponent {
+export class NumberExampleComponent {
   schema = form(() => {
-    text('text').label('控件标签').hint('这是一段控件提示');
+    number('num').placeholder('Please enter number').range({ min: 0, max: 99 }).col(4);
   });
 
   model = {};

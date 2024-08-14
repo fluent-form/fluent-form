@@ -5,3 +5,13 @@
 ```bash
 ng add @fluent-form/core
 ```
+
+## Angular 版本兼容性
+
+选择正确的 {% include "../../../markdowns/brand.md" %} 版本以与您的 Angular 版本兼容。
+
+| Angular 版本 | fluentform 版本 |
+| ------------ | --------------- |
+| v18.x       | v0.24.x           |
+| v17.x       | v0.24.x           |
+| v16.x       | 不受支持           |

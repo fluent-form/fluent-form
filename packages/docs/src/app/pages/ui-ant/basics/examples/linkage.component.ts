@@ -4,7 +4,7 @@ import { FluentFormComponent, form } from '@fluent-form/core';
 import { radioGroup, select, text, toggle } from '@fluent-form/ui-zorro';
 
 @Component({
-  selector: 'control-linkage-example',
+  selector: 'linkage-example',
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
@@ -12,7 +12,7 @@ import { radioGroup, select, text, toggle } from '@fluent-form/ui-zorro';
     <pre>{{ model | json }}</pre>
   `
 })
-export class ControlLinkageExampleComponent {
+export class LinkageExampleComponent {
   schema = form(() => {
     radioGroup('lang')
       .label('语言')

@@ -10,17 +10,17 @@ import { button } from '@fluent-form/ui-zorro';
 })
 export class ButtonExampleComponent {
   schema = form(() => {
-    button().type('primary').content('确认');
-    button().type('default').content('确认');
-    button().type('dashed').content('确认');
-    button().type('link').content('确认');
-    button().type('text').content('确认');
-    button().type('primary').variants({ ghost: true }).content('确认');
-    button().type('primary').variants({ danger: true }).content('确认');
-    button().type('primary').variants({ shape: 'round' }).content('确认');
+    button().type('primary').content('Primay Button');
+    button().type('default').content('Default Button');
+    button().type('dashed').content('Dashed Button');
+    button().type('link').content('Link Button');
+    button().type('text').content('Text Button');
+    button().type('primary').variants({ ghost: true }).content('Ghost Button');
+    button().type('primary').variants({ danger: true }).content('Danger Button');
+    button().type('primary').variants({ shape: 'round' }).content('Rounded Button');
     button().type('primary').variants({ shape: 'circle' }).icon('plus');
-    button().type('primary').variants({ shape: 'round' }).icon('plus').content('添加');
-    button().type('primary').variants({ block: true }).content('确认').col(12);
+    button().type('primary').variants({ shape: 'round' }).icon('plus').content('Icon Button');
+    button().type('primary').variants({ block: true }).content('Block Button');
   })
 
   model = {};

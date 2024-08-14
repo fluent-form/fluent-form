@@ -19,7 +19,7 @@ const ControlContainerPage: NgDocPage = {
     TabsArrayExampleComponent,
     ZorroStyleComponent
   },
-  order: 3
+  order: 4
 };
 
 export default ControlContainerPage;

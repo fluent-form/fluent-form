@@ -1,10 +1,10 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { text } from '@fluent-form/ui-zorro';
+import { button, text } from '@fluent-form/ui-zorro';
 
 @Component({
-  selector: 'control-disabled-example',
+  selector: 'update-on-example',
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
@@ -12,13 +12,13 @@ import { text } from '@fluent-form/ui-zorro';
     <pre>{{ model | json }}</pre>
   `
 })
-export class ControlDisabledExampleComponent {
+export class UpdateOnExampleComponent {
   schema = form(() => {
-    text('text-1').disabled(true);
-    text('text-2').disabled(() => true);
+    text('text-1').label('变更时').updateOn('change');
+    text('text-2').label('失焦时').updateOn('blur');
+    text('text-3').label('提交时').updateOn('submit');
 
-    text('text-3').disabled(true).hidden(true);
-    text('text-4').disabled(true).hidden(({ control }) => control.disabled);
+    button().type('primary').content('提交').col(12);
   });
 
   model = {};

@@ -28,6 +28,18 @@ export class InputGroupExampleComponent {
     inputGroup().label('输入框与修饰符').affixes({ prefix: '￥', suffix: 'RMB' }).col(4).schemas(() => {
       text('rmb').placeholder('请输入').col({ flex: 'auto' });
     })
+
+    inputGroup().label('Multi suffixes').col(6).schemas(() => {
+      const fakeText = () => text('_')
+        .readonly(true)
+        .col({ flex: '75px' })
+        .style({ padding: 0, textAlign: 'center', pointerEvents: 'none' });
+
+      text('week').col('fill')
+      fakeText().placeholder('周')
+      text('day').col('fill')
+      fakeText().placeholder('天')
+    })
   });
 
   model = {};

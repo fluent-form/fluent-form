@@ -1,10 +1,10 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { dateRange } from '@fluent-form/ui-zorro';
+import { text } from '@fluent-form/ui-zorro';
 
 @Component({
-  selector: 'control-multi-key-example',
+  selector: 'disabled-example',
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
@@ -12,9 +12,13 @@ import { dateRange } from '@fluent-form/ui-zorro';
     <pre>{{ model | json }}</pre>
   `
 })
-export class ControlMultiKeyExampleComponent {
+export class DisabledExampleComponent {
   schema = form(() => {
-    dateRange(['start', 'end']).label('日期区间');
+    text('text-1').disabled(true);
+    text('text-2').disabled(() => true);
+
+    text('text-3').disabled(true).hidden(true);
+    text('text-4').disabled(true).hidden(({ control }) => control.disabled);
   });
 
   model = {};

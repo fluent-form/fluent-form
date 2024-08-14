@@ -4,7 +4,7 @@ import { FluentFormComponent, form } from '@fluent-form/core';
 import { date } from '@fluent-form/ui-zorro';
 
 @Component({
-  selector: 'control-mapper-example',
+  selector: 'mapper-example',
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
@@ -12,7 +12,7 @@ import { date } from '@fluent-form/ui-zorro';
     <pre>{{ model | json }}</pre>
   `
 })
-export class ControlMapperExampleComponent {
+export class MapperExampleComponent {
   schema = form(() => {
     date('date').label('日期控件').mapper({
       parser: (input: string | null) => {

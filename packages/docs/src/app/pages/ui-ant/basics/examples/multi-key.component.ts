@@ -1,10 +1,10 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { button, text } from '@fluent-form/ui-zorro';
+import { dateRange } from '@fluent-form/ui-zorro';
 
 @Component({
-  selector: 'control-update-on-example',
+  selector: 'multi-key-example',
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
@@ -12,13 +12,9 @@ import { button, text } from '@fluent-form/ui-zorro';
     <pre>{{ model | json }}</pre>
   `
 })
-export class ControlUpdateOnExampleComponent {
+export class MultiKeyExampleComponent {
   schema = form(() => {
-    text('text-1').label('变更时').updateOn('change');
-    text('text-2').label('失焦时').updateOn('blur');
-    text('text-3').label('提交时').updateOn('submit');
-
-    button().type('primary').content('提交').col(12);
+    dateRange(['start', 'end']).label('日期区间');
   });
 
   model = {};

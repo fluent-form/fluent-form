@@ -5,7 +5,7 @@ import { FluentFormComponent, form } from '@fluent-form/core';
 import { inputGroup, text } from '@fluent-form/ui-zorro';
 
 @Component({
-  selector: 'control-validation-example',
+  selector: 'validation-example',
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
@@ -13,7 +13,7 @@ import { inputGroup, text } from '@fluent-form/ui-zorro';
     <pre>{{ model | json }}</pre>
   `
 })
-export class ControlValidationExampleComponent {
+export class ValidationExampleComponent {
   schema = form(() => {
     text('username')
       .label('Username')

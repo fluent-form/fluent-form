@@ -1,39 +1,57 @@
 import { NgDocPage } from '@ng-doc/core';
 import UIZorroCategory from '../ng-doc.category';
 import { ZorroStyleComponent } from '../style';
-import { ControlDefaultValueExampleComponent } from './examples/control-default-value.component';
-import { ControlDisabledExampleComponent } from './examples/control-disabled.component';
-import { ControlHintExampleComponent } from './examples/control-hint.component';
-import { ControlLabelExampleComponent } from './examples/control-label.component';
-import { ControlLinkageExampleComponent } from './examples/control-linkage.component';
-import { ControlMapperExampleComponent } from './examples/control-mapper.component';
-import { ControlMultiKeyExampleComponent } from './examples/control-multi-key.component';
-import { ControlPathKeyExampleComponent } from './examples/control-path-key.component';
-import { ControlSelectCustomOptionContentExampleComponent } from './examples/control-select-custom-option-content.component';
-import { ControlSelectRemoteDataExampleComponent } from './examples/control-select-remote-data.component';
-import { ControlUpdateOnExampleComponent } from './examples/control-update-on.component';
-import { ControlValidationExampleComponent } from './examples/control-validation.component';
+import { CascaderAsyncOptionsExampleComponent } from './examples/cascader-async-options.component';
+import { CascaderCustomPropertyNamesExampleComponent } from './examples/cascader-custom-property-names.component';
+import { CascaderExampleComponent } from './examples/cascader.component';
+import { CheckboxGroupCustomPropertyNamesExampleComponent } from './examples/checkbox-group-custom-property-names.component';
+import { CheckboxGroupExampleComponent } from './examples/checkbox-group.component';
+import { CheckboxExampleComponent } from './examples/checkbox.component';
+import { DateRangeExampleComponent } from './examples/date-range.component';
+import { DateExampleComponent } from './examples/date.component';
+import { NumberExampleComponent } from './examples/number.component';
+import { RadioGroupExampleComponent } from './examples/radio-group.component';
+import { RateExampleComponent } from './examples/rate.component';
+import { SelectCustomOptionContentExampleComponent } from './examples/select-custom-option-content.component';
+import { SelectCustomPropertyNamesExampleComponent } from './examples/select-custom-property-names.component';
+import { SelectRemoteDataExampleComponent } from './examples/select-remote-data.component';
+import { SelectExampleComponent } from './examples/select.component';
+import { SliderExampleComponent } from './examples/slider.component';
+import { TextExampleComponent } from './examples/text.component';
+import { TextareaExampleComponent } from './examples/textarea.component';
+import { TimeExampleComponent } from './examples/time.component';
+import { ToggleExampleComponent } from './examples/toggle.component';
+import { TreeSelectExampleComponent } from './examples/tree-select.component';
 
 const ControlPage: NgDocPage = {
   title: 'Control',
   mdFile: './index.md',
   category: UIZorroCategory,
   demos: {
-    ControlLabelExampleComponent,
-    ControlDefaultValueExampleComponent,
-    ControlDisabledExampleComponent,
-    ControlHintExampleComponent,
-    ControlLinkageExampleComponent,
-    ControlMapperExampleComponent,
-    ControlMultiKeyExampleComponent,
-    ControlPathKeyExampleComponent,
-    ControlUpdateOnExampleComponent,
-    ControlValidationExampleComponent,
-    ControlSelectCustomOptionContentExampleComponent,
-    ControlSelectRemoteDataExampleComponent,
-    ZorroStyleComponent
+    ZorroStyleComponent,
+    TextExampleComponent,
+    TextareaExampleComponent,
+    NumberExampleComponent,
+    DateExampleComponent,
+    DateRangeExampleComponent,
+    TimeExampleComponent,
+    ToggleExampleComponent,
+    SelectExampleComponent,
+    SelectRemoteDataExampleComponent,
+    SelectCustomOptionContentExampleComponent,
+    SelectCustomPropertyNamesExampleComponent,
+    CascaderExampleComponent,
+    CascaderAsyncOptionsExampleComponent,
+    CascaderCustomPropertyNamesExampleComponent,
+    TreeSelectExampleComponent,
+    SliderExampleComponent,
+    RadioGroupExampleComponent,
+    CheckboxExampleComponent,
+    CheckboxGroupExampleComponent,
+    CheckboxGroupCustomPropertyNamesExampleComponent,
+    RateExampleComponent,
   },
-  order: 1
+  order: 2
 };
 
 export default ControlPage;

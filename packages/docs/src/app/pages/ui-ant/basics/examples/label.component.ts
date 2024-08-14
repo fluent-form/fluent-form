@@ -4,7 +4,7 @@ import { FluentFormComponent, form } from '@fluent-form/core';
 import { group, text } from '@fluent-form/ui-zorro';
 
 @Component({
-  selector: 'control-label-example',
+  selector: 'label-example',
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
@@ -12,7 +12,7 @@ import { group, text } from '@fluent-form/ui-zorro';
     <pre>{{ model | json }}</pre>
   `
 })
-export class ControlLabelExampleComponent {
+export class LabelExampleComponent {
   schema = form(
     group().layout('horizontal').schemas(() => {
       text('text-1').label('普通标签').col(12);

@@ -13,7 +13,7 @@ const ComponentPage: NgDocPage = {
     AlertExampleComponent,
     ZorroStyleComponent
   },
-  order: 4
+  order: 5
 };
 
 export default ComponentPage;

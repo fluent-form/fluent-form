@@ -1,10 +1,10 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { text } from '@fluent-form/ui-zorro';
+import { date } from '@fluent-form/ui-zorro';
 
 @Component({
-  selector: 'control-default-value-example',
+  selector: 'date-example',
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
@@ -12,9 +12,16 @@ import { text } from '@fluent-form/ui-zorro';
     <pre>{{ model | json }}</pre>
   `
 })
-export class ControlDefaultValueExampleComponent {
+export class DateExampleComponent {
   schema = form(() => {
-    text('text').defaultValue('默认值');
+    date('date')
+      .label('Date')
+      .placeholder('Please select date')
+      .col(4);
+    date('datetime')
+      .label('Datetime')
+      .placeholder('Please select datetime')
+      .time(true).col(4);
   });
 
   model = {};

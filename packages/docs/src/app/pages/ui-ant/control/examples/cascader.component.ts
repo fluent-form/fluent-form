@@ -48,8 +48,8 @@ const OPTIONS = [
         label: 'Ningbo',
         children: [
           {
-            code: 'dongqianlake',
-            name: 'Dongqian Lake',
+            value: 'dongqianlake',
+            label: 'Dongqian Lake',
             isLeaf: true
           }
         ]

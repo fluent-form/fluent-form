@@ -15,7 +15,7 @@ import { toggle } from '@fluent-form/ui-zorro';
 export class ToggleExampleComponent {
   schema = form(() => {
     toggle('toggle').defaultValue(true);
-    toggle('switch').placeholder(['off', 'on']);
+    toggle('switch').placeholder(['on', 'off']);
   });
 
   model = {};

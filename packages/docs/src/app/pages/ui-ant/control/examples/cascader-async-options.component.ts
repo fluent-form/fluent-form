@@ -16,6 +16,7 @@ import { tap, timer } from 'rxjs';
 export class CascaderAsyncOptionsExampleComponent {
   schema = form(() => {
     cascader('promise')
+      .label('Promise')
       .placeholder('Please select')
       .fetchOptions((node, index) => new Promise<void>(resolve => {
         setTimeout(() => {
@@ -33,6 +34,7 @@ export class CascaderAsyncOptionsExampleComponent {
       .col(4);
 
     cascader('observable')
+      .label('Rx Observable')
       .placeholder('Please select')
       .fetchOptions((node, index) => timer(500).pipe(
         tap(() => {

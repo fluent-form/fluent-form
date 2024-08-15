@@ -14,23 +14,23 @@ import { button, number, numberGroup, text } from '@fluent-form/ui-zorro';
 })
 export class NumberGroupExampleComponent {
   schema = form(() => {
-    numberGroup().label('数值').col(4).schemas(() => {
-      number('num1').placeholder('请输入数字').col(6);
-      number('num2').placeholder('请输入数字').col(6);
+    numberGroup().label('Input group').col(4).schemas(() => {
+      number('num1').placeholder('Please enter').col(6);
+      number('num2').placeholder('Please enter').col(6);
     });
-    numberGroup().label('数值与文本').col(4).schemas(() => {
-      number('num3').placeholder('请输入数字').col(6);
-      text('text').placeholder('请输入文本').col(6);
+    numberGroup().label('Number and text').col(4).schemas(() => {
+      number('num3').placeholder('Please enter number').col(6);
+      text('text').placeholder('Please enter text').col(6);
     });
-    numberGroup().label('输入框与按钮').col(4).schemas(() => {
-      number('num4').placeholder('请输入数字').col({ flex: 'auto' });
-      button().type('primary').variants({ ghost: true }).content('确认');
+    numberGroup().label('Input with button').col(4).schemas(() => {
+      number('num4').placeholder('Please enter').col('fill');
+      button().type('primary').variants({ ghost: true }).content('Confirm');
     });
-    numberGroup().label('输入框与图标').addons({ before: { icon: 'user' } }).col(4).schemas(() => {
-      number('num5').placeholder('请输入数字').col({ flex: 'auto' });
+    numberGroup().label('Input with addons').addons({ before: { icon: 'user' } }).col(4).schemas(() => {
+      number('num5').placeholder('Please enter').col('fill');
     })
-    numberGroup().label('输入框与修饰符').affixes({ prefix: '￥', suffix: 'RMB' }).col(4).schemas(() => {
-      number('num6').placeholder('请输入数字').col({ flex: 'auto' });
+    numberGroup().label('Input with affixes').affixes({ prefix: '￥', suffix: 'RMB' }).col(4).schemas(() => {
+      number('num6').placeholder('Please enter').col('fill');
     })
   });
 

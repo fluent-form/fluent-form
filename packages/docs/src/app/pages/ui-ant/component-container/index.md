@@ -2,7 +2,7 @@
 
 {{ NgDocActions.demo("ZorroStyleComponent", { container: false }) }}
 
-在本章节，我们将展示一些组件容器的使用示例。
+在本章节中，我们将展示一些组件容器的基本使用示例。
 
 ## 分步表单
 

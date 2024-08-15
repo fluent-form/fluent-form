@@ -14,7 +14,7 @@ import { radioGroup } from '@fluent-form/ui-zorro';
 })
 export class RadioGroupExampleComponent {
   schema = form(() => {
-    radioGroup('gender').defaultValue(1).options([
+    radioGroup('gender').label('Gender').defaultValue(1).options([
       { label: 'Wonmen', value: 0 },
       { label: 'Men', value: 1 }
     ]);

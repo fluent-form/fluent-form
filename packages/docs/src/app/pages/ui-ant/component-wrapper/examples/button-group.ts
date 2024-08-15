@@ -10,10 +10,15 @@ import { button, buttonGroup } from '@fluent-form/ui-zorro';
 })
 export class ButtonGroupExampleComponent {
   schema = form(() => {
-    buttonGroup().schemas(() => {
+    buttonGroup().label('Basic').schemas(() => {
       button().content('Cancel');
       button().type('primary').content('Confirm');
     });
+    // TODO
+    // buttonGroup().label('With icon').schemas(() => {
+    //   button().type('primary').icon('left').content('Go back');
+    //   button().type('primary').icon({ after: 'right' }).content('Go forward');
+    // });
   })
 
   model = {};

@@ -59,7 +59,7 @@ export class LinkageExampleComponent {
     toggle('state').label('状态').placeholder(['启用', '禁用']).col(3);
 
     text('text')
-      .label('文本输入框')
+      .label('目标输入框')
       .hidden(({ model }) => !model.show)
       .disabled(({ model }) => !model.state)
       .col(3);

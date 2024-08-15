@@ -6,7 +6,7 @@ import { select } from '@fluent-form/ui-zorro';
 import { catchError, debounceTime, map, of, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'select-remote-data-example',
+  selector: 'select-async-options-example',
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
@@ -14,7 +14,7 @@ import { catchError, debounceTime, map, of, switchMap } from 'rxjs';
     <pre>{{ model | json }}</pre>
   `
 })
-export class SelectRemoteDataExampleComponent {
+export class SelectAsyncOptionsExampleComponent {
   http = inject(HttpClient);
 
   schema = form(() => {

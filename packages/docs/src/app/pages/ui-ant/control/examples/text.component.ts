@@ -14,7 +14,9 @@ import { text } from '@fluent-form/ui-zorro';
 })
 export class TextExampleComponent {
   schema = form(() => {
-    text('name').placeholder('Please enter').col(4);
+    text('name').label('Text').placeholder('Please enter').col(4);
+    text('email').type('email').label('Email').placeholder('Please enter').col(4);
+    text('pwd').type('password').label('Password').placeholder('Please enter').col(4);
   });
 
   model = {};

@@ -21,11 +21,11 @@ export class DateRangeExampleComponent {
 
     dateRange('datetimeRange')
       .label('Datetime range')
-      .placeholder(['Start date', 'End date'])
+      .placeholder(['Start time', 'End time'])
       .time(true)
       .col(4);
 
-    dateRange(['startDay', 'endDay'])
+    dateRange(['startDate', 'endDate'])
       .label('Multi keys')
       .placeholder(['Start date', 'End date'])
       .col(4);

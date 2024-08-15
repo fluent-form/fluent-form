@@ -12,9 +12,9 @@ import { DateExampleComponent } from './examples/date.component';
 import { NumberExampleComponent } from './examples/number.component';
 import { RadioGroupExampleComponent } from './examples/radio-group.component';
 import { RateExampleComponent } from './examples/rate.component';
+import { SelectAsyncOptionsExampleComponent } from './examples/select-async-options.component';
 import { SelectCustomOptionContentExampleComponent } from './examples/select-custom-option-content.component';
 import { SelectCustomPropertyNamesExampleComponent } from './examples/select-custom-property-names.component';
-import { SelectRemoteDataExampleComponent } from './examples/select-remote-data.component';
 import { SelectExampleComponent } from './examples/select.component';
 import { SliderExampleComponent } from './examples/slider.component';
 import { TextExampleComponent } from './examples/text.component';
@@ -37,7 +37,7 @@ const ControlPage: NgDocPage = {
     TimeExampleComponent,
     ToggleExampleComponent,
     SelectExampleComponent,
-    SelectRemoteDataExampleComponent,
+    SelectAsyncOptionsExampleComponent,
     SelectCustomOptionContentExampleComponent,
     SelectCustomPropertyNamesExampleComponent,
     CascaderExampleComponent,

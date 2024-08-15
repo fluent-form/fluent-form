@@ -18,7 +18,7 @@ export class TextareaExampleComponent {
       .label('Description')
       .placeholder('Please fill in')
       .rows(3)
-      .col(4);
+      .col(6);
   });
 
   model = {};

@@ -14,19 +14,19 @@ import { button, inputGroup, text } from '@fluent-form/ui-zorro';
 })
 export class InputGroupExampleComponent {
   schema = form(() => {
-    inputGroup().label('姓名').col(4).schemas(() => {
-      text('firstName').placeholder('请输入名字').col(4);
-      text('lastName').placeholder('请输入姓氏').col(8);
+    inputGroup().label('Input group').col(4).schemas(() => {
+      text('firstName').placeholder('Please enter').col(4);
+      text('lastName').placeholder('Please enter').col(8);
     })
-    inputGroup().label('输入框与按钮').col(4).schemas(() => {
-      text('keyword').placeholder('请输入关键字').col({ flex: 'auto' });
-      button().type('primary').variants({ ghost: true }).content('搜索');
+    inputGroup().label('Input with button').col(4).schemas(() => {
+      text('keyword').placeholder('Please enter').col('fill');
+      button().type('primary').variants({ ghost: true }).content('Search');
     })
-    inputGroup().label('输入框与图标').addons({ before: { icon: 'user' } }).col(4).schemas(() => {
-      text('username').placeholder('请输入').col({ flex: 'auto' });
+    inputGroup().label('Input with addons').addons({ before: { icon: 'user' } }).col(4).schemas(() => {
+      text('username').placeholder('Please enter').col('fill');
     })
-    inputGroup().label('输入框与修饰符').affixes({ prefix: '￥', suffix: 'RMB' }).col(4).schemas(() => {
-      text('rmb').placeholder('请输入').col({ flex: 'auto' });
+    inputGroup().label('Input with affixes').affixes({ prefix: '￥', suffix: 'RMB' }).col(4).schemas(() => {
+      text('rmb').placeholder('Please enter').col('fill');
     })
 
     inputGroup().label('Multi suffixes').col(6).schemas(() => {

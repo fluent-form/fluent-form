@@ -2,6 +2,8 @@
 
 {{ NgDocActions.demo("ZorroStyleComponent", { container: false }) }}
 
+在本章节中，我们将展示一些控件容器的基本使用示例。
+
 {% include "../../../markdowns/brand.md" %} 目前支持 `FormGroup` 与 `FormArray` 两种控件容器。
 
 ## FormGroup

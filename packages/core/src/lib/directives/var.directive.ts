@@ -4,6 +4,9 @@ interface FluentVarContext<T> {
   fluentVar: T;
 }
 
+/**
+ * @deprecated Use `@let` to replace this directive in v18.1
+ */
 @Directive({
   selector: '[fluentVar]',
   standalone: true

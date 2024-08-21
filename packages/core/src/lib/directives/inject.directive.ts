@@ -12,6 +12,12 @@ interface FluentInjectContext<T extends ProviderToken<SafeAny>> {
  * ```html
  * <ng-container *fluentInject="token as value"></ng-container>
  * ```
+ *
+ * @deprecated Use `@let` to replace this directive in v18.1.
+ *
+ * ```
+ * @let value = token | inject: { optional: true }
+ * ```
  */
 @Directive({
   selector: '[fluentInject]',

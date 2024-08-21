@@ -29,16 +29,20 @@
     ">
     @if (schema.label) {
       @if (schema.label | reactive: model : schema : control; as label) {
-        <nz-form-label
-          [nzSpan]="(helper.label.span | invoke: label)!"
-          [nzTooltipTitle]="helper.tooltip.content | invoke: schema.tooltip"
-          [nzTooltipIcon]="(helper.tooltip.icon | invoke: schema.tooltip)!"
-          [nzFor]="schema.id"
-          [nzLabelWrap]="(helper.label.wrap | invoke: label)!"
-          [nzRequired]="currentSchema.required | reactive: model : schema : control"
-          [style.width]="helper.label.width | invoke: label">
-          {{ helper.label.content | invoke: label }}
-        </nz-form-label>
+        <ng-container *fluentInject="NzFormDirective as nzFormDirective">
+          <nz-form-label
+            *fluentVar="helper.label.content | invoke: label as labelContent"
+            [nzSpan]="(helper.label.span | invoke: label)!"
+            [nzTooltipTitle]="helper.tooltip.content | invoke: schema.tooltip"
+            [nzTooltipIcon]="(helper.tooltip.icon | invoke: schema.tooltip)!"
+            [nzFor]="schema.id"
+            [nzLabelWrap]="(helper.label.wrap | invoke: label)!"
+            [nzRequired]="currentSchema.required | reactive: model : schema : control"
+            [nzNoColon]="labelContent ? nzFormDirective.nzNoColon : true"
+            [style.width]="helper.label.width | invoke: label">
+            {{ labelContent }}
+          </nz-form-label>
+        </ng-container>
       }
     }
 

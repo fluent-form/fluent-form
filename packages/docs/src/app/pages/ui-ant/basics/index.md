@@ -84,11 +84,22 @@
 
 {{ NgDocActions.demo("PathKeyExampleComponent") }}
 
+## 事件侦听
+
+可以使用 `listeners` 选项来侦听控件的事件。所有控件均支持 `valueChanges` 和 `statusChanges` 事件。除此之外，每个控件组件/元素还支持侦听其自身提供的特定事件。
+
+{{ NgDocActions.demo("EventListenerExampleComponent") }}
+
 ## 表单联动
 
-表单联动可以帮助您实现复杂的交互效果。部分组件/控件的选项支持传入一个函数，以实现控件之间的联动。该函数接受一个对象作为输入参数，对象类型为 `{ model, control, schema }`。
+表单联动可以帮助您实现复杂的交互效果。部分组件/控件的选项支持传入一个**函数**，以实现控件之间的联动。该函数接受一个对象作为输入参数，对象类型为 `{ model, control, schema }`。
 
 > **WARNING**
 > 并非所有选项都支持联动，我们仅会对必要的选项支持此功能，您可以根据选项的类型判断是否支持该联动。如有需要，请随时向我们[提出](https://github.com/fluent-form/fluent-form/issues)需求。
 
 {{ NgDocActions.demo("LinkageExampleComponent") }}
+
+值得注意的是，如果使用了 `value` 选项来联动控件值，此时控件的值将**完全**由 `value` 选项提供的函数逻辑控制，因此该控件应对用户来说是**只读**的（readonly）。
+如果仍然需要允许用户输入，可以通过侦听控件的 `valueChange` 事件，并在事件回调函数中手动设置目标控件的值。
+
+{{ NgDocActions.demo("LinkageByValueChangesExampleComponent") }}

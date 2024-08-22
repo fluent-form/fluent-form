@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { group, text } from '@fluent-form/ui-zorro';
+import { button, group, text } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'label-example',
@@ -28,6 +28,8 @@ export class LabelExampleComponent {
         .tooltip({ content: '小贴士', icon: 'info-circle' })
         .col(12);
       text('text-6').label({ content: '长文本长文本长文本自动换行', wrap: true, span: 4 }).col(12);
+
+      button().type('primary').label({ span: 4 }).content('Submit').variants({ block: true })
     })
   );
 

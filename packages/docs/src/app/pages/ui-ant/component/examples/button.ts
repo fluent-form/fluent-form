@@ -20,7 +20,9 @@ export class ButtonExampleComponent {
     button().type('primary').variants({ shape: 'round' }).content('Rounded Button');
     button().type('primary').variants({ shape: 'circle' }).icon('plus');
     button().type('primary').variants({ shape: 'round' }).icon('plus').content('Icon Button');
-    button().type('primary').variants({ block: true }).content('Block Button');
+    button().type('primary').variants({ block: true }).content('Block Button').listeners({
+      click: () => console.log('click')
+    });
   })
 
   model = {};

@@ -15,17 +15,17 @@ import { radioGroup, select, text, toggle } from '@fluent-form/ui-zorro';
 export class LinkageExampleComponent {
   schema = form(() => {
     radioGroup('lang')
-      .label('语言')
+      .label('Change language')
       .variants({ button: 'solid' })
       .col(3)
       .defaultValue('zh')
       .options([
         { label: '中文', value: 'zh' },
-        { label: '英文', value: 'en' },
+        { label: 'English', value: 'en' },
       ]);
 
-    select('select')
-      .label('控制内容')
+    select('content')
+      .label('Change value')
       .defaultValue('jack')
       .options(({ model }) => {
         if (model.lang === 'zh') {
@@ -40,28 +40,25 @@ export class LinkageExampleComponent {
           { label: 'Lucy', value: 'lucy' },
         ];
       })
-      .listeners({
-        valueChange: (value, { control }) => {
-          control.parent?.get('text')?.setValue(value);
-        }
-      })
       .col(3);
 
-    radioGroup('show')
-      .label('控制显隐')
+    radioGroup('visible')
+      .label('Change visible')
       .defaultValue(true)
       .options([
-        { label: '显示', value: true },
-        { label: '隐藏', value: false },
+        { label: 'Show', value: true },
+        { label: 'Hide', value: false },
       ])
       .col(3);
 
-    toggle('state').label('状态').placeholder(['启用', '禁用']).col(3);
+    toggle('status').label('Change status').placeholder(['Enabled', 'Disabled']).col(3);
 
-    text('text')
-      .label('目标输入框')
-      .hidden(({ model }) => !model.show)
-      .disabled(({ model }) => !model.state)
+    text('target')
+      .label('Target control')
+      .readonly(true)
+      .hidden(({ model }) => !model.visible)
+      .disabled(({ model }) => !model.status)
+      .value(({ model }) => model.content)
       .col(3);
   });
 

@@ -18,6 +18,10 @@ export class RadioGroupExampleComponent {
       { label: 'Wonmen', value: 0 },
       { label: 'Men', value: 1 }
     ]);
+    radioGroup('sex').label('Sex').variants({ button: 'solid' }).defaultValue(1).options([
+      { label: 'Wonmen', value: 0 },
+      { label: 'Men', value: 1 }
+    ]);
   });
 
   model = {};

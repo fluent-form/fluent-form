@@ -25,6 +25,16 @@ export class SelectExampleComponent {
         { label: 'Mike', value: 'mike' },
       ])
       .col(4);
+
+    select('users')
+      .mode('multiple')
+      .placeholder('Please select users')
+      .options([
+        { label: 'Jack', value: 'jack' },
+        { label: 'lucy', value: 'lucy' },
+        { label: 'Mike', value: 'mike' },
+      ])
+      .col(4);
   });
 
   model = {};

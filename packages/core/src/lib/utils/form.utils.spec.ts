@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { provideFluentForm } from '../provider';
-import { AbstractSchema } from '../schemas';
+import { AbstractControlSchema, AbstractSchema } from '../schemas';
 import { withTesting } from '../testing';
 import { Indexable } from '../types';
 import { FormUtil, getChildControl } from './form.utils';
@@ -476,6 +476,19 @@ describe('form.utils', () => {
     });
 
     describe('updateForm', () => {
+      it('value', () => {
+        const schemas: Indexable<AbstractControlSchema>[] = [
+          { kind: 'text', key: 'txt' },
+          { kind: 'text', key: 'txt2', value: ctx => ctx.model.txt },
+        ];
+        const form = util.createFormGroup(schemas, {});
+
+        expect(form.value).toEqual({ txt: null, txt2: null });
+
+        util.updateForm(form, { txt: true }, schemas);
+        expect(form.get('txt2')?.value).toEqual(true);
+      });
+
       describe('disbaled', () => {
         it('normal', () => {
           const schemas: Indexable<AbstractSchema>[] = [

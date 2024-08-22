@@ -1,7 +1,7 @@
 import { AbstractControlOptions, AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { AbstractSchema } from './abstract.schema';
-import { ControlValueMapper, MaybeSchemaReactiveFn, PropertyHolder } from './interfaces';
+import { ControlValueMapper, MaybeSchemaReactiveFn, PropertyHolder, SchemaReactiveFn } from './interfaces';
 import { SchemaKey } from './types';
 
 /**
@@ -12,6 +12,8 @@ export interface AbstractControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   id?: string;
   /** I/O mapper for control */
   mapper?: ControlValueMapper<Val>;
+  /** Linkage control values */
+  value?: SchemaReactiveFn<AbstractControlSchema, Val>
   /* Used to set the default value of the control. */
   defaultValue?: SafeAny;
   /** Is it a required control */

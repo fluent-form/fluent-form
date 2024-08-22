@@ -126,7 +126,10 @@ export class FormUtil {
   }
 
   /**
-   * 更新表单状态，目前包括更新 validator 与 enabled / disabled
+   * 更新表单状态，目前包括：
+   * - 更新 validator
+   * - 更新 status - enabled / disabled
+   * - 更新 value
    * @param form
    * @param model
    * @param schemas
@@ -161,6 +164,10 @@ export class FormUtil {
       if (this.schemaUtil.isControl(schema)) {
         const control = getChildControl(form, schema.key!)!;
 
+        if (schema.value) {
+          const value = this.valueTransformer.transform(schema.value, { model, schema, control });
+          control.setValue(value, { onlySelf: true });
+        }
         // update disabled
         const disabled = this.valueTransformer.transform(schema.disabled, { model, schema, control });
         if (control.enabled !== !disabled) { // 不一致才更新

@@ -387,6 +387,16 @@ describe('form.utils', () => {
         expect(util.updateModel({}, form, schemas)).toEqual({ txt: '1' });
       });
 
+      it('should be skip disabled controls', () => {
+        const schemas: Indexable<AbstractSchema>[] = [
+          { kind: 'text', key: 'txt', disabled: true },
+          { kind: 'text', key: 'txt2' }
+        ];
+        const form = util.createFormGroup(schemas, {});
+
+        expect(util.updateModel({}, form, schemas)).toEqual({ txt2: null });
+      });
+
       describe('with mulit key control', () => {
         it('normal', () => {
           const schemas: Indexable<AbstractSchema>[] = [

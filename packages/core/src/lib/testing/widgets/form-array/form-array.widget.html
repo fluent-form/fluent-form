@@ -17,39 +17,39 @@
       let-model="model"
       let-index="index"
       let-first="first">
-      @if (schema | renderable) {
-        <fluent-col
-          cdkDrag
-          cdkDragPreviewContainer="parent"
-          [cdkDragBoundary]="row"
-          [span]="schema.col | col: 'span'"
-          [flex]="schema.col | col: 'flex'"
-          [offset]="schema.col | col: 'offset'"
-          [hidden]="schema.hidden | reactive: model : schema : control">
-          <ng-container [fluentFormItemOutlet]="{ schema, control, model }" />
-          <!-- form array 的 schemas 可能会有多个，只在第一个时渲染 remove button -->
-          <button
-            class="fluent-array-element-remove-btn"
-            type="button"
-            [disabled]="formArray.length <= (helper.length.min | invoke: formSchema.length)"
-            (click)="formArray.removeAt(index)">
-            -
-          </button>
-        </fluent-col>
-      }
+      <fluent-col
+        cdkDrag
+        cdkDragPreviewContainer="parent"
+        [cdkDragBoundary]="row"
+        [span]="schema.col | col: 'span'"
+        [flex]="schema.col | col: 'flex'"
+        [offset]="schema.col | col: 'offset'"
+        [hidden]="schema.hidden | reactive: model : schema : control">
+        <ng-container [fluentFormItemOutlet]="{ schema, control, model }" />
+        <!-- form array 的 schemas 可能会有多个，只在第一个时渲染 remove button -->
+        <button
+          class="fluent-array-element-remove-btn"
+          type="button"
+          [disabled]="formArray.length <= (helper.length.min | invoke: formSchema.length)"
+          (click)="formArray.removeAt(index)">
+          -
+        </button>
+      </fluent-col>
     </ng-template>
 
     @for (control of formArray.controls; track control; let index = $index) {
       @for (subschema of formSchema.schemas; track subschema; let first = $first) {
-        <ng-container
-          [ngTemplateOutlet]="formColTemplate"
-          [ngTemplateOutletContext]="{
-            control: control,
-            schema: withIndex(index, subschema),
-            model: model[formSchema.key!],
-            index: index,
-            first: first
-          }" />
+        @if (subschema | renderable) {
+          <ng-container
+            [ngTemplateOutlet]="formColTemplate"
+            [ngTemplateOutletContext]="{
+              control: control,
+              schema: withIndex(index, subschema),
+              model: model[formSchema.key!],
+              index: index,
+              first: first
+            }" />
+        }
       }
     }
 

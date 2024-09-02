@@ -27,25 +27,25 @@
           [nzLayout]="formSchema.layout!"
           [gap]="parentRow.gap">
           <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
-            @if (schema | renderable) {
-              <fluent-col
-                [span]="schema.col | col: 'span'"
-                [flex]="schema.col | col: 'flex'"
-                [offset]="schema.col | col: 'offset'"
-                [hidden]="schema.hidden | reactive: model : schema : control">
-                <ng-container [fluentFormItemOutlet]="{ schema, control, model }" />
-              </fluent-col>
-            }
+            <fluent-col
+              [span]="schema.col | col: 'span'"
+              [flex]="schema.col | col: 'flex'"
+              [offset]="schema.col | col: 'offset'"
+              [hidden]="schema.hidden | reactive: model : schema : control">
+              <ng-container [fluentFormItemOutlet]="{ schema, control, model }" />
+            </fluent-col>
           </ng-template>
           @for (subschema of formSchema.schemas; track subschema) {
-            <ng-container
-              [ngTemplateOutlet]="formColTemplate"
-              [ngTemplateOutletContext]="{
-                control: control,
-                schema: withIndex(index, subschema),
-                model: model[formSchema.key!],
-                index: index
-              }" />
+            @if (subschema | renderable) {
+              <ng-container
+                [ngTemplateOutlet]="formColTemplate"
+                [ngTemplateOutletContext]="{
+                  control: control,
+                  schema: withIndex(index, subschema),
+                  model: model[formSchema.key!],
+                  index: index
+                }" />
+            }
           }
         </fluent-row>
       </nz-tab>

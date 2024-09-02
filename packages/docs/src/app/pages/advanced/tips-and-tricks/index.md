@@ -35,7 +35,15 @@
 使用 Fluent API，我们可以轻松地封装图示函数，以提高表单开发效率。
 
 ```ts
-import { button, form, toggle, radioGroup, text } from '@fluent-form/ui-zorro';
+import { form } from '@fluent-form/core';
+import { button, headless, toggle, radioGroup, text } from '@fluent-form/ui-zorro';
+
+function entityForm(composeFn: () => void) {
+  return form(() => {
+    headless('id');
+    composeFn();
+  });
+}
 
 function genderRadioGroup(key = 'gender') {
   return radioGroup(key).options([
@@ -52,7 +60,7 @@ function submitButton(key?: string) {
   return button(key).type('primary').mode('submit');
 }
 
-form(() => {
+entityForm(() => {
   text('fullName').label('姓名');
   genderRadioGroup().label('性别');
   enabledToggle().label('状态');

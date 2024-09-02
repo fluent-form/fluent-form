@@ -8,10 +8,18 @@
 
 输入框的组合展现。
 
+```ts
+import { useInputGroupWidget } from '@fluent-form/ui-zorro';
+```
+
 {{ NgDocActions.demo("InputGroupExampleComponent") }}
 
 ## NumberGroup
 
 数字输入框的组合展现。
+
+```ts
+import { useNumberGroupWidget } from '@fluent-form/ui-zorro';
+```
 
 {{ NgDocActions.demo("NumberGroupExampleComponent") }}

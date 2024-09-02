@@ -8,4 +8,8 @@
 
 多个按钮的组合展现。
 
+```ts
+import { useButtonGroupWidget } from '@fluent-form/ui-zorro';
+```
+
 {{ NgDocActions.demo("ButtonGroupExampleComponent") }}

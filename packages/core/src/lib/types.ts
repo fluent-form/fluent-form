@@ -1,4 +1,4 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, OutputRef } from '@angular/core';
 import { PickProperty, SafeAny } from '@ngify/types';
 import { SchemaContext } from './schemas';
 
@@ -25,7 +25,7 @@ export type HTMLElementPropertyMap<E extends HTMLElement> = Partial<PickProperty
  * @template C 组件的类类型
  */
 type ComponentOutputName<C> = Exclude<
-  { [K in keyof C]: C[K] extends EventEmitter<SafeAny> ? K : never }[keyof C],
+  { [K in keyof C]: C[K] extends EventEmitter<SafeAny> | OutputRef<SafeAny> ? K : never }[keyof C],
   undefined
 >;
 
@@ -38,7 +38,7 @@ type ComponentOutputName<C> = Exclude<
  * @template S 各种控件的图示
  */
 export type ComponentOutputListenerMap<C> = {
-  [K in ComponentOutputName<C>]?: (event: C[K] extends EventEmitter<infer E> ? E : never, ctx: SchemaContext) => SafeAny
+  [K in ComponentOutputName<C>]?: (event: C[K] extends EventEmitter<infer E> | OutputRef<infer E> ? E : never, ctx: SchemaContext) => SafeAny
 }
 
 /**

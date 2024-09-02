@@ -1,5 +1,5 @@
 import { form } from '../../compose';
-import { headless, range, text } from './control';
+import { headless, number, range, text } from './control';
 
 describe('control', () => {
   it('headless', () => {
@@ -26,6 +26,15 @@ describe('control', () => {
     });
     expect(schemas).toEqual([{
       kind: 'range',
+    }]);
+  });
+
+  it('number', () => {
+    const { schemas } = form(() => {
+      number();
+    });
+    expect(schemas).toEqual([{
+      kind: 'number',
     }]);
   });
 });

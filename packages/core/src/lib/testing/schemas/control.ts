@@ -1,6 +1,7 @@
 import { SafeAny } from '@ngify/types';
 import { AbstractControlSchema, AbstractHeadlessControlSchema, ComponentEventListenerHolder, ComponentPropertyHolder, ElementControlEventListenerHolder, ElementPropertyHolder, SchemaKey, SingleSchemaKey } from '../../schemas';
 import { RangeComponent } from '../components';
+import { NumberComponent } from '../components/number/number.component';
 
 /**
  * @public
@@ -24,4 +25,9 @@ export interface RangeControlSchema<Key extends SchemaKey = SchemaKey, Val = [nu
   kind: 'range';
   min?: number;
   max?: number;
+}
+
+export interface NumberControlSchema<Key extends SchemaKey = SchemaKey, Val = number>
+  extends AbstractControlSchema<Key, Val>, ComponentEventListenerHolder<Val>, ComponentPropertyHolder<NumberComponent> {
+  kind: 'number';
 }

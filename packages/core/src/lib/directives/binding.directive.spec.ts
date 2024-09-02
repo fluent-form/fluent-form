@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { provideFluentForm } from '../provider';
 import { TextControlSchema, withTesting } from '../testing';
-import { RangeComponent } from '../testing/components';
+import { NumberComponent, RangeComponent } from '../testing/components';
 import { FormUtil } from '../utils';
 import { FluentBindingDirective } from './binding.directive';
 
@@ -17,6 +17,7 @@ const inputChangeFn = jest.fn();
   standalone: true,
   imports: [
     RangeComponent,
+    NumberComponent,
     ReactiveFormsModule,
     FluentBindingDirective
   ],
@@ -26,9 +27,14 @@ const inputChangeFn = jest.fn();
       [formControl]="inputControl">
 
     <fluent-range
-      #component
-      [fluentBinding]="{ component, schema: rangeSchema, control: rangeControl, model: {} }"
+      #rangeComponent
+      [fluentBinding]="{ component: rangeComponent, schema: rangeSchema, control: rangeControl, model: {} }"
       [formControl]="rangeControl" />
+
+    <fluent-number
+      #numberComponent
+      [fluentBinding]="{ component: numberComponent, schema: numberSchema, control: numberControl, model: {} }"
+      [formControl]="numberControl" />
   `
 })
 class TestingComponent {
@@ -58,9 +64,21 @@ class TestingComponent {
       testChange: testChangeFn
     }
   };
+  numberSchema = {
+    kind: 'number',
+    properties: {
+      max: 999
+    },
+    listeners: {
+      valueChange: valueChangeFn,
+      statusChange: statusChangeFn,
+      testChange: testChangeFn
+    }
+  };
 
   inputControl = this.formUtil.createFormControl(this.inputSchema, {});
   rangeControl = this.formUtil.createFormControl(this.rangeSchema, {});
+  numberControl = this.formUtil.createFormControl(this.numberSchema, {});
 }
 
 describe('FluentBindingDirective', () => {
@@ -83,15 +101,20 @@ describe('FluentBindingDirective', () => {
     fixture.detectChanges();
   });
 
-  it('input should be read only', () => {
+  it('should be properties applied (element)', () => {
     const input = debugElement.nativeElement.querySelector('input');
     input.dispatchEvent(new InputEvent('input'));
     expect(input.readOnly).toBe(true);
   });
 
-  it('rate should be auto focus', () => {
+  it('should be properties applied (component)', () => {
     const rangeCmp: RangeComponent = debugElement.query(By.directive(RangeComponent)).componentInstance;
     expect(rangeCmp.min).toBe(5);
+  });
+
+  it('should be properties applied (signal input component)', () => {
+    const numberCmp: NumberComponent = debugElement.query(By.directive(NumberComponent)).componentInstance;
+    expect(numberCmp.max()).toBe(999);
   });
 
   it('should listen to nativeElement event', () => {
@@ -112,9 +135,15 @@ describe('FluentBindingDirective', () => {
     expect(statusChangeFn).toHaveBeenCalled();
   });
 
-  it('should listen to custom event', () => {
+  it('should listen to custom event (EventEmiter)', () => {
     const rangeCmp: RangeComponent = debugElement.query(By.directive(RangeComponent)).componentInstance;
     rangeCmp.testChange.emit();
+    expect(testChangeFn).toHaveBeenCalled();
+  });
+
+  it('should listen to custom event (OutputRef)', () => {
+    const numberCmp: NumberComponent = debugElement.query(By.directive(NumberComponent)).componentInstance;
+    numberCmp.testChange.emit();
     expect(testChangeFn).toHaveBeenCalled();
   });
 });

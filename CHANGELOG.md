@@ -1,3 +1,24 @@
+## 0.25.0 (2024-09-05)
+
+
+### 🚀 Features
+
+- **core:** update withSchemaPatchers to support nested arrays of patchers ([0c9c5e18](https://github.com/fluent-form/fluent-form/commit/0c9c5e18))
+- **core:** support for value linkage ([1e3c6976](https://github.com/fluent-form/fluent-form/commit/1e3c6976))
+- **core:** support for io function based component ([35f6f8a4](https://github.com/fluent-form/fluent-form/commit/35f6f8a4))
+
+### 🩹 Fixes
+
+- **core:** should be skip disabled controls ([c808c9bf](https://github.com/fluent-form/fluent-form/commit/c808c9bf))
+
+### 🔥 Performance
+
+- improve rendering performance ([64297b87](https://github.com/fluent-form/fluent-form/commit/64297b87))
+
+### ❤️  Thank You
+
+- hyperlife1119 @HyperLife1119
+
 ## 0.24.14 (2024-07-26)
 
 

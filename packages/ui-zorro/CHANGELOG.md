@@ -1,3 +1,15 @@
+## 0.25.0 (2024-09-05)
+
+
+### 🔥 Performance
+
+- improve rendering performance
+
+
+### ❤️  Thank You
+
+- hyperlife1119
+
 ## 0.24.14 (2024-07-26)
 
 

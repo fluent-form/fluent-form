@@ -1,3 +1,29 @@
+## 0.25.0 (2024-09-05)
+
+
+### 🚀 Features
+
+- **core:** update withSchemaPatchers to support nested arrays of patchers
+
+- **core:** support for value linkage
+
+- **core:** support for io function based component
+
+
+### 🩹 Fixes
+
+- **core:** should be skip disabled controls
+
+
+### 🔥 Performance
+
+- improve rendering performance
+
+
+### ❤️  Thank You
+
+- hyperlife1119
+
 ## 0.24.14 (2024-07-26)
 
 

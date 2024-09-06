@@ -1,9 +1,7 @@
-# core
+# @fluent-form/ui-zorro
 
-This library was generated with [Nx](https://nx.dev).
+The ng-zorro-antd UI adapter for @fluent-form/core.
 
-## Running unit tests
+## License
 
-Run `nx test core` to execute the unit tests.
-
-test
+[MIT](https://github.com/fluent-form/fluent-form/blob/main/LICENSE)

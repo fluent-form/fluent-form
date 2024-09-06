@@ -1,9 +1,7 @@
-# core
+# @fluent-form/core
 
-This library was generated with [Nx](https://nx.dev).
+An Angular dynamic forms library powered by Fluent API and JSON.
 
-## Running unit tests
+## License
 
-Run `nx test core` to execute the unit tests.
-
-test
+[MIT](https://github.com/fluent-form/fluent-form/blob/main/LICENSE)

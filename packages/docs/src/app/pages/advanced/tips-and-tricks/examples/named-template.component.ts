@@ -14,7 +14,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
     </fluent-form>
   `
 })
-export class NamedemplateExampleComponent {
+export class NamedTemplateExampleComponent {
   schema = form(() => {
     inputGroup().addons({ before: 'Https://', after: '#tld' }).schemas(() => {
       text('text').col(12);

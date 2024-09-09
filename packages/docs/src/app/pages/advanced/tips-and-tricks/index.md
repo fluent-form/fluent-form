@@ -19,7 +19,7 @@
 
 要使用命名模板功能，您需要导入 `FluentFormModule` 模块，并在 `<fluent-form>` 组件下使用 `[fluentTemplate]` 结构指令来注册自定义模板。
 
-{{ NgDocActions.demo("NamedemplateExampleComponent") }}
+{{ NgDocActions.demo("NamedTemplateExampleComponent") }}
 
 ## 更新图示
 

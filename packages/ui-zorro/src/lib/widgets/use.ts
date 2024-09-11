@@ -1,9 +1,10 @@
 import { ValidatorFn, Validators } from '@angular/forms';
 import { FluentFormWidgetConfig, SchemaType, isNumber } from '@fluent-form/core';
-import { AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, InputGroupComponentSchema, NumberGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CardComponentSchema, CardsArraySchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, InputGroupComponentSchema, NumberGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { AlertWidget } from './alert/alert.widget';
 import { ButtonGroupWidget } from './button-group/button-group.widget';
 import { ButtonWidget } from './button/button.widget';
+import { CardsArrayWidget } from './cards-array/cards-array.widget';
 import { CascaderWidget } from './cascader/cascader.widget';
 import { CheckboxGroupWidget } from './checkbox-group/checkbox-group.widget';
 import { CheckboxWidget } from './checkbox/checkbox.widget';
@@ -55,6 +56,7 @@ export function useAllWidgets() {
     useFormGroupWidget(),
     useFormArrayWidget(),
     useTabsArrayWidget(),
+    useCardsArrayWidget()
   ];
 }
 
@@ -361,4 +363,18 @@ export function useTabsArrayWidget(): FluentFormWidgetConfig<TabsArraySchema> {
     type: SchemaType.ControlArray,
     widget: TabsArrayWidget
   };
+}
+
+export function useCardsArrayWidget(): [FluentFormWidgetConfig<CardsArraySchema>, FluentFormWidgetConfig<CardComponentSchema>] {
+  return [
+    {
+      kind: 'cards-array',
+      type: SchemaType.ControlArray,
+      widget: CardsArrayWidget
+    },
+    {
+      kind: 'card',
+      type: SchemaType.ComponentContainer,
+    }
+  ];
 }

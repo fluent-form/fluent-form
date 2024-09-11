@@ -1,5 +1,5 @@
 import { form } from '@fluent-form/core';
-import { array, group, tabsArray } from './control-container';
+import { array, cardsArray, group, tabsArray } from './control-container';
 
 describe('control-container', () => {
   it('group', () => {
@@ -34,6 +34,18 @@ describe('control-container', () => {
     expect(schemas).toEqual([{
       kind: 'tabs-array',
       key: 'tabs-array',
+      schemas: []
+    }]);
+  });
+
+  it('cards-array', () => {
+    const { schemas } = form(() => {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      cardsArray('cards-array').schemas(() => { });
+    });
+    expect(schemas).toEqual([{
+      kind: 'cards-array',
+      key: 'cards-array',
       schemas: []
     }]);
   });

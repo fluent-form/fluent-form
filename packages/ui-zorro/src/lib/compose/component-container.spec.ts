@@ -1,5 +1,5 @@
 import { form } from '@fluent-form/core';
-import { step, steps, tab, tabs } from './component-container';
+import { card, step, steps, tab, tabs } from './component-container';
 import { text } from './control';
 
 describe('component-container', () => {
@@ -44,6 +44,17 @@ describe('component-container', () => {
           ]
         }
       ]
+    }]);
+  });
+
+  it('card', () => {
+    const { schemas } = form(() => {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      card().schemas(() => { });
+    });
+    expect(schemas).toEqual([{
+      kind: 'card',
+      schemas: []
     }]);
   });
 });

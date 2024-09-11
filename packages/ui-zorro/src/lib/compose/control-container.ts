@@ -1,5 +1,5 @@
 import { SingleSchemaKey, UnstableBuilder, composeBuilder } from '@fluent-form/core';
-import { FormArraySchema, FormGroupSchema, TabsArraySchema } from '../schemas';
+import { CardsArraySchema, FormArraySchema, FormGroupSchema, TabsArraySchema } from '../schemas';
 import { KindOrKey } from './helper';
 
 export function group(): UnstableBuilder<FormGroupSchema<number>, KindOrKey>;
@@ -18,4 +18,10 @@ export function tabsArray(): UnstableBuilder<TabsArraySchema<number>, KindOrKey>
 export function tabsArray<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<TabsArraySchema<Key>, KindOrKey>;
 export function tabsArray<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<TabsArraySchema<Key>, KindOrKey> {
   return composeBuilder<TabsArraySchema<Key>>().kind('tabs-array').key(key);
+}
+
+export function cardsArray(): UnstableBuilder<CardsArraySchema<number>, KindOrKey>;
+export function cardsArray<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<CardsArraySchema<Key>, KindOrKey>;
+export function cardsArray<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<CardsArraySchema<Key>, KindOrKey> {
+  return composeBuilder<CardsArraySchema<Key>>().kind('cards-array').key(key);
 }

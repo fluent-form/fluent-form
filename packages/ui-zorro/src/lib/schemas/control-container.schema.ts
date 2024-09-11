@@ -4,6 +4,7 @@ import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button'
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
 import { NzTabPosition } from 'ng-zorro-antd/tabs';
+import { CardComponentSchema } from './component-container.schema';
 import { Labelful } from './interfaces';
 
 /**
@@ -53,4 +54,13 @@ export interface TabsArraySchema<Key extends SingleSchemaKey = SingleSchemaKey> 
   addable?: MaybeSchemaReactiveFn<TabsArraySchema, boolean>;
   removable?: boolean;
   // orderable?: boolean;
+}
+
+export interface CardsArraySchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractFormArraySchema<Key>, Labelful {
+  kind: 'cards-array';
+  layout?: NzFormLayoutType;
+  addable?: MaybeSchemaReactiveFn<FormArraySchema, boolean | AddableButton>;
+  removable?: boolean;
+  orderable?: boolean;
+  schemas: CardComponentSchema[];
 }

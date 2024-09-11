@@ -1,5 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { AbstractComponentContainerSchema, ComponentEventListenerHolder, ComponentPropertyHolder, MaybeSchemaReactiveFn, SingleSchemaKey } from '@fluent-form/core';
+import { NzCardComponent } from 'ng-zorro-antd/card';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
 import { NzTabComponent, NzTabPosition, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
@@ -56,4 +57,12 @@ export interface TabComponentSchema<Key extends SingleSchemaKey = SingleSchemaKe
   kind: 'tab';
   title: string;
   disabled?: MaybeSchemaReactiveFn<TabComponentSchema<SingleSchemaKey>, boolean>;
+}
+
+export interface CardComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
+  extends AbstractComponentContainerSchema<Key>, ComponentEventListenerHolder<NzTabComponent>, ComponentPropertyHolder<NzTabComponent> {
+  kind: 'card';
+  borderless?: boolean;
+  hoverable?: boolean;
+  size?: NzCardComponent['nzSize'];
 }

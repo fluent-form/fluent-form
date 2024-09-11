@@ -5,7 +5,6 @@
     nz-form
     cdkDropList
     [cdkDropListDisabled]="!formSchema.orderable"
-    [class.cdk-drop-list-disabled]="!formSchema.orderable"
     [gap]="formSchema.gap ?? parentRow.gap"
     [align]="formSchema.align"
     [justify]="formSchema.justify"
@@ -59,16 +58,14 @@
                   </fluent-col>
                 </ng-template>
 
-                @for (subschema of cardSchema.schemas; track subschema; let first = $first) {
+                @for (subschema of cardSchema.schemas; track subschema) {
                   @if (subschema | renderable) {
                     <ng-container
                       [ngTemplateOutlet]="formColTemplate"
                       [ngTemplateOutletContext]="{
                         control: control,
                         schema: withIndex(index, subschema),
-                        model: model[formSchema.key!],
-                        index: index,
-                        first: first
+                        model: model[formSchema.key!]
                       }" />
                   }
                 }

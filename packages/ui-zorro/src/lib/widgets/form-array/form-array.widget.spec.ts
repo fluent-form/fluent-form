@@ -7,7 +7,7 @@ import { withZorro } from '../../feature';
 import { useAllWidgets } from '../use';
 import { FormArrayWidget } from './form-array.widget';
 
-describe('NestedFormWidget', () => {
+describe('FormArrayWidget', () => {
   let component: FormArrayWidget;
   let helper: FormArrayWidget['helper'];
   let fixture: ComponentFixture<FormArrayWidget>;

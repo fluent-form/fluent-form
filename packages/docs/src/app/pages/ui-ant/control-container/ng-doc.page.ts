@@ -1,6 +1,7 @@
 import { NgDocPage } from '@ng-doc/core';
 import UIZorroCategory from '../ng-doc.category';
 import { ZorroStyleComponent } from '../style';
+import { CardsArrayExampleComponent } from './examples/cards-array.component';
 import { FormArrayExampleComponent } from './examples/form-array.component';
 import { FormGroupExampleComponent } from './examples/form-group.component';
 import { FormLayoutExampleComponent } from './examples/form-layout.component';
@@ -17,6 +18,7 @@ const ControlContainerPage: NgDocPage = {
     FormArrayExampleComponent,
     FormGroupExampleComponent,
     TabsArrayExampleComponent,
+    CardsArrayExampleComponent,
     ZorroStyleComponent
   },
   order: 4

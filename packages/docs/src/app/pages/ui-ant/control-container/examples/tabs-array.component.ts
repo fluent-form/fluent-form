@@ -15,7 +15,7 @@ export class TabsArrayExampleComponent {
   schema = form(() => {
     tabsArray('passengers')
       .label('乘客')
-      .length({ min: 1, max: 5 })
+      .length({ max: 5 })
       .col(12)
       .schemas(() => {
         group().col(12).schemas(() => {

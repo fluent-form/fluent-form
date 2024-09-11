@@ -49,6 +49,21 @@ import { useTabsArrayWidget } from '@fluent-form/ui-zorro';
 
 {{ NgDocActions.demo("TabsArrayExampleComponent") }}
 
+### 卡片型
+
+使用 `cardsArray()` 函数，您可以轻松地配置卡片样式的数组表单。这种类型的表单支持增减元素、嵌套、**拖拽排序**以及长度限制。
+
+- 必须搭配 `card()` 组件使用。
+- 使用 `length` 选项配置数组元素长度限制，支持传入一个数字或一个配置对象。
+- 使用 `addable` / `removable` 选项配置是否启用增删元素。
+- 使用 `orderable` 选项配置是否启用拖拽排序（目前仅支持一维拖拽，参见 [#13372](https://github.com/angular/components/issues/13372)）。
+
+```ts
+import { useCardsArrayWidget } from '@fluent-form/ui-zorro';
+```
+
+{{ NgDocActions.demo("CardsArrayExampleComponent") }}
+
 ## 顶层表单
 
 顶层表单实际上也是一个 `FormGroup`，是通过 `form()` 函数自动创建的。

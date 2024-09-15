@@ -36,7 +36,7 @@ jobs:
           cache-dependency-path: ${{ env.BUILD_PATH }}/package-lock.json
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
       - name: Install dependencies
         run: npm ci
         working-directory: ${{ env.BUILD_PATH }}

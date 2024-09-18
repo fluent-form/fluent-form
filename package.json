@@ -12,7 +12,7 @@
     "lint": "nx run-many --target=lint",
     "affected": "nx affected -t lint test build",
     "release": "export npm_config_legacy_peer_deps=false && nx release",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "workspaces": [
     "packages/*"

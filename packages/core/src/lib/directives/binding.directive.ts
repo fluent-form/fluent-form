@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OutputRef, isSignal } from '@angular/core';
+import { Directive, ElementRef, Input, OutputRef, inject, isSignal } from '@angular/core';
 import { SIGNAL, SignalNode, signalSetFn } from '@angular/core/primitives/signals';
 import { outputToObservable } from '@angular/core/rxjs-interop';
 import { AbstractControl } from '@angular/forms';
@@ -25,6 +25,8 @@ function isPropertyPatcher(value: SafeAny): value is PropertyHolder {
   providers: [DestroyedSubject],
 })
 export class FluentBindingDirective<E extends HTMLElement, C extends object, S extends AbstractSchema> {
+  private readonly elementRef: ElementRef<E> = inject(ElementRef);
+  private readonly destroyed = inject(DestroyedSubject);
 
   @Input() set fluentBinding(value: { component?: C, schema: S, control: AbstractControl, model: AnyObject }) {
     const { component, schema, control, model } = value;
@@ -78,10 +80,4 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
       }
     }
   }
-
-  constructor(
-    private elementRef: ElementRef<E>,
-    private destroyed: DestroyedSubject
-  ) { }
-
 }

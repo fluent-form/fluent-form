@@ -1,6 +1,7 @@
 export * from './binding.directive';
 export * from './context-guard.directive';
 export * from './context.directive';
+export * from './control-wrapper.directive';
 export * from './form-item-outlet.directive';
 export * from './grid';
 export * from './inject.directive';

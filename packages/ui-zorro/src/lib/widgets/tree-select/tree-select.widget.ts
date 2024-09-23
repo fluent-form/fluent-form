@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, InvokePipe, WidgetTemplateContext, isBoolean, isUndefined } from '@fluent-form/core';
+import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, InvokePipe, WidgetTemplateContext, isBoolean, isUndefined } from '@fluent-form/core';
 import { SafeAny } from '@ngify/types';
-import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { TreeSelectControlSchema } from '../../schemas';
 
@@ -28,7 +27,7 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
   styles: [`nz-tree-select { width: 100% }`]
 })
 export class TreeSelectWidget extends AbstractWidget<TreeSelectWidgetTemplateContext> {
-  protected readonly InputGroup = NzFormNoStatusService;
+  protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
   protected readonly helper = {
     checkable: (checkable: TreeSelectControlSchema['checkable']) =>
       isBoolean(checkable) ? checkable : !isUndefined(checkable?.strict),

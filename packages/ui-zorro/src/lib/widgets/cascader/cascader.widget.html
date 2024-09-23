@@ -1,6 +1,6 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <ng-container *fluentInject="InputGroup as inputGroup; optional: true">
-    @if (inputGroup) {
+  <ng-container *fluentInject="ControlWrapperDirective as controlWrapper; optional: true">
+    @if (controlWrapper) {
       @if (!(schema.hidden | reactive: model : schema : control)) {
         <nz-cascader
           #component

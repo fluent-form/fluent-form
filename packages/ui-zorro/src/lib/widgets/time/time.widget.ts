@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
-import { NzFormNoStatusService } from 'ng-zorro-antd/core/form';
+import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { TimePickerControlSchema } from '../../schemas';
 
@@ -27,5 +26,5 @@ type TimeWidgetTemplateContext = WidgetTemplateContext<TimePickerControlSchema, 
   styles: [`nz-time-picker { width: 100% }`]
 })
 export class TimeWidget extends AbstractWidget<TimeWidgetTemplateContext> {
-  protected readonly InputGroup = NzFormNoStatusService;
+  protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
 }

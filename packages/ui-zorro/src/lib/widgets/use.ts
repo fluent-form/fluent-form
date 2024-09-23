@@ -1,6 +1,6 @@
 import { ValidatorFn, Validators } from '@angular/forms';
 import { FluentFormWidgetConfig, SchemaType, isNumber } from '@fluent-form/core';
-import { AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CardComponentSchema, CardsArraySchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, InputGroupComponentSchema, NumberGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CardComponentSchema, CardsArraySchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, InputGroupComponentSchema, NumberGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SpaceComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { AlertWidget } from './alert/alert.widget';
 import { ButtonGroupWidget } from './button-group/button-group.widget';
 import { ButtonWidget } from './button/button.widget';
@@ -20,6 +20,7 @@ import { RadioGroupWidget } from './radio-group/radio-group.widget';
 import { RateWidget } from './rate/rate.widget';
 import { SelectWidget } from './select/select.widget';
 import { SilderWidget } from './slider/silder.widget';
+import { SpaceWidget } from './space/space.widget';
 import { StepsWidget } from './steps/steps.widget';
 import { TabsArrayWidget } from './tabs-array/tabs-array.widget';
 import { TabsWidget } from './tabs/tabs.widget';
@@ -49,6 +50,7 @@ export function useAllWidgets() {
     useHeadingWidget(),
     useInputGroupWidget(),
     useNumberGroupWidget(),
+    useSpaceWidget(),
     useButtonWidget(),
     useAlertWidget(),
     useStepsWidget(),
@@ -277,6 +279,14 @@ export function useNumberGroupWidget(): FluentFormWidgetConfig<NumberGroupCompon
     kind: 'number-group',
     type: SchemaType.ControlWrapper,
     widget: NumberGroupWidget
+  };
+}
+
+export function useSpaceWidget(): FluentFormWidgetConfig<SpaceComponentSchema> {
+  return {
+    kind: 'space',
+    type: SchemaType.ControlWrapper,
+    widget: SpaceWidget
   };
 }
 

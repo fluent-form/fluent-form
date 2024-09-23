@@ -3,6 +3,7 @@ import UIZorroCategory from '../ng-doc.category';
 import { ZorroStyleComponent } from '../style';
 import { InputGroupExampleComponent } from './examples/input-group.component';
 import { NumberGroupExampleComponent } from './examples/number-group.component';
+import { SpaceExampleComponent } from './examples/space.component';
 
 const ControlWrapperPage: NgDocPage = {
   title: 'Control Wrapper',
@@ -11,6 +12,7 @@ const ControlWrapperPage: NgDocPage = {
   demos: {
     InputGroupExampleComponent,
     NumberGroupExampleComponent,
+    SpaceExampleComponent,
     ZorroStyleComponent
   },
   order: 3

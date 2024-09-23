@@ -6,7 +6,7 @@
 
 ## InputGroup
 
-输入框的组合展现。
+`InputGroup` 组件可以帮助您在表单中添加输入框的组合展现。
 
 ```ts
 import { useInputGroupWidget } from '@fluent-form/ui-zorro';
@@ -14,12 +14,13 @@ import { useInputGroupWidget } from '@fluent-form/ui-zorro';
 
 {{ NgDocActions.demo("InputGroupExampleComponent") }}
 
-## NumberGroup
 
-数字输入框的组合展现。
+## Space
+
+间距布局组件可以帮助您在控件之间添加间距，使表单更加美观。
 
 ```ts
-import { useNumberGroupWidget } from '@fluent-form/ui-zorro';
+import { useSpaceWidget } from '@fluent-form/ui-zorro';
 ```
 
-{{ NgDocActions.demo("NumberGroupExampleComponent") }}
+{{ NgDocActions.demo("SpaceExampleComponent") }}

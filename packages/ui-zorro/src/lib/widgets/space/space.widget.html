@@ -1,0 +1,20 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <nz-flex
+    #component
+    [fluentBinding]="{ component, schema, control, model }"
+    [class]="schema.class"
+    [style]="schema.style"
+    [nzVertical]="schema.vertical!"
+    [nzJustify]="schema.justify!"
+    [nzAlign]="schema.align!"
+    [nzWrap]="schema.wrap!"
+    [nzFlex]="schema.flex!"
+    [nzGap]="schema.gap || 'small'">
+    @for (subschema of schema.schemas; track subschema) {
+      <ng-container
+        fluentWithInjector
+        [ngTemplateOutlet]="subschema | widgetTemplate"
+        [ngTemplateOutletContext]="{ control: subschema.key | control: control, schema: subschema, model: model }" />
+    }
+  </nz-flex>
+</ng-template>

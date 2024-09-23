@@ -1,17 +1,9 @@
 <ng-template let-control="control" let-schema="schema" let-model="model">
-  <ng-container *fluentVar="schema.kind | schemaType as schemaType">
-    @if (schemaType === SchemaType.ComponentContainer) {
-      <ng-container
-        fluentWithInjector
-        [ngTemplateOutlet]="schema | widgetTemplate"
-        [ngTemplateOutletContext]="{ control, schema, model }" />
-    } @else {
-      <ng-container
-        fluentWithInjector
-        [ngTemplateOutlet]="formItemTemplate"
-        [ngTemplateOutletContext]="{ control, schema, model, schemaType }" />
-    }
-  </ng-container>
+  <ng-container
+    *fluentVar="schema.kind | schemaType as schemaType"
+    fluentWithInjector
+    [ngTemplateOutlet]="formItemTemplate"
+    [ngTemplateOutletContext]="{ control, schema, model, schemaType }" />
 </ng-template>
 
 <ng-template #formItemTemplate let-control="control" let-schema="schema" let-model="model" let-schemaType="schemaType">
@@ -25,7 +17,11 @@
     "
     [class]="schema.class"
     [style.margin-bottom.px]="
-      schemaType === SchemaType.ControlGroup || schemaType === SchemaType.ControlArray ? 0 : null
+      schemaType === SchemaType.ControlGroup ||
+      schemaType === SchemaType.ControlArray ||
+      schemaType === SchemaType.ComponentContainer
+        ? 0
+        : null
     ">
     <ng-container *fluentVar="schema.label | reactive: model : schema : control as label">
       <ng-container *fluentVar="helper.label.content | invoke: label as labelContent">

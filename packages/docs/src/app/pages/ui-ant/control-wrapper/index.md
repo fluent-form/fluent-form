@@ -14,6 +14,15 @@ import { useInputGroupWidget } from '@fluent-form/ui-zorro';
 
 {{ NgDocActions.demo("InputGroupExampleComponent") }}
 
+## NumberGroup
+
+`NumberGroup` 组件可以帮助您在表单中添加输入框的组合展现。
+
+```ts
+import { useNumberGroupWidget } from '@fluent-form/ui-zorro';
+```
+
+{{ NgDocActions.demo("NumberGroupExampleComponent") }}
 
 ## Space
 

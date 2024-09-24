@@ -22,7 +22,7 @@
         [nzSubtitle]="subschema.subtitle | template"
         [nzDescription]="subschema.description | template"
         [nzDisabled]="subschema.disabled | reactive: model : subschema : control"
-        [nzStatus]="subschema.status ?? schema.active === index ? 'process' : 'wait'"
+        [nzStatus]="subschema.status ?? (schema.active === index ? 'process' : 'wait')"
         [hidden]="subschema.hidden | reactive: model : subschema : control" />
     }
   </nz-steps>

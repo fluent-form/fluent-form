@@ -1,5 +1,5 @@
 import { form } from '@fluent-form/core';
-import { alert, button, heading1, heading2, heading3, heading4, heading5, heading6, template } from './component';
+import { alert, button, heading1, heading2, heading3, heading4, heading5, heading6, icon, template } from './component';
 
 describe('component', () => {
   it('template', () => {
@@ -33,6 +33,15 @@ describe('component', () => {
     });
     expect(schemas).toEqual([
       { kind: 'alert', message: '' }
+    ]);
+  });
+
+  it('icon', () => {
+    const { schemas } = form(() => {
+      icon().type('user');
+    });
+    expect(schemas).toEqual([
+      { kind: 'icon', type: 'user' }
     ]);
   });
 });

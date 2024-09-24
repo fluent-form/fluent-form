@@ -1,7 +1,8 @@
 import { TemplateRef } from '@angular/core';
-import { AbstractComponentSchema, AbstractSchema, ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, MaybeSchemaReactiveFn, PropertyHolder, SingleSchemaKey } from '@fluent-form/core';
+import { AbstractComponentSchema, ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, MaybeSchemaReactiveFn, PropertyHolder, SingleSchemaKey } from '@fluent-form/core';
 import { NzAlertComponent } from 'ng-zorro-antd/alert';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
+import { NzIconDirective } from 'ng-zorro-antd/icon';
 import { Icon, Labelful } from './interfaces';
 
 /**
@@ -36,7 +37,7 @@ export interface ButtonComponentSchema<Key extends SingleSchemaKey = SingleSchem
  * @public
  */
 export interface HeadingComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractSchema<Key>, ElementEventListenerHolder, ElementPropertyHolder<HTMLHeadingElement> {
+  extends AbstractComponentSchema<Key>, ElementEventListenerHolder, ElementPropertyHolder<HTMLHeadingElement> {
   kind: 'heading';
   level: 1 | 2 | 3 | 4 | 5 | 6;
   content: string | TemplateRef<void>;
@@ -46,7 +47,7 @@ export interface HeadingComponentSchema<Key extends SingleSchemaKey = SingleSche
  * @public
  */
 export interface AlertComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractSchema<Key>, ComponentEventListenerHolder<NzAlertComponent>, ComponentPropertyHolder<NzAlertComponent> {
+  extends AbstractComponentSchema<Key>, ComponentEventListenerHolder<NzAlertComponent>, ComponentPropertyHolder<NzAlertComponent> {
   kind: 'alert';
   type?: NzAlertComponent['nzType'];
   icon?: boolean | string;
@@ -57,4 +58,13 @@ export interface AlertComponentSchema<Key extends SingleSchemaKey = SingleSchema
   variants?: {
     banner?: boolean;
   }
+}
+
+export interface IconComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
+  extends AbstractComponentSchema<Key>, ComponentPropertyHolder<NzIconDirective> {
+  kind: 'icon';
+  type: MaybeSchemaReactiveFn<IconComponentSchema<SingleSchemaKey>, string>
+  theme?: NzIconDirective['nzTheme'];
+  spin?: boolean
+  rotate?: number
 }

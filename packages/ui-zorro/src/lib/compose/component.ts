@@ -1,5 +1,5 @@
 import { SingleSchemaKey, UnstableBuilder, composeBuilder } from '@fluent-form/core';
-import { AlertComponentSchema, ButtonComponentSchema, HeadingComponentSchema, TemplateSchema } from '../schemas';
+import { AlertComponentSchema, ButtonComponentSchema, HeadingComponentSchema, IconComponentSchema, TemplateSchema } from '../schemas';
 import { KindOrKey } from './helper';
 
 export function template<Key extends SingleSchemaKey>(key: Key): UnstableBuilder<TemplateSchema<Key>, KindOrKey> {
@@ -34,6 +34,10 @@ export function heading6<Key extends SingleSchemaKey>(key?: Key): UnstableBuilde
 
 export function alert<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<AlertComponentSchema<Key>, KindOrKey> {
   return composeBuilder<AlertComponentSchema<Key>>().kind('alert').key(key);
+}
+
+export function icon<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<IconComponentSchema<Key>, KindOrKey> {
+  return composeBuilder<IconComponentSchema<Key>>().kind('icon').key(key);
 }
 
 type KindOrKeyOrLevel = KindOrKey | 'level';

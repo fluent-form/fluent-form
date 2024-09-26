@@ -48,7 +48,7 @@
   )
 ```
 
-5. `inputGroup()` 与 `numberGroup()` 组件的 `before` 与 `after` 参数合并为 `addons`，`prefix` 与 `suffix` 参数合并为 `affixes` 参数：
+5. `inputGroup()` 组件的 `before` 与 `after` 参数合并为 `addons`，`prefix` 与 `suffix` 参数合并为 `affixes` 参数：
 
 ```diff
 - inputGroup().before('before').after('after')
@@ -57,3 +57,5 @@
 - inputGroup().prefix('prefix').suffix('suffix')
 + inputGroup().affixes({ prefix: 'prefix', suffix: 'suffix' })
 ```
+
+6. `numberGroup()` 组件已被移除，您可以使用 `inputGroup()` 组件代替。

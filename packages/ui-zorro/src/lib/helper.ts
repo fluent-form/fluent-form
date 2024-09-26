@@ -1,5 +1,6 @@
+import { TemplateRef } from '@angular/core';
 import { WithoutSchemaReactiveFn, isNumber, isString } from '@fluent-form/core';
-import { Labelful } from './schemas';
+import { Labelful, TextControlSchema } from './schemas';
 
 export const labelHelper = {
   content: (label: WithoutSchemaReactiveFn<Labelful['label']>) => {
@@ -31,4 +32,11 @@ export const tooltipHelper = {
   icon: (tooltip: WithoutSchemaReactiveFn<Labelful['tooltip']>) => {
     return isString(tooltip) ? null : tooltip?.icon;
   },
+};
+
+export const affixHelper = {
+  content: (affix: WithoutSchemaReactiveFn<NonNullable<TextControlSchema['affixes']>['prefix']>) =>
+    isString(affix) || affix instanceof TemplateRef ? affix : undefined,
+  icon: (affix: WithoutSchemaReactiveFn<NonNullable<TextControlSchema['affixes']>['prefix']>) =>
+    isString(affix) || affix instanceof TemplateRef ? undefined : affix?.icon,
 };

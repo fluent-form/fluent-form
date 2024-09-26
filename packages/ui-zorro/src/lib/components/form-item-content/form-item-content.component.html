@@ -11,7 +11,7 @@
   <!-- 如果需要采用 input-group 内其他控件，则需要使用 input-group 的 primary 参数明确指定 -->
   <nz-form-item
     *fluentVar="
-      schema.kind === 'input-group' || schema.kind === 'number-group'
+      schema.kind === 'input-group'
         ? ((schema.primary ?? schema.schemas[0].key | schema: schema) ?? {})
         : schema as currentSchema
     "

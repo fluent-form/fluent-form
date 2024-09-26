@@ -2,16 +2,120 @@
   <ng-container *fluentInject="ControlWrapperDirective as controlWrapper; optional: true">
     @if (controlWrapper) {
       @if (!(schema.hidden | reactive: model : schema : control)) {
+        @if (schema.affixes || schema.addons) {
+          <nz-input-number-group
+            fluentCol
+            [span]="schema.col | col: 'span'"
+            [flex]="schema.col | col: 'flex'"
+            [offset]="schema.col | col: 'offset'"
+            [class]="schema.class"
+            [style]="schema.style"
+            [nzSize]="schema.size!"
+            [nzAddOnBefore]="
+              helper.affix.content | invoke: (schema.addons?.before | reactive: model : schema : control) | template
+            "
+            [nzAddOnAfter]="
+              helper.affix.content | invoke: (schema.addons?.after | reactive: model : schema : control) | template
+            "
+            [nzAddOnBeforeIcon]="
+              helper.affix.icon | invoke: (schema.addons?.before | reactive: model : schema : control)
+            "
+            [nzAddOnAfterIcon]="helper.affix.icon | invoke: (schema.addons?.after | reactive: model : schema : control)"
+            [nzPrefix]="
+              helper.affix.content | invoke: (schema.affixes?.prefix | reactive: model : schema : control) | template
+            "
+            [nzSuffix]="
+              helper.affix.content | invoke: (schema.affixes?.suffix | reactive: model : schema : control) | template
+            "
+            [nzPrefixIcon]="helper.affix.icon | invoke: (schema.affixes?.prefix | reactive: model : schema : control)"
+            [nzSuffixIcon]="helper.affix.icon | invoke: (schema.affixes?.suffix | reactive: model : schema : control)">
+            <nz-input-number
+              #component
+              [fluentBinding]="{ component, schema, control, model }"
+              [formControl]="control"
+              [class]="schema.class"
+              [style]="schema.style"
+              [nzId]="schema.id!"
+              [nzMax]="schema.range?.max ?? infinity"
+              [nzMin]="schema.range?.min ?? -infinity"
+              [nzPlaceHolder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
+              [nzPrecision]="helper.precision | invoke: schema.precision"
+              [nzPrecisionMode]="helper.precisionMode | invoke: schema.precision"
+              [nzStep]="schema.step ?? 1"
+              [nzAutoFocus]="schema.autofocus"
+              [nzReadOnly]="schema.readonly | reactive: model : schema : control"
+              [nzSize]="schema.size!"
+              [nzBorderless]="schema.borderless" />
+          </nz-input-number-group>
+        } @else {
+          <nz-input-number
+            #component
+            fluentCol
+            [fluentBinding]="{ component, schema, control, model }"
+            [formControl]="control"
+            [class]="schema.class"
+            [style]="schema.style"
+            [span]="schema.col | col: 'span'"
+            [flex]="schema.col | col: 'flex'"
+            [offset]="schema.col | col: 'offset'"
+            [nzId]="schema.id!"
+            [nzMax]="schema.range?.max ?? infinity"
+            [nzMin]="schema.range?.min ?? -infinity"
+            [nzPlaceHolder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
+            [nzPrecision]="helper.precision | invoke: schema.precision"
+            [nzPrecisionMode]="helper.precisionMode | invoke: schema.precision"
+            [nzStep]="schema.step ?? 1"
+            [nzAutoFocus]="schema.autofocus"
+            [nzReadOnly]="schema.readonly | reactive: model : schema : control"
+            [nzSize]="schema.size!"
+            [nzBorderless]="schema.borderless" />
+        }
+      }
+    } @else {
+      @if (schema.affixes || schema.addons) {
+        <nz-input-number-group
+          [class]="schema.class"
+          [style]="schema.style"
+          [nzSize]="schema.size!"
+          [nzAddOnBefore]="
+            helper.affix.content | invoke: (schema.addons?.before | reactive: model : schema : control) | template
+          "
+          [nzAddOnAfter]="
+            helper.affix.content | invoke: (schema.addons?.after | reactive: model : schema : control) | template
+          "
+          [nzAddOnBeforeIcon]="helper.affix.icon | invoke: (schema.addons?.before | reactive: model : schema : control)"
+          [nzAddOnAfterIcon]="helper.affix.icon | invoke: (schema.addons?.after | reactive: model : schema : control)"
+          [nzPrefix]="
+            helper.affix.content | invoke: (schema.affixes?.prefix | reactive: model : schema : control) | template
+          "
+          [nzSuffix]="
+            helper.affix.content | invoke: (schema.affixes?.suffix | reactive: model : schema : control) | template
+          "
+          [nzPrefixIcon]="helper.affix.icon | invoke: (schema.affixes?.prefix | reactive: model : schema : control)"
+          [nzSuffixIcon]="helper.affix.icon | invoke: (schema.affixes?.suffix | reactive: model : schema : control)">
+          <nz-input-number
+            #component
+            [fluentBinding]="{ component, schema, control, model }"
+            [formControl]="control"
+            [nzId]="schema.id!"
+            [nzMax]="schema.range?.max ?? infinity"
+            [nzMin]="schema.range?.min ?? -infinity"
+            [nzPlaceHolder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
+            [nzPrecision]="helper.precision | invoke: schema.precision"
+            [nzPrecisionMode]="helper.precisionMode | invoke: schema.precision"
+            [nzStep]="schema.step ?? 1"
+            [nzAutoFocus]="schema.autofocus"
+            [nzReadOnly]="schema.readonly | reactive: model : schema : control"
+            [nzSize]="schema.size!"
+            [nzBorderless]="schema.borderless" />
+        </nz-input-number-group>
+      } @else {
         <nz-input-number
           #component
-          fluentCol
           [fluentBinding]="{ component, schema, control, model }"
           [formControl]="control"
           [class]="schema.class"
           [style]="schema.style"
-          [span]="schema.col | col: 'span'"
-          [flex]="schema.col | col: 'flex'"
-          [offset]="schema.col | col: 'offset'"
           [nzId]="schema.id!"
           [nzMax]="schema.range?.max ?? infinity"
           [nzMin]="schema.range?.min ?? -infinity"
@@ -24,24 +128,6 @@
           [nzSize]="schema.size!"
           [nzBorderless]="schema.borderless" />
       }
-    } @else {
-      <nz-input-number
-        #component
-        [fluentBinding]="{ component, schema, control, model }"
-        [formControl]="control"
-        [class]="schema.class"
-        [style]="schema.style"
-        [nzId]="schema.id!"
-        [nzMax]="schema.range?.max ?? infinity"
-        [nzMin]="schema.range?.min ?? -infinity"
-        [nzPlaceHolder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
-        [nzPrecision]="helper.precision | invoke: schema.precision"
-        [nzPrecisionMode]="helper.precisionMode | invoke: schema.precision"
-        [nzStep]="schema.step ?? 1"
-        [nzAutoFocus]="schema.autofocus"
-        [nzReadOnly]="schema.readonly | reactive: model : schema : control"
-        [nzSize]="schema.size!"
-        [nzBorderless]="schema.borderless" />
     }
   </ng-container>
 </ng-template>

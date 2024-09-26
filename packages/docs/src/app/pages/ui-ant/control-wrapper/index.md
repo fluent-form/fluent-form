@@ -16,19 +16,9 @@ import { useInputGroupWidget } from '@fluent-form/ui-zorro';
 
 ### InputAddon
 
-`InputGroup` 的 `addons` 选项仅支持渲染**非控件**组件，若需在输入框的 `addons` 中渲染**控件**，请结合使用 `InputAddon` 组件。
+将 `inputGroup()` 与 `inputAddon()` 组件组合使用，可以实现在 `addons` 中渲染**控件**。
 
 {{ NgDocActions.demo("InputAddonExampleComponent") }}
-
-## NumberGroup
-
-`NumberGroup` 组件可以帮助您在表单中添加输入框的组合展现。
-
-```ts
-import { useNumberGroupWidget } from '@fluent-form/ui-zorro';
-```
-
-{{ NgDocActions.demo("NumberGroupExampleComponent") }}
 
 ## Space
 

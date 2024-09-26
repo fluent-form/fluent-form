@@ -19,10 +19,35 @@ export class NumberExampleComponent {
       .placeholder('Please enter number')
       .range({ min: 0, max: 99 })
       .col(4);
+
     number('int')
       .label('Integer')
       .placeholder('Please enter integer')
       .precision(0)
+      .col(4);
+
+    number('rmb1')
+      .label('With affixes')
+      .placeholder('Please enter')
+      .affixes({ prefix: '￥', suffix: 'RMB' })
+      .col(4);
+
+    number('rmb2')
+      .label('With icon affixes')
+      .placeholder('Please enter')
+      .affixes({ suffix: { icon: 'setting' } })
+      .col(4);
+
+    number('cny1')
+      .label('With addons')
+      .placeholder('Please enter')
+      .addons({ before: '￥', after: 'CNY' })
+      .col(4);
+
+    number('cny2')
+      .label('With icon addons')
+      .placeholder('Please enter')
+      .addons({ after: { icon: 'setting' } })
       .col(4);
   });
 

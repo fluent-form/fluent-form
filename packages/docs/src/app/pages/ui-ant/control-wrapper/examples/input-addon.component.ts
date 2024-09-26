@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { inputAddon, inputGroup, select, text } from '@fluent-form/ui-zorro';
+import { inputAddon, inputGroup, number, select, text } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'input-addon-example',
@@ -31,6 +31,16 @@ export class InputAddonExampleComponent {
         ]);
       });
     })
+
+    inputGroup().label('Number with control addon').col(5).schemas(() => {
+      inputAddon().schemas(() => {
+        select('type').style({ width: '55px' }).defaultValue('¥').options([
+          { label: '¥', value: '¥' },
+          { label: '$', value: '$' },
+        ]);
+      });
+      number('price').placeholder('Please enter').col('fill');
+    });
   });
 
   model = {};

@@ -7,26 +7,8 @@
     [class]="schema.class"
     [style]="schema.style"
     [nzSize]="schema.size!"
-    [nzAddOnBefore]="
-      schema.addons?.before
-        ? (helper.addon | invoke: (schema.addons?.before | reactive: model : schema : control) | template)
-        : schema.schemas[0].kind === 'input-addon'
-          ? beforeAddonTmpl
-          : undefined
-    "
-    [nzAddOnAfter]="
-      schema.addons?.after
-        ? (helper.addon | invoke: (schema.addons?.after | reactive: model : schema : control) | template)
-        : schema.schemas[schema.schemas.length - 1].kind === 'input-addon'
-          ? afterAddonTmpl
-          : undefined
-    "
-    [nzAddOnBeforeIcon]="helper.addonIcon | invoke: (schema.addons?.before | reactive: model : schema : control)"
-    [nzAddOnAfterIcon]="helper.addonIcon | invoke: (schema.addons?.after | reactive: model : schema : control)"
-    [nzPrefix]="helper.addon | invoke: (schema.affixes?.prefix | reactive: model : schema : control) | template"
-    [nzSuffix]="helper.addon | invoke: (schema.affixes?.suffix | reactive: model : schema : control) | template"
-    [nzPrefixIcon]="helper.addonIcon | invoke: (schema.affixes?.prefix | reactive: model : schema : control)"
-    [nzSuffixIcon]="helper.addonIcon | invoke: (schema.affixes?.suffix | reactive: model : schema : control)">
+    [nzAddOnBefore]="schema.schemas[0].kind === 'input-addon' ? beforeAddonTmpl : undefined"
+    [nzAddOnAfter]="schema.schemas[schema.schemas.length - 1].kind === 'input-addon' ? afterAddonTmpl : undefined">
     @for (subschema of schema.schemas; track subschema) {
       @if (subschema.kind !== 'input-addon') {
         <ng-container

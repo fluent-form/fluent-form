@@ -86,6 +86,14 @@ export interface TextControlSchema<Key extends SingleSchemaKey = SingleSchemaKey
   kind: 'text';
   /* A type of input. */
   type?: 'text' | 'number' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
+  addons?: {
+    before?: MaybeSchemaReactiveFn<TextControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    after?: MaybeSchemaReactiveFn<TextControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+  };
+  affixes?: {
+    prefix?: MaybeSchemaReactiveFn<TextControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    suffix?: MaybeSchemaReactiveFn<TextControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+  };
 }
 
 /**
@@ -111,6 +119,14 @@ export interface NumberInputControlSchema<Key extends SingleSchemaKey = SingleSc
   precision?: number | { value?: number, mode?: NzInputNumberComponent['nzPrecisionMode'] };
   /** Step length */
   step?: number;
+  addons?: {
+    before?: MaybeSchemaReactiveFn<NumberInputControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    after?: MaybeSchemaReactiveFn<NumberInputControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+  };
+  affixes?: {
+    prefix?: MaybeSchemaReactiveFn<NumberInputControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    suffix?: MaybeSchemaReactiveFn<NumberInputControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+  };
 }
 
 /**

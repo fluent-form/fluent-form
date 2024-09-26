@@ -2,20 +2,119 @@
   <ng-container *fluentInject="ControlWrapperDirective as controlWrapper; optional: true">
     @if (controlWrapper) {
       @if (!(schema.hidden | reactive: model : schema : control)) {
+        @if (schema.affixes || schema.addons) {
+          <nz-input-group
+            fluentCol
+            [span]="schema.col | col: 'span'"
+            [flex]="schema.col | col: 'flex'"
+            [offset]="schema.col | col: 'offset'"
+            [class]="schema.class"
+            [style]="schema.style"
+            [nzSize]="schema.size!"
+            [nzAddOnBefore]="
+              helper.affix.content | invoke: (schema.addons?.before | reactive: model : schema : control) | template
+            "
+            [nzAddOnAfter]="
+              helper.affix.content | invoke: (schema.addons?.after | reactive: model : schema : control) | template
+            "
+            [nzAddOnBeforeIcon]="
+              helper.affix.icon | invoke: (schema.addons?.before | reactive: model : schema : control)
+            "
+            [nzAddOnAfterIcon]="helper.affix.icon | invoke: (schema.addons?.after | reactive: model : schema : control)"
+            [nzPrefix]="
+              helper.affix.content | invoke: (schema.affixes?.prefix | reactive: model : schema : control) | template
+            "
+            [nzSuffix]="
+              helper.affix.content | invoke: (schema.affixes?.suffix | reactive: model : schema : control) | template
+            "
+            [nzPrefixIcon]="helper.affix.icon | invoke: (schema.affixes?.prefix | reactive: model : schema : control)"
+            [nzSuffixIcon]="helper.affix.icon | invoke: (schema.affixes?.suffix | reactive: model : schema : control)">
+            <input
+              nz-input
+              [attr.id]="schema.id"
+              [attr.name]="schema.key"
+              [attr.maxlength]="helper.length.max | invoke: schema.length"
+              [attr.minlength]="helper.length.min | invoke: schema.length"
+              [fluentBinding]="{ schema, control, model }"
+              [formControl]="control"
+              [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
+              [type]="schema.type ?? 'text'"
+              [autofocus]="schema.autofocus"
+              [readonly]="schema.readonly | reactive: model : schema : control"
+              [nzSize]="schema.size!"
+              [nzBorderless]="schema.borderless" />
+          </nz-input-group>
+        } @else {
+          <input
+            fluentCol
+            nz-input
+            [span]="schema.col | col: 'span'"
+            [flex]="schema.col | col: 'flex'"
+            [offset]="schema.col | col: 'offset'"
+            [attr.id]="schema.id"
+            [attr.name]="schema.key"
+            [attr.maxlength]="helper.length.max | invoke: schema.length"
+            [attr.minlength]="helper.length.min | invoke: schema.length"
+            [fluentBinding]="{ schema, control, model }"
+            [formControl]="control"
+            [class]="schema.class"
+            [style]="schema.style"
+            [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
+            [type]="schema.type ?? 'text'"
+            [autofocus]="schema.autofocus"
+            [readonly]="schema.readonly | reactive: model : schema : control"
+            [nzSize]="schema.size!"
+            [nzBorderless]="schema.borderless" />
+        }
+      }
+    } @else {
+      @if (schema.affixes || schema.addons) {
+        <nz-input-group
+          [class]="schema.class"
+          [style]="schema.style"
+          [nzSize]="schema.size!"
+          [nzAddOnBefore]="
+            helper.affix.content | invoke: (schema.addons?.before | reactive: model : schema : control) | template
+          "
+          [nzAddOnAfter]="
+            helper.affix.content | invoke: (schema.addons?.after | reactive: model : schema : control) | template
+          "
+          [nzAddOnBeforeIcon]="helper.affix.icon | invoke: (schema.addons?.before | reactive: model : schema : control)"
+          [nzAddOnAfterIcon]="helper.affix.icon | invoke: (schema.addons?.after | reactive: model : schema : control)"
+          [nzPrefix]="
+            helper.affix.content | invoke: (schema.affixes?.prefix | reactive: model : schema : control) | template
+          "
+          [nzSuffix]="
+            helper.affix.content | invoke: (schema.affixes?.suffix | reactive: model : schema : control) | template
+          "
+          [nzPrefixIcon]="helper.affix.icon | invoke: (schema.affixes?.prefix | reactive: model : schema : control)"
+          [nzSuffixIcon]="helper.affix.icon | invoke: (schema.affixes?.suffix | reactive: model : schema : control)">
+          <input
+            nz-input
+            [attr.id]="schema.id"
+            [attr.name]="schema.key"
+            [attr.maxlength]="helper.length.max | invoke: schema.length"
+            [attr.minlength]="helper.length.min | invoke: schema.length"
+            [fluentBinding]="{ schema, control, model }"
+            [formControl]="control"
+            [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
+            [type]="schema.type ?? 'text'"
+            [autofocus]="schema.autofocus"
+            [readonly]="schema.readonly | reactive: model : schema : control"
+            [nzSize]="schema.size!"
+            [nzBorderless]="schema.borderless" />
+        </nz-input-group>
+      } @else {
         <input
-          fluentCol
           nz-input
           [attr.id]="schema.id"
           [attr.name]="schema.key"
           [attr.maxlength]="helper.length.max | invoke: schema.length"
           [attr.minlength]="helper.length.min | invoke: schema.length"
           [fluentBinding]="{ schema, control, model }"
-          [formControl]="control"
           [class]="schema.class"
           [style]="schema.style"
-          [span]="schema.col | col: 'span'"
-          [flex]="schema.col | col: 'flex'"
-          [offset]="schema.col | col: 'offset'"
+          [formControl]="control"
           [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
           [type]="schema.type ?? 'text'"
           [autofocus]="schema.autofocus"
@@ -23,23 +122,6 @@
           [nzSize]="schema.size!"
           [nzBorderless]="schema.borderless" />
       }
-    } @else {
-      <input
-        nz-input
-        [attr.id]="schema.id"
-        [attr.name]="schema.key"
-        [attr.maxlength]="helper.length.max | invoke: schema.length"
-        [attr.minlength]="helper.length.min | invoke: schema.length"
-        [fluentBinding]="{ schema, control, model }"
-        [class]="schema.class"
-        [style]="schema.style"
-        [formControl]="control"
-        [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
-        [type]="schema.type ?? 'text'"
-        [autofocus]="schema.autofocus"
-        [readonly]="schema.readonly | reactive: model : schema : control"
-        [nzSize]="schema.size!"
-        [nzBorderless]="schema.borderless" />
     }
   </ng-container>
 </ng-template>

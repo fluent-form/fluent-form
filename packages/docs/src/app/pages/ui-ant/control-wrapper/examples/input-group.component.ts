@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { button, inputGroup, text } from '@fluent-form/ui-zorro';
+import { button, inputGroup, number, text } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'input-group-example',
@@ -15,25 +15,30 @@ import { button, inputGroup, text } from '@fluent-form/ui-zorro';
 export class InputGroupExampleComponent {
   schema = form(() => {
     inputGroup().label('Compact mode').col(4).schemas(() => {
-      text('firstName').placeholder('Please enter').col(4);
-      text('lastName').placeholder('Please enter').col(8);
+      text('txt1').placeholder('Please enter').addons({ before: '@' }).col(6);
+      text('txt2').placeholder('Please enter').affixes({ prefix: '@' }).col(6);
+    })
+    inputGroup().label('Number compact mode').col(4).schemas(() => {
+      number('price').placeholder('Please enter').affixes({ prefix: '#' }).col(6);
+      number('price').placeholder('Please enter').addons({ before: '#' }).col(6);
+    })
+    inputGroup().label('Text & number compact mode').col(4).schemas(() => {
+      text('price').placeholder('Please enter').col(6);
+      number('price').placeholder('Please enter').col(6);
     })
 
     inputGroup().label('With button').col(4).schemas(() => {
-      text('keyword').placeholder('Please enter').col('fill');
+      text('keyword').placeholder('Please enter').affixes({ prefix: '@' }).col('fill');
       button().type('primary').variants({ ghost: true }).content('Search');
     })
-
-    inputGroup().label('With text addon').addons({ before: '$' }).col(4).schemas(() => {
-      text('price').placeholder('Please enter').col('fill');
+    inputGroup().label('Number with button').col(4).schemas(() => {
+      number('keyword').placeholder('Please enter').affixes({ prefix: '#' }).col('fill');
+      button().type('primary').variants({ ghost: true }).content('Search');
     })
-
-    inputGroup().label('With icon addon').addons({ after: { icon: 'user' } }).col(4).schemas(() => {
-      text('username').placeholder('Please enter').col('fill');
-    })
-
-    inputGroup().label('With affixes').affixes({ prefix: '￥', suffix: 'RMB' }).col(4).schemas(() => {
-      text('rmb').placeholder('Please enter').col('fill');
+    inputGroup().label('Text & Number with button').col(4).schemas(() => {
+      text('keyword').placeholder('Please enter').col('fill');
+      number('keyword').placeholder('Please enter').col('fill');
+      button().type('primary').variants({ ghost: true }).content('Search');
     })
 
     inputGroup().label('Multi suffixes').col(6).schemas(() => {

@@ -1,4 +1,4 @@
-import { labelHelper, tooltipHelper } from './helper';
+import { affixHelper, labelHelper, tooltipHelper } from './helper';
 
 describe('label helper', () => {
   describe('label', () => {
@@ -43,5 +43,18 @@ describe('tooltip helper', () => {
     expect(tooltipHelper.icon(undefined)).toBeUndefined();
     expect(tooltipHelper.icon('tooltip')).toBeNull();
     expect(tooltipHelper.icon({ content: 'tooltip', icon: 'icon' })).toEqual('icon');
+  });
+});
+
+describe('affix helper', () => {
+  it('content', () => {
+    expect(affixHelper.content(undefined)).toBeUndefined();
+    expect(affixHelper.content('user')).toEqual('user');
+  });
+
+  it('icon', () => {
+    expect(affixHelper.icon(undefined)).toBeUndefined();
+    expect(affixHelper.icon('user')).toBeUndefined();
+    expect(affixHelper.icon({ icon: 'user' })).toEqual('user');
   });
 });

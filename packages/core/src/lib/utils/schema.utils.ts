@@ -146,7 +146,9 @@ export class SchemaUtil {
   find(schema: Indexable<AbstractBranchSchema>, key: SingleSchemaKey): AbstractSchema | null;
   find(schema: Indexable<AbstractBranchSchema>, key: SchemaKey[]): AbstractSchema | null;
   find(schema: Indexable<AbstractBranchSchema>, path: SingleSchemaKey | SchemaKey[]): AbstractSchema | null;
-  find(schema: Indexable<AbstractBranchSchema>, path: SingleSchemaKey | SchemaKey[]): AbstractSchema | null {
+  find(schema: Indexable<AbstractBranchSchema>, path?: SingleSchemaKey | SchemaKey[]): AbstractSchema | null {
+    if (!path) return null;
+
     const paths = isArray(path)
       ? path.map(o => isArray(o) ? o.toString() : o)
       : path.toString().split('.');

@@ -14,18 +14,25 @@ import { button, inputGroup, text } from '@fluent-form/ui-zorro';
 })
 export class InputGroupExampleComponent {
   schema = form(() => {
-    inputGroup().label('Input group').col(4).schemas(() => {
+    inputGroup().label('Compact mode').col(4).schemas(() => {
       text('firstName').placeholder('Please enter').col(4);
       text('lastName').placeholder('Please enter').col(8);
     })
-    inputGroup().label('Input with button').col(4).schemas(() => {
+
+    inputGroup().label('With button').col(4).schemas(() => {
       text('keyword').placeholder('Please enter').col('fill');
       button().type('primary').variants({ ghost: true }).content('Search');
     })
-    inputGroup().label('Input with addons').addons({ before: { icon: 'user' } }).col(4).schemas(() => {
+
+    inputGroup().label('With text addon').addons({ before: '$' }).col(4).schemas(() => {
+      text('price').placeholder('Please enter').col('fill');
+    })
+
+    inputGroup().label('With icon addon').addons({ after: { icon: 'user' } }).col(4).schemas(() => {
       text('username').placeholder('Please enter').col('fill');
     })
-    inputGroup().label('Input with affixes').affixes({ prefix: '￥', suffix: 'RMB' }).col(4).schemas(() => {
+
+    inputGroup().label('With affixes').affixes({ prefix: '￥', suffix: 'RMB' }).col(4).schemas(() => {
       text('rmb').placeholder('Please enter').col('fill');
     })
 

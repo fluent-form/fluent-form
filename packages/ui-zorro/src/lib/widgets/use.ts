@@ -1,6 +1,6 @@
 import { ValidatorFn, Validators } from '@angular/forms';
 import { FluentFormWidgetConfig, SchemaType, isNumber } from '@fluent-form/core';
-import { AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CardComponentSchema, CardsArraySchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, IconComponentSchema, InputGroupComponentSchema, NumberGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SpaceComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CardComponentSchema, CardsArraySchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, IconComponentSchema, InputAddonComponentSchema, InputGroupComponentSchema, NumberGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SpaceComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { AlertWidget } from './alert/alert.widget';
 import { ButtonGroupWidget } from './button-group/button-group.widget';
 import { ButtonWidget } from './button/button.widget';
@@ -272,12 +272,18 @@ export function useHeadingWidget(): FluentFormWidgetConfig<HeadingComponentSchem
   };
 }
 
-export function useInputGroupWidget(): FluentFormWidgetConfig<InputGroupComponentSchema> {
-  return {
-    kind: 'input-group',
-    type: SchemaType.ControlWrapper,
-    widget: InputGroupWidget
-  };
+export function useInputGroupWidget(): [FluentFormWidgetConfig<InputGroupComponentSchema>, FluentFormWidgetConfig<InputAddonComponentSchema>] {
+  return [
+    {
+      kind: 'input-group',
+      type: SchemaType.ControlWrapper,
+      widget: InputGroupWidget
+    },
+    {
+      kind: 'input-addon',
+      type: SchemaType.ControlWrapper,
+    }
+  ];
 }
 
 export function useNumberGroupWidget(): FluentFormWidgetConfig<NumberGroupComponentSchema> {

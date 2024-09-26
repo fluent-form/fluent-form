@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, TemplateRef } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, FluentControlPipe, FluentControlWrapperDirective, FluentReactivePipe, FluentTemplatePipe, FluentWidgetTemplatePipe, FluentWithInjectorDirective, InvokePipe, WidgetTemplateContext, WithoutSchemaReactiveFn, isString } from '@fluent-form/core';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { InputGroupComponentSchema } from '../../schemas';
@@ -14,7 +14,6 @@ type InputGroupWidgetTemplateContext = WidgetTemplateContext<InputGroupComponent
   standalone: true,
   imports: [
     NgTemplateOutlet,
-    ReactiveFormsModule,
     NzInputModule,
     FluentBindingDirective,
     FluentContextGuardDirective,
@@ -32,8 +31,7 @@ type InputGroupWidgetTemplateContext = WidgetTemplateContext<InputGroupComponent
 export class InputGroupWidget extends AbstractWidget<InputGroupWidgetTemplateContext> {
   protected readonly helper = {
     addon: (addon: WithoutSchemaReactiveFn<NonNullable<InputGroupComponentSchema['addons']>['before']>) =>
-      isString(addon) || addon instanceof TemplateRef ? addon : undefined
-    ,
+      isString(addon) || addon instanceof TemplateRef ? addon : undefined,
     addonIcon: (addon: WithoutSchemaReactiveFn<NonNullable<InputGroupComponentSchema['addons']>['before']>) =>
       isString(addon) || addon instanceof TemplateRef ? undefined : addon?.icon,
   } as const;

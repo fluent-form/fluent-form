@@ -2,24 +2,56 @@
   <nz-input-group
     #component
     fluentControlWrapper
+    nzCompact
     [fluentBinding]="{ component, schema, control, model }"
     [class]="schema.class"
     [style]="schema.style"
     [nzSize]="schema.size!"
-    [nzCompact]="schema.schemas.length > 1"
-    [nzAddOnBefore]="helper.addon | invoke: (schema.addons?.before | reactive: model : schema : control) | template"
-    [nzAddOnAfter]="helper.addon | invoke: (schema.addons?.after | reactive: model : schema : control) | template"
-    [nzPrefix]="helper.addon | invoke: (schema.affixes?.prefix | reactive: model : schema : control) | template"
-    [nzSuffix]="helper.addon | invoke: (schema.affixes?.suffix | reactive: model : schema : control) | template"
+    [nzAddOnBefore]="
+      schema.addons?.before
+        ? (helper.addon | invoke: (schema.addons?.before | reactive: model : schema : control) | template)
+        : schema.schemas[0].kind === 'input-addon'
+          ? beforeAddonTmpl
+          : undefined
+    "
+    [nzAddOnAfter]="
+      schema.addons?.after
+        ? (helper.addon | invoke: (schema.addons?.after | reactive: model : schema : control) | template)
+        : schema.schemas[schema.schemas.length - 1].kind === 'input-addon'
+          ? afterAddonTmpl
+          : undefined
+    "
     [nzAddOnBeforeIcon]="helper.addonIcon | invoke: (schema.addons?.before | reactive: model : schema : control)"
     [nzAddOnAfterIcon]="helper.addonIcon | invoke: (schema.addons?.after | reactive: model : schema : control)"
+    [nzPrefix]="helper.addon | invoke: (schema.affixes?.prefix | reactive: model : schema : control) | template"
+    [nzSuffix]="helper.addon | invoke: (schema.affixes?.suffix | reactive: model : schema : control) | template"
     [nzPrefixIcon]="helper.addonIcon | invoke: (schema.affixes?.prefix | reactive: model : schema : control)"
     [nzSuffixIcon]="helper.addonIcon | invoke: (schema.affixes?.suffix | reactive: model : schema : control)">
     @for (subschema of schema.schemas; track subschema) {
+      @if (subschema.kind !== 'input-addon') {
+        <ng-container
+          fluentWithInjector
+          [ngTemplateOutlet]="subschema | widgetTemplate"
+          [ngTemplateOutletContext]="{ control: subschema.key | control: control, schema: subschema, model: model }" />
+      }
+    }
+  </nz-input-group>
+
+  <ng-template #beforeAddonTmpl>
+    @for (subschema of $any(schema.schemas[0]).schemas; track subschema) {
       <ng-container
         fluentWithInjector
         [ngTemplateOutlet]="subschema | widgetTemplate"
         [ngTemplateOutletContext]="{ control: subschema.key | control: control, schema: subschema, model: model }" />
     }
-  </nz-input-group>
+  </ng-template>
+
+  <ng-template #afterAddonTmpl>
+    @for (subschema of $any(schema.schemas[schema.schemas.length - 1]).schemas; track subschema) {
+      <ng-container
+        fluentWithInjector
+        [ngTemplateOutlet]="subschema | widgetTemplate"
+        [ngTemplateOutletContext]="{ control: subschema.key | control: control, schema: subschema, model: model }" />
+    }
+  </ng-template>
 </ng-template>

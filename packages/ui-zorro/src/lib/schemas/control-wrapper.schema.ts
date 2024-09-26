@@ -24,6 +24,10 @@ export interface InputGroupComponentSchema<Key extends SingleSchemaKey = SingleS
   primary?: SchemaKey;
 }
 
+export interface InputAddonComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractControlWrapperSchema<Key> {
+  kind: 'input-addon';
+}
+
 /**
  * @public
  */

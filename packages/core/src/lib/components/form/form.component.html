@@ -1,1 +1,3 @@
-<ng-template [ngTemplateOutlet]="templateRef" [ngTemplateOutletContext]="{ schema, model, form, submit }" />
+<ng-template
+  [ngTemplateOutlet]="templateRef"
+  [ngTemplateOutletContext]="{ schema: patchedSchema(), model: model(), form: form(), submit }" />

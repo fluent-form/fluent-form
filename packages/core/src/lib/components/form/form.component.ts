@@ -1,120 +1,106 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ContentChildren, EnvironmentInjector, EventEmitter, Injector, Input, OnChanges, Output, QueryList, SimpleChanges, createComponent, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, EnvironmentInjector, Injector, computed, contentChildren, createComponent, effect, inject, input, model, output, untracked } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControlStatus, FormGroup } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
-import { takeUntil } from 'rxjs';
 import { FluentTemplateDirective } from '../../directives';
 import { AbstractFormGroupSchema } from '../../schemas';
-import { DestroyedSubject } from '../../services';
-import { runMicrotask } from '../../shared';
 import { FLUENT_FORM_CONTENT, TEMPLATE_DIRECTIVES } from '../../tokens';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
 
 @Component({
   selector: 'fluent-form',
   standalone: true,
-  imports: [
-    NgTemplateOutlet
-  ],
+  imports: [NgTemplateOutlet],
   templateUrl: './form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    DestroyedSubject,
     {
       provide: TEMPLATE_DIRECTIVES,
       useFactory: () => inject(FluentFormComponent).templateDirectives
     }
   ]
 })
-export class FluentFormComponent<T extends AnyObject> implements OnChanges {
-  private readonly destroyed$ = inject(DestroyedSubject);
+export class FluentFormComponent<T extends AnyObject> {
   private readonly formUtil = inject(FormUtil);
   private readonly modelUtil = inject(ModelUtil);
   private readonly schemaUtil = inject(SchemaUtil);
-  /**
-   * 内部的不可变模型，主要有以下用途：
-   * - 用来跟公开的模型值进行引用比较，判断变更是内部发出的还是外部传入的，如果引用一致则为内部变更
-   */
   private internalModel!: T;
-  private _schema!: AbstractFormGroupSchema;
 
-  templateRef = createComponent(inject(FLUENT_FORM_CONTENT), {
-    environmentInjector: inject(EnvironmentInjector),
-    elementInjector: inject(Injector)
-  }).instance.templateRef;
-
-  form!: FormGroup;
-
-  @Input({ required: true })
-  set schema(value: AbstractFormGroupSchema) {
-    this._schema = this.schemaUtil.patch(value);
-  }
-  get schema(): AbstractFormGroupSchema {
-    return this._schema;
-  }
-
-  @Input({ required: true }) model!: T;
-
-  @Output() formChange: EventEmitter<FormGroup> = new EventEmitter();
-  @Output() modelChange: EventEmitter<T> = new EventEmitter();
-  @Output() valueChanges: EventEmitter<T> = new EventEmitter();
-  @Output() statusChanges: EventEmitter<FormControlStatus> = new EventEmitter();
-  // eslint-disable-next-line @angular-eslint/no-output-native
-  @Output() submit: EventEmitter<SubmitEvent> = new EventEmitter();
-
-  @ContentChildren(FluentTemplateDirective) templateDirectives!: QueryList<FluentTemplateDirective>;
-
-  ngOnChanges(changes: SimpleChanges): void {
-    const schemaChange = changes['schema'];
-    const modelChange = changes['model'];
-
-    if (schemaChange) {
-      this.createForm();
-    } else if (modelChange) {
-      // 如果是外部变更，就赋值到表单
-      if (this.model !== this.internalModel) {
-        this.updateForm();
-      }
+  protected readonly templateRef = createComponent(
+    inject(FLUENT_FORM_CONTENT),
+    {
+      environmentInjector: inject(EnvironmentInjector),
+      elementInjector: inject(Injector)
     }
-  }
+  ).instance.templateRef;
 
-  private createForm() {
-    this.destroyed$.next();
+  readonly schema = input.required<AbstractFormGroupSchema>();
+  readonly model = model.required<T>();
 
-    this.formChange.emit(
-      this.form = this.formUtil.createFormGroup(this.schema, this.model)
-    );
+  readonly patchedSchema = computed(() => this.schemaUtil.patch(this.schema()));
+  protected form = computed<FormGroup>(() =>
+    this.formUtil.createFormGroup(this.patchedSchema(), untracked(() => this.model()))
+  );
 
-    this.onValueChanges();
+  readonly formChange = output<FormGroup>();
+  readonly valueChanges = output<T>();
+  readonly statusChanges = output<FormControlStatus>();
+  // eslint-disable-next-line @angular-eslint/no-output-native
+  readonly submit = output<SubmitEvent>();
 
-    this.form.valueChanges.pipe(takeUntil(this.destroyed$)).subscribe(value => {
-      this.onValueChanges();
-      this.valueChanges.emit(value);
+  readonly templateDirectives = contentChildren(FluentTemplateDirective);
+
+  constructor() {
+    const destroyRef = inject(DestroyRef);
+
+    effect(() => {
+      const form = this.form();
+      untracked(() => {
+        this.formChange.emit(form);
+        this.onValueChanges();
+
+        form.valueChanges.pipe(takeUntilDestroyed(destroyRef)).subscribe(value => {
+          this.onValueChanges();
+          this.valueChanges.emit(value);
+        });
+
+        form.statusChanges.pipe(takeUntilDestroyed(destroyRef)).subscribe(status =>
+          this.statusChanges.emit(status)
+        );
+      });
     });
 
-    this.form.statusChanges.pipe(takeUntil(this.destroyed$)).subscribe(o =>
-      this.statusChanges.emit(o)
-    );
-  }
-
-  private updateForm() {
-    return this.modelUtil.updateForm(this.form, this.model, this.schema.schemas);
+    let modelChangeCounter = 0;
+    effect(() => {
+      const model = this.model();
+      untracked(() => {
+        // 如果是外部变更，就赋值到表单
+        if (modelChangeCounter++ > 0 && model !== this.internalModel) {
+          this.modelUtil.updateForm(
+            this.form(),
+            model,
+            this.patchedSchema().schemas
+          );
+        }
+      });
+    });
   }
 
   private onValueChanges() {
-    // NG0100，防止在更新模型之前在模板中读取模型
-    runMicrotask(() => {
-      this.formUtil.updateForm(
-        this.form,
-        this.model = this.internalModel = this.formUtil.updateModel(
-          {} as T,
-          this.form,
-          this.schema.schemas
-        ),
-        this.schema.schemas
-      );
-      this.modelChange.emit(this.model);
-    });
+    const form = this.form();
+    const { schemas } = this.patchedSchema();
+
+    this.formUtil.updateForm(
+      form,
+      this.internalModel = this.formUtil.updateModel(
+        {} as T,
+        form,
+        schemas
+      ),
+      schemas
+    );
+    this.model.set(this.internalModel);
   }
 
 }

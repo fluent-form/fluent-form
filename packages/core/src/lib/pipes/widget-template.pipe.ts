@@ -22,7 +22,7 @@ export class FluentWidgetTemplatePipe implements PipeTransform {
 
     switch (value.kind) {
       case SchemaKind.Template: {
-        const dir = templateDirectives?.find(o => o.name === value.key);
+        const dir = templateDirectives?.().find(o => o.name === value.key);
 
         if (!dir) {
           throwCustomTemplateNotFoundError(value.key as string);
@@ -33,7 +33,7 @@ export class FluentWidgetTemplatePipe implements PipeTransform {
 
       case SchemaKind.Headless: {
         // 这里假设在外层已经判断 value.template 是否存在了
-        const dir = templateDirectives?.find(o => o.name === value['template']);
+        const dir = templateDirectives?.().find(o => o.name === value['template']);
 
         if (!dir) {
           throwCustomTemplateNotFoundError(value['template']!);

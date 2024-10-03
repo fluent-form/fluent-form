@@ -1,3 +1,4 @@
+import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideFluentForm } from '../provider';
 import { withTesting } from '../testing';
@@ -15,12 +16,12 @@ describe('FluentWidgetTemplatePipe', () => {
         ),
         {
           provide: TEMPLATE_DIRECTIVES,
-          useValue: {  // mock QueryList
+          useValue: signal({  // mock QueryList
             find(fn: Function) {
               const dir = { name: 'named', templateRef: {} }; // mock FluentTemplateDirective
               return fn(dir) ? dir : null;
             }
-          }
+          })
         }
       ]
     });

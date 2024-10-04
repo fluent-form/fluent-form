@@ -31,9 +31,9 @@ export interface SchemaLike<Key extends SchemaKey = SchemaKey> {
 }
 
 export interface Row {
-  align?: FluentRowDirective['align'];
-  justify?: FluentRowDirective['justify'];
-  gap?: FluentRowDirective['gap'];
+  align?: ReturnType<FluentRowDirective['align']>;
+  justify?: ReturnType<FluentRowDirective['justify']>;
+  gap?: ReturnType<FluentRowDirective['gap']>;
 }
 
 export interface Column {

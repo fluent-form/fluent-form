@@ -5,7 +5,6 @@ import { AnyObject } from '@ngify/types';
 import { form } from '../../compose';
 import { provideFluentForm } from '../../provider';
 import { AbstractFormGroupSchema } from '../../schemas';
-import { runMicrotask } from '../../shared';
 import { array, group, inputGroup, text, withTesting } from '../../testing';
 import { FluentFormDirective } from './form.directive';
 import { FluentFormLayoutModule } from './module';
@@ -53,7 +52,7 @@ describe('FluentFormDirective', () => {
     expect(component.fluentFormDirective.onSubmit({} as SubmitEvent)).toBe(false);
   });
 
-  it('should be the expected model value', async () => {
+  it('should be the expected model value', () => {
     component.schema = form(() => {
       text('ipt');
       inputGroup('ipts').schemas(() => {
@@ -72,21 +71,19 @@ describe('FluentFormDirective', () => {
     component.model = {};
     fixture.detectChanges();
 
-    await runMicrotask(() => {
-      expect(component.model).toEqual({
+    expect(component.model).toEqual({
+      ipt: null,
+      ipt2: null,
+      group: {
         ipt: null,
         ipt2: null,
-        group: {
-          ipt: null,
-          ipt2: null,
-        },
-        array: []
-      });
+      },
+      array: []
     });
   });
 
   describe('模型应该能正确赋值表单', () => {
-    it('先设置 schema，后设置 model', async () => {
+    it('先设置 schema，后设置 model', () => {
       component.schema = form(() => {
         text('ipt');
         inputGroup('ipts').schemas(() => {
@@ -110,16 +107,14 @@ describe('FluentFormDirective', () => {
       };
       fixture.detectChanges();
 
-      await runMicrotask(() => {
-        expect(component.model).toEqual({
+      expect(component.model).toEqual({
+        ipt: 'test',
+        ipt2: 'test',
+        group: {
           ipt: 'test',
           ipt2: 'test',
-          group: {
-            ipt: 'test',
-            ipt2: 'test',
-          },
-          array: ['test']
-        });
+        },
+        array: ['test']
       });
     });
 
@@ -203,7 +198,7 @@ describe('FluentFormDirective', () => {
   });
 
   describe('表单应该能正确赋值模型', () => {
-    it('先设置 schema，后设置 model', async () => {
+    it('先设置 schema，后设置 model', () => {
       component.schema = form(() => {
         text('ipt').defaultValue('test');
         inputGroup('ipts').schemas(() => {
@@ -222,20 +217,18 @@ describe('FluentFormDirective', () => {
       component.model = {};
       fixture.detectChanges();
 
-      await runMicrotask(() => {
-        expect(component.model).toEqual({
+      expect(component.model).toEqual({
+        ipt: 'test',
+        ipt2: 'test',
+        group: {
           ipt: 'test',
           ipt2: 'test',
-          group: {
-            ipt: 'test',
-            ipt2: 'test',
-          },
-          array: []
-        });
+        },
+        array: []
       });
     });
 
-    it('先设置 model，后设置 schema', async () => {
+    it('先设置 model，后设置 schema', () => {
       component.model = {};
       component.schema = form(() => {
         text('ipt').defaultValue('test');
@@ -254,20 +247,18 @@ describe('FluentFormDirective', () => {
       });
       fixture.detectChanges();
 
-      await runMicrotask(() => {
-        expect(component.model).toEqual({
+      expect(component.model).toEqual({
+        ipt: 'test',
+        ipt2: 'test',
+        group: {
           ipt: 'test',
           ipt2: 'test',
-          group: {
-            ipt: 'test',
-            ipt2: 'test',
-          },
-          array: []
-        });
+        },
+        array: []
       });
     });
 
-    it('多次设置 schema', async () => {
+    it('多次设置 schema', () => {
       component.model = {};
       component.schema = form(() => {
         text('ipt').defaultValue('test');
@@ -286,16 +277,14 @@ describe('FluentFormDirective', () => {
       });
       fixture.detectChanges();
 
-      await runMicrotask(() => {
-        expect(component.model).toEqual({
-          ipt: 'test',
+      expect(component.model).toEqual({
+        ipt: 'test',
+        ipt2: null,
+        group: {
+          ipt: null,
           ipt2: null,
-          group: {
-            ipt: null,
-            ipt2: null,
-          },
-          array: []
-        });
+        },
+        array: []
       });
 
       component.schema = form(() => {
@@ -315,21 +304,19 @@ describe('FluentFormDirective', () => {
       });
       fixture.detectChanges();
 
-      await runMicrotask(() => {
-        expect(component.model).toEqual({
-          ipt: 'test',
+      expect(component.model).toEqual({
+        ipt: 'test',
+        ipt2: null,
+        group: {
+          ipt: null,
           ipt2: null,
-          group: {
-            ipt: null,
-            ipt2: null,
-          },
-          array: []
-        });
+        },
+        array: []
       });
     });
   });
 
-  it('should be the expected model value (configure the toplevel form)', async () => {
+  it('should be the expected model value (configure the toplevel form)', () => {
     component.schema = form(
       group().updateOn('blur').schemas(() => {
         text('ipt');
@@ -350,16 +337,14 @@ describe('FluentFormDirective', () => {
     component.model = {};
     fixture.detectChanges();
 
-    await runMicrotask(() => {
-      expect(component.model).toEqual({
+    expect(component.model).toEqual({
+      ipt: null,
+      ipt2: null,
+      group: {
         ipt: null,
         ipt2: null,
-        group: {
-          ipt: null,
-          ipt2: null,
-        },
-        array: []
-      });
+      },
+      array: []
     });
   });
 });

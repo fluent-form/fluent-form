@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Directive, OnDestroy, OnInit, output } from '@angular/core';
 
 /**
  * @internal
@@ -8,15 +8,15 @@ import { Directive, EventEmitter, OnDestroy, OnInit, Output } from '@angular/cor
   standalone: true
 })
 export class FluentLifeCycleDirective implements OnInit, OnDestroy {
-  @Output() fluentInit = new EventEmitter<void>();
-  @Output() fluentDestroy = new EventEmitter<void>();
+  fluentInit = output();
+  fluentDestroy = output();
 
   ngOnInit(): void {
-    this.fluentInit.next();
+    this.fluentInit.emit();
   }
 
   ngOnDestroy(): void {
-    this.fluentDestroy.next();
+    this.fluentDestroy.emit();
   }
 
 }

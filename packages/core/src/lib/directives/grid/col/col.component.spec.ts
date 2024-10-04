@@ -10,9 +10,9 @@ import { FluentColDirective } from './col.component';
 class TestComponent {
   @ViewChild(FluentColDirective, { read: ElementRef, static: true })
     colElementRef!: ElementRef<HTMLElement>;
-  span: FluentColDirective['span'];
-  flex: FluentColDirective['flex'];
-  offset: FluentColDirective['offset'];
+  span: ReturnType<FluentColDirective['span']>;
+  flex: ReturnType<FluentColDirective['flex']>;
+  offset: ReturnType<FluentColDirective['offset']>;
 }
 
 describe('FluentColComponent', () => {
@@ -36,11 +36,9 @@ describe('FluentColComponent', () => {
   it('should be able parse the span', () => {
     component.span = 1;
     fixture.detectChanges();
-    fixture.detectChanges();
     expect(component.colElementRef.nativeElement.classList.contains('fluent-column-1')).toBe(true);
 
     component.span = { xxl: 1 };
-    fixture.detectChanges();
     fixture.detectChanges();
     expect(component.colElementRef.nativeElement.classList.contains('fluent-column-1')).toBe(false);
   });
@@ -48,16 +46,13 @@ describe('FluentColComponent', () => {
   it('should be able parse the offset', () => {
     component.offset = 1;
     fixture.detectChanges();
-    fixture.detectChanges();
     expect(component.colElementRef.nativeElement.classList.contains('fluent-column-offset-1')).toBe(true);
 
     component.offset = null;
     fixture.detectChanges();
-    fixture.detectChanges();
     expect(component.colElementRef.nativeElement.classList.contains('fluent-column-offset-1')).toBe(false);
 
     component.offset = { xs: 1, sm: 2, md: 3, lg: 4, xl: 5, xxl: 6 };
-    fixture.detectChanges();
     fixture.detectChanges();
     expect(component.colElementRef.nativeElement.classList.contains('fluent-column-offset-1')).toBe(true);
     expect(component.colElementRef.nativeElement.classList.contains('fluent-column-offset-sm-2')).toBe(true);

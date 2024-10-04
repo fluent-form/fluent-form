@@ -13,9 +13,9 @@ import { FluentRowDirective } from './row.component';
 class TestComponent {
   @ViewChild(FluentRowDirective, { static: true }) rowComponent!: FluentRowDirective;
   @ViewChild(FluentRowDirective, { read: ElementRef, static: true }) rowElementRef!: ElementRef<HTMLElement>;
-  gap: FluentRowDirective['gap'] = 0;
-  justify: FluentRowDirective['justify'];
-  align: FluentRowDirective['align'];
+  gap: ReturnType<FluentRowDirective['gap']> = 0;
+  justify: ReturnType<FluentRowDirective['justify']>;
+  align: ReturnType<FluentRowDirective['align']>;
 }
 
 describe('FluentRowComponent', () => {

@@ -11,5 +11,5 @@ import { FluentRowDirective } from './grid';
 })
 export class FluentParentRowDirective {
   protected row = inject(FluentRowDirective, { skipSelf: true, optional: true });
-  get gap() { return this.row?.['_gap'](); }
+  get gap() { return this.row?.gap(); }
 }

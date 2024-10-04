@@ -37,9 +37,9 @@ export interface Row {
 }
 
 export interface Column {
-  span?: FluentColDirective['span'];
-  offset?: FluentColDirective['offset'];
-  flex?: FluentColDirective['flex'];
+  span?: ReturnType<FluentColDirective['span']>;
+  offset?: ReturnType<FluentColDirective['offset']>;
+  flex?: ReturnType<FluentColDirective['flex']>;
 }
 
 export interface ControlValueMapper<V> {

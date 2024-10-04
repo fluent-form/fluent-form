@@ -10,7 +10,7 @@ import { SchemaKey } from './types';
  */
 export interface AbstractSchema<Key extends SchemaKey = SchemaKey> extends SchemaLike<Key> {
   /* Used to define the width of the control. */
-  col?: Column | FluentColDirective['span'];
+  col?: Column | ReturnType<FluentColDirective['span']>;
   hidden?: MaybeSchemaReactiveFn<AbstractSchema, boolean>;
   class?: null | string | string[] | { [className: string]: boolean | undefined | null };
   style?: string | undefined | null | { [styleName: string]: SafeAny };

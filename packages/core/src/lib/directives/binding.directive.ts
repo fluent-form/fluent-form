@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OutputRef, inject, isSignal } from '@angular/core';
+import { Directive, ElementRef, OutputRef, effect, inject, input, isSignal, untracked } from '@angular/core';
 import { SIGNAL, SignalNode, signalSetFn } from '@angular/core/primitives/signals';
 import { outputToObservable } from '@angular/core/rxjs-interop';
 import { AbstractControl } from '@angular/forms';
@@ -25,59 +25,66 @@ function isPropertyPatcher(value: SafeAny): value is PropertyHolder {
   providers: [DestroyedSubject],
 })
 export class FluentBindingDirective<E extends HTMLElement, C extends object, S extends AbstractSchema> {
-  private readonly elementRef: ElementRef<E> = inject(ElementRef);
-  private readonly destroyed = inject(DestroyedSubject);
+  readonly fluentBinding = input.required<{ component?: C, schema: S, control: AbstractControl, model: AnyObject }>();
 
-  @Input() set fluentBinding(value: { component?: C, schema: S, control: AbstractControl, model: AnyObject }) {
-    const { component, schema, control, model } = value;
-    const host = component ?? this.elementRef.nativeElement;
+  constructor() {
+    const elementRef: ElementRef<E> = inject(ElementRef);
+    const destroyed = inject(DestroyedSubject);
 
-    this.destroyed.next();
+    effect(() => {
+      const { component, schema, control, model } = this.fluentBinding();
 
-    if (isPropertyPatcher(schema) && schema.properties) {
-      for (const [property, value] of Object.entries(schema.properties)) {
-        const prop = host[property as keyof (C | E)];
-        if (isSignal(prop)) {
-          signalSetFn(prop[SIGNAL] as SignalNode<SafeAny>, value);
-        } else {
-          host[property as keyof (C | E)] = value;
+      untracked(() => {
+        const host = component ?? elementRef.nativeElement;
+
+        if (isPropertyPatcher(schema) && schema.properties) {
+          for (const [property, value] of Object.entries(schema.properties)) {
+            const prop = host[property as keyof (C | E)];
+            if (isSignal(prop)) {
+              signalSetFn(prop[SIGNAL] as SignalNode<SafeAny>, value);
+            } else {
+              host[property as keyof (C | E)] = value;
+            }
+          }
         }
-      }
-    }
 
-    if (isEventListener(schema) && schema.listeners) {
-      const context: SchemaContext = { control, schema, model };
+        if (isEventListener(schema) && schema.listeners) {
+          const context: SchemaContext = { control, schema, model };
 
-      for (const [eventName, listener] of Object.entries(schema.listeners)) {
-        if (eventName === 'valueChange') {
-          control.valueChanges.pipe(
-            takeUntil(this.destroyed),
-          ).subscribe(value => {
-            listener!(value, context);
-          });
-        } else if (eventName === 'statusChange') {
-          control.statusChanges.pipe(
-            takeUntil(this.destroyed),
-          ).subscribe(status => {
-            listener!(status, context);
-          });
-        } else if (host instanceof HTMLElement) {
-          fromEvent(host, eventName).pipe(
-            takeUntil(this.destroyed)
-          ).subscribe(event => {
-            listener!(event, context);
-          });
-        } else {
-          const output = host[eventName as keyof C] as Observable<SafeAny> | OutputRef<SafeAny>;
-          const observable = output instanceof Observable ? output : outputToObservable(output);
+          destroyed.next();
 
-          observable.pipe(
-            takeUntil(this.destroyed)
-          ).subscribe(event => {
-            listener!(event, context);
-          });
+          for (const [eventName, listener] of Object.entries(schema.listeners)) {
+            if (eventName === 'valueChange') {
+              control.valueChanges.pipe(
+                takeUntil(destroyed),
+              ).subscribe(value => {
+                listener!(value, context);
+              });
+            } else if (eventName === 'statusChange') {
+              control.statusChanges.pipe(
+                takeUntil(destroyed),
+              ).subscribe(status => {
+                listener!(status, context);
+              });
+            } else if (host instanceof HTMLElement) {
+              fromEvent(host, eventName).pipe(
+                takeUntil(destroyed)
+              ).subscribe(event => {
+                listener!(event, context);
+              });
+            } else {
+              const output = host[eventName as keyof C] as Observable<SafeAny> | OutputRef<SafeAny>;
+              const observable = output instanceof Observable ? output : outputToObservable(output);
+
+              observable.pipe(
+                takeUntil(destroyed)
+              ).subscribe(event => {
+                listener!(event, context);
+              });
+            }
+          }
         }
-      }
-    }
+      });
+    });
   }
 }

@@ -1,11 +1,10 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <fluent-row
-    #parentRow="fluentParentRow"
     [class]="schema.class"
     [style]="schema.style"
     [align]="schema.align"
     [justify]="schema.justify"
-    [gap]="schema.gap ?? parentRow.gap"
+    [gap]="schema.gap"
     [fluentBinding]="{ schema, control, model }">
     <ng-template #colTemplate let-schema="schema" let-control="control" let-model="model">
       <fluent-col

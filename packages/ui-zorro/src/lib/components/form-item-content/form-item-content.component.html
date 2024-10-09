@@ -1,60 +1,53 @@
 <ng-template let-control="control" let-schema="schema" let-model="model">
-  <ng-container
-    *fluentVar="schema.kind | schemaType as schemaType"
-    fluentWithInjector
-    [ngTemplateOutlet]="formItemTemplate"
-    [ngTemplateOutletContext]="{ control, schema, model, schemaType }" />
-</ng-template>
+  <ng-container *fluentVar="schema.kind | schemaType as schemaType">
+    <!-- 在控件被 input-group 包裹的时候，控件状态/提示/required默认使用的是 input-group 里的第一个控件 -->
+    <!-- 如果需要采用 input-group 内其他控件，则需要使用 input-group 的 primary 参数明确指定 -->
+    <nz-form-item
+      *fluentVar="
+        schema.kind === 'input-group'
+          ? ((schema.primary ?? schema.schemas[0].key | schema: schema) ?? {})
+          : schema as currentSchema
+      "
+      [class]="schema.class"
+      [style.margin-bottom.px]="
+        schemaType === SchemaType.ControlGroup ||
+        schemaType === SchemaType.ControlArray ||
+        schemaType === SchemaType.ComponentContainer
+          ? 0
+          : null
+      ">
+      <ng-container *fluentVar="schema.label | reactive: model : schema : control as label">
+        <ng-container *fluentVar="helper.label.content | invoke: label as labelContent">
+          @if (labelContent) {
+            <nz-form-label
+              [nzSpan]="(helper.label.span | invoke: label)!"
+              [nzTooltipTitle]="helper.tooltip.content | invoke: schema.tooltip"
+              [nzTooltipIcon]="(helper.tooltip.icon | invoke: schema.tooltip)!"
+              [nzFor]="schema.id"
+              [nzLabelWrap]="(helper.label.wrap | invoke: label)!"
+              [nzRequired]="currentSchema.required | reactive: model : schema : control"
+              [style.width]="helper.label.width | invoke: label">
+              {{ labelContent }}
+            </nz-form-label>
+          }
 
-<ng-template #formItemTemplate let-control="control" let-schema="schema" let-model="model" let-schemaType="schemaType">
-  <!-- 在控件被 input-group 包裹的时候，控件状态/提示/required默认使用的是 input-group 里的第一个控件 -->
-  <!-- 如果需要采用 input-group 内其他控件，则需要使用 input-group 的 primary 参数明确指定 -->
-  <nz-form-item
-    *fluentVar="
-      schema.kind === 'input-group'
-        ? ((schema.primary ?? schema.schemas[0].key | schema: schema) ?? {})
-        : schema as currentSchema
-    "
-    [class]="schema.class"
-    [style.margin-bottom.px]="
-      schemaType === SchemaType.ControlGroup ||
-      schemaType === SchemaType.ControlArray ||
-      schemaType === SchemaType.ComponentContainer
-        ? 0
-        : null
-    ">
-    <ng-container *fluentVar="schema.label | reactive: model : schema : control as label">
-      <ng-container *fluentVar="helper.label.content | invoke: label as labelContent">
-        @if (labelContent) {
-          <nz-form-label
-            [nzSpan]="(helper.label.span | invoke: label)!"
-            [nzTooltipTitle]="helper.tooltip.content | invoke: schema.tooltip"
-            [nzTooltipIcon]="(helper.tooltip.icon | invoke: schema.tooltip)!"
-            [nzFor]="schema.id"
-            [nzLabelWrap]="(helper.label.wrap | invoke: label)!"
-            [nzRequired]="currentSchema.required | reactive: model : schema : control"
-            [style.width]="helper.label.width | invoke: label">
-            {{ labelContent }}
-          </nz-form-label>
-        }
-
-        <nz-form-control
-          [nzXs]="{ offset: 0 }"
-          [nzSm]="{ offset: labelContent ? 0 : (helper.label.span | invoke: label)! }"
-          [nzValidateStatus]="currentSchema.key | control: control"
-          [nzHasFeedback]="currentSchema.feedback"
-          [nzValidatingTip]="currentSchema.tips?.validating | template"
-          [nzSuccessTip]="currentSchema.tips?.success | template"
-          [nzWarningTip]="currentSchema.tips?.warning | template"
-          [nzErrorTip]="currentSchema.tips?.error | template"
-          [nzAutoTips]="currentSchema.tips?.auto ?? {}"
-          [nzExtra]="currentSchema.hint | template">
-          <ng-container
-            fluentWithInjector
-            [ngTemplateOutlet]="schema | widgetTemplate"
-            [ngTemplateOutletContext]="{ control, schema, model }" />
-        </nz-form-control>
+          <nz-form-control
+            [nzXs]="{ offset: 0 }"
+            [nzSm]="{ offset: labelContent ? 0 : (helper.label.span | invoke: label)! }"
+            [nzValidateStatus]="currentSchema.key | control: control"
+            [nzHasFeedback]="currentSchema.feedback"
+            [nzValidatingTip]="currentSchema.tips?.validating | template"
+            [nzSuccessTip]="currentSchema.tips?.success | template"
+            [nzWarningTip]="currentSchema.tips?.warning | template"
+            [nzErrorTip]="currentSchema.tips?.error | template"
+            [nzAutoTips]="currentSchema.tips?.auto ?? {}"
+            [nzExtra]="currentSchema.hint | template">
+            <ng-container
+              [ngTemplateOutlet]="schema | widgetTemplate"
+              [ngTemplateOutletContext]="{ control, schema, model }" />
+          </nz-form-control>
+        </ng-container>
       </ng-container>
-    </ng-container>
-  </nz-form-item>
+    </nz-form-item>
+  </ng-container>
 </ng-template>

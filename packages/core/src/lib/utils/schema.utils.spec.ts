@@ -217,6 +217,7 @@ describe('SchemaUtil', () => {
         range(['begin', 'end']);
       });
 
+      expect(schemaUtil.find(schema, null!)).toBe(null);
       expect(schemaUtil.find(schema, [['begin', 'e']])).toBe(null);
       expect(schemaUtil.find(schema, ['begin', 'e'].toString())).toBe(null);
     });

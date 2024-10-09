@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { AnyObject, SafeAny } from '@ngify/types';
 import { form } from '../../compose';
 import { provideFluentForm } from '../../provider';
@@ -124,5 +125,11 @@ describe('FluentFormComponent', () => {
     expect(component.form.get('a')!.disabled).toEqual(true);
     expect(component.form.get('b')!.disabled).toEqual(true);
     expect(component.form.get('c')!.disabled).toEqual(true);
+  });
+
+  it('should be callable onSubmit', () => {
+    const { componentInstance } = fixture.debugElement.query(By.directive(FluentFormComponent));
+    const result = componentInstance.onSubmit(new Event('submit') as SubmitEvent);
+    expect(result).toBe(false);
   });
 });

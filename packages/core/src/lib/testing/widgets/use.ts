@@ -36,7 +36,8 @@ export function useTextWidget(): FluentFormWidgetConfig<TextControlSchema> {
       }
 
       return validators;
-    }
+    },
+    patch: schema => schema
   };
 }
 

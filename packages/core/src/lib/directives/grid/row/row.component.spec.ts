@@ -42,6 +42,11 @@ describe('FluentRowComponent', () => {
   });
 
   it('should be able to parse the level to gap value', () => {
+    component.gap = null;
+    fixture.detectChanges();
+    expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-x')).toEqual('0px');
+    expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-y')).toEqual('0px');
+
     component.gap = [1, 2];
     fixture.detectChanges();
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-x')).toEqual('4px');

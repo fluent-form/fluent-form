@@ -1,0 +1,16 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <nz-color-picker
+    #component
+    [fluentBinding]="{ component, schema, control, model }"
+    [formControl]="control"
+    [class]="schema.class"
+    [style]="schema.style"
+    [nzFormat]="schema.format ?? 'hex'"
+    [nzSize]="schema.size ?? 'default'"
+    [nzAllowClear]="schema.clearable"
+    [nzTrigger]="schema.trigger ?? 'click'"
+    [nzShowText]="schema.showText"
+    [nzDisabled]="schema.disabled | reactive: model : schema : control"
+    [nzDisabledAlpha]="!(schema.alpha ?? true)"
+    [nzTitle]="schema.title! | template" />
+</ng-template>

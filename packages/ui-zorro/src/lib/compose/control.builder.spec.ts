@@ -1,5 +1,5 @@
 import { form } from '@fluent-form/core';
-import { cascader, checkbox, checkboxGroup, date, dateRange, datetime, headless, number, password, radioGroup, rate, select, slider, text, textarea, time, toggle, treeSelect } from './control';
+import { cascader, checkbox, checkboxGroup, color, date, dateRange, datetime, headless, number, password, radioGroup, rate, select, slider, text, textarea, time, toggle, treeSelect } from './control';
 
 describe('control', () => {
   it('headless', () => {
@@ -95,5 +95,10 @@ describe('control', () => {
   it('date-range', () => {
     const { schemas } = form(() => dateRange('dateRange'));
     expect(schemas).toEqual([{ kind: 'date-range', key: 'dateRange' }]);
+  });
+
+  it('color', () => {
+    const { schemas } = form(() => color('color'));
+    expect(schemas).toEqual([{ kind: 'color', key: 'color' }]);
   });
 });

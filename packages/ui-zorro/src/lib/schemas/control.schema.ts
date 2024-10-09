@@ -4,6 +4,7 @@ import { AbstractControlSchema, AbstractHeadlessControlSchema, ComponentControlE
 import { AnyObject, SafeAny } from '@ngify/types';
 import { NzCascaderComponent, NzCascaderExpandTrigger, NzCascaderOption, NzCascaderSize, NzShowSearchOptions } from 'ng-zorro-antd/cascader';
 import { NzCheckBoxOptionInterface, NzCheckboxComponent, NzCheckboxGroupComponent } from 'ng-zorro-antd/checkbox';
+import { NzColorPickerComponent } from 'ng-zorro-antd/color-picker';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDateMode, NzDatePickerComponent, NzRangePickerComponent, SupportTimeOptions } from 'ng-zorro-antd/date-picker';
 import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
@@ -339,4 +340,16 @@ export interface TreeSelectControlSchema<Key extends SingleSchemaKey = SingleSch
   expandedKeys?: string[];
   backdrop?: boolean;
   multiple?: boolean;
+}
+
+export interface ColorPickerControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = string>
+  extends AbstractZorroControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzColorPickerComponent, Val>, ComponentPropertyHolder<NzColorPickerComponent> {
+  kind: 'color';
+  format?: NzColorPickerComponent['nzFormat'];
+  size?: NzColorPickerComponent['nzSize'];
+  clearable?: boolean;
+  trigger?: NzColorPickerComponent['nzTrigger'];
+  showText?: boolean;
+  alpha?: boolean;
+  title?: string | TemplateRef<void>
 }

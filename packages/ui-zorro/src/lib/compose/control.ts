@@ -1,5 +1,5 @@
 import { SchemaKey, SingleSchemaKey, UnstableBuilder, composeBuilder } from '@fluent-form/core';
-import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, HeadlessControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, ColorPickerControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, HeadlessControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { KindOrKey } from './helper';
 
 export function headless<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<HeadlessControlSchema<Key>, KindOrKey> {
@@ -106,6 +106,12 @@ export function dateRange(): UnstableBuilder<DateRangePickerControlSchema<number
 export function dateRange<Key extends SchemaKey>(key?: Key): UnstableBuilder<DateRangePickerControlSchema<Key>, KindOrKey>;
 export function dateRange<Key extends SchemaKey>(key?: Key) {
   return composeBuilder<DateRangePickerControlSchema<Key>>().kind('date-range').key(key);
+}
+
+export function color(): UnstableBuilder<ColorPickerControlSchema<number>, KindOrKey>;
+export function color<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<ColorPickerControlSchema<Key>, KindOrKey>;
+export function color<Key extends SingleSchemaKey>(key?: Key) {
+  return composeBuilder<ColorPickerControlSchema<Key>>().kind('color').key(key);
 }
 
 type KindOrKeyOrType = KindOrKey | 'type';

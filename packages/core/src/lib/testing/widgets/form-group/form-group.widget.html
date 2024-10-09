@@ -1,7 +1,6 @@
 <ng-template let-formGroup="control" let-formSchema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <fluent-row
-    #parentRow="fluentParentRow"
-    [gap]="formSchema.gap ?? parentRow.gap"
+    [gap]="formSchema.gap"
     [align]="formSchema.align"
     [justify]="formSchema.justify"
     [class]="formSchema.class"

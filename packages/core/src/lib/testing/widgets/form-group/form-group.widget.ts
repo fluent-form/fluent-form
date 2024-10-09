@@ -1,7 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FluentBindingDirective, FluentContextGuardDirective, FluentFormItemOutletDirective, FluentGridModule, FluentParentRowDirective } from '../../../directives';
+import { FluentBindingDirective, FluentContextGuardDirective, FluentFormItemOutletDirective, FluentGridModule } from '../../../directives';
 import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe, RenderablePipe } from '../../../pipes';
 import { AbstractWidget, WidgetTemplateContext } from '../../../widgets/widget';
 import { FormGroupSchema } from '../../schemas';
@@ -19,7 +19,6 @@ type FormGroupWidgetTemplateContext = WidgetTemplateContext<FormGroupSchema, For
     FluentFormItemOutletDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,
-    FluentParentRowDirective,
     FluentColumnPipe,
     FluentReactivePipe,
     FluentControlPipe,

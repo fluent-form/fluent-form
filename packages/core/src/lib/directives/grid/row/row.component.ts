@@ -21,6 +21,7 @@ const GAPS = {
   5: SPACER * 2,    // 32
   6: SPACER * 3,    // 48
 };
+const DEFAULT_GAP: Partial<Record<keyof Breakpoints, Gap | [x: Gap, y: Gap]>> = { xs: 1, sm: 2, md: 3, lg: 4, xl: 5 };
 
 const BREAKPOINTS: string[] = [
   Breakpoints.xs,
@@ -69,12 +70,12 @@ export class FluentRowDirective {
   );
 
   protected readonly gapPx = computed(() => {
-    const gap = this.gap();
-    const breakpoints = this.breakpoints();
-
-    if (!gap) {
+    if (this.gap() === null) {
       return getGapPixel(0);
     }
+
+    const breakpoints = this.breakpoints();
+    const gap = this.gap() ?? DEFAULT_GAP;
 
     if (isArray(gap) || isNumber(gap) || isString(gap)) {
       return getGapPixel(gap);

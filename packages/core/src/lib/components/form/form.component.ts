@@ -51,6 +51,15 @@ export class FluentFormComponent<T extends AnyObject> {
 
   readonly templateDirectives = contentChildren(FluentTemplateDirective);
 
+  readonly onSubmit = (event: SubmitEvent) => {
+    event.stopPropagation();
+    this.submit.emit(event);
+    // Forms with `method="dialog"` have some special behavior that won't reload the page and that
+    // shouldn't be prevented. Note that we need to null check the `event` and the `target`, because
+    // some internal apps call this method directly with the wrong arguments.
+    return (event?.target as HTMLFormElement | null)?.method === 'dialog';
+  };
+
   constructor() {
     const destroyRef = inject(DestroyRef);
 

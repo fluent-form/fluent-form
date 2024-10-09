@@ -1,4 +1,4 @@
-import { Directive, OutputEmitterRef } from '@angular/core';
+import { Directive } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
 import { TemplateRefHolder } from '../../directives';
@@ -8,7 +8,7 @@ export interface FormContentTemplateContext {
   form: FormGroup;
   model: AnyObject;
   schema: AbstractSchema;
-  submit: OutputEmitterRef<SubmitEvent>
+  onSubmit: (event: SubmitEvent) => boolean
 }
 
 @Directive()

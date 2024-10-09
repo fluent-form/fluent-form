@@ -1,18 +1,12 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, Directive, EventEmitter } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { AbstractSchema, FluentBindingDirective, FluentColumnPipe, FluentControlPipe, FluentFormItemOutletDirective, FluentGridModule, FluentReactivePipe, RenderablePipe, TemplateRefHolder } from '@fluent-form/core';
-import { AnyObject } from '@ngify/types';
+import { Component } from '@angular/core';
+import { AbstractFormContentComponent, FluentBindingDirective, FluentColumnPipe, FluentControlPipe, FluentFormItemOutletDirective, FluentGridModule, FluentReactivePipe, RenderablePipe } from '@fluent-form/core';
 import { NzFormModule } from 'ng-zorro-antd/form';
-
-@Directive()
-export abstract class AbstractFormContentComponent extends TemplateRefHolder<{ form: FormGroup, model: AnyObject, schema: AbstractSchema, submit: EventEmitter<SubmitEvent> }> { }
 
 @Component({
   standalone: true,
   imports: [
     NgTemplateOutlet,
-    ReactiveFormsModule,
     NzFormModule,
     FluentGridModule,
     FluentFormItemOutletDirective,

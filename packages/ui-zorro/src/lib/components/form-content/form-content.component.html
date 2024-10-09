@@ -1,4 +1,4 @@
-<ng-template let-schema="schema" let-form="form" let-model="model" let-submit="submit">
+<ng-template let-schema="schema" let-form="form" let-model="model" let-onSubmit="onSubmit">
   <form
     nz-form
     fluentRow
@@ -8,10 +8,8 @@
     [nzLayout]="schema.layout!"
     [class]="schema.class"
     [style]="schema.style"
-    [formGroup]="form"
     [fluentBinding]="{ schema, control: form, model }"
-    (submit)="$event.stopPropagation()"
-    (ngSubmit)="submit.emit($event)">
+    (submit)="onSubmit($event)">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
       <fluent-col
         [span]="schema.col | col: 'span'"

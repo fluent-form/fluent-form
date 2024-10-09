@@ -1,6 +1,6 @@
 import { form } from '@fluent-form/core';
 import { text } from './control';
-import { inputGroup, space } from './control-wrapper';
+import { inputAddon, inputGroup, space } from './control-wrapper';
 
 describe('control-wrapper', () => {
   it('inputGroup', () => {
@@ -11,6 +11,20 @@ describe('control-wrapper', () => {
     });
     expect(schemas).toEqual([{
       kind: 'input-group',
+      schemas: [
+        { kind: 'text' }
+      ]
+    }]);
+  });
+
+  it('inputAddon', () => {
+    const { schemas } = form(() => {
+      inputAddon().schemas(() => {
+        text();
+      });
+    });
+    expect(schemas).toEqual([{
+      kind: 'input-addon',
       schemas: [
         { kind: 'text' }
       ]

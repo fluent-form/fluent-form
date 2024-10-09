@@ -20,12 +20,11 @@
         [nzClosable]="formArray.length > (helper.length.min | invoke: formSchema.length)"
         [nzTitle]="'No.' + (index + 1)">
         <fluent-row
-          #parentRow="fluentParentRow"
           nz-form
           [align]="formSchema.align"
           [justify]="formSchema.justify"
           [nzLayout]="formSchema.layout!"
-          [gap]="parentRow.gap">
+          [gap]="formSchema.gap">
           <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
             <fluent-col
               [span]="schema.col | col: 'span'"

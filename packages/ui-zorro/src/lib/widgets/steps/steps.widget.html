@@ -28,11 +28,7 @@
   </nz-steps>
 
   @for (stepSchema of schema.schemas; track stepSchema; let stepIndex = $index) {
-    <fluent-row
-      #parentRow="fluentParentRow"
-      [gap]="parentRow.gap"
-      [hidden]="schema.active !== stepIndex"
-      [style.margin-top.px]="16">
+    <fluent-row [hidden]="schema.active !== stepIndex" [style.margin-top.px]="16">
       <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
         <fluent-col
           [span]="schema.col | col: 'span'"

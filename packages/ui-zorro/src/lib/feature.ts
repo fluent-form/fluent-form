@@ -18,7 +18,6 @@ export function withZorro(widgets: (FluentFormWidgetConfig<SafeAny> | FluentForm
       selector: 'group',
       patch: (schema: SafeAny) => {
         schema.layout ??= 'vertical';
-        schema.gap ??= { xs: 1, sm: 2, md: 3, lg: 4, xl: 5 };
         return schema;
       }
     })

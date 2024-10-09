@@ -1,11 +1,10 @@
 <ng-template let-formArray="control" let-formSchema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <fluent-row
     #row
-    #parentRow="fluentParentRow"
     nz-form
     cdkDropList
     [cdkDropListDisabled]="!formSchema.orderable"
-    [gap]="formSchema.gap ?? parentRow.gap"
+    [gap]="formSchema.gap"
     [align]="formSchema.align"
     [justify]="formSchema.justify"
     [nzLayout]="formSchema.layout!"

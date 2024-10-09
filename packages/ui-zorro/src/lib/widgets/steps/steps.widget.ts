@@ -1,7 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlPipe, FluentFormItemOutletDirective, FluentGridModule, FluentParentRowDirective, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
+import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlPipe, FluentFormItemOutletDirective, FluentGridModule, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { StepsComponentSchema } from '../../schemas';
 
@@ -18,7 +18,6 @@ type StepsWidgetTemplateContext = WidgetTemplateContext<StepsComponentSchema, Fo
     FluentGridModule,
     FluentFormItemOutletDirective,
     FluentBindingDirective,
-    FluentParentRowDirective,
     FluentContextGuardDirective,
     FluentReactivePipe,
     FluentControlPipe,

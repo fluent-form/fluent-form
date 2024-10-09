@@ -19,7 +19,7 @@
         [nzTitle]="tabSchema.title"
         [nzDisabled]="tabSchema.disabled | reactive: model : tabSchema : control"
         [hidden]="tabSchema.hidden | reactive: model : tabSchema : control">
-        <fluent-row #parentRow="fluentParentRow" [gap]="parentRow.gap">
+        <fluent-row>
           <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
             <fluent-col
               [span]="schema.col | col: 'span'"

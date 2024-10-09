@@ -7,6 +7,7 @@ import { CascaderExampleComponent } from './examples/cascader.component';
 import { CheckboxGroupCustomPropertyNamesExampleComponent } from './examples/checkbox-group-custom-property-names.component';
 import { CheckboxGroupExampleComponent } from './examples/checkbox-group.component';
 import { CheckboxExampleComponent } from './examples/checkbox.component';
+import { ColorExampleComponent } from './examples/color.component';
 import { DateRangeExampleComponent } from './examples/date-range.component';
 import { DateExampleComponent } from './examples/date.component';
 import { NumberExampleComponent } from './examples/number.component';
@@ -50,6 +51,7 @@ const ControlPage: NgDocPage = {
     CheckboxGroupExampleComponent,
     CheckboxGroupCustomPropertyNamesExampleComponent,
     RateExampleComponent,
+    ColorExampleComponent,
   },
   order: 2
 };

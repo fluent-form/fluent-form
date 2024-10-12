@@ -6,7 +6,7 @@
 
 ## Text
 
-本框允许用户通过鼠标或键盘输入内容，是最基础的表单域。
+文本框允许用户通过鼠标或键盘输入内容，是最基础的表单域。
 
 ```ts
 import { useTextWidget } from '@fluent-form/ui-zorro';

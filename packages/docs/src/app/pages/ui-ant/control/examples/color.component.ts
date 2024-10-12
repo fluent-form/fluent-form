@@ -14,7 +14,7 @@ import { color } from '@fluent-form/ui-zorro';
 })
 export class ColorExampleComponent {
   schema = form(() => {
-    color('color1').alpha(false);
+    color('color1');
     color('color2').showText(true);
   });
 

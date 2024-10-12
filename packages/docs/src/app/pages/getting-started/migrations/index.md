@@ -11,8 +11,8 @@
 ```
 
 2. 更新导入点，您通常可以使用 IDE 自动导入功能来完成此迁移:
-   1. 核心功能相关的 API，请使用 `@fluent-form/core` 导入点。
-   2. UI 部件相关的 API，请使用 `@fluent-form/ui-zorro` 导入点。
+   - 核心功能相关的 API，请使用 `@fluent-form/core` 导入点。
+   - UI 部件相关的 API，请使用 `@fluent-form/ui-zorro` 导入点。
 
 3. 更新配置：
 ```diff
@@ -48,7 +48,7 @@
   )
 ```
 
-5. `inputGroup()` 组件的 `before` 与 `after` 参数合并为 `addons`，`prefix` 与 `suffix` 参数合并为 `affixes` 参数，并将它们移动到 `text()` 与 `number()` 控件上：
+5. `inputGroup()` 组件的 `before` 与 `after` 选项合并为 `addons` 选项，`prefix` 与 `suffix` 选项合并为 `affixes` 选项，并将这些选项转移到 `text()` 与 `number()` 控件上：
 
 ```diff
 - inputGroup().before('before').after('after')
@@ -57,5 +57,8 @@
 - inputGroup().prefix('prefix').suffix('suffix')
 + text('x').affixes({ prefix: 'prefix', suffix: 'suffix' })
 ```
+
+> **NOTE**
+> 简单场景下您可能不再需要 `inputGroup()` 组件。
 
 6. `numberGroup()` 组件已被移除，您可以使用 `inputGroup()` 组件代替。

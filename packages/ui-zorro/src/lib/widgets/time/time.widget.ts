@@ -3,6 +3,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { TimePickerControlSchema } from '../../schemas';
+import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
 type TimeWidgetTemplateContext = WidgetTemplateContext<TimePickerControlSchema, FormControl<Date>>;
 
@@ -14,6 +15,7 @@ type TimeWidgetTemplateContext = WidgetTemplateContext<TimePickerControlSchema, 
   imports: [
     ReactiveFormsModule,
     NzTimePickerModule,
+    NzSpaceCompactItemDirective,
     FluentGridModule,
     FluentInjectDirective,
     FluentBindingDirective,

@@ -6,6 +6,7 @@
           <a
             nz-button
             fluentCol
+            nzSpaceCompactItem="btn"
             [disabled]="schema.disabled | reactive: model : schema : control"
             [fluentBinding]="{ schema, control, model }"
             [class]="schema.class"
@@ -26,6 +27,7 @@
           <button
             nz-button
             fluentCol
+            nzSpaceCompactItem="btn"
             [attr.type]="schema.mode"
             [disabled]="schema.disabled | reactive: model : schema : control"
             [fluentBinding]="{ schema, control, model }"
@@ -48,6 +50,7 @@
         @if (schema.type === 'link') {
           <a
             nz-button
+            nzSpaceCompactItem="btn"
             [disabled]="schema.disabled | reactive: model : schema : control"
             [fluentBinding]="{ schema, control, model }"
             [class]="schema.class"
@@ -64,6 +67,7 @@
         } @else {
           <button
             nz-button
+            nzSpaceCompactItem="btn"
             [attr.type]="schema.mode"
             [disabled]="schema.disabled | reactive: model : schema : control"
             [fluentBinding]="{ schema, control, model }"

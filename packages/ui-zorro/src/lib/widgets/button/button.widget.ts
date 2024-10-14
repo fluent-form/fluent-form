@@ -6,6 +6,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { ButtonComponentSchema, Icon } from '../../schemas';
+import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
 type ButtonWidgetTemplateContext = WidgetTemplateContext<ButtonComponentSchema, FormGroup>;
 
@@ -18,6 +19,7 @@ type ButtonWidgetTemplateContext = WidgetTemplateContext<ButtonComponentSchema, 
     NgTemplateOutlet,
     NzButtonModule,
     NzIconModule,
+    NzSpaceCompactItemDirective,
     NzOutletModule,
     FluentInjectDirective,
     FluentBindingDirective,

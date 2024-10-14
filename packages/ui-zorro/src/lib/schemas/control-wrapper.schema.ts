@@ -2,6 +2,7 @@ import { AbstractControlWrapperSchema, ComponentEventListenerHolder, ComponentPr
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFlexDirective } from 'ng-zorro-antd/flex';
 import { NzInputGroupComponent } from 'ng-zorro-antd/input';
+import { NzSpaceCompactComponent } from '../widgets/space-compact/lib/space-compact.component';
 import { Labelful } from './interfaces';
 
 /**
@@ -27,4 +28,14 @@ export interface SpaceComponentSchema<Key extends SingleSchemaKey = SingleSchema
   align?: NzFlexDirective['nzAlign']
   flex?: NzFlexDirective['nzFlex']
   gap?: NzFlexDirective['nzGap']
+}
+
+export interface SpaceCompactComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
+  extends AbstractControlWrapperSchema<Key>, Labelful, ComponentEventListenerHolder<NzSpaceCompactComponent>, ComponentPropertyHolder<NzSpaceCompactComponent> {
+  kind: 'space-compact';
+  direction?: ReturnType<NzSpaceCompactComponent['nzDirection']>
+  size?: NzSizeLDSType
+  variants?: {
+    block?: boolean
+  }
 }

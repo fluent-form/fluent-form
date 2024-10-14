@@ -1,6 +1,6 @@
 import { form } from '@fluent-form/core';
 import { text } from './control';
-import { inputAddon, inputGroup, space } from './control-wrapper';
+import { inputAddon, inputGroup, space, spaceCompact } from './control-wrapper';
 
 describe('control-wrapper', () => {
   it('inputGroup', () => {
@@ -38,6 +38,17 @@ describe('control-wrapper', () => {
     });
     expect(schemas).toEqual([{
       kind: 'space',
+      schemas: []
+    }]);
+  });
+
+  it('spaceCompact', () => {
+    const { schemas } = form(() => {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      spaceCompact().schemas(() => { });
+    });
+    expect(schemas).toEqual([{
+      kind: 'space-compact',
       schemas: []
     }]);
   });

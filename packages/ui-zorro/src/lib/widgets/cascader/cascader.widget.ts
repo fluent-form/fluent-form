@@ -4,6 +4,7 @@ import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContext
 import { AnyObject, SafeAny } from '@ngify/types';
 import { NzCascaderModule, NzCascaderOption } from 'ng-zorro-antd/cascader';
 import { CascaderControlSchema } from '../../schemas';
+import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
 type CascaderWidgetTemplateContext = WidgetTemplateContext<CascaderControlSchema, FormControl<SafeAny[]>>;
 
@@ -15,6 +16,7 @@ type CascaderWidgetTemplateContext = WidgetTemplateContext<CascaderControlSchema
   imports: [
     ReactiveFormsModule,
     NzCascaderModule,
+    NzSpaceCompactItemDirective,
     FluentGridModule,
     FluentInjectDirective,
     FluentBindingDirective,

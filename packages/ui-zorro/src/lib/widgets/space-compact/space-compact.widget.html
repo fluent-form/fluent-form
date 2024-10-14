@@ -1,0 +1,18 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <nz-space-compact
+    #component
+    fluentControlWrapper
+    [fluentBinding]="{ component, schema, control, model }"
+    [class]="schema.class"
+    [style]="schema.style"
+    [nzSize]="schema.size!"
+    [nzDirection]="schema.direction ?? 'horizontal'"
+    [nzBlock]="schema.variants?.block">
+    @for (subschema of schema.schemas; track subschema) {
+      <ng-container
+        fluentWithInjector
+        [ngTemplateOutlet]="subschema | widgetTemplate"
+        [ngTemplateOutletContext]="{ control: subschema.key | control: control, schema: subschema, model: model }" />
+    }
+  </nz-space-compact>
+</ng-template>

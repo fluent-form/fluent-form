@@ -5,6 +5,7 @@
         @if (schema.affixes || schema.addons) {
           <nz-input-group
             fluentCol
+            nzSpaceCompactItem="input"
             [span]="schema.col | col: 'span'"
             [flex]="schema.col | col: 'flex'"
             [offset]="schema.col | col: 'offset'"
@@ -48,6 +49,7 @@
           <input
             fluentCol
             nz-input
+            nzSpaceCompactItem="input"
             [span]="schema.col | col: 'span'"
             [flex]="schema.col | col: 'flex'"
             [offset]="schema.col | col: 'offset'"
@@ -70,6 +72,7 @@
     } @else {
       @if (schema.affixes || schema.addons) {
         <nz-input-group
+          nzSpaceCompactItem="input"
           [class]="schema.class"
           [style]="schema.style"
           [nzSize]="schema.size!"
@@ -107,6 +110,7 @@
       } @else {
         <input
           nz-input
+          nzSpaceCompactItem="input"
           [attr.id]="schema.id"
           [attr.name]="schema.key"
           [attr.maxlength]="helper.length.max | invoke: schema.length"

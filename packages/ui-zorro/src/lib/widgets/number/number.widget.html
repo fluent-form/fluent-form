@@ -5,6 +5,7 @@
         @if (schema.affixes || schema.addons) {
           <nz-input-number-group
             fluentCol
+            nzSpaceCompactItem="input-number"
             [span]="schema.col | col: 'span'"
             [flex]="schema.col | col: 'flex'"
             [offset]="schema.col | col: 'offset'"
@@ -51,6 +52,7 @@
           <nz-input-number
             #component
             fluentCol
+            nzSpaceCompactItem="input-number"
             [fluentBinding]="{ component, schema, control, model }"
             [formControl]="control"
             [class]="schema.class"
@@ -74,6 +76,7 @@
     } @else {
       @if (schema.affixes || schema.addons) {
         <nz-input-number-group
+          nzSpaceCompactItem="input-number"
           [class]="schema.class"
           [style]="schema.style"
           [nzSize]="schema.size!"
@@ -112,6 +115,7 @@
       } @else {
         <nz-input-number
           #component
+          nzSpaceCompactItem="input-number"
           [fluentBinding]="{ component, schema, control, model }"
           [formControl]="control"
           [class]="schema.class"

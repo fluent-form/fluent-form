@@ -4,6 +4,7 @@ import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContext
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { affixHelper } from '../../helper';
 import { TextControlSchema } from '../../schemas';
+import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
 type TextWidgetTemplateContext = WidgetTemplateContext<TextControlSchema, FormControl<string>>;
 
@@ -15,6 +16,7 @@ type TextWidgetTemplateContext = WidgetTemplateContext<TextControlSchema, FormCo
   imports: [
     ReactiveFormsModule,
     NzInputModule,
+    NzSpaceCompactItemDirective,
     FluentGridModule,
     FluentInjectDirective,
     FluentBindingDirective,

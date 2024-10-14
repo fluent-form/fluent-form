@@ -6,6 +6,7 @@ import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { Subject, filter, tap } from 'rxjs';
 import { SelectControlSchema } from '../../schemas';
+import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
 type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, FormControl>;
 
@@ -17,6 +18,7 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
   imports: [
     ReactiveFormsModule,
     NzSelectModule,
+    NzSpaceCompactItemDirective,
     NzOutletModule,
     FluentGridModule,
     FluentInjectDirective,

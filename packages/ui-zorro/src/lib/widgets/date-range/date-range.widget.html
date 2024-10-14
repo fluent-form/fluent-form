@@ -5,6 +5,7 @@
         <nz-range-picker
           #component
           fluentCol
+          nzSpaceCompactItem="picker"
           [fluentBinding]="{ component, schema, control, model }"
           [formControl]="control"
           [class]="schema.class"
@@ -34,6 +35,7 @@
     } @else {
       <nz-range-picker
         #component
+        nzSpaceCompactItem="picker"
         [fluentBinding]="{ component, schema, control, model }"
         [formControl]="control"
         [class]="schema.class"

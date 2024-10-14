@@ -5,6 +5,7 @@
         <nz-tree-select
           #component
           fluentCol
+          nzSpaceCompactItem="select"
           [fluentBinding]="{ component, schema, control, model }"
           [formControl]="control"
           [class]="schema.class"
@@ -33,6 +34,7 @@
     } @else {
       <nz-tree-select
         #component
+        nzSpaceCompactItem="select"
         [fluentBinding]="{ component, schema, control, model }"
         [formControl]="control"
         [class]="schema.class"

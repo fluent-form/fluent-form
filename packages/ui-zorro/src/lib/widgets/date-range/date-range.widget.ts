@@ -3,6 +3,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { DateRangePickerControlSchema } from '../../schemas';
+import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
 type DateRangeWidgetTemplateContext = WidgetTemplateContext<DateRangePickerControlSchema, FormControl<[Date, Date]>>;
 
@@ -14,6 +15,7 @@ type DateRangeWidgetTemplateContext = WidgetTemplateContext<DateRangePickerContr
   imports: [
     ReactiveFormsModule,
     NzDatePickerModule,
+    NzSpaceCompactItemDirective,
     FluentGridModule,
     FluentInjectDirective,
     FluentBindingDirective,

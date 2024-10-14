@@ -5,6 +5,7 @@
         <nz-time-picker
           #component
           fluentCol
+          nzSpaceCompactItem="picker"
           [fluentBinding]="{ component, schema, control, model }"
           [formControl]="control"
           [class]="schema.class"
@@ -29,6 +30,7 @@
     } @else {
       <nz-time-picker
         #component
+        nzSpaceCompactItem="picker"
         [fluentBinding]="{ component, schema, control, model }"
         [formControl]="control"
         [class]="schema.class"

@@ -4,6 +4,7 @@ import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContext
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { affixHelper } from '../../helper';
 import { NumberInputControlSchema } from '../../schemas';
+import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
 type NumberWidgetTemplateContext = WidgetTemplateContext<NumberInputControlSchema, FormControl<number>>;
 
@@ -15,6 +16,7 @@ type NumberWidgetTemplateContext = WidgetTemplateContext<NumberInputControlSchem
   imports: [
     ReactiveFormsModule,
     NzInputNumberModule,
+    NzSpaceCompactItemDirective,
     FluentGridModule,
     FluentInjectDirective,
     FluentBindingDirective,

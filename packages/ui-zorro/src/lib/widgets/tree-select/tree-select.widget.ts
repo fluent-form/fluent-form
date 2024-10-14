@@ -4,6 +4,7 @@ import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContext
 import { SafeAny } from '@ngify/types';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { TreeSelectControlSchema } from '../../schemas';
+import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
 type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSchema, FormControl<SafeAny[]>>;
 
@@ -15,6 +16,7 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
   imports: [
     ReactiveFormsModule,
     NzTreeSelectModule,
+    NzSpaceCompactItemDirective,
     FluentGridModule,
     FluentInjectDirective,
     FluentBindingDirective,

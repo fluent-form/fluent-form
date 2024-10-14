@@ -190,7 +190,7 @@ import { useRateWidget } from '@fluent-form/ui-zorro';
 
 {{ NgDocActions.demo("RateExampleComponent") }}
 
-## Color
+<!-- ## Color
 
 颜色选择器允许用户选择或自定义颜色。
 
@@ -198,4 +198,4 @@ import { useRateWidget } from '@fluent-form/ui-zorro';
 import { useColorWidget } from '@fluent-form/ui-zorro';
 ```
 
-{{ NgDocActions.demo("ColorExampleComponent") }}
+{{ NgDocActions.demo("ColorExampleComponent") }} -->

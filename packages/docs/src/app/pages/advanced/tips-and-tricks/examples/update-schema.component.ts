@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { AbstractFormGroupSchema, FluentFormComponent, SchemaUtil, form } from '@fluent-form/core';
-import { button, buttonGroup, group, text } from '@fluent-form/ui-zorro';
+import { button, group, spaceCompact, text } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'update-schema-example',
@@ -16,7 +16,7 @@ export class UpdateSchemaExampleComponent {
   schemaUtil = inject(SchemaUtil);
 
   schema = form(() => {
-    buttonGroup().schemas(() => {
+    spaceCompact().schemas(() => {
       button().type('primary').content('添加控件').listeners({
         click: () => this.add()
       });

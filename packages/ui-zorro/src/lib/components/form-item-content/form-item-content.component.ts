@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AbstractFormItemContentComponent, FluentControlPipe, FluentReactivePipe, FluentSchemaPipe, FluentSchemaTypePipe, FluentTemplatePipe, FluentVarDirective, FluentWidgetTemplatePipe, InvokePipe, SchemaType } from '@fluent-form/core';
+import { AbstractFormItemContentComponent, FluentControlPipe, FluentReactivePipe, FluentSchemaPipe, FluentSchemaTypePipe, FluentTemplatePipe, FluentVarDirective, FluentWidgetTemplatePipe, FluentWithInjectorDirective, InvokePipe, SchemaType } from '@fluent-form/core';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { labelHelper, tooltipHelper } from '../../helper';
 
@@ -12,6 +12,7 @@ import { labelHelper, tooltipHelper } from '../../helper';
   imports: [
     NgTemplateOutlet,
     NzFormModule,
+    FluentWithInjectorDirective,
     FluentVarDirective,
     FluentReactivePipe,
     FluentSchemaPipe,

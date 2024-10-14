@@ -1,13 +1,12 @@
 import { ValidatorFn, Validators } from '@angular/forms';
 import { FluentFormWidgetConfig, SchemaType, isNumber } from '@fluent-form/core';
-import { AlertComponentSchema, ButtonComponentSchema, CardComponentSchema, CardsArraySchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, ColorPickerControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, IconComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SpaceCompactComponentSchema, SpaceComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { AlertComponentSchema, ButtonComponentSchema, CardComponentSchema, CardsArraySchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, IconComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SpaceCompactComponentSchema, SpaceComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { AlertWidget } from './alert/alert.widget';
 import { ButtonWidget } from './button/button.widget';
 import { CardsArrayWidget } from './cards-array/cards-array.widget';
 import { CascaderWidget } from './cascader/cascader.widget';
 import { CheckboxGroupWidget } from './checkbox-group/checkbox-group.widget';
 import { CheckboxWidget } from './checkbox/checkbox.widget';
-import { ColorWidget } from './color/color.widget';
 import { DateRangeWidget } from './date-range/date-range.widget';
 import { DateWidget } from './date/date.widget';
 import { FormArrayWidget } from './form-array/form-array.widget';
@@ -47,7 +46,7 @@ export function useAllWidgets() {
     useCheckboxWidget(),
     useCheckboxGroupWidget(),
     useRateWidget(),
-    useColorWidget(),
+    // useColorWidget(),
     useHeadingWidget(),
 
     useSpaceWidget(),
@@ -259,13 +258,13 @@ export function useRateWidget(): FluentFormWidgetConfig<RateControlSchema> {
   };
 }
 
-export function useColorWidget(): FluentFormWidgetConfig<ColorPickerControlSchema> {
-  return {
-    kind: 'color',
-    type: SchemaType.Control,
-    widget: ColorWidget
-  };
-}
+// export function useColorWidget(): FluentFormWidgetConfig<ColorPickerControlSchema> {
+//   return {
+//     kind: 'color',
+//     type: SchemaType.Control,
+//     widget: ColorWidget
+//   };
+// }
 
 export function useHeadingWidget(): FluentFormWidgetConfig<HeadingComponentSchema> {
   return {

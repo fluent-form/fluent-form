@@ -1,8 +1,7 @@
 import { ValidatorFn, Validators } from '@angular/forms';
 import { FluentFormWidgetConfig, SchemaType, isNumber } from '@fluent-form/core';
-import { AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CardComponentSchema, CardsArraySchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, ColorPickerControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, IconComponentSchema, InputAddonComponentSchema, InputGroupComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SpaceCompactComponentSchema, SpaceComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { AlertComponentSchema, ButtonComponentSchema, CardComponentSchema, CardsArraySchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, ColorPickerControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, IconComponentSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SpaceCompactComponentSchema, SpaceComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { AlertWidget } from './alert/alert.widget';
-import { ButtonGroupWidget } from './button-group/button-group.widget';
 import { ButtonWidget } from './button/button.widget';
 import { CardsArrayWidget } from './cards-array/cards-array.widget';
 import { CascaderWidget } from './cascader/cascader.widget';
@@ -15,7 +14,6 @@ import { FormArrayWidget } from './form-array/form-array.widget';
 import { FormGroupWidget } from './form-group/form-group.widget';
 import { HeadingWidget } from './heading/heading.widget';
 import { IconWidget } from './icon/icon.widget';
-import { InputGroupWidget } from './input-group/input-group.widget';
 import { NumberWidget } from './number/number.widget';
 import { RadioGroupWidget } from './radio-group/radio-group.widget';
 import { RateWidget } from './rate/rate.widget';
@@ -52,7 +50,6 @@ export function useAllWidgets() {
     useColorWidget(),
     useHeadingWidget(),
 
-    useInputGroupWidget(),
     useSpaceWidget(),
     useSpaceCompactWidget(),
 
@@ -282,20 +279,6 @@ export function useHeadingWidget(): FluentFormWidgetConfig<HeadingComponentSchem
   };
 }
 
-export function useInputGroupWidget(): [FluentFormWidgetConfig<InputGroupComponentSchema>, FluentFormWidgetConfig<InputAddonComponentSchema>] {
-  return [
-    {
-      kind: 'input-group',
-      type: SchemaType.ControlWrapper,
-      widget: InputGroupWidget
-    },
-    {
-      kind: 'input-addon',
-      type: SchemaType.ControlWrapper,
-    }
-  ];
-}
-
 export function useSpaceWidget(): FluentFormWidgetConfig<SpaceComponentSchema> {
   return {
     kind: 'space',
@@ -332,25 +315,18 @@ export function useIconWidget(): FluentFormWidgetConfig<IconComponentSchema> {
   };
 }
 
-export function useButtonWidget(): [FluentFormWidgetConfig<ButtonComponentSchema>, FluentFormWidgetConfig<ButtonGroupComponentSchema>] {
-  return [
-    {
-      kind: 'button',
-      type: SchemaType.Component,
-      widget: ButtonWidget,
-      patch: schema => {
-        if (schema.variants?.block) {
-          schema.col ??= 12;
-        }
-        return schema;
+export function useButtonWidget(): FluentFormWidgetConfig<ButtonComponentSchema> {
+  return {
+    kind: 'button',
+    type: SchemaType.Component,
+    widget: ButtonWidget,
+    patch: schema => {
+      if (schema.variants?.block) {
+        schema.col ??= 12;
       }
-    },
-    {
-      kind: 'button-group',
-      type: SchemaType.ComponentWrapper,
-      widget: ButtonGroupWidget
+      return schema;
     }
-  ];
+  };
 }
 
 export function useStepsWidget(): [FluentFormWidgetConfig<StepsComponentSchema>, FluentFormWidgetConfig<StepComponentSchema>] {

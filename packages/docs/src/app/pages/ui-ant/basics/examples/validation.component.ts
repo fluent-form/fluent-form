@@ -2,7 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { inputGroup, text } from '@fluent-form/ui-zorro';
+import { spaceCompact, text } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'validation-example',
@@ -48,9 +48,8 @@ export class ValidationExampleComponent {
       .validators([Validators.pattern(/[A-Z]{3}/)])
       .tips({ error: 'Please enter three capital letters!' });
 
-    inputGroup()
+    spaceCompact()
       .label('InputGroup')
-      .primary('lastName')
       .col(6)
       .schemas(() => {
         text('firstName').col(4);

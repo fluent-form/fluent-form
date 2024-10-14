@@ -4,21 +4,15 @@
 
 在本章节中，我们将展示一些控件包装器的基本使用示例。
 
-## InputGroup
+## SpaceCompact
 
-`InputGroup` 组件可以帮助您在表单中添加输入框的组合展现。
+`SpaceCompact` 组件可以帮助您在表单中添加输入框或按钮的组合展现。
 
 ```ts
-import { useInputGroupWidget } from '@fluent-form/ui-zorro';
+import { useSpaceCompactWidget } from '@fluent-form/ui-zorro';
 ```
 
-{{ NgDocActions.demo("InputGroupExampleComponent") }}
-
-### InputAddon
-
-将 `inputGroup()` 与 `inputAddon()` 组件组合使用，可以实现在 `addons` 中渲染**控件**。
-
-{{ NgDocActions.demo("InputAddonExampleComponent") }}
+{{ NgDocActions.demo("SpaceCompactExampleComponent") }}
 
 ## Space
 

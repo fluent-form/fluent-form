@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Directive, inject, Injector, ViewContainerRef } from '@angular/core';
+import { Directive, inject, Injector } from '@angular/core';
 
 /**
  * @internal
@@ -12,10 +12,9 @@ export class FluentWithInjectorDirective {
 
   constructor() {
     const outlet = inject(NgTemplateOutlet);
-    const { injector } = inject(ViewContainerRef);
     outlet.ngTemplateOutletInjector = Injector.create({
       providers: [],
-      parent: injector
+      parent: inject(Injector)
     });
   }
 

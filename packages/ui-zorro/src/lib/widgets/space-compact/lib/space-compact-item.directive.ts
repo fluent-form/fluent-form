@@ -3,16 +3,14 @@
  * found in the LICENSE file at https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/LICENSE
  */
 
-import { afterNextRender, computed, Directive, ElementRef, forwardRef, inject, input, OnDestroy } from '@angular/core';
+import { afterNextRender, computed, Directive, ElementRef, inject, input, OnDestroy } from '@angular/core';
 
 import { NzSpaceCompactComponent } from './space-compact.component';
-import { NZ_SPACE_COMPACT_ITEM } from './space-compact.token';
 
 @Directive({
   selector: '[nzSpaceCompactItem]',
   exportAs: 'nzSpaceCompactItem',
   standalone: true,
-  providers: [{ provide: NZ_SPACE_COMPACT_ITEM, useExisting: forwardRef(() => NzSpaceCompactItemDirective) }],
   host: {
     '[class]': 'class()'
   }

@@ -44,12 +44,14 @@ export class NzSpaceCompactItemDirective implements OnDestroy {
       const { nativeElement }: ElementRef<HTMLElement> = inject(ElementRef);
 
       afterNextRender(() => {
-        const index = Array.from(nativeElement.parentElement!.children).indexOf(nativeElement);
-        this.spaceCompactCmp!.items.update(value => {
-          const newValue = value.slice();
-          newValue.splice(index, 0, this);
-          return newValue;
-        });
+        if (nativeElement.parentElement) {
+          const index = Array.from(nativeElement.parentElement.children).indexOf(nativeElement);
+          this.spaceCompactCmp!.items.update(value => {
+            const newValue = value.slice();
+            newValue.splice(index, 0, this);
+            return newValue;
+          });
+        }
       });
     }
   }

@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { SchemaUtil, ValueUtil, provideFluentForm } from '@fluent-form/core';
 import { text } from '../compose/control';
 import { withZorro } from '../feature';
@@ -24,8 +24,8 @@ describe('useWidget', () => {
 
   describe('built-in patcher', () => {
     it('heading patcher', () => {
-      const schema = { kind: 'heading', level: 1, content: '' };
-      expect(schemaUtil.patch(schema)).toEqual({ kind: 'heading', level: 1, content: '', col: 12 });
+      expect(schemaUtil.patch({ kind: 'heading', level: 1, content: '', col: 1 })).toEqual({ kind: 'heading', level: 1, content: '', col: 1 });
+      expect(schemaUtil.patch({ kind: 'heading', level: 1, content: '' })).toEqual({ kind: 'heading', level: 1, content: '', col: 12 });
     });
 
     it('button patcher', () => {
@@ -34,8 +34,21 @@ describe('useWidget', () => {
     });
 
     it('alert patcher', () => {
-      const schema = { kind: 'alert', message: '' };
-      expect(schemaUtil.patch(schema)).toEqual({ kind: 'alert', message: '', col: 12 });
+      expect(schemaUtil.patch({ kind: 'alert', message: '', col: 1 })).toEqual({ kind: 'alert', message: '', col: 1 });
+      expect(schemaUtil.patch({ kind: 'alert', message: '' })).toEqual({ kind: 'alert', message: '', col: 12 });
+    });
+
+    it('button patcher', () => {
+      expect(schemaUtil.patch({ kind: 'button', content: '' })).toEqual({ kind: 'button', content: '' });
+      expect(schemaUtil.patch({ kind: 'button', content: '', variants: { block: true } })).toEqual({ kind: 'button', content: '', variants: { block: true }, col: 12 });
+    });
+  });
+
+  describe('built-in validators', () => {
+    it('text email validators', () => {
+      const schema = { kind: 'text', type: 'email' };
+      const validators = schemaUtil.validatorsOf(schema);
+      expect(validators).toContain(Validators.email);
     });
   });
 

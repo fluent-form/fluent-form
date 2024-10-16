@@ -10,8 +10,8 @@ ng add @fluent-form/core
 
 选择正确的 {% include "../../../markdowns/brand.md" %} 版本以与您的 Angular 版本兼容。
 
-| Angular 版本 | fluentform 版本 |
+| Angular 版本 | FluentForm 版本 |
 | ------------ | --------------- |
-| v18.x       | v0.24.x           |
-| v17.x       | v0.24.x           |
-| v16.x       | 不受支持           |
+| v18.x        | >=0.24.x        |
+| v17.x        | >=0.24.x        |
+| v16.x        | 不受支持        |

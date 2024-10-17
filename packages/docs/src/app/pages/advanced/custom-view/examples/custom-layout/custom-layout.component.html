@@ -9,7 +9,7 @@
   </thead>
   <tbody>
     @for (item of table.data; track item; let index = $index) {
-      <tr fluent-form [fluentSchema]="schema" [(fluentModel)]="list[index]">
+      <tr [fluentSchema]="schema" [(fluentModel)]="list[index]">
         <td>
           <fluent-outlet key="name"></fluent-outlet>
         </td>

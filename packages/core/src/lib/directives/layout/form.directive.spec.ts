@@ -15,7 +15,7 @@ import { FluentFormLayoutModule } from './module';
     FluentFormLayoutModule
   ],
   template: `
-    <div fluent-form [fluentSchema]="schema" [(fluentModel)]="model" (fluentFormChange)="form = $event">
+    <div [fluentSchema]="schema" [(fluentModel)]="model" (fluentFormChange)="form = $event">
       <fluent-outlet key="ipt" />
       <fluent-outlet key="ipts" />
       <fluent-outlet key="group.ipt" />

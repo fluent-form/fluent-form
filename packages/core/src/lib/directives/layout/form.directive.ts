@@ -7,7 +7,7 @@ import { FormUtil, ModelUtil } from '../../utils';
 import { FluentControlContainer, FluentControlContainerDirective } from './models/control-container';
 
 @Directive({
-  selector: '[fluent-form]',
+  selector: '[fluentSchema]',
   exportAs: 'fluentForm',
   standalone: true,
   providers: [

@@ -1,3 +1,7 @@
+## 0.26.1 (2024-10-18)
+
+This was a version bump only for ui-zorro to align it with other projects, there were no code changes.
+
 ## 0.26.0 (2024-10-18)
 
 

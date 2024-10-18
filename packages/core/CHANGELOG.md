@@ -1,3 +1,31 @@
+## 0.26.0 (2024-10-18)
+
+
+### 🚀 Features
+
+- **core:** add control wrapper directive
+
+- **core:** adjust definition of FormContentTemplateContext
+
+- **core:** add default gap for row component
+
+
+### 🩹 Fixes
+
+- **core:** fix bug of find schema
+
+- **core:** fix type
+
+- **core:** remove ControlContainer patch
+
+- **core:** remove FluentParentRowDirective usages
+
+
+### ❤️  Thank You
+
+- hyperlife1119
+- HyperLifelll9
+
 ## 0.25.0 (2024-09-05)
 
 

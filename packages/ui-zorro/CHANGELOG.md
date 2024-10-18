@@ -1,3 +1,15 @@
+## 0.26.2 (2024-10-18)
+
+
+### 🚀 Features
+
+- **ui-zorro:** reintroducing button group widget ([ee62f69e](https://github.com/fluent-form/fluent-form/commit/ee62f69e))
+
+
+### ❤️  Thank You
+
+- hyperlife1119 @HyperLife1119
+
 ## 0.26.1 (2024-10-18)
 
 This was a version bump only for ui-zorro to align it with other projects, there were no code changes.

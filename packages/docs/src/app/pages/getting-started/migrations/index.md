@@ -58,4 +58,4 @@
 + text('x').affixes({ prefix: 'prefix', suffix: 'suffix' })
 ```
 
-6. `inputGroup()`、`numberGroup()` 和 `buttonGroup()` 组件已被移除，您可以使用 `spaceCompact()` 组件代替。
+1. `inputGroup()` 和 `numberGroup()` 组件已被移除，您可以使用 `spaceCompact()` 组件代替。

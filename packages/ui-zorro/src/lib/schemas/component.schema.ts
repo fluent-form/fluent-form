@@ -47,7 +47,7 @@ export interface HeadingComponentSchema<Key extends SingleSchemaKey = SingleSche
  * @public
  */
 export interface AlertComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractComponentSchema<Key>, ComponentEventListenerHolder<NzAlertComponent>, ComponentPropertyHolder<NzAlertComponent> {
+  extends AbstractComponentSchema<Key>, Labelful, ComponentEventListenerHolder<NzAlertComponent>, ComponentPropertyHolder<NzAlertComponent> {
   kind: 'alert';
   type?: NzAlertComponent['nzType'];
   icon?: boolean | string;

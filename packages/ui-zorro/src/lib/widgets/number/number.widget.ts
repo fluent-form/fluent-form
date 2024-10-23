@@ -3,10 +3,10 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, FluentTemplatePipe, InvokePipe, WidgetTemplateContext, isNumber } from '@fluent-form/core';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { affixHelper } from '../../helper';
-import { NumberInputControlSchema } from '../../schemas';
+import { NumberControlSchema } from '../../schemas';
 import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
-type NumberWidgetTemplateContext = WidgetTemplateContext<NumberInputControlSchema, FormControl<number>>;
+type NumberWidgetTemplateContext = WidgetTemplateContext<NumberControlSchema, FormControl<number>>;
 
 /**
  * @internal
@@ -34,9 +34,9 @@ export class NumberWidget extends AbstractWidget<NumberWidgetTemplateContext> {
   protected readonly infinity = Infinity;
 
   protected readonly helper = {
-    precision: (precision: NumberInputControlSchema['precision']) =>
+    precision: (precision: NumberControlSchema['precision']) =>
       isNumber(precision) ? precision : precision?.value,
-    precisionMode: (precision: NumberInputControlSchema['precision']) =>
+    precisionMode: (precision: NumberControlSchema['precision']) =>
       isNumber(precision) || !precision?.mode ? 'toFixed' : precision.mode,
     affix: affixHelper
   } as const;

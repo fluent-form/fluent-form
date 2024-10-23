@@ -112,7 +112,7 @@ export interface TextareaControlSchema<Key extends SingleSchemaKey = SingleSchem
 /**
  * @public
  */
-export interface NumberInputControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = number>
+export interface NumberControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = number>
   extends AbstractInputBoxControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzInputNumberComponent, Val>, ComponentPropertyHolder<NzInputNumberComponent> {
   kind: 'number';
   range?: { max?: number, min?: number }
@@ -121,12 +121,12 @@ export interface NumberInputControlSchema<Key extends SingleSchemaKey = SingleSc
   /** Step length */
   step?: number;
   addons?: {
-    before?: MaybeSchemaReactiveFn<NumberInputControlSchema, string | TemplateRef<void> | { icon: string } | null>;
-    after?: MaybeSchemaReactiveFn<NumberInputControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    before?: MaybeSchemaReactiveFn<NumberControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    after?: MaybeSchemaReactiveFn<NumberControlSchema, string | TemplateRef<void> | { icon: string } | null>;
   };
   affixes?: {
-    prefix?: MaybeSchemaReactiveFn<NumberInputControlSchema, string | TemplateRef<void> | { icon: string } | null>;
-    suffix?: MaybeSchemaReactiveFn<NumberInputControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    prefix?: MaybeSchemaReactiveFn<NumberControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    suffix?: MaybeSchemaReactiveFn<NumberControlSchema, string | TemplateRef<void> | { icon: string } | null>;
   };
 }
 

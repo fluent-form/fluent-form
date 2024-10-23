@@ -1,5 +1,5 @@
 import { SchemaKey, SingleSchemaKey, UnstableBuilder, composeBuilder } from '@fluent-form/core';
-import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, ColorPickerControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, HeadlessControlSchema, NumberInputControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, ColorPickerControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, HeadlessControlSchema, NumberControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { KindOrKey } from './helper';
 
 export function headless<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<HeadlessControlSchema<Key>, KindOrKey> {
@@ -24,10 +24,10 @@ export function textarea<Key extends SingleSchemaKey>(key?: Key) {
   return composeBuilder<TextareaControlSchema<Key>>().kind('textarea').key(key);
 }
 
-export function number(): UnstableBuilder<NumberInputControlSchema<number>, KindOrKey>;
-export function number<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<NumberInputControlSchema<Key>, KindOrKey>;
+export function number(): UnstableBuilder<NumberControlSchema<number>, KindOrKey>;
+export function number<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<NumberControlSchema<Key>, KindOrKey>;
 export function number<Key extends SingleSchemaKey>(key?: Key) {
-  return composeBuilder<NumberInputControlSchema<Key>>().kind('number').key(key);
+  return composeBuilder<NumberControlSchema<Key>>().kind('number').key(key);
 }
 
 export function date(): UnstableBuilder<DatePickerControlSchema<number>, KindOrKey>;

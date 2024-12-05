@@ -23,11 +23,11 @@
 
 要使用自定义布局功能，您需要导入 `FluentFormLayoutModule` 模块。该模块提供了以下指令：
 
-- `[fluentSchema] 指令：这是顶层表单，用于配置 `schema` 并绑定 `model`。
+- `[fluentSchema]` 指令：这是顶层表单，用于配置 `schema` 并绑定 `model`。
 - `<fluent-outlet>` 指令：这是视图渲染出口，用于渲染表单元素视图。您可以使用参数 `key` 来指定要渲染的部分。
 
 {{ NgDocActions.demo("CustomLayoutExampleComponent") }}
 
 ## 自定义部件
 
-即将推出...
+即将推出教程...

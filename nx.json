@@ -1,38 +1,18 @@
 {
-  "pluginsConfig": {
-    "@nx/js": {
-      "analyzeSourceFiles": true
-    }
-  },
+  "pluginsConfig": { "@nx/js": { "analyzeSourceFiles": true } },
   "extends": "nx/presets/npm.json",
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
     "@nx/angular:package": {
       "cache": true,
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "default",
-        "^default"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["default", "^default"]
     },
     "@nx/jest:jest": {
       "cache": true,
-      "inputs": [
-        "default",
-        "^default",
-        "{workspaceRoot}/jest.preset.js"
-      ],
-      "options": {
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
-      }
+      "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],
+      "options": { "passWithNoTests": true },
+      "configurations": { "ci": { "ci": true, "codeCoverage": true } }
     },
     "@nx/eslint:lint": {
       "cache": true,
@@ -45,28 +25,14 @@
     },
     "@angular-devkit/build-angular:application": {
       "cache": true,
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "default",
-        "^default"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["default", "^default"]
     },
-    "nx-release-publish": {
-      "options": {
-        "packageRoot": "dist/{projectName}"
-      }
-    }
+    "nx-release-publish": { "options": { "packageRoot": "dist/{projectName}" } }
   },
   "generators": {
-    "@nx/angular:library": {
-      "linter": "eslint",
-      "unitTestRunner": "jest"
-    },
-    "@nx/angular:component": {
-      "style": "scss"
-    },
+    "@nx/angular:library": { "linter": "eslint", "unitTestRunner": "jest" },
+    "@nx/angular:component": { "style": "scss" },
     "@nx/angular:application": {
       "e2eTestRunner": "none",
       "linter": "eslint",
@@ -76,9 +42,7 @@
   },
   "release": {
     "changelog": {
-      "workspaceChangelog": {
-        "createRelease": "github"
-      },
+      "workspaceChangelog": { "createRelease": "github" },
       "projectChangelogs": true
     },
     "version": {
@@ -88,5 +52,6 @@
       }
     }
   },
-  "nxCloudId": "67512023f94c174f87739462"
+  "nxCloudId": "67512023f94c174f87739462",
+  "nxCloudAccessToken": "Y2I2YzY1NGQtZWNiMS00YjEzLWE1NmYtMDI4NTFlOTE3NjUwfHJlYWQtd3JpdGU="
 }

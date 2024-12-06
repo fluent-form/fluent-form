@@ -1,13 +1,13 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FluentFormLayoutModule, form } from '@fluent-form/core';
+import { FluentFormRenderModule, form } from '@fluent-form/core';
 import { date, group, slider, spaceCompact, text, toggle } from '@fluent-form/ui-zorro';
 import { NzTableModule } from 'ng-zorro-antd/table';
 
 @Component({
   selector: 'custom-layout-example',
   standalone: true,
-  imports: [FluentFormLayoutModule, NzTableModule, JsonPipe],
+  imports: [FluentFormRenderModule, NzTableModule, JsonPipe],
   templateUrl: './custom-layout.component.html'
 })
 export class CustomLayoutExampleComponent {

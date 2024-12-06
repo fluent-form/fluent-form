@@ -17,11 +17,13 @@
 
 {{ NgDocActions.demo("CustomTemplateExampleComponent") }}
 
-## 自定义布局
+## 自定义渲染
 
 {% include "../../../markdowns/developer-preview.md" %}
 
-要使用自定义布局功能，您需要导入 `FluentFormLayoutModule` 模块。该模块提供了以下指令：
+如果您需要自定义表单布局，例如将表单控件渲染到表格单元格中，您可以使用自定义渲染功能。
+
+要使用自定义渲染功能，您需要导入 `FluentFormRenderModule` 模块。该模块提供了以下指令：
 
 - `[fluentSchema]` 指令：这是顶层表单，用于配置 `schema` 并绑定 `model`。
 - `<fluent-outlet>` 指令：这是视图渲染出口，用于渲染表单元素视图。您可以使用参数 `key` 来指定要渲染的部分。

@@ -7,12 +7,12 @@ import { provideFluentForm } from '../../provider';
 import { AbstractFormGroupSchema } from '../../schemas';
 import { array, group, inputGroup, text, withTesting } from '../../testing';
 import { FluentFormDirective } from './form.directive';
-import { FluentFormLayoutModule } from './module';
+import { FluentFormRenderModule } from './module';
 
 @Component({
   standalone: true,
   imports: [
-    FluentFormLayoutModule
+    FluentFormRenderModule
   ],
   template: `
     <div [fluentSchema]="schema" [(fluentModel)]="model" (fluentFormChange)="form = $event">

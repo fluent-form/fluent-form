@@ -44,9 +44,9 @@ export interface Column {
 
 export interface ControlValueMapper<V> {
   /** A parser that maps from a model's value to a form control's value */
-  parser: (input: SafeAny, schema: AbstractControlSchema) => V | null;
+  parser: (value: SafeAny | null, schema: AbstractControlSchema) => V | null;
   /** A formatter that maps from a form control's value to a model's value */
-  formatter: (output: V | null, schema: AbstractControlSchema) => SafeAny;
+  formatter: (value: V | null, schema: AbstractControlSchema) => SafeAny | null;
 }
 
 export interface SchemaContext<S extends SchemaLike = AbstractSchema> {

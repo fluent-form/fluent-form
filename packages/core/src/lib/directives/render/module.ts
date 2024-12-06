@@ -12,4 +12,4 @@ import { FluentOutletDirective } from './outlet.directive';
     FluentOutletDirective,
   ]
 })
-export class FluentFormLayoutModule { }
+export class FluentFormRenderModule { }

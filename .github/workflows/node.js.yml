@@ -3,14 +3,15 @@
 
 name: Node.js CI
 
-env:
-  NODE_OPTIONS: --max-old-space-size=6144
-
 on:
   push:
-    branches: [main, next]
+    branches: [main]
   pull_request:
-    branches: [main, next]
+    branches: [main]
+
+permissions:
+  actions: read
+  contents: read
 
 jobs:
   build:
@@ -23,10 +24,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
           cache: "npm"
       - run: npm ci
       - uses: nrwl/nx-set-shas@v4

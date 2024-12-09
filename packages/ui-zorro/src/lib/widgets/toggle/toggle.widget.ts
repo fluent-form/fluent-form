@@ -19,7 +19,6 @@ type ToggleWidgetTemplateContext = WidgetTemplateContext<ToggleControlSchema, Fo
     FluentTemplatePipe,
     FluentReactivePipe
   ],
-  templateUrl: './toggle.widget.html',
-  styles: [`nz-switch { width: 100% }`]
+  templateUrl: './toggle.widget.html'
 })
 export class ToggleWidget extends AbstractWidget<ToggleWidgetTemplateContext> { }

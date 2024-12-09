@@ -50,6 +50,10 @@ export class ExampleComponent {
 
 Currently in beta, we look forward to your active trial, we will continue to actively collect user feedback, rapid iteration and continuous improvement of functionality and performance.
 
+## Changelog
+
+[Learn about the latest improvements.](https://github.com/fluent-form/fluent-form/blob/main/CHANGELOG.md)
+
 ## Support
 
 Do you love ✨ {% include "../../markdowns/brand.md" %} ✨ ? Star for [this](https://github.com/fluent-form/fluent-form) project!

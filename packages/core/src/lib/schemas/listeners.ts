@@ -1,40 +1,47 @@
 import { FormControlStatus } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
-import { ComponentOutputListenerMap, HTMLElementEventListenerMap } from '../types';
+import { ComponentOutputMap } from '../types';
 import { SchemaContext } from './interfaces';
 
-/** 控件事件 */
-type ControlEventMap<Val> = {
-  valueChange?: (value: Val, ctx: SchemaContext) => void | Promise<void>;
-  statusChange?: (status: FormControlStatus, ctx: SchemaContext) => void | Promise<void>;
+type ControlEventListenerMap<Val> = {
+  valueChange?: (value: Val, context: SchemaContext) => void;
+  statusChange?: (status: FormControlStatus, context: SchemaContext) => void;
 }
+
+type ComponentOutputListenerMap<C> = {
+  [K in keyof ComponentOutputMap<C>]?: (value: ComponentOutputMap<C>[K], context: SchemaContext) => void
+}
+
+type ElementEventListenerMap = {
+  [K in keyof HTMLElementEventMap]?: (event: HTMLElementEventMap[K], ctx: SchemaContext) => void
+};
 
 /** 事件侦听器 */
 export interface EventListenerHolder {
-  listeners?: Record<string, undefined | ((...args: SafeAny[]) => void | Promise<void>)>
+  listeners?: Partial<Record<string, ((...args: SafeAny[]) => void)>>
 }
 
 /** 控件事件侦听器 */
 export interface ControlEventListenerHolder<V = SafeAny> extends EventListenerHolder {
-  listeners?: ControlEventMap<V>;
+  listeners?: ControlEventListenerMap<V>;
 }
 
 /** 组件事件侦听器 */
 export interface ComponentEventListenerHolder<C> extends EventListenerHolder {
-  listeners?: ComponentOutputListenerMap<C>;
+  listeners?: ComponentOutputListenerMap<C>
 }
 
 /** 组件控件事件侦听器 */
 export interface ComponentControlEventListenerHolder<C, V = SafeAny> extends EventListenerHolder {
-  listeners?: ComponentOutputListenerMap<C> & ControlEventMap<V>;
+  listeners?: ComponentOutputListenerMap<C> & ControlEventListenerMap<V>;
 }
 
 /** 元素事件侦听器 */
 export interface ElementEventListenerHolder extends EventListenerHolder {
-  listeners?: HTMLElementEventListenerMap;
+  listeners?: ElementEventListenerMap;
 }
 
 /** 元素控件事件侦听器 */
 export interface ElementControlEventListenerHolder<V = SafeAny> extends EventListenerHolder {
-  listeners?: HTMLElementEventListenerMap & ControlEventMap<V>;
+  listeners?: ElementEventListenerMap & ControlEventListenerMap<V>;
 }

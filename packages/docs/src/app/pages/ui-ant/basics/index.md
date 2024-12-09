@@ -86,9 +86,22 @@
 
 ## 事件侦听
 
-可以使用 `listeners` 选项来侦听控件的事件。所有控件均支持 `valueChanges` 和 `statusChanges` 事件。除此之外，每个控件组件/元素还支持侦听其自身提供的特定事件。
+{% include "../../../markdowns/brand.md" %} 目前提供了两种方式来侦听控件/组件的事件：
+
+### Callback
+
+使用 `listeners` 选项来侦听控件的事件。`listeners` 选项接受一个对象，对象的键为事件名，值为一个事件回调函数。
 
 {{ NgDocActions.demo("EventListenerExampleComponent") }}
+
+### Observable
+
+如果您想要使用 RxJS 来处理事件，可以使用 `observers` 选项。`observers` 选项接受一个对象，对象的键为事件名，值为一个函数，函数的第一个参数为 `Observable`。
+
+{{ NgDocActions.demo("EventObserverExampleComponent") }}
+
+> **NOTE**
+> 所有控件均支持 `valueChanges` 和 `statusChanges` 事件。除此之外，每个控件组件/元素还支持侦听其自身提供的特定事件。
 
 ## 表单联动
 

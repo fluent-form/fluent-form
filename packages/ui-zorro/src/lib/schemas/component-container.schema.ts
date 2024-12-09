@@ -1,5 +1,5 @@
 import { TemplateRef } from '@angular/core';
-import { AbstractComponentContainerSchema, ComponentEventListenerHolder, ComponentPropertyHolder, MaybeSchemaReactiveFn, SingleSchemaKey } from '@fluent-form/core';
+import { AbstractComponentContainerSchema, ComponentEventListenerHolder, ComponentEventObserverHolder, ComponentPropertyHolder, MaybeSchemaReactiveFn, SingleSchemaKey } from '@fluent-form/core';
 import { NzCardComponent } from 'ng-zorro-antd/card';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
@@ -10,7 +10,7 @@ import { Labelful } from './interfaces';
  * @public
  */
 export interface StepsComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractComponentContainerSchema<Key>, ComponentEventListenerHolder<NzStepsComponent>, ComponentPropertyHolder<NzStepsComponent>, Labelful {
+  extends AbstractComponentContainerSchema<Key>, ComponentEventListenerHolder<NzStepsComponent>, ComponentEventObserverHolder<NzStepsComponent>, ComponentPropertyHolder<NzStepsComponent>, Labelful {
   kind: 'steps';
   type?: 'default' | 'navigation';
   active?: number;
@@ -26,7 +26,7 @@ export interface StepsComponentSchema<Key extends SingleSchemaKey = SingleSchema
  * @public
  */
 export interface StepComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractComponentContainerSchema<Key>, ComponentEventListenerHolder<NzStepComponent>, ComponentPropertyHolder<NzStepComponent> {
+  extends AbstractComponentContainerSchema<Key>, ComponentEventListenerHolder<NzStepComponent>, ComponentEventObserverHolder<NzStepComponent>, ComponentPropertyHolder<NzStepComponent> {
   kind: 'step';
   title: string | TemplateRef<void>;
   subtitle?: string | TemplateRef<void>;
@@ -39,7 +39,7 @@ export interface StepComponentSchema<Key extends SingleSchemaKey = SingleSchemaK
  * @public
  */
 export interface TabsComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractComponentContainerSchema<Key>, ComponentEventListenerHolder<NzTabSetComponent>, ComponentPropertyHolder<NzTabSetComponent>, Labelful {
+  extends AbstractComponentContainerSchema<Key>, ComponentEventListenerHolder<NzTabSetComponent>, ComponentEventObserverHolder<NzTabSetComponent>, ComponentPropertyHolder<NzTabSetComponent>, Labelful {
   kind: 'tabs';
   type?: NzTabType;
   active?: number;
@@ -54,14 +54,14 @@ export interface TabsComponentSchema<Key extends SingleSchemaKey = SingleSchemaK
  * @public
  */
 export interface TabComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractComponentContainerSchema<Key>, ComponentEventListenerHolder<NzTabComponent>, ComponentPropertyHolder<NzTabComponent> {
+  extends AbstractComponentContainerSchema<Key>, ComponentEventListenerHolder<NzTabComponent>, ComponentEventObserverHolder<NzTabComponent>, ComponentPropertyHolder<NzTabComponent> {
   kind: 'tab';
   title: string;
   disabled?: MaybeSchemaReactiveFn<TabComponentSchema<SingleSchemaKey>, boolean>;
 }
 
 export interface CardComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractComponentContainerSchema<Key>, ComponentEventListenerHolder<NzTabComponent>, ComponentPropertyHolder<NzTabComponent> {
+  extends AbstractComponentContainerSchema<Key>, ComponentEventListenerHolder<NzCardComponent>, ComponentEventObserverHolder<NzCardComponent>, ComponentPropertyHolder<NzTabComponent> {
   kind: 'card';
   borderless?: boolean;
   hoverable?: boolean;

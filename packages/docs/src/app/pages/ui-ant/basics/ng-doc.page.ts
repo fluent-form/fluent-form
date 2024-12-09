@@ -4,6 +4,7 @@ import { ZorroStyleComponent } from '../style';
 import { DefaultValueExampleComponent } from './examples/default-value.component';
 import { DisabledExampleComponent } from './examples/disabled.component';
 import { EventListenerExampleComponent } from './examples/event-listener.component';
+import { EventObserverExampleComponent } from './examples/event-observer.component';
 import { HintExampleComponent } from './examples/hint.component';
 import { LabelExampleComponent } from './examples/label.component';
 import { LinkageByValueChangesExampleComponent } from './examples/linkage-by-value-changes.component';
@@ -29,6 +30,7 @@ const BasicsPage: NgDocPage = {
     UpdateOnExampleComponent,
     ValidationExampleComponent,
     EventListenerExampleComponent,
+    EventObserverExampleComponent,
     LinkageExampleComponent,
     LinkageByValueChangesExampleComponent,
     ZorroStyleComponent

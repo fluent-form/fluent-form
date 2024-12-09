@@ -1,5 +1,5 @@
 import { TemplateRef } from '@angular/core';
-import { AbstractComponentSchema, ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementPropertyHolder, MaybeSchemaReactiveFn, PropertyHolder, SingleSchemaKey } from '@fluent-form/core';
+import { AbstractComponentSchema, ComponentEventListenerHolder, ComponentPropertyHolder, ElementEventListenerHolder, ElementEventObserverHolder, ElementPropertyHolder, MaybeSchemaReactiveFn, PropertyHolder, SingleSchemaKey } from '@fluent-form/core';
 import { NzAlertComponent } from 'ng-zorro-antd/alert';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzIconDirective } from 'ng-zorro-antd/icon';
@@ -16,7 +16,7 @@ export interface TemplateSchema<Key extends SingleSchemaKey = SingleSchemaKey> e
  * @public
  */
 export interface ButtonComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractComponentSchema<Key>, Labelful, ElementEventListenerHolder, ElementPropertyHolder<HTMLButtonElement> {
+  extends AbstractComponentSchema<Key>, Labelful, ElementEventListenerHolder, ElementEventObserverHolder, ElementPropertyHolder<HTMLButtonElement> {
   kind: 'button';
   type?: NzButtonType;
   mode?: HTMLButtonElement['type'];
@@ -37,7 +37,7 @@ export interface ButtonComponentSchema<Key extends SingleSchemaKey = SingleSchem
  * @public
  */
 export interface HeadingComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractComponentSchema<Key>, ElementEventListenerHolder, ElementPropertyHolder<HTMLHeadingElement> {
+  extends AbstractComponentSchema<Key>, ElementEventListenerHolder, ElementEventObserverHolder, ElementPropertyHolder<HTMLHeadingElement> {
   kind: 'heading';
   level: 1 | 2 | 3 | 4 | 5 | 6;
   content: string | TemplateRef<void>;
@@ -47,7 +47,7 @@ export interface HeadingComponentSchema<Key extends SingleSchemaKey = SingleSche
  * @public
  */
 export interface AlertComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractComponentSchema<Key>, Labelful, ComponentEventListenerHolder<NzAlertComponent>, ComponentPropertyHolder<NzAlertComponent> {
+  extends AbstractComponentSchema<Key>, Labelful, ComponentEventListenerHolder<NzAlertComponent>, ElementEventObserverHolder, ComponentPropertyHolder<NzAlertComponent> {
   kind: 'alert';
   type?: NzAlertComponent['nzType'];
   icon?: boolean | string;

@@ -1,16 +1,5 @@
-import { EventEmitter, OutputRef } from '@angular/core';
+import { EventEmitter, OutputRef, Signal } from '@angular/core';
 import { PickProperty, SafeAny } from '@ngify/types';
-import { SchemaContext } from './schemas';
-
-/**
- * HTML 元素的事件侦听器对象
- * ```ts
- * { click: (event, schema) => void, ... }
- * ```
- */
-export type HTMLElementEventListenerMap = {
-  [K in keyof HTMLElementEventMap]?: (event: HTMLElementEventMap[K], ctx: SchemaContext) => SafeAny
-};
 
 /**
  * HTML 元素的属性对象
@@ -30,15 +19,15 @@ type ComponentOutputName<C> = Exclude<
 >;
 
 /**
- * 组件的事件侦听器对象
+ * 组件的输出对象
  * ```ts
- * { nzChange: (event) => void, ... }
+ * { nzChange: EventType, ... }
  * ```
  * @template C 组件的类类型
  * @template S 各种控件的图示
  */
-export type ComponentOutputListenerMap<C> = {
-  [K in ComponentOutputName<C>]?: (event: C[K] extends EventEmitter<infer E> | OutputRef<infer E> ? E : never, ctx: SchemaContext) => SafeAny
+export type ComponentOutputMap<C> = {
+  [K in ComponentOutputName<C>]?: C[K] extends EventEmitter<infer E> | OutputRef<infer E> ? E : never
 }
 
 /**
@@ -48,7 +37,9 @@ export type ComponentOutputListenerMap<C> = {
  * ```
  * @template C 组件的类类型
  */
-export type ComponentPropertyMap<C> = Partial<Omit<C, ComponentOutputName<C>>>;
+export type ComponentPropertyMap<C> = {
+  [K in keyof Omit<C, ComponentOutputName<C>>]?: C[K] extends Signal<infer S> ? S : C[K]
+}
 
 export type Stringify<T> = T extends number ? `${T}` : never;
 

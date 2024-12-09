@@ -9,5 +9,6 @@ export * from './grid';
 export * from './interfaces';
 export * from './listeners';
 export * from './mapper';
+export * from './observers';
 export * from './properties';
 export * from './types';

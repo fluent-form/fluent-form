@@ -4,13 +4,15 @@ import { AbstractBranchSchema } from './abstract.schema';
 import { Row } from './grid';
 import { Length } from './interfaces';
 import { ControlEventListenerHolder } from './listeners';
+import { ControlEventObserverHolder } from './observers';
 import { SingleSchemaKey } from './types';
 
 /**
  * @public
  * 抽象的容器控件图示
  */
-export interface AbstractControlContainerSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractBranchSchema<Key>, ControlEventListenerHolder<SafeAny>, Row {
+export interface AbstractControlContainerSchema<Key extends SingleSchemaKey = SingleSchemaKey>
+  extends AbstractBranchSchema<Key>, ControlEventListenerHolder<SafeAny>, ControlEventObserverHolder<SafeAny>, Row {
   /** Validator for the control */
   validators?: ValidatorFn[];
   /** Async validators for control */

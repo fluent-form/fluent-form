@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { provideFluentForm } from '../provider';
-import { TextControlSchema, withTesting } from '../testing';
+import { NumberControlSchema, RangeControlSchema, TextControlSchema, withTesting } from '../testing';
 import { NumberComponent, RangeComponent } from '../testing/components';
 import { FormUtil } from '../utils';
 import { FluentBindingDirective } from './binding.directive';
@@ -12,6 +12,11 @@ const statusChangeFn = jest.fn();
 const valueChangeFn = jest.fn();
 const testChangeFn = jest.fn();
 const inputChangeFn = jest.fn();
+
+const statusChangeNextFn = jest.fn();
+const valueChangeNextFn = jest.fn();
+const testChangeNextFn = jest.fn();
+const inputChangeNextFn = jest.fn();
 
 @Component({
   standalone: true,
@@ -50,9 +55,14 @@ class TestingComponent {
       valueChange: valueChangeFn,
       statusChange: statusChangeFn,
       input: inputChangeFn,
+    },
+    observers: {
+      valueChange: source => source.subscribe(valueChangeNextFn),
+      statusChange: source => source.subscribe(statusChangeNextFn),
+      input: source => source.subscribe(inputChangeNextFn),
     }
   };
-  rangeSchema = {
+  rangeSchema: RangeControlSchema = {
     kind: 'range',
     key: 'range',
     properties: {
@@ -62,9 +72,14 @@ class TestingComponent {
       valueChange: valueChangeFn,
       statusChange: statusChangeFn,
       testChange: testChangeFn
+    },
+    observers: {
+      valueChange: source => source.subscribe(valueChangeNextFn),
+      statusChange: source => source.subscribe(statusChangeNextFn),
+      testChange: source => source.subscribe(testChangeNextFn),
     }
   };
-  numberSchema = {
+  numberSchema: NumberControlSchema = {
     kind: 'number',
     properties: {
       max: 999
@@ -73,6 +88,11 @@ class TestingComponent {
       valueChange: valueChangeFn,
       statusChange: statusChangeFn,
       testChange: testChangeFn
+    },
+    observers: {
+      valueChange: source => source.subscribe(valueChangeNextFn),
+      statusChange: source => source.subscribe(statusChangeNextFn),
+      testChange: source => source.subscribe(testChangeNextFn),
     }
   };
 
@@ -101,6 +121,18 @@ describe('FluentBindingDirective', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    statusChangeFn.mockClear();
+    valueChangeFn.mockClear();
+    testChangeFn.mockClear();
+    inputChangeFn.mockClear();
+
+    statusChangeNextFn.mockClear();
+    valueChangeNextFn.mockClear();
+    testChangeNextFn.mockClear();
+    inputChangeNextFn.mockClear();
+  });
+
   it('should be properties applied (element)', () => {
     const input = debugElement.nativeElement.querySelector('input');
     input.dispatchEvent(new InputEvent('input'));
@@ -121,29 +153,34 @@ describe('FluentBindingDirective', () => {
     const input = debugElement.nativeElement.querySelector('input');
     input.dispatchEvent(new InputEvent('input'));
     expect(inputChangeFn).toHaveBeenCalled();
+    expect(inputChangeNextFn).toHaveBeenCalled();
   });
 
   it('should listen to valueChange event', () => {
     const input = debugElement.nativeElement.querySelector('input');
     input.dispatchEvent(new InputEvent('input'));
     expect(valueChangeFn).toHaveBeenCalled();
+    expect(valueChangeNextFn).toHaveBeenCalled();
   });
 
   it('should listen to statusChange event', () => {
     const input = debugElement.nativeElement.querySelector('input');
     input.dispatchEvent(new InputEvent('input'));
     expect(statusChangeFn).toHaveBeenCalled();
+    expect(statusChangeNextFn).toHaveBeenCalled();
   });
 
   it('should listen to custom event (EventEmiter)', () => {
     const rangeCmp: RangeComponent = debugElement.query(By.directive(RangeComponent)).componentInstance;
     rangeCmp.testChange.emit();
     expect(testChangeFn).toHaveBeenCalled();
+    expect(testChangeNextFn).toHaveBeenCalled();
   });
 
   it('should listen to custom event (OutputRef)', () => {
     const numberCmp: NumberComponent = debugElement.query(By.directive(NumberComponent)).componentInstance;
     numberCmp.testChange.emit();
     expect(testChangeFn).toHaveBeenCalled();
+    expect(testChangeNextFn).toHaveBeenCalled();
   });
 });

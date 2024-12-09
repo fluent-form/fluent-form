@@ -1,7 +1,8 @@
 import { SafeAny } from '@ngify/types';
 import { FluentColDirective } from '../directives';
 import { Indexable } from '../types';
-import { Column, MaybeSchemaReactiveFn, SchemaLike } from './interfaces';
+import { Column } from './grid';
+import { MaybeSchemaReactiveFn, SchemaLike } from './interfaces';
 import { SchemaKey } from './types';
 
 /**

@@ -1,5 +1,7 @@
 import { AbstractBranchSchema } from './abstract.schema';
-import { ElementEventListenerHolder, ElementPropertyHolder, Row } from './interfaces';
+import { Row } from './grid';
+import { ElementEventListenerHolder } from './listeners';
+import { ElementPropertyHolder } from './properties';
 import { SingleSchemaKey } from './types';
 
 /**

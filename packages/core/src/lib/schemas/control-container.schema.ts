@@ -1,7 +1,9 @@
 import { AbstractControlOptions, AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { AbstractBranchSchema } from './abstract.schema';
-import { ControlEventListenerHolder, Length, Row } from './interfaces';
+import { Row } from './grid';
+import { Length } from './interfaces';
+import { ControlEventListenerHolder } from './listeners';
 import { SingleSchemaKey } from './types';
 
 /**

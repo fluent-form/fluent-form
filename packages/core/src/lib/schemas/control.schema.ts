@@ -1,7 +1,9 @@
 import { AbstractControlOptions, AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 import { SafeAny } from '@ngify/types';
 import { AbstractSchema } from './abstract.schema';
-import { ControlValueMapper, MaybeSchemaReactiveFn, PropertyHolder, SchemaReactiveFn } from './interfaces';
+import { MaybeSchemaReactiveFn, SchemaReactiveFn } from './interfaces';
+import { ControlValueMapper } from './mapper';
+import { PropertyHolder } from './properties';
 import { SchemaKey } from './types';
 
 /**

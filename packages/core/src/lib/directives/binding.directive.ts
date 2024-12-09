@@ -4,15 +4,14 @@ import { outputToObservable } from '@angular/core/rxjs-interop';
 import { AbstractControl } from '@angular/forms';
 import { AnyObject, SafeAny } from '@ngify/types';
 import { Observable, fromEvent, takeUntil } from 'rxjs';
-import { AbstractSchema } from '../schemas';
-import { EventListenerHolder, PropertyHolder, SchemaContext } from '../schemas/interfaces';
+import { AbstractSchema, EventListenerHolder, PropertyHolder, SchemaContext } from '../schemas';
 import { DestroyedSubject } from '../services';
 
-function isEventListener(value: SafeAny): value is EventListenerHolder {
+function isEventListener(value: SafeAny): value is Required<EventListenerHolder> {
   return 'listeners' in value;
 }
 
-function isPropertyPatcher(value: SafeAny): value is PropertyHolder {
+function isPropertyPatcher(value: SafeAny): value is Required<PropertyHolder> {
   return 'properties' in value;
 }
 
@@ -37,7 +36,7 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
       untracked(() => {
         const host = component ?? elementRef.nativeElement;
 
-        if (isPropertyPatcher(schema) && schema.properties) {
+        if (isPropertyPatcher(schema)) {
           for (const [property, value] of Object.entries(schema.properties)) {
             const prop = host[property as keyof (C | E)];
             if (isSignal(prop)) {
@@ -48,7 +47,7 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
           }
         }
 
-        if (isEventListener(schema) && schema.listeners) {
+        if (isEventListener(schema)) {
           const context: SchemaContext = { control, schema, model };
 
           destroyed.next();

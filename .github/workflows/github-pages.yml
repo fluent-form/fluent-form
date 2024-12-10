@@ -46,7 +46,6 @@ jobs:
       - name: Create 404.html
         run: |
           mv ${{ env.DOCS_SITE_PATH }}/index.csr.html ${{ env.DOCS_SITE_PATH }}/index.html
-          &
           cp ${{ env.DOCS_SITE_PATH }}/index.html ${{ env.DOCS_SITE_PATH }}/404.html
         working-directory: ${{ env.BUILD_PATH }}
       - name: Upload artifact

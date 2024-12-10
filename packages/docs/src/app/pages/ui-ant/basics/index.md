@@ -1,5 +1,3 @@
-# {{ NgDocPage.title }}
-
 {{ NgDocActions.demo("ZorroStyleComponent", { container: false }) }}
 
 本节内容涵盖所有适用于表单控件的基本功能选项。这些功能选项可以帮助您更好地控制和管理您的表单控件。

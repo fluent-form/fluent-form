@@ -1,24 +1,20 @@
 <ng-doc-root [footerContent]="footerContent">
-  <ng-doc-navbar [leftContent]="leftContent" [rightContent]="rightContent">
-    <ng-template #leftContent>
-      <app-brand class="text-3xl">
-        <sup class="opacity-50 text-sm ml-1 tracking-tighter">{{ version$ | async }}</sup>
-      </app-brand>
-    </ng-template>
+  <ng-doc-navbar>
+    <app-brand class="text-3xl" ngDocNavbarLeft>
+      <sup class="opacity-50 text-sm ml-1 tracking-tighter">{{ version$ | async }}</sup>
+    </app-brand>
 
-    <ng-template #rightContent>
-      <div class="flex gap-4">
-        <ng-doc-theme-toggle />
-        <a
-          ng-doc-button-icon
-          size="large"
-          href="https://github.com/fluent-form/fluent-form"
-          target="_blank"
-          ngDocTooltip="Repository on Github">
-          <ng-doc-icon customIcon="github" [size]="24" />
-        </a>
-      </div>
-    </ng-template>
+    <div class="ng-doc-header-controls flex" ngDocNavbarRight>
+      <ng-doc-theme-toggle />
+      <a
+        ng-doc-button-icon
+        size="large"
+        href="https://github.com/fluent-form/fluent-form"
+        target="_blank"
+        ngDocTooltip="Repository on Github">
+        <ng-doc-icon customIcon="github" [size]="24" />
+      </a>
+    </div>
   </ng-doc-navbar>
 
   <ng-doc-sidebar />

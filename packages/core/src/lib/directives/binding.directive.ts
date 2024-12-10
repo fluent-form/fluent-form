@@ -29,7 +29,7 @@ function isObserverHolder(value: SafeAny): value is Required<EventObserverHolder
 })
 export class FluentBindingDirective<E extends HTMLElement, C extends object, S extends AbstractSchema> implements OnChanges {
   // TODO: ng17 的 effect 似乎有 bug，对 schema.kind=text 的 widget 不起作用，导致无法绑定事件，具体查看 docs 中的 事件侦听 demo
-  // 目前暂时切换回 @Input，升级 ng18 修复后再改回来
+  // 目前暂时切换回 @Input，升级 ng19 修复后再改回来
   @Input() fluentBinding!: { component?: C, schema: S, control: AbstractControl, model: AnyObject };
 
   private readonly elementRef: ElementRef<E> = inject(ElementRef);

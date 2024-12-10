@@ -1,5 +1,3 @@
-# {{ NgDocPage.title }}
-
 {{ NgDocActions.demo("ZorroStyleComponent", { container: false }) }}
 
 {% include "../../../markdowns/brand.md" %} 内置了一个包含 12 列的栅格系统（Grid System），支持六个屏幕响应断点（xs、sm、md、lg、xl、xxl）。

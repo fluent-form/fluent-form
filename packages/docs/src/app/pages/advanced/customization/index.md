@@ -1,5 +1,3 @@
-# {{ NgDocPage.title }}
-
 {{ NgDocActions.demo("ZorroStyleComponent", { container: false }) }}
 
 {% include "../../../markdowns/brand.md" %} 提供了强大的自定义视图渲染功能，无论是表单元素还是表单布局，都可以根据需要进行定制。

@@ -8,7 +8,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideFluentForm, withStaticExpression } from '@fluent-form/core';
 import { useAllWidgets, withZorro } from '@fluent-form/ui-zorro';
-import { NG_DOC_DEFAULT_PAGE_PROCESSORS, NG_DOC_DEFAULT_PAGE_SKELETON, NgDocDefaultSearchEngine, provideMainPageProcessor, provideNgDocApp, providePageSkeleton, provideSearchEngine } from '@ng-doc/app';
+import { NG_DOC_DEFAULT_PAGE_PROCESSORS, NG_DOC_DEFAULT_PAGE_SKELETON, NgDocDefaultSearchEngine, provideMainPageProcessor, provideMermaid, provideNgDocApp, providePageSkeleton, provideSearchEngine } from '@ng-doc/app';
 import { NG_DOC_ROUTING, provideNgDocContext } from '@ng-doc/generated';
 
 registerLocaleData(zh, 'zh-CN', zhExtra);
@@ -27,10 +27,11 @@ export const appConfig: ApplicationConfig = {
       withFetch()
     ),
     provideNgDocContext(),
-    provideNgDocApp({ defaultThemeId: 'auto' }),
+    provideNgDocApp(),
     provideSearchEngine(NgDocDefaultSearchEngine),
     providePageSkeleton(NG_DOC_DEFAULT_PAGE_SKELETON),
     provideMainPageProcessor(NG_DOC_DEFAULT_PAGE_PROCESSORS),
+    provideMermaid(),
     provideFluentForm(
       withZorro(useAllWidgets()),
       withStaticExpression()

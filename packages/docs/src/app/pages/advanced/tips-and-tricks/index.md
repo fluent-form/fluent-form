@@ -1,5 +1,3 @@
-# {{ NgDocPage.title }}
-
 {{ NgDocActions.demo("ZorroStyleComponent", { container: false }) }}
 
 在本章节，我们将介绍一些开发技巧，以帮助您更有效地使用 {% include "../../../markdowns/brand.md" %}。

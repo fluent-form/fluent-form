@@ -1,5 +1,3 @@
-# {{ NgDocPage.title }}
-
 图示修补可用于在编写图示后续统一修改或补充参数。
 
 ## SchemaPatcher

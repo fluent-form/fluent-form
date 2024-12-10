@@ -1,5 +1,3 @@
-# {{ NgDocPage.title }}
-
 {{ NgDocActions.demo("ZorroStyleComponent", { container: false }) }}
 
 除了支持使用 Fluent API 和对象字面量编写图示，{% include "../../../markdowns/brand.md" %} 还允许使用 JSON 格式来编写图示。

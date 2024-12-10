@@ -1,5 +1,3 @@
-# {{ NgDocPage.title }}
-
 ## Basics
 
 {{ NgDocActions.demo("GridBasicExampleComponent") }}

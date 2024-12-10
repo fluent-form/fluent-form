@@ -45,7 +45,6 @@
           }
         ],
         "styles": [
-          "node_modules/@ng-doc/app/styles/global.css",
           "packages/docs/src/styles.scss"
         ],
         "scripts": [],

@@ -1,5 +1,3 @@
-# {{ NgDocPage.title }}
-
 {% include "../../../markdowns/brand.md" %} 使用 `schema` 来描述各种元素，通过将这些 `schema` 组合在一起，我们能够很好的描述一个完整的表单。
 
 ## 术语

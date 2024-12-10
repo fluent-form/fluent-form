@@ -1,5 +1,3 @@
-# {{ NgDocPage.title }}
-
 {{ NgDocActions.demo("ZorroStyleComponent", { container: false }) }}
 
 本文档将详细介绍 {% include "../../../markdowns/brand.md" %} 的基本用法。
@@ -8,7 +6,7 @@
 
 {% include "../../../markdowns/brand.md" %} 目前提供了以下 UI 库的支持：
 
-| UI      | Package                 | 官网                  |
+| UI         | Package                 | 官网                  |
 | ---------- | ----------------------- | --------------------- |
 | Ant Design | `@fluent-form/ui-zorro` | https://ng.ant.design |
 

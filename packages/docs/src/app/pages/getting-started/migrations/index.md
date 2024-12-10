@@ -1,5 +1,3 @@
-# {{ NgDocPage.title }}
-
 从 `ngx-fluent-form` 升级到 `@fluent-form/core`，您需要手动执行以下迁移。
 
 ## 迁移步骤

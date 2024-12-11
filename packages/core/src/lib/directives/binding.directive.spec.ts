@@ -154,6 +154,9 @@ describe('FluentBindingDirective', () => {
     input.dispatchEvent(new InputEvent('input'));
     expect(inputChangeFn).toHaveBeenCalled();
     expect(inputChangeNextFn).toHaveBeenCalled();
+    const [callArgs] = inputChangeNextFn.mock.calls;
+    expect(callArgs[0]).toHaveProperty('event');
+    expect(callArgs[0].context).toBeTruthy();
   });
 
   it('should listen to valueChange event', () => {
@@ -161,6 +164,9 @@ describe('FluentBindingDirective', () => {
     input.dispatchEvent(new InputEvent('input'));
     expect(valueChangeFn).toHaveBeenCalled();
     expect(valueChangeNextFn).toHaveBeenCalled();
+    const [callArgs] = valueChangeNextFn.mock.calls;
+    expect(callArgs[0]).toHaveProperty('event');
+    expect(callArgs[0].context).toBeTruthy();
   });
 
   it('should listen to statusChange event', () => {
@@ -168,6 +174,9 @@ describe('FluentBindingDirective', () => {
     input.dispatchEvent(new InputEvent('input'));
     expect(statusChangeFn).toHaveBeenCalled();
     expect(statusChangeNextFn).toHaveBeenCalled();
+    const [callArgs] = statusChangeNextFn.mock.calls;
+    expect(callArgs[0]).toHaveProperty('event');
+    expect(callArgs[0].context).toBeTruthy();
   });
 
   it('should listen to custom event (EventEmiter)', () => {
@@ -175,6 +184,9 @@ describe('FluentBindingDirective', () => {
     rangeCmp.testChange.emit();
     expect(testChangeFn).toHaveBeenCalled();
     expect(testChangeNextFn).toHaveBeenCalled();
+    const [callArgs] = testChangeNextFn.mock.calls;
+    expect(callArgs[0]).toHaveProperty('event');
+    expect(callArgs[0].context).toBeTruthy();
   });
 
   it('should listen to custom event (OutputRef)', () => {
@@ -182,5 +194,8 @@ describe('FluentBindingDirective', () => {
     numberCmp.testChange.emit();
     expect(testChangeFn).toHaveBeenCalled();
     expect(testChangeNextFn).toHaveBeenCalled();
+    const [callArgs] = testChangeNextFn.mock.calls;
+    expect(callArgs[0]).toHaveProperty('event');
+    expect(callArgs[0].context).toBeTruthy();
   });
 });

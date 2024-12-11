@@ -90,17 +90,17 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
       for (const [eventName, observer] of Object.entries(schema.observers)) {
         if (eventName === 'valueChange') {
           observer!(control.valueChanges.pipe(
-            map(value => ({ value, context })),
+            map(event => ({ event, context })),
             takeUntil(this.destroyed)
           ));
         } else if (eventName === 'statusChange') {
           observer!(control.statusChanges.pipe(
-            map(value => ({ value, context })),
+            map(event => ({ event, context })),
             takeUntil(this.destroyed)
           ));
         } else if (host instanceof HTMLElement) {
           observer!(fromEvent(host, eventName).pipe(
-            map(value => ({ value, context })),
+            map(event => ({ event, context })),
             takeUntil(this.destroyed)
           ));
         } else {
@@ -108,7 +108,7 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
           const observable = output instanceof Observable ? output : outputToObservable(output);
 
           observer!(observable.pipe(
-            map(value => ({ value, context })),
+            map(event => ({ event, context })),
             takeUntil(this.destroyed)
           ));
         }

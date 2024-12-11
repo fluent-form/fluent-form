@@ -5,16 +5,16 @@ import { ComponentOutputMap } from '../types';
 import { SchemaContext } from './interfaces';
 
 type ControlEventObserverMap<Val> = {
-  valueChange?: (source: Observable<{ value: Val, context: SchemaContext }>) => void;
-  statusChange?: (source: Observable<{ value: FormControlStatus, context: SchemaContext }>) => void;
+  valueChange?: (source: Observable<{ event: Val, context: SchemaContext }>) => void;
+  statusChange?: (source: Observable<{ event: FormControlStatus, context: SchemaContext }>) => void;
 }
 
 type ComponentOutputObserverMap<C> = {
-  [K in keyof ComponentOutputMap<C>]?: (source: Observable<{ value: ComponentOutputMap<C>[K], context: SchemaContext }>) => void
+  [K in keyof ComponentOutputMap<C>]?: (source: Observable<{ event: ComponentOutputMap<C>[K], context: SchemaContext }>) => void
 }
 
 type ElementEventObserverMap = {
-  [K in keyof HTMLElementEventMap]?: (source: Observable<{ value: HTMLElementEventMap[K], ctx: SchemaContext }>) => void
+  [K in keyof HTMLElementEventMap]?: (source: Observable<{ event: HTMLElementEventMap[K], ctx: SchemaContext }>) => void
 };
 
 /** 事件侦听器 */

@@ -37,7 +37,6 @@ describe('control', () => {
     expect(schemas).toEqual([{
       kind: 'date-picker',
       key: 'datetime',
-      format: 'yyyy-MM-dd HH:mm:ss',
       time: true
     }]);
   });

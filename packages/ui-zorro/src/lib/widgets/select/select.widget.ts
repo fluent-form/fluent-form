@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextDirective, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectPipe, FluentLifeCycleDirective, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
+import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectPipe, FluentNewPipe, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
 import { AnyObject } from '@ngify/types';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { Subject, filter, tap } from 'rxjs';
+import { filter, Subject, tap } from 'rxjs';
 import { SelectControlSchema } from '../../schemas';
 import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
@@ -23,12 +23,11 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
     FluentGridModule,
     FluentBindingDirective,
     FluentContextGuardDirective,
-    FluentContextDirective,
-    FluentLifeCycleDirective,
     FluentReactivePipe,
     FluentColumnPipe,
     FluentTemplatePipe,
-    FluentInjectPipe
+    FluentInjectPipe,
+    FluentNewPipe,
   ],
   templateUrl: './select.widget.html',
   styles: [`nz-select { width: 100% }`]
@@ -41,12 +40,12 @@ export class SelectWidget extends AbstractWidget<SelectWidgetTemplateContext> {
 
 export class SelectWidgetTemplatePrivateContext {
   private readonly keyword$ = new Subject<string>();
-  private readonly cdr = inject(ChangeDetectorRef);
 
   open = false;
 
-  init(schema: SelectControlSchema, model: AnyObject, control: FormControl) {
+  constructor(schema: SelectControlSchema, model: AnyObject, control: FormControl) {
     const fetchOptionsFn = schema.fetchOptions;
+    const cdr = inject(ChangeDetectorRef);
 
     if (fetchOptionsFn) {
       this.keyword$.pipe(
@@ -56,13 +55,13 @@ export class SelectWidgetTemplatePrivateContext {
       ).subscribe(options => {
         schema.options = options;
         schema.loading = false;
-        this.cdr.detectChanges();
+        cdr.detectChanges();
       });
     }
-  }
 
-  destroy() {
-    this.keyword$.complete();
+    inject(DestroyRef).onDestroy(() => {
+      this.keyword$.complete();
+    });
   }
 
   trigger(keyword: string) {

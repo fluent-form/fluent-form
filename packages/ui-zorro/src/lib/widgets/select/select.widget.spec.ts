@@ -29,31 +29,29 @@ describe('SelectWidget', () => {
     let ctx!: SelectWidgetTemplatePrivateContext;
 
     TestBed.runInInjectionContext(() => {
-      ctx = new SelectWidgetTemplatePrivateContext();
+      ctx = new SelectWidgetTemplatePrivateContext(
+        {
+          kind: 'select',
+          options: []
+        },
+        {},
+        control
+      );
+      ctx = new SelectWidgetTemplatePrivateContext(
+        {
+          kind: 'select',
+          fetchOptions: keyword$ =>
+            keyword$.pipe(
+              switchMap(() => of([]))
+            )
+        },
+        {},
+        control
+      );
     });
 
-    ctx.init(
-      {
-        kind: 'select',
-        options: []
-      },
-      {},
-      control
-    );
-    ctx.init(
-      {
-        kind: 'select',
-        fetchOptions: keyword$ =>
-          keyword$.pipe(
-            switchMap(() => of([]))
-          )
-      },
-      {},
-      control
-    );
     ctx.open = true;
     ctx.trigger('keyword');
-    ctx.destroy();
     expect(ctx).toBeTruthy();
   });
 });

@@ -1,61 +1,20 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <ng-container
-    *fluentContext="ctxClass as ctx"
-    (fluentInit)="ctx.init(schema, model, control)"
-    (fluentDestroy)="ctx.destroy()">
-    @if (ControlWrapperDirective | inject: { optional: true }) {
-      @if (!(schema.hidden | reactive: model : schema : control)) {
-        <nz-select
-          #component
-          fluentCol
-          nzSpaceCompactItem="select"
-          [fluentBinding]="{ component, schema, control, model }"
-          [formControl]="control"
-          [class]="schema.class"
-          [style]="schema.style"
-          [span]="schema.col | col: 'span'"
-          [flex]="schema.col | col: 'flex'"
-          [offset]="schema.col | col: 'offset'"
-          [nzId]="schema.id!"
-          [nzAllowClear]="schema.clearable"
-          [nzMaxMultipleCount]="schema.length?.max ?? infinity"
-          [nzMode]="schema.mode ?? 'default'"
-          [nzPlaceHolder]="schema.placeholder | reactive: model : schema : control"
-          [nzShowSearch]="schema.searchable || !!schema.fetchOptions"
-          [nzBackdrop]="schema.backdrop!"
-          [nzBorderless]="schema.borderless"
-          [nzAutoFocus]="schema.autofocus"
-          [nzShowArrow]="(schema.arrow ?? !schema.mode) || schema.mode === 'default'"
-          [nzSize]="schema.size!"
-          [nzSuffixIcon]="(schema.suffixIcon | template)!"
-          [nzLoading]="schema.loading"
-          [nzServerSearch]="!!schema.fetchOptions"
-          [(nzOpen)]="ctx.open"
-          (nzOnSearch)="ctx.trigger($event)">
-          @for (option of schema.options | reactive: model : schema : control; track option) {
-            <nz-option
-              [nzCustomContent]="!!schema.option"
-              [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
-              [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
-              [nzValue]="option[schema.config?.valueProperty ?? 'value']"
-              [nzHide]="option[schema.config?.hideProperty ?? 'hide']">
-              <ng-template
-                [nzStringTemplateOutlet]="schema.option | template"
-                [nzStringTemplateOutletContext]="{ $implicit: option }" />
-            </nz-option>
-          }
-        </nz-select>
-      }
-    } @else {
+  @let ctx = ctxClass | new: schema : model : control;
+  @if (ControlWrapperDirective | inject: { optional: true }) {
+    @if (!(schema.hidden | reactive: model : schema : control)) {
       <nz-select
         #component
+        fluentCol
         nzSpaceCompactItem="select"
         [fluentBinding]="{ component, schema, control, model }"
         [formControl]="control"
         [class]="schema.class"
         [style]="schema.style"
-        [nzAllowClear]="schema.clearable"
+        [span]="schema.col | col: 'span'"
+        [flex]="schema.col | col: 'flex'"
+        [offset]="schema.col | col: 'offset'"
         [nzId]="schema.id!"
+        [nzAllowClear]="schema.clearable"
         [nzMaxMultipleCount]="schema.length?.max ?? infinity"
         [nzMode]="schema.mode ?? 'default'"
         [nzPlaceHolder]="schema.placeholder | reactive: model : schema : control"
@@ -84,5 +43,42 @@
         }
       </nz-select>
     }
-  </ng-container>
+  } @else {
+    <nz-select
+      #component
+      nzSpaceCompactItem="select"
+      [fluentBinding]="{ component, schema, control, model }"
+      [formControl]="control"
+      [class]="schema.class"
+      [style]="schema.style"
+      [nzAllowClear]="schema.clearable"
+      [nzId]="schema.id!"
+      [nzMaxMultipleCount]="schema.length?.max ?? infinity"
+      [nzMode]="schema.mode ?? 'default'"
+      [nzPlaceHolder]="schema.placeholder | reactive: model : schema : control"
+      [nzShowSearch]="schema.searchable || !!schema.fetchOptions"
+      [nzBackdrop]="schema.backdrop!"
+      [nzBorderless]="schema.borderless"
+      [nzAutoFocus]="schema.autofocus"
+      [nzShowArrow]="(schema.arrow ?? !schema.mode) || schema.mode === 'default'"
+      [nzSize]="schema.size!"
+      [nzSuffixIcon]="(schema.suffixIcon | template)!"
+      [nzLoading]="schema.loading"
+      [nzServerSearch]="!!schema.fetchOptions"
+      [(nzOpen)]="ctx.open"
+      (nzOnSearch)="ctx.trigger($event)">
+      @for (option of schema.options | reactive: model : schema : control; track option) {
+        <nz-option
+          [nzCustomContent]="!!schema.option"
+          [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
+          [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
+          [nzValue]="option[schema.config?.valueProperty ?? 'value']"
+          [nzHide]="option[schema.config?.hideProperty ?? 'hide']">
+          <ng-template
+            [nzStringTemplateOutlet]="schema.option | template"
+            [nzStringTemplateOutletContext]="{ $implicit: option }" />
+        </nz-option>
+      }
+    </nz-select>
+  }
 </ng-template>

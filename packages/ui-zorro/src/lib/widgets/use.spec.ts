@@ -72,7 +72,7 @@ describe('useWidget', () => {
     describe('date control', () => {
       it('with no init value and default value', () => {
         const model = {};
-        const schema = schemaUtil.patch({ kind: 'date', key: 'date' });
+        const schema = schemaUtil.patch({ kind: 'date-picker', key: 'date' });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBeNull();
@@ -81,7 +81,7 @@ describe('useWidget', () => {
       it('with init value', () => {
         const now = Date.now();
         const model = { date: now };
-        const schema = schemaUtil.patch({ kind: 'date', key: 'date' });
+        const schema = schemaUtil.patch({ kind: 'date-picker', key: 'date' });
         const value = valueUtil.valueOfModel(model, schema) as Date;
 
         expect(value).toBeInstanceOf(Date);
@@ -91,7 +91,7 @@ describe('useWidget', () => {
       it('with default value', () => {
         const now = Date.now();
         const model = {};
-        const schema = schemaUtil.patch({ kind: 'date', key: 'date', defaultValue: now });
+        const schema = schemaUtil.patch({ kind: 'date-picker', key: 'date', defaultValue: now });
         const value = valueUtil.valueOfModel(model, schema) as Date;
 
         expect(value).toBeInstanceOf(Date);
@@ -102,7 +102,7 @@ describe('useWidget', () => {
     describe('time control', () => {
       it('with no init value and default value', () => {
         const model = {};
-        const schema = schemaUtil.patch({ kind: 'time', key: 'time' });
+        const schema = schemaUtil.patch({ kind: 'time-picker', key: 'time' });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBeNull();
@@ -111,7 +111,7 @@ describe('useWidget', () => {
       it('with init value', () => {
         const now = Date.now();
         const model = { time: now };
-        const schema = schemaUtil.patch({ kind: 'time', key: 'time' });
+        const schema = schemaUtil.patch({ kind: 'time-picker', key: 'time' });
         const value = valueUtil.valueOfModel(model, schema) as Date;
 
         expect(value).toBeInstanceOf(Date);
@@ -121,7 +121,7 @@ describe('useWidget', () => {
       it('with default value', () => {
         const now = Date.now();
         const model = {};
-        const schema = schemaUtil.patch({ kind: 'time', key: 'time', defaultValue: now });
+        const schema = schemaUtil.patch({ kind: 'time-picker', key: 'time', defaultValue: now });
         const value = valueUtil.valueOfModel(model, schema) as Date;
 
         expect(value).toBeInstanceOf(Date);
@@ -131,7 +131,7 @@ describe('useWidget', () => {
 
     describe('date range control', () => {
       it('with no init value and default value', () => {
-        const schema = schemaUtil.patch({ kind: 'date-range', key: ['begin', 'end'] });
+        const schema = schemaUtil.patch({ kind: 'date-range-picker', key: ['begin', 'end'] });
         const model = {};
         const value = valueUtil.valueOfModel(model, schema);
 
@@ -140,7 +140,7 @@ describe('useWidget', () => {
 
       it('with init value', () => {
         const begin = new Date(), end = new Date();
-        const schema = schemaUtil.patch({ kind: 'date-range', key: ['begin', 'end'] });
+        const schema = schemaUtil.patch({ kind: 'date-range-picker', key: ['begin', 'end'] });
         const model = { begin, end };
         const value = valueUtil.valueOfModel(model, schema);
 
@@ -148,7 +148,7 @@ describe('useWidget', () => {
       });
 
       it('with init value but is null', () => {
-        const schema = schemaUtil.patch({ kind: 'date-range', key: ['begin', 'end'] });
+        const schema = schemaUtil.patch({ kind: 'date-range-picker', key: ['begin', 'end'] });
         const model = { begin: null, end: null };
         const value = valueUtil.valueOfModel(model, schema);
 
@@ -157,7 +157,7 @@ describe('useWidget', () => {
 
       it('with default value', () => {
         const begin = new Date(), end = new Date();
-        const schema = schemaUtil.patch({ kind: 'date-range', key: ['begin', 'end'], defaultValue: [begin, end] });
+        const schema = schemaUtil.patch({ kind: 'date-range-picker', key: ['begin', 'end'], defaultValue: [begin, end] });
         const model = {};
         const value = valueUtil.valueOfModel(model, schema);
 
@@ -188,7 +188,7 @@ describe('useWidget', () => {
   describe('get value from control', () => {
     describe('date control', () => {
       it('with has no value', () => {
-        const schema = schemaUtil.patch({ kind: 'date', key: 'date', });
+        const schema = schemaUtil.patch({ kind: 'date-picker', key: 'date', });
         const control = new FormControl(null);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -197,7 +197,7 @@ describe('useWidget', () => {
 
       it('with has value', () => {
         const now = new Date();
-        const schema = schemaUtil.patch({ kind: 'date', key: 'date', });
+        const schema = schemaUtil.patch({ kind: 'date-picker', key: 'date', });
         const control = new FormControl(now);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -206,7 +206,7 @@ describe('useWidget', () => {
 
       it('with has value (time mode)', () => {
         const now = new Date();
-        const schema = schemaUtil.patch({ kind: 'date', key: 'date', time: true });
+        const schema = schemaUtil.patch({ kind: 'date-picker', key: 'date', time: true });
         const control = new FormControl(now);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -216,7 +216,7 @@ describe('useWidget', () => {
 
     describe('time control', () => {
       it('with has no value', () => {
-        const schema = schemaUtil.patch({ kind: 'time', key: 'time', });
+        const schema = schemaUtil.patch({ kind: 'time-picker', key: 'time', });
         const control = new FormControl(null);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -225,7 +225,7 @@ describe('useWidget', () => {
 
       it('with has value', () => {
         const now = new Date();
-        const schema = schemaUtil.patch({ kind: 'time', key: 'time', });
+        const schema = schemaUtil.patch({ kind: 'time-picker', key: 'time', });
         const control = new FormControl(now);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -235,7 +235,7 @@ describe('useWidget', () => {
 
     describe('date range control', () => {
       it('with has no value', () => {
-        const schema = schemaUtil.patch({ kind: 'date-range', key: 'range', });
+        const schema = schemaUtil.patch({ kind: 'date-range-picker', key: 'range', });
         const control = new FormControl(null);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -244,7 +244,7 @@ describe('useWidget', () => {
 
       it('with has value', () => {
         const begin = new Date(), end = new Date();
-        const schema = schemaUtil.patch({ kind: 'date-range', key: 'range', });
+        const schema = schemaUtil.patch({ kind: 'date-range-picker', key: 'range', });
         const control = new FormControl([begin, end]);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -253,7 +253,7 @@ describe('useWidget', () => {
 
       it('with has value (time mode)', () => {
         const begin = new Date(), end = new Date();
-        const schema = schemaUtil.patch({ kind: 'date-range', key: 'range', time: true });
+        const schema = schemaUtil.patch({ kind: 'date-range-picker', key: 'range', time: true });
         const control = new FormControl([begin, end]);
         const value = valueUtil.valueOfControl(control, schema);
 

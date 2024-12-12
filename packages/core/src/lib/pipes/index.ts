@@ -1,5 +1,6 @@
 export * from './col.pipe';
 export * from './control.pipe';
+export * from './inject.pipe';
 export * from './invoke.pipe';
 export * from './reactive.pipe';
 export * from './renderable.pipe';

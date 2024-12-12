@@ -4,7 +4,6 @@ export * from './context.directive';
 export * from './control-wrapper.directive';
 export * from './form-item-outlet.directive';
 export * from './grid';
-export * from './inject.directive';
 export * from './life-cycle.directive';
 export * from './render';
 export * from './template-ref-holder.directive';

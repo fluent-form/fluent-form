@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextDirective, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectDirective, FluentLifeCycleDirective, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
+import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextDirective, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectPipe, FluentLifeCycleDirective, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
 import { AnyObject } from '@ngify/types';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzSelectModule } from 'ng-zorro-antd/select';
@@ -21,14 +21,14 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
     NzSpaceCompactItemDirective,
     NzOutletModule,
     FluentGridModule,
-    FluentInjectDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentContextDirective,
     FluentLifeCycleDirective,
     FluentReactivePipe,
     FluentColumnPipe,
-    FluentTemplatePipe
+    FluentTemplatePipe,
+    FluentInjectPipe
   ],
   templateUrl: './select.widget.html',
   styles: [`nz-select { width: 100% }`]

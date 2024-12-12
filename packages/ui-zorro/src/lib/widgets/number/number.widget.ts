@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, FluentTemplatePipe, InvokePipe, WidgetTemplateContext, isNumber } from '@fluent-form/core';
+import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectPipe, FluentReactivePipe, FluentTemplatePipe, InvokePipe, WidgetTemplateContext, isNumber } from '@fluent-form/core';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { affixHelper } from '../../helper';
 import { NumberControlSchema } from '../../schemas';
@@ -18,12 +18,12 @@ type NumberWidgetTemplateContext = WidgetTemplateContext<NumberControlSchema, Fo
     NzInputNumberModule,
     NzSpaceCompactItemDirective,
     FluentGridModule,
-    FluentInjectDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentReactivePipe,
     FluentColumnPipe,
     FluentTemplatePipe,
+    FluentInjectPipe,
     InvokePipe
   ],
   templateUrl: './number.widget.html',

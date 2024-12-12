@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, FluentTemplatePipe, InvokePipe, WidgetTemplateContext } from '@fluent-form/core';
+import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectPipe, FluentReactivePipe, FluentTemplatePipe, InvokePipe, WidgetTemplateContext } from '@fluent-form/core';
 import { AnyObject, SafeAny } from '@ngify/types';
 import { NzCascaderModule, NzCascaderOption } from 'ng-zorro-antd/cascader';
 import { CascaderControlSchema } from '../../schemas';
@@ -18,12 +18,12 @@ type CascaderWidgetTemplateContext = WidgetTemplateContext<CascaderControlSchema
     NzCascaderModule,
     NzSpaceCompactItemDirective,
     FluentGridModule,
-    FluentInjectDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentReactivePipe,
     FluentColumnPipe,
     FluentTemplatePipe,
+    FluentInjectPipe,
     InvokePipe
   ],
   templateUrl: './cascader.widget.html',

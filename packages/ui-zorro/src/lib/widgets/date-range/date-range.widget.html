@@ -1,45 +1,17 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <ng-container *fluentInject="ControlWrapperDirective as controlWrapper; optional: true">
-    @if (controlWrapper) {
-      @if (!(schema.hidden | reactive: model : schema : control)) {
-        <nz-range-picker
-          #component
-          fluentCol
-          nzSpaceCompactItem="picker"
-          [fluentBinding]="{ component, schema, control, model }"
-          [formControl]="control"
-          [class]="schema.class"
-          [style]="schema.style"
-          [span]="schema.col | col: 'span'"
-          [flex]="schema.col | col: 'flex'"
-          [offset]="schema.col | col: 'offset'"
-          [nzAllowClear]="schema.clearable"
-          [nzFormat]="schema.format!"
-          [nzId]="schema.id!"
-          [nzInline]="schema.inline"
-          [nzMode]="schema.mode!"
-          [nzPlaceHolder]="schema.placeholder | reactive: model : schema : control"
-          [nzShowTime]="schema.time"
-          [nzShowTime]="schema.time"
-          [nzBackdrop]="schema.backdrop!"
-          [nzPlacement]="schema.placement ?? 'bottomLeft'"
-          [nzSuffixIcon]="schema.suffixIcon | template: 'calendar'"
-          [nzAutoFocus]="schema.autofocus"
-          [nzInputReadOnly]="schema.readonly | reactive: model : schema : control"
-          [nzSize]="schema.size!"
-          [nzBorderless]="schema.borderless"
-          [nzShowToday]="schema.today ?? true"
-          [nzShowNow]="schema.now ?? true"
-          [nzSeparator]="schema.separator" />
-      }
-    } @else {
+  @if (ControlWrapperDirective | inject: { optional: true }) {
+    @if (!(schema.hidden | reactive: model : schema : control)) {
       <nz-range-picker
         #component
+        fluentCol
         nzSpaceCompactItem="picker"
         [fluentBinding]="{ component, schema, control, model }"
         [formControl]="control"
         [class]="schema.class"
         [style]="schema.style"
+        [span]="schema.col | col: 'span'"
+        [flex]="schema.col | col: 'flex'"
+        [offset]="schema.col | col: 'offset'"
         [nzAllowClear]="schema.clearable"
         [nzFormat]="schema.format!"
         [nzId]="schema.id!"
@@ -59,5 +31,31 @@
         [nzShowNow]="schema.now ?? true"
         [nzSeparator]="schema.separator" />
     }
-  </ng-container>
+  } @else {
+    <nz-range-picker
+      #component
+      nzSpaceCompactItem="picker"
+      [fluentBinding]="{ component, schema, control, model }"
+      [formControl]="control"
+      [class]="schema.class"
+      [style]="schema.style"
+      [nzAllowClear]="schema.clearable"
+      [nzFormat]="schema.format!"
+      [nzId]="schema.id!"
+      [nzInline]="schema.inline"
+      [nzMode]="schema.mode!"
+      [nzPlaceHolder]="schema.placeholder | reactive: model : schema : control"
+      [nzShowTime]="schema.time"
+      [nzShowTime]="schema.time"
+      [nzBackdrop]="schema.backdrop!"
+      [nzPlacement]="schema.placement ?? 'bottomLeft'"
+      [nzSuffixIcon]="schema.suffixIcon | template: 'calendar'"
+      [nzAutoFocus]="schema.autofocus"
+      [nzInputReadOnly]="schema.readonly | reactive: model : schema : control"
+      [nzSize]="schema.size!"
+      [nzBorderless]="schema.borderless"
+      [nzShowToday]="schema.today ?? true"
+      [nzShowNow]="schema.now ?? true"
+      [nzSeparator]="schema.separator" />
+  }
 </ng-template>

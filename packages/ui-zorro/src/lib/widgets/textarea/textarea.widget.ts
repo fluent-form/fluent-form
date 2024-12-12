@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectDirective, FluentReactivePipe, InvokePipe, Length, WidgetTemplateContext, isNumber } from '@fluent-form/core';
+import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectPipe, FluentReactivePipe, InvokePipe, Length, WidgetTemplateContext, isNumber } from '@fluent-form/core';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { TextareaControlSchema } from '../../schemas';
 
@@ -15,11 +15,11 @@ type TextareaWidgetTemplateContext = WidgetTemplateContext<TextareaControlSchema
     ReactiveFormsModule,
     NzInputModule,
     FluentGridModule,
-    FluentInjectDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentReactivePipe,
     FluentColumnPipe,
+    FluentInjectPipe,
     InvokePipe
   ],
   templateUrl: './textarea.widget.html',

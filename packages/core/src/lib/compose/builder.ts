@@ -8,7 +8,7 @@ interface Schema {
 const COMPOSE_KEY = 'schemas';
 const SCHEMA_STACK: Schema[] = [];
 
-export function getCurrentSchema(): Schema | undefined {
+function getCurrentSchema(): Schema | undefined {
   return SCHEMA_STACK[SCHEMA_STACK.length - 1];
 }
 
@@ -20,14 +20,19 @@ function leaveSchema() {
   SCHEMA_STACK.pop();
 }
 
+function joinSchema(schmea: Schema) {
+  const currentSchema = getCurrentSchema();
+  // 如果当前已经有了 schema，就直接 push 进去作为 subschema
+  currentSchema?.schemas!.push(schmea);
+}
+
 const IS_BUILDER = Symbol();
 const BUILD_KEY = 'build';
 
 export function composeBuilder<T>(): Builder<T> {
   const target: AnyObject = {};
-  const currentSchema = getCurrentSchema();
-  // 如果当前已经有了 schema，就直接 push 进去作为 subschema
-  currentSchema?.schemas!.push(target);
+
+  joinSchema(target);
 
   const builder = new Proxy(target, {
     get(target, property) {

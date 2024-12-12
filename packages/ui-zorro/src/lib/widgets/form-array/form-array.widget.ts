@@ -2,7 +2,7 @@ import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
-import { AbstractSchema, AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentFormItemOutletDirective, FluentGridModule, FluentReactivePipe, FluentTemplatePipe, FluentVarDirective, FormUtil, InvokePipe, RenderablePipe, SchemaUtil, WidgetTemplateContext, WithoutSchemaReactiveFn, isBoolean, isNumber, isUndefined } from '@fluent-form/core';
+import { AbstractSchema, AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentFormItemOutletDirective, FluentGridModule, FluentReactivePipe, FluentTemplatePipe, FormUtil, InvokePipe, RenderablePipe, SchemaUtil, WidgetTemplateContext, WithoutSchemaReactiveFn, isBoolean, isNumber, isUndefined } from '@fluent-form/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -30,7 +30,6 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
     FluentColumnPipe,
     FluentReactivePipe,
     FluentTemplatePipe,
-    FluentVarDirective,
     InvokePipe,
     RenderablePipe
   ],

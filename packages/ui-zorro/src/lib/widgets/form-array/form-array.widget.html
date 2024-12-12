@@ -65,10 +65,8 @@
     <fluent-col span="12">
       <nz-form-item>
         <nz-form-control>
+          @let addBtn = helper.addable | invoke: (formSchema.addable | reactive: model : formSchema : formArray);
           <button
-            *fluentVar="
-              helper.addable | invoke: (formSchema.addable | reactive: model : formSchema : formArray) as addBtn
-            "
             type="button"
             nz-button
             [nzType]="addBtn.type ?? null"

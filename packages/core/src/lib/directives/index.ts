@@ -9,5 +9,4 @@ export * from './life-cycle.directive';
 export * from './render';
 export * from './template-ref-holder.directive';
 export * from './template.directive';
-export * from './var.directive';
 export * from './with-injector.directive';

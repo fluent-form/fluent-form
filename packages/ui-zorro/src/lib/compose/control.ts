@@ -30,22 +30,22 @@ export function number<Key extends SingleSchemaKey>(key?: Key) {
   return composeBuilder<NumberControlSchema<Key>>().kind('number').key(key);
 }
 
-export function date(): UnstableBuilder<DatePickerControlSchema<number>, KindOrKey>;
-export function date<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<DatePickerControlSchema<Key>, KindOrKey>;
-export function date<Key extends SingleSchemaKey>(key?: Key) {
-  return composeBuilder<DatePickerControlSchema<Key>>().kind('date').key(key);
+export function datePicker(): UnstableBuilder<DatePickerControlSchema<number>, KindOrKey>;
+export function datePicker<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<DatePickerControlSchema<Key>, KindOrKey>;
+export function datePicker<Key extends SingleSchemaKey>(key?: Key) {
+  return composeBuilder<DatePickerControlSchema<Key>>().kind('date-picker').key(key);
 }
 
-export function datetime(): UnstableBuilder<DatePickerControlSchema<number>, KindOrKey | TimeOrFormat>;
-export function datetime<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<DatePickerControlSchema<Key>, KindOrKey | TimeOrFormat>;
-export function datetime<Key extends SingleSchemaKey>(key?: Key) {
-  return date<Key>(key).format('yyyy-MM-dd HH:mm:ss').time(true);
+export function datetimePicker(): UnstableBuilder<DatePickerControlSchema<number>, KindOrKey | 'time'>;
+export function datetimePicker<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<DatePickerControlSchema<Key>, KindOrKey | 'time'>;
+export function datetimePicker<Key extends SingleSchemaKey>(key?: Key) {
+  return datePicker<Key>(key).time(true);
 }
 
-export function time(): UnstableBuilder<TimePickerControlSchema<number>, KindOrKey>;
-export function time<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<TimePickerControlSchema<Key>, KindOrKey>;
-export function time<Key extends SingleSchemaKey>(key?: Key) {
-  return composeBuilder<TimePickerControlSchema<Key>>().kind('time').key(key);
+export function timePicker(): UnstableBuilder<TimePickerControlSchema<number>, KindOrKey>;
+export function timePicker<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<TimePickerControlSchema<Key>, KindOrKey>;
+export function timePicker<Key extends SingleSchemaKey>(key?: Key) {
+  return composeBuilder<TimePickerControlSchema<Key>>().kind('time-picker').key(key);
 }
 
 export function toggle(): UnstableBuilder<ToggleControlSchema<number>, KindOrKey>;
@@ -102,10 +102,10 @@ export function slider<Key extends SchemaKey>(key?: Key) {
   return composeBuilder<SliderControlSchema<Key>>().kind('slider').key(key);
 }
 
-export function dateRange(): UnstableBuilder<DateRangePickerControlSchema<number>, KindOrKey>;
-export function dateRange<Key extends SchemaKey>(key?: Key): UnstableBuilder<DateRangePickerControlSchema<Key>, KindOrKey>;
-export function dateRange<Key extends SchemaKey>(key?: Key) {
-  return composeBuilder<DateRangePickerControlSchema<Key>>().kind('date-range').key(key);
+export function dateRangePicker(): UnstableBuilder<DateRangePickerControlSchema<number>, KindOrKey>;
+export function dateRangePicker<Key extends SchemaKey>(key?: Key): UnstableBuilder<DateRangePickerControlSchema<Key>, KindOrKey>;
+export function dateRangePicker<Key extends SchemaKey>(key?: Key) {
+  return composeBuilder<DateRangePickerControlSchema<Key>>().kind('date-range-picker').key(key);
 }
 
 export function color(): UnstableBuilder<ColorPickerControlSchema<number>, KindOrKey>;
@@ -115,4 +115,3 @@ export function color<Key extends SingleSchemaKey>(key?: Key) {
 }
 
 type KindOrKeyOrType = KindOrKey | 'type';
-type TimeOrFormat = 'time' | 'format';

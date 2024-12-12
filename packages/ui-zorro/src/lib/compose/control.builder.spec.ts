@@ -1,5 +1,5 @@
 import { form } from '@fluent-form/core';
-import { cascader, checkbox, checkboxGroup, color, date, dateRange, datetime, headless, number, password, radioGroup, rate, select, slider, text, textarea, time, toggle, treeSelect } from './control';
+import { cascader, checkbox, checkboxGroup, color, datePicker, dateRangePicker, datetimePicker, headless, number, password, radioGroup, rate, select, slider, text, textarea, timePicker, toggle, treeSelect } from './control';
 
 describe('control', () => {
   it('headless', () => {
@@ -27,24 +27,24 @@ describe('control', () => {
     expect(schemas).toEqual([{ kind: 'number', key: 'number' }]);
   });
 
-  it('date', () => {
-    const { schemas } = form(() => date('date'));
-    expect(schemas).toEqual([{ kind: 'date', key: 'date' }]);
+  it('date-picker', () => {
+    const { schemas } = form(() => datePicker('date'));
+    expect(schemas).toEqual([{ kind: 'date-picker', key: 'date' }]);
   });
 
-  it('datetime', () => {
-    const { schemas } = form(() => datetime('datetime'));
+  it('datetime-picker', () => {
+    const { schemas } = form(() => datetimePicker('datetime'));
     expect(schemas).toEqual([{
-      kind: 'date',
+      kind: 'date-picker',
       key: 'datetime',
       format: 'yyyy-MM-dd HH:mm:ss',
       time: true
     }]);
   });
 
-  it('time', () => {
-    const { schemas } = form(() => time('time'));
-    expect(schemas).toEqual([{ kind: 'time', key: 'time' }]);
+  it('time-picker', () => {
+    const { schemas } = form(() => timePicker('time'));
+    expect(schemas).toEqual([{ kind: 'time-picker', key: 'time' }]);
   });
 
   it('toggle', () => {
@@ -62,7 +62,7 @@ describe('control', () => {
     expect(schemas).toEqual([{ kind: 'cascader', key: 'cascader', options: [] }]);
   });
 
-  it('treeSelect', () => {
+  it('tree-select', () => {
     const { schemas } = form(() => treeSelect('treeSelect').options([]));
     expect(schemas).toEqual([{ kind: 'tree-select', key: 'treeSelect', options: [] }]);
   });
@@ -77,7 +77,7 @@ describe('control', () => {
     expect(schemas).toEqual([{ kind: 'checkbox', key: 'checkbox' }]);
   });
 
-  it('checkboxGroup', () => {
+  it('checkbox-group', () => {
     const { schemas } = form(() => checkboxGroup('checkboxGroup').options([]));
     expect(schemas).toEqual([{ kind: 'checkbox-group', key: 'checkboxGroup', options: [] }]);
   });
@@ -92,9 +92,9 @@ describe('control', () => {
     expect(schemas).toEqual([{ kind: 'slider', key: 'slider' }]);
   });
 
-  it('date-range', () => {
-    const { schemas } = form(() => dateRange('dateRange'));
-    expect(schemas).toEqual([{ kind: 'date-range', key: 'dateRange' }]);
+  it('date-range-picker', () => {
+    const { schemas } = form(() => dateRangePicker('dateRange'));
+    expect(schemas).toEqual([{ kind: 'date-range-picker', key: 'dateRange' }]);
   });
 
   it('color', () => {

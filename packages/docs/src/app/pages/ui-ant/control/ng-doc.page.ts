@@ -8,8 +8,8 @@ import { CheckboxGroupCustomPropertyNamesExampleComponent } from './examples/che
 import { CheckboxGroupExampleComponent } from './examples/checkbox-group.component';
 import { CheckboxExampleComponent } from './examples/checkbox.component';
 import { ColorExampleComponent } from './examples/color.component';
-import { DateRangeExampleComponent } from './examples/date-range.component';
-import { DateExampleComponent } from './examples/date.component';
+import { DatePickerExampleComponent } from './examples/date-picker.component';
+import { DateRangePickerExampleComponent } from './examples/date-range-picker.component';
 import { NumberExampleComponent } from './examples/number.component';
 import { RadioGroupExampleComponent } from './examples/radio-group.component';
 import { RateExampleComponent } from './examples/rate.component';
@@ -20,7 +20,7 @@ import { SelectExampleComponent } from './examples/select.component';
 import { SliderExampleComponent } from './examples/slider.component';
 import { TextExampleComponent } from './examples/text.component';
 import { TextareaExampleComponent } from './examples/textarea.component';
-import { TimeExampleComponent } from './examples/time.component';
+import { TimePickerExampleComponent } from './examples/time-picker.component';
 import { ToggleExampleComponent } from './examples/toggle.component';
 import { TreeSelectExampleComponent } from './examples/tree-select.component';
 
@@ -33,9 +33,9 @@ const ControlPage: NgDocPage = {
     TextExampleComponent,
     TextareaExampleComponent,
     NumberExampleComponent,
-    DateExampleComponent,
-    DateRangeExampleComponent,
-    TimeExampleComponent,
+    DatePickerExampleComponent,
+    DateRangePickerExampleComponent,
+    TimePickerExampleComponent,
     ToggleExampleComponent,
     SelectExampleComponent,
     SelectAsyncOptionsExampleComponent,

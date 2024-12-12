@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { date } from '@fluent-form/ui-zorro';
+import { datePicker } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'mapper-example',
@@ -14,7 +14,7 @@ import { date } from '@fluent-form/ui-zorro';
 })
 export class MapperExampleComponent {
   schema = form(() => {
-    date('date').label('日期控件').mapper({
+    datePicker('date').label('日期控件').mapper({
       parser: (input: string | null) => {
         return input ? new Date(input) : new Date();
       },

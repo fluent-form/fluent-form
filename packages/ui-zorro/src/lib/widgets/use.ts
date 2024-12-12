@@ -35,9 +35,9 @@ export function useAllWidgets() {
     useTextWidget(),
     useTextareaWidget(),
     useNumberWidget(),
-    useDateWidget(),
-    useDateRangeWidget(),
-    useTimeWidget(),
+    useDatePickerWidget(),
+    useDateRangePickerWidget(),
+    useTimePickerWidget(),
     useToggleWidget(),
     useSelectWidget(),
     useCascaderWidget(),
@@ -122,9 +122,9 @@ export function useNumberWidget(): FluentFormWidgetConfig<NumberControlSchema> {
   };
 }
 
-export function useDateWidget(): FluentFormWidgetConfig<DatePickerControlSchema> {
+export function useDatePickerWidget(): FluentFormWidgetConfig<DatePickerControlSchema> {
   return {
-    kind: 'date',
+    kind: 'date-picker',
     type: SchemaType.Control,
     widget: DateWidget,
     patch: schema => {
@@ -140,9 +140,9 @@ export function useDateWidget(): FluentFormWidgetConfig<DatePickerControlSchema>
   };
 }
 
-export function useDateRangeWidget(): FluentFormWidgetConfig<DateRangePickerControlSchema> {
+export function useDateRangePickerWidget(): FluentFormWidgetConfig<DateRangePickerControlSchema> {
   return {
-    kind: 'date-range',
+    kind: 'date-range-picker',
     type: SchemaType.Control,
     widget: DateRangeWidget,
     patch: schema => {
@@ -158,9 +158,9 @@ export function useDateRangeWidget(): FluentFormWidgetConfig<DateRangePickerCont
   };
 }
 
-export function useTimeWidget(): FluentFormWidgetConfig<TimePickerControlSchema> {
+export function useTimePickerWidget(): FluentFormWidgetConfig<TimePickerControlSchema> {
   return {
-    kind: 'time',
+    kind: 'time-picker',
     type: SchemaType.Control,
     widget: TimeWidget,
     patch: schema => {

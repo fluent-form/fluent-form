@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormRenderModule, form } from '@fluent-form/core';
-import { date, group, slider, spaceCompact, text, toggle } from '@fluent-form/ui-zorro';
+import { datePicker, group, slider, spaceCompact, text, toggle } from '@fluent-form/ui-zorro';
 import { NzTableModule } from 'ng-zorro-antd/table';
 
 @Component({
@@ -18,7 +18,7 @@ export class CustomLayoutExampleComponent {
     });
     slider('age').style({ width: '120px' });
     group('info').schemas(() => {
-      date('birthday');
+      datePicker('birthday');
     });
     toggle('enabled');
   });

@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { button, card, cardsArray, datetime, group, text } from '@fluent-form/ui-zorro';
+import { button, card, cardsArray, datetimePicker, group, text } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'cards-array-example',
@@ -15,7 +15,7 @@ import { button, card, cardsArray, datetime, group, text } from '@fluent-form/ui
 export class CardsArrayExampleComponent {
   schema = form(() => {
     text('flight').label('航班').col(12);
-    datetime('boardingTime').label('登机时间').col(12);
+    datetimePicker('boardingTime').label('登机时间').col(12);
 
     cardsArray('passengers')
       .label('乘客')

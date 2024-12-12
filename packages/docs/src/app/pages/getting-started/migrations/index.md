@@ -56,4 +56,12 @@
 + text('x').affixes({ prefix: 'prefix', suffix: 'suffix' })
 ```
 
-1. `inputGroup()` 和 `numberGroup()` 组件已被移除，您可以使用 `spaceCompact()` 组件代替。
+6. `inputGroup()` 和 `numberGroup()` 组件已被移除，您可以使用 `spaceCompact()` 组件代替。
+
+7. API 重命名：
+   1. `date()` 重命名为 `datePicker()`
+   2. `dateRange()` 重命名为 `dateRangePicker()`
+   3. `time()` 重命名为 `timePicker()`
+   4.  `useDateWidget()` 重命名为 `useDatePickerWidget()`
+   5.  `useDateRangeWidget()` 重命名为 `useDateRangePickerWidget()`
+   6.  `useTimeWidget()` 重命名为 `useTimePickerWidget()`

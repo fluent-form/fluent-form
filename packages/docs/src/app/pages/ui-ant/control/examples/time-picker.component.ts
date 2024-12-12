@@ -1,10 +1,10 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { time } from '@fluent-form/ui-zorro';
+import { timePicker } from '@fluent-form/ui-zorro';
 
 @Component({
-  selector: 'time-example',
+  selector: 'time-picker-example',
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
@@ -12,9 +12,9 @@ import { time } from '@fluent-form/ui-zorro';
     <pre>{{ model | json }}</pre>
   `
 })
-export class TimeExampleComponent {
+export class TimePickerExampleComponent {
   schema = form(() => {
-    time('time').placeholder('Please select time').col(4);
+    timePicker('time').placeholder('Please select time').col(4);
   });
 
   model = {};

@@ -37,30 +37,30 @@ import { useNumberWidget } from '@fluent-form/ui-zorro';
 日期选择器允许用户输入或选择日期。
 
 ```ts
-import { useDateWidget } from '@fluent-form/ui-zorro';
+import { useDatePickerWidget } from '@fluent-form/ui-zorro';
 ```
 
-{{ NgDocActions.demo("DateExampleComponent") }}
+{{ NgDocActions.demo("DatePickerExampleComponent") }}
 
 ## Date Range Picker
 
 日期区间选择器允许用户输入或选择日期区间。
 
 ```ts
-import { useDateRangeWidget } from '@fluent-form/ui-zorro';
+import { useDateRangePickerWidget } from '@fluent-form/ui-zorro';
 ```
 
-{{ NgDocActions.demo("DateRangeExampleComponent") }}
+{{ NgDocActions.demo("DateRangePickerExampleComponent") }}
 
 ## Time Picker
 
 时间选择器允许用户输入或选择时间。
 
 ```ts
-import { useTimeWidget } from '@fluent-form/ui-zorro';
+import { useTimePickerWidget } from '@fluent-form/ui-zorro';
 ```
 
-{{ NgDocActions.demo("TimeExampleComponent") }}
+{{ NgDocActions.demo("TimePickerExampleComponent") }}
 
 ## Toggle
 

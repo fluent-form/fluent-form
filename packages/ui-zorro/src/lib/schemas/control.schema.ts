@@ -135,7 +135,7 @@ export interface NumberControlSchema<Key extends SingleSchemaKey = SingleSchemaK
  */
 export interface DatePickerControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = Date>
   extends AbstractDateControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzDatePickerComponent, Val>, ComponentControlEventObserverHolder<NzDatePickerComponent, Val>, ComponentPropertyHolder<NzDatePickerComponent> {
-  kind: 'date';
+  kind: 'date-picker';
 }
 
 /**
@@ -143,7 +143,7 @@ export interface DatePickerControlSchema<Key extends SingleSchemaKey = SingleSch
  */
 export interface DateRangePickerControlSchema<Key extends SchemaKey = SchemaKey, Val = [Date, Date]>
   extends AbstractDateControlSchema<Key, Val, [string, string]>, ComponentControlEventListenerHolder<NzRangePickerComponent, Val>, ComponentControlEventObserverHolder<NzRangePickerComponent, Val>, ComponentPropertyHolder<NzRangePickerComponent> {
-  kind: 'date-range';
+  kind: 'date-range-picker';
   separator?: string;
 }
 
@@ -152,7 +152,7 @@ export interface DateRangePickerControlSchema<Key extends SchemaKey = SchemaKey,
  */
 export interface TimePickerControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = Date>
   extends AbstractInputBoxControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzTimePickerComponent, Val>, ComponentControlEventObserverHolder<NzTimePickerComponent, Val>, ComponentPropertyHolder<NzTimePickerComponent> {
-  kind: 'time';
+  kind: 'time-picker';
   /** Show clean button */
   clearable?: boolean;
   /** Time display format */

@@ -1,10 +1,10 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { dateRange } from '@fluent-form/ui-zorro';
+import { dateRangePicker } from '@fluent-form/ui-zorro';
 
 @Component({
-  selector: 'date-range-example',
+  selector: 'date-range-picker-example',
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
@@ -12,20 +12,20 @@ import { dateRange } from '@fluent-form/ui-zorro';
     <pre>{{ model | json }}</pre>
   `
 })
-export class DateRangeExampleComponent {
+export class DateRangePickerExampleComponent {
   schema = form(() => {
-    dateRange('dateRange')
+    dateRangePicker('dateRange')
       .label('Date range')
       .placeholder(['Start date', 'End date'])
       .col(4);
 
-    dateRange('datetimeRange')
+    dateRangePicker('datetimeRange')
       .label('Datetime range')
       .placeholder(['Start time', 'End time'])
       .time(true)
       .col(4);
 
-    dateRange(['startDate', 'endDate'])
+    dateRangePicker(['startDate', 'endDate'])
       .label('Multi keys')
       .placeholder(['Start date', 'End date'])
       .col(4);

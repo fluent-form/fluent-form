@@ -1,3 +1,16 @@
+## 0.27.0 (2024-12-20)
+
+### 🚀 Features
+
+- **core:** add new pipe ([5414e3af](https://github.com/fluent-form/fluent-form/commit/5414e3af))
+- **core:** add inject pipe ([ba04f709](https://github.com/fluent-form/fluent-form/commit/ba04f709))
+- support schema.observers option ([3393774c](https://github.com/fluent-form/fluent-form/commit/3393774c))
+- **nx-cloud:** set up nx workspace ([#178](https://github.com/fluent-form/fluent-form/pull/178))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.26.2 (2024-10-18)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

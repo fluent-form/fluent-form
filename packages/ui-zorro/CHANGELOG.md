@@ -1,3 +1,19 @@
+## 0.27.0 (2024-12-20)
+
+### 🚀 Features
+
+- support schema.observers option ([3393774c](https://github.com/fluent-form/fluent-form/commit/3393774c))
+- **nx-cloud:** set up nx workspace ([#178](https://github.com/fluent-form/fluent-form/pull/178))
+
+### 🩹 Fixes
+
+- **ui-zorro:** make alert schema extends labelful interface ([ade1154d](https://github.com/fluent-form/fluent-form/commit/ade1154d))
+
+### ❤️ Thank You
+
+- hyperlife1119 @HyperLife1119
+- HyperLife1119 @HyperLife1119
+
 ## 0.26.2 (2024-10-18)
 
 

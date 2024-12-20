@@ -8,15 +8,15 @@ import { NumberComponent, RangeComponent } from '../testing/components';
 import { FormUtil } from '../utils';
 import { FluentBindingDirective } from './binding.directive';
 
-const statusChangeFn = jest.fn();
-const valueChangeFn = jest.fn();
-const testChangeFn = jest.fn();
-const inputChangeFn = jest.fn();
+const statusChangeFn = vitest.fn();
+const valueChangeFn = vitest.fn();
+const testChangeFn = vitest.fn();
+const inputChangeFn = vitest.fn();
 
-const statusChangeNextFn = jest.fn();
-const valueChangeNextFn = jest.fn();
-const testChangeNextFn = jest.fn();
-const inputChangeNextFn = jest.fn();
+const statusChangeNextFn = vitest.fn();
+const valueChangeNextFn = vitest.fn();
+const testChangeNextFn = vitest.fn();
+const inputChangeNextFn = vitest.fn();
 
 @Component({
   standalone: true,

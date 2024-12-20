@@ -24,12 +24,12 @@
       "defaultConfiguration": "production"
     },
     "test": {
-      "executor": "@nx/jest:jest",
+      "executor": "@nx/vite:test",
       "outputs": [
-        "{workspaceRoot}/coverage/ui-zorro"
+        "{options.reportsDirectory}"
       ],
       "options": {
-        "jestConfig": "packages/ui-zorro/jest.config.ts"
+        "reportsDirectory": "../../coverage/ui-sun"
       }
     },
     "lint": {

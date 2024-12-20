@@ -1,6 +1,23 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["src/**/*.ts", "../core/src/lib/components/form/examples/tabs-form/tabs-form.component.ts"],
+  "include": [
+    "src/**/*.ts",
+    "../core/src/lib/components/form/examples/tabs-form/tabs-form.component.ts"
+  ],
   "compilerOptions": {},
-  "exclude": ["jest.config.ts", "src/**/*.test.ts", "src/**/*.spec.ts"]
+  "exclude": [
+    "test-setup.ts",
+    "vite.config.ts",
+    "vite.config.mts",
+    "vitest.config.ts",
+    "vitest.config.mts",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/**/*.spec.tsx",
+    "src/**/*.test.js",
+    "src/**/*.spec.js",
+    "src/**/*.test.jsx",
+    "src/**/*.spec.jsx"
+  ]
 }

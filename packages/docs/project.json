@@ -104,12 +104,12 @@
       "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nx/jest:jest",
+      "executor": "@nx/vite:test",
       "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
+        "{options.reportsDirectory}"
       ],
       "options": {
-        "jestConfig": "packages/docs/jest.config.ts"
+        "reportsDirectory": "../../coverage/docs"
       }
     }
   }

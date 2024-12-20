@@ -46,3 +46,5 @@ Thumbs.db
 
 ## NgDoc folder
 /ng-doc
+
+vite.config.*.timestamp*

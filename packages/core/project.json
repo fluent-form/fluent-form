@@ -37,12 +37,12 @@
       }
     },
     "test": {
-      "executor": "@nx/jest:jest",
+      "executor": "@nx/vite:test",
       "outputs": [
-        "{workspaceRoot}/coverage/core"
+        "{options.reportsDirectory}"
       ],
       "options": {
-        "jestConfig": "packages/core/jest.config.ts"
+        "reportsDirectory": "../../coverage/core"
       }
     },
     "lint": {

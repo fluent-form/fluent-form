@@ -10,6 +10,7 @@ ng add @fluent-form/core
 
 | Angular 版本 | FluentForm 版本 |
 | ------------ | --------------- |
+| v19.x        | >=0.27.x        |
 | v18.x        | >=0.27.x        |
 | v17.x        | ^0.26.x         |
 | v16.x        | 不受支持        |

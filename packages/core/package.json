@@ -26,6 +26,12 @@
   "ng-add": {
     "save": "dependencies"
   },
+  "ng-update": {
+    "packageGroup": [
+      "@fluent-form/core",
+      "@fluent-form/ui-zorro"
+    ]
+  },
   "peerDependencies": {
     "@angular/forms": ">=17.0.0",
     "@angular/cdk": ">=17.0.0",

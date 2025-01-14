@@ -32,4 +32,4 @@ jobs:
           cache: "npm"
       - run: npm ci
       - uses: nrwl/nx-set-shas@v4
-      - run: nx run-many --target=build,build:schematics,test,lint
+      - run: npx nx run-many --target=build,build:schematics,test,lint

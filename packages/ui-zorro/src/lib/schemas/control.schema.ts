@@ -204,6 +204,7 @@ export interface SelectControlSchema<Key extends SingleSchemaKey = SingleSchemaK
   option?: string | TemplateRef<{ $implicit: SafeAny }>;
   options?: MaybeSchemaReactiveFn<SelectControlSchema<SingleSchemaKey, Val>, AnyObject[]>;
   fetchOptions?: (keyword$: Observable<string>, ctx: SchemaContext<SelectControlSchema<SingleSchemaKey, Val>>) => Observable<AnyObject[]>;
+  compareWith?: (a: SafeAny, b: SafeAny) => boolean;
   config?: {
     labelProperty?: string;
     valueProperty?: string;

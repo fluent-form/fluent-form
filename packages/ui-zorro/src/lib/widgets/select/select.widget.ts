@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, DestroyRef, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectPipe, FluentNewPipe, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
-import { AnyObject } from '@ngify/types';
+import { AnyObject, SafeAny } from '@ngify/types';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { filter, Subject, tap } from 'rxjs';
@@ -35,6 +35,7 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
 export class SelectWidget extends AbstractWidget<SelectWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
   protected readonly infinity = Infinity;
+  protected readonly compareWith = (a: SafeAny, b: SafeAny) => a === b;
   protected readonly ctxClass = SelectWidgetTemplatePrivateContext;
 }
 

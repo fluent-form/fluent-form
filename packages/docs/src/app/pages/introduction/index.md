@@ -6,7 +6,7 @@
   An Angular dynamic forms library powered by Fluent API and JSON.
 
   ![npm version](https://img.shields.io/npm/v/@fluent-form/core/latest.svg)
-  [![CI](https://github.com/fluent-form/fluent-form/actions/workflows/ci.yml/badge.svg)](https://github.com/fluent-form/fluent-form/actions/workflows/ci.yml)
+  ![CI](https://github.com/fluent-form/fluent-form/actions/workflows/ci.yml/badge.svg)
   ![License](https://img.shields.io/badge/License-MIT-blue.svg)
   ![Angular](https://img.shields.io/badge/Build%20with-Angular%20CLI-red?logo=angular)
   ![codecov](https://codecov.io/gh/fluent-form/fluent-form/branch/main/graph/badge.svg?token=070GEU44U0)

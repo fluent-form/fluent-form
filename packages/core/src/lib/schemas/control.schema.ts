@@ -4,7 +4,7 @@ import { AbstractSchema } from './abstract.schema';
 import { MaybeSchemaReactiveFn, SchemaReactiveFn } from './interfaces';
 import { ControlValueMapper } from './mapper';
 import { PropertyHolder } from './properties';
-import { SchemaKey } from './types';
+import { SchemaKey, SingleSchemaKey } from './types';
 
 /**
  * @public
@@ -33,7 +33,14 @@ export interface AbstractControlSchema<Key extends SchemaKey = SchemaKey, Val = 
 /**
  * @public
  */
-export interface AbstractHeadlessControlSchema extends PropertyHolder {
+export interface HeadlessControlSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractControlSchema<Key> {
   kind: 'headless';
-  template?: string;
+}
+
+/**
+ * @public
+ */
+export interface AbstractHeadfulControlSchema extends PropertyHolder {
+  kind: 'headful';
+  template: string;
 }

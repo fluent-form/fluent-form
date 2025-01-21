@@ -24,6 +24,7 @@ describe('FluentSchemaTypePipe', () => {
   });
 
   it('should transform the control schema type', () => {
+    expect(pipe.transform(SchemaKind.Headful)).toBe(SchemaType.Control);
     expect(pipe.transform(SchemaKind.Headless)).toBe(SchemaType.Control);
     expect(pipe.transform('text')).toBe(SchemaType.Control);
     expect(pipe.transform('range')).toBe(SchemaType.Control);

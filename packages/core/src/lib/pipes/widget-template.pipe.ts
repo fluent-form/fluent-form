@@ -31,12 +31,11 @@ export class FluentWidgetTemplatePipe implements PipeTransform {
         return dir.templateRef;
       }
 
-      case SchemaKind.Headless: {
-        // 这里假设在外层已经判断 value.template 是否存在了
+      case SchemaKind.Headful: {
         const dir = templateDirectives?.().find(o => o.name === value['template']);
 
         if (!dir) {
-          throwCustomTemplateNotFoundError(value['template']!);
+          throwCustomTemplateNotFoundError(value['template']);
         }
 
         return dir.templateRef;

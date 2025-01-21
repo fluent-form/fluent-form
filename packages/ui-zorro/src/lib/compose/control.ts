@@ -1,9 +1,9 @@
 import { SchemaKey, SingleSchemaKey, UnstableBuilder, composeBuilder } from '@fluent-form/core';
-import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, ColorPickerControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, HeadlessControlSchema, NumberControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, ColorPickerControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, HeadfulControlSchema, NumberControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { KindOrKey } from './helper';
 
-export function headless<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<HeadlessControlSchema<Key>, KindOrKey> {
-  return composeBuilder<HeadlessControlSchema<Key>>().kind('headless').key(key);
+export function headful<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<HeadfulControlSchema<Key>, KindOrKey> {
+  return composeBuilder<HeadfulControlSchema<Key>>().kind('headful').key(key);
 }
 
 export function text(): UnstableBuilder<TextControlSchema<number>, KindOrKey>;

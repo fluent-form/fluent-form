@@ -17,9 +17,15 @@
     </ng-template>
 
     @for (subschema of schema.schemas; track subschema) {
-      <ng-container
-        [ngTemplateOutlet]="colTemplate"
-        [ngTemplateOutletContext]="{ control: (subschema.key | control: control), schema: subschema, model: model }" />
+      @if (subschema | renderable) {
+        <ng-container
+          [ngTemplateOutlet]="colTemplate"
+          [ngTemplateOutletContext]="{
+            control: (subschema.key | control: control),
+            schema: subschema,
+            model: model
+          }" />
+      }
     }
   </fluent-row>
 </ng-template>

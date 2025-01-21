@@ -38,8 +38,8 @@ describe('FluentWidgetTemplatePipe', () => {
       .toThrow(`The custom 'unnamed' template was not found`);
   });
 
-  it('should be not found template (with headless schema)', () => {
-    expect(() => pipe.transform({ kind: 'headless', key: 'headless', template: 'unnamed' }))
+  it('should be not found template (with headful schema)', () => {
+    expect(() => pipe.transform({ kind: 'headful', key: 'headful', template: 'unnamed' }))
       .toThrow(`The custom 'unnamed' template was not found`);
   });
 
@@ -48,8 +48,8 @@ describe('FluentWidgetTemplatePipe', () => {
     expect(value).toBeTruthy();
   });
 
-  it('should be find template (with headless schema)', () => {
-    const value = pipe.transform({ kind: 'headless', key: 'headless', template: 'named' });
+  it('should be find template (with headful schema)', () => {
+    const value = pipe.transform({ kind: 'headful', key: 'headful', template: 'named' });
     expect(value).toBeTruthy();
   });
 });

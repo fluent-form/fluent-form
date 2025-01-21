@@ -1,13 +1,13 @@
 import { form } from '../../compose';
-import { headless, number, range, text } from './control';
+import { headful, number, range, text } from './control';
 
 describe('control', () => {
-  it('headless', () => {
+  it('headful', () => {
     const { schemas } = form(() => {
-      headless();
+      headful();
     });
     expect(schemas).toEqual([{
-      kind: 'headless',
+      kind: 'headful',
     }]);
   });
 

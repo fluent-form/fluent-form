@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FluentFormComponent, form } from '@fluent-form/core';
-import { headless, number, rate, text, textarea, toggle } from '@fluent-form/ui-zorro';
+import { FluentFormComponent, form, headless } from '@fluent-form/core';
+import { number, rate, text, textarea, toggle } from '@fluent-form/ui-zorro';
 
 interface Hero {
   id: number;

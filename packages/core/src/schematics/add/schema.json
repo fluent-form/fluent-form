@@ -14,7 +14,8 @@
       "type": "string",
       "description": "The UI library to be used by fluent-form.",
       "enum": [
-        "ng-zorro-antd"
+        "ng-zorro-antd",
+        "none"
       ],
       "x-prompt": {
         "message": "Which UI library do you want to use?",
@@ -23,6 +24,10 @@
           {
             "value": "ng-zorro-antd",
             "label": "ng-zorro-antd - [ https://ng.ant.design ]"
+          },
+          {
+            "value": "none",
+            "label": "none"
           }
         ]
       }

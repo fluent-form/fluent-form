@@ -19,6 +19,8 @@ export default function (options: Schema): Rule {
 
 function installUIPackage(host: Tree, context: SchematicContext, options: Schema) {
   return () => {
+    if (options.ui === 'none') return;
+
     const fluentFormDep = getPackageJsonDependency(host, '@fluent-form/core')!;
 
     addPackageJsonDependency(host, {

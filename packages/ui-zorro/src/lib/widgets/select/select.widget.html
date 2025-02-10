@@ -30,13 +30,13 @@
         [nzServerSearch]="!!schema.fetchOptions"
         [(nzOpen)]="ctx.open"
         (nzOnSearch)="ctx.trigger($event)">
-        @for (option of schema.options | reactive: model : schema : control; track option) {
+        @for (option of schema.options | reactive: model : schema : control; track option.value) {
           <nz-option
             [nzCustomContent]="!!schema.option"
-            [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
-            [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
-            [nzValue]="option[schema.config?.valueProperty ?? 'value']"
-            [nzHide]="option[schema.config?.hideProperty ?? 'hide']">
+            [nzDisabled]="option.disabled"
+            [nzLabel]="option.label"
+            [nzValue]="option.value"
+            [nzHide]="option.hide">
             <ng-template
               [nzStringTemplateOutlet]="schema.option | template"
               [nzStringTemplateOutletContext]="{ $implicit: option }" />
@@ -69,13 +69,13 @@
       [nzServerSearch]="!!schema.fetchOptions"
       [(nzOpen)]="ctx.open"
       (nzOnSearch)="ctx.trigger($event)">
-      @for (option of schema.options | reactive: model : schema : control; track option) {
+      @for (option of schema.options | reactive: model : schema : control; track option.value) {
         <nz-option
           [nzCustomContent]="!!schema.option"
-          [nzDisabled]="option[schema.config?.disabledProperty ?? 'disabled']"
-          [nzLabel]="option[schema.config?.labelProperty ?? 'label']"
-          [nzValue]="option[schema.config?.valueProperty ?? 'value']"
-          [nzHide]="option[schema.config?.hideProperty ?? 'hide']">
+          [nzDisabled]="option.disabled"
+          [nzLabel]="option.label"
+          [nzValue]="option.value"
+          [nzHide]="option.hide">
           <ng-template
             [nzStringTemplateOutlet]="schema.option | template"
             [nzStringTemplateOutletContext]="{ $implicit: option }" />

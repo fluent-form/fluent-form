@@ -3,11 +3,6 @@ import { ngKeywordsLoader } from '@ng-doc/keywords-loaders';
 
 const config: NgDocConfiguration = {
   cache: false,
-  pages: [
-    'packages/docs/src',
-    'packages/core/src',
-    'packages/ui-zorro/src',
-  ],
   keywords: {
     loaders: [ngKeywordsLoader()],
   },

@@ -1,7 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { AbstractControlSchema, AbstractHeadfulControlSchema, ComponentControlEventListenerHolder, ComponentControlEventObserverHolder, ComponentPropertyHolder, ElementControlEventListenerHolder, ElementControlEventObserverHolder, ElementPropertyHolder, Length, MaybeSchemaReactiveFn, SchemaContext, SchemaKey, SingleSchemaKey } from '@fluent-form/core';
-import { AnyObject, SafeAny } from '@ngify/types';
+import { SafeAny } from '@ngify/types';
 import { NzCascaderComponent, NzCascaderExpandTrigger, NzCascaderOption, NzCascaderSize, NzShowSearchOptions } from 'ng-zorro-antd/cascader';
 import { NzCheckBoxOptionInterface, NzCheckboxComponent, NzCheckboxGroupComponent } from 'ng-zorro-antd/checkbox';
 import { NzColorPickerComponent } from 'ng-zorro-antd/color-picker';
@@ -11,7 +11,7 @@ import { NzPlacement } from 'ng-zorro-antd/date-picker/date-picker.component';
 import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
 import { NzRadioButtonStyle, NzRadioGroupComponent } from 'ng-zorro-antd/radio';
 import { NzRateComponent } from 'ng-zorro-antd/rate';
-import { NzSelectComponent, NzSelectModeType, NzSelectSizeType } from 'ng-zorro-antd/select';
+import { NzSelectComponent, NzSelectModeType, NzSelectOptionInterface, NzSelectSizeType } from 'ng-zorro-antd/select';
 import { NzSliderComponent } from 'ng-zorro-antd/slider';
 import { NzSwitchComponent } from 'ng-zorro-antd/switch';
 import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
@@ -202,15 +202,9 @@ export interface SelectControlSchema<Key extends SingleSchemaKey = SingleSchemaK
   suffixIcon?: string | TemplateRef<SafeAny>;
   loading?: boolean;
   option?: string | TemplateRef<{ $implicit: SafeAny }>;
-  options?: MaybeSchemaReactiveFn<SelectControlSchema<SingleSchemaKey, Val>, AnyObject[]>;
-  fetchOptions?: (keyword$: Observable<string>, ctx: SchemaContext<SelectControlSchema<SingleSchemaKey, Val>>) => Observable<AnyObject[]>;
+  options?: MaybeSchemaReactiveFn<SelectControlSchema<SingleSchemaKey, Val>, NzSelectOptionInterface[]>;
+  fetchOptions?: (keyword$: Observable<string>, ctx: SchemaContext<SelectControlSchema<SingleSchemaKey, Val>>) => Observable<NzSelectOptionInterface[]>;
   compareWith?: (a: SafeAny, b: SafeAny) => boolean;
-  config?: {
-    labelProperty?: string;
-    valueProperty?: string;
-    disabledProperty?: string;
-    hideProperty?: string;
-  };
 }
 
 /**
@@ -236,10 +230,6 @@ export interface CascaderControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   searchable?: boolean | NzShowSearchOptions;
   options?: MaybeSchemaReactiveFn<CascaderControlSchema<SingleSchemaKey, Val>, NzCascaderOption[]>;
   fetchOptions?: (node: NzCascaderOption, index: number, ctx: SchemaContext<CascaderControlSchema<SchemaKey, Val>>) => PromiseLike<SafeAny> | Observable<SafeAny>;
-  config?: {
-    labelProperty?: string;
-    valueProperty?: string;
-  };
 }
 
 /**
@@ -268,13 +258,9 @@ export interface RadioGroupControlSchema<Key extends SingleSchemaKey = SingleSch
   extends AbstractZorroControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzRadioGroupComponent, Val>, ComponentControlEventObserverHolder<NzRadioGroupComponent, Val>, ComponentPropertyHolder<NzRadioGroupComponent> {
   kind: 'radio-group';
   size?: NzSizeLDSType;
-  options: AnyObject[];
+  options: { label: string, value: SafeAny }[];
   variants?: {
     button?: NzRadioButtonStyle;
-  };
-  config?: {
-    labelProperty?: string;
-    valueProperty?: string;
   };
 }
 
@@ -295,11 +281,7 @@ export interface CheckboxControlSchema<Key extends SingleSchemaKey = SingleSchem
 export interface CheckboxGroupControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = NzCheckBoxOptionInterface[]>
   extends AbstractZorroControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzCheckboxGroupComponent, Val>, ComponentControlEventObserverHolder<NzCheckboxGroupComponent, Val>, ComponentPropertyHolder<NzCheckboxGroupComponent> {
   kind: 'checkbox-group';
-  options: AnyObject[];
-  config?: {
-    labelProperty?: string;
-    valueProperty?: string;
-  };
+  options: { label: string, value: SafeAny }[];
 }
 
 /**

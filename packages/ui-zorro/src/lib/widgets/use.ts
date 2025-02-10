@@ -235,15 +235,13 @@ export function useCheckboxGroupWidget(): FluentFormWidgetConfig<CheckboxGroupCo
     type: SchemaType.Control,
     widget: CheckboxGroupWidget,
     patch: schema => {
-      const labelProperty = schema.config?.labelProperty ?? 'label';
-      const valueProperty = schema.config?.valueProperty ?? 'value';
       const options = schema.options;
 
       schema.mapper ??= {
         parser: value => options.map(option => ({
-          label: option[labelProperty],
-          value: option[valueProperty],
-          checked: !!value?.includes(option[valueProperty])
+          label: option.label,
+          value: option.value,
+          checked: !!value?.includes(option.value)
         })),
         formatter: value => value?.filter(o => o.checked).map(o => o.value)
       };

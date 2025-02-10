@@ -7,15 +7,11 @@
     [style]="schema.style"
     [nzButtonStyle]="schema.variants?.button ?? 'outline'"
     [nzSize]="schema.size!">
-    @for (option of schema.options; track option) {
+    @for (option of schema.options; track option.value) {
       @if (schema.variants?.button) {
-        <label nz-radio-button [nzValue]="option[schema.config?.valueProperty ?? 'value']">
-          {{ option[schema.config?.labelProperty ?? 'label'] }}
-        </label>
+        <label nz-radio-button [nzValue]="option.value">{{ option.label }}</label>
       } @else {
-        <label nz-radio [nzValue]="option[schema.config?.valueProperty ?? 'value']">
-          {{ option[schema.config?.labelProperty ?? 'label'] }}
-        </label>
+        <label nz-radio [nzValue]="option.value">{{ option.label }}</label>
       }
     }
   </nz-radio-group>

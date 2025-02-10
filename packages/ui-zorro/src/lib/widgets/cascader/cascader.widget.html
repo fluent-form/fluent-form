@@ -18,15 +18,13 @@
         [nzBackdrop]="schema.backdrop!"
         [nzExpandIcon]="schema.expandIcon | template: ''"
         [nzExpandTrigger]="schema.trigger!"
-        [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
         [nzLoadData]="fetchOptions | invoke: model : schema : control"
         [nzOptions]="schema.options! | reactive: model : schema : control"
         [nzPlaceHolder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
         [nzShowArrow]="schema.arrow ?? true"
         [nzShowSearch]="schema.searchable!"
         [nzSize]="schema.size!"
-        [nzSuffixIcon]="schema.suffixIcon | template: 'down'"
-        [nzValueProperty]="schema.config?.valueProperty ?? 'value'" />
+        [nzSuffixIcon]="schema.suffixIcon | template: 'down'" />
     }
   } @else {
     <nz-cascader
@@ -42,14 +40,12 @@
       [nzChangeOnSelect]="schema.changeOnSelect"
       [nzExpandIcon]="schema.expandIcon | template: ''"
       [nzExpandTrigger]="schema.trigger!"
-      [nzLabelProperty]="schema.config?.labelProperty ?? 'label'"
       [nzLoadData]="fetchOptions | invoke: model : schema : control"
       [nzOptions]="schema.options! | reactive: model : schema : control"
       [nzPlaceHolder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
       [nzShowArrow]="schema.arrow ?? true"
       [nzShowSearch]="schema.searchable!"
       [nzSize]="schema.size!"
-      [nzSuffixIcon]="schema.suffixIcon | template: 'down'"
-      [nzValueProperty]="schema.config?.valueProperty ?? 'value'" />
+      [nzSuffixIcon]="schema.suffixIcon | template: 'down'" />
   }
 </ng-template>

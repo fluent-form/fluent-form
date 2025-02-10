@@ -88,12 +88,6 @@ import { useSelectWidget } from '@fluent-form/ui-zorro';
 
 {{ NgDocActions.demo("SelectAsyncOptionsExampleComponent") }}
 
-#### Custom Property Names
-
-此示例展示了如何使用 `config` 选项自定义属性名。
-
-{{ NgDocActions.demo("SelectCustomPropertyNamesExampleComponent") }}
-
 #### Custom Option View
 
 此示例展示了如何使用 `option` 选项自定义选项视图。
@@ -115,12 +109,6 @@ import { useCascaderWidget } from '@fluent-form/ui-zorro';
 此示例展示了如何使用 `fetchOptions` 选项加载异步数据，支持 Promise 与 Observable。
 
 {{ NgDocActions.demo("CascaderAsyncOptionsExampleComponent") }}
-
-#### Custom Property Names
-
-此示例展示了如何使用 `config` 选项自定义属性名。
-
-{{ NgDocActions.demo("CascaderCustomPropertyNamesExampleComponent") }}
 
 ## Tree Select
 
@@ -171,12 +159,6 @@ import { useCheckboxGroupWidget } from '@fluent-form/ui-zorro';
 ```
 
 {{ NgDocActions.demo("CheckboxGroupExampleComponent") }}
-
-#### Custom Property Names
-
-此示例展示了如何使用 `config` 选项自定义属性名。
-
-{{ NgDocActions.demo("CheckboxGroupCustomPropertyNamesExampleComponent") }}
 
 ## Rate
 

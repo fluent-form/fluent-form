@@ -65,3 +65,7 @@
    4.  `useDateWidget()` 重命名为 `useDatePickerWidget()`
    5.  `useDateRangeWidget()` 重命名为 `useDateRangePickerWidget()`
    6.  `useTimeWidget()` 重命名为 `useTimePickerWidget()`
+
+8. `headless()` 不再支持自定义模板，您可以使用 `headful()` 替代。
+
+9. `select()`、`cascader()`、`radioGroup()`、`checkGroup()` 不再支持 `config` 选项。

@@ -24,9 +24,7 @@ export interface AbstractControlContainerSchema<Key extends SingleSchemaKey = Si
 /**
  * @public
  */
-export interface AbstractFormGroupSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractControlContainerSchema<Key> {
-  kind: 'group';
-}
+export type AbstractFormGroupSchema<Key extends SingleSchemaKey = SingleSchemaKey> = AbstractControlContainerSchema<Key>
 
 /**
  * @public

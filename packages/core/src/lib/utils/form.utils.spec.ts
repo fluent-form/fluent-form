@@ -231,6 +231,42 @@ describe('form.utils', () => {
         expect(form.value).toEqual([]);
       });
 
+      it('with length', () => {
+        const form1 = util.createFormArray({
+          kind: 'array',
+          length: 1,
+          schemas: [
+            { kind: 'text' }
+          ]
+        }, []);
+        const form2 = util.createFormArray({
+          kind: 'array',
+          length: { min: 1, max: 5 },
+          schemas: [
+            { kind: 'text' }
+          ]
+        }, []);
+        const form3 = util.createFormArray({
+          kind: 'array',
+          length: { min: 1 },
+          schemas: [
+            { kind: 'text' }
+          ]
+        }, ['']);
+        const form4 = util.createFormArray({
+          kind: 'array',
+          length: { max: 1 },
+          schemas: [
+            { kind: 'text' }
+          ]
+        }, ['']);
+
+        expect(form1.valid).toEqual(false);
+        expect(form2.valid).toEqual(false);
+        expect(form3.valid).toEqual(true);
+        expect(form4.valid).toEqual(true);
+      });
+
       it('not element schema', () => {
         expect(() => {
           util.createFormArray({

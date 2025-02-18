@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { AnyArray, AnyObject, SafeAny } from '@ngify/types';
-import { AbstractControlContainerSchema, AbstractControlSchema, AbstractSchema, SchemaKey } from '../schemas';
+import { AbstractControlSchema, AbstractFormArraySchema, AbstractFormGroupSchema, AbstractSchema, SchemaKey } from '../schemas';
 import { ValueTransformer } from '../services';
 import { Indexable } from '../types';
-import { isArray, isUndefined } from './is.utils';
+import { isArray, isNumber, isUndefined } from './is.utils';
 import { SchemaUtil } from './schema.utils';
 import { ValueUtil } from './value.utils';
 
@@ -31,10 +31,10 @@ export class FormUtil {
     });
   }
 
-  createFormGroup(schema: AbstractControlContainerSchema, model: AnyObject): FormGroup;
+  createFormGroup(schema: AbstractFormGroupSchema, model: AnyObject): FormGroup;
   createFormGroup(schemas: Indexable<AbstractSchema>[], model: AnyObject): FormGroup;
-  createFormGroup(schemaOrSchemas: AbstractControlContainerSchema | Indexable<AbstractSchema>[], model: AnyObject): FormGroup;
-  createFormGroup(schemaOrSchemas: AbstractControlContainerSchema | Indexable<AbstractSchema>[], model: AnyObject): FormGroup {
+  createFormGroup(schemaOrSchemas: AbstractFormGroupSchema | Indexable<AbstractSchema>[], model: AnyObject): FormGroup;
+  createFormGroup(schemaOrSchemas: AbstractFormGroupSchema | Indexable<AbstractSchema>[], model: AnyObject): FormGroup {
     let schemas: Indexable<AbstractSchema>[];
     let options: AbstractControlOptions = {};
 
@@ -90,11 +90,29 @@ export class FormUtil {
     }, {} as Record<string, AbstractControl>);
   }
 
-  createFormArray(schema: AbstractControlContainerSchema, model: AnyArray): FormArray {
+  createFormArray(schema: AbstractFormArraySchema, model: AnyArray): FormArray {
     const controls = this.createFormArrayElements(schema.schemas, model);
+    const validators: ValidatorFn[] = schema.validators ?? [];
+
+    if (schema.length) {
+      validators.push(Validators.required);
+      if (isNumber(schema.length)) {
+        validators.push(
+          Validators.minLength(schema.length),
+          Validators.maxLength(schema.length),
+        );
+      } else {
+        if (schema.length.min) {
+          validators.push(Validators.minLength(schema.length.min));
+        }
+        if (schema.length.max) {
+          validators.push(Validators.maxLength(schema.length.max));
+        }
+      }
+    }
 
     return new FormArray<SafeAny>(controls, {
-      validators: schema.validators,
+      validators,
       asyncValidators: schema.asyncValidators,
       updateOn: schema.updateOn
     });

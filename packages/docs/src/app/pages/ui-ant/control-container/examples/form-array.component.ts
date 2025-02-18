@@ -19,17 +19,20 @@ export class FormArrayExampleComponent {
 
     array('passengers')
       .label('乘客')
-      .length({ max: 5 })
+      .length({ min: 1, max: 5 })
       .orderable(true)
       .col(12)
       .schemas(() => {
         text().placeholder('请输入姓名').col(12);
       });
 
-    button().content('提交').type('primary').col(12).variants({ block: true });
+    button()
+      .type('primary')
+      .content('提交')
+      .variants({ block: true })
+      .disabled(ctx => ctx.control.invalid)
+      .col(12);
   });
 
-  model = {
-    passengers: ['特朗普']
-  };
+  model = {};
 }

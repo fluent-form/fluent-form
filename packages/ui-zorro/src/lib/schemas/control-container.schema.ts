@@ -11,6 +11,7 @@ import { Labelful } from './interfaces';
  * @public
  */
 export interface FormGroupSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractFormGroupSchema<Key>, Labelful {
+  kind: 'group';
   layout?: NzFormLayoutType;
 }
 

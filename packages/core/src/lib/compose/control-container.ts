@@ -30,6 +30,4 @@ export function form(fnOrSchemasOrBuilder: Indexable<AbstractSchema>[] | FormCom
   return scheam;
 }
 
-export const fluentForm = form;
-
 type FormComposeFn = () => SafeAny;

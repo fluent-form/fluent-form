@@ -3,9 +3,9 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FluentBindingDirective, FluentContextGuardDirective } from '../../../directives';
 import { AbstractWidget, WidgetTemplateContext } from '../../../widgets/widget';
 import { NumberComponent } from '../../components/number/number.component';
-import { NumberControlSchema } from '../../schemas';
+import { NumberFieldControlSchema } from '../../schemas';
 
-type NumberWidgetTemplateContext = WidgetTemplateContext<NumberControlSchema, FormControl<number>>;
+type NumberWidgetTemplateContext = WidgetTemplateContext<NumberFieldControlSchema, FormControl<number>>;
 
 /**
  * @internal

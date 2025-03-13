@@ -12,9 +12,9 @@ export interface HeadfulControlSchema<Key extends SingleSchemaKey = SingleSchema
 /**
  * @public
  */
-export interface TextControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = string>
+export interface TextFieldControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = string>
   extends AbstractControlSchema<Key, Val>, ElementControlEventListenerHolder<Val>, ElementControlEventObserverHolder<Val>, ElementPropertyHolder<HTMLInputElement> {
-  kind: 'text';
+  kind: 'text-field';
   type?: 'text' | 'number' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
   placeholder?: string;
 }
@@ -26,7 +26,7 @@ export interface RangeControlSchema<Key extends SchemaKey = SchemaKey, Val = [nu
   max?: number;
 }
 
-export interface NumberControlSchema<Key extends SchemaKey = SchemaKey, Val = number>
+export interface NumberFieldControlSchema<Key extends SchemaKey = SchemaKey, Val = number>
   extends AbstractControlSchema<Key, Val>, ComponentControlEventListenerHolder<NumberComponent, Val>, ComponentControlEventObserverHolder<NumberComponent, Val>, ComponentPropertyHolder<NumberComponent> {
-  kind: 'number';
+  kind: 'number-field';
 }

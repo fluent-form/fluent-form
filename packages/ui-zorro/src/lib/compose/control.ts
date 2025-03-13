@@ -1,33 +1,33 @@
 import { SchemaKey, SingleSchemaKey, UnstableBuilder, composeBuilder } from '@fluent-form/core';
-import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, ColorPickerControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, HeadfulControlSchema, NumberControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, ColorPickerControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, HeadfulControlSchema, NumberFieldControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, TextAreaControlSchema, TextFieldControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { KindOrKey } from './helper';
 
 export function headful<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<HeadfulControlSchema<Key>, KindOrKey> {
   return composeBuilder<HeadfulControlSchema<Key>>().kind('headful').key(key);
 }
 
-export function text(): UnstableBuilder<TextControlSchema<number>, KindOrKey>;
-export function text<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<TextControlSchema<Key>, KindOrKey>;
-export function text<Key extends SingleSchemaKey>(key?: Key) {
-  return composeBuilder<TextControlSchema<Key>>().kind('text').key(key);
+export function textField(): UnstableBuilder<TextFieldControlSchema<number>, KindOrKey>;
+export function textField<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<TextFieldControlSchema<Key>, KindOrKey>;
+export function textField<Key extends SingleSchemaKey>(key?: Key) {
+  return composeBuilder<TextFieldControlSchema<Key>>().kind('text-field').key(key);
 }
 
-export function password(): UnstableBuilder<TextControlSchema<number>, KindOrKeyOrType>;
-export function password<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<TextControlSchema<Key>, KindOrKeyOrType>;
-export function password<Key extends SingleSchemaKey>(key?: Key) {
-  return text(key).type('password');
+export function passwordField(): UnstableBuilder<TextFieldControlSchema<number>, KindOrKeyOrType>;
+export function passwordField<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<TextFieldControlSchema<Key>, KindOrKeyOrType>;
+export function passwordField<Key extends SingleSchemaKey>(key?: Key) {
+  return textField(key).type('password');
 }
 
-export function textarea(): UnstableBuilder<TextareaControlSchema<number>, KindOrKey>;
-export function textarea<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<TextareaControlSchema<Key>, KindOrKey>;
-export function textarea<Key extends SingleSchemaKey>(key?: Key) {
-  return composeBuilder<TextareaControlSchema<Key>>().kind('textarea').key(key);
+export function textArea(): UnstableBuilder<TextAreaControlSchema<number>, KindOrKey>;
+export function textArea<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<TextAreaControlSchema<Key>, KindOrKey>;
+export function textArea<Key extends SingleSchemaKey>(key?: Key) {
+  return composeBuilder<TextAreaControlSchema<Key>>().kind('text-area').key(key);
 }
 
-export function number(): UnstableBuilder<NumberControlSchema<number>, KindOrKey>;
-export function number<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<NumberControlSchema<Key>, KindOrKey>;
-export function number<Key extends SingleSchemaKey>(key?: Key) {
-  return composeBuilder<NumberControlSchema<Key>>().kind('number').key(key);
+export function numberField(): UnstableBuilder<NumberFieldControlSchema<number>, KindOrKey>;
+export function numberField<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<NumberFieldControlSchema<Key>, KindOrKey>;
+export function numberField<Key extends SingleSchemaKey>(key?: Key) {
+  return composeBuilder<NumberFieldControlSchema<Key>>().kind('number-field').key(key);
 }
 
 export function datePicker(): UnstableBuilder<DatePickerControlSchema<number>, KindOrKey>;

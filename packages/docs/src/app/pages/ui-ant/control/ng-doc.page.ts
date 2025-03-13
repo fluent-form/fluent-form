@@ -8,15 +8,15 @@ import { CheckboxExampleComponent } from './examples/checkbox.component';
 import { ColorExampleComponent } from './examples/color.component';
 import { DatePickerExampleComponent } from './examples/date-picker.component';
 import { DateRangePickerExampleComponent } from './examples/date-range-picker.component';
-import { NumberExampleComponent } from './examples/number.component';
+import { NumberFieldExampleComponent } from './examples/number-field.component';
 import { RadioGroupExampleComponent } from './examples/radio-group.component';
 import { RateExampleComponent } from './examples/rate.component';
 import { SelectAsyncOptionsExampleComponent } from './examples/select-async-options.component';
 import { SelectCustomOptionContentExampleComponent } from './examples/select-custom-option-content.component';
 import { SelectExampleComponent } from './examples/select.component';
 import { SliderExampleComponent } from './examples/slider.component';
-import { TextExampleComponent } from './examples/text.component';
-import { TextareaExampleComponent } from './examples/textarea.component';
+import { TextAreaExampleComponent } from './examples/text-area.component';
+import { TextFieldExampleComponent } from './examples/text-field.component';
 import { TimePickerExampleComponent } from './examples/time-picker.component';
 import { ToggleExampleComponent } from './examples/toggle.component';
 import { TreeSelectExampleComponent } from './examples/tree-select.component';
@@ -27,9 +27,9 @@ const ControlPage: NgDocPage = {
   category: UIZorroCategory,
   demos: {
     ZorroStyleComponent,
-    TextExampleComponent,
-    TextareaExampleComponent,
-    NumberExampleComponent,
+    TextFieldExampleComponent,
+    TextAreaExampleComponent,
+    NumberFieldExampleComponent,
     DatePickerExampleComponent,
     DateRangePickerExampleComponent,
     TimePickerExampleComponent,

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { FormControl, Validators } from '@angular/forms';
 import { SchemaUtil, ValueUtil, provideFluentForm } from '@fluent-form/core';
-import { text } from '../compose/control';
+import { textField } from '../compose/control';
 import { withZorro } from '../feature';
 import { useAllWidgets } from './use';
 
@@ -46,7 +46,7 @@ describe('useWidget', () => {
 
   describe('built-in validators', () => {
     it('text email validators', () => {
-      const schema = { kind: 'text', type: 'email' };
+      const schema = { kind: 'text-field', type: 'email' };
       const validators = schemaUtil.validatorsOf(schema);
       expect(validators).toContain(Validators.email);
     });
@@ -54,14 +54,14 @@ describe('useWidget', () => {
 
   describe('带验证器的图示', () => {
     it('length', () => {
-      const schema = { kind: 'text', length: 1 };
+      const schema = { kind: 'text-field', length: 1 };
       const validators = schemaUtil.validatorsOf(schema);
       // min & max
       expect(validators.length).toBe(2);
     });
 
     it('min/max', () => {
-      const schema = text('name').length({ min: 1, max: 2 }).build();
+      const schema = textField('name').length({ min: 1, max: 2 }).build();
       const validators = schemaUtil.validatorsOf(schema);
 
       expect(validators.length).toBe(2);

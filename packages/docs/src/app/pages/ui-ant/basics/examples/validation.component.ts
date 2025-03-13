@@ -2,7 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { spaceCompact, text } from '@fluent-form/ui-zorro';
+import { spaceCompact, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'validation-example',
@@ -15,7 +15,7 @@ import { spaceCompact, text } from '@fluent-form/ui-zorro';
 })
 export class ValidationExampleComponent {
   schema = form(() => {
-    text('username')
+    textField('username')
       .label('Username')
       .required(true)
       .length({ min: 3, max: 10 })
@@ -31,7 +31,7 @@ export class ValidationExampleComponent {
       })
       .col(6);
 
-    text('email')
+    textField('email')
       .label('Email')
       .type('email')
       .required(true)
@@ -39,7 +39,7 @@ export class ValidationExampleComponent {
       .tips({ success: 'Verification passed!', error: 'Verification failed' })
       .col(6);
 
-    text('password')
+    textField('password')
       .label('Password')
       .type('password')
       .required(true)
@@ -52,8 +52,8 @@ export class ValidationExampleComponent {
       .label('InputGroup')
       .col(6)
       .schemas(() => {
-        text('firstName').col(4);
-        text('lastName')
+        textField('firstName').col(4);
+        textField('lastName')
           .required(true)
           .tips({ error: 'Please enter your lastName!' })
           .col(8);

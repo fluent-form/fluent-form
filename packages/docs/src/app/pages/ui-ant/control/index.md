@@ -7,30 +7,30 @@
 文本框允许用户通过鼠标或键盘输入内容，是最基础的表单域。
 
 ```ts
-import { useTextWidget } from '@fluent-form/ui-zorro';
+import { useTextFieldWidget } from '@fluent-form/ui-zorro';
 ```
 
-{{ NgDocActions.demo("TextExampleComponent") }}
+{{ NgDocActions.demo("TextFieldExampleComponent") }}
 
 ## Textarea
 
 文本域允许用户通过鼠标或键盘输入内容，是最基础的表单域。
 
 ```ts
-import { useTextareaWidget } from '@fluent-form/ui-zorro';
+import { useTextAreaWidget } from '@fluent-form/ui-zorro';
 ```
 
-{{ NgDocActions.demo("TextareaExampleComponent") }}
+{{ NgDocActions.demo("TextAreaExampleComponent") }}
 
 ## Number
 
 数字输入框允许用户通过鼠标或键盘输入范围内的数值。
 
 ```ts
-import { useNumberWidget } from '@fluent-form/ui-zorro';
+import { useNumberFieldWidget } from '@fluent-form/ui-zorro';
 ```
 
-{{ NgDocActions.demo("NumberExampleComponent") }}
+{{ NgDocActions.demo("NumberFieldExampleComponent") }}
 
 ## Date Picker
 

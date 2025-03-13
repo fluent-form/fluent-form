@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { text } from '@fluent-form/ui-zorro';
+import { textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'default-value-example',
@@ -14,7 +14,7 @@ import { text } from '@fluent-form/ui-zorro';
 })
 export class DefaultValueExampleComponent {
   schema = form(() => {
-    text('text').defaultValue('默认值');
+    textField('text').defaultValue('默认值');
   });
 
   model = {};

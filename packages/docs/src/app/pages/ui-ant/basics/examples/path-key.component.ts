@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { text } from '@fluent-form/ui-zorro';
+import { textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'path-key-example',
@@ -14,8 +14,8 @@ import { text } from '@fluent-form/ui-zorro';
 })
 export class PathKeyExampleComponent {
   schema = form(() => {
-    text('user.name').label('用户名');
-    text('user.password').label('密码').type('password');
+    textField('user.name').label('用户名');
+    textField('user.password').label('密码').type('password');
   });
 
   model = {

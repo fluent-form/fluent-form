@@ -34,7 +34,7 @@ describe('TabsArrayWidget', () => {
     component['push'](formArray, {
       kind: 'tabs-array',
       schemas: [
-        { kind: 'text' }
+        { kind: 'text-field' }
       ]
     });
 

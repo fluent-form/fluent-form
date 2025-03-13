@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectPipe, FluentReactivePipe, InvokePipe, Length, WidgetTemplateContext, isNumber } from '@fluent-form/core';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { TextareaControlSchema } from '../../schemas';
+import { TextAreaControlSchema } from '../../schemas';
 
-type TextareaWidgetTemplateContext = WidgetTemplateContext<TextareaControlSchema, FormControl<string>>;
+type TextareaWidgetTemplateContext = WidgetTemplateContext<TextAreaControlSchema, FormControl<string>>;
 
 /**
  * @internal

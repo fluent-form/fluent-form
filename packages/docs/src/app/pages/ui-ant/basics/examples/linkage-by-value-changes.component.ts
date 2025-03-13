@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { select, text } from '@fluent-form/ui-zorro';
+import { select, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'linkage-by-value-changes-example',
@@ -27,7 +27,7 @@ export class LinkageByValueChangesExampleComponent {
       })
       .col(3);
 
-    text('target').label('Target control').col(3);
+    textField('target').label('Target control').col(3);
   });
 
   model = {};

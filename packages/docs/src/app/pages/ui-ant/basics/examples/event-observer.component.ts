@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { select, text } from '@fluent-form/ui-zorro';
+import { select, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'event-observer-example',
@@ -14,7 +14,7 @@ import { select, text } from '@fluent-form/ui-zorro';
 })
 export class EventObserverExampleComponent {
   schema = form(() => {
-    text('txt')
+    textField('txt')
       .placeholder('Please feel free to enter')
       .observers({
         valueChange: source => {

@@ -26,7 +26,7 @@ describe('RenderablePipe', () => {
   it('should return true for AbstractSchema', () => {
     const pipe = new RenderablePipe();
     const schema = {
-      kind: 'text'
+      kind: 'text-field'
     };
     expect(pipe.transform(schema)).toBe(true);
   });

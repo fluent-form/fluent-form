@@ -24,14 +24,14 @@
 
 ```ts
 import { provideFluentForm } from '@fluent-form/core';
-import { withZorro, useTextWidget, useNumberWidget } from '@fluent-form/ui-zorro';
+import { withZorro, useTextFieldWidget, useNumberFieldWidget } from '@fluent-form/ui-zorro';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideFluentForm(
       withZorro([
-        useTextWidget(),
-        useNumberWidget(),
+        useTextFieldWidget(),
+        useNumberFieldWidget(),
         ...
       ])
     )
@@ -41,7 +41,7 @@ export const appConfig: ApplicationConfig = {
 
 在上述代码中，我们使用 `provideFluentForm` 辅助函数来配置 {% include "../../../markdowns/brand.md" %}，然后使用 `withZorro` 函数来注册 UI 库与部件，它接收一个部件数组作为参数。
 
-`useTextWidget` 和 `useNumberWidget` 都是部件工厂函数，它们分别创建一个文本输入部件和一个数字部件。
+`useTextFieldWidget` 和 `useNumberFieldWidget` 都是部件工厂函数，它们分别注册一个文本输入部件和一个数字部件。
 
 要查看更多部件，请查阅 [API 文档](/api)。
 
@@ -55,10 +55,10 @@ Fluent API 是一种可组合的、有限链式调用的 Builder-like API。它�
 
 ```ts
 import { form } from '@fluent-form/core';
-import { buttonGroup, button, text } from '@fluent-form/ui-zorro';
+import { buttonGroup, button, textField } from '@fluent-form/ui-zorro';
 
 const schema = form(() => {
-  text('text').label('文本').placeholder('请输入');
+  textField('text').label('文本').placeholder('请输入');
 
   buttonGroup().schemas(() => {
     button().content('提交');
@@ -75,7 +75,7 @@ import { form } from '@fluent-form/core';
 
 const schema = form([
   {
-    kind: 'text',
+    kind: 'text-field',
     key: 'text',
     label: '文本',
     placeholder: '请输入'
@@ -144,19 +144,19 @@ interface Hero {
 
 ```ts
 import { form } from '@fluent-form/core';
-import { text, number, rate, textarea, toggle } from '@fluent-form/ui-zorro';
+import { textField, numberField, rate, textArea, toggle } from '@fluent-form/ui-zorro';
 
 const schema = form(() => {
-  number('id').label('ID').required(true);
-  text('name').label('名称').required(true);
-  textarea('power').label('能力').required(true);
-  number('height').label('身高');
+  numberField('id').label('ID').required(true);
+  textField('name').label('名称').required(true);
+  textArea('power').label('能力').required(true);
+  numberField('height').label('身高');
   rate('popularity').label('声望');
   toggle('enabled').label('状态').required(true);
 });
 ```
 
-在这个例子中，我们使用了 `number`、`text`、`textarea`、`rate` 和 `toggle` 这几种控件。每个控件都有一些配置选项，例如 `label` 用于设置控件的标签，`required` 用于设置控件是否必填。
+在这个例子中，我们使用了 `number-field`、`text-field`、`text-area`、`rate` 和 `toggle` 这几种控件。每个控件都有一些配置选项，例如 `label` 用于设置控件的标签，`required` 用于设置控件是否必填。
 
 然后，我们需要解决两个问题：
 
@@ -166,7 +166,7 @@ const schema = form(() => {
 对于第一个问题，我们可以使用 `headless` 控件来处理。`headless` 控件是一个“无头”控件，它可以**完全不渲染**控件视图，但仍然可以在表单模型中保留对应的字段。
 
 ```diff
-- number('id').label('ID').required(true);
+- numberField('id').label('ID').required(true);
 + headless('id');
 ```
 

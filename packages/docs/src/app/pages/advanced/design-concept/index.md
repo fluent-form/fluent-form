@@ -32,7 +32,7 @@
 
 ```ts
 const schema = form(() => {
-  text('text').label('文本').placeholder('请输入');
+  textField('text').label('文本').placeholder('请输入');
 
   buttonGroup().schemas(() => {
     button().content('提交');
@@ -47,7 +47,7 @@ const schema = form(() => {
   key: 'root',
   schemas: [
     {
-      kind: 'text',
+      kind: 'text-field',
       key: 'text',
       label: '文本',
       placeholder: '请输入'

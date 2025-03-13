@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { AbstractFormGroupSchema, FluentFormComponent, SchemaUtil, form } from '@fluent-form/core';
-import { button, group, spaceCompact, text } from '@fluent-form/ui-zorro';
+import { button, group, spaceCompact, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'update-schema-example',
@@ -25,7 +25,7 @@ export class UpdateSchemaExampleComponent {
       });
     });
     group('users').col(12).schemas(() => {
-      text('user-1').label('用户').col(6);
+      textField('user-1').label('用户').col(6);
     });
   });
 
@@ -34,7 +34,7 @@ export class UpdateSchemaExampleComponent {
   add() {
     const group = this.schemaUtil.find(this.schema, 'users') as AbstractFormGroupSchema;
     group.schemas.push(
-      text(`user-${group.schemas.length + 1}`).label('用户').col(6).build()
+      textField(`user-${group.schemas.length + 1}`).label('用户').col(6).build()
     );
     this.schema = { ...this.schema };
   }

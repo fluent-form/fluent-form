@@ -34,7 +34,7 @@
 
 ```ts
 import { form, headless } from '@fluent-form/core';
-import { button, toggle, radioGroup, text } from '@fluent-form/ui-zorro';
+import { button, toggle, radioGroup, textField } from '@fluent-form/ui-zorro';
 
 function entityForm(composeFn: () => void) {
   return form(() => {
@@ -59,7 +59,7 @@ function submitButton(key?: string) {
 }
 
 entityForm(() => {
-  text('fullName').label('姓名');
+  textField('fullName').label('姓名');
   genderRadioGroup().label('性别');
   enabledToggle().label('状态');
   submitButton().content('提交信息');

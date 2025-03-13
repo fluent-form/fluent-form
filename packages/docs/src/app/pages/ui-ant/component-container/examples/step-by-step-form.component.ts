@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { button, datePicker, group, step, steps, text, textarea, toggle } from '@fluent-form/ui-zorro';
+import { button, datePicker, group, step, steps, textArea, textField, toggle } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'step-by-step-form-example',
@@ -16,8 +16,8 @@ export class StepByStepFormExampleComponent {
   schema = form(() => {
     steps().col(12).active(0).schemas(() => {
       step().title('第一步').schemas(() => {
-        text('text-1').label('文本输入框');
-        text('text-2').label('文本输入框');
+        textField('text-1').label('文本输入框');
+        textField('text-2').label('文本输入框');
       });
 
       step().title('第二步').schemas(() => {
@@ -27,7 +27,7 @@ export class StepByStepFormExampleComponent {
 
       step().title('第三步').schemas(() => {
         group('step3').schemas(() => {
-          textarea('textarea').label('文本域');
+          textArea('textarea').label('文本域');
         });
 
         button().type('primary').content('提交').variants({ block: true }).col(12);

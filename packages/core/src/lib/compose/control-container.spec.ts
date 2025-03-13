@@ -1,4 +1,4 @@
-import { group, text } from '../testing';
+import { group, textField } from '../testing';
 import { form } from './control-container';
 
 describe('control-container', () => {
@@ -10,19 +10,19 @@ describe('control-container', () => {
     });
 
     it('schemas', () => {
-      const { schemas } = form([{ kind: 'text', key: 'input' }]);
-      expect(schemas).toEqual([{ kind: 'text', key: 'input' }]);
+      const { schemas } = form([{ kind: 'text-field', key: 'input' }]);
+      expect(schemas).toEqual([{ kind: 'text-field', key: 'input' }]);
     });
 
     it('compose', () => {
       const schema = form(() => {
-        text('input');
+        textField('input');
       });
       expect(schema).toEqual({
         kind: 'group',
         key: 'root',
         schemas: [
-          { kind: 'text', key: 'input' }
+          { kind: 'text-field', key: 'input' }
         ]
       });
     });

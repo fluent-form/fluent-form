@@ -46,7 +46,7 @@ class TestingComponent {
   readonly formUtil = inject(FormUtil);
 
   inputSchema: TextControlSchema = {
-    kind: 'text',
+    kind: 'text-field',
     key: 'ipt',
     properties: {
       readOnly: true
@@ -80,7 +80,7 @@ class TestingComponent {
     }
   };
   numberSchema: NumberControlSchema = {
-    kind: 'number',
+    kind: 'number-field',
     properties: {
       max: 999
     },

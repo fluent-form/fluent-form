@@ -26,7 +26,7 @@ describe('ModelUtils', () => {
   describe('updateForm', () => {
     it('group', () => {
       const schemas: Indexable<AbstractSchema>[] = [
-        { kind: 'text', key: 'input' }
+        { kind: 'text-field', key: 'input' }
       ];
       const form = formUtil.createFormGroup(schemas, {});
 
@@ -43,7 +43,7 @@ describe('ModelUtils', () => {
           kind: 'group',
           key: 'object',
           schemas: [
-            { kind: 'text', key: 'input' }
+            { kind: 'text-field', key: 'input' }
           ]
         }
       ];
@@ -62,7 +62,7 @@ describe('ModelUtils', () => {
           kind: 'array',
           key: 'array',
           schemas: [
-            { kind: 'text' }
+            { kind: 'text-field' }
           ]
         }
       ];
@@ -87,7 +87,7 @@ describe('ModelUtils', () => {
             {
               kind: 'array',
               schemas: [
-                { kind: 'text' }
+                { kind: 'text-field' }
               ]
             }
           ]
@@ -120,7 +120,7 @@ describe('ModelUtils', () => {
             {
               kind: 'group',
               schemas: [
-                { kind: 'text', key: 'input' }
+                { kind: 'text-field', key: 'input' }
               ]
             }
           ]
@@ -156,7 +156,7 @@ describe('ModelUtils', () => {
         {
           kind: 'input-group',
           schemas: [
-            { kind: 'text', key: 'input' },
+            { kind: 'text-field', key: 'input' },
           ]
         }
       ];
@@ -171,7 +171,7 @@ describe('ModelUtils', () => {
 
     it('with component', () => {
       const schemas: Indexable<AbstractSchema>[] = [
-        { kind: 'text', key: 'input' },
+        { kind: 'text-field', key: 'input' },
         { kind: 'button' }
       ];
       const form = formUtil.createFormGroup(schemas, {});
@@ -185,7 +185,7 @@ describe('ModelUtils', () => {
 
     it('with component wrapper', () => {
       const schemas: Indexable<AbstractSchema>[] = [
-        { kind: 'text', key: 'input' },
+        { kind: 'text-field', key: 'input' },
         {
           kind: 'button-group',
           schemas: [
@@ -207,7 +207,7 @@ describe('ModelUtils', () => {
         {
           kind: 'row',
           schemas: [
-            { kind: 'text', key: 'input' },
+            { kind: 'text-field', key: 'input' },
           ]
         }
       ];

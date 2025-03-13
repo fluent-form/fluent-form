@@ -38,7 +38,7 @@ describe('CardsArrayWidget', () => {
         {
           kind: 'card',
           schemas: [
-            { kind: 'text' }
+            { kind: 'text-field' }
           ]
         }
       ]
@@ -58,7 +58,7 @@ describe('CardsArrayWidget', () => {
   });
 
   it('withIndex method', () => {
-    expect(component['withIndex'](0, { kind: 'text' })).toEqual({ kind: 'text', key: 0 });
+    expect(component['withIndex'](0, { kind: 'text-field' })).toEqual({ kind: 'text-field', key: 0 });
   });
 
   describe('helper function', () => {

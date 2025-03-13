@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormRenderModule, form } from '@fluent-form/core';
-import { datePicker, group, slider, spaceCompact, text, toggle } from '@fluent-form/ui-zorro';
+import { datePicker, group, slider, spaceCompact, textField, toggle } from '@fluent-form/ui-zorro';
 import { NzTableModule } from 'ng-zorro-antd/table';
 
 @Component({
@@ -13,8 +13,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 export class CustomLayoutExampleComponent {
   schema = form(() => {
     spaceCompact('name').schemas(() => {
-      text('firstName').col(6);
-      text('lastName').col(6);
+      textField('firstName').col(6);
+      textField('lastName').col(6);
     });
     slider('age').style({ width: '120px' });
     group('info').schemas(() => {

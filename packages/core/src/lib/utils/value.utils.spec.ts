@@ -27,7 +27,7 @@ describe('ValueUtils', () => {
     describe('normal', () => {
       it('no init value and default value', () => {
         const model = {};
-        const schema = schemaUtil.patch({ kind: 'text', key: 'txt' });
+        const schema = schemaUtil.patch({ kind: 'text-field', key: 'txt' });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBeNull();
@@ -35,7 +35,7 @@ describe('ValueUtils', () => {
 
       it('with init value', () => {
         const model = { txt: '1' };
-        const schema = schemaUtil.patch({ kind: 'text', key: 'txt' });
+        const schema = schemaUtil.patch({ kind: 'text-field', key: 'txt' });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBe('1');
@@ -43,7 +43,7 @@ describe('ValueUtils', () => {
 
       it('with default value', () => {
         const model = {};
-        const schema = schemaUtil.patch({ kind: 'text', key: 'txt', defaultValue: '1' });
+        const schema = schemaUtil.patch({ kind: 'text-field', key: 'txt', defaultValue: '1' });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBe('1');
@@ -51,7 +51,7 @@ describe('ValueUtils', () => {
 
       it('with init value and default value', () => {
         const model = { txt: '2' };
-        const schema = schemaUtil.patch({ kind: 'text', key: 'txt', defaultValue: '1' });
+        const schema = schemaUtil.patch({ kind: 'text-field', key: 'txt', defaultValue: '1' });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBe('2');
@@ -60,7 +60,7 @@ describe('ValueUtils', () => {
       it('with mapper', () => {
         const model = { txt: 1 };
         const schema = schemaUtil.patch({
-          kind: 'text',
+          kind: 'text-field',
           key: 'txt',
           mapper: {
             parser: (value: number) => value.toString(),
@@ -76,7 +76,7 @@ describe('ValueUtils', () => {
     describe('path key schema', () => {
       it('no init value and default value', () => {
         const model = {};
-        const schema = schemaUtil.patch({ kind: 'text', key: 'user.name' });
+        const schema = schemaUtil.patch({ kind: 'text-field', key: 'user.name' });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBeNull();
@@ -84,7 +84,7 @@ describe('ValueUtils', () => {
 
       it('with init value', () => {
         const model = { user: { name: 'joy' } };
-        const schema = schemaUtil.patch({ kind: 'text', key: 'user.name' });
+        const schema = schemaUtil.patch({ kind: 'text-field', key: 'user.name' });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBe('joy');
@@ -92,7 +92,7 @@ describe('ValueUtils', () => {
 
       it('with default value', () => {
         const model = {};
-        const schema = schemaUtil.patch({ kind: 'text', key: 'user.name', defaultValue: 'mike' });
+        const schema = schemaUtil.patch({ kind: 'text-field', key: 'user.name', defaultValue: 'mike' });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBe('mike');
@@ -100,7 +100,7 @@ describe('ValueUtils', () => {
 
       it('with init value and default value', () => {
         const model = { user: { name: 'joy' } };
-        const schema = schemaUtil.patch({ kind: 'text', key: 'user.name', defaultValue: 'mike' });
+        const schema = schemaUtil.patch({ kind: 'text-field', key: 'user.name', defaultValue: 'mike' });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBe('joy');
@@ -109,7 +109,7 @@ describe('ValueUtils', () => {
       it('with mapper', () => {
         const model = { user: { name: 'joy' } };
         const schema = schemaUtil.patch({
-          kind: 'text',
+          kind: 'text-field',
           key: 'user.name',
           mapper: {
             parser: (value: string) => value.toUpperCase(),
@@ -175,7 +175,7 @@ describe('ValueUtils', () => {
 
   describe('get value from control', () => {
     it('normal', () => {
-      const schema = schemaUtil.patch({ kind: 'text', key: 'txt' });
+      const schema = schemaUtil.patch({ kind: 'text-field', key: 'txt' });
       const control = new FormControl('1');
       const value = valueUtil.valueOfControl(control, schema);
 
@@ -184,7 +184,7 @@ describe('ValueUtils', () => {
 
     it('with mapper', () => {
       const schema = schemaUtil.patch({
-        kind: 'text',
+        kind: 'text-field',
         key: 'txt',
         mapper: {
           parser: (value: string) => value.toUpperCase(),

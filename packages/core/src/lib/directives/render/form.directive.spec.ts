@@ -5,7 +5,7 @@ import { AnyObject } from '@ngify/types';
 import { form } from '../../compose';
 import { provideFluentForm } from '../../provider';
 import { AbstractFormGroupSchema } from '../../schemas';
-import { array, group, inputGroup, text, withTesting } from '../../testing';
+import { array, fieldGroup, group, textField, withTesting } from '../../testing';
 import { FluentFormDirective } from './form.directive';
 import { FluentFormRenderModule } from './module';
 
@@ -54,18 +54,18 @@ describe('FluentFormDirective', () => {
 
   it('should be the expected model value', () => {
     component.schema = form(() => {
-      text('ipt');
-      inputGroup('ipts').schemas(() => {
-        text('ipt2');
+      textField('ipt');
+      fieldGroup('ipts').schemas(() => {
+        textField('ipt2');
       });
       group('group').schemas(() => {
-        text('ipt');
-        inputGroup('ipts').schemas(() => {
-          text('ipt2');
+        textField('ipt');
+        fieldGroup('ipts').schemas(() => {
+          textField('ipt2');
         });
       });
       array('array').schemas(() => {
-        text();
+        textField();
       });
     });
     component.model = {};
@@ -85,18 +85,18 @@ describe('FluentFormDirective', () => {
   describe('模型应该能正确赋值表单', () => {
     it('先设置 schema，后设置 model', () => {
       component.schema = form(() => {
-        text('ipt');
-        inputGroup('ipts').schemas(() => {
-          text('ipt2');
+        textField('ipt');
+        fieldGroup('ipts').schemas(() => {
+          textField('ipt2');
         });
         group('group').schemas(() => {
-          text('ipt');
-          inputGroup('ipts').schemas(() => {
-            text('ipt2');
+          textField('ipt');
+          fieldGroup('ipts').schemas(() => {
+            textField('ipt2');
           });
         });
         array('array').schemas(() => {
-          text();
+          textField();
         });
       });
       component.model = {
@@ -126,18 +126,18 @@ describe('FluentFormDirective', () => {
         array: ['test']
       };
       component.schema = form(() => {
-        text('ipt');
-        inputGroup('ipts').schemas(() => {
-          text('ipt2');
+        textField('ipt');
+        fieldGroup('ipts').schemas(() => {
+          textField('ipt2');
         });
         group('group').schemas(() => {
-          text('ipt');
-          inputGroup('ipts').schemas(() => {
-            text('ipt2');
+          textField('ipt');
+          fieldGroup('ipts').schemas(() => {
+            textField('ipt2');
           });
         });
         array('array').schemas(() => {
-          text();
+          textField();
         });
       });
       fixture.detectChanges();
@@ -155,18 +155,18 @@ describe('FluentFormDirective', () => {
 
     it('多次设置 model', () => {
       component.schema = form(() => {
-        text('ipt');
-        inputGroup('ipts').schemas(() => {
-          text('ipt2');
+        textField('ipt');
+        fieldGroup('ipts').schemas(() => {
+          textField('ipt2');
         });
         group('group').schemas(() => {
-          text('ipt');
-          inputGroup('ipts').schemas(() => {
-            text('ipt2');
+          textField('ipt');
+          fieldGroup('ipts').schemas(() => {
+            textField('ipt2');
           });
         });
         array('array').schemas(() => {
-          text();
+          textField();
         });
       });
       component.model = { ipt: 'test' };
@@ -200,18 +200,18 @@ describe('FluentFormDirective', () => {
   describe('表单应该能正确赋值模型', () => {
     it('先设置 schema，后设置 model', () => {
       component.schema = form(() => {
-        text('ipt').defaultValue('test');
-        inputGroup('ipts').schemas(() => {
-          text('ipt2').defaultValue('test');
+        textField('ipt').defaultValue('test');
+        fieldGroup('ipts').schemas(() => {
+          textField('ipt2').defaultValue('test');
         });
         group('group').schemas(() => {
-          text('ipt').defaultValue('test');
-          inputGroup('ipts').schemas(() => {
-            text('ipt2').defaultValue('test');
+          textField('ipt').defaultValue('test');
+          fieldGroup('ipts').schemas(() => {
+            textField('ipt2').defaultValue('test');
           });
         });
         array('array').schemas(() => {
-          text().defaultValue('test');
+          textField().defaultValue('test');
         });
       });
       component.model = {};
@@ -231,18 +231,18 @@ describe('FluentFormDirective', () => {
     it('先设置 model，后设置 schema', () => {
       component.model = {};
       component.schema = form(() => {
-        text('ipt').defaultValue('test');
-        inputGroup('ipts').schemas(() => {
-          text('ipt2').defaultValue('test');
+        textField('ipt').defaultValue('test');
+        fieldGroup('ipts').schemas(() => {
+          textField('ipt2').defaultValue('test');
         });
         group('group').schemas(() => {
-          text('ipt').defaultValue('test');
-          inputGroup('ipts').schemas(() => {
-            text('ipt2').defaultValue('test');
+          textField('ipt').defaultValue('test');
+          fieldGroup('ipts').schemas(() => {
+            textField('ipt2').defaultValue('test');
           });
         });
         array('array').schemas(() => {
-          text().defaultValue('test');
+          textField().defaultValue('test');
         });
       });
       fixture.detectChanges();
@@ -261,18 +261,18 @@ describe('FluentFormDirective', () => {
     it('多次设置 schema', () => {
       component.model = {};
       component.schema = form(() => {
-        text('ipt').defaultValue('test');
-        inputGroup('ipts').schemas(() => {
-          text('ipt2');
+        textField('ipt').defaultValue('test');
+        fieldGroup('ipts').schemas(() => {
+          textField('ipt2');
         });
         group('group').schemas(() => {
-          text('ipt');
-          inputGroup('ipts').schemas(() => {
-            text('ipt2');
+          textField('ipt');
+          fieldGroup('ipts').schemas(() => {
+            textField('ipt2');
           });
         });
         array('array').schemas(() => {
-          text();
+          textField();
         });
       });
       fixture.detectChanges();
@@ -288,18 +288,18 @@ describe('FluentFormDirective', () => {
       });
 
       component.schema = form(() => {
-        text('ipt').defaultValue('test change');
-        inputGroup('ipts').schemas(() => {
-          text('ipt2');
+        textField('ipt').defaultValue('test change');
+        fieldGroup('ipts').schemas(() => {
+          textField('ipt2');
         });
         group('group').schemas(() => {
-          text('ipt');
-          inputGroup('ipts').schemas(() => {
-            text('ipt2');
+          textField('ipt');
+          fieldGroup('ipts').schemas(() => {
+            textField('ipt2');
           });
         });
         array('array').schemas(() => {
-          text();
+          textField();
         });
       });
       fixture.detectChanges();
@@ -319,18 +319,18 @@ describe('FluentFormDirective', () => {
   it('should be the expected model value (configure the toplevel form)', () => {
     component.schema = form(
       group().updateOn('blur').schemas(() => {
-        text('ipt');
-        inputGroup('ipts').schemas(() => {
-          text('ipt2');
+        textField('ipt');
+        fieldGroup('ipts').schemas(() => {
+          textField('ipt2');
         });
         group('group').schemas(() => {
-          text('ipt');
-          inputGroup('ipts').schemas(() => {
-            text('ipt2');
+          textField('ipt');
+          fieldGroup('ipts').schemas(() => {
+            textField('ipt2');
           });
         });
         array('array').schemas(() => {
-          text();
+          textField();
         });
       })
     );

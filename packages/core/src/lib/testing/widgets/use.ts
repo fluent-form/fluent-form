@@ -1,6 +1,6 @@
 import { ValidatorFn, Validators } from '@angular/forms';
 import { FluentFormWidgetConfig, SchemaType } from '@fluent-form/core';
-import { ButtonComponentSchema, ButtonGroupComponentSchema, FormArraySchema, FormGroupSchema, InputGroupComponentSchema, NumberControlSchema, RangeControlSchema, TextControlSchema } from '../schemas';
+import { ButtonComponentSchema, ButtonGroupComponentSchema, FieldGroupComponentSchema, FormArraySchema, FormGroupSchema, NumberFieldControlSchema, RangeControlSchema, TextFieldControlSchema } from '../schemas';
 import { ButtonGroupWidget } from './button-group/button-group.widget';
 import { ButtonWidget } from './button/button.widget';
 import { FormArrayWidget } from './form-array/form-array.widget';
@@ -12,9 +12,9 @@ import { RangeWidget } from './range/range.widget';
 
 export function useAllWidgets() {
   return [
-    useTextWidget(),
+    useTextFieldWidget(),
     useRangeWidget(),
-    useNumberWidget(),
+    useNumberFieldWidget(),
     useInputGroupWidget(),
     useButtonWidget(),
     useButtonGroupWidget(),
@@ -23,9 +23,9 @@ export function useAllWidgets() {
   ];
 }
 
-export function useTextWidget(): FluentFormWidgetConfig<TextControlSchema> {
+export function useTextFieldWidget(): FluentFormWidgetConfig<TextFieldControlSchema> {
   return {
-    kind: 'text',
+    kind: 'text-field',
     type: SchemaType.Control,
     widget: InputWidget,
     validators: schema => {
@@ -49,15 +49,15 @@ export function useRangeWidget(): FluentFormWidgetConfig<RangeControlSchema> {
   };
 }
 
-export function useNumberWidget(): FluentFormWidgetConfig<NumberControlSchema> {
+export function useNumberFieldWidget(): FluentFormWidgetConfig<NumberFieldControlSchema> {
   return {
-    kind: 'number',
+    kind: 'number-field',
     type: SchemaType.Control,
     widget: NumberWidget
   };
 }
 
-export function useInputGroupWidget(): FluentFormWidgetConfig<InputGroupComponentSchema> {
+export function useInputGroupWidget(): FluentFormWidgetConfig<FieldGroupComponentSchema> {
   return {
     kind: 'input-group',
     type: SchemaType.ControlWrapper,

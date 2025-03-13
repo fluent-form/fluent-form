@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { button, text } from '@fluent-form/ui-zorro';
+import { button, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'update-on-example',
@@ -14,9 +14,9 @@ import { button, text } from '@fluent-form/ui-zorro';
 })
 export class UpdateOnExampleComponent {
   schema = form(() => {
-    text('text-1').label('变更时').updateOn('change');
-    text('text-2').label('失焦时').updateOn('blur');
-    text('text-3').label('提交时').updateOn('submit');
+    textField('text-1').label('变更时').updateOn('change');
+    textField('text-2').label('失焦时').updateOn('blur');
+    textField('text-3').label('提交时').updateOn('submit');
 
     button().type('primary').content('提交').col(12);
   });

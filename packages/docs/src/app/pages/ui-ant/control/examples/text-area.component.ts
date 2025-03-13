@@ -1,10 +1,10 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { textarea } from '@fluent-form/ui-zorro';
+import { textArea } from '@fluent-form/ui-zorro';
 
 @Component({
-  selector: 'textarea-example',
+  selector: 'text-area-example',
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
@@ -12,9 +12,9 @@ import { textarea } from '@fluent-form/ui-zorro';
     <pre>{{ model | json }}</pre>
   `
 })
-export class TextareaExampleComponent {
+export class TextAreaExampleComponent {
   schema = form(() => {
-    textarea('desc')
+    textArea('desc')
       .label('Description')
       .placeholder('Please fill in')
       .rows(3)

@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FluentBindingDirective, FluentContextGuardDirective } from '../../../directives';
 import { AbstractWidget, WidgetTemplateContext } from '../../../widgets/widget';
-import { TextControlSchema } from '../../schemas';
+import { TextFieldControlSchema } from '../../schemas';
 
-type InputWidgetTemplateContext = WidgetTemplateContext<TextControlSchema, FormControl<string>>;
+type InputWidgetTemplateContext = WidgetTemplateContext<TextFieldControlSchema, FormControl<string>>;
 
 /**
  * @internal

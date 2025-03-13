@@ -1,5 +1,5 @@
 import { form } from '../../compose';
-import { headful, number, range, text } from './control';
+import { headful, numberField, range, textField } from './control';
 
 describe('control', () => {
   it('headful', () => {
@@ -13,10 +13,10 @@ describe('control', () => {
 
   it('text', () => {
     const { schemas } = form(() => {
-      text();
+      textField();
     });
     expect(schemas).toEqual([{
-      kind: 'text',
+      kind: 'text-field',
     }]);
   });
 
@@ -31,10 +31,10 @@ describe('control', () => {
 
   it('number', () => {
     const { schemas } = form(() => {
-      number();
+      numberField();
     });
     expect(schemas).toEqual([{
-      kind: 'number',
+      kind: 'number-field',
     }]);
   });
 });

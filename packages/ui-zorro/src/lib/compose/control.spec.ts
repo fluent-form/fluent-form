@@ -1,5 +1,5 @@
 import { form } from '@fluent-form/core';
-import { cascader, checkbox, checkboxGroup, color, datePicker, dateRangePicker, datetimePicker, headful, number, password, radioGroup, rate, select, slider, text, textarea, timePicker, toggle, treeSelect } from './control';
+import { cascader, checkbox, checkboxGroup, color, datePicker, dateRangePicker, datetimePicker, headful, numberField, passwordField, radioGroup, rate, select, slider, textArea, textField, timePicker, toggle, treeSelect } from './control';
 
 describe('control', () => {
   it('headful', () => {
@@ -8,23 +8,23 @@ describe('control', () => {
   });
 
   it('text', () => {
-    const { schemas } = form(() => text('txt'));
-    expect(schemas).toEqual([{ kind: 'text', key: 'txt' }]);
+    const { schemas } = form(() => textField('txt'));
+    expect(schemas).toEqual([{ kind: 'text-field', key: 'txt' }]);
   });
 
   it('password', () => {
-    const { schemas } = form(() => password('password'));
-    expect(schemas).toEqual([{ kind: 'text', key: 'password', type: 'password' }]);
+    const { schemas } = form(() => passwordField('password'));
+    expect(schemas).toEqual([{ kind: 'text-field', key: 'password', type: 'password' }]);
   });
 
   it('textarea', () => {
-    const { schemas } = form(() => textarea('textarea'));
-    expect(schemas).toEqual([{ kind: 'textarea', key: 'textarea' }]);
+    const { schemas } = form(() => textArea('textarea'));
+    expect(schemas).toEqual([{ kind: 'text-area', key: 'textarea' }]);
   });
 
   it('number', () => {
-    const { schemas } = form(() => number('number'));
-    expect(schemas).toEqual([{ kind: 'number', key: 'number' }]);
+    const { schemas } = form(() => numberField('number'));
+    expect(schemas).toEqual([{ kind: 'number-field', key: 'number' }]);
   });
 
   it('date-picker', () => {

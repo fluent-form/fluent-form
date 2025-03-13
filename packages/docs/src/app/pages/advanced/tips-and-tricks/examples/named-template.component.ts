@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormModule, form } from '@fluent-form/core';
-import { text } from '@fluent-form/ui-zorro';
+import { textField } from '@fluent-form/ui-zorro';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 @Component({
@@ -16,7 +16,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 })
 export class NamedTemplateExampleComponent {
   schema = form(() => {
-    text('text').addons({
+    textField('text').addons({
       before: 'Https://',
       after: '#tld'
     });

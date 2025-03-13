@@ -15,57 +15,44 @@
 3. 更新配置：
 ```diff
 - import { withWidgets } from 'ngx-fluent-form';
++ import { withZorro } from '@fluent-form/ui-zorro';
+
   provideFluentForm(
 -   withWidgets(...)
-  )
-
-+ import { withZorro } from '@fluent-form/ui-zorro';
-  provideFluentForm(
 +   withZorro(...)
-  )
+  );
 ```
 
-4. `input()` 控件重命名为 `text()` 控件：
-```diff
-- input('txt')
-+ text('txt')
-```
-
-包括 `useInputWidget()` 部件工厂函数，也需要重命名为 `useTextWidget()`：
-```diff
-  provideFluentForm(
-    withZorro([
--    useInputWidget()
-    ])
-  )
-
-  provideFluentForm(
-    withZorro([
-+    useTextWidget()
-    ])
-  )
-```
-
-5. `inputGroup()` 组件的 `before` 与 `after` 选项合并为 `addons` 选项，`prefix` 与 `suffix` 选项合并为 `affixes` 选项，并将这些选项转移到 `text()` 与 `number()` 控件上：
+4. `inputGroup()` 组件的 `before` 与 `after` 选项合并为 `addons` 选项，`prefix` 与 `suffix` 选项合并为 `affixes` 选项，并将这些选项转移到 `textField()` 与 `numberField()` 控件上：
 
 ```diff
 - inputGroup().before('before').after('after')
-+ text('x').addons({ before: 'before', after: 'after' })
++ textField('x').addons({ before: 'before', after: 'after' })
 
 - inputGroup().prefix('prefix').suffix('suffix')
-+ text('x').affixes({ prefix: 'prefix', suffix: 'suffix' })
++ textField('x').affixes({ prefix: 'prefix', suffix: 'suffix' })
 ```
 
-6. `inputGroup()` 和 `numberGroup()` 组件已被移除，您可以使用 `spaceCompact()` 组件代替。
+5. `inputGroup()` 和 `numberGroup()` 组件已被移除，使用 `spaceCompact()` 组件代替。
 
-7. API 重命名：
-   1. `date()` 重命名为 `datePicker()`
-   2. `dateRange()` 重命名为 `dateRangePicker()`
-   3. `time()` 重命名为 `timePicker()`
-   4.  `useDateWidget()` 重命名为 `useDatePickerWidget()`
-   5.  `useDateRangeWidget()` 重命名为 `useDateRangePickerWidget()`
-   6.  `useTimeWidget()` 重命名为 `useTimePickerWidget()`
+6. API 重命名：
 
-8. `headless()` 不再支持自定义模板，您可以使用 `headful()` 替代。
+| Old API                | New API                      |
+| ---------------------- | ---------------------------- |
+| `date()`               | `datePicker()`               |
+| `dateRange()`          | `dateRangePicker()`          |
+| `time()`               | `timePicker()`               |
+| `input()`              | `textField()`                |
+| `number()`             | `numberField()`              |
+| `textarea()`           | `textArea()`                 |
+| `useInputWidge()`      | `useTextFieldWidget()`       |
+| `useNumberWidge()`     | `useNumberFieldWidget()`     |
+| `useTextareaWidge()`   | `useTextAreaWidget()`        |
+| `useDateWidget()`      | `useDatePickerWidget()`      |
+| `useDateRangeWidget()` | `useDateRangePickerWidget()` |
+| `useTimeWidget()`      | `useTimePickerWidget()`      |
 
-9. `select()`、`cascader()`、`radioGroup()`、`checkGroup()` 不再支持 `config` 选项。
+
+7. `headless()` 不再支持自定义模板，您可以使用 `headful()` 替代。
+
+8. `select()`、`cascader()`、`radioGroup()`、`checkboxGroup()` 不再支持 `config` 选项。

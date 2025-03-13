@@ -1,6 +1,6 @@
 import { ValidatorFn, Validators } from '@angular/forms';
 import { FluentFormWidgetConfig, SchemaType, isNumber } from '@fluent-form/core';
-import { AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CardComponentSchema, CardsArraySchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, IconComponentSchema, NumberControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SpaceCompactComponentSchema, SpaceComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextControlSchema, TextareaControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CardComponentSchema, CardsArraySchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, IconComponentSchema, NumberFieldControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SpaceCompactComponentSchema, SpaceComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextAreaControlSchema, TextFieldControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
 import { AlertWidget } from './alert/alert.widget';
 import { ButtonGroupWidget } from './button-group/button-group.widget';
 import { ButtonWidget } from './button/button.widget';
@@ -32,9 +32,9 @@ import { TreeSelectWidget } from './tree-select/tree-select.widget';
 
 export function useAllWidgets() {
   return [
-    useTextWidget(),
-    useTextareaWidget(),
-    useNumberWidget(),
+    useTextFieldWidget(),
+    useTextAreaWidget(),
+    useNumberFieldWidget(),
     useDatePickerWidget(),
     useDateRangePickerWidget(),
     useTimePickerWidget(),
@@ -69,7 +69,7 @@ export function useAllWidgets() {
   ];
 }
 
-function validatorsOfTextControl(schema: TextControlSchema | TextareaControlSchema) {
+function validatorsOfTextControl(schema: TextFieldControlSchema | TextAreaControlSchema) {
   const validators: ValidatorFn[] = [];
 
   if (schema.length) {
@@ -88,9 +88,9 @@ function validatorsOfTextControl(schema: TextControlSchema | TextareaControlSche
   return validators;
 }
 
-export function useTextWidget(): FluentFormWidgetConfig<TextControlSchema> {
+export function useTextFieldWidget(): FluentFormWidgetConfig<TextFieldControlSchema> {
   return {
-    kind: 'text',
+    kind: 'text-field',
     type: SchemaType.Control,
     widget: TextWidget,
     validators: schema => {
@@ -105,18 +105,18 @@ export function useTextWidget(): FluentFormWidgetConfig<TextControlSchema> {
   };
 }
 
-export function useTextareaWidget(): FluentFormWidgetConfig<TextareaControlSchema> {
+export function useTextAreaWidget(): FluentFormWidgetConfig<TextAreaControlSchema> {
   return {
-    kind: 'textarea',
+    kind: 'text-area',
     type: SchemaType.Control,
     widget: TextareaWidget,
     validators: validatorsOfTextControl
   };
 }
 
-export function useNumberWidget(): FluentFormWidgetConfig<NumberControlSchema> {
+export function useNumberFieldWidget(): FluentFormWidgetConfig<NumberFieldControlSchema> {
   return {
-    kind: 'number',
+    kind: 'number-field',
     type: SchemaType.Control,
     widget: NumberWidget
   };

@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { button, card, cardsArray, datetimePicker, group, text } from '@fluent-form/ui-zorro';
+import { button, card, cardsArray, datetimePicker, group, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'cards-array-example',
@@ -14,7 +14,7 @@ import { button, card, cardsArray, datetimePicker, group, text } from '@fluent-f
 })
 export class CardsArrayExampleComponent {
   schema = form(() => {
-    text('flight').label('航班').col(12);
+    textField('flight').label('航班').col(12);
     datetimePicker('boardingTime').label('登机时间').col(12);
 
     cardsArray('passengers')
@@ -24,8 +24,8 @@ export class CardsArrayExampleComponent {
       .schemas(() => {
         card().col(6).schemas(() => {
           group().col(12).schemas(() => {
-            text('name').label('姓名').placeholder('请输入姓名').col(12);
-            text('cellphone').label('电话').placeholder('请输入电话').col(12);
+            textField('name').label('姓名').placeholder('请输入姓名').col(12);
+            textField('cellphone').label('电话').placeholder('请输入电话').col(12);
           });
         })
       });

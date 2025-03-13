@@ -82,27 +82,27 @@ export interface HeadfulControlSchema<Key extends SingleSchemaKey = SingleSchema
 /**
  * @public
  */
-export interface TextControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = string>
+export interface TextFieldControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = string>
   extends AbstractTextControlSchema<Key>, ElementControlEventListenerHolder<Val>, ElementControlEventObserverHolder<Val>, ElementPropertyHolder<HTMLInputElement> {
-  kind: 'text';
+  kind: 'text-field';
   /* A type of input. */
   type?: 'text' | 'number' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
   addons?: {
-    before?: MaybeSchemaReactiveFn<TextControlSchema, string | TemplateRef<void> | { icon: string } | null>;
-    after?: MaybeSchemaReactiveFn<TextControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    before?: MaybeSchemaReactiveFn<TextFieldControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    after?: MaybeSchemaReactiveFn<TextFieldControlSchema, string | TemplateRef<void> | { icon: string } | null>;
   };
   affixes?: {
-    prefix?: MaybeSchemaReactiveFn<TextControlSchema, string | TemplateRef<void> | { icon: string } | null>;
-    suffix?: MaybeSchemaReactiveFn<TextControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    prefix?: MaybeSchemaReactiveFn<TextFieldControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    suffix?: MaybeSchemaReactiveFn<TextFieldControlSchema, string | TemplateRef<void> | { icon: string } | null>;
   };
 }
 
 /**
  * @public
  */
-export interface TextareaControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = string>
+export interface TextAreaControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = string>
   extends AbstractTextControlSchema<Key>, ElementControlEventListenerHolder<Val>, ElementControlEventObserverHolder<Val>, ElementPropertyHolder<HTMLTextAreaElement> {
-  kind: 'textarea';
+  kind: 'text-area';
   /** The number of lines in the text field */
   rows?: number;
   /** Whether to adapt the content height */
@@ -112,21 +112,21 @@ export interface TextareaControlSchema<Key extends SingleSchemaKey = SingleSchem
 /**
  * @public
  */
-export interface NumberControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = number>
+export interface NumberFieldControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = number>
   extends AbstractInputBoxControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzInputNumberComponent, Val>, ComponentControlEventObserverHolder<NzInputNumberComponent, Val>, ComponentPropertyHolder<NzInputNumberComponent> {
-  kind: 'number';
+  kind: 'number-field';
   range?: { max?: number, min?: number }
   /** Decimal precision */
   precision?: number | { value?: number, mode?: NzInputNumberComponent['nzPrecisionMode'] };
   /** Step length */
   step?: number;
   addons?: {
-    before?: MaybeSchemaReactiveFn<NumberControlSchema, string | TemplateRef<void> | { icon: string } | null>;
-    after?: MaybeSchemaReactiveFn<NumberControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    before?: MaybeSchemaReactiveFn<NumberFieldControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    after?: MaybeSchemaReactiveFn<NumberFieldControlSchema, string | TemplateRef<void> | { icon: string } | null>;
   };
   affixes?: {
-    prefix?: MaybeSchemaReactiveFn<NumberControlSchema, string | TemplateRef<void> | { icon: string } | null>;
-    suffix?: MaybeSchemaReactiveFn<NumberControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    prefix?: MaybeSchemaReactiveFn<NumberFieldControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    suffix?: MaybeSchemaReactiveFn<NumberFieldControlSchema, string | TemplateRef<void> | { icon: string } | null>;
   };
 }
 

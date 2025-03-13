@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { button, group, text } from '@fluent-form/ui-zorro';
+import { button, group, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'label-example',
@@ -15,19 +15,19 @@ import { button, group, text } from '@fluent-form/ui-zorro';
 export class LabelExampleComponent {
   schema = form(
     group().layout('horizontal').schemas(() => {
-      text('text-1').label('普通标签').col(12);
-      text('text-2').label({ content: '固定宽度', width: 80 }).col(12);
+      textField('text-1').label('普通标签').col(12);
+      textField('text-2').label({ content: '固定宽度', width: 80 }).col(12);
 
-      text('text-3').label({ content: '右对齐', span: 4 }).col(12);
-      text('text-4')
+      textField('text-3').label({ content: '右对齐', span: 4 }).col(12);
+      textField('text-4')
         .label({ content: '附带提示', span: 4 })
         .tooltip('小贴士')
         .col(12);
-      text('text-5')
+      textField('text-5')
         .label({ content: '自定义图标', span: 4 })
         .tooltip({ content: '小贴士', icon: 'info-circle' })
         .col(12);
-      text('text-6').label({ content: '长文本长文本长文本自动换行', wrap: true, span: 4 }).col(12);
+      textField('text-6').label({ content: '长文本长文本长文本自动换行', wrap: true, span: 4 }).col(12);
 
       button().type('primary').label({ span: 4 }).content('Submit').variants({ block: true })
     })

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { group, text } from '@fluent-form/ui-zorro';
+import { group, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'form-layout-example',
@@ -20,23 +20,23 @@ import { group, text } from '@fluent-form/ui-zorro';
 export class FormLayoutExampleComponent {
   schema1 = form(
     group().layout('vertical').schemas(() => {
-      text('text-1').label('控件标签').col(6);
-      text('text-2').label('控件标签').col(6);
-      text('text-3').label('控件标签').col(6);
+      textField('text-1').label('控件标签').col(6);
+      textField('text-2').label('控件标签').col(6);
+      textField('text-3').label('控件标签').col(6);
     })
   );
   schema2 = form(
     group().layout('horizontal').schemas(() => {
-      text('text-1').label('控件标签').col(6);
-      text('text-2').label('控件标签').col(6);
-      text('text-3').label('控件标签').col(6);
+      textField('text-1').label('控件标签').col(6);
+      textField('text-2').label('控件标签').col(6);
+      textField('text-3').label('控件标签').col(6);
     })
   );
   schema3 = form(
     group().layout('inline').schemas(() => {
-      text('text-1').label('控件标签').col(6);
-      text('text-2').label('控件标签').col(6);
-      text('text-3').label('控件标签').col(6);
+      textField('text-1').label('控件标签').col(6);
+      textField('text-2').label('控件标签').col(6);
+      textField('text-3').label('控件标签').col(6);
     })
   );
 

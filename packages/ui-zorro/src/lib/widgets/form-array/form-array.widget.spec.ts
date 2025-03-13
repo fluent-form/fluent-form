@@ -35,7 +35,7 @@ describe('FormArrayWidget', () => {
     component['push'](formArray, {
       kind: 'array',
       schemas: [
-        { kind: 'text' }
+        { kind: 'text-field' }
       ]
     });
 
@@ -53,7 +53,7 @@ describe('FormArrayWidget', () => {
   });
 
   it('withIndex method', () => {
-    expect(component['withIndex'](0, { kind: 'text' })).toEqual({ kind: 'text', key: 0 });
+    expect(component['withIndex'](0, { kind: 'text-field' })).toEqual({ kind: 'text-field', key: 0 });
   });
 
   describe('helper function', () => {

@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { radioGroup, select, text, toggle } from '@fluent-form/ui-zorro';
+import { radioGroup, select, textField, toggle } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'linkage-example',
@@ -53,7 +53,7 @@ export class LinkageExampleComponent {
 
     toggle('status').label('Change status').placeholder(['Enabled', 'Disabled']).col(3);
 
-    text('target')
+    textField('target')
       .label('Target control')
       .readonly(true)
       .hidden(({ model }) => !model.visible)

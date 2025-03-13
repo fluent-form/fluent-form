@@ -3,10 +3,10 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectPipe, FluentReactivePipe, FluentTemplatePipe, InvokePipe, Length, WidgetTemplateContext, isNumber } from '@fluent-form/core';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { affixHelper } from '../../helper';
-import { TextControlSchema } from '../../schemas';
+import { TextFieldControlSchema } from '../../schemas';
 import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
-type TextWidgetTemplateContext = WidgetTemplateContext<TextControlSchema, FormControl<string>>;
+type TextWidgetTemplateContext = WidgetTemplateContext<TextFieldControlSchema, FormControl<string>>;
 
 /**
  * @internal

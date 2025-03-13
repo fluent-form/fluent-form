@@ -1,11 +1,11 @@
 import { form } from '../../compose';
-import { inputGroup } from './control-wrapper';
+import { fieldGroup } from './control-wrapper';
 
 describe('control-wrapper', () => {
-  it('inputGroup', () => {
+  it('fieldGroup', () => {
     const { schemas } = form(() => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
-      inputGroup().schemas(() => { });
+      fieldGroup().schemas(() => { });
     });
     expect(schemas).toEqual([{
       kind: 'input-group',

@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { button, group, tabsArray, text } from '@fluent-form/ui-zorro';
+import { button, group, tabsArray, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   standalone: true,
@@ -19,8 +19,8 @@ export class TabsArrayExampleComponent {
       .col(12)
       .schemas(() => {
         group().col(12).schemas(() => {
-          text('name').label('姓名').placeholder('请输入姓名').col(12);
-          text('cellphone').label('电话').placeholder('请输入电话').col(12);
+          textField('name').label('姓名').placeholder('请输入姓名').col(12);
+          textField('cellphone').label('电话').placeholder('请输入电话').col(12);
         });
       });
 

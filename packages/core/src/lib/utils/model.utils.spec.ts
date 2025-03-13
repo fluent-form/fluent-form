@@ -154,7 +154,7 @@ describe('ModelUtils', () => {
     it('with control wrapper', () => {
       const schemas: Indexable<AbstractSchema>[] = [
         {
-          kind: 'input-group',
+          kind: 'field-group',
           schemas: [
             { kind: 'text-field', key: 'input' },
           ]

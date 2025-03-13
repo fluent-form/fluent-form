@@ -48,7 +48,7 @@ describe('SchemaUtil', () => {
     expect(schemaUtil.isControlArray({ kind: 'array' })).toBe(true);
     expect(schemaUtil.isControlContainer({ kind: 'group' })).toBe(true);
     expect(schemaUtil.isControlContainer({ kind: 'array' })).toBe(true);
-    expect(schemaUtil.isControlWrapper({ kind: 'input-group' })).toBe(true);
+    expect(schemaUtil.isControlWrapper({ kind: 'field-group' })).toBe(true);
     expect(schemaUtil.isControl({ kind: 'text-field' })).toBe(true);
     expect(schemaUtil.isNonControl({ kind: 'button' })).toBe(true);
     expect(schemaUtil.isNonControl({ kind: 'button-group' })).toBe(true);
@@ -61,7 +61,7 @@ describe('SchemaUtil', () => {
       { kind: 'group', schemas: [] },
       { kind: 'array', schemas: [] },
       {
-        kind: 'input-group',
+        kind: 'field-group',
         schemas: [
           { kind: 'text-field' }
         ]
@@ -146,7 +146,7 @@ describe('SchemaUtil', () => {
         }]);
       });
 
-      it('input-group', () => {
+      it('field-group', () => {
         const { schemas } = form(() => {
           fieldGroup().schemas(() => {
             textField('name');
@@ -154,7 +154,7 @@ describe('SchemaUtil', () => {
         });
 
         expect(schemas).toEqual([{
-          kind: 'input-group',
+          kind: 'field-group',
           schemas: [
             { kind: 'text-field', key: 'name' }
           ]

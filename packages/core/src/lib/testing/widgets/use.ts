@@ -15,7 +15,7 @@ export function useAllWidgets() {
     useTextFieldWidget(),
     useRangeWidget(),
     useNumberFieldWidget(),
-    useInputGroupWidget(),
+    useFieldGroupWidget(),
     useButtonWidget(),
     useButtonGroupWidget(),
     useFormGroupWidget(),
@@ -57,9 +57,9 @@ export function useNumberFieldWidget(): FluentFormWidgetConfig<NumberFieldContro
   };
 }
 
-export function useInputGroupWidget(): FluentFormWidgetConfig<FieldGroupComponentSchema> {
+export function useFieldGroupWidget(): FluentFormWidgetConfig<FieldGroupComponentSchema> {
   return {
-    kind: 'input-group',
+    kind: 'field-group',
     type: SchemaType.ControlWrapper,
     widget: InputGroupWidget
   };

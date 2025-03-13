@@ -154,7 +154,7 @@ describe('form.utils', () => {
       it('with control wrapper', () => {
         const form = util.createFormGroup([
           {
-            kind: 'input-group',
+            kind: 'field-group',
             schemas: [
               { kind: 'text-field', key: 'input' }
             ]
@@ -292,7 +292,7 @@ describe('form.utils', () => {
           kind: 'array',
           schemas: [
             {
-              kind: 'input-group',
+              kind: 'field-group',
               schemas: [
                 { kind: 'text-field' }
               ]

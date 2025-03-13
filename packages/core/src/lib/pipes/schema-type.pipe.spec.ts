@@ -36,7 +36,7 @@ describe('FluentSchemaTypePipe', () => {
   });
 
   it('should transform the control wrapper schema type', () => {
-    expect(pipe.transform('input-group')).toBe(SchemaType.ControlWrapper);
+    expect(pipe.transform('field-group')).toBe(SchemaType.ControlWrapper);
   });
 
   it('should transform the component schema type', () => {

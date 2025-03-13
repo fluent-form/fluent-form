@@ -8,7 +8,7 @@ describe('control-wrapper', () => {
       fieldGroup().schemas(() => { });
     });
     expect(schemas).toEqual([{
-      kind: 'input-group',
+      kind: 'field-group',
       schemas: []
     }]);
   });

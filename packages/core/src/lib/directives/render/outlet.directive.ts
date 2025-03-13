@@ -7,7 +7,7 @@ import { WidgetTemplateContext } from '../../widgets';
 import { FluentControlContainer } from './models/control-container';
 
 @Directive({
-  selector: 'fluent-outlet',
+  selector: 'fluent-outlet,[fluentOutlet]',
   exportAs: 'fluentOutlet',
   standalone: true
 })

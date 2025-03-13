@@ -14,7 +14,7 @@ import { FormArrayWidget } from './form-array/form-array.widget';
 import { FormGroupWidget } from './form-group/form-group.widget';
 import { HeadingWidget } from './heading/heading.widget';
 import { IconWidget } from './icon/icon.widget';
-import { NumberWidget } from './number/number.widget';
+import { NumberFieldWidget } from './number-field/number-field.widget';
 import { RadioGroupWidget } from './radio-group/radio-group.widget';
 import { RateWidget } from './rate/rate.widget';
 import { SelectWidget } from './select/select.widget';
@@ -24,8 +24,8 @@ import { SpaceWidget } from './space/space.widget';
 import { StepsWidget } from './steps/steps.widget';
 import { TabsArrayWidget } from './tabs-array/tabs-array.widget';
 import { TabsWidget } from './tabs/tabs.widget';
-import { TextWidget } from './text/text.widget';
-import { TextareaWidget } from './textarea/textarea.widget';
+import { TextAreaWidget } from './text-area/text-area.widget';
+import { TextFieldWidget } from './text-field/text-field.widget';
 import { TimeWidget } from './time/time.widget';
 import { ToggleWidget } from './toggle/toggle.widget';
 import { TreeSelectWidget } from './tree-select/tree-select.widget';
@@ -92,7 +92,7 @@ export function useTextFieldWidget(): FluentFormWidgetConfig<TextFieldControlSch
   return {
     kind: 'text-field',
     type: SchemaType.Control,
-    widget: TextWidget,
+    widget: TextFieldWidget,
     validators: schema => {
       const validators = validatorsOfTextControl(schema);
 
@@ -109,7 +109,7 @@ export function useTextAreaWidget(): FluentFormWidgetConfig<TextAreaControlSchem
   return {
     kind: 'text-area',
     type: SchemaType.Control,
-    widget: TextareaWidget,
+    widget: TextAreaWidget,
     validators: validatorsOfTextControl
   };
 }
@@ -118,7 +118,7 @@ export function useNumberFieldWidget(): FluentFormWidgetConfig<NumberFieldContro
   return {
     kind: 'number-field',
     type: SchemaType.Control,
-    widget: NumberWidget
+    widget: NumberFieldWidget
   };
 }
 

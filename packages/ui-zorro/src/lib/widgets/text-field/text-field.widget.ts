@@ -6,7 +6,7 @@ import { affixHelper } from '../../helper';
 import { TextFieldControlSchema } from '../../schemas';
 import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
-type TextWidgetTemplateContext = WidgetTemplateContext<TextFieldControlSchema, FormControl<string>>;
+type TextFieldWidgetTemplateContext = WidgetTemplateContext<TextFieldControlSchema, FormControl<string>>;
 
 /**
  * @internal
@@ -26,9 +26,9 @@ type TextWidgetTemplateContext = WidgetTemplateContext<TextFieldControlSchema, F
     FluentInjectPipe,
     InvokePipe
   ],
-  templateUrl: './text.widget.html',
+  templateUrl: './text-field.widget.html',
 })
-export class TextWidget extends AbstractWidget<TextWidgetTemplateContext> {
+export class TextFieldWidget extends AbstractWidget<TextFieldWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
   protected readonly helper = {
     length: {

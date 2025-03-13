@@ -6,7 +6,7 @@ import { affixHelper } from '../../helper';
 import { NumberFieldControlSchema } from '../../schemas';
 import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
-type NumberWidgetTemplateContext = WidgetTemplateContext<NumberFieldControlSchema, FormControl<number>>;
+type NumberFieldWidgetTemplateContext = WidgetTemplateContext<NumberFieldControlSchema, FormControl<number>>;
 
 /**
  * @internal
@@ -26,10 +26,10 @@ type NumberWidgetTemplateContext = WidgetTemplateContext<NumberFieldControlSchem
     FluentInjectPipe,
     InvokePipe
   ],
-  templateUrl: './number.widget.html',
+  templateUrl: './number-field.widget.html',
   styles: `nz-input-number,nz-input-number-group { width: 100% }`
 })
-export class NumberWidget extends AbstractWidget<NumberWidgetTemplateContext> {
+export class NumberFieldWidget extends AbstractWidget<NumberFieldWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
   protected readonly infinity = Infinity;
 

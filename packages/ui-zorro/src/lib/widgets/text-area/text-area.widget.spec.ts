@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TextareaWidget } from './textarea.widget';
+import { TextAreaWidget } from './text-area.widget';
 
-describe('TextareaWidget', () => {
-  let component: TextareaWidget;
-  let helper: TextareaWidget['helper'];
-  let fixture: ComponentFixture<TextareaWidget>;
+describe('TextAreaWidget', () => {
+  let component: TextAreaWidget;
+  let helper: TextAreaWidget['helper'];
+  let fixture: ComponentFixture<TextAreaWidget>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TextareaWidget);
+    fixture = TestBed.createComponent(TextAreaWidget);
     component = fixture.componentInstance;
     helper = component['helper'];
     fixture.detectChanges();

@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NumberWidget } from './number.widget';
+import { NumberFieldWidget } from './number-field.widget';
 
-describe('NumberWidget', () => {
-  let component: NumberWidget;
-  let helper: NumberWidget['helper'];
-  let fixture: ComponentFixture<NumberWidget>;
+describe('NumberFieldWidget', () => {
+  let component: NumberFieldWidget;
+  let helper: NumberFieldWidget['helper'];
+  let fixture: ComponentFixture<NumberFieldWidget>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NumberWidget);
+    fixture = TestBed.createComponent(NumberFieldWidget);
     component = fixture.componentInstance;
     helper = component['helper'];
     fixture.detectChanges();

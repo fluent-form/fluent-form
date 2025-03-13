@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TextWidget } from './text.widget';
+import { TextFieldWidget } from './text-field.widget';
 
-describe('TextWidget', () => {
-  let component: TextWidget;
-  let fixture: ComponentFixture<TextWidget>;
-  let helper: TextWidget['helper'];
+describe('TextFieldWidget', () => {
+  let component: TextFieldWidget;
+  let fixture: ComponentFixture<TextFieldWidget>;
+  let helper: TextFieldWidget['helper'];
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TextWidget);
+    fixture = TestBed.createComponent(TextFieldWidget);
     component = fixture.componentInstance;
     helper = component['helper'];
     fixture.detectChanges();

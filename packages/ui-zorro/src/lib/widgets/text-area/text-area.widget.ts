@@ -4,7 +4,7 @@ import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContext
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { TextAreaControlSchema } from '../../schemas';
 
-type TextareaWidgetTemplateContext = WidgetTemplateContext<TextAreaControlSchema, FormControl<string>>;
+type TextAreaWidgetTemplateContext = WidgetTemplateContext<TextAreaControlSchema, FormControl<string>>;
 
 /**
  * @internal
@@ -22,9 +22,9 @@ type TextareaWidgetTemplateContext = WidgetTemplateContext<TextAreaControlSchema
     FluentInjectPipe,
     InvokePipe
   ],
-  templateUrl: './textarea.widget.html',
+  templateUrl: './text-area.widget.html',
 })
-export class TextareaWidget extends AbstractWidget<TextareaWidgetTemplateContext> {
+export class TextAreaWidget extends AbstractWidget<TextAreaWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
   protected readonly helper = {
     length: {

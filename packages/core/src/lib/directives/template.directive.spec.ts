@@ -1,6 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { FluentTemplateDirective } from './template.directive';
+import { FluentTemplate } from './template.directive';
 
 describe('FluentTemplateDirective', () => {
   beforeEach(() => {
@@ -8,7 +8,7 @@ describe('FluentTemplateDirective', () => {
   });
 
   it('should create an instance', () => {
-    const directive = TestBed.runInInjectionContext(() => new FluentTemplateDirective());
+    const directive = TestBed.runInInjectionContext(() => new FluentTemplate());
     directive.name = 'named';
     expect(directive).toBeTruthy();
   });

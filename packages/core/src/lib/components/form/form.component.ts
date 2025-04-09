@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, EnvironmentInjector, In
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControlStatus, FormGroup } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
-import { FluentTemplateDirective } from '../../directives';
+import { FluentTemplate } from '../../directives';
 import { AbstractFormGroupSchema } from '../../schemas';
 import { FLUENT_FORM_CONTENT, TEMPLATE_DIRECTIVES } from '../../tokens';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
@@ -17,11 +17,11 @@ import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
   providers: [
     {
       provide: TEMPLATE_DIRECTIVES,
-      useFactory: () => inject(FluentFormComponent).templateDirectives
+      useFactory: () => inject(FluentForm).templateDirectives
     }
   ]
 })
-export class FluentFormComponent<T extends AnyObject> {
+export class FluentForm<T extends AnyObject> {
   private readonly formUtil = inject(FormUtil);
   private readonly modelUtil = inject(ModelUtil);
   private readonly schemaUtil = inject(SchemaUtil);
@@ -49,7 +49,7 @@ export class FluentFormComponent<T extends AnyObject> {
   // eslint-disable-next-line @angular-eslint/no-output-native
   readonly submit = output<SubmitEvent>();
 
-  readonly templateDirectives = contentChildren(FluentTemplateDirective);
+  readonly templateDirectives = contentChildren(FluentTemplate);
 
   readonly onSubmit = (event: SubmitEvent) => {
     event.stopPropagation();
@@ -113,3 +113,9 @@ export class FluentFormComponent<T extends AnyObject> {
   }
 
 }
+
+/**
+ * @deprecated
+ * This component will be removed in future versions. Please use {@link FluentForm} instead.
+ */
+export const FluentFormComponent = FluentForm;

@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
-import { FluentFormComponent } from './components';
-import { FluentTemplateDirective } from './directives';
+import { FluentForm } from './components';
+import { FluentTemplate } from './directives';
 
 @NgModule({
   imports: [
-    FluentFormComponent,
-    FluentTemplateDirective,
+    FluentForm,
+    FluentTemplate,
   ],
   exports: [
-    FluentFormComponent,
-    FluentTemplateDirective,
+    FluentForm,
+    FluentTemplate,
   ]
 })
 export class FluentFormModule { }

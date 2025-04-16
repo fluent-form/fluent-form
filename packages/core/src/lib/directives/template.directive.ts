@@ -1,14 +1,31 @@
-import { Directive, Input, TemplateRef, inject } from '@angular/core';
+import { DestroyRef, Directive, TemplateRef, inject, input, OnInit } from '@angular/core';
+import { NAMED_TEMPLATES } from '../tokens';
 
 @Directive({
   selector: '[fluentTemplate]',
   standalone: true
 })
-export class FluentTemplate {
-  @Input('fluentTemplate') name!: string;
+export class FluentTemplate implements OnInit {
+  private readonly templateRef = inject(TemplateRef);
+  private readonly templates = inject(NAMED_TEMPLATES);
 
-  readonly templateRef = inject(TemplateRef);
+  readonly fluentTemplate = input.required<string>();
 
+  constructor() {
+    inject(DestroyRef).onDestroy(() => {
+      this.templates.splice(
+        this.templates.findIndex(item => item.templateRef === this.templateRef),
+        1
+      );
+    });
+  }
+
+  ngOnInit() {
+    this.templates.push({
+      name: this.fluentTemplate(),
+      templateRef: this.templateRef
+    });
+  }
 }
 
 /**

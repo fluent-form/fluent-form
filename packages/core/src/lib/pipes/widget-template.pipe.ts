@@ -3,7 +3,7 @@ import { throwCustomTemplateNotFoundError } from '../errors';
 import { AbstractSchema } from '../schemas';
 import { SchemaKind } from '../schemas/interfaces';
 import { WidgetTemplateRegistry } from '../services';
-import { TEMPLATE_DIRECTIVES } from '../tokens';
+import { NAMED_TEMPLATES } from '../tokens';
 import { Indexable } from '../types';
 
 /**
@@ -15,14 +15,12 @@ import { Indexable } from '../types';
 })
 export class FluentWidgetTemplatePipe implements PipeTransform {
   private readonly registry = inject(WidgetTemplateRegistry);
-  private readonly templateDirectives = inject(TEMPLATE_DIRECTIVES, { optional: true });
+  private readonly templates = inject(NAMED_TEMPLATES, { optional: true });
 
   transform(value: Indexable<AbstractSchema>): TemplateRef<unknown> {
-    const templateDirectives = this.templateDirectives;
-
     switch (value.kind) {
       case SchemaKind.Template: {
-        const dir = templateDirectives?.().find(o => o.name === value.key);
+        const dir = this.templates?.find(o => o.name === value.key);
 
         if (!dir) {
           throwCustomTemplateNotFoundError(value.key as string);
@@ -32,7 +30,7 @@ export class FluentWidgetTemplatePipe implements PipeTransform {
       }
 
       case SchemaKind.Headful: {
-        const dir = templateDirectives?.().find(o => o.name === value['template']);
+        const dir = this.templates?.find(o => o.name === value['template']);
 
         if (!dir) {
           throwCustomTemplateNotFoundError(value['template']);

@@ -1,11 +1,10 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, EnvironmentInjector, Injector, computed, contentChildren, createComponent, effect, inject, input, model, output, untracked } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, EnvironmentInjector, Injector, computed, createComponent, effect, inject, input, model, output, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControlStatus, FormGroup } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
-import { FluentTemplate } from '../../directives';
 import { AbstractFormGroupSchema } from '../../schemas';
-import { FLUENT_FORM_CONTENT, TEMPLATE_DIRECTIVES } from '../../tokens';
+import { FLUENT_FORM_CONTENT, NAMED_TEMPLATES } from '../../tokens';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
 
 @Component({
@@ -16,8 +15,8 @@ import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
-      provide: TEMPLATE_DIRECTIVES,
-      useFactory: () => inject(FluentForm).templateDirectives
+      provide: NAMED_TEMPLATES,
+      useFactory: () => []
     }
   ]
 })
@@ -48,8 +47,6 @@ export class FluentForm<T extends AnyObject> {
   readonly statusChanges = output<FormControlStatus>();
   // eslint-disable-next-line @angular-eslint/no-output-native
   readonly submit = output<SubmitEvent>();
-
-  readonly templateDirectives = contentChildren(FluentTemplate);
 
   readonly onSubmit = (event: SubmitEvent) => {
     event.stopPropagation();

@@ -29,7 +29,7 @@
         "{options.reportsDirectory}"
       ],
       "options": {
-        "reportsDirectory": "../../coverage/ui-sun"
+        "reportsDirectory": "../../coverage/ui-zorro"
       }
     },
     "lint": {

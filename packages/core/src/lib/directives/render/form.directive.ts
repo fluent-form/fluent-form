@@ -3,6 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControlStatus, FormGroup } from '@angular/forms';
 import { AnyArray, AnyObject } from '@ngify/types';
 import { AbstractFormGroupSchema } from '../../schemas';
+import { NAMED_TEMPLATES } from '../../tokens';
 import { FormUtil, ModelUtil } from '../../utils';
 import { FluentControlContainer, FluentControlContainerDirective } from './models/control-container';
 
@@ -14,6 +15,10 @@ import { FluentControlContainer, FluentControlContainerDirective } from './model
     {
       provide: FluentControlContainer,
       useExisting: forwardRef(() => FluentFormDirective)
+    },
+    {
+      provide: NAMED_TEMPLATES,
+      useFactory: () => []
     }
   ]
 })

@@ -26,6 +26,11 @@ function joinSchema(schmea: Schema) {
   currentSchema?.schemas!.push(schmea);
 }
 
+export function applyRoot(schema: Schema) {
+  const currentSchema = getCurrentSchema()!;
+  Object.assign(currentSchema, schema);
+}
+
 const IS_BUILDER = Symbol();
 const BUILD_KEY = 'build';
 

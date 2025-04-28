@@ -1,5 +1,7 @@
+import { signal } from '@angular/core';
 import { group, textField } from '../testing';
-import { form } from './control-container';
+import { applyRoot } from './builder';
+import { fluentForm, form } from './control-container';
 
 describe('control-container', () => {
   describe('form', () => {
@@ -25,6 +27,43 @@ describe('control-container', () => {
           { kind: 'text-field', key: 'input' }
         ]
       });
+    });
+  });
+
+  it('fluentForm', () => {
+    const key = signal('input');
+    const schema = fluentForm(() => {
+      textField(key());
+    });
+    expect(schema()).toEqual({
+      kind: 'group',
+      key: 'root',
+      schemas: [
+        { kind: 'text-field', key: 'input' }
+      ]
+    });
+    key.set('input2');
+    expect(schema()).toEqual({
+      kind: 'group',
+      key: 'root',
+      schemas: [
+        { kind: 'text-field', key: 'input2' }
+      ]
+    });
+  });
+
+  it('applyRoot', () => {
+    const schema = fluentForm(() => {
+      applyRoot({ updateOn: 'blur' });
+      textField('input');
+    });
+    expect(schema()).toEqual({
+      kind: 'group',
+      key: 'root',
+      updateOn: 'blur',
+      schemas: [
+        { kind: 'text-field', key: 'input' }
+      ]
     });
   });
 });

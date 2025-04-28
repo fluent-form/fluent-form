@@ -1,6 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { AbstractControlSchema, AbstractHeadfulControlSchema, ComponentControlEventListenerHolder, ComponentControlEventObserverHolder, ComponentPropertyHolder, ElementControlEventListenerHolder, ElementControlEventObserverHolder, ElementPropertyHolder, Length, MaybeSchemaReactiveFn, SchemaContext, SchemaKey, SingleSchemaKey } from '@fluent-form/core';
+import { AbstractControlSchema, AbstractHeadedControlSchema, ComponentControlEventListenerHolder, ComponentControlEventObserverHolder, ComponentPropertyHolder, ElementControlEventListenerHolder, ElementControlEventObserverHolder, ElementPropertyHolder, Length, MaybeSchemaReactiveFn, SchemaContext, SchemaKey, SingleSchemaKey } from '@fluent-form/core';
 import { SafeAny } from '@ngify/types';
 import { NzCascaderComponent, NzCascaderExpandTrigger, NzCascaderOption, NzCascaderSize, NzShowSearchOptions } from 'ng-zorro-antd/cascader';
 import { NzCheckBoxOptionInterface, NzCheckboxComponent, NzCheckboxGroupComponent } from 'ng-zorro-antd/checkbox';
@@ -75,8 +75,8 @@ interface AbstractDateControlSchema<Key extends SchemaKey, Val, P extends string
 /**
  * @public
  */
-export interface HeadfulControlSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractZorroControlSchema<Key, SafeAny>, AbstractHeadfulControlSchema {
-  kind: 'headful';
+export interface HeadedControlSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractZorroControlSchema<Key, SafeAny>, AbstractHeadedControlSchema {
+  kind: 'headed';
 }
 
 /**

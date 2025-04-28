@@ -18,7 +18,7 @@ export enum SchemaType {
 
 export const enum SchemaKind {
   Headless = 'headless',
-  Headful = 'headful',
+  Headed = 'headed',
   Template = 'template',
   Row = 'row'
 }

@@ -29,7 +29,7 @@ export class FluentWidgetTemplatePipe implements PipeTransform {
         return dir.templateRef;
       }
 
-      case SchemaKind.Headful: {
+      case SchemaKind.Headed: {
         const dir = this.templates?.find(o => o.name === value['template']);
 
         if (!dir) {

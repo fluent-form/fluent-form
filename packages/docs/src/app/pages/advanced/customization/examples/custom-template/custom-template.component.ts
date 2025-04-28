@@ -2,7 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FluentFormModule, form, headless, row } from '@fluent-form/core';
-import { headful, template } from '@fluent-form/ui-zorro';
+import { headed, template } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'custom-template-example',
@@ -14,7 +14,7 @@ export class CustomTemplateExampleComponent {
   schema = form(() => {
     row().col(12).schemas(() => {
       headless('headless');
-      headful('headful').template('controlTpl');
+      headed('headed').template('controlTpl');
     });
     row().schemas(() => {
       template('namedTpl1');

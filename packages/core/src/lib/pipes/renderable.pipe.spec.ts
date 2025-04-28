@@ -6,10 +6,10 @@ describe('RenderablePipe', () => {
     expect(pipe).toBeTruthy();
   });
 
-  it('should return true for HeadfulControlSchema', () => {
+  it('should return true for HeadedControlSchema', () => {
     const pipe = new RenderablePipe();
     const schema = {
-      kind: 'headful',
+      kind: 'headed',
       template: 'template'
     };
     expect(pipe.transform(schema)).toBe(true);

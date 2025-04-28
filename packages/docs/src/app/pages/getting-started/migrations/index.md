@@ -53,6 +53,6 @@
 | `useTimeWidget()`      | `useTimePickerWidget()`      |
 
 
-7. `headless()` 不再支持自定义模板，您可以使用 `headful()` 替代。
+7. `headless()` 不再支持自定义模板，您可以使用 `headed()` 替代。
 
 8. `select()`、`cascader()`、`radioGroup()`、`checkboxGroup()` 不再支持 `config` 选项。

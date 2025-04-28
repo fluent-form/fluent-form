@@ -8,10 +8,10 @@
 
 该指令会在 `<ng-template>` 上导出三个模板变量，分别是：`control`、`schema`、`model`。
 
-您可以选择使用 `headless()`、`headful()` 或 `template()` 来渲染自定义模板。这两者的主要区别在于：
+您可以选择使用 `headless()`、`headed()` 或 `template()` 来渲染自定义模板。这两者的主要区别在于：
 
 - `headless()` 是一个表单控件，它**仅**用于形成表单模型，**不会**渲染模板；
-- `headful()` 是一个表单控件，它**可以**渲染自定义模板并形成表单模型；
+- `headed()` 是一个表单控件，它**可以**渲染自定义模板并形成表单模型；
 - `template()` 是一个组件，它**仅**用于渲染模板，**不会**形成表单模型。
 
 {{ NgDocActions.demo("CustomTemplateExampleComponent") }}

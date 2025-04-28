@@ -1,5 +1,6 @@
-import { form } from '@fluent-form/core';
-import { array, cardsArray, group, tabsArray } from './control-container';
+import { fluentForm, form } from '@fluent-form/core';
+import { textField } from './control';
+import { applyGroup, array, cardsArray, group, tabsArray } from './control-container';
 
 describe('control-container', () => {
   it('group', () => {
@@ -48,5 +49,20 @@ describe('control-container', () => {
       key: 'cards-array',
       schemas: []
     }]);
+  });
+
+  it('applyGroup', () => {
+    const schema = fluentForm(() => {
+      applyGroup({ updateOn: 'blur' });
+      textField('input');
+    });
+    expect(schema()).toEqual({
+      kind: 'group',
+      key: 'root',
+      updateOn: 'blur',
+      schemas: [
+        { kind: 'text-field', key: 'input' }
+      ]
+    });
   });
 });

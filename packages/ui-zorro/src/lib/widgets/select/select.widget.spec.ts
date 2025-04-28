@@ -24,6 +24,11 @@ describe('SelectWidget', () => {
     expect(component).toBeTruthy();
   });
 
+  it('compareWith', () => {
+    const result = component['compareWith'](1, 1);
+    expect(result).toBeTruthy();
+  });
+
   it('private context', () => {
     const control = new FormControl();
     let ctx!: SelectWidgetTemplatePrivateContext;

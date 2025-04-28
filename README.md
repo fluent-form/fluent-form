@@ -34,12 +34,12 @@ For documentation and examples please visit [https://fluent-form.github.io/fluen
 ## Usage
 
 ```ts
-import { FluentFormComponent, form } from '@fluent-form/core';
+import { FluentForm, form } from '@fluent-form/core';
 import { button, numberField, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   standalone: true,
-  imports: [FluentFormComponent],
+  imports: [FluentForm],
   template: `<fluent-form [(model)]="model" [schema]="schema" />`
 })
 export class ExampleComponent {

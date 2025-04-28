@@ -1,8 +1,8 @@
 import { NgDocPage } from '@ng-doc/core';
 import { ZorroStyleComponent } from '../../ui-ant/style';
 import AdvancedCategory from '../ng-doc.category';
+import { DynamicSchemaExampleComponent } from './examples/dynamic-schema.component';
 import { NamedTemplateExampleComponent } from './examples/named-template.component';
-import { UpdateSchemaExampleComponent } from './examples/update-schema.component';
 
 const TipsAndTricksPage: NgDocPage = {
   title: 'Tips & Tricks',
@@ -10,7 +10,7 @@ const TipsAndTricksPage: NgDocPage = {
   mdFile: './index.md',
   demos: {
     NamedTemplateExampleComponent,
-    UpdateSchemaExampleComponent,
+    DynamicSchemaExampleComponent,
     ZorroStyleComponent
   },
   order: 3

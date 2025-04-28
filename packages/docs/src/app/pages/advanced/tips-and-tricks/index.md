@@ -19,14 +19,11 @@
 
 {{ NgDocActions.demo("NamedTemplateExampleComponent") }}
 
-## 更新图示
+## 动态图示
 
-在大多数情况下，您无需手动更新图示，因为表单联动和表单数组已经满足了大部分需求。但是，如果需要，您可以使用 `SchemaUtil` 提供的 `find` 方法来查找并修改指定的图示。
+借助 Signals API，您可以在 `fluentForm()` 函数内部轻松构建动态图示。
 
-> **NOTE**
-> 由于 {% include "../../../markdowns/brand.md" %} 组件使用 `OnPush` 变更检测策略，更新 `schema` 后需要改变对象引用才能触发更新。
-
-{{ NgDocActions.demo("UpdateSchemaExampleComponent") }}
+{{ NgDocActions.demo("DynamicSchemaExampleComponent") }}
 
 ## 封装图示
 

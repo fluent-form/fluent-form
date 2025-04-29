@@ -16,6 +16,18 @@ import { useFormGroupWidget } from '@fluent-form/ui-zorro';
 
 {{ NgDocActions.demo("FormGroupExampleComponent") }}
 
+### 顶层表单
+
+顶层表单实际上也是一个 `FormGroup`，是通过 `form()` 函数自动创建的。
+
+如果您需要配置顶层表单的行为，例如验证器和更新时机，可以使用 `applyGroup()` 函数。
+
+{{ NgDocActions.demo("RootFormExampleComponent") }}
+
+您还可以使用 `layout` 选项来配置表单项目的布局行为，默认为 `vertical`。
+
+{{ NgDocActions.demo("FormLayoutExampleComponent") }}
+
 ## FormArray
 
 `FormArray` 是包含一组有序 `FormControl` 的表达数组，子控件可以通过索引进行访问和操作。
@@ -61,15 +73,3 @@ import { useCardsArrayWidget } from '@fluent-form/ui-zorro';
 ```
 
 {{ NgDocActions.demo("CardsArrayExampleComponent") }}
-
-## 顶层表单
-
-顶层表单实际上也是一个 `FormGroup`，是通过 `form()` 函数自动创建的。
-
-如果您需要配置顶层表单的行为，例如验证器和更新时机，可以通过将 `group()` 作为参数传入 `form()` 函数。
-
-{{ NgDocActions.demo("RootFormExampleComponent") }}
-
-您还可以使用 `group()` 的 `layout` 选项来配置表单项目的布局行为，默认为 `vertical`。
-
-{{ NgDocActions.demo("FormLayoutExampleComponent") }}

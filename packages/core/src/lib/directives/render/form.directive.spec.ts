@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
-import { form } from '../../compose';
+import { applyRoot, form } from '../../compose';
 import { provideFluentForm } from '../../provider';
 import { AbstractFormGroupSchema } from '../../schemas';
 import { array, fieldGroup, group, textField, withTesting } from '../../testing';
@@ -317,23 +317,22 @@ describe('FluentFormDirective', () => {
   });
 
   it('should be the expected model value (configure the toplevel form)', () => {
-    component.schema = form(
-      group().updateOn('blur').schemas(() => {
+    component.schema = form(() => {
+      applyRoot({ updateOn: 'blur' });
+      textField('ipt');
+      fieldGroup('ipts').schemas(() => {
+        textField('ipt2');
+      });
+      group('group').schemas(() => {
         textField('ipt');
         fieldGroup('ipts').schemas(() => {
           textField('ipt2');
         });
-        group('group').schemas(() => {
-          textField('ipt');
-          fieldGroup('ipts').schemas(() => {
-            textField('ipt2');
-          });
-        });
-        array('array').schemas(() => {
-          textField();
-        });
-      })
-    );
+      });
+      array('array').schemas(() => {
+        textField();
+      });
+    });
     component.model = {};
     fixture.detectChanges();
 

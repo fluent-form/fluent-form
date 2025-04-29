@@ -56,3 +56,13 @@
 7. `headless()` 不再支持自定义模板，您可以使用 `headed()` 替代。
 
 8. `select()`、`cascader()`、`radioGroup()`、`checkboxGroup()` 不再支持 `config` 选项。
+
+9. 移除 `form(builder)` 函数签名，若要配置顶层表单，请使用 `applyGroup()` 函数。
+
+```diff
+- form(group().layout('horizontal').schemas(() => {}))
++ form(() => {
++   applyGroup({ layout: 'horizontal' });
++   // ...
++ })
+```

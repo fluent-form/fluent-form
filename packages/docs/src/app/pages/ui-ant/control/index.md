@@ -2,7 +2,7 @@
 
 在本章节中，我们将展示一些控件的基本使用示例。
 
-## Text
+## Text Field
 
 文本框允许用户通过鼠标或键盘输入内容，是最基础的表单域。
 
@@ -12,7 +12,7 @@ import { useTextFieldWidget } from '@fluent-form/ui-zorro';
 
 {{ NgDocActions.demo("TextFieldExampleComponent") }}
 
-## Textarea
+## Text Area
 
 文本域允许用户通过鼠标或键盘输入内容，是最基础的表单域。
 
@@ -22,7 +22,7 @@ import { useTextAreaWidget } from '@fluent-form/ui-zorro';
 
 {{ NgDocActions.demo("TextAreaExampleComponent") }}
 
-## Number
+## Number Field
 
 数字输入框允许用户通过鼠标或键盘输入范围内的数值。
 

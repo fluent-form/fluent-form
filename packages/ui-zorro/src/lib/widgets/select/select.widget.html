@@ -26,11 +26,11 @@
         [nzShowArrow]="(schema.arrow ?? !schema.mode) || schema.mode === 'default'"
         [nzSize]="schema.size!"
         [nzSuffixIcon]="(schema.suffixIcon | template)!"
-        [nzLoading]="schema.loading"
+        [nzLoading]="ctx.loading"
         [nzServerSearch]="!!schema.fetchOptions"
         [(nzOpen)]="ctx.open"
         (nzOnSearch)="ctx.trigger($event)">
-        @for (option of schema.options | reactive: model : schema : control; track option.value) {
+        @for (option of ctx.options | reactive: model : schema : control; track option.value) {
           <nz-option
             [nzCustomContent]="!!schema.option"
             [nzDisabled]="option.disabled"
@@ -65,11 +65,11 @@
       [nzShowArrow]="(schema.arrow ?? !schema.mode) || schema.mode === 'default'"
       [nzSize]="schema.size!"
       [nzSuffixIcon]="(schema.suffixIcon | template)!"
-      [nzLoading]="schema.loading"
+      [nzLoading]="ctx.loading"
       [nzServerSearch]="!!schema.fetchOptions"
       [(nzOpen)]="ctx.open"
       (nzOnSearch)="ctx.trigger($event)">
-      @for (option of schema.options | reactive: model : schema : control; track option.value) {
+      @for (option of ctx.options | reactive: model : schema : control; track option.value) {
         <nz-option
           [nzCustomContent]="!!schema.option"
           [nzDisabled]="option.disabled"

@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, DestroyRef, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectPipe, FluentNewPipe, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
+import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectPipe, FluentNewPipe, FluentReactivePipe, FluentTemplatePipe, MaybeSchemaReactiveFn, SingleSchemaKey, WidgetTemplateContext } from '@fluent-form/core';
 import { AnyObject, SafeAny } from '@ngify/types';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzSelectModule } from 'ng-zorro-antd/select';
@@ -42,20 +42,26 @@ export class SelectWidget extends AbstractWidget<SelectWidgetTemplateContext> {
 export class SelectWidgetTemplatePrivateContext {
   private readonly keyword$ = new Subject<string>();
 
+  options: MaybeSchemaReactiveFn<SelectControlSchema<SingleSchemaKey, SafeAny>, AnyObject[]> = [];
+  loading = false;
   open = false;
 
   constructor(schema: SelectControlSchema, model: AnyObject, control: FormControl) {
     const fetchOptionsFn = schema.fetchOptions;
     const cdr = inject(ChangeDetectorRef);
 
+    if (schema.options) {
+      this.options = schema.options;
+    }
+
     if (fetchOptionsFn) {
       this.keyword$.pipe(
         filter(() => this.open), // 选中后关闭浮层也会触发一次 keyword$，此时 open=false，过滤掉
-        tap(() => schema.loading = true),
+        tap(() => this.loading = true),
         source => fetchOptionsFn(source, { schema, model, control }), // TODO: bug, model 始终是空对象 {}，不会更新
       ).subscribe(options => {
-        schema.options = options;
-        schema.loading = false;
+        this.options = options;
+        this.loading = false;
         cdr.detectChanges();
       });
     }

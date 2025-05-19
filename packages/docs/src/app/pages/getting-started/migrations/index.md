@@ -57,7 +57,7 @@
 
 8. `select()`、`cascader()`、`radioGroup()`、`checkboxGroup()` 不再支持 `config` 选项。
 
-9. 移除 `form(builder)` 函数签名，若要配置顶层表单，请使用 `applyGroup()` 函数。
+9. `form()` 函数不再支持 `group()` 作为参数，您可以使用 `applyGroup()` 函数来配置顶层表单。
 
 ```diff
 - form(group().layout('horizontal').schemas(() => {}))
@@ -65,4 +65,13 @@
 +   applyGroup({ layout: 'horizontal' });
 +   // ...
 + })
+```
+
+10.  `observers` 选项用法更新，不再需要自行订阅，改为 `pipe` 形式：
+
+```diff
+  .observers({
+-   valueChanges: source => source.subscribe(...),
++   valueChanges: source => source.pipe(tap(...)),
+  })
 ```

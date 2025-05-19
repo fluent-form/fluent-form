@@ -89,28 +89,32 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
     if (isObserverHolder(schema)) {
       for (const [eventName, observer] of Object.entries(schema.observers)) {
         if (eventName === 'valueChange') {
-          observer!(control.valueChanges.pipe(
+          control.valueChanges.pipe(
             map(event => ({ event, context })),
+            observer!,
             takeUntil(this.destroyed)
-          ));
+          ).subscribe();
         } else if (eventName === 'statusChange') {
-          observer!(control.statusChanges.pipe(
+          control.statusChanges.pipe(
             map(event => ({ event, context })),
+            observer!,
             takeUntil(this.destroyed)
-          ));
+          ).subscribe();
         } else if (host instanceof HTMLElement) {
-          observer!(fromEvent(host, eventName).pipe(
+          fromEvent(host, eventName).pipe(
             map(event => ({ event, context })),
+            observer!,
             takeUntil(this.destroyed)
-          ));
+          ).subscribe();
         } else {
           const output = host[eventName as keyof C] as Observable<SafeAny> | OutputRef<SafeAny>;
           const observable = output instanceof Observable ? output : outputToObservable(output);
 
-          observer!(observable.pipe(
+          observable.pipe(
             map(event => ({ event, context })),
+            observer!,
             takeUntil(this.destroyed)
-          ));
+          ).subscribe();
         }
       }
     }

@@ -2,6 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { select, textField } from '@fluent-form/ui-zorro';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'event-observer-example',
@@ -17,15 +18,15 @@ export class EventObserverExampleComponent {
     textField('txt')
       .placeholder('Please feel free to enter')
       .observers({
-        valueChange: source => {
-          source.subscribe(value => console.log('valueChange', value))
-        },
-        statusChange: source => {
-          source.subscribe(value => console.log('statusChange', value))
-        },
-        focus: source => {
-          source.subscribe(value => console.log('focus', value))
-        }
+        valueChange: source => source.pipe(
+          tap(value => console.log('valueChange', value))
+        ),
+        statusChange: source => source.pipe(
+          tap(value => console.log('statusChange', value))
+        ),
+        focus: source => source.pipe(
+          tap(value => console.log('focus', value))
+        )
       })
       .col(4);
 
@@ -37,9 +38,9 @@ export class EventObserverExampleComponent {
         { label: 'Mike', value: 'mike' },
       ])
       .observers({
-        nzOpenChange: source => {
-          source.subscribe(value => console.log('nzOpenChange', value))
-        }
+        nzOpenChange: source => source.pipe(
+          tap(value => console.log('nzOpenChange', value))
+        )
       })
       .col(4);
   });

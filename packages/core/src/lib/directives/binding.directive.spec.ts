@@ -2,8 +2,9 @@ import { Component, DebugElement, inject } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { tap } from 'rxjs';
 import { provideFluentForm } from '../provider';
-import { NumberControlSchema, RangeControlSchema, TextControlSchema, withTesting } from '../testing';
+import { NumberFieldControlSchema, RangeControlSchema, TextFieldControlSchema, withTesting } from '../testing';
 import { NumberComponent, RangeComponent } from '../testing/components';
 import { FormUtil } from '../utils';
 import { FluentBindingDirective } from './binding.directive';
@@ -45,7 +46,7 @@ const inputChangeNextFn = vitest.fn();
 class TestingComponent {
   readonly formUtil = inject(FormUtil);
 
-  inputSchema: TextControlSchema = {
+  inputSchema: TextFieldControlSchema = {
     kind: 'text-field',
     key: 'ipt',
     properties: {
@@ -57,9 +58,9 @@ class TestingComponent {
       input: inputChangeFn,
     },
     observers: {
-      valueChange: source => source.subscribe(valueChangeNextFn),
-      statusChange: source => source.subscribe(statusChangeNextFn),
-      input: source => source.subscribe(inputChangeNextFn),
+      valueChange: source => source.pipe(tap(valueChangeNextFn)),
+      statusChange: source => source.pipe(tap(statusChangeNextFn)),
+      input: source => source.pipe(tap(inputChangeNextFn)),
     }
   };
   rangeSchema: RangeControlSchema = {
@@ -74,12 +75,12 @@ class TestingComponent {
       testChange: testChangeFn
     },
     observers: {
-      valueChange: source => source.subscribe(valueChangeNextFn),
-      statusChange: source => source.subscribe(statusChangeNextFn),
-      testChange: source => source.subscribe(testChangeNextFn),
+      valueChange: source => source.pipe(tap(valueChangeNextFn)),
+      statusChange: source => source.pipe(tap(statusChangeNextFn)),
+      testChange: source => source.pipe(tap(testChangeNextFn)),
     }
   };
-  numberSchema: NumberControlSchema = {
+  numberSchema: NumberFieldControlSchema = {
     kind: 'number-field',
     properties: {
       max: 999
@@ -90,9 +91,9 @@ class TestingComponent {
       testChange: testChangeFn
     },
     observers: {
-      valueChange: source => source.subscribe(valueChangeNextFn),
-      statusChange: source => source.subscribe(statusChangeNextFn),
-      testChange: source => source.subscribe(testChangeNextFn),
+      valueChange: source => source.pipe(tap(valueChangeNextFn)),
+      statusChange: source => source.pipe(tap(statusChangeNextFn)),
+      testChange: source => source.pipe(tap(testChangeNextFn)),
     }
   };
 

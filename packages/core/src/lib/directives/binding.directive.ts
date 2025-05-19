@@ -53,6 +53,8 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
   }
 
   ngOnChanges() {
+    // TODO：由于 [fluentBinding]="{}" 这里的对象是写在模板里了，导致每一次 CD 都会创建一个新对象，触发 ngOnChanges
+    // 应该将对象里的参数分开独立传入
     const { component, schema, control, model } = this.fluentBinding;
     const host = component ?? this.elementRef.nativeElement;
 

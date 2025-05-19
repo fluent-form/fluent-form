@@ -9,6 +9,9 @@ import { NumberComponent, RangeComponent } from '../testing/components';
 import { FormUtil } from '../utils';
 import { FluentBindingDirective } from './binding.directive';
 
+const onInitFn = vitest.fn();
+const onDestroyFn = vitest.fn();
+
 const statusChangeFn = vitest.fn();
 const valueChangeFn = vitest.fn();
 const testChangeFn = vitest.fn();
@@ -51,6 +54,10 @@ class TestingComponent {
     key: 'ipt',
     properties: {
       readOnly: true
+    },
+    hooks: {
+      onInit: onInitFn,
+      onDestroy: onDestroyFn
     },
     listeners: {
       valueChange: valueChangeFn,
@@ -123,6 +130,9 @@ describe('FluentBindingDirective', () => {
   });
 
   afterEach(() => {
+    onInitFn.mockClear();
+    onDestroyFn.mockClear();
+
     statusChangeFn.mockClear();
     valueChangeFn.mockClear();
     testChangeFn.mockClear();
@@ -148,6 +158,15 @@ describe('FluentBindingDirective', () => {
   it('should be properties applied (signal input component)', () => {
     const numberCmp: NumberComponent = debugElement.query(By.directive(NumberComponent)).componentInstance;
     expect(numberCmp.max()).toBe(999);
+  });
+
+  it('should be onInit called', () => {
+    expect(onInitFn).toHaveBeenCalled();
+  });
+
+  it('should be onDestroy called', () => {
+    fixture.destroy();
+    expect(onDestroyFn).toHaveBeenCalled();
   });
 
   it('should listen to nativeElement event', () => {

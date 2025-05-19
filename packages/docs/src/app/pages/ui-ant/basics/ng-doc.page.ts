@@ -7,6 +7,7 @@ import { EventListenerExampleComponent } from './examples/event-listener.compone
 import { EventObserverExampleComponent } from './examples/event-observer.component';
 import { HintExampleComponent } from './examples/hint.component';
 import { LabelExampleComponent } from './examples/label.component';
+import { LifecycleHooksExampleComponent } from './examples/lifecycle-hooks.component';
 import { LinkageByValueChangesExampleComponent } from './examples/linkage-by-value-changes.component';
 import { LinkageExampleComponent } from './examples/linkage.component';
 import { MapperExampleComponent } from './examples/mapper.component';
@@ -31,6 +32,7 @@ const BasicsPage: NgDocPage = {
     ValidationExampleComponent,
     EventListenerExampleComponent,
     EventObserverExampleComponent,
+    LifecycleHooksExampleComponent,
     LinkageExampleComponent,
     LinkageByValueChangesExampleComponent,
     ZorroStyleComponent

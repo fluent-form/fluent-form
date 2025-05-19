@@ -2,7 +2,7 @@
 
 本节内容涵盖所有适用于表单控件的基本功能选项。这些功能选项可以帮助您更好地控制和管理您的表单控件。
 
-## 控件标签
+## Label
 
 通过使用 `label` 选项，您可以传入字符串或者一个对象来完全配置标签的样式。
 
@@ -10,31 +10,31 @@
 
 {{ NgDocActions.demo("LabelExampleComponent") }}
 
-## 底部提示
+## Hint
 
 底部提示可以提供额外的信息，帮助用户填写表单。使用 `hint` 选项来配置控件底部的提示信息。
 
 {{ NgDocActions.demo("HintExampleComponent") }}
 
-## 默认值
+## Default Value
 
 默认值可以帮助用户节省填写时间。使用 `defaultValue` 选项来配置控件的默认值。
 
 {{ NgDocActions.demo("DefaultValueExampleComponent") }}
 
-## 禁用控件
+## Disabled
 
 在某些情况下，您可能需要禁用某些控件。使用 `disabled` 选项来禁用控件，配合 `hidden` 选项可达到禁用控件的同时隐藏控件。
 
 {{ NgDocActions.demo("DisabledExampleComponent") }}
 
-## 更新时机
+## Update Timing
 
 更新时机可以影响到表单的性能和用户体验。使用 `updateOn` 选项来配置控件值的更新时机，支持三种更新时机，默认为 `change`。
 
 {{ NgDocActions.demo("UpdateOnExampleComponent") }}
 
-## 表单验证
+## Form Validation
 
 表单验证是保证数据质量的重要手段：
 
@@ -48,7 +48,7 @@
 
 {{ NgDocActions.demo("ValidationExampleComponent") }}
 
-## 格式化与解析
+## Format & Parse
 
 > **NOTE**
 > 这是一项高级功能，基于此功能我们可以定制一些简单的业务组件。
@@ -62,7 +62,7 @@
 > **WARNING**
 > {% include "../../../markdowns/brand.md" %} 默认会将日期控件输出的 `Date` 对象转为时间戳，您可以使用 `mapper` 选项覆盖此行为。
 
-## 多字段控件
+## Multi keys
 
 多字段控件可以帮助您处理复杂的数据结构。部分控件的控件值为一个数组，例如 `dateRange()`、`cascader()` 控件等。
 
@@ -70,7 +70,7 @@
 
 {{ NgDocActions.demo("MultiKeyExampleComponent") }}
 
-## 对象路径键
+## Object Path Keys
 
 对象路径键可以帮助您构造包含子对象的表单。
 在需要构造包含子对象的表单时，除了使用 `group()` 控件容器图示之外，还可以使用**对象路径键**作为控件图示的 `key`，这是一种更便捷、扁平的方法。
@@ -82,7 +82,17 @@
 
 {{ NgDocActions.demo("PathKeyExampleComponent") }}
 
-## 事件侦听
+## Lifecycle Hooks
+
+使用 `hooks` 选项来设置组件生命周期钩子。`hooks` 选项接受一个对象，对象的键为钩子名称，值为一个钩子函数。
+
+目前支持的钩子有：
+- `onInit`：初始化时调用。
+- `onDestroy`：销毁时调用。
+
+{{ NgDocActions.demo("LifecycleHooksExampleComponent") }}
+
+## Event Listener
 
 {% include "../../../markdowns/brand.md" %} 目前提供了两种方式来侦听控件/组件的事件：
 
@@ -101,7 +111,7 @@
 > **NOTE**
 > 所有控件均支持 `valueChanges` 和 `statusChanges` 事件。除此之外，每个控件组件/元素还支持侦听其自身提供的特定事件。
 
-## 表单联动
+## Form Linkage
 
 表单联动可以帮助您实现复杂的交互效果。部分组件/控件的选项支持传入一个**函数**，以实现控件之间的联动。该函数接受一个对象作为输入参数，对象类型为 `{ model, control, schema }`。
 

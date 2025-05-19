@@ -6,6 +6,7 @@ export * from './control-container.schema';
 export * from './control-wrapper.schema';
 export * from './control.schema';
 export * from './grid';
+export * from './hooks';
 export * from './interfaces';
 export * from './listeners';
 export * from './mapper';

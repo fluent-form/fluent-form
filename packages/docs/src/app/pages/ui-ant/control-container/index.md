@@ -16,7 +16,7 @@ import { useFormGroupWidget } from '@fluent-form/ui-zorro';
 
 {{ NgDocActions.demo("FormGroupExampleComponent") }}
 
-### 顶层表单
+### Root Form
 
 顶层表单实际上也是一个 `FormGroup`，是通过 `form()` 函数自动创建的。
 
@@ -32,7 +32,7 @@ import { useFormGroupWidget } from '@fluent-form/ui-zorro';
 
 `FormArray` 是包含一组有序 `FormControl` 的表达数组，子控件可以通过索引进行访问和操作。
 
-### 列表型
+### List Type
 
 使用 `array()` 函数，您可以轻松地配置列表型的数组表单。这种类型的表单支持增减元素、嵌套、**拖拽排序**以及长度限制：
 
@@ -46,7 +46,7 @@ import { useFormArrayWidget } from '@fluent-form/ui-zorro';
 
 {{ NgDocActions.demo("FormArrayExampleComponent") }}
 
-### 标签页型
+### Tabs Type
 
 使用 `tabsArray()` 函数，您可以轻松地配置标签页样式的数组表单。这种类型的表单支持增减元素、嵌套以及长度限制。
 
@@ -59,7 +59,7 @@ import { useTabsArrayWidget } from '@fluent-form/ui-zorro';
 
 {{ NgDocActions.demo("TabsArrayExampleComponent") }}
 
-### 卡片型
+### Cards Type
 
 使用 `cardsArray()` 函数，您可以轻松地配置卡片样式的数组表单。这种类型的表单支持增减元素、嵌套、**拖拽排序**以及长度限制。
 

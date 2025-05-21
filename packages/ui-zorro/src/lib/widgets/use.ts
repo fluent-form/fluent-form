@@ -1,6 +1,6 @@
 import { ValidatorFn, Validators } from '@angular/forms';
 import { FluentFormWidgetConfig, SchemaType, isNumber } from '@fluent-form/core';
-import { AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CardComponentSchema, CardsArraySchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, IconComponentSchema, NumberFieldControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SpaceCompactComponentSchema, SpaceComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextAreaControlSchema, TextFieldControlSchema, TimePickerControlSchema, ToggleControlSchema, TreeSelectControlSchema } from '../schemas';
+import { AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CardComponentSchema, CardsArraySchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, IconComponentSchema, NumberFieldControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SpaceCompactComponentSchema, SpaceComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextAreaControlSchema, TextFieldControlSchema, TimePickerControlSchema, ToggleControlSchema, TransferControlSchema, TreeSelectControlSchema } from '../schemas';
 import { AlertWidget } from './alert/alert.widget';
 import { ButtonGroupWidget } from './button-group/button-group.widget';
 import { ButtonWidget } from './button/button.widget';
@@ -28,6 +28,7 @@ import { TextAreaWidget } from './text-area/text-area.widget';
 import { TextFieldWidget } from './text-field/text-field.widget';
 import { TimeWidget } from './time/time.widget';
 import { ToggleWidget } from './toggle/toggle.widget';
+import { TransferWidget } from './transfer/transfer.widget';
 import { TreeSelectWidget } from './tree-select/tree-select.widget';
 
 export function useAllWidgets() {
@@ -47,6 +48,7 @@ export function useAllWidgets() {
     useCheckboxWidget(),
     useCheckboxGroupWidget(),
     useRateWidget(),
+    useTransferWidget(),
     // useColorWidget(),
     useHeadingWidget(),
 
@@ -256,6 +258,14 @@ export function useRateWidget(): FluentFormWidgetConfig<RateControlSchema> {
     kind: 'rate',
     type: SchemaType.Control,
     widget: RateWidget
+  };
+}
+
+export function useTransferWidget(): FluentFormWidgetConfig<TransferControlSchema> {
+  return {
+    kind: 'transfer',
+    type: SchemaType.Control,
+    widget: TransferWidget
   };
 }
 

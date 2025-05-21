@@ -15,6 +15,7 @@ import { NzSelectComponent, NzSelectModeType, NzSelectOptionInterface, NzSelectS
 import { NzSliderComponent } from 'ng-zorro-antd/slider';
 import { NzSwitchComponent } from 'ng-zorro-antd/switch';
 import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
+import { NzTransferComponent } from 'ng-zorro-antd/transfer';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { NzTreeSelectComponent } from 'ng-zorro-antd/tree-select';
 import { Observable } from 'rxjs';
@@ -319,6 +320,22 @@ export interface TreeSelectControlSchema<Key extends SingleSchemaKey = SingleSch
   expandedKeys?: string[];
   backdrop?: boolean;
   multiple?: boolean;
+}
+
+export interface TransferControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = SafeAny[]>
+  extends AbstractZorroControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzTransferComponent, Val>, ComponentControlEventObserverHolder<NzTransferComponent, Val>, ComponentPropertyHolder<NzTransferComponent> {
+  kind: 'transfer';
+  list?: string | TemplateRef<{ $implicit: SafeAny }>;
+  footer?: string | TemplateRef<{ $implicit: SafeAny }>;
+  option?: string | TemplateRef<{ $implicit: SafeAny }>;
+  options: MaybeSchemaReactiveFn<TransferControlSchema<SingleSchemaKey, Val>, { label: string, value: SafeAny }[]>;
+  titles: [string, string];
+  operations: [string, string];
+  listStyle?: undefined | null | { [styleName: string]: SafeAny };
+  searchable?: boolean;
+  filter?: NzTransferComponent['nzFilterOption'];
+  // TODO: v19 支持
+  // oneWay?: boolean;
 }
 
 export interface ColorPickerControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = string>

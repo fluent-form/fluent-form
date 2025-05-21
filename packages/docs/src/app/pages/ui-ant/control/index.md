@@ -170,6 +170,16 @@ import { useRateWidget } from '@fluent-form/ui-zorro';
 
 {{ NgDocActions.demo("RateExampleComponent") }}
 
+## Transfer
+
+穿梭选择框用直观的方式在两栏中移动元素，完成选择行为。
+
+```ts
+import { useTransferWidget } from '@fluent-form/ui-zorro';
+```
+
+{{ NgDocActions.demo("TransferExampleComponent") }}
+
 <!-- ## Color
 
 颜色选择器允许用户选择或自定义颜色。

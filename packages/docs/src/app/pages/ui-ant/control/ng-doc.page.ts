@@ -19,6 +19,7 @@ import { TextAreaExampleComponent } from './examples/text-area.component';
 import { TextFieldExampleComponent } from './examples/text-field.component';
 import { TimePickerExampleComponent } from './examples/time-picker.component';
 import { ToggleExampleComponent } from './examples/toggle.component';
+import { TransferExampleComponent } from './examples/transfer.component';
 import { TreeSelectExampleComponent } from './examples/tree-select.component';
 
 const ControlPage: NgDocPage = {
@@ -45,6 +46,7 @@ const ControlPage: NgDocPage = {
     CheckboxExampleComponent,
     CheckboxGroupExampleComponent,
     RateExampleComponent,
+    TransferExampleComponent,
     ColorExampleComponent,
   },
   order: 2

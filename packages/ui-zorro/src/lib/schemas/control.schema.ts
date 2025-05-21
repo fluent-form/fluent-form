@@ -63,9 +63,6 @@ interface AbstractDateControlSchema<Key extends SchemaKey, Val, P extends string
   time?: boolean | SupportTimeOptions;
   /** Date display format */
   format?: string;
-  /** Inline mode */
-  inline?: boolean;
-  backdrop?: boolean;
   placement?: NzPlacement;
   today?: boolean;
   now?: boolean;

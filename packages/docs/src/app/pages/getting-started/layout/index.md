@@ -23,18 +23,19 @@
 
 ## 栅格行
 
-可以使用 `row()` 组件来创建新的栅格行，栅格行内的列会自动换行。
+可以使用 `row()` 组件来创建新的栅格行，栅格行内的列会自动换行，您可以使用：
+
+- `justify` 选项设置栅格的水平对齐方式。
+- `align` 选项设置栅格的垂直对齐方式。
 
 {{ NgDocActions.demo("GridRowExampleComponent") }}
 
 ## 顶层栅格
 
-您可以直接将 `group()` 作为参数传递给 `form()` 函数，以便在表单中配置顶层栅格。
+在表单中，顶层栅格行是由 `group()` 组件创建的，您可以使用 `applyGroup()` 函数配置顶层表单，进而配置顶层栅格。
 
-`group()` 在功能上**继承**了 `row()` 组件，因此您可以在 `group()` 上使用 `row()` 组件的 `justify` 和 `align` 选项来配置顶层栅格行为。
-
-- `justify` 选项用于设置栅格的水平对齐方式。
-- `align` 选项用于设置栅格的垂直对齐方式。
+> **NOTE**
+> `group()` 在功能上**继承**了 `row()` 组件，因此您可以在 `group()` 上使用 `row()` 组件的 `justify` 和 `align` 选项来配置栅格行为。
 
 {{ NgDocActions.demo("GridLayoutExampleComponent") }}
 

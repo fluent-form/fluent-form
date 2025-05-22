@@ -7,7 +7,7 @@
     [style]="schema.style"
     [nzIncluded]="schema.included ?? true"
     [nzMax]="schema.range?.max ?? 100"
-    [nzMin]="schema.range?.min"
+    [nzMin]="schema.range?.min ?? 0"
     [nzRange]="schema.type === 'range'"
     [nzStep]="schema.step ?? 1"
     [nzDots]="schema.dots"

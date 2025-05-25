@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
-import { color } from '@fluent-form/ui-zorro';
+import { colorPicker } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'color-example',
@@ -14,8 +14,8 @@ import { color } from '@fluent-form/ui-zorro';
 })
 export class ColorExampleComponent {
   readonly schema = form(() => {
-    color('color1');
-    color('color2').showText(true);
+    colorPicker('color1');
+    colorPicker('color2').showText(true);
   });
 
   readonly model = signal({});

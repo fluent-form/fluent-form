@@ -4,7 +4,7 @@ import { applyRoot } from './builder';
 import { form } from './control-container';
 
 describe('control-container', () => {
-  it('fluentForm', () => {
+  it('form', () => {
     const key = signal('input');
     const schema = form(() => {
       textField(key());
@@ -24,6 +24,11 @@ describe('control-container', () => {
         { kind: 'text-field', key: 'input2' }
       ]
     });
+  });
+
+  it('schemas', () => {
+    const { schemas } = form([{ kind: 'text-field', key: 'input' }]);
+    expect(schemas).toEqual([{ kind: 'text-field', key: 'input' }]);
   });
 
   it('applyRoot', () => {

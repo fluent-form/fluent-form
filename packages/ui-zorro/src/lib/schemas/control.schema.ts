@@ -340,7 +340,7 @@ export interface TransferControlSchema<Key extends SingleSchemaKey = SingleSchem
 
 export interface ColorPickerControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = string>
   extends AbstractZorroControlSchema<Key, Val>, ComponentControlEventListenerHolder<NzColorPickerComponent, Val>, ComponentControlEventObserverHolder<NzColorPickerComponent, Val>, ComponentPropertyHolder<NzColorPickerComponent> {
-  kind: 'color';
+  kind: 'color-picker';
   format?: NzColorPickerComponent['nzFormat'];
   size?: NzColorPickerComponent['nzSize'];
   clearable?: boolean;

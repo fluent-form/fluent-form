@@ -3,37 +3,37 @@ import { headed, numberField, range, textField } from './control';
 
 describe('control', () => {
   it('headed', () => {
-    const { schemas } = form(() => {
+    const schema = form(() => {
       headed();
     });
-    expect(schemas).toEqual([{
+    expect(schema().schemas).toEqual([{
       kind: 'headed',
     }]);
   });
 
   it('text', () => {
-    const { schemas } = form(() => {
+    const schema = form(() => {
       textField();
     });
-    expect(schemas).toEqual([{
+    expect(schema().schemas).toEqual([{
       kind: 'text-field',
     }]);
   });
 
   it('range', () => {
-    const { schemas } = form(() => {
+    const schema = form(() => {
       range();
     });
-    expect(schemas).toEqual([{
+    expect(schema().schemas).toEqual([{
       kind: 'range',
     }]);
   });
 
   it('number', () => {
-    const { schemas } = form(() => {
+    const schema = form(() => {
       numberField();
     });
-    expect(schemas).toEqual([{
+    expect(schema().schemas).toEqual([{
       kind: 'number-field',
     }]);
   });

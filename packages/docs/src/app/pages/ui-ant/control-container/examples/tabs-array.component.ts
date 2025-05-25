@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { button, group, tabsArray, textField } from '@fluent-form/ui-zorro';
 
@@ -7,12 +7,12 @@ import { button, group, tabsArray, textField } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class TabsArrayExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     tabsArray('passengers')
       .label('乘客')
       .length({ max: 5 })
@@ -27,12 +27,12 @@ export class TabsArrayExampleComponent {
     button().content('提交').type('primary').col(12).variants({ block: true });
   });
 
-  model = {
+  readonly model = signal({
     passengers: [
       {
         name: '李四',
         cellphone: '13800138000'
       }
     ]
-  };
+  });
 }

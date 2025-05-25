@@ -1,32 +1,12 @@
 import { signal } from '@angular/core';
 import { textField } from '../testing';
 import { applyRoot } from './builder';
-import { fluentForm, form } from './control-container';
+import { form } from './control-container';
 
 describe('control-container', () => {
-  describe('form', () => {
-    it('schemas', () => {
-      const { schemas } = form([{ kind: 'text-field', key: 'input' }]);
-      expect(schemas).toEqual([{ kind: 'text-field', key: 'input' }]);
-    });
-
-    it('compose', () => {
-      const schema = form(() => {
-        textField('input');
-      });
-      expect(schema).toEqual({
-        kind: 'group',
-        key: 'root',
-        schemas: [
-          { kind: 'text-field', key: 'input' }
-        ]
-      });
-    });
-  });
-
   it('fluentForm', () => {
     const key = signal('input');
-    const schema = fluentForm(() => {
+    const schema = form(() => {
       textField(key());
     });
     expect(schema()).toEqual({
@@ -47,7 +27,7 @@ describe('control-container', () => {
   });
 
   it('applyRoot', () => {
-    const schema = fluentForm(() => {
+    const schema = form(() => {
       applyRoot({ updateOn: 'blur' });
       textField('input');
     });

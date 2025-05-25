@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { color } from '@fluent-form/ui-zorro';
 
@@ -8,15 +8,15 @@ import { color } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class ColorExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     color('color1');
     color('color2').showText(true);
   });
 
-  model = {};
+  readonly model = signal({});
 }

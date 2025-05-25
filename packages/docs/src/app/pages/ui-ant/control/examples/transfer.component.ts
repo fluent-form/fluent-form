@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { transfer } from '@fluent-form/ui-zorro';
 
@@ -8,12 +8,12 @@ import { transfer } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class TransferExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     transfer('toggle').label('Please transfer').defaultValue(['Apple']).options([
       { label: 'Apple', value: 'Apple' },
       { label: 'Pear', value: 'Pear' },
@@ -21,5 +21,5 @@ export class TransferExampleComponent {
     ])
   });
 
-  model = {};
+  readonly model = signal({});
 }

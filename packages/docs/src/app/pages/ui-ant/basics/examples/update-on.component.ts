@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { button, textField } from '@fluent-form/ui-zorro';
 
@@ -8,12 +8,12 @@ import { button, textField } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class UpdateOnExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     textField('text-1').label('变更时').updateOn('change');
     textField('text-2').label('失焦时').updateOn('blur');
     textField('text-3').label('提交时').updateOn('submit');
@@ -21,5 +21,5 @@ export class UpdateOnExampleComponent {
     button().type('primary').content('提交').col(12);
   });
 
-  model = {};
+  readonly model = signal({});
 }

@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import json from './schema.json';
 
@@ -9,11 +9,10 @@ import json from './schema.json';
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class StaticExpressionExampleComponent {
-  schema = form(json as []);
-
-  model = {};
+  readonly schema = form(json as []);
+  readonly model = signal({});
 }

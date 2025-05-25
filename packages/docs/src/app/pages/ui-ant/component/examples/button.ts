@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { button } from '@fluent-form/ui-zorro';
 
@@ -6,10 +6,10 @@ import { button } from '@fluent-form/ui-zorro';
   selector: 'button-example',
   standalone: true,
   imports: [FluentFormComponent],
-  template: `<fluent-form [schema]="schema" [(model)]="model" />`
+  template: `<fluent-form [schema]="schema()" [(model)]="model" />`
 })
 export class ButtonExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     button().type('primary').content('Primay Button');
     button().type('default').content('Default Button');
     button().type('dashed').content('Dashed Button');
@@ -25,5 +25,5 @@ export class ButtonExampleComponent {
     });
   })
 
-  model = {};
+  readonly model = signal({});
 }

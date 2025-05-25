@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { textArea } from '@fluent-form/ui-zorro';
 
@@ -8,12 +8,12 @@ import { textArea } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class TextAreaExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     textArea('desc')
       .label('Description')
       .placeholder('Please fill in')
@@ -21,5 +21,5 @@ export class TextAreaExampleComponent {
       .col(6);
   });
 
-  model = {};
+  readonly model = signal({});
 }

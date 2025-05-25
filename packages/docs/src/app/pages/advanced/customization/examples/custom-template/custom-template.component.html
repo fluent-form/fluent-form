@@ -1,4 +1,4 @@
-<fluent-form [schema]="schema" [(model)]="model">
+<fluent-form [schema]="schema()" [(model)]="model">
   <input
     *fluentTemplate="'controlTpl'; let control = control"
     placeholder="一个原生样式的输入框"
@@ -17,4 +17,4 @@
   </ng-template>
 </fluent-form>
 
-<pre>{{ model | json }}</pre>
+<pre>{{ model() | json }}</pre>

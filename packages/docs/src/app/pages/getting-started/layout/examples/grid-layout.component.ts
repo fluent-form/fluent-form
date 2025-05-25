@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { alert, applyGroup } from '@fluent-form/ui-zorro';
 
@@ -6,15 +6,15 @@ import { alert, applyGroup } from '@fluent-form/ui-zorro';
   selector: 'grid-layout-example',
   standalone: true,
   imports: [FluentFormComponent],
-  template: `<fluent-form [(model)]="model" [schema]="schema" />`
+  template: `<fluent-form [schema]="schema()" [(model)]="model" />`
 })
 export class GridLayoutExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     applyGroup({ align: 'center', justify: 'space-between' });
     alert().message('col-6').col(4);
     alert().message('col-6').description('align-center').col(4);
     alert().message('col-6').col(4);
   });
 
-  model = {};
+  readonly model = signal({});
 }

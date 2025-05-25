@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { button, datePicker, group, step, steps, textArea, textField, toggle } from '@fluent-form/ui-zorro';
 
@@ -8,12 +8,12 @@ import { button, datePicker, group, step, steps, textArea, textField, toggle } f
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class StepByStepFormExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     steps().col(12).active(0).schemas(() => {
       step().title('第一步').schemas(() => {
         textField('text-1').label('文本输入框');
@@ -35,5 +35,5 @@ export class StepByStepFormExampleComponent {
     });
   });
 
-  model = {};
+  readonly model = signal({});
 }

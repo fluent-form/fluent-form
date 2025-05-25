@@ -4,14 +4,14 @@ import { textField } from './control';
 
 describe('component-container', () => {
   it('steps', () => {
-    const { schemas } = form(() => {
+    const schema = form(() => {
       steps().schemas(() => {
         step().title('title').schemas(() => {
           textField('ipt');
         });
       });
     });
-    expect(schemas).toEqual([{
+    expect(schema().schemas).toEqual([{
       kind: 'steps',
       schemas: [
         {
@@ -26,14 +26,14 @@ describe('component-container', () => {
   });
 
   it('tabs', () => {
-    const { schemas } = form(() => {
+    const schema = form(() => {
       tabs().schemas(() => {
         tab().title('title').schemas(() => {
           textField('ipt');
         });
       });
     });
-    expect(schemas).toEqual([{
+    expect(schema().schemas).toEqual([{
       kind: 'tabs',
       schemas: [
         {
@@ -48,11 +48,11 @@ describe('component-container', () => {
   });
 
   it('card', () => {
-    const { schemas } = form(() => {
+    const schema = form(() => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       card().schemas(() => { });
     });
-    expect(schemas).toEqual([{
+    expect(schema().schemas).toEqual([{
       kind: 'card',
       schemas: []
     }]);

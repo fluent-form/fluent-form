@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form, row } from '@fluent-form/core';
 import { alert, heading5 } from '@fluent-form/ui-zorro';
 
@@ -6,10 +6,10 @@ import { alert, heading5 } from '@fluent-form/ui-zorro';
   selector: 'grid-row-example',
   standalone: true,
   imports: [FluentFormComponent],
-  template: `<fluent-form [(model)]="model" [schema]="schema" />`
+  template: `<fluent-form [schema]="schema()" [(model)]="model" />`
 })
 export class GridRowExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     heading5().content('柔性');
     row().col(12).schemas(() => {
       alert().message('flex-1').col({ flex: 1 });
@@ -59,5 +59,5 @@ export class GridRowExampleComponent {
     });
   });
 
-  model = {};
+  readonly model = signal({});
 }

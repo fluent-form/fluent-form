@@ -101,21 +101,21 @@ describe('SchemaUtil', () => {
 
   describe('应该能正确标准化图示', () => {
     it('普通图示', () => {
-      const { schemas } = form(() => {
+      const schema = form(() => {
         textField('name');
       });
-      expect(schemas).toEqual([{ kind: 'text-field', key: 'name' }]);
+      expect(schema().schemas).toEqual([{ kind: 'text-field', key: 'name' }]);
     });
 
     describe('嵌套图示', () => {
       it('group', () => {
-        const { schemas } = form(() => {
+        const schema = form(() => {
           group('name').schemas(() => {
             textField('name');
           });
         });
 
-        expect(schemas).toEqual([{
+        expect(schema().schemas).toEqual([{
           kind: 'group',
           key: 'name',
           schemas: [
@@ -125,7 +125,7 @@ describe('SchemaUtil', () => {
       });
 
       it('array', () => {
-        const { schemas } = form(() => {
+        const schema = form(() => {
           array('name').schemas(() => {
             group(0).schemas(() => {
               textField('name');
@@ -133,7 +133,7 @@ describe('SchemaUtil', () => {
           });
         });
 
-        expect(schemas).toEqual([{
+        expect(schema().schemas).toEqual([{
           kind: 'array',
           key: 'name',
           schemas: [{
@@ -147,13 +147,13 @@ describe('SchemaUtil', () => {
       });
 
       it('field-group', () => {
-        const { schemas } = form(() => {
+        const schema = form(() => {
           fieldGroup().schemas(() => {
             textField('name');
           });
         });
 
-        expect(schemas).toEqual([{
+        expect(schema().schemas).toEqual([{
           kind: 'field-group',
           schemas: [
             { kind: 'text-field', key: 'name' }
@@ -169,7 +169,7 @@ describe('SchemaUtil', () => {
         textField('name');
       });
 
-      expect(schemaUtil.find(schema, 'name')).toEqual({ kind: 'text-field', key: 'name' });
+      expect(schemaUtil.find(schema(), 'name')).toEqual({ kind: 'text-field', key: 'name' });
     });
 
     it('二级图示', () => {
@@ -179,8 +179,8 @@ describe('SchemaUtil', () => {
         });
       });
 
-      expect(schemaUtil.find(schema, ['group', 'name'])).toEqual({ kind: 'text-field', key: 'name' });
-      expect(schemaUtil.find(schema, 'group.name')).toEqual({ kind: 'text-field', key: 'name' });
+      expect(schemaUtil.find(schema(), ['group', 'name'])).toEqual({ kind: 'text-field', key: 'name' });
+      expect(schemaUtil.find(schema(), 'group.name')).toEqual({ kind: 'text-field', key: 'name' });
     });
 
     it('多级图示', () => {
@@ -192,8 +192,8 @@ describe('SchemaUtil', () => {
         });
       });
 
-      expect(schemaUtil.find(schema, ['group', 'group', 'name'])).toEqual({ kind: 'text-field', key: 'name' });
-      expect(schemaUtil.find(schema, 'group.group.name')).toEqual({ kind: 'text-field', key: 'name' });
+      expect(schemaUtil.find(schema(), ['group', 'group', 'name'])).toEqual({ kind: 'text-field', key: 'name' });
+      expect(schemaUtil.find(schema(), 'group.group.name')).toEqual({ kind: 'text-field', key: 'name' });
     });
 
     it('多字段图示', () => {
@@ -201,15 +201,15 @@ describe('SchemaUtil', () => {
         range(['begin', 'end']);
       });
 
-      expect(schemaUtil.find(schema, [['begin', 'end']])).toEqual({ kind: 'range', key: ['begin', 'end'] });
-      expect(schemaUtil.find(schema, ['begin', 'end'].toString())).toEqual({ kind: 'range', key: ['begin', 'end'] });
+      expect(schemaUtil.find(schema(), [['begin', 'end']])).toEqual({ kind: 'range', key: ['begin', 'end'] });
+      expect(schemaUtil.find(schema(), ['begin', 'end'].toString())).toEqual({ kind: 'range', key: ['begin', 'end'] });
     });
 
     it('不存在的图示', () => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       const schema = form(() => { });
 
-      expect(schemaUtil.find(schema, 'x')).toBe(null);
+      expect(schemaUtil.find(schema(), 'x')).toBe(null);
     });
 
     it('不存在的多图示', () => {
@@ -217,9 +217,9 @@ describe('SchemaUtil', () => {
         range(['begin', 'end']);
       });
 
-      expect(schemaUtil.find(schema, null!)).toBe(null);
-      expect(schemaUtil.find(schema, [['begin', 'e']])).toBe(null);
-      expect(schemaUtil.find(schema, ['begin', 'e'].toString())).toBe(null);
+      expect(schemaUtil.find(schema(), null!)).toBe(null);
+      expect(schemaUtil.find(schema(), [['begin', 'e']])).toBe(null);
+      expect(schemaUtil.find(schema(), ['begin', 'e'].toString())).toBe(null);
     });
   });
 });

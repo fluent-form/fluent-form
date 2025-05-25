@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { alert } from '@fluent-form/ui-zorro';
 
@@ -6,13 +6,13 @@ import { alert } from '@fluent-form/ui-zorro';
   selector: 'grid-offset-example',
   standalone: true,
   imports: [FluentFormComponent],
-  template: `<fluent-form [(model)]="model" [schema]="schema" />`
+  template: `<fluent-form [schema]="schema()" [(model)]="model" />`
 })
 export class GridOffsetExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     alert().message('col-3-offset-3').col({ span: 3, offset: 3 });
     alert().message('col-3-offset-3').col({ span: 3, offset: 3 });
   });
 
-  model = {};
+  readonly model = signal({});
 }

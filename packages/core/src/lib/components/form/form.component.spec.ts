@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -12,11 +12,11 @@ import { FluentFormComponent } from './form.component';
 @Component({
   standalone: true,
   imports: [FluentFormComponent],
-  template: `<fluent-form [schema]="schema" [(model)]="model" (formChange)="form = $event" />`,
+  template: `<fluent-form [schema]="schema()" [(model)]="model" (formChange)="form = $event" />`,
 })
 class TestComponent<T extends AnyObject> {
   form!: FormGroup;
-  schema!: AbstractFormGroupSchema;
+  schema!: Signal<AbstractFormGroupSchema>;
   model: T = {} as T;
 }
 

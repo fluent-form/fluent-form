@@ -11,7 +11,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
   templateUrl: './custom-layout.component.html'
 })
 export class CustomLayoutExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     spaceCompact('name').schemas(() => {
       textField('firstName').col(6);
       textField('lastName').col(6);

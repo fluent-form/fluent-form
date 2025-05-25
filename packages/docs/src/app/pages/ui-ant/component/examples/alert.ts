@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { alert } from '@fluent-form/ui-zorro';
 
@@ -6,10 +6,10 @@ import { alert } from '@fluent-form/ui-zorro';
   selector: 'alert-example',
   standalone: true,
   imports: [FluentFormComponent],
-  template: `<fluent-form [schema]="schema" [(model)]="model" />`
+  template: `<fluent-form [schema]="schema()" [(model)]="model" />`
 })
 export class AlertExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     alert().type('success').message('Success Text');
     alert().type('info').message('Info Text').icon(true);
     alert().type('warning').message('Warning Text');
@@ -18,5 +18,5 @@ export class AlertExampleComponent {
     alert().type('error').message('Error Text').description('Error Description Error Description Error Description Error Description Error Description Error Description');
   })
 
-  model = {};
+  readonly model = signal({});
 }

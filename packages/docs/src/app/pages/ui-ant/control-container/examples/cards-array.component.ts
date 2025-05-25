@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { button, card, cardsArray, datetimePicker, group, textField } from '@fluent-form/ui-zorro';
 
@@ -8,12 +8,12 @@ import { button, card, cardsArray, datetimePicker, group, textField } from '@flu
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class CardsArrayExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     textField('flight').label('航班').col(12);
     datetimePicker('boardingTime').label('登机时间').col(12);
 
@@ -33,7 +33,7 @@ export class CardsArrayExampleComponent {
     button().content('提交').type('primary').col(12).variants({ block: true });
   });
 
-  model = {
+  readonly model = signal({
     passengers: [{}]
-  };
+  });
 }

@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { applyGroup, passwordField, textField } from '@fluent-form/ui-zorro';
 
@@ -8,16 +8,16 @@ import { applyGroup, passwordField, textField } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class RootFormExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     applyGroup({ updateOn: 'blur' });
     textField('username').label('Username');
     passwordField('password').label('Password');
   });
 
-  model = {};
+  readonly model = signal({});
 }

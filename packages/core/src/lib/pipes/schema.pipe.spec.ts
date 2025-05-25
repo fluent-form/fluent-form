@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { form } from '../compose';
 import { provideFluentForm } from '../provider';
-import { withTesting } from '../testing';
+import { textField, withTesting } from '../testing';
 import { FluentSchemaPipe } from './schema.pipe';
 
 describe('FluentSchemaPipe', () => {
@@ -24,7 +24,9 @@ describe('FluentSchemaPipe', () => {
   });
 
   it('should be can find schema by key', () => {
-    const schema = form([{ kind: 'text-field', key: 'text' }]);
-    expect(pipe.transform('text', schema)).toBe(schema.schemas[0]);
+    const schema = form(() => {
+      textField('text');
+    });
+    expect(pipe.transform('text', schema())).toBe(schema().schemas[0]);
   });
 });

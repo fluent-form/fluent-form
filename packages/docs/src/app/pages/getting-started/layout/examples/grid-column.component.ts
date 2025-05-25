@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { alert } from '@fluent-form/ui-zorro';
 
@@ -6,10 +6,10 @@ import { alert } from '@fluent-form/ui-zorro';
   selector: 'grid-col-example',
   standalone: true,
   imports: [FluentFormComponent],
-  template: `<fluent-form [(model)]="model" [schema]="schema" />`
+  template: `<fluent-form [schema]="schema()" [(model)]="model" />`
 })
 export class GridColExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     alert().message('col-3').col(3);
     alert().message('col-4').col(4);
     alert().message('col-5').col(5);
@@ -18,5 +18,5 @@ export class GridColExampleComponent {
     alert().message('col-3').col(3);
   });
 
-  model = {};
+  readonly model = signal({});
 }

@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { radioGroup } from '@fluent-form/ui-zorro';
 
@@ -8,12 +8,12 @@ import { radioGroup } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class RadioGroupExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     radioGroup('gender').label('Gender').defaultValue(1).options([
       { label: 'Wonmen', value: 0 },
       { label: 'Men', value: 1 }
@@ -24,5 +24,5 @@ export class RadioGroupExampleComponent {
     ]);
   });
 
-  model = {};
+  readonly model = signal({});
 }

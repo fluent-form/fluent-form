@@ -3,22 +3,22 @@ import { array, group } from './control-container';
 
 describe('control-container', () => {
   it('group', () => {
-    const { schemas } = form(() => {
+    const schema = form(() => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       group().schemas(() => { });
     });
-    expect(schemas).toEqual([{
+    expect(schema().schemas).toEqual([{
       kind: 'group',
       schemas: []
     }]);
   });
 
   it('array', () => {
-    const { schemas } = form(() => {
+    const schema = form(() => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       array().schemas(() => { });
     });
-    expect(schemas).toEqual([{
+    expect(schema().schemas).toEqual([{
       kind: 'array',
       schemas: []
     }]);

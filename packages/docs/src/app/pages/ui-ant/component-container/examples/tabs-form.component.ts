@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { button, checkbox, passwordField, tab, tabs, textField } from '@fluent-form/ui-zorro';
 
@@ -8,12 +8,12 @@ import { button, checkbox, passwordField, tab, tabs, textField } from '@fluent-f
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class TabsFormExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     tabs().col(12).schemas(() => {
       tab().title('用户名').schemas(() => {
         textField('username').label('用户名').col(12);
@@ -31,5 +31,5 @@ export class TabsFormExampleComponent {
     });
   });
 
-  model = {};
+  readonly model = signal({});
 }

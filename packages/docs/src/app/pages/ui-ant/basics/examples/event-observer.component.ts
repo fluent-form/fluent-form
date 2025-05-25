@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { select, textField } from '@fluent-form/ui-zorro';
 import { tap } from 'rxjs';
@@ -9,12 +9,12 @@ import { tap } from 'rxjs';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class EventObserverExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     textField('txt')
       .placeholder('Please feel free to enter')
       .observers({
@@ -45,5 +45,5 @@ export class EventObserverExampleComponent {
       .col(4);
   });
 
-  model = {};
+  readonly model = signal({});
 }

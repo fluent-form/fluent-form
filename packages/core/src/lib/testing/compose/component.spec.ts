@@ -3,19 +3,19 @@ import { button, template } from './component';
 
 describe('component', () => {
   it('template', () => {
-    const { schemas } = form(() => {
+    const schema = form(() => {
       template();
     });
-    expect(schemas).toEqual([{
+    expect(schema().schemas).toEqual([{
       kind: 'template',
     }]);
   });
 
   it('button', () => {
-    const { schemas } = form(() => {
+    const schema = form(() => {
       button();
     });
-    expect(schemas).toEqual([{
+    expect(schema().schemas).toEqual([{
       kind: 'button',
     }]);
   });

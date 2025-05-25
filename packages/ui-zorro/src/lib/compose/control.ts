@@ -114,10 +114,10 @@ export function transfer<Key extends SingleSchemaKey>(key?: Key) {
   return composeBuilder<TransferControlSchema<Key>>().kind('transfer').key(key);
 }
 
-export function color(): UnstableBuilder<ColorPickerControlSchema<number>, KindOrKey>;
-export function color<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<ColorPickerControlSchema<Key>, KindOrKey>;
-export function color<Key extends SingleSchemaKey>(key?: Key) {
-  return composeBuilder<ColorPickerControlSchema<Key>>().kind('color').key(key);
+export function colorPicker(): UnstableBuilder<ColorPickerControlSchema<number>, KindOrKey>;
+export function colorPicker<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<ColorPickerControlSchema<Key>, KindOrKey>;
+export function colorPicker<Key extends SingleSchemaKey>(key?: Key) {
+  return composeBuilder<ColorPickerControlSchema<Key>>().kind('color-picker').key(key);
 }
 
 type KindOrKeyOrType = KindOrKey | 'type';

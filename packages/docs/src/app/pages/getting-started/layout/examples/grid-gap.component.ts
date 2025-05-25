@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form, row } from '@fluent-form/core';
 import { alert } from '@fluent-form/ui-zorro';
 
@@ -6,10 +6,10 @@ import { alert } from '@fluent-form/ui-zorro';
   selector: 'grid-gap-example',
   standalone: true,
   imports: [FluentFormComponent],
-  template: `<fluent-form [(model)]="model" [schema]="schema" />`
+  template: `<fluent-form [schema]="schema()" [(model)]="model" />`
 })
 export class GridGapExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     row().gap(1).col(12).schemas(() => {
       alert().message('gap-1').col(4);
       alert().message('gap-1').col(4);
@@ -53,5 +53,5 @@ export class GridGapExampleComponent {
     })
   });
 
-  model = {};
+  readonly model = signal({});
 }

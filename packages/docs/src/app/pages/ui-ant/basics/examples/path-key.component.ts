@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { textField } from '@fluent-form/ui-zorro';
 
@@ -8,19 +8,19 @@ import { textField } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class PathKeyExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     textField('user.name').label('用户名');
     textField('user.password').label('密码').type('password');
   });
 
-  model = {
+  readonly model = signal({
     user: {
       name: '海森堡'
     }
-  };
+  });
 }

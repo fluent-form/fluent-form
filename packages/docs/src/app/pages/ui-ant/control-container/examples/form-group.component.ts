@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { button, group, numberField, textField } from '@fluent-form/ui-zorro';
 
@@ -8,12 +8,12 @@ import { button, group, numberField, textField } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class FormGroupExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     textField('name').label('用户名').col(12);
     numberField('age').label('年龄').col(12);
 
@@ -25,5 +25,5 @@ export class FormGroupExampleComponent {
     button().content('提交').type('primary').variants({ block: true });
   });
 
-  model = {};
+  readonly model = signal({});
 }

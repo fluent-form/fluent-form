@@ -3,11 +3,11 @@ import { fieldGroup } from './control-wrapper';
 
 describe('control-wrapper', () => {
   it('fieldGroup', () => {
-    const { schemas } = form(() => {
+    const schema = form(() => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       fieldGroup().schemas(() => { });
     });
-    expect(schemas).toEqual([{
+    expect(schema().schemas).toEqual([{
       kind: 'field-group',
       schemas: []
     }]);

@@ -1,6 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { select } from '@fluent-form/ui-zorro';
 
@@ -9,14 +9,14 @@ import { select } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class SelectExampleComponent {
   http = inject(HttpClient);
 
-  schema = form(() => {
+  readonly schema = form(() => {
     select('user')
       .placeholder('Please select user')
       .options([
@@ -37,5 +37,5 @@ export class SelectExampleComponent {
       .col(4);
   });
 
-  model = {};
+  readonly model = signal({});
 }

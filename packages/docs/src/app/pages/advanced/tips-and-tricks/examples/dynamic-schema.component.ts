@@ -1,6 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormComponent, fluentForm } from '@fluent-form/core';
+import { FluentFormComponent, form } from '@fluent-form/core';
 import { textField } from '@fluent-form/ui-zorro';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 
@@ -14,25 +14,25 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     <br />
     <br />
     <fluent-form [schema]="schema()" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class DynamicSchemaExampleComponent {
   readonly counter = signal(1);
-  readonly schema = fluentForm(() => {
+  readonly schema = form(() => {
     for (let index = 0; index < this.counter(); index++) {
       const number = index + 1;
       textField(`user-${number}`).label(`User ${number}`).col(6);
     }
   });
 
-  model = {};
+  readonly model = signal({});
 
   add() {
-    this.counter.update(value => value + 1)
+    this.counter.update(value => ++value)
   }
 
   remove() {
-    this.counter.update(value => value > 1 ? value - 1 : 1)
+    this.counter.update(value => Math.max(1, --value))
   }
 }

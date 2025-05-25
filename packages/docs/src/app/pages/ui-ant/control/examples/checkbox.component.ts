@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { checkbox } from '@fluent-form/ui-zorro';
 
@@ -8,16 +8,16 @@ import { checkbox } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class CheckboxExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     checkbox('accept')
       .content('I agree and accept the terms of service.')
       .defaultValue(true);
   });
 
-  model = {};
+  readonly model = signal({});
 }

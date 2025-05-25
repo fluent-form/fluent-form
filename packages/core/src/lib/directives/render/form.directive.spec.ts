@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Signal, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { AnyObject } from '@ngify/types';
@@ -15,7 +15,7 @@ import { FluentFormRenderModule } from './module';
     FluentFormRenderModule
   ],
   template: `
-    <div [fluentSchema]="schema" [(fluentModel)]="model" (fluentFormChange)="form = $event">
+    <div [fluentSchema]="schema()" [(fluentModel)]="model" (fluentFormChange)="form = $event">
       <fluent-outlet key="ipt" />
       <fluent-outlet key="ipts" />
       <fluent-outlet key="group.ipt" />
@@ -27,7 +27,7 @@ import { FluentFormRenderModule } from './module';
 class TestComponent {
   @ViewChild(FluentFormDirective, { static: true }) fluentFormDirective!: FluentFormDirective<AnyObject>;
   form!: FormGroup;
-  schema!: AbstractFormGroupSchema;
+  schema!: Signal<AbstractFormGroupSchema>;
   model!: AnyObject;
 }
 

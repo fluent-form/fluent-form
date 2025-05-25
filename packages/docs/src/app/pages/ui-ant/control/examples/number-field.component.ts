@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { numberField } from '@fluent-form/ui-zorro';
 
@@ -8,12 +8,12 @@ import { numberField } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class NumberFieldExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     numberField('num')
       .label('Number')
       .placeholder('Please enter number')
@@ -51,5 +51,5 @@ export class NumberFieldExampleComponent {
       .col(4);
   });
 
-  model = {};
+  readonly model = signal({});
 }

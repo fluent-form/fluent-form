@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { spaceCompact, textField } from '@fluent-form/ui-zorro';
@@ -9,12 +9,12 @@ import { spaceCompact, textField } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class ValidationExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     textField('username')
       .label('Username')
       .required(true)
@@ -60,5 +60,5 @@ export class ValidationExampleComponent {
       });
   });
 
-  model = {};
+  readonly model = signal({});
 }

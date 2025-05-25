@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { datePicker } from '@fluent-form/ui-zorro';
 
@@ -8,12 +8,12 @@ import { datePicker } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class DatePickerExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     datePicker('date')
       .label('Date')
       .placeholder('Please select date')
@@ -24,5 +24,5 @@ export class DatePickerExampleComponent {
       .time(true).col(4);
   });
 
-  model = {};
+  readonly model = signal({});
 }

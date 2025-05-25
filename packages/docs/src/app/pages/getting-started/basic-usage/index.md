@@ -100,7 +100,7 @@ const schema = form([
 `FluentFormComponent` 是 {% include "../../../markdowns/brand.md" %} 的核心组件，它用于创建和管理表单。
 
 ```html
-<fluent-form [schema]="schema" [(model)]="model" (submit)="onSubmit($event)" />
+<fluent-form [schema]="schema()" [(model)]="model" (submit)="onSubmit($event)" />
 ```
 
 - `schema` 属性用于指定表单图示；

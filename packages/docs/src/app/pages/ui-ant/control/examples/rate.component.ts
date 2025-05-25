@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { rate } from '@fluent-form/ui-zorro';
 
@@ -8,14 +8,14 @@ import { rate } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class RateExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     rate('rate').label('Please rate').defaultValue(2.5);
   });
 
-  model = {};
+  readonly model = signal({});
 }

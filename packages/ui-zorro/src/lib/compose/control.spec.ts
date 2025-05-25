@@ -1,40 +1,40 @@
 import { form } from '@fluent-form/core';
-import { cascader, checkbox, checkboxGroup, color, datePicker, dateRangePicker, datetimePicker, headed, numberField, passwordField, radioGroup, rate, select, slider, textArea, textField, timePicker, toggle, transfer, treeSelect } from './control';
+import { cascader, checkbox, checkboxGroup, colorPicker, datePicker, dateRangePicker, datetimePicker, headed, numberField, passwordField, radioGroup, rate, select, slider, textArea, textField, timePicker, toggle, transfer, treeSelect } from './control';
 
 describe('control', () => {
   it('headed', () => {
-    const { schemas } = form(() => headed('headed'));
-    expect(schemas).toEqual([{ kind: 'headed', key: 'headed' }]);
+    const schema = form(() => headed('headed'));
+    expect(schema().schemas).toEqual([{ kind: 'headed', key: 'headed' }]);
   });
 
   it('text', () => {
-    const { schemas } = form(() => textField('txt'));
-    expect(schemas).toEqual([{ kind: 'text-field', key: 'txt' }]);
+    const schema = form(() => textField('txt'));
+    expect(schema().schemas).toEqual([{ kind: 'text-field', key: 'txt' }]);
   });
 
   it('password', () => {
-    const { schemas } = form(() => passwordField('password'));
-    expect(schemas).toEqual([{ kind: 'text-field', key: 'password', type: 'password' }]);
+    const schema = form(() => passwordField('password'));
+    expect(schema().schemas).toEqual([{ kind: 'text-field', key: 'password', type: 'password' }]);
   });
 
   it('textarea', () => {
-    const { schemas } = form(() => textArea('textarea'));
-    expect(schemas).toEqual([{ kind: 'text-area', key: 'textarea' }]);
+    const schema = form(() => textArea('textarea'));
+    expect(schema().schemas).toEqual([{ kind: 'text-area', key: 'textarea' }]);
   });
 
   it('number', () => {
-    const { schemas } = form(() => numberField('number'));
-    expect(schemas).toEqual([{ kind: 'number-field', key: 'number' }]);
+    const schema = form(() => numberField('number'));
+    expect(schema().schemas).toEqual([{ kind: 'number-field', key: 'number' }]);
   });
 
   it('date-picker', () => {
-    const { schemas } = form(() => datePicker('date'));
-    expect(schemas).toEqual([{ kind: 'date-picker', key: 'date' }]);
+    const schema = form(() => datePicker('date'));
+    expect(schema().schemas).toEqual([{ kind: 'date-picker', key: 'date' }]);
   });
 
   it('datetime-picker', () => {
-    const { schemas } = form(() => datetimePicker('datetime'));
-    expect(schemas).toEqual([{
+    const schema = form(() => datetimePicker('datetime'));
+    expect(schema().schemas).toEqual([{
       kind: 'date-picker',
       key: 'datetime',
       time: true
@@ -42,67 +42,67 @@ describe('control', () => {
   });
 
   it('time-picker', () => {
-    const { schemas } = form(() => timePicker('time'));
-    expect(schemas).toEqual([{ kind: 'time-picker', key: 'time' }]);
+    const schema = form(() => timePicker('time'));
+    expect(schema().schemas).toEqual([{ kind: 'time-picker', key: 'time' }]);
   });
 
   it('toggle', () => {
-    const { schemas } = form(() => toggle('toggle'));
-    expect(schemas).toEqual([{ kind: 'toggle', key: 'toggle' }]);
+    const schema = form(() => toggle('toggle'));
+    expect(schema().schemas).toEqual([{ kind: 'toggle', key: 'toggle' }]);
   });
 
   it('select', () => {
-    const { schemas } = form(() => select('select').options([]));
-    expect(schemas).toEqual([{ kind: 'select', key: 'select', options: [] }]);
+    const schema = form(() => select('select').options([]));
+    expect(schema().schemas).toEqual([{ kind: 'select', key: 'select', options: [] }]);
   });
 
   it('cascader', () => {
-    const { schemas } = form(() => cascader('cascader').options([]));
-    expect(schemas).toEqual([{ kind: 'cascader', key: 'cascader', options: [] }]);
+    const schema = form(() => cascader('cascader').options([]));
+    expect(schema().schemas).toEqual([{ kind: 'cascader', key: 'cascader', options: [] }]);
   });
 
   it('tree-select', () => {
-    const { schemas } = form(() => treeSelect('treeSelect').options([]));
-    expect(schemas).toEqual([{ kind: 'tree-select', key: 'treeSelect', options: [] }]);
+    const schema = form(() => treeSelect('treeSelect').options([]));
+    expect(schema().schemas).toEqual([{ kind: 'tree-select', key: 'treeSelect', options: [] }]);
   });
 
   it('radio-group', () => {
-    const { schemas } = form(() => radioGroup('radioGroup').options([]));
-    expect(schemas).toEqual([{ kind: 'radio-group', key: 'radioGroup', options: [] }]);
+    const schema = form(() => radioGroup('radioGroup').options([]));
+    expect(schema().schemas).toEqual([{ kind: 'radio-group', key: 'radioGroup', options: [] }]);
   });
 
   it('checkbox', () => {
-    const { schemas } = form(() => checkbox('checkbox'));
-    expect(schemas).toEqual([{ kind: 'checkbox', key: 'checkbox' }]);
+    const schema = form(() => checkbox('checkbox'));
+    expect(schema().schemas).toEqual([{ kind: 'checkbox', key: 'checkbox' }]);
   });
 
   it('checkbox-group', () => {
-    const { schemas } = form(() => checkboxGroup('checkboxGroup').options([]));
-    expect(schemas).toEqual([{ kind: 'checkbox-group', key: 'checkboxGroup', options: [] }]);
+    const schema = form(() => checkboxGroup('checkboxGroup').options([]));
+    expect(schema().schemas).toEqual([{ kind: 'checkbox-group', key: 'checkboxGroup', options: [] }]);
   });
 
   it('rate', () => {
-    const { schemas } = form(() => rate('rate'));
-    expect(schemas).toEqual([{ kind: 'rate', key: 'rate' }]);
+    const schema = form(() => rate('rate'));
+    expect(schema().schemas).toEqual([{ kind: 'rate', key: 'rate' }]);
   });
 
   it('slider', () => {
-    const { schemas } = form(() => slider('slider'));
-    expect(schemas).toEqual([{ kind: 'slider', key: 'slider' }]);
+    const schema = form(() => slider('slider'));
+    expect(schema().schemas).toEqual([{ kind: 'slider', key: 'slider' }]);
   });
 
   it('date-range-picker', () => {
-    const { schemas } = form(() => dateRangePicker('dateRange'));
-    expect(schemas).toEqual([{ kind: 'date-range-picker', key: 'dateRange' }]);
+    const schema = form(() => dateRangePicker('dateRange'));
+    expect(schema().schemas).toEqual([{ kind: 'date-range-picker', key: 'dateRange' }]);
   });
 
   it('transfer', () => {
-    const { schemas } = form(() => transfer('transfer'));
-    expect(schemas).toEqual([{ kind: 'transfer', key: 'transfer' }]);
+    const schema = form(() => transfer('transfer'));
+    expect(schema().schemas).toEqual([{ kind: 'transfer', key: 'transfer' }]);
   });
 
-  it('color', () => {
-    const { schemas } = form(() => color('color'));
-    expect(schemas).toEqual([{ kind: 'color', key: 'color' }]);
+  it('color-picker', () => {
+    const schema = form(() => colorPicker('color'));
+    expect(schema().schemas).toEqual([{ kind: 'color-picker', key: 'color' }]);
   });
 });

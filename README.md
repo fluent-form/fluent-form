@@ -35,24 +35,26 @@ For documentation and examples please visit [https://fluent-form.github.io/fluen
 
 ```ts
 import { FluentForm, form } from '@fluent-form/core';
-import { button, numberField, textField } from '@fluent-form/ui-zorro';
+import { button, numberField, textField, textArea } from '@fluent-form/ui-zorro';
 
 @Component({
   standalone: true,
   imports: [FluentForm],
-  template: `<fluent-form [(model)]="model" [schema]="schema" />`
+  template: `<fluent-form [schema]="schema()" [(model)]="model" />`
 })
 export class ExampleComponent {
-  schema = form(() => {
-    textField('text');
-    numberField('count');
-    button().content('submit');
+  readonly schema = form(() => {
+    textField('name').label('Name').required(true);
+    numberField('age').label('Age').required(true);
+    textArea('bio').label('Bio').placeholder('Tell us about yourself');
+    button().content('Submit');
   });
 
-  model = {
-    text: 'I love fluent form',
-    count: 10
-  };
+  readonly model = signal({
+    name: 'John Doe',
+    age: null,
+    bio: 'I love fluent form'
+  });
 }
 ```
 

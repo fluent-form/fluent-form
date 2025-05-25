@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { radioGroup, select, textField, toggle } from '@fluent-form/ui-zorro';
 
@@ -8,12 +8,12 @@ import { radioGroup, select, textField, toggle } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class LinkageExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     radioGroup('lang')
       .label('Change language')
       .variants({ button: 'solid' })
@@ -62,5 +62,5 @@ export class LinkageExampleComponent {
       .col(3);
   });
 
-  model = {};
+  readonly model = signal({});
 }

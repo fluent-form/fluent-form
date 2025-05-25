@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { textField } from '@fluent-form/ui-zorro';
 
@@ -8,12 +8,12 @@ import { textField } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class LifecycleHooksExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     textField('txt')
       .placeholder('Please feel free to enter')
       .hooks({
@@ -23,5 +23,5 @@ export class LifecycleHooksExampleComponent {
       .col(4);
   });
 
-  model = {};
+  readonly model = signal({});
 }

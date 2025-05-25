@@ -21,7 +21,7 @@
 
 ## 动态图示
 
-借助 Signals API，您可以在 `fluentForm()` 函数内部轻松构建动态图示。
+借助 Signals API，您可以在 `form()` 函数内部轻松构建动态图示。
 
 {{ NgDocActions.demo("DynamicSchemaExampleComponent") }}
 

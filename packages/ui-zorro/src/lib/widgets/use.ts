@@ -269,9 +269,9 @@ export function useTransferWidget(): FluentFormWidgetConfig<TransferControlSchem
   };
 }
 
-// export function useColorWidget(): FluentFormWidgetConfig<ColorPickerControlSchema> {
+// export function useColorPickerWidget(): FluentFormWidgetConfig<ColorPickerControlSchema> {
 //   return {
-//     kind: 'color',
+//     kind: 'color-picker',
 //     type: SchemaType.Control,
 //     widget: ColorWidget
 //   };

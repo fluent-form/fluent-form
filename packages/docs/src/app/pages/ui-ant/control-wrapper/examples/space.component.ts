@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { button, space, textField } from '@fluent-form/ui-zorro';
 
@@ -8,12 +8,12 @@ import { button, space, textField } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class SpaceExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     space().label('Inputs with space').col(4).schemas(() => {
       textField('firstName').placeholder('Please enter').col(4);
       textField('lastName').placeholder('Please enter').col(8);
@@ -25,5 +25,5 @@ export class SpaceExampleComponent {
     })
   });
 
-  model = {};
+  readonly model = signal({});
 }

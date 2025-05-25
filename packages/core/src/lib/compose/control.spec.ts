@@ -3,10 +3,10 @@ import { form } from './control-container';
 
 describe('control', () => {
   it('headless', () => {
-    const { schemas } = form(() => {
+    const schema = form(() => {
       headless();
     });
-    expect(schemas).toEqual([{
+    expect(schema().schemas).toEqual([{
       kind: 'headless'
     }]);
   });

@@ -1,11 +1,11 @@
 [
   {
-    "kind": "text",
+    "kind": "text-field",
     "key": "username",
     "label": "用户名"
   },
   {
-    "kind": "text",
+    "kind": "text-field",
     "key": "password",
     "label": "密码",
     "disabled": "{{ !model.username }}"

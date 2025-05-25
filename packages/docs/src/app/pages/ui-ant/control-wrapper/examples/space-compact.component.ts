@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { button, numberField, select, spaceCompact, textField } from '@fluent-form/ui-zorro';
 
@@ -8,12 +8,12 @@ import { button, numberField, select, spaceCompact, textField } from '@fluent-fo
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class SpaceCompactExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     spaceCompact().label('Text compact mode').col(4).schemas(() => {
       textField('txt1').placeholder('Please enter').addons({ before: '@' }).col(6);
       textField('txt2').placeholder('Please enter').affixes({ prefix: '@' }).col(6);
@@ -78,5 +78,5 @@ export class SpaceCompactExampleComponent {
     })
   });
 
-  model = {};
+  readonly model = signal({});
 }

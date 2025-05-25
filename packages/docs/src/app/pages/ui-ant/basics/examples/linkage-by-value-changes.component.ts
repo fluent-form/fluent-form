@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { select, textField } from '@fluent-form/ui-zorro';
 
@@ -8,12 +8,12 @@ import { select, textField } from '@fluent-form/ui-zorro';
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class LinkageByValueChangesExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     select('content')
       .label('Change value')
       .options([
@@ -30,5 +30,5 @@ export class LinkageByValueChangesExampleComponent {
     textField('target').label('Target control').col(3);
   });
 
-  model = {};
+  readonly model = signal({});
 }

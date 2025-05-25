@@ -1,14 +1,14 @@
-import { fluentForm, form } from '@fluent-form/core';
+import { form } from '@fluent-form/core';
 import { textField } from './control';
 import { applyGroup, array, cardsArray, group, tabsArray } from './control-container';
 
 describe('control-container', () => {
   it('group', () => {
-    const { schemas } = form(() => {
+    const schema = form(() => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       group('group').schemas(() => { });
     });
-    expect(schemas).toEqual([{
+    expect(schema().schemas).toEqual([{
       kind: 'group',
       key: 'group',
       schemas: []
@@ -16,11 +16,11 @@ describe('control-container', () => {
   });
 
   it('array', () => {
-    const { schemas } = form(() => {
+    const schema = form(() => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       array('array').schemas(() => { });
     });
-    expect(schemas).toEqual([{
+    expect(schema().schemas).toEqual([{
       kind: 'array',
       key: 'array',
       schemas: []
@@ -28,11 +28,11 @@ describe('control-container', () => {
   });
 
   it('tabs-array', () => {
-    const { schemas } = form(() => {
+    const schema = form(() => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       tabsArray('tabs-array').schemas(() => { });
     });
-    expect(schemas).toEqual([{
+    expect(schema().schemas).toEqual([{
       kind: 'tabs-array',
       key: 'tabs-array',
       schemas: []
@@ -40,11 +40,11 @@ describe('control-container', () => {
   });
 
   it('cards-array', () => {
-    const { schemas } = form(() => {
+    const schema = form(() => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       cardsArray('cards-array').schemas(() => { });
     });
-    expect(schemas).toEqual([{
+    expect(schema().schemas).toEqual([{
       kind: 'cards-array',
       key: 'cards-array',
       schemas: []
@@ -52,7 +52,7 @@ describe('control-container', () => {
   });
 
   it('applyGroup', () => {
-    const schema = fluentForm(() => {
+    const schema = form(() => {
       applyGroup({ updateOn: 'blur' });
       textField('input');
     });

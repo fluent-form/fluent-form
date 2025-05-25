@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormComponent, form } from '@fluent-form/core';
 import { array, button, datetimePicker, textField } from '@fluent-form/ui-zorro';
 
@@ -8,12 +8,12 @@ import { array, button, datetimePicker, textField } from '@fluent-form/ui-zorro'
   standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
-    <fluent-form class="block mr-12" [schema]="schema" [(model)]="model" />
-    <pre>{{ model | json }}</pre>
+    <fluent-form class="block mr-12" [schema]="schema()" [(model)]="model" />
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class FormArrayExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     textField('flight').label('航班').col(12);
     datetimePicker('boardingTime').label('登机时间').col(12);
 
@@ -34,5 +34,5 @@ export class FormArrayExampleComponent {
       .col(12);
   });
 
-  model = {};
+  readonly model = signal({});
 }

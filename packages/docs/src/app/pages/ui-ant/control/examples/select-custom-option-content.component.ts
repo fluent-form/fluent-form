@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FluentFormModule, form } from '@fluent-form/core';
 import { select } from '@fluent-form/ui-zorro';
 import { NzTagModule } from 'ng-zorro-antd/tag';
@@ -9,16 +9,16 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
   standalone: true,
   imports: [FluentFormModule, NzTagModule, JsonPipe],
   template: `
-    <fluent-form [schema]="schema" [(model)]="model">
+    <fluent-form [schema]="schema()" [(model)]="model">
       <ng-template fluentTemplate="optionTpl" let-option>
         <nz-tag nzColor="magenta">Label</nz-tag>{{ option.label }}
       </ng-template>
     </fluent-form>
-    <pre>{{ model | json }}</pre>
+    <pre>{{ model() | json }}</pre>
   `
 })
 export class SelectCustomOptionContentExampleComponent {
-  schema = form(() => {
+  readonly schema = form(() => {
     select('user')
       .placeholder('Please select user')
       .option('#optionTpl')
@@ -30,6 +30,6 @@ export class SelectCustomOptionContentExampleComponent {
       .col(4);
   });
 
-  model = {};
+  readonly model = signal({});
 
 }

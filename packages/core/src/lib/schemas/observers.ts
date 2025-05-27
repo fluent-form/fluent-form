@@ -14,7 +14,7 @@ type ComponentOutputObserverMap<C> = {
 }
 
 type ElementEventObserverMap = {
-  [K in keyof HTMLElementEventMap]?: (source: Observable<{ event: HTMLElementEventMap[K], ctx: SchemaContext }>) => Observable<SafeAny>
+  [K in keyof HTMLElementEventMap]?: (source: Observable<{ event: HTMLElementEventMap[K], context: SchemaContext }>) => Observable<SafeAny>
 };
 
 /** 事件侦听器 */

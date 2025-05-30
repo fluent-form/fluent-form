@@ -22,7 +22,7 @@ function leaveSchema() {
 
 function joinSchema(schmea: Schema) {
   const currentSchema = getCurrentSchema();
-  // 如果当前已经有了 schema，就直接 push 进去作为 subschema
+  // If a schema already exists, just push it in as a subschema.
   currentSchema?.schemas!.push(schmea);
 }
 
@@ -74,8 +74,7 @@ export function composeBuilder<T>(): Builder<T> {
 }
 
 /**
- * 是否为一个构建器
- * @param value
+ * Determines whether the value is a builder.
  */
 export function isBuilder<T = unknown>(value: SafeAny): value is StableBuilder<T> {
   return value[IS_BUILDER] ?? false;
@@ -84,7 +83,7 @@ export function isBuilder<T = unknown>(value: SafeAny): value is StableBuilder<T
 type ComposeKey = typeof COMPOSE_KEY;
 type BuildKey = typeof BUILD_KEY;
 type Buildable = Record<BuildKey, unknown>;
-/** 取得接口的非空必填字段 */
+/** Get the non-nullable and required keys of an interface. */
 type NonNullableKey<T> = {
   [K in keyof T]-?: { [_ in K]: T[K] } extends { [_ in K]-?: T[K] } ? K : never
 }[keyof T];

@@ -144,10 +144,10 @@ export class FormUtil {
   }
 
   /**
-   * 更新表单状态，目前包括：
-   * - 更新 validator
-   * - 更新 status - enabled / disabled
-   * - 更新 value
+   * Update the form state, currently includes:
+   * - Updating validators
+   * - Updating status - enabled / disabled
+   * - Updating value
    * @param form
    * @param model
    * @param schemas
@@ -188,9 +188,10 @@ export class FormUtil {
         }
         // update disabled
         const disabled = this.valueTransformer.transform(schema.disabled, { model, schema, control });
-        if (control.enabled !== !disabled) { // 不一致才更新
+        if (control.enabled !== !disabled) { // Update only if inconsistent
           if (disabled) {
-            // 这里使用 onlySelf: true 而不是 emitEvent: false，因为需要维持控件本身的 value/statusChanges 事件能正常触发
+            // Using `onlySelf: true` here instead of `emitEvent: false` because the
+            // control's own value/statusChanges events need to trigger properly.
             control.disable({ onlySelf: true });
           } else {
             control.enable({ onlySelf: true });
@@ -276,7 +277,8 @@ export class FormUtil {
 }
 
 /**
- * 根据 form 的类型自动选择使用 .get() 还是 .at() 来获取子控件
+ * Automatically choose to use `.get()` or `.at()` to get a child control
+ * based on the type of the form.
  * @param form
  * @param key
  * @returns

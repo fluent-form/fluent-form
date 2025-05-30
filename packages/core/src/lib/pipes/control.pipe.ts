@@ -13,10 +13,10 @@ import { getChildControl, isUndefined } from '../utils';
 export class FluentControlPipe implements PipeTransform {
 
   /**
-   * 将 value 作为 key，获取 form 中的实例
+   * Use value as a key to get the instance from the form.
    * @param value
    * @param form
-   * @param type 用来重载方法的返回值
+   * @param type Used to overload the method's return type.
    */
   transform(value: SchemaKey | undefined, form: FormGroup | FormArray, type: 'control'): FormControl;
   transform(value: SchemaKey | undefined, form: FormGroup | FormArray, type: 'group'): FormGroup;
@@ -26,7 +26,9 @@ export class FluentControlPipe implements PipeTransform {
     if (isUndefined(value)) return form;
 
     return getChildControl(form, value) ?? form;
-    // 当获取不到对应的控件实例时，通常说明当前的 schema 不是一个 control schema，这里直接返回父级表单实例☝️
+    // When the corresponding control instance cannot be found, it usually
+    // means the current schema is not a control schema.
+    // In this case, return the parent form instance directly ☝️
   }
 
 }

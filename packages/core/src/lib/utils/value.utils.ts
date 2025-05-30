@@ -16,14 +16,16 @@ export class ValueUtil {
 
   valueOfModel<M extends AnyObject | AnyArray>(model: M, schema: AbstractControlSchema): unknown {
     let value: unknown;
-    // 如果从模型中读出来的值为 undefined，说明模型中没有写入该值，这里取图示中提供的默认值
-    // 如果是多字段模式，则需要从模型中分别取得这这些字段的值组为一个数组
+    // If the value read from the model is undefined, it means the model did
+    // not provide a value, so take the default value from the schema here.
+    // If it is a multi-key schema, the values of these keys need to be retrieved
+    // separately from the model and combined into an array.
     if (this.schemaUtil.isMultiKeySchema(schema)) {
       value = (schema.key as string[]).map((key, index) => {
         const val = model[key as keyof M];
         return isUndefined(val) ? schema.defaultValue?.[index] ?? null : val;
       });
-      // 如果数组元素都是 null，那就直接赋值 null
+      // If all elements in the array are `null`, assign `null` directly.
       if ((value as []).every(o => o === null)) {
         value = null;
       }

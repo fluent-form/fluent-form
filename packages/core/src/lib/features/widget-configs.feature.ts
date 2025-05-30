@@ -10,13 +10,13 @@ import { AbstractWidget, useRowWidget } from '../widgets';
 export interface FluentFormWidgetConfig<S extends AbstractSchema> extends SchemaConfig<S> {
   kind: S['kind'];
   widget?: Type<AbstractWidget<unknown>>;
-  /** 修补图示，标准化图示时调用 */
+  /** Patch the schema, called when normalizing the schema. */
   patch?: SchemaPatchFn<S>;
 }
 
 export function provideWidgetConfigs(configs: (FluentFormWidgetConfig<SafeAny> | FluentFormWidgetConfig<SafeAny>[])[]): Provider[] {
   const _configs = configs.flat();
-  // 添加内置 widgets
+  // Add built-in widgets.
   _configs.push(useRowWidget());
 
   return [
@@ -43,7 +43,7 @@ export function provideWidgetConfigs(configs: (FluentFormWidgetConfig<SafeAny> |
           ])
         );
 
-        // 添加内置的 schema
+        // Add built-in schemas.
         map.set(SchemaKind.Headless, { type: SchemaType.Control });
         map.set(SchemaKind.Headed, { type: SchemaType.Control });
         map.set(SchemaKind.Template, { type: SchemaType.Component });
@@ -51,7 +51,7 @@ export function provideWidgetConfigs(configs: (FluentFormWidgetConfig<SafeAny> |
         return map;
       }
     },
-    // 组件内置的 patcher
+    // Component's built-in patcher.
     _configs.filter(config => config.patch).map<Provider>(config =>
       provideSchemaPatcher({
         selector: config.kind,

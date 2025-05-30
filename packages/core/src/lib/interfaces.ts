@@ -4,6 +4,6 @@ import { SchemaType } from './schemas/interfaces';
 
 export interface SchemaConfig<S extends AbstractSchema> {
   type: SchemaType;
-  /** 添加图示自带的验证器 */
+  /** Add built-in validators from the schema. */
   validators?: (schema: S) => ValidatorFn[];
 }

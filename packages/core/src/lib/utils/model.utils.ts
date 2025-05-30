@@ -42,7 +42,8 @@ export class ModelUtil {
         const array: AnyArray = model[key] ??= [];
         const formArray = getChildControl(form, key) as FormArray;
 
-        // 如果模型数组的长度与数组控件长度一致，则原地更新表单值，否则直接重建数组控件
+        // / If the model array length matches the form array length, update the
+        // form values in place; otherwise, rebuild the form array.
         if (array.length === formArray.length) {
           const [elementSchema] = this.schemaUtil.filterControls(schema.schemas);
           const elementSchemas = array.map((_, index) => ({ ...elementSchema, key: index }));
@@ -73,7 +74,7 @@ export class ModelUtil {
       }
     }
 
-    // 仅在完成全部子更新时，再关闭 onlySelf
+    // Only disable `onlySelf` after all child updates are complete.
     form.updateValueAndValidity({ onlySelf: !completed });
 
     return form;

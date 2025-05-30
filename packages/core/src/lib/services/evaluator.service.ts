@@ -13,18 +13,15 @@ export function isStaticExpression(str: string) {
   return STATIC_EXPRESSION_PATTERN.test(str);
 }
 
-/**
- * @internal
- */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class DynamicCodeEvaluator implements CodeEvaluator {
-
   evaluate(code: string, context: AnyObject) {
     code = RETURN_STR + code.replace(INTERPOLATION_PATTERN, '');
 
+    // TODO: This doesn't work with `unsafe-eval` enabled in CSP.
     const fn = new Function('o', `with(o){${code}}`);
     const proxy = new Proxy(Object.freeze(context), {
-      // 拦截所有属性，防止到 Proxy 对象以外的作用域链查找。
+      // Intercept all properties to prevent lookup beyond the `Proxy` object's scope chain.
       has() {
         return true;
       },

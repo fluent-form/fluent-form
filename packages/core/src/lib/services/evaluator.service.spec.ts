@@ -5,9 +5,6 @@ describe('CodeEvaluator', () => {
   let evaluator: DynamicCodeEvaluator;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [DynamicCodeEvaluator]
-    });
     evaluator = TestBed.inject(DynamicCodeEvaluator);
   });
 

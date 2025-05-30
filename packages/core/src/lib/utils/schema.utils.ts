@@ -29,15 +29,15 @@ export class SchemaUtil {
 
     const config = this.schemaMap.get(schema.kind);
 
-    if (!config) {
+    if (typeof ngDevMode !== 'undefined' && ngDevMode && !config) {
       throwWidgetNotFoundError(schema.kind);
     }
 
-    const { type } = config;
+    const { type } = config!;
 
     return this.schemaPatchers
       .filter(patcher => {
-        // 将选择器转为数组统一处理
+        // Convert selector to an array for unified processing.
         const selector = isArray(patcher.selector) ? patcher.selector : [patcher.selector];
 
         return selector.some(kindOrType => {
@@ -54,8 +54,7 @@ export class SchemaUtil {
   }
 
   /**
-   * 过滤出首层控件/控件容器图示
-   * @param schemas
+   * Filter out top-level control/control container schemas.
    */
   filterControls(schemas: Indexable<AbstractSchema>[]) {
     return schemas.reduce((schemas, schema) => {
@@ -102,24 +101,22 @@ export class SchemaUtil {
   }
 
   /**
-   * 是否为多字段图示
-   * @param schema
+   * Whether it is a multi-field schema.
    */
   isMultiKeySchema(schema: SchemaLike) {
     return isArray(schema.key);
   }
 
   /**
-   * 是否为路径字段图示
-   * @param schema
+   * Whether it is a path field schema.
    */
   isPathKeySchema(schema: SchemaLike) {
     return isString(schema.key) && schema.key.includes('.');
   }
 
   /**
-   * 非控件图示，表示其本身或其子节点不会包含控件图示
-   * @param schema
+   * Non-control schema, indicating that it or its child nodes
+   * do not contain any control schemas.
    */
   isNonControl(schema: SchemaLike): schema is AbstractSchema {
     return this.isComponent(schema) || this.isComponentWrapper(schema);

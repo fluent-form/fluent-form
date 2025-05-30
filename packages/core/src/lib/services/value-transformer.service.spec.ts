@@ -16,17 +16,17 @@ describe('ValueTransformerService (disabled static expression support)', () => {
     expect(service).toBeTruthy();
   });
 
-  it('正确处理普通静态参数', () => {
+  it('correctly handles a normal static parameter', () => {
     const value = service.transform(true);
     expect(value).toEqual(true);
   });
 
-  it('正确处理函数参数', () => {
+  it('correctly handles a function parameter', () => {
     const value = service.transform((ctx: SafeAny) => ctx.model, { model: true });
     expect(value).toEqual(true);
   });
 
-  it('正确处理字符串参数', () => {
+  it('correctly handles a string parameter', () => {
     const value = service.transform('str');
     expect(value).toEqual('str');
   });
@@ -40,7 +40,7 @@ describe('ValueTransformerService (enabled static expression support)', () => {
       providers: [
         {
           provide: CodeEvaluator,
-          useClass: DynamicCodeEvaluator
+          useExisting: DynamicCodeEvaluator
         }
       ]
     });

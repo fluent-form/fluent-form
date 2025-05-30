@@ -1,5 +1,5 @@
 import { makeEnvironmentProviders } from '@angular/core';
-import { FluentFormFeature, FluentFormFeatureKind } from './features';
+import { type FluentFormFeature, FluentFormFeatureKind } from './features';
 
 export function provideFluentForm(...features: FluentFormFeature<FluentFormFeatureKind>[]) {
   return makeEnvironmentProviders([

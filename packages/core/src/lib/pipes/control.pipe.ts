@@ -1,6 +1,6 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, type PipeTransform } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
-import { SchemaKey } from '../schemas';
+import type { SchemaKey } from '../schemas';
 import { getChildControl, isUndefined } from '../utils';
 
 /**

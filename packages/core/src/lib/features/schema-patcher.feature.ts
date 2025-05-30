@@ -1,7 +1,7 @@
-import { Provider } from '@angular/core';
-import { SchemaPatcher, provideSchemaPatcher } from '../patcher';
+import type { Provider } from '@angular/core';
+import { type SchemaPatcher, provideSchemaPatcher } from '../patcher';
 import { makeFluentFeature } from './helper';
-import { FluentFormFeature, FluentFormFeatureKind } from './interface';
+import { type FluentFormFeature, FluentFormFeatureKind } from './interface';
 
 export function withSchemaPatchers(patchers: (SchemaPatcher | SchemaPatcher[])[]): FluentFormFeature<FluentFormFeatureKind.SchemaPatcher> {
   return makeFluentFeature(

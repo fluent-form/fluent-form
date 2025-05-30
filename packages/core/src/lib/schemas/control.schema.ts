@@ -1,14 +1,13 @@
-import { AbstractControlOptions, AsyncValidatorFn, ValidatorFn } from '@angular/forms';
-import { SafeAny } from '@ngify/types';
-import { AbstractSchema } from './abstract.schema';
-import { MaybeSchemaReactiveFn, SchemaReactiveFn } from './interfaces';
-import { ControlValueMapper } from './mapper';
-import { PropertyHolder } from './properties';
-import { SchemaKey, SingleSchemaKey } from './types';
+import type { AbstractControlOptions, AsyncValidatorFn, ValidatorFn } from '@angular/forms';
+import type { SafeAny } from '@ngify/types';
+import type { AbstractSchema } from './abstract.schema';
+import type { MaybeSchemaReactiveFn, SchemaReactiveFn } from './interfaces';
+import type { ControlValueMapper } from './mapper';
+import type { PropertyHolder } from './properties';
+import type { SchemaKey, SingleSchemaKey } from './types';
 
 /**
- * @public
- * 抽象的真实控件图示
+ * Abstract representation of a real (concrete) control schema.
  */
 export interface AbstractControlSchema<Key extends SchemaKey = SchemaKey, Val = SafeAny> extends AbstractSchema<Key> {
   id?: string;

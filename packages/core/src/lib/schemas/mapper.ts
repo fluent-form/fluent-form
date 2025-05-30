@@ -1,5 +1,5 @@
-import { SafeAny } from '@ngify/types';
-import { AbstractControlSchema } from './control.schema';
+import type { SafeAny } from '@ngify/types';
+import type { AbstractControlSchema } from './control.schema';
 
 export interface ControlValueMapper<V> {
   /** A parser that maps from a model's value to a form control's value */

@@ -1,7 +1,7 @@
-import { Indexable } from '../types';
-import { AbstractBranchSchema } from './abstract.schema';
-import { AbstractControlSchema } from './control.schema';
-import { SingleSchemaKey } from './types';
+import type { Indexable } from '../types';
+import type { AbstractBranchSchema } from './abstract.schema';
+import type { AbstractControlSchema } from './control.schema';
+import type { SingleSchemaKey } from './types';
 
 /**
  * @public

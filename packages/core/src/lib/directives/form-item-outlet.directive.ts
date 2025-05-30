@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Directive, EnvironmentInjector, Injector, createComponent, inject } from '@angular/core';
-import { SafeAny } from '@ngify/types';
+import type { SafeAny } from '@ngify/types';
 import { FLUENT_FORM_ITEM_CONTENT } from '../tokens';
 
 @Directive({

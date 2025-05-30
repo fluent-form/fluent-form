@@ -1,3 +1,5 @@
+import { Injector, runInInjectionContext } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 import { delay, finalize, of, takeUntil } from 'rxjs';
 import { DestroyedSubject } from './destroyed.service';
 
@@ -6,7 +8,7 @@ describe('DestroyedSubject', () => {
   const initObservable = of('done');
 
   beforeEach(() => {
-    destroyed$ = new DestroyedSubject();
+    destroyed$ = runInInjectionContext(TestBed.inject(Injector), () => new DestroyedSubject());
   });
 
   it('should subscribe work normal', () => {
@@ -32,7 +34,7 @@ describe('DestroyedSubject', () => {
       )
       .subscribe();
 
-    destroyed$.ngOnDestroy();
+    TestBed.resetTestingModule();
 
     expect(result).toBe('final');
   });

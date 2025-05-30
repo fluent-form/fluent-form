@@ -1,7 +1,7 @@
-import { computed, Signal } from '@angular/core';
-import { SafeAny } from '@ngify/types';
-import { AbstractFormGroupSchema, AbstractSchema } from '../schemas';
-import { Indexable } from '../types';
+import { computed, type Signal } from '@angular/core';
+import type { SafeAny } from '@ngify/types';
+import type { AbstractFormGroupSchema, AbstractSchema } from '../schemas';
+import type { Indexable } from '../types';
 import { isArray } from '../utils';
 import { composeBuilder } from './builder';
 

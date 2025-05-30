@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { AbstractSchema, Column } from '../schemas';
+import { Pipe, type PipeTransform } from '@angular/core';
+import type { AbstractSchema, Column } from '../schemas';
 import { isObject } from '../utils';
 
 function isColumn(value: object): value is Column {

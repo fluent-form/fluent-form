@@ -1,7 +1,7 @@
 import { AbstractControl } from '@angular/forms';
-import { SafeAny } from '@ngify/types';
-import { AbstractSchema } from './abstract.schema';
-import { SchemaKey } from './types';
+import type { SafeAny } from '@ngify/types';
+import type { AbstractSchema } from './abstract.schema';
+import type { SchemaKey } from './types';
 
 /**
  * @public
@@ -30,7 +30,10 @@ export interface SchemaLike<Key extends SchemaKey = SchemaKey> {
 
 export interface SchemaContext<S extends SchemaLike = AbstractSchema> {
   schema: S;
-  /** 如果当前没有对应的 control，会返回上一级的 control，这时候一般是 form group/array */
+  /**
+   * If there is no corresponding control, the parent control will be returned,
+   * usually a `FormGroup` or `FormArray`.
+   */
   control: AbstractControl;
   model: SafeAny;
 }

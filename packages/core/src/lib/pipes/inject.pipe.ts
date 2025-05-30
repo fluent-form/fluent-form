@@ -1,4 +1,4 @@
-import { inject, InjectOptions, Injector, Pipe, PipeTransform, ProviderToken } from '@angular/core';
+import { inject, type InjectOptions, Injector, Pipe, type PipeTransform, type ProviderToken } from '@angular/core';
 
 /**
  * @internal

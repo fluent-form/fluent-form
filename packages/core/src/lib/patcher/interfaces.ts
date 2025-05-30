@@ -1,5 +1,5 @@
-import { SafeAny } from '@ngify/types';
-import { AbstractSchema, SchemaType } from '../schemas';
+import type { SafeAny } from '@ngify/types';
+import type { AbstractSchema, SchemaType } from '../schemas';
 
 export type SchemaSelector = '*' | string | SchemaType | (string | SchemaType)[];
 

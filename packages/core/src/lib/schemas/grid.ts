@@ -1,4 +1,4 @@
-import { FluentColDirective, FluentRowDirective } from '../directives';
+import type { FluentColDirective, FluentRowDirective } from '../directives';
 
 export interface Row {
   align?: ReturnType<FluentRowDirective['align']>;

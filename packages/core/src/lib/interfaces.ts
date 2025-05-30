@@ -1,6 +1,6 @@
-import { ValidatorFn } from '@angular/forms';
-import { AbstractSchema } from './schemas';
-import { SchemaType } from './schemas/interfaces';
+import type { ValidatorFn } from '@angular/forms';
+import type { AbstractSchema } from './schemas';
+import type { SchemaType } from './schemas/interfaces';
 
 export interface SchemaConfig<S extends AbstractSchema> {
   type: SchemaType;

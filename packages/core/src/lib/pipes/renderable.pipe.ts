@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { AbstractSchema, SchemaKind } from '../schemas';
+import { Pipe, type PipeTransform } from '@angular/core';
+import { type AbstractSchema, SchemaKind } from '../schemas';
 
 @Pipe({
   name: 'renderable',

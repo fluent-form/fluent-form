@@ -1,4 +1,4 @@
-import { SchemaContext, SchemaLike } from './interfaces';
+import type { SchemaContext, SchemaLike } from './interfaces';
 
 export interface HooksHolder<S extends SchemaLike = SchemaLike> {
   hooks?: {

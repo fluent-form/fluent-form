@@ -1,8 +1,8 @@
-import { FormControlStatus } from '@angular/forms';
-import { SafeAny } from '@ngify/types';
-import { Observable } from 'rxjs';
-import { ComponentOutputMap } from '../types';
-import { SchemaContext } from './interfaces';
+import type { FormControlStatus } from '@angular/forms';
+import type { SafeAny } from '@ngify/types';
+import type { Observable } from 'rxjs';
+import type { ComponentOutputMap } from '../types';
+import type { SchemaContext } from './interfaces';
 
 type ControlEventObserverMap<Val> = {
   valueChange?: (source: Observable<{ event: Val, context: SchemaContext }>) => Observable<SafeAny>;

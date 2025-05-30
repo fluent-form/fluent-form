@@ -1,4 +1,4 @@
-import { inject, Pipe, PipeTransform } from '@angular/core';
+import { inject, Pipe, type PipeTransform } from '@angular/core';
 import { SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP } from '../tokens';
 

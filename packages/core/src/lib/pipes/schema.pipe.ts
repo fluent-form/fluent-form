@@ -1,6 +1,6 @@
-import { inject, Pipe, PipeTransform } from '@angular/core';
-import { AbstractBranchSchema, AbstractControlContainerSchema, AbstractControlSchema, SchemaKey, SingleSchemaKey } from '../schemas';
-import { Indexable } from '../types';
+import { inject, Pipe, type PipeTransform } from '@angular/core';
+import type { AbstractBranchSchema, AbstractControlContainerSchema, AbstractControlSchema, SchemaKey, SingleSchemaKey } from '../schemas';
+import type { Indexable } from '../types';
 import { SchemaUtil } from '../utils';
 
 /**

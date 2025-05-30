@@ -1,5 +1,5 @@
-import { AbstractBranchSchema } from './abstract.schema';
-import { SingleSchemaKey } from './types';
+import type { AbstractBranchSchema } from './abstract.schema';
+import type { SingleSchemaKey } from './types';
 
 /**
  * @public

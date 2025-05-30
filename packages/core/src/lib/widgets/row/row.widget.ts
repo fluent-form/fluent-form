@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentFormItemOutletDirective, FluentGridModule } from '../../directives';
 import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe, RenderablePipe } from '../../pipes';
-import { RowComponentSchema } from '../../schemas';
-import { AbstractWidget, WidgetTemplateContext } from '../widget';
+import type { RowComponentSchema } from '../../schemas';
+import { AbstractWidget, type WidgetTemplateContext } from '../widget';
 
 type RowWidgetTemplateContext = WidgetTemplateContext<RowComponentSchema, FormGroup>;
 

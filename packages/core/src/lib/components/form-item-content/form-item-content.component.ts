@@ -1,8 +1,8 @@
 import { Directive } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
-import { AnyObject } from '@ngify/types';
+import type { AbstractControl } from '@angular/forms';
+import type { AnyObject } from '@ngify/types';
 import { TemplateRefHolder } from '../../directives';
-import { AbstractSchema } from '../../schemas';
+import type { AbstractSchema } from '../../schemas';
 
 export interface FormItemContentContext {
   control: AbstractControl;

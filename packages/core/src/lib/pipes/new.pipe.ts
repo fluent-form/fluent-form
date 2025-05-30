@@ -1,5 +1,5 @@
-import { inject, Injector, Pipe, PipeTransform, runInInjectionContext, Type } from '@angular/core';
-import { SafeAny } from '@ngify/types';
+import { inject, Injector, Pipe, type PipeTransform, runInInjectionContext, Type } from '@angular/core';
+import type { SafeAny } from '@ngify/types';
 
 /**
  * @internal

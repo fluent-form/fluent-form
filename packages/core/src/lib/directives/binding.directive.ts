@@ -32,8 +32,11 @@ function isObserverHolder(value: SafeAny): value is Required<EventObserverHolder
   providers: [DestroyedSubject]
 })
 export class FluentBindingDirective<E extends HTMLElement, C extends object, S extends AbstractSchema> implements OnInit, OnChanges {
-  // TODO: ng17 的 effect 似乎有 bug，对 schema.kind=text 的 widget 不起作用，导致无法绑定事件，具体查看 docs 中的 事件侦听 demo
-  // 目前暂时切换回 @Input，升级 ng19 修复后再改回来
+  // TODO: There seems to be a bug in ng17's effect;
+  // it doesn't work for widgets with `schema.kind = text`,
+  // causing event binding to fail. See the event listening demo in the docs for details.
+  // Currently temporarily switching back to `@Input`;
+  // will revert after upgrading to ng19 where this is fixed.
   @Input() fluentBinding!: { component?: C, schema: S, control: AbstractControl, model: AnyObject };
 
   private readonly elementRef: ElementRef<E> = inject(ElementRef);
@@ -53,8 +56,9 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
   }
 
   ngOnChanges() {
-    // TODO：由于 [fluentBinding]="{}" 这里的对象是写在模板里了，导致每一次 CD 都会创建一个新对象，触发 ngOnChanges
-    // 应该将对象里的参数分开独立传入
+    // TODO: Because the object in `[fluentBinding]="{}"` is written directly in
+    // the template, a new object is created on every change detection, triggering `ngOnChanges`.
+    // The parameters inside the object should be passed separately and independently.
     const { component, schema, control, model } = this.fluentBinding;
     const host = component ?? this.elementRef.nativeElement;
 

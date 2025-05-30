@@ -57,7 +57,7 @@ export class FluentRowDirective {
   readonly gap = input<Gap | Stringify<Gap> | [x: Gap, y: Gap] | Partial<Record<keyof Breakpoints, Gap | [x: Gap, y: Gap]>> | null>();
   readonly justify = input<Justify | null>();
   readonly align = input<Align | null>();
-  /** 当前匹配的断点 */
+  /** Currently matched breakpoints. */
   private readonly breakpoints = toSignal(
     inject(BreakpointObserver).observe(BREAKPOINTS).pipe(
       map(state =>

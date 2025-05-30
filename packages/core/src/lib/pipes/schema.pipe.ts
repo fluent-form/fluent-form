@@ -14,10 +14,10 @@ export class FluentSchemaPipe implements PipeTransform {
   private readonly schemaUtil = inject(SchemaUtil);
 
   /**
-   * 将 value 作为 key，获取 schemas 中的图示
+   * Use value as a key to get the schema from schemas.
    * @param value
    * @param schemas
-   * @param type 用来重载方法的返回值
+   * @param type Used to overload the method's return type
    */
   transform(value: SingleSchemaKey | SchemaKey[], schema: Indexable<AbstractBranchSchema>, type: 'control'): AbstractControlSchema | null;
   transform(value: SingleSchemaKey | SchemaKey[], schema: Indexable<AbstractBranchSchema>, type: 'group'): AbstractControlContainerSchema | null;

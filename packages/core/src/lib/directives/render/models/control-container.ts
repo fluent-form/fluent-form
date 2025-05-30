@@ -5,16 +5,13 @@ import { AbstractControlContainerSchema } from '../../../schemas';
 import { SchemaUtil } from '../../../utils';
 import { FluentOutletDirective } from '../outlet.directive';
 
-/**
- * 抽象的控件容器
- */
 export abstract class FluentControlContainer<T extends AnyObject | AnyArray> {
   abstract readonly schema: Signal<AbstractControlContainerSchema>;
   abstract readonly patchedSchema: Signal<AbstractControlContainerSchema>;
   abstract readonly form: Signal<FormGroup>;
   abstract readonly model: Signal<T>;
 
-  /** 当前容器的指令 */
+  /** The directive of the current container. */
   abstract get directive(): FluentControlContainerDirective<T>;
 }
 

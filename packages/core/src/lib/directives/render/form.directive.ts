@@ -68,7 +68,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentC
     effect(() => {
       const model = this.model();
       untracked(() => {
-        // 如果是外部变更，就赋值到表单
+        // If the change comes from outside, assign the value to the form.
         if (modelChangeCounter++ > 0 && model !== this.internalModel) {
           this.modelUtil.updateForm(
             this.form(),

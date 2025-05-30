@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { AnyObject, SafeAny } from '@ngify/types';
+import type { AnyObject, SafeAny } from '@ngify/types';
 import { isFunction, isString } from '../utils';
 import { CodeEvaluator, isStaticExpression } from './evaluator.service';
 

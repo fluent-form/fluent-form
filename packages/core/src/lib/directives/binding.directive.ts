@@ -1,10 +1,10 @@
-import { DestroyRef, Directive, ElementRef, Input, OnChanges, OnInit, OutputRef, inject, isSignal } from '@angular/core';
-import { SIGNAL, SignalNode, signalSetFn } from '@angular/core/primitives/signals';
+import { DestroyRef, Directive, ElementRef, Input, type OnChanges, type OnInit, type OutputRef, inject, isSignal } from '@angular/core';
+import { SIGNAL, type SignalNode, signalSetFn } from '@angular/core/primitives/signals';
 import { outputToObservable } from '@angular/core/rxjs-interop';
 import { AbstractControl } from '@angular/forms';
-import { AnyObject, SafeAny } from '@ngify/types';
+import type { AnyObject, SafeAny } from '@ngify/types';
 import { Observable, fromEvent, map, takeUntil } from 'rxjs';
-import { AbstractSchema, EventListenerHolder, EventObserverHolder, HooksHolder, PropertyHolder, SchemaContext } from '../schemas';
+import type { AbstractSchema, EventListenerHolder, EventObserverHolder, HooksHolder, PropertyHolder, SchemaContext } from '../schemas';
 import { DestroyedSubject } from '../services';
 
 function isHookHolder(value: SafeAny): value is Required<HooksHolder> {

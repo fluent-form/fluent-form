@@ -1,8 +1,8 @@
-import { InjectionToken, TemplateRef, Type } from '@angular/core';
-import { SafeAny } from '@ngify/types';
-import { AbstractFormContentComponent, AbstractFormItemContentComponent } from './components';
-import { SchemaConfig } from './interfaces';
-import { AbstractWidget } from './widgets/widget';
+import { InjectionToken, type TemplateRef, type Type } from '@angular/core';
+import type { SafeAny } from '@ngify/types';
+import type { AbstractFormContentComponent, AbstractFormItemContentComponent } from './components';
+import type { SchemaConfig } from './interfaces';
+import type { AbstractWidget } from './widgets/widget';
 
 export const WIDGET_MAP = new InjectionToken<Map<string, Type<AbstractWidget<unknown>>>>('');
 

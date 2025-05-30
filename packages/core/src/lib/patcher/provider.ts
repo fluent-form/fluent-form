@@ -1,5 +1,5 @@
-import { InjectionToken, Provider } from '@angular/core';
-import { SchemaPatcher } from './interfaces';
+import { InjectionToken, type Provider } from '@angular/core';
+import type { SchemaPatcher } from './interfaces';
 
 export const SCHEMA_PATCHERS = new InjectionToken<SchemaPatcher[]>('SchemaPatchers');
 

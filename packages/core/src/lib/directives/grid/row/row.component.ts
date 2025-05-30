@@ -4,7 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { Breakpoints } from '../../../breakpoints';
 import { withStyle } from '../../../style';
-import { Stringify } from '../../../types';
+import type { Stringify } from '../../../types';
 import { isArray, isNumber, isString } from '../../../utils';
 
 type Gap = 0 | 1 | 2 | 3 | 4 | 5 | 6;

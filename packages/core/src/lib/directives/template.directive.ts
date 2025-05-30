@@ -1,4 +1,4 @@
-import { DestroyRef, Directive, TemplateRef, inject, input, OnInit } from '@angular/core';
+import { DestroyRef, Directive, TemplateRef, inject, input, type OnInit } from '@angular/core';
 import { NAMED_TEMPLATES } from '../tokens';
 
 @Directive({

@@ -1,7 +1,7 @@
-import { inject, Pipe, PipeTransform } from '@angular/core';
+import { inject, Pipe, type PipeTransform } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { SafeAny } from '@ngify/types';
-import { AbstractSchema, MaybeSchemaReactiveFn } from '../schemas';
+import type { SafeAny } from '@ngify/types';
+import type { AbstractSchema, MaybeSchemaReactiveFn } from '../schemas';
 import { ValueTransformer } from '../services';
 
 /**

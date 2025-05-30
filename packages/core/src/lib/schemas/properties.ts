@@ -1,5 +1,5 @@
-import { SafeAny } from '@ngify/types';
-import { ComponentPropertyMap, HTMLElementPropertyMap } from '../types';
+import type { SafeAny } from '@ngify/types';
+import type { ComponentPropertyMap, HTMLElementPropertyMap } from '../types';
 
 /** 属性修补器 */
 export interface PropertyHolder {

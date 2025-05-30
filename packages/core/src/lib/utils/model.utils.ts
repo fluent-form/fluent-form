@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
-import { AnyArray, AnyObject } from '@ngify/types';
-import { AbstractSchema } from '../schemas';
-import { Indexable } from '../types';
+import type { AnyArray, AnyObject } from '@ngify/types';
+import type { AbstractSchema } from '../schemas';
+import type { Indexable } from '../types';
 import { FormUtil, getChildControl } from './form.utils';
 import { SchemaUtil } from './schema.utils';
 import { ValueUtil } from './value.utils';

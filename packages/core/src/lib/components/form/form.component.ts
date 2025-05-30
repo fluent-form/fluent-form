@@ -1,9 +1,9 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, EnvironmentInjector, Injector, computed, createComponent, effect, inject, input, model, output, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControlStatus, FormGroup } from '@angular/forms';
-import { AnyObject } from '@ngify/types';
-import { AbstractFormGroupSchema } from '../../schemas';
+import { type FormControlStatus, FormGroup } from '@angular/forms';
+import type { AnyObject } from '@ngify/types';
+import type { AbstractFormGroupSchema } from '../../schemas';
 import { FLUENT_FORM_CONTENT, NAMED_TEMPLATES } from '../../tokens';
 import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
 

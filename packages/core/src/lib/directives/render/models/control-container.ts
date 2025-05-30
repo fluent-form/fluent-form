@@ -1,7 +1,7 @@
-import { Directive, Signal, inject } from '@angular/core';
+import { Directive, type Signal, inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { AnyArray, AnyObject } from '@ngify/types';
-import { AbstractControlContainerSchema } from '../../../schemas';
+import type { AnyArray, AnyObject } from '@ngify/types';
+import type { AbstractControlContainerSchema } from '../../../schemas';
 import { SchemaUtil } from '../../../utils';
 import { FluentOutletDirective } from '../outlet.directive';
 

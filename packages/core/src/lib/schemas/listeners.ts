@@ -1,7 +1,7 @@
-import { FormControlStatus } from '@angular/forms';
-import { SafeAny } from '@ngify/types';
-import { ComponentOutputMap } from '../types';
-import { SchemaContext } from './interfaces';
+import type { FormControlStatus } from '@angular/forms';
+import type { SafeAny } from '@ngify/types';
+import type { ComponentOutputMap } from '../types';
+import type { SchemaContext } from './interfaces';
 
 type ControlEventListenerMap<Val> = {
   valueChange?: (value: Val, context: SchemaContext) => void;

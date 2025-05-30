@@ -1,10 +1,10 @@
-import { SafeAny } from '@ngify/types';
-import { FluentColDirective } from '../directives';
-import { Indexable } from '../types';
-import { Column } from './grid';
-import { HooksHolder } from './hooks';
-import { MaybeSchemaReactiveFn, SchemaLike } from './interfaces';
-import { SchemaKey } from './types';
+import type { SafeAny } from '@ngify/types';
+import type { FluentColDirective } from '../directives';
+import type { Indexable } from '../types';
+import type { Column } from './grid';
+import type { HooksHolder } from './hooks';
+import type { MaybeSchemaReactiveFn, SchemaLike } from './interfaces';
+import type { SchemaKey } from './types';
 
 /**
  * 抽象图示

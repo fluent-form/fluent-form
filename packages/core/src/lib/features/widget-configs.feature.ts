@@ -1,8 +1,8 @@
-import { Provider, Type } from '@angular/core';
-import { SafeAny } from '@ngify/types';
-import { SchemaConfig } from '../interfaces';
-import { SchemaPatchFn, provideSchemaPatcher } from '../patcher';
-import { AbstractSchema } from '../schemas';
+import type { Provider, Type } from '@angular/core';
+import type { SafeAny } from '@ngify/types';
+import type { SchemaConfig } from '../interfaces';
+import { type SchemaPatchFn, provideSchemaPatcher } from '../patcher';
+import type { AbstractSchema } from '../schemas';
 import { SchemaKind, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP, WIDGET_MAP } from '../tokens';
 import { AbstractWidget, useRowWidget } from '../widgets';

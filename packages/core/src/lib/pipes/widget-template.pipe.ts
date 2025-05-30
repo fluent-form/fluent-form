@@ -1,10 +1,10 @@
-import { inject, Pipe, PipeTransform, TemplateRef } from '@angular/core';
+import { inject, Pipe, type PipeTransform, TemplateRef } from '@angular/core';
 import { throwCustomTemplateNotFoundError } from '../errors';
-import { AbstractSchema } from '../schemas';
+import type { AbstractSchema } from '../schemas';
 import { SchemaKind } from '../schemas/interfaces';
 import { WidgetTemplateRegistry } from '../services';
 import { NAMED_TEMPLATES } from '../tokens';
-import { Indexable } from '../types';
+import type { Indexable } from '../types';
 
 /**
  * @internal

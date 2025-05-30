@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AnyObject, SafeAny } from '@ngify/types';
+import type { AnyObject, SafeAny } from '@ngify/types';
 
 const RETURN_STR = 'return ';
 const STATIC_EXPRESSION_PATTERN = /^{{.+}}$/;

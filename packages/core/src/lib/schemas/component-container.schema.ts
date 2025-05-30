@@ -1,9 +1,9 @@
-import { AbstractBranchSchema } from './abstract.schema';
-import { Row } from './grid';
-import { ElementEventListenerHolder } from './listeners';
-import { ElementEventObserverHolder } from './observers';
-import { ElementPropertyHolder } from './properties';
-import { SingleSchemaKey } from './types';
+import type { AbstractBranchSchema } from './abstract.schema';
+import type { Row } from './grid';
+import type { ElementEventListenerHolder } from './listeners';
+import type { ElementEventObserverHolder } from './observers';
+import type { ElementPropertyHolder } from './properties';
+import type { SingleSchemaKey } from './types';
 
 /**
  * @public

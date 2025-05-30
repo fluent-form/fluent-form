@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
-import { AnyArray, AnyObject } from '@ngify/types';
-import { AbstractControlSchema } from '../schemas';
+import type { AbstractControl } from '@angular/forms';
+import type { AnyArray, AnyObject } from '@ngify/types';
+import type { AbstractControlSchema } from '../schemas';
 import { isUndefined } from './is.utils';
 import { SchemaUtil } from './schema.utils';
 

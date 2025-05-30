@@ -1,7 +1,7 @@
 import { Component, Directive, ViewEncapsulation, computed, input } from '@angular/core';
 import { Breakpoints, createBreakpointInfix } from '../../../breakpoints';
 import { withStyle } from '../../../style';
-import { Stringify } from '../../../types';
+import type { Stringify } from '../../../types';
 import { isObject } from '../../../utils';
 
 type Cell = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;

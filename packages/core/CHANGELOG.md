@@ -1,3 +1,30 @@
+## 0.28.0 (2025-05-31)
+
+### 🚀 Features
+
+- merge fluentForm & form function ([8b2aaa36](https://github.com/fluent-form/fluent-form/commit/8b2aaa36))
+- add lifecycle hooks options ([bb482719](https://github.com/fluent-form/fluent-form/commit/bb482719))
+- improve observers options ([09183eb0](https://github.com/fluent-form/fluent-form/commit/09183eb0))
+- **core:** add fluentForm & applyRoot API ([866b650b](https://github.com/fluent-form/fluent-form/commit/866b650b))
+- **core:** make FluentFormDirective support fluent template ([f17a33e9](https://github.com/fluent-form/fluent-form/commit/f17a33e9))
+- **core:** make FluentTemplate auto set named templates ([5087c285](https://github.com/fluent-form/fluent-form/commit/5087c285))
+- **core:** make outlet directive support [fluentOutlet] selector ([ca07ca76](https://github.com/fluent-form/fluent-form/commit/ca07ca76))
+- **core:** expose fluentForm function ([8722b169](https://github.com/fluent-form/fluent-form/commit/8722b169))
+- **core:** support none option of ui ([9fd55008](https://github.com/fluent-form/fluent-form/commit/9fd55008))
+- add headful & headless control ([5c71b3f6](https://github.com/fluent-form/fluent-form/commit/5c71b3f6))
+- **docs:** update docs ([a4d1ff7a](https://github.com/fluent-form/fluent-form/commit/a4d1ff7a))
+
+### 🩹 Fixes
+
+- **core:** fix bug ([02763968](https://github.com/fluent-form/fluent-form/commit/02763968))
+- **core:** fix type of default value ([9e7af825](https://github.com/fluent-form/fluent-form/commit/9e7af825))
+- **core:** fix test cases ([078d8d6f](https://github.com/fluent-form/fluent-form/commit/078d8d6f))
+- **core:** support min/maxLength validators for form array ([b3179688](https://github.com/fluent-form/fluent-form/commit/b3179688))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.27.0 (2024-12-20)
 
 ### 🚀 Features

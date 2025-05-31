@@ -1,3 +1,24 @@
+## 0.28.0 (2025-05-31)
+
+### 🚀 Features
+
+- merge fluentForm & form function ([8b2aaa36](https://github.com/fluent-form/fluent-form/commit/8b2aaa36))
+- **ui-zorro:** add transfer widget ([79db591e](https://github.com/fluent-form/fluent-form/commit/79db591e))
+- **ui-zorro:** add applyGroup API ([7c9005b2](https://github.com/fluent-form/fluent-form/commit/7c9005b2))
+- add headful & headless control ([5c71b3f6](https://github.com/fluent-form/fluent-form/commit/5c71b3f6))
+- **ui-zorro:** support compareWith for select widget ([3616e11f](https://github.com/fluent-form/fluent-form/commit/3616e11f))
+- **docs:** update docs ([a4d1ff7a](https://github.com/fluent-form/fluent-form/commit/a4d1ff7a))
+
+### 🩹 Fixes
+
+- **ui-zorro:** fix bug of slider widget ([6c025421](https://github.com/fluent-form/fluent-form/commit/6c025421))
+- **ui-zorro:** fix bug of select widget private context ([82e83270](https://github.com/fluent-form/fluent-form/commit/82e83270))
+- **ui-zorro:** fix bug ([21071d3f](https://github.com/fluent-form/fluent-form/commit/21071d3f))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.27.0 (2024-12-20)
 
 ### 🚀 Features

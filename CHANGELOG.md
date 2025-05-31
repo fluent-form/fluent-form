@@ -1,3 +1,37 @@
+## 0.28.0 (2025-05-31)
+
+### 🚀 Features
+
+- add headful & headless control ([5c71b3f6](https://github.com/fluent-form/fluent-form/commit/5c71b3f6))
+- improve observers options ([09183eb0](https://github.com/fluent-form/fluent-form/commit/09183eb0))
+- add lifecycle hooks options ([bb482719](https://github.com/fluent-form/fluent-form/commit/bb482719))
+- merge fluentForm & form function ([8b2aaa36](https://github.com/fluent-form/fluent-form/commit/8b2aaa36))
+- **core:** support none option of ui ([9fd55008](https://github.com/fluent-form/fluent-form/commit/9fd55008))
+- **core:** expose fluentForm function ([8722b169](https://github.com/fluent-form/fluent-form/commit/8722b169))
+- **core:** make outlet directive support [fluentOutlet] selector ([ca07ca76](https://github.com/fluent-form/fluent-form/commit/ca07ca76))
+- **core:** make FluentTemplate auto set named templates ([5087c285](https://github.com/fluent-form/fluent-form/commit/5087c285))
+- **core:** make FluentFormDirective support fluent template ([f17a33e9](https://github.com/fluent-form/fluent-form/commit/f17a33e9))
+- **core:** add fluentForm & applyRoot API ([866b650b](https://github.com/fluent-form/fluent-form/commit/866b650b))
+- **docs:** update docs ([432216c2](https://github.com/fluent-form/fluent-form/commit/432216c2))
+- **docs:** update docs ([a4d1ff7a](https://github.com/fluent-form/fluent-form/commit/a4d1ff7a))
+- **ui-zorro:** support compareWith for select widget ([3616e11f](https://github.com/fluent-form/fluent-form/commit/3616e11f))
+- **ui-zorro:** add applyGroup API ([7c9005b2](https://github.com/fluent-form/fluent-form/commit/7c9005b2))
+- **ui-zorro:** add transfer widget ([79db591e](https://github.com/fluent-form/fluent-form/commit/79db591e))
+
+### 🩹 Fixes
+
+- **core:** support min/maxLength validators for form array ([b3179688](https://github.com/fluent-form/fluent-form/commit/b3179688))
+- **core:** fix test cases ([078d8d6f](https://github.com/fluent-form/fluent-form/commit/078d8d6f))
+- **core:** fix type of default value ([9e7af825](https://github.com/fluent-form/fluent-form/commit/9e7af825))
+- **core:** fix bug ([02763968](https://github.com/fluent-form/fluent-form/commit/02763968))
+- **ui-zorro:** fix bug ([21071d3f](https://github.com/fluent-form/fluent-form/commit/21071d3f))
+- **ui-zorro:** fix bug of select widget private context ([82e83270](https://github.com/fluent-form/fluent-form/commit/82e83270))
+- **ui-zorro:** fix bug of slider widget ([6c025421](https://github.com/fluent-form/fluent-form/commit/6c025421))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.27.0 (2024-12-20)
 
 ### 🚀 Features

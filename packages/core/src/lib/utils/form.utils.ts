@@ -119,10 +119,10 @@ export class FormUtil {
   }
 
   createFormArrayElements(schemas: Indexable<AbstractSchema>[], model: AnyArray) {
-    // 只拿第一个，其他的忽略
+    // Only take the first one, ignore the rest.
     const [schema] = this.schemaUtil.filterControls(schemas);
 
-    if (!schema) {
+    if (typeof ngDevMode !== 'undefined' && ngDevMode && !schema) {
       throw Error('FormArray element control schema not found');
     }
 
@@ -211,7 +211,7 @@ export class FormUtil {
   }
 
   /**
-   * 从 form 赋值到 model
+   * Assign value from form to model
    * @param model
    * @param form
    * @param schemas
@@ -253,7 +253,7 @@ export class FormUtil {
 
         const value = this.valueUtil.valueOfControl(control, schema);
 
-        // 多字段情况
+        // Multi-field case.
         if (this.schemaUtil.isMultiKeySchema(schema)) {
           (schema.key as string[]).map((prop, idx) => {
             model[prop] = (value as [unknown, unknown])?.[idx] ?? null;

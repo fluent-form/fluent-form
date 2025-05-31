@@ -6,7 +6,7 @@ export function withStaticExpression(): FluentFormFeature<FluentFormFeatureKind.
   return makeFluentFeature(FluentFormFeatureKind.StaticExpression, [
     {
       provide: CodeEvaluator,
-      useClass: DynamicCodeEvaluator
+      useExisting: DynamicCodeEvaluator
     }
   ]);
 }

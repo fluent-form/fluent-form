@@ -22,21 +22,21 @@ export class FluentWidgetTemplatePipe implements PipeTransform {
       case SchemaKind.Template: {
         const dir = this.templates?.find(o => o.name === value.key);
 
-        if (!dir) {
+        if (typeof ngDevMode !== 'undefined' && ngDevMode && !dir) {
           throwCustomTemplateNotFoundError(value.key as string);
         }
 
-        return dir.templateRef;
+        return dir!.templateRef;
       }
 
       case SchemaKind.Headed: {
         const dir = this.templates?.find(o => o.name === value['template']);
 
-        if (!dir) {
+        if (typeof ngDevMode !== 'undefined' && ngDevMode && !dir) {
           throwCustomTemplateNotFoundError(value['template']);
         }
 
-        return dir.templateRef;
+        return dir!.templateRef;
       }
 
       default:

@@ -1,3 +1,5 @@
+import './lib/ng-dev-mode';
+
 export * from './lib/components';
 export * from './lib/compose';
 export * from './lib/directives';

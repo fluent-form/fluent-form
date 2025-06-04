@@ -3,10 +3,11 @@ import type { SafeAny } from '@ngify/types';
 import type { ComponentOutputMap } from '../types';
 import type { SchemaContext } from './interfaces';
 
-interface ControlEventListenerMap<Val> {
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+type ControlEventListenerMap<Val> = {
   valueChange?: (value: Val, context: SchemaContext) => void;
   statusChange?: (status: FormControlStatus, context: SchemaContext) => void;
-}
+};
 
 type ComponentOutputListenerMap<C> = {
   [K in keyof ComponentOutputMap<C>]?: (value: ComponentOutputMap<C>[K], context: SchemaContext) => void
@@ -18,7 +19,7 @@ type ElementEventListenerMap = {
 
 /** 事件侦听器 */
 export interface EventListenerHolder {
-  listeners?: Partial<Record<string, ((...args: SafeAny[]) => void)>>;
+  listeners?: Partial<Record<string, ((...args: SafeAny[]) => SafeAny)>>;
 }
 
 /** 控件事件侦听器 */

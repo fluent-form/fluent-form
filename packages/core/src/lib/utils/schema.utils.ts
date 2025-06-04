@@ -18,6 +18,8 @@ import { SCHEMA_MAP } from '../tokens';
 import type { Indexable } from '../types';
 import { isArray, isString } from './is.utils';
 
+declare const ngDevMode: boolean | undefined;
+
 const ANY_SCHEMA_SELECTOR = '*';
 
 @Injectable({

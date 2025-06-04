@@ -8,9 +8,8 @@ import { isArray, isNumber, isUndefined } from './is.utils';
 import { SchemaUtil } from './schema.utils';
 import { ValueUtil } from './value.utils';
 
-/**
- * @internal
- */
+declare const ngDevMode: boolean | undefined;
+
 @Injectable({
   providedIn: 'root'
 })

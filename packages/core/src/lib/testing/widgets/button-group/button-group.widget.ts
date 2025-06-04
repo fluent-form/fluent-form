@@ -7,11 +7,8 @@ import {
   FluentBindingDirective,
   FluentContextGuardDirective,
   FluentControlPipe,
-  FluentReactivePipe,
-  FluentTemplatePipe,
   FluentWidgetTemplatePipe,
   FluentWithInjectorDirective,
-  InvokePipe,
   type WidgetTemplateContext
 } from '@fluent-form/core';
 
@@ -29,10 +26,7 @@ type ButtonGroupWidgetTemplateContext = WidgetTemplateContext<ButtonGroupCompone
     FluentContextGuardDirective,
     FluentWithInjectorDirective,
     FluentControlPipe,
-    FluentWidgetTemplatePipe,
-    FluentTemplatePipe,
-    FluentReactivePipe,
-    InvokePipe
+    FluentWidgetTemplatePipe
   ],
   templateUrl: './button-group.widget.html'
 })

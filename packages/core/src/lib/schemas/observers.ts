@@ -4,10 +4,11 @@ import type { Observable } from 'rxjs';
 import type { ComponentOutputMap } from '../types';
 import type { SchemaContext } from './interfaces';
 
-interface ControlEventObserverMap<Val> {
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+type ControlEventObserverMap<Val> = {
   valueChange?: (source: Observable<{ event: Val, context: SchemaContext }>) => Observable<SafeAny>;
   statusChange?: (source: Observable<{ event: FormControlStatus, context: SchemaContext }>) => Observable<SafeAny>;
-}
+};
 
 type ComponentOutputObserverMap<C> = {
   [K in keyof ComponentOutputMap<C>]?: (source: Observable<{ event: ComponentOutputMap<C>[K], context: SchemaContext }>) => Observable<SafeAny>

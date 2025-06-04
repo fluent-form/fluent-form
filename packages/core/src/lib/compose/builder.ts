@@ -85,7 +85,8 @@ type BuildKey = typeof BUILD_KEY;
 type Buildable = Record<BuildKey, unknown>;
 /** Get the non-nullable and required keys of an interface. */
 type NonNullableKey<T> = {
-  [K in keyof T]-?: Record<K, T[K]> extends Required<Record<K, T[K]>> ? K : never
+  // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
+  [K in keyof T]-?: Record<K, T[K]> extends { [_ in K]-?: T[K] } ? K : never
 }[keyof T];
 
 /**

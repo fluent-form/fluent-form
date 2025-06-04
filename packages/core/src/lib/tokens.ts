@@ -4,6 +4,8 @@ import type { AbstractFormContentComponent, AbstractFormItemContentComponent } f
 import type { SchemaConfig } from './interfaces';
 import type { AbstractWidget } from './widgets/widget';
 
+declare const ngDevMode: boolean | undefined;
+
 export const WIDGET_MAP = new InjectionToken<Map<string, Type<AbstractWidget<unknown>>>>(
   typeof ngDevMode !== 'undefined' && ngDevMode ? 'WIDGET_MAP' : ''
 );

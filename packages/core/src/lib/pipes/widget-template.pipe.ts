@@ -6,9 +6,8 @@ import { WidgetTemplateRegistry } from '../services';
 import { NAMED_TEMPLATES } from '../tokens';
 import type { Indexable } from '../types';
 
-/**
- * @internal
- */
+declare const ngDevMode: boolean | undefined;
+
 @Pipe({
   name: 'widgetTemplate',
   standalone: true

@@ -2,6 +2,8 @@ import { createComponent, EnvironmentInjector, inject, Injectable, TemplateRef }
 import { throwWidgetNotFoundError } from '../errors';
 import { WIDGET_MAP } from '../tokens';
 
+declare const ngDevMode: boolean | undefined;
+
 @Injectable({ providedIn: 'root' })
 export class WidgetTemplateRegistry extends Map<string, TemplateRef<unknown>> {
   private readonly envInjector = inject(EnvironmentInjector);

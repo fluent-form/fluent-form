@@ -1,7 +1,11 @@
 import { InjectionToken, type Provider } from '@angular/core';
 import type { SchemaPatcher } from './interfaces';
 
-export const SCHEMA_PATCHERS = new InjectionToken<SchemaPatcher[]>(typeof ngDevMode !== 'undefined' && ngDevMode ? 'SchemaPatchers' : '');
+declare const ngDevMode: boolean | undefined;
+
+export const SCHEMA_PATCHERS = new InjectionToken<SchemaPatcher[]>(
+  typeof ngDevMode !== 'undefined' && ngDevMode ? 'SchemaPatchers' : ''
+);
 
 export function provideSchemaPatcher(patcher: SchemaPatcher): Provider {
   return {

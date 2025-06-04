@@ -1,7 +1,16 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, FluentControlPipe, FluentControlWrapperDirective, FluentWidgetTemplatePipe, FluentWithInjectorDirective, WidgetTemplateContext } from '@fluent-form/core';
+import {
+  AbstractWidget,
+  FluentBindingDirective,
+  FluentContextGuardDirective,
+  FluentControlPipe,
+  FluentControlWrapperDirective,
+  FluentWidgetTemplatePipe,
+  FluentWithInjectorDirective,
+  WidgetTemplateContext
+} from '@fluent-form/core';
 import { SpaceCompactComponentSchema } from '../../schemas';
 import { NzSpaceCompactComponent } from './lib/space-compact.component';
 
@@ -20,7 +29,7 @@ type SpaceCompactWidgetTemplateContext = WidgetTemplateContext<SpaceCompactCompo
     FluentWithInjectorDirective,
     FluentControlPipe,
     FluentWidgetTemplatePipe,
-    FluentControlWrapperDirective,
+    FluentControlWrapperDirective
   ],
   templateUrl: './space-compact.widget.html',
   styleUrl: './space-compact.widget.scss'

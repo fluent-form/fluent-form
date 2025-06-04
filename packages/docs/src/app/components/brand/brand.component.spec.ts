@@ -7,7 +7,7 @@ describe('BrandComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BrandComponent],
+      imports: [BrandComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(BrandComponent);

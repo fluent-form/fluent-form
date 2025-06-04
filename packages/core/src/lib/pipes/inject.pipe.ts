@@ -13,5 +13,4 @@ export class FluentInjectPipe implements PipeTransform {
   transform<T>(value: ProviderToken<T>, options?: InjectOptions): T | null {
     return this.injector.get(value, null, options);
   }
-
 }

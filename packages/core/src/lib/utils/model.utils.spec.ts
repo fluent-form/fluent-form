@@ -25,9 +25,7 @@ describe('ModelUtils', () => {
 
   describe('updateForm', () => {
     it('group', () => {
-      const schemas: Indexable<AbstractSchema>[] = [
-        { kind: 'text-field', key: 'input' }
-      ];
+      const schemas: Indexable<AbstractSchema>[] = [{ kind: 'text-field', key: 'input' }];
       const form = formUtil.createFormGroup(schemas, {});
 
       modelUtil.updateForm(form, {}, schemas);
@@ -42,9 +40,7 @@ describe('ModelUtils', () => {
         {
           kind: 'group',
           key: 'object',
-          schemas: [
-            { kind: 'text-field', key: 'input' }
-          ]
+          schemas: [{ kind: 'text-field', key: 'input' }]
         }
       ];
       const form = formUtil.createFormGroup(schemas, {});
@@ -61,9 +57,7 @@ describe('ModelUtils', () => {
         {
           kind: 'array',
           key: 'array',
-          schemas: [
-            { kind: 'text-field' }
-          ]
+          schemas: [{ kind: 'text-field' }]
         }
       ];
       const form = formUtil.createFormGroup(schemas, {});
@@ -86,9 +80,7 @@ describe('ModelUtils', () => {
           schemas: [
             {
               kind: 'array',
-              schemas: [
-                { kind: 'text-field' }
-              ]
+              schemas: [{ kind: 'text-field' }]
             }
           ]
         }
@@ -119,9 +111,7 @@ describe('ModelUtils', () => {
           schemas: [
             {
               kind: 'group',
-              schemas: [
-                { kind: 'text-field', key: 'input' }
-              ]
+              schemas: [{ kind: 'text-field', key: 'input' }]
             }
           ]
         }
@@ -139,9 +129,7 @@ describe('ModelUtils', () => {
     });
 
     it('with mulit key control', () => {
-      const schemas: Indexable<AbstractSchema>[] = [
-        { kind: 'range', key: ['start', 'end'] }
-      ];
+      const schemas: Indexable<AbstractSchema>[] = [{ kind: 'range', key: ['start', 'end'] }];
       const form = formUtil.createFormGroup(schemas, {});
 
       modelUtil.updateForm(form, {}, schemas);
@@ -155,9 +143,7 @@ describe('ModelUtils', () => {
       const schemas: Indexable<AbstractSchema>[] = [
         {
           kind: 'field-group',
-          schemas: [
-            { kind: 'text-field', key: 'input' },
-          ]
+          schemas: [{ kind: 'text-field', key: 'input' }]
         }
       ];
       const form = formUtil.createFormGroup(schemas, {});
@@ -188,9 +174,7 @@ describe('ModelUtils', () => {
         { kind: 'text-field', key: 'input' },
         {
           kind: 'button-group',
-          schemas: [
-            { kind: 'button' }
-          ]
+          schemas: [{ kind: 'button' }]
         }
       ];
       const form = formUtil.createFormGroup(schemas, {});
@@ -206,9 +190,7 @@ describe('ModelUtils', () => {
       const schemas: Indexable<AbstractSchema>[] = [
         {
           kind: 'row',
-          schemas: [
-            { kind: 'text-field', key: 'input' },
-          ]
+          schemas: [{ kind: 'text-field', key: 'input' }]
         }
       ];
       const form = formUtil.createFormGroup(schemas, {});

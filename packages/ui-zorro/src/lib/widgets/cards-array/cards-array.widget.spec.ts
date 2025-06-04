@@ -37,9 +37,7 @@ describe('CardsArrayWidget', () => {
       schemas: [
         {
           kind: 'card',
-          schemas: [
-            { kind: 'text-field' }
-          ]
+          schemas: [{ kind: 'text-field' }]
         }
       ]
     });

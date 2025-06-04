@@ -65,7 +65,7 @@ export const PROVINCES_OPTIONS = [
   }
 ];
 
-export const CITIES_OPTIONS: { [key: string]: Array<{ value: string; label: string; isLeaf?: boolean }> } = {
+export const CITIES_OPTIONS: Record<string, { value: string, label: string, isLeaf?: boolean }[]> = {
   zhejiang: [
     {
       value: 'hangzhou',
@@ -85,7 +85,7 @@ export const CITIES_OPTIONS: { [key: string]: Array<{ value: string; label: stri
   ]
 };
 
-export const SCENICSPOTS_OPTIONS: { [key: string]: Array<{ value: string; label: string; isLeaf?: boolean }> } = {
+export const SCENICSPOTS_OPTIONS: Record<string, { value: string, label: string, isLeaf?: boolean }[]> = {
   hangzhou: [
     {
       value: 'xihu',

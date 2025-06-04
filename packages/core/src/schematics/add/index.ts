@@ -4,9 +4,7 @@ import { addRootProvider } from '@schematics/angular/utility';
 import { NodeDependencyType, addPackageJsonDependency, getPackageJsonDependency } from '@schematics/angular/utility/dependencies';
 import { Schema } from './schema';
 
-const UI_PACKAGE_MAP = new Map<string, string>([
-  ['ng-zorro-antd', '@fluent-form/ui-zorro']
-]);
+const UI_PACKAGE_MAP = new Map<string, string>([['ng-zorro-antd', '@fluent-form/ui-zorro']]);
 
 export default function (options: Schema): Rule {
   return (host: Tree, context: SchematicContext) => {
@@ -26,7 +24,7 @@ function installUIPackage(host: Tree, context: SchematicContext, options: Schema
     addPackageJsonDependency(host, {
       type: NodeDependencyType.Default,
       name: UI_PACKAGE_MAP.get(options.ui)!,
-      version: fluentFormDep.version,
+      version: fluentFormDep.version
     });
 
     context.addTask(new NodePackageInstallTask());
@@ -37,7 +35,7 @@ function addProvider(options: Schema): Rule {
   return addRootProvider(options.project, ({ code, external }) => {
     return code`${external(
       'provideFluentForm',
-      '@fluent-form/core',
+      '@fluent-form/core'
     )}(/* TODO */)`;
   });
 }

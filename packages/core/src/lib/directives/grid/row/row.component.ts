@@ -15,11 +15,11 @@ const SPACER = 16;
 const GAPS = {
   0: 0,
   1: SPACER * 0.25, // 4
-  2: SPACER * 0.5,  // 8
-  3: SPACER,        // 16
-  4: SPACER * 1.5,  // 24
-  5: SPACER * 2,    // 32
-  6: SPACER * 3,    // 48
+  2: SPACER * 0.5, // 8
+  3: SPACER, // 16
+  4: SPACER * 1.5, // 24
+  5: SPACER * 2, // 32
+  6: SPACER * 3 // 48
 };
 const DEFAULT_GAP: Partial<Record<keyof Breakpoints, Gap | [x: Gap, y: Gap]>> = { xs: 1, sm: 2, md: 3, lg: 4, xl: 5 };
 
@@ -29,7 +29,7 @@ const BREAKPOINTS: string[] = [
   Breakpoints.md,
   Breakpoints.lg,
   Breakpoints.xl,
-  Breakpoints.xxl,
+  Breakpoints.xxl
 ];
 
 @Component({
@@ -37,7 +37,7 @@ const BREAKPOINTS: string[] = [
   standalone: true,
   template: '',
   styleUrls: ['./row.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 class FluentRowComponent { }
 
@@ -50,7 +50,7 @@ class FluentRowComponent { }
     '[style.--gap-x.px]': 'gapPx()[0]',
     '[style.--gap-y.px]': 'gapPx()[1]',
     '[style.justify-content]': 'justifyContent()',
-    '[style.align-items]': 'alignItems()',
+    '[style.align-items]': 'alignItems()'
   }
 })
 export class FluentRowDirective {
@@ -63,8 +63,7 @@ export class FluentRowDirective {
       map(state =>
         Object.keys(state.breakpoints)
           .filter(breakpoint => state.breakpoints[breakpoint])
-          .sort((a, b) => BREAKPOINTS.indexOf(b) - BREAKPOINTS.indexOf(a))
-      )
+          .sort((a, b) => BREAKPOINTS.indexOf(b) - BREAKPOINTS.indexOf(a)))
     ),
     { initialValue: [] }
   );
@@ -91,6 +90,7 @@ export class FluentRowDirective {
 
     return getGapPixel(0);
   });
+
   protected readonly justifyContent = computed(() => parseJustifyOrAlign(this.justify()));
   protected readonly alignItems = computed(() => parseJustifyOrAlign(this.align()));
 

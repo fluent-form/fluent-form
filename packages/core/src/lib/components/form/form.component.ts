@@ -1,5 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, EnvironmentInjector, Injector, computed, createComponent, effect, inject, input, model, output, untracked } from '@angular/core';
+import {
+  ChangeDetectionStrategy, Component, DestroyRef, EnvironmentInjector, Injector, computed, createComponent, effect, inject, input, model, output, untracked
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { type FormControlStatus, FormGroup } from '@angular/forms';
 import type { AnyObject } from '@ngify/types';
@@ -39,8 +41,7 @@ export class FluentForm<T extends AnyObject> {
 
   readonly patchedSchema = computed(() => this.schemaUtil.patch(this.schema()));
   protected form = computed<FormGroup>(() =>
-    this.formUtil.createFormGroup(this.patchedSchema(), untracked(() => this.model()))
-  );
+    this.formUtil.createFormGroup(this.patchedSchema(), untracked(() => this.model())));
 
   readonly formChange = output<FormGroup>();
   readonly valueChanges = output<T>();
@@ -72,8 +73,7 @@ export class FluentForm<T extends AnyObject> {
         });
 
         form.statusChanges.pipe(takeUntilDestroyed(destroyRef)).subscribe(status =>
-          this.statusChanges.emit(status)
-        );
+          this.statusChanges.emit(status));
       });
     });
 
@@ -108,7 +108,6 @@ export class FluentForm<T extends AnyObject> {
     );
     this.model.set(this.internalModel);
   }
-
 }
 
 /**

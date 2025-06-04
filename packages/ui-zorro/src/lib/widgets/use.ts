@@ -1,6 +1,39 @@
 import { ValidatorFn, Validators } from '@angular/forms';
 import { FluentFormWidgetConfig, SchemaType, isNumber } from '@fluent-form/core';
-import { AlertComponentSchema, ButtonComponentSchema, ButtonGroupComponentSchema, CardComponentSchema, CardsArraySchema, CascaderControlSchema, CheckboxControlSchema, CheckboxGroupControlSchema, DatePickerControlSchema, DateRangePickerControlSchema, FormArraySchema, FormGroupSchema, HeadingComponentSchema, IconComponentSchema, NumberFieldControlSchema, RadioGroupControlSchema, RateControlSchema, SelectControlSchema, SliderControlSchema, SpaceCompactComponentSchema, SpaceComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsArraySchema, TabsComponentSchema, TextAreaControlSchema, TextFieldControlSchema, TimePickerControlSchema, ToggleControlSchema, TransferControlSchema, TreeSelectControlSchema } from '../schemas';
+import {
+  AlertComponentSchema,
+  ButtonComponentSchema,
+  ButtonGroupComponentSchema,
+  CardComponentSchema,
+  CardsArraySchema,
+  CascaderControlSchema,
+  CheckboxControlSchema,
+  CheckboxGroupControlSchema,
+  DatePickerControlSchema,
+  DateRangePickerControlSchema,
+  FormArraySchema,
+  FormGroupSchema,
+  HeadingComponentSchema,
+  IconComponentSchema,
+  NumberFieldControlSchema,
+  RadioGroupControlSchema,
+  RateControlSchema,
+  SelectControlSchema,
+  SliderControlSchema,
+  SpaceCompactComponentSchema,
+  SpaceComponentSchema,
+  StepComponentSchema,
+  StepsComponentSchema,
+  TabComponentSchema,
+  TabsArraySchema,
+  TabsComponentSchema,
+  TextAreaControlSchema,
+  TextFieldControlSchema,
+  TimePickerControlSchema,
+  ToggleControlSchema,
+  TransferControlSchema,
+  TreeSelectControlSchema
+} from '../schemas';
 import { AlertWidget } from './alert/alert.widget';
 import { ButtonGroupWidget } from './button-group/button-group.widget';
 import { ButtonWidget } from './button/button.widget';
@@ -285,7 +318,7 @@ export function useHeadingWidget(): FluentFormWidgetConfig<HeadingComponentSchem
     patch: schema => {
       schema.col ??= 12;
       return schema;
-    },
+    }
   };
 }
 
@@ -313,7 +346,7 @@ export function useAlertWidget(): FluentFormWidgetConfig<AlertComponentSchema> {
     patch: schema => {
       schema.col ??= 12;
       return schema;
-    },
+    }
   };
 }
 
@@ -356,7 +389,7 @@ export function useStepsWidget(): [FluentFormWidgetConfig<StepsComponentSchema>,
     },
     {
       kind: 'step',
-      type: SchemaType.ComponentContainer,
+      type: SchemaType.ComponentContainer
     }
   ];
 }
@@ -370,7 +403,7 @@ export function useTabsWidget(): [FluentFormWidgetConfig<TabsComponentSchema>, F
     },
     {
       kind: 'tab',
-      type: SchemaType.ComponentContainer,
+      type: SchemaType.ComponentContainer
     }
   ];
 }
@@ -408,7 +441,7 @@ export function useCardsArrayWidget(): [FluentFormWidgetConfig<CardsArraySchema>
     },
     {
       kind: 'card',
-      type: SchemaType.ComponentContainer,
+      type: SchemaType.ComponentContainer
     }
   ];
 }

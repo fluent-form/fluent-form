@@ -15,5 +15,4 @@ export class FluentSchemaTypePipe implements PipeTransform {
   transform(value: string): SchemaType {
     return this.schemaMap.get(value)!.type;
   }
-
 }

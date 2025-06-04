@@ -28,7 +28,7 @@ type ComponentOutputName<C> = Exclude<
  */
 export type ComponentOutputMap<C> = {
   [K in ComponentOutputName<C>]?: C[K] extends EventEmitter<infer E> | OutputRef<infer E> ? E : never
-}
+};
 
 /**
  * Component class properties
@@ -39,7 +39,7 @@ export type ComponentOutputMap<C> = {
  */
 export type ComponentPropertyMap<C> = {
   [K in keyof Omit<C, ComponentOutputName<C>>]?: C[K] extends Signal<infer S> ? S : C[K]
-}
+};
 
 export type Stringify<T> = T extends number ? `${T}` : never;
 

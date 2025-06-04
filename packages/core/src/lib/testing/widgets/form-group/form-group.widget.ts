@@ -24,6 +24,6 @@ type FormGroupWidgetTemplateContext = WidgetTemplateContext<FormGroupSchema, For
     FluentControlPipe,
     RenderablePipe
   ],
-  templateUrl: './form-group.widget.html',
+  templateUrl: './form-group.widget.html'
 })
 export class FormGroupWidget extends AbstractWidget<FormGroupWidgetTemplateContext> { }

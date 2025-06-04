@@ -16,8 +16,8 @@ type RangeWidgetTemplateContext = WidgetTemplateContext<RangeControlSchema, Form
     ReactiveFormsModule,
     RangeComponent,
     FluentBindingDirective,
-    FluentContextGuardDirective,
+    FluentContextGuardDirective
   ],
-  templateUrl: './range.widget.html',
+  templateUrl: './range.widget.html'
 })
 export class RangeWidget extends AbstractWidget<RangeWidgetTemplateContext> { }

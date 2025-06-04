@@ -39,7 +39,7 @@ export interface AddableButton {
     shape?: NzButtonShape;
     danger?: boolean;
     ghost?: boolean;
-  }
+  };
 }
 
 /**

@@ -1,7 +1,22 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
-import { AbstractSchema, AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentFormItemOutletDirective, FluentGridModule, FluentReactivePipe, FormUtil, InvokePipe, RenderablePipe, SchemaUtil, WidgetTemplateContext, isNumber } from '@fluent-form/core';
+import {
+  AbstractSchema,
+  AbstractWidget,
+  FluentBindingDirective,
+  FluentColumnPipe,
+  FluentContextGuardDirective,
+  FluentFormItemOutletDirective,
+  FluentGridModule,
+  FluentReactivePipe,
+  FormUtil,
+  InvokePipe,
+  RenderablePipe,
+  SchemaUtil,
+  WidgetTemplateContext,
+  isNumber
+} from '@fluent-form/core';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -51,7 +66,7 @@ export class TabsArrayWidget extends AbstractWidget<TabsArrayWidgetTemplateConte
       },
       max: (length: TabsArraySchema['length']) => {
         return isNumber(length) ? length : length?.max ?? Infinity;
-      },
+      }
     }
   } as const;
 

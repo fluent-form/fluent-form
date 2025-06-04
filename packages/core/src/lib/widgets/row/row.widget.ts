@@ -22,8 +22,8 @@ type RowWidgetTemplateContext = WidgetTemplateContext<RowComponentSchema, FormGr
     FluentContextGuardDirective,
     FluentColumnPipe,
     FluentControlPipe,
-    RenderablePipe,
+    RenderablePipe
   ],
-  templateUrl: './row.widget.html',
+  templateUrl: './row.widget.html'
 })
 export class RowWidget extends AbstractWidget<RowWidgetTemplateContext> { }

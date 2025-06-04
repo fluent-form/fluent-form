@@ -11,18 +11,18 @@ describe('component-container', () => {
         });
       });
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'steps',
-      schemas: [
-        {
-          kind: 'step',
-          title: 'title',
-          schemas: [
-            { kind: 'text-field', key: 'ipt' }
-          ]
-        }
-      ]
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'steps',
+        schemas: [
+          {
+            kind: 'step',
+            title: 'title',
+            schemas: [{ kind: 'text-field', key: 'ipt' }]
+          }
+        ]
+      }
+    ]);
   });
 
   it('tabs', () => {
@@ -33,18 +33,18 @@ describe('component-container', () => {
         });
       });
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'tabs',
-      schemas: [
-        {
-          kind: 'tab',
-          title: 'title',
-          schemas: [
-            { kind: 'text-field', key: 'ipt' }
-          ]
-        }
-      ]
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'tabs',
+        schemas: [
+          {
+            kind: 'tab',
+            title: 'title',
+            schemas: [{ kind: 'text-field', key: 'ipt' }]
+          }
+        ]
+      }
+    ]);
   });
 
   it('card', () => {
@@ -52,9 +52,11 @@ describe('component-container', () => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       card().schemas(() => { });
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'card',
-      schemas: []
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'card',
+        schemas: []
+      }
+    ]);
   });
 });

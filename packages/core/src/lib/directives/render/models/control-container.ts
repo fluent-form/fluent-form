@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import type { AnyArray, AnyObject } from '@ngify/types';
 import type { AbstractControlContainerSchema } from '../../../schemas';
 import { SchemaUtil } from '../../../utils';
-import { FluentOutletDirective } from '../outlet.directive';
+import type { FluentOutletDirective } from '../outlet.directive';
 
 export abstract class FluentControlContainer<T extends AnyObject | AnyArray> {
   abstract readonly schema: Signal<AbstractControlContainerSchema>;

@@ -21,7 +21,7 @@ export class LinkageExampleComponent {
       .defaultValue('zh')
       .options([
         { label: '中文', value: 'zh' },
-        { label: 'English', value: 'en' },
+        { label: 'English', value: 'en' }
       ]);
 
     select('content')
@@ -31,13 +31,13 @@ export class LinkageExampleComponent {
         if (model.lang === 'zh') {
           return [
             { label: '杰克', value: 'jack' },
-            { label: '露西', value: 'lucy' },
+            { label: '露西', value: 'lucy' }
           ];
         }
 
         return [
           { label: 'Jack', value: 'jack' },
-          { label: 'Lucy', value: 'lucy' },
+          { label: 'Lucy', value: 'lucy' }
         ];
       })
       .col(3);
@@ -47,7 +47,7 @@ export class LinkageExampleComponent {
       .defaultValue(true)
       .options([
         { label: 'Show', value: true },
-        { label: 'Hide', value: false },
+        { label: 'Hide', value: false }
       ])
       .col(3);
 

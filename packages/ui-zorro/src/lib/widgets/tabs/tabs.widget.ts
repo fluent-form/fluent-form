@@ -1,7 +1,17 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlPipe, FluentFormItemOutletDirective, FluentGridModule, FluentReactivePipe, WidgetTemplateContext } from '@fluent-form/core';
+import {
+  AbstractWidget,
+  FluentBindingDirective,
+  FluentColumnPipe,
+  FluentContextGuardDirective,
+  FluentControlPipe,
+  FluentFormItemOutletDirective,
+  FluentGridModule,
+  FluentReactivePipe,
+  WidgetTemplateContext
+} from '@fluent-form/core';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { TabsComponentSchema } from '../../schemas';
 
@@ -23,6 +33,6 @@ type TabsWidgetTemplateContext = WidgetTemplateContext<TabsComponentSchema, Form
     FluentControlPipe,
     FluentColumnPipe
   ],
-  templateUrl: './tabs.widget.html',
+  templateUrl: './tabs.widget.html'
 })
 export class TabsWidget extends AbstractWidget<TabsWidgetTemplateContext> { }

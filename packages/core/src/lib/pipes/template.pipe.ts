@@ -15,8 +15,8 @@ const NAMED_TEMPLATE_PREFIX = '#' as const;
 export class FluentTemplatePipe implements PipeTransform {
   private readonly templates = inject(NAMED_TEMPLATES, { optional: true });
 
-  transform<T>(value: T): T | TemplateRef<SafeAny>
-  transform<T, U>(value: T, defaultValue: U): NonNullable<T> | U | TemplateRef<SafeAny>
+  transform<T>(value: T): T | TemplateRef<SafeAny>;
+  transform<T, U>(value: T, defaultValue: U): NonNullable<T> | U | TemplateRef<SafeAny>;
   transform<T, U>(value: T, defaultValue?: U): T | U | TemplateRef<SafeAny> {
     // If the string starts with '#', try to find the externally registered
     // template and return it.
@@ -31,5 +31,4 @@ export class FluentTemplatePipe implements PipeTransform {
 
     return value ?? defaultValue!;
   }
-
 }

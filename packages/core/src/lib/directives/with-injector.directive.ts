@@ -9,7 +9,6 @@ import { Directive, inject, Injector } from '@angular/core';
   standalone: true
 })
 export class FluentWithInjectorDirective {
-
   constructor() {
     const outlet = inject(NgTemplateOutlet);
     outlet.ngTemplateOutletInjector = Injector.create({
@@ -17,5 +16,4 @@ export class FluentWithInjectorDirective {
       parent: inject(Injector)
     });
   }
-
 }

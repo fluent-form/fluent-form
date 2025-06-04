@@ -50,8 +50,7 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
     if (isHookHolder(schema)) {
       schema.hooks.onInit?.(context);
       this.destroyRef.onDestroy(() =>
-        schema.hooks.onDestroy?.(context)
-      );
+        schema.hooks.onDestroy?.(context));
     }
   }
 
@@ -80,13 +79,13 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
       for (const [eventName, listener] of Object.entries(schema.listeners)) {
         if (eventName === 'valueChange') {
           control.valueChanges.pipe(
-            takeUntil(this.destroyed),
+            takeUntil(this.destroyed)
           ).subscribe(value => {
             listener!(value, context);
           });
         } else if (eventName === 'statusChange') {
           control.statusChanges.pipe(
-            takeUntil(this.destroyed),
+            takeUntil(this.destroyed)
           ).subscribe(status => {
             listener!(status, context);
           });

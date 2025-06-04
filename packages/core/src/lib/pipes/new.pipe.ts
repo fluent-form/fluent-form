@@ -14,5 +14,4 @@ export class FluentNewPipe implements PipeTransform {
   transform<T>(clazz: Type<T>, ...args: SafeAny[]): T {
     return runInInjectionContext(this.injector, () => new clazz(...args));
   }
-
 }

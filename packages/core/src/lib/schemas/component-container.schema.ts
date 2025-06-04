@@ -8,7 +8,7 @@ import type { SingleSchemaKey } from './types';
 /**
  * @public
  */
-export type AbstractComponentContainerSchema<Key extends SingleSchemaKey = SingleSchemaKey> = AbstractBranchSchema<Key>
+export type AbstractComponentContainerSchema<Key extends SingleSchemaKey = SingleSchemaKey> = AbstractBranchSchema<Key>;
 
 /**
  * @public

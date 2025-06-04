@@ -14,8 +14,8 @@ type InputWidgetTemplateContext = WidgetTemplateContext<TextFieldControlSchema, 
   imports: [
     ReactiveFormsModule,
     FluentBindingDirective,
-    FluentContextGuardDirective,
+    FluentContextGuardDirective
   ],
-  templateUrl: './input.widget.html',
+  templateUrl: './input.widget.html'
 })
 export class InputWidget extends AbstractWidget<InputWidgetTemplateContext> { }

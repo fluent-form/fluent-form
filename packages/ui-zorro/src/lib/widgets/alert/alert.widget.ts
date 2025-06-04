@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, FluentTemplatePipe, InvokePipe, WidgetTemplateContext, isBoolean } from '@fluent-form/core';
+import {
+  AbstractWidget,
+  FluentBindingDirective,
+  FluentContextGuardDirective,
+  FluentTemplatePipe,
+  InvokePipe,
+  WidgetTemplateContext,
+  isBoolean
+} from '@fluent-form/core';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { AlertComponentSchema } from '../../schemas';
 
@@ -16,9 +24,9 @@ type AlertWidgetTemplateContext = WidgetTemplateContext<AlertComponentSchema, Fo
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentTemplatePipe,
-    InvokePipe,
+    InvokePipe
   ],
-  templateUrl: './alert.widget.html',
+  templateUrl: './alert.widget.html'
 })
 export class AlertWidget extends AbstractWidget<AlertWidgetTemplateContext> {
   protected readonly helper = {

@@ -15,8 +15,8 @@ type IconWidgetTemplateContext = WidgetTemplateContext<IconComponentSchema, Form
     NzIconModule,
     FluentBindingDirective,
     FluentContextGuardDirective,
-    FluentReactivePipe,
+    FluentReactivePipe
   ],
-  templateUrl: './icon.widget.html',
+  templateUrl: './icon.widget.html'
 })
 export class IconWidget extends AbstractWidget<IconWidgetTemplateContext> { }

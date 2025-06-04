@@ -17,8 +17,8 @@ type ButtonWidgetTemplateContext = WidgetTemplateContext<ButtonComponentSchema, 
     FluentContextGuardDirective,
     FluentReactivePipe,
     FluentGridModule,
-    FluentColumnPipe,
+    FluentColumnPipe
   ],
-  templateUrl: './button.widget.html',
+  templateUrl: './button.widget.html'
 })
 export class ButtonWidget extends AbstractWidget<ButtonWidgetTemplateContext> { }

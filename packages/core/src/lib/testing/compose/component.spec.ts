@@ -6,17 +6,21 @@ describe('component', () => {
     const schema = form(() => {
       template();
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'template',
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'template'
+      }
+    ]);
   });
 
   it('button', () => {
     const schema = form(() => {
       button();
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'button',
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'button'
+      }
+    ]);
   });
 });

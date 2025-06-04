@@ -7,9 +7,11 @@ describe('component-container', () => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       row().schemas(() => { });
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'row',
-      schemas: []
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'row',
+        schemas: []
+      }
+    ]);
   });
 });

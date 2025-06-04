@@ -29,7 +29,7 @@ export class LabelExampleComponent {
       .col(12);
     textField('text-6').label({ content: '长文本长文本长文本自动换行', wrap: true, span: 4 }).col(12);
 
-    button().type('primary').label({ span: 4 }).content('Submit').variants({ block: true })
+    button().type('primary').label({ span: 4 }).content('Submit').variants({ block: true });
   });
 
   readonly model = signal({});

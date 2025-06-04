@@ -6,8 +6,10 @@ describe('control', () => {
     const schema = form(() => {
       headless();
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'headless'
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'headless'
+      }
+    ]);
   });
 });

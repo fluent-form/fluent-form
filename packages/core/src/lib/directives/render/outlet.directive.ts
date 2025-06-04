@@ -11,7 +11,8 @@ import { FluentControlContainer } from './models/control-container';
   exportAs: 'fluentOutlet',
   standalone: true
 })
-export class FluentOutletDirective<T extends AnyObject | AnyArray> implements OnInit, OnChanges, OnDestroy, WidgetTemplateContext<AbstractSchema, AbstractControl> {
+export class FluentOutletDirective<T extends AnyObject | AnyArray>
+implements OnInit, OnChanges, OnDestroy, WidgetTemplateContext<AbstractSchema, AbstractControl> {
   private readonly registry = inject(WidgetTemplateRegistry);
   private readonly viewContainerRef = inject(ViewContainerRef);
   private readonly controlContainer: FluentControlContainer<T> = inject(FluentControlContainer<T>, { host: true, skipSelf: true });
@@ -23,10 +24,12 @@ export class FluentOutletDirective<T extends AnyObject | AnyArray> implements On
     this.viewContainerRef.length && this.viewContainerRef.clear();
     this.viewContainerRef.createEmbeddedView(this.registry.get(value.kind), this);
   }
+
   /** @internal */
   get schema() {
     return this._schema;
   }
+
   /** @internal */
   control!: AbstractControl;
   /** @internal */

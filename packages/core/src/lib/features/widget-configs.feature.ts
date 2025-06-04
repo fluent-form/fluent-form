@@ -23,7 +23,7 @@ export function provideWidgetConfigs(configs: (FluentFormWidgetConfig<SafeAny> |
     {
       provide: WIDGET_MAP,
       useFactory: () => {
-        const map: Map<string, Type<AbstractWidget<unknown>>> = new Map(
+        const map = new Map<string, Type<AbstractWidget<unknown>>>(
           _configs.filter(config => config.widget).map(feature => [
             feature.kind,
             feature.widget!
@@ -36,7 +36,7 @@ export function provideWidgetConfigs(configs: (FluentFormWidgetConfig<SafeAny> |
     {
       provide: SCHEMA_MAP,
       useFactory: () => {
-        const map: Map<string, SchemaConfig<SafeAny>> = new Map(
+        const map = new Map<string, SchemaConfig<SafeAny>>(
           _configs.map(config => [
             config.kind,
             config
@@ -56,7 +56,6 @@ export function provideWidgetConfigs(configs: (FluentFormWidgetConfig<SafeAny> |
       provideSchemaPatcher({
         selector: config.kind,
         patch: config.patch!
-      })
-    ),
+      }))
   ];
 }

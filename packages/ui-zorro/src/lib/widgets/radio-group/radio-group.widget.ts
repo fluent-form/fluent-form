@@ -17,6 +17,6 @@ type RadioGroupWidgetTemplateContext = WidgetTemplateContext<RadioGroupControlSc
     FluentBindingDirective,
     FluentContextGuardDirective
   ],
-  templateUrl: './radio-group.widget.html',
+  templateUrl: './radio-group.widget.html'
 })
 export class RadioGroupWidget extends AbstractWidget<RadioGroupWidgetTemplateContext> { }

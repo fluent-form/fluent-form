@@ -42,5 +42,4 @@ export class RangeComponent implements ControlValueAccessor {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setDisabledState?(isDisabled: boolean): void { }
-
 }

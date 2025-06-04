@@ -1,6 +1,13 @@
 import { Component, Pipe, PipeTransform } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, FluentReactivePipe, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
+import {
+  AbstractWidget,
+  FluentBindingDirective,
+  FluentContextGuardDirective,
+  FluentReactivePipe,
+  FluentTemplatePipe,
+  WidgetTemplateContext
+} from '@fluent-form/core';
 import { SafeAny } from '@ngify/types';
 import { NzTransferModule, TransferChange, TransferItem } from 'ng-zorro-antd/transfer';
 import { TransferControlSchema } from '../../schemas';
@@ -33,7 +40,7 @@ export class TransferItemsPipe implements PipeTransform {
     FluentReactivePipe,
     TransferItemsPipe
   ],
-  templateUrl: './transfer.widget.html',
+  templateUrl: './transfer.widget.html'
 })
 export class TransferWidget extends AbstractWidget<TransferWidgetTemplateContext> {
   onChange(event: TransferChange, control: AbstractControl) {

@@ -1,4 +1,4 @@
 export interface Schema {
-  project: string
-  ui: string
+  project: string;
+  ui: string;
 }

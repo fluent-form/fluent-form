@@ -16,5 +16,4 @@ export class FluentContextGuardDirective<T> {
   static ngTemplateContextGuard<T>(_: FluentContextGuardDirective<T>, context: unknown): context is T {
     return true;
   }
-
 }

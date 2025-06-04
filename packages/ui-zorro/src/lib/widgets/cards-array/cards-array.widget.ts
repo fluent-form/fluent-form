@@ -2,7 +2,26 @@ import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
-import { AbstractSchema, AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentFormItemOutletDirective, FluentGridModule, FluentReactivePipe, FluentTemplatePipe, FormUtil, InvokePipe, RenderablePipe, SchemaUtil, WidgetTemplateContext, WithoutSchemaReactiveFn, isBoolean, isNumber, isUndefined } from '@fluent-form/core';
+import {
+  AbstractSchema,
+  AbstractWidget,
+  FluentBindingDirective,
+  FluentColumnPipe,
+  FluentContextGuardDirective,
+  FluentFormItemOutletDirective,
+  FluentGridModule,
+  FluentReactivePipe,
+  FluentTemplatePipe,
+  FormUtil,
+  InvokePipe,
+  RenderablePipe,
+  SchemaUtil,
+  WidgetTemplateContext,
+  WithoutSchemaReactiveFn,
+  isBoolean,
+  isNumber,
+  isUndefined
+} from '@fluent-form/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
@@ -49,14 +68,14 @@ export class CardsArrayWidget extends AbstractWidget<FormArrayWidgetTemplateCont
       },
       max: (length: CardsArraySchema['length']) => {
         return isNumber(length) ? length : length?.max ?? Infinity;
-      },
+      }
     },
     addable: (addable: WithoutSchemaReactiveFn<CardsArraySchema['addable']>): AddableButton => {
       if (isUndefined(addable) || isBoolean(addable)) {
         return {
           type: 'dashed',
           icon: 'plus',
-          disabled: isBoolean(addable) ? !addable : false,
+          disabled: isBoolean(addable) ? !addable : false
         };
       }
 

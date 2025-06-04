@@ -71,43 +71,33 @@ describe('form.utils', () => {
       it('normal', () => {
         const form = util.createFormGroup({
           kind: 'group',
-          schemas: [
-            { kind: 'text-field', key: 'input' }
-          ]
+          schemas: [{ kind: 'text-field', key: 'input' }]
         }, {});
 
         expect(form.value).toEqual({ input: null });
       });
 
       it('with control default value', () => {
-        const form = util.createFormGroup([
-          { kind: 'text-field', key: 'input', defaultValue: 'control default value' }
-        ], {});
+        const form = util.createFormGroup([{ kind: 'text-field', key: 'input', defaultValue: 'control default value' }], {});
 
         expect(form.value).toEqual({ input: 'control default value' });
       });
 
       it('with model default value', () => {
-        const form = util.createFormGroup([
-          { kind: 'text-field', key: 'input', defaultValue: 'control default value' }
-        ], { input: 'model value' });
+        const form = util.createFormGroup([{ kind: 'text-field', key: 'input', defaultValue: 'control default value' }], { input: 'model value' });
 
         expect(form.value).toEqual({ input: 'model value' });
       });
 
       describe('with mulit key control', () => {
         it('normal', () => {
-          const form = util.createFormGroup([
-            { kind: 'range', key: ['start', 'end'] }
-          ], {});
+          const form = util.createFormGroup([{ kind: 'range', key: ['start', 'end'] }], {});
 
           expect(form.value).toEqual({ 'start,end': null });
         });
 
         it('with model default value', () => {
-          const form = util.createFormGroup([
-            { kind: 'range', key: ['start', 'end'] }
-          ], { start: 1, end: 100 });
+          const form = util.createFormGroup([{ kind: 'range', key: ['start', 'end'] }], { start: 1, end: 100 });
 
           expect(form.value).toEqual({ 'start,end': [1, 100] });
         });
@@ -119,9 +109,7 @@ describe('form.utils', () => {
           {
             kind: 'group',
             key: 'group',
-            schemas: [
-              { kind: 'text-field', key: 'input' }
-            ]
+            schemas: [{ kind: 'text-field', key: 'input' }]
           }
         ], {});
 
@@ -139,9 +127,7 @@ describe('form.utils', () => {
           {
             kind: 'array',
             key: 'array',
-            schemas: [
-              { kind: 'text-field' }
-            ]
+            schemas: [{ kind: 'text-field' }]
           }
         ], {});
 
@@ -155,9 +141,7 @@ describe('form.utils', () => {
         const form = util.createFormGroup([
           {
             kind: 'field-group',
-            schemas: [
-              { kind: 'text-field', key: 'input' }
-            ]
+            schemas: [{ kind: 'text-field', key: 'input' }]
           }
         ], {});
 
@@ -178,9 +162,7 @@ describe('form.utils', () => {
           { kind: 'text-field', key: 'input' },
           {
             kind: 'button-group',
-            schemas: [
-              { kind: 'button' }
-            ]
+            schemas: [{ kind: 'button' }]
           }
         ], {});
 
@@ -191,9 +173,7 @@ describe('form.utils', () => {
         const form = util.createFormGroup([
           {
             kind: 'row',
-            schemas: [
-              { kind: 'text-field', key: 'input' },
-            ]
+            schemas: [{ kind: 'text-field', key: 'input' }]
           }
         ], {});
 
@@ -204,7 +184,7 @@ describe('form.utils', () => {
         const form = util.createFormGroup([
           { kind: 'text-field', key: 'a.b.c', defaultValue: 'hello' },
           { kind: 'text-field', key: 'a.b.d', defaultValue: 'world' },
-          { kind: 'text-field', key: 'a.b.e.f', defaultValue: '!' },
+          { kind: 'text-field', key: 'a.b.e.f', defaultValue: '!' }
         ], {});
 
         expect(form.value).toEqual({
@@ -223,9 +203,7 @@ describe('form.utils', () => {
       it('normal', () => {
         const form = util.createFormArray({
           kind: 'array',
-          schemas: [
-            { kind: 'text-field' }
-          ]
+          schemas: [{ kind: 'text-field' }]
         }, []);
 
         expect(form.value).toEqual([]);
@@ -235,30 +213,22 @@ describe('form.utils', () => {
         const form1 = util.createFormArray({
           kind: 'array',
           length: 1,
-          schemas: [
-            { kind: 'text-field' }
-          ]
+          schemas: [{ kind: 'text-field' }]
         }, []);
         const form2 = util.createFormArray({
           kind: 'array',
           length: { min: 1, max: 5 },
-          schemas: [
-            { kind: 'text-field' }
-          ]
+          schemas: [{ kind: 'text-field' }]
         }, []);
         const form3 = util.createFormArray({
           kind: 'array',
           length: { min: 1 },
-          schemas: [
-            { kind: 'text-field' }
-          ]
+          schemas: [{ kind: 'text-field' }]
         }, ['']);
         const form4 = util.createFormArray({
           kind: 'array',
           length: { max: 1 },
-          schemas: [
-            { kind: 'text-field' }
-          ]
+          schemas: [{ kind: 'text-field' }]
         }, ['']);
 
         expect(form1.valid).toEqual(false);
@@ -279,9 +249,7 @@ describe('form.utils', () => {
       it('with model value', () => {
         const form = util.createFormArray({
           kind: 'array',
-          schemas: [
-            { kind: 'text-field' }
-          ]
+          schemas: [{ kind: 'text-field' }]
         }, ['hello', 'world']);
 
         expect(form.value).toEqual(['hello', 'world']);
@@ -293,9 +261,7 @@ describe('form.utils', () => {
           schemas: [
             {
               kind: 'field-group',
-              schemas: [
-                { kind: 'text-field' }
-              ]
+              schemas: [{ kind: 'text-field' }]
             }
           ]
         }, ['hello', 'world']);
@@ -322,9 +288,7 @@ describe('form.utils', () => {
             { kind: 'text-field' },
             {
               kind: 'button-group',
-              schemas: [
-                { kind: 'button' }
-              ]
+              schemas: [{ kind: 'button' }]
             }
           ]
         }, ['hello', 'world']);
@@ -338,9 +302,7 @@ describe('form.utils', () => {
           schemas: [
             {
               kind: 'row',
-              schemas: [
-                { kind: 'text-field' }
-              ]
+              schemas: [{ kind: 'text-field' }]
             }
           ]
         }, ['hello', 'world']);
@@ -354,9 +316,7 @@ describe('form.utils', () => {
           schemas: [
             {
               kind: 'group',
-              schemas: [
-                { kind: 'text-field', key: 'input' }
-              ]
+              schemas: [{ kind: 'text-field', key: 'input' }]
             }
           ]
         }, [{ input: 'input' }]);
@@ -370,9 +330,7 @@ describe('form.utils', () => {
           schemas: [
             {
               kind: 'array',
-              schemas: [
-                { kind: 'text-field' }
-              ]
+              schemas: [{ kind: 'text-field' }]
             }
           ]
         }, [['hello', 'world']]);
@@ -392,9 +350,7 @@ describe('form.utils', () => {
         const schema: Indexable<AbstractSchema> = {
           kind: 'group',
           key: 'group',
-          schemas: [
-            { kind: 'text-field', key: 'input' }
-          ]
+          schemas: [{ kind: 'text-field', key: 'input' }]
         };
         const control = util.createAnyControl(schema, {});
         expect(control.value).toEqual({ input: null });
@@ -404,9 +360,7 @@ describe('form.utils', () => {
         const schema: Indexable<AbstractSchema> = {
           kind: 'array',
           key: 'array',
-          schemas: [
-            { kind: 'text-field' }
-          ]
+          schemas: [{ kind: 'text-field' }]
         };
         const control = util.createAnyControl(schema, {});
         expect(control.value).toEqual([]);
@@ -415,9 +369,7 @@ describe('form.utils', () => {
 
     describe('updateModel', () => {
       it('with control', () => {
-        const schemas: Indexable<AbstractSchema>[] = [
-          { kind: 'text-field', key: 'txt', defaultValue: '1' }
-        ];
+        const schemas: Indexable<AbstractSchema>[] = [{ kind: 'text-field', key: 'txt', defaultValue: '1' }];
         const form = util.createFormGroup(schemas, {});
 
         expect(util.updateModel({}, form, schemas)).toEqual({ txt: '1' });
@@ -435,18 +387,14 @@ describe('form.utils', () => {
 
       describe('with mulit key control', () => {
         it('normal', () => {
-          const schemas: Indexable<AbstractSchema>[] = [
-            { kind: 'range', key: ['start', 'end'] }
-          ];
+          const schemas: Indexable<AbstractSchema>[] = [{ kind: 'range', key: ['start', 'end'] }];
           const form = util.createFormGroup(schemas, {});
 
           expect(util.updateModel({}, form, schemas)).toEqual({ start: null, end: null });
         });
 
         it('with default value', () => {
-          const schemas: Indexable<AbstractSchema>[] = [
-            { kind: 'range', key: ['start', 'end'], defaultValue: [0, 10] }
-          ];
+          const schemas: Indexable<AbstractSchema>[] = [{ kind: 'range', key: ['start', 'end'], defaultValue: [0, 10] }];
           const form = util.createFormGroup(schemas, {});
 
           expect(util.updateModel({}, form, schemas)).toEqual({ start: 0, end: 10 });
@@ -454,18 +402,14 @@ describe('form.utils', () => {
       });
 
       it('with component', () => {
-        const schemas: Indexable<AbstractSchema>[] = [
-          { kind: 'button' }
-        ];
+        const schemas: Indexable<AbstractSchema>[] = [{ kind: 'button' }];
         const form = util.createFormGroup(schemas, {});
 
         expect(util.updateModel({}, form, schemas)).toEqual({});
       });
 
       it('with component wrapper', () => {
-        const schemas: Indexable<AbstractSchema>[] = [
-          { kind: 'button-group', schemas: [] }
-        ];
+        const schemas: Indexable<AbstractSchema>[] = [{ kind: 'button-group', schemas: [] }];
         const form = util.createFormGroup(schemas, {});
 
         expect(util.updateModel({}, form, schemas)).toEqual({});
@@ -476,9 +420,7 @@ describe('form.utils', () => {
           {
             kind: 'group',
             key: 'obj',
-            schemas: [
-              { kind: 'text-field', key: 'txt', defaultValue: '1' }
-            ]
+            schemas: [{ kind: 'text-field', key: 'txt', defaultValue: '1' }]
           }
         ];
         const form = util.createFormGroup(schemas, {});
@@ -491,9 +433,7 @@ describe('form.utils', () => {
           {
             kind: 'array',
             key: 'array',
-            schemas: [
-              { kind: 'text-field' }
-            ]
+            schemas: [{ kind: 'text-field' }]
           }
         ];
         const form = util.createFormGroup(schemas, { array: [1, 2] });
@@ -505,7 +445,7 @@ describe('form.utils', () => {
         const schemas: Indexable<AbstractSchema>[] = [
           { kind: 'text-field', key: 'a.b.c', defaultValue: 'hello' },
           { kind: 'text-field', key: 'a.b.d', defaultValue: 'world' },
-          { kind: 'text-field', key: 'a.b.e.f', defaultValue: '!' },
+          { kind: 'text-field', key: 'a.b.e.f', defaultValue: '!' }
         ];
         const form = util.createFormGroup(schemas, {});
 
@@ -525,7 +465,7 @@ describe('form.utils', () => {
       it('value', () => {
         const schemas: Indexable<AbstractControlSchema>[] = [
           { kind: 'text-field', key: 'txt' },
-          { kind: 'text-field', key: 'txt2', value: ctx => ctx.model.txt },
+          { kind: 'text-field', key: 'txt2', value: ctx => ctx.model.txt }
         ];
         const form = util.createFormGroup(schemas, {});
 
@@ -539,7 +479,7 @@ describe('form.utils', () => {
         it('normal', () => {
           const schemas: Indexable<AbstractSchema>[] = [
             { kind: 'text-field', key: 'txt', disabled: (ctx: SafeAny) => ctx.model.txt },
-            { kind: 'text-field', key: 'txt2' },
+            { kind: 'text-field', key: 'txt2' }
           ];
           const form = util.createFormGroup(schemas, {});
 
@@ -555,7 +495,7 @@ describe('form.utils', () => {
         it('with component', () => {
           const schemas: Indexable<AbstractSchema>[] = [
             { kind: 'button' },
-            { kind: 'text-field', key: 'txt', disabled: (ctx: SafeAny) => ctx.model.txt },
+            { kind: 'text-field', key: 'txt', disabled: (ctx: SafeAny) => ctx.model.txt }
           ];
           const form = util.createFormGroup(schemas, {});
 
@@ -568,9 +508,7 @@ describe('form.utils', () => {
             {
               kind: 'group',
               key: 'obj',
-              schemas: [
-                { kind: 'text-field', key: 'txt', disabled: (ctx: SafeAny) => ctx.model.txt },
-              ]
+              schemas: [{ kind: 'text-field', key: 'txt', disabled: (ctx: SafeAny) => ctx.model.txt }]
             }
           ];
           const form = util.createFormGroup(schemas, {});
@@ -584,9 +522,7 @@ describe('form.utils', () => {
             {
               kind: 'array',
               key: 'arr',
-              schemas: [
-                { kind: 'text-field', key: 0, disabled: (ctx: SafeAny) => ctx.model[0] },
-              ]
+              schemas: [{ kind: 'text-field', key: 0, disabled: (ctx: SafeAny) => ctx.model[0] }]
             }
           ];
           const form = util.createFormGroup(schemas, { arr: [true] });
@@ -600,7 +536,7 @@ describe('form.utils', () => {
         it('normal', () => {
           const schemas: Indexable<AbstractSchema>[] = [
             { kind: 'toggle', key: 'required' },
-            { kind: 'text-field', key: 'text', required: (ctx: SafeAny) => ctx.model.required },
+            { kind: 'text-field', key: 'text', required: (ctx: SafeAny) => ctx.model.required }
           ];
           const form = util.createFormGroup(schemas, {});
 
@@ -618,7 +554,7 @@ describe('form.utils', () => {
         it('with component', () => {
           const schemas: Indexable<AbstractSchema>[] = [
             { kind: 'button' },
-            { kind: 'text-field', key: 'txt', required: (ctx: SafeAny) => ctx.model.txt },
+            { kind: 'text-field', key: 'txt', required: (ctx: SafeAny) => ctx.model.txt }
           ];
           const form = util.createFormGroup(schemas, {});
 
@@ -633,7 +569,7 @@ describe('form.utils', () => {
               key: 'obj',
               schemas: [
                 { kind: 'toggle', key: 'required' },
-                { kind: 'text-field', key: 'text', required: (ctx: SafeAny) => ctx.model.required },
+                { kind: 'text-field', key: 'text', required: (ctx: SafeAny) => ctx.model.required }
               ]
             }
           ];
@@ -655,9 +591,7 @@ describe('form.utils', () => {
             {
               kind: 'array',
               key: 'arr',
-              schemas: [
-                { kind: 'text-field', key: 0, required: (ctx: SafeAny) => ctx.model[0] },
-              ]
+              schemas: [{ kind: 'text-field', key: 0, required: (ctx: SafeAny) => ctx.model[0] }]
             }
           ];
           const form = util.createFormGroup(schemas, { arr: [true] });
@@ -670,14 +604,10 @@ describe('form.utils', () => {
   });
 
   it('getChildControl', () => {
-    const group = util.createFormGroup([
-      { kind: 'text-field', key: 'input' }
-    ], {});
+    const group = util.createFormGroup([{ kind: 'text-field', key: 'input' }], {});
     const array = util.createFormArray({
       kind: 'array',
-      schemas: [
-        { kind: 'text-field' }
-      ]
+      schemas: [{ kind: 'text-field' }]
     }, ['str']);
 
     expect(getChildControl(group, 'input')).toBeTruthy();

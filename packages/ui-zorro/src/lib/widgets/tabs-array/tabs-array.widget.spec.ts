@@ -33,9 +33,7 @@ describe('TabsArrayWidget', () => {
     const formArray = new FormArray<SafeAny>([]);
     component['push'](formArray, {
       kind: 'tabs-array',
-      schemas: [
-        { kind: 'text-field' }
-      ]
+      schemas: [{ kind: 'text-field' }]
     });
 
     expect(formArray.length).toBe(1);

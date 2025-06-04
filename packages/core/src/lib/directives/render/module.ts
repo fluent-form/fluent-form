@@ -5,11 +5,11 @@ import { FluentOutletDirective } from './outlet.directive';
 @NgModule({
   imports: [
     FluentFormDirective,
-    FluentOutletDirective,
+    FluentOutletDirective
   ],
   exports: [
     FluentFormDirective,
-    FluentOutletDirective,
+    FluentOutletDirective
   ]
 })
 export class FluentFormRenderModule { }

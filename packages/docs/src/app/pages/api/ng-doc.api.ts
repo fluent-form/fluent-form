@@ -15,8 +15,8 @@ const Api: NgDocApi = {
       route: 'ui-zorro',
       include: 'packages/ui-zorro/src/**/*.ts',
       exclude: 'packages/ui-zorro/src/**/*.spec.ts'
-    },
-  ],
+    }
+  ]
 };
 
 export default Api;

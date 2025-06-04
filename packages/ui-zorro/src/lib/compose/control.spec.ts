@@ -1,5 +1,26 @@
 import { form } from '@fluent-form/core';
-import { cascader, checkbox, checkboxGroup, colorPicker, datePicker, dateRangePicker, datetimePicker, headed, numberField, passwordField, radioGroup, rate, select, slider, textArea, textField, timePicker, toggle, transfer, treeSelect } from './control';
+import {
+  cascader,
+  checkbox,
+  checkboxGroup,
+  colorPicker,
+  datePicker,
+  dateRangePicker,
+  datetimePicker,
+  headed,
+  numberField,
+  passwordField,
+  radioGroup,
+  rate,
+  select,
+  slider,
+  textArea,
+  textField,
+  timePicker,
+  toggle,
+  transfer,
+  treeSelect
+} from './control';
 
 describe('control', () => {
   it('headed', () => {
@@ -34,11 +55,13 @@ describe('control', () => {
 
   it('datetime-picker', () => {
     const schema = form(() => datetimePicker('datetime'));
-    expect(schema().schemas).toEqual([{
-      kind: 'date-picker',
-      key: 'datetime',
-      time: true
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'date-picker',
+        key: 'datetime',
+        time: true
+      }
+    ]);
   });
 
   it('time-picker', () => {

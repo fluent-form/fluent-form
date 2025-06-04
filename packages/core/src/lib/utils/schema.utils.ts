@@ -2,7 +2,17 @@ import { inject, Injectable } from '@angular/core';
 import { type ValidatorFn, Validators } from '@angular/forms';
 import { throwWidgetNotFoundError } from '../errors';
 import { SCHEMA_PATCHERS } from '../patcher';
-import type { AbstractBranchSchema, AbstractComponentContainerSchema, AbstractComponentWrapperSchema, AbstractControlContainerSchema, AbstractControlSchema, AbstractControlWrapperSchema, AbstractSchema, SchemaKey, SingleSchemaKey } from '../schemas';
+import type {
+  AbstractBranchSchema,
+  AbstractComponentContainerSchema,
+  AbstractComponentWrapperSchema,
+  AbstractControlContainerSchema,
+  AbstractControlSchema,
+  AbstractControlWrapperSchema,
+  AbstractSchema,
+  SchemaKey,
+  SingleSchemaKey
+} from '../schemas';
 import { type SchemaLike, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP } from '../tokens';
 import type { Indexable } from '../types';

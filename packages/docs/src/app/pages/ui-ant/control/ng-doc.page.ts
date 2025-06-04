@@ -47,7 +47,7 @@ const ControlPage: NgDocPage = {
     CheckboxGroupExampleComponent,
     RateExampleComponent,
     TransferExampleComponent,
-    ColorExampleComponent,
+    ColorExampleComponent
   },
   order: 2
 };

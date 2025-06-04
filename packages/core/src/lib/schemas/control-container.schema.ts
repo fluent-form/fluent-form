@@ -24,11 +24,11 @@ export interface AbstractControlContainerSchema<Key extends SingleSchemaKey = Si
 /**
  * @public
  */
-export type AbstractFormGroupSchema<Key extends SingleSchemaKey = SingleSchemaKey> = AbstractControlContainerSchema<Key>
+export type AbstractFormGroupSchema<Key extends SingleSchemaKey = SingleSchemaKey> = AbstractControlContainerSchema<Key>;
 
 /**
  * @public
  */
 export interface AbstractFormArraySchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractControlContainerSchema<Key> {
-  length?: Length
+  length?: Length;
 }

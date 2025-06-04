@@ -42,7 +42,5 @@ export class FluentWidgetTemplatePipe implements PipeTransform {
       default:
         return this.registry.get(value.kind);
     }
-
   }
-
 }

@@ -14,7 +14,6 @@ function isColumn(value: object): value is Column {
   standalone: true
 })
 export class FluentColumnPipe implements PipeTransform {
-
   transform<T extends keyof Column>(value: AbstractSchema['col'], type: T): Column[T] {
     if (!value) {
       return null;
@@ -26,5 +25,4 @@ export class FluentColumnPipe implements PipeTransform {
 
     return type === 'span' ? (value as Column[T]) : null;
   }
-
 }

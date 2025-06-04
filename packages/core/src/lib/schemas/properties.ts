@@ -3,7 +3,7 @@ import type { ComponentPropertyMap, HTMLElementPropertyMap } from '../types';
 
 /** 属性修补器 */
 export interface PropertyHolder {
-  properties?: Record<string, SafeAny>
+  properties?: Record<string, SafeAny>;
 }
 
 /** 组件属性修补器 */

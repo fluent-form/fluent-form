@@ -13,8 +13,8 @@ export interface AbstractSchema<Key extends SchemaKey = SchemaKey> extends Schem
   /* Used to define the width of the control. */
   col?: Column | ReturnType<FluentColDirective['span']>;
   hidden?: MaybeSchemaReactiveFn<AbstractSchema, boolean>;
-  class?: null | string | string[] | { [className: string]: boolean | undefined | null };
-  style?: string | undefined | null | { [styleName: string]: SafeAny };
+  class?: null | string | string[] | Record<string, boolean | undefined | null>;
+  style?: string | undefined | null | Record<string, SafeAny>;
 }
 
 export interface AbstractBranchSchema<Key extends SchemaKey = SchemaKey> extends AbstractSchema<Key> {

@@ -7,9 +7,11 @@ describe('control-wrapper', () => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       fieldGroup().schemas(() => { });
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'field-group',
-      schemas: []
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'field-group',
+        schemas: []
+      }
+    ]);
   });
 });

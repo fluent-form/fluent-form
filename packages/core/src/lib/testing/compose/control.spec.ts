@@ -6,35 +6,43 @@ describe('control', () => {
     const schema = form(() => {
       headed();
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'headed',
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'headed'
+      }
+    ]);
   });
 
   it('text', () => {
     const schema = form(() => {
       textField();
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'text-field',
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'text-field'
+      }
+    ]);
   });
 
   it('range', () => {
     const schema = form(() => {
       range();
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'range',
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'range'
+      }
+    ]);
   });
 
   it('number', () => {
     const schema = form(() => {
       numberField();
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'number-field',
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'number-field'
+      }
+    ]);
   });
 });

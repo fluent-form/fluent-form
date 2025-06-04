@@ -18,6 +18,6 @@ type NumberWidgetTemplateContext = WidgetTemplateContext<NumberFieldControlSchem
     FluentContextGuardDirective,
     NumberComponent
   ],
-  templateUrl: './number.widget.html',
+  templateUrl: './number.widget.html'
 })
 export class NumberWidget extends AbstractWidget<NumberWidgetTemplateContext> { }

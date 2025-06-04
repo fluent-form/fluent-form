@@ -1,4 +1,12 @@
-import { AbstractSchema, ElementEventListenerHolder, ElementEventObserverHolder, ElementPropertyHolder, MaybeSchemaReactiveFn, PropertyHolder, SingleSchemaKey } from '../../schemas';
+import type {
+  AbstractSchema,
+  ElementEventListenerHolder,
+  ElementEventObserverHolder,
+  ElementPropertyHolder,
+  MaybeSchemaReactiveFn,
+  PropertyHolder,
+  SingleSchemaKey
+} from '../../schemas';
 
 /**
  * @public

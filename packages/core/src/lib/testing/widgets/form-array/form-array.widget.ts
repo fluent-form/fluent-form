@@ -1,9 +1,24 @@
-import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import { type CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
-import { AbstractSchema, AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentFormItemOutletDirective, FluentGridModule, FluentReactivePipe, FormUtil, InvokePipe, RenderablePipe, SchemaUtil, WidgetTemplateContext, isNumber } from '@fluent-form/core';
-import { FormArraySchema } from '../../schemas';
+import type { FormArraySchema } from '../../schemas';
+import {
+  type AbstractSchema,
+  AbstractWidget,
+  FluentBindingDirective,
+  FluentColumnPipe,
+  FluentContextGuardDirective,
+  FluentFormItemOutletDirective,
+  FluentGridModule,
+  FluentReactivePipe,
+  FormUtil,
+  InvokePipe,
+  RenderablePipe,
+  SchemaUtil,
+  type WidgetTemplateContext,
+  isNumber
+} from '@fluent-form/core';
 
 type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, FormArray>;
 
@@ -51,7 +66,7 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
       },
       max: (length: FormArraySchema['length']) => {
         return isNumber(length) ? length : length?.max ?? Infinity;
-      },
+      }
     }
   } as const;
 

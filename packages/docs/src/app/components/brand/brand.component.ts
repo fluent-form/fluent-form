@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-brand',
   standalone: true,
   templateUrl: './brand.component.html',
-  styleUrl: './brand.component.scss',
+  styleUrl: './brand.component.scss'
 })
 export class BrandComponent { }

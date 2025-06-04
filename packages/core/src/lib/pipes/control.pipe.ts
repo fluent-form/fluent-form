@@ -11,7 +11,6 @@ import { getChildControl, isUndefined } from '../utils';
   standalone: true
 })
 export class FluentControlPipe implements PipeTransform {
-
   /**
    * Use value as a key to get the instance from the form.
    * @param value
@@ -30,5 +29,4 @@ export class FluentControlPipe implements PipeTransform {
     // means the current schema is not a control schema.
     // In this case, return the parent form instance directly ☝️
   }
-
 }

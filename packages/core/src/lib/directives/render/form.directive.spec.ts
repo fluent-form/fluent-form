@@ -11,9 +11,7 @@ import { FluentFormRenderModule } from './module';
 
 @Component({
   standalone: true,
-  imports: [
-    FluentFormRenderModule
-  ],
+  imports: [FluentFormRenderModule],
   template: `
     <div [fluentSchema]="schema()" [(fluentModel)]="model" (fluentFormChange)="form = $event">
       <fluent-outlet key="ipt" />
@@ -76,7 +74,7 @@ describe('FluentFormDirective', () => {
       ipt2: null,
       group: {
         ipt: null,
-        ipt2: null,
+        ipt2: null
       },
       array: []
     });
@@ -112,7 +110,7 @@ describe('FluentFormDirective', () => {
         ipt2: 'test',
         group: {
           ipt: 'test',
-          ipt2: 'test',
+          ipt2: 'test'
         },
         array: ['test']
       });
@@ -147,7 +145,7 @@ describe('FluentFormDirective', () => {
         ipt2: 'test',
         group: {
           ipt: 'test',
-          ipt2: 'test',
+          ipt2: 'test'
         },
         array: ['test']
       });
@@ -177,7 +175,7 @@ describe('FluentFormDirective', () => {
         ipt2: null,
         group: {
           ipt: null,
-          ipt2: null,
+          ipt2: null
         },
         array: []
       });
@@ -190,7 +188,7 @@ describe('FluentFormDirective', () => {
         ipt2: null,
         group: {
           ipt: null,
-          ipt2: null,
+          ipt2: null
         },
         array: []
       });
@@ -222,7 +220,7 @@ describe('FluentFormDirective', () => {
         ipt2: 'test',
         group: {
           ipt: 'test',
-          ipt2: 'test',
+          ipt2: 'test'
         },
         array: []
       });
@@ -252,7 +250,7 @@ describe('FluentFormDirective', () => {
         ipt2: 'test',
         group: {
           ipt: 'test',
-          ipt2: 'test',
+          ipt2: 'test'
         },
         array: []
       });
@@ -282,7 +280,7 @@ describe('FluentFormDirective', () => {
         ipt2: null,
         group: {
           ipt: null,
-          ipt2: null,
+          ipt2: null
         },
         array: []
       });
@@ -309,7 +307,7 @@ describe('FluentFormDirective', () => {
         ipt2: null,
         group: {
           ipt: null,
-          ipt2: null,
+          ipt2: null
         },
         array: []
       });
@@ -341,7 +339,7 @@ describe('FluentFormDirective', () => {
       ipt2: null,
       group: {
         ipt: null,
-        ipt2: null,
+        ipt2: null
       },
       array: []
     });

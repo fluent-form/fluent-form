@@ -1,10 +1,10 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormArray, FormBuilder } from '@angular/forms';
-import { provideFluentForm } from '@fluent-form/core';
 import { SafeAny } from '@ngify/types';
 import { withTesting } from '../../feature';
 import { FormArrayWidget } from './form-array.widget';
+import { provideFluentForm } from '@fluent-form/core';
 
 describe('NestedFormWidget', () => {
   let component: FormArrayWidget;
@@ -33,9 +33,7 @@ describe('NestedFormWidget', () => {
     const formArray = new FormArray<SafeAny>([]);
     component['push'](formArray, {
       kind: 'array',
-      schemas: [
-        { kind: 'text-field' }
-      ]
+      schemas: [{ kind: 'text-field' }]
     });
 
     expect(formArray.length).toBe(1);

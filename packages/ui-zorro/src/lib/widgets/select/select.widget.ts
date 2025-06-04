@@ -1,6 +1,20 @@
 import { ChangeDetectorRef, Component, DestroyRef, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectPipe, FluentNewPipe, FluentReactivePipe, FluentTemplatePipe, MaybeSchemaReactiveFn, SingleSchemaKey, WidgetTemplateContext } from '@fluent-form/core';
+import {
+  AbstractWidget,
+  FluentBindingDirective,
+  FluentColumnPipe,
+  FluentContextGuardDirective,
+  FluentControlWrapperDirective,
+  FluentGridModule,
+  FluentInjectPipe,
+  FluentNewPipe,
+  FluentReactivePipe,
+  FluentTemplatePipe,
+  MaybeSchemaReactiveFn,
+  SingleSchemaKey,
+  WidgetTemplateContext
+} from '@fluent-form/core';
 import { AnyObject, SafeAny } from '@ngify/types';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzSelectModule } from 'ng-zorro-antd/select';
@@ -27,7 +41,7 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
     FluentColumnPipe,
     FluentTemplatePipe,
     FluentInjectPipe,
-    FluentNewPipe,
+    FluentNewPipe
   ],
   templateUrl: './select.widget.html',
   styles: [`nz-select { width: 100% }`]
@@ -58,7 +72,7 @@ export class SelectWidgetTemplatePrivateContext {
       this.keyword$.pipe(
         filter(() => this.open), // 选中后关闭浮层也会触发一次 keyword$，此时 open=false，过滤掉
         tap(() => this.loading = true),
-        source => fetchOptionsFn(source, { schema, model, control }), // TODO: bug, model 始终是空对象 {}，不会更新
+        source => fetchOptionsFn(source, { schema, model, control }) // TODO: bug, model 始终是空对象 {}，不会更新
       ).subscribe(options => {
         this.options = options;
         this.loading = false;

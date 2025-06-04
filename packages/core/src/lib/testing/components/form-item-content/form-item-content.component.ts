@@ -12,7 +12,7 @@ import { FluentWidgetTemplatePipe } from '../../../pipes';
   imports: [
     NgTemplateOutlet,
     FluentWithInjectorDirective,
-    FluentWidgetTemplatePipe,
+    FluentWidgetTemplatePipe
   ],
   templateUrl: './form-item-content.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

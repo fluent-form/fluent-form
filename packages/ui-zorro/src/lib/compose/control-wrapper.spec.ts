@@ -7,10 +7,12 @@ describe('control-wrapper', () => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       space().schemas(() => { });
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'space',
-      schemas: []
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'space',
+        schemas: []
+      }
+    ]);
   });
 
   it('spaceCompact', () => {
@@ -18,9 +20,11 @@ describe('control-wrapper', () => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       spaceCompact().schemas(() => { });
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'space-compact',
-      schemas: []
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'space-compact',
+        schemas: []
+      }
+    ]);
   });
 });

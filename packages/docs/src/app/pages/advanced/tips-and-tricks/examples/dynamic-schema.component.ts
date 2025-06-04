@@ -29,10 +29,10 @@ export class DynamicSchemaExampleComponent {
   readonly model = signal({});
 
   add() {
-    this.counter.update(value => ++value)
+    this.counter.update(value => ++value);
   }
 
   remove() {
-    this.counter.update(value => Math.max(1, --value))
+    this.counter.update(value => Math.max(1, --value));
   }
 }

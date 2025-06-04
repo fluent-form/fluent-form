@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideFluentForm } from '@fluent-form/core';
 import { withTesting } from '../../feature';
 import { FormItemContentComponent } from './form-item-content.component';
+import { provideFluentForm } from '@fluent-form/core';
 
 describe('FluentFormItemOutletComponent', () => {
   let component: FormItemContentComponent;

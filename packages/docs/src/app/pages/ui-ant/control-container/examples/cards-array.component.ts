@@ -27,7 +27,7 @@ export class CardsArrayExampleComponent {
             textField('name').label('姓名').placeholder('请输入姓名').col(12);
             textField('cellphone').label('电话').placeholder('请输入电话').col(12);
           });
-        })
+        });
       });
 
     button().content('提交').type('primary').col(12).variants({ block: true });

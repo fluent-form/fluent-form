@@ -8,7 +8,7 @@ import { FluentRowDirective } from './row.component';
 @Component({
   standalone: true,
   imports: [FluentRowDirective],
-  template: `<fluent-row [gap]="gap" [justify]="justify" [align]="align" />`,
+  template: `<fluent-row [gap]="gap" [justify]="justify" [align]="align" />`
 })
 class TestComponent {
   @ViewChild(FluentRowDirective, { static: true }) rowComponent!: FluentRowDirective;
@@ -24,9 +24,7 @@ describe('FluentRowComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        { provide: MediaMatcher, useClass: FakeMediaMatcher }
-      ],
+      providers: [{ provide: MediaMatcher, useClass: FakeMediaMatcher }]
     });
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;

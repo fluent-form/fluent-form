@@ -62,22 +62,18 @@ describe('SchemaUtil', () => {
       { kind: 'array', schemas: [] },
       {
         kind: 'field-group',
-        schemas: [
-          { kind: 'text-field' }
-        ]
+        schemas: [{ kind: 'text-field' }]
       },
       {
         kind: 'row',
-        schemas: [
-          { kind: 'text-field' }
-        ]
+        schemas: [{ kind: 'text-field' }]
       }
     ])).toEqual([
       { kind: 'text-field' },
       { kind: 'group', schemas: [] },
       { kind: 'array', schemas: [] },
       { kind: 'text-field' },
-      { kind: 'text-field' },
+      { kind: 'text-field' }
     ]);
   });
 
@@ -115,13 +111,13 @@ describe('SchemaUtil', () => {
           });
         });
 
-        expect(schema().schemas).toEqual([{
-          kind: 'group',
-          key: 'name',
-          schemas: [
-            { kind: 'text-field', key: 'name' }
-          ]
-        }]);
+        expect(schema().schemas).toEqual([
+          {
+            kind: 'group',
+            key: 'name',
+            schemas: [{ kind: 'text-field', key: 'name' }]
+          }
+        ]);
       });
 
       it('array', () => {
@@ -133,17 +129,19 @@ describe('SchemaUtil', () => {
           });
         });
 
-        expect(schema().schemas).toEqual([{
-          kind: 'array',
-          key: 'name',
-          schemas: [{
-            kind: 'group',
-            key: 0,
+        expect(schema().schemas).toEqual([
+          {
+            kind: 'array',
+            key: 'name',
             schemas: [
-              { kind: 'text-field', key: 'name' }
+              {
+                kind: 'group',
+                key: 0,
+                schemas: [{ kind: 'text-field', key: 'name' }]
+              }
             ]
-          }]
-        }]);
+          }
+        ]);
       });
 
       it('field-group', () => {
@@ -153,12 +151,12 @@ describe('SchemaUtil', () => {
           });
         });
 
-        expect(schema().schemas).toEqual([{
-          kind: 'field-group',
-          schemas: [
-            { kind: 'text-field', key: 'name' }
-          ]
-        }]);
+        expect(schema().schemas).toEqual([
+          {
+            kind: 'field-group',
+            schemas: [{ kind: 'text-field', key: 'name' }]
+          }
+        ]);
       });
     });
   });

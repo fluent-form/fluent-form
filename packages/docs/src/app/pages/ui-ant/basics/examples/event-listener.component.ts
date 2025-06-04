@@ -18,13 +18,13 @@ export class EventListenerExampleComponent {
       .placeholder('Please feel free to enter')
       .listeners({
         valueChange: (value, context) => {
-          console.log('valueChange', { value, context })
+          console.log('valueChange', { value, context });
         },
         statusChange: (status, context) => {
-          console.log('statusChange', { status, context })
+          console.log('statusChange', { status, context });
         },
         focus: (event, context) => {
-          console.log('focus', { event, context })
+          console.log('focus', { event, context });
         }
       })
       .col(4);
@@ -34,11 +34,11 @@ export class EventListenerExampleComponent {
       .options([
         { label: 'Jack', value: 'jack' },
         { label: 'lucy', value: 'lucy' },
-        { label: 'Mike', value: 'mike' },
+        { label: 'Mike', value: 'mike' }
       ])
       .listeners({
         nzOpenChange: (event, context) => {
-          console.log('nzOpenChange', { event, context })
+          console.log('nzOpenChange', { event, context });
         }
       })
       .col(4);

@@ -8,11 +8,13 @@ describe('control-container', () => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       group('group').schemas(() => { });
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'group',
-      key: 'group',
-      schemas: []
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'group',
+        key: 'group',
+        schemas: []
+      }
+    ]);
   });
 
   it('array', () => {
@@ -20,11 +22,13 @@ describe('control-container', () => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       array('array').schemas(() => { });
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'array',
-      key: 'array',
-      schemas: []
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'array',
+        key: 'array',
+        schemas: []
+      }
+    ]);
   });
 
   it('tabs-array', () => {
@@ -32,11 +36,13 @@ describe('control-container', () => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       tabsArray('tabs-array').schemas(() => { });
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'tabs-array',
-      key: 'tabs-array',
-      schemas: []
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'tabs-array',
+        key: 'tabs-array',
+        schemas: []
+      }
+    ]);
   });
 
   it('cards-array', () => {
@@ -44,11 +50,13 @@ describe('control-container', () => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       cardsArray('cards-array').schemas(() => { });
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'cards-array',
-      key: 'cards-array',
-      schemas: []
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'cards-array',
+        key: 'cards-array',
+        schemas: []
+      }
+    ]);
   });
 
   it('applyGroup', () => {
@@ -60,9 +68,7 @@ describe('control-container', () => {
       kind: 'group',
       key: 'root',
       updateOn: 'blur',
-      schemas: [
-        { kind: 'text-field', key: 'input' }
-      ]
+      schemas: [{ kind: 'text-field', key: 'input' }]
     });
   });
 });

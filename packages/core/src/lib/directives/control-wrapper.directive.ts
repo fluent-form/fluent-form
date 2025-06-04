@@ -2,6 +2,6 @@ import { Directive } from '@angular/core';
 
 @Directive({
   selector: '[fluentControlWrapper]',
-  standalone: true,
+  standalone: true
 })
 export class FluentControlWrapperDirective { }

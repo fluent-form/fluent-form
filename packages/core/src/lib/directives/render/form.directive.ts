@@ -1,4 +1,6 @@
-import { computed, DestroyRef, Directive, effect, forwardRef, HostListener, inject, input, model, output, untracked } from '@angular/core';
+import {
+  computed, DestroyRef, Directive, effect, forwardRef, HostListener, inject, input, model, output, untracked
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { type FormControlStatus, FormGroup } from '@angular/forms';
 import type { AnyArray, AnyObject } from '@ngify/types';
@@ -32,8 +34,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentC
 
   readonly patchedSchema = computed(() => this.schemaUtil.patch(this.schema()));
   readonly form = computed<FormGroup>(() =>
-    this.formUtil.createFormGroup(this.patchedSchema(), untracked(() => this.model()))
-  );
+    this.formUtil.createFormGroup(this.patchedSchema(), untracked(() => this.model())));
 
   readonly formChange = output<FormGroup>({ alias: 'fluentFormChange' });
   readonly valueChanges = output<T>({ alias: 'fluentValueChanges' });
@@ -59,8 +60,7 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentC
         });
 
         form.statusChanges.pipe(takeUntilDestroyed(destroyRef)).subscribe(status =>
-          this.statusChanges.emit(status)
-        );
+          this.statusChanges.emit(status));
       });
     });
 
@@ -95,11 +95,10 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentC
       this.internalModel = this.formUtil.updateModel(
         {} as T,
         form,
-        schemas,
+        schemas
       ),
-      schemas,
+      schemas
     );
     this.model.set(this.internalModel);
   }
-
 }

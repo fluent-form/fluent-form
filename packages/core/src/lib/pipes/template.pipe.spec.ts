@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { SafeAny } from '@ngify/types';
 import { NAMED_TEMPLATES } from '../tokens';
 import { FluentTemplatePipe } from './template.pipe';
 
@@ -11,7 +12,7 @@ describe('FluentTemplatePipe', () => {
         {
           provide: NAMED_TEMPLATES,
           useValue: { // mock array.find
-            find(fn: Function) {
+            find(fn: (...args: SafeAny) => SafeAny) {
               const dir = { name: 'named', templateRef: {} }; // mock FluentTemplateDirective
               return fn(dir) ? dir : null;
             }

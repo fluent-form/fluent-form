@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { AbstractControl, type AbstractControlOptions, FormArray, FormControl, FormGroup, type ValidatorFn, Validators } from '@angular/forms';
 import type { AnyArray, AnyObject, SafeAny } from '@ngify/types';
 import type { AbstractControlSchema, AbstractFormArraySchema, AbstractFormGroupSchema, AbstractSchema, SchemaKey } from '../schemas';
-import { ValueTransformer } from '../services';
+import { ValueTransformer } from '../services/value-transformer.service';
 import type { Indexable } from '../types';
 import { isArray, isNumber, isUndefined } from './is.utils';
 import { SchemaUtil } from './schema.utils';
@@ -99,7 +99,7 @@ export class FormUtil {
       if (isNumber(schema.length)) {
         validators.push(
           Validators.minLength(schema.length),
-          Validators.maxLength(schema.length),
+          Validators.maxLength(schema.length)
         );
       } else {
         if (schema.length.min) {

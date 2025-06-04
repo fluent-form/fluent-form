@@ -5,11 +5,11 @@ import { FluentTemplate } from './directives';
 @NgModule({
   imports: [
     FluentForm,
-    FluentTemplate,
+    FluentTemplate
   ],
   exports: [
     FluentForm,
-    FluentTemplate,
+    FluentTemplate
   ]
 })
 export class FluentFormModule { }

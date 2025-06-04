@@ -8,7 +8,7 @@ import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import type { NzSpaceCompactItemDirective } from './space-compact-item.directive';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
+
   selector: 'nz-space-compact',
   exportAs: 'nzSpaceCompact',
   standalone: true,

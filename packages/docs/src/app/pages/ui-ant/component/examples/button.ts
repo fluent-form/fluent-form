@@ -23,7 +23,7 @@ export class ButtonExampleComponent {
     button().type('primary').variants({ block: true }).content('Block Button').listeners({
       click: () => console.log('click')
     });
-  })
+  });
 
   readonly model = signal({});
 }

@@ -22,7 +22,7 @@ export const labelHelper = {
   },
   wrap: (label: WithoutSchemaReactiveFn<Labelful['label']>) => {
     return isString(label) ? false : label?.wrap;
-  },
+  }
 };
 
 export const tooltipHelper = {
@@ -31,12 +31,12 @@ export const tooltipHelper = {
   },
   icon: (tooltip: WithoutSchemaReactiveFn<Labelful['tooltip']>) => {
     return isString(tooltip) ? null : tooltip?.icon;
-  },
+  }
 };
 
 export const affixHelper = {
   content: (affix: WithoutSchemaReactiveFn<NonNullable<TextFieldControlSchema['affixes']>['prefix']>) =>
     isString(affix) || affix instanceof TemplateRef ? affix : undefined,
   icon: (affix: WithoutSchemaReactiveFn<NonNullable<TextFieldControlSchema['affixes']>['prefix']>) =>
-    isString(affix) || affix instanceof TemplateRef ? undefined : affix?.icon,
+    isString(affix) || affix instanceof TemplateRef ? undefined : affix?.icon
 };

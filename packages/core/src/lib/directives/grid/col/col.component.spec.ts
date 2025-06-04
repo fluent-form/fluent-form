@@ -5,11 +5,12 @@ import { FluentColDirective } from './col.component';
 @Component({
   standalone: true,
   imports: [FluentColDirective],
-  template: `<fluent-col [span]="span" [flex]="flex" [offset]="offset" />`,
+  template: `<fluent-col [span]="span" [flex]="flex" [offset]="offset" />`
 })
 class TestComponent {
   @ViewChild(FluentColDirective, { read: ElementRef, static: true })
-    colElementRef!: ElementRef<HTMLElement>;
+  colElementRef!: ElementRef<HTMLElement>;
+
   span: ReturnType<FluentColDirective['span']>;
   flex: ReturnType<FluentColDirective['flex']>;
   offset: ReturnType<FluentColDirective['offset']>;

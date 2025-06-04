@@ -25,11 +25,10 @@ export class SelectCustomOptionContentExampleComponent {
       .options([
         { label: 'Jack', value: 'jack' },
         { label: 'lucy', value: 'lucy' },
-        { label: 'Mike', value: 'mike' },
+        { label: 'Mike', value: 'mike' }
       ])
       .col(4);
   });
 
   readonly model = signal({});
-
 }

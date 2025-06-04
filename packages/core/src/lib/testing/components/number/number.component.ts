@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, forwardRef, input, model, output } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { type ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'fluent-number',
@@ -40,5 +40,4 @@ export class NumberComponent implements ControlValueAccessor {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setDisabledState?(isDisabled: boolean): void { }
-
 }

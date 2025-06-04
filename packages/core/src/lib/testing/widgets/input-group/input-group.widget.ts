@@ -1,8 +1,19 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, FluentControlPipe, FluentReactivePipe, FluentTemplatePipe, FluentWidgetTemplatePipe, FluentWithInjectorDirective, InvokePipe, WidgetTemplateContext } from '@fluent-form/core';
-import { FieldGroupComponentSchema } from '../../schemas';
+import type { FieldGroupComponentSchema } from '../../schemas';
+import {
+  AbstractWidget,
+  FluentBindingDirective,
+  FluentContextGuardDirective,
+  FluentControlPipe,
+  FluentReactivePipe,
+  FluentTemplatePipe,
+  FluentWidgetTemplatePipe,
+  FluentWithInjectorDirective,
+  InvokePipe,
+  type WidgetTemplateContext
+} from '@fluent-form/core';
 
 type InputGroupWidgetTemplateContext = WidgetTemplateContext<FieldGroupComponentSchema, FormGroup>;
 

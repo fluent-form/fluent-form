@@ -23,7 +23,7 @@ import { BrandComponent } from './components';
     NgDocTooltipDirective
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   version$ = inject(HttpClient)

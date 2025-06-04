@@ -2,7 +2,7 @@ import { Component, Signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { AnyObject, SafeAny } from '@ngify/types';
+import { SafeAny } from '@ngify/types';
 import { form } from '../../compose';
 import { provideFluentForm } from '../../provider';
 import { AbstractFormGroupSchema } from '../../schemas';
@@ -12,17 +12,17 @@ import { FluentFormComponent } from './form.component';
 @Component({
   standalone: true,
   imports: [FluentFormComponent],
-  template: `<fluent-form [schema]="schema()" [(model)]="model" (formChange)="form = $event" />`,
+  template: `<fluent-form [schema]="schema()" [(model)]="model" (formChange)="form = $event" />`
 })
-class TestComponent<T extends AnyObject> {
+class TestComponent {
   form!: FormGroup;
   schema!: Signal<AbstractFormGroupSchema>;
-  model: T = {} as T;
+  model: SafeAny;
 }
 
 describe('FluentFormComponent', () => {
-  let component: TestComponent<{}>;
-  let fixture: ComponentFixture<TestComponent<{}>>;
+  let component: TestComponent;
+  let fixture: ComponentFixture<TestComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({

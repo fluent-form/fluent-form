@@ -1,6 +1,14 @@
-import { ValidatorFn, Validators } from '@angular/forms';
-import { FluentFormWidgetConfig, SchemaType } from '@fluent-form/core';
-import { ButtonComponentSchema, ButtonGroupComponentSchema, FieldGroupComponentSchema, FormArraySchema, FormGroupSchema, NumberFieldControlSchema, RangeControlSchema, TextFieldControlSchema } from '../schemas';
+import { type ValidatorFn, Validators } from '@angular/forms';
+import type {
+  ButtonComponentSchema,
+  ButtonGroupComponentSchema,
+  FieldGroupComponentSchema,
+  FormArraySchema,
+  FormGroupSchema,
+  NumberFieldControlSchema,
+  RangeControlSchema,
+  TextFieldControlSchema
+} from '../schemas';
 import { ButtonGroupWidget } from './button-group/button-group.widget';
 import { ButtonWidget } from './button/button.widget';
 import { FormArrayWidget } from './form-array/form-array.widget';
@@ -9,6 +17,7 @@ import { InputGroupWidget } from './input-group/input-group.widget';
 import { InputWidget } from './input/input.widget';
 import { NumberWidget } from './number/number.widget';
 import { RangeWidget } from './range/range.widget';
+import { type FluentFormWidgetConfig, SchemaType } from '@fluent-form/core';
 
 export function useAllWidgets() {
   return [

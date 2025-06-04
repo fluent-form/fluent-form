@@ -125,7 +125,7 @@ describe('ValueUtils', () => {
     describe('mulit key control', () => {
       it('no init value and default value', () => {
         const model = {};
-        const schema = schemaUtil.patch({ kind: 'range', key: ['start', 'end'], type: 'range', });
+        const schema = schemaUtil.patch({ kind: 'range', key: ['start', 'end'], type: 'range' });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toBeNull();
@@ -133,7 +133,7 @@ describe('ValueUtils', () => {
 
       it('with init value', () => {
         const model = { start: 0, end: 100 };
-        const schema = schemaUtil.patch({ kind: 'range', key: ['start', 'end'], type: 'range', });
+        const schema = schemaUtil.patch({ kind: 'range', key: ['start', 'end'], type: 'range' });
         const value = valueUtil.valueOfModel(model, schema);
 
         expect(value).toEqual([0, 100]);

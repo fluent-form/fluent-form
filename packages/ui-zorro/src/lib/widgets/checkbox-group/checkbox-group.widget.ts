@@ -16,8 +16,8 @@ type CheckboxGroupWidgetTemplateContext = WidgetTemplateContext<CheckboxGroupCon
     ReactiveFormsModule,
     NzCheckboxModule,
     FluentBindingDirective,
-    FluentContextGuardDirective,
+    FluentContextGuardDirective
   ],
-  templateUrl: './checkbox-group.widget.html',
+  templateUrl: './checkbox-group.widget.html'
 })
 export class CheckboxGroupWidget extends AbstractWidget<CheckboxGroupWidgetTemplateContext> { }

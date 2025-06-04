@@ -62,14 +62,15 @@ class TestingComponent {
     listeners: {
       valueChange: valueChangeFn,
       statusChange: statusChangeFn,
-      input: inputChangeFn,
+      input: inputChangeFn
     },
     observers: {
       valueChange: source => source.pipe(tap(valueChangeNextFn)),
       statusChange: source => source.pipe(tap(statusChangeNextFn)),
-      input: source => source.pipe(tap(inputChangeNextFn)),
+      input: source => source.pipe(tap(inputChangeNextFn))
     }
   };
+
   rangeSchema: RangeControlSchema = {
     kind: 'range',
     key: 'range',
@@ -84,9 +85,10 @@ class TestingComponent {
     observers: {
       valueChange: source => source.pipe(tap(valueChangeNextFn)),
       statusChange: source => source.pipe(tap(statusChangeNextFn)),
-      testChange: source => source.pipe(tap(testChangeNextFn)),
+      testChange: source => source.pipe(tap(testChangeNextFn))
     }
   };
+
   numberSchema: NumberFieldControlSchema = {
     kind: 'number-field',
     properties: {
@@ -100,7 +102,7 @@ class TestingComponent {
     observers: {
       valueChange: source => source.pipe(tap(valueChangeNextFn)),
       statusChange: source => source.pipe(tap(statusChangeNextFn)),
-      testChange: source => source.pipe(tap(testChangeNextFn)),
+      testChange: source => source.pipe(tap(testChangeNextFn))
     }
   };
 

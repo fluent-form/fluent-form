@@ -14,6 +14,6 @@ export function withTesting(widgets: (FluentFormWidgetConfig<SafeAny> | FluentFo
       provide: FLUENT_FORM_ITEM_CONTENT,
       useValue: FormItemContentComponent
     },
-    provideWidgetConfigs(widgets),
+    provideWidgetConfigs(widgets)
   ]);
 }

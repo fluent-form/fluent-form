@@ -12,17 +12,13 @@ describe('control-container', () => {
     expect(schema()).toEqual({
       kind: 'group',
       key: 'root',
-      schemas: [
-        { kind: 'text-field', key: 'input' }
-      ]
+      schemas: [{ kind: 'text-field', key: 'input' }]
     });
     key.set('input2');
     expect(schema()).toEqual({
       kind: 'group',
       key: 'root',
-      schemas: [
-        { kind: 'text-field', key: 'input2' }
-      ]
+      schemas: [{ kind: 'text-field', key: 'input2' }]
     });
   });
 
@@ -40,9 +36,7 @@ describe('control-container', () => {
       kind: 'group',
       key: 'root',
       updateOn: 'blur',
-      schemas: [
-        { kind: 'text-field', key: 'input' }
-      ]
+      schemas: [{ kind: 'text-field', key: 'input' }]
     });
   });
 });

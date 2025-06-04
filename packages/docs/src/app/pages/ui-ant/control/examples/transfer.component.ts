@@ -18,7 +18,7 @@ export class TransferExampleComponent {
       { label: 'Apple', value: 'Apple' },
       { label: 'Pear', value: 'Pear' },
       { label: 'Orange', value: 'Orange' }
-    ])
+    ]);
   });
 
   readonly model = signal({});

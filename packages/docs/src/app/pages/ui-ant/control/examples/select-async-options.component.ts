@@ -24,8 +24,7 @@ export class SelectAsyncOptionsExampleComponent {
         keyword$.pipe(
           debounceTime(300),
           switchMap(keyword => this.searchUsers(keyword))
-        )
-      )
+        ))
       .col(4);
   });
 

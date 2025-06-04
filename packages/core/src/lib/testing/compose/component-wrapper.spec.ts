@@ -7,9 +7,11 @@ describe('component-wrapper', () => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       buttonGroup().schemas(() => { });
     });
-    expect(schema().schemas).toEqual([{
-      kind: 'button-group',
-      schemas: []
-    }]);
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'button-group',
+        schemas: []
+      }
+    ]);
   });
 });

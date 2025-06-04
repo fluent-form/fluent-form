@@ -26,5 +26,4 @@ export class FluentSchemaPipe implements PipeTransform {
   transform(value: SingleSchemaKey | SchemaKey[], schema: Indexable<AbstractBranchSchema>): AbstractControlSchema | AbstractControlContainerSchema | null {
     return this.schemaUtil.find(schema, value) as AbstractControlSchema | AbstractControlContainerSchema | null;
   }
-
 }

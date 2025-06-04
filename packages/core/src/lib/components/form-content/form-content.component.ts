@@ -8,7 +8,7 @@ export interface FormContentTemplateContext {
   form: FormGroup;
   model: AnyObject;
   schema: AbstractSchema;
-  onSubmit: (event: SubmitEvent) => boolean
+  onSubmit: (event: SubmitEvent) => boolean;
 }
 
 @Directive()

@@ -4,14 +4,14 @@ import type { Observable } from 'rxjs';
 import type { ComponentOutputMap } from '../types';
 import type { SchemaContext } from './interfaces';
 
-type ControlEventObserverMap<Val> = {
+interface ControlEventObserverMap<Val> {
   valueChange?: (source: Observable<{ event: Val, context: SchemaContext }>) => Observable<SafeAny>;
   statusChange?: (source: Observable<{ event: FormControlStatus, context: SchemaContext }>) => Observable<SafeAny>;
 }
 
 type ComponentOutputObserverMap<C> = {
   [K in keyof ComponentOutputMap<C>]?: (source: Observable<{ event: ComponentOutputMap<C>[K], context: SchemaContext }>) => Observable<SafeAny>
-}
+};
 
 type ElementEventObserverMap = {
   [K in keyof HTMLElementEventMap]?: (source: Observable<{ event: HTMLElementEventMap[K], context: SchemaContext }>) => Observable<SafeAny>
@@ -19,7 +19,7 @@ type ElementEventObserverMap = {
 
 /** 事件侦听器 */
 export interface EventObserverHolder {
-  observers?: Partial<Record<string, ((source: Observable<SafeAny>) => Observable<SafeAny>)>>
+  observers?: Partial<Record<string, ((source: Observable<SafeAny>) => Observable<SafeAny>)>>;
 }
 
 /** 控件事件侦听器 */
@@ -29,7 +29,7 @@ export interface ControlEventObserverHolder<V = SafeAny> extends EventObserverHo
 
 /** 组件事件侦听器 */
 export interface ComponentEventObserverHolder<C> extends EventObserverHolder {
-  observers?: ComponentOutputObserverMap<C>
+  observers?: ComponentOutputObserverMap<C>;
 }
 
 /** 组件控件事件侦听器 */

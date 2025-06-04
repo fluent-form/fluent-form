@@ -30,10 +30,9 @@ export class DynamicCodeEvaluator implements CodeEvaluator {
           return undefined;
         }
         return Reflect.get(target, key, receiver);
-      },
+      }
     });
 
     return fn(proxy);
   }
-
 }

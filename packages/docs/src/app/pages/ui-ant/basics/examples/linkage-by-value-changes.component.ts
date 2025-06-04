@@ -18,7 +18,7 @@ export class LinkageByValueChangesExampleComponent {
       .label('Change value')
       .options([
         { label: 'Jack', value: 'jack' },
-        { label: 'Lucy', value: 'lucy' },
+        { label: 'Lucy', value: 'lucy' }
       ])
       .listeners({
         valueChange: (value, { control }) => {

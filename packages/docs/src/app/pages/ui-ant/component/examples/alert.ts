@@ -15,8 +15,13 @@ export class AlertExampleComponent {
     alert().type('warning').message('Warning Text');
     alert().type('error').message('Error Text');
     alert().type('success').message('Success Text').closeable(true);
-    alert().type('error').message('Error Text').description('Error Description Error Description Error Description Error Description Error Description Error Description');
-  })
+    alert()
+      .type('error')
+      .message('Error Text')
+      .description(
+        'Error Description Error Description Error Description Error Description Error Description Error Description'
+      );
+  });
 
   readonly model = signal({});
 }

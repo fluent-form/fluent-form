@@ -18,8 +18,8 @@ type RateWidgetTemplateContext = WidgetTemplateContext<RateControlSchema, FormCo
     NzOutletModule,
     FluentBindingDirective,
     FluentContextGuardDirective,
-    FluentTemplatePipe,
+    FluentTemplatePipe
   ],
-  templateUrl: './rate.widget.html',
+  templateUrl: './rate.widget.html'
 })
 export class RateWidget extends AbstractWidget<RateWidgetTemplateContext> { }

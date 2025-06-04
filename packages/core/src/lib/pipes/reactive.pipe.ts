@@ -23,5 +23,4 @@ export class FluentReactivePipe implements PipeTransform {
     // Because it might be a static expression, the final type cannot be determined.
     return this.transformer.transform(value, { model, schema, control });
   }
-
 }

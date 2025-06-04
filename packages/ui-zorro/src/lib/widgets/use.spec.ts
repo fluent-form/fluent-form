@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { FormControl, Validators } from '@angular/forms';
 import { SchemaUtil, ValueUtil, provideFluentForm } from '@fluent-form/core';
-import { textField } from '../compose/control';
 import { withZorro } from '../feature';
 import { useAllWidgets } from './use';
 
@@ -24,8 +23,10 @@ describe('useWidget', () => {
 
   describe('built-in patcher', () => {
     it('heading patcher', () => {
-      expect(schemaUtil.patch({ kind: 'heading', level: 1, content: '', col: 1 })).toEqual({ kind: 'heading', level: 1, content: '', col: 1 });
-      expect(schemaUtil.patch({ kind: 'heading', level: 1, content: '' })).toEqual({ kind: 'heading', level: 1, content: '', col: 12 });
+      expect(schemaUtil.patch({ kind: 'heading', level: 1, content: '', col: 1 }))
+        .toEqual({ kind: 'heading', level: 1, content: '', col: 1 });
+      expect(schemaUtil.patch({ kind: 'heading', level: 1, content: '' }))
+        .toEqual({ kind: 'heading', level: 1, content: '', col: 12 });
     });
 
     it('button patcher', () => {
@@ -35,12 +36,14 @@ describe('useWidget', () => {
 
     it('alert patcher', () => {
       expect(schemaUtil.patch({ kind: 'alert', message: '', col: 1 })).toEqual({ kind: 'alert', message: '', col: 1 });
-      expect(schemaUtil.patch({ kind: 'alert', message: '' })).toEqual({ kind: 'alert', message: '', col: 12 });
+      expect(schemaUtil.patch({ kind: 'alert', message: '' }))
+        .toEqual({ kind: 'alert', message: '', col: 12 });
     });
 
     it('button patcher', () => {
       expect(schemaUtil.patch({ kind: 'button', content: '' })).toEqual({ kind: 'button', content: '' });
-      expect(schemaUtil.patch({ kind: 'button', content: '', variants: { block: true } })).toEqual({ kind: 'button', content: '', variants: { block: true }, col: 12 });
+      expect(schemaUtil.patch({ kind: 'button', content: '', variants: { block: true } }))
+        .toEqual({ kind: 'button', content: '', variants: { block: true }, col: 12 });
     });
   });
 
@@ -61,7 +64,7 @@ describe('useWidget', () => {
     });
 
     it('min/max', () => {
-      const schema = textField('name').length({ min: 1, max: 2 }).build();
+      const schema = { kind: 'text-field', length: { min: 1, max: 2 } };
       const validators = schemaUtil.validatorsOf(schema);
 
       expect(validators.length).toBe(2);
@@ -171,7 +174,7 @@ describe('useWidget', () => {
         key: 'active',
         options: [
           { label: 'one', value: 1 },
-          { label: 'two', value: 2 },
+          { label: 'two', value: 2 }
         ],
         defaultValue: [1]
       });
@@ -180,7 +183,7 @@ describe('useWidget', () => {
 
       expect(value).toEqual([
         { label: 'one', value: 1, checked: true },
-        { label: 'two', value: 2, checked: false },
+        { label: 'two', value: 2, checked: false }
       ]);
     });
   });
@@ -188,7 +191,7 @@ describe('useWidget', () => {
   describe('get value from control', () => {
     describe('date control', () => {
       it('with has no value', () => {
-        const schema = schemaUtil.patch({ kind: 'date-picker', key: 'date', });
+        const schema = schemaUtil.patch({ kind: 'date-picker', key: 'date' });
         const control = new FormControl(null);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -197,7 +200,7 @@ describe('useWidget', () => {
 
       it('with has value', () => {
         const now = new Date();
-        const schema = schemaUtil.patch({ kind: 'date-picker', key: 'date', });
+        const schema = schemaUtil.patch({ kind: 'date-picker', key: 'date' });
         const control = new FormControl(now);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -216,7 +219,7 @@ describe('useWidget', () => {
 
     describe('time control', () => {
       it('with has no value', () => {
-        const schema = schemaUtil.patch({ kind: 'time-picker', key: 'time', });
+        const schema = schemaUtil.patch({ kind: 'time-picker', key: 'time' });
         const control = new FormControl(null);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -225,7 +228,7 @@ describe('useWidget', () => {
 
       it('with has value', () => {
         const now = new Date();
-        const schema = schemaUtil.patch({ kind: 'time-picker', key: 'time', });
+        const schema = schemaUtil.patch({ kind: 'time-picker', key: 'time' });
         const control = new FormControl(now);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -235,7 +238,7 @@ describe('useWidget', () => {
 
     describe('date range control', () => {
       it('with has no value', () => {
-        const schema = schemaUtil.patch({ kind: 'date-range-picker', key: 'range', });
+        const schema = schemaUtil.patch({ kind: 'date-range-picker', key: 'range' });
         const control = new FormControl(null);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -244,7 +247,7 @@ describe('useWidget', () => {
 
       it('with has value', () => {
         const begin = new Date(), end = new Date();
-        const schema = schemaUtil.patch({ kind: 'date-range-picker', key: 'range', });
+        const schema = schemaUtil.patch({ kind: 'date-range-picker', key: 'range' });
         const control = new FormControl([begin, end]);
         const value = valueUtil.valueOfControl(control, schema);
 
@@ -265,7 +268,7 @@ describe('useWidget', () => {
       const schema = schemaUtil.patch({ kind: 'checkbox-group', key: 'active', options: [] });
       const control = new FormControl([
         { label: 'one', value: 1, checked: true },
-        { label: 'two', value: 2, checked: false },
+        { label: 'two', value: 2, checked: false }
       ]);
       const value = valueUtil.valueOfControl(control, schema);
 

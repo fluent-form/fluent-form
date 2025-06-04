@@ -15,7 +15,7 @@ type SilderWidgetTemplateContext = WidgetTemplateContext<SliderControlSchema, Fo
     ReactiveFormsModule,
     NzSliderModule,
     FluentBindingDirective,
-    FluentContextGuardDirective,
+    FluentContextGuardDirective
   ],
   templateUrl: './silder.widget.html',
   styles: [`nz-slider { display: block; }`]

@@ -18,7 +18,7 @@ export class LifecycleHooksExampleComponent {
       .placeholder('Please feel free to enter')
       .hooks({
         onInit: context => console.log('onInit', context),
-        onDestroy: context => console.log('onDestroy', context),
+        onDestroy: context => console.log('onDestroy', context)
       })
       .col(4);
   });

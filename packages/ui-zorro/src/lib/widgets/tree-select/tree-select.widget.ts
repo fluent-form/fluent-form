@@ -1,6 +1,19 @@
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectPipe, FluentReactivePipe, InvokePipe, WidgetTemplateContext, isBoolean, isUndefined } from '@fluent-form/core';
+import {
+  AbstractWidget,
+  FluentBindingDirective,
+  FluentColumnPipe,
+  FluentContextGuardDirective,
+  FluentControlWrapperDirective,
+  FluentGridModule,
+  FluentInjectPipe,
+  FluentReactivePipe,
+  InvokePipe,
+  WidgetTemplateContext,
+  isBoolean,
+  isUndefined
+} from '@fluent-form/core';
 import { SafeAny } from '@ngify/types';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { TreeSelectControlSchema } from '../../schemas';

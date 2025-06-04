@@ -1,6 +1,19 @@
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentColumnPipe, FluentContextGuardDirective, FluentControlWrapperDirective, FluentGridModule, FluentInjectPipe, FluentReactivePipe, FluentTemplatePipe, InvokePipe, WidgetTemplateContext, isNumber } from '@fluent-form/core';
+import {
+  AbstractWidget,
+  FluentBindingDirective,
+  FluentColumnPipe,
+  FluentContextGuardDirective,
+  FluentControlWrapperDirective,
+  FluentGridModule,
+  FluentInjectPipe,
+  FluentReactivePipe,
+  FluentTemplatePipe,
+  InvokePipe,
+  WidgetTemplateContext,
+  isNumber
+} from '@fluent-form/core';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { affixHelper } from '../../helper';
 import { NumberFieldControlSchema } from '../../schemas';

@@ -46,7 +46,7 @@ export function composeBuilder<T>(): Builder<T> {
         case BUILD_KEY: return () => target;
 
         case COMPOSE_KEY:
-          return (composeFn: Function): unknown => {
+          return (composeFn: (...args: SafeAny) => SafeAny): unknown => {
             target[COMPOSE_KEY] = [];
 
             enterSchema(target);
@@ -85,7 +85,7 @@ type BuildKey = typeof BUILD_KEY;
 type Buildable = Record<BuildKey, unknown>;
 /** Get the non-nullable and required keys of an interface. */
 type NonNullableKey<T> = {
-  [K in keyof T]-?: { [_ in K]: T[K] } extends { [_ in K]-?: T[K] } ? K : never
+  [K in keyof T]-?: Record<K, T[K]> extends Required<Record<K, T[K]>> ? K : never
 }[keyof T];
 
 /**
@@ -102,9 +102,9 @@ type _Builder<
   S extends keyof T = never,
   B extends BuildKey = never
 > = {
-    // 通过 `keyof Pick` 从原始类型 T 中提取出字段后再遍历就能够携带上字段在 T 中的注释
-    [K in keyof Pick<T, Exclude<C, S> | B>]-?: (
-      K extends BuildKey
+  // 通过 `keyof Pick` 从原始类型 T 中提取出字段后再遍历就能够携带上字段在 T 中的注释
+  [K in keyof Pick<T, Exclude<C, S> | B>]-?: (
+    K extends BuildKey
       ? () => Pick<T, S>
       : (val: K extends ComposeKey ? () => SafeAny : T[K]) => _Builder<
         T,
@@ -113,8 +113,8 @@ type _Builder<
         S | K,
         [N] extends [S | K] ? BuildKey : never
       >
-    )
-  };
+  )
+};
 
 /**
  * @template T 原型

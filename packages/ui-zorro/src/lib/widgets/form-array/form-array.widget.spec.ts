@@ -34,9 +34,7 @@ describe('FormArrayWidget', () => {
     const formArray = new FormArray<SafeAny>([]);
     component['push'](formArray, {
       kind: 'array',
-      schemas: [
-        { kind: 'text-field' }
-      ]
+      schemas: [{ kind: 'text-field' }]
     });
 
     expect(formArray.length).toBe(1);

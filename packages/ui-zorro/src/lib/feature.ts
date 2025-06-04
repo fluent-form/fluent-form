@@ -1,4 +1,12 @@
-import { FLUENT_FORM_CONTENT, FLUENT_FORM_ITEM_CONTENT, FluentFormFeatureKind, FluentFormWidgetConfig, makeFluentFeature, provideSchemaPatcher, provideWidgetConfigs } from '@fluent-form/core';
+import {
+  FLUENT_FORM_CONTENT,
+  FLUENT_FORM_ITEM_CONTENT,
+  FluentFormFeatureKind,
+  FluentFormWidgetConfig,
+  makeFluentFeature,
+  provideSchemaPatcher,
+  provideWidgetConfigs
+} from '@fluent-form/core';
 import { SafeAny } from '@ngify/types';
 import { FormContentComponent, FormItemContentComponent } from './components';
 

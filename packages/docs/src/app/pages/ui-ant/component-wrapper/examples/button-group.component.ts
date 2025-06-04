@@ -19,7 +19,7 @@ export class ButtonGroupExampleComponent {
       button().content('Cancel');
       button().type('primary').content('Confirm');
     });
-  })
+  });
 
   readonly model = signal({});
 }

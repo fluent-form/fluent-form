@@ -35,7 +35,7 @@ export class EventObserverExampleComponent {
       .options([
         { label: 'Jack', value: 'jack' },
         { label: 'lucy', value: 'lucy' },
-        { label: 'Mike', value: 'mike' },
+        { label: 'Mike', value: 'mike' }
       ])
       .observers({
         nzOpenChange: source => source.pipe(

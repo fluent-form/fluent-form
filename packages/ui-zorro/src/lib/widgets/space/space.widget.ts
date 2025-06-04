@@ -1,7 +1,16 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, FluentControlPipe, FluentControlWrapperDirective, FluentWidgetTemplatePipe, FluentWithInjectorDirective, WidgetTemplateContext } from '@fluent-form/core';
+import {
+  AbstractWidget,
+  FluentBindingDirective,
+  FluentContextGuardDirective,
+  FluentControlPipe,
+  FluentControlWrapperDirective,
+  FluentWidgetTemplatePipe,
+  FluentWithInjectorDirective,
+  WidgetTemplateContext
+} from '@fluent-form/core';
 import { NzFlexDirective } from 'ng-zorro-antd/flex';
 import { SpaceComponentSchema } from '../../schemas';
 
@@ -21,8 +30,8 @@ type SpaceWidgetTemplateContext = WidgetTemplateContext<SpaceComponentSchema, Fo
     FluentWithInjectorDirective,
     FluentControlPipe,
     FluentWidgetTemplatePipe,
-    FluentControlWrapperDirective,
+    FluentControlWrapperDirective
   ],
-  templateUrl: './space.widget.html',
+  templateUrl: './space.widget.html'
 })
 export class SpaceWidget extends AbstractWidget<SpaceWidgetTemplateContext> { }

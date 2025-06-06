@@ -32,17 +32,25 @@ const inputChangeNextFn = vitest.fn();
   ],
   template: `
     <input
-      [fluentBinding]="{ schema: inputSchema, control: inputControl, model: {} }"
+      [fluentBindingSchema]="inputSchema"
+      [fluentBindingControl]="inputControl"
+      [fluentBindingModel]="{}"
       [formControl]="inputControl">
 
     <fluent-range
       #rangeComponent
-      [fluentBinding]="{ component: rangeComponent, schema: rangeSchema, control: rangeControl, model: {} }"
+      [fluentBindingComponent]="rangeComponent"
+      [fluentBindingSchema]="rangeSchema"
+      [fluentBindingControl]="rangeControl"
+      [fluentBindingModel]="{}"
       [formControl]="rangeControl" />
 
     <fluent-number
       #numberComponent
-      [fluentBinding]="{ component: numberComponent, schema: numberSchema, control: numberControl, model: {} }"
+      [fluentBindingComponent]="numberComponent"
+      [fluentBindingSchema]="numberSchema"
+      [fluentBindingControl]="numberControl"
+      [fluentBindingModel]="{}"
       [formControl]="numberControl" />
   `
 })

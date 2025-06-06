@@ -1,8 +1,8 @@
-import { Rule, SchematicContext, Tree, chain } from '@angular-devkit/schematics';
+import { type Rule, type SchematicContext, Tree, chain } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { addRootProvider } from '@schematics/angular/utility';
 import { NodeDependencyType, addPackageJsonDependency, getPackageJsonDependency } from '@schematics/angular/utility/dependencies';
-import { Schema } from './schema';
+import type { Schema } from './schema';
 
 const UI_PACKAGE_MAP = new Map<string, string>([['ng-zorro-antd', '@fluent-form/ui-zorro']]);
 

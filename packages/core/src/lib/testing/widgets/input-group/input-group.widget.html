@@ -1,5 +1,12 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <div #component [fluentBinding]="{ component, schema, control, model }" [class]="schema.class" [style]="schema.style">
+  <div
+    #component
+    [fluentBindingComponent]="component"
+    [fluentBindingSchema]="schema"
+    [fluentBindingControl]="control"
+    [fluentBindingModel]="model"
+    [class]="schema.class"
+    [style]="schema.style">
     @for (subschema of schema.schemas; track subschema) {
       <ng-container
         fluentWithInjector

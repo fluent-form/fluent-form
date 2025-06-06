@@ -5,7 +5,9 @@
     [align]="schema.align"
     [justify]="schema.justify"
     [gap]="schema.gap"
-    [fluentBinding]="{ schema, control, model }">
+    [fluentBindingSchema]="schema"
+    [fluentBindingControl]="control"
+    [fluentBindingModel]="model">
     <ng-template #colTemplate let-schema="schema" let-control="control" let-model="model">
       <fluent-col
         [span]="schema.col | col: 'span'"

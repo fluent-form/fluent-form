@@ -52,10 +52,10 @@ function permissionCheckboxGroup() {
   return checkboxGroup('permission')
     .options(options)
     .mapper({
-      // 输入一个权限值，分解为 checkbox-group 需要的值
+      // Enter a permission value and break it down into the values ​​required by the checkbox-group
       parser: (value: number) =>
         flags.filter(flag => (value & flag) > 0),
-      // 过滤出选中的值，通过位或运算合并为权限值
+      // Combine the selected values ​​into the permission value through bitwise OR operation
       formatter: value =>
         (value as number[])?.reduce((acc, cur) => acc | cur, Permissions.Default)
     });

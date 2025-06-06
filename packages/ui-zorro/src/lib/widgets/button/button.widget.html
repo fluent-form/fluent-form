@@ -6,7 +6,9 @@
           nz-button
           fluentCol
           [disabled]="schema.disabled | reactive: model : schema : control"
-          [fluentBinding]="{ schema, control, model }"
+          [fluentBindingSchema]="schema"
+          [fluentBindingControl]="control"
+          [fluentBindingModel]="model"
           [class]="schema.class"
           [style]="schema.style"
           [nzBlock]="schema.variants?.block"
@@ -27,7 +29,9 @@
           fluentCol
           [attr.type]="schema.mode"
           [disabled]="schema.disabled | reactive: model : schema : control"
-          [fluentBinding]="{ schema, control, model }"
+          [fluentBindingSchema]="schema"
+          [fluentBindingControl]="control"
+          [fluentBindingModel]="model"
           [class]="schema.class"
           [style]="schema.style"
           [nzBlock]="schema.variants?.block"
@@ -48,7 +52,9 @@
         <a
           nz-button
           [disabled]="schema.disabled | reactive: model : schema : control"
-          [fluentBinding]="{ schema, control, model }"
+          [fluentBindingSchema]="schema"
+          [fluentBindingControl]="control"
+          [fluentBindingModel]="model"
           [class]="schema.class"
           [style]="schema.style"
           [nzBlock]="schema.variants?.block"
@@ -65,7 +71,9 @@
           nz-button
           [attr.type]="schema.mode"
           [disabled]="schema.disabled | reactive: model : schema : control"
-          [fluentBinding]="{ schema, control, model }"
+          [fluentBindingSchema]="schema"
+          [fluentBindingControl]="control"
+          [fluentBindingModel]="model"
           [class]="schema.class"
           [style]="schema.style"
           [nzBlock]="schema.variants?.block"

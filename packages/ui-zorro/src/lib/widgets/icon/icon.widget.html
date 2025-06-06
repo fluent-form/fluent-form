@@ -2,7 +2,10 @@
   <span
     #component="nzIcon"
     nz-icon
-    [fluentBinding]="{ component, schema, control, model }"
+    [fluentBindingComponent]="component"
+    [fluentBindingSchema]="schema"
+    [fluentBindingControl]="control"
+    [fluentBindingModel]="model"
     [class]="schema.class"
     [style]="schema.style"
     [nzType]="schema.type | reactive: model : schema : control"

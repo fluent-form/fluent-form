@@ -1,7 +1,10 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <nz-color-picker
     #component
-    [fluentBinding]="{ component, schema, control, model }"
+    [fluentBindingComponent]="component"
+    [fluentBindingSchema]="schema"
+    [fluentBindingControl]="control"
+    [fluentBindingModel]="model"
     [formControl]="control"
     [class]="schema.class"
     [style]="schema.style"

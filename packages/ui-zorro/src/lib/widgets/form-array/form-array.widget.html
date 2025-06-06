@@ -10,7 +10,9 @@
     [nzLayout]="formSchema.layout!"
     [class]="formSchema.class"
     [style]="formSchema.style"
-    [fluentBinding]="{ schema: formSchema, control: formArray, model }"
+    [fluentBindingSchema]="formSchema"
+    [fluentBindingControl]="formArray"
+    [fluentBindingModel]="model"
     (cdkDropListDropped)="drop(formArray, $event)">
     <ng-template
       #formColTemplate

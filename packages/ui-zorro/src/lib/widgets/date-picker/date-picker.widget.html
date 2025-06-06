@@ -4,7 +4,10 @@
       <nz-date-picker
         #component
         fluentCol
-        [fluentBinding]="{ component, schema, control, model }"
+        [fluentBindingComponent]="component"
+        [fluentBindingSchema]="schema"
+        [fluentBindingControl]="control"
+        [fluentBindingModel]="model"
         [formControl]="control"
         [class]="schema.class"
         [style]="schema.style"
@@ -29,7 +32,10 @@
   } @else {
     <nz-date-picker
       #component
-      [fluentBinding]="{ component, schema, control, model }"
+      [fluentBindingComponent]="component"
+      [fluentBindingSchema]="schema"
+      [fluentBindingControl]="control"
+      [fluentBindingModel]="model"
       [formControl]="control"
       [class]="schema.class"
       [style]="schema.style"

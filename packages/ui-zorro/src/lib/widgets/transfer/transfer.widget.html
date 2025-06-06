@@ -1,7 +1,10 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <nz-transfer
     #component
-    [fluentBinding]="{ component, schema, control, model }"
+    [fluentBindingComponent]="component"
+    [fluentBindingSchema]="schema"
+    [fluentBindingControl]="control"
+    [fluentBindingModel]="model"
     [class]="schema.class"
     [style]="schema.style"
     [nzDataSource]="schema.options | reactive: model : schema : control | transferItems"

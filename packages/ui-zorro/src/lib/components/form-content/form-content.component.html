@@ -8,7 +8,9 @@
     [nzLayout]="schema.layout!"
     [class]="schema.class"
     [style]="schema.style"
-    [fluentBinding]="{ schema, control: form, model }"
+    [fluentBindingSchema]="schema"
+    [fluentBindingControl]="form"
+    [fluentBindingModel]="model"
     (submit)="onSubmit($event)">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
       <fluent-col

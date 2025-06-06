@@ -2,7 +2,10 @@
   <label
     #component
     nz-checkbox
-    [fluentBinding]="{ component, schema, control, model }"
+    [fluentBindingComponent]="component"
+    [fluentBindingSchema]="schema"
+    [fluentBindingControl]="control"
+    [fluentBindingModel]="model"
     [formControl]="control"
     [class]="schema.class"
     [style]="schema.style"

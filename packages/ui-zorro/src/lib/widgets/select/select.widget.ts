@@ -15,12 +15,11 @@ import {
   SingleSchemaKey,
   WidgetTemplateContext
 } from '@fluent-form/core';
-import { AnyObject, SafeAny } from '@ngify/types';
+import { AnyObject, SafeAny } from '@ngify/core';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { filter, Subject, tap } from 'rxjs';
 import { SelectControlSchema } from '../../schemas';
-import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
 type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, FormControl>;
 
@@ -32,7 +31,6 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
   imports: [
     ReactiveFormsModule,
     NzSelectModule,
-    NzSpaceCompactItemDirective,
     NzOutletModule,
     FluentGridModule,
     FluentBindingDirective,

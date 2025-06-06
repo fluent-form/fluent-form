@@ -1,5 +1,5 @@
 import { InjectionToken, type TemplateRef, type Type } from '@angular/core';
-import type { SafeAny } from '@ngify/types';
+import type { SafeAny } from '@ngify/core';
 import type { AbstractFormContentComponent, AbstractFormItemContentComponent } from './components';
 import type { SchemaConfig } from './interfaces';
 import type { AbstractWidget } from './widgets/widget';

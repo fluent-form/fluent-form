@@ -1,7 +1,7 @@
 // @ts-check
-import eslint from "@eslint/js";
+import eslint from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
-import angular from "angular-eslint";
+import angular from 'angular-eslint';
 // @ts-expect-error eslint-plugin-import is not typed
 import importPlugin from 'eslint-plugin-import';
 import tseslint from 'typescript-eslint';
@@ -11,7 +11,7 @@ export default tseslint.config(
     ignores: ['**/dist'],
   },
   {
-    files: ["**/*.ts"],
+    files: ['**/*.ts'],
     extends: [
       eslint.configs.recommended,
       importPlugin.flatConfigs.recommended,
@@ -248,28 +248,28 @@ export default tseslint.config(
         }
       ],
 
-      "@angular-eslint/component-selector": "warn",
-      "@angular-eslint/component-class-suffix": "off",
-      "@angular-eslint/directive-class-suffix": "off",
-      "@angular-eslint/no-input-rename": "off",
-      "@angular-eslint/no-output-rename": "off",
-      "@angular-eslint/no-host-metadata-property": "off"
+      '@angular-eslint/component-selector': 'warn',
+      '@angular-eslint/component-class-suffix': 'off',
+      '@angular-eslint/directive-class-suffix': 'off',
+      '@angular-eslint/no-input-rename': 'off',
+      '@angular-eslint/no-output-rename': 'off',
+      '@angular-eslint/no-host-metadata-property': 'off'
     },
   },
   {
-    files: ["**/*.html"],
+    files: ['**/*.html'],
     extends: [
       ...angular.configs.templateRecommended,
       ...angular.configs.templateAccessibility,
     ],
     rules: {
-      "@angular-eslint/template/label-has-associated-control": "warn",
-      "@angular-eslint/template/click-events-have-key-events": "warn",
-      "@angular-eslint/template/interactive-supports-focus": "warn",
-      "@angular-eslint/template/no-autofocus": "off",
-      "@angular-eslint/template/no-interpolation-in-attributes": "error",
-      "@angular-eslint/template/prefer-control-flow": "error",
-      "@angular-eslint/template/prefer-self-closing-tags": "error"
+      '@angular-eslint/template/label-has-associated-control': 'warn',
+      '@angular-eslint/template/click-events-have-key-events': 'warn',
+      '@angular-eslint/template/interactive-supports-focus': 'warn',
+      '@angular-eslint/template/no-autofocus': 'off',
+      '@angular-eslint/template/no-interpolation-in-attributes': 'error',
+      '@angular-eslint/template/prefer-control-flow': 'error',
+      '@angular-eslint/template/prefer-self-closing-tags': 'error'
     },
   }
 );

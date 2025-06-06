@@ -1,4 +1,4 @@
-import { SafeAny } from '@ngify/types';
+import { SafeAny } from '@ngify/core';
 import { FluentFormFeatureKind, FluentFormWidgetConfig, makeFluentFeature, provideWidgetConfigs } from '../features';
 import { FLUENT_FORM_CONTENT, FLUENT_FORM_ITEM_CONTENT } from '../tokens';
 import { FormContentComponent, FormItemContentComponent } from './components';

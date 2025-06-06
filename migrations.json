@@ -1,0 +1,11 @@
+{
+  "migrations": [
+    {
+      "version": "19.0.0-0",
+      "description": "Updates the Angular CDK to v19",
+      "factory": "./ng-update/index#updateToV19",
+      "package": "@angular/cdk",
+      "name": "migration-v19"
+    }
+  ]
+}

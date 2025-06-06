@@ -1,7 +1,7 @@
 import { Component, Signal, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
-import { AnyObject } from '@ngify/types';
+import { AnyObject } from '@ngify/core';
 import { applyRoot, form } from '../../compose';
 import { provideFluentForm } from '../../provider';
 import { AbstractFormGroupSchema } from '../../schemas';

@@ -11,8 +11,8 @@ import {
   FluentWithInjectorDirective,
   WidgetTemplateContext
 } from '@fluent-form/core';
+import { NzSpaceCompactComponent } from 'ng-zorro-antd/space';
 import { SpaceCompactComponentSchema } from '../../schemas';
-import { NzSpaceCompactComponent } from './lib/space-compact.component';
 
 type SpaceCompactWidgetTemplateContext = WidgetTemplateContext<SpaceCompactComponentSchema, FormGroup>;
 

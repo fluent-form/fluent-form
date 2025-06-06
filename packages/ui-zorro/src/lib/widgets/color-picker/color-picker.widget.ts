@@ -11,7 +11,7 @@ import {
 import { NzColorPickerComponent } from 'ng-zorro-antd/color-picker';
 import { ColorPickerControlSchema } from '../../schemas';
 
-type ColorWidgetTemplateContext = WidgetTemplateContext<ColorPickerControlSchema, FormControl<string>>;
+type ColorPickerWidgetTemplateContext = WidgetTemplateContext<ColorPickerControlSchema, FormControl<string>>;
 
 /**
  * @internal
@@ -26,6 +26,6 @@ type ColorWidgetTemplateContext = WidgetTemplateContext<ColorPickerControlSchema
     FluentTemplatePipe,
     FluentReactivePipe
   ],
-  templateUrl: './color.widget.html'
+  templateUrl: './color-picker.widget.html'
 })
-export class ColorWidget extends AbstractWidget<ColorWidgetTemplateContext> { }
+export class ColorPickerWidget extends AbstractWidget<ColorPickerWidgetTemplateContext> { }

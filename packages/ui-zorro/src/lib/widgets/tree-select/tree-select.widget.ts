@@ -14,10 +14,9 @@ import {
   isBoolean,
   isUndefined
 } from '@fluent-form/core';
-import { SafeAny } from '@ngify/types';
+import { SafeAny } from '@ngify/core';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { TreeSelectControlSchema } from '../../schemas';
-import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
 type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSchema, FormControl<SafeAny[]>>;
 
@@ -29,7 +28,6 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
   imports: [
     ReactiveFormsModule,
     NzTreeSelectModule,
-    NzSpaceCompactItemDirective,
     FluentGridModule,
     FluentBindingDirective,
     FluentContextGuardDirective,

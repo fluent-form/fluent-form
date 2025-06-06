@@ -1,10 +1,9 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   @if (ControlWrapperDirective | inject: { optional: true }) {
     @if (!(schema.hidden | reactive: model : schema : control)) {
-      <nz-date-picker
+      <nz-time-picker
         #component
         fluentCol
-        nzSpaceCompactItem="picker"
         [fluentBinding]="{ component, schema, control, model }"
         [formControl]="control"
         [class]="schema.class"
@@ -12,42 +11,39 @@
         [span]="schema.col | col: 'span'"
         [flex]="schema.col | col: 'flex'"
         [offset]="schema.col | col: 'offset'"
-        [nzAllowClear]="schema.clearable"
-        [nzFormat]="schema.format!"
         [nzId]="schema.id!"
-        [nzMode]="schema.mode!"
+        [nzAllowEmpty]="schema.clearable"
+        [nzFormat]="schema.format ?? 'HH:mm:ss'"
+        [nzHourStep]="schema.step?.hour!"
+        [nzMinuteStep]="schema.step?.minute!"
+        [nzSecondStep]="schema.step?.second!"
         [nzPlaceHolder]="schema.placeholder | reactive: model : schema : control"
-        [nzShowTime]="schema.time"
-        [nzPlacement]="schema.placement ?? 'bottomLeft'"
-        [nzSuffixIcon]="schema.suffixIcon | template: 'calendar'"
         [nzAutoFocus]="schema.autofocus"
-        [nzInputReadOnly]="schema.readonly | reactive: model : schema : control"
         [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless"
-        [nzShowToday]="schema.today ?? true"
-        [nzShowNow]="schema.now ?? true" />
+        [nzBackdrop]="schema.backdrop!"
+        [nzInputReadOnly]="schema.readonly | reactive: model : schema : control"
+        [nzSuffixIcon]="schema.suffixIcon | template: 'clock-circle'" />
     }
   } @else {
-    <nz-date-picker
+    <nz-time-picker
       #component
-      nzSpaceCompactItem="picker"
       [fluentBinding]="{ component, schema, control, model }"
       [formControl]="control"
       [class]="schema.class"
       [style]="schema.style"
-      [nzAllowClear]="schema.clearable"
-      [nzFormat]="schema.format!"
+      [nzAllowEmpty]="schema.clearable"
+      [nzFormat]="schema.format ?? 'HH:mm:ss'"
       [nzId]="schema.id!"
-      [nzMode]="schema.mode!"
+      [nzHourStep]="schema.step?.hour!"
+      [nzMinuteStep]="schema.step?.minute!"
+      [nzSecondStep]="schema.step?.second!"
       [nzPlaceHolder]="schema.placeholder | reactive: model : schema : control"
-      [nzShowTime]="schema.time"
-      [nzPlacement]="schema.placement ?? 'bottomLeft'"
-      [nzSuffixIcon]="schema.suffixIcon | template: 'calendar'"
       [nzAutoFocus]="schema.autofocus"
-      [nzInputReadOnly]="schema.readonly | reactive: model : schema : control"
       [nzSize]="schema.size!"
       [nzBorderless]="schema.borderless"
-      [nzShowToday]="schema.today ?? true"
-      [nzShowNow]="schema.now ?? true" />
+      [nzBackdrop]="schema.backdrop!"
+      [nzInputReadOnly]="schema.readonly | reactive: model : schema : control"
+      [nzSuffixIcon]="schema.suffixIcon | template: 'clock-circle'" />
   }
 </ng-template>

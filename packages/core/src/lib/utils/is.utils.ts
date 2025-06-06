@@ -1,4 +1,4 @@
-import type { SafeAny } from '@ngify/types';
+import type { SafeAny } from '@ngify/core';
 
 export const isObject = (o: unknown): o is object => typeof o === 'object';
 export const isNumber = (o: unknown): o is number => typeof o === 'number';

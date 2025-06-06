@@ -7,7 +7,7 @@ import {
   provideSchemaPatcher,
   provideWidgetConfigs
 } from '@fluent-form/core';
-import { SafeAny } from '@ngify/types';
+import { SafeAny } from '@ngify/core';
 import { FormContentComponent, FormItemContentComponent } from './components';
 
 export function withZorro(widgets: (FluentFormWidgetConfig<SafeAny> | FluentFormWidgetConfig<SafeAny>[])[]) {

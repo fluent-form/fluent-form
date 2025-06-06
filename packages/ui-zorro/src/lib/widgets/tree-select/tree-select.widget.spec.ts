@@ -1,6 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SafeAny } from '@ngify/types';
+import { SafeAny } from '@ngify/core';
 import { TreeSelectWidget } from './tree-select.widget';
 
 describe('TreeSelectWidget', () => {

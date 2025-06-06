@@ -1,5 +1,5 @@
 import { computed, type Signal } from '@angular/core';
-import type { SafeAny } from '@ngify/types';
+import type { SafeAny } from '@ngify/core';
 import type { AbstractFormGroupSchema, AbstractSchema } from '../schemas';
 import type { Indexable } from '../types';
 import { isArray } from '../utils';

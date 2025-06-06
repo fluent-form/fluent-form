@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { FormControl } from '@angular/forms';
-import { AnyObject } from '@ngify/types';
+import { AnyObject } from '@ngify/core';
 import { withStaticExpression } from '../features';
 import { provideFluentForm } from '../provider';
 import { AbstractControlSchema } from '../schemas';

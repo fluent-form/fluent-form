@@ -1,5 +1,5 @@
 import { inject, Pipe, type PipeTransform, TemplateRef } from '@angular/core';
-import type { SafeAny } from '@ngify/types';
+import type { SafeAny } from '@ngify/core';
 import { NAMED_TEMPLATES } from '../tokens';
 import { isString } from '../utils';
 

@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { AbstractControl, type AbstractControlOptions, FormArray, FormControl, FormGroup, type ValidatorFn, Validators } from '@angular/forms';
-import type { AnyArray, AnyObject, SafeAny } from '@ngify/types';
+import type { AnyArray, AnyObject, SafeAny } from '@ngify/core';
 import type { AbstractControlSchema, AbstractFormArraySchema, AbstractFormGroupSchema, AbstractSchema, SchemaKey } from '../schemas';
 import { ValueTransformer } from '../services/value-transformer.service';
 import type { Indexable } from '../types';

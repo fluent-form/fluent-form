@@ -1,14 +1,19 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormComponent, form } from '@fluent-form/core';
+import { FluentFormModule, form } from '@fluent-form/core';
 import { numberField } from '@fluent-form/ui-zorro';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'number-field-example',
   standalone: true,
-  imports: [FluentFormComponent, JsonPipe],
+  imports: [FluentFormModule, JsonPipe, NzIconModule],
   template: `
-    <fluent-form [schema]="schema()" [(model)]="model" />
+    <fluent-form [schema]="schema()" [(model)]="model">
+      <ng-template fluentTemplate="settingsIconTmpl">
+        <nz-icon nzType="setting" nzTheme="outline" />
+      </ng-template>
+    </fluent-form>
     <pre>{{ model() | json }}</pre>
   `
 })
@@ -35,7 +40,7 @@ export class NumberFieldExampleComponent {
     numberField('rmb2')
       .label('With icon affixes')
       .placeholder('Please enter')
-      .affixes({ suffix: { icon: 'setting' } })
+      .affixes({ suffix: '#settingsIconTmpl' })
       .col(4);
 
     numberField('cny1')
@@ -47,7 +52,7 @@ export class NumberFieldExampleComponent {
     numberField('cny2')
       .label('With icon addons')
       .placeholder('Please enter')
-      .addons({ after: { icon: 'setting' } })
+      .addons({ after: '#settingsIconTmpl' })
       .col(4);
   });
 

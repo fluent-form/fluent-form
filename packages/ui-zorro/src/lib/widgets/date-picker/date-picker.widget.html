@@ -1,10 +1,9 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   @if (ControlWrapperDirective | inject: { optional: true }) {
     @if (!(schema.hidden | reactive: model : schema : control)) {
-      <nz-range-picker
+      <nz-date-picker
         #component
         fluentCol
-        nzSpaceCompactItem="picker"
         [fluentBinding]="{ component, schema, control, model }"
         [formControl]="control"
         [class]="schema.class"
@@ -18,7 +17,6 @@
         [nzMode]="schema.mode!"
         [nzPlaceHolder]="schema.placeholder | reactive: model : schema : control"
         [nzShowTime]="schema.time"
-        [nzShowTime]="schema.time"
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzSuffixIcon]="schema.suffixIcon | template: 'calendar'"
         [nzAutoFocus]="schema.autofocus"
@@ -26,13 +24,11 @@
         [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless"
         [nzShowToday]="schema.today ?? true"
-        [nzShowNow]="schema.now ?? true"
-        [nzSeparator]="schema.separator" />
+        [nzShowNow]="schema.now ?? true" />
     }
   } @else {
-    <nz-range-picker
+    <nz-date-picker
       #component
-      nzSpaceCompactItem="picker"
       [fluentBinding]="{ component, schema, control, model }"
       [formControl]="control"
       [class]="schema.class"
@@ -43,7 +39,6 @@
       [nzMode]="schema.mode!"
       [nzPlaceHolder]="schema.placeholder | reactive: model : schema : control"
       [nzShowTime]="schema.time"
-      [nzShowTime]="schema.time"
       [nzPlacement]="schema.placement ?? 'bottomLeft'"
       [nzSuffixIcon]="schema.suffixIcon | template: 'calendar'"
       [nzAutoFocus]="schema.autofocus"
@@ -51,7 +46,6 @@
       [nzSize]="schema.size!"
       [nzBorderless]="schema.borderless"
       [nzShowToday]="schema.today ?? true"
-      [nzShowNow]="schema.now ?? true"
-      [nzSeparator]="schema.separator" />
+      [nzShowNow]="schema.now ?? true" />
   }
 </ng-template>

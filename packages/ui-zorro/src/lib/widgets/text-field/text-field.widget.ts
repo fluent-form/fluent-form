@@ -16,9 +16,7 @@ import {
   isNumber
 } from '@fluent-form/core';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { affixHelper } from '../../helper';
 import { TextFieldControlSchema } from '../../schemas';
-import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
 type TextFieldWidgetTemplateContext = WidgetTemplateContext<TextFieldControlSchema, FormControl<string>>;
 
@@ -30,7 +28,6 @@ type TextFieldWidgetTemplateContext = WidgetTemplateContext<TextFieldControlSche
   imports: [
     ReactiveFormsModule,
     NzInputModule,
-    NzSpaceCompactItemDirective,
     FluentGridModule,
     FluentBindingDirective,
     FluentContextGuardDirective,
@@ -48,7 +45,6 @@ export class TextFieldWidget extends AbstractWidget<TextFieldWidgetTemplateConte
     length: {
       min: (length?: Length) => isNumber(length) ? length : length?.min,
       max: (length?: Length) => isNumber(length) ? length : length?.max
-    },
-    affix: affixHelper
+    }
   } as const;
 }

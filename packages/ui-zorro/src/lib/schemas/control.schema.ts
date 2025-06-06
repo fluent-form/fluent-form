@@ -15,9 +15,9 @@ import {
   SchemaKey,
   SingleSchemaKey
 } from '@fluent-form/core';
-import { SafeAny } from '@ngify/types';
+import { SafeAny } from '@ngify/core';
 import { NzCascaderComponent, NzCascaderExpandTrigger, NzCascaderOption, NzCascaderSize, NzShowSearchOptions } from 'ng-zorro-antd/cascader';
-import { NzCheckBoxOptionInterface, NzCheckboxComponent, NzCheckboxGroupComponent } from 'ng-zorro-antd/checkbox';
+import { NzCheckboxComponent, NzCheckboxGroupComponent } from 'ng-zorro-antd/checkbox';
 import { NzColorPickerComponent } from 'ng-zorro-antd/color-picker';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzDateMode, NzDatePickerComponent, NzRangePickerComponent, SupportTimeOptions } from 'ng-zorro-antd/date-picker';
@@ -106,12 +106,12 @@ export interface TextFieldControlSchema<Key extends SingleSchemaKey = SingleSche
   /* A type of input. */
   type?: 'text' | 'number' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
   addons?: {
-    before?: MaybeSchemaReactiveFn<TextFieldControlSchema, string | TemplateRef<void> | { icon: string } | null>;
-    after?: MaybeSchemaReactiveFn<TextFieldControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    before?: MaybeSchemaReactiveFn<TextFieldControlSchema, string | TemplateRef<void> | null>;
+    after?: MaybeSchemaReactiveFn<TextFieldControlSchema, string | TemplateRef<void> | null>;
   };
   affixes?: {
-    prefix?: MaybeSchemaReactiveFn<TextFieldControlSchema, string | TemplateRef<void> | { icon: string } | null>;
-    suffix?: MaybeSchemaReactiveFn<TextFieldControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    prefix?: MaybeSchemaReactiveFn<TextFieldControlSchema, string | TemplateRef<void> | null>;
+    suffix?: MaybeSchemaReactiveFn<TextFieldControlSchema, string | TemplateRef<void> | null>;
   };
 }
 
@@ -141,16 +141,16 @@ export interface NumberFieldControlSchema<Key extends SingleSchemaKey = SingleSc
   kind: 'number-field';
   range?: { max?: number, min?: number };
   /** Decimal precision */
-  precision?: number | { value?: number, mode?: NzInputNumberComponent['nzPrecisionMode'] };
+  precision?: number;
   /** Step length */
   step?: number;
   addons?: {
-    before?: MaybeSchemaReactiveFn<NumberFieldControlSchema, string | TemplateRef<void> | { icon: string } | null>;
-    after?: MaybeSchemaReactiveFn<NumberFieldControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    before?: MaybeSchemaReactiveFn<NumberFieldControlSchema, string | TemplateRef<void> | null>;
+    after?: MaybeSchemaReactiveFn<NumberFieldControlSchema, string | TemplateRef<void> | null>;
   };
   affixes?: {
-    prefix?: MaybeSchemaReactiveFn<NumberFieldControlSchema, string | TemplateRef<void> | { icon: string } | null>;
-    suffix?: MaybeSchemaReactiveFn<NumberFieldControlSchema, string | TemplateRef<void> | { icon: string } | null>;
+    prefix?: MaybeSchemaReactiveFn<NumberFieldControlSchema, string | TemplateRef<void> | null>;
+    suffix?: MaybeSchemaReactiveFn<NumberFieldControlSchema, string | TemplateRef<void> | null>;
   };
 }
 
@@ -332,13 +332,13 @@ export interface CheckboxControlSchema<Key extends SingleSchemaKey = SingleSchem
 /**
  * @public
  */
-export interface CheckboxGroupControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = NzCheckBoxOptionInterface[]>
+export interface CheckboxGroupControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = number[] | string[]>
   extends AbstractZorroControlSchema<Key, Val>,
   ComponentControlEventListenerHolder<NzCheckboxGroupComponent, Val>,
   ComponentControlEventObserverHolder<NzCheckboxGroupComponent, Val>,
   ComponentPropertyHolder<NzCheckboxGroupComponent> {
   kind: 'checkbox-group';
-  options: { label: string, value: SafeAny }[];
+  options: MaybeSchemaReactiveFn<SelectControlSchema<SingleSchemaKey, Val>, { label: string, value: SafeAny }[]>;
 }
 
 /**
@@ -403,8 +403,7 @@ export interface TransferControlSchema<Key extends SingleSchemaKey = SingleSchem
   listStyle?: undefined | null | Record<string, SafeAny>;
   searchable?: boolean;
   filter?: NzTransferComponent['nzFilterOption'];
-  // TODO: v19 支持
-  // oneWay?: boolean;
+  oneWay?: boolean;
 }
 
 export interface ColorPickerControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = string>

@@ -1,6 +1,6 @@
 @use "sass:map";
-@import "../../../styles/variables";
-@import "../../../styles/breakpoints";
+@use "../../../styles/variables" as vars;
+@use "../../../styles/breakpoints" as breakpoints;
 
 @mixin make-col-fit() {
   flex: 0 0 auto;
@@ -9,7 +9,7 @@
 
 @mixin make-cols($breakpoint) {
   $infix: "";
-  $width: map-get($breakpoints, $breakpoint);
+  $width: map.get(vars.$breakpoints, $breakpoint);
 
   @if $width > 0 {
     $infix: -$breakpoint;
@@ -23,7 +23,7 @@
     margin-left: auto;
   }
 
-  @for $span from 1 through $grid-columns {
+  @for $span from 1 through vars.$grid-columns {
     .fluent-column#{$infix}-#{$span} {
       @if $span {
         flex: 0 0 auto;
@@ -45,8 +45,8 @@
   @include make-col-fit();
 }
 
-@each $breakpoint, $width in $breakpoints {
-  @include with-media-breakpoint($breakpoint, $width) {
+@each $breakpoint, $width in vars.$breakpoints {
+  @include breakpoints.with-media-breakpoint($breakpoint, $width) {
     @include make-cols($breakpoint);
   }
 }

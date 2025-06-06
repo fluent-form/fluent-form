@@ -15,7 +15,7 @@
 
 ## Features
 
-- Support for using the Fluent API with JSON.
+- Support for using the Fluent API and JSON.
 - Based on embedded view, no host element, supports nested layout.
 - Imported on demand and tree-shakable.
 - Built on Angular reactive forms.

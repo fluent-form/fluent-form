@@ -1,5 +1,5 @@
 import type { FormControlStatus } from '@angular/forms';
-import type { SafeAny } from '@ngify/types';
+import type { SafeAny } from '@ngify/core';
 import type { Observable } from 'rxjs';
 import type { ComponentOutputMap } from '../types';
 import type { SchemaContext } from './interfaces';

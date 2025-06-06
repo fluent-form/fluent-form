@@ -15,5 +15,6 @@
     [nzRenderList]="$any(schema.list | template)"
     [nzFooter]="$any(schema.footer | template)"
     [nzTargetKeys]="control.value"
+    [nzOneWay]="schema.oneWay"
     (nzChange)="onChange($event, control)" />
 </ng-template>

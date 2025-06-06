@@ -2,7 +2,7 @@ import { DestroyRef, Directive, ElementRef, Input, type OnChanges, type OnInit, 
 import { SIGNAL, type SignalNode, signalSetFn } from '@angular/core/primitives/signals';
 import { outputToObservable } from '@angular/core/rxjs-interop';
 import { AbstractControl } from '@angular/forms';
-import type { AnyObject, SafeAny } from '@ngify/types';
+import type { AnyObject, SafeAny } from '@ngify/core';
 import { Observable, fromEvent, map, takeUntil } from 'rxjs';
 import type { AbstractSchema, EventListenerHolder, EventObserverHolder, HooksHolder, PropertyHolder, SchemaContext } from '../schemas';
 import { DestroyedSubject } from '../services';

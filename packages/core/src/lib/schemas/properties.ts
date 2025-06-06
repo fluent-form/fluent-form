@@ -1,4 +1,4 @@
-import type { SafeAny } from '@ngify/types';
+import type { SafeAny } from '@ngify/core';
 import type { ComponentPropertyMap, HTMLElementPropertyMap } from '../types';
 
 /** 属性修补器 */

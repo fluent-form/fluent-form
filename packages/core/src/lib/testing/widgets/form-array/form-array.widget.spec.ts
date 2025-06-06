@@ -1,7 +1,7 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormArray, FormBuilder } from '@angular/forms';
-import { SafeAny } from '@ngify/types';
+import { SafeAny } from '@ngify/core';
 import { withTesting } from '../../feature';
 import { FormArrayWidget } from './form-array.widget';
 import { provideFluentForm } from '@fluent-form/core';

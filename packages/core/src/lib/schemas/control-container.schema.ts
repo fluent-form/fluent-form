@@ -1,5 +1,5 @@
 import type { AbstractControlOptions, AsyncValidatorFn, ValidatorFn } from '@angular/forms';
-import type { SafeAny } from '@ngify/types';
+import type { SafeAny } from '@ngify/core';
 import type { AbstractBranchSchema } from './abstract.schema';
 import type { Row } from './grid';
 import type { Length } from './interfaces';

@@ -1,4 +1,4 @@
-import type { AnyObject, SafeAny } from '@ngify/types';
+import type { AnyObject, SafeAny } from '@ngify/core';
 
 interface Schema {
   [k: string]: SafeAny;

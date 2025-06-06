@@ -1,4 +1,4 @@
-import type { SafeAny } from '@ngify/types';
+import type { SafeAny } from '@ngify/core';
 import type { FluentColDirective } from '../directives';
 import type { Indexable } from '../types';
 import type { Column } from './grid';

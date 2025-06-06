@@ -1,9 +1,19 @@
 import {
-  computed, DestroyRef, Directive, effect, forwardRef, HostListener, inject, input, model, output, untracked
+  computed,
+  DestroyRef,
+  Directive,
+  effect,
+  forwardRef,
+  HostListener,
+  inject,
+  input,
+  model,
+  output,
+  untracked
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { type FormControlStatus, FormGroup } from '@angular/forms';
-import type { AnyArray, AnyObject } from '@ngify/types';
+import type { AnyArray, AnyObject } from '@ngify/core';
 import type { AbstractFormGroupSchema } from '../../schemas';
 import { NAMED_TEMPLATES } from '../../tokens';
 import { FormUtil, ModelUtil } from '../../utils';

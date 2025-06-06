@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DateRangeWidget } from './date-range.widget';
+import { DatePickerWidget } from './date-picker.widget';
 
-describe('DateRangeWidget', () => {
-  let component: DateRangeWidget;
-  let fixture: ComponentFixture<DateRangeWidget>;
+describe('DateWidget', () => {
+  let component: DatePickerWidget;
+  let fixture: ComponentFixture<DatePickerWidget>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DateRangeWidget);
+    fixture = TestBed.createComponent(DatePickerWidget);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

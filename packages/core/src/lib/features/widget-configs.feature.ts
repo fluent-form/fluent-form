@@ -1,5 +1,5 @@
 import type { Provider, Type } from '@angular/core';
-import type { SafeAny } from '@ngify/types';
+import type { SafeAny } from '@ngify/core';
 import type { SchemaConfig } from '../interfaces';
 import { type SchemaPatchFn, provideSchemaPatcher } from '../patcher';
 import type { AbstractSchema } from '../schemas';

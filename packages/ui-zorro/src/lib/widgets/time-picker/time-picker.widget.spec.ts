@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ColorWidget } from './color.widget';
+import { TimePickerWidget } from './time-picker.widget';
 
-describe('ColorWidget', () => {
-  let component: ColorWidget;
-  let fixture: ComponentFixture<ColorWidget>;
+describe('TimeWidget', () => {
+  let component: TimePickerWidget;
+  let fixture: ComponentFixture<TimePickerWidget>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ColorWidget);
+    fixture = TestBed.createComponent(TimePickerWidget);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

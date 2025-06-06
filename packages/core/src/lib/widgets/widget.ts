@@ -1,6 +1,6 @@
 import { Directive } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
-import type { AnyObject } from '@ngify/types';
+import type { AnyObject } from '@ngify/core';
 import { TemplateRefHolder } from '../directives';
 import type { AbstractSchema } from '../schemas';
 

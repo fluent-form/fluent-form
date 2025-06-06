@@ -167,25 +167,6 @@ describe('useWidget', () => {
         expect(value).toEqual([begin, end]);
       });
     });
-
-    it('checkbox group control', () => {
-      const schema = schemaUtil.patch({
-        kind: 'checkbox-group',
-        key: 'active',
-        options: [
-          { label: 'one', value: 1 },
-          { label: 'two', value: 2 }
-        ],
-        defaultValue: [1]
-      });
-      const model = {};
-      const value = valueUtil.valueOfModel(model, schema);
-
-      expect(value).toEqual([
-        { label: 'one', value: 1, checked: true },
-        { label: 'two', value: 2, checked: false }
-      ]);
-    });
   });
 
   describe('get value from control', () => {
@@ -262,17 +243,6 @@ describe('useWidget', () => {
 
         expect(value).toEqual([begin.getTime(), end.getTime()]);
       });
-    });
-
-    it('checkbox group control', () => {
-      const schema = schemaUtil.patch({ kind: 'checkbox-group', key: 'active', options: [] });
-      const control = new FormControl([
-        { label: 'one', value: 1, checked: true },
-        { label: 'two', value: 2, checked: false }
-      ]);
-      const value = valueUtil.valueOfControl(control, schema);
-
-      expect(value).toEqual([1]);
     });
   });
 });

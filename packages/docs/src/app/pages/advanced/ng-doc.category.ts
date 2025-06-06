@@ -2,7 +2,7 @@ import { NgDocCategory } from '@ng-doc/core';
 
 const AdvancedCategory: NgDocCategory = {
   title: 'Advanced',
-  order: 998
+  order: 997
 };
 
 export default AdvancedCategory;

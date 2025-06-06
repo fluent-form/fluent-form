@@ -10,14 +10,11 @@ import {
   FluentInjectPipe,
   FluentReactivePipe,
   FluentTemplatePipe,
-  InvokePipe,
-  WidgetTemplateContext,
-  isNumber
+  WidgetTemplateContext
 } from '@fluent-form/core';
+import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-import { affixHelper } from '../../helper';
 import { NumberFieldControlSchema } from '../../schemas';
-import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
 type NumberFieldWidgetTemplateContext = WidgetTemplateContext<NumberFieldControlSchema, FormControl<number>>;
 
@@ -29,15 +26,14 @@ type NumberFieldWidgetTemplateContext = WidgetTemplateContext<NumberFieldControl
   imports: [
     ReactiveFormsModule,
     NzInputNumberModule,
-    NzSpaceCompactItemDirective,
+    NzOutletModule,
     FluentGridModule,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentReactivePipe,
     FluentColumnPipe,
     FluentTemplatePipe,
-    FluentInjectPipe,
-    InvokePipe
+    FluentInjectPipe
   ],
   templateUrl: './number-field.widget.html',
   styles: `nz-input-number,nz-input-number-group { width: 100% }`
@@ -45,12 +41,4 @@ type NumberFieldWidgetTemplateContext = WidgetTemplateContext<NumberFieldControl
 export class NumberFieldWidget extends AbstractWidget<NumberFieldWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
   protected readonly infinity = Infinity;
-
-  protected readonly helper = {
-    precision: (precision: NumberFieldControlSchema['precision']) =>
-      isNumber(precision) ? precision : precision?.value,
-    precisionMode: (precision: NumberFieldControlSchema['precision']) =>
-      isNumber(precision) || !precision?.mode ? 'toFixed' : precision.mode,
-    affix: affixHelper
-  } as const;
 }

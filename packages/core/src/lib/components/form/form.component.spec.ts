@@ -2,7 +2,7 @@ import { Component, Signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { SafeAny } from '@ngify/types';
+import { SafeAny } from '@ngify/core';
 import { form } from '../../compose';
 import { provideFluentForm } from '../../provider';
 import { AbstractFormGroupSchema } from '../../schemas';

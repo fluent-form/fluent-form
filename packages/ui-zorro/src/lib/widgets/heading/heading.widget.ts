@@ -5,7 +5,6 @@ import {
   AbstractWidget,
   FluentBindingDirective,
   FluentContextGuardDirective,
-  FluentReactivePipe,
   FluentTemplatePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
@@ -26,7 +25,6 @@ type HeadingWidgetTemplateContext = WidgetTemplateContext<HeadingComponentSchema
     NzOutletModule,
     FluentBindingDirective,
     FluentContextGuardDirective,
-    FluentReactivePipe,
     FluentTemplatePipe
   ],
   templateUrl: './heading.widget.html',

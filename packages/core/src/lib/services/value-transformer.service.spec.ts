@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SafeAny } from '@ngify/types';
+import { SafeAny } from '@ngify/core';
 import { CodeEvaluator, DynamicCodeEvaluator } from './evaluator.service';
 import { ValueTransformer } from './value-transformer.service';
 

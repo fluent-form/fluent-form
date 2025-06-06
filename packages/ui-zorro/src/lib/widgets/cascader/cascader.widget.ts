@@ -13,10 +13,9 @@ import {
   InvokePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
-import { AnyObject, SafeAny } from '@ngify/types';
+import { AnyObject, SafeAny } from '@ngify/core';
 import { NzCascaderModule, NzCascaderOption } from 'ng-zorro-antd/cascader';
 import { CascaderControlSchema } from '../../schemas';
-import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
 
 type CascaderWidgetTemplateContext = WidgetTemplateContext<CascaderControlSchema, FormControl<SafeAny[]>>;
 
@@ -28,7 +27,6 @@ type CascaderWidgetTemplateContext = WidgetTemplateContext<CascaderControlSchema
   imports: [
     ReactiveFormsModule,
     NzCascaderModule,
-    NzSpaceCompactItemDirective,
     FluentGridModule,
     FluentBindingDirective,
     FluentContextGuardDirective,

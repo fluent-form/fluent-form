@@ -4,29 +4,16 @@
       @if (schema.affixes || schema.addons) {
         <nz-input-group
           fluentCol
-          nzSpaceCompactItem="input"
           [span]="schema.col | col: 'span'"
           [flex]="schema.col | col: 'flex'"
           [offset]="schema.col | col: 'offset'"
           [class]="schema.class"
           [style]="schema.style"
           [nzSize]="schema.size!"
-          [nzAddOnBefore]="
-            helper.affix.content | invoke: (schema.addons?.before | reactive: model : schema : control) | template
-          "
-          [nzAddOnAfter]="
-            helper.affix.content | invoke: (schema.addons?.after | reactive: model : schema : control) | template
-          "
-          [nzAddOnBeforeIcon]="helper.affix.icon | invoke: (schema.addons?.before | reactive: model : schema : control)"
-          [nzAddOnAfterIcon]="helper.affix.icon | invoke: (schema.addons?.after | reactive: model : schema : control)"
-          [nzPrefix]="
-            helper.affix.content | invoke: (schema.affixes?.prefix | reactive: model : schema : control) | template
-          "
-          [nzSuffix]="
-            helper.affix.content | invoke: (schema.affixes?.suffix | reactive: model : schema : control) | template
-          "
-          [nzPrefixIcon]="helper.affix.icon | invoke: (schema.affixes?.prefix | reactive: model : schema : control)"
-          [nzSuffixIcon]="helper.affix.icon | invoke: (schema.affixes?.suffix | reactive: model : schema : control)">
+          [nzAddOnBefore]="schema.addons?.before | reactive: model : schema : control | template"
+          [nzAddOnAfter]="schema.addons?.after | reactive: model : schema : control | template"
+          [nzPrefix]="schema.affixes?.prefix | reactive: model : schema : control | template"
+          [nzSuffix]="schema.affixes?.suffix | reactive: model : schema : control | template">
           <input
             nz-input
             [attr.id]="schema.id"
@@ -46,7 +33,6 @@
         <input
           fluentCol
           nz-input
-          nzSpaceCompactItem="input"
           [span]="schema.col | col: 'span'"
           [flex]="schema.col | col: 'flex'"
           [offset]="schema.col | col: 'offset'"
@@ -69,26 +55,13 @@
   } @else {
     @if (schema.affixes || schema.addons) {
       <nz-input-group
-        nzSpaceCompactItem="input"
         [class]="schema.class"
         [style]="schema.style"
         [nzSize]="schema.size!"
-        [nzAddOnBefore]="
-          helper.affix.content | invoke: (schema.addons?.before | reactive: model : schema : control) | template
-        "
-        [nzAddOnAfter]="
-          helper.affix.content | invoke: (schema.addons?.after | reactive: model : schema : control) | template
-        "
-        [nzAddOnBeforeIcon]="helper.affix.icon | invoke: (schema.addons?.before | reactive: model : schema : control)"
-        [nzAddOnAfterIcon]="helper.affix.icon | invoke: (schema.addons?.after | reactive: model : schema : control)"
-        [nzPrefix]="
-          helper.affix.content | invoke: (schema.affixes?.prefix | reactive: model : schema : control) | template
-        "
-        [nzSuffix]="
-          helper.affix.content | invoke: (schema.affixes?.suffix | reactive: model : schema : control) | template
-        "
-        [nzPrefixIcon]="helper.affix.icon | invoke: (schema.affixes?.prefix | reactive: model : schema : control)"
-        [nzSuffixIcon]="helper.affix.icon | invoke: (schema.affixes?.suffix | reactive: model : schema : control)">
+        [nzAddOnBefore]="schema.addons?.before | reactive: model : schema : control | template"
+        [nzAddOnAfter]="schema.addons?.after | reactive: model : schema : control | template"
+        [nzPrefix]="schema.affixes?.prefix | reactive: model : schema : control | template"
+        [nzSuffix]="schema.affixes?.suffix | reactive: model : schema : control | template">
         <input
           nz-input
           [attr.id]="schema.id"
@@ -107,7 +80,6 @@
     } @else {
       <input
         nz-input
-        nzSpaceCompactItem="input"
         [attr.id]="schema.id"
         [attr.name]="schema.key"
         [attr.maxlength]="helper.length.max | invoke: schema.length"

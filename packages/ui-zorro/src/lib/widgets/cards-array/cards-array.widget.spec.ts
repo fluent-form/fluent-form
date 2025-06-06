@@ -2,7 +2,7 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { provideFluentForm } from '@fluent-form/core';
-import { SafeAny } from '@ngify/types';
+import { SafeAny } from '@ngify/core';
 import { withZorro } from '../../feature';
 import { useAllWidgets } from '../use';
 import { CardsArrayWidget } from './cards-array.widget';

@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { SafeAny } from '@ngify/types';
+import { SafeAny } from '@ngify/core';
 import { provideFluentForm } from '../provider';
 import { withTesting } from '../testing';
 import { NAMED_TEMPLATES } from '../tokens';

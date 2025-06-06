@@ -5,7 +5,7 @@ import { CascaderAsyncOptionsExampleComponent } from './examples/cascader-async-
 import { CascaderExampleComponent } from './examples/cascader.component';
 import { CheckboxGroupExampleComponent } from './examples/checkbox-group.component';
 import { CheckboxExampleComponent } from './examples/checkbox.component';
-import { ColorExampleComponent } from './examples/color.component';
+import { ColorPickerExampleComponent } from './examples/color-picker.component';
 import { DatePickerExampleComponent } from './examples/date-picker.component';
 import { DateRangePickerExampleComponent } from './examples/date-range-picker.component';
 import { NumberFieldExampleComponent } from './examples/number-field.component';
@@ -47,7 +47,7 @@ const ControlPage: NgDocPage = {
     CheckboxGroupExampleComponent,
     RateExampleComponent,
     TransferExampleComponent,
-    ColorExampleComponent
+    ColorPickerExampleComponent
   },
   order: 2
 };

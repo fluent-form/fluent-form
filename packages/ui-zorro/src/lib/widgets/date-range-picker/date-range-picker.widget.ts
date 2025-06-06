@@ -13,10 +13,9 @@ import {
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-import { DatePickerControlSchema } from '../../schemas';
-import { NzSpaceCompactItemDirective } from '../space-compact/lib/space-compact-item.directive';
+import { DateRangePickerControlSchema } from '../../schemas';
 
-type DateWidgetTemplateContext = WidgetTemplateContext<DatePickerControlSchema, FormControl<Date>>;
+type DateRangePickerWidgetTemplateContext = WidgetTemplateContext<DateRangePickerControlSchema, FormControl<[Date, Date]>>;
 
 /**
  * @internal
@@ -26,7 +25,6 @@ type DateWidgetTemplateContext = WidgetTemplateContext<DatePickerControlSchema, 
   imports: [
     ReactiveFormsModule,
     NzDatePickerModule,
-    NzSpaceCompactItemDirective,
     FluentGridModule,
     FluentBindingDirective,
     FluentContextGuardDirective,
@@ -35,9 +33,9 @@ type DateWidgetTemplateContext = WidgetTemplateContext<DatePickerControlSchema, 
     FluentTemplatePipe,
     FluentInjectPipe
   ],
-  templateUrl: './date.widget.html',
-  styles: [`nz-date-picker { width: 100% }`]
+  templateUrl: './date-range-picker.widget.html',
+  styles: [`nz-range-picker { width: 100% }`]
 })
-export class DateWidget extends AbstractWidget<DateWidgetTemplateContext> {
+export class DateRangePickerWidget extends AbstractWidget<DateRangePickerWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
 }

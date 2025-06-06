@@ -180,12 +180,12 @@ import { useTransferWidget } from '@fluent-form/ui-zorro';
 
 {{ NgDocActions.demo("TransferExampleComponent") }}
 
-<!-- ## Color
+<!-- ## ColorPicker
 
 颜色选择器允许用户选择或自定义颜色。
 
 ```ts
-import { useColorWidget } from '@fluent-form/ui-zorro';
+import { useColorPickerWidget } from '@fluent-form/ui-zorro';
 ```
 
-{{ NgDocActions.demo("ColorExampleComponent") }} -->
+{{ NgDocActions.demo("ColorPickerExampleComponent") }} -->

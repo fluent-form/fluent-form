@@ -1,5 +1,5 @@
 import type { EventEmitter, OutputRef, Signal } from '@angular/core';
-import type { PickProperty, SafeAny } from '@ngify/types';
+import type { PickProperty, SafeAny } from '@ngify/core';
 
 /**
  * Attribute map for HTML elements.

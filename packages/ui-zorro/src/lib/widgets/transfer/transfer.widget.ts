@@ -8,7 +8,7 @@ import {
   FluentTemplatePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
-import { SafeAny } from '@ngify/types';
+import { SafeAny } from '@ngify/core';
 import { NzTransferModule, TransferChange, TransferItem } from 'ng-zorro-antd/transfer';
 import { TransferControlSchema } from '../../schemas';
 
@@ -49,7 +49,6 @@ export class TransferWidget extends AbstractWidget<TransferWidgetTemplateContext
     if (event.to === 'right') {
       // only add the selected items which are not in the value
       if (!event.list.every(item => value.includes(item['key']))) {
-        console.log(event.list);
         control.setValue(
           value.concat(event.list.map(item => item['key']))
         );

@@ -41,8 +41,8 @@ import { CardsArrayWidget } from './cards-array/cards-array.widget';
 import { CascaderWidget } from './cascader/cascader.widget';
 import { CheckboxGroupWidget } from './checkbox-group/checkbox-group.widget';
 import { CheckboxWidget } from './checkbox/checkbox.widget';
-import { DateRangeWidget } from './date-range/date-range.widget';
-import { DateWidget } from './date/date.widget';
+import { DatePickerWidget } from './date-picker/date-picker.widget';
+import { DateRangePickerWidget } from './date-range-picker/date-range-picker.widget';
 import { FormArrayWidget } from './form-array/form-array.widget';
 import { FormGroupWidget } from './form-group/form-group.widget';
 import { HeadingWidget } from './heading/heading.widget';
@@ -59,7 +59,7 @@ import { TabsArrayWidget } from './tabs-array/tabs-array.widget';
 import { TabsWidget } from './tabs/tabs.widget';
 import { TextAreaWidget } from './text-area/text-area.widget';
 import { TextFieldWidget } from './text-field/text-field.widget';
-import { TimeWidget } from './time/time.widget';
+import { TimePickerWidget } from './time-picker/time-picker.widget';
 import { ToggleWidget } from './toggle/toggle.widget';
 import { TransferWidget } from './transfer/transfer.widget';
 import { TreeSelectWidget } from './tree-select/tree-select.widget';
@@ -82,7 +82,7 @@ export function useAllWidgets() {
     useCheckboxGroupWidget(),
     useRateWidget(),
     useTransferWidget(),
-    // useColorWidget(),
+    // useColorPickerWidget(),
     useHeadingWidget(),
 
     useSpaceWidget(),
@@ -161,7 +161,7 @@ export function useDatePickerWidget(): FluentFormWidgetConfig<DatePickerControlS
   return {
     kind: 'date-picker',
     type: SchemaType.Control,
-    widget: DateWidget,
+    widget: DatePickerWidget,
     patch: schema => {
       schema.mapper ??= {
         parser: (value: string | number | Date) => value ? new Date(value) : null,
@@ -179,7 +179,7 @@ export function useDateRangePickerWidget(): FluentFormWidgetConfig<DateRangePick
   return {
     kind: 'date-range-picker',
     type: SchemaType.Control,
-    widget: DateRangeWidget,
+    widget: DateRangePickerWidget,
     patch: schema => {
       schema.mapper ??= {
         parser: (value: [string | number | Date, string | number | Date]) => value?.map(o => new Date(o)) as [Date, Date] ?? null,
@@ -197,7 +197,7 @@ export function useTimePickerWidget(): FluentFormWidgetConfig<TimePickerControlS
   return {
     kind: 'time-picker',
     type: SchemaType.Control,
-    widget: TimeWidget,
+    widget: TimePickerWidget,
     patch: schema => {
       schema.mapper ??= {
         parser: (value: string | number | Date) => value ? new Date(value) : null,
@@ -268,21 +268,7 @@ export function useCheckboxGroupWidget(): FluentFormWidgetConfig<CheckboxGroupCo
   return {
     kind: 'checkbox-group',
     type: SchemaType.Control,
-    widget: CheckboxGroupWidget,
-    patch: schema => {
-      const options = schema.options;
-
-      schema.mapper ??= {
-        parser: value => options.map(option => ({
-          label: option.label,
-          value: option.value,
-          checked: !!value?.includes(option.value)
-        })),
-        formatter: value => value?.filter(o => o.checked).map(o => o.value)
-      };
-
-      return schema;
-    }
+    widget: CheckboxGroupWidget
   };
 }
 
@@ -306,7 +292,7 @@ export function useTransferWidget(): FluentFormWidgetConfig<TransferControlSchem
 //   return {
 //     kind: 'color-picker',
 //     type: SchemaType.Control,
-//     widget: ColorWidget
+//     widget: ColorPickerWidget
 //   };
 // }
 

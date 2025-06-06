@@ -1,6 +1,6 @@
 import { Directive, inject, Input, type OnChanges, type OnDestroy, type OnInit, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import type { AnyArray, AnyObject } from '@ngify/types';
+import type { AnyArray, AnyObject } from '@ngify/core';
 import type { AbstractSchema, SingleSchemaKey } from '../../schemas';
 import { WidgetTemplateRegistry } from '../../services';
 import type { WidgetTemplateContext } from '../../widgets';

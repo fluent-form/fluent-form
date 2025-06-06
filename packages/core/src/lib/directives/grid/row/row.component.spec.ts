@@ -1,7 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Component, ElementRef, Injectable, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SafeAny } from '@ngify/types';
+import { SafeAny } from '@ngify/core';
 import { Breakpoints } from '../../../breakpoints';
 import { FluentRowDirective } from './row.component';
 

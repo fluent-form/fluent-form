@@ -1,5 +1,5 @@
 import { AbstractControl } from '@angular/forms';
-import type { SafeAny } from '@ngify/types';
+import type { SafeAny } from '@ngify/core';
 import type { AbstractSchema } from './abstract.schema';
 import type { SchemaKey } from './types';
 

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
-import { SafeAny } from '@ngify/types';
+import { SafeAny } from '@ngify/core';
 import { provideFluentForm } from '../provider';
 import { AbstractControlSchema, AbstractSchema } from '../schemas';
 import { withTesting } from '../testing';

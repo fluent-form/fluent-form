@@ -5,10 +5,10 @@ import {
   AbstractWidget,
   FluentBindingDirective,
   FluentContextGuardDirective,
+  FluentTemplateOutlet,
   FluentTemplatePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
-import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { HeadingComponentSchema } from '../../schemas';
 
@@ -22,9 +22,9 @@ type HeadingWidgetTemplateContext = WidgetTemplateContext<HeadingComponentSchema
   imports: [
     NgTemplateOutlet,
     NzTypographyModule,
-    NzOutletModule,
     FluentBindingDirective,
     FluentContextGuardDirective,
+    FluentTemplateOutlet,
     FluentTemplatePipe
   ],
   templateUrl: './heading.widget.html',

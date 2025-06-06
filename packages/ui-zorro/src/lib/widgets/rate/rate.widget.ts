@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, FluentTemplatePipe, WidgetTemplateContext } from '@fluent-form/core';
-import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
+import {
+  AbstractWidget,
+  FluentBindingDirective,
+  FluentContextGuardDirective,
+  FluentTemplateOutlet,
+  FluentTemplatePipe,
+  WidgetTemplateContext
+} from '@fluent-form/core';
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { RateControlSchema } from '../../schemas';
 
@@ -15,7 +21,8 @@ type RateWidgetTemplateContext = WidgetTemplateContext<RateControlSchema, FormCo
   imports: [
     ReactiveFormsModule,
     NzRateModule,
-    NzOutletModule,
+    FluentTemplateOutlet,
+    FluentTemplateOutlet,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentTemplatePipe

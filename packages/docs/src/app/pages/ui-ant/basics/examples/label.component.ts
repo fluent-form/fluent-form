@@ -1,14 +1,18 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormComponent, form } from '@fluent-form/core';
+import { FluentFormModule, form } from '@fluent-form/core';
 import { applyGroup, button, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'label-example',
   standalone: true,
-  imports: [FluentFormComponent, JsonPipe],
+  imports: [FluentFormModule, JsonPipe],
   template: `
-    <fluent-form [schema]="schema()" [(model)]="model" />
+    <fluent-form [schema]="schema()" [(model)]="model">
+      <ng-template fluentTemplate="labelTmpl">
+        <strong>自定义模板</strong>
+      </ng-template>
+    </fluent-form>
     <pre>{{ model() | json }}</pre>
   `
 })
@@ -28,6 +32,7 @@ export class LabelExampleComponent {
       .tooltip({ content: '小贴士', icon: 'info-circle' })
       .col(12);
     textField('text-6').label({ content: '长文本长文本长文本自动换行', wrap: true, span: 4 }).col(12);
+    textField('text-7').label('#labelTmpl').col(12);
 
     button().type('primary').label({ span: 4 }).content('Submit').variants({ block: true });
   });

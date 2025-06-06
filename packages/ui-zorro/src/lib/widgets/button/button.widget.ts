@@ -10,6 +10,7 @@ import {
   FluentGridModule,
   FluentInjectPipe,
   FluentReactivePipe,
+  FluentTemplateOutlet,
   FluentTemplatePipe,
   InvokePipe,
   WidgetTemplateContext,
@@ -17,7 +18,6 @@ import {
   isUndefined
 } from '@fluent-form/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { ButtonComponentSchema, Icon } from '../../schemas';
 
@@ -32,7 +32,7 @@ type ButtonWidgetTemplateContext = WidgetTemplateContext<ButtonComponentSchema, 
     NgTemplateOutlet,
     NzButtonModule,
     NzIconModule,
-    NzOutletModule,
+    FluentTemplateOutlet,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentReactivePipe,

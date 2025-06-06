@@ -27,16 +27,16 @@
         [nzSize]="schema.size!"
         [nzBordered]="!schema.borderless">
         @if (addonBefore) {
-          <ng-template nzInputAddonBefore [nzStringTemplateOutlet]="addonBefore">{{ addonBefore }}</ng-template>
+          <ng-template nzInputAddonBefore [fluentTemplateOutlet]="addonBefore">{{ addonBefore }}</ng-template>
         }
         @if (addonAfter) {
-          <ng-template nzInputAddonAfter [nzStringTemplateOutlet]="addonAfter">{{ addonAfter }}</ng-template>
+          <ng-template nzInputAddonAfter [fluentTemplateOutlet]="addonAfter">{{ addonAfter }}</ng-template>
         }
         @if (prefix) {
-          <ng-template nzInputPrefix [nzStringTemplateOutlet]="prefix">{{ prefix }}</ng-template>
+          <ng-template nzInputPrefix [fluentTemplateOutlet]="prefix">{{ prefix }}</ng-template>
         }
         @if (suffix) {
-          <ng-template nzInputSuffix [nzStringTemplateOutlet]="suffix">{{ suffix }}</ng-template>
+          <ng-template nzInputSuffix [fluentTemplateOutlet]="suffix">{{ suffix }}</ng-template>
         }
       </nz-input-number>
     }
@@ -58,16 +58,16 @@
       [nzSize]="schema.size!"
       [nzBordered]="!schema.borderless">
       @if (addonBefore) {
-        <ng-template nzInputAddonBefore [nzStringTemplateOutlet]="addonBefore">{{ addonBefore }}</ng-template>
+        <ng-template nzInputAddonBefore [fluentTemplateOutlet]="addonBefore">{{ addonBefore }}</ng-template>
       }
       @if (addonAfter) {
-        <ng-template nzInputAddonAfter [nzStringTemplateOutlet]="addonAfter">{{ addonAfter }}</ng-template>
+        <ng-template nzInputAddonAfter [fluentTemplateOutlet]="addonAfter">{{ addonAfter }}</ng-template>
       }
       @if (prefix) {
-        <ng-template nzInputPrefix [nzStringTemplateOutlet]="prefix">{{ prefix }}</ng-template>
+        <ng-template nzInputPrefix [fluentTemplateOutlet]="prefix">{{ prefix }}</ng-template>
       }
       @if (suffix) {
-        <ng-template nzInputSuffix [nzStringTemplateOutlet]="suffix">{{ suffix }}</ng-template>
+        <ng-template nzInputSuffix [fluentTemplateOutlet]="suffix">{{ suffix }}</ng-template>
       }
     </nz-input-number>
   }

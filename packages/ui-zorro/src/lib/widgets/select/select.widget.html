@@ -37,8 +37,8 @@
             [nzValue]="option.value"
             [nzHide]="option.hide">
             <ng-template
-              [nzStringTemplateOutlet]="schema.option | template"
-              [nzStringTemplateOutletContext]="{ $implicit: option }" />
+              [fluentTemplateOutlet]="schema.option | template"
+              [fluentTemplateOutletContext]="{ $implicit: option }" />
           </nz-option>
         }
       </nz-select>
@@ -75,8 +75,8 @@
           [nzValue]="option.value"
           [nzHide]="option.hide">
           <ng-template
-            [nzStringTemplateOutlet]="schema.option | template"
-            [nzStringTemplateOutletContext]="{ $implicit: option }" />
+            [fluentTemplateOutlet]="schema.option | template"
+            [fluentTemplateOutletContext]="{ $implicit: option }" />
         </nz-option>
       }
     </nz-select>

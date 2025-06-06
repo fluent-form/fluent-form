@@ -13,6 +13,6 @@
     [nzAutoFocus]="schema.autofocus" />
 
   <ng-template #character>
-    <ng-container *nzStringTemplateOutlet="schema.character | template">{{ schema.character }}</ng-container>
+    <ng-container *fluentTemplateOutlet="schema.character | template">{{ schema.character }}</ng-container>
   </ng-template>
 </ng-template>

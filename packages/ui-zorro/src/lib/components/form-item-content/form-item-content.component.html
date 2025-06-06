@@ -26,7 +26,7 @@
         [nzLabelWrap]="(helper.label.wrap | invoke: label)!"
         [nzRequired]="currentSchema.required | reactive: model : schema : control"
         [style.width]="helper.label.width | invoke: label">
-        {{ labelContent }}
+        <ng-container *fluentTemplateOutlet="labelContent | template">{{ labelContent }}</ng-container>
       </nz-form-label>
     }
     <nz-form-control

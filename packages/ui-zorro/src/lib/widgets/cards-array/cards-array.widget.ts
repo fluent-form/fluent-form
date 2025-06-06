@@ -11,6 +11,7 @@ import {
   FluentFormItemOutletDirective,
   FluentGridModule,
   FluentReactivePipe,
+  FluentTemplateOutlet,
   FluentTemplatePipe,
   FormUtil,
   InvokePipe,
@@ -24,7 +25,6 @@ import {
 } from '@fluent-form/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { AddableButton, CardsArraySchema } from '../../schemas';
@@ -43,7 +43,7 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<CardsArraySchema, Fo
     NzFormModule,
     NzButtonModule,
     NzIconModule,
-    NzOutletModule,
+    FluentTemplateOutlet,
     FluentGridModule,
     FluentFormItemOutletDirective,
     FluentBindingDirective,

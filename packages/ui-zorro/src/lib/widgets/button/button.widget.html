@@ -86,7 +86,7 @@
       <span nz-icon [nzTheme]="icon.theme ?? 'outline'" [nzType]="icon.type"></span>
     }
     @if (schema.content) {
-      <ng-container *nzStringTemplateOutlet="schema.content | template">{{ schema.content }}</ng-container>
+      <ng-container *fluentTemplateOutlet="schema.content | template">{{ schema.content }}</ng-container>
     }
   </ng-template>
 </ng-template>

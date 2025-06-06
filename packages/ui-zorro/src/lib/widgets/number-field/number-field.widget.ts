@@ -9,10 +9,10 @@ import {
   FluentGridModule,
   FluentInjectPipe,
   FluentReactivePipe,
+  FluentTemplateOutlet,
   FluentTemplatePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
-import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NumberFieldControlSchema } from '../../schemas';
 
@@ -26,7 +26,7 @@ type NumberFieldWidgetTemplateContext = WidgetTemplateContext<NumberFieldControl
   imports: [
     ReactiveFormsModule,
     NzInputNumberModule,
-    NzOutletModule,
+    FluentTemplateOutlet,
     FluentGridModule,
     FluentBindingDirective,
     FluentContextGuardDirective,

@@ -17,7 +17,6 @@ import {
   WidgetTemplateContext,
   isNumber
 } from '@fluent-form/core';
-import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
@@ -35,7 +34,6 @@ type TabsArrayWidgetTemplateContext = WidgetTemplateContext<TabsArraySchema, For
     NzEmptyModule,
     NzFormModule,
     NzTabsModule,
-    NzOutletModule,
     FluentGridModule,
     FluentFormItemOutletDirective,
     FluentBindingDirective,

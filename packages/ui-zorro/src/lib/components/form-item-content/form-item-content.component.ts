@@ -6,6 +6,7 @@ import {
   FluentReactivePipe,
   FluentSchemaPipe,
   FluentSchemaTypePipe,
+  FluentTemplateOutlet,
   FluentTemplatePipe,
   FluentWidgetTemplatePipe,
   FluentWithInjectorDirective,
@@ -30,6 +31,7 @@ import { labelHelper, tooltipHelper } from '../../helper';
     FluentTemplatePipe,
     FluentWidgetTemplatePipe,
     FluentSchemaTypePipe,
+    FluentTemplateOutlet,
     InvokePipe
   ],
   templateUrl: './form-item-content.component.html',

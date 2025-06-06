@@ -10,13 +10,13 @@ import {
   FluentInjectPipe,
   FluentNewPipe,
   FluentReactivePipe,
+  FluentTemplateOutlet,
   FluentTemplatePipe,
   MaybeSchemaReactiveFn,
   SingleSchemaKey,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { AnyObject, SafeAny } from '@ngify/core';
-import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { filter, Subject, tap } from 'rxjs';
 import { SelectControlSchema } from '../../schemas';
@@ -31,7 +31,7 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
   imports: [
     ReactiveFormsModule,
     NzSelectModule,
-    NzOutletModule,
+    FluentTemplateOutlet,
     FluentGridModule,
     FluentBindingDirective,
     FluentContextGuardDirective,

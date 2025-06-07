@@ -41,7 +41,7 @@
             [nzDanger]="true"
             [disabled]="formArray.length <= (helper.length.min | invoke: formSchema.length)"
             (click)="formArray.removeAt(index)">
-            <span nz-icon nzType="minus" nzTheme="outline"></span>
+            <nz-icon nz-icon nzType="minus" nzTheme="outline" />
           </button>
         }
       </fluent-col>
@@ -80,7 +80,7 @@
             [disabled]="addBtn.disabled || formArray.length === (helper.length.max | invoke: formSchema.length)"
             (click)="push(formArray, formSchema)">
             @if (addBtn.icon) {
-              <span nz-icon nzTheme="outline" [nzType]="addBtn.icon"></span>
+              <nz-icon nz-icon nzTheme="outline" [nzType]="addBtn.icon" />
             }
             @if (addBtn.content) {
               <ng-template [fluentTemplateOutlet]="addBtn.content | template">

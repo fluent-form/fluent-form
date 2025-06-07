@@ -91,7 +91,7 @@
 
   <ng-template #buttonContentTemplate>
     @if (helper.icon | invoke: schema.icon; as icon) {
-      <span nz-icon [nzTheme]="icon.theme ?? 'outline'" [nzType]="icon.type"></span>
+      <nz-icon [nzTheme]="icon.theme ?? 'outline'" [nzType]="icon.type" />
     }
     @if (schema.content) {
       <ng-container *fluentTemplateOutlet="schema.content | template">{{ schema.content }}</ng-container>

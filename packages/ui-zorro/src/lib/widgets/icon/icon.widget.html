@@ -1,7 +1,6 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  <span
+  <nz-icon
     #component="nzIcon"
-    nz-icon
     [fluentBindingComponent]="component"
     [fluentBindingSchema]="schema"
     [fluentBindingControl]="control"
@@ -11,5 +10,5 @@
     [nzType]="schema.type | reactive: model : schema : control"
     [nzTheme]="schema.theme!"
     [nzSpin]="schema.spin"
-    [nzRotate]="schema.rotate!"></span>
+    [nzRotate]="schema.rotate!" />
 </ng-template>

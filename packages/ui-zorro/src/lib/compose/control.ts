@@ -10,6 +10,7 @@ import {
   NumberFieldControlSchema,
   RadioGroupControlSchema,
   RateControlSchema,
+  SegmentedControlSchema,
   SelectControlSchema,
   SliderControlSchema,
   TextAreaControlSchema,
@@ -137,6 +138,12 @@ export function colorPicker(): UnstableBuilder<ColorPickerControlSchema<number>,
 export function colorPicker<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<ColorPickerControlSchema<Key>, KindOrKey>;
 export function colorPicker<Key extends SingleSchemaKey>(key?: Key) {
   return composeBuilder<ColorPickerControlSchema<Key>>().kind('color-picker').key(key);
+}
+
+export function segmented(): UnstableBuilder<SegmentedControlSchema<number>, KindOrKey>;
+export function segmented<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<SegmentedControlSchema<Key>, KindOrKey>;
+export function segmented<Key extends SingleSchemaKey>(key?: Key) {
+  return composeBuilder<SegmentedControlSchema<Key>>().kind('segmented').key(key);
 }
 
 type KindOrKeyOrType = KindOrKey | 'type';

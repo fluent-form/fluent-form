@@ -16,7 +16,14 @@ import {
   SingleSchemaKey
 } from '@fluent-form/core';
 import { SafeAny } from '@ngify/core';
-import { NzCascaderComponent, NzCascaderExpandTrigger, NzCascaderOption, NzCascaderSize, NzShowSearchOptions } from 'ng-zorro-antd/cascader';
+import {
+  NzCascaderComponent,
+  NzCascaderExpandTrigger,
+  NzCascaderOption,
+  NzCascaderPlacement,
+  NzCascaderSize,
+  NzShowSearchOptions
+} from 'ng-zorro-antd/cascader';
 import { NzCheckboxComponent, NzCheckboxGroupComponent } from 'ng-zorro-antd/checkbox';
 import { NzColorPickerComponent } from 'ng-zorro-antd/color-picker';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
@@ -24,6 +31,7 @@ import { NzDateMode, NzDatePickerComponent, NzRangePickerComponent, SupportTimeO
 import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
 import { NzRadioButtonStyle, NzRadioGroupComponent } from 'ng-zorro-antd/radio';
 import { NzRateComponent } from 'ng-zorro-antd/rate';
+import { NzSegmentedComponent } from 'ng-zorro-antd/segmented';
 import { NzSelectComponent, NzSelectModeType, NzSelectOptionInterface, NzSelectSizeType } from 'ng-zorro-antd/select';
 import { NzSliderComponent } from 'ng-zorro-antd/slider';
 import { NzSwitchComponent } from 'ng-zorro-antd/switch';
@@ -256,6 +264,7 @@ export interface CascaderControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   kind: 'cascader';
   /** Placeholder text */
   placeholder?: MaybeSchemaReactiveFn<CascaderControlSchema<Key, Val>, string>;
+  placement?: NzCascaderPlacement;
   /** Show clean button */
   clearable?: boolean;
   changeOnSelect?: boolean;
@@ -338,7 +347,7 @@ export interface CheckboxGroupControlSchema<Key extends SingleSchemaKey = Single
   ComponentControlEventObserverHolder<NzCheckboxGroupComponent, Val>,
   ComponentPropertyHolder<NzCheckboxGroupComponent> {
   kind: 'checkbox-group';
-  options: MaybeSchemaReactiveFn<SelectControlSchema<SingleSchemaKey, Val>, { label: string, value: SafeAny }[]>;
+  options: MaybeSchemaReactiveFn<SelectControlSchema<SingleSchemaKey, Val>, { label: string, value: number | string }[]>;
 }
 
 /**
@@ -419,4 +428,17 @@ export interface ColorPickerControlSchema<Key extends SingleSchemaKey = SingleSc
   showText?: boolean;
   alpha?: boolean;
   title?: string | TemplateRef<void>;
+}
+
+export interface SegmentedControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = number | string>
+  extends AbstractZorroControlSchema<Key, Val>,
+  ComponentControlEventListenerHolder<NzSegmentedComponent, Val>,
+  ComponentControlEventObserverHolder<NzSegmentedComponent, Val>,
+  ComponentPropertyHolder<NzSegmentedComponent> {
+  kind: 'segmented';
+  variants?: {
+    block?: boolean;
+  };
+  options: MaybeSchemaReactiveFn<SegmentedControlSchema<SingleSchemaKey, Val>, { label?: string, value: number | string, icon?: string }[]>;
+  size?: NzSizeLDSType;
 }

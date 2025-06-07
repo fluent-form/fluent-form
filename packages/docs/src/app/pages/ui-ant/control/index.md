@@ -180,6 +180,16 @@ import { useTransferWidget } from '@fluent-form/ui-zorro';
 
 {{ NgDocActions.demo("TransferExampleComponent") }}
 
+## Segmented
+
+分段控制器用于展示多个选项并允许用户选择其中单个选项。
+
+```ts
+import { useSegmentedWidget } from '@fluent-form/ui-zorro';
+```
+
+{{ NgDocActions.demo("SegmentedExampleComponent") }}
+
 <!-- ## ColorPicker
 
 颜色选择器允许用户选择或自定义颜色。

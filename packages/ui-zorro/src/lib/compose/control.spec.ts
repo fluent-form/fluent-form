@@ -12,6 +12,7 @@ import {
   passwordField,
   radioGroup,
   rate,
+  segmented,
   select,
   slider,
   textArea,
@@ -127,5 +128,10 @@ describe('control', () => {
   it('color-picker', () => {
     const schema = form(() => colorPicker('color'));
     expect(schema().schemas).toEqual([{ kind: 'color-picker', key: 'color' }]);
+  });
+
+  it('segmented', () => {
+    const schema = form(() => segmented('segmented'));
+    expect(schema().schemas).toEqual([{ kind: 'segmented', key: 'segmented' }]);
   });
 });

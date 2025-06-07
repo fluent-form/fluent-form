@@ -11,6 +11,7 @@ import { DateRangePickerExampleComponent } from './examples/date-range-picker.co
 import { NumberFieldExampleComponent } from './examples/number-field.component';
 import { RadioGroupExampleComponent } from './examples/radio-group.component';
 import { RateExampleComponent } from './examples/rate.component';
+import { SegmentedExampleComponent } from './examples/segmented.component';
 import { SelectAsyncOptionsExampleComponent } from './examples/select-async-options.component';
 import { SelectCustomOptionContentExampleComponent } from './examples/select-custom-option-content.component';
 import { SelectExampleComponent } from './examples/select.component';
@@ -47,7 +48,8 @@ const ControlPage: NgDocPage = {
     CheckboxGroupExampleComponent,
     RateExampleComponent,
     TransferExampleComponent,
-    ColorPickerExampleComponent
+    ColorPickerExampleComponent,
+    SegmentedExampleComponent
   },
   order: 2
 };

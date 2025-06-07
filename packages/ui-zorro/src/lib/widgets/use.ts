@@ -18,6 +18,7 @@ import {
   NumberFieldControlSchema,
   RadioGroupControlSchema,
   RateControlSchema,
+  SegmentedControlSchema,
   SelectControlSchema,
   SliderControlSchema,
   SpaceCompactComponentSchema,
@@ -50,6 +51,7 @@ import { IconWidget } from './icon/icon.widget';
 import { NumberFieldWidget } from './number-field/number-field.widget';
 import { RadioGroupWidget } from './radio-group/radio-group.widget';
 import { RateWidget } from './rate/rate.widget';
+import { SegmentedWidget } from './segmented/segmented.widget';
 import { SelectWidget } from './select/select.widget';
 import { SilderWidget } from './slider/silder.widget';
 import { SpaceCompactWidget } from './space-compact/space-compact.widget';
@@ -83,6 +85,8 @@ export function useAllWidgets() {
     useRateWidget(),
     useTransferWidget(),
     // useColorPickerWidget(),
+    useSegmentedWidget(),
+
     useHeadingWidget(),
 
     useSpaceWidget(),
@@ -295,6 +299,14 @@ export function useTransferWidget(): FluentFormWidgetConfig<TransferControlSchem
 //     widget: ColorPickerWidget
 //   };
 // }
+
+export function useSegmentedWidget(): FluentFormWidgetConfig<SegmentedControlSchema> {
+  return {
+    kind: 'segmented',
+    type: SchemaType.Control,
+    widget: SegmentedWidget
+  };
+}
 
 export function useHeadingWidget(): FluentFormWidgetConfig<HeadingComponentSchema> {
   return {

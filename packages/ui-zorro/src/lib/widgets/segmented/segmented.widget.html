@@ -1,0 +1,15 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <nz-segmented
+    #component
+    [fluentBindingComponent]="component"
+    [fluentBindingSchema]="schema"
+    [fluentBindingControl]="control"
+    [fluentBindingModel]="model"
+    [formControl]="control"
+    [class]="schema.class"
+    [style]="schema.style"
+    [nzSize]="schema.size!"
+    [nzDisabled]="schema.disabled | reactive: model : schema : control"
+    [nzOptions]="schema.options | reactive: model : schema : control"
+    [nzBlock]="schema.variants?.block" />
+</ng-template>

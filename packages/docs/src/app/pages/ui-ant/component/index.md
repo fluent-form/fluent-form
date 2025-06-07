@@ -12,6 +12,16 @@ import { useButtonWidget } from '@fluent-form/ui-zorro';
 
 {{ NgDocActions.demo("ButtonExampleComponent") }}
 
+## Heading
+
+标题用于标识表单的分组或重要信息。
+
+```ts
+import { useHeadingWidget } from '@fluent-form/ui-zorro';
+```
+
+{{ NgDocActions.demo("HeadingExampleComponent") }}
+
 ## Alert
 
 警告提示，展现需要关注的信息。

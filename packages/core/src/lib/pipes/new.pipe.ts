@@ -5,8 +5,7 @@ import type { SafeAny } from '@ngify/core';
  * @internal
  */
 @Pipe({
-  name: 'new',
-  standalone: true
+  name: 'new'
 })
 export class FluentNewPipe implements PipeTransform {
   private readonly injector = inject(Injector);

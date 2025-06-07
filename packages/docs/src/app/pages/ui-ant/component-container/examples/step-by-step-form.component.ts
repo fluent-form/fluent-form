@@ -5,7 +5,6 @@ import { button, datePicker, group, step, steps, textArea, textField, toggle } f
 
 @Component({
   selector: 'step-by-step-form-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model" />

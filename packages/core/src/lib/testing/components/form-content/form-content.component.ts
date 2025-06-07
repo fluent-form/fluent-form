@@ -11,7 +11,6 @@ export abstract class AbstractFormContentComponent
   extends TemplateRefHolder<{ form: FormGroup, model: AnyObject, schema: AbstractSchema, submit: EventEmitter<SubmitEvent> }> { }
 
 @Component({
-  standalone: true,
   imports: [
     NgTemplateOutlet,
     ReactiveFormsModule,

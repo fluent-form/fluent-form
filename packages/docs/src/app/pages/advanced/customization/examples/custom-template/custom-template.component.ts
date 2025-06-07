@@ -6,7 +6,6 @@ import { headed, template } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'custom-template-example',
-  standalone: true,
   imports: [FluentFormModule, JsonPipe, ReactiveFormsModule],
   templateUrl: './custom-template.component.html'
 })

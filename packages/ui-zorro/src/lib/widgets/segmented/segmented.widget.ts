@@ -16,7 +16,6 @@ type SegmentedWidgetTemplateContext = WidgetTemplateContext<SegmentedControlSche
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     NzSegmentedModule,

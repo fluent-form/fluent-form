@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FluentColDirective } from './col.component';
 
 @Component({
-  standalone: true,
   imports: [FluentColDirective],
   template: `<fluent-col [span]="span" [flex]="flex" [offset]="offset" />`
 })

@@ -5,7 +5,6 @@ import { button, card, cardsArray, datetimePicker, group, textField } from '@flu
 
 @Component({
   selector: 'cards-array-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model" />

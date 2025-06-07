@@ -22,7 +22,6 @@ type NumberFieldWidgetTemplateContext = WidgetTemplateContext<NumberFieldControl
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     NzInputNumberModule,

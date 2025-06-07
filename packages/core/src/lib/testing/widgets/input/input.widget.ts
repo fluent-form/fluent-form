@@ -10,7 +10,6 @@ type InputWidgetTemplateContext = WidgetTemplateContext<TextFieldControlSchema, 
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     FluentBindingDirective,

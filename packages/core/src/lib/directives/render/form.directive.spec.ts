@@ -10,7 +10,6 @@ import { FluentFormDirective } from './form.directive';
 import { FluentFormRenderModule } from './module';
 
 @Component({
-  standalone: true,
   imports: [FluentFormRenderModule],
   template: `
     <div [fluentSchema]="schema()" [(fluentModel)]="model" (fluentFormChange)="form = $event">

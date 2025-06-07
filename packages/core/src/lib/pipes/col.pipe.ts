@@ -10,8 +10,7 @@ function isColumn(value: object): value is Column {
  * @internal
  */
 @Pipe({
-  name: 'col',
-  standalone: true
+  name: 'col'
 })
 export class FluentColumnPipe implements PipeTransform {
   transform<T extends keyof Column>(value: AbstractSchema['col'], type: T): Column[T] {

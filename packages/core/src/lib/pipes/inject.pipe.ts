@@ -4,8 +4,7 @@ import { inject, type InjectOptions, Injector, Pipe, type PipeTransform, type Pr
  * @internal
  */
 @Pipe({
-  name: 'inject',
-  standalone: true
+  name: 'inject'
 })
 export class FluentInjectPipe implements PipeTransform {
   private readonly injector = inject(Injector);

@@ -2,8 +2,7 @@ import { DestroyRef, Directive, TemplateRef, inject, input, type OnInit } from '
 import { NAMED_TEMPLATES } from '../tokens';
 
 @Directive({
-  selector: '[fluentTemplate]',
-  standalone: true
+  selector: '[fluentTemplate]'
 })
 export class FluentTemplate implements OnInit {
   private readonly templateRef = inject(TemplateRef);

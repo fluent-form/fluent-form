@@ -6,7 +6,6 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 
 @Component({
   selector: 'custom-layout-example',
-  standalone: true,
   imports: [FluentFormRenderModule, NzTableModule, JsonPipe],
   templateUrl: './custom-layout.component.html'
 })

@@ -22,7 +22,6 @@ type FormGroupWidgetTemplateContext = WidgetTemplateContext<FormGroupSchema, For
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     NgTemplateOutlet,
     NzFormModule,

@@ -8,7 +8,6 @@ interface TestContext {
 }
 
 @Component({
-  standalone: true,
   imports: [FluentTemplateOutlet],
   template: `
     <ng-template #defaultTemplate let-message="message" let-count="count">

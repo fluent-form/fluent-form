@@ -10,7 +10,6 @@ type CheckboxWidgetTemplateContext = WidgetTemplateContext<CheckboxControlSchema
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     NzCheckboxModule,

@@ -7,8 +7,7 @@ import { getChildControl, isUndefined } from '../utils';
  * @internal
  */
 @Pipe({
-  name: 'control',
-  standalone: true
+  name: 'control'
 })
 export class FluentControlPipe implements PipeTransform {
   /**

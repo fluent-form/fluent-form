@@ -4,8 +4,7 @@ import { Pipe, type PipeTransform } from '@angular/core';
  * @internal
  */
 @Pipe({
-  name: 'invoke',
-  standalone: true
+  name: 'invoke'
 })
 export class InvokePipe implements PipeTransform {
   transform<A extends unknown[], R>(value: (...args: A) => R, ...args: A): R {

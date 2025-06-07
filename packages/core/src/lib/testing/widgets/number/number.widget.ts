@@ -11,7 +11,6 @@ type NumberWidgetTemplateContext = WidgetTemplateContext<NumberFieldControlSchem
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     FluentBindingDirective,

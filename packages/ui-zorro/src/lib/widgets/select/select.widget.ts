@@ -27,7 +27,6 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     NzSelectModule,

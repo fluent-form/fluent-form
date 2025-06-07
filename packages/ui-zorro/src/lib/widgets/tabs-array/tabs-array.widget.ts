@@ -28,7 +28,6 @@ type TabsArrayWidgetTemplateContext = WidgetTemplateContext<TabsArraySchema, For
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     NgTemplateOutlet,
     NzEmptyModule,

@@ -38,7 +38,6 @@ import { FluentForm, form } from '@fluent-form/core';
 import { button, numberField, textField, textArea } from '@fluent-form/ui-zorro';
 
 @Component({
-  standalone: true,
   imports: [FluentForm],
   template: `<fluent-form [schema]="schema()" [(model)]="model" />`
 })

@@ -1,8 +1,7 @@
 import { Directive, effect, EmbeddedViewRef, inject, input, TemplateRef, untracked, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[fluentTemplateOutlet]',
-  standalone: true
+  selector: '[fluentTemplateOutlet]'
 })
 export class FluentTemplateOutlet<C = unknown> {
   readonly fluentTemplateOutlet = input.required<TemplateRef<C> | string | undefined | null>();

@@ -5,7 +5,6 @@ import { array, button, datetimePicker, textField } from '@fluent-form/ui-zorro'
 
 @Component({
   selector: 'form-array-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form class="block mr-12" [schema]="schema()" [(model)]="model" />

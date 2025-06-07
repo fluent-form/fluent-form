@@ -43,7 +43,6 @@ describe('FluentTemplateDirective', () => {
 });
 
 @Component({
-  standalone: true,
   imports: [FluentTemplate],
   template: `
     <ng-template fluentTemplate="tmpl1" />

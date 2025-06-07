@@ -5,7 +5,6 @@ import { applyGroup, button, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'label-example',
-  standalone: true,
   imports: [FluentFormModule, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model">

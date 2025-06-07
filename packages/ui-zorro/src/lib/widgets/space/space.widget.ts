@@ -20,7 +20,6 @@ type SpaceWidgetTemplateContext = WidgetTemplateContext<SpaceComponentSchema, Fo
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     NgTemplateOutlet,
     ReactiveFormsModule,

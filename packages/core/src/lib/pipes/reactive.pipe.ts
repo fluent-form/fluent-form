@@ -8,8 +8,7 @@ import { ValueTransformer } from '../services';
  * @internal
  */
 @Pipe({
-  name: 'reactive',
-  standalone: true
+  name: 'reactive'
 })
 export class FluentReactivePipe implements PipeTransform {
   private readonly transformer = inject(ValueTransformer);

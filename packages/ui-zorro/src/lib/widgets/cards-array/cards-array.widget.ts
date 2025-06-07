@@ -35,7 +35,6 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<CardsArraySchema, Fo
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     NgTemplateOutlet,
     DragDropModule,

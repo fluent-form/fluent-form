@@ -10,7 +10,6 @@ type IconWidgetTemplateContext = WidgetTemplateContext<IconComponentSchema, Form
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     NzIconModule,
     FluentBindingDirective,

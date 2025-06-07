@@ -9,7 +9,6 @@ import { BrandComponent } from './components';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [
     AsyncPipe,
     RouterOutlet,

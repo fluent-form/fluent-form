@@ -5,7 +5,6 @@ import { datePicker } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'date-picker-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model" />

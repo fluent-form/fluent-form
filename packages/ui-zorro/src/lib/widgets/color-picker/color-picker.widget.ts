@@ -17,7 +17,6 @@ type ColorPickerWidgetTemplateContext = WidgetTemplateContext<ColorPickerControl
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     NzColorPickerComponent,

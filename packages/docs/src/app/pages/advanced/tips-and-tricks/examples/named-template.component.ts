@@ -5,7 +5,6 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 @Component({
   selector: 'named-template-example',
-  standalone: true,
   imports: [FluentFormModule, NzToolTipModule],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model">

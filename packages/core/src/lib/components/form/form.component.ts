@@ -23,7 +23,6 @@ import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
 
 @Component({
   selector: 'fluent-form',
-  standalone: true,
   imports: [NgTemplateOutlet],
   templateUrl: './form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

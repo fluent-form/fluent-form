@@ -5,7 +5,6 @@ import { button, space, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'space-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model" />

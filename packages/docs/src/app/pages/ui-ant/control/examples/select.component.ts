@@ -6,7 +6,6 @@ import { select } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'select-remote-data-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model" />

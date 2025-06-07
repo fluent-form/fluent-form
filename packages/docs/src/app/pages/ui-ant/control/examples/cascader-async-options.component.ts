@@ -6,7 +6,6 @@ import { tap, timer } from 'rxjs';
 
 @Component({
   selector: 'cascader-async-options-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model" />

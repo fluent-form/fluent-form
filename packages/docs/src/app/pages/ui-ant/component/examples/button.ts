@@ -4,7 +4,6 @@ import { button } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'button-example',
-  standalone: true,
   imports: [FluentFormComponent],
   template: `<fluent-form [schema]="schema()" [(model)]="model" />`
 })

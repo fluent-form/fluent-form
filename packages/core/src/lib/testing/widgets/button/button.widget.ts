@@ -11,7 +11,6 @@ type ButtonWidgetTemplateContext = WidgetTemplateContext<ButtonComponentSchema, 
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     FluentBindingDirective,
     FluentContextGuardDirective,

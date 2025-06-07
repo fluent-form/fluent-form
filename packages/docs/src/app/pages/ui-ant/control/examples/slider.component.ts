@@ -5,7 +5,6 @@ import { slider } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'slider-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model" />

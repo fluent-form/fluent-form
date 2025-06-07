@@ -13,7 +13,6 @@ import {
 import { NzFormModule } from 'ng-zorro-antd/form';
 
 @Component({
-  standalone: true,
   imports: [
     NgTemplateOutlet,
     NzFormModule,

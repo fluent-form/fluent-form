@@ -11,7 +11,6 @@ type CheckboxGroupWidgetTemplateContext = WidgetTemplateContext<CheckboxGroupCon
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     NzCheckboxModule,

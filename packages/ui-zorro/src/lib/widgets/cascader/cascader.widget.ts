@@ -23,7 +23,6 @@ type CascaderWidgetTemplateContext = WidgetTemplateContext<CascaderControlSchema
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     NzCascaderModule,

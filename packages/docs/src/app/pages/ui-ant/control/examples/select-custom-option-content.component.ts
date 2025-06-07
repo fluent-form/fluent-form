@@ -6,7 +6,6 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 
 @Component({
   selector: 'select-custom-option-content-example',
-  standalone: true,
   imports: [FluentFormModule, NzTagModule, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model">

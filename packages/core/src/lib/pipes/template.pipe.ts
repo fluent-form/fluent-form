@@ -9,8 +9,7 @@ const NAMED_TEMPLATE_PREFIX = '#' as const;
  * @internal
  */
 @Pipe({
-  name: 'template',
-  standalone: true
+  name: 'template'
 })
 export class FluentTemplatePipe implements PipeTransform {
   private readonly templates = inject(NAMED_TEMPLATES, { optional: true });

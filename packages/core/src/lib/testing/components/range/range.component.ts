@@ -3,7 +3,6 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
 
 @Component({
   selector: 'fluent-range',
-  standalone: true,
   imports: [FormsModule],
   templateUrl: './range.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

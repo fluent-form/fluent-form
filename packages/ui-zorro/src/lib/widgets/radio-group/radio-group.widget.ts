@@ -10,7 +10,6 @@ type RadioGroupWidgetTemplateContext = WidgetTemplateContext<RadioGroupControlSc
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     NzRadioModule,

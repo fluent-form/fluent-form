@@ -20,7 +20,6 @@ type SpaceCompactWidgetTemplateContext = WidgetTemplateContext<SpaceCompactCompo
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     NgTemplateOutlet,
     NzSpaceCompactComponent,

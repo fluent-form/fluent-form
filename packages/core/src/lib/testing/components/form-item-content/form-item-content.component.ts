@@ -8,7 +8,6 @@ import { FluentWidgetTemplatePipe } from '../../../pipes';
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     NgTemplateOutlet,
     FluentWithInjectorDirective,

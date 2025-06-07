@@ -21,7 +21,6 @@ type TimePickerWidgetTemplateContext = WidgetTemplateContext<TimePickerControlSc
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     NzTimePickerModule,

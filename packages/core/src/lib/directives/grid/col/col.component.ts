@@ -10,7 +10,6 @@ type Offset = Cell | 'auto' | null;
 
 @Component({
   selector: 'fluent-col',
-  standalone: true,
   template: '',
   styleUrls: ['./col.component.scss'],
   encapsulation: ViewEncapsulation.None
@@ -20,7 +19,6 @@ class FluentColComponent { }
 @Directive({
   selector: 'fluent-col,[fluentCol]',
   exportAs: 'fluentCol',
-  standalone: true,
   host: {
     class: 'fluent-column',
     '[class]': 'classes()',

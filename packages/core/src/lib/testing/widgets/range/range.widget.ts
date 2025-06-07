@@ -11,7 +11,6 @@ type RangeWidgetTemplateContext = WidgetTemplateContext<RangeControlSchema, Form
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     RangeComponent,

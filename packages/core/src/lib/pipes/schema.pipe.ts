@@ -7,8 +7,7 @@ import { SchemaUtil } from '../utils';
  * @internal
  */
 @Pipe({
-  name: 'schema',
-  standalone: true
+  name: 'schema'
 })
 export class FluentSchemaPipe implements PipeTransform {
   private readonly schemaUtil = inject(SchemaUtil);

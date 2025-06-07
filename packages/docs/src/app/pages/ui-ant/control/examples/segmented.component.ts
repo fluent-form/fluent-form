@@ -5,7 +5,6 @@ import { segmented } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'segmented-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model" />

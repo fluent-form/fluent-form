@@ -5,7 +5,6 @@ import { button, group, numberField, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'form-group-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model" />

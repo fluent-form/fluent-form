@@ -5,7 +5,6 @@ import { timePicker } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'time-picker-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model" />

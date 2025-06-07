@@ -4,7 +4,6 @@ import { applyGroup, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'form-layout-example',
-  standalone: true,
   imports: [FluentFormComponent],
   template: `
     <h3>Vertical</h3>

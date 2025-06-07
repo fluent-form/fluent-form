@@ -19,7 +19,6 @@ interface Hero {
 
 @Component({
   selector: 'hero-form-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model" />

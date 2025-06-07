@@ -6,8 +6,7 @@ import { SCHEMA_MAP } from '../tokens';
  * @internal
  */
 @Pipe({
-  name: 'schemaType',
-  standalone: true
+  name: 'schemaType'
 })
 export class FluentSchemaTypePipe implements PipeTransform {
   private readonly schemaMap = inject(SCHEMA_MAP);

@@ -24,7 +24,6 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     NzTreeSelectModule,

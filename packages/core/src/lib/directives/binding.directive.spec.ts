@@ -23,7 +23,6 @@ const testChangeNextFn = vitest.fn();
 const inputChangeNextFn = vitest.fn();
 
 @Component({
-  standalone: true,
   imports: [
     RangeComponent,
     NumberComponent,

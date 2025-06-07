@@ -15,8 +15,7 @@ import { TransferControlSchema } from '../../schemas';
 type TransferWidgetTemplateContext = WidgetTemplateContext<TransferControlSchema, FormControl<SafeAny[]>>;
 
 @Pipe({
-  name: 'transferItems',
-  standalone: true
+  name: 'transferItems'
 })
 export class TransferItemsPipe implements PipeTransform {
   transform(value: { label: string, value: SafeAny }[]): TransferItem[] {
@@ -31,7 +30,6 @@ export class TransferItemsPipe implements PipeTransform {
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     NzTransferModule,
     FluentBindingDirective,

@@ -20,7 +20,6 @@ import { labelHelper, tooltipHelper } from '../../helper';
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     NgTemplateOutlet,
     NzFormModule,

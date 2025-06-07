@@ -23,7 +23,6 @@ type TextAreaWidgetTemplateContext = WidgetTemplateContext<TextAreaControlSchema
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     NzInputModule,

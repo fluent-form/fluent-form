@@ -34,7 +34,6 @@ const BREAKPOINTS: string[] = [
 
 @Component({
   selector: 'fluent-row',
-  standalone: true,
   template: '',
   styleUrls: ['./row.component.scss'],
   encapsulation: ViewEncapsulation.None
@@ -44,7 +43,6 @@ class FluentRowComponent { }
 @Directive({
   selector: 'fluent-row,[fluentRow]',
   exportAs: 'fluentRow',
-  standalone: true,
   host: {
     class: 'fluent-row',
     '[style.--gap-x.px]': 'gapPx()[0]',

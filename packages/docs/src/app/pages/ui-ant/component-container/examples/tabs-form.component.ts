@@ -5,7 +5,6 @@ import { button, checkbox, passwordField, tab, tabs, textField } from '@fluent-f
 
 @Component({
   selector: 'tabs-form-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model" />

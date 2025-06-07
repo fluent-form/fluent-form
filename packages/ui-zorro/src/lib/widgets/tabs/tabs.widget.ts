@@ -21,7 +21,6 @@ type TabsWidgetTemplateContext = WidgetTemplateContext<TabsComponentSchema, Form
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     NgTemplateOutlet,
     NzTabsModule,

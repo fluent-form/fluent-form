@@ -4,7 +4,6 @@ import { alert } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'grid-responsive-example',
-  standalone: true,
   imports: [FluentFormComponent],
   template: `<fluent-form [schema]="schema()" [(model)]="model" />`
 })

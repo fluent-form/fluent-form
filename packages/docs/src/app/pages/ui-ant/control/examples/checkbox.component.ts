@@ -5,7 +5,6 @@ import { checkbox } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'checkbox-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model" />

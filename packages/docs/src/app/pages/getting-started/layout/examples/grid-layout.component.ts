@@ -4,7 +4,6 @@ import { alert, applyGroup } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'grid-layout-example',
-  standalone: true,
   imports: [FluentFormComponent],
   template: `<fluent-form [schema]="schema()" [(model)]="model" />`
 })

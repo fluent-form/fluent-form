@@ -7,7 +7,6 @@ import { catchError, debounceTime, map, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'select-async-options-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model" />

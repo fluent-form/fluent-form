@@ -12,7 +12,6 @@ type RowWidgetTemplateContext = WidgetTemplateContext<RowComponentSchema, FormGr
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     NgTemplateOutlet,
     FluentGridModule,

@@ -27,7 +27,6 @@ type ButtonWidgetTemplateContext = WidgetTemplateContext<ButtonComponentSchema, 
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     NgTemplateOutlet,
     NzButtonModule,

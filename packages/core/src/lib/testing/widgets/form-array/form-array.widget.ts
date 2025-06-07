@@ -26,7 +26,6 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     NgTemplateOutlet,
     DragDropModule,

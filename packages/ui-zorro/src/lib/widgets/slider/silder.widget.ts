@@ -10,7 +10,6 @@ type SilderWidgetTemplateContext = WidgetTemplateContext<SliderControlSchema, Fo
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     NzSliderModule,

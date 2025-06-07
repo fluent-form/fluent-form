@@ -9,8 +9,7 @@ import type { Indexable } from '../types';
 declare const ngDevMode: boolean | undefined;
 
 @Pipe({
-  name: 'widgetTemplate',
-  standalone: true
+  name: 'widgetTemplate'
 })
 export class FluentWidgetTemplatePipe implements PipeTransform {
   private readonly registry = inject(WidgetTemplateRegistry);

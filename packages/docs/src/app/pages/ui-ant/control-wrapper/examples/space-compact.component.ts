@@ -5,7 +5,6 @@ import { button, numberField, select, spaceCompact, textField } from '@fluent-fo
 
 @Component({
   selector: 'space-compact-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model" />

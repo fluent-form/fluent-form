@@ -18,7 +18,6 @@ type AlertWidgetTemplateContext = WidgetTemplateContext<AlertComponentSchema, Fo
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     NzAlertModule,
     FluentBindingDirective,

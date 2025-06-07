@@ -18,7 +18,6 @@ type InputGroupWidgetTemplateContext = WidgetTemplateContext<FieldGroupComponent
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     NgTemplateOutlet,
     ReactiveFormsModule,

@@ -22,7 +22,6 @@ type StepsWidgetTemplateContext = WidgetTemplateContext<StepsComponentSchema, Fo
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     NgTemplateOutlet,
     NzStepsModule,

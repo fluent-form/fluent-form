@@ -5,7 +5,6 @@ import { FLUENT_FORM_ITEM_CONTENT } from '../tokens';
 
 @Directive({
   selector: '[fluentFormItemOutlet]',
-  standalone: true,
   hostDirectives: [
     {
       directive: NgTemplateOutlet,

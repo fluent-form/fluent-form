@@ -18,7 +18,6 @@ type HeadingWidgetTemplateContext = WidgetTemplateContext<HeadingComponentSchema
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     NgTemplateOutlet,
     NzTypographyModule,

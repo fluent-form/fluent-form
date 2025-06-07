@@ -17,7 +17,6 @@ type RateWidgetTemplateContext = WidgetTemplateContext<RateControlSchema, FormCo
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     NzRateModule,

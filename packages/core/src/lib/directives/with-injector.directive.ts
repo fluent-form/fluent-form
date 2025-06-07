@@ -5,8 +5,7 @@ import { Directive, inject, Injector } from '@angular/core';
  * @internal
  */
 @Directive({
-  selector: '[ngTemplateOutlet][fluentWithInjector]',
-  standalone: true
+  selector: '[ngTemplateOutlet][fluentWithInjector]'
 })
 export class FluentWithInjectorDirective {
   constructor() {

@@ -8,8 +8,7 @@ import { FluentControlContainer } from './models/control-container';
 
 @Directive({
   selector: 'fluent-outlet,[fluentOutlet]',
-  exportAs: 'fluentOutlet',
-  standalone: true
+  exportAs: 'fluentOutlet'
 })
 export class FluentOutletDirective<T extends AnyObject | AnyArray>
 implements OnInit, OnChanges, OnDestroy, WidgetTemplateContext<AbstractSchema, AbstractControl> {

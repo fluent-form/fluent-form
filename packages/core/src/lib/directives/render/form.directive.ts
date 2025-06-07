@@ -22,7 +22,6 @@ import { FluentControlContainer, FluentControlContainerDirective } from './model
 @Directive({
   selector: '[fluentSchema]',
   exportAs: 'fluentForm',
-  standalone: true,
   providers: [
     {
       provide: FluentControlContainer,

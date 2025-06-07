@@ -21,7 +21,6 @@ type DatePickerWidgetTemplateContext = WidgetTemplateContext<DatePickerControlSc
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     NzDatePickerModule,

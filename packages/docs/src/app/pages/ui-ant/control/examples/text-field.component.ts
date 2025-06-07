@@ -6,7 +6,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'text-field-example',
-  standalone: true,
   imports: [FluentFormModule, JsonPipe, NzIconModule],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model">

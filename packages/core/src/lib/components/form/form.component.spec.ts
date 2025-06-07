@@ -10,7 +10,6 @@ import { textField, withTesting } from '../../testing';
 import { FluentFormComponent } from './form.component';
 
 @Component({
-  standalone: true,
   imports: [FluentFormComponent],
   template: `<fluent-form [schema]="schema()" [(model)]="model" (formChange)="form = $event" />`
 })

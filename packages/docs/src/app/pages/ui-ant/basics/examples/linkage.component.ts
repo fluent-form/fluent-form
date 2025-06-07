@@ -5,7 +5,6 @@ import { radioGroup, select, textField, toggle } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'linkage-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model" />

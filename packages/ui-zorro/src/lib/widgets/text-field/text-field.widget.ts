@@ -24,7 +24,6 @@ type TextFieldWidgetTemplateContext = WidgetTemplateContext<TextFieldControlSche
  * @internal
  */
 @Component({
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     NzInputModule,

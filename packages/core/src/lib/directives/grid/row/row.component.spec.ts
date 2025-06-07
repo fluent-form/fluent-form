@@ -6,7 +6,6 @@ import { Breakpoints } from '../../../breakpoints';
 import { FluentRowDirective } from './row.component';
 
 @Component({
-  standalone: true,
   imports: [FluentRowDirective],
   template: `<fluent-row [gap]="gap" [justify]="justify" [align]="align" />`
 })

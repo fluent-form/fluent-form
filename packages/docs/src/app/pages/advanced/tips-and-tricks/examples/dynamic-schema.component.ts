@@ -6,7 +6,6 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'dynamic-schema-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe, NzButtonModule],
   template: `
     <button nz-button (click)="add()">Add user</button>

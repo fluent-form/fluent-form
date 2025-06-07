@@ -5,7 +5,6 @@ import json from './schema.json';
 
 @Component({
   selector: 'static-expression-example',
-  standalone: true,
   imports: [FluentFormComponent, JsonPipe],
   template: `
     <fluent-form [schema]="schema" [(model)]="model" />

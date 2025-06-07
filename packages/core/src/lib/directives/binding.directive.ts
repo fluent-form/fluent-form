@@ -30,7 +30,6 @@ function isObserverHolder(value: SafeAny): value is Required<EventObserverHolder
  */
 @Directive({
   selector: '[fluentBindingSchema]',
-  standalone: true,
   providers: [DestroyedSubject]
 })
 export class FluentBindingDirective<E extends HTMLElement, C extends object, S extends AbstractSchema> implements OnInit {

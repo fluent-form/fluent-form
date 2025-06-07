@@ -3,7 +3,6 @@ import { type ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'fluent-number',
-  standalone: true,
   template: `num()`,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [

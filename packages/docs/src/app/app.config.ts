@@ -18,6 +18,7 @@ import {
   providePageSkeleton,
   provideSearchEngine
 } from '@ng-doc/app';
+
 import { NG_DOC_ROUTING, provideNgDocContext } from '@ng-doc/generated';
 
 registerLocaleData(zh, 'zh-CN', zhExtra);

@@ -11,7 +11,7 @@ type Offset = Cell | 'auto' | null;
 @Component({
   selector: 'fluent-col',
   template: '',
-  styleUrls: ['./col.component.scss'],
+  styleUrl: './col.component.scss',
   encapsulation: ViewEncapsulation.None
 })
 class FluentColComponent { }

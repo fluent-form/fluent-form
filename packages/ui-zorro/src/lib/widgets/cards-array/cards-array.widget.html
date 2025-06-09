@@ -39,7 +39,7 @@
               cdkDragHandle
               [nzSize]="cardSchema.size ?? 'small'"
               [nzBordered]="!cardSchema.borderless"
-              [nzTitle]="'No.' + (index + 1)"
+              [nzTitle]="`No.${index + 1}`"
               [nzExtra]="extraTmpl">
               <fluent-row
                 nz-form

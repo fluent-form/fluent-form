@@ -15,7 +15,7 @@
     [nzStatus]="schema.status ?? 'process'"
     [nzStartIndex]="schema.start ?? 0"
     (nzIndexChange)="schema.active = $event">
-    @for (subschema of schema.schemas; track subschema; let index = $index) {
+    @for (subschema of schema.schemas; track subschema) {
       <nz-step
         #component
         [fluentBindingComponent]="component"
@@ -28,7 +28,7 @@
         [nzSubtitle]="subschema.subtitle | template"
         [nzDescription]="subschema.description | template"
         [nzDisabled]="subschema.disabled | reactive: model : subschema : control"
-        [nzStatus]="subschema.status ?? (schema.active === index ? 'process' : 'wait')"
+        [nzStatus]="subschema.status ?? (schema.active === $index ? 'process' : 'wait')"
         [hidden]="subschema.hidden | reactive: model : subschema : control" />
     }
   </nz-steps>

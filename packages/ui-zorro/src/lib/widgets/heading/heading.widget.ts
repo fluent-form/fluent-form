@@ -27,6 +27,6 @@ type HeadingWidgetTemplateContext = WidgetTemplateContext<HeadingComponentSchema
     FluentTemplatePipe
   ],
   templateUrl: './heading.widget.html',
-  styleUrls: ['./heading.widget.scss']
+  styleUrl: './heading.widget.scss'
 })
 export class HeadingWidget extends AbstractWidget<HeadingWidgetTemplateContext> { }

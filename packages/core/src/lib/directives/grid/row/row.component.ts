@@ -35,7 +35,7 @@ const BREAKPOINTS: string[] = [
 @Component({
   selector: 'fluent-row',
   template: '',
-  styleUrls: ['./row.component.scss'],
+  styleUrl: './row.component.scss',
   encapsulation: ViewEncapsulation.None
 })
 class FluentRowComponent { }

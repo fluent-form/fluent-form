@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   template: '',
-  encapsulation: ViewEncapsulation.None,
-  styles: '@use "ng-zorro-antd/ng-zorro-antd.css";'
+  styles: '@use "ng-zorro-antd/ng-zorro-antd.css";',
+  encapsulation: ViewEncapsulation.None
 })
 export class ZorroStyleComponent { }

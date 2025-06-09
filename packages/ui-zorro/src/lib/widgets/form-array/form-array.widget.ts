@@ -52,7 +52,7 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
     RenderablePipe
   ],
   templateUrl: './form-array.widget.html',
-  styleUrls: ['./form-array.widget.scss']
+  styleUrl: './form-array.widget.scss'
 })
 export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateContext> {
   private readonly schemaUtil = inject(SchemaUtil);

@@ -21,7 +21,7 @@
     @for (control of formArray.controls; track control; let index = $index) {
       <nz-tab
         [nzClosable]="formArray.length > (helper.length.min | invoke: formSchema.length)"
-        [nzTitle]="'No.' + (index + 1)">
+        [nzTitle]="`No.${index + 1}`">
         <fluent-row
           nz-form
           [align]="formSchema.align"

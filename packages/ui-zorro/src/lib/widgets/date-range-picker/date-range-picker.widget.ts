@@ -33,7 +33,7 @@ type DateRangePickerWidgetTemplateContext = WidgetTemplateContext<DateRangePicke
     FluentInjectPipe
   ],
   templateUrl: './date-range-picker.widget.html',
-  styles: [`nz-range-picker { width: 100% }`]
+  styles: `nz-range-picker { width: 100% }`
 })
 export class DateRangePickerWidget extends AbstractWidget<DateRangePickerWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;

@@ -33,7 +33,7 @@ type TimePickerWidgetTemplateContext = WidgetTemplateContext<TimePickerControlSc
     FluentInjectPipe
   ],
   templateUrl: './time-picker.widget.html',
-  styles: [`nz-time-picker { width: 100% }`]
+  styles: `nz-time-picker { width: 100% }`
 })
 export class TimePickerWidget extends AbstractWidget<TimePickerWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;

@@ -36,7 +36,7 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
     InvokePipe
   ],
   templateUrl: './tree-select.widget.html',
-  styles: [`nz-tree-select { width: 100% }`]
+  styles: `nz-tree-select { width: 100% }`
 })
 export class TreeSelectWidget extends AbstractWidget<TreeSelectWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;

@@ -54,7 +54,7 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<CardsArraySchema, Fo
     RenderablePipe
   ],
   templateUrl: './cards-array.widget.html',
-  styleUrls: ['./cards-array.widget.scss']
+  styleUrl: './cards-array.widget.scss'
 })
 export class CardsArrayWidget extends AbstractWidget<FormArrayWidgetTemplateContext> {
   private readonly schemaUtil = inject(SchemaUtil);

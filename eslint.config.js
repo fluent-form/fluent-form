@@ -33,6 +33,12 @@ export default tseslint.config(
       'import/order': 'warn',
       'import/no-cycle': 'error',
       'import/no-deprecated': 'warn',
+      'import/no-unresolved': [
+        'error',
+        {
+          ignore: ['@ng-doc/generated']
+        }
+      ],
 
       'no-irregular-whitespace': [
         'error',
@@ -253,7 +259,12 @@ export default tseslint.config(
       '@angular-eslint/directive-class-suffix': 'off',
       '@angular-eslint/no-input-rename': 'off',
       '@angular-eslint/no-output-rename': 'off',
-      '@angular-eslint/no-host-metadata-property': 'off'
+      '@angular-eslint/no-host-metadata-property': 'off',
+      '@angular-eslint/sort-keys-in-type-decorator': 'error',
+      '@angular-eslint/consistent-component-styles': [
+        'error',
+        'string'
+      ]
     },
   },
   {
@@ -269,7 +280,11 @@ export default tseslint.config(
       '@angular-eslint/template/no-autofocus': 'off',
       '@angular-eslint/template/no-interpolation-in-attributes': 'error',
       '@angular-eslint/template/prefer-control-flow': 'error',
-      '@angular-eslint/template/prefer-self-closing-tags': 'error'
+      '@angular-eslint/template/prefer-self-closing-tags': 'error',
+      '@angular-eslint/template/prefer-at-empty': 'error',
+      '@angular-eslint/template/prefer-static-string-properties': 'error',
+      '@angular-eslint/template/prefer-template-literal': 'error',
+      '@angular-eslint/template/prefer-contextual-for-variables': 'error',
     },
   }
 );

@@ -41,7 +41,7 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
     FluentNewPipe
   ],
   templateUrl: './select.widget.html',
-  styles: [`nz-select { width: 100% }`]
+  styles: `nz-select { width: 100% }`
 })
 export class SelectWidget extends AbstractWidget<SelectWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;

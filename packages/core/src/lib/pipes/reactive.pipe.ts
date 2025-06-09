@@ -18,8 +18,7 @@ export class FluentReactivePipe implements PipeTransform {
     model: unknown,
     schema: AbstractSchema,
     control: AbstractControl
-  ): T | SafeAny {
-    // Because it might be a static expression, the final type cannot be determined.
+  ): T {
     return this.transformer.transform(value, { model, schema, control });
   }
 }

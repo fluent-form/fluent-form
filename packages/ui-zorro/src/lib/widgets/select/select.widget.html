@@ -20,7 +20,7 @@
         [nzAllowClear]="schema.clearable"
         [nzMaxMultipleCount]="schema.length?.max ?? infinity"
         [nzMode]="schema.mode ?? 'default'"
-        [nzPlaceHolder]="schema.placeholder | reactive: model : schema : control"
+        [nzPlaceHolder]="(schema.placeholder | reactive: model : schema : control)!"
         [nzShowSearch]="schema.searchable || !!schema.fetchOptions"
         [nzBackdrop]="schema.backdrop!"
         [nzBorderless]="schema.borderless"
@@ -36,7 +36,7 @@
           <nz-option
             [nzCustomContent]="!!schema.option"
             [nzDisabled]="option.disabled"
-            [nzLabel]="option.label"
+            [nzLabel]="$any(option.label)"
             [nzValue]="option.value"
             [nzHide]="option.hide">
             <ng-template
@@ -61,7 +61,7 @@
       [nzAllowClear]="schema.clearable"
       [nzMaxMultipleCount]="schema.length?.max ?? infinity"
       [nzMode]="schema.mode ?? 'default'"
-      [nzPlaceHolder]="schema.placeholder | reactive: model : schema : control"
+      [nzPlaceHolder]="(schema.placeholder | reactive: model : schema : control)!"
       [nzShowSearch]="schema.searchable || !!schema.fetchOptions"
       [nzBackdrop]="schema.backdrop!"
       [nzBorderless]="schema.borderless"
@@ -77,7 +77,7 @@
         <nz-option
           [nzCustomContent]="!!schema.option"
           [nzDisabled]="option.disabled"
-          [nzLabel]="option.label"
+          [nzLabel]="$any(option.label)"
           [nzValue]="option.value"
           [nzHide]="option.hide">
           <ng-template

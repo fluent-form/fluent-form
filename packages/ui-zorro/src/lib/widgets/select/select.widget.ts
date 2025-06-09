@@ -12,8 +12,6 @@ import {
   FluentReactivePipe,
   FluentTemplateOutlet,
   FluentTemplatePipe,
-  MaybeSchemaReactiveFn,
-  SingleSchemaKey,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { AnyObject, SafeAny } from '@ngify/core';
@@ -53,7 +51,7 @@ export class SelectWidget extends AbstractWidget<SelectWidgetTemplateContext> {
 export class SelectWidgetTemplatePrivateContext {
   private readonly keyword$ = new Subject<string>();
 
-  options: MaybeSchemaReactiveFn<SelectControlSchema<SingleSchemaKey, SafeAny>, AnyObject[]> = [];
+  options: SelectControlSchema['options'] = [];
   loading = false;
   open = false;
 

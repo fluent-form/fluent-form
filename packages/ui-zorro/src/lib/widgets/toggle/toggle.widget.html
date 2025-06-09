@@ -9,7 +9,7 @@
     [class]="schema.class"
     [style]="schema.style"
     [nzId]="schema.id!"
-    [nzCheckedChildren]="(schema.placeholder | reactive: model : schema : control)?.[0] | template"
-    [nzUnCheckedChildren]="(schema.placeholder | reactive: model : schema : control)?.[1] | template"
+    [nzCheckedChildren]="(schema.placeholder | reactive: model : schema : control)?.[0]! | template"
+    [nzUnCheckedChildren]="(schema.placeholder | reactive: model : schema : control)?.[1]! | template"
     [nzSize]="schema.size!" />
 </ng-template>

@@ -10,10 +10,10 @@
           [class]="schema.class"
           [style]="schema.style"
           [nzSize]="schema.size!"
-          [nzAddOnBefore]="schema.addons?.before | reactive: model : schema : control | template"
-          [nzAddOnAfter]="schema.addons?.after | reactive: model : schema : control | template"
-          [nzPrefix]="schema.affixes?.prefix | reactive: model : schema : control | template"
-          [nzSuffix]="schema.affixes?.suffix | reactive: model : schema : control | template">
+          [nzAddOnBefore]="(schema.addons?.before | reactive: model : schema : control)! | template"
+          [nzAddOnAfter]="(schema.addons?.after | reactive: model : schema : control)! | template"
+          [nzPrefix]="(schema.affixes?.prefix | reactive: model : schema : control)! | template"
+          [nzSuffix]="(schema.affixes?.suffix | reactive: model : schema : control)! | template">
           <input
             nz-input
             [attr.id]="schema.id"
@@ -62,10 +62,10 @@
         [class]="schema.class"
         [style]="schema.style"
         [nzSize]="schema.size!"
-        [nzAddOnBefore]="schema.addons?.before | reactive: model : schema : control | template"
-        [nzAddOnAfter]="schema.addons?.after | reactive: model : schema : control | template"
-        [nzPrefix]="schema.affixes?.prefix | reactive: model : schema : control | template"
-        [nzSuffix]="schema.affixes?.suffix | reactive: model : schema : control | template">
+        [nzAddOnBefore]="(schema.addons?.before | reactive: model : schema : control)! | template"
+        [nzAddOnAfter]="(schema.addons?.after | reactive: model : schema : control)! | template"
+        [nzPrefix]="(schema.affixes?.prefix | reactive: model : schema : control)! | template"
+        [nzSuffix]="(schema.affixes?.suffix | reactive: model : schema : control)! | template">
         <input
           nz-input
           [attr.id]="schema.id"

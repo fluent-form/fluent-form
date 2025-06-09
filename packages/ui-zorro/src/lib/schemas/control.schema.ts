@@ -31,7 +31,7 @@ import { NzDateMode, NzDatePickerComponent, NzRangePickerComponent, SupportTimeO
 import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
 import { NzRadioButtonStyle, NzRadioGroupComponent } from 'ng-zorro-antd/radio';
 import { NzRateComponent } from 'ng-zorro-antd/rate';
-import { NzSegmentedComponent } from 'ng-zorro-antd/segmented';
+import { NzSegmentedComponent, NzSegmentedOptions } from 'ng-zorro-antd/segmented';
 import { NzSelectComponent, NzSelectModeType, NzSelectOptionInterface, NzSelectSizeType } from 'ng-zorro-antd/select';
 import { NzSliderComponent } from 'ng-zorro-antd/slider';
 import { NzSwitchComponent } from 'ng-zorro-antd/switch';
@@ -439,6 +439,6 @@ export interface SegmentedControlSchema<Key extends SingleSchemaKey = SingleSche
   variants?: {
     block?: boolean;
   };
-  options: MaybeSchemaReactiveFn<SegmentedControlSchema<SingleSchemaKey, Val>, { label?: string, value: number | string, icon?: string }[]>;
+  options: MaybeSchemaReactiveFn<SegmentedControlSchema<SingleSchemaKey, Val>, NzSegmentedOptions>;
   size?: NzSizeLDSType;
 }

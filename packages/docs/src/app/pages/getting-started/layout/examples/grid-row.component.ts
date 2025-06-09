@@ -9,14 +9,14 @@ import { alert, heading5 } from '@fluent-form/ui-zorro';
 })
 export class GridRowExampleComponent {
   readonly schema = form(() => {
-    heading5().content('柔性');
+    heading5().content('Flex');
     row().col(12).schemas(() => {
       alert().message('flex-1').col({ flex: 1 });
       alert().message('flex-2').col({ flex: 2 });
       alert().message('fill').col('fill');
     });
 
-    heading5().content('排版');
+    heading5().content('Justify');
     row().justify('space-between').col(12).schemas(() => {
       alert().message('col-4').col(4);
       alert().message('col-4').col(4);
@@ -28,7 +28,7 @@ export class GridRowExampleComponent {
       alert().message('col-4').col(4);
     });
 
-    heading5().content('对齐');
+    heading5().content('Align');
     row().align('start').col(12).schemas(() => {
       for (let i = 0; i < 6; i++) {
         if (i % 2 === 0) {

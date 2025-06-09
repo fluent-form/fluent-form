@@ -2,7 +2,7 @@
 
 {% include "../../../markdowns/brand.md" %} 提供了强大的自定义视图渲染功能，无论是表单元素还是表单布局，都可以根据需要进行定制。
 
-## 自定义模板
+## Custom Template
 
 如果您需要使用自定义模板，首先需要导入 `FluentFormModule` 模块。然后，在 `<fluent-form>` 组件下使用 `[fluentTemplate]` 结构指令来注册自定义模板。
 
@@ -16,7 +16,7 @@
 
 {{ NgDocActions.demo("CustomTemplateExampleComponent") }}
 
-## 自定义渲染
+## Custom Render
 
 {% include "../../../markdowns/developer-preview.md" %}
 
@@ -29,6 +29,6 @@
 
 {{ NgDocActions.demo("CustomLayoutExampleComponent") }}
 
-## 自定义部件
+## Custom Widget
 
 即将推出教程...

@@ -2,7 +2,9 @@
 
 在本章节，我们将介绍一些开发技巧，以帮助您更有效地使用 {% include "../../../markdowns/brand.md" %}。
 
-## 命名模板
+## Named Template
+
+{% include "../../../markdowns/developer-preview.md" %}
 
 在某些情况下，我们可能需要为组件图示选项传入 `TemplateRef` 类型的值，例如 `text` 图示的 `addons` 选项。
 
@@ -19,13 +21,13 @@
 
 {{ NgDocActions.demo("NamedTemplateExampleComponent") }}
 
-## 动态图示
+## Dynamic Schema
 
 借助 Signals API，您可以在 `form()` 函数内部轻松构建动态图示。
 
 {{ NgDocActions.demo("DynamicSchemaExampleComponent") }}
 
-## 封装图示
+## Encapsulation Schema
 
 使用 Fluent API，我们可以轻松地封装图示函数，以提高表单开发效率。
 

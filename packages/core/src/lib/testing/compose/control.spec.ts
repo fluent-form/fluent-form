@@ -1,14 +1,14 @@
 import { form } from '../../compose';
-import { headed, numberField, range, textField } from './control';
+import { headful, numberField, range, textField } from './control';
 
 describe('control', () => {
-  it('headed', () => {
+  it('headful', () => {
     const schema = form(() => {
-      headed();
+      headful();
     });
     expect(schema().schemas).toEqual([
       {
-        kind: 'headed'
+        kind: 'headful'
       }
     ]);
   });

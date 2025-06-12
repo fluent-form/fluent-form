@@ -2,7 +2,7 @@ import { TemplateRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
   AbstractControlSchema,
-  AbstractHeadedControlSchema,
+  AbstractHeadfulControlSchema,
   ComponentControlEventListenerHolder,
   ComponentControlEventObserverHolder,
   ComponentPropertyHolder,
@@ -97,9 +97,9 @@ interface AbstractDateControlSchema<Key extends SchemaKey, Val, P extends string
 /**
  * @public
  */
-export interface HeadedControlSchema<Key extends SingleSchemaKey = SingleSchemaKey>
-  extends AbstractZorroControlSchema<Key, SafeAny>, AbstractHeadedControlSchema {
-  kind: 'headed';
+export interface HeadfulControlSchema<Key extends SingleSchemaKey = SingleSchemaKey>
+  extends AbstractZorroControlSchema<Key, SafeAny>, AbstractHeadfulControlSchema {
+  kind: 'headful';
 }
 
 /**

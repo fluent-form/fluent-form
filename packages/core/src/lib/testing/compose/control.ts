@@ -1,10 +1,10 @@
 import { UnstableBuilder, composeBuilder } from '../../compose';
 import { KindOrKey } from '../../compose/helper';
 import { SchemaKey, SingleSchemaKey } from '../../schemas';
-import { HeadedControlSchema, NumberFieldControlSchema, RangeControlSchema, TextFieldControlSchema } from '../schemas';
+import { HeadfulControlSchema, NumberFieldControlSchema, RangeControlSchema, TextFieldControlSchema } from '../schemas';
 
-export function headed<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<HeadedControlSchema<Key>, KindOrKey> {
-  return composeBuilder<HeadedControlSchema<Key>>().kind('headed').key(key);
+export function headful<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<HeadfulControlSchema<Key>, KindOrKey> {
+  return composeBuilder<HeadfulControlSchema<Key>>().kind('headful').key(key);
 }
 
 export function textField<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<TextFieldControlSchema<Key>, KindOrKey> {

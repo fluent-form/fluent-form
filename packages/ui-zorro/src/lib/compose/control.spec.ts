@@ -7,7 +7,7 @@ import {
   datePicker,
   dateRangePicker,
   datetimePicker,
-  headed,
+  headful,
   numberField,
   passwordField,
   radioGroup,
@@ -24,9 +24,9 @@ import {
 } from './control';
 
 describe('control', () => {
-  it('headed', () => {
-    const schema = form(() => headed('headed'));
-    expect(schema().schemas).toEqual([{ kind: 'headed', key: 'headed' }]);
+  it('headful', () => {
+    const schema = form(() => headful('headful'));
+    expect(schema().schemas).toEqual([{ kind: 'headful', key: 'headful' }]);
   });
 
   it('text', () => {

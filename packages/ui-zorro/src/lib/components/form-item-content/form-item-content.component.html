@@ -1,7 +1,7 @@
 <ng-template let-control="control" let-schema="schema" let-model="model">
   @let schemaType = schema.kind | schemaType;
-  <!-- 在控件被 input-group 包裹的时候，控件状态/提示/required默认使用的是 input-group 里的第一个控件 -->
-  <!-- 如果需要采用 input-group 内其他控件，则需要使用 input-group 的 primary 参数明确指定 -->
+  <!-- 在控件被 space-compact 包裹的时候，控件状态/提示/required默认使用的是 space-compact 里的第一个控件 -->
+  <!-- TODO 这里有个问题，如果 space-compact 里的第一个图示不是控件图示，应该查找 space-compact 里的第一个控件图示 -->
   @let currentSchema =
     schemaType === SchemaType.ControlWrapper ? ((schema.schemas[0].key | schema: schema) ?? {}) : schema;
 
@@ -32,6 +32,7 @@
     <nz-form-control
       [nzXs]="{ offset: 0 }"
       [nzSm]="{ offset: labelContent ? 0 : (helper.label.span | invoke: label)! }"
+      [style.margin-left]="labelContent ? null : (helper.label.width | invoke: label)"
       [nzValidateStatus]="currentSchema.key | control: control"
       [nzHasFeedback]="currentSchema.feedback"
       [nzValidatingTip]="currentSchema.tips?.validating | template"

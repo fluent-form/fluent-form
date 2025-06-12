@@ -20,8 +20,11 @@ export class LabelExampleComponent {
     applyGroup({ layout: 'horizontal' });
 
     textField('text-1').label('普通标签').col(12);
-    textField('text-2').label({ content: '固定宽度', width: 80 }).col(12);
-    textField('text-3').label('#labelTmpl').col(12);
+    textField('text-2').label('#labelTmpl').col(12);
+
+    textField('text-3').label({ content: '固定宽度', width: 80 }).col(12);
+    button().type('primary').label({ width: 80 }).content('Submit').variants({ block: true });
+
     textField('text-4').label({ content: '右对齐', span: 4 }).col(12);
     textField('text-5')
       .label({ content: '附带提示', span: 4 })

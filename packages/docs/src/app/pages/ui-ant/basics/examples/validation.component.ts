@@ -51,9 +51,14 @@ export class ValidationExampleComponent {
       .label('InputGroup')
       .col(6)
       .schemas(() => {
-        textField('firstName').col(4);
+        textField('firstName')
+          .required(true)
+          .feedback(true)
+          .tips({ error: 'Please enter your firstName!' })
+          .col(4);
         textField('lastName')
           .required(true)
+          .feedback(true)
           .tips({ error: 'Please enter your lastName!' })
           .col(8);
       });

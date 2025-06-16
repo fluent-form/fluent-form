@@ -1,3 +1,7 @@
+## 0.28.1 (2025-06-16)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
 ## 0.28.0 (2025-05-31)
 
 ### 🚀 Features

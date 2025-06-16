@@ -2,8 +2,7 @@
   @let schemaType = schema.kind | schemaType;
   <!-- 在控件被 space-compact 包裹的时候，控件状态/提示/required默认使用的是 space-compact 里的第一个控件 -->
   <!-- TODO 这里有个问题，如果 space-compact 里的第一个图示不是控件图示，应该查找 space-compact 里的第一个控件图示 -->
-  @let currentSchema =
-    schemaType === SchemaType.ControlWrapper ? ((schema.schemas[0].key | schema: schema) ?? {}) : schema;
+  @let currentSchema = schemaType === SchemaType.ControlWrapper ? schema.schemas[0] : schema;
 
   <nz-form-item
     [class]="schema.class"

@@ -29,7 +29,7 @@ export class FluentWidgetTemplatePipe implements PipeTransform {
         return dir!.templateRef;
       }
 
-      case SchemaKind.Headed: {
+      case SchemaKind.Headful: {
         const dir = this.templates?.find(o => o.name === value['template']);
 
         if (typeof ngDevMode !== 'undefined' && ngDevMode && !dir) {

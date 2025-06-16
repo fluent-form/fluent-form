@@ -39,7 +39,7 @@ export interface HeadlessControlSchema<Key extends SingleSchemaKey = SingleSchem
 /**
  * @public
  */
-export interface AbstractHeadedControlSchema extends PropertyHolder {
-  kind: 'headed';
+export interface AbstractHeadfulControlSchema extends PropertyHolder {
+  kind: 'headful';
   template: string;
 }

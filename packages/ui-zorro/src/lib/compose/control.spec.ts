@@ -1,10 +1,10 @@
 import { form } from '@fluent-form/core';
-import { cascader, checkbox, checkboxGroup, colorPicker, datePicker, dateRangePicker, datetimePicker, headed, numberField, passwordField, radioGroup, rate, select, slider, textArea, textField, timePicker, toggle, transfer, treeSelect } from './control';
+import { cascader, checkbox, checkboxGroup, colorPicker, datePicker, dateRangePicker, datetimePicker, headful, numberField, passwordField, radioGroup, rate, select, slider, textArea, textField, timePicker, toggle, transfer, treeSelect } from './control';
 
 describe('control', () => {
-  it('headed', () => {
-    const schema = form(() => headed('headed'));
-    expect(schema().schemas).toEqual([{ kind: 'headed', key: 'headed' }]);
+  it('headful', () => {
+    const schema = form(() => headful('headful'));
+    expect(schema().schemas).toEqual([{ kind: 'headful', key: 'headful' }]);
   });
 
   it('text', () => {

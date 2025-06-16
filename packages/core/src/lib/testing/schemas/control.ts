@@ -1,12 +1,12 @@
 import { SafeAny } from '@ngify/types';
-import { AbstractControlSchema, AbstractHeadedControlSchema, ComponentControlEventListenerHolder, ComponentControlEventObserverHolder, ComponentPropertyHolder, ElementControlEventListenerHolder, ElementControlEventObserverHolder, ElementPropertyHolder, SchemaKey, SingleSchemaKey } from '../../schemas';
+import { AbstractControlSchema, AbstractHeadfulControlSchema, ComponentControlEventListenerHolder, ComponentControlEventObserverHolder, ComponentPropertyHolder, ElementControlEventListenerHolder, ElementControlEventObserverHolder, ElementPropertyHolder, SchemaKey, SingleSchemaKey } from '../../schemas';
 import { NumberComponent, RangeComponent } from '../components';
 
 /**
  * @public
  */
-export interface HeadedControlSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractControlSchema<Key, SafeAny>, AbstractHeadedControlSchema {
-  kind: 'headed';
+export interface HeadfulControlSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractControlSchema<Key, SafeAny>, AbstractHeadfulControlSchema {
+  kind: 'headful';
 }
 
 /**

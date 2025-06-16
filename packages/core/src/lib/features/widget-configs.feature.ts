@@ -45,7 +45,7 @@ export function provideWidgetConfigs(configs: (FluentFormWidgetConfig<SafeAny> |
 
         // Add built-in schemas.
         map.set(SchemaKind.Headless, { type: SchemaType.Control });
-        map.set(SchemaKind.Headed, { type: SchemaType.Control });
+        map.set(SchemaKind.Headful, { type: SchemaType.Control });
         map.set(SchemaKind.Template, { type: SchemaType.Component });
 
         return map;

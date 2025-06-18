@@ -1,8 +1,9 @@
-import { Directive, inject, Input, type OnChanges, type OnDestroy, type OnInit, ViewContainerRef } from '@angular/core';
+import { computed, Directive, effect, inject, input, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import type { AnyArray, AnyObject } from '@ngify/core';
 import type { AbstractSchema, SingleSchemaKey } from '../../schemas';
 import { WidgetTemplateRegistry } from '../../services';
+import { SchemaUtil } from '../../utils';
 import type { WidgetTemplateContext } from '../../widgets';
 import { FluentControlContainer } from './models/control-container';
 
@@ -10,43 +11,46 @@ import { FluentControlContainer } from './models/control-container';
   selector: 'fluent-outlet,[fluentOutlet]',
   exportAs: 'fluentOutlet'
 })
-export class FluentOutletDirective<T extends AnyObject | AnyArray>
-implements OnInit, OnChanges, OnDestroy, WidgetTemplateContext<AbstractSchema, AbstractControl> {
+export class FluentOutletDirective<T extends AnyObject | AnyArray> implements WidgetTemplateContext<AbstractSchema, AbstractControl> {
+  private readonly schemaUtil = inject(SchemaUtil);
   private readonly registry = inject(WidgetTemplateRegistry);
   private readonly viewContainerRef = inject(ViewContainerRef);
   private readonly controlContainer: FluentControlContainer<T> = inject(FluentControlContainer<T>, { host: true, skipSelf: true });
-  private _schema!: AbstractSchema;
+  private readonly _schema = computed(() => {
+    return this.schemaUtil.find(this.controlContainer.patchedSchema(), this.key())!;
+  });
 
-  /** @internal */
-  set schema(value: AbstractSchema) {
-    this._schema = value;
-    this.viewContainerRef.length && this.viewContainerRef.clear();
-    this.viewContainerRef.createEmbeddedView(this.registry.get(value.kind), this);
+  private readonly _control = computed(() => {
+    const form = this.controlContainer.form();
+    return form.get(this.key().toString()) ?? form;
+  });
+
+  private readonly _model = computed(() => {
+    const rootModel = this.controlContainer.model();
+    const paths = this.schemaUtil.parsePathKey(this.key().toString());
+    // Delete the last key to get the parent model
+    return paths.slice(0, -1).reduce((obj, key) => obj?.[key as keyof T] as T, rootModel);
+  });
+
+  get control(): AbstractControl {
+    return this._control();
   }
 
-  /** @internal */
   get schema() {
-    return this._schema;
+    return this._schema();
   }
 
-  /** @internal */
-  control!: AbstractControl;
-  /** @internal */
   get model() {
-    return this.controlContainer.directive.model;
+    return this._model();
   }
 
-  @Input() key!: SingleSchemaKey;
+  readonly key = input.required<SingleSchemaKey>();
 
-  ngOnInit() {
-    this.controlContainer.directive.addOutlet(this);
-  }
-
-  ngOnChanges() {
-    this.controlContainer.directive.updateOutlet(this);
-  }
-
-  ngOnDestroy() {
-    this.controlContainer.directive.removeOutlet(this);
+  constructor() {
+    effect(() => {
+      const schema = this.schema;
+      this.viewContainerRef.length && this.viewContainerRef.clear();
+      this.viewContainerRef.createEmbeddedView(this.registry.get(schema.kind), this);
+    });
   }
 }

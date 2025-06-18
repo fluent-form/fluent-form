@@ -16,8 +16,8 @@ import { type FormControlStatus, FormGroup } from '@angular/forms';
 import type { AnyArray, AnyObject } from '@ngify/core';
 import type { AbstractFormGroupSchema } from '../../schemas';
 import { NAMED_TEMPLATES } from '../../tokens';
-import { FormUtil, ModelUtil } from '../../utils';
-import { FluentControlContainer, FluentControlContainerDirective } from './models/control-container';
+import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
+import { FluentControlContainer } from './models/control-container';
 
 @Directive({
   selector: '[fluentSchema]',
@@ -33,8 +33,9 @@ import { FluentControlContainer, FluentControlContainerDirective } from './model
     }
   ]
 })
-export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentControlContainerDirective<T> {
+export class FluentFormDirective<T extends AnyObject | AnyArray> implements FluentControlContainer<T> {
   private readonly formUtil = inject(FormUtil);
+  private readonly schemaUtil = inject(SchemaUtil);
   private readonly modelUtil = inject(ModelUtil);
   private internalModel!: T;
 
@@ -53,8 +54,6 @@ export class FluentFormDirective<T extends AnyObject | AnyArray> extends FluentC
   readonly submit = output<SubmitEvent>({ alias: 'fluentSubmit' });
 
   constructor() {
-    super();
-
     const destroyRef = inject(DestroyRef);
 
     effect(() => {

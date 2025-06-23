@@ -1,0 +1,6 @@
+nz-form-control {
+  // small breakpoint
+  @media (min-width: 576px) {
+    margin-left: var(--fluent-ant-col-offset);
+  }
+}

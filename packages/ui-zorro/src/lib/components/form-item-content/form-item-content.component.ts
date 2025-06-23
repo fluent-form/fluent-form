@@ -32,6 +32,7 @@ import { labelHelper, tooltipHelper } from '../../helper';
     InvokePipe
   ],
   templateUrl: './form-item-content.component.html',
+  styleUrl: './form-item-content.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormItemContentComponent extends AbstractFormItemContentComponent {

@@ -1,7 +1,7 @@
 import { computed, Directive, effect, inject, input, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import type { AnyArray, AnyObject } from '@ngify/core';
-import type { AbstractSchema, SingleSchemaKey } from '../../schemas';
+import type { AbstractSchema, SchemaKey, SingleSchemaKey } from '../../schemas';
 import { WidgetTemplateRegistry } from '../../services';
 import { SchemaUtil } from '../../utils';
 import type { WidgetTemplateContext } from '../../widgets';
@@ -22,14 +22,19 @@ export class FluentOutletDirective<T extends AnyObject | AnyArray> implements Wi
 
   private readonly _control = computed(() => {
     const form = this.controlContainer.form();
-    return form.get(this.key().toString()) ?? form;
+    const paths = this.schemaUtil.norimalizePaths(this.key());
+    return form.get(paths) ?? form;
   });
 
   private readonly _model = computed(() => {
     const rootModel = this.controlContainer.model();
-    const paths = this.schemaUtil.parsePathKey(this.key().toString());
+    const paths = this.schemaUtil.norimalizePaths(this.key());
     // Delete the last key to get the parent model
-    return paths.slice(0, -1).reduce((obj, key) => obj?.[key as keyof T] as T, rootModel);
+    return paths
+      .map(path => this.schemaUtil.parsePathKey(path))
+      .flat()
+      .slice(0, -1)
+      .reduce((obj, key) => obj?.[key as keyof T] as T, rootModel);
   });
 
   get control(): AbstractControl {
@@ -44,7 +49,7 @@ export class FluentOutletDirective<T extends AnyObject | AnyArray> implements Wi
     return this._model();
   }
 
-  readonly key = input.required<SingleSchemaKey>();
+  readonly key = input.required<SingleSchemaKey | SchemaKey[]>();
 
   constructor() {
     effect(() => {

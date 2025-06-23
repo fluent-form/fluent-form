@@ -15,8 +15,8 @@ import { FluentFormRenderModule } from './module';
     <div [fluentSchema]="schema()" [(fluentModel)]="model" (fluentFormChange)="form = $event">
       <fluent-outlet key="ipt" />
       <fluent-outlet key="ipts" />
-      <fluent-outlet key="group.ipt" />
-      <fluent-outlet key="group.ipts" />
+      <fluent-outlet [key]="['group', 'ipt']" />
+      <fluent-outlet [key]="['group', 'ipts']" />
       <fluent-outlet key="array" />
     </div>
   `

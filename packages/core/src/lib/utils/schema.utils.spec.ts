@@ -170,17 +170,6 @@ describe('SchemaUtil', () => {
       expect(schemaUtil.find(schema(), 'name')).toEqual({ kind: 'text-field', key: 'name' });
     });
 
-    it('二级图示', () => {
-      const schema = form(() => {
-        group('group').schemas(() => {
-          textField('name');
-        });
-      });
-
-      expect(schemaUtil.find(schema(), ['group', 'name'])).toEqual({ kind: 'text-field', key: 'name' });
-      expect(schemaUtil.find(schema(), 'group.name')).toEqual({ kind: 'text-field', key: 'name' });
-    });
-
     it('多级图示', () => {
       const schema = form(() => {
         group('group').schemas(() => {
@@ -191,16 +180,23 @@ describe('SchemaUtil', () => {
       });
 
       expect(schemaUtil.find(schema(), ['group', 'group', 'name'])).toEqual({ kind: 'text-field', key: 'name' });
-      expect(schemaUtil.find(schema(), 'group.group.name')).toEqual({ kind: 'text-field', key: 'name' });
     });
 
-    it('多字段图示', () => {
+    it('multi key schema', () => {
       const schema = form(() => {
         range(['begin', 'end']);
       });
 
       expect(schemaUtil.find(schema(), [['begin', 'end']])).toEqual({ kind: 'range', key: ['begin', 'end'] });
-      expect(schemaUtil.find(schema(), ['begin', 'end'].toString())).toEqual({ kind: 'range', key: ['begin', 'end'] });
+      expect(schemaUtil.find(schema(), 'begin,end')).toEqual({ kind: 'range', key: ['begin', 'end'] });
+    });
+
+    it('object path key schema', () => {
+      const schema = form(() => {
+        textField('name.first');
+      });
+
+      expect(schemaUtil.find(schema(), 'name.first')).toEqual({ kind: 'text-field', key: 'name.first' });
     });
 
     it('不存在的图示', () => {
@@ -215,9 +211,29 @@ describe('SchemaUtil', () => {
         range(['begin', 'end']);
       });
 
-      expect(schemaUtil.find(schema(), null!)).toBe(null);
       expect(schemaUtil.find(schema(), [['begin', 'e']])).toBe(null);
       expect(schemaUtil.find(schema(), ['begin', 'e'].toString())).toBe(null);
+    });
+  });
+
+  describe('norimalizePaths', () => {
+    it('should normalize a single string key', () => {
+      expect(schemaUtil.norimalizePaths('name')).toEqual(['name']);
+      expect(schemaUtil.norimalizePaths(1)).toEqual(['1']);
+    });
+
+    it('should normalize a object path key', () => {
+      expect(schemaUtil.norimalizePaths('a.b')).toEqual(['a.b']);
+    });
+
+    it('should normalize a paths', () => {
+      expect(schemaUtil.norimalizePaths(['a', 'b'])).toEqual(['a', 'b']);
+      expect(schemaUtil.norimalizePaths([1, 2])).toEqual(['1', '2']);
+      expect(schemaUtil.norimalizePaths(['a', 1])).toEqual(['a', '1']);
+    });
+
+    it('should normalize an array with a nested array key', () => {
+      expect(schemaUtil.norimalizePaths([['a', 'b'], 'c', 1])).toEqual(['a,b', 'c', '1']);
     });
   });
 });

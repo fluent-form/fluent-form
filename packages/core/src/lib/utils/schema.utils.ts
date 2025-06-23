@@ -152,26 +152,24 @@ export class SchemaUtil {
     return key.split('.');
   }
 
+  norimalizePaths(paths: SingleSchemaKey | SchemaKey[]) {
+    return (isArray(paths) ? paths : [paths]).map(o => o.toString());
+  }
+
   find(schema: Indexable<AbstractBranchSchema>, key: SingleSchemaKey): AbstractSchema | null;
   find(schema: Indexable<AbstractBranchSchema>, key: SchemaKey[]): AbstractSchema | null;
-  find(schema: Indexable<AbstractBranchSchema>, path: SingleSchemaKey | SchemaKey[]): AbstractSchema | null;
-  find(schema: Indexable<AbstractBranchSchema>, path?: SingleSchemaKey | SchemaKey[]): AbstractSchema | null {
-    if (!path) return null;
+  find(schema: Indexable<AbstractBranchSchema>, paths: SingleSchemaKey | SchemaKey[]): AbstractSchema | null;
+  find(schema: Indexable<AbstractBranchSchema>, paths: SingleSchemaKey | SchemaKey[]): AbstractSchema | null {
+    let currentSchema: Indexable<AbstractSchema> | null = schema;
 
-    const paths = isArray(path)
-      ? path.map(o => isArray(o) ? o.toString() : o)
-      : path.toString().split('.');
+    for (const path of this.norimalizePaths(paths)) {
+      currentSchema = currentSchema['schemas'].find((o: AbstractSchema) => o.key?.toString() === path) ?? null;
 
-    let _schema: Indexable<AbstractSchema> | null = schema;
-
-    for (const path of paths) {
-      _schema = _schema['schemas'].find((o: AbstractSchema) => o.key?.toString() === path) ?? null;
-
-      if (_schema === null) {
-        return _schema;
+      if (currentSchema === null) {
+        return currentSchema;
       }
     }
 
-    return _schema;
+    return currentSchema;
   }
 }

@@ -13,7 +13,7 @@ import { datePicker } from '@fluent-form/ui-zorro';
 })
 export class MapperExampleComponent {
   readonly schema = form(() => {
-    datePicker('date').label('日期控件').mapper({
+    datePicker('date').label('Date').mapper({
       parser: (input: string | null) => {
         return input ? new Date(input) : new Date();
       },

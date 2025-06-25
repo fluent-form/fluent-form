@@ -13,15 +13,15 @@ import { button, group, numberField, textField } from '@fluent-form/ui-zorro';
 })
 export class FormGroupExampleComponent {
   readonly schema = form(() => {
-    textField('name').label('用户名').col(12);
-    numberField('age').label('年龄').col(12);
+    textField('name').label('Name').col(12);
+    numberField('age').label('Age').col(12);
 
-    group('info').label('其他信息').col(12).schemas(() => {
-      textField('cellphone').type('tel').label('手机号').col(6);
-      textField('email').type('email').label('邮箱').col(6);
+    group('info').label('Info').col(12).schemas(() => {
+      textField('cellphone').type('tel').label('Cellphone').col(6);
+      textField('email').type('email').label('Email').col(6);
     });
 
-    button().content('提交').type('primary').variants({ block: true });
+    button().content('Submit').type('primary').variants({ block: true });
   });
 
   readonly model = signal({});

@@ -13,21 +13,21 @@ import { array, button, datetimePicker, textField } from '@fluent-form/ui-zorro'
 })
 export class FormArrayExampleComponent {
   readonly schema = form(() => {
-    textField('flight').label('航班').col(12);
-    datetimePicker('boardingTime').label('登机时间').col(12);
+    textField('flight').label('Flight').col(12);
+    datetimePicker('boardingTime').label('Boarding time').col(12);
 
     array('passengers')
-      .label('乘客')
+      .label('Passengers')
       .length({ min: 1, max: 5 })
       .orderable(true)
       .col(12)
       .schemas(() => {
-        textField().placeholder('请输入姓名').col(12);
+        textField().placeholder('Please enter').col(12);
       });
 
     button()
       .type('primary')
-      .content('提交')
+      .content('Submit')
       .variants({ block: true })
       .disabled(ctx => ctx.control.invalid)
       .col(12);

@@ -13,7 +13,7 @@ import { dateRangePicker } from '@fluent-form/ui-zorro';
 })
 export class MultiKeyExampleComponent {
   readonly schema = form(() => {
-    dateRangePicker(['start', 'end']).label('日期区间');
+    dateRangePicker(['start', 'end']).label('Date Range');
   });
 
   readonly model = signal({});

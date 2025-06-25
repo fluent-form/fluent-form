@@ -13,7 +13,7 @@ import { textField } from '@fluent-form/ui-zorro';
 })
 export class HintExampleComponent {
   readonly schema = form(() => {
-    textField('text').label('控件标签').hint('这是一段控件提示');
+    textField('text').hint('This is a hint message for the text field.');
   });
 
   readonly model = signal({});

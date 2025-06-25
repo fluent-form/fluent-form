@@ -14,22 +14,22 @@ import { button, datePicker, group, step, steps, textArea, textField, toggle } f
 export class StepByStepFormExampleComponent {
   readonly schema = form(() => {
     steps().col(12).active(0).schemas(() => {
-      step().title('第一步').schemas(() => {
-        textField('text-1').label('文本输入框');
-        textField('text-2').label('文本输入框');
+      step().title('Step 1').schemas(() => {
+        textField('text-1').label('Please enter');
+        textField('text-2').label('Please enter');
       });
 
-      step().title('第二步').schemas(() => {
-        datePicker('date').label('文本输入框');
-        toggle('switch').label('开关');
+      step().title('Step 2').schemas(() => {
+        datePicker('date').label('Please enter');
+        toggle('switch').label('Switch');
       });
 
-      step().title('第三步').schemas(() => {
+      step().title('Step 3').schemas(() => {
         group('step3').schemas(() => {
-          textArea('textarea').label('文本域');
+          textArea('textarea').label('Please fill in');
         });
 
-        button().type('primary').content('提交').variants({ block: true }).col(12);
+        button().type('primary').content('Submit').variants({ block: true }).col(12);
       });
     });
   });

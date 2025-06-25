@@ -13,17 +13,17 @@ import { button, group, tabsArray, textField } from '@fluent-form/ui-zorro';
 export class TabsArrayExampleComponent {
   readonly schema = form(() => {
     tabsArray('passengers')
-      .label('乘客')
+      .label('Passengers')
       .length({ max: 5 })
       .col(12)
       .schemas(() => {
         group().col(12).schemas(() => {
-          textField('name').label('姓名').placeholder('请输入姓名').col(12);
-          textField('cellphone').label('电话').placeholder('请输入电话').col(12);
+          textField('name').label('Name').placeholder('Please enter').col(12);
+          textField('cellphone').label('Cellphone').placeholder('Please enter').col(12);
         });
       });
 
-    button().content('提交').type('primary').col(12).variants({ block: true });
+    button().content('Submit').type('primary').col(12).variants({ block: true });
   });
 
   readonly model = signal({

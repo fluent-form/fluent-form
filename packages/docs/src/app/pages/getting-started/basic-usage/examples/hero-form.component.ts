@@ -5,15 +5,10 @@ import { numberField, rate, textArea, textField, toggle } from '@fluent-form/ui-
 
 interface Hero {
   id: number;
-  /** 名称 **/
   name: string;
-  /** 能力 **/
   power: string;
-  /** 身高 **/
   height?: number;
-  /** 声望 **/
   popularity?: number;
-  /** 有效/无效 **/
   enabled: boolean;
 }
 
@@ -28,11 +23,11 @@ interface Hero {
 export class HeroFormExampleComponent {
   readonly schema = form(() => {
     headless('id');
-    textField('name').label('名称').required(true);
-    textArea('power').label('能力').required(true);
-    numberField('height').label('身高');
-    rate('popularity').label('声望');
-    toggle('enabled').label('状态').required(true).defaultValue(true);
+    textField('name').label('Name').required(true);
+    textArea('power').label('Poser').required(true);
+    numberField('height').label('Height');
+    rate('popularity').label('Popularity');
+    toggle('enabled').label('Status').required(true).defaultValue(true);
   });
 
   readonly model = signal<Partial<Hero>>({

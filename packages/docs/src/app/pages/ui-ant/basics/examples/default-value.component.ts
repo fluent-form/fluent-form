@@ -13,7 +13,7 @@ import { textField } from '@fluent-form/ui-zorro';
 })
 export class DefaultValueExampleComponent {
   readonly schema = form(() => {
-    textField('text').defaultValue('默认值');
+    textField('text').defaultValue('Default value');
   });
 
   readonly model = signal({});

@@ -13,8 +13,8 @@ import { textField } from '@fluent-form/ui-zorro';
 })
 export class PathKeyExampleComponent {
   readonly schema = form(() => {
-    textField('user.name').label('用户名');
-    textField('user.password').label('密码').type('password');
+    textField('user.name').label('Username');
+    textField('user.password').label('Password').type('password');
   });
 
   readonly model = signal({

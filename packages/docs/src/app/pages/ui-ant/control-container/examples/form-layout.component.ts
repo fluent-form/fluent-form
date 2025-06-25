@@ -19,23 +19,23 @@ import { applyGroup, textField } from '@fluent-form/ui-zorro';
 export class FormLayoutExampleComponent {
   readonly schema1 = form(() => {
     applyGroup({ layout: 'vertical' });
-    textField('text-1').label('控件标签').col(6);
-    textField('text-2').label('控件标签').col(6);
-    textField('text-3').label('控件标签').col(6);
+    textField('text-1').label('Label').col(6);
+    textField('text-2').label('Label').col(6);
+    textField('text-3').label('Label').col(6);
   });
 
   readonly schema2 = form(() => {
     applyGroup({ layout: 'horizontal' });
-    textField('text-1').label('控件标签').col(6);
-    textField('text-2').label('控件标签').col(6);
-    textField('text-3').label('控件标签').col(6);
+    textField('text-1').label('Label').col(6);
+    textField('text-2').label('Label').col(6);
+    textField('text-3').label('Label').col(6);
   });
 
   readonly schema3 = form(() => {
     applyGroup({ layout: 'inline' });
-    textField('text-1').label('控件标签').col(6);
-    textField('text-2').label('控件标签').col(6);
-    textField('text-3').label('控件标签').col(6);
+    textField('text-1').label('Label').col(6);
+    textField('text-2').label('Label').col(6);
+    textField('text-3').label('Label').col(6);
   });
 
   readonly model1 = {};

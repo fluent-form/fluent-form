@@ -13,23 +13,23 @@ import { button, card, cardsArray, datetimePicker, group, textField } from '@flu
 })
 export class CardsArrayExampleComponent {
   readonly schema = form(() => {
-    textField('flight').label('航班').col(12);
-    datetimePicker('boardingTime').label('登机时间').col(12);
+    textField('flight').label('Flight').col(12);
+    datetimePicker('boardingTime').label('Boarding time').col(12);
 
     cardsArray('passengers')
-      .label('乘客')
+      .label('Passengers')
       .length({ max: 5 })
       .col(12)
       .schemas(() => {
         card().col(6).schemas(() => {
           group().col(12).schemas(() => {
-            textField('name').label('姓名').placeholder('请输入姓名').col(12);
-            textField('cellphone').label('电话').placeholder('请输入电话').col(12);
+            textField('name').label('Name').placeholder('Please enter').col(12);
+            textField('cellphone').label('Cellphone').placeholder('Please enter').col(12);
           });
         });
       });
 
-    button().content('提交').type('primary').col(12).variants({ block: true });
+    button().content('Submit').type('primary').col(12).variants({ block: true });
   });
 
   readonly model = signal({

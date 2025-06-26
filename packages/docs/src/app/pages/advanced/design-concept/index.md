@@ -71,14 +71,14 @@ const schema = form(() => {
 
 <br>
 
-| 类型                 | 描述                                                          |
-| -------------------- | ------------------------------------------------------------- |
-| `Control`            | 控件类型，表示表单中的控件元素，例如 `text`、`number`         |
-| `ControlWrapper`     | 控件包装类型，用于包装**一层**控件元素，例如 `space`          |
-| `ControlContainer`   | 控件容器类型，用于承载**多层**控件元素，例如 `group`、`array` |
-| `Component`          | 组件类型，表示非控件元素，即普通组件，例如 `button`           |
-| `ComponentWrapper`   | 组件包装类型，用于包装**一层**组件元素，例如 `button-group`   |
-| `ComponentContainer` | 组件容器类型，用于容纳**多层**组件元素，例如 `tabs`、`steps`  |
+| 类型                 | 描述                                                                                                       |
+| -------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `Control`            | 控件类型，表示表单中的控件元素，例如 `text`、`number`                                                      |
+| `ControlWrapper`     | 控件包装类型，用于包装**一层**控件元素，例如 `space`                                                       |
+| `ControlContainer`   | 控件容器类型，用于承载**多层**控件元素，可以细分为 `ControlGroup` 与 `ControlArray`，例如 `group`、`array` |
+| `Component`          | 组件类型，表示非控件元素，即普通组件，例如 `button`                                                        |
+| `ComponentWrapper`   | 组件包装类型，用于包装**一层**组件元素，例如 `button-group`                                                |
+| `ComponentContainer` | 组件容器类型，用于容纳**多层**组件元素，例如 `tabs`、`steps`                                               |
 
 <br>
 
@@ -91,6 +91,8 @@ const schema = form(() => {
 - `AbstractControlSchema`：控件图示抽象接口
 - `AbstractControlWrapperSchema`：控件包装器图示抽象接口
 - `AbstractControlContainerSchema`：控件容器图示抽象接口
+  - `AbstractFormGroupSchema`：控件组图示抽象接口
+  - `AbstractFormArraySchema`：控件数组图示抽象接口
 - `AbstractComponentSchema`：组件图示抽象接口
 - `AbstractComponentWrapperSchema`：组件包装器图示抽象接口
 - `AbstractComponentContainerSchema`：组件容器图示抽象接口

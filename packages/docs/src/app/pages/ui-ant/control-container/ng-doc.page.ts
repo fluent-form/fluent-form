@@ -6,6 +6,7 @@ import { FormArrayExampleComponent } from './examples/form-array.component';
 import { FormGroupExampleComponent } from './examples/form-group.component';
 import { FormLayoutExampleComponent } from './examples/form-layout.component';
 import { RootFormExampleComponent } from './examples/root-form.component';
+import { TableArrayExampleComponent } from './examples/table-array.component';
 import { TabsArrayExampleComponent } from './examples/tabs-array.component';
 
 const ControlContainerPage: NgDocPage = {
@@ -19,6 +20,7 @@ const ControlContainerPage: NgDocPage = {
     FormGroupExampleComponent,
     TabsArrayExampleComponent,
     CardsArrayExampleComponent,
+    TableArrayExampleComponent,
     ZorroStyleComponent
   },
   order: 4

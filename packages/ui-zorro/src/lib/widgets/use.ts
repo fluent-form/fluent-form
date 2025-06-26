@@ -26,6 +26,9 @@ import {
   StepComponentSchema,
   StepsComponentSchema,
   TabComponentSchema,
+  TableArraySchema,
+  TableColumnSchema,
+  TableRowGroupSchema,
   TabsArraySchema,
   TabsComponentSchema,
   TextAreaControlSchema,
@@ -57,6 +60,7 @@ import { SilderWidget } from './slider/silder.widget';
 import { SpaceCompactWidget } from './space-compact/space-compact.widget';
 import { SpaceWidget } from './space/space.widget';
 import { StepsWidget } from './steps/steps.widget';
+import { TableArrayWidget } from './table-array/table-array.widget';
 import { TabsArrayWidget } from './tabs-array/tabs-array.widget';
 import { TabsWidget } from './tabs/tabs.widget';
 import { TextAreaWidget } from './text-area/text-area.widget';
@@ -103,6 +107,7 @@ export function useAllWidgets() {
 
     useFormGroupWidget(),
     useFormArrayWidget(),
+    useTableArrayWidget(),
     useTabsArrayWidget(),
     useCardsArrayWidget()
   ];
@@ -420,6 +425,28 @@ export function useFormArrayWidget(): FluentFormWidgetConfig<FormArraySchema> {
     type: SchemaType.ControlArray,
     widget: FormArrayWidget
   };
+}
+
+export function useTableArrayWidget(): [
+  FluentFormWidgetConfig<TableArraySchema>,
+  FluentFormWidgetConfig<TableRowGroupSchema>,
+  FluentFormWidgetConfig<TableColumnSchema>
+] {
+  return [
+    {
+      kind: 'table-array',
+      type: SchemaType.ControlArray,
+      widget: TableArrayWidget
+    },
+    {
+      kind: 'table-row-group',
+      type: SchemaType.ControlGroup
+    },
+    {
+      kind: 'table-column',
+      type: SchemaType.ControlWrapper
+    }
+  ];
 }
 
 export function useTabsArrayWidget(): FluentFormWidgetConfig<TabsArraySchema> {

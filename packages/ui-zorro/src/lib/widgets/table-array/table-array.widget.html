@@ -1,0 +1,115 @@
+<ng-template let-formArray="control" let-formSchema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  @let tableRowGroupSchema = formSchema.schemas[0];
+  <nz-table
+    #component
+    [nzSize]="formSchema.size || 'middle'"
+    [nzBordered]="formSchema.bordered"
+    [nzLoading]="formSchema.loading"
+    [nzShowPagination]="false"
+    [nzData]="formArray.value"
+    [class]="formSchema.class"
+    [style]="formSchema.style"
+    [fluentBindingComponent]="component"
+    [fluentBindingSchema]="formSchema"
+    [fluentBindingControl]="formArray"
+    [fluentBindingModel]="model">
+    <thead>
+      <tr [class]="tableRowGroupSchema.class" [style]="tableRowGroupSchema.style">
+        @for (tableColumnSchema of tableRowGroupSchema.schemas; track tableColumnSchema) {
+          <th [class]="tableColumnSchema.class" [style]="tableColumnSchema.style">
+            {{ tableColumnSchema.header }}
+            @if (tableColumnSchema.tooltip) {
+              <nz-icon
+                class="fluent-table-header-tooltip"
+                nz-tooltip
+                [nzType]="(helper.tooltip.icon | invoke: tableColumnSchema.tooltip) || 'question-circle'"
+                [nzTooltipTitle]="helper.tooltip.content | invoke: tableColumnSchema.tooltip" />
+            }
+          </th>
+        }
+        <th></th>
+      </tr>
+    </thead>
+    <tbody
+      #tbody="element"
+      element
+      cdkDropList
+      [cdkDropListDisabled]="!formSchema.orderable"
+      (cdkDropListDropped)="drop(formArray, $event)">
+      @for (formGroup of formArray.controls; track formGroup) {
+        <tr
+          cdkDrag
+          cdkDragPreviewContainer="parent"
+          [cdkDragBoundary]="tbody.ref"
+          [class]="tableRowGroupSchema.class"
+          [style]="tableRowGroupSchema.style"
+          [fluentBindingSchema]="tableRowGroupSchema"
+          [fluentBindingControl]="formGroup"
+          [fluentBindingModel]="model[formSchema.key!]">
+          @for (tableColumnSchema of tableRowGroupSchema.schemas; track tableColumnSchema; let index = $index) {
+            <td [class]="tableColumnSchema.class" [style]="tableColumnSchema.style">
+              @for (subschema of tableColumnSchema.schemas; track subschema) {
+                @if (subschema | renderable) {
+                  <ng-container
+                    [ngTemplateOutlet]="formColTemplate"
+                    [ngTemplateOutletContext]="{
+                      control: subschema.key | control: $any(formGroup),
+                      schema: subschema,
+                      model: model[formSchema.key!][index],
+                      index: index
+                    }" />
+                }
+              }
+            </td>
+          }
+          <td>
+            <button
+              class="fluent-array-element-remove-btn"
+              type="button"
+              nz-button
+              nzShape="circle"
+              nzSize="small"
+              [nzDanger]="true"
+              [disabled]="formArray.length <= (helper.length.min | invoke: formSchema.length)"
+              (click)="formArray.removeAt($index)">
+              <nz-icon nz-icon nzType="minus" nzTheme="outline" />
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </nz-table>
+
+  <nz-form-item [style.margin-top.px]="10">
+    <nz-form-control>
+      @let addBtn = helper.addable | invoke: (formSchema.addable | reactive: model : formSchema : formArray);
+      <button
+        type="button"
+        nz-button
+        [nzType]="addBtn.type ?? null"
+        [nzBlock]="true"
+        [nzDanger]="addBtn.variants?.danger"
+        [nzGhost]="addBtn.variants?.ghost"
+        [nzShape]="addBtn.variants?.shape!"
+        [nzSize]="addBtn.size!"
+        [disabled]="addBtn.disabled || formArray.length === (helper.length.max | invoke: formSchema.length)"
+        (click)="push(formArray, formSchema)">
+        @if (addBtn.icon) {
+          <nz-icon nz-icon nzTheme="outline" [nzType]="addBtn.icon" />
+        }
+        @if (addBtn.content) {
+          <ng-template [fluentTemplateOutlet]="addBtn.content | template">
+            {{ addBtn.content }}
+          </ng-template>
+        }
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+
+  <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model" let-index="index">
+    <ng-container
+      fluentWithInjector
+      [ngTemplateOutlet]="schema | widgetTemplate"
+      [ngTemplateOutletContext]="{ control: schema.key | control: control, schema, model }" />
+  </ng-template>
+</ng-template>

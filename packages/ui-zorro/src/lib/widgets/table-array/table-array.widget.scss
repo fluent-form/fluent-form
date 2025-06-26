@@ -1,0 +1,28 @@
+.fluent-table-header-tooltip {
+  cursor: help;
+  color: rgba(0, 0, 0, 0.45);
+  margin-inline-start: 1px;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-preview {
+  display: table;
+  overflow: visible;
+}
+
+/* Animate items as they're being sorted. */
+.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Animate an item that has been dropped. */
+.cdk-drag-animating {
+  transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drag:not(.cdk-drag-disabled) {
+  cursor: move;
+}

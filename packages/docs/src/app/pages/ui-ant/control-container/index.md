@@ -34,11 +34,13 @@ import { useFormGroupWidget } from '@fluent-form/ui-zorro';
 
 ### List Type
 
-使用 `array()` 函数，您可以轻松地配置列表型的数组表单。这种类型的表单支持增减元素、嵌套、**拖拽排序**以及长度限制：
+列表型数组表单是最常见的数组表单类型，适用于需要以列表形式展示数据的场景。
 
-- 使用 `length` 选项配置数组元素长度限制，支持传入一个数字或一个配置对象。
-- 使用 `addable` / `removable` 选项配置是否启用增删元素。
-- 使用 `orderable` 选项配置是否启用拖拽排序（目前仅支持一维拖拽，参见 [#13372](https://github.com/angular/components/issues/13372)）。
+使用 `array()` 函数，您可以轻松地配置列表型的数组表单。这种类型的表单支持丰富的交互功能，包括：
+
+- **增删操作**：使用 `addable` / `removable` 选项控制是否允许增删行数据
+- **拖拽排序**：使用 `orderable` 选项控制是否启用拖拽排序功能
+- **长度限制**：可通过 `length` 选项设置最大/最小行数（支持数字或配置对象）
 
 ```ts
 import { useFormArrayWidget } from '@fluent-form/ui-zorro';
@@ -48,10 +50,13 @@ import { useFormArrayWidget } from '@fluent-form/ui-zorro';
 
 ### Tabs Type
 
-使用 `tabsArray()` 函数，您可以轻松地配置标签页样式的数组表单。这种类型的表单支持增减元素、嵌套以及长度限制。
+标签页型数组表单是以标签页的形式展示一组相关数据的表单类型，适用于需要在多个视图之间切换的场景。
 
-- 使用 `length` 选项配置数组元素长度限制，支持传入一个数字或一个配置对象。
-- 使用 `addable` / `removable` 选项配置是否启用增删元素。
+使用 `tabsArray()` 函数，您可以轻松地配置标签页样式的数组表单。这种类型的表单支持丰富的交互功能，包括：
+
+- **增删操作**：使用 `addable` / `removable` 选项控制是否允许增删行数据
+- **拖拽排序**：使用 `orderable` 选项控制是否启用拖拽排序功能
+- **长度限制**：可通过 `length` 选项设置最大/最小行数（支持数字或配置对象）
 
 ```ts
 import { useTabsArrayWidget } from '@fluent-form/ui-zorro';
@@ -61,15 +66,38 @@ import { useTabsArrayWidget } from '@fluent-form/ui-zorro';
 
 ### Cards Type
 
-使用 `cardsArray()` 函数，您可以轻松地配置卡片样式的数组表单。这种类型的表单支持增减元素、嵌套、**拖拽排序**以及长度限制。
+卡片型数组表单是以卡片的形式展示一组相关数据的表单类型，适用于需要以分块展示数据的场景。
 
-- 必须搭配 `card()` 组件使用。
-- 使用 `length` 选项配置数组元素长度限制，支持传入一个数字或一个配置对象。
-- 使用 `addable` / `removable` 选项配置是否启用增删元素。
-- 使用 `orderable` 选项配置是否启用拖拽排序（目前仅支持一维拖拽，参见 [#13372](https://github.com/angular/components/issues/13372)）。
+使用 `cardsArray()` 与 `card()` 函数，您可以轻松地配置卡片样式的数组表单。这种类型的表单支持丰富的交互功能，包括：
+
+- **增删操作**：使用 `addable` / `removable` 选项控制是否允许增删行数据
+- **拖拽排序**：使用 `orderable` 选项控制是否启用拖拽排序功能
+- **长度限制**：可通过 `length` 选项设置最大/最小行数（支持数字或配置对象）
 
 ```ts
 import { useCardsArrayWidget } from '@fluent-form/ui-zorro';
 ```
 
 {{ NgDocActions.demo("CardsArrayExampleComponent") }}
+
+### Table Type
+
+表格表单是一种特殊的数组表单类型，适用于需要以表格形式展示数据的场景。
+
+由于表格布局的特殊性，您需要使用以下图示函数来构建表格数组表单：
+
+- `tableArray()` - 创建表格数组容器，对应 `ControlArray` 类型，数据结构为 `Array` 类型
+- `tableRowGroup()` - 定义表格行的结构，对应 `ControlGroup` 类型，数据结构为 `Object` 类型
+- `tableColumn()` - 配置表格列，包括列标题和列内容
+
+通过这些函数的组合使用，您可以轻松构建功能完整的表格表单。表格表单支持丰富的交互功能，包括：
+
+- **增删操作**：使用 `addable` / `removable` 选项控制是否允许增删行数据
+- **拖拽排序**：使用 `orderable` 选项控制是否启用拖拽排序功能
+- **长度限制**：可通过 `length` 选项设置最大/最小行数（支持数字或配置对象）
+
+```ts
+import { useTableArrayWidget } from '@fluent-form/ui-zorro';
+```
+
+{{ NgDocActions.demo("TableArrayExampleComponent") }}

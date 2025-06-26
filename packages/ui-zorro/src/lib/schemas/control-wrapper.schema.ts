@@ -8,7 +8,7 @@ import {
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzFlexDirective } from 'ng-zorro-antd/flex';
 import { NzSpaceCompactComponent } from 'ng-zorro-antd/space';
-import { Labelful } from './interfaces';
+import { Labelful, Tooltip } from './interfaces';
 
 export interface SpaceComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
   extends AbstractControlWrapperSchema<Key>,
@@ -37,4 +37,11 @@ export interface SpaceCompactComponentSchema<Key extends SingleSchemaKey = Singl
   variants?: {
     block?: boolean;
   };
+}
+
+export interface TableColumnSchema<Key extends SingleSchemaKey = SingleSchemaKey>
+  extends AbstractControlWrapperSchema<Key> {
+  kind: 'table-column';
+  header?: string;
+  tooltip?: string | Tooltip;
 }

@@ -1,12 +1,11 @@
 import { TemplateRef } from '@angular/core';
 import { ThemeType } from '@ant-design/icons-angular';
 import { AbstractSchema, MaybeSchemaReactiveFn } from '@fluent-form/core';
-import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 
 /** @internal */
 export interface Tooltip {
   content: string | TemplateRef<void>;
-  icon: string | NzFormTooltipIcon;
+  icon: string;
 }
 
 /** @internal */

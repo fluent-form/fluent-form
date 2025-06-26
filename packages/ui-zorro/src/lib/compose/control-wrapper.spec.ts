@@ -1,5 +1,5 @@
 import { form } from '@fluent-form/core';
-import { space, spaceCompact } from './control-wrapper';
+import { space, spaceCompact, tableColumn } from './control-wrapper';
 
 describe('control-wrapper', () => {
   it('space', () => {
@@ -23,6 +23,19 @@ describe('control-wrapper', () => {
     expect(schema().schemas).toEqual([
       {
         kind: 'space-compact',
+        schemas: []
+      }
+    ]);
+  });
+
+  it('tableColumn', () => {
+    const schema = form(() => {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      tableColumn().schemas(() => { });
+    });
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'table-column',
         schemas: []
       }
     ]);

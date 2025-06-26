@@ -1,6 +1,6 @@
 import { form } from '@fluent-form/core';
 import { textField } from './control';
-import { applyGroup, array, cardsArray, group, tabsArray } from './control-container';
+import { applyGroup, array, cardsArray, group, tableArray, tableRowGroup, tabsArray } from './control-container';
 
 describe('control-container', () => {
   it('group', () => {
@@ -11,6 +11,20 @@ describe('control-container', () => {
     expect(schema().schemas).toEqual([
       {
         kind: 'group',
+        key: 'group',
+        schemas: []
+      }
+    ]);
+  });
+
+  it('tableRowGroup', () => {
+    const schema = form(() => {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      tableRowGroup('group').schemas(() => { });
+    });
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'table-row-group',
         key: 'group',
         schemas: []
       }
@@ -31,7 +45,7 @@ describe('control-container', () => {
     ]);
   });
 
-  it('tabs-array', () => {
+  it('tabsArray', () => {
     const schema = form(() => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       tabsArray('tabs-array').schemas(() => { });
@@ -45,7 +59,7 @@ describe('control-container', () => {
     ]);
   });
 
-  it('cards-array', () => {
+  it('cardsArray', () => {
     const schema = form(() => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       cardsArray('cards-array').schemas(() => { });
@@ -54,6 +68,20 @@ describe('control-container', () => {
       {
         kind: 'cards-array',
         key: 'cards-array',
+        schemas: []
+      }
+    ]);
+  });
+
+  it('tableArray', () => {
+    const schema = form(() => {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      tableArray('table-array').schemas(() => { });
+    });
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'table-array',
+        key: 'table-array',
         schemas: []
       }
     ]);

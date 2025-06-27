@@ -8,7 +8,6 @@ import { TabsArrayWidget } from './tabs-array.widget';
 
 describe('TabsArrayWidget', () => {
   let component: TabsArrayWidget;
-  let helper: TabsArrayWidget['helper'];
   let fixture: ComponentFixture<TabsArrayWidget>;
 
   beforeEach(() => {
@@ -21,7 +20,6 @@ describe('TabsArrayWidget', () => {
     });
     fixture = TestBed.createComponent(TabsArrayWidget);
     component = fixture.componentInstance;
-    helper = component['helper'];
     fixture.detectChanges();
   });
 
@@ -37,24 +35,6 @@ describe('TabsArrayWidget', () => {
     });
 
     expect(formArray.length).toBe(1);
-  });
-
-  describe('helper function', () => {
-    describe('length', () => {
-      it('min', () => {
-        expect(helper.length.min(undefined)).toBe(0);
-        expect(helper.length.min(1)).toBe(1);
-        expect(helper.length.min({ max: 1 })).toBe(0);
-        expect(helper.length.min({ min: 1 })).toBe(1);
-      });
-
-      it('max', () => {
-        expect(helper.length.max(undefined)).toBe(Infinity);
-        expect(helper.length.max(1)).toBe(1);
-        expect(helper.length.max({ min: 1 })).toBe(Infinity);
-        expect(helper.length.max({ max: 1 })).toBe(1);
-      });
-    });
   });
 
   describe('withIndex', () => {

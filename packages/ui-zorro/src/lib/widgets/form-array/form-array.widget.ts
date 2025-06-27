@@ -20,12 +20,12 @@ import {
   WidgetTemplateContext,
   WithoutSchemaReactiveFn,
   isBoolean,
-  isNumber,
   isUndefined
 } from '@fluent-form/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { lengthHelper } from '../../helper';
 import { AddableButton, FormArraySchema } from '../../schemas';
 
 type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, FormArray>;
@@ -59,14 +59,7 @@ export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateConte
   private readonly formUtil = inject(FormUtil);
 
   protected readonly helper = {
-    length: {
-      min: (length: FormArraySchema['length']) => {
-        return isNumber(length) ? length : length?.min ?? 0;
-      },
-      max: (length: FormArraySchema['length']) => {
-        return isNumber(length) ? length : length?.max ?? Infinity;
-      }
-    },
+    length: lengthHelper,
     addable: (addable: WithoutSchemaReactiveFn<FormArraySchema['addable']>): AddableButton => {
       if (isUndefined(addable) || isBoolean(addable)) {
         return {

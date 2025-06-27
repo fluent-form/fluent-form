@@ -1,4 +1,4 @@
-import { labelHelper, tooltipHelper } from './helper';
+import { labelHelper, lengthHelper, tooltipHelper } from './helper';
 
 describe('label helper', () => {
   describe('label', () => {
@@ -43,5 +43,21 @@ describe('tooltip helper', () => {
     expect(tooltipHelper.icon(undefined)).toBeUndefined();
     expect(tooltipHelper.icon('tooltip')).toBeNull();
     expect(tooltipHelper.icon({ content: 'tooltip', icon: 'icon' })).toEqual('icon');
+  });
+});
+
+describe('length', () => {
+  it('min', () => {
+    expect(lengthHelper.min(undefined)).toBe(0);
+    expect(lengthHelper.min(1)).toBe(1);
+    expect(lengthHelper.min({ max: 1 })).toBe(0);
+    expect(lengthHelper.min({ min: 1 })).toBe(1);
+  });
+
+  it('max', () => {
+    expect(lengthHelper.max(undefined)).toBe(Infinity);
+    expect(lengthHelper.max(1)).toBe(1);
+    expect(lengthHelper.max({ min: 1 })).toBe(Infinity);
+    expect(lengthHelper.max({ max: 1 })).toBe(1);
   });
 });

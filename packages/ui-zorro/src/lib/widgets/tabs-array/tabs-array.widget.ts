@@ -14,12 +14,12 @@ import {
   InvokePipe,
   RenderablePipe,
   SchemaUtil,
-  WidgetTemplateContext,
-  isNumber
+  WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { lengthHelper } from '../../helper';
 import { TabsArraySchema } from '../../schemas';
 
 type TabsArrayWidgetTemplateContext = WidgetTemplateContext<TabsArraySchema, FormArray>;
@@ -57,14 +57,7 @@ export class TabsArrayWidget extends AbstractWidget<TabsArrayWidgetTemplateConte
   }
 
   protected readonly helper = {
-    length: {
-      min: (length: TabsArraySchema['length']) => {
-        return isNumber(length) ? length : length?.min ?? 0;
-      },
-      max: (length: TabsArraySchema['length']) => {
-        return isNumber(length) ? length : length?.max ?? Infinity;
-      }
-    }
+    length: lengthHelper
   } as const;
 
   withIndex(index: number, schema: AbstractSchema): AbstractSchema {

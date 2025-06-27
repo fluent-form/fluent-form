@@ -15,7 +15,6 @@ import {
   FormUtil,
   InvokePipe,
   isBoolean,
-  isNumber,
   isUndefined,
   RenderablePipe,
   SchemaUtil,
@@ -27,8 +26,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import { tooltipHelper } from '../../helper';
-import { AddableButton, FormArraySchema, TableArraySchema } from '../../schemas';
+import { lengthHelper, tooltipHelper } from '../../helper';
+import { AddableButton, TableArraySchema } from '../../schemas';
 
 type TableArrayWidgetTemplateContext = WidgetTemplateContext<TableArraySchema, FormArray>;
 
@@ -70,14 +69,7 @@ export class TableArrayWidget extends AbstractWidget<TableArrayWidgetTemplateCon
   private readonly formUtil = inject(FormUtil);
 
   protected readonly helper = {
-    length: {
-      min: (length: FormArraySchema['length']) => {
-        return isNumber(length) ? length : length?.min ?? 0;
-      },
-      max: (length: FormArraySchema['length']) => {
-        return isNumber(length) ? length : length?.max ?? Infinity;
-      }
-    },
+    length: lengthHelper,
     addable: (addable: WithoutSchemaReactiveFn<TableArraySchema['addable']>): AddableButton => {
       if (isUndefined(addable) || isBoolean(addable)) {
         return {

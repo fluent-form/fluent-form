@@ -1,13 +1,17 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormComponent, form } from '@fluent-form/core';
-import { button, spaceCompact, tableArray, tableColumn, tableRowGroup, textField, toggle } from '@fluent-form/ui-zorro';
+import { FluentFormModule, form } from '@fluent-form/core';
+import { button, spaceCompact, tableArray, tableColumn, tableRowGroup, template, textField, toggle } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'table-array-example',
-  imports: [FluentFormComponent, JsonPipe],
+  imports: [FluentFormModule, JsonPipe],
   template: `
-    <fluent-form class="block" [schema]="schema()" [(model)]="model" />
+    <fluent-form class="block" [schema]="schema()" [(model)]="model">
+      <ng-template fluentTemplate="idxTmpl" let-control="control">
+        {{ control.parent?.controls.indexOf(control)! + 1 }}
+      </ng-template>
+    </fluent-form>
     <pre>{{ model() | json }}</pre>
   `
 })
@@ -19,6 +23,9 @@ export class TableArrayExampleComponent {
       .col(12)
       .schemas(() => {
         tableRowGroup().schemas(() => {
+          tableColumn().header('#').schemas(() => {
+            template('idxTmpl');
+          });
           tableColumn().header('Name').schemas(() => {
             textField('name').placeholder('Please enter');
           });

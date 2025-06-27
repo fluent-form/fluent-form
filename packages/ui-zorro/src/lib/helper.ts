@@ -1,4 +1,4 @@
-import { WithoutSchemaReactiveFn, isNumber, isString } from '@fluent-form/core';
+import { AbstractFormArraySchema, WithoutSchemaReactiveFn, isNumber, isString } from '@fluent-form/core';
 import { Labelful } from './schemas';
 
 export const labelHelper = {
@@ -30,5 +30,14 @@ export const tooltipHelper = {
   },
   icon: (tooltip: WithoutSchemaReactiveFn<Labelful['tooltip']>) => {
     return isString(tooltip) ? null : tooltip?.icon;
+  }
+};
+
+export const lengthHelper = {
+  min: (length: AbstractFormArraySchema['length']) => {
+    return isNumber(length) ? length : length?.min ?? 0;
+  },
+  max: (length: AbstractFormArraySchema['length']) => {
+    return isNumber(length) ? length : length?.max ?? Infinity;
   }
 };

@@ -55,22 +55,6 @@ describe('FormArrayWidget', () => {
   });
 
   describe('helper function', () => {
-    describe('length', () => {
-      it('min', () => {
-        expect(helper.length.min(undefined)).toBe(0);
-        expect(helper.length.min(1)).toBe(1);
-        expect(helper.length.min({ max: 1 })).toBe(0);
-        expect(helper.length.min({ min: 1 })).toBe(1);
-      });
-
-      it('max', () => {
-        expect(helper.length.max(undefined)).toBe(Infinity);
-        expect(helper.length.max(1)).toBe(1);
-        expect(helper.length.max({ min: 1 })).toBe(Infinity);
-        expect(helper.length.max({ max: 1 })).toBe(1);
-      });
-    });
-
     it('addable', () => {
       expect(helper.addable(false)).toEqual({ type: 'dashed', icon: 'plus', disabled: true });
       expect(helper.addable(true)).toEqual({ type: 'dashed', icon: 'plus', disabled: false });

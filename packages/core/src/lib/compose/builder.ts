@@ -26,15 +26,10 @@ function joinSchema(schmea: Schema) {
   currentSchema?.schemas!.push(schmea);
 }
 
-export function applyRoot(schema: Schema) {
-  const currentSchema = getCurrentSchema()!;
-  Object.assign(currentSchema, schema);
-}
-
 const IS_BUILDER = Symbol();
 const BUILD_KEY = 'build';
 
-export function composeBuilder<T>(): Builder<T> {
+export function composeBuilder<T extends Record<string, SafeAny>>(): Builder<T> {
   const target: AnyObject = {};
 
   joinSchema(target);
@@ -52,7 +47,7 @@ export function composeBuilder<T>(): Builder<T> {
             enterSchema(target);
 
             try {
-              composeFn();
+              composeFn(builder);
             } finally {
               leaveSchema();
             }
@@ -82,7 +77,6 @@ export function isBuilder<T = unknown>(value: SafeAny): value is StableBuilder<T
 
 type ComposeKey = typeof COMPOSE_KEY;
 type BuildKey = typeof BUILD_KEY;
-type Buildable = Record<BuildKey, unknown>;
 /** Get the non-nullable and required keys of an interface. */
 type NonNullableKey<T> = {
   // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
@@ -96,10 +90,10 @@ type NonNullableKey<T> = {
  * @template S 已选字段
  * @template B 可以构建
  */
-type _Builder<
-  T extends Buildable,
-  C extends keyof T,
-  N extends keyof T,
+export type Builder<
+  T extends Record<string, SafeAny>,
+  C extends keyof T = keyof T,
+  N extends keyof T = NonNullableKey<T>,
   S extends keyof T = never,
   B extends BuildKey = never
 > = {
@@ -107,7 +101,7 @@ type _Builder<
   [K in keyof Pick<T, Exclude<C, S> | B>]-?: (
     K extends BuildKey
       ? () => Pick<T, S>
-      : (val: K extends ComposeKey ? () => SafeAny : T[K]) => _Builder<
+      : (val: K extends ComposeKey ? (it: Builder<T>) => SafeAny : T[K]) => Builder<
         T,
         C,
         N,
@@ -117,15 +111,6 @@ type _Builder<
   )
 };
 
-/**
- * @template T 原型
- */
-export type Builder<T> = _Builder<
-  T & Buildable,
-  keyof T,
-  NonNullableKey<T>
->;
-
 export type StableBuilder<T> = Record<BuildKey, () => T>;
 
 /**
@@ -134,11 +119,11 @@ export type StableBuilder<T> = Record<BuildKey, () => T>;
  * @template N 必填字段
  */
 export type UnstableBuilder<
-  T,
+  T extends Record<string, SafeAny>,
   S extends keyof T,
   N extends keyof T = NonNullableKey<T>
-> = _Builder<
-  T & Buildable,
+> = Builder<
+  T,
   keyof T,
   N,
   S,

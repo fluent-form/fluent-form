@@ -1,5 +1,5 @@
-import { form } from '../../compose';
 import { headful, numberField, range, textField } from './control';
+import { form } from './control-container';
 
 describe('control', () => {
   it('headful', () => {

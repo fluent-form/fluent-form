@@ -1,4 +1,4 @@
-import { form } from '../../compose';
+import { form } from './control-container';
 import { fieldGroup } from './control-wrapper';
 
 describe('control-wrapper', () => {

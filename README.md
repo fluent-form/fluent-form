@@ -8,7 +8,7 @@
   [![npm version](https://img.shields.io/npm/v/@fluent-form/core/latest.svg)](https://www.npmjs.com/settings/fluent-form/packages)
   ![CI](https://github.com/fluent-form/fluent-form/actions/workflows/ci.yml/badge.svg)
   ![License](https://img.shields.io/badge/License-MIT-blue.svg)
-  [![Angular](https://img.shields.io/badge/Angular-≥17.0.0-red?logo=angular)](https://www.github.com/angular/angular)
+  [![Angular](https://img.shields.io/badge/Angular-≥18.0.0-red?logo=angular)](https://www.github.com/angular/angular)
   [![codecov](https://codecov.io/gh/fluent-form/fluent-form/branch/main/graph/badge.svg?token=070GEU44U0)](https://codecov.io/gh/fluent-form/fluent-form)
   [![CodeFactor](https://www.codefactor.io/repository/github/fluent-form/fluent-form/badge)](https://www.codefactor.io/repository/github/fluent-form/fluent-form)
 </div>
@@ -34,8 +34,8 @@ For documentation and examples please visit [https://fluent-form.github.io/fluen
 ## Usage
 
 ```ts
-import { FluentForm, form } from '@fluent-form/core';
-import { button, numberField, textField, textArea } from '@fluent-form/ui-zorro';
+import { FluentForm } from '@fluent-form/core';
+import { form, button, numberField, textField, textArea } from '@fluent-form/ui-zorro';
 
 @Component({
   imports: [FluentForm],

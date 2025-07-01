@@ -1,5 +1,5 @@
-import { form } from '../../compose';
 import { buttonGroup } from './component-wrapper';
+import { form } from './control-container';
 
 describe('component-wrapper', () => {
   it('row', () => {

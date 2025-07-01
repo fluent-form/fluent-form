@@ -8,22 +8,22 @@ interface Schema {
 const COMPOSE_KEY = 'schemas';
 const SCHEMA_STACK: Schema[] = [];
 
-function getCurrentSchema(): Schema | undefined {
+export function getCurrentSchema(): Schema | undefined {
   return SCHEMA_STACK[SCHEMA_STACK.length - 1];
 }
 
-function enterSchema(schmea: Schema) {
-  SCHEMA_STACK.push(schmea);
+function enterSchema(schema: Schema) {
+  SCHEMA_STACK.push(schema);
 }
 
 function leaveSchema() {
   SCHEMA_STACK.pop();
 }
 
-function joinSchema(schmea: Schema) {
+function joinSchema(schema: Schema) {
   const currentSchema = getCurrentSchema();
   // If a schema already exists, just push it in as a subschema.
-  currentSchema?.schemas!.push(schmea);
+  currentSchema?.schemas!.push(schema);
 }
 
 const IS_BUILDER = Symbol();

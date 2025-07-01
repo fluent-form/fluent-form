@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormModule, form } from '@fluent-form/core';
-import { numberField } from '@fluent-form/ui-zorro';
+import { FluentFormModule } from '@fluent-form/core';
+import { form, numberField } from '@fluent-form/ui-zorro';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({

@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormComponent, form } from '@fluent-form/core';
-import { slider } from '@fluent-form/ui-zorro';
+import { FluentFormComponent } from '@fluent-form/core';
+import { form, slider } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'slider-example',

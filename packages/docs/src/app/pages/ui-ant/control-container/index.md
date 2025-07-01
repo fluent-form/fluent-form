@@ -20,7 +20,7 @@ import { useFormGroupWidget } from '@fluent-form/ui-zorro';
 
 顶层表单实际上也是一个 `FormGroup`，是通过 `form()` 函数自动创建的。
 
-如果您需要配置顶层表单的行为，例如验证器和更新时机，可以使用 `applyGroup()` 函数。
+如果您需要配置顶层表单的行为，例如验证器和更新时机，可以使用 `it` 参数。
 
 {{ NgDocActions.demo("RootFormExampleComponent") }}
 

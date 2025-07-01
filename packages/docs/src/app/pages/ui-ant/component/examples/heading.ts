@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
-import { FluentFormComponent, form } from '@fluent-form/core';
-import { heading1, heading2, heading3, heading4, heading5, heading6 } from '@fluent-form/ui-zorro';
+import { FluentFormComponent } from '@fluent-form/core';
+import { form, heading1, heading2, heading3, heading4, heading5, heading6 } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'heading-example',

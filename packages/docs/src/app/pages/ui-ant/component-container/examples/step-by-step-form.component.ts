@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormComponent, form } from '@fluent-form/core';
-import { button, datePicker, group, step, steps, textArea, textField, toggle } from '@fluent-form/ui-zorro';
+import { FluentFormComponent } from '@fluent-form/core';
+import { button, datePicker, form, group, step, steps, textArea, textField, toggle } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'step-by-step-form-example',

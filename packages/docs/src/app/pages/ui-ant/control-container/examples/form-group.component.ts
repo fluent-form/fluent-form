@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormComponent, form } from '@fluent-form/core';
-import { button, group, numberField, textField } from '@fluent-form/ui-zorro';
+import { FluentFormComponent } from '@fluent-form/core';
+import { button, form, group, numberField, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'form-group-example',

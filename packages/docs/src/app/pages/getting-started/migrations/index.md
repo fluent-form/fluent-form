@@ -67,11 +67,31 @@
 + })
 ```
 
-10.  `observers` 选项用法更新，不再需要自行订阅，改为 `pipe` 形式：
+10. 移除 `applyGroup()` 函数，您可以直接在 `form()` 函数中使用 `it` 参数来配置顶层表单。
+
+```diff
+- form(() => {
+-   applyGroup({ layout: 'horizontal' });
+-   // ...
+- })
++ form(it => {
++   it.layout('horizontal');
++   // ...
++ })
+```
+
+11.  `observers` 选项用法更新，不再需要自行订阅，改为 `pipe` 形式：
 
 ```diff
   .observers({
 -   valueChanges: source => source.subscribe(...),
 +   valueChanges: source => source.pipe(tap(...)),
   })
+```
+
+12. `@fluent-form/core` 不再导出 `form` 函数，您需要从 `@fluent-form/ui-zorro` 中导入。
+
+```diff
+- import { form } from '@fluent-form/core';
++ import { form } from '@fluent-form/ui-zorro';
 ```

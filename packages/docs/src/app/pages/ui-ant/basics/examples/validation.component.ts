@@ -1,8 +1,8 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { FluentFormComponent, form } from '@fluent-form/core';
-import { spaceCompact, textField } from '@fluent-form/ui-zorro';
+import { FluentFormComponent } from '@fluent-form/core';
+import { form, spaceCompact, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'validation-example',

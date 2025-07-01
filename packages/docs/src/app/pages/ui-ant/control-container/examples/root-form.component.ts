@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormComponent, form } from '@fluent-form/core';
-import { applyGroup, passwordField, textField } from '@fluent-form/ui-zorro';
+import { FluentFormComponent } from '@fluent-form/core';
+import { form, passwordField, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'root-form-example',
@@ -12,8 +12,8 @@ import { applyGroup, passwordField, textField } from '@fluent-form/ui-zorro';
   `
 })
 export class RootFormExampleComponent {
-  readonly schema = form(() => {
-    applyGroup({ updateOn: 'blur' });
+  readonly schema = form(it => {
+    it.updateOn('blur');
     textField('username').label('Username');
     passwordField('password').label('Password');
   });

@@ -1,4 +1,3 @@
-import { form } from '@fluent-form/core';
 import {
   cascader,
   checkbox,
@@ -22,6 +21,7 @@ import {
   transfer,
   treeSelect
 } from './control';
+import { form } from './control-container';
 
 describe('control', () => {
   it('headful', () => {

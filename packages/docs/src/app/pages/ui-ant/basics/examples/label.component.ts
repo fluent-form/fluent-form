@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormModule, form } from '@fluent-form/core';
-import { applyGroup, button, textField } from '@fluent-form/ui-zorro';
+import { FluentFormModule } from '@fluent-form/core';
+import { button, form, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'label-example',
@@ -16,8 +16,8 @@ import { applyGroup, button, textField } from '@fluent-form/ui-zorro';
   `
 })
 export class LabelExampleComponent {
-  readonly schema = form(() => {
-    applyGroup({ layout: 'horizontal' });
+  readonly schema = form(it => {
+    it.layout('horizontal');
 
     textField('text-1').label('Normal label').col(12);
     textField('text-2').label('#labelTmpl').col(12);

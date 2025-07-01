@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormModule, form } from '@fluent-form/core';
-import { button, spaceCompact, tableArray, tableColumn, tableRowGroup, template, textField, toggle } from '@fluent-form/ui-zorro';
+import { FluentFormModule } from '@fluent-form/core';
+import { button, form, spaceCompact, tableArray, tableColumn, tableRowGroup, template, textField, toggle } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'table-array-example',

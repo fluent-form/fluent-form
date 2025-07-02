@@ -27,7 +27,9 @@
             }
           </th>
         }
-        <th></th>
+        @if (formSchema.removable ?? true) {
+          <th></th>
+        }
       </tr>
     </thead>
     <tbody
@@ -62,19 +64,21 @@
               }
             </td>
           }
-          <td>
-            <button
-              class="fluent-array-element-remove-btn"
-              type="button"
-              nz-button
-              nzShape="circle"
-              nzSize="small"
-              [nzDanger]="true"
-              [disabled]="formArray.length <= (helper.length.min | invoke: formSchema.length)"
-              (click)="formArray.removeAt($index)">
-              <nz-icon nz-icon nzType="minus" nzTheme="outline" />
-            </button>
-          </td>
+          @if (formSchema.removable ?? true) {
+            <td>
+              <button
+                class="fluent-array-element-remove-btn"
+                type="button"
+                nz-button
+                nzShape="circle"
+                nzSize="small"
+                [nzDanger]="true"
+                [disabled]="formArray.length <= (helper.length.min | invoke: formSchema.length)"
+                (click)="formArray.removeAt($index)">
+                <nz-icon nz-icon nzType="minus" nzTheme="outline" />
+              </button>
+            </td>
+          }
         </tr>
       }
     </tbody>

@@ -1,3 +1,13 @@
+## 0.28.4 (2025-07-02)
+
+### 🩹 Fixes
+
+- **schema:** update defaultValue type to allow SafeAny ([c017ef42](https://github.com/fluent-form/fluent-form/commit/c017ef42))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.28.3 (2025-06-30)
 
 This was a version bump only, there were no code changes.

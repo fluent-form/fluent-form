@@ -1,8 +1,5 @@
 <fluent-form [schema]="schema()" [(model)]="model">
-  <input
-    *fluentTemplate="'controlTpl'; let control = control"
-    placeholder="一个原生样式的输入框"
-    [formControl]="control" />
+  <input *fluentTemplate="'controlTpl'; let control = control" placeholder="A native input" [formControl]="control" />
 
   <ng-container *fluentTemplate="'namedTpl1'">
     <button>click me</button>

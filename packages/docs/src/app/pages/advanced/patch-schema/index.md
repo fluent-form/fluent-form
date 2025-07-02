@@ -4,7 +4,7 @@
 
 使用 `withSchemaPatchers()` 特性函数开启此功能，将一个或多个图示修补器添加到配置中。
 
-## 用例
+## Use Cases
 
 一个自动补充输入框的 `placeholder` 占位提示的例子。
 
@@ -19,15 +19,15 @@ provideFluentForm(
     {
       selector: 'text',
       patch: schema => {
-        const label = schema.label || '文本';
-        schema.placeholder ||= `请输入${label}`;
+        const label = schema.label || 'Text';
+        schema.placeholder ||= `Please enter ${label}`;
         return schema;
       }
     },
     {
       selector: 'number',
       patch: schema => {
-        schema.placeholder ||= '请输入数字';
+        schema.placeholder ||= 'Please enter a number';
         return schema;
       }
     }
@@ -35,7 +35,7 @@ provideFluentForm(
 )
 ```
 
-## 修补器定义
+## Type Definition
 
 ```ts
 type SchemaSelector = '*' | string | SchemaType | (string | SchemaType)[];
@@ -60,43 +60,43 @@ interface SchemaPatcher<S extends AbstractSchema = AbstractSchema> {
 ```ts
 import { SchemaType } from '@fluent-form/core';
 
-// 选择任意图示
+// Select any schemas
 {
   selector: '*',
   patch: schema => schema
 }
 
-// 选择 text 图示
+// Select text-field schemas
 {
-  selector: 'text',
+  selector: 'text-field',
   patch: schema => schema
 }
 
-// 选择 text 与 number 图示
+// Select text-field and number-field schemas
 {
-  selector: ['text', 'number'],
+  selector: ['text-field', 'number-field'],
   patch: schema => schema
 }
 
-// 选择类型为控件的图示
+// Select schemas of type Control
 {
   selector: SchemaType.Control,
   patch: schema => schema
 }
 
-// 选择类型为控件与组件的图示
+// Select schemas of type Control and Component
 {
   selector: [SchemaType.Control, SchemaType.Component],
   patch: schema => schema
 }
 
-// 选择 button 图示 与 类型为控件组件的图示
+// Select button schemas and schemas of type Control
 {
   selector: ['button', SchemaType.Control],
   patch: schema => schema
 }
 ```
 
-## 执行顺序
+## Execution Order
 
 图示修补器将根据它们在 `withSchemaPatchers()` 函数参数中的顺序，按顺序逐个执行修补函数。

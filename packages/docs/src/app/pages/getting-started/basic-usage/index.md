@@ -2,11 +2,11 @@
 
 本文档将详细介绍 {% include "../../../markdowns/brand.md" %} 的基本用法。
 
-## 选择 UI 库
+## Select UI Library
 
 {% include "../../../markdowns/brand.md" %} 目前提供了以下 UI 库的支持：
 
-| UI         | Package                 | 官网                  |
+| UI         | Package                 | Website               |
 | ---------- | ----------------------- | --------------------- |
 | Ant Design | `@fluent-form/ui-zorro` | https://ng.ant.design |
 
@@ -18,7 +18,7 @@
 > **NOTE**
 > 您可以根据自己的偏好和项目的需求来选择不同的 UI 库。教程中将主要使用 Ant Design 来演示。
 
-## 注册部件
+## Register Widgets
 
 在选择好 UI 库之后，您需要**按需注册**项目所需要的部件：
 
@@ -45,7 +45,7 @@ export const appConfig: ApplicationConfig = {
 
 要查看更多部件，请查阅 [API 文档](/api)。
 
-## 创建图示
+## Create Schema
 
 创建图示（schema）有两种主要方式：Fluent API 和 对象字面量。
 
@@ -57,15 +57,15 @@ Fluent API 是一种可组合的、有限链式调用的 Builder-like API。它�
 import { form, buttonGroup, button, textField } from '@fluent-form/ui-zorro';
 
 const schema = form(() => {
-  textField('text').label('文本').placeholder('请输入');
+  textField('text').label('Text').placeholder('Please enter');
 
   buttonGroup().schemas(() => {
-    button().content('提交');
+    button().content('Submit');
   });
 });
 ```
 
-### 对象字面量
+### Object Literal
 
 对象字面量的方式更直观，更符合 JavaScript 的编程习惯。
 
@@ -76,15 +76,15 @@ const schema = form([
   {
     kind: 'text-field',
     key: 'text',
-    label: '文本',
-    placeholder: '请输入'
+    label: 'Text',
+    placeholder: 'Please enter'
   },
   {
     kind: 'button-group',
     schemas: [
       {
         kind: 'button',
-        content: '提交'
+        content: 'Submit'
       }
     ]
   }
@@ -94,7 +94,7 @@ const schema = form([
 > **NOTE**
 > 两种写法都是等效的，您可以根据自己的偏好和项目的需求来选择。教程中将主要使用 Fluent API 来演示。
 
-## 核心组件
+## Core Components
 
 `FluentFormComponent` 是 {% include "../../../markdowns/brand.md" %} 的核心组件，它用于创建和管理表单。
 
@@ -110,26 +110,21 @@ const schema = form([
 - `(valueChanges)` 事件用于侦听表单值变更，参考 [AbstractControl#valueChanges](https://angular.cn/api/forms/AbstractControl#valueChanges)；
 - `(statusChanges)` 事件用于侦听表单状态变更，参考 [AbstractControl#statusChanges](https://angular.cn/api/forms/AbstractControl#statusChanges)；
 
-## 创建表单
+## Create Form
 
 接下来，我们将学习如何创建一个简单的英雄信息填写表单。
 
-### 准备数据模型
+### Define Model
 
 首先，我们需要定义一个英雄数据模型。在这里，我们的英雄数据模型是一个接口（interface），一个零行为的贫血模型。
 
 ```ts
 interface Hero {
   id: number;
-  /** 名称 **/
   name: string;
-  /** 能力 **/
   power: string;
-  /** 身高 **/
   height?: number;
-  /** 声望 **/
   popularity?: number;
-  /** 有效/无效 **/
   enabled: boolean;
 }
 ```
@@ -137,7 +132,7 @@ interface Hero {
 > **Note**
 > 注意，Hero 的 `height` 和 `popularity` 属性都是可选的，这意味着在表单中它们属于**非必填**项。
 
-### 创建表单图示
+### Create form schema
 
 根据英雄数据模型，我们为每个属性选择并配置合适的表单控件：
 
@@ -146,11 +141,11 @@ import { form, textField, numberField, rate, textArea, toggle } from '@fluent-fo
 
 const schema = form(() => {
   numberField('id').label('ID').required(true);
-  textField('name').label('名称').required(true);
-  textArea('power').label('能力').required(true);
-  numberField('height').label('身高');
-  rate('popularity').label('声望');
-  toggle('enabled').label('状态').required(true);
+  textField('name').label('Name').required(true);
+  textArea('power').label('Power').required(true);
+  numberField('height').label('Height');
+  rate('popularity').label('Popularity');
+  toggle('enabled').label('Status').required(true);
 });
 ```
 
@@ -171,8 +166,8 @@ const schema = form(() => {
 对于第二个问题，我们可以通过配置 `defaultValue` 选项来为控件提供默认值。
 
 ```diff
-- toggle('enabled').label('状态').required(true);
-+ toggle('enabled').label('状态').required(true).defaultValue(true);
+- toggle('enabled').label('Status').required(true);
++ toggle('enabled').label('Status').required(true).defaultValue(true);
 ```
 最后，我们将创建的表单图示应用到实际组件中：
 

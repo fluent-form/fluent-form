@@ -2,12 +2,12 @@
   {
     "kind": "text-field",
     "key": "username",
-    "label": "用户名"
+    "label": "Username"
   },
   {
     "kind": "text-field",
     "key": "password",
-    "label": "密码",
+    "label": "Password",
     "disabled": "{{ !model.username }}"
   }
 ]

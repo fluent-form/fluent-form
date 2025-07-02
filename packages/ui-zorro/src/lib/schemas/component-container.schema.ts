@@ -25,7 +25,6 @@ export interface StepsComponentSchema<Key extends SingleSchemaKey = SingleSchema
   kind: 'steps';
   type?: 'default' | 'navigation';
   active?: number;
-  placement?: 'vertical' | 'horizontal';
   dot?: boolean;
   size?: NzSizeDSType;
   status?: NzStatusType;

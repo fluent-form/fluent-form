@@ -16,7 +16,7 @@ export interface AbstractControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   /** Linkage control values */
   value?: SchemaReactiveFn<AbstractControlSchema, Val>
   /* Used to set the default value of the control. */
-  defaultValue?: Val;
+  defaultValue?: SafeAny | Val;
   /** Is it a required control */
   required?: MaybeSchemaReactiveFn<AbstractControlSchema<SchemaKey, Val>, boolean>;
   /** Whether to disable control */

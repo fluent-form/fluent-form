@@ -24,7 +24,7 @@
           [flex]="cardSchema.col | col: 'flex'"
           [offset]="cardSchema.col | col: 'offset'"
           [hidden]="cardSchema.hidden | reactive: model : cardSchema : control">
-          <nz-form-item [class]="formSchema.class" [style]="formSchema.style">
+          <nz-form-item [class]="cardSchema.class" [style]="cardSchema.style">
             <ng-template #extraTmpl>
               @if (formArray.length > (helper.length.min | invoke: formSchema.length)) {
                 <nz-icon

@@ -274,6 +274,7 @@ export interface CascaderControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   suffixIcon?: string | TemplateRef<void>;
   arrow?: boolean;
   size?: NzCascaderSize;
+  mode?: 'single' | 'multiple';
   /** Expand trigger for cascader control */
   trigger?: NzCascaderExpandTrigger;
   /** Support search, cannot be used with `options.load` */

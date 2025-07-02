@@ -17,6 +17,11 @@ export class CascaderExampleComponent {
       .placeholder('Please select')
       .options(OPTIONS)
       .col(4);
+    cascader('address2')
+      .placeholder('Please select')
+      .options(OPTIONS)
+      .mode('multiple')
+      .col(4);
     cascader(['province', 'city', 'scenicspots'])
       .placeholder('Please select')
       .options(OPTIONS)

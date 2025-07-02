@@ -22,7 +22,7 @@
           [flex]="cardSchema.col | col: 'flex'"
           [offset]="cardSchema.col | col: 'offset'"
           [hidden]="cardSchema.hidden | reactive: model : cardSchema : control">
-          <nz-form-item>
+          <nz-form-item [class]="formSchema.class" [style]="formSchema.style">
             <ng-template #extraTmpl>
               @if (formArray.length > (helper.length.min | invoke: formSchema.length)) {
                 <span
@@ -39,7 +39,7 @@
               [nzSize]="cardSchema.size ?? 'small'"
               [nzBordered]="!cardSchema.borderless"
               [nzTitle]="'No.' + (index + 1)"
-              [nzExtra]="extraTmpl">
+              [nzExtra]="formSchema.removable ? extraTmpl : undefined">
               <fluent-row
                 nz-form
                 [align]="formSchema.align"

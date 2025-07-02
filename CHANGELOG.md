@@ -1,3 +1,13 @@
+## 0.28.5 (2025-07-02)
+
+### 🩹 Fixes
+
+- **ui-zorro/cards-array:** nz-card properties for better styling and conditional rendering ([6091cd63](https://github.com/fluent-form/fluent-form/commit/6091cd63))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.28.4 (2025-07-02)
 
 ### 🩹 Fixes

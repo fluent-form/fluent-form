@@ -1,3 +1,21 @@
+## 0.29.0 (2025-07-03)
+
+### 🚀 Features
+
+- **core:** expose getCurrentSchema function ([f3f02473](https://github.com/fluent-form/fluent-form/commit/f3f02473))
+- **core:** extend AbstractHeadfulControlSchema with event listener and observer interfaces ([f081ae5e](https://github.com/fluent-form/fluent-form/commit/f081ae5e))
+- **core:** add FluentTemplateOutlet directive ([fe429a3d](https://github.com/fluent-form/fluent-form/commit/fe429a3d))
+
+### 🩹 Fixes
+
+- **core:** update defaultValue type to allow SafeAny ([8afd4329](https://github.com/fluent-form/fluent-form/commit/8afd4329))
+- **core:** find schemas correctly ([43d7dc34](https://github.com/fluent-form/fluent-form/commit/43d7dc34))
+- **core:** fix some bugs ([6690e9e8](https://github.com/fluent-form/fluent-form/commit/6690e9e8))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.28.0 (2025-05-31)
 
 ### 🚀 Features

@@ -1,3 +1,24 @@
+## 0.29.0 (2025-07-03)
+
+### 🚀 Features
+
+- **ui-zorro:** add multiple selection mode to cascader component ([de94b5a0](https://github.com/fluent-form/fluent-form/commit/de94b5a0))
+- **ui-zorro:** add form function & remove applyGroup function ([a80dc1b9](https://github.com/fluent-form/fluent-form/commit/a80dc1b9))
+- **ui-zorro:** add table array widget ([7b1c62aa](https://github.com/fluent-form/fluent-form/commit/7b1c62aa))
+- **ui-zorro:** add segmented widget ([59e8cfcb](https://github.com/fluent-form/fluent-form/commit/59e8cfcb))
+
+### 🩹 Fixes
+
+- **ui-zorro/cards-array:** update nz-form-item class binding to use cardSchema class ([81fa390d](https://github.com/fluent-form/fluent-form/commit/81fa390d))
+- **ui-zorro/cards-array:** conditionally render extra template ([4650bc18](https://github.com/fluent-form/fluent-form/commit/4650bc18))
+- **ui-zorro:** conditionally render remove button and header based on formSchema.removable ([54ba4e56](https://github.com/fluent-form/fluent-form/commit/54ba4e56))
+- **ui-zorro:** fix bug ([54a72f99](https://github.com/fluent-form/fluent-form/commit/54a72f99))
+- **ui-zorro:** fix bug of label width ([127aa195](https://github.com/fluent-form/fluent-form/commit/127aa195))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.28.0 (2025-05-31)
 
 ### 🚀 Features

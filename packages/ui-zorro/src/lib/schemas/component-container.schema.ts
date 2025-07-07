@@ -10,7 +10,7 @@ import {
 import { NzCardComponent } from 'ng-zorro-antd/card';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
-import { NzTabComponent, NzTabPosition, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
+import type { NzTabComponent, NzTabPosition, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
 import { Labelful } from './interfaces';
 
 /**

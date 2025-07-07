@@ -3,7 +3,7 @@ import { AbstractFormArraySchema, AbstractFormGroupSchema, MaybeSchemaReactiveFn
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzSizeLDSType, NzSizeMDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
-import { NzTabPosition } from 'ng-zorro-antd/tabs';
+import type { NzTabPosition } from 'ng-zorro-antd/tabs';
 import { CardComponentSchema } from './component-container.schema';
 import { TableColumnSchema } from './control-wrapper.schema';
 import { Labelful } from './interfaces';

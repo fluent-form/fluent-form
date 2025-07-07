@@ -20,7 +20,7 @@ type ElementEventObserverMap = {
 
 /** 事件侦听器 */
 export interface EventObserverHolder {
-  observers?: Partial<Record<string, ((source: Observable<SafeAny>) => Observable<SafeAny>)>>;
+  observers?: Partial<Record<string, ((source: Observable<{ event: SafeAny, context: SchemaContext }>) => Observable<SafeAny>)>>;
 }
 
 /** 控件事件侦听器 */

@@ -1,3 +1,14 @@
+## 0.29.1 (2025-07-08)
+
+### 🩹 Fixes
+
+- **ui-zorro/table-array:** fix bug ([c6038d52](https://github.com/fluent-form/fluent-form/commit/c6038d52))
+- **tabs:** change import to type for NzTabPosition in control-container.schema.ts ([9ee4d6e6](https://github.com/fluent-form/fluent-form/commit/9ee4d6e6))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.0 (2025-07-03)
 
 ### 🚀 Features

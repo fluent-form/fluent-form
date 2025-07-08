@@ -1,3 +1,13 @@
+## 0.29.1 (2025-07-08)
+
+### 🩹 Fixes
+
+- **observers:** update EventObserverHolder to include event and context in observers ([058160a7](https://github.com/fluent-form/fluent-form/commit/058160a7))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.0 (2025-07-03)
 
 ### 🚀 Features

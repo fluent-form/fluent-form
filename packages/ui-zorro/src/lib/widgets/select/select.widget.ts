@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
@@ -39,7 +39,8 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
     FluentNewPipe
   ],
   templateUrl: './select.widget.html',
-  styles: `nz-select { width: 100% }`
+  styles: `nz-select { width: 100% }`,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectWidget extends AbstractWidget<SelectWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;

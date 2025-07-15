@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
@@ -35,7 +35,8 @@ type NumberFieldWidgetTemplateContext = WidgetTemplateContext<NumberFieldControl
     FluentInjectPipe
   ],
   templateUrl: './number-field.widget.html',
-  styles: `nz-input-number,nz-input-number-group { width: 100% }`
+  styles: `nz-input-number { width: 100% }`,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NumberFieldWidget extends AbstractWidget<NumberFieldWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;

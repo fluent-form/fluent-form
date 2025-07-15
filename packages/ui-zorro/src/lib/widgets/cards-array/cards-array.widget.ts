@@ -1,6 +1,6 @@
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import {
   AbstractSchema,
@@ -54,7 +54,8 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<CardsArraySchema, Fo
     RenderablePipe
   ],
   templateUrl: './cards-array.widget.html',
-  styleUrl: './cards-array.widget.scss'
+  styleUrl: './cards-array.widget.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardsArrayWidget extends AbstractWidget<FormArrayWidgetTemplateContext> {
   private readonly schemaUtil = inject(SchemaUtil);

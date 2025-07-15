@@ -1,4 +1,4 @@
-import { Component, Pipe, PipeTransform } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Pipe, PipeTransform } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 import {
   AbstractWidget,
@@ -38,7 +38,8 @@ export class TransferItemsPipe implements PipeTransform {
     FluentReactivePipe,
     TransferItemsPipe
   ],
-  templateUrl: './transfer.widget.html'
+  templateUrl: './transfer.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TransferWidget extends AbstractWidget<TransferWidgetTemplateContext> {
   onChange(event: TransferChange, control: AbstractControl) {

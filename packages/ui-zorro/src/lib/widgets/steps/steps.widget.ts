@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   AbstractWidget,
@@ -34,6 +34,7 @@ type StepsWidgetTemplateContext = WidgetTemplateContext<StepsComponentSchema, Fo
     FluentColumnPipe,
     FluentTemplatePipe
   ],
-  templateUrl: './steps.widget.html'
+  templateUrl: './steps.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StepsWidget extends AbstractWidget<StepsWidgetTemplateContext> { }

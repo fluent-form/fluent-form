@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
@@ -36,7 +36,8 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
     InvokePipe
   ],
   templateUrl: './tree-select.widget.html',
-  styles: `nz-tree-select { width: 100% }`
+  styles: `nz-tree-select { width: 100% }`,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeSelectWidget extends AbstractWidget<TreeSelectWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
@@ -36,7 +36,8 @@ type TextFieldWidgetTemplateContext = WidgetTemplateContext<TextFieldControlSche
     FluentInjectPipe,
     InvokePipe
   ],
-  templateUrl: './text-field.widget.html'
+  templateUrl: './text-field.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TextFieldWidget extends AbstractWidget<TextFieldWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;

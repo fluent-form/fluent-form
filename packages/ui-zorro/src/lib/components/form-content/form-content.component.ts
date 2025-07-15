@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   AbstractFormContentComponent,
   FluentBindingDirective,
@@ -24,6 +24,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     FluentColumnPipe,
     RenderablePipe
   ],
-  templateUrl: './form-content.component.html'
+  templateUrl: './form-content.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormContentComponent extends AbstractFormContentComponent { }

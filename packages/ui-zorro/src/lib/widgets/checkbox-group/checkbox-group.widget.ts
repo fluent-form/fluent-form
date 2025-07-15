@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, FluentReactivePipe, WidgetTemplateContext } from '@fluent-form/core';
 import { SafeAny } from '@ngify/core';
@@ -18,6 +18,7 @@ type CheckboxGroupWidgetTemplateContext = WidgetTemplateContext<CheckboxGroupCon
     FluentContextGuardDirective,
     FluentReactivePipe
   ],
-  templateUrl: './checkbox-group.widget.html'
+  templateUrl: './checkbox-group.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CheckboxGroupWidget extends AbstractWidget<CheckboxGroupWidgetTemplateContext> { }

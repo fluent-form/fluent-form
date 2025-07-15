@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   AbstractWidget,
@@ -25,7 +25,8 @@ type AlertWidgetTemplateContext = WidgetTemplateContext<AlertComponentSchema, Fo
     FluentTemplatePipe,
     InvokePipe
   ],
-  templateUrl: './alert.widget.html'
+  templateUrl: './alert.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertWidget extends AbstractWidget<AlertWidgetTemplateContext> {
   protected readonly helper = {

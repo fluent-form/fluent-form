@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import {
   AbstractSchema,
@@ -42,7 +42,8 @@ type TabsArrayWidgetTemplateContext = WidgetTemplateContext<TabsArraySchema, For
     InvokePipe,
     RenderablePipe
   ],
-  templateUrl: './tabs-array.widget.html'
+  templateUrl: './tabs-array.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabsArrayWidget extends AbstractWidget<TabsArrayWidgetTemplateContext> {
   private readonly schemaUtil = inject(SchemaUtil);

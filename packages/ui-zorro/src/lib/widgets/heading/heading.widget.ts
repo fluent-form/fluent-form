@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   AbstractWidget,
@@ -27,6 +27,7 @@ type HeadingWidgetTemplateContext = WidgetTemplateContext<HeadingComponentSchema
     FluentTemplatePipe
   ],
   templateUrl: './heading.widget.html',
-  styleUrl: './heading.widget.scss'
+  styleUrl: './heading.widget.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeadingWidget extends AbstractWidget<HeadingWidgetTemplateContext> { }

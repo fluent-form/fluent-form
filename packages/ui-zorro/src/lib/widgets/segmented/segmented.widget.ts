@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
@@ -23,6 +23,7 @@ type SegmentedWidgetTemplateContext = WidgetTemplateContext<SegmentedControlSche
     FluentContextGuardDirective,
     FluentReactivePipe
   ],
-  templateUrl: './segmented.widget.html'
+  templateUrl: './segmented.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SegmentedWidget extends AbstractWidget<SegmentedWidgetTemplateContext> { }

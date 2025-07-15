@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   AbstractWidget,
@@ -26,6 +26,7 @@ type ButtonGroupWidgetTemplateContext = WidgetTemplateContext<ButtonGroupCompone
     FluentContextGuardDirective,
     FluentWidgetTemplatePipe
   ],
-  templateUrl: './button-group.widget.html'
+  templateUrl: './button-group.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonGroupWidget extends AbstractWidget<ButtonGroupWidgetTemplateContext> { }

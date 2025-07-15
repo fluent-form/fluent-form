@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
@@ -25,6 +25,7 @@ type ColorPickerWidgetTemplateContext = WidgetTemplateContext<ColorPickerControl
     FluentTemplatePipe,
     FluentReactivePipe
   ],
-  templateUrl: './color-picker.widget.html'
+  templateUrl: './color-picker.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ColorPickerWidget extends AbstractWidget<ColorPickerWidgetTemplateContext> { }

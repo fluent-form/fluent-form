@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   AbstractWidget,
@@ -31,6 +31,7 @@ type SpaceCompactWidgetTemplateContext = WidgetTemplateContext<SpaceCompactCompo
     FluentControlWrapperDirective
   ],
   templateUrl: './space-compact.widget.html',
-  styleUrl: './space-compact.widget.scss'
+  styleUrl: './space-compact.widget.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SpaceCompactWidget extends AbstractWidget<SpaceCompactWidgetTemplateContext> { }

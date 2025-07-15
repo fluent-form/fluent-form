@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   AbstractWidget,
@@ -41,7 +41,8 @@ type ButtonWidgetTemplateContext = WidgetTemplateContext<ButtonComponentSchema, 
     FluentColumnPipe,
     InvokePipe
   ],
-  templateUrl: './button.widget.html'
+  templateUrl: './button.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonWidget extends AbstractWidget<ButtonWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;

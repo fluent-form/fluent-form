@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, WidgetTemplateContext } from '@fluent-form/core';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
@@ -16,6 +16,7 @@ type RadioGroupWidgetTemplateContext = WidgetTemplateContext<RadioGroupControlSc
     FluentBindingDirective,
     FluentContextGuardDirective
   ],
-  templateUrl: './radio-group.widget.html'
+  templateUrl: './radio-group.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RadioGroupWidget extends AbstractWidget<RadioGroupWidgetTemplateContext> { }

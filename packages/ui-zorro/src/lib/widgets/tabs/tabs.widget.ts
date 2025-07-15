@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   AbstractWidget,
@@ -32,6 +32,7 @@ type TabsWidgetTemplateContext = WidgetTemplateContext<TabsComponentSchema, Form
     FluentControlPipe,
     FluentColumnPipe
   ],
-  templateUrl: './tabs.widget.html'
+  templateUrl: './tabs.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabsWidget extends AbstractWidget<TabsWidgetTemplateContext> { }

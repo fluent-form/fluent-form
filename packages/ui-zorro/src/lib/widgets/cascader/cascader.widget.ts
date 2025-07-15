@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
@@ -36,7 +36,8 @@ type CascaderWidgetTemplateContext = WidgetTemplateContext<CascaderControlSchema
     InvokePipe
   ],
   templateUrl: './cascader.widget.html',
-  styles: `nz-cascader { width: 100% }`
+  styles: `nz-cascader { width: 100% }`,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CascaderWidget extends AbstractWidget<CascaderWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;

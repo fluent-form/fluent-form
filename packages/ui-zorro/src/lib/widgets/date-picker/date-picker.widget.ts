@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
@@ -33,7 +33,8 @@ type DatePickerWidgetTemplateContext = WidgetTemplateContext<DatePickerControlSc
     FluentInjectPipe
   ],
   templateUrl: './date-picker.widget.html',
-  styles: `nz-date-picker { width: 100% }`
+  styles: `nz-date-picker { width: 100% }`,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatePickerWidget extends AbstractWidget<DatePickerWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;

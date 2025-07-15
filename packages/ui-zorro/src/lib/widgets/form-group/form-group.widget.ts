@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   AbstractWidget,
@@ -34,6 +34,7 @@ type FormGroupWidgetTemplateContext = WidgetTemplateContext<FormGroupSchema, For
     FluentControlPipe,
     RenderablePipe
   ],
-  templateUrl: './form-group.widget.html'
+  templateUrl: './form-group.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormGroupWidget extends AbstractWidget<FormGroupWidgetTemplateContext> { }

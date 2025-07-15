@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
@@ -26,6 +26,7 @@ type RateWidgetTemplateContext = WidgetTemplateContext<RateControlSchema, FormCo
     FluentContextGuardDirective,
     FluentTemplatePipe
   ],
-  templateUrl: './rate.widget.html'
+  templateUrl: './rate.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RateWidget extends AbstractWidget<RateWidgetTemplateContext> { }

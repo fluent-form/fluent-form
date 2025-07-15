@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, FluentReactivePipe, WidgetTemplateContext } from '@fluent-form/core';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -16,6 +16,7 @@ type IconWidgetTemplateContext = WidgetTemplateContext<IconComponentSchema, Form
     FluentContextGuardDirective,
     FluentReactivePipe
   ],
-  templateUrl: './icon.widget.html'
+  templateUrl: './icon.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IconWidget extends AbstractWidget<IconWidgetTemplateContext> { }

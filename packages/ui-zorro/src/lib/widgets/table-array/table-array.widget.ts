@@ -1,6 +1,6 @@
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, Directive, ElementRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive, ElementRef, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import {
   AbstractFormArraySchema,
@@ -62,7 +62,8 @@ export class ElementDirective {
     ElementDirective
   ],
   templateUrl: './table-array.widget.html',
-  styleUrl: './table-array.widget.scss'
+  styleUrl: './table-array.widget.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableArrayWidget extends AbstractWidget<TableArrayWidgetTemplateContext> {
   private readonly schemaUtil = inject(SchemaUtil);

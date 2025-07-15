@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
@@ -33,7 +33,8 @@ type TimePickerWidgetTemplateContext = WidgetTemplateContext<TimePickerControlSc
     FluentInjectPipe
   ],
   templateUrl: './time-picker.widget.html',
-  styles: `nz-time-picker { width: 100% }`
+  styles: `nz-time-picker { width: 100% }`,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TimePickerWidget extends AbstractWidget<TimePickerWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, WidgetTemplateContext } from '@fluent-form/core';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
@@ -17,6 +17,7 @@ type SilderWidgetTemplateContext = WidgetTemplateContext<SliderControlSchema, Fo
     FluentContextGuardDirective
   ],
   templateUrl: './silder.widget.html',
-  styles: `nz-slider { display: block; }`
+  styles: `nz-slider { display: block; }`,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SilderWidget extends AbstractWidget<SilderWidgetTemplateContext> { }

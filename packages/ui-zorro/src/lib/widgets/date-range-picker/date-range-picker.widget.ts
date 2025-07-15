@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
@@ -33,7 +33,8 @@ type DateRangePickerWidgetTemplateContext = WidgetTemplateContext<DateRangePicke
     FluentInjectPipe
   ],
   templateUrl: './date-range-picker.widget.html',
-  styles: `nz-range-picker { width: 100% }`
+  styles: `nz-range-picker { width: 100% }`,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DateRangePickerWidget extends AbstractWidget<DateRangePickerWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;

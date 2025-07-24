@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, viewChild, ViewContainerRef } from '@angular/core';
+import { Component, effect, TemplateRef, viewChild, ViewContainerRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FluentTemplateOutlet } from './template-outlet';
 
@@ -22,7 +22,7 @@ interface TestContext {
     </div>
   `
 })
-class TestHostComponent implements OnInit {
+class TestHostComponent {
   readonly defaultTemplateRef = viewChild.required('defaultTemplate', { read: TemplateRef });
   readonly customTemplateRef = viewChild.required('customTemplate', { read: TemplateRef });
   readonly viewContainerRef = viewChild.required(FluentTemplateOutlet, { read: ViewContainerRef });
@@ -30,8 +30,10 @@ class TestHostComponent implements OnInit {
   currentTemplate: TemplateRef<TestContext> | string = '';
   currentContext: TestContext | null = { message: 'Initial', count: 0 };
 
-  ngOnInit() {
-    this.currentTemplate = this.defaultTemplateRef();
+  constructor() {
+    effect(() => {
+      this.currentTemplate = this.defaultTemplateRef();
+    });
   }
 }
 

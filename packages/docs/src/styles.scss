@@ -5,20 +5,49 @@
 @tailwind components;
 @tailwind utilities;
 
+@mixin dark-theme {
+  --ng-doc-code-background: #0b0e14;
+
+  .ng-doc-demo pre {
+    --color: #e2e8f0;
+    --border-color: #0f172a;
+  }
+}
+
 :root {
   --ng-doc-code-max-height: 700px;
   --ng-doc-app-max-width: 1536px;
+  --ng-doc-code-background: #f8fafc;
+  --ng-doc-demo-displayer-background: repeating-linear-gradient(
+    135deg,
+    var(--ng-doc-base-1),
+    var(--ng-doc-base-1) 1px,
+    var(--ng-doc-base-0) 1px,
+    var(--ng-doc-base-0) 14px
+  );
 }
 
 .ng-doc-demo {
   overflow: visible !important;
 
   pre {
+    --color: #334155;
+    --border-color: #e2e8f0;
     font-size: 12px;
     padding: 8px 10px;
-    color: #334155;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    color: var(--color);
+    background: var(--ng-doc-code-background);
+    border: 1px solid var(--border-color);
     border-radius: 6px;
+  }
+}
+
+:root[data-theme="dark"] {
+  @include dark-theme;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] {
+    @include dark-theme;
   }
 }

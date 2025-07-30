@@ -37,7 +37,14 @@ export const appConfig: ApplicationConfig = {
       withFetch()
     ),
     provideNgDocContext(),
-    provideNgDocApp(),
+    provideNgDocApp({
+      shiki: {
+        theme: {
+          light: 'github-light',
+          dark: 'github-dark'
+        }
+      }
+    }),
     provideSearchEngine(NgDocDefaultSearchEngine),
     providePageSkeleton(NG_DOC_DEFAULT_PAGE_SKELETON),
     provideMainPageProcessor(NG_DOC_DEFAULT_PAGE_PROCESSORS),

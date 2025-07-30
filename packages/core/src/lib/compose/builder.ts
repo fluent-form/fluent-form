@@ -77,55 +77,52 @@ export function isBuilder<T = unknown>(value: SafeAny): value is StableBuilder<T
 
 type ComposeKey = typeof COMPOSE_KEY;
 type BuildKey = typeof BUILD_KEY;
-/** Get the non-nullable and required keys of an interface. */
-type NonNullableKey<T> = {
-  // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
-  [K in keyof T]-?: Record<K, T[K]> extends { [_ in K]-?: T[K] } ? K : never
+
+type RequiredKey<T> = {
+  [K in keyof T]-?: undefined extends T[K] ? never : K
 }[keyof T];
+
+type ComposeFn<T extends Record<string, SafeAny>> = (it: Builder<T>) => SafeAny;
 
 /**
  * @template T 原型
- * @template C 候选
- * @template N 必填字段
- * @template S 已选字段
- * @template B 可以构建
+ * @template TCandidateKey 候选
+ * @template TRequiredKey 必填字段
+ * @template TSelectedKey 已选字段
  */
 export type Builder<
   T extends Record<string, SafeAny>,
-  C extends keyof T = keyof T,
-  N extends keyof T = NonNullableKey<T>,
-  S extends keyof T = never,
-  B extends BuildKey = never
-> = {
-  // 通过 `keyof Pick` 从原始类型 T 中提取出字段后再遍历就能够携带上字段在 T 中的注释
-  [K in keyof Pick<T, Exclude<C, S> | B>]-?: (
-    K extends BuildKey
-      ? () => Pick<T, S>
-      : (val: K extends ComposeKey ? (it: Builder<T>) => SafeAny : T[K]) => Builder<
+  TCandidateKey extends keyof T = keyof T,
+  TRequiredKey extends keyof T = RequiredKey<T>,
+  TSelectedKey extends keyof T = never
+> =
+  {
+    [K in keyof Pick<T, Exclude<TCandidateKey, TSelectedKey>>]-?: (
+      (val: K extends ComposeKey ? ComposeFn<T> : T[K]) => Builder<
         T,
-        C,
-        N,
-        S | K,
-        [N] extends [S | K] ? BuildKey : never
+        TCandidateKey,
+        TRequiredKey,
+        TSelectedKey | K
       >
-  )
-};
+    )
+  }
+  &
+  Record<[TRequiredKey] extends [TSelectedKey] ? BuildKey : never, () => Pick<T, TSelectedKey>>;
 
 export type StableBuilder<T> = Record<BuildKey, () => T>;
 
 /**
  * @template T 原型
- * @template S 已选字段
- * @template N 必填字段
+ * @template TRequiredKey 必填字段
+ * @template TSelectedKey 已选字段
  */
 export type UnstableBuilder<
   T extends Record<string, SafeAny>,
-  S extends keyof T,
-  N extends keyof T = NonNullableKey<T>
+  TSelectedKey extends keyof T,
+  TRequiredKey extends keyof T = RequiredKey<T>
 > = Builder<
   T,
   keyof T,
-  N,
-  S,
-  [N] extends [S] ? BuildKey : never
+  TRequiredKey,
+  TSelectedKey
 >;

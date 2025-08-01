@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NumberComponent } from './number.component';
 
-describe('FluentFormItemOutletComponent', () => {
+describe('FluentFormFieldOutletComponent', () => {
   let component: NumberComponent;
   let fixture: ComponentFixture<NumberComponent>;
 

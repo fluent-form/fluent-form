@@ -1,6 +1,6 @@
 import { InjectionToken, type TemplateRef, type Type } from '@angular/core';
 import type { SafeAny } from '@ngify/core';
-import type { AbstractFormContentComponent, AbstractFormItemContentComponent } from './components';
+import type { AbstractFormContentComponent, AbstractFormFieldContentComponent } from './components';
 import type { SchemaConfig } from './interfaces';
 import type { AbstractWidget } from './widgets/widget';
 
@@ -21,6 +21,6 @@ export const NAMED_TEMPLATES = new InjectionToken<{ name: string, templateRef: T
 export const FLUENT_FORM_CONTENT = new InjectionToken<Type<AbstractFormContentComponent>>(
   typeof ngDevMode !== 'undefined' && ngDevMode ? 'FLUENT_FORM_CONTENT' : ''
 );
-export const FLUENT_FORM_ITEM_CONTENT = new InjectionToken<Type<AbstractFormItemContentComponent>>(
-  typeof ngDevMode !== 'undefined' && ngDevMode ? 'FLUENT_FORM_ITEM_CONTENT' : ''
+export const FLUENT_FORM_FIELD_CONTENT = new InjectionToken<Type<AbstractFormFieldContentComponent>>(
+  typeof ngDevMode !== 'undefined' && ngDevMode ? 'FLUENT_FORM_FIELD_CONTENT' : ''
 );

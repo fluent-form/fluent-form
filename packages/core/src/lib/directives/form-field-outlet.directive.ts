@@ -1,22 +1,22 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Directive, EnvironmentInjector, Injector, createComponent, inject } from '@angular/core';
 import type { SafeAny } from '@ngify/core';
-import { FLUENT_FORM_ITEM_CONTENT } from '../tokens';
+import { FLUENT_FORM_FIELD_CONTENT } from '../tokens';
 
 @Directive({
-  selector: '[fluentFormItemOutlet]',
+  selector: '[fluentFormFieldOutlet]',
   hostDirectives: [
     {
       directive: NgTemplateOutlet,
-      inputs: ['ngTemplateOutletContext: fluentFormItemOutlet']
+      inputs: ['ngTemplateOutletContext: fluentFormFieldOutlet']
     }
   ]
 })
-export class FluentFormItemOutletDirective {
+export class FluentFormFieldOutletDirective {
   constructor() {
     const outlet = inject(NgTemplateOutlet);
     const injector = inject(Injector);
-    const { templateRef } = createComponent(inject(FLUENT_FORM_ITEM_CONTENT), {
+    const { templateRef } = createComponent(inject(FLUENT_FORM_FIELD_CONTENT), {
       environmentInjector: inject(EnvironmentInjector),
       elementInjector: injector
     }).instance;

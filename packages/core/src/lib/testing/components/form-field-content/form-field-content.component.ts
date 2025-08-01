@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AbstractFormItemContentComponent } from '../../../components';
+import { AbstractFormFieldContentComponent } from '../../../components';
 import { FluentWithInjectorDirective } from '../../../directives';
 import { FluentWidgetTemplatePipe } from '../../../pipes';
 
@@ -13,7 +13,7 @@ import { FluentWidgetTemplatePipe } from '../../../pipes';
     FluentWithInjectorDirective,
     FluentWidgetTemplatePipe
   ],
-  templateUrl: './form-item-content.component.html',
+  templateUrl: './form-field-content.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormItemContentComponent extends AbstractFormItemContentComponent { }
+export class FormFieldContentComponent extends AbstractFormFieldContentComponent { }

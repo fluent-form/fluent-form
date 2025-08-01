@@ -4,11 +4,11 @@ import type { AnyObject } from '@ngify/core';
 import { TemplateRefHolder } from '../../directives';
 import type { AbstractSchema } from '../../schemas';
 
-export interface FormItemContentContext {
+export interface FormFieldContentContext {
   control: AbstractControl;
   model: AnyObject;
   schema: AbstractSchema;
 }
 
 @Directive()
-export abstract class AbstractFormItemContentComponent extends TemplateRefHolder<FormItemContentContext> { }
+export abstract class AbstractFormFieldContentComponent extends TemplateRefHolder<FormFieldContentContext> { }

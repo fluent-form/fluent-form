@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RangeComponent } from './range.component';
 
-describe('FluentFormItemOutletComponent', () => {
+describe('FluentFormFieldOutletComponent', () => {
   let component: RangeComponent;
   let fixture: ComponentFixture<RangeComponent>;
 

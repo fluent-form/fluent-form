@@ -5,7 +5,7 @@ import {
   FluentBindingDirective,
   FluentColumnPipe,
   FluentControlPipe,
-  FluentFormItemOutletDirective,
+  FluentFormFieldOutletDirective,
   FluentGridModule,
   FluentReactivePipe,
   RenderablePipe
@@ -17,7 +17,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     NgTemplateOutlet,
     NzFormModule,
     FluentGridModule,
-    FluentFormItemOutletDirective,
+    FluentFormFieldOutletDirective,
     FluentBindingDirective,
     FluentReactivePipe,
     FluentControlPipe,

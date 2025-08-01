@@ -7,7 +7,7 @@ import {
   FluentColumnPipe,
   FluentContextGuardDirective,
   FluentControlPipe,
-  FluentFormItemOutletDirective,
+  FluentFormFieldOutletDirective,
   FluentGridModule,
   FluentReactivePipe,
   WidgetTemplateContext
@@ -25,7 +25,7 @@ type TabsWidgetTemplateContext = WidgetTemplateContext<TabsComponentSchema, Form
     NgTemplateOutlet,
     NzTabsModule,
     FluentGridModule,
-    FluentFormItemOutletDirective,
+    FluentFormFieldOutletDirective,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentReactivePipe,

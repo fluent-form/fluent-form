@@ -2,11 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideFluentForm } from '@fluent-form/core';
 import { withZorro } from '../../feature';
 import { useAllWidgets } from '../../widgets';
-import { FormItemContentComponent } from './form-item-content.component';
+import { FormFieldContentComponent } from './form-field-content.component';
 
-describe('FluentFormItemOutletComponent', () => {
-  let component: FormItemContentComponent;
-  let fixture: ComponentFixture<FormItemContentComponent>;
+describe('FluentFormFieldOutletComponent', () => {
+  let component: FormFieldContentComponent;
+  let fixture: ComponentFixture<FormFieldContentComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -17,7 +17,7 @@ describe('FluentFormItemOutletComponent', () => {
       ]
     });
 
-    fixture = TestBed.createComponent(FormItemContentComponent);
+    fixture = TestBed.createComponent(FormFieldContentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

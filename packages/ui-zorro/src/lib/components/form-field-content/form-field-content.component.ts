@@ -1,7 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
-  AbstractFormItemContentComponent,
+  AbstractFormFieldContentComponent,
   FluentControlPipe,
   FluentReactivePipe,
   FluentSchemaTypePipe,
@@ -31,11 +31,11 @@ import { labelHelper, tooltipHelper } from '../../helper';
     FluentTemplateOutlet,
     InvokePipe
   ],
-  templateUrl: './form-item-content.component.html',
-  styleUrl: './form-item-content.component.scss',
+  templateUrl: './form-field-content.component.html',
+  styleUrl: './form-field-content.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormItemContentComponent extends AbstractFormItemContentComponent {
+export class FormFieldContentComponent extends AbstractFormFieldContentComponent {
   protected readonly SchemaType = SchemaType;
 
   protected readonly helper = {

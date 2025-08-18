@@ -1,3 +1,17 @@
+## 0.29.2 (2025-08-18)
+
+### 🚀 Features
+
+- **core:** add valueCollectionStrategy config ([92634ba5](https://github.com/fluent-form/fluent-form/commit/92634ba5))
+
+### 🩹 Fixes
+
+- **core/grid:** add !important for better layout control ([c5441900](https://github.com/fluent-form/fluent-form/commit/c5441900))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.1 (2025-07-08)
 
 ### 🩹 Fixes

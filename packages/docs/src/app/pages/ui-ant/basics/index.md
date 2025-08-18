@@ -30,7 +30,7 @@
 
 ## Update Timing
 
-更新时机可以影响到表单的性能和用户体验。使用 `updateOn` 选项来配置控件值的更新时机，支持三种更新时机，默认为 `change`。
+更新时机可以影响到表单的性能和用户体验。使用 `config.updateOn` 选项来配置控件值的更新时机，支持三种更新时机，默认为 `change`。
 
 {{ NgDocActions.demo("UpdateOnExampleComponent") }}
 

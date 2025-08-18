@@ -27,8 +27,14 @@ export interface AbstractControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   validators?: ValidatorFn[];
   /** Async validators for control */
   asyncValidators?: AsyncValidatorFn[];
+  config?: ControlSchemaConfig;
+}
+
+export interface ControlSchemaConfig {
   /** The event name for control to update upon. */
   updateOn?: AbstractControlOptions['updateOn'];
+  /** How values are read/collected from the form. 'raw' includes disabled (like getRawValue) */
+  valueCollectionStrategy?: 'value' | 'raw';
 }
 
 /**

@@ -314,7 +314,7 @@ describe('FluentFormDirective', () => {
 
   it('should be the expected model value (configure the toplevel form)', () => {
     component.schema = form(it => {
-      it.updateOn('blur');
+      it.config({ updateOn: 'blur' });
       textField('ipt');
       fieldGroup('ipts').schemas(() => {
         textField('ipt2');

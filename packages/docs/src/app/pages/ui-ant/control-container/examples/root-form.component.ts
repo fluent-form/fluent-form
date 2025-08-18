@@ -13,7 +13,7 @@ import { form, passwordField, textField } from '@fluent-form/ui-zorro';
 })
 export class RootFormExampleComponent {
   readonly schema = form(it => {
-    it.updateOn('blur');
+    it.config({ updateOn: 'blur' });
     textField('username').label('Username');
     passwordField('password').label('Password');
   });

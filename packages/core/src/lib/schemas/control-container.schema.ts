@@ -1,6 +1,7 @@
-import type { AbstractControlOptions, AsyncValidatorFn, ValidatorFn } from '@angular/forms';
+import type { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 import type { SafeAny } from '@ngify/core';
 import type { AbstractBranchSchema } from './abstract.schema';
+import type { ControlSchemaConfig } from './control.schema';
 import type { Row } from './grid';
 import type { Length } from './interfaces';
 import type { ControlEventListenerHolder } from './listeners';
@@ -17,8 +18,7 @@ export interface AbstractControlContainerSchema<Key extends SingleSchemaKey = Si
   validators?: ValidatorFn[];
   /** Async validators for control */
   asyncValidators?: AsyncValidatorFn[];
-  /** The event name for control to update upon. */
-  updateOn?: AbstractControlOptions['updateOn'];
+  config?: ControlSchemaConfig;
 }
 
 /**

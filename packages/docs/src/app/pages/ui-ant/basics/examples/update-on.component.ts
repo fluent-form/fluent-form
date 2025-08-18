@@ -13,9 +13,9 @@ import { button, form, textField } from '@fluent-form/ui-zorro';
 })
 export class UpdateOnExampleComponent {
   readonly schema = form(() => {
-    textField('text-1').label('Change').updateOn('change');
-    textField('text-2').label('Blur').updateOn('blur');
-    textField('text-3').label('Submit').updateOn('submit');
+    textField('text-1').label('Change').config({ updateOn: 'change' });
+    textField('text-2').label('Blur').config({ updateOn: 'blur' });
+    textField('text-3').label('Submit').config({ updateOn: 'submit' });
 
     button().type('primary').content('Submit').col(12);
   });

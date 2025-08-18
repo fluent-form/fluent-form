@@ -26,7 +26,7 @@ export class FormUtil {
       nonNullable: !isUndefined(schema.defaultValue),
       validators: schema.validators ? validators.concat(schema.validators) : validators,
       asyncValidators: schema.asyncValidators,
-      updateOn: schema.updateOn
+      updateOn: schema.config?.updateOn
     });
   }
 
@@ -44,7 +44,7 @@ export class FormUtil {
       options = {
         validators: schemaOrSchemas.validators,
         asyncValidators: schemaOrSchemas.asyncValidators,
-        updateOn: schemaOrSchemas.updateOn
+        updateOn: schemaOrSchemas.config?.updateOn
       };
     }
 
@@ -113,7 +113,7 @@ export class FormUtil {
     return new FormArray<SafeAny>(controls, {
       validators,
       asyncValidators: schema.asyncValidators,
-      updateOn: schema.updateOn
+      updateOn: schema.config?.updateOn
     });
   }
 

@@ -26,6 +26,9 @@
 
 在某些情况下，您可能需要禁用某些控件。使用 `disabled` 选项来禁用控件，配合 `hidden` 选项可达到禁用控件的同时隐藏控件。
 
+> **NOTE**
+> 如仅需禁用 UI，且仍希望 `model` 中保留被禁用控件的值，请将 `config.valueCollectionStrategy` 设为 `'raw'`。
+
 {{ NgDocActions.demo("DisabledExampleComponent") }}
 
 ## Update Timing

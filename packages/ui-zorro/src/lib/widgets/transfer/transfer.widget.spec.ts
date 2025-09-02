@@ -46,10 +46,10 @@ describe('TransferWidget', () => {
       { label: 'Item 1', value: '1' },
       { label: 'Item 2', value: '2' }
     ];
-    const result = pipe.transform(items);
+    const result = pipe.transform(items, ['1']);
     expect(result).toEqual([
-      { key: '1', title: 'Item 1' },
-      { key: '2', title: 'Item 2' }
+      { key: '1', title: 'Item 1', direction: 'right' },
+      { key: '2', title: 'Item 2', direction: 'left' }
     ]);
   });
 });

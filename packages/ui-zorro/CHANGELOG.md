@@ -1,3 +1,13 @@
+## 0.29.3 (2025-09-02)
+
+### 🩹 Fixes
+
+- **ui-zorro/transfer:** fix bug ([626f089c](https://github.com/fluent-form/fluent-form/commit/626f089c))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.2 (2025-08-18)
 
 This was a version bump only for ui-zorro to align it with other projects, there were no code changes.

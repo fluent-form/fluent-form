@@ -18,10 +18,12 @@ type TransferWidgetTemplateContext = WidgetTemplateContext<TransferControlSchema
   name: 'transferItems'
 })
 export class TransferItemsPipe implements PipeTransform {
-  transform(value: { label: string, value: SafeAny }[]): TransferItem[] {
+  transform(value: { label: string, value: SafeAny }[], targetKeys: SafeAny[]): TransferItem[] {
+    targetKeys ??= [];
     return value.map(option => ({
       key: option.value,
-      title: option.label
+      title: option.label,
+      direction: targetKeys.includes(option.value) ? 'right' : 'left'
     }));
   }
 }

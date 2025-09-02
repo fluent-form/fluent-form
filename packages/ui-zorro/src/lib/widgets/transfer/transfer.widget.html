@@ -7,7 +7,7 @@
     [fluentBindingModel]="model"
     [class]="schema.class"
     [style]="schema.style"
-    [nzDataSource]="schema.options | reactive: model : schema : control | transferItems"
+    [nzDataSource]="schema.options | reactive: model : schema : control | transferItems: control.value"
     [nzDisabled]="schema.disabled | reactive: model : schema : control"
     [nzTitles]="schema.titles || []"
     [nzOperations]="schema.operations || []"

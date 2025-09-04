@@ -1,3 +1,14 @@
+## 0.29.4 (2025-09-04)
+
+### 🚀 Features
+
+- **core:** hooks & listeners & obervers support for headless control ([9ad93abc](https://github.com/fluent-form/fluent-form/commit/9ad93abc))
+- **ui-zorro:** hooks & listeners & obervers support for headless control ([5949ae67](https://github.com/fluent-form/fluent-form/commit/5949ae67))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.3 (2025-09-02)
 
 ### 🩹 Fixes

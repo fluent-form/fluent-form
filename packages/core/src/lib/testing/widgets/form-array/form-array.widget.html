@@ -50,6 +50,11 @@
               index: index,
               first: first
             }" />
+        } @else {
+          <ng-template
+            [fluentBindingSchema]="withIndex(index, subschema)"
+            [fluentBindingControl]="control"
+            [fluentBindingModel]="model[formSchema.key!]" />
         }
       }
     }

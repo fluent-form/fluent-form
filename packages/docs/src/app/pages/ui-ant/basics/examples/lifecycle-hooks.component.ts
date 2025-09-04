@@ -1,6 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormComponent } from '@fluent-form/core';
+import { FluentFormComponent, headless } from '@fluent-form/core';
 import { form, textField } from '@fluent-form/ui-zorro';
 
 @Component({
@@ -13,6 +13,10 @@ import { form, textField } from '@fluent-form/ui-zorro';
 })
 export class LifecycleHooksExampleComponent {
   readonly schema = form(() => {
+    headless('id').hooks({
+      onInit: context => console.log('headless init', context),
+      onDestroy: context => console.log('headless destroy', context)
+    });
     textField('txt')
       .placeholder('Please feel free to enter')
       .hooks({

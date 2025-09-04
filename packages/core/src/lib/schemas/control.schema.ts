@@ -2,9 +2,9 @@ import type { AbstractControlOptions, AsyncValidatorFn, ValidatorFn } from '@ang
 import type { SafeAny } from '@ngify/core';
 import type { AbstractSchema } from './abstract.schema';
 import type { MaybeSchemaReactiveFn, SchemaReactiveFn } from './interfaces';
-import type { EventListenerHolder } from './listeners';
+import type { ControlEventListenerHolder, EventListenerHolder } from './listeners';
 import type { ControlValueMapper } from './mapper';
-import type { EventObserverHolder } from './observers';
+import type { ControlEventObserverHolder, EventObserverHolder } from './observers';
 import type { PropertyHolder } from './properties';
 import type { SchemaKey, SingleSchemaKey } from './types';
 
@@ -40,7 +40,8 @@ export interface ControlSchemaConfig {
 /**
  * @public
  */
-export interface HeadlessControlSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractControlSchema<Key> {
+export interface HeadlessControlSchema<Key extends SingleSchemaKey = SingleSchemaKey>
+  extends AbstractControlSchema<Key>, ControlEventObserverHolder, ControlEventListenerHolder {
   kind: 'headless';
 }
 

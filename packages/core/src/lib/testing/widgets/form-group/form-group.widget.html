@@ -27,6 +27,11 @@
             schema: subschema,
             model: model[formSchema.key!]
           }" />
+      } @else {
+        <ng-template
+          [fluentBindingSchema]="subschema"
+          [fluentBindingControl]="subschema.key | control: formGroup"
+          [fluentBindingModel]="model[formSchema.key!]" />
       }
     }
   </fluent-row>

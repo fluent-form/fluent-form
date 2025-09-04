@@ -60,6 +60,11 @@
                       model: model[formSchema.key!][index],
                       index: index
                     }" />
+                } @else {
+                  <ng-template
+                    [fluentBindingSchema]="subschema"
+                    [fluentBindingControl]="subschema.key | control: $any(formGroup)"
+                    [fluentBindingModel]="model[formSchema.key!][index]" />
                 }
               }
             </td>

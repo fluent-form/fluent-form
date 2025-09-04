@@ -66,6 +66,11 @@
                         schema: withIndex(index, subschema),
                         model: model[formSchema.key!]
                       }" />
+                  } @else {
+                    <ng-template
+                      [fluentBindingSchema]="withIndex(index, subschema)"
+                      [fluentBindingControl]="control"
+                      [fluentBindingModel]="model[formSchema.key!]" />
                   }
                 }
               </fluent-row>

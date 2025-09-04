@@ -31,6 +31,11 @@
             schema: subschema,
             model: model
           }" />
+      } @else {
+        <ng-template
+          [fluentBindingSchema]="subschema"
+          [fluentBindingControl]="subschema.key | control: form"
+          [fluentBindingModel]="model" />
       }
     }
   </form>

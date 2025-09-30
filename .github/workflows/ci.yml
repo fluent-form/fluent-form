@@ -25,7 +25,7 @@ jobs:
       # - run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="build"
 
       # Cache node_modules
-      - uses: actions/setup-node@5
+      - uses: actions/setup-node@v5
         with:
           node-version: 20
           cache: "npm"

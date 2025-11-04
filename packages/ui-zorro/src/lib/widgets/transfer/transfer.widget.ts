@@ -10,6 +10,7 @@ import {
 } from '@fluent-form/core';
 import { SafeAny } from '@ngify/core';
 import { NzTransferModule, TransferChange, TransferItem } from 'ng-zorro-antd/transfer';
+import { StatusPipe } from '../../pipes';
 import { TransferControlSchema } from '../../schemas';
 
 type TransferWidgetTemplateContext = WidgetTemplateContext<TransferControlSchema, FormControl<SafeAny[]>>;
@@ -38,7 +39,8 @@ export class TransferItemsPipe implements PipeTransform {
     FluentContextGuardDirective,
     FluentTemplatePipe,
     FluentReactivePipe,
-    TransferItemsPipe
+    TransferItemsPipe,
+    StatusPipe
   ],
   templateUrl: './transfer.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -27,7 +27,8 @@
         [nzSize]="schema.size!"
         [nzBorderless]="schema.borderless"
         [nzShowToday]="schema.today ?? true"
-        [nzShowNow]="schema.now ?? true" />
+        [nzShowNow]="schema.now ?? true"
+        [nzStatus]="(control | status)()" />
     }
   } @else {
     <nz-date-picker
@@ -52,6 +53,7 @@
       [nzSize]="schema.size!"
       [nzBorderless]="schema.borderless"
       [nzShowToday]="schema.today ?? true"
-      [nzShowNow]="schema.now ?? true" />
+      [nzShowNow]="schema.now ?? true"
+      [nzStatus]="(control | status)()" />
   }
 </ng-template>

@@ -13,6 +13,7 @@ import {
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { StatusPipe } from '../../pipes';
 import { TimePickerControlSchema } from '../../schemas';
 
 type TimePickerWidgetTemplateContext = WidgetTemplateContext<TimePickerControlSchema, FormControl<Date>>;
@@ -30,7 +31,8 @@ type TimePickerWidgetTemplateContext = WidgetTemplateContext<TimePickerControlSc
     FluentReactivePipe,
     FluentColumnPipe,
     FluentTemplatePipe,
-    FluentInjectPipe
+    FluentInjectPipe,
+    StatusPipe
   ],
   templateUrl: './time-picker.widget.html',
   styles: `nz-time-picker { width: 100% }`,

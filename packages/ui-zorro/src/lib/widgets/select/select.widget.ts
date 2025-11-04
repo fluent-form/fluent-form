@@ -17,6 +17,7 @@ import {
 import { AnyObject, SafeAny } from '@ngify/core';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { filter, Subject, tap } from 'rxjs';
+import { StatusPipe } from '../../pipes';
 import { SelectControlSchema } from '../../schemas';
 
 type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, FormControl>;
@@ -36,7 +37,8 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
     FluentColumnPipe,
     FluentTemplatePipe,
     FluentInjectPipe,
-    FluentNewPipe
+    FluentNewPipe,
+    StatusPipe
   ],
   templateUrl: './select.widget.html',
   styles: `nz-select { width: 100% }`,

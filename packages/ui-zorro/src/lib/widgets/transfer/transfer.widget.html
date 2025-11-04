@@ -17,6 +17,7 @@
     [nzRender]="$any(schema.option | template)"
     [nzRenderList]="$any(schema.list | template)"
     [nzFooter]="$any(schema.footer | template)"
+    [nzStatus]="(control | status)()"
     [nzTargetKeys]="control.value"
     [nzOneWay]="schema.oneWay"
     (nzChange)="onChange($event, control)" />

@@ -27,7 +27,7 @@ export class TableArrayExampleComponent {
             template('idxTmpl');
           });
           tableColumn().header('Name').schemas(() => {
-            textField('name').placeholder('Please enter');
+            textField('name').placeholder('Please enter').required(true);
           });
           tableColumn().header('Cellphone').schemas(() => {
             textField('cellphone').placeholder('Please enter');

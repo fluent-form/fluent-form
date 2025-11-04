@@ -26,6 +26,7 @@
         [nzShowArrow]="schema.arrow ?? true"
         [nzShowSearch]="schema.searchable!"
         [nzSize]="schema.size!"
+        [nzStatus]="(control | status)()"
         [nzSuffixIcon]="schema.suffixIcon | template: 'down'"
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzMultiple]="schema.mode === 'multiple'" />
@@ -52,6 +53,7 @@
       [nzShowArrow]="schema.arrow ?? true"
       [nzShowSearch]="schema.searchable!"
       [nzSize]="schema.size!"
+      [nzStatus]="(control | status)()"
       [nzSuffixIcon]="schema.suffixIcon | template: 'down'"
       [nzPlacement]="schema.placement ?? 'bottomLeft'"
       [nzMultiple]="schema.mode === 'multiple'" />

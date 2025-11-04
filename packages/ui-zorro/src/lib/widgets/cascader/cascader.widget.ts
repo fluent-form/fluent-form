@@ -15,6 +15,7 @@ import {
 } from '@fluent-form/core';
 import { AnyObject, SafeAny } from '@ngify/core';
 import { NzCascaderModule, NzCascaderOption } from 'ng-zorro-antd/cascader';
+import { StatusPipe } from '../../pipes';
 import { CascaderControlSchema } from '../../schemas';
 
 type CascaderWidgetTemplateContext = WidgetTemplateContext<CascaderControlSchema, FormControl<SafeAny[]>>;
@@ -33,7 +34,8 @@ type CascaderWidgetTemplateContext = WidgetTemplateContext<CascaderControlSchema
     FluentColumnPipe,
     FluentTemplatePipe,
     FluentInjectPipe,
-    InvokePipe
+    InvokePipe,
+    StatusPipe
   ],
   templateUrl: './cascader.widget.html',
   styles: `nz-cascader { width: 100% }`,

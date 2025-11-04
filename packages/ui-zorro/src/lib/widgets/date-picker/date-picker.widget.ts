@@ -13,6 +13,7 @@ import {
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { StatusPipe } from '../../pipes';
 import { DatePickerControlSchema } from '../../schemas';
 
 type DatePickerWidgetTemplateContext = WidgetTemplateContext<DatePickerControlSchema, FormControl<Date>>;
@@ -30,7 +31,8 @@ type DatePickerWidgetTemplateContext = WidgetTemplateContext<DatePickerControlSc
     FluentReactivePipe,
     FluentColumnPipe,
     FluentTemplatePipe,
-    FluentInjectPipe
+    FluentInjectPipe,
+    StatusPipe
   ],
   templateUrl: './date-picker.widget.html',
   styles: `nz-date-picker { width: 100% }`,

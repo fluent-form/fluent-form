@@ -16,6 +16,7 @@ import {
   isNumber
 } from '@fluent-form/core';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { StatusPipe } from '../../pipes';
 import { TextFieldControlSchema } from '../../schemas';
 
 type TextFieldWidgetTemplateContext = WidgetTemplateContext<TextFieldControlSchema, FormControl<string>>;
@@ -34,7 +35,8 @@ type TextFieldWidgetTemplateContext = WidgetTemplateContext<TextFieldControlSche
     FluentColumnPipe,
     FluentTemplatePipe,
     FluentInjectPipe,
-    InvokePipe
+    InvokePipe,
+    StatusPipe
   ],
   templateUrl: './text-field.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

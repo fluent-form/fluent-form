@@ -29,7 +29,8 @@
         [nzBorderless]="schema.borderless"
         [nzShowToday]="schema.today ?? true"
         [nzShowNow]="schema.now ?? true"
-        [nzSeparator]="schema.separator" />
+        [nzSeparator]="schema.separator"
+        [nzStatus]="(control | status)()" />
     }
   } @else {
     <nz-range-picker
@@ -56,6 +57,7 @@
       [nzBorderless]="schema.borderless"
       [nzShowToday]="schema.today ?? true"
       [nzShowNow]="schema.now ?? true"
-      [nzSeparator]="schema.separator" />
+      [nzSeparator]="schema.separator"
+      [nzStatus]="(control | status)()" />
   }
 </ng-template>

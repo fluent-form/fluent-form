@@ -23,6 +23,7 @@
         [autofocus]="schema.autofocus"
         [readonly]="schema.readonly | reactive: model : schema : control"
         [nzSize]="schema.size!"
+        [nzStatus]="(control | status)()"
         [nzBorderless]="schema.borderless"></textarea>
     }
   } @else {
@@ -44,6 +45,7 @@
       [autofocus]="schema.autofocus"
       [readonly]="schema.readonly | reactive: model : schema : control"
       [nzSize]="schema.size!"
+      [nzStatus]="(control | status)()"
       [nzBorderless]="schema.borderless"></textarea>
   }
 </ng-template>

@@ -29,6 +29,7 @@
             [autofocus]="schema.autofocus"
             [readonly]="schema.readonly | reactive: model : schema : control"
             [nzSize]="schema.size!"
+            [nzStatus]="(control | status)()"
             [nzBorderless]="schema.borderless" />
         </nz-input-group>
       } @else {
@@ -53,6 +54,7 @@
           [autofocus]="schema.autofocus"
           [readonly]="schema.readonly | reactive: model : schema : control"
           [nzSize]="schema.size!"
+          [nzStatus]="(control | status)()"
           [nzBorderless]="schema.borderless" />
       }
     }
@@ -81,6 +83,7 @@
           [autofocus]="schema.autofocus"
           [readonly]="schema.readonly | reactive: model : schema : control"
           [nzSize]="schema.size!"
+          [nzStatus]="(control | status)()"
           [nzBorderless]="schema.borderless" />
       </nz-input-group>
     } @else {
@@ -101,6 +104,7 @@
         [autofocus]="schema.autofocus"
         [readonly]="schema.readonly | reactive: model : schema : control"
         [nzSize]="schema.size!"
+        [nzStatus]="(control | status)()"
         [nzBorderless]="schema.borderless" />
     }
   }

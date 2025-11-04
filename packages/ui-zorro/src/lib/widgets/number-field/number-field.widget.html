@@ -28,6 +28,7 @@
         [nzAutoFocus]="schema.autofocus"
         [nzReadOnly]="schema.readonly | reactive: model : schema : control"
         [nzSize]="schema.size!"
+        [nzStatus]="(control | status)()"
         [nzBordered]="!schema.borderless">
         @if (addonBefore) {
           <ng-template nzInputAddonBefore [fluentTemplateOutlet]="addonBefore">{{ addonBefore }}</ng-template>
@@ -62,6 +63,7 @@
       [nzAutoFocus]="schema.autofocus"
       [nzReadOnly]="schema.readonly | reactive: model : schema : control"
       [nzSize]="schema.size!"
+      [nzStatus]="(control | status)()"
       [nzBordered]="!schema.borderless">
       @if (addonBefore) {
         <ng-template nzInputAddonBefore [fluentTemplateOutlet]="addonBefore">{{ addonBefore }}</ng-template>

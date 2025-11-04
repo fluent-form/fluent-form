@@ -14,6 +14,7 @@ import {
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { StatusPipe } from '../../pipes';
 import { NumberFieldControlSchema } from '../../schemas';
 
 type NumberFieldWidgetTemplateContext = WidgetTemplateContext<NumberFieldControlSchema, FormControl<number>>;
@@ -32,7 +33,8 @@ type NumberFieldWidgetTemplateContext = WidgetTemplateContext<NumberFieldControl
     FluentReactivePipe,
     FluentColumnPipe,
     FluentTemplatePipe,
-    FluentInjectPipe
+    FluentInjectPipe,
+    StatusPipe
   ],
   templateUrl: './number-field.widget.html',
   styles: `nz-input-number { width: 100% }`,

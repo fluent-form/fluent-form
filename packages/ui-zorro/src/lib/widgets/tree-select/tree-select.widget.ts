@@ -16,6 +16,7 @@ import {
 } from '@fluent-form/core';
 import { SafeAny } from '@ngify/core';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
+import { StatusPipe } from '../../pipes';
 import { TreeSelectControlSchema } from '../../schemas';
 
 type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSchema, FormControl<SafeAny[]>>;
@@ -33,7 +34,8 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
     FluentReactivePipe,
     FluentColumnPipe,
     FluentInjectPipe,
-    InvokePipe
+    InvokePipe,
+    StatusPipe
   ],
   templateUrl: './tree-select.widget.html',
   styles: `nz-tree-select { width: 100% }`,

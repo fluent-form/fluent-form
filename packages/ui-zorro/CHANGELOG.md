@@ -1,3 +1,14 @@
+## 0.29.5 (2025-11-04)
+
+### 🚀 Features
+
+- **ui-zorro:** add status binding to various widgets for improved control status handling ([e5b3baaf](https://github.com/fluent-form/fluent-form/commit/e5b3baaf))
+- **ui-zorro:** add status pipe ([ae264359](https://github.com/fluent-form/fluent-form/commit/ae264359))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.4 (2025-09-04)
 
 ### 🚀 Features

@@ -1,6 +1,6 @@
-import { Component, Directive, ViewEncapsulation, computed, input } from '@angular/core';
+import { _CdkPrivateStyleLoader } from '@angular/cdk/private';
+import { ChangeDetectionStrategy, Component, Directive, ViewEncapsulation, computed, inject, input } from '@angular/core';
 import { Breakpoints, createBreakpointInfix } from '../../../breakpoints';
-import { withStyle } from '../../../style';
 import type { Stringify } from '../../../types';
 import { isObject } from '../../../utils';
 
@@ -12,7 +12,8 @@ type Offset = Cell | 'auto' | null;
   selector: 'fluent-col',
   template: '',
   styleUrl: './col.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 class FluentColComponent { }
 
@@ -59,7 +60,7 @@ export class FluentColDirective {
   });
 
   constructor() {
-    withStyle(FluentColComponent);
+    inject(_CdkPrivateStyleLoader).load(FluentColComponent);
   }
 }
 

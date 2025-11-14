@@ -2,7 +2,7 @@ import { registerLocaleData } from '@angular/common';
 import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 import zhExtra from '@angular/common/locales/extra/zh';
 import zh from '@angular/common/locales/zh';
-import { ApplicationConfig, LOCALE_ID, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
@@ -25,7 +25,7 @@ registerLocaleData(zh, 'zh-CN', zhExtra);
 export const appConfig: ApplicationConfig = {
   providers: [
     { provide: LOCALE_ID, useValue: 'zh-CN' },
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    // provideZoneChangeDetection({ eventCoalescing: true }),
     provideClientHydration(),
     provideAnimationsAsync(),
     provideRouter(
@@ -52,6 +52,7 @@ export const appConfig: ApplicationConfig = {
     provideFluentForm(
       withZorro(useAllWidgets()),
       withStaticExpression()
-    )
+    ),
+    provideExperimentalZonelessChangeDetection()
   ]
 };

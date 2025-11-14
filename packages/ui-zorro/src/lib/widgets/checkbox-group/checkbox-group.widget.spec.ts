@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CheckboxGroupWidget } from './checkbox-group.widget';
+import CheckboxGroupWidget from './checkbox-group.widget';
 
 describe('CheckboxGroupWidget', () => {
   let component: CheckboxGroupWidget;

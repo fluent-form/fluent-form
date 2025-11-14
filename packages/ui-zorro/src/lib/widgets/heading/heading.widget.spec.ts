@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HeadingWidget } from './heading.widget';
+import HeadingWidget from './heading.widget';
 
 describe('HeadingWidget', () => {
   let component: HeadingWidget;

@@ -19,4 +19,4 @@ type CheckboxWidgetTemplateContext = WidgetTemplateContext<CheckboxControlSchema
   templateUrl: './checkbox.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CheckboxWidget extends AbstractWidget<CheckboxWidgetTemplateContext> { }
+export default class CheckboxWidget extends AbstractWidget<CheckboxWidgetTemplateContext> { }

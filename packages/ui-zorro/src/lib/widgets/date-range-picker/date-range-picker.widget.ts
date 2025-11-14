@@ -38,6 +38,6 @@ type DateRangePickerWidgetTemplateContext = WidgetTemplateContext<DateRangePicke
   styles: `nz-range-picker { width: 100% }`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DateRangePickerWidget extends AbstractWidget<DateRangePickerWidgetTemplateContext> {
+export default class DateRangePickerWidget extends AbstractWidget<DateRangePickerWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
 }

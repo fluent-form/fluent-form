@@ -118,7 +118,7 @@
   <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model" let-index="index">
     <ng-container
       fluentWithInjector
-      [ngTemplateOutlet]="schema | widgetTemplate"
+      [ngTemplateOutlet]="schema | widgetTemplate | async"
       [ngTemplateOutletContext]="{ control: schema.key | control: control, schema, model }" />
   </ng-template>
 </ng-template>

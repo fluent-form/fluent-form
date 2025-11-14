@@ -45,7 +45,7 @@ type TabsArrayWidgetTemplateContext = WidgetTemplateContext<TabsArraySchema, For
   templateUrl: './tabs-array.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TabsArrayWidget extends AbstractWidget<TabsArrayWidgetTemplateContext> {
+export default class TabsArrayWidget extends AbstractWidget<TabsArrayWidgetTemplateContext> {
   private readonly schemaUtil = inject(SchemaUtil);
   private readonly formUtil = inject(FormUtil);
 

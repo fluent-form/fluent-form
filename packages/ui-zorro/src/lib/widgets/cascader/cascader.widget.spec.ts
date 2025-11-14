@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl } from '@angular/forms';
 import { CascaderControlSchema } from '../../schemas';
-import { CascaderWidget } from './cascader.widget';
+import CascaderWidget from './cascader.widget';
 
 describe('CascaderWidget', () => {
   let component: CascaderWidget;

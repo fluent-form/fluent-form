@@ -37,4 +37,4 @@ type FormGroupWidgetTemplateContext = WidgetTemplateContext<FormGroupSchema, For
   templateUrl: './form-group.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormGroupWidget extends AbstractWidget<FormGroupWidgetTemplateContext> { }
+export default class FormGroupWidget extends AbstractWidget<FormGroupWidgetTemplateContext> { }

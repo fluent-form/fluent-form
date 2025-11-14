@@ -28,4 +28,4 @@ type ColorPickerWidgetTemplateContext = WidgetTemplateContext<ColorPickerControl
   templateUrl: './color-picker.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ColorPickerWidget extends AbstractWidget<ColorPickerWidgetTemplateContext> { }
+export default class ColorPickerWidget extends AbstractWidget<ColorPickerWidgetTemplateContext> { }

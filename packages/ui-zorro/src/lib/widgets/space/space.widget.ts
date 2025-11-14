@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -21,6 +21,7 @@ type SpaceWidgetTemplateContext = WidgetTemplateContext<SpaceComponentSchema, Fo
  */
 @Component({
   imports: [
+    AsyncPipe,
     NgTemplateOutlet,
     ReactiveFormsModule,
     NzFlexDirective,
@@ -34,4 +35,4 @@ type SpaceWidgetTemplateContext = WidgetTemplateContext<SpaceComponentSchema, Fo
   templateUrl: './space.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SpaceWidget extends AbstractWidget<SpaceWidgetTemplateContext> { }
+export default class SpaceWidget extends AbstractWidget<SpaceWidgetTemplateContext> { }

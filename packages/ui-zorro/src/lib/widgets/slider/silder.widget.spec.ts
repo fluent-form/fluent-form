@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SilderWidget } from './silder.widget';
+import SilderWidget from './silder.widget';
 
 describe('SilderWidget', () => {
   let component: SilderWidget;

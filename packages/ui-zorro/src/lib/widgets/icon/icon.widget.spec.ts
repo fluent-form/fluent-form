@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { IconWidget } from './icon.widget';
+import IconWidget from './icon.widget';
 
 describe('IconWidget', () => {
   let component: IconWidget;

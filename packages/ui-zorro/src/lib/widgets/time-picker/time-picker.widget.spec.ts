@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TimePickerWidget } from './time-picker.widget';
+import TimePickerWidget from './time-picker.widget';
 
 describe('TimeWidget', () => {
   let component: TimePickerWidget;

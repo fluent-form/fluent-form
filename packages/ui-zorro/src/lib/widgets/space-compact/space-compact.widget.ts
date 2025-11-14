@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
@@ -21,6 +21,7 @@ type SpaceCompactWidgetTemplateContext = WidgetTemplateContext<SpaceCompactCompo
  */
 @Component({
   imports: [
+    AsyncPipe,
     NgTemplateOutlet,
     NzSpaceCompactComponent,
     FluentBindingDirective,
@@ -34,4 +35,4 @@ type SpaceCompactWidgetTemplateContext = WidgetTemplateContext<SpaceCompactCompo
   styleUrl: './space-compact.widget.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SpaceCompactWidget extends AbstractWidget<SpaceCompactWidgetTemplateContext> { }
+export default class SpaceCompactWidget extends AbstractWidget<SpaceCompactWidgetTemplateContext> { }

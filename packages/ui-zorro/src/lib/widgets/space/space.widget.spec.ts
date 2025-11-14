@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SpaceWidget } from './space.widget';
+import SpaceWidget from './space.widget';
 
 describe('SpaceWidget', () => {
   let component: SpaceWidget;

@@ -41,7 +41,7 @@ type CascaderWidgetTemplateContext = WidgetTemplateContext<CascaderControlSchema
   styles: `nz-cascader { width: 100% }`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CascaderWidget extends AbstractWidget<CascaderWidgetTemplateContext> {
+export default class CascaderWidget extends AbstractWidget<CascaderWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
 
   fetchOptions(model: AnyObject, schema: CascaderControlSchema, control: FormControl) {

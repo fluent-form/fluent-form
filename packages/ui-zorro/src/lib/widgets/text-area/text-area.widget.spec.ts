@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TextAreaWidget } from './text-area.widget';
+import TextAreaWidget from './text-area.widget';
 
 describe('TextAreaWidget', () => {
   let component: TextAreaWidget;

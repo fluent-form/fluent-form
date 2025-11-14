@@ -28,4 +28,4 @@ type ToggleWidgetTemplateContext = WidgetTemplateContext<ToggleControlSchema, Fo
   templateUrl: './toggle.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToggleWidget extends AbstractWidget<ToggleWidgetTemplateContext> { }
+export default class ToggleWidget extends AbstractWidget<ToggleWidgetTemplateContext> { }

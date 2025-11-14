@@ -41,7 +41,7 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
   styles: `nz-tree-select { width: 100% }`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TreeSelectWidget extends AbstractWidget<TreeSelectWidgetTemplateContext> {
+export default class TreeSelectWidget extends AbstractWidget<TreeSelectWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
   protected readonly helper = {
     checkable: (checkable: TreeSelectControlSchema['checkable']) =>

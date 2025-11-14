@@ -29,4 +29,4 @@ type RateWidgetTemplateContext = WidgetTemplateContext<RateControlSchema, FormCo
   templateUrl: './rate.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RateWidget extends AbstractWidget<RateWidgetTemplateContext> { }
+export default class RateWidget extends AbstractWidget<RateWidgetTemplateContext> { }

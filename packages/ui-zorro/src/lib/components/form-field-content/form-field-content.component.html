@@ -43,7 +43,7 @@
       [nzExtra]="currentSchema.hint | template">
       <ng-container
         fluentWithInjector
-        [ngTemplateOutlet]="schema | widgetTemplate"
+        [ngTemplateOutlet]="schema | widgetTemplate | async"
         [ngTemplateOutletContext]="{ control, schema, model }" />
     </nz-form-control>
   </nz-form-item>

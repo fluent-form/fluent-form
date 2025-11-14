@@ -5,27 +5,29 @@ import { WIDGET_MAP } from '../tokens';
 declare const ngDevMode: boolean | undefined;
 
 @Injectable({ providedIn: 'root' })
-export class WidgetTemplateRegistry extends Map<string, TemplateRef<unknown>> {
+export class WidgetTemplateRegistry extends Map<string, Promise<TemplateRef<unknown>>> {
   private readonly envInjector = inject(EnvironmentInjector);
-  private readonly map = inject(WIDGET_MAP);
+  private readonly widgetMap = inject(WIDGET_MAP);
 
-  override get(kind: string): TemplateRef<unknown> {
+  override get(kind: string): Promise<TemplateRef<unknown>> {
     return super.get(kind) ?? this.register(kind);
   }
 
   private register(kind: string) {
-    const component = this.map.get(kind);
+    const component = this.widgetMap.get(kind);
 
     if (typeof ngDevMode !== 'undefined' && ngDevMode && !component) {
       throwWidgetNotFoundError(kind);
     }
 
-    const { instance } = createComponent(component!, {
-      environmentInjector: this.envInjector
+    const tmpl = component!().then(comp => {
+      const { instance } = createComponent(comp, {
+        environmentInjector: this.envInjector
+      });
+      return instance.templateRef;
     });
 
-    this.set(kind, instance.templateRef);
-
-    return instance.templateRef;
+    this.set(kind, tmpl);
+    return tmpl;
   }
 }

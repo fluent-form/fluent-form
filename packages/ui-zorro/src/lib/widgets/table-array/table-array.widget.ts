@@ -1,5 +1,5 @@
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
-import { NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Directive, ElementRef, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import {
@@ -44,6 +44,7 @@ export class ElementDirective {
  */
 @Component({
   imports: [
+    AsyncPipe,
     NgTemplateOutlet,
     NzTableModule,
     NzButtonModule,
@@ -65,7 +66,7 @@ export class ElementDirective {
   styleUrl: './table-array.widget.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableArrayWidget extends AbstractWidget<TableArrayWidgetTemplateContext> {
+export default class TableArrayWidget extends AbstractWidget<TableArrayWidgetTemplateContext> {
   private readonly schemaUtil = inject(SchemaUtil);
   private readonly formUtil = inject(FormUtil);
 

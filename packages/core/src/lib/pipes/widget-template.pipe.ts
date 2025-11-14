@@ -15,7 +15,7 @@ export class FluentWidgetTemplatePipe implements PipeTransform {
   private readonly registry = inject(WidgetTemplateRegistry);
   private readonly templates = inject(NAMED_TEMPLATES, { optional: true });
 
-  transform(value: Indexable<AbstractSchema>): TemplateRef<unknown> {
+  transform(value: Indexable<AbstractSchema>): Promise<TemplateRef<unknown>> {
     switch (value.kind) {
       case SchemaKind.Template: {
         const dir = this.templates?.find(o => o.name === value.key);
@@ -24,7 +24,7 @@ export class FluentWidgetTemplatePipe implements PipeTransform {
           throwCustomTemplateNotFoundError(value.key as string);
         }
 
-        return dir!.templateRef;
+        return Promise.resolve(dir!.templateRef);
       }
 
       case SchemaKind.Headful: {
@@ -34,7 +34,7 @@ export class FluentWidgetTemplatePipe implements PipeTransform {
           throwCustomTemplateNotFoundError(value['template']);
         }
 
-        return dir!.templateRef;
+        return Promise.resolve(dir!.templateRef);
       }
 
       default:

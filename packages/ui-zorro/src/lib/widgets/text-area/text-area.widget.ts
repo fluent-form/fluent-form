@@ -39,7 +39,7 @@ type TextAreaWidgetTemplateContext = WidgetTemplateContext<TextAreaControlSchema
   templateUrl: './text-area.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TextAreaWidget extends AbstractWidget<TextAreaWidgetTemplateContext> {
+export default class TextAreaWidget extends AbstractWidget<TextAreaWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
   protected readonly helper = {
     length: {

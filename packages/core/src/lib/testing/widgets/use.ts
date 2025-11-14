@@ -15,8 +15,6 @@ import { FormArrayWidget } from './form-array/form-array.widget';
 import { FormGroupWidget } from './form-group/form-group.widget';
 import { InputGroupWidget } from './input-group/input-group.widget';
 import { InputWidget } from './input/input.widget';
-import { NumberWidget } from './number/number.widget';
-import { RangeWidget } from './range/range.widget';
 import { type FluentFormWidgetConfig, SchemaType } from '@fluent-form/core';
 
 export function useAllWidgets() {
@@ -54,7 +52,7 @@ export function useRangeWidget(): FluentFormWidgetConfig<RangeControlSchema> {
   return {
     kind: 'range',
     type: SchemaType.Control,
-    widget: RangeWidget
+    loadWidget: () => import('./range/range.widget').then(m => m.RangeWidget)
   };
 }
 
@@ -62,7 +60,7 @@ export function useNumberFieldWidget(): FluentFormWidgetConfig<NumberFieldContro
   return {
     kind: 'number-field',
     type: SchemaType.Control,
-    widget: NumberWidget
+    loadWidget: () => import('./number/number.widget')
   };
 }
 

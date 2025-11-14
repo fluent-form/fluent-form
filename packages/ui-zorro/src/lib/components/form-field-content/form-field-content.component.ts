@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   AbstractFormFieldContentComponent,
@@ -20,6 +20,7 @@ import { labelHelper, tooltipHelper } from '../../helper';
  */
 @Component({
   imports: [
+    AsyncPipe,
     NgTemplateOutlet,
     NzFormModule,
     FluentWithInjectorDirective,

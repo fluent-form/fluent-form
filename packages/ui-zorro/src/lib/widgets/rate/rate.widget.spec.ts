@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RateWidget } from './rate.widget';
+import RateWidget from './rate.widget';
 
 describe('RateWidget', () => {
   let component: RateWidget;

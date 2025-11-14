@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ColorPickerWidget } from './color-picker.widget';
+import ColorPickerWidget from './color-picker.widget';
 
 describe('ColorPickerWidget', () => {
   let component: ColorPickerWidget;

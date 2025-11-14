@@ -55,7 +55,9 @@ export class FluentOutletDirective<T extends AnyObject | AnyArray> implements Wi
     effect(() => {
       const schema = this.schema;
       this.viewContainerRef.length && this.viewContainerRef.clear();
-      this.viewContainerRef.createEmbeddedView(this.registry.get(schema.kind), this);
+      this.registry.get(schema.kind).then(tmpl => {
+        this.viewContainerRef.createEmbeddedView(tmpl, this);
+      });
     });
   }
 }

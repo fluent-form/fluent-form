@@ -5,7 +5,7 @@ import { provideFluentForm } from '@fluent-form/core';
 import { SafeAny } from '@ngify/core';
 import { withZorro } from '../../feature';
 import { useAllWidgets } from '../use';
-import { FormArrayWidget } from './form-array.widget';
+import FormArrayWidget from './form-array.widget';
 
 describe('FormArrayWidget', () => {
   let component: FormArrayWidget;

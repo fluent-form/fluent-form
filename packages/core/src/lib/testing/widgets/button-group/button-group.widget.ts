@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import type { ButtonGroupComponentSchema } from '../../schemas';
@@ -19,6 +19,7 @@ type ButtonGroupWidgetTemplateContext = WidgetTemplateContext<ButtonGroupCompone
  */
 @Component({
   imports: [
+    AsyncPipe,
     NgTemplateOutlet,
     ReactiveFormsModule,
     FluentBindingDirective,

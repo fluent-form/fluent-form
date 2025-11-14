@@ -22,6 +22,12 @@ describe('WidgetTemplateRegistry', () => {
   });
 
   it('should throw error', () => {
-    expect(() => service.get('undefinded')).toThrow(`The 'undefinded' widget was not found`);
+    expect(() => service.get('undefined')).toThrow(`The 'undefined' widget was not found`);
+  });
+
+  it('should register and retrieve a widget', async () => {
+    expect(await service.get('text-field')).toBeTruthy();
+    expect(await service.get('range')).toBeTruthy();
+    expect(await service.get('number-field')).toBeTruthy();
   });
 });

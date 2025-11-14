@@ -6,7 +6,7 @@ import type { AbstractWidget } from './widgets/widget';
 
 declare const ngDevMode: boolean | undefined;
 
-export const WIDGET_MAP = new InjectionToken<Map<string, Type<AbstractWidget<unknown>>>>(
+export const WIDGET_MAP = new InjectionToken<Map<string, () => Promise<Type<AbstractWidget<unknown>>>>>(
   typeof ngDevMode !== 'undefined' && ngDevMode ? 'WIDGET_MAP' : ''
 );
 

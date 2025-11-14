@@ -26,4 +26,4 @@ type SegmentedWidgetTemplateContext = WidgetTemplateContext<SegmentedControlSche
   templateUrl: './segmented.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SegmentedWidget extends AbstractWidget<SegmentedWidgetTemplateContext> { }
+export default class SegmentedWidget extends AbstractWidget<SegmentedWidgetTemplateContext> { }

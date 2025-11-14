@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormGroupWidget } from './form-group.widget';
+import FormGroupWidget from './form-group.widget';
 
 describe('NestedFormWidget', () => {
   let component: FormGroupWidget;

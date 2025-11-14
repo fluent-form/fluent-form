@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RadioGroupWidget } from './radio-group.widget';
+import RadioGroupWidget from './radio-group.widget';
 
 describe('RadioGroupWidget', () => {
   let component: RadioGroupWidget;

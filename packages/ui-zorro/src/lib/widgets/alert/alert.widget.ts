@@ -28,7 +28,7 @@ type AlertWidgetTemplateContext = WidgetTemplateContext<AlertComponentSchema, Fo
   templateUrl: './alert.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AlertWidget extends AbstractWidget<AlertWidgetTemplateContext> {
+export default class AlertWidget extends AbstractWidget<AlertWidgetTemplateContext> {
   protected readonly helper = {
     icon(icon: AlertComponentSchema['icon']) {
       return isBoolean(icon) ? null : icon;

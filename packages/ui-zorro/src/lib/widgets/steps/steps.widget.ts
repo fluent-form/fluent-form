@@ -37,4 +37,4 @@ type StepsWidgetTemplateContext = WidgetTemplateContext<StepsComponentSchema, Fo
   templateUrl: './steps.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StepsWidget extends AbstractWidget<StepsWidgetTemplateContext> { }
+export default class StepsWidget extends AbstractWidget<StepsWidgetTemplateContext> { }

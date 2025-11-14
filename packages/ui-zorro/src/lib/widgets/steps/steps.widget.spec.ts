@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StepsWidget } from './steps.widget';
+import StepsWidget from './steps.widget';
 
 describe('StepsWidget', () => {
   let component: StepsWidget;

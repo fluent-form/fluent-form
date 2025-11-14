@@ -1,7 +1,7 @@
 <ng-doc-root [footerContent]="footerContent">
   <ng-doc-navbar>
     <app-brand class="text-3xl" ngDocNavbarLeft>
-      <sup class="opacity-50 text-sm ml-1 tracking-tighter">{{ version$ | async }}</sup>
+      <sup class="opacity-50 text-sm ml-1 tracking-tighter">{{ version() }}</sup>
     </app-brand>
 
     <div class="ng-doc-header-controls flex" ngDocNavbarRight>

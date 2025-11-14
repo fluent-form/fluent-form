@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ToggleWidget } from './toggle.widget';
+import ToggleWidget from './toggle.widget';
 
 describe('ToggleWidget', () => {
   let component: ToggleWidget;

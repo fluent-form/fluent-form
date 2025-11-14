@@ -38,6 +38,6 @@ type TimePickerWidgetTemplateContext = WidgetTemplateContext<TimePickerControlSc
   styles: `nz-time-picker { width: 100% }`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TimePickerWidget extends AbstractWidget<TimePickerWidgetTemplateContext> {
+export default class TimePickerWidget extends AbstractWidget<TimePickerWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
 }

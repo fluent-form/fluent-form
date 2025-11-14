@@ -19,4 +19,4 @@ type IconWidgetTemplateContext = WidgetTemplateContext<IconComponentSchema, Form
   templateUrl: './icon.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class IconWidget extends AbstractWidget<IconWidgetTemplateContext> { }
+export default class IconWidget extends AbstractWidget<IconWidgetTemplateContext> { }

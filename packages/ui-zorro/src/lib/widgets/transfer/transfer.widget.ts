@@ -45,7 +45,7 @@ export class TransferItemsPipe implements PipeTransform {
   templateUrl: './transfer.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TransferWidget extends AbstractWidget<TransferWidgetTemplateContext> {
+export default class TransferWidget extends AbstractWidget<TransferWidgetTemplateContext> {
   onChange(event: TransferChange, control: AbstractControl) {
     const value = control.value ?? [];
     // selected

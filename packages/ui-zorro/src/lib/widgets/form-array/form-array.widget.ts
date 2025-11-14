@@ -55,7 +55,7 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
   styleUrl: './form-array.widget.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateContext> {
+export default class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateContext> {
   private readonly schemaUtil = inject(SchemaUtil);
   private readonly formUtil = inject(FormUtil);
 

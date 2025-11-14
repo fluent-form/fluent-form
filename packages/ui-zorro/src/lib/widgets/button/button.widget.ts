@@ -44,7 +44,7 @@ type ButtonWidgetTemplateContext = WidgetTemplateContext<ButtonComponentSchema, 
   templateUrl: './button.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ButtonWidget extends AbstractWidget<ButtonWidgetTemplateContext> {
+export default class ButtonWidget extends AbstractWidget<ButtonWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
   protected readonly helper = {
     icon: (icon: ButtonComponentSchema['icon']): Icon | undefined => {

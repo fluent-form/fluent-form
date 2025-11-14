@@ -30,4 +30,4 @@ type HeadingWidgetTemplateContext = WidgetTemplateContext<HeadingComponentSchema
   styleUrl: './heading.widget.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeadingWidget extends AbstractWidget<HeadingWidgetTemplateContext> { }
+export default class HeadingWidget extends AbstractWidget<HeadingWidgetTemplateContext> { }

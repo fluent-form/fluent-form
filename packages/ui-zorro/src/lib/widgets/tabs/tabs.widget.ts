@@ -35,4 +35,4 @@ type TabsWidgetTemplateContext = WidgetTemplateContext<TabsComponentSchema, Form
   templateUrl: './tabs.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TabsWidget extends AbstractWidget<TabsWidgetTemplateContext> { }
+export default class TabsWidget extends AbstractWidget<TabsWidgetTemplateContext> { }

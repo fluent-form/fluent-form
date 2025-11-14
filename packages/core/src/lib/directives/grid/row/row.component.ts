@@ -1,9 +1,9 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, Directive, ViewEncapsulation, computed, inject, input } from '@angular/core';
+import { _CdkPrivateStyleLoader } from '@angular/cdk/private';
+import { ChangeDetectionStrategy, Component, Directive, ViewEncapsulation, computed, inject, input } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { Breakpoints } from '../../../breakpoints';
-import { withStyle } from '../../../style';
 import type { Stringify } from '../../../types';
 import { isArray, isNumber, isString } from '../../../utils';
 
@@ -36,7 +36,8 @@ const BREAKPOINTS: string[] = [
   selector: 'fluent-row',
   template: '',
   styleUrl: './row.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 class FluentRowComponent { }
 
@@ -93,7 +94,7 @@ export class FluentRowDirective {
   protected readonly alignItems = computed(() => parseJustifyOrAlign(this.align()));
 
   constructor() {
-    withStyle(FluentRowComponent);
+    inject(_CdkPrivateStyleLoader).load(FluentRowComponent);
   }
 }
 

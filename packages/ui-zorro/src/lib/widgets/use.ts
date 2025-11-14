@@ -9,6 +9,7 @@ import {
   CascaderControlSchema,
   CheckboxControlSchema,
   CheckboxGroupControlSchema,
+  ColorPickerControlSchema,
   DatePickerControlSchema,
   DateRangePickerControlSchema,
   FormArraySchema,
@@ -38,37 +39,6 @@ import {
   TransferControlSchema,
   TreeSelectControlSchema
 } from '../schemas';
-import { AlertWidget } from './alert/alert.widget';
-import { ButtonGroupWidget } from './button-group/button-group.widget';
-import { ButtonWidget } from './button/button.widget';
-import { CardsArrayWidget } from './cards-array/cards-array.widget';
-import { CascaderWidget } from './cascader/cascader.widget';
-import { CheckboxGroupWidget } from './checkbox-group/checkbox-group.widget';
-import { CheckboxWidget } from './checkbox/checkbox.widget';
-import { DatePickerWidget } from './date-picker/date-picker.widget';
-import { DateRangePickerWidget } from './date-range-picker/date-range-picker.widget';
-import { FormArrayWidget } from './form-array/form-array.widget';
-import { FormGroupWidget } from './form-group/form-group.widget';
-import { HeadingWidget } from './heading/heading.widget';
-import { IconWidget } from './icon/icon.widget';
-import { NumberFieldWidget } from './number-field/number-field.widget';
-import { RadioGroupWidget } from './radio-group/radio-group.widget';
-import { RateWidget } from './rate/rate.widget';
-import { SegmentedWidget } from './segmented/segmented.widget';
-import { SelectWidget } from './select/select.widget';
-import { SilderWidget } from './slider/silder.widget';
-import { SpaceCompactWidget } from './space-compact/space-compact.widget';
-import { SpaceWidget } from './space/space.widget';
-import { StepsWidget } from './steps/steps.widget';
-import { TableArrayWidget } from './table-array/table-array.widget';
-import { TabsArrayWidget } from './tabs-array/tabs-array.widget';
-import { TabsWidget } from './tabs/tabs.widget';
-import { TextAreaWidget } from './text-area/text-area.widget';
-import { TextFieldWidget } from './text-field/text-field.widget';
-import { TimePickerWidget } from './time-picker/time-picker.widget';
-import { ToggleWidget } from './toggle/toggle.widget';
-import { TransferWidget } from './transfer/transfer.widget';
-import { TreeSelectWidget } from './tree-select/tree-select.widget';
 
 export function useAllWidgets() {
   return [
@@ -88,7 +58,7 @@ export function useAllWidgets() {
     useCheckboxGroupWidget(),
     useRateWidget(),
     useTransferWidget(),
-    // useColorPickerWidget(),
+    useColorPickerWidget(),
     useSegmentedWidget(),
 
     useHeadingWidget(),
@@ -136,7 +106,7 @@ export function useTextFieldWidget(): FluentFormWidgetConfig<TextFieldControlSch
   return {
     kind: 'text-field',
     type: SchemaType.Control,
-    widget: TextFieldWidget,
+    loadWidget: () => import('./text-field/text-field.widget'),
     validators: schema => {
       const validators = validatorsOfTextControl(schema);
 
@@ -153,7 +123,7 @@ export function useTextAreaWidget(): FluentFormWidgetConfig<TextAreaControlSchem
   return {
     kind: 'text-area',
     type: SchemaType.Control,
-    widget: TextAreaWidget,
+    loadWidget: () => import('./text-area/text-area.widget'),
     validators: validatorsOfTextControl
   };
 }
@@ -162,7 +132,7 @@ export function useNumberFieldWidget(): FluentFormWidgetConfig<NumberFieldContro
   return {
     kind: 'number-field',
     type: SchemaType.Control,
-    widget: NumberFieldWidget
+    loadWidget: () => import('./number-field/number-field.widget')
   };
 }
 
@@ -170,7 +140,7 @@ export function useDatePickerWidget(): FluentFormWidgetConfig<DatePickerControlS
   return {
     kind: 'date-picker',
     type: SchemaType.Control,
-    widget: DatePickerWidget,
+    loadWidget: () => import('./date-picker/date-picker.widget'),
     patch: schema => {
       schema.mapper ??= {
         parser: (value: string | number | Date) => value ? new Date(value) : null,
@@ -188,7 +158,7 @@ export function useDateRangePickerWidget(): FluentFormWidgetConfig<DateRangePick
   return {
     kind: 'date-range-picker',
     type: SchemaType.Control,
-    widget: DateRangePickerWidget,
+    loadWidget: () => import('./date-range-picker/date-range-picker.widget'),
     patch: schema => {
       schema.mapper ??= {
         parser: (value: [string | number | Date, string | number | Date]) => value?.map(o => new Date(o)) as [Date, Date] ?? null,
@@ -206,7 +176,7 @@ export function useTimePickerWidget(): FluentFormWidgetConfig<TimePickerControlS
   return {
     kind: 'time-picker',
     type: SchemaType.Control,
-    widget: TimePickerWidget,
+    loadWidget: () => import('./time-picker/time-picker.widget'),
     patch: schema => {
       schema.mapper ??= {
         parser: (value: string | number | Date) => value ? new Date(value) : null,
@@ -221,7 +191,7 @@ export function useToggleWidget(): FluentFormWidgetConfig<ToggleControlSchema> {
   return {
     kind: 'toggle',
     type: SchemaType.Control,
-    widget: ToggleWidget
+    loadWidget: () => import('./toggle/toggle.widget')
   };
 }
 
@@ -229,7 +199,7 @@ export function useSelectWidget(): FluentFormWidgetConfig<SelectControlSchema> {
   return {
     kind: 'select',
     type: SchemaType.Control,
-    widget: SelectWidget
+    loadWidget: () => import('./select/select.widget')
   };
 }
 
@@ -237,7 +207,7 @@ export function useCascaderWidget(): FluentFormWidgetConfig<CascaderControlSchem
   return {
     kind: 'cascader',
     type: SchemaType.Control,
-    widget: CascaderWidget
+    loadWidget: () => import('./cascader/cascader.widget')
   };
 }
 
@@ -245,7 +215,7 @@ export function useTreeSelectWidget(): FluentFormWidgetConfig<TreeSelectControlS
   return {
     kind: 'tree-select',
     type: SchemaType.Control,
-    widget: TreeSelectWidget
+    loadWidget: () => import('./tree-select/tree-select.widget')
   };
 }
 
@@ -253,7 +223,7 @@ export function useSliderWidget(): FluentFormWidgetConfig<SliderControlSchema> {
   return {
     kind: 'slider',
     type: SchemaType.Control,
-    widget: SilderWidget
+    loadWidget: () => import('./slider/silder.widget')
   };
 }
 
@@ -261,7 +231,7 @@ export function useRadioGroupWidget(): FluentFormWidgetConfig<RadioGroupControlS
   return {
     kind: 'radio-group',
     type: SchemaType.Control,
-    widget: RadioGroupWidget
+    loadWidget: () => import('./radio-group/radio-group.widget')
   };
 }
 
@@ -269,7 +239,7 @@ export function useCheckboxWidget(): FluentFormWidgetConfig<CheckboxControlSchem
   return {
     kind: 'checkbox',
     type: SchemaType.Control,
-    widget: CheckboxWidget
+    loadWidget: () => import('./checkbox/checkbox.widget')
   };
 }
 
@@ -277,7 +247,7 @@ export function useCheckboxGroupWidget(): FluentFormWidgetConfig<CheckboxGroupCo
   return {
     kind: 'checkbox-group',
     type: SchemaType.Control,
-    widget: CheckboxGroupWidget
+    loadWidget: () => import('./checkbox-group/checkbox-group.widget')
   };
 }
 
@@ -285,7 +255,7 @@ export function useRateWidget(): FluentFormWidgetConfig<RateControlSchema> {
   return {
     kind: 'rate',
     type: SchemaType.Control,
-    widget: RateWidget
+    loadWidget: () => import('./rate/rate.widget')
   };
 }
 
@@ -293,23 +263,23 @@ export function useTransferWidget(): FluentFormWidgetConfig<TransferControlSchem
   return {
     kind: 'transfer',
     type: SchemaType.Control,
-    widget: TransferWidget
+    loadWidget: () => import('./transfer/transfer.widget')
   };
 }
 
-// export function useColorPickerWidget(): FluentFormWidgetConfig<ColorPickerControlSchema> {
-//   return {
-//     kind: 'color-picker',
-//     type: SchemaType.Control,
-//     widget: ColorPickerWidget
-//   };
-// }
+export function useColorPickerWidget(): FluentFormWidgetConfig<ColorPickerControlSchema> {
+  return {
+    kind: 'color-picker',
+    type: SchemaType.Control,
+    loadWidget: () => import('./color-picker/color-picker.widget')
+  };
+}
 
 export function useSegmentedWidget(): FluentFormWidgetConfig<SegmentedControlSchema> {
   return {
     kind: 'segmented',
     type: SchemaType.Control,
-    widget: SegmentedWidget
+    loadWidget: () => import('./segmented/segmented.widget')
   };
 }
 
@@ -317,7 +287,7 @@ export function useHeadingWidget(): FluentFormWidgetConfig<HeadingComponentSchem
   return {
     kind: 'heading',
     type: SchemaType.Component,
-    widget: HeadingWidget,
+    loadWidget: () => import('./heading/heading.widget'),
     patch: schema => {
       schema.col ??= 12;
       return schema;
@@ -329,7 +299,7 @@ export function useSpaceWidget(): FluentFormWidgetConfig<SpaceComponentSchema> {
   return {
     kind: 'space',
     type: SchemaType.ControlWrapper,
-    widget: SpaceWidget
+    loadWidget: () => import('./space/space.widget')
   };
 }
 
@@ -337,7 +307,7 @@ export function useSpaceCompactWidget(): FluentFormWidgetConfig<SpaceCompactComp
   return {
     kind: 'space-compact',
     type: SchemaType.ControlWrapper,
-    widget: SpaceCompactWidget
+    loadWidget: () => import('./space-compact/space-compact.widget')
   };
 }
 
@@ -345,7 +315,7 @@ export function useAlertWidget(): FluentFormWidgetConfig<AlertComponentSchema> {
   return {
     kind: 'alert',
     type: SchemaType.Component,
-    widget: AlertWidget,
+    loadWidget: () => import('./alert/alert.widget'),
     patch: schema => {
       schema.col ??= 12;
       return schema;
@@ -357,7 +327,7 @@ export function useIconWidget(): FluentFormWidgetConfig<IconComponentSchema> {
   return {
     kind: 'icon',
     type: SchemaType.Component,
-    widget: IconWidget
+    loadWidget: () => import('./icon/icon.widget')
   };
 }
 
@@ -365,7 +335,7 @@ export function useButtonWidget(): FluentFormWidgetConfig<ButtonComponentSchema>
   return {
     kind: 'button',
     type: SchemaType.Component,
-    widget: ButtonWidget,
+    loadWidget: () => import('./button/button.widget'),
     patch: schema => {
       if (schema.variants?.block) {
         schema.col ??= 12;
@@ -379,7 +349,7 @@ export function useButtonGroupWidget(): FluentFormWidgetConfig<ButtonGroupCompon
   return {
     kind: 'button-group',
     type: SchemaType.ComponentWrapper,
-    widget: ButtonGroupWidget
+    loadWidget: () => import('./button-group/button-group.widget')
   };
 }
 
@@ -388,7 +358,7 @@ export function useStepsWidget(): [FluentFormWidgetConfig<StepsComponentSchema>,
     {
       kind: 'steps',
       type: SchemaType.ComponentContainer,
-      widget: StepsWidget
+      loadWidget: () => import('./steps/steps.widget')
     },
     {
       kind: 'step',
@@ -402,7 +372,7 @@ export function useTabsWidget(): [FluentFormWidgetConfig<TabsComponentSchema>, F
     {
       kind: 'tabs',
       type: SchemaType.ComponentContainer,
-      widget: TabsWidget
+      loadWidget: () => import('./tabs/tabs.widget')
     },
     {
       kind: 'tab',
@@ -415,7 +385,7 @@ export function useFormGroupWidget(): FluentFormWidgetConfig<FormGroupSchema> {
   return {
     kind: 'group',
     type: SchemaType.ControlGroup,
-    widget: FormGroupWidget
+    loadWidget: () => import('./form-group/form-group.widget')
   };
 }
 
@@ -423,7 +393,7 @@ export function useFormArrayWidget(): FluentFormWidgetConfig<FormArraySchema> {
   return {
     kind: 'array',
     type: SchemaType.ControlArray,
-    widget: FormArrayWidget
+    loadWidget: () => import('./form-array/form-array.widget')
   };
 }
 
@@ -436,7 +406,7 @@ export function useTableArrayWidget(): [
     {
       kind: 'table-array',
       type: SchemaType.ControlArray,
-      widget: TableArrayWidget
+      loadWidget: () => import('./table-array/table-array.widget')
     },
     {
       kind: 'table-row-group',
@@ -453,7 +423,7 @@ export function useTabsArrayWidget(): FluentFormWidgetConfig<TabsArraySchema> {
   return {
     kind: 'tabs-array',
     type: SchemaType.ControlArray,
-    widget: TabsArrayWidget
+    loadWidget: () => import('./tabs-array/tabs-array.widget')
   };
 }
 
@@ -462,7 +432,7 @@ export function useCardsArrayWidget(): [FluentFormWidgetConfig<CardsArraySchema>
     {
       kind: 'cards-array',
       type: SchemaType.ControlArray,
-      widget: CardsArrayWidget
+      loadWidget: () => import('./cards-array/cards-array.widget')
     },
     {
       kind: 'card',

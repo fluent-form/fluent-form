@@ -38,6 +38,6 @@ type DatePickerWidgetTemplateContext = WidgetTemplateContext<DatePickerControlSc
   styles: `nz-date-picker { width: 100% }`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatePickerWidget extends AbstractWidget<DatePickerWidgetTemplateContext> {
+export default class DatePickerWidget extends AbstractWidget<DatePickerWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
 }

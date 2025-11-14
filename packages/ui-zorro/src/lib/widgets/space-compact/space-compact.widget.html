@@ -14,7 +14,7 @@
     @for (subschema of schema.schemas; track subschema) {
       <ng-container
         fluentWithInjector
-        [ngTemplateOutlet]="subschema | widgetTemplate"
+        [ngTemplateOutlet]="subschema | widgetTemplate | async"
         [ngTemplateOutletContext]="{ control: subschema.key | control: control, schema: subschema, model: model }" />
     }
   </nz-space-compact>

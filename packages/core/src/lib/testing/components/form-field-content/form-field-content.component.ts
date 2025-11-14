@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AbstractFormFieldContentComponent } from '../../../components';
 import { FluentWithInjectorDirective } from '../../../directives';
@@ -9,6 +9,7 @@ import { FluentWidgetTemplatePipe } from '../../../pipes';
  */
 @Component({
   imports: [
+    AsyncPipe,
     NgTemplateOutlet,
     FluentWithInjectorDirective,
     FluentWidgetTemplatePipe

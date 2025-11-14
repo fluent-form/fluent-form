@@ -21,4 +21,4 @@ type CheckboxGroupWidgetTemplateContext = WidgetTemplateContext<CheckboxGroupCon
   templateUrl: './checkbox-group.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CheckboxGroupWidget extends AbstractWidget<CheckboxGroupWidgetTemplateContext> { }
+export default class CheckboxGroupWidget extends AbstractWidget<CheckboxGroupWidgetTemplateContext> { }

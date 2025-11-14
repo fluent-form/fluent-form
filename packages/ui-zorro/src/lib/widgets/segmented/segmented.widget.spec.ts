@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SegmentedWidget } from './segmented.widget';
+import SegmentedWidget from './segmented.widget';
 
 describe('SegmentedWidget', () => {
   let component: SegmentedWidget;

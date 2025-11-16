@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SpaceCompactWidget } from './space-compact.widget';
+import SpaceCompactWidget from './space-compact.widget';
 
 describe('SpaceCompactWidget', () => {
   let component: SpaceCompactWidget;

@@ -41,7 +41,7 @@ type TextFieldWidgetTemplateContext = WidgetTemplateContext<TextFieldControlSche
   templateUrl: './text-field.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TextFieldWidget extends AbstractWidget<TextFieldWidgetTemplateContext> {
+export default class TextFieldWidget extends AbstractWidget<TextFieldWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
   protected readonly helper = {
     length: {

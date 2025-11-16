@@ -40,7 +40,7 @@ type NumberFieldWidgetTemplateContext = WidgetTemplateContext<NumberFieldControl
   styles: `nz-input-number { width: 100% }`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NumberFieldWidget extends AbstractWidget<NumberFieldWidgetTemplateContext> {
+export default class NumberFieldWidget extends AbstractWidget<NumberFieldWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
   protected readonly infinity = Infinity;
 }

@@ -7,11 +7,28 @@ import { SchemaKind, SchemaType } from '../schemas/interfaces';
 import { SCHEMA_MAP, WIDGET_MAP } from '../tokens';
 import { AbstractWidget, useRowWidget } from '../widgets';
 
+interface DefaultExport<T> {
+  default: T;
+}
+type MaybeDefaultExport<T> = T | DefaultExport<T>;
+
 export interface FluentFormWidgetConfig<S extends AbstractSchema> extends SchemaConfig<S> {
   kind: S['kind'];
   widget?: Type<AbstractWidget<unknown>>;
+  loadWidget?: () => Promise<MaybeDefaultExport<Type<AbstractWidget<unknown>>>>;
   /** Patch the schema, called when normalizing the schema. */
   patch?: SchemaPatchFn<S>;
+}
+
+function isWrappedDefaultExport<T>(value: T | DefaultExport<T>): value is DefaultExport<T> {
+  // We use `in` here with a string key `'default'`, because we expect `DefaultExport` objects to be
+  // dynamically imported ES modules with a spec-mandated `default` key. Thus we don't expect that
+  // `default` will be a renamed property.
+  return value && typeof value === 'object' && 'default' in value;
+}
+
+function maybeUnwrapDefaultExport<T>(input: T | DefaultExport<T>): T {
+  return isWrappedDefaultExport(input) ? input.default : input;
 }
 
 export function provideWidgetConfigs(configs: (FluentFormWidgetConfig<SafeAny> | FluentFormWidgetConfig<SafeAny>[])[]): Provider[] {
@@ -23,10 +40,12 @@ export function provideWidgetConfigs(configs: (FluentFormWidgetConfig<SafeAny> |
     {
       provide: WIDGET_MAP,
       useFactory: () => {
-        const map = new Map<string, Type<AbstractWidget<unknown>>>(
-          _configs.filter(config => config.widget).map(feature => [
+        const map = new Map<string, () => Promise<Type<AbstractWidget<unknown>>>>(
+          _configs.filter(config => config.widget || config.loadWidget).map(feature => [
             feature.kind,
-            feature.widget!
+            () => feature.widget
+              ? Promise.resolve(feature.widget!)
+              : feature.loadWidget!().then(maybeUnwrapDefaultExport)
           ])
         );
 

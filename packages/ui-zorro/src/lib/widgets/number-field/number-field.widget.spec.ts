@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NumberFieldWidget } from './number-field.widget';
+import NumberFieldWidget from './number-field.widget';
 
 describe('NumberFieldWidget', () => {
   let component: NumberFieldWidget;

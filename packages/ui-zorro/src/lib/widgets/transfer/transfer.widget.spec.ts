@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl } from '@angular/forms';
 import { TransferChange } from 'ng-zorro-antd/transfer';
-import { TransferItemsPipe, TransferWidget } from './transfer.widget';
+import TransferWidget, { TransferItemsPipe } from './transfer.widget';
 
 describe('TransferWidget', () => {
   let component: TransferWidget;

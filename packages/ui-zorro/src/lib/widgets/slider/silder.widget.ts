@@ -20,4 +20,4 @@ type SilderWidgetTemplateContext = WidgetTemplateContext<SliderControlSchema, Fo
   styles: `nz-slider { display: block; }`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SilderWidget extends AbstractWidget<SilderWidgetTemplateContext> { }
+export default class SilderWidget extends AbstractWidget<SilderWidgetTemplateContext> { }

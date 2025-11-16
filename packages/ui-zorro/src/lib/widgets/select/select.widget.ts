@@ -44,7 +44,7 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
   styles: `nz-select { width: 100% }`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectWidget extends AbstractWidget<SelectWidgetTemplateContext> {
+export default class SelectWidget extends AbstractWidget<SelectWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
   protected readonly infinity = Infinity;
   protected readonly compareWith = (a: SafeAny, b: SafeAny) => a === b;

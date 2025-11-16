@@ -19,4 +19,4 @@ type RadioGroupWidgetTemplateContext = WidgetTemplateContext<RadioGroupControlSc
   templateUrl: './radio-group.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RadioGroupWidget extends AbstractWidget<RadioGroupWidgetTemplateContext> { }
+export default class RadioGroupWidget extends AbstractWidget<RadioGroupWidgetTemplateContext> { }

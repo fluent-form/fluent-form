@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AlertWidget } from './alert.widget';
+import AlertWidget from './alert.widget';
 
 describe('AlertWidget', () => {
   let component: AlertWidget;

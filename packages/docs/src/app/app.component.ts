@@ -5,13 +5,14 @@ import { RouterOutlet } from '@angular/router';
 import { NgDocNavbarComponent, NgDocRootComponent, NgDocSidebarComponent, NgDocThemeToggleComponent } from '@ng-doc/app';
 import { NgDocButtonIconComponent, NgDocIconComponent, NgDocTooltipDirective } from '@ng-doc/ui-kit';
 import { catchError, EMPTY, map } from 'rxjs';
-import { BrandComponent } from './components';
+import { BrandComponent, NavProgressBar } from './components';
 
 @Component({
   selector: 'app-root',
   imports: [
     RouterOutlet,
     BrandComponent,
+    NavProgressBar,
     NgDocRootComponent,
     NgDocNavbarComponent,
     NgDocSidebarComponent,

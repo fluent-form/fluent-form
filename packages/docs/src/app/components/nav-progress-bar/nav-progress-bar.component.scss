@@ -1,0 +1,38 @@
+.sun-nav-progress-bar {
+  --track-color: transparent;
+  --progress-color: var(--ng-doc-primary);
+
+  > div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2.5px;
+    background: var(--track-color);
+    z-index: 999;
+
+    &::after {
+      content: "";
+      display: block;
+      height: 100%;
+      width: 40%;
+      transform-origin: left;
+      background: var(--progress-color);
+      animation: sun-nav-progress 1.5s infinite linear;
+    }
+  }
+}
+
+@keyframes sun-nav-progress {
+  0% {
+    transform: translateX(250%) scaleX(0.2);
+  }
+
+  80% {
+    transform: translateX(0) scaleX(1);
+  }
+
+  100% {
+    transform: translateX(0) scaleX(0);
+  }
+}

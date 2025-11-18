@@ -3,7 +3,8 @@ import type { Provider } from '@angular/core';
 export const enum FluentFormFeatureKind {
   UIAdapter,
   StaticExpression,
-  SchemaPatcher
+  SchemaPatcher,
+  Preload
 }
 
 export interface FluentFormFeature<K extends FluentFormFeatureKind> {

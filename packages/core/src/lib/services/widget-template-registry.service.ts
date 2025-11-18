@@ -13,7 +13,7 @@ export class WidgetTemplateRegistry extends Map<string, Promise<TemplateRef<unkn
     return super.get(kind) ?? this.register(kind);
   }
 
-  private register(kind: string) {
+  register(kind: string) {
     const component = this.widgetMap.get(kind);
 
     if (typeof ngDevMode !== 'undefined' && ngDevMode && !component) {

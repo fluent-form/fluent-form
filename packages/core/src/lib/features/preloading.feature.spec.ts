@@ -30,7 +30,6 @@ describe('WidgetTemplateRegistry', () => {
 
   it('should preloading work', async () => {
     await new Promise(resolve => setTimeout(resolve, 500));
-    Map.prototype.get.call(service, 'text-field');
     expect(Map.prototype.get.call(service, 'text-field')).toBeTruthy();
     expect(Map.prototype.get.call(service, 'range')).toBeTruthy();
     expect(Map.prototype.get.call(service, 'number-field')).toBeTruthy();

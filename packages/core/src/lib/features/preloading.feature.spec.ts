@@ -5,7 +5,7 @@ import { WidgetTemplateRegistry } from '../services';
 import { withTesting } from '../testing';
 import { withPreloading } from './preloading.feature';
 
-describe('WidgetTemplateRegistry', () => {
+describe('withPreloading', () => {
   let service: WidgetTemplateRegistry;
 
   beforeEach(() => {

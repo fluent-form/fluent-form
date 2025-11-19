@@ -4,7 +4,7 @@ export const enum FluentFormFeatureKind {
   UIAdapter,
   StaticExpression,
   SchemaPatcher,
-  Preload
+  Preloading
 }
 
 export interface FluentFormFeature<K extends FluentFormFeatureKind> {

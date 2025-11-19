@@ -1,3 +1,19 @@
+## 0.29.6 (2025-11-19)
+
+### 🚀 Features
+
+- **core:** add preloading feature for lazy-loaded widgets ([#213](https://github.com/fluent-form/fluent-form/pull/213))
+- support lazy load widgets ([#211](https://github.com/fluent-form/fluent-form/pull/211))
+
+### 🩹 Fixes
+
+- **core:** correct enum value from Preload to Preloading for consistency ([d95a8d7d](https://github.com/fluent-form/fluent-form/commit/d95a8d7d))
+
+### ❤️ Thank You
+
+- hyperlife1119 @HyperLife1119
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.5 (2025-11-04)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

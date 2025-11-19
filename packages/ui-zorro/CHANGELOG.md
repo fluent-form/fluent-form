@@ -1,3 +1,13 @@
+## 0.29.6 (2025-11-19)
+
+### 🚀 Features
+
+- support lazy load widgets ([#211](https://github.com/fluent-form/fluent-form/pull/211))
+
+### ❤️ Thank You
+
+- hyperlife1119 @HyperLife1119
+
 ## 0.29.5 (2025-11-04)
 
 ### 🚀 Features

@@ -17,7 +17,7 @@
 
 - Support for using the Fluent API and JSON.
 - Based on embedded view, no host element, supports nested layout.
-- Import on demand, lazy loading and tree shakable.
+- Tree shakable, supports lazy loading and preloading.
 - Built on Angular reactive forms.
 - Supports integration with UI libraries.
 

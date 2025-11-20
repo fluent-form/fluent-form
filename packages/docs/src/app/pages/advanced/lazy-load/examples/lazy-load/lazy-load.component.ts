@@ -24,16 +24,16 @@ import {
 export class LazyLoadExampleComponent {
   readonly schema = form(() => {
     array('array').col(12).schemas(() => {
-      textField('text').col(12);
-      textArea('textarea').col(12);
-      numberField('number').col(12);
       group('group').col(12).schemas(() => {
+        textField('text').col(12);
+        textArea('textarea').col(12);
+        numberField('number').col(12);
         datePicker('date').col(12);
         dateRangePicker('dateRange').col(12);
         timePicker('time').col(12);
+        toggle('toggle').col(12);
+        slider('slider').col(12);
       });
-      toggle('toggle').col(12);
-      slider('slider').col(12);
     });
   });
 

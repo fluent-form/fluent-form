@@ -1,9 +1,10 @@
 import { Signal, computed } from '@angular/core';
 import { AbstractSchema, Builder, Indexable, SingleSchemaKey, UnstableBuilder, composeBuilder, isArray } from '@fluent-form/core';
-import { SafeAny } from '@ngify/types';
 import { CardsArraySchema, FormArraySchema, FormGroupSchema, TableArraySchema, TableRowGroupSchema, TabsArraySchema } from '../schemas';
 import { KindOrKey } from './helper';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type SafeAny = any;
 type ComposeFn = (it: Builder<FormGroupSchema>) => SafeAny;
 
 export function form(composeFn: ComposeFn): Signal<FormGroupSchema>;

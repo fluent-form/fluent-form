@@ -21,7 +21,6 @@
     "ng-zorro-antd": ">=18.0.0"
   },
   "dependencies": {
-    "@fluent-form/core": "0.0.0",
-    "@ngify/types": "~1.5.0"
+    "@fluent-form/core": "0.0.0"
   }
 }

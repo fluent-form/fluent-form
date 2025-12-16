@@ -5,7 +5,6 @@
     "entryFile": "src/index.ts"
   },
   "allowedNonPeerDependencies": [
-    "@fluent-form/*",
-    "@ngify/types"
+    "@fluent-form/*"
   ]
 }

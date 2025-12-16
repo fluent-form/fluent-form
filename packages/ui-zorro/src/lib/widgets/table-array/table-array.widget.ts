@@ -1,4 +1,4 @@
-import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Directive, ElementRef, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
@@ -51,7 +51,8 @@ export class ElementDirective {
     NzIconModule,
     NzFormModule,
     NzToolTipModule,
-    DragDropModule,
+    CdkDrag,
+    CdkDropList,
     FluentGridModule,
     FluentBindingDirective,
     FluentContextGuardDirective,

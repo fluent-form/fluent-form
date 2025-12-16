@@ -1,4 +1,4 @@
-import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
@@ -37,7 +37,8 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<CardsArraySchema, Fo
 @Component({
   imports: [
     NgTemplateOutlet,
-    DragDropModule,
+    CdkDrag,
+    CdkDropList,
     NzCardModule,
     NzFormModule,
     NzButtonModule,

@@ -1,3 +1,13 @@
+## 0.29.8 (2025-12-19)
+
+### 🩹 Fixes
+
+- **ui-zorro/slider:** handle default values for marks and tip formatter ([c8c175fa](https://github.com/fluent-form/fluent-form/commit/c8c175fa))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.7 (2025-12-19)
 
 ### 🚀 Features

@@ -1,3 +1,13 @@
+## 0.29.7 (2025-12-19)
+
+### 🚀 Features
+
+- **ui-zorro/slider:** add marks and tooltip formatter options ([a4043b28](https://github.com/fluent-form/fluent-form/commit/a4043b28))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.6 (2025-11-19)
 
 ### 🚀 Features

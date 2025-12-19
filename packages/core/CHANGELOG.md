@@ -1,3 +1,7 @@
+## 0.29.7 (2025-12-19)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
 ## 0.29.6 (2025-11-19)
 
 ### 🚀 Features

@@ -304,6 +304,10 @@ export interface SliderControlSchema<Key extends SchemaKey = SchemaKey, Val = nu
   type?: 'range' | 'single';
   /** Step length */
   step?: number;
+  marks?: NzSliderComponent['nzMarks'];
+  tip?: {
+    formatter?: NzSliderComponent['nzTipFormatter'];
+  };
   dots?: boolean;
   vertical?: boolean;
   reverse?: boolean;

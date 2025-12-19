@@ -14,6 +14,8 @@
     [nzRange]="schema.type === 'range'"
     [nzStep]="schema.step ?? 1"
     [nzDots]="schema.dots"
+    [nzMarks]="schema.marks!"
+    [nzTipFormatter]="schema.tip?.formatter"
     [nzVertical]="schema.vertical"
     [nzReverse]="schema.reverse" />
 </ng-template>

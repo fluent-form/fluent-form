@@ -1,3 +1,13 @@
+## 0.29.9 (2025-12-23)
+
+### 🚀 Features
+
+- **ui-zorro:** enhance custom template context ([c8f081ac](https://github.com/fluent-form/fluent-form/commit/c8f081ac))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.8 (2025-12-19)
 
 ### 🩹 Fixes

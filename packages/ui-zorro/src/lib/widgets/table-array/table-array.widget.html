@@ -107,9 +107,7 @@
           <nz-icon nz-icon nzTheme="outline" [nzType]="addBtn.icon" />
         }
         @if (addBtn.content) {
-          <ng-template [fluentTemplateOutlet]="addBtn.content | template">
-            {{ addBtn.content }}
-          </ng-template>
+          <ng-template [fluentTemplateOutlet]="addBtn.content | template">{{ addBtn.content }}</ng-template>
         }
       </button>
     </nz-form-control>

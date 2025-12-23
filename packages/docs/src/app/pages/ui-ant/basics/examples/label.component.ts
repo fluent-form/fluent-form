@@ -8,8 +8,8 @@ import { button, form, textField } from '@fluent-form/ui-zorro';
   imports: [FluentFormModule, JsonPipe],
   template: `
     <fluent-form [schema]="schema()" [(model)]="model">
-      <ng-template fluentTemplate="labelTmpl">
-        <strong>Custom Template</strong>
+      <ng-template fluentTemplate="labelTmpl" let-control="control" let-schema="schema" let-model="model">
+        <strong>Custom Template {{ control.value }}</strong>
       </ng-template>
     </fluent-form>
     <pre>{{ model() | json }}</pre>

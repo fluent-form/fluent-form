@@ -94,7 +94,11 @@
       <nz-icon [nzTheme]="icon.theme ?? 'outline'" [nzType]="icon.type" />
     }
     @if (schema.content) {
-      <ng-container *fluentTemplateOutlet="schema.content | template">{{ schema.content }}</ng-container>
+      <ng-template
+        [fluentTemplateOutlet]="schema.content | template"
+        [fluentTemplateOutletContext]="{ control, schema, model }"
+        >{{ schema.content }}</ng-template
+      >
     }
   </ng-template>
 </ng-template>

@@ -1,3 +1,13 @@
+## 0.29.10 (2025-12-27)
+
+### 🚀 Features
+
+- **core:** add destroyRef to context in onInit hook ([c9becad0](https://github.com/fluent-form/fluent-form/commit/c9becad0))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.9 (2025-12-23)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

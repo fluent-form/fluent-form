@@ -138,7 +138,7 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
     const schema = this.fluentBindingSchema();
     const control = this.fluentBindingControl();
     const model = this.fluentBindingModel();
-    const context: SchemaContext = { control, schema, model };
+    const context = { control, schema, model, destroyRef: this.destroyRef };
 
     if (isHookHolder(schema)) {
       schema.hooks.onInit?.(context);

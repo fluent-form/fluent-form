@@ -1,5 +1,5 @@
 import {
-  DestroyRef, Directive, ElementRef, type OnInit, type OutputRef, effect, inject, input, isSignal, untracked
+  DestroyRef, Directive, ElementRef, Injector, type OnInit, type OutputRef, effect, inject, input, isSignal, runInInjectionContext, untracked
 } from '@angular/core';
 import { SIGNAL, type SignalNode, signalSetFn } from '@angular/core/primitives/signals';
 import { outputToObservable } from '@angular/core/rxjs-interop';
@@ -34,6 +34,7 @@ function isObserverHolder(value: SafeAny): value is Required<EventObserverHolder
 })
 export class FluentBindingDirective<E extends HTMLElement, C extends object, S extends AbstractSchema> implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
+  private readonly injector = inject(Injector);
 
   readonly fluentBindingComponent = input<C>();
   readonly fluentBindingSchema = input.required<S>();
@@ -138,12 +139,12 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
     const schema = this.fluentBindingSchema();
     const control = this.fluentBindingControl();
     const model = this.fluentBindingModel();
-    const context = { control, schema, model, destroyRef: this.destroyRef };
+    const context: SchemaContext<S> = { control, schema, model };
 
     if (isHookHolder(schema)) {
-      schema.hooks.onInit?.(context);
+      runInInjectionContext(this.injector, () => schema.hooks.onInit?.(context));
       this.destroyRef.onDestroy(() =>
-        schema.hooks.onDestroy?.(context));
+        runInInjectionContext(this.injector, () => schema.hooks.onDestroy?.(context)));
     }
   }
 }

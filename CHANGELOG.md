@@ -1,3 +1,13 @@
+## 0.29.11 (2025-12-29)
+
+### 🚀 Features
+
+- **core:** run hooks in injection context ([ec317009](https://github.com/fluent-form/fluent-form/commit/ec317009))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.10 (2025-12-27)
 
 ### 🚀 Features

@@ -1,3 +1,7 @@
+## 0.29.11 (2025-12-29)
+
+This was a version bump only for ui-zorro to align it with other projects, there were no code changes.
+
 ## 0.29.10 (2025-12-27)
 
 This was a version bump only for ui-zorro to align it with other projects, there were no code changes.

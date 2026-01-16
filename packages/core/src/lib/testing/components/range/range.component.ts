@@ -5,14 +5,14 @@ import { type ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angu
   selector: 'fluent-range',
   imports: [FormsModule],
   templateUrl: './range.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => RangeComponent),
       multi: true
     }
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RangeComponent implements ControlValueAccessor {
   // eslint-disable-next-line @typescript-eslint/no-empty-function

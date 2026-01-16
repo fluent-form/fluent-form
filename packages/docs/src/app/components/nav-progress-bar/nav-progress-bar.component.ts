@@ -7,8 +7,8 @@ import { filter, map } from 'rxjs';
   selector: 'app-nav-progress-bar',
   template: `@if (navigating()) {<div></div>}`,
   styleUrl: './nav-progress-bar.component.scss',
-  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   host: {
     class: 'sun-nav-progress-bar'
   }

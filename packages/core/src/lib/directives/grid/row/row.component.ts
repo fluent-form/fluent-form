@@ -36,21 +36,21 @@ const BREAKPOINTS: string[] = [
   selector: 'fluent-row',
   template: '',
   styleUrl: './row.component.scss',
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
 class FluentRowComponent { }
 
 @Directive({
   selector: 'fluent-row,[fluentRow]',
-  exportAs: 'fluentRow',
   host: {
     class: 'fluent-row',
     '[style.--gap-x.px]': 'gapPx()[0]',
     '[style.--gap-y.px]': 'gapPx()[1]',
     '[style.justify-content]': 'justifyContent()',
     '[style.align-items]': 'alignItems()'
-  }
+  },
+  exportAs: 'fluentRow'
 })
 export class FluentRowDirective {
   readonly gap = input<Gap | Stringify<Gap> | [x: Gap, y: Gap] | Partial<Record<keyof Breakpoints, Gap | [x: Gap, y: Gap]>> | null>();

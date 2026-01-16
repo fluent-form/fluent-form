@@ -21,7 +21,6 @@ import { FluentControlContainer } from './models/control-container';
 
 @Directive({
   selector: '[fluentSchema]',
-  exportAs: 'fluentForm',
   providers: [
     {
       provide: FluentControlContainer,
@@ -31,7 +30,8 @@ import { FluentControlContainer } from './models/control-container';
       provide: NAMED_TEMPLATES,
       useFactory: () => []
     }
-  ]
+  ],
+  exportAs: 'fluentForm'
 })
 export class FluentFormDirective<T extends AnyObject | AnyArray> implements FluentControlContainer<T> {
   private readonly formUtil = inject(FormUtil);

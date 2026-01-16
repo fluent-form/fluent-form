@@ -25,13 +25,13 @@ import { FormUtil, ModelUtil, SchemaUtil } from '../../utils';
   selector: 'fluent-form',
   imports: [NgTemplateOutlet],
   templateUrl: './form.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NAMED_TEMPLATES,
       useFactory: () => []
     }
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FluentForm<T extends AnyObject> {
   private readonly formUtil = inject(FormUtil);

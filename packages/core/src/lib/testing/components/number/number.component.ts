@@ -4,14 +4,14 @@ import { type ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'fluent-number',
   template: `num()`,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => NumberComponent),
       multi: true
     }
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NumberComponent implements ControlValueAccessor {
   // eslint-disable-next-line @typescript-eslint/no-empty-function

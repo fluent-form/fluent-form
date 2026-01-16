@@ -12,19 +12,19 @@ type Offset = Cell | 'auto' | null;
   selector: 'fluent-col',
   template: '',
   styleUrl: './col.component.scss',
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
 class FluentColComponent { }
 
 @Directive({
   selector: 'fluent-col,[fluentCol]',
-  exportAs: 'fluentCol',
   host: {
     class: 'fluent-column',
     '[class]': 'classes()',
     '[style.flex]': 'flex()'
-  }
+  },
+  exportAs: 'fluentCol'
 })
 export class FluentColDirective {
   readonly span = input<Span | Stringify<Span> | Partial<Record<keyof Breakpoints, Span>>>();

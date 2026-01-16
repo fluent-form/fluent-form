@@ -3,7 +3,6 @@ import { FluentFormWidgetConfig, SchemaType, isNumber } from '@fluent-form/core'
 import {
   AlertComponentSchema,
   ButtonComponentSchema,
-  ButtonGroupComponentSchema,
   CardComponentSchema,
   CardsArraySchema,
   CascaderControlSchema,
@@ -70,7 +69,7 @@ export function useAllWidgets() {
     useAlertWidget(),
     useIconWidget(),
 
-    useButtonGroupWidget(),
+    // useButtonGroupWidget(),
 
     useStepsWidget(),
     useTabsWidget(),
@@ -342,14 +341,6 @@ export function useButtonWidget(): FluentFormWidgetConfig<ButtonComponentSchema>
       }
       return schema;
     }
-  };
-}
-
-export function useButtonGroupWidget(): FluentFormWidgetConfig<ButtonGroupComponentSchema> {
-  return {
-    kind: 'button-group',
-    type: SchemaType.ComponentWrapper,
-    loadWidget: () => import('./button-group/button-group.widget')
   };
 }
 

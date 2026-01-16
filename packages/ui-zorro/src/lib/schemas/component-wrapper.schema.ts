@@ -10,7 +10,7 @@ import { ButtonComponentSchema } from './component.schema';
 import { Labelful } from './interfaces';
 
 /**
- * @public
+ * @deprecated
  */
 export interface ButtonGroupComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
   extends AbstractComponentWrapperSchema<Key>,

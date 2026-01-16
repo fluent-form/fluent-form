@@ -10,7 +10,7 @@ import {
 import { NzCardComponent } from 'ng-zorro-antd/card';
 import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
-import type { NzTabComponent, NzTabPosition, NzTabSetComponent, NzTabType } from 'ng-zorro-antd/tabs';
+import type { NzTabComponent, NzTabPosition, NzTabsComponent, NzTabType } from 'ng-zorro-antd/tabs';
 import { Labelful } from './interfaces';
 
 /**
@@ -53,9 +53,9 @@ export interface StepComponentSchema<Key extends SingleSchemaKey = SingleSchemaK
  */
 export interface TabsComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
   extends AbstractComponentContainerSchema<Key>,
-  ComponentEventListenerHolder<NzTabSetComponent>,
-  ComponentEventObserverHolder<NzTabSetComponent>,
-  ComponentPropertyHolder<NzTabSetComponent>,
+  ComponentEventListenerHolder<NzTabsComponent>,
+  ComponentEventObserverHolder<NzTabsComponent>,
+  ComponentPropertyHolder<NzTabsComponent>,
   Labelful {
   kind: 'tabs';
   type?: NzTabType;

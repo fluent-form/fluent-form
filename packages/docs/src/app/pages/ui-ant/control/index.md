@@ -190,7 +190,7 @@ import { useSegmentedWidget } from '@fluent-form/ui-zorro';
 
 {{ NgDocActions.demo("SegmentedExampleComponent") }}
 
-<!-- ## ColorPicker
+## ColorPicker
 
 颜色选择器允许用户选择或自定义颜色。
 
@@ -198,4 +198,4 @@ import { useSegmentedWidget } from '@fluent-form/ui-zorro';
 import { useColorPickerWidget } from '@fluent-form/ui-zorro';
 ```
 
-{{ NgDocActions.demo("ColorPickerExampleComponent") }} -->
+{{ NgDocActions.demo("ColorPickerExampleComponent") }}

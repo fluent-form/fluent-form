@@ -14,7 +14,8 @@ ng add @fluent-form/core
 
 | Angular | FluentForm |
 | ------- | ---------- |
-| v20.x   | >=0.29.x   |
+| v21.x   | >=0.30.x   |
+| v20.x   | >=0.30.x   |
 | v19.x   | >=0.29.x   |
 | v18.x   | ^0.28.x    |
 
@@ -24,5 +25,6 @@ ng add @fluent-form/core
 
 | Angular | FluentForm  |
 | ------- | ----------- |
+| v18.x   | ^0.28.x     |
 | v17.x   | ^0.26.x     |
 | v16.x   | Unsupported |

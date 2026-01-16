@@ -33,7 +33,7 @@
 + textField('x').affixes({ prefix: 'prefix', suffix: 'suffix' })
 ```
 
-5. `inputGroup()` 和 `numberGroup()` 组件已被移除，使用 `spaceCompact()` 组件代替。
+5. `inputGroup()` `numberGroup()` 和 `buttonGroup()` 组件已被移除，使用 `spaceCompact()` 组件代替。
 
 6. API 重命名：
 

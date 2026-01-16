@@ -15,10 +15,10 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@angular/forms": ">=18.0.0",
-    "@angular/cdk": ">=18.0.0",
-    "@angular/core": ">=18.0.0",
-    "ng-zorro-antd": ">=18.0.0"
+    "@angular/forms": ">=19.0.0",
+    "@angular/cdk": ">=19.0.0",
+    "@angular/core": ">=19.0.0",
+    "ng-zorro-antd": ">=19.0.0"
   },
   "dependencies": {
     "@fluent-form/core": "0.0.0"

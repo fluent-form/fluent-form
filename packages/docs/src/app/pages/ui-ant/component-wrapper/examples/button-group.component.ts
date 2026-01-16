@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { FluentFormComponent } from '@fluent-form/core';
-import { button, buttonGroup, form } from '@fluent-form/ui-zorro';
+import { button, form, spaceCompact } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'button-group-example',
@@ -9,12 +9,12 @@ import { button, buttonGroup, form } from '@fluent-form/ui-zorro';
 })
 export class ButtonGroupExampleComponent {
   readonly schema = form(() => {
-    buttonGroup().label('Basic').schemas(() => {
+    spaceCompact().label('Basic').schemas(() => {
       button().type('primary').content('« Previous');
       button().type('primary').content('Next »');
     });
 
-    buttonGroup().label('Different types').schemas(() => {
+    spaceCompact().label('Different types').schemas(() => {
       button().content('Cancel');
       button().type('primary').content('Confirm');
     });

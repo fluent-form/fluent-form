@@ -9,6 +9,7 @@ import {
   FluentGridModule,
   FluentInjectPipe,
   FluentReactivePipe,
+  FluentTemplateOutlet,
   FluentTemplatePipe,
   InvokePipe,
   Length,
@@ -35,6 +36,7 @@ type TextFieldWidgetTemplateContext = WidgetTemplateContext<TextFieldControlSche
     FluentColumnPipe,
     FluentTemplatePipe,
     FluentInjectPipe,
+    FluentTemplateOutlet,
     InvokePipe,
     StatusPipe
   ],

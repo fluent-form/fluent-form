@@ -113,6 +113,7 @@ export interface TextFieldControlSchema<Key extends SingleSchemaKey = SingleSche
   kind: 'text-field';
   /* A type of input. */
   type?: 'text' | 'number' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
+  clearable?: boolean;
   addons?: {
     before?: MaybeSchemaReactiveFn<TextFieldControlSchema, string | TemplateRef<void> | null>;
     after?: MaybeSchemaReactiveFn<TextFieldControlSchema, string | TemplateRef<void> | null>;

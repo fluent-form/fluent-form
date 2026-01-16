@@ -44,6 +44,12 @@ export class TextFieldExampleComponent {
       .placeholder('Please enter')
       .addons({ after: '#settingsIconTmpl' })
       .col(4);
+
+    textField('clearable')
+      .label('With clear button')
+      .placeholder('Please enter')
+      .clearable(true)
+      .col(4);
   });
 
   readonly model = signal({});

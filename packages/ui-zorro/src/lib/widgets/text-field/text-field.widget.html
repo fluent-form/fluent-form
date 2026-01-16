@@ -3,68 +3,192 @@
   @let addonAfter = schema.addons?.after | reactive: model : schema : control | template;
   @let prefix = schema.affixes?.prefix | reactive: model : schema : control | template;
   @let suffix = schema.affixes?.suffix | reactive: model : schema : control | template;
+  @let hasWrapper =
+    schema.affixes || schema.addons || schema.clearable || schema.type === 'password' || schema.type === 'search';
 
   @if (ControlWrapperDirective | inject: { optional: true }) {
     @if (!(schema.hidden | reactive: model : schema : control)) {
-      @if (schema.affixes || schema.addons || schema.clearable) {
-        <nz-input-wrapper
-          fluentCol
-          [span]="schema.col | col: 'span'"
-          [flex]="schema.col | col: 'flex'"
-          [offset]="schema.col | col: 'offset'"
-          [class]="schema.class"
-          [style]="schema.style"
-          [nzAllowClear]="schema.clearable">
-          <input
-            nz-input
-            [attr.id]="schema.id"
-            [attr.name]="schema.key"
-            [attr.maxlength]="helper.length.max | invoke: schema.length"
-            [attr.minlength]="helper.length.min | invoke: schema.length"
-            [fluentBindingSchema]="schema"
-            [fluentBindingControl]="control"
-            [fluentBindingModel]="model"
-            [formControl]="control"
-            [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
-            [type]="schema.type ?? 'text'"
-            [autofocus]="schema.autofocus"
-            [readonly]="schema.readonly | reactive: model : schema : control"
-            [nzSize]="schema.size!"
-            [nzStatus]="(control | status)()"
-            [nzBorderless]="schema.borderless" />
-          @if (addonBefore) {
-            <ng-template
-              nzInputAddonBefore
-              [fluentTemplateOutlet]="addonBefore"
-              [fluentTemplateOutletContext]="{ control, schema, model }"
-              >{{ addonBefore }}</ng-template
-            >
+      @if (hasWrapper) {
+        @switch (schema.type) {
+          @case ('password') {
+            <nz-input-password
+              fluentCol
+              [span]="schema.col | col: 'span'"
+              [flex]="schema.col | col: 'flex'"
+              [offset]="schema.col | col: 'offset'"
+              [class]="schema.class"
+              [style]="schema.style"
+              [nzAllowClear]="schema.clearable">
+              <input
+                nz-input
+                [attr.id]="schema.id"
+                [attr.name]="schema.key"
+                [attr.maxlength]="helper.length.max | invoke: schema.length"
+                [attr.minlength]="helper.length.min | invoke: schema.length"
+                [fluentBindingSchema]="schema"
+                [fluentBindingControl]="control"
+                [fluentBindingModel]="model"
+                [formControl]="control"
+                [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
+                [autofocus]="schema.autofocus"
+                [readonly]="schema.readonly | reactive: model : schema : control"
+                [nzSize]="schema.size!"
+                [nzStatus]="(control | status)()"
+                [nzBorderless]="schema.borderless" />
+              @if (addonBefore) {
+                <ng-template
+                  nzInputAddonBefore
+                  [fluentTemplateOutlet]="addonBefore"
+                  [fluentTemplateOutletContext]="{ control, schema, model }"
+                  >{{ addonBefore }}</ng-template
+                >
+              }
+              @if (addonAfter) {
+                <ng-template
+                  nzInputAddonAfter
+                  [fluentTemplateOutlet]="addonAfter"
+                  [fluentTemplateOutletContext]="{ control, schema, model }"
+                  >{{ addonAfter }}</ng-template
+                >
+              }
+              @if (prefix) {
+                <ng-template
+                  nzInputPrefix
+                  [fluentTemplateOutlet]="prefix"
+                  [fluentTemplateOutletContext]="{ control, schema, model }"
+                  >{{ prefix }}</ng-template
+                >
+              }
+              @if (suffix) {
+                <ng-template
+                  nzInputSuffix
+                  [fluentTemplateOutlet]="suffix"
+                  [fluentTemplateOutletContext]="{ control, schema, model }"
+                  >{{ suffix }}</ng-template
+                >
+              }
+            </nz-input-password>
           }
-          @if (addonAfter) {
-            <ng-template
-              nzInputAddonAfter
-              [fluentTemplateOutlet]="addonAfter"
-              [fluentTemplateOutletContext]="{ control, schema, model }"
-              >{{ addonAfter }}</ng-template
-            >
+          @case ('search') {
+            <nz-input-search
+              fluentCol
+              [span]="schema.col | col: 'span'"
+              [flex]="schema.col | col: 'flex'"
+              [offset]="schema.col | col: 'offset'"
+              [class]="schema.class"
+              [style]="schema.style"
+              [nzAllowClear]="schema.clearable">
+              <input
+                nz-input
+                [attr.id]="schema.id"
+                [attr.name]="schema.key"
+                [attr.maxlength]="helper.length.max | invoke: schema.length"
+                [attr.minlength]="helper.length.min | invoke: schema.length"
+                [fluentBindingSchema]="schema"
+                [fluentBindingControl]="control"
+                [fluentBindingModel]="model"
+                [formControl]="control"
+                [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
+                [autofocus]="schema.autofocus"
+                [readonly]="schema.readonly | reactive: model : schema : control"
+                [nzSize]="schema.size!"
+                [nzStatus]="(control | status)()"
+                [nzBorderless]="schema.borderless" />
+              @if (addonBefore) {
+                <ng-template
+                  nzInputAddonBefore
+                  [fluentTemplateOutlet]="addonBefore"
+                  [fluentTemplateOutletContext]="{ control, schema, model }"
+                  >{{ addonBefore }}</ng-template
+                >
+              }
+              @if (addonAfter) {
+                <ng-template
+                  nzInputAddonAfter
+                  [fluentTemplateOutlet]="addonAfter"
+                  [fluentTemplateOutletContext]="{ control, schema, model }"
+                  >{{ addonAfter }}</ng-template
+                >
+              }
+              @if (prefix) {
+                <ng-template
+                  nzInputPrefix
+                  [fluentTemplateOutlet]="prefix"
+                  [fluentTemplateOutletContext]="{ control, schema, model }"
+                  >{{ prefix }}</ng-template
+                >
+              }
+              @if (suffix) {
+                <ng-template
+                  nzInputSuffix
+                  [fluentTemplateOutlet]="suffix"
+                  [fluentTemplateOutletContext]="{ control, schema, model }"
+                  >{{ suffix }}</ng-template
+                >
+              }
+            </nz-input-search>
           }
-          @if (prefix) {
-            <ng-template
-              nzInputPrefix
-              [fluentTemplateOutlet]="prefix"
-              [fluentTemplateOutletContext]="{ control, schema, model }"
-              >{{ prefix }}</ng-template
-            >
+          @default {
+            <nz-input-wrapper
+              fluentCol
+              [span]="schema.col | col: 'span'"
+              [flex]="schema.col | col: 'flex'"
+              [offset]="schema.col | col: 'offset'"
+              [class]="schema.class"
+              [style]="schema.style"
+              [nzAllowClear]="schema.clearable">
+              <input
+                nz-input
+                [attr.id]="schema.id"
+                [attr.name]="schema.key"
+                [attr.maxlength]="helper.length.max | invoke: schema.length"
+                [attr.minlength]="helper.length.min | invoke: schema.length"
+                [fluentBindingSchema]="schema"
+                [fluentBindingControl]="control"
+                [fluentBindingModel]="model"
+                [formControl]="control"
+                [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
+                [type]="schema.type ?? 'text'"
+                [autofocus]="schema.autofocus"
+                [readonly]="schema.readonly | reactive: model : schema : control"
+                [nzSize]="schema.size!"
+                [nzStatus]="(control | status)()"
+                [nzBorderless]="schema.borderless" />
+              @if (addonBefore) {
+                <ng-template
+                  nzInputAddonBefore
+                  [fluentTemplateOutlet]="addonBefore"
+                  [fluentTemplateOutletContext]="{ control, schema, model }"
+                  >{{ addonBefore }}</ng-template
+                >
+              }
+              @if (addonAfter) {
+                <ng-template
+                  nzInputAddonAfter
+                  [fluentTemplateOutlet]="addonAfter"
+                  [fluentTemplateOutletContext]="{ control, schema, model }"
+                  >{{ addonAfter }}</ng-template
+                >
+              }
+              @if (prefix) {
+                <ng-template
+                  nzInputPrefix
+                  [fluentTemplateOutlet]="prefix"
+                  [fluentTemplateOutletContext]="{ control, schema, model }"
+                  >{{ prefix }}</ng-template
+                >
+              }
+              @if (suffix) {
+                <ng-template
+                  nzInputSuffix
+                  [fluentTemplateOutlet]="suffix"
+                  [fluentTemplateOutletContext]="{ control, schema, model }"
+                  >{{ suffix }}</ng-template
+                >
+              }
+            </nz-input-wrapper>
           }
-          @if (suffix) {
-            <ng-template
-              nzInputSuffix
-              [fluentTemplateOutlet]="suffix"
-              [fluentTemplateOutletContext]="{ control, schema, model }"
-              >{{ suffix }}</ng-template
-            >
-          }
-        </nz-input-wrapper>
+        }
       } @else {
         <input
           fluentCol
@@ -92,59 +216,169 @@
       }
     }
   } @else {
-    @if (schema.affixes || schema.addons || schema.clearable) {
-      <nz-input-wrapper [class]="schema.class" [style]="schema.style" [nzAllowClear]="schema.clearable">
-        <input
-          nz-input
-          [attr.id]="schema.id"
-          [attr.name]="schema.key"
-          [attr.maxlength]="helper.length.max | invoke: schema.length"
-          [attr.minlength]="helper.length.min | invoke: schema.length"
-          [fluentBindingSchema]="schema"
-          [fluentBindingControl]="control"
-          [fluentBindingModel]="model"
-          [formControl]="control"
-          [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
-          [type]="schema.type ?? 'text'"
-          [autofocus]="schema.autofocus"
-          [readonly]="schema.readonly | reactive: model : schema : control"
-          [nzSize]="schema.size!"
-          [nzStatus]="(control | status)()"
-          [nzBorderless]="schema.borderless" />
+    @if (hasWrapper) {
+      @switch (schema.type) {
+        @case ('password') {
+          <nz-input-password [class]="schema.class" [style]="schema.style" [nzAllowClear]="schema.clearable">
+            <input
+              nz-input
+              [attr.id]="schema.id"
+              [attr.name]="schema.key"
+              [attr.maxlength]="helper.length.max | invoke: schema.length"
+              [attr.minlength]="helper.length.min | invoke: schema.length"
+              [fluentBindingSchema]="schema"
+              [fluentBindingControl]="control"
+              [fluentBindingModel]="model"
+              [formControl]="control"
+              [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
+              [autofocus]="schema.autofocus"
+              [readonly]="schema.readonly | reactive: model : schema : control"
+              [nzSize]="schema.size!"
+              [nzStatus]="(control | status)()"
+              [nzBorderless]="schema.borderless" />
 
-        @if (addonBefore) {
-          <ng-template
-            nzInputAddonBefore
-            [fluentTemplateOutlet]="addonBefore"
-            [fluentTemplateOutletContext]="{ control, schema, model }"
-            >{{ addonBefore }}</ng-template
-          >
+            @if (addonBefore) {
+              <ng-template
+                nzInputAddonBefore
+                [fluentTemplateOutlet]="addonBefore"
+                [fluentTemplateOutletContext]="{ control, schema, model }"
+                >{{ addonBefore }}</ng-template
+              >
+            }
+            @if (addonAfter) {
+              <ng-template
+                nzInputAddonAfter
+                [fluentTemplateOutlet]="addonAfter"
+                [fluentTemplateOutletContext]="{ control, schema, model }"
+                >{{ addonAfter }}</ng-template
+              >
+            }
+            @if (prefix) {
+              <ng-template
+                nzInputPrefix
+                [fluentTemplateOutlet]="prefix"
+                [fluentTemplateOutletContext]="{ control, schema, model }"
+                >{{ prefix }}</ng-template
+              >
+            }
+            @if (suffix) {
+              <ng-template
+                nzInputSuffix
+                [fluentTemplateOutlet]="suffix"
+                [fluentTemplateOutletContext]="{ control, schema, model }"
+                >{{ suffix }}</ng-template
+              >
+            }
+          </nz-input-password>
         }
-        @if (addonAfter) {
-          <ng-template
-            nzInputAddonAfter
-            [fluentTemplateOutlet]="addonAfter"
-            [fluentTemplateOutletContext]="{ control, schema, model }"
-            >{{ addonAfter }}</ng-template
-          >
+        @case ('search') {
+          <nz-input-search [class]="schema.class" [style]="schema.style" [nzAllowClear]="schema.clearable">
+            <input
+              nz-input
+              [attr.id]="schema.id"
+              [attr.name]="schema.key"
+              [attr.maxlength]="helper.length.max | invoke: schema.length"
+              [attr.minlength]="helper.length.min | invoke: schema.length"
+              [fluentBindingSchema]="schema"
+              [fluentBindingControl]="control"
+              [fluentBindingModel]="model"
+              [formControl]="control"
+              [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
+              [autofocus]="schema.autofocus"
+              [readonly]="schema.readonly | reactive: model : schema : control"
+              [nzSize]="schema.size!"
+              [nzStatus]="(control | status)()"
+              [nzBorderless]="schema.borderless" />
+
+            @if (addonBefore) {
+              <ng-template
+                nzInputAddonBefore
+                [fluentTemplateOutlet]="addonBefore"
+                [fluentTemplateOutletContext]="{ control, schema, model }"
+                >{{ addonBefore }}</ng-template
+              >
+            }
+            @if (addonAfter) {
+              <ng-template
+                nzInputAddonAfter
+                [fluentTemplateOutlet]="addonAfter"
+                [fluentTemplateOutletContext]="{ control, schema, model }"
+                >{{ addonAfter }}</ng-template
+              >
+            }
+            @if (prefix) {
+              <ng-template
+                nzInputPrefix
+                [fluentTemplateOutlet]="prefix"
+                [fluentTemplateOutletContext]="{ control, schema, model }"
+                >{{ prefix }}</ng-template
+              >
+            }
+            @if (suffix) {
+              <ng-template
+                nzInputSuffix
+                [fluentTemplateOutlet]="suffix"
+                [fluentTemplateOutletContext]="{ control, schema, model }"
+                >{{ suffix }}</ng-template
+              >
+            }
+          </nz-input-search>
         }
-        @if (prefix) {
-          <ng-template
-            nzInputPrefix
-            [fluentTemplateOutlet]="prefix"
-            [fluentTemplateOutletContext]="{ control, schema, model }"
-            >{{ prefix }}</ng-template
-          >
+        @default {
+          <nz-input-wrapper [class]="schema.class" [style]="schema.style" [nzAllowClear]="schema.clearable">
+            <input
+              nz-input
+              [attr.id]="schema.id"
+              [attr.name]="schema.key"
+              [attr.maxlength]="helper.length.max | invoke: schema.length"
+              [attr.minlength]="helper.length.min | invoke: schema.length"
+              [fluentBindingSchema]="schema"
+              [fluentBindingControl]="control"
+              [fluentBindingModel]="model"
+              [formControl]="control"
+              [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
+              [type]="schema.type ?? 'text'"
+              [autofocus]="schema.autofocus"
+              [readonly]="schema.readonly | reactive: model : schema : control"
+              [nzSize]="schema.size!"
+              [nzStatus]="(control | status)()"
+              [nzBorderless]="schema.borderless" />
+
+            @if (addonBefore) {
+              <ng-template
+                nzInputAddonBefore
+                [fluentTemplateOutlet]="addonBefore"
+                [fluentTemplateOutletContext]="{ control, schema, model }"
+                >{{ addonBefore }}</ng-template
+              >
+            }
+            @if (addonAfter) {
+              <ng-template
+                nzInputAddonAfter
+                [fluentTemplateOutlet]="addonAfter"
+                [fluentTemplateOutletContext]="{ control, schema, model }"
+                >{{ addonAfter }}</ng-template
+              >
+            }
+            @if (prefix) {
+              <ng-template
+                nzInputPrefix
+                [fluentTemplateOutlet]="prefix"
+                [fluentTemplateOutletContext]="{ control, schema, model }"
+                >{{ prefix }}</ng-template
+              >
+            }
+            @if (suffix) {
+              <ng-template
+                nzInputSuffix
+                [fluentTemplateOutlet]="suffix"
+                [fluentTemplateOutletContext]="{ control, schema, model }"
+                >{{ suffix }}</ng-template
+              >
+            }
+          </nz-input-wrapper>
         }
-        @if (suffix) {
-          <ng-template
-            nzInputSuffix
-            [fluentTemplateOutlet]="suffix"
-            [fluentTemplateOutletContext]="{ control, schema, model }"
-            >{{ suffix }}</ng-template
-          >
-        }
-      </nz-input-wrapper>
+      }
     } @else {
       <input
         nz-input

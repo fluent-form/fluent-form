@@ -18,8 +18,23 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 })
 export class TextFieldExampleComponent {
   readonly schema = form(() => {
-    textField('name').label('Text').placeholder('Please enter').col(4);
-    textField('pwd').type('password').label('Password').placeholder('Please enter').col(4);
+    textField('name')
+      .label('Text type')
+      .placeholder('Please enter')
+      .col(4);
+
+    textField('password')
+      .type('password')
+      .label('Password type')
+      .placeholder('Please enter')
+      .col(4);
+
+    textField('search')
+      .type('search')
+      .label('Search type')
+      .placeholder('Please enter')
+      .clearable(true)
+      .col(4);
 
     textField('rmb1')
       .label('With affixes')

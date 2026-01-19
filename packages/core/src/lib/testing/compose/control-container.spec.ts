@@ -1,6 +1,7 @@
 import { signal } from '@angular/core';
+import { form } from '../../compose';
 import { textField } from './control';
-import { array, form, group } from './control-container';
+import { array, group } from './control-container';
 
 describe('control-container', () => {
   it('form', () => {

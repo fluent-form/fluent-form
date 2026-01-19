@@ -2,9 +2,10 @@ import { Component, Signal, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { AnyObject } from '@ngify/core';
+import { form } from '../../compose';
 import { provideFluentForm } from '../../provider';
 import { AbstractFormGroupSchema } from '../../schemas';
-import { array, fieldGroup, form, group, textField, withTesting } from '../../testing';
+import { array, fieldGroup, group, textField, withTesting } from '../../testing';
 import { FluentFormDirective } from './form.directive';
 import { FluentFormRenderModule } from './module';
 
@@ -312,9 +313,8 @@ describe('FluentFormDirective', () => {
     });
   });
 
-  it('should be the expected model value (configure the toplevel form)', () => {
-    component.schema = form(it => {
-      it.config({ updateOn: 'blur' });
+  it('should be the expected model value', () => {
+    component.schema = form(() => {
       textField('ipt');
       fieldGroup('ipts').schemas(() => {
         textField('ipt2');

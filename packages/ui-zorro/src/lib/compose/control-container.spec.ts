@@ -1,43 +1,16 @@
-import { signal } from '@angular/core';
-import { textField } from './control';
-import { array, cardsArray, form, group, tableArray, tableRowGroup, tabsArray } from './control-container';
+import { form } from '@fluent-form/core';
+import { applyGroup, array, cardsArray, group, tableArray, tableRowGroup, tabsArray } from './control-container';
 
 describe('control-container', () => {
-  describe('form', () => {
-    it('compose function', () => {
-      const schema = form(it => {
-        it.layout('horizontal');
-        textField('input');
-      });
-      expect(schema()).toEqual({
-        kind: 'group',
-        key: 'root',
-        layout: 'horizontal',
-        schemas: [{ kind: 'text-field', key: 'input' }]
-      });
+  it('applyGroup', () => {
+    const schema = form(() => {
+      applyGroup().layout('horizontal');
     });
-
-    it('signal', () => {
-      const key = signal('input');
-      const schema = form(() => {
-        textField(key());
-      });
-      expect(schema()).toEqual({
-        kind: 'group',
-        key: 'root',
-        schemas: [{ kind: 'text-field', key: 'input' }]
-      });
-      key.set('input2');
-      expect(schema()).toEqual({
-        kind: 'group',
-        key: 'root',
-        schemas: [{ kind: 'text-field', key: 'input2' }]
-      });
-    });
-
-    it('schema array', () => {
-      const { schemas } = form([{ kind: 'text-field', key: 'input' }]);
-      expect(schemas).toEqual([{ kind: 'text-field', key: 'input' }]);
+    expect(schema()).toEqual({
+      kind: 'group',
+      key: 'root',
+      layout: 'horizontal',
+      schemas: []
     });
   });
 

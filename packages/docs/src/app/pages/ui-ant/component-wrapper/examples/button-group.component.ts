@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
-import { FluentFormComponent } from '@fluent-form/core';
-import { button, form, spaceCompact } from '@fluent-form/ui-zorro';
+import { FluentFormComponent, form } from '@fluent-form/core';
+import { button, spaceCompact } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'button-group-example',

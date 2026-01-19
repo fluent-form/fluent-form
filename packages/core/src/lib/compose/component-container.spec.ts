@@ -1,5 +1,5 @@
-import { form } from '../testing';
 import { row } from './component-container';
+import { form } from './control-container';
 
 describe('component-container', () => {
   it('row', () => {

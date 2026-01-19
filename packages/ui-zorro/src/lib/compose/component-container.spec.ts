@@ -1,6 +1,6 @@
+import { form } from '@fluent-form/core';
 import { card, step, steps, tab, tabs } from './component-container';
 import { textField } from './control';
-import { form } from './control-container';
 
 describe('component-container', () => {
   it('steps', () => {

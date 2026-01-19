@@ -29,10 +29,8 @@ function joinSchema(schema: Schema) {
 const IS_BUILDER = Symbol();
 const BUILD_KEY = 'build';
 
-export function composeBuilder<T extends Record<string, SafeAny>>(): Builder<T> {
-  const target: AnyObject = {};
-
-  joinSchema(target);
+export function composeBuilder<T extends Record<string, SafeAny>>(target: AnyObject = {}, append = true): Builder<T> {
+  append && joinSchema(target);
 
   const builder = new Proxy(target, {
     get(target, property) {

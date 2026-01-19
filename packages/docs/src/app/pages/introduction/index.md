@@ -24,8 +24,8 @@
 ## Basic usage
 
 ```ts
-import { FluentForm } from '@fluent-form/core';
-import { form, button, numberField, textField, textArea } from '@fluent-form/ui-zorro';
+import { FluentForm, form } from '@fluent-form/core';
+import { button, numberField, textField, textArea } from '@fluent-form/ui-zorro';
 
 @Component({
   imports: [FluentForm],

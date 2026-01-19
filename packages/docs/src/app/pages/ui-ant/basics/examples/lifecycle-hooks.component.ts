@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormComponent, headless } from '@fluent-form/core';
-import { form, textField } from '@fluent-form/ui-zorro';
+import { FluentFormComponent, form, headless } from '@fluent-form/core';
+import { textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'lifecycle-hooks-example',

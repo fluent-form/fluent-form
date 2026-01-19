@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
-import { FluentFormComponent, row } from '@fluent-form/core';
-import { alert, form } from '@fluent-form/ui-zorro';
+import { FluentFormComponent, form, row } from '@fluent-form/core';
+import { alert } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'grid-responsive-example',

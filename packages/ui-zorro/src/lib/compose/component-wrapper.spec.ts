@@ -1,5 +1,5 @@
+import { form } from '@fluent-form/core';
 import { buttonGroup } from './component-wrapper';
-import { form } from './control-container';
 
 describe('component-wrapper', () => {
   it('buttonGroup', () => {

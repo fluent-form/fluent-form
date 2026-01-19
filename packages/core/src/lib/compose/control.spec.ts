@@ -1,5 +1,5 @@
-import { form } from '../testing';
 import { headless } from './control';
+import { form } from './control-container';
 
 describe('control', () => {
   it('headless', () => {

@@ -1,12 +1,11 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FluentFormModule } from '@fluent-form/core';
+import { FluentFormModule, form } from '@fluent-form/core';
 import {
   array,
   datePicker,
   dateRangePicker,
-  form,
   group,
   numberField,
   slider,

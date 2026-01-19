@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FluentFormRenderModule } from '@fluent-form/core';
-import { datePicker, form, group, slider, spaceCompact, textField, toggle } from '@fluent-form/ui-zorro';
+import { FluentFormRenderModule, form } from '@fluent-form/core';
+import { datePicker, group, slider, spaceCompact, textField, toggle } from '@fluent-form/ui-zorro';
 import { NzTableModule } from 'ng-zorro-antd/table';
 
 @Component({

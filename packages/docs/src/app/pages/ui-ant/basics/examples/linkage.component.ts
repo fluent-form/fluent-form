@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormComponent } from '@fluent-form/core';
-import { form, radioGroup, select, textField, toggle } from '@fluent-form/ui-zorro';
+import { FluentFormComponent, form } from '@fluent-form/core';
+import { radioGroup, select, textField, toggle } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'linkage-example',

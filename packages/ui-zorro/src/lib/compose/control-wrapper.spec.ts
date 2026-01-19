@@ -1,4 +1,4 @@
-import { form } from './control-container';
+import { form } from '@fluent-form/core';
 import { space, spaceCompact, tableColumn } from './control-wrapper';
 
 describe('control-wrapper', () => {

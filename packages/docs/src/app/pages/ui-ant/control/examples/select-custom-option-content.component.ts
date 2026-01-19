@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormModule } from '@fluent-form/core';
-import { form, select } from '@fluent-form/ui-zorro';
+import { FluentFormModule, form } from '@fluent-form/core';
+import { select } from '@fluent-form/ui-zorro';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 
 @Component({

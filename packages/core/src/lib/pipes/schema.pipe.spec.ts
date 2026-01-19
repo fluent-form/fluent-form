@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
+import { form } from '../compose';
 import { provideFluentForm } from '../provider';
-import { form, textField, withTesting } from '../testing';
+import { textField, withTesting } from '../testing';
 import { FluentSchemaPipe } from './schema.pipe';
 
 describe('FluentSchemaPipe', () => {

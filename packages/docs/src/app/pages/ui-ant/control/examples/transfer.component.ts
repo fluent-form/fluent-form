@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormComponent } from '@fluent-form/core';
-import { form, transfer } from '@fluent-form/ui-zorro';
+import { FluentFormComponent, form } from '@fluent-form/core';
+import { transfer } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'transfer-example',

@@ -1,8 +1,8 @@
 import { JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
-import { FluentFormComponent } from '@fluent-form/core';
-import { form, select } from '@fluent-form/ui-zorro';
+import { FluentFormComponent, form } from '@fluent-form/core';
+import { select } from '@fluent-form/ui-zorro';
 import { catchError, debounceTime, map, of, switchMap } from 'rxjs';
 
 @Component({

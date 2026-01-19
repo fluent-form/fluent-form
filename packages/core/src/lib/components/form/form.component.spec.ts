@@ -3,9 +3,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { SafeAny } from '@ngify/core';
+import { form } from '../../compose';
 import { provideFluentForm } from '../../provider';
 import { AbstractFormGroupSchema } from '../../schemas';
-import { form, textField, withTesting } from '../../testing';
+import { textField, withTesting } from '../../testing';
 import { FluentFormComponent } from './form.component';
 
 @Component({

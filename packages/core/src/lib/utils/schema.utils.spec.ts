@@ -1,12 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
 import { SafeAny } from '@ngify/core';
+import { form } from '../compose';
 import { withSchemaPatchers } from '../features';
 import { SCHEMA_PATCHERS } from '../patcher';
 import { provideFluentForm } from '../provider';
 import { AbstractSchema } from '../schemas';
 import { SchemaType } from '../schemas/interfaces';
-import { array, fieldGroup, form, group, range, textField, withTesting } from '../testing';
+import { array, fieldGroup, group, range, textField, withTesting } from '../testing';
 import { SchemaUtil } from './schema.utils';
 
 describe('SchemaUtil', () => {

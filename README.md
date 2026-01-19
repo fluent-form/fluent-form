@@ -34,8 +34,8 @@ For documentation and examples please visit [https://fluent-form.github.io/fluen
 ## Usage
 
 ```ts
-import { FluentForm } from '@fluent-form/core';
-import { form, button, numberField, textField, textArea } from '@fluent-form/ui-zorro';
+import { FluentForm, form } from '@fluent-form/core';
+import { button, numberField, textField, textArea } from '@fluent-form/ui-zorro';
 
 @Component({
   imports: [FluentForm],

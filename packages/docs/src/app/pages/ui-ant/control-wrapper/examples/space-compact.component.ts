@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormComponent } from '@fluent-form/core';
-import { button, form, numberField, select, spaceCompact, textField } from '@fluent-form/ui-zorro';
+import { FluentFormComponent, form } from '@fluent-form/core';
+import { button, numberField, select, spaceCompact, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'space-compact-example',

@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { FluentFormComponent } from '@fluent-form/core';
-import { button, form, group, tabsArray, textField } from '@fluent-form/ui-zorro';
+import { FluentFormComponent, form } from '@fluent-form/core';
+import { button, group, tabsArray, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   imports: [FluentFormComponent, JsonPipe],

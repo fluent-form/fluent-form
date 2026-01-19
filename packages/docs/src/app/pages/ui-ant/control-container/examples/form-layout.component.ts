@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FluentFormComponent } from '@fluent-form/core';
-import { form, textField } from '@fluent-form/ui-zorro';
+import { FluentFormComponent, form } from '@fluent-form/core';
+import { applyGroup, textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'form-layout-example',
@@ -17,22 +17,22 @@ import { form, textField } from '@fluent-form/ui-zorro';
   `
 })
 export class FormLayoutExampleComponent {
-  readonly schema1 = form(it => {
-    it.layout('vertical');
+  readonly schema1 = form(() => {
+    applyGroup().layout('vertical');
     textField('text-1').label('Label').col(6);
     textField('text-2').label('Label').col(6);
     textField('text-3').label('Label').col(6);
   });
 
-  readonly schema2 = form(it => {
-    it.layout('horizontal');
+  readonly schema2 = form(() => {
+    applyGroup().layout('horizontal');
     textField('text-1').label('Label').col(6);
     textField('text-2').label('Label').col(6);
     textField('text-3').label('Label').col(6);
   });
 
-  readonly schema3 = form(it => {
-    it.layout('inline');
+  readonly schema3 = form(() => {
+    applyGroup().layout('inline');
     textField('text-1').label('Label').col(6);
     textField('text-2').label('Label').col(6);
     textField('text-3').label('Label').col(6);

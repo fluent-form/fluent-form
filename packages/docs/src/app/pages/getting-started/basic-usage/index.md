@@ -54,7 +54,8 @@ export const appConfig: ApplicationConfig = {
 Fluent API 是一种可组合的、有限链式调用的 Builder-like API。它的优点是语法简洁，易于编写和类型安全。
 
 ```ts
-import { form, buttonGroup, button, textField } from '@fluent-form/ui-zorro';
+import { form } from '@fluent-form/core';
+import { buttonGroup, button, textField } from '@fluent-form/ui-zorro';
 
 const schema = form(() => {
   textField('text').label('Text').placeholder('Please enter');
@@ -137,7 +138,8 @@ interface Hero {
 根据英雄数据模型，我们为每个属性选择并配置合适的表单控件：
 
 ```ts
-import { form, textField, numberField, rate, textArea, toggle } from '@fluent-form/ui-zorro';
+import { form } from '@fluent-form/core';
+import { textField, numberField, rate, textArea, toggle } from '@fluent-form/ui-zorro';
 
 const schema = form(() => {
   numberField('id').label('ID').required(true);

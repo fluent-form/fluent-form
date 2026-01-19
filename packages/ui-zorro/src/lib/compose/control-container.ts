@@ -1,28 +1,10 @@
-import { Signal, computed } from '@angular/core';
-import { AbstractSchema, Builder, Indexable, SingleSchemaKey, UnstableBuilder, composeBuilder, isArray } from '@fluent-form/core';
+import { SingleSchemaKey, UnstableBuilder, composeBuilder, getCurrentSchema } from '@fluent-form/core';
 import { CardsArraySchema, FormArraySchema, FormGroupSchema, TableArraySchema, TableRowGroupSchema, TabsArraySchema } from '../schemas';
 import { KindOrKey } from './helper';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type SafeAny = any;
-type ComposeFn = (it: Builder<FormGroupSchema>) => SafeAny;
-
-export function form(composeFn: ComposeFn): Signal<FormGroupSchema>;
-export function form(schemas: Indexable<AbstractSchema>[]): FormGroupSchema;
-export function form(schemasOrComposeFn: Indexable<AbstractSchema>[] | ComposeFn): FormGroupSchema | Signal<FormGroupSchema> {
-  if (isArray(schemasOrComposeFn)) {
-    return {
-      kind: 'group',
-      key: 'root',
-      schemas: schemasOrComposeFn
-    };
-  }
-  return computed(() =>
-    composeBuilder<FormGroupSchema>()
-      .kind('group')
-      .key('root')
-      .schemas(schemasOrComposeFn)
-      .build());
+export function applyGroup() {
+  const schema = getCurrentSchema();
+  return composeBuilder<Omit<FormGroupSchema, 'kind' | 'key' | 'schemas'>>(schema, false);
 }
 
 export function group(): UnstableBuilder<FormGroupSchema<number>, KindOrKey>;

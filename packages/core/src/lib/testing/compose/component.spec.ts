@@ -1,5 +1,5 @@
+import { form } from '../../compose';
 import { button, template } from './component';
-import { form } from './control-container';
 
 describe('component', () => {
   it('template', () => {

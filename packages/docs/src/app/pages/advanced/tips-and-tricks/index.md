@@ -32,8 +32,8 @@
 使用 Fluent API，我们可以轻松地封装图示函数，以提高表单开发效率。
 
 ```ts
-import { headless } from '@fluent-form/core';
-import { form, button, toggle, radioGroup, textField } from '@fluent-form/ui-zorro';
+import { form, headless } from '@fluent-form/core';
+import { button, toggle, radioGroup, textField } from '@fluent-form/ui-zorro';
 
 function entityForm(composeFn: () => void) {
   return form(() => {

@@ -26,7 +26,7 @@ import {
 } from 'ng-zorro-antd/cascader';
 import { NzCheckboxComponent, NzCheckboxGroupComponent } from 'ng-zorro-antd/checkbox';
 import { NzColorPickerComponent } from 'ng-zorro-antd/color-picker';
-import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
+import { NzSizeDSType, NzSizeLDSType, NzVariant } from 'ng-zorro-antd/core/types';
 import { NzDateMode, NzDatePickerComponent, NzRangePickerComponent, SupportTimeOptions } from 'ng-zorro-antd/date-picker';
 import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
 import { NzRadioButtonStyle, NzRadioGroupComponent } from 'ng-zorro-antd/radio';
@@ -65,7 +65,7 @@ interface AbstractInputBoxControlSchema<Key extends SchemaKey, Val, P extends st
   autofocus?: boolean;
   readonly?: MaybeSchemaReactiveFn<AbstractInputBoxControlSchema<SchemaKey, Val, P>, boolean>;
   size?: NzSizeLDSType;
-  borderless?: boolean;
+  variant?: NzVariant;
 }
 
 /**
@@ -243,7 +243,7 @@ export interface SelectControlSchema<Key extends SingleSchemaKey = SingleSchemaK
   /** Support search */
   searchable?: boolean;
   backdrop?: boolean;
-  borderless?: boolean;
+  variant?: NzVariant;
   autofocus?: boolean;
   arrow?: boolean;
   size?: NzSelectSizeType;
@@ -281,6 +281,7 @@ export interface CascaderControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   /** Support search, cannot be used with `options.load` */
   searchable?: boolean | NzShowSearchOptions;
   options?: MaybeSchemaReactiveFn<CascaderControlSchema<SingleSchemaKey, Val>, NzCascaderOption[]>;
+  variant?: NzVariant;
   fetchOptions?: (
     node: NzCascaderOption,
     index: number,
@@ -401,6 +402,7 @@ export interface TreeSelectControlSchema<Key extends SingleSchemaKey = SingleSch
   expandedKeys?: string[];
   backdrop?: boolean;
   multiple?: boolean;
+  variant?: NzVariant;
 }
 
 export interface TransferControlSchema<Key extends SingleSchemaKey = SingleSchemaKey, Val = SafeAny[]>

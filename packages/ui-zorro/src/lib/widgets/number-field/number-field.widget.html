@@ -29,7 +29,7 @@
         [nzReadOnly]="schema.readonly | reactive: model : schema : control"
         [nzSize]="schema.size!"
         [nzStatus]="(control | status)()"
-        [nzBordered]="!schema.borderless">
+        [nzVariant]="schema.variant ?? 'outlined'">
         @if (addonBefore) {
           <ng-template
             nzInputAddonBefore
@@ -84,7 +84,7 @@
       [nzReadOnly]="schema.readonly | reactive: model : schema : control"
       [nzSize]="schema.size!"
       [nzStatus]="(control | status)()"
-      [nzBordered]="!schema.borderless">
+      [nzVariant]="schema.variant ?? 'outlined'">
       @if (addonBefore) {
         <ng-template
           nzInputAddonBefore

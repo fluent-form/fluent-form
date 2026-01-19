@@ -25,7 +25,7 @@
         [nzAutoFocus]="schema.autofocus"
         [nzInputReadOnly]="schema.readonly | reactive: model : schema : control"
         [nzSize]="schema.size!"
-        [nzBorderless]="schema.borderless"
+        [nzVariant]="schema.variant ?? 'outlined'"
         [nzShowToday]="schema.today ?? true"
         [nzShowNow]="schema.now ?? true"
         [nzStatus]="(control | status)()" />
@@ -51,7 +51,7 @@
       [nzAutoFocus]="schema.autofocus"
       [nzInputReadOnly]="schema.readonly | reactive: model : schema : control"
       [nzSize]="schema.size!"
-      [nzBorderless]="schema.borderless"
+      [nzVariant]="schema.variant ?? 'outlined'"
       [nzShowToday]="schema.today ?? true"
       [nzShowNow]="schema.now ?? true"
       [nzStatus]="(control | status)()" />

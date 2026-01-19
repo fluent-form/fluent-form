@@ -17,6 +17,7 @@ import { SelectCustomOptionContentExampleComponent } from './examples/select-cus
 import { SelectExampleComponent } from './examples/select.component';
 import { SliderExampleComponent } from './examples/slider.component';
 import { TextAreaExampleComponent } from './examples/text-area.component';
+import { TextFieldVariantExampleComponent } from './examples/text-field-variant.component';
 import { TextFieldExampleComponent } from './examples/text-field.component';
 import { TimePickerExampleComponent } from './examples/time-picker.component';
 import { ToggleExampleComponent } from './examples/toggle.component';
@@ -30,6 +31,7 @@ const ControlPage: NgDocPage = {
   demos: {
     ZorroStyleComponent,
     TextFieldExampleComponent,
+    TextFieldVariantExampleComponent,
     TextAreaExampleComponent,
     NumberFieldExampleComponent,
     DatePickerExampleComponent,

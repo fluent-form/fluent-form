@@ -34,7 +34,7 @@
                 [readonly]="schema.readonly | reactive: model : schema : control"
                 [nzSize]="schema.size!"
                 [nzStatus]="(control | status)()"
-                [nzBorderless]="schema.borderless" />
+                [nzVariant]="schema.variant ?? 'outlined'" />
               @if (addonBefore) {
                 <ng-template
                   nzInputAddonBefore
@@ -93,7 +93,7 @@
                 [readonly]="schema.readonly | reactive: model : schema : control"
                 [nzSize]="schema.size!"
                 [nzStatus]="(control | status)()"
-                [nzBorderless]="schema.borderless" />
+                [nzVariant]="schema.variant ?? 'outlined'" />
               @if (addonBefore) {
                 <ng-template
                   nzInputAddonBefore
@@ -153,7 +153,7 @@
                 [readonly]="schema.readonly | reactive: model : schema : control"
                 [nzSize]="schema.size!"
                 [nzStatus]="(control | status)()"
-                [nzBorderless]="schema.borderless" />
+                [nzVariant]="schema.variant ?? 'outlined'" />
               @if (addonBefore) {
                 <ng-template
                   nzInputAddonBefore
@@ -212,7 +212,7 @@
           [readonly]="schema.readonly | reactive: model : schema : control"
           [nzSize]="schema.size!"
           [nzStatus]="(control | status)()"
-          [nzBorderless]="schema.borderless" />
+          [nzVariant]="schema.variant ?? 'outlined'" />
       }
     }
   } @else {
@@ -235,7 +235,7 @@
               [readonly]="schema.readonly | reactive: model : schema : control"
               [nzSize]="schema.size!"
               [nzStatus]="(control | status)()"
-              [nzBorderless]="schema.borderless" />
+              [nzVariant]="schema.variant ?? 'outlined'" />
 
             @if (addonBefore) {
               <ng-template
@@ -288,7 +288,7 @@
               [readonly]="schema.readonly | reactive: model : schema : control"
               [nzSize]="schema.size!"
               [nzStatus]="(control | status)()"
-              [nzBorderless]="schema.borderless" />
+              [nzVariant]="schema.variant ?? 'outlined'" />
 
             @if (addonBefore) {
               <ng-template
@@ -342,7 +342,7 @@
               [readonly]="schema.readonly | reactive: model : schema : control"
               [nzSize]="schema.size!"
               [nzStatus]="(control | status)()"
-              [nzBorderless]="schema.borderless" />
+              [nzVariant]="schema.variant ?? 'outlined'" />
 
             @if (addonBefore) {
               <ng-template
@@ -398,7 +398,7 @@
         [readonly]="schema.readonly | reactive: model : schema : control"
         [nzSize]="schema.size!"
         [nzStatus]="(control | status)()"
-        [nzBorderless]="schema.borderless" />
+        [nzVariant]="schema.variant ?? 'outlined'" />
     }
   }
 </ng-template>

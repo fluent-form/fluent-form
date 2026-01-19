@@ -24,7 +24,7 @@
         [readonly]="schema.readonly | reactive: model : schema : control"
         [nzSize]="schema.size!"
         [nzStatus]="(control | status)()"
-        [nzBorderless]="schema.borderless"></textarea>
+        [nzVariant]="schema.variant ?? 'outlined'"></textarea>
     }
   } @else {
     <textarea
@@ -46,6 +46,6 @@
       [readonly]="schema.readonly | reactive: model : schema : control"
       [nzSize]="schema.size!"
       [nzStatus]="(control | status)()"
-      [nzBorderless]="schema.borderless"></textarea>
+      [nzVariant]="schema.variant ?? 'outlined'"></textarea>
   }
 </ng-template>

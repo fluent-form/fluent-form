@@ -31,7 +31,8 @@
         [nzPlaceHolder]="(schema.placeholder | reactive: model : schema : control)!"
         [nzDefaultExpandAll]="schema.expandAll"
         [nzExpandedKeys]="schema.expandedKeys!"
-        [nzMultiple]="schema.multiple" />
+        [nzMultiple]="schema.multiple"
+        [nzVariant]="schema.variant ?? 'outlined'" />
     }
   } @else {
     <nz-tree-select
@@ -60,6 +61,7 @@
       [nzPlaceHolder]="(schema.placeholder | reactive: model : schema : control)!"
       [nzDefaultExpandAll]="schema.expandAll"
       [nzExpandedKeys]="schema.expandedKeys!"
-      [nzMultiple]="schema.multiple" />
+      [nzMultiple]="schema.multiple"
+      [nzVariant]="schema.variant ?? 'outlined'" />
   }
 </ng-template>

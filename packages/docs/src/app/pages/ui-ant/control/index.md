@@ -12,6 +12,12 @@ import { useTextFieldWidget } from '@fluent-form/ui-zorro';
 
 {{ NgDocActions.demo("TextFieldExampleComponent") }}
 
+### Variants
+
+文本框支持多种样式变体：`outlined`、`filled`、`borderless`、`underlined`。您可以通过 `variant` 选项来设置文本框的样式变体。
+
+{{ NgDocActions.demo("TextFieldVariantExampleComponent") }}
+
 ## Text Area
 
 文本域允许用户通过鼠标或键盘输入内容，是最基础的表单域。

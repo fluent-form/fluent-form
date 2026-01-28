@@ -39,13 +39,13 @@ export class FluentForm<T extends AnyObject> {
   private readonly schemaUtil = inject(SchemaUtil);
   private internalModel!: T;
 
-  protected readonly templateRef = createComponent(
+  protected readonly formContentRef = createComponent(
     inject(FLUENT_FORM_CONTENT),
     {
       environmentInjector: inject(EnvironmentInjector),
       elementInjector: inject(Injector)
     }
-  ).instance.templateRef;
+  );
 
   readonly schema = input.required<AbstractFormGroupSchema>();
   readonly model = model.required<T>();
@@ -102,6 +102,8 @@ export class FluentForm<T extends AnyObject> {
         }
       });
     });
+
+    destroyRef.onDestroy(() => this.formContentRef.destroy());
   }
 
   private onValueChanges() {

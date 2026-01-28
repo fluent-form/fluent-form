@@ -1,3 +1,4 @@
+export * from './components';
 export * from './compose';
 export * from './feature';
 export * from './schemas';

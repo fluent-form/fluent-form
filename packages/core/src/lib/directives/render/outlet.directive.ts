@@ -1,4 +1,4 @@
-import { computed, Directive, effect, inject, input, ViewContainerRef } from '@angular/core';
+import { computed, Directive, effect, inject, input, untracked, ViewContainerRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import type { AnyArray, AnyObject } from '@ngify/core';
 import type { AbstractSchema, SchemaKey, SingleSchemaKey } from '../../schemas';
@@ -54,9 +54,12 @@ export class FluentOutletDirective<T extends AnyObject | AnyArray> implements Wi
   constructor() {
     effect(() => {
       const schema = this.schema;
-      this.viewContainerRef.length && this.viewContainerRef.clear();
-      this.registry.get(schema.kind).then(tmpl => {
-        this.viewContainerRef.createEmbeddedView(tmpl, this);
+
+      untracked(() => {
+        this.viewContainerRef.length && this.viewContainerRef.clear();
+        this.registry.get(schema.kind).then(tmpl => {
+          this.viewContainerRef.createEmbeddedView(tmpl, this);
+        });
       });
     });
   }

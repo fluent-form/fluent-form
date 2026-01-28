@@ -51,8 +51,8 @@ export class FluentForm<T extends AnyObject> {
   readonly model = model.required<T>();
 
   readonly patchedSchema = computed(() => this.schemaUtil.patch(this.schema()));
-  protected form = computed<FormGroup>(() =>
-    this.formUtil.createFormGroup(this.patchedSchema(), untracked(() => this.model())));
+  readonly form = computed<FormGroup>(() =>
+    this.formUtil.createFormGroup(this.patchedSchema(), untracked(this.model)));
 
   readonly formChange = output<FormGroup>();
   readonly valueChanges = output<T>();

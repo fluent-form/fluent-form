@@ -32,3 +32,82 @@
 ## Custom Widget
 
 即将推出教程...
+
+## Custom Widget Wrapper
+
+有时，您可能需要为表单控件添加“包装器（WidgetWrapper）”，用于实现自定义样式或交互能力，例如：边框/分组、提示信息、额外的操作按钮、前后缀布局等。
+
+Wrapper **只影响视图渲染**，不会改变表单模型的生成逻辑。
+
+如果您使用的是 `@fluent-form/ui-zorro`，它会提供一个默认的 Wrapper：`FormFieldWrapper`（用于渲染 FormItem、FormLabel、校验提示等）。
+
+当控件没有显式指定 `wrappers` 时，会使用 UI 适配器提供的默认 `wrappers`。
+
+### How the wrapper works
+
+当 Fluent Form 渲染某个控件时，会先渲染一层或多层 Wrapper，然后再渲染真正的 Widget。
+
+每一层 Wrapper 都会拿到同一份上下文（Context）：
+
+- `control`：当前控件对应的 `AbstractControl`
+- `schema`：当前控件的 schema
+- `model`：当前表单的 model
+- `next`：下一层要渲染的内容（可能还是一个 Wrapper，也可能是最终的 Widget）
+
+要让“链式 Wrapper”继续向内渲染，Wrapper 模板中需要使用 `FluentNextWidgetWrapperOutlet` 把 `{ schema, control, model, next }` 继续传下去。
+
+### Implement a custom wrapper
+
+推荐使用一个独立的（standalone）组件来实现 Wrapper，并继承 `AbstractWidgetWrapper`。在模板中包裹自己的 DOM，然后用 `FluentNextWidgetWrapperOutlet` 渲染下一层：
+
+```ts
+import { AbstractWidgetWrapper, FluentNextWidgetWrapperOutlet } from '@fluent-form/core';
+
+@Component({
+  imports: [FluentNextWidgetWrapperOutlet],
+  template: `
+    <ng-template let-control="control" let-schema="schema" let-model="model" let-next="next">
+      <div class="my-wrapper">
+        <ng-container [fluentNextWidgetWrapperOutlet]="{ schema, control, model, next }" />
+      </div>
+    </ng-template>
+  `
+})
+export class MyWrapper extends AbstractWidgetWrapper { }
+```
+
+如果您在 Wrapper 里忘记渲染 `FluentNextWidgetWrapperOutlet`，那么内层（下一个 wrapper / widget）将不会显示。
+
+### Applying wrapper
+
+通过 schema 的 `wrappers([...])` 为某个控件指定 Wrapper 列表：
+
+- 数组顺序决定了渲染顺序，“由外到内”：第一个是最外层 Wrapper。
+- 指定 `wrappers` 会**覆盖** UI 适配器（例如 `@fluent-form/ui-zorro`）提供的默认 wrappers；如果您希望保留默认 wrapper，请手动把它加入数组。
+
+```ts
+textField('name').label('Name').wrappers([
+  FormFieldWrapper, // 仍然保留默认的表单项外观（label、校验提示等）
+  MyWrapper,        // 再叠加自定义外观/交互
+]);
+```
+
+{{ NgDocActions.demo("CustomWrapperExampleComponent") }}
+
+### Providing default wrapper
+
+UI 适配器通常会使用 `FLUENT_WIDGET_WRAPPER` Token 来提供默认的 Wrappers，一般情况下您不需要直接使用它；
+
+但如果希望**全局追加**一些默认 Wrappers（对所有未显式 `wrappers` 的控件生效），可以自行提供该 Token：
+
+```ts
+import { FLUENT_WIDGET_WRAPPER } from '@fluent-form/core';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    ...
+    { provide: FLUENT_WIDGET_WRAPPER, useValue: MyWrapper1, multi: true },
+    { provide: FLUENT_WIDGET_WRAPPER, useValue: MyWrapper2, multi: true },
+  ],
+};
+```

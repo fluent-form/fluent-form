@@ -1,22 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { withTesting } from '../../feature';
-import { FormFieldContentComponent } from './form-field-content.component';
 import { provideFluentForm } from '@fluent-form/core';
+import { withZorro } from '../../feature';
+import { useAllWidgets } from '../../widgets';
+import { FormFieldWrapper } from './form-field-wrapper.component';
 
 describe('FluentFormFieldOutletComponent', () => {
-  let component: FormFieldContentComponent;
-  let fixture: ComponentFixture<FormFieldContentComponent>;
+  let component: FormFieldWrapper;
+  let fixture: ComponentFixture<FormFieldWrapper>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         provideFluentForm(
-          withTesting()
+          withZorro(useAllWidgets())
         )
       ]
     });
 
-    fixture = TestBed.createComponent(FormFieldContentComponent);
+    fixture = TestBed.createComponent(FormFieldWrapper);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

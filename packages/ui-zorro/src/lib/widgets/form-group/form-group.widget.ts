@@ -7,9 +7,9 @@ import {
   FluentColumnPipe,
   FluentContextGuardDirective,
   FluentControlPipe,
-  FluentFormFieldOutletDirective,
   FluentGridModule,
   FluentReactivePipe,
+  FluentWidgetWrapperOutlet,
   RenderablePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
@@ -26,7 +26,7 @@ type FormGroupWidgetTemplateContext = WidgetTemplateContext<FormGroupSchema, For
     NgTemplateOutlet,
     NzFormModule,
     FluentGridModule,
-    FluentFormFieldOutletDirective,
+    FluentWidgetWrapperOutlet,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentColumnPipe,

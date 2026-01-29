@@ -7,10 +7,10 @@ import {
   FluentColumnPipe,
   FluentContextGuardDirective,
   FluentControlPipe,
-  FluentFormFieldOutletDirective,
   FluentGridModule,
   FluentReactivePipe,
   FluentTemplatePipe,
+  FluentWidgetWrapperOutlet,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
@@ -26,7 +26,7 @@ type StepsWidgetTemplateContext = WidgetTemplateContext<StepsComponentSchema, Fo
     NgTemplateOutlet,
     NzStepsModule,
     FluentGridModule,
-    FluentFormFieldOutletDirective,
+    FluentWidgetWrapperOutlet,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentReactivePipe,

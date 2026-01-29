@@ -13,6 +13,7 @@ import type {
  */
 export interface TemplateSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractSchema<Key>, PropertyHolder {
   kind: 'template';
+  label?: string;
 }
 
 /**
@@ -21,6 +22,7 @@ export interface TemplateSchema<Key extends SingleSchemaKey = SingleSchemaKey> e
 export interface ButtonComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
   extends AbstractSchema<Key>, ElementEventListenerHolder, ElementEventObserverHolder, ElementPropertyHolder<HTMLButtonElement> {
   kind: 'button';
+  label?: string;
   mode?: HTMLButtonElement['type'];
   disabled?: MaybeSchemaReactiveFn<ButtonComponentSchema<SingleSchemaKey>, boolean>;
   content?: string;

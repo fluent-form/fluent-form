@@ -1,5 +1,7 @@
+import type { Type } from '@angular/core';
 import type { SafeAny } from '@ngify/core';
-import type { FluentColDirective } from '../directives';
+import type { WidgetWrapperContext } from '../components';
+import type { FluentColDirective, TemplateRefHolder } from '../directives';
 import type { Indexable } from '../types';
 import type { Column } from './grid';
 import type { HooksHolder } from './hooks';
@@ -15,6 +17,7 @@ export interface AbstractSchema<Key extends SchemaKey = SchemaKey> extends Schem
   hidden?: MaybeSchemaReactiveFn<AbstractSchema, boolean>;
   class?: null | string | string[] | Record<string, boolean | undefined | null>;
   style?: string | undefined | null | Record<string, SafeAny>;
+  wrappers?: Type<TemplateRefHolder<WidgetWrapperContext>>[];
 }
 
 export interface AbstractBranchSchema<Key extends SchemaKey = SchemaKey> extends AbstractSchema<Key> {

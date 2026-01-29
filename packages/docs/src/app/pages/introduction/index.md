@@ -8,7 +8,7 @@
   ![npm version](https://img.shields.io/npm/v/@fluent-form/core/latest.svg)
   ![CI](https://github.com/fluent-form/fluent-form/actions/workflows/ci.yml/badge.svg)
   ![License](https://img.shields.io/badge/License-MIT-blue.svg)
-  ![Angular](https://img.shields.io/badge/Angular-≥18.0.0-red?logo=angular)
+  ![Angular](https://img.shields.io/badge/Angular-≥19.0.0-red?logo=angular)
   ![codecov](https://codecov.io/gh/fluent-form/fluent-form/branch/main/graph/badge.svg?token=070GEU44U0)
   ![CodeFactor](https://www.codefactor.io/repository/github/fluent-form/fluent-form/badge)
 </div>

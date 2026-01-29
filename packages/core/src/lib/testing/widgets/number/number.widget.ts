@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FluentBindingDirective, FluentContextGuardDirective } from '../../../directives';
 import { AbstractWidget, type WidgetTemplateContext } from '../../../widgets/widget';
@@ -17,6 +17,7 @@ type NumberWidgetTemplateContext = WidgetTemplateContext<NumberFieldControlSchem
     FluentContextGuardDirective,
     NumberComponent
   ],
-  templateUrl: './number.widget.html'
+  templateUrl: './number.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class NumberWidget extends AbstractWidget<NumberWidgetTemplateContext> { }

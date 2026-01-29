@@ -1,6 +1,6 @@
 import {
   FLUENT_FORM_CONTENT,
-  FLUENT_FORM_FIELD_CONTENT,
+  FLUENT_WIDGET_WRAPPER,
   FluentFormFeatureKind,
   FluentFormWidgetConfig,
   makeFluentFeature,
@@ -8,7 +8,7 @@ import {
   provideWidgetConfigs
 } from '@fluent-form/core';
 import { SafeAny } from '@ngify/core';
-import { FormContentComponent, FormFieldContentComponent } from './components';
+import { FormContentComponent, FormFieldWrapper } from './components';
 
 export function withZorro(widgets: (FluentFormWidgetConfig<SafeAny> | FluentFormWidgetConfig<SafeAny>[])[]) {
   return makeFluentFeature(FluentFormFeatureKind.UIAdapter, [
@@ -17,8 +17,9 @@ export function withZorro(widgets: (FluentFormWidgetConfig<SafeAny> | FluentForm
       useValue: FormContentComponent
     },
     {
-      provide: FLUENT_FORM_FIELD_CONTENT,
-      useValue: FormFieldContentComponent
+      provide: FLUENT_WIDGET_WRAPPER,
+      useValue: FormFieldWrapper,
+      multi: true
     },
     provideWidgetConfigs(widgets),
     // 添加内置的 patcher

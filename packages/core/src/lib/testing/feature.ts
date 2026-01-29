@@ -1,7 +1,7 @@
 import type { SafeAny } from '@ngify/core';
 import { FluentFormFeatureKind, type FluentFormWidgetConfig, makeFluentFeature, provideWidgetConfigs } from '../features';
-import { FLUENT_FORM_CONTENT, FLUENT_FORM_FIELD_CONTENT } from '../tokens';
-import { FormContentComponent, FormFieldContentComponent } from './components';
+import { FLUENT_FORM_CONTENT, FLUENT_WIDGET_WRAPPER } from '../tokens';
+import { FormContentComponent, FormFieldWrapper } from './components';
 import { useAllWidgets } from './widgets';
 
 export function withTesting(widgets: (FluentFormWidgetConfig<SafeAny> | FluentFormWidgetConfig<SafeAny>[])[] = useAllWidgets()) {
@@ -11,8 +11,9 @@ export function withTesting(widgets: (FluentFormWidgetConfig<SafeAny> | FluentFo
       useValue: FormContentComponent
     },
     {
-      provide: FLUENT_FORM_FIELD_CONTENT,
-      useValue: FormFieldContentComponent
+      provide: FLUENT_WIDGET_WRAPPER,
+      useValue: FormFieldWrapper,
+      multi: true
     },
     provideWidgetConfigs(widgets)
   ]);

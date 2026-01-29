@@ -9,4 +9,5 @@ import type {
 export interface FieldGroupComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
   extends AbstractControlWrapperSchema<Key>, ElementEventListenerHolder, ElementEventObserverHolder, ElementPropertyHolder<HTMLElement> {
   kind: 'field-group';
+  label?: string;
 }

@@ -1,6 +1,6 @@
 import { CdkDrag, type CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import type { FormArraySchema } from '../../schemas';
 import {
@@ -9,9 +9,9 @@ import {
   FluentBindingDirective,
   FluentColumnPipe,
   FluentContextGuardDirective,
-  FluentFormFieldOutletDirective,
   FluentGridModule,
   FluentReactivePipe,
+  FluentWidgetWrapperOutlet,
   FormUtil,
   InvokePipe,
   RenderablePipe,
@@ -31,7 +31,7 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
     CdkDrag,
     CdkDropList,
     FluentGridModule,
-    FluentFormFieldOutletDirective,
+    FluentWidgetWrapperOutlet,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentColumnPipe,
@@ -40,7 +40,8 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
     RenderablePipe
   ],
   templateUrl: './form-array.widget.html',
-  styleUrl: './form-array.widget.scss'
+  styleUrl: './form-array.widget.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormArrayWidget extends AbstractWidget<FormArrayWidgetTemplateContext> {
   private readonly schemaUtil = inject(SchemaUtil);

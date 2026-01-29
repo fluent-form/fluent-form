@@ -1,4 +1,4 @@
-<ng-template let-control="control" let-schema="schema" let-model="model">
+<ng-template let-control="control" let-schema="schema" let-model="model" let-next="next">
   @let schemaType = schema.kind | schemaType;
   <!-- 在控件被 space-compact 包裹的时候，控件状态/提示/required默认使用的是 space-compact 里的第一个控件 -->
   <!-- TODO 这里有个问题，如果 space-compact 里的第一个图示不是控件图示，应该查找 space-compact 里的第一个控件图示 -->
@@ -45,10 +45,7 @@
       [nzErrorTip]="currentSchema.tips?.error | template"
       [nzAutoTips]="currentSchema.tips?.auto ?? {}"
       [nzExtra]="currentSchema.hint | template">
-      <ng-container
-        fluentWithInjector
-        [ngTemplateOutlet]="schema | widgetTemplate | async"
-        [ngTemplateOutletContext]="{ control, schema, model }" />
+      <ng-container [fluentNextWidgetWrapperOutlet]="{ schema, control, model, next }" />
     </nz-form-control>
   </nz-form-item>
 </ng-template>

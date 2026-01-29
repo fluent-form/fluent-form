@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FluentBindingDirective, FluentContextGuardDirective } from '../../../directives';
-import { AbstractWidget, WidgetTemplateContext } from '../../../widgets/widget';
+import { AbstractWidget, type WidgetTemplateContext } from '../../../widgets/widget';
 import { RangeComponent } from '../../components';
-import { RangeControlSchema } from '../../schemas';
+import type { RangeControlSchema } from '../../schemas';
 
 type RangeWidgetTemplateContext = WidgetTemplateContext<RangeControlSchema, FormControl<[number, number]>>;
 
@@ -17,6 +17,7 @@ type RangeWidgetTemplateContext = WidgetTemplateContext<RangeControlSchema, Form
     FluentBindingDirective,
     FluentContextGuardDirective
   ],
-  templateUrl: './range.widget.html'
+  templateUrl: './range.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RangeWidget extends AbstractWidget<RangeWidgetTemplateContext> { }

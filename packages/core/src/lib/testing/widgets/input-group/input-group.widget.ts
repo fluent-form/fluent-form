@@ -1,5 +1,5 @@
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import type { FieldGroupComponentSchema } from '../../schemas';
 import {
@@ -28,6 +28,7 @@ type InputGroupWidgetTemplateContext = WidgetTemplateContext<FieldGroupComponent
     FluentControlPipe,
     FluentWidgetTemplatePipe
   ],
-  templateUrl: './input-group.widget.html'
+  templateUrl: './input-group.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputGroupWidget extends AbstractWidget<InputGroupWidgetTemplateContext> { }

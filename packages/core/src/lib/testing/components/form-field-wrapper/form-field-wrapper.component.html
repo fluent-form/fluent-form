@@ -1,0 +1,6 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" let-next="next">
+  <div class="form-field-wrapper">
+    <label>{{ schema.label }}</label>
+    <ng-container [fluentNextWidgetWrapperOutlet]="{ control, schema, model, next }" />
+  </div>
+</ng-template>

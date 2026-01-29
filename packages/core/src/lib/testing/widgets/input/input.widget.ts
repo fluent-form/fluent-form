@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FluentBindingDirective, FluentContextGuardDirective } from '../../../directives';
 import { AbstractWidget, type WidgetTemplateContext } from '../../../widgets/widget';
@@ -15,6 +15,7 @@ type InputWidgetTemplateContext = WidgetTemplateContext<TextFieldControlSchema, 
     FluentBindingDirective,
     FluentContextGuardDirective
   ],
-  templateUrl: './input.widget.html'
+  templateUrl: './input.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputWidget extends AbstractWidget<InputWidgetTemplateContext> { }

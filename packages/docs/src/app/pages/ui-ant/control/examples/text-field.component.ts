@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FluentFormModule, form } from '@fluent-form/core';
-import { textField } from '@fluent-form/ui-zorro';
+import { passwordField, textField } from '@fluent-form/ui-zorro';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
@@ -23,8 +23,7 @@ export class TextFieldExampleComponent {
       .placeholder('Please enter')
       .col(4);
 
-    textField('password')
-      .type('password')
+    passwordField('password')
       .label('Password type')
       .placeholder('Please enter')
       .col(4);

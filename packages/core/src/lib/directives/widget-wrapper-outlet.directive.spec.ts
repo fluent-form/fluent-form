@@ -58,12 +58,14 @@ describe('FluentWidgetWrapperOutlet', () => {
 
     const wrapperElement: HTMLElement = debugElement.nativeElement.querySelector('fluent-col > .form-field-wrapper');
     const labelElement: HTMLElement = debugElement.nativeElement.querySelector('fluent-col > .form-field-wrapper > label');
-    const nextWrapperElement: HTMLElement = debugElement.nativeElement.querySelector('fluent-col > .form-field-wrapper > .border-wrapper');
-    const inputElement: HTMLElement = debugElement.nativeElement.querySelector('fluent-col > .form-field-wrapper > .border-wrapper > input');
+    const nextWrapperElement: HTMLElement = debugElement.nativeElement.querySelector('fluent-col > .form-field-wrapper > .bordered-wrapper');
+    const namedWrapperElement: HTMLElement = debugElement.nativeElement.querySelector('fluent-col > .form-field-wrapper > .bordered-wrapper > .named-wrapper');
+    const inputElement: HTMLElement = debugElement.nativeElement.querySelector('fluent-col > .form-field-wrapper > .bordered-wrapper > .named-wrapper > input');
 
     expect(wrapperElement).toBeTruthy();
-    expect(nextWrapperElement).toBeTruthy();
     expect(labelElement.textContent?.trim()).toBe('TextField');
+    expect(nextWrapperElement).toBeTruthy();
+    expect(namedWrapperElement).toBeTruthy();
     expect(inputElement).toBeTruthy();
   });
 });
@@ -94,13 +96,27 @@ export class TestWrapperComponent {
 
 @Component({
   imports: [FluentFormModule],
-  template: `<fluent-form [schema]="schema()" [(model)]="model" />`
+  template: `
+    <fluent-form [schema]="schema()" [(model)]="model">
+      <ng-template
+        fluentTemplate="namedWrapper"
+        let-control="control"
+        let-schema="schema"
+        let-model="model"
+        let-next="next">
+        <div class="named-wrapper">
+          <ng-container [fluentNextWidgetWrapperOutlet]="{ schema, control, model, next }" />
+        </div>
+      </ng-template>
+    </fluent-form>
+  `
 })
 export class TestNextWrapperComponent {
   readonly schema = form(() => {
     textField('txt').label('TextField').wrappers([
       FormFieldWrapper,
-      BorderedWrapper
+      BorderedWrapper,
+      'namedWrapper'
     ]);
   });
 
@@ -111,7 +127,7 @@ export class TestNextWrapperComponent {
   imports: [FluentNextWidgetWrapperOutlet],
   template: `
     <ng-template let-control="control" let-schema="schema" let-model="model" let-next="next">
-      <div class="border-wrapper">
+      <div class="bordered-wrapper">
          <ng-container [fluentNextWidgetWrapperOutlet]="{ schema, control, model, next }" />
       </div>
     </ng-template>

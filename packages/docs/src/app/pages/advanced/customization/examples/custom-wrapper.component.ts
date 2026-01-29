@@ -7,7 +7,18 @@ import { FormFieldWrapper, textField } from '@fluent-form/ui-zorro';
   selector: 'custom-wrapper-example',
   imports: [FluentFormModule, JsonPipe],
   template: `
-    <fluent-form [schema]="schema()" [(model)]="model" />
+    <fluent-form [schema]="schema()" [(model)]="model">
+      <ng-template
+        fluentTemplate="namedWrapper"
+        let-control="control"
+        let-schema="schema"
+        let-model="model"
+        let-next="next">
+        <div class="shadow-lg hover:scale-110 transition">
+          <ng-container [fluentNextWidgetWrapperOutlet]="{ schema, control, model, next }" />
+        </div>
+      </ng-template>
+    </fluent-form>
     <pre>{{ model() | json }}</pre>
   `
 })
@@ -21,7 +32,8 @@ export class CustomWrapperExampleComponent {
       BorderedWrapper,
       FormFieldWrapper
     ]);
-    textField('text3').label('No Wrappers').wrappers([]);
+    textField('text3').placeholder('Hover me').wrappers(['namedWrapper']);
+    textField('text4').placeholder('No wrappers').wrappers([]);
   });
 
   readonly model = signal({});
@@ -31,7 +43,7 @@ export class CustomWrapperExampleComponent {
   imports: [FluentNextWidgetWrapperOutlet],
   template: `
     <ng-template let-control="control" let-schema="schema" let-model="model" let-next="next">
-      <div class="custom-border-wrapper" style="border: 1px dashed #ec4899;">
+      <div class="custom-border-wrapper" style="border: 1px dashed #ec4899">
          <ng-container [fluentNextWidgetWrapperOutlet]="{ schema, control, model, next }" />
       </div>
     </ng-template>

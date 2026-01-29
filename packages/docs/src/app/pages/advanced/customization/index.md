@@ -8,9 +8,9 @@
 
 该指令会在 `<ng-template>` 上导出三个模板变量，分别是：`control`、`schema`、`model`。
 
-您可以选择使用 `headless()`、`headful()` 或 `template()` 来渲染自定义模板。这两者的主要区别在于：
+您可以选择使用 `headful()` 或 `template()` 来渲染自定义模板。这两者的主要区别在于：
 
-- `headless()` 是一个表单控件，它**仅**用于形成表单模型，**不会**渲染模板；
+<!-- - `headless()` 是一个表单控件，它**仅**用于形成表单模型，**不会**渲染模板； -->
 - `headful()` 是一个表单控件，它**可以**渲染自定义模板并形成表单模型；
 - `template()` 是一个组件，它**仅**用于渲染模板，**不会**形成表单模型。
 
@@ -58,7 +58,7 @@ Wrapper **只影响视图渲染**，不会改变表单模型的生成逻辑。
 
 ### Implement a custom wrapper
 
-推荐使用一个独立的（standalone）组件来实现 Wrapper，并继承 `AbstractWidgetWrapper`。在模板中包裹自己的 DOM，然后用 `FluentNextWidgetWrapperOutlet` 渲染下一层：
+可以使用一个组件来实现 Wrapper，并继承 `AbstractWidgetWrapper`。在模板中包裹自己的 DOM，然后用 `FluentNextWidgetWrapperOutlet` 渲染下一层：
 
 ```ts
 import { AbstractWidgetWrapper, FluentNextWidgetWrapperOutlet } from '@fluent-form/core';
@@ -78,17 +78,40 @@ export class MyWrapper extends AbstractWidgetWrapper { }
 
 如果您在 Wrapper 里忘记渲染 `FluentNextWidgetWrapperOutlet`，那么内层（下一个 wrapper / widget）将不会显示。
 
-### Applying wrapper
+### Using a named template as wrapper
+
+除了使用组件来实现 Wrapper 外，您还可以使用“命名模板”来实现 Wrapper。
+
+当 `wrappers` 的元素是字符串时，它表示一个“命名模板”的 Key，指向的是使用 `fluentTemplate` 指令注册的模板。这样您可以只用一段模板就完成包装，而无需创建一个 `AbstractWidgetWrapper` 子类。
+
+```html
+<fluent-form [schema]="schema()" [(model)]="model">
+  <ng-template
+    fluentTemplate="borderedWrapper"
+    let-control="control"
+    let-schema="schema"
+    let-model="model"
+    let-next="next">
+    <div style="border: 1px dashed #ec4899;">
+      <ng-container [fluentNextWidgetWrapperOutlet]="{ schema, control, model, next }" />
+    </div>
+  </ng-template>
+</fluent-form>
+```
+
+### Applying wrappers
 
 通过 schema 的 `wrappers([...])` 为某个控件指定 Wrapper 列表：
 
 - 数组顺序决定了渲染顺序，“由外到内”：第一个是最外层 Wrapper。
 - 指定 `wrappers` 会**覆盖** UI 适配器（例如 `@fluent-form/ui-zorro`）提供的默认 Wrappers；如果您希望保留默认 Wrappers，请手动把它加入数组。
+- 数组元素既可以是 Wrapper 组件类型，也可以是命名模板 Key（由 `fluentTemplate` 注册）。
 
 ```ts
 textField('name').label('Name').wrappers([
-  FormFieldWrapper, // 仍然保留默认的表单项外观（label、校验提示等）
-  MyWrapper,        // 再叠加自定义外观/交互
+  FormFieldWrapper,  // 仍然保留默认的表单项外观（label、校验提示等）
+  MyWrapper,         // 再叠加自定义外观/交互
+  'borderedWrapper', // 对应 fluentTemplate="borderedWrapper" 注册的模板
 ]);
 ```
 

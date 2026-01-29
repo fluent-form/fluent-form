@@ -4,8 +4,6 @@
 
 ## Named Template
 
-{% include "../../../markdowns/developer-preview.md" %}
-
 在某些情况下，我们可能需要为组件图示选项传入 `TemplateRef` 类型的值，例如 `text` 图示的 `addons` 选项。
 
 通常，我们会使用 `@ViewChild()` 来注入并获取相应的 `TemplateRef`。

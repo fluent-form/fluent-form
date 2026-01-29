@@ -17,7 +17,6 @@ ng add @fluent-form/core
 | v21.x   | >=0.30.x   |
 | v20.x   | >=0.30.x   |
 | v19.x   | >=0.29.x   |
-| v18.x   | ^0.28.x    |
 
 ### Unsupported versions
 

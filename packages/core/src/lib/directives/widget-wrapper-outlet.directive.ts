@@ -2,9 +2,10 @@ import { NgTemplateOutlet } from '@angular/common';
 import { Directive, Injector, effect, inject, input, untracked } from '@angular/core';
 import type { SafeAny } from '@ngify/core';
 import type { WidgetWrapperContext } from '../components';
-import type { SchemaContext } from '../schemas';
+import type { AbstractSchema, SchemaContext } from '../schemas';
 import { WidgetWrapperTemplateRegistry } from '../services';
-import { FLUENT_WIDGET_WRAPPER } from '../tokens';
+import { FLUENT_WIDGET_WRAPPERS } from '../tokens';
+import { FluentNextWidgetWrapper } from './next-widget-wrapper-outlet.directive';
 
 @Directive({
   selector: '[fluentWidgetWrapperOutlet]',
@@ -16,15 +17,20 @@ export class FluentWidgetWrapperOutlet<C extends SchemaContext> {
   constructor() {
     const outlet = inject(NgTemplateOutlet);
     const injector = inject(Injector);
-    const wrappers = inject(FLUENT_WIDGET_WRAPPER, { optional: true }) ?? [];
+    const wrappers = inject(FLUENT_WIDGET_WRAPPERS, { optional: true }) ?? [];
     const wrapperMap = inject(WidgetWrapperTemplateRegistry);
+
+    function finalWrappersOf(schema: AbstractSchema) {
+      const finalWrappers = schema.wrappers || wrappers;
+      return finalWrappers.length ? finalWrappers : [FluentNextWidgetWrapper];
+    }
 
     // Initialize wrapper components and cache their templateRefs
     const effectRef = effect(() => {
       const context = this.fluentWidgetWrapperOutlet();
 
       untracked(() => {
-        const finalWrappers = context.schema.wrappers || wrappers;
+        const finalWrappers = finalWrappersOf(context.schema);
 
         outlet.ngTemplateOutlet = wrapperMap.get(finalWrappers[0])!;
         outlet.ngTemplateOutletInjector = Injector.create({
@@ -42,7 +48,7 @@ export class FluentWidgetWrapperOutlet<C extends SchemaContext> {
       const baseContext = this.fluentWidgetWrapperOutlet();
 
       untracked(() => {
-        const finalWrappers = baseContext.schema.wrappers || wrappers;
+        const finalWrappers = finalWrappersOf(baseContext.schema);
         // Build the chained context
         const context = finalWrappers.reduceRight<WidgetWrapperContext>(
           (nextContext, wrapper) => {

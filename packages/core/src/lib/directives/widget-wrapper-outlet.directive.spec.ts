@@ -35,6 +35,19 @@ describe('FluentWidgetWrapperOutlet', () => {
     expect(inputElement).toBeTruthy();
   });
 
+  it('should not render widget wrapper', async () => {
+    const fixture = TestBed.createComponent(TestNoWrapperComponent);
+    const debugElement = fixture.debugElement;
+
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const inputElement: HTMLElement = debugElement.nativeElement.querySelector('fluent-col > input');
+
+    expect(inputElement).toBeTruthy();
+  });
+
   it('should render next widget wrapper', async () => {
     const fixture = TestBed.createComponent(TestNextWrapperComponent);
     const debugElement = fixture.debugElement;
@@ -54,6 +67,18 @@ describe('FluentWidgetWrapperOutlet', () => {
     expect(inputElement).toBeTruthy();
   });
 });
+
+@Component({
+  imports: [FluentFormModule],
+  template: `<fluent-form [schema]="schema()" [(model)]="model" />`
+})
+export class TestNoWrapperComponent {
+  readonly schema = form(() => {
+    textField('txt').label('TextField').wrappers([]);
+  });
+
+  readonly model = signal({});
+}
 
 @Component({
   imports: [FluentFormModule],

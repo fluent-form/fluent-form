@@ -21,6 +21,6 @@ export const NAMED_TEMPLATES = new InjectionToken<{ name: string, templateRef: T
 export const FLUENT_FORM_CONTENT = new InjectionToken<Type<AbstractFormContentComponent>>(
   typeof ngDevMode !== 'undefined' && ngDevMode ? 'FLUENT_FORM_CONTENT' : ''
 );
-export const FLUENT_WIDGET_WRAPPER = new InjectionToken<Type<AbstractWidgetWrapper>[]>(
-  typeof ngDevMode !== 'undefined' && ngDevMode ? 'FLUENT_WIDGET_WRAPPER' : ''
+export const FLUENT_WIDGET_WRAPPERS = new InjectionToken<Type<AbstractWidgetWrapper>[]>(
+  typeof ngDevMode !== 'undefined' && ngDevMode ? 'FLUENT_WIDGET_WRAPPERS' : ''
 );

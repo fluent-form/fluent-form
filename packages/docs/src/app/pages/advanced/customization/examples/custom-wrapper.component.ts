@@ -21,6 +21,7 @@ export class CustomWrapperExampleComponent {
       BorderedWrapper,
       FormFieldWrapper
     ]);
+    textField('text3').label('No Wrappers').wrappers([]);
   });
 
   readonly model = signal({});

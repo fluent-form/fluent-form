@@ -1,6 +1,6 @@
 import {
   FLUENT_FORM_CONTENT,
-  FLUENT_WIDGET_WRAPPER,
+  FLUENT_WIDGET_WRAPPERS,
   FluentFormFeatureKind,
   FluentFormWidgetConfig,
   makeFluentFeature,
@@ -17,9 +17,8 @@ export function withZorro(widgets: (FluentFormWidgetConfig<SafeAny> | FluentForm
       useValue: FormContentComponent
     },
     {
-      provide: FLUENT_WIDGET_WRAPPER,
-      useValue: FormFieldWrapper,
-      multi: true
+      provide: FLUENT_WIDGET_WRAPPERS,
+      useValue: [FormFieldWrapper]
     },
     provideWidgetConfigs(widgets),
     // 添加内置的 patcher

@@ -45,7 +45,7 @@ Wrapper **只影响视图渲染**，不会改变表单模型的生成逻辑。
 
 ### How the wrapper works
 
-当 Fluent Form 渲染某个控件时，会先渲染一层或多层 Wrapper，然后再渲染真正的 Widget。
+当 {% include "../../../markdowns/brand.md" %} 渲染某个控件时，如果存在 Wrappers，会先渲染一层或多层 Wrappers，然后再渲染真正的 Widget。
 
 每一层 Wrapper 都会拿到同一份上下文（Context）：
 
@@ -83,7 +83,7 @@ export class MyWrapper extends AbstractWidgetWrapper { }
 通过 schema 的 `wrappers([...])` 为某个控件指定 Wrapper 列表：
 
 - 数组顺序决定了渲染顺序，“由外到内”：第一个是最外层 Wrapper。
-- 指定 `wrappers` 会**覆盖** UI 适配器（例如 `@fluent-form/ui-zorro`）提供的默认 wrappers；如果您希望保留默认 wrapper，请手动把它加入数组。
+- 指定 `wrappers` 会**覆盖** UI 适配器（例如 `@fluent-form/ui-zorro`）提供的默认 Wrappers；如果您希望保留默认 Wrappers，请手动把它加入数组。
 
 ```ts
 textField('name').label('Name').wrappers([
@@ -92,22 +92,27 @@ textField('name').label('Name').wrappers([
 ]);
 ```
 
-{{ NgDocActions.demo("CustomWrapperExampleComponent") }}
-
-### Providing default wrapper
-
-UI 适配器通常会使用 `FLUENT_WIDGET_WRAPPER` Token 来提供默认的 Wrappers，一般情况下您不需要直接使用它；
-
-但如果希望**全局追加**一些默认 Wrappers（对所有未显式 `wrappers` 的控件生效），可以自行提供该 Token：
+- 如果您不需要任何 Wrappers，可以传入一个空数组来覆盖默认的 Wrappers：
 
 ```ts
-import { FLUENT_WIDGET_WRAPPER } from '@fluent-form/core';
+textField('name').label('Name').wrappers([]);
+```
+
+{{ NgDocActions.demo("CustomWrapperExampleComponent") }}
+
+### Providing default wrappers
+
+UI 适配器通常会使用 `FLUENT_WIDGET_WRAPPERS` Token 来提供一组默认的 Wrappers，一般情况下您不需要直接使用它；
+
+但如果希望**覆盖**这些默认 Wrappers（对所有未显式设置 `wrappers` 的控件生效），可以自行提供该 Token：
+
+```ts
+import { FLUENT_WIDGET_WRAPPERS } from '@fluent-form/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     ...
-    { provide: FLUENT_WIDGET_WRAPPER, useValue: MyWrapper1, multi: true },
-    { provide: FLUENT_WIDGET_WRAPPER, useValue: MyWrapper2, multi: true },
+    { provide: FLUENT_WIDGET_WRAPPERS, useValue: [MyWrapper1, MyWrapper2] },
   ],
 };
 ```

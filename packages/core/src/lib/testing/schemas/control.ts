@@ -31,6 +31,7 @@ export interface TextFieldControlSchema<Key extends SingleSchemaKey = SingleSche
   ElementPropertyHolder<HTMLInputElement> {
   kind: 'text-field';
   type?: 'text' | 'number' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'color';
+  label?: string;
   placeholder?: string;
 }
 
@@ -40,6 +41,7 @@ export interface RangeControlSchema<Key extends SchemaKey = SchemaKey, Val = [nu
   ComponentControlEventObserverHolder<RangeComponent, Val>,
   ComponentPropertyHolder<RangeComponent> {
   kind: 'range';
+  label?: string;
   min?: number;
   max?: number;
 }
@@ -50,4 +52,5 @@ export interface NumberFieldControlSchema<Key extends SchemaKey = SchemaKey, Val
   ComponentControlEventObserverHolder<NumberComponent, Val>,
   ComponentPropertyHolder<NumberComponent> {
   kind: 'number-field';
+  label?: string;
 }

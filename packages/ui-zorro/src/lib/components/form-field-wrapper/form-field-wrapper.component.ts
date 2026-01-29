@@ -1,42 +1,34 @@
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
-  AbstractFormFieldContentComponent,
+  AbstractWidgetWrapper,
   FluentControlPipe,
+  FluentNextWidgetWrapperOutlet,
   FluentReactivePipe,
   FluentSchemaTypePipe,
   FluentTemplateOutlet,
   FluentTemplatePipe,
-  FluentWidgetTemplatePipe,
-  FluentWithInjectorDirective,
   InvokePipe,
   SchemaType
 } from '@fluent-form/core';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { labelHelper, tooltipHelper } from '../../helper';
 
-/**
- * @internal
- */
 @Component({
   imports: [
-    AsyncPipe,
-    NgTemplateOutlet,
     NzFormModule,
-    FluentWithInjectorDirective,
     FluentReactivePipe,
     FluentControlPipe,
     FluentTemplatePipe,
-    FluentWidgetTemplatePipe,
     FluentSchemaTypePipe,
     FluentTemplateOutlet,
+    FluentNextWidgetWrapperOutlet,
     InvokePipe
   ],
-  templateUrl: './form-field-content.component.html',
-  styleUrl: './form-field-content.component.scss',
+  templateUrl: './form-field-wrapper.component.html',
+  styleUrl: './form-field-wrapper.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormFieldContentComponent extends AbstractFormFieldContentComponent {
+export class FormFieldWrapper extends AbstractWidgetWrapper {
   protected readonly SchemaType = SchemaType;
 
   protected readonly helper = {

@@ -7,9 +7,9 @@ import {
   FluentColumnPipe,
   FluentContextGuardDirective,
   FluentControlPipe,
-  FluentFormFieldOutletDirective,
   FluentGridModule,
   FluentReactivePipe,
+  FluentWidgetWrapperOutlet,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
@@ -25,7 +25,7 @@ type TabsWidgetTemplateContext = WidgetTemplateContext<TabsComponentSchema, Form
     NgTemplateOutlet,
     NzTabsModule,
     FluentGridModule,
-    FluentFormFieldOutletDirective,
+    FluentWidgetWrapperOutlet,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentReactivePipe,

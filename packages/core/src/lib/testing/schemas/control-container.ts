@@ -1,8 +1,12 @@
-import { AbstractFormArraySchema, AbstractFormGroupSchema, SingleSchemaKey } from '../../schemas';
+import type { AbstractFormArraySchema, AbstractFormGroupSchema, SingleSchemaKey } from '../../schemas';
 
 /**
  * @public
  */
-export type FormGroupSchema<Key extends SingleSchemaKey = SingleSchemaKey> = AbstractFormGroupSchema<Key>;
+export interface FormGroupSchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractFormGroupSchema<Key> {
+  label?: string;
+}
 
-export type FormArraySchema<Key extends SingleSchemaKey = SingleSchemaKey> = AbstractFormArraySchema<Key>;
+export interface FormArraySchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractFormArraySchema<Key> {
+  label?: string;
+}

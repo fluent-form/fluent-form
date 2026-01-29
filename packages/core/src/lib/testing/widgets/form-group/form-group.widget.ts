@@ -1,10 +1,10 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FluentBindingDirective, FluentContextGuardDirective, FluentFormFieldOutletDirective, FluentGridModule } from '../../../directives';
+import { FluentBindingDirective, FluentContextGuardDirective, FluentGridModule, FluentWidgetWrapperOutlet } from '../../../directives';
 import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe, RenderablePipe } from '../../../pipes';
-import { AbstractWidget, WidgetTemplateContext } from '../../../widgets/widget';
-import { FormGroupSchema } from '../../schemas';
+import { AbstractWidget, type WidgetTemplateContext } from '../../../widgets/widget';
+import type { FormGroupSchema } from '../../schemas';
 
 type FormGroupWidgetTemplateContext = WidgetTemplateContext<FormGroupSchema, FormGroup>;
 
@@ -15,7 +15,7 @@ type FormGroupWidgetTemplateContext = WidgetTemplateContext<FormGroupSchema, For
   imports: [
     NgTemplateOutlet,
     FluentGridModule,
-    FluentFormFieldOutletDirective,
+    FluentWidgetWrapperOutlet,
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentColumnPipe,
@@ -23,6 +23,7 @@ type FormGroupWidgetTemplateContext = WidgetTemplateContext<FormGroupSchema, For
     FluentControlPipe,
     RenderablePipe
   ],
-  templateUrl: './form-group.widget.html'
+  templateUrl: './form-group.widget.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormGroupWidget extends AbstractWidget<FormGroupWidgetTemplateContext> { }

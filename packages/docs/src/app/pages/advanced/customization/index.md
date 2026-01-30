@@ -60,7 +60,7 @@ Wrapper **只影响视图渲染**，不会改变表单模型的生成逻辑。
 
 可以使用一个组件来实现 Wrapper，并继承 `AbstractWidgetWrapper`。在模板中包裹自己的 DOM，然后用 `FluentNextWidgetWrapperOutlet` 渲染下一层：
 
-```ts
+```angular-ts
 import { AbstractWidgetWrapper, FluentNextWidgetWrapperOutlet } from '@fluent-form/core';
 
 @Component({
@@ -105,11 +105,14 @@ export class MyWrapper extends AbstractWidgetWrapper { }
 
 - 数组顺序决定了渲染顺序，“由外到内”：第一个是最外层 Wrapper。
 - 指定 `wrappers` 会**覆盖** UI 适配器（例如 `@fluent-form/ui-zorro`）提供的默认 Wrappers；如果您希望保留默认 Wrappers，请手动把它加入数组。
+- 可以使用 `inject(FLUENT_WIDGET_WRAPPERS)` 来获取默认的 Wrappers 列表。
 - 数组元素既可以是 Wrapper 组件类型，也可以是命名模板 Key（由 `fluentTemplate` 注册）。
 
 ```ts
+const defaultWrappers = inject(FLUENT_WIDGET_WRAPPERS);
+
 textField('name').label('Name').wrappers([
-  FormFieldWrapper,  // 仍然保留默认的表单项外观（label、校验提示等）
+  defaultWrappers,   // 仍然保留默认的表单项外观（label、校验提示等）
   MyWrapper,         // 再叠加自定义外观/交互
   'borderedWrapper', // 对应 fluentTemplate="borderedWrapper" 注册的模板
 ]);
@@ -125,9 +128,9 @@ textField('name').label('Name').wrappers([]);
 
 ### Providing default wrappers
 
-UI 适配器通常会使用 `FLUENT_WIDGET_WRAPPERS` Token 来提供一组默认的 Wrappers，一般情况下您不需要直接使用它；
+UI 适配器通常会使用 `FLUENT_WIDGET_WRAPPERS` Token 来提供一组默认的 Wrappers；
 
-但如果希望**覆盖**这些默认 Wrappers（对所有未显式设置 `wrappers` 的控件生效），可以自行提供该 Token：
+如果希望**覆盖**这些默认 Wrappers（对所有未显式设置 `wrappers` 的控件生效），可以自行提供该 Token：
 
 ```ts
 import { FLUENT_WIDGET_WRAPPERS } from '@fluent-form/core';

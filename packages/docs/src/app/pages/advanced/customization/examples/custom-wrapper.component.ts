@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
-import { Component, signal } from '@angular/core';
-import { AbstractWidgetWrapper, FluentFormModule, FluentNextWidgetWrapperOutlet, form } from '@fluent-form/core';
-import { FormFieldWrapper, textField } from '@fluent-form/ui-zorro';
+import { Component, inject, signal } from '@angular/core';
+import { AbstractWidgetWrapper, FLUENT_WIDGET_WRAPPERS, FluentFormModule, FluentNextWidgetWrapperOutlet, form } from '@fluent-form/core';
+import { textField } from '@fluent-form/ui-zorro';
 
 @Component({
   selector: 'custom-wrapper-example',
@@ -23,14 +23,16 @@ import { FormFieldWrapper, textField } from '@fluent-form/ui-zorro';
   `
 })
 export class CustomWrapperExampleComponent {
+  private readonly defaultWrappers = inject(FLUENT_WIDGET_WRAPPERS);
+
   readonly schema = form(() => {
     textField('text1').label('Wrapped field').wrappers([
-      FormFieldWrapper,
+      this.defaultWrappers,
       BorderedWrapper
     ]);
     textField('text2').label('Wrapped field').wrappers([
       BorderedWrapper,
-      FormFieldWrapper
+      this.defaultWrappers
     ]);
     textField('text3').placeholder('Hover me').wrappers(['namedWrapper']);
     textField('text4').placeholder('No wrappers').wrappers([]);

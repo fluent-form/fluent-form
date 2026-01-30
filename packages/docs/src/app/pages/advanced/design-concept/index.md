@@ -107,7 +107,7 @@ const schema = form(() => {
 
 以 `<button-group>` 与 `<button>` 嵌套形成的按钮组为例，这些组件通常来自外部组件库。为了在动态表单中复用它们，我们需要分别为这些组件定义专用的包装组件，然后注册到动态表单：
 
-```ts
+```angular-ts
 @Component({
   selector: 'my-button',
   template: `

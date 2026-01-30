@@ -27,7 +27,7 @@ export class FluentWidgetWrapperOutlet<C extends SchemaContext> {
     );
 
     function finalWrappersOf(schema: AbstractSchema) {
-      const finalWrappers = schema.wrappers || wrappers;
+      const finalWrappers = schema.wrappers?.flat() || wrappers;
       return finalWrappers.length ? finalWrappers : [FluentNextWidgetWrapper];
     }
 

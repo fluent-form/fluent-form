@@ -8,6 +8,8 @@ import type { HooksHolder } from './hooks';
 import type { MaybeSchemaReactiveFn, SchemaLike } from './interfaces';
 import type { SchemaKey } from './types';
 
+type WidgetWrapperType = Type<TemplateRefHolder<WidgetWrapperContext>> | string;
+
 /**
  * 抽象图示
  */
@@ -17,7 +19,7 @@ export interface AbstractSchema<Key extends SchemaKey = SchemaKey> extends Schem
   hidden?: MaybeSchemaReactiveFn<AbstractSchema, boolean>;
   class?: null | string | string[] | Record<string, boolean | undefined | null>;
   style?: string | undefined | null | Record<string, SafeAny>;
-  wrappers?: (Type<TemplateRefHolder<WidgetWrapperContext>> | string)[];
+  wrappers?: (WidgetWrapperType[] | WidgetWrapperType)[];
 }
 
 export interface AbstractBranchSchema<Key extends SchemaKey = SchemaKey> extends AbstractSchema<Key> {

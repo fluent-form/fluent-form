@@ -2,10 +2,7 @@
   <nz-flex
     #component
     fluentControlWrapper
-    [fluentBindingComponent]="component"
-    [fluentBindingSchema]="schema"
-    [fluentBindingControl]="control"
-    [fluentBindingModel]="model"
+    [fluentBinding]="{ component, schema, control, model }"
     [class]="schema.class"
     [style]="schema.style"
     [nzVertical]="schema.vertical!"

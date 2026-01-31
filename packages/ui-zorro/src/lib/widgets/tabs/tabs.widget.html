@@ -1,10 +1,7 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <nz-tabs
     #component
-    [fluentBindingComponent]="component"
-    [fluentBindingSchema]="schema"
-    [fluentBindingControl]="control"
-    [fluentBindingModel]="model"
+    [fluentBinding]="{ component, schema, control, model }"
     [class]="schema.class"
     [style]="schema.style"
     [nzSelectedIndex]="schema.active!"
@@ -16,10 +13,7 @@
     @for (tabSchema of schema.schemas; track tabSchema) {
       <nz-tab
         #component
-        [fluentBindingComponent]="component"
-        [fluentBindingSchema]="schema"
-        [fluentBindingControl]="control"
-        [fluentBindingModel]="model"
+        [fluentBinding]="{ component, schema, control, model }"
         [class]="tabSchema.class"
         [style]="tabSchema.style"
         [nzTitle]="tabSchema.title"

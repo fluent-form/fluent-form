@@ -10,9 +10,7 @@
     [nzLayout]="formSchema.layout!"
     [class]="formSchema.class"
     [style]="formSchema.style"
-    [fluentBindingSchema]="formSchema"
-    [fluentBindingControl]="formArray"
-    [fluentBindingModel]="model"
+    [fluentBinding]="{ schema: formSchema, control: formArray, model }"
     (cdkDropListDropped)="drop(formArray, $event)">
     <ng-template
       #formColTemplate
@@ -61,9 +59,7 @@
             }" />
         } @else {
           <ng-template
-            [fluentBindingSchema]="withIndex(index, subschema)"
-            [fluentBindingControl]="control"
-            [fluentBindingModel]="model[formSchema.key!]" />
+            [fluentBinding]="{ schema: withIndex(index, subschema), control, model: model[formSchema.key!] }" />
         }
       }
     }

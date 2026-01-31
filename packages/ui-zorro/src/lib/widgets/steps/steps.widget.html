@@ -1,10 +1,7 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <nz-steps
     #component
-    [fluentBindingComponent]="component"
-    [fluentBindingSchema]="schema"
-    [fluentBindingControl]="control"
-    [fluentBindingModel]="model"
+    [fluentBinding]="{ component, schema, control, model }"
     [class]="schema.class"
     [style]="schema.style"
     [nzType]="schema.type ?? 'default'"
@@ -17,10 +14,7 @@
     @for (subschema of schema.schemas; track subschema) {
       <nz-step
         #component
-        [fluentBindingComponent]="component"
-        [fluentBindingSchema]="schema"
-        [fluentBindingControl]="control"
-        [fluentBindingModel]="model"
+        [fluentBinding]="{ component, schema, control, model }"
         [class]="subschema.class"
         [style]="subschema.style"
         [nzTitle]="subschema.title | template"

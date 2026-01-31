@@ -1,10 +1,7 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <nz-switch
     #component
-    [fluentBindingComponent]="component"
-    [fluentBindingSchema]="schema"
-    [fluentBindingControl]="control"
-    [fluentBindingModel]="model"
+    [fluentBinding]="{ component, schema, control, model }"
     [formControl]="control"
     [class]="schema.class"
     [style]="schema.style"

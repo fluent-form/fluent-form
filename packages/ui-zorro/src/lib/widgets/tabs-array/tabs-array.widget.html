@@ -2,10 +2,7 @@
   <nz-tabs
     #component
     nzType="editable-card"
-    [fluentBindingComponent]="component"
-    [fluentBindingSchema]="formSchema"
-    [fluentBindingControl]="formArray"
-    [fluentBindingModel]="model"
+    [fluentBinding]="{ component, schema: formSchema, control: formArray, model }"
     [class]="formSchema.class"
     [style]="formSchema.style"
     [nzSize]="formSchema.size ?? 'default'"
@@ -50,9 +47,7 @@
                 }" />
             } @else {
               <ng-template
-                [fluentBindingSchema]="withIndex(index, subschema)"
-                [fluentBindingControl]="control"
-                [fluentBindingModel]="model[formSchema.key!]" />
+                [fluentBinding]="{ schema: withIndex(index, subschema), control, model: model[formSchema.key!] }" />
             }
           }
         </fluent-row>

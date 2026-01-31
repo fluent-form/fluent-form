@@ -9,10 +9,7 @@
     [nzData]="formArray.value"
     [class]="formSchema.class"
     [style]="formSchema.style"
-    [fluentBindingComponent]="component"
-    [fluentBindingSchema]="formSchema"
-    [fluentBindingControl]="formArray"
-    [fluentBindingModel]="model">
+    [fluentBinding]="{ component, schema: formSchema, control: formArray, model }">
     <thead>
       <tr [class]="tableRowGroupSchema.class" [style]="tableRowGroupSchema.style">
         @for (tableColumnSchema of tableRowGroupSchema.schemas; track tableColumnSchema) {
@@ -45,9 +42,7 @@
           [cdkDragBoundary]="tbody.ref"
           [class]="tableRowGroupSchema.class"
           [style]="tableRowGroupSchema.style"
-          [fluentBindingSchema]="tableRowGroupSchema"
-          [fluentBindingControl]="formGroup"
-          [fluentBindingModel]="model[formSchema.key!]">
+          [fluentBinding]="{ schema: tableRowGroupSchema, control: formGroup, model: model[formSchema.key!] }">
           @for (tableColumnSchema of tableRowGroupSchema.schemas; track tableColumnSchema) {
             <td [class]="tableColumnSchema.class" [style]="tableColumnSchema.style">
               @for (subschema of tableColumnSchema.schemas; track subschema) {
@@ -62,9 +57,11 @@
                     }" />
                 } @else {
                   <ng-template
-                    [fluentBindingSchema]="subschema"
-                    [fluentBindingControl]="subschema.key | control: $any(formGroup)"
-                    [fluentBindingModel]="model[formSchema.key!][index]" />
+                    [fluentBinding]="{
+                      schema: subschema,
+                      control: subschema.key | control: $any(formGroup),
+                      model: model[formSchema.key!][index]
+                    }" />
                 }
               }
             </td>

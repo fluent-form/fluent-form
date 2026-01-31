@@ -5,9 +5,7 @@
     [justify]="formSchema.justify"
     [class]="formSchema.class"
     [style]="formSchema.style"
-    [fluentBindingSchema]="formSchema"
-    [fluentBindingControl]="formGroup"
-    [fluentBindingModel]="model">
+    [fluentBinding]="{ schema: formSchema, control: formGroup, model }">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
       <fluent-col
         [span]="schema.col | col: 'span'"
@@ -29,9 +27,11 @@
           }" />
       } @else {
         <ng-template
-          [fluentBindingSchema]="subschema"
-          [fluentBindingControl]="subschema.key | control: formGroup"
-          [fluentBindingModel]="model[formSchema.key!]" />
+          [fluentBinding]="{
+            schema: subschema,
+            control: subschema.key | control: formGroup,
+            model: model[formSchema.key!]
+          }" />
       }
     }
   </fluent-row>

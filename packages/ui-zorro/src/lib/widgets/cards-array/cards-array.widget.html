@@ -10,9 +10,7 @@
     [nzLayout]="formSchema.layout!"
     [class]="formSchema.class"
     [style]="formSchema.style"
-    [fluentBindingSchema]="formSchema"
-    [fluentBindingControl]="formArray"
-    [fluentBindingModel]="model"
+    [fluentBinding]="{ schema: formSchema, control: formArray, model }"
     (cdkDropListDropped)="drop(formArray, $event)">
     @for (cardSchema of formSchema.schemas; track cardSchema) {
       @for (control of formArray.controls; track control; let index = $index) {
@@ -68,9 +66,11 @@
                       }" />
                   } @else {
                     <ng-template
-                      [fluentBindingSchema]="withIndex(index, subschema)"
-                      [fluentBindingControl]="control"
-                      [fluentBindingModel]="model[formSchema.key!]" />
+                      [fluentBinding]="{
+                        schema: withIndex(index, subschema),
+                        control,
+                        model: model[formSchema.key!]
+                      }" />
                   }
                 }
               </fluent-row>

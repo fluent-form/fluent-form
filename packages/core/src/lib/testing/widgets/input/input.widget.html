@@ -2,9 +2,7 @@
   <input
     [attr.id]="schema.id"
     [attr.name]="schema.key"
-    [fluentBindingSchema]="schema"
-    [fluentBindingControl]="control"
-    [fluentBindingModel]="model"
+    [fluentBinding]="{ schema, control, model }"
     [class]="schema.class"
     [style]="schema.style"
     [formControl]="control"

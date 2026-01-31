@@ -1,8 +1,6 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   <fluent-range
-    [fluentBindingSchema]="schema"
-    [fluentBindingControl]="control"
-    [fluentBindingModel]="model"
+    [fluentBinding]="{ schema, control, model }"
     [class]="schema.class"
     [style]="schema.style"
     [formControl]="control"

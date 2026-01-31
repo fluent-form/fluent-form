@@ -1,5 +1,5 @@
 import {
-  DestroyRef, Directive, ElementRef, Injector, type OnInit, type OutputRef, effect, inject, input, isSignal, runInInjectionContext, untracked
+  DestroyRef, Directive, ElementRef, Injector, type OnInit, type OutputRef, computed, effect, inject, input, isSignal, runInInjectionContext, untracked
 } from '@angular/core';
 import { SIGNAL, type SignalNode, signalSetFn } from '@angular/core/primitives/signals';
 import { outputToObservable } from '@angular/core/rxjs-interop';
@@ -29,30 +29,32 @@ function isObserverHolder(value: SafeAny): value is Required<EventObserverHolder
  * @internal
  */
 @Directive({
-  selector: '[fluentBindingSchema]',
+  selector: '[fluentBinding]',
   providers: [DestroyedSubject]
 })
 export class FluentBindingDirective<E extends HTMLElement, C extends object, S extends AbstractSchema> implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly injector = inject(Injector);
 
-  readonly fluentBindingComponent = input<C>();
-  readonly fluentBindingSchema = input.required<S>();
-  readonly fluentBindingControl = input.required<AbstractControl>();
-  readonly fluentBindingModel = input.required<AnyObject>();
+  readonly fluentBinding = input.required<{ component?: C, schema: S, control: AbstractControl, model: AnyObject }>();
+
+  private readonly schema = computed(() => this.fluentBinding().schema);
+  private readonly model = computed(() => this.fluentBinding().model);
+  private readonly control = computed(() => this.fluentBinding().control);
+  private readonly component = computed(() => this.fluentBinding().component);
 
   constructor() {
     const elementRef: ElementRef<E> = inject(ElementRef);
     const destroyed = inject(DestroyedSubject);
 
     effect(() => {
-      const component = this.fluentBindingComponent();
-      const schema = this.fluentBindingSchema();
-      const control = this.fluentBindingControl();
+      const component = this.component();
+      const schema = this.schema();
+      const control = this.control();
       const host = component ?? elementRef.nativeElement;
 
       untracked(() => {
-        const context = (): SchemaContext => ({ control, schema, model: this.fluentBindingModel() });
+        const context = (): SchemaContext => ({ control, schema, model: this.model() });
         destroyed.next();
 
         if (isPropertyHolder(schema)) {
@@ -136,15 +138,14 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
   }
 
   ngOnInit() {
-    const schema = this.fluentBindingSchema();
-    const control = this.fluentBindingControl();
-    const model = this.fluentBindingModel();
-    const context: SchemaContext<S> = { control, schema, model };
+    const schema = this.schema();
+    const control = this.control();
+    const context = (): SchemaContext => ({ control, schema, model: this.model() });
 
     if (isHookHolder(schema)) {
-      runInInjectionContext(this.injector, () => schema.hooks.onInit?.(context));
+      runInInjectionContext(this.injector, () => schema.hooks.onInit?.(context()));
       this.destroyRef.onDestroy(() =>
-        runInInjectionContext(this.injector, () => schema.hooks.onDestroy?.(context)));
+        runInInjectionContext(this.injector, () => schema.hooks.onDestroy?.(context())));
     }
   }
 }

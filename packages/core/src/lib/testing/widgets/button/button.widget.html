@@ -3,9 +3,7 @@
     fluentCol
     [attr.type]="schema.mode"
     [disabled]="schema.disabled | reactive: model : schema : control"
-    [fluentBindingSchema]="schema"
-    [fluentBindingControl]="control"
-    [fluentBindingModel]="model"
+    [fluentBinding]="{ schema, control, model }"
     [class]="schema.class"
     [style]="schema.style"
     [span]="schema.col | col: 'span'"

@@ -5,9 +5,7 @@
     [align]="schema.align"
     [justify]="schema.justify"
     [gap]="schema.gap"
-    [fluentBindingSchema]="schema"
-    [fluentBindingControl]="control"
-    [fluentBindingModel]="model">
+    [fluentBinding]="{ schema, control, model }">
     <ng-template #colTemplate let-schema="schema" let-control="control" let-model="model">
       <fluent-col
         [span]="schema.col | col: 'span'"
@@ -28,10 +26,7 @@
             model: model
           }" />
       } @else {
-        <ng-template
-          [fluentBindingSchema]="subschema"
-          [fluentBindingControl]="subschema.key | control: control"
-          [fluentBindingModel]="model" />
+        <ng-template [fluentBinding]="{ schema: subschema, control: subschema.key | control: control, model }" />
       }
     }
   </fluent-row>

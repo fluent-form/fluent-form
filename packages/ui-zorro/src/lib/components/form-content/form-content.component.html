@@ -8,9 +8,7 @@
     [nzLayout]="schema.layout!"
     [class]="schema.class"
     [style]="schema.style"
-    [fluentBindingSchema]="schema"
-    [fluentBindingControl]="form"
-    [fluentBindingModel]="model"
+    [fluentBinding]="{ schema, control: form, model }"
     (submit)="onSubmit($event)">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
       <fluent-col
@@ -32,10 +30,7 @@
             model: model
           }" />
       } @else {
-        <ng-template
-          [fluentBindingSchema]="subschema"
-          [fluentBindingControl]="subschema.key | control: form"
-          [fluentBindingModel]="model" />
+        <ng-template [fluentBinding]="{ schema: subschema, control: subschema.key | control: form, model }" />
       }
     }
   </form>

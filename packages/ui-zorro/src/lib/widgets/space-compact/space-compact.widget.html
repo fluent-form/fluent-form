@@ -2,10 +2,7 @@
   <nz-space-compact
     #component
     fluentControlWrapper
-    [fluentBindingComponent]="component"
-    [fluentBindingSchema]="schema"
-    [fluentBindingControl]="control"
-    [fluentBindingModel]="model"
+    [fluentBinding]="{ component, schema, control, model }"
     [class]="schema.class"
     [style]="schema.style"
     [nzSize]="schema.size!"

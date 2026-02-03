@@ -44,6 +44,9 @@ type CascaderWidgetTemplateContext = WidgetTemplateContext<CascaderControlSchema
 export default class CascaderWidget extends AbstractWidget<CascaderWidgetTemplateContext> {
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
 
+  readonly displayWith = (options: NzCascaderOption[]) =>
+    options.map(option => option.label).join(' / ');
+
   fetchOptions(model: AnyObject, schema: CascaderControlSchema, control: FormControl) {
     return (node: NzCascaderOption, index: number) =>
       // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain

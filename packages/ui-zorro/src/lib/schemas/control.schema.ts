@@ -271,6 +271,8 @@ export interface CascaderControlSchema<Key extends SchemaKey = SchemaKey, Val = 
   changeOnSelect?: boolean;
   autofocus?: boolean;
   backdrop?: boolean;
+  displayWith?: NzCascaderComponent['nzDisplayWith'];
+  display?: NzCascaderComponent['nzLabelRender'] | string;
   expandIcon?: string | TemplateRef<void>;
   suffixIcon?: string | TemplateRef<void>;
   arrow?: boolean;

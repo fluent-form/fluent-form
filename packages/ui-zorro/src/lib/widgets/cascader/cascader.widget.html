@@ -27,7 +27,9 @@
         [nzSuffixIcon]="schema.suffixIcon | template: 'down'"
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzMultiple]="schema.mode === 'multiple'"
-        [nzVariant]="schema.variant ?? 'outlined'" />
+        [nzVariant]="schema.variant ?? 'outlined'"
+        [nzDisplayWith]="schema.displayWith ?? displayWith"
+        [nzLabelRender]="$any(schema.display | template: null)" />
     }
   } @else {
     <nz-cascader
@@ -52,6 +54,8 @@
       [nzSuffixIcon]="schema.suffixIcon | template: 'down'"
       [nzPlacement]="schema.placement ?? 'bottomLeft'"
       [nzMultiple]="schema.mode === 'multiple'"
-      [nzVariant]="schema.variant ?? 'outlined'" />
+      [nzVariant]="schema.variant ?? 'outlined'"
+      [nzDisplayWith]="schema.displayWith ?? displayWith"
+      [nzLabelRender]="$any(schema.display | template: null)" />
   }
 </ng-template>

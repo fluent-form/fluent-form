@@ -31,7 +31,7 @@
         [nzPlacement]="schema.placement ?? 'bottomLeft'"
         [nzMultiple]="schema.mode === 'multiple'"
         [nzDisplayWith]="schema.displayWith ?? displayWith"
-        [nzLabelRender]="schema.display ?? null" />
+        [nzLabelRender]="$any(schema.display | template: null)" />
     }
   } @else {
     <nz-cascader
@@ -60,6 +60,6 @@
       [nzPlacement]="schema.placement ?? 'bottomLeft'"
       [nzMultiple]="schema.mode === 'multiple'"
       [nzDisplayWith]="schema.displayWith ?? displayWith"
-      [nzLabelRender]="schema.display ?? null" />
+      [nzLabelRender]="$any(schema.display | template: null)" />
   }
 </ng-template>

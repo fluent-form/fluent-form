@@ -1,3 +1,13 @@
+## 0.29.12 (2026-02-03)
+
+### 🚀 Features
+
+- **ui-zorro/cascader:** add displayWith and display properties ([c858960a](https://github.com/fluent-form/fluent-form/commit/c858960a))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.11 (2025-12-29)
 
 ### 🚀 Features

@@ -1,13 +1,15 @@
 <fluent-form [schema]="schema()" [(model)]="model">
-  <input *fluentTemplate="'controlTpl'; let control = control" placeholder="A native input" [formControl]="control" />
+  <ng-template fluentTemplate="controlTpl" let-control="control">
+    <input placeholder="A native input" [formControl]="control" />
+  </ng-template>
 
-  <ng-container *fluentTemplate="'namedTpl1'">
+  <ng-template fluentTemplate="namedTpl1">
     <button>click me</button>
-  </ng-container>
+  </ng-template>
 
-  <ng-container *fluentTemplate="'namedTpl2'; schema as schema">
+  <ng-template fluentTemplate="namedTpl2" let-schema="schema">
     <button>{{ schema.kind }}</button>
-  </ng-container>
+  </ng-template>
 
   <ng-template fluentTemplate="namedTpl3" let-model="model">
     <button>{{ model | json }}</button>

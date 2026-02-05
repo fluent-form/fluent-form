@@ -4,7 +4,7 @@
 
 ## Custom Template
 
-如果您需要使用自定义模板，首先需要导入 `FluentFormModule` 模块。然后，在 `<fluent-form>` 组件下使用 `[fluentTemplate]` 结构指令来注册自定义模板。
+如果您需要使用自定义模板，首先需要导入 `FluentFormModule` 模块。然后，在 `<fluent-form>` 组件下使用 `[fluentTemplate]` 指令来注册自定义模板。
 
 该指令会在 `<ng-template>` 上导出三个模板变量，分别是：`control`、`schema`、`model`。
 
@@ -78,11 +78,11 @@ export class MyWrapper extends AbstractWidgetWrapper { }
 
 如果您在 Wrapper 里忘记渲染 `FluentNextWidgetWrapperOutlet`，那么内层（下一个 wrapper / widget）将不会显示。
 
-### Using a named template as wrapper
+### Using a fluent template as wrapper
 
-除了使用组件来实现 Wrapper 外，您还可以使用“命名模板”来实现 Wrapper。
+除了使用组件来实现 Wrapper 外，您还可以使用 `FluentTemplate` 来实现 Wrapper。
 
-当 `wrappers` 的元素是字符串时，它表示一个“命名模板”的 Key，指向的是使用 `fluentTemplate` 指令注册的模板。这样您可以只用一段模板就完成包装，而无需创建一个 `AbstractWidgetWrapper` 子类。
+当 `wrappers` 的元素是字符串时，它表示一个 `FluentTemplate` 的 Key，指向的是使用 `[fluentTemplate]` 指令注册的模板。这样您可以只用一段模板就完成包装，而无需创建一个 `AbstractWidgetWrapper` 子类。
 
 ```html
 <fluent-form [schema]="schema()" [(model)]="model">
@@ -106,7 +106,7 @@ export class MyWrapper extends AbstractWidgetWrapper { }
 - 数组顺序决定了渲染顺序，“由外到内”：第一个是最外层 Wrapper。
 - 指定 `wrappers` 会**覆盖** UI 适配器（例如 `@fluent-form/ui-zorro`）提供的默认 Wrappers；如果您希望保留默认 Wrappers，请手动把它加入数组。
 - 可以使用 `inject(FLUENT_WIDGET_WRAPPERS)` 来获取默认的 Wrappers 列表。
-- 数组元素既可以是 Wrapper 组件类型，也可以是命名模板 Key（由 `fluentTemplate` 注册）。
+- 数组元素既可以是 Wrapper 组件类型，也可以是 `FluentTemplate` 的 Key（由 `[fluentTemplate]` 注册）。
 
 ```ts
 const defaultWrappers = inject(FLUENT_WIDGET_WRAPPERS);

@@ -31,7 +31,7 @@
         [nzSuffixIcon]="(schema.suffixIcon | template)!"
         [nzLoading]="ctx.loading"
         [nzServerSearch]="!!schema.fetchOptions"
-        [(nzOpen)]="ctx.open"
+        (nzOpenChange)="ctx.open = $event"
         (nzOnSearch)="ctx.trigger($event)">
         @for (option of ctx.options | reactive: model : schema : control; track option.value) {
           <nz-option
@@ -73,7 +73,7 @@
       [nzSuffixIcon]="(schema.suffixIcon | template)!"
       [nzLoading]="ctx.loading"
       [nzServerSearch]="!!schema.fetchOptions"
-      [(nzOpen)]="ctx.open"
+      (nzOpenChange)="ctx.open = $event"
       (nzOnSearch)="ctx.trigger($event)">
       @for (option of ctx.options | reactive: model : schema : control; track option.value) {
         <nz-option

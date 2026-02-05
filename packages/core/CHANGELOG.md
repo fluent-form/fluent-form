@@ -1,3 +1,7 @@
+## 0.29.14 (2026-02-05)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
 ## 0.29.13 (2026-02-03)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

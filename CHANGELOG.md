@@ -1,3 +1,13 @@
+## 0.29.14 (2026-02-05)
+
+### 🩹 Fixes
+
+- **ui-zorro/select:** update nzOpen binding to use nzOpenChange event ([add5a7aa](https://github.com/fluent-form/fluent-form/commit/add5a7aa))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.13 (2026-02-03)
 
 This was a version bump only, there were no code changes.

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideFluentForm } from '../provider';
-import { withTesting } from '../testing';
+import { provideFluentForm } from '../../provider';
+import { withTesting } from '../../testing';
 import { FluentNextWidgetWrapper } from './next-widget-wrapper-outlet.directive';
 
 describe('FluentNextWidgetWrapper', () => {

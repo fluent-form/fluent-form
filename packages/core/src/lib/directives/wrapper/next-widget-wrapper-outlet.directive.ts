@@ -1,10 +1,10 @@
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Directive, inject, Injector } from '@angular/core';
 import type { SafeAny } from '@ngify/core';
-import { AbstractWidgetWrapper } from '../components/widget-wrapper';
-import { FluentWidgetTemplatePipe } from '../pipes';
-import { WidgetWrapperTemplateRegistry } from '../services';
-import { FluentWithInjectorDirective } from './with-injector.directive';
+import { AbstractWidgetWrapper } from '../../components/widget-wrapper';
+import { FluentWidgetTemplatePipe } from '../../pipes';
+import { WidgetWrapperTemplateRegistry } from '../../services';
+import { FluentWithInjectorDirective } from '../with-injector.directive';
 
 @Directive({
   selector: '[fluentNextWidgetWrapperOutlet]',

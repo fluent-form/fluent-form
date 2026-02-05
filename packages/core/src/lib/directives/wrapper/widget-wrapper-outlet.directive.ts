@@ -1,20 +1,22 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Directive, Injector, TemplateRef, Type, effect, inject, input, untracked } from '@angular/core';
+import { Directive, Injector, TemplateRef, Type, computed, effect, inject, input, untracked } from '@angular/core';
 import type { SafeAny } from '@ngify/core';
-import type { WidgetWrapperContext } from '../components';
-import { throwCustomTemplateNotFoundError } from '../errors';
-import type { AbstractSchema, SchemaContext } from '../schemas';
-import { WidgetWrapperTemplateRegistry } from '../services';
-import { FLUENT_WIDGET_WRAPPERS, NAMED_TEMPLATES } from '../tokens';
+import type { WidgetWrapperContext } from '../../components';
+import { throwCustomTemplateNotFoundError } from '../../errors';
+import type { AbstractSchema, SchemaContext } from '../../schemas';
+import { WidgetWrapperTemplateRegistry } from '../../services';
+import { FLUENT_WIDGET_WRAPPERS, NAMED_TEMPLATES } from '../../tokens';
+import type { TemplateRefHolder } from '../template-ref-holder.directive';
 import { FluentNextWidgetWrapper } from './next-widget-wrapper-outlet.directive';
-import type { TemplateRefHolder } from './template-ref-holder.directive';
 
 @Directive({
   selector: '[fluentWidgetWrapperOutlet]',
   hostDirectives: [NgTemplateOutlet]
 })
 export class FluentWidgetWrapperOutlet<C extends SchemaContext> {
-  readonly fluentWidgetWrapperOutlet = input.required<C>();
+  readonly context = input.required<C>({ alias: 'fluentWidgetWrapperOutlet' });
+
+  readonly schema = computed(() => this.context().schema);
 
   constructor() {
     const outlet = inject(NgTemplateOutlet);
@@ -46,11 +48,11 @@ export class FluentWidgetWrapperOutlet<C extends SchemaContext> {
     }
 
     // Initialize wrapper components and cache their templateRefs
-    const effectRef = effect(() => {
-      const context = this.fluentWidgetWrapperOutlet();
+    effect(() => {
+      const schema = this.schema();
 
       untracked(() => {
-        const finalWrappers = finalWrappersOf(context.schema);
+        const finalWrappers = finalWrappersOf(schema);
 
         outlet.ngTemplateOutlet = resolveWrapperTemplate(finalWrappers[0]);
         outlet.ngTemplateOutletInjector = Injector.create({
@@ -58,19 +60,17 @@ export class FluentWidgetWrapperOutlet<C extends SchemaContext> {
           parent: injector
         });
         outlet.ngOnChanges({ ngTemplateOutlet: {} as SafeAny });
-
-        effectRef.destroy();
       });
     });
 
     // Update the outlet context when context change
     effect(() => {
-      const baseContext = this.fluentWidgetWrapperOutlet();
+      const baseContext = this.context();
 
       untracked(() => {
         const finalWrappers = finalWrappersOf(baseContext.schema);
         // Build the chained context
-        const context = finalWrappers.reduceRight<WidgetWrapperContext>(
+        const context = finalWrappers.reduceRight<WidgetWrapperContext | undefined>(
           (nextContext, wrapper) => {
             return {
               ...baseContext,
@@ -78,7 +78,7 @@ export class FluentWidgetWrapperOutlet<C extends SchemaContext> {
               next: nextContext
             };
           },
-          undefined!
+          undefined
         );
 
         outlet.ngTemplateOutletContext = context;

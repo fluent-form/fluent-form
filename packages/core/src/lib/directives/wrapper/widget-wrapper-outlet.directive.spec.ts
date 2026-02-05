@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { AbstractWidgetWrapper } from '../components';
-import { form } from '../compose';
-import { FluentFormModule } from '../module';
-import { provideFluentForm } from '../provider';
-import { FormFieldWrapper, textField, useAllWidgets, withTesting } from '../testing';
+import { AbstractWidgetWrapper } from '../../components';
+import { form } from '../../compose';
+import { FluentFormModule } from '../../module';
+import { provideFluentForm } from '../../provider';
+import { FormFieldWrapper, textField, useAllWidgets, withTesting } from '../../testing';
 import { FluentNextWidgetWrapperOutlet } from './next-widget-wrapper-outlet.directive';
 
 describe('FluentWidgetWrapperOutlet', () => {

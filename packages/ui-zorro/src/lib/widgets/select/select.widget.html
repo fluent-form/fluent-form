@@ -37,7 +37,7 @@
             [nzLabel]="$any(option.label)"
             [nzValue]="option.value"
             [nzHide]="option.hide">
-            <ng-template
+            <ng-container
               [fluentTemplateOutlet]="schema.option | template"
               [fluentTemplateOutletContext]="{ $implicit: option }" />
           </nz-option>
@@ -76,7 +76,7 @@
           [nzLabel]="$any(option.label)"
           [nzValue]="option.value"
           [nzHide]="option.hide">
-          <ng-template
+          <ng-container
             [fluentTemplateOutlet]="schema.option | template"
             [fluentTemplateOutletContext]="{ $implicit: option }" />
         </nz-option>

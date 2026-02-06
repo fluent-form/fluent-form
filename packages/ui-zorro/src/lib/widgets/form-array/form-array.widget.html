@@ -58,7 +58,7 @@
               first: first
             }" />
         } @else {
-          <ng-template
+          <ng-container
             [fluentBinding]="{ schema: withIndex(index, subschema), control, model: model[formSchema.key!] }" />
         }
       }

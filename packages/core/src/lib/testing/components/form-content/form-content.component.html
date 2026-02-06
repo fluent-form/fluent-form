@@ -30,7 +30,7 @@
             model: model
           }" />
       } @else {
-        <ng-template [fluentBinding]="{ schema: subschema, control: subschema.key | control: form, model }" />
+        <ng-container [fluentBinding]="{ schema: subschema, control: subschema.key | control: form, model }" />
       }
     }
   </form>

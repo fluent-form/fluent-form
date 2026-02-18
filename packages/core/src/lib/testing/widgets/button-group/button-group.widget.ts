@@ -4,11 +4,13 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import type { ButtonGroupComponentSchema } from '../../schemas';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentContextGuardDirective,
   FluentControlPipe,
   FluentWidgetTemplatePipe,
   FluentWithInjectorDirective,
+  StylePipe,
   type WidgetTemplateContext
 } from '@fluent-form/core';
 
@@ -26,7 +28,9 @@ type ButtonGroupWidgetTemplateContext = WidgetTemplateContext<ButtonGroupCompone
     FluentContextGuardDirective,
     FluentWithInjectorDirective,
     FluentControlPipe,
-    FluentWidgetTemplatePipe
+    FluentWidgetTemplatePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './button-group.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

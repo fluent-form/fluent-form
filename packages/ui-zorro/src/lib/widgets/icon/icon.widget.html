@@ -2,8 +2,8 @@
   <nz-icon
     #component="nzIcon"
     [fluentBinding]="{ component, schema, control, model }"
-    [class]="schema.class"
-    [style]="schema.style"
+    [class]="schema.class | class"
+    [style]="schema.style | style"
     [nzType]="schema.type | reactive: model : schema : control"
     [nzTheme]="schema.theme!"
     [nzSpin]="schema.spin"

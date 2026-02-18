@@ -5,6 +5,7 @@ import { FormArray } from '@angular/forms';
 import {
   AbstractSchema,
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentColumnPipe,
   FluentContextGuardDirective,
@@ -17,6 +18,7 @@ import {
   InvokePipe,
   RenderablePipe,
   SchemaUtil,
+  StylePipe,
   WidgetTemplateContext,
   WithoutSchemaReactiveFn,
   isBoolean,
@@ -50,7 +52,9 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
     FluentReactivePipe,
     FluentTemplatePipe,
     InvokePipe,
-    RenderablePipe
+    RenderablePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './form-array.widget.html',
   styleUrl: './form-array.widget.scss',

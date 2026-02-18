@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentColumnPipe,
   FluentContextGuardDirective,
@@ -11,6 +12,7 @@ import {
   FluentReactivePipe,
   InvokePipe,
   Length,
+  StylePipe,
   WidgetTemplateContext,
   isNumber
 } from '@fluent-form/core';
@@ -34,7 +36,9 @@ type TextAreaWidgetTemplateContext = WidgetTemplateContext<TextAreaControlSchema
     FluentColumnPipe,
     FluentInjectPipe,
     InvokePipe,
-    StatusPipe
+    StatusPipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './text-area.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

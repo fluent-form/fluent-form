@@ -2,8 +2,8 @@
   <nz-steps
     #component
     [fluentBinding]="{ component, schema, control, model }"
-    [class]="schema.class"
-    [style]="schema.style"
+    [class]="schema.class | class"
+    [style]="schema.style | style"
     [nzType]="schema.type ?? 'default'"
     [nzCurrent]="schema.active ?? 0"
     [nzProgressDot]="schema.dot"
@@ -14,9 +14,9 @@
     @for (subschema of schema.schemas; track subschema) {
       <nz-step
         #component
-        [fluentBinding]="{ component, schema, control, model }"
-        [class]="subschema.class"
-        [style]="subschema.style"
+        [fluentBinding]="{ component, schema: subschema, control, model }"
+        [class]="subschema.class | class"
+        [style]="subschema.style | style"
         [nzTitle]="subschema.title | template"
         [nzSubtitle]="subschema.subtitle | template"
         [nzDescription]="subschema.description | template"

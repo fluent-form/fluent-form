@@ -2,10 +2,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentContextGuardDirective,
   FluentReactivePipe,
   FluentTemplatePipe,
+  StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzColorPickerComponent } from 'ng-zorro-antd/color-picker';
@@ -23,7 +25,9 @@ type ColorPickerWidgetTemplateContext = WidgetTemplateContext<ColorPickerControl
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentTemplatePipe,
-    FluentReactivePipe
+    FluentReactivePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './color-picker.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

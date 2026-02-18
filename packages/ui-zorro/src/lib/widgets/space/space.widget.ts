@@ -3,18 +3,21 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentContextGuardDirective,
   FluentControlPipe,
   FluentControlWrapperDirective,
   FluentWidgetTemplatePipe,
   FluentWithInjectorDirective,
+  StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzFlexDirective } from 'ng-zorro-antd/flex';
 import { SpaceComponentSchema } from '../../schemas';
 
-type SpaceWidgetTemplateContext = WidgetTemplateContext<SpaceComponentSchema, FormGroup>;
+type SpaceWidgetTemplateContext = WidgetTemplateContext<SpaceComponentSchema,
+  FormGroup>;
 
 /**
  * @internal
@@ -30,7 +33,9 @@ type SpaceWidgetTemplateContext = WidgetTemplateContext<SpaceComponentSchema, Fo
     FluentWithInjectorDirective,
     FluentControlPipe,
     FluentWidgetTemplatePipe,
-    FluentControlWrapperDirective
+    FluentControlWrapperDirective,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './space.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -127,3 +127,11 @@
 如果仍然需要允许用户输入，可以通过侦听控件的 `valueChange` 事件，并在事件回调函数中手动设置目标控件的值。
 
 {{ NgDocActions.demo("LinkageByValueChangesExampleComponent") }}
+
+## Class & Style
+
+使用 `class` 和 `style` 选项来设置 Widget 或 WidgetWrapper 的 CSS 类和内联样式。`class` 和 `style` 选项支持传入实际值或者一个配置对象。
+
+默认配置的是 host (Widget 本身)，如果需要配置 WidgetWrapper，可以传入一个对象分别指定 host 与 wrapper。
+
+{{ NgDocActions.demo("ClassStyleExampleComponent") }}

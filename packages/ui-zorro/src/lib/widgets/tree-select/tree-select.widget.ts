@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentColumnPipe,
   FluentContextGuardDirective,
@@ -10,6 +11,7 @@ import {
   FluentInjectPipe,
   FluentReactivePipe,
   InvokePipe,
+  StylePipe,
   WidgetTemplateContext,
   isBoolean,
   isUndefined
@@ -35,7 +37,9 @@ type TreeSelectWidgetTemplateContext = WidgetTemplateContext<TreeSelectControlSc
     FluentColumnPipe,
     FluentInjectPipe,
     InvokePipe,
-    StatusPipe
+    StatusPipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './tree-select.widget.html',
   styles: `nz-tree-select { width: 100% }`,

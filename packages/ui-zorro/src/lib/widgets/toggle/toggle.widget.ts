@@ -2,10 +2,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentContextGuardDirective,
   FluentReactivePipe,
   FluentTemplatePipe,
+  StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
@@ -23,7 +25,9 @@ type ToggleWidgetTemplateContext = WidgetTemplateContext<ToggleControlSchema, Fo
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentTemplatePipe,
-    FluentReactivePipe
+    FluentReactivePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './toggle.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -8,8 +8,8 @@
     [align]="formSchema.align"
     [justify]="formSchema.justify"
     [nzLayout]="formSchema.layout!"
-    [class]="formSchema.class"
-    [style]="formSchema.style"
+    [class]="formSchema.class | class"
+    [style]="formSchema.style | style"
     [fluentBinding]="{ schema: formSchema, control: formArray, model }"
     (cdkDropListDropped)="drop(formArray, $event)">
     @for (cardSchema of formSchema.schemas; track cardSchema) {
@@ -22,7 +22,7 @@
           [flex]="cardSchema.col | col: 'flex'"
           [offset]="cardSchema.col | col: 'offset'"
           [hidden]="cardSchema.hidden | reactive: model : cardSchema : control">
-          <nz-form-item [class]="cardSchema.class" [style]="cardSchema.style">
+          <nz-form-item>
             <ng-template #extraTmpl>
               @if (formArray.length > (helper.length.min | invoke: formSchema.length)) {
                 <nz-icon
@@ -38,7 +38,9 @@
               [nzSize]="cardSchema.size ?? 'small'"
               [nzBordered]="!cardSchema.borderless"
               [nzTitle]="`No.${index + 1}`"
-              [nzExtra]="formSchema.removable ? extraTmpl : undefined">
+              [nzExtra]="formSchema.removable ? extraTmpl : undefined"
+              [class]="cardSchema.class | class"
+              [style]="cardSchema.style | style">
               <fluent-row
                 nz-form
                 [align]="formSchema.align"

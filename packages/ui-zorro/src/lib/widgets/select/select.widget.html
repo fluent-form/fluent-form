@@ -7,8 +7,8 @@
         fluentCol
         [fluentBinding]="{ component, schema, control, model }"
         [formControl]="control"
-        [class]="schema.class"
-        [style]="schema.style"
+        [class]="schema.class | class"
+        [style]="schema.style | style"
         [span]="schema.col | col: 'span'"
         [flex]="schema.col | col: 'flex'"
         [offset]="schema.col | col: 'offset'"
@@ -49,8 +49,8 @@
       #component
       [fluentBinding]="{ component, schema, control, model }"
       [formControl]="control"
-      [class]="schema.class"
-      [style]="schema.style"
+      [class]="schema.class | class"
+      [style]="schema.style | style"
       [compareWith]="schema.compareWith ?? compareWith"
       [nzId]="schema.id!"
       [nzAllowClear]="schema.clearable"

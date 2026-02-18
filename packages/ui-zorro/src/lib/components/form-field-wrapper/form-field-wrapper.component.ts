@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   AbstractWidgetWrapper,
+  ClassPipe,
   FluentControlPipe,
   FluentNextWidgetWrapperOutlet,
   FluentReactivePipe,
@@ -8,7 +9,8 @@ import {
   FluentTemplateOutlet,
   FluentTemplatePipe,
   InvokePipe,
-  SchemaType
+  SchemaType,
+  StylePipe
 } from '@fluent-form/core';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { labelHelper, tooltipHelper } from '../../helper';
@@ -22,7 +24,9 @@ import { labelHelper, tooltipHelper } from '../../helper';
     FluentSchemaTypePipe,
     FluentTemplateOutlet,
     FluentNextWidgetWrapperOutlet,
-    InvokePipe
+    InvokePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './form-field-wrapper.component.html',
   styleUrl: './form-field-wrapper.component.scss',

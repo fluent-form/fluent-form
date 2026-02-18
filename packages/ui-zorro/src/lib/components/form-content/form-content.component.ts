@@ -2,13 +2,15 @@ import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   AbstractFormContentComponent,
+  ClassPipe,
   FluentBindingDirective,
   FluentColumnPipe,
   FluentControlPipe,
   FluentGridModule,
   FluentReactivePipe,
   FluentWidgetWrapperOutlet,
-  RenderablePipe
+  RenderablePipe,
+  StylePipe
 } from '@fluent-form/core';
 import { NzFormModule } from 'ng-zorro-antd/form';
 
@@ -22,7 +24,9 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     FluentReactivePipe,
     FluentControlPipe,
     FluentColumnPipe,
-    RenderablePipe
+    RenderablePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './form-content.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

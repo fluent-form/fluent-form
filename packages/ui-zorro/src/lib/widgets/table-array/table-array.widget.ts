@@ -6,6 +6,7 @@ import {
   AbstractFormArraySchema,
   AbstractSchema,
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentContextGuardDirective,
   FluentControlPipe,
@@ -18,6 +19,7 @@ import {
   isUndefined,
   RenderablePipe,
   SchemaUtil,
+  StylePipe,
   WidgetTemplateContext,
   WithoutSchemaReactiveFn
 } from '@fluent-form/core';
@@ -61,7 +63,9 @@ export class ElementDirective {
     RenderablePipe,
     InvokePipe,
     FluentWidgetTemplatePipe,
-    ElementDirective
+    ElementDirective,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './table-array.widget.html',
   styleUrl: './table-array.widget.scss',

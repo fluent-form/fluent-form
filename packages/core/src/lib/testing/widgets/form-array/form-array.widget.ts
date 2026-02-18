@@ -6,6 +6,7 @@ import type { FormArraySchema } from '../../schemas';
 import {
   type AbstractSchema,
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentColumnPipe,
   FluentContextGuardDirective,
@@ -16,6 +17,7 @@ import {
   InvokePipe,
   RenderablePipe,
   SchemaUtil,
+  StylePipe,
   type WidgetTemplateContext,
   isNumber
 } from '@fluent-form/core';
@@ -37,7 +39,9 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<FormArraySchema, For
     FluentColumnPipe,
     FluentReactivePipe,
     InvokePipe,
-    RenderablePipe
+    RenderablePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './form-array.widget.html',
   styleUrl: './form-array.widget.scss',

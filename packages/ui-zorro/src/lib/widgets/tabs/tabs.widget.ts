@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentColumnPipe,
   FluentContextGuardDirective,
@@ -10,6 +11,7 @@ import {
   FluentGridModule,
   FluentReactivePipe,
   FluentWidgetWrapperOutlet,
+  StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
@@ -30,7 +32,9 @@ type TabsWidgetTemplateContext = WidgetTemplateContext<TabsComponentSchema, Form
     FluentContextGuardDirective,
     FluentReactivePipe,
     FluentControlPipe,
-    FluentColumnPipe
+    FluentColumnPipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './tabs.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

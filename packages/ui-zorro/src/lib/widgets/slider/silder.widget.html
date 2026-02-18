@@ -3,8 +3,8 @@
     #component
     [fluentBinding]="{ component, schema, control, model }"
     [formControl]="control"
-    [class]="schema.class"
-    [style]="schema.style"
+    [class]="schema.class | class"
+    [style]="schema.style | style"
     [nzIncluded]="schema.included ?? true"
     [nzMax]="schema.range?.max ?? 100"
     [nzMin]="schema.range?.min ?? 0"

@@ -2,10 +2,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentContextGuardDirective,
   FluentTemplateOutlet,
   FluentTemplatePipe,
+  StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzRateModule } from 'ng-zorro-antd/rate';
@@ -24,7 +26,9 @@ type RateWidgetTemplateContext = WidgetTemplateContext<RateControlSchema, FormCo
     FluentTemplateOutlet,
     FluentBindingDirective,
     FluentContextGuardDirective,
-    FluentTemplatePipe
+    FluentTemplatePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './rate.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -3,8 +3,8 @@
     #component
     [fluentBinding]="{ component, schema, control, model }"
     [formControl]="control"
-    [class]="schema.class"
-    [style]="schema.style"
+    [class]="schema.class | class"
+    [style]="schema.style | style"
     [nzButtonStyle]="schema.variants?.button ?? 'outline'"
     [nzSize]="schema.size!">
     @for (option of schema.options; track option.value) {

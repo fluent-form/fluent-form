@@ -62,7 +62,7 @@ export class SpaceCompactExampleComponent {
       const fakeText = () => textField('')
         .readonly(true)
         .col({ flex: '75px' })
-        .style({ padding: 0, textAlign: 'center', pointerEvents: 'none' });
+        .style({ padding: '0', textAlign: 'center', pointerEvents: 'none' });
 
       textField('week').col('fill');
       fakeText().placeholder('周');

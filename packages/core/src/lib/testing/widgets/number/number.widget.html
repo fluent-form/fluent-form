@@ -3,7 +3,7 @@
     [attr.id]="schema.id"
     [attr.name]="schema.key"
     [fluentBinding]="{ schema, control, model }"
-    [class]="schema.class"
-    [style]="schema.style"
+    [class]="schema.class | class"
+    [style]="schema.style | style"
     [formControl]="control" />
 </ng-template>

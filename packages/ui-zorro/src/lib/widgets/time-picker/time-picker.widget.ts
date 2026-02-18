@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentColumnPipe,
   FluentContextGuardDirective,
@@ -10,6 +11,7 @@ import {
   FluentInjectPipe,
   FluentReactivePipe,
   FluentTemplatePipe,
+  StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
@@ -32,7 +34,9 @@ type TimePickerWidgetTemplateContext = WidgetTemplateContext<TimePickerControlSc
     FluentColumnPipe,
     FluentTemplatePipe,
     FluentInjectPipe,
-    StatusPipe
+    StatusPipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './time-picker.widget.html',
   styles: `nz-time-picker { width: 100% }`,

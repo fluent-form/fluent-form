@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentColumnPipe,
   FluentContextGuardDirective,
@@ -10,6 +11,7 @@ import {
   FluentInjectPipe,
   FluentReactivePipe,
   FluentTemplatePipe,
+  StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
@@ -32,7 +34,9 @@ type DatePickerWidgetTemplateContext = WidgetTemplateContext<DatePickerControlSc
     FluentColumnPipe,
     FluentTemplatePipe,
     FluentInjectPipe,
-    StatusPipe
+    StatusPipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './date-picker.widget.html',
   styles: `nz-date-picker { width: 100% }`,

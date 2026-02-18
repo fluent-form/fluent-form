@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentColumnPipe,
   FluentContextGuardDirective,
@@ -11,6 +12,7 @@ import {
   FluentReactivePipe,
   FluentTemplatePipe,
   InvokePipe,
+  StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { AnyObject, SafeAny } from '@ngify/core';
@@ -35,7 +37,9 @@ type CascaderWidgetTemplateContext = WidgetTemplateContext<CascaderControlSchema
     FluentTemplatePipe,
     FluentInjectPipe,
     InvokePipe,
-    StatusPipe
+    StatusPipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './cascader.widget.html',
   styles: `nz-cascader { width: 100% }`,

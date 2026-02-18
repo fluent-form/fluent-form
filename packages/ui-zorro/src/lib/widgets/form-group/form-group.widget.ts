@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentColumnPipe,
   FluentContextGuardDirective,
@@ -11,6 +12,7 @@ import {
   FluentReactivePipe,
   FluentWidgetWrapperOutlet,
   RenderablePipe,
+  StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -32,7 +34,9 @@ type FormGroupWidgetTemplateContext = WidgetTemplateContext<FormGroupSchema, For
     FluentColumnPipe,
     FluentReactivePipe,
     FluentControlPipe,
-    RenderablePipe
+    RenderablePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './form-group.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

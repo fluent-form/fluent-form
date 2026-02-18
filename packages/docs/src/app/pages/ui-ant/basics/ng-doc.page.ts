@@ -1,6 +1,7 @@
 import { NgDocPage } from '@ng-doc/core';
 import UIZorroCategory from '../ng-doc.category';
 import { ZorroStyleComponent } from '../style';
+import { ClassStyleExampleComponent } from './examples/class-style';
 import { DefaultValueExampleComponent } from './examples/default-value.component';
 import { DisabledExampleComponent } from './examples/disabled.component';
 import { EventListenerExampleComponent } from './examples/event-listener.component';
@@ -35,6 +36,7 @@ const BasicsPage: NgDocPage = {
     LifecycleHooksExampleComponent,
     LinkageExampleComponent,
     LinkageByValueChangesExampleComponent,
+    ClassStyleExampleComponent,
     ZorroStyleComponent
   },
   order: 1

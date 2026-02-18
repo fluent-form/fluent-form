@@ -2,9 +2,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentContextGuardDirective,
   FluentReactivePipe,
+  StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzSegmentedModule } from 'ng-zorro-antd/segmented';
@@ -21,7 +23,9 @@ type SegmentedWidgetTemplateContext = WidgetTemplateContext<SegmentedControlSche
     NzSegmentedModule,
     FluentBindingDirective,
     FluentContextGuardDirective,
-    FluentReactivePipe
+    FluentReactivePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './segmented.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

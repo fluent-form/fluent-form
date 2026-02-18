@@ -2,8 +2,8 @@
   <nz-alert
     #component
     [fluentBinding]="{ component, schema, control, model }"
-    [class]="schema.class"
-    [style]="schema.style"
+    [class]="schema.class | class"
+    [style]="schema.style | style"
     [nzType]="schema.type ?? 'info'"
     [nzMessage]="schema.message | template"
     [nzDescription]="(schema.description | template)!"

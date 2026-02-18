@@ -7,13 +7,13 @@
     [nzLoading]="formSchema.loading"
     [nzShowPagination]="false"
     [nzData]="formArray.value"
-    [class]="formSchema.class"
-    [style]="formSchema.style"
+    [class]="formSchema.class | class"
+    [style]="formSchema.style | style"
     [fluentBinding]="{ component, schema: formSchema, control: formArray, model }">
     <thead>
-      <tr [class]="tableRowGroupSchema.class" [style]="tableRowGroupSchema.style">
+      <tr [class]="tableRowGroupSchema.class | class" [style]="tableRowGroupSchema.style | style">
         @for (tableColumnSchema of tableRowGroupSchema.schemas; track tableColumnSchema) {
-          <th [class]="tableColumnSchema.class" [style]="tableColumnSchema.style">
+          <th [class]="tableColumnSchema.class | class" [style]="tableColumnSchema.style | style">
             {{ tableColumnSchema.header }}
             @if (tableColumnSchema.tooltip) {
               <nz-icon
@@ -40,11 +40,11 @@
           cdkDrag
           cdkDragPreviewContainer="parent"
           [cdkDragBoundary]="tbody.ref"
-          [class]="tableRowGroupSchema.class"
-          [style]="tableRowGroupSchema.style"
+          [class]="tableRowGroupSchema.class | class"
+          [style]="tableRowGroupSchema.style | style"
           [fluentBinding]="{ schema: tableRowGroupSchema, control: formGroup, model: model[formSchema.key!] }">
           @for (tableColumnSchema of tableRowGroupSchema.schemas; track tableColumnSchema) {
-            <td [class]="tableColumnSchema.class" [style]="tableColumnSchema.style">
+            <td [class]="tableColumnSchema.class | class" [style]="tableColumnSchema.style | style">
               @for (subschema of tableColumnSchema.schemas; track subschema) {
                 @if (subschema | renderable) {
                   <ng-container

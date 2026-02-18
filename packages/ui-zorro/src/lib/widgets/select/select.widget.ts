@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inje
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentColumnPipe,
   FluentContextGuardDirective,
@@ -12,6 +13,7 @@ import {
   FluentReactivePipe,
   FluentTemplateOutlet,
   FluentTemplatePipe,
+  StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { AnyObject, SafeAny } from '@ngify/core';
@@ -38,7 +40,9 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
     FluentTemplatePipe,
     FluentInjectPipe,
     FluentNewPipe,
-    StatusPipe
+    StatusPipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './select.widget.html',
   styles: `nz-select { width: 100% }`,

@@ -3,10 +3,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentContextGuardDirective,
   FluentTemplateOutlet,
   FluentTemplatePipe,
+  StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
@@ -24,7 +26,9 @@ type HeadingWidgetTemplateContext = WidgetTemplateContext<HeadingComponentSchema
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentTemplateOutlet,
-    FluentTemplatePipe
+    FluentTemplatePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './heading.widget.html',
   styleUrl: './heading.widget.scss',

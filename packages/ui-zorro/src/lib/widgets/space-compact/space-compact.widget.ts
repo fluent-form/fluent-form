@@ -3,12 +3,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentContextGuardDirective,
   FluentControlPipe,
   FluentControlWrapperDirective,
   FluentWidgetTemplatePipe,
   FluentWithInjectorDirective,
+  StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzSpaceCompactComponent } from 'ng-zorro-antd/space';
@@ -29,7 +31,9 @@ type SpaceCompactWidgetTemplateContext = WidgetTemplateContext<SpaceCompactCompo
     FluentWithInjectorDirective,
     FluentControlPipe,
     FluentWidgetTemplatePipe,
-    FluentControlWrapperDirective
+    FluentControlWrapperDirective,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './space-compact.widget.html',
   styleUrl: './space-compact.widget.scss',

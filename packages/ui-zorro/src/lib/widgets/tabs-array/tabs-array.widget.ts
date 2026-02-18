@@ -4,6 +4,7 @@ import { FormArray } from '@angular/forms';
 import {
   AbstractSchema,
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentColumnPipe,
   FluentContextGuardDirective,
@@ -14,6 +15,7 @@ import {
   InvokePipe,
   RenderablePipe,
   SchemaUtil,
+  StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
@@ -40,7 +42,9 @@ type TabsArrayWidgetTemplateContext = WidgetTemplateContext<TabsArraySchema, For
     FluentColumnPipe,
     FluentReactivePipe,
     InvokePipe,
-    RenderablePipe
+    RenderablePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './tabs-array.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Directive, EventEmitter } from '@an
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import type { AnyObject } from '@ngify/core';
 import { FluentBindingDirective, FluentGridModule, FluentWidgetWrapperOutlet, TemplateRefHolder } from '../../../directives';
-import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe, RenderablePipe } from '../../../pipes';
+import { ClassPipe, FluentColumnPipe, FluentControlPipe, FluentReactivePipe, RenderablePipe, StylePipe } from '../../../pipes';
 import type { AbstractSchema } from '../../../schemas';
 
 @Directive()
@@ -20,7 +20,9 @@ export abstract class AbstractFormContentComponent
     FluentReactivePipe,
     FluentControlPipe,
     FluentColumnPipe,
-    RenderablePipe
+    RenderablePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './form-content.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentColumnPipe,
   FluentContextGuardDirective,
@@ -11,6 +12,7 @@ import {
   FluentReactivePipe,
   FluentTemplatePipe,
   FluentWidgetWrapperOutlet,
+  StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
@@ -32,7 +34,9 @@ type StepsWidgetTemplateContext = WidgetTemplateContext<StepsComponentSchema, Fo
     FluentReactivePipe,
     FluentControlPipe,
     FluentColumnPipe,
-    FluentTemplatePipe
+    FluentTemplatePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './steps.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

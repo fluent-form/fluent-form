@@ -3,8 +3,8 @@
     #component
     [fluentBinding]="{ component, schema, control, model }"
     [formControl]="control"
-    [class]="schema.class"
-    [style]="schema.style"
+    [class]="schema.class | class"
+    [style]="schema.style | style"
     [nzId]="schema.id!"
     [nzCheckedChildren]="(schema.placeholder | reactive: model : schema : control)?.[0]! | template"
     [nzUnCheckedChildren]="(schema.placeholder | reactive: model : schema : control)?.[1]! | template"

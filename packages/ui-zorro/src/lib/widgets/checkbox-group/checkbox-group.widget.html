@@ -3,7 +3,7 @@
     #component
     [fluentBinding]="{ component, schema, control, model }"
     [formControl]="control"
-    [class]="schema.class"
-    [style]="schema.style"
+    [class]="schema.class | class"
+    [style]="schema.style | style"
     [nzOptions]="schema.options | reactive: model : schema : control" />
 </ng-template>

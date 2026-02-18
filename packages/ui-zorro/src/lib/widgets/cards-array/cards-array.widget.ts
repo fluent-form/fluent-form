@@ -5,6 +5,7 @@ import { FormArray } from '@angular/forms';
 import {
   AbstractSchema,
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentColumnPipe,
   FluentContextGuardDirective,
@@ -17,6 +18,7 @@ import {
   InvokePipe,
   RenderablePipe,
   SchemaUtil,
+  StylePipe,
   WidgetTemplateContext,
   WithoutSchemaReactiveFn,
   isBoolean,
@@ -52,7 +54,9 @@ type FormArrayWidgetTemplateContext = WidgetTemplateContext<CardsArraySchema, Fo
     FluentReactivePipe,
     FluentTemplatePipe,
     InvokePipe,
-    RenderablePipe
+    RenderablePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './cards-array.widget.html',
   styleUrl: './cards-array.widget.scss',

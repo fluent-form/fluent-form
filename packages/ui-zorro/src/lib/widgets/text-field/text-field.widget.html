@@ -16,8 +16,8 @@
               [span]="schema.col | col: 'span'"
               [flex]="schema.col | col: 'flex'"
               [offset]="schema.col | col: 'offset'"
-              [class]="schema.class"
-              [style]="schema.style"
+              [class]="schema.class | class"
+              [style]="schema.style | style"
               [nzAllowClear]="schema.clearable">
               <input
                 nz-input
@@ -73,8 +73,8 @@
               [span]="schema.col | col: 'span'"
               [flex]="schema.col | col: 'flex'"
               [offset]="schema.col | col: 'offset'"
-              [class]="schema.class"
-              [style]="schema.style"
+              [class]="schema.class | class"
+              [style]="schema.style | style"
               [nzAllowClear]="schema.clearable">
               <input
                 nz-input
@@ -130,8 +130,8 @@
               [span]="schema.col | col: 'span'"
               [flex]="schema.col | col: 'flex'"
               [offset]="schema.col | col: 'offset'"
-              [class]="schema.class"
-              [style]="schema.style"
+              [class]="schema.class | class"
+              [style]="schema.style | style"
               [nzAllowClear]="schema.clearable">
               <input
                 nz-input
@@ -196,8 +196,8 @@
           [attr.minlength]="helper.length.min | invoke: schema.length"
           [fluentBinding]="{ schema, control, model }"
           [formControl]="control"
-          [class]="schema.class"
-          [style]="schema.style"
+          [class]="schema.class | class"
+          [style]="schema.style | style"
           [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
           [type]="schema.type ?? 'text'"
           [autofocus]="schema.autofocus"
@@ -211,7 +211,10 @@
     @if (hasWrapper) {
       @switch (schema.type) {
         @case ('password') {
-          <nz-input-password [class]="schema.class" [style]="schema.style" [nzAllowClear]="schema.clearable">
+          <nz-input-password
+            [class]="schema.class | class"
+            [style]="schema.style | style"
+            [nzAllowClear]="schema.clearable">
             <input
               nz-input
               [attr.id]="schema.id"
@@ -262,7 +265,10 @@
           </nz-input-password>
         }
         @case ('search') {
-          <nz-input-search [class]="schema.class" [style]="schema.style" [nzAllowClear]="schema.clearable">
+          <nz-input-search
+            [class]="schema.class | class"
+            [style]="schema.style | style"
+            [nzAllowClear]="schema.clearable">
             <input
               nz-input
               [attr.id]="schema.id"
@@ -313,7 +319,10 @@
           </nz-input-search>
         }
         @default {
-          <nz-input-wrapper [class]="schema.class" [style]="schema.style" [nzAllowClear]="schema.clearable">
+          <nz-input-wrapper
+            [class]="schema.class | class"
+            [style]="schema.style | style"
+            [nzAllowClear]="schema.clearable">
             <input
               nz-input
               [attr.id]="schema.id"
@@ -373,8 +382,8 @@
         [attr.maxlength]="helper.length.max | invoke: schema.length"
         [attr.minlength]="helper.length.min | invoke: schema.length"
         [fluentBinding]="{ schema, control, model }"
-        [class]="schema.class"
-        [style]="schema.style"
+        [class]="schema.class | class"
+        [style]="schema.style | style"
         [formControl]="control"
         [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
         [type]="schema.type ?? 'text'"

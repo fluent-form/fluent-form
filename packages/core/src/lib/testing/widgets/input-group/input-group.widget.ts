@@ -4,11 +4,13 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import type { FieldGroupComponentSchema } from '../../schemas';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentContextGuardDirective,
   FluentControlPipe,
   FluentWidgetTemplatePipe,
   FluentWithInjectorDirective,
+  StylePipe,
   type WidgetTemplateContext
 } from '@fluent-form/core';
 
@@ -26,7 +28,9 @@ type InputGroupWidgetTemplateContext = WidgetTemplateContext<FieldGroupComponent
     FluentContextGuardDirective,
     FluentWithInjectorDirective,
     FluentControlPipe,
-    FluentWidgetTemplatePipe
+    FluentWidgetTemplatePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './input-group.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

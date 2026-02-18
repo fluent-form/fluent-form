@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { AbstractWidget, FluentBindingDirective, FluentContextGuardDirective, WidgetTemplateContext } from '@fluent-form/core';
+import { AbstractWidget, ClassPipe, FluentBindingDirective, FluentContextGuardDirective, StylePipe, WidgetTemplateContext } from '@fluent-form/core';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { CheckboxControlSchema } from '../../schemas';
 
@@ -14,7 +14,9 @@ type CheckboxWidgetTemplateContext = WidgetTemplateContext<CheckboxControlSchema
     ReactiveFormsModule,
     NzCheckboxModule,
     FluentBindingDirective,
-    FluentContextGuardDirective
+    FluentContextGuardDirective,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './checkbox.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

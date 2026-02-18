@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentGridModule } from '../../../directives';
-import { FluentColumnPipe, FluentReactivePipe } from '../../../pipes';
+import { ClassPipe, FluentColumnPipe, FluentReactivePipe, StylePipe } from '../../../pipes';
 import { AbstractWidget, type WidgetTemplateContext } from '../../../widgets/widget';
 import type { ButtonComponentSchema } from '../../schemas';
 
@@ -16,7 +16,9 @@ type ButtonWidgetTemplateContext = WidgetTemplateContext<ButtonComponentSchema, 
     FluentContextGuardDirective,
     FluentReactivePipe,
     FluentGridModule,
-    FluentColumnPipe
+    FluentColumnPipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './button.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

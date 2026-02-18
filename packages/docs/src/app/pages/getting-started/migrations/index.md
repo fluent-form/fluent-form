@@ -75,3 +75,5 @@
 +   valueChanges: source => source.pipe(tap(...)),
   })
 ```
+
+11. `class`、`style` 支持分别配置 wrapper 和 widget，默认配置的是 widget。

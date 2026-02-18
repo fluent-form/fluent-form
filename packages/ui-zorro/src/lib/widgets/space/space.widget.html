@@ -3,8 +3,8 @@
     #component
     fluentControlWrapper
     [fluentBinding]="{ component, schema, control, model }"
-    [class]="schema.class"
-    [style]="schema.style"
+    [class]="schema.class | class"
+    [style]="schema.style | style"
     [nzVertical]="schema.vertical!"
     [nzJustify]="schema.justify!"
     [nzAlign]="schema.align!"

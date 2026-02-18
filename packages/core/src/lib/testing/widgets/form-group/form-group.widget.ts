@@ -2,7 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FluentBindingDirective, FluentContextGuardDirective, FluentGridModule, FluentWidgetWrapperOutlet } from '../../../directives';
-import { FluentColumnPipe, FluentControlPipe, FluentReactivePipe, RenderablePipe } from '../../../pipes';
+import { ClassPipe, FluentColumnPipe, FluentControlPipe, FluentReactivePipe, RenderablePipe, StylePipe } from '../../../pipes';
 import { AbstractWidget, type WidgetTemplateContext } from '../../../widgets/widget';
 import type { FormGroupSchema } from '../../schemas';
 
@@ -21,7 +21,9 @@ type FormGroupWidgetTemplateContext = WidgetTemplateContext<FormGroupSchema, For
     FluentColumnPipe,
     FluentReactivePipe,
     FluentControlPipe,
-    RenderablePipe
+    RenderablePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './form-group.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

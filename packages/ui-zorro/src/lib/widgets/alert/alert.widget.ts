@@ -2,10 +2,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentContextGuardDirective,
   FluentTemplatePipe,
   InvokePipe,
+  StylePipe,
   WidgetTemplateContext,
   isBoolean
 } from '@fluent-form/core';
@@ -23,7 +25,9 @@ type AlertWidgetTemplateContext = WidgetTemplateContext<AlertComponentSchema, Fo
     FluentBindingDirective,
     FluentContextGuardDirective,
     FluentTemplatePipe,
-    InvokePipe
+    InvokePipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './alert.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

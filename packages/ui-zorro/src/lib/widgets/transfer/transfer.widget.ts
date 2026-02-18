@@ -2,10 +2,12 @@ import { ChangeDetectionStrategy, Component, Pipe, PipeTransform } from '@angula
 import { AbstractControl, FormControl } from '@angular/forms';
 import {
   AbstractWidget,
+  ClassPipe,
   FluentBindingDirective,
   FluentContextGuardDirective,
   FluentReactivePipe,
   FluentTemplatePipe,
+  StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { SafeAny } from '@ngify/core';
@@ -40,7 +42,9 @@ export class TransferItemsPipe implements PipeTransform {
     FluentTemplatePipe,
     FluentReactivePipe,
     TransferItemsPipe,
-    StatusPipe
+    StatusPipe,
+    ClassPipe,
+    StylePipe
   ],
   templateUrl: './transfer.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

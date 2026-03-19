@@ -13,6 +13,7 @@ import {
   FluentReactivePipe,
   FluentTemplateOutlet,
   FluentTemplatePipe,
+  InvokePipe,
   StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
@@ -42,7 +43,8 @@ type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, Fo
     FluentNewPipe,
     StatusPipe,
     ClassPipe,
-    StylePipe
+    StylePipe,
+    InvokePipe
   ],
   templateUrl: './select.widget.html',
   styles: `nz-select { width: 100% }`,
@@ -52,6 +54,15 @@ export default class SelectWidget extends AbstractWidget<SelectWidgetTemplateCon
   protected readonly ControlWrapperDirective = FluentControlWrapperDirective;
   protected readonly infinity = Infinity;
   protected readonly compareWith = (a: SafeAny, b: SafeAny) => a === b;
+  protected readonly helper = {
+    searchable: (value: SelectControlSchema['searchable'], type: 'client' | 'server') => {
+      if (typeof value === 'boolean') {
+        return value;
+      }
+      return value?.[type] ?? false;
+    }
+  };
+
   protected readonly ctxClass = SelectWidgetTemplatePrivateContext;
 }
 

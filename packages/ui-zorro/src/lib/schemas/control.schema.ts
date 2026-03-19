@@ -241,7 +241,7 @@ export interface SelectControlSchema<Key extends SingleSchemaKey = SingleSchemaK
   /** Max selected count */
   length?: { max: number };
   /** Support search */
-  searchable?: boolean;
+  searchable?: boolean | { client?: boolean, server?: boolean };
   backdrop?: boolean;
   variant?: NzVariant;
   autofocus?: boolean;

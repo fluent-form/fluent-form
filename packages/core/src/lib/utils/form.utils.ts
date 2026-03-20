@@ -20,14 +20,20 @@ export class FormUtil {
 
   createFormControl(schema: AbstractControlSchema, model: AnyObject): FormControl {
     const validators: ValidatorFn[] = this.schemaUtil.validatorsOf(schema);
-    const value = this.valueUtil.valueOfModel(model, schema) ?? schema.defaultValue;
+    const modalValue = this.valueUtil.valueOfModel(model, schema);
 
-    return new FormControl(value, {
+    const control = new FormControl(schema.defaultValue ?? null, {
       nonNullable: !isUndefined(schema.defaultValue),
       validators: schema.validators ? validators.concat(schema.validators) : validators,
       asyncValidators: schema.asyncValidators,
       updateOn: schema.config?.updateOn
     });
+
+    if (modalValue !== null) {
+      control.setValue(modalValue, { emitEvent: false });
+    }
+
+    return control;
   }
 
   createFormGroup(schema: AbstractFormGroupSchema, model: AnyObject): FormGroup;

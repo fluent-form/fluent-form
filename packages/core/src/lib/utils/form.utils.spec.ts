@@ -65,6 +65,23 @@ describe('form.utils', () => {
         }, {});
         expect(control.hasValidator(Validators.email)).toBe(true);
       });
+
+      it('with default value', () => {
+        let control = util.createFormControl({
+          kind: 'text-field',
+          defaultValue: 'default value'
+        }, {});
+        expect(control.value).toEqual('default value');
+
+        control = util.createFormControl({
+          kind: 'text-field',
+          key: 'text',
+          defaultValue: 'default value'
+        }, { text: 'model value' });
+        expect(control.value).toEqual('model value');
+        control.reset();
+        expect(control.value).toEqual('default value');
+      });
     });
 
     describe('createFormGroup', () => {

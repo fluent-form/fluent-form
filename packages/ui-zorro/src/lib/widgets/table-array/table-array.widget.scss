@@ -1,7 +1,13 @@
-.fluent-table-header-tooltip {
-  cursor: help;
-  color: rgba(0, 0, 0, 0.45);
-  margin-inline-start: 1px;
+.fluent-table {
+  &-cell-tooltip-icon {
+    cursor: help;
+    color: rgba(0, 0, 0, 0.45);
+    margin-inline-start: 1px;
+  }
+
+  &-action-cell {
+    width: 0; // 0px will make the cell shrink to fit its content
+  }
 }
 
 .cdk-drag-placeholder {

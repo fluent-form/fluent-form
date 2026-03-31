@@ -17,7 +17,7 @@
             {{ tableColumnSchema.header }}
             @if (tableColumnSchema.tooltip) {
               <nz-icon
-                class="fluent-table-header-tooltip"
+                class="fluent-table-cell-tooltip-icon"
                 nz-tooltip
                 [nzType]="(helper.tooltip.icon | invoke: tableColumnSchema.tooltip) || 'question-circle'"
                 [nzTooltipTitle]="helper.tooltip.content | invoke: tableColumnSchema.tooltip" />
@@ -25,7 +25,7 @@
           </th>
         }
         @if (formSchema.removable ?? true) {
-          <th></th>
+          <th class="fluent-table-action-cell"></th>
         }
       </tr>
     </thead>

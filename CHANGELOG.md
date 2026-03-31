@@ -1,3 +1,7 @@
+## 0.29.15 (2026-03-31)
+
+This was a version bump only, there were no code changes.
+
 ## 0.29.14 (2026-02-05)
 
 ### 🩹 Fixes

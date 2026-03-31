@@ -8,10 +8,10 @@ export interface PropertyHolder {
 
 /** 组件属性修补器 */
 export interface ComponentPropertyHolder<C> extends PropertyHolder {
-  properties?: ComponentPropertyMap<C>;
+  properties?: ComponentPropertyMap<C> & HTMLElementPropertyMap<HTMLElement>;
 }
 
 /** 元素属性修补器 */
-export interface ElementPropertyHolder<E extends HTMLElement> extends PropertyHolder {
+export interface ElementPropertyHolder<E extends HTMLElement = HTMLElement> extends PropertyHolder {
   properties?: HTMLElementPropertyMap<E>;
 }

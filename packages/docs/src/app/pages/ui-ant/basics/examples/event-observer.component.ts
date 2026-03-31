@@ -39,6 +39,9 @@ export class EventObserverExampleComponent {
       .observers({
         nzOpenChange: source => source.pipe(
           tap(value => console.log('nzOpenChange', value))
+        ),
+        click: source => source.pipe(
+          tap(value => console.log('click', value))
         )
       })
       .col(4);

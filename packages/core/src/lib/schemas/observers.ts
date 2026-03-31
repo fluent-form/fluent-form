@@ -25,17 +25,17 @@ export interface EventObserverHolder {
 
 /** 控件事件侦听器 */
 export interface ControlEventObserverHolder<V = SafeAny> extends EventObserverHolder {
-  observers?: ControlEventObserverMap<V>;
+  observers?: ControlEventObserverMap<V> & ElementEventObserverMap;
 }
 
 /** 组件事件侦听器 */
 export interface ComponentEventObserverHolder<C> extends EventObserverHolder {
-  observers?: ComponentOutputObserverMap<C>;
+  observers?: ComponentOutputObserverMap<C> & ElementEventObserverMap;
 }
 
 /** 组件控件事件侦听器 */
 export interface ComponentControlEventObserverHolder<C, V = SafeAny> extends EventObserverHolder {
-  observers?: ComponentOutputObserverMap<C> & ControlEventObserverMap<V>;
+  observers?: ComponentOutputObserverMap<C> & ControlEventObserverMap<V> & ElementEventObserverMap;
 }
 
 /** 元素事件侦听器 */

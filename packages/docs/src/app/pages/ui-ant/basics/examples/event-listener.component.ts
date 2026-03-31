@@ -38,6 +38,9 @@ export class EventListenerExampleComponent {
       .listeners({
         nzOpenChange: (event, context) => {
           console.log('nzOpenChange', { event, context });
+        },
+        click: (event, context) => {
+          console.log('click', { event, context });
         }
       })
       .col(4);

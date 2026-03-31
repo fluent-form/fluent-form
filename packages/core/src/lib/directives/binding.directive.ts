@@ -1,5 +1,19 @@
 import {
-  DestroyRef, Directive, ElementRef, Injector, type OnInit, type OutputRef, computed, effect, inject, input, isSignal, runInInjectionContext, untracked
+  DestroyRef,
+  Directive,
+  ElementRef,
+  Injector,
+  type OnInit,
+  type OutputRef,
+  Type,
+  computed,
+  effect,
+  inject,
+  input,
+  isSignal,
+  reflectComponentType,
+  runInInjectionContext,
+  untracked
 } from '@angular/core';
 import { SIGNAL, type SignalNode, signalSetFn } from '@angular/core/primitives/signals';
 import { outputToObservable } from '@angular/core/rxjs-interop';
@@ -51,13 +65,18 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
       const component = this.component();
       const schema = this.schema();
       const control = this.control();
-      const host = component ?? elementRef.nativeElement;
+      const element = elementRef.nativeElement;
+      const outputs = component
+        ? reflectComponentType(component.constructor as Type<unknown>)?.outputs.map(output => output.propName) ?? []
+        : [];
 
       untracked(() => {
         const context = (): SchemaContext => ({ control, schema, model: this.model() });
         destroyed.next();
 
         if (isPropertyHolder(schema)) {
+          const host = component ?? element;
+
           for (const [property, value] of Object.entries(schema.properties)) {
             const prop = host[property as keyof (C | E)];
             if (isSignal(prop)) {
@@ -82,17 +101,24 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
               ).subscribe(status => {
                 listener!(status, context());
               });
-            } else if (host instanceof HTMLElement) {
-              fromEvent(host, eventName).pipe(
-                takeUntil(destroyed)
-              ).subscribe(event => {
-                listener!(event, context());
-              });
             } else {
-              const output = host[eventName as keyof C] as Observable<SafeAny> | OutputRef<SafeAny>;
-              const observable = output instanceof Observable ? output : outputToObservable(output);
+              // First try to bind to the component's output, then fallback to DOM event binding
+              if (component) {
+                if (outputs.includes(eventName)) {
+                  const output = component[eventName as keyof C] as Observable<SafeAny> | OutputRef<SafeAny>;
+                  const observable = output instanceof Observable ? output : outputToObservable(output);
 
-              observable.pipe(
+                  observable.pipe(
+                    takeUntil(destroyed)
+                  ).subscribe(event => {
+                    listener!(event, context());
+                  });
+
+                  continue;
+                }
+              }
+
+              fromEvent(element, eventName).pipe(
                 takeUntil(destroyed)
               ).subscribe(event => {
                 listener!(event, context());
@@ -115,17 +141,23 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
                 observer!,
                 takeUntil(destroyed)
               ).subscribe();
-            } else if (host instanceof HTMLElement) {
-              fromEvent(host, eventName).pipe(
-                map(event => ({ event, context: context() })),
-                observer!,
-                takeUntil(destroyed)
-              ).subscribe();
             } else {
-              const output = host[eventName as keyof C] as Observable<SafeAny> | OutputRef<SafeAny>;
-              const observable = output instanceof Observable ? output : outputToObservable(output);
+              // First try to bind to the component's output, then fallback to DOM event binding
+              if (component) {
+                if (outputs.includes(eventName)) {
+                  const output = component[eventName as keyof C] as Observable<SafeAny> | OutputRef<SafeAny>;
+                  const observable = output instanceof Observable ? output : outputToObservable(output);
 
-              observable.pipe(
+                  observable.pipe(
+                    map(event => ({ event, context: context() })),
+                    observer!,
+                    takeUntil(destroyed)
+                  ).subscribe();
+                  continue;
+                }
+              }
+
+              fromEvent(element, eventName).pipe(
                 map(event => ({ event, context: context() })),
                 observer!,
                 takeUntil(destroyed)

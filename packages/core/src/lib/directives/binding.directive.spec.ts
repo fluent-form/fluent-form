@@ -16,11 +16,13 @@ const statusChangeFn = vitest.fn();
 const valueChangeFn = vitest.fn();
 const testChangeFn = vitest.fn();
 const inputChangeFn = vitest.fn();
+const clickFn = vitest.fn();
 
 const statusChangeNextFn = vitest.fn();
 const valueChangeNextFn = vitest.fn();
 const testChangeNextFn = vitest.fn();
 const inputChangeNextFn = vitest.fn();
+const clickNextFn = vitest.fn();
 
 @Component({
   imports: [
@@ -87,12 +89,14 @@ class TestingComponent {
     listeners: {
       valueChange: valueChangeFn,
       statusChange: statusChangeFn,
-      testChange: testChangeFn
+      testChange: testChangeFn,
+      click: clickFn
     },
     observers: {
       valueChange: source => source.pipe(tap(valueChangeNextFn)),
       statusChange: source => source.pipe(tap(statusChangeNextFn)),
-      testChange: source => source.pipe(tap(testChangeNextFn))
+      testChange: source => source.pipe(tap(testChangeNextFn)),
+      click: source => source.pipe(tap(clickNextFn))
     }
   };
 
@@ -146,11 +150,13 @@ describe('FluentBindingDirective', () => {
     valueChangeFn.mockClear();
     testChangeFn.mockClear();
     inputChangeFn.mockClear();
+    clickFn.mockClear();
 
     statusChangeNextFn.mockClear();
     valueChangeNextFn.mockClear();
     testChangeNextFn.mockClear();
     inputChangeNextFn.mockClear();
+    clickNextFn.mockClear();
   });
 
   it('should be properties applied (element)', () => {
@@ -224,6 +230,16 @@ describe('FluentBindingDirective', () => {
     expect(testChangeFn).toHaveBeenCalled();
     expect(testChangeNextFn).toHaveBeenCalled();
     const [callArgs] = testChangeNextFn.mock.calls;
+    expect(callArgs[0]).toHaveProperty('event');
+    expect(callArgs[0].context).toBeTruthy();
+  });
+
+  it('should listen to custom event (DOM event)', () => {
+    const rangeElement: HTMLElement = debugElement.query(By.directive(RangeComponent)).nativeElement;
+    rangeElement.dispatchEvent(new MouseEvent('click'));
+    expect(clickFn).toHaveBeenCalled();
+    expect(clickNextFn).toHaveBeenCalled();
+    const [callArgs] = clickNextFn.mock.calls;
     expect(callArgs[0]).toHaveProperty('event');
     expect(callArgs[0].context).toBeTruthy();
   });

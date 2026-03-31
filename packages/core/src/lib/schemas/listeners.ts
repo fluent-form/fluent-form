@@ -24,17 +24,17 @@ export interface EventListenerHolder {
 
 /** 控件事件侦听器 */
 export interface ControlEventListenerHolder<V = SafeAny> extends EventListenerHolder {
-  listeners?: ControlEventListenerMap<V>;
+  listeners?: ControlEventListenerMap<V> & ElementEventListenerMap;
 }
 
 /** 组件事件侦听器 */
 export interface ComponentEventListenerHolder<C> extends EventListenerHolder {
-  listeners?: ComponentOutputListenerMap<C>;
+  listeners?: ComponentOutputListenerMap<C> & ElementEventListenerMap;
 }
 
 /** 组件控件事件侦听器 */
 export interface ComponentControlEventListenerHolder<C, V = SafeAny> extends EventListenerHolder {
-  listeners?: ComponentOutputListenerMap<C> & ControlEventListenerMap<V>;
+  listeners?: ComponentOutputListenerMap<C> & ControlEventListenerMap<V> & ElementEventListenerMap;
 }
 
 /** 元素事件侦听器 */

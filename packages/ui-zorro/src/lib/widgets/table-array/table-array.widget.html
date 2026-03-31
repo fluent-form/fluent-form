@@ -17,7 +17,7 @@
             {{ tableColumnSchema.header }}
             @if (tableColumnSchema.tooltip) {
               <nz-icon
-                class="fluent-table-cell-tooltip-icon"
+                class="fluent-table-array-cell-tooltip-icon"
                 nz-tooltip
                 [nzType]="(helper.tooltip.icon | invoke: tableColumnSchema.tooltip) || 'question-circle'"
                 [nzTooltipTitle]="helper.tooltip.content | invoke: tableColumnSchema.tooltip" />
@@ -25,7 +25,7 @@
           </th>
         }
         @if (formSchema.removable ?? true) {
-          <th class="fluent-table-action-cell"></th>
+          <th class="fluent-table-array-action-cell"></th>
         }
       </tr>
     </thead>
@@ -90,6 +90,7 @@
     <nz-form-control>
       @let addBtn = helper.addable | invoke: (formSchema.addable | reactive: model : formSchema : formArray);
       <button
+        class="fluent-table-array-element-add-btn"
         type="button"
         nz-button
         [nzType]="addBtn.type ?? null"

@@ -1,3 +1,27 @@
+## 0.30.0 (2026-04-01)
+
+### 🚀 Features
+
+- support configuring class & style of host & wrapper ([f17499c2](https://github.com/fluent-form/fluent-form/commit/f17499c2))
+- **core:** improve widget wrappers ([5db06f0d](https://github.com/fluent-form/fluent-form/commit/5db06f0d))
+- **core:** support named template as widget wrappers ([82efb48b](https://github.com/fluent-form/fluent-form/commit/82efb48b))
+- support no widget wrappers ([22af9efb](https://github.com/fluent-form/fluent-form/commit/22af9efb))
+- support custom widget wrappers ([#224](https://github.com/fluent-form/fluent-form/pull/224))
+
+### 🩹 Fixes
+
+- **core:** allow non-peer dependency ([a63eba97](https://github.com/fluent-form/fluent-form/commit/a63eba97))
+- **core:** correctly handle control default values ([5b36ba8e](https://github.com/fluent-form/fluent-form/commit/5b36ba8e))
+
+### 🔥 Performance
+
+- replace ng-template with ng-container ([4ef5c2f2](https://github.com/fluent-form/fluent-form/commit/4ef5c2f2))
+
+### ❤️ Thank You
+
+- hyperlife1119 @HyperLife1119
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.11 (2025-12-29)
 
 ### 🚀 Features

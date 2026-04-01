@@ -1,3 +1,32 @@
+## 0.30.0 (2026-04-01)
+
+### 🚀 Features
+
+- **ui-zorro/segmented:** add vertical alignment option to segmented control ([c68311e2](https://github.com/fluent-form/fluent-form/commit/c68311e2))
+- **ui-zorro/select:** enhance searchable property to support client and server ([9a8908d5](https://github.com/fluent-form/fluent-form/commit/9a8908d5))
+- support configuring class & style of host & wrapper ([f17499c2](https://github.com/fluent-form/fluent-form/commit/f17499c2))
+- **ui-zorro/cascader:** add displayWith and display properties ([f3fbb660](https://github.com/fluent-form/fluent-form/commit/f3fbb660))
+- support no widget wrappers ([22af9efb](https://github.com/fluent-form/fluent-form/commit/22af9efb))
+- support custom widget wrappers ([#224](https://github.com/fluent-form/fluent-form/pull/224))
+- **ui-zorro:** add support for variants option ([2d48db17](https://github.com/fluent-form/fluent-form/commit/2d48db17))
+- **ui-zorro/text-field:** support password & search type ([0ad944d4](https://github.com/fluent-form/fluent-form/commit/0ad944d4))
+- **ui-zorro/text-field:** support clearable ([5182614a](https://github.com/fluent-form/fluent-form/commit/5182614a))
+
+### 🩹 Fixes
+
+- **core:** allow non-peer dependency ([a63eba97](https://github.com/fluent-form/fluent-form/commit/a63eba97))
+- **ui-zorro/select:** fix bug ([7a719251](https://github.com/fluent-form/fluent-form/commit/7a719251))
+- **ui-zorro/select:** update nzOpen binding to use nzOpenChange event ([1a10ae15](https://github.com/fluent-form/fluent-form/commit/1a10ae15))
+
+### 🔥 Performance
+
+- replace ng-template with ng-container ([4ef5c2f2](https://github.com/fluent-form/fluent-form/commit/4ef5c2f2))
+
+### ❤️ Thank You
+
+- hyperlife1119 @HyperLife1119
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.11 (2025-12-29)
 
 This was a version bump only for ui-zorro to align it with other projects, there were no code changes.

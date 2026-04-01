@@ -451,4 +451,5 @@ export interface SegmentedControlSchema<Key extends SingleSchemaKey = SingleSche
   };
   options: MaybeSchemaReactiveFn<SegmentedControlSchema<SingleSchemaKey, Val>, NzSegmentedOptions>;
   size?: NzSizeLDSType;
+  vertical?: boolean;
 }

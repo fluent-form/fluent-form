@@ -8,5 +8,6 @@
     [nzSize]="schema.size!"
     [nzDisabled]="schema.disabled | reactive: model : schema : control"
     [nzOptions]="schema.options | reactive: model : schema : control"
-    [nzBlock]="schema.variants?.block" />
+    [nzBlock]="schema.variants?.block"
+    [nzVertical]="schema.vertical" />
 </ng-template>

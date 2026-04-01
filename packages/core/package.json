@@ -32,6 +32,9 @@
       "@fluent-form/ui-zorro"
     ]
   },
+  "dependencies": {
+    "@ngify/core": "^2.0.0"
+  },
   "peerDependencies": {
     "@angular/forms": ">=19.0.0",
     "@angular/cdk": ">=19.0.0",

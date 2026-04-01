@@ -48,7 +48,7 @@
         "{workspaceRoot}/eslint.config.js"
       ]
     },
-    "@angular-devkit/build-angular:application": {
+    "@angular/build:application": {
       "cache": true,
       "dependsOn": [
         "^build"

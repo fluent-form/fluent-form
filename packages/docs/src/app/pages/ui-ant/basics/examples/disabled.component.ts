@@ -18,10 +18,6 @@ export class DisabledExampleComponent {
 
     textField('text-3').disabled(true).hidden(true);
     textField('text-4').disabled(true).hidden(({ control }) => control.disabled);
-
-    textField('text-5').disabled(true).config({
-      valueCollectionStrategy: 'raw'
-    });
   });
 
   readonly model = signal({});

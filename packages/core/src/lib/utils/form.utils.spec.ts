@@ -392,18 +392,8 @@ describe('form.utils', () => {
         expect(util.updateModel({}, form, schemas)).toEqual({ txt: '1' });
       });
 
-      it('should be skip disabled controls', () => {
-        const schemas: Indexable<AbstractSchema>[] = [
-          { kind: 'text-field', key: 'txt', disabled: true },
-          { kind: 'text-field', key: 'txt2' }
-        ];
-        const form = util.createFormGroup(schemas, {});
-
-        expect(util.updateModel({}, form, schemas)).toEqual({ txt2: null });
-      });
-
       it('should be includes disabled controls', () => {
-        const schemas: Indexable<AbstractSchema>[] = [{ kind: 'text-field', key: 'txt', disabled: true, config: { valueCollectionStrategy: 'raw' } }];
+        const schemas: Indexable<AbstractSchema>[] = [{ kind: 'text-field', key: 'txt', disabled: true }];
         const form = util.createFormGroup(schemas, {});
 
         expect(util.updateModel({}, form, schemas)).toEqual({ txt: null });

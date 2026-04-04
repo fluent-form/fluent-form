@@ -33,8 +33,6 @@ export interface AbstractControlSchema<Key extends SchemaKey = SchemaKey, Val = 
 export interface ControlSchemaConfig {
   /** The event name for control to update upon. */
   updateOn?: AbstractControlOptions['updateOn'];
-  /** How values are read/collected from the form. 'raw' includes disabled (like getRawValue) */
-  valueCollectionStrategy?: 'value' | 'raw';
 }
 
 /**

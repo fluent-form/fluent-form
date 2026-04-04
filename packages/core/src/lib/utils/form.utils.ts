@@ -251,13 +251,6 @@ export class FormUtil {
       if (this.schemaUtil.isControl(schema)) {
         const key = schema.key!.toString();
         const control = getChildControl(form, key)!;
-
-        if (!schema.config?.valueCollectionStrategy || schema.config.valueCollectionStrategy === 'value') {
-          const disabled = this.valueTransformer.transform(schema.disabled, { model, schema, control });
-          // skip disabled controls
-          if (disabled) continue;
-        }
-
         const value = this.valueUtil.valueOfControl(control, schema);
 
         // Multi-field case.

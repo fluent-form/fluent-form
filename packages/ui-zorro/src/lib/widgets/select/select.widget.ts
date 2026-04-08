@@ -17,7 +17,7 @@ import {
   StylePipe,
   WidgetTemplateContext
 } from '@fluent-form/core';
-import { AnyObject, SafeAny } from '@ngify/core';
+import { SafeAny } from '@ngify/core';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { filter, Subject, tap } from 'rxjs';
 import { StatusPipe } from '../../pipes';
@@ -73,7 +73,7 @@ export class SelectWidgetTemplatePrivateContext {
   loading = false;
   open = false;
 
-  constructor(schema: SelectControlSchema, model: AnyObject, control: FormControl) {
+  constructor(schema: SelectControlSchema, control: FormControl) {
     const fetchOptionsFn = schema.fetchOptions;
     const cdr = inject(ChangeDetectorRef);
 
@@ -85,7 +85,7 @@ export class SelectWidgetTemplatePrivateContext {
       this.keyword$.pipe(
         filter(() => this.open), // 选中后关闭浮层也会触发一次 keyword$，此时 open=false，过滤掉
         tap(() => this.loading = true),
-        source => fetchOptionsFn(source, { schema, model, control }) // TODO: bug, model 始终是空对象 {}，不会更新
+        source => fetchOptionsFn(source, { schema, control, model: {} }) // TODO: bug, model 始终是空对象 {}，不会更新
       ).subscribe(options => {
         this.options = options;
         this.loading = false;

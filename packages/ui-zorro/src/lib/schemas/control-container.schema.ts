@@ -1,8 +1,9 @@
 import { TemplateRef } from '@angular/core';
-import { AbstractFormArraySchema, AbstractFormGroupSchema, MaybeSchemaReactiveFn, SingleSchemaKey } from '@fluent-form/core';
+import { AbstractFormArraySchema, AbstractFormGroupSchema, ComponentPropertyHolder, MaybeSchemaReactiveFn, SingleSchemaKey } from '@fluent-form/core';
 import { NzButtonShape, NzButtonSize, NzButtonType } from 'ng-zorro-antd/button';
 import { NzSizeLDSType, NzSizeMDSType } from 'ng-zorro-antd/core/types';
 import { NzFormLayoutType } from 'ng-zorro-antd/form';
+import { NzTableComponent, NzTableLayout } from 'ng-zorro-antd/table';
 import type { NzTabPosition } from 'ng-zorro-antd/tabs';
 import { CardComponentSchema } from './component-container.schema';
 import { TableColumnSchema } from './control-wrapper.schema';
@@ -21,12 +22,14 @@ export interface TableRowGroupSchema<Key extends SingleSchemaKey = SingleSchemaK
   schemas: TableColumnSchema[];
 }
 
-export interface TableArraySchema<Key extends SingleSchemaKey = SingleSchemaKey> extends AbstractFormArraySchema<Key>, Labelful {
+export interface TableArraySchema<Key extends SingleSchemaKey = SingleSchemaKey>
+  extends AbstractFormArraySchema<Key>, Labelful, ComponentPropertyHolder<NzTableComponent<unknown>> {
   kind: 'table-array';
   addable?: MaybeSchemaReactiveFn<FormArraySchema, boolean | AddableButton>;
   removable?: boolean;
   orderable?: boolean;
   size?: NzSizeMDSType;
+  layout?: NzTableLayout;
   bordered?: boolean;
   loading?: boolean;
   schemas: TableRowGroupSchema[];

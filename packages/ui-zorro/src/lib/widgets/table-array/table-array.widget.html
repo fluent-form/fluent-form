@@ -7,6 +7,7 @@
     [nzLoading]="formSchema.loading"
     [nzShowPagination]="false"
     [nzData]="formArray.value"
+    [nzTableLayout]="formSchema.layout ?? 'auto'"
     [class]="formSchema.class | class"
     [style]="formSchema.style | style"
     [fluentBinding]="{ component, schema: formSchema, control: formArray, model }">

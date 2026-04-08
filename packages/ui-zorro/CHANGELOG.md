@@ -1,3 +1,14 @@
+## 0.29.16 (2026-04-08)
+
+### 🩹 Fixes
+
+- **ui-zorro/select:** fix bug ([18564396](https://github.com/fluent-form/fluent-form/commit/18564396))
+- **ui-zorro/table-array:** add FluentWithInjectorDirective imports ([47c93210](https://github.com/fluent-form/fluent-form/commit/47c93210))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.15 (2026-03-31)
 
 This was a version bump only for ui-zorro to align it with other projects, there were no code changes.

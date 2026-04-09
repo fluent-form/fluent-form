@@ -1,5 +1,5 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Directive, ElementRef, inject } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import {
@@ -12,8 +12,7 @@ import {
   FluentControlPipe,
   FluentGridModule,
   FluentReactivePipe,
-  FluentWidgetTemplatePipe,
-  FluentWithInjectorDirective,
+  FluentWidgetWrapperOutlet,
   FormUtil,
   InvokePipe,
   isBoolean,
@@ -47,7 +46,6 @@ export class ElementDirective {
  */
 @Component({
   imports: [
-    AsyncPipe,
     NgTemplateOutlet,
     NzTableModule,
     NzButtonModule,
@@ -61,10 +59,9 @@ export class ElementDirective {
     FluentContextGuardDirective,
     FluentReactivePipe,
     FluentControlPipe,
-    FluentWithInjectorDirective,
     RenderablePipe,
     InvokePipe,
-    FluentWidgetTemplatePipe,
+    FluentWidgetWrapperOutlet,
     ElementDirective,
     ClassPipe,
     StylePipe

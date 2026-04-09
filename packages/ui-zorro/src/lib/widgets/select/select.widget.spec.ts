@@ -39,7 +39,6 @@ describe('SelectWidget', () => {
           kind: 'select',
           options: []
         },
-        {},
         control
       );
       ctx = new SelectWidgetTemplatePrivateContext(
@@ -50,7 +49,6 @@ describe('SelectWidget', () => {
               switchMap(() => of([]))
             )
         },
-        {},
         control
       );
     });

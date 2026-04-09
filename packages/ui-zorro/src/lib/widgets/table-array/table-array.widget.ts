@@ -13,6 +13,7 @@ import {
   FluentGridModule,
   FluentReactivePipe,
   FluentWidgetWrapperOutlet,
+  FluentWithInjectorDirective,
   FormUtil,
   InvokePipe,
   isBoolean,
@@ -24,6 +25,7 @@ import {
   WithoutSchemaReactiveFn
 } from '@fluent-form/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzFormStatusService } from 'ng-zorro-antd/core/form';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTableModule } from 'ng-zorro-antd/table';
@@ -40,6 +42,17 @@ type TableArrayWidgetTemplateContext = WidgetTemplateContext<TableArraySchema, F
 export class ElementDirective {
   readonly ref = inject(ElementRef);
 }
+
+/**
+ * nz-table 外面会被 nz-form-control 包裹，而 nz-form-control 会提供一个 NzFormStatusService。
+ * control 组件会注入这个服务，导致 control 组件的状态被 NzFormStatusService 控制，从而无法正确反映 control 的状态。
+ * 因此需要覆盖掉 NzFormStatusService 的提供者，提供一个空的服务实例。
+ */
+@Directive({
+  selector: 'nz-table',
+  providers: [{ provide: NzFormStatusService, useValue: null }]
+})
+export class OverrideProvidersDirective { }
 
 /**
  * @internal
@@ -62,9 +75,11 @@ export class ElementDirective {
     RenderablePipe,
     InvokePipe,
     FluentWidgetWrapperOutlet,
+    FluentWithInjectorDirective,
     ElementDirective,
     ClassPipe,
-    StylePipe
+    StylePipe,
+    OverrideProvidersDirective
   ],
   templateUrl: './table-array.widget.html',
   styleUrl: './table-array.widget.scss',

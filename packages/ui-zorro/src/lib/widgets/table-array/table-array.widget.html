@@ -50,6 +50,7 @@
               @for (subschema of tableColumnSchema.schemas; track subschema) {
                 @if (subschema | renderable) {
                   <ng-container
+                    fluentWithInjector
                     [ngTemplateOutlet]="formColTemplate"
                     [ngTemplateOutletContext]="{
                       control: subschema.key | control: $any(formGroup),

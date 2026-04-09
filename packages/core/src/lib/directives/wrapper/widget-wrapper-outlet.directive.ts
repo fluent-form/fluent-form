@@ -1,12 +1,11 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Directive, Injector, TemplateRef, Type, computed, effect, inject, input, untracked } from '@angular/core';
 import type { SafeAny } from '@ngify/core';
-import type { WidgetWrapperContext } from '../../components';
+import type { AbstractWidgetWrapper, WidgetWrapperContext } from '../../components';
 import { throwCustomTemplateNotFoundError } from '../../errors';
 import type { AbstractSchema, SchemaContext } from '../../schemas';
 import { WidgetWrapperTemplateRegistry } from '../../services';
 import { FLUENT_WIDGET_WRAPPERS, NAMED_TEMPLATES } from '../../tokens';
-import type { TemplateRefHolder } from '../template-ref-holder.directive';
 import { FluentNextWidgetWrapper } from './next-widget-wrapper-outlet.directive';
 
 @Directive({
@@ -15,25 +14,26 @@ import { FluentNextWidgetWrapper } from './next-widget-wrapper-outlet.directive'
 })
 export class FluentWidgetWrapperOutlet<C extends SchemaContext> {
   readonly context = input.required<C>({ alias: 'fluentWidgetWrapperOutlet' });
+  readonly wrappers = input<Type<AbstractWidgetWrapper>[]>(undefined, { alias: 'fluentWidgetWrapperOutletWrappers' });
 
   readonly schema = computed(() => this.context().schema);
 
   constructor() {
     const outlet = inject(NgTemplateOutlet);
     const injector = inject(Injector);
-    const wrappers = inject(FLUENT_WIDGET_WRAPPERS, { optional: true }) ?? [];
+    const wrappers = inject(FLUENT_WIDGET_WRAPPERS, { optional: true });
     const wrapperMap = inject(WidgetWrapperTemplateRegistry);
     const namedTemplates = inject(NAMED_TEMPLATES, { optional: true });
     const namedTemplateMap = new Map<string, TemplateRef<WidgetWrapperContext>>(
       namedTemplates?.map(o => [o.name, o.templateRef])
     );
 
-    function finalWrappersOf(schema: AbstractSchema) {
-      const finalWrappers = schema.wrappers?.flat() || wrappers;
-      return finalWrappers.length ? finalWrappers : [FluentNextWidgetWrapper];
-    }
+    const finalWrappersOf = (schema: AbstractSchema) => {
+      const finalWrappers = schema.wrappers?.flat() || this.wrappers() || wrappers;
+      return finalWrappers?.length ? finalWrappers : [FluentNextWidgetWrapper];
+    };
 
-    function resolveWrapperTemplate(wrapper: Type<TemplateRefHolder<WidgetWrapperContext>> | string) {
+    function resolveWrapperTemplate(wrapper: Type<AbstractWidgetWrapper> | string) {
       if (typeof wrapper === 'string') {
         const tmpl = namedTemplateMap.get(wrapper);
 

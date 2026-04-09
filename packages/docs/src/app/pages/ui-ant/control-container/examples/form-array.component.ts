@@ -22,7 +22,7 @@ export class FormArrayExampleComponent {
       .orderable(true)
       .col(12)
       .schemas(() => {
-        textField().placeholder('Please enter').col(12);
+        textField().placeholder('Please enter').required(true).col(12);
       });
 
     button()

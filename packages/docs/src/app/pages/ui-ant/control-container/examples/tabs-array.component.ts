@@ -18,7 +18,7 @@ export class TabsArrayExampleComponent {
       .col(12)
       .schemas(() => {
         group().col(12).schemas(() => {
-          textField('name').label('Name').placeholder('Please enter').col(12);
+          textField('name').label('Name').placeholder('Please enter').required(true).col(12);
           textField('cellphone').label('Cellphone').placeholder('Please enter').col(12);
         });
       });

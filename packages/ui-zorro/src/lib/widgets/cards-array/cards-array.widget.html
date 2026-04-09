@@ -58,18 +58,19 @@
                 </ng-template>
 
                 @for (subschema of cardSchema.schemas; track subschema) {
+                  @let indexedSubschema = withIndex | invoke: index : subschema;
                   @if (subschema | renderable) {
                     <ng-container
                       [ngTemplateOutlet]="formColTemplate"
                       [ngTemplateOutletContext]="{
                         control: control,
-                        schema: withIndex(index, subschema),
+                        schema: indexedSubschema,
                         model: model[formSchema.key!]
                       }" />
                   } @else {
                     <ng-container
                       [fluentBinding]="{
-                        schema: withIndex(index, subschema),
+                        schema: indexedSubschema,
                         control,
                         model: model[formSchema.key!]
                       }" />

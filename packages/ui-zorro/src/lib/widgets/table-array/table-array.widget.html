@@ -37,13 +37,14 @@
       [cdkDropListDisabled]="!formSchema.orderable"
       (cdkDropListDropped)="drop(formArray, $event)">
       @for (formGroup of formArray.controls; track formGroup; let index = $index) {
+        @let indexedTableRowGroupSchema = withIndex | invoke: index : tableRowGroupSchema;
         <tr
           cdkDrag
           cdkDragPreviewContainer="parent"
           [cdkDragBoundary]="tbody.ref"
           [class]="tableRowGroupSchema.class | class"
           [style]="tableRowGroupSchema.style | style"
-          [fluentBinding]="{ schema: tableRowGroupSchema, control: formGroup, model: model[formSchema.key!] }">
+          [fluentBinding]="{ schema: indexedTableRowGroupSchema, control: formGroup, model: model[formSchema.key!] }">
           @for (tableColumnSchema of tableRowGroupSchema.schemas; track tableColumnSchema) {
             <td [class]="tableColumnSchema.class | class" [style]="tableColumnSchema.style | style">
               @for (subschema of tableColumnSchema.schemas; track subschema) {

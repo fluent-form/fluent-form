@@ -1,3 +1,13 @@
+## 0.29.17 (2026-04-13)
+
+### 🚀 Features
+
+- **core:** update listener context types ([32c6e84a](https://github.com/fluent-form/fluent-form/commit/32c6e84a))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.29.16 (2026-04-08)
 
 ### 🩹 Fixes

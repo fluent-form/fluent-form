@@ -18,7 +18,7 @@
         [nzMaxMultipleCount]="schema.length?.max ?? infinity"
         [nzMode]="schema.mode ?? 'default'"
         [nzPlaceHolder]="(schema.placeholder | reactive: model : schema : control)!"
-        [nzShowSearch]="(helper.searchable | invoke: schema.searchable : 'client') || !!schema.fetchOptions"
+        [nzShowSearch]="schema.searchable || !!schema.fetchOptions"
         [nzBackdrop]="schema.backdrop!"
         [nzVariant]="schema.variant ?? 'outlined'"
         [nzAutoFocus]="schema.autofocus"
@@ -27,7 +27,7 @@
         [nzStatus]="(control | status)()"
         [nzSuffixIcon]="(schema.suffixIcon | template)!"
         [nzLoading]="ctx.loading"
-        [nzServerSearch]="(helper.searchable | invoke: schema.searchable : 'server') && !!schema.fetchOptions"
+        [nzServerSearch]="helper.serverSearchable | invoke: schema"
         (nzOpenChange)="ctx.open = $event"
         (nzOnSearch)="ctx.trigger($event)">
         @for (option of ctx.options | reactive: model : schema : control; track option.value) {
@@ -56,7 +56,7 @@
       [nzMaxMultipleCount]="schema.length?.max ?? infinity"
       [nzMode]="schema.mode ?? 'default'"
       [nzPlaceHolder]="(schema.placeholder | reactive: model : schema : control)!"
-      [nzShowSearch]="(helper.searchable | invoke: schema.searchable : 'client') || !!schema.fetchOptions"
+      [nzShowSearch]="schema.searchable || !!schema.fetchOptions"
       [nzBackdrop]="schema.backdrop!"
       [nzVariant]="schema.variant ?? 'outlined'"
       [nzAutoFocus]="schema.autofocus"
@@ -65,7 +65,7 @@
       [nzStatus]="(control | status)()"
       [nzSuffixIcon]="(schema.suffixIcon | template)!"
       [nzLoading]="ctx.loading"
-      [nzServerSearch]="(helper.searchable | invoke: schema.searchable : 'server') && !!schema.fetchOptions"
+      [nzServerSearch]="helper.serverSearchable | invoke: schema"
       (nzOpenChange)="ctx.open = $event"
       (nzOnSearch)="ctx.trigger($event)">
       @for (option of ctx.options | reactive: model : schema : control; track option.value) {

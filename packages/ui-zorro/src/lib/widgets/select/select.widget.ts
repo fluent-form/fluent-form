@@ -55,11 +55,12 @@ export default class SelectWidget extends AbstractWidget<SelectWidgetTemplateCon
   protected readonly infinity = Infinity;
   protected readonly compareWith = (a: SafeAny, b: SafeAny) => a === b;
   protected readonly helper = {
-    searchable: (value: SelectControlSchema['searchable'], type: 'client' | 'server') => {
-      if (typeof value === 'boolean') {
-        return value;
+    serverSearchable: (schema: SelectControlSchema) => {
+      // TODO more thinking
+      if (typeof schema.searchable === 'boolean') {
+        return schema.searchable && schema.fetchOptions;
       }
-      return value?.[type] ?? false;
+      return schema.searchable?.server && schema.fetchOptions;
     }
   };
 

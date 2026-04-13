@@ -2,25 +2,25 @@ import type { FormControlStatus } from '@angular/forms';
 import type { SafeAny } from '@ngify/core';
 import type { Observable } from 'rxjs';
 import type { ComponentOutputMap } from '../types';
-import type { SchemaContext } from './interfaces';
+import type { ListenerContext } from './listeners';
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 type ControlEventObserverMap<Val> = {
-  valueChange?: (source: Observable<{ event: Val, context: SchemaContext }>) => Observable<SafeAny>;
-  statusChange?: (source: Observable<{ event: FormControlStatus, context: SchemaContext }>) => Observable<SafeAny>;
+  valueChange?: (source: Observable<{ event: Val, context: ListenerContext }>) => Observable<SafeAny>;
+  statusChange?: (source: Observable<{ event: FormControlStatus, context: ListenerContext }>) => Observable<SafeAny>;
 };
 
 type ComponentOutputObserverMap<C> = {
-  [K in keyof ComponentOutputMap<C>]?: (source: Observable<{ event: ComponentOutputMap<C>[K], context: SchemaContext }>) => Observable<SafeAny>
+  [K in keyof ComponentOutputMap<C>]?: (source: Observable<{ event: ComponentOutputMap<C>[K], context: ListenerContext }>) => Observable<SafeAny>
 };
 
 type ElementEventObserverMap = {
-  [K in keyof HTMLElementEventMap]?: (source: Observable<{ event: HTMLElementEventMap[K], context: SchemaContext }>) => Observable<SafeAny>
+  [K in keyof HTMLElementEventMap]?: (source: Observable<{ event: HTMLElementEventMap[K], context: ListenerContext }>) => Observable<SafeAny>
 };
 
 /** 事件侦听器 */
 export interface EventObserverHolder {
-  observers?: Partial<Record<string, ((source: Observable<{ event: SafeAny, context: SchemaContext }>) => Observable<SafeAny>)>>;
+  observers?: Partial<Record<string, ((source: Observable<{ event: SafeAny, context: ListenerContext }>) => Observable<SafeAny>)>>;
 }
 
 /** 控件事件侦听器 */

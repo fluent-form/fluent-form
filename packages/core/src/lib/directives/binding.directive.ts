@@ -20,7 +20,7 @@ import { outputToObservable } from '@angular/core/rxjs-interop';
 import { AbstractControl } from '@angular/forms';
 import type { AnyObject, SafeAny } from '@ngify/core';
 import { Observable, fromEvent, map, takeUntil } from 'rxjs';
-import type { AbstractSchema, EventListenerHolder, EventObserverHolder, HooksHolder, PropertyHolder, SchemaContext } from '../schemas';
+import type { AbstractSchema, EventListenerHolder, EventObserverHolder, HooksHolder, ListenerContext, PropertyHolder, SchemaContext } from '../schemas';
 import { DestroyedSubject } from '../services';
 
 function isHookHolder(value: SafeAny): value is Required<HooksHolder> {
@@ -71,7 +71,7 @@ export class FluentBindingDirective<E extends HTMLElement, C extends object, S e
         : [];
 
       untracked(() => {
-        const context = (): SchemaContext => ({ control, schema, model: this.model() });
+        const context = (): ListenerContext => ({ control, schema, model: this.model(), element, component });
         destroyed.next();
 
         if (isPropertyHolder(schema)) {

@@ -1,3 +1,26 @@
+## 0.30.1 (2026-04-17)
+
+### 🚀 Features
+
+- **ui-zorro/table-array:** support widget wrappers ([0b779c07](https://github.com/fluent-form/fluent-form/commit/0b779c07))
+- **ui-zorro/table-array:** add layout support ([bd529714](https://github.com/fluent-form/fluent-form/commit/bd529714))
+
+### 🩹 Fixes
+
+- **ui-zorro/select:** update searchable logic and improve server search handling ([420b6685](https://github.com/fluent-form/fluent-form/commit/420b6685))
+- **ui-zorro/table-array:** fix bug ([c31b9a79](https://github.com/fluent-form/fluent-form/commit/c31b9a79))
+- **ui-zorro/table-array:** add OverrideProvidersDirective to manage NzFormStatusService ([7049e534](https://github.com/fluent-form/fluent-form/commit/7049e534))
+- **ui-zorro/table-array:** fix bug ([7f0ee3b5](https://github.com/fluent-form/fluent-form/commit/7f0ee3b5))
+- **ui-zorro/tabs-array:** fix bug ([12c15838](https://github.com/fluent-form/fluent-form/commit/12c15838))
+- **ui-zorro/form-array:** fix bug ([e2271c55](https://github.com/fluent-form/fluent-form/commit/e2271c55))
+- **ui-zorro/cards-array:** fix bug ([808fe158](https://github.com/fluent-form/fluent-form/commit/808fe158))
+- **ui-zorro/select:** fix bug ([42bc8adb](https://github.com/fluent-form/fluent-form/commit/42bc8adb))
+- **ui-zorro/table-array:** add FluentWithInjectorDirective imports ([dedff923](https://github.com/fluent-form/fluent-form/commit/dedff923))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.30.0 (2026-04-01)
 
 ### 🚀 Features

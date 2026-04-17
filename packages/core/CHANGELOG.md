@@ -1,3 +1,13 @@
+## 0.30.1 (2026-04-17)
+
+### 🚀 Features
+
+- update context types to use ListenerContext in listeners & observers ([eb8b9b29](https://github.com/fluent-form/fluent-form/commit/eb8b9b29))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.30.0 (2026-04-01)
 
 ### 🚀 Features

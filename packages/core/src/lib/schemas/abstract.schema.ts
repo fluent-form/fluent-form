@@ -8,7 +8,7 @@ import type { MaybeSchemaReactiveFn, SchemaLike } from './interfaces';
 import type { SchemaKey } from './types';
 
 export type WidgetWrapperType = Type<TemplateRefHolder<WidgetWrapperContext>> | string;
-export type ClassType = string | string[] | undefined | null;
+export type ClassType = string | string[] | undefined | null | Record<string, boolean | undefined | null>;
 export type StyleType = Partial<Record<keyof CSSStyleDeclaration | (string & {}), string>> | undefined | null;
 export type ElementType = 'host' | 'wrapper';
 

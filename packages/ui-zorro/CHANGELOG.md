@@ -1,3 +1,7 @@
+## 0.30.2 (2026-04-17)
+
+This was a version bump only for ui-zorro to align it with other projects, there were no code changes.
+
 ## 0.30.1 (2026-04-17)
 
 ### 🚀 Features

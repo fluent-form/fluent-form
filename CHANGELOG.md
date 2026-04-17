@@ -1,3 +1,13 @@
+## 0.30.2 (2026-04-17)
+
+### 🩹 Fixes
+
+- **core:** update ClassType to allow class name mapping ([a21b81d0](https://github.com/fluent-form/fluent-form/commit/a21b81d0))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.30.1 (2026-04-17)
 
 ### 🚀 Features

@@ -137,6 +137,7 @@ export interface TextAreaControlSchema<Key extends SingleSchemaKey = SingleSchem
   rows?: number;
   /** Whether to adapt the content height */
   autosize?: boolean | { minRows: number, maxRows: number };
+  clearable?: boolean;
 }
 
 /**

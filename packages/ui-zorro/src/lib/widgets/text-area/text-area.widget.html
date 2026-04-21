@@ -1,8 +1,81 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  @let hasWrapper = schema.clearable;
+
   @if (ControlWrapperDirective | inject: { optional: true }) {
     @if (!(schema.hidden | reactive: model : schema : control)) {
+      @if (hasWrapper) {
+        <nz-input-wrapper
+          fluentCol
+          [span]="schema.col | col: 'span'"
+          [flex]="schema.col | col: 'flex'"
+          [offset]="schema.col | col: 'offset'"
+          [class]="schema.class | class"
+          [style]="schema.style | style"
+          [nzAllowClear]="schema.clearable">
+          <textarea
+            nz-input
+            [attr.id]="schema.id"
+            [attr.name]="schema.key"
+            [attr.maxlength]="helper.length.max | invoke: schema.length"
+            [attr.minlength]="helper.length.min | invoke: schema.length"
+            [fluentBinding]="{ schema, control, model }"
+            [formControl]="control"
+            [nzAutosize]="schema.autosize ?? {}"
+            [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
+            [rows]="schema.rows"
+            [autofocus]="schema.autofocus"
+            [readonly]="schema.readonly | reactive: model : schema : control"
+            [nzSize]="schema.size!"
+            [nzStatus]="(control | status)()"
+            [nzVariant]="schema.variant ?? 'outlined'"></textarea>
+        </nz-input-wrapper>
+      } @else {
+        <textarea
+          fluentCol
+          nz-input
+          [attr.id]="schema.id"
+          [attr.name]="schema.key"
+          [attr.maxlength]="helper.length.max | invoke: schema.length"
+          [attr.minlength]="helper.length.min | invoke: schema.length"
+          [fluentBinding]="{ schema, control, model }"
+          [formControl]="control"
+          [class]="schema.class | class"
+          [style]="schema.style | style"
+          [span]="schema.col | col: 'span'"
+          [flex]="schema.col | col: 'flex'"
+          [offset]="schema.col | col: 'offset'"
+          [nzAutosize]="schema.autosize ?? {}"
+          [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
+          [rows]="schema.rows"
+          [autofocus]="schema.autofocus"
+          [readonly]="schema.readonly | reactive: model : schema : control"
+          [nzSize]="schema.size!"
+          [nzStatus]="(control | status)()"
+          [nzVariant]="schema.variant ?? 'outlined'"></textarea>
+      }
+    }
+  } @else {
+    @if (hasWrapper) {
+      <nz-input-wrapper [class]="schema.class | class" [style]="schema.style | style" [nzAllowClear]="schema.clearable">
+        <textarea
+          nz-input
+          [attr.id]="schema.id"
+          [attr.name]="schema.key"
+          [attr.maxlength]="helper.length.max | invoke: schema.length"
+          [attr.minlength]="helper.length.min | invoke: schema.length"
+          [fluentBinding]="{ schema, control, model }"
+          [formControl]="control"
+          [nzAutosize]="schema.autosize ?? {}"
+          [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
+          [rows]="schema.rows"
+          [autofocus]="schema.autofocus"
+          [readonly]="schema.readonly | reactive: model : schema : control"
+          [nzSize]="schema.size!"
+          [nzStatus]="(control | status)()"
+          [nzVariant]="schema.variant ?? 'outlined'"></textarea>
+      </nz-input-wrapper>
+    } @else {
       <textarea
-        fluentCol
         nz-input
         [attr.id]="schema.id"
         [attr.name]="schema.key"
@@ -12,9 +85,6 @@
         [formControl]="control"
         [class]="schema.class | class"
         [style]="schema.style | style"
-        [span]="schema.col | col: 'span'"
-        [flex]="schema.col | col: 'flex'"
-        [offset]="schema.col | col: 'offset'"
         [nzAutosize]="schema.autosize ?? {}"
         [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
         [rows]="schema.rows"
@@ -24,24 +94,5 @@
         [nzStatus]="(control | status)()"
         [nzVariant]="schema.variant ?? 'outlined'"></textarea>
     }
-  } @else {
-    <textarea
-      nz-input
-      [attr.id]="schema.id"
-      [attr.name]="schema.key"
-      [attr.maxlength]="helper.length.max | invoke: schema.length"
-      [attr.minlength]="helper.length.min | invoke: schema.length"
-      [fluentBinding]="{ schema, control, model }"
-      [formControl]="control"
-      [class]="schema.class | class"
-      [style]="schema.style | style"
-      [nzAutosize]="schema.autosize ?? {}"
-      [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
-      [rows]="schema.rows"
-      [autofocus]="schema.autofocus"
-      [readonly]="schema.readonly | reactive: model : schema : control"
-      [nzSize]="schema.size!"
-      [nzStatus]="(control | status)()"
-      [nzVariant]="schema.variant ?? 'outlined'"></textarea>
   }
 </ng-template>

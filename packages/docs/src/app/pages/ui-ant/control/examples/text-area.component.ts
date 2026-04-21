@@ -18,6 +18,12 @@ export class TextAreaExampleComponent {
       .placeholder('Please fill in')
       .rows(3)
       .col(6);
+    textArea('desc2')
+      .label('Description')
+      .placeholder('Please fill in')
+      .rows(3)
+      .clearable(true)
+      .col(6);
   });
 
   readonly model = signal({});

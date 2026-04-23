@@ -1,3 +1,14 @@
+## 0.30.3 (2026-04-23)
+
+### 🚀 Features
+
+- support reactive class & style ([9e5cba90](https://github.com/fluent-form/fluent-form/commit/9e5cba90))
+- **ui-zorro/text-area:** support clearable option ([775fb6a3](https://github.com/fluent-form/fluent-form/commit/775fb6a3))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.30.2 (2026-04-17)
 
 This was a version bump only for ui-zorro to align it with other projects, there were no code changes.

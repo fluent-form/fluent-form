@@ -1,3 +1,13 @@
+## 0.30.3 (2026-04-23)
+
+### 🚀 Features
+
+- support reactive class & style ([9e5cba90](https://github.com/fluent-form/fluent-form/commit/9e5cba90))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.30.2 (2026-04-17)
 
 ### 🩹 Fixes

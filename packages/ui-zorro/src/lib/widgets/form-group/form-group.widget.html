@@ -5,8 +5,8 @@
     [align]="formSchema.align"
     [justify]="formSchema.justify"
     [nzLayout]="formSchema.layout!"
-    [class]="formSchema.class | class"
-    [style]="formSchema.style | style"
+    [class]="formSchema.class | reactive: model : formSchema : formGroup | class"
+    [style]="formSchema.style | reactive: model : formSchema : formGroup | style"
     [fluentBinding]="{ schema: formSchema, control: formGroup, model }">
     <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
       <fluent-col

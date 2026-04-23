@@ -8,6 +8,7 @@ import {
   FluentContextGuardDirective,
   FluentControlPipe,
   FluentControlWrapperDirective,
+  FluentReactivePipe,
   FluentWidgetTemplatePipe,
   FluentWithInjectorDirective,
   StylePipe,
@@ -16,7 +17,8 @@ import {
 import { NzSpaceCompactComponent } from 'ng-zorro-antd/space';
 import { SpaceCompactComponentSchema } from '../../schemas';
 
-type SpaceCompactWidgetTemplateContext = WidgetTemplateContext<SpaceCompactComponentSchema, FormGroup>;
+type SpaceCompactWidgetTemplateContext = WidgetTemplateContext<SpaceCompactComponentSchema,
+  FormGroup>;
 
 /**
  * @internal
@@ -33,7 +35,8 @@ type SpaceCompactWidgetTemplateContext = WidgetTemplateContext<SpaceCompactCompo
     FluentWidgetTemplatePipe,
     FluentControlWrapperDirective,
     ClassPipe,
-    StylePipe
+    StylePipe,
+    FluentReactivePipe
   ],
   templateUrl: './space-compact.widget.html',
   styleUrl: './space-compact.widget.scss',

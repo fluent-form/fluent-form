@@ -1,6 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { AbstractWidget, ClassPipe, FluentBindingDirective, FluentContextGuardDirective, StylePipe, WidgetTemplateContext } from '@fluent-form/core';
+import {
+  AbstractWidget,
+  ClassPipe,
+  FluentBindingDirective,
+  FluentContextGuardDirective,
+  FluentReactivePipe,
+  StylePipe,
+  WidgetTemplateContext
+} from '@fluent-form/core';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { SliderControlSchema } from '../../schemas';
 
@@ -16,7 +24,8 @@ type SilderWidgetTemplateContext = WidgetTemplateContext<SliderControlSchema, Fo
     FluentBindingDirective,
     FluentContextGuardDirective,
     ClassPipe,
-    StylePipe
+    StylePipe,
+    FluentReactivePipe
   ],
   templateUrl: './silder.widget.html',
   styles: `nz-slider { display: block; }`,

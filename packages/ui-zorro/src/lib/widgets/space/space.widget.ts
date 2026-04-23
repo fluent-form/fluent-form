@@ -8,6 +8,7 @@ import {
   FluentContextGuardDirective,
   FluentControlPipe,
   FluentControlWrapperDirective,
+  FluentReactivePipe,
   FluentWidgetTemplatePipe,
   FluentWithInjectorDirective,
   StylePipe,
@@ -35,7 +36,8 @@ type SpaceWidgetTemplateContext = WidgetTemplateContext<SpaceComponentSchema,
     FluentWidgetTemplatePipe,
     FluentControlWrapperDirective,
     ClassPipe,
-    StylePipe
+    StylePipe,
+    FluentReactivePipe
   ],
   templateUrl: './space.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

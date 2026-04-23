@@ -16,8 +16,8 @@
               [span]="schema.col | col: 'span'"
               [flex]="schema.col | col: 'flex'"
               [offset]="schema.col | col: 'offset'"
-              [class]="schema.class | class"
-              [style]="schema.style | style"
+              [class]="schema.class | reactive: model : schema : control | class"
+              [style]="schema.style | reactive: model : schema : control | style"
               [nzAllowClear]="schema.clearable">
               <input
                 nz-input
@@ -73,8 +73,8 @@
               [span]="schema.col | col: 'span'"
               [flex]="schema.col | col: 'flex'"
               [offset]="schema.col | col: 'offset'"
-              [class]="schema.class | class"
-              [style]="schema.style | style"
+              [class]="schema.class | reactive: model : schema : control | class"
+              [style]="schema.style | reactive: model : schema : control | style"
               [nzAllowClear]="schema.clearable">
               <input
                 nz-input
@@ -130,8 +130,8 @@
               [span]="schema.col | col: 'span'"
               [flex]="schema.col | col: 'flex'"
               [offset]="schema.col | col: 'offset'"
-              [class]="schema.class | class"
-              [style]="schema.style | style"
+              [class]="schema.class | reactive: model : schema : control | class"
+              [style]="schema.style | reactive: model : schema : control | style"
               [nzAllowClear]="schema.clearable">
               <input
                 nz-input
@@ -196,8 +196,8 @@
           [attr.minlength]="helper.length.min | invoke: schema.length"
           [fluentBinding]="{ schema, control, model }"
           [formControl]="control"
-          [class]="schema.class | class"
-          [style]="schema.style | style"
+          [class]="schema.class | reactive: model : schema : control | class"
+          [style]="schema.style | reactive: model : schema : control | style"
           [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
           [type]="schema.type ?? 'text'"
           [autofocus]="schema.autofocus"
@@ -212,8 +212,8 @@
       @switch (schema.type) {
         @case ('password') {
           <nz-input-password
-            [class]="schema.class | class"
-            [style]="schema.style | style"
+            [class]="schema.class | reactive: model : schema : control | class"
+            [style]="schema.style | reactive: model : schema : control | style"
             [nzAllowClear]="schema.clearable">
             <input
               nz-input
@@ -266,8 +266,8 @@
         }
         @case ('search') {
           <nz-input-search
-            [class]="schema.class | class"
-            [style]="schema.style | style"
+            [class]="schema.class | reactive: model : schema : control | class"
+            [style]="schema.style | reactive: model : schema : control | style"
             [nzAllowClear]="schema.clearable">
             <input
               nz-input
@@ -320,8 +320,8 @@
         }
         @default {
           <nz-input-wrapper
-            [class]="schema.class | class"
-            [style]="schema.style | style"
+            [class]="schema.class | reactive: model : schema : control | class"
+            [style]="schema.style | reactive: model : schema : control | style"
             [nzAllowClear]="schema.clearable">
             <input
               nz-input
@@ -382,8 +382,8 @@
         [attr.maxlength]="helper.length.max | invoke: schema.length"
         [attr.minlength]="helper.length.min | invoke: schema.length"
         [fluentBinding]="{ schema, control, model }"
-        [class]="schema.class | class"
-        [style]="schema.style | style"
+        [class]="schema.class | reactive: model : schema : control | class"
+        [style]="schema.style | reactive: model : schema : control | style"
         [formControl]="control"
         [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
         [type]="schema.type ?? 'text'"

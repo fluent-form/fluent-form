@@ -19,8 +19,8 @@ export interface AbstractSchema<Key extends SchemaKey = SchemaKey> extends Schem
   /* Used to define the width of the control. */
   col?: Column | ReturnType<FluentColDirective['span']>;
   hidden?: MaybeSchemaReactiveFn<AbstractSchema, boolean>;
-  class?: ClassType | Partial<Record<ElementType, ClassType>>;
-  style?: StyleType | Partial<Record<ElementType, StyleType>>;
+  class?: MaybeSchemaReactiveFn<AbstractSchema, ClassType | Partial<Record<ElementType, ClassType>>>;
+  style?: MaybeSchemaReactiveFn<AbstractSchema, StyleType | Partial<Record<ElementType, StyleType>>>;
   wrappers?: (WidgetWrapperType[] | WidgetWrapperType)[];
 }
 

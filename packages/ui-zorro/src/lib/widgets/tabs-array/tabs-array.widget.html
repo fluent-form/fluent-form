@@ -3,8 +3,8 @@
     #component
     nzType="editable-card"
     [fluentBinding]="{ component, schema: formSchema, control: formArray, model }"
-    [class]="formSchema.class | class"
-    [style]="formSchema.style | style"
+    [class]="formSchema.class | reactive: model : formSchema : formArray | class"
+    [style]="formSchema.style | reactive: model : formSchema : formArray | style"
     [nzSize]="formSchema.size ?? 'default'"
     [nzTabPosition]="formSchema.position ?? 'top'"
     [nzTabBarGutter]="formSchema.gutter"

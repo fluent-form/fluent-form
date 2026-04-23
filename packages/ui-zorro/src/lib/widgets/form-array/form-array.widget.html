@@ -8,8 +8,8 @@
     [align]="formSchema.align"
     [justify]="formSchema.justify"
     [nzLayout]="formSchema.layout!"
-    [class]="formSchema.class | class"
-    [style]="formSchema.style | style"
+    [class]="formSchema.class | reactive: model : formSchema : formArray | class"
+    [style]="formSchema.style | reactive: model : formSchema : formArray | style"
     [fluentBinding]="{ schema: formSchema, control: formArray, model }"
     (cdkDropListDropped)="drop(formArray, $event)">
     <ng-template

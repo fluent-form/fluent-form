@@ -5,8 +5,8 @@
   @let currentSchema = schemaType === SchemaType.ControlWrapper ? schema.schemas[0] : schema;
 
   <nz-form-item
-    [class]="schema.class | class: 'wrapper'"
-    [style]="schema.style | style: 'wrapper'"
+    [class]="schema.class | reactive: model : schema : control | class: 'wrapper'"
+    [style]="schema.style | reactive: model : schema : control | style: 'wrapper'"
     [style.margin-bottom.px]="
       schemaType === SchemaType.ControlGroup ||
       schemaType === SchemaType.ControlArray ||

@@ -5,6 +5,7 @@ import {
   ClassPipe,
   FluentBindingDirective,
   FluentContextGuardDirective,
+  FluentReactivePipe,
   FluentTemplateOutlet,
   FluentTemplatePipe,
   StylePipe,
@@ -28,7 +29,8 @@ type RateWidgetTemplateContext = WidgetTemplateContext<RateControlSchema, FormCo
     FluentContextGuardDirective,
     FluentTemplatePipe,
     ClassPipe,
-    StylePipe
+    StylePipe,
+    FluentReactivePipe
   ],
   templateUrl: './rate.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

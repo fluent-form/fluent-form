@@ -8,8 +8,8 @@
     [align]="formSchema.align"
     [justify]="formSchema.justify"
     [nzLayout]="formSchema.layout!"
-    [class]="formSchema.class | class"
-    [style]="formSchema.style | style"
+    [class]="formSchema.class | reactive: model : formSchema : formArray | class"
+    [style]="formSchema.style | reactive: model : formSchema : formArray | style"
     [fluentBinding]="{ schema: formSchema, control: formArray, model }"
     (cdkDropListDropped)="drop(formArray, $event)">
     @for (cardSchema of formSchema.schemas; track cardSchema) {
@@ -39,8 +39,8 @@
               [nzBordered]="!cardSchema.borderless"
               [nzTitle]="`No.${index + 1}`"
               [nzExtra]="formSchema.removable ? extraTmpl : undefined"
-              [class]="cardSchema.class | class"
-              [style]="cardSchema.style | style">
+              [class]="cardSchema.class | reactive: model : cardSchema : control | class"
+              [style]="cardSchema.style | reactive: model : cardSchema : control | style">
               <fluent-row
                 nz-form
                 [align]="formSchema.align"

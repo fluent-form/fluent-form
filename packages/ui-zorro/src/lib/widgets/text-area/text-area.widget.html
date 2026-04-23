@@ -9,8 +9,8 @@
           [span]="schema.col | col: 'span'"
           [flex]="schema.col | col: 'flex'"
           [offset]="schema.col | col: 'offset'"
-          [class]="schema.class | class"
-          [style]="schema.style | style"
+          [class]="schema.class | reactive: model : schema : control | class"
+          [style]="schema.style | reactive: model : schema : control | style"
           [nzAllowClear]="schema.clearable">
           <textarea
             nz-input
@@ -39,8 +39,8 @@
           [attr.minlength]="helper.length.min | invoke: schema.length"
           [fluentBinding]="{ schema, control, model }"
           [formControl]="control"
-          [class]="schema.class | class"
-          [style]="schema.style | style"
+          [class]="schema.class | reactive: model : schema : control | class"
+          [style]="schema.style | reactive: model : schema : control | style"
           [span]="schema.col | col: 'span'"
           [flex]="schema.col | col: 'flex'"
           [offset]="schema.col | col: 'offset'"
@@ -56,7 +56,10 @@
     }
   } @else {
     @if (hasWrapper) {
-      <nz-input-wrapper [class]="schema.class | class" [style]="schema.style | style" [nzAllowClear]="schema.clearable">
+      <nz-input-wrapper
+        [class]="schema.class | reactive: model : schema : control | class"
+        [style]="schema.style | reactive: model : schema : control | style"
+        [nzAllowClear]="schema.clearable">
         <textarea
           nz-input
           [attr.id]="schema.id"
@@ -83,8 +86,8 @@
         [attr.minlength]="helper.length.min | invoke: schema.length"
         [fluentBinding]="{ schema, control, model }"
         [formControl]="control"
-        [class]="schema.class | class"
-        [style]="schema.style | style"
+        [class]="schema.class | reactive: model : schema : control | class"
+        [style]="schema.style | reactive: model : schema : control | style"
         [nzAutosize]="schema.autosize ?? {}"
         [placeholder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
         [rows]="schema.rows"

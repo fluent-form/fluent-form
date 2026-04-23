@@ -2,8 +2,8 @@
   <nz-tabs
     #component
     [fluentBinding]="{ component, schema, control, model }"
-    [class]="schema.class | class"
-    [style]="schema.style | style"
+    [class]="schema.class | reactive: model : schema : control | class"
+    [style]="schema.style | reactive: model : schema : control | style"
     [nzSelectedIndex]="schema.active!"
     [nzType]="schema.type ?? 'line'"
     [nzSize]="schema.size ?? 'default'"
@@ -14,8 +14,8 @@
       <nz-tab
         #component
         [fluentBinding]="{ component, schema, control, model }"
-        [class]="tabSchema.class | class"
-        [style]="tabSchema.style | style"
+        [class]="tabSchema.class | reactive: model : tabSchema : control | class"
+        [style]="tabSchema.style | reactive: model : tabSchema : control | style"
         [nzTitle]="tabSchema.title"
         [nzDisabled]="tabSchema.disabled | reactive: model : tabSchema : control"
         [hidden]="tabSchema.hidden | reactive: model : tabSchema : control">

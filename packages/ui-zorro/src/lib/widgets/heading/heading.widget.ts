@@ -6,6 +6,7 @@ import {
   ClassPipe,
   FluentBindingDirective,
   FluentContextGuardDirective,
+  FluentReactivePipe,
   FluentTemplateOutlet,
   FluentTemplatePipe,
   StylePipe,
@@ -28,7 +29,8 @@ type HeadingWidgetTemplateContext = WidgetTemplateContext<HeadingComponentSchema
     FluentTemplateOutlet,
     FluentTemplatePipe,
     ClassPipe,
-    StylePipe
+    StylePipe,
+    FluentReactivePipe
   ],
   templateUrl: './heading.widget.html',
   styleUrl: './heading.widget.scss',

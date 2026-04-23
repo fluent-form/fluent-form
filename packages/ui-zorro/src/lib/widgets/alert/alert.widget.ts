@@ -5,6 +5,7 @@ import {
   ClassPipe,
   FluentBindingDirective,
   FluentContextGuardDirective,
+  FluentReactivePipe,
   FluentTemplatePipe,
   InvokePipe,
   StylePipe,
@@ -27,7 +28,8 @@ type AlertWidgetTemplateContext = WidgetTemplateContext<AlertComponentSchema, Fo
     FluentTemplatePipe,
     InvokePipe,
     ClassPipe,
-    StylePipe
+    StylePipe,
+    FluentReactivePipe
   ],
   templateUrl: './alert.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

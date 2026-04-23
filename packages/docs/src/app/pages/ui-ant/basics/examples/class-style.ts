@@ -27,6 +27,7 @@ export class ClassStyleExampleComponent {
     textField('wrapper-style').label('Wrapper style').style({
       wrapper: { fontWeight: 'bold' }
     });
+    textField('dynamic').label('Dynamic style').style(({ control }) => ({ background: control.value ? 'green' : 'red' }));
   });
 
   readonly model = signal({});

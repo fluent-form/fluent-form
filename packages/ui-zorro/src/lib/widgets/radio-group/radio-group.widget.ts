@@ -1,6 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { AbstractWidget, ClassPipe, FluentBindingDirective, FluentContextGuardDirective, StylePipe, WidgetTemplateContext } from '@fluent-form/core';
+import {
+  AbstractWidget,
+  ClassPipe,
+  FluentBindingDirective,
+  FluentContextGuardDirective,
+  FluentReactivePipe,
+  StylePipe,
+  WidgetTemplateContext
+} from '@fluent-form/core';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { RadioGroupControlSchema } from '../../schemas';
 
@@ -16,7 +24,8 @@ type RadioGroupWidgetTemplateContext = WidgetTemplateContext<RadioGroupControlSc
     FluentBindingDirective,
     FluentContextGuardDirective,
     ClassPipe,
-    StylePipe
+    StylePipe,
+    FluentReactivePipe
   ],
   templateUrl: './radio-group.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

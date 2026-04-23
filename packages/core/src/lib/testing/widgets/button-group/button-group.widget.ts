@@ -8,6 +8,7 @@ import {
   FluentBindingDirective,
   FluentContextGuardDirective,
   FluentControlPipe,
+  FluentReactivePipe,
   FluentWidgetTemplatePipe,
   FluentWithInjectorDirective,
   StylePipe,
@@ -30,7 +31,8 @@ type ButtonGroupWidgetTemplateContext = WidgetTemplateContext<ButtonGroupCompone
     FluentControlPipe,
     FluentWidgetTemplatePipe,
     ClassPipe,
-    StylePipe
+    StylePipe,
+    FluentReactivePipe
   ],
   templateUrl: './button-group.widget.html',
   changeDetection: ChangeDetectionStrategy.OnPush

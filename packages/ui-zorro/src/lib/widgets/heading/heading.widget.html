@@ -4,8 +4,8 @@
       <h1
         nz-typography
         [fluentBinding]="{ schema, control, model }"
-        [class]="schema.class | class"
-        [style]="schema.style | style">
+        [class]="schema.class | reactive: model : schema : control | class"
+        [style]="schema.style | reactive: model : schema : control | style">
         <ng-container [ngTemplateOutlet]="headingContentTemplate" />
       </h1>
     }
@@ -13,8 +13,8 @@
       <h2
         nz-typography
         [fluentBinding]="{ schema, control, model }"
-        [class]="schema.class | class"
-        [style]="schema.style | style">
+        [class]="schema.class | reactive: model : schema : control | class"
+        [style]="schema.style | reactive: model : schema : control | style">
         <ng-container [ngTemplateOutlet]="headingContentTemplate" />
       </h2>
     }
@@ -22,8 +22,8 @@
       <h3
         nz-typography
         [fluentBinding]="{ schema, control, model }"
-        [class]="schema.class | class"
-        [style]="schema.style | style">
+        [class]="schema.class | reactive: model : schema : control | class"
+        [style]="schema.style | reactive: model : schema : control | style">
         <ng-container [ngTemplateOutlet]="headingContentTemplate" />
       </h3>
     }
@@ -31,8 +31,8 @@
       <h4
         nz-typography
         [fluentBinding]="{ schema, control, model }"
-        [class]="schema.class | class"
-        [style]="schema.style | style">
+        [class]="schema.class | reactive: model : schema : control | class"
+        [style]="schema.style | reactive: model : schema : control | style">
         <ng-container [ngTemplateOutlet]="headingContentTemplate" />
       </h4>
     }
@@ -40,8 +40,8 @@
       <h5
         nz-typography
         [fluentBinding]="{ schema, control, model }"
-        [class]="schema.class | class"
-        [style]="schema.style | style">
+        [class]="schema.class | reactive: model : schema : control | class"
+        [style]="schema.style | reactive: model : schema : control | style">
         <ng-container [ngTemplateOutlet]="headingContentTemplate" />
       </h5>
     }
@@ -49,8 +49,8 @@
       <h6
         nz-typography
         [fluentBinding]="{ schema, control, model }"
-        [class]="schema.class | class"
-        [style]="schema.style | style">
+        [class]="schema.class | reactive: model : schema : control | class"
+        [style]="schema.style | reactive: model : schema : control | style">
         <ng-container [ngTemplateOutlet]="headingContentTemplate" />
       </h6>
     }

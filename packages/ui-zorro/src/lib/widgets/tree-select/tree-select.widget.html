@@ -1,43 +1,16 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  @if (ControlWrapperDirective | inject: { optional: true }) {
-    @if (!(schema.hidden | reactive: model : schema : control)) {
-      <nz-tree-select
-        #component
-        fluentCol
-        [fluentBinding]="{ component, schema, control, model }"
-        [formControl]="control"
-        [class]="schema.class | reactive: model : schema : control | class"
-        [style]="schema.style | reactive: model : schema : control | style"
-        [span]="schema.col | col: 'span'"
-        [flex]="schema.col | col: 'flex'"
-        [offset]="schema.col | col: 'offset'"
-        [nzId]="schema.id!"
-        [nzAllowClear]="schema.clearable ?? true"
-        [nzBackdrop]="schema.backdrop!"
-        [nzShowIcon]="schema.icon"
-        [nzShowSearch]="schema.searchable"
-        [nzSize]="schema.size!"
-        [nzStatus]="(control | status)()"
-        [nzCheckable]="helper.checkable | invoke: schema.checkable"
-        [nzCheckStrictly]="helper.checkStrictly | invoke: schema.checkable"
-        [nzShowExpand]="helper.showExpand | invoke: schema.expandIcon"
-        [nzExpandedIcon]="helper.expandedIcon | invoke: schema.expandIcon"
-        [nzShowLine]="schema.line"
-        [nzAsyncData]="schema.async"
-        [nzNodes]="schema.options | reactive: model : schema : control"
-        [nzPlaceHolder]="(schema.placeholder | reactive: model : schema : control)!"
-        [nzDefaultExpandAll]="schema.expandAll"
-        [nzExpandedKeys]="schema.expandedKeys!"
-        [nzMultiple]="schema.multiple"
-        [nzVariant]="schema.variant ?? 'outlined'" />
-    }
-  } @else {
+  @let hasControlWrapper = ControlWrapperDirective | inject: { optional: true };
+  @if (!(schema.hidden | reactive: model : schema : control)) {
     <nz-tree-select
       #component
+      [fluentCol]="hasControlWrapper"
       [fluentBinding]="{ component, schema, control, model }"
       [formControl]="control"
       [class]="schema.class | reactive: model : schema : control | class"
       [style]="schema.style | reactive: model : schema : control | style"
+      [span]="schema.col | col: 'span'"
+      [flex]="schema.col | col: 'flex'"
+      [offset]="schema.col | col: 'offset'"
       [nzId]="schema.id!"
       [nzAllowClear]="schema.clearable ?? true"
       [nzBackdrop]="schema.backdrop!"

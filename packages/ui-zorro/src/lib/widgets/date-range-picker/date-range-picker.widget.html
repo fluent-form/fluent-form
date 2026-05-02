@@ -1,41 +1,16 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  @if (ControlWrapperDirective | inject: { optional: true }) {
-    @if (!(schema.hidden | reactive: model : schema : control)) {
-      <nz-range-picker
-        #component
-        fluentCol
-        [fluentBinding]="{ component, schema, control, model }"
-        [formControl]="control"
-        [class]="schema.class | reactive: model : schema : control | class"
-        [style]="schema.style | reactive: model : schema : control | style"
-        [span]="schema.col | col: 'span'"
-        [flex]="schema.col | col: 'flex'"
-        [offset]="schema.col | col: 'offset'"
-        [nzAllowClear]="schema.clearable"
-        [nzFormat]="schema.format!"
-        [nzId]="schema.id!"
-        [nzMode]="schema.mode!"
-        [nzPlaceHolder]="(schema.placeholder | reactive: model : schema : control)!"
-        [nzShowTime]="schema.time"
-        [nzShowTime]="schema.time"
-        [nzPlacement]="schema.placement ?? 'bottomLeft'"
-        [nzSuffixIcon]="schema.suffixIcon | template: 'calendar'"
-        [nzAutoFocus]="schema.autofocus"
-        [nzInputReadOnly]="schema.readonly | reactive: model : schema : control"
-        [nzSize]="schema.size!"
-        [nzVariant]="schema.variant ?? 'outlined'"
-        [nzShowToday]="schema.today ?? true"
-        [nzShowNow]="schema.now ?? true"
-        [nzSeparator]="schema.separator"
-        [nzStatus]="(control | status)()" />
-    }
-  } @else {
+  @let hasControlWrapper = ControlWrapperDirective | inject: { optional: true };
+  @if (!(schema.hidden | reactive: model : schema : control)) {
     <nz-range-picker
       #component
+      [fluentCol]="hasControlWrapper"
       [fluentBinding]="{ component, schema, control, model }"
       [formControl]="control"
       [class]="schema.class | reactive: model : schema : control | class"
       [style]="schema.style | reactive: model : schema : control | style"
+      [span]="schema.col | col: 'span'"
+      [flex]="schema.col | col: 'flex'"
+      [offset]="schema.col | col: 'offset'"
       [nzAllowClear]="schema.clearable"
       [nzFormat]="schema.format!"
       [nzId]="schema.id!"

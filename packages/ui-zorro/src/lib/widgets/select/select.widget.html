@@ -1,55 +1,17 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
   @let ctx = ctxClass | new: schema : control;
-  @if (ControlWrapperDirective | inject: { optional: true }) {
-    @if (!(schema.hidden | reactive: model : schema : control)) {
-      <nz-select
-        #component
-        fluentCol
-        [fluentBinding]="{ component, schema, control, model }"
-        [formControl]="control"
-        [class]="schema.class | reactive: model : schema : control | class"
-        [style]="schema.style | reactive: model : schema : control | style"
-        [span]="schema.col | col: 'span'"
-        [flex]="schema.col | col: 'flex'"
-        [offset]="schema.col | col: 'offset'"
-        [compareWith]="schema.compareWith ?? compareWith"
-        [nzId]="schema.id!"
-        [nzAllowClear]="schema.clearable"
-        [nzMaxMultipleCount]="schema.length?.max ?? infinity"
-        [nzMode]="schema.mode ?? 'default'"
-        [nzPlaceHolder]="(schema.placeholder | reactive: model : schema : control)!"
-        [nzShowSearch]="schema.searchable || !!schema.fetchOptions"
-        [nzBackdrop]="schema.backdrop!"
-        [nzVariant]="schema.variant ?? 'outlined'"
-        [nzAutoFocus]="schema.autofocus"
-        [nzShowArrow]="(schema.arrow ?? !schema.mode) || schema.mode === 'default'"
-        [nzSize]="schema.size!"
-        [nzStatus]="(control | status)()"
-        [nzSuffixIcon]="(schema.suffixIcon | template)!"
-        [nzLoading]="ctx.loading"
-        [nzServerSearch]="helper.serverSearchable | invoke: schema"
-        (nzOpenChange)="ctx.open = $event"
-        (nzOnSearch)="ctx.trigger($event)">
-        @for (option of ctx.options | reactive: model : schema : control; track option.value) {
-          <nz-option
-            [nzCustomContent]="!!schema.option"
-            [nzDisabled]="option.disabled"
-            [nzLabel]="$any(option.label)"
-            [nzValue]="option.value">
-            <ng-template
-              [fluentTemplateOutlet]="schema.option | template"
-              [fluentTemplateOutletContext]="{ $implicit: option }" />
-          </nz-option>
-        }
-      </nz-select>
-    }
-  } @else {
+  @let hasControlWrapper = ControlWrapperDirective | inject: { optional: true };
+  @if (!(schema.hidden | reactive: model : schema : control)) {
     <nz-select
       #component
+      [fluentCol]="hasControlWrapper"
       [fluentBinding]="{ component, schema, control, model }"
       [formControl]="control"
       [class]="schema.class | reactive: model : schema : control | class"
       [style]="schema.style | reactive: model : schema : control | style"
+      [span]="schema.col | col: 'span'"
+      [flex]="schema.col | col: 'flex'"
+      [offset]="schema.col | col: 'offset'"
       [compareWith]="schema.compareWith ?? compareWith"
       [nzId]="schema.id!"
       [nzAllowClear]="schema.clearable"

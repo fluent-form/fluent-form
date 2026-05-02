@@ -4,12 +4,13 @@ import { FluentColDirective } from './col.component';
 
 @Component({
   imports: [FluentColDirective],
-  template: `<fluent-col [span]="span" [flex]="flex" [offset]="offset" />`
+  template: `<fluent-col [fluentCol]="enabled" [span]="span" [flex]="flex" [offset]="offset" />`
 })
 class TestComponent {
   @ViewChild(FluentColDirective, { read: ElementRef, static: true })
   colElementRef!: ElementRef<HTMLElement>;
 
+  enabled = true;
   span: ReturnType<FluentColDirective['span']>;
   flex: ReturnType<FluentColDirective['flex']>;
   offset: ReturnType<FluentColDirective['offset']>;
@@ -31,6 +32,12 @@ describe('FluentColComponent', () => {
 
   it('should have default class', () => {
     expect(component.colElementRef.nativeElement.classList.contains('fluent-column')).toBe(true);
+  });
+
+  it('should be able to disable the column', () => {
+    component.enabled = false;
+    fixture.detectChanges();
+    expect(component.colElementRef.nativeElement.classList.contains('fluent-column')).toBe(false);
   });
 
   it('should be able parse the span', () => {

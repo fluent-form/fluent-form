@@ -1,47 +1,20 @@
 <ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
-  @if (ControlWrapperDirective | inject: { optional: true }) {
-    @if (!(schema.hidden | reactive: model : schema : control)) {
-      <nz-cascader
-        #component
-        fluentCol
-        [fluentBinding]="{ component, schema, control, model }"
-        [formControl]="control"
-        [class]="schema.class | reactive: model : schema : control | class"
-        [style]="schema.style | reactive: model : schema : control | style"
-        [span]="schema.col | col: 'span'"
-        [flex]="schema.col | col: 'flex'"
-        [offset]="schema.col | col: 'offset'"
-        [nzAllowClear]="schema.clearable ?? true"
-        [nzAutoFocus]="schema.autofocus"
-        [nzChangeOnSelect]="schema.changeOnSelect"
-        [nzBackdrop]="schema.backdrop!"
-        [nzExpandIcon]="schema.expandIcon | template: ''"
-        [nzExpandTrigger]="schema.trigger!"
-        [nzLoadData]="fetchOptions | invoke: model : schema : control"
-        [nzOptions]="schema.options! | reactive: model : schema : control"
-        [nzPlaceHolder]="(schema.placeholder | reactive: model : schema : control) ?? ''"
-        [nzShowArrow]="schema.arrow ?? true"
-        [nzShowSearch]="schema.searchable!"
-        [nzSize]="schema.size!"
-        [nzStatus]="(control | status)()"
-        [nzSuffixIcon]="schema.suffixIcon | template: 'down'"
-        [nzPlacement]="schema.placement ?? 'bottomLeft'"
-        [nzMultiple]="schema.mode === 'multiple'"
-        [nzVariant]="schema.variant ?? 'outlined'"
-        [nzDisplayWith]="schema.displayWith ?? displayWith"
-        [nzLabelRender]="$any(schema.display | template: null)" />
-    }
-  } @else {
+  @let hasControlWrapper = ControlWrapperDirective | inject: { optional: true };
+  @if (!(schema.hidden | reactive: model : schema : control)) {
     <nz-cascader
       #component
+      [fluentCol]="hasControlWrapper"
       [fluentBinding]="{ component, schema, control, model }"
       [formControl]="control"
       [class]="schema.class | reactive: model : schema : control | class"
       [style]="schema.style | reactive: model : schema : control | style"
+      [span]="schema.col | col: 'span'"
+      [flex]="schema.col | col: 'flex'"
+      [offset]="schema.col | col: 'offset'"
       [nzAllowClear]="schema.clearable ?? true"
       [nzAutoFocus]="schema.autofocus"
-      [nzBackdrop]="schema.backdrop!"
       [nzChangeOnSelect]="schema.changeOnSelect"
+      [nzBackdrop]="schema.backdrop!"
       [nzExpandIcon]="schema.expandIcon | template: ''"
       [nzExpandTrigger]="schema.trigger!"
       [nzLoadData]="fetchOptions | invoke: model : schema : control"

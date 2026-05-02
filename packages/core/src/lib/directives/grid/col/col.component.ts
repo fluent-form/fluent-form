@@ -1,5 +1,5 @@
 import { _CdkPrivateStyleLoader } from '@angular/cdk/private';
-import { ChangeDetectionStrategy, Component, Directive, ViewEncapsulation, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive, ViewEncapsulation, booleanAttribute, computed, inject, input } from '@angular/core';
 import { Breakpoints, createBreakpointInfix } from '../../../breakpoints';
 import type { Stringify } from '../../../types';
 import { isObject } from '../../../utils';
@@ -20,13 +20,13 @@ class FluentColComponent { }
 @Directive({
   selector: 'fluent-col,[fluentCol]',
   host: {
-    class: 'fluent-column',
-    '[class]': 'classes()',
-    '[style.flex]': 'flex()'
+    '[class]': 'fluentCol() ? classes() : null',
+    '[style.flex]': 'fluentCol() ? flex() : null'
   },
   exportAs: 'fluentCol'
 })
 export class FluentColDirective {
+  readonly fluentCol = input(true, { transform: booleanAttribute });
   readonly span = input<Span | Stringify<Span> | Partial<Record<keyof Breakpoints, Span>>>();
   readonly flex = input<string | number | null>();
   readonly offset = input<Offset | Stringify<Offset> | Partial<Record<keyof Breakpoints, Offset>>>();
@@ -34,7 +34,7 @@ export class FluentColDirective {
   protected readonly classes = computed(() => {
     const span = this.span();
     const offset = this.offset();
-    const classes: string[] = [];
+    const classes = ['fluent-column'];
 
     if (span) {
       if (isObject(span)) {

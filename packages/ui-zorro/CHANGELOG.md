@@ -1,3 +1,13 @@
+## 0.30.4 (2026-05-15)
+
+### 🚀 Features
+
+- **ui-zorro/select:** add filter option support ([00649153](https://github.com/fluent-form/fluent-form/commit/00649153))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.30.3 (2026-04-23)
 
 ### 🚀 Features

@@ -32,7 +32,7 @@ import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
 import { NzRadioButtonStyle, NzRadioGroupComponent } from 'ng-zorro-antd/radio';
 import { NzRateComponent } from 'ng-zorro-antd/rate';
 import { NzSegmentedComponent, NzSegmentedOptions } from 'ng-zorro-antd/segmented';
-import { NzSelectComponent, NzSelectModeType, NzSelectOptionInterface, NzSelectSizeType } from 'ng-zorro-antd/select';
+import { NzFilterOptionType, NzSelectComponent, NzSelectModeType, NzSelectOptionInterface, NzSelectSizeType } from 'ng-zorro-antd/select';
 import { NzSliderComponent } from 'ng-zorro-antd/slider';
 import { NzSwitchComponent } from 'ng-zorro-antd/switch';
 import { NzTimePickerComponent } from 'ng-zorro-antd/time-picker';
@@ -253,6 +253,7 @@ export interface SelectControlSchema<Key extends SingleSchemaKey = SingleSchemaK
   options?: MaybeSchemaReactiveFn<SelectControlSchema<SingleSchemaKey, Val>, NzSelectOptionInterface[]>;
   fetchOptions?: (keyword$: Observable<string>, ctx: SchemaContext<SelectControlSchema<SingleSchemaKey, Val>>) => Observable<NzSelectOptionInterface[]>;
   compareWith?: (a: SafeAny, b: SafeAny) => boolean;
+  filter?: NzFilterOptionType;
 }
 
 /**

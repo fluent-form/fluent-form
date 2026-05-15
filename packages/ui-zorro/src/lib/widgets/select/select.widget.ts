@@ -18,12 +18,20 @@ import {
   WidgetTemplateContext
 } from '@fluent-form/core';
 import { SafeAny } from '@ngify/core';
-import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzFilterOptionType, NzSelectItemInterface, NzSelectModule } from 'ng-zorro-antd/select';
 import { filter, Subject, tap } from 'rxjs';
 import { StatusPipe } from '../../pipes';
 import { SelectControlSchema } from '../../schemas';
 
 type SelectWidgetTemplateContext = WidgetTemplateContext<SelectControlSchema, FormControl>;
+
+const defaultFilterOption: NzFilterOptionType = (searchValue: string, item: NzSelectItemInterface): boolean => {
+  if (item && item.nzLabel) {
+    return item.nzLabel.toString().toLowerCase().includes(searchValue.toLowerCase());
+  } else {
+    return false;
+  }
+};
 
 /**
  * @internal
@@ -65,6 +73,7 @@ export default class SelectWidget extends AbstractWidget<SelectWidgetTemplateCon
   };
 
   protected readonly ctxClass = SelectWidgetTemplatePrivateContext;
+  readonly defaultFilter = defaultFilterOption;
 }
 
 export class SelectWidgetTemplatePrivateContext {

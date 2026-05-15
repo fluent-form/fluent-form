@@ -28,6 +28,7 @@
       [nzSuffixIcon]="(schema.suffixIcon | template)!"
       [nzLoading]="ctx.loading"
       [nzServerSearch]="helper.serverSearchable | invoke: schema"
+      [nzFilterOption]="schema.filter ?? defaultFilter"
       (nzOpenChange)="ctx.open = $event"
       (nzOnSearch)="ctx.trigger($event)">
       @for (option of ctx.options | reactive: model : schema : control; track option.value) {

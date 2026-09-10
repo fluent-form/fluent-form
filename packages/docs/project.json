@@ -9,7 +9,8 @@
     "build": {
       "executor": "@ng-doc/builder:application",
       "outputs": [
-        "{options.outputPath}"
+        "{options.outputPath}",
+        "{workspaceRoot}/ng-doc/docs"
       ],
       "options": {
         "outputPath": "dist/docs",
@@ -102,6 +103,9 @@
     },
     "test": {
       "executor": "@nx/angular:unit-test",
+      "dependsOn": [
+        "build"
+      ],
       "outputs": [
         "{workspaceRoot}/coverage/docs"
       ],

@@ -1,5 +1,5 @@
 import { MediaMatcher } from '@angular/cdk/layout';
-import { Component, ElementRef, Injectable, ViewChild } from '@angular/core';
+import { Component, signal, ElementRef, Injectable, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SafeAny } from '@ngify/core';
 import { Breakpoints } from '../../../breakpoints';
@@ -7,27 +7,27 @@ import { FluentRowDirective } from './row.component';
 
 @Component({
   imports: [FluentRowDirective],
-  template: `<fluent-row [gap]="gap" [justify]="justify" [align]="align" />`
+  template: `<fluent-row [gap]="gap()" [justify]="justify()" [align]="align()" />`
 })
 class TestComponent {
   @ViewChild(FluentRowDirective, { static: true }) rowComponent!: FluentRowDirective;
   @ViewChild(FluentRowDirective, { read: ElementRef, static: true }) rowElementRef!: ElementRef<HTMLElement>;
-  gap: ReturnType<FluentRowDirective['gap']> = 0;
-  justify: ReturnType<FluentRowDirective['justify']>;
-  align: ReturnType<FluentRowDirective['align']>;
+  readonly gap = signal<ReturnType<FluentRowDirective['gap']>>(0);
+  readonly justify = signal<ReturnType<FluentRowDirective['justify']>>(undefined);
+  readonly align = signal<ReturnType<FluentRowDirective['align']>>(undefined);
 }
 
 describe('FluentRowComponent', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
       providers: [{ provide: MediaMatcher, useClass: FakeMediaMatcher }]
     });
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    await fixture.whenStable();
   });
 
   it('should create', () => {
@@ -38,55 +38,55 @@ describe('FluentRowComponent', () => {
     expect(component.rowElementRef.nativeElement.classList.contains('fluent-row')).toBe(true);
   });
 
-  it('should be able to parse the level to gap value', () => {
-    component.gap = null;
-    fixture.detectChanges();
+  it('should be able to parse the level to gap value', async () => {
+    component.gap.set(null);
+    await fixture.whenStable();
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-x')).toEqual('0px');
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-y')).toEqual('0px');
 
-    component.gap = [1, 2];
-    fixture.detectChanges();
+    component.gap.set([1, 2]);
+    await fixture.whenStable();
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-x')).toEqual('4px');
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-y')).toEqual('8px');
 
-    component.gap = [3, 4];
-    fixture.detectChanges();
+    component.gap.set([3, 4]);
+    await fixture.whenStable();
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-x')).toEqual('16px');
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-y')).toEqual('24px');
 
-    component.gap = [5, 6];
-    fixture.detectChanges();
+    component.gap.set([5, 6]);
+    await fixture.whenStable();
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-x')).toEqual('32px');
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-y')).toEqual('48px');
 
-    component.gap = 1;
-    fixture.detectChanges();
+    component.gap.set(1);
+    await fixture.whenStable();
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-x')).toEqual('4px');
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-y')).toEqual('0px');
 
-    component.gap = { xl: 2 };
-    fixture.detectChanges();
+    component.gap.set({ xl: 2 });
+    await fixture.whenStable();
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-x')).toEqual('8px');
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-y')).toEqual('0px');
 
-    component.gap = { xl: [1, 1] };
-    fixture.detectChanges();
+    component.gap.set({ xl: [1, 1] });
+    await fixture.whenStable();
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-x')).toEqual('4px');
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-y')).toEqual('4px');
 
-    component.gap = { xxl: 1 };
-    fixture.detectChanges();
+    component.gap.set({ xxl: 1 });
+    await fixture.whenStable();
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-x')).toEqual('0px');
     expect(component.rowElementRef.nativeElement.style.getPropertyValue('--gap-y')).toEqual('0px');
   });
 
-  it('should be able to parse the align and justify', () => {
-    component.align = 'start';
-    fixture.detectChanges();
+  it('should be able to parse the align and justify', async () => {
+    component.align.set('start');
+    await fixture.whenStable();
     expect(component.rowElementRef.nativeElement.style.alignItems).toEqual('flex-start');
 
-    component.justify = 'end';
-    fixture.detectChanges();
+    component.justify.set('end');
+    await fixture.whenStable();
     expect(component.rowElementRef.nativeElement.style.justifyContent).toEqual('flex-end');
   });
 });

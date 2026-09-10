@@ -29,7 +29,7 @@ import { NzFormStatusService } from 'ng-zorro-antd/core/form';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
 import { lengthHelper, tooltipHelper } from '../../helper';
 import { AddableButton, TableArraySchema } from '../../schemas';
 
@@ -64,7 +64,7 @@ export class OverrideProvidersDirective { }
     NzButtonModule,
     NzIconModule,
     NzFormModule,
-    NzToolTipModule,
+    NzTooltipModule,
     CdkDrag,
     CdkDropList,
     FluentGridModule,

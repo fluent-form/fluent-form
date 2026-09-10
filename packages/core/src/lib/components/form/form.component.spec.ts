@@ -1,4 +1,4 @@
-import { Component, Signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -15,8 +15,8 @@ import { FluentFormComponent } from './form.component';
 })
 class TestComponent {
   form!: FormGroup;
-  schema!: Signal<AbstractFormGroupSchema>;
-  model: SafeAny;
+  readonly schema = signal<AbstractFormGroupSchema>(form([]));
+  readonly model = signal<SafeAny>({});
 }
 
 describe('FluentFormComponent', () => {
@@ -43,83 +43,83 @@ describe('FluentFormComponent', () => {
   });
 
   describe('模型应该能正确赋值表单', () => {
-    it('先设置 schema，后设置 model', () => {
-      component.schema = form(() => textField('text'));
-      component.model = { text: 'test' };
-      fixture.detectChanges();
+    it('先设置 schema，后设置 model', async () => {
+      component.schema.set(form(() => textField('text'))());
+      component.model.set({ text: 'test' });
+      await fixture.whenStable();
 
       expect(component.form.value).toEqual({ text: 'test' });
     });
 
-    it('先设置 model，后设置 schema', () => {
-      component.model = { text: 'test' };
-      component.schema = form(() => textField('text'));
-      fixture.detectChanges();
+    it('先设置 model，后设置 schema', async () => {
+      component.model.set({ text: 'test' });
+      component.schema.set(form(() => textField('text'))());
+      await fixture.whenStable();
 
       expect(component.form.value).toEqual({ text: 'test' });
     });
 
-    it('多次设置 model', () => {
-      component.schema = form(() => textField('text'));
-      component.model = { text: 'test' };
-      fixture.detectChanges();
+    it('多次设置 model', async () => {
+      component.schema.set(form(() => textField('text'))());
+      component.model.set({ text: 'test' });
+      await fixture.whenStable();
 
       expect(component.form.value).toEqual({ text: 'test' });
 
-      component.model = { text: 'test change' };
-      fixture.detectChanges();
+      component.model.set({ text: 'test change' });
+      await fixture.whenStable();
 
       expect(component.form.value).toEqual({ text: 'test change' });
     });
   });
 
   describe('表单应该能正确赋值模型', () => {
-    it('先设置 schema，后设置 model', () => {
-      component.schema = form(() => {
+    it('先设置 schema，后设置 model', async () => {
+      component.schema.set(form(() => {
         textField('text').col(1).defaultValue('test');
-      });
-      component.model = {};
-      fixture.detectChanges();
+      })());
+      component.model.set({});
+      await fixture.whenStable();
 
-      expect(component.model).toEqual({ text: 'test' });
+      expect(component.model()).toEqual({ text: 'test' });
     });
 
-    it('先设置 model，后设置 schema', () => {
-      component.model = {};
-      component.schema = form(() => {
+    it('先设置 model，后设置 schema', async () => {
+      component.model.set({});
+      component.schema.set(form(() => {
         textField('text').col(1).defaultValue('test');
-      });
-      fixture.detectChanges();
+      })());
+      await fixture.whenStable();
 
-      expect(component.model).toEqual({ text: 'test' });
+      expect(component.model()).toEqual({ text: 'test' });
     });
 
-    it('多次设置 schema', () => {
-      component.model = {};
-      component.schema = form(() => {
+    it('多次设置 schema', async () => {
+      component.model.set({});
+      component.schema.set(form(() => {
         textField('text').col(1).defaultValue('test');
-      });
-      fixture.detectChanges();
+      })());
+      await fixture.whenStable();
 
-      expect(component.model).toEqual({ text: 'test' });
+      expect(component.model()).toEqual({ text: 'test' });
 
-      component.schema = form(() => {
+      component.schema.set(form(() => {
         textField('text').col(1).defaultValue('test change');
-      });
-      fixture.detectChanges();
+      })());
+      await fixture.whenStable();
 
-      expect(component.model).toEqual({ text: 'test' });
+      expect(component.model()).toEqual({ text: 'test' });
     });
   });
 
-  it('应该能正确处理控件的 disabled 选项', () => {
-    component.schema = form(() => {
+  it('应该能正确处理控件的 disabled 选项', async () => {
+    component.schema.set(form(() => {
       textField('a').disabled('{{true}}' as SafeAny);
       textField('b').disabled(() => true);
       textField('c').disabled(true);
-    });
-    component.model = {};
-    fixture.detectChanges();
+    })());
+    component.model.set({});
+    await fixture.whenStable();
 
     expect(component.form.get('a')!.disabled).toEqual(true);
     expect(component.form.get('b')!.disabled).toEqual(true);

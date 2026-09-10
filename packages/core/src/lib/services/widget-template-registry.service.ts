@@ -1,4 +1,4 @@
-import { createComponent, EnvironmentInjector, inject, Injectable, TemplateRef } from '@angular/core';
+import { createComponent, EnvironmentInjector, inject, Injectable, PendingTasks, TemplateRef } from '@angular/core';
 import { throwWidgetNotFoundError } from '../errors';
 import { WIDGET_MAP } from '../tokens';
 
@@ -8,6 +8,7 @@ declare const ngDevMode: boolean | undefined;
 export class WidgetTemplateRegistry extends Map<string, Promise<TemplateRef<unknown>>> {
   private readonly envInjector = inject(EnvironmentInjector);
   private readonly widgetMap = inject(WIDGET_MAP);
+  private readonly pendingTasks = inject(PendingTasks);
 
   override get(kind: string): Promise<TemplateRef<unknown>> {
     return super.get(kind) ?? this.register(kind);
@@ -20,12 +21,18 @@ export class WidgetTemplateRegistry extends Map<string, Promise<TemplateRef<unkn
       throwWidgetNotFoundError(kind);
     }
 
-    const tmpl = component!().then(comp => {
-      const { instance } = createComponent(comp, {
-        environmentInjector: this.envInjector
-      });
-      return instance.templateRef;
-    });
+    const completeTask = this.pendingTasks.add();
+    const tmpl = (async () => {
+      try {
+        const comp = await component!();
+        const { instance } = createComponent(comp, {
+          environmentInjector: this.envInjector
+        });
+        return instance.templateRef;
+      } finally {
+        completeTask();
+      }
+    })();
 
     this.set(kind, tmpl);
     return tmpl;

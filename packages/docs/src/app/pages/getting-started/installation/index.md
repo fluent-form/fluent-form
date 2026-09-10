@@ -14,16 +14,16 @@ ng add @fluent-form/core
 
 | Angular | FluentForm |
 | ------- | ---------- |
-| v21.x   | >=0.30.x   |
+| v22.x   | >=0.31.x   |
+| v21.x   | >=0.31.x   |
 | v20.x   | >=0.30.x   |
-| v19.x   | >=0.29.x   |
 
 ### Unsupported versions
 
 此表格涵盖不再受长期支持 (LTS) 的 FluentForm 版本。这些信息在每个版本退出 LTS 时都是正确的，但不提供任何进一步的保证。此处列出的信息仅供历史参考。
 
-| Angular | FluentForm  |
-| ------- | ----------- |
-| v18.x   | ^0.28.x     |
-| v17.x   | ^0.26.x     |
-| v16.x   | Unsupported |
+| Angular | FluentForm |
+| ------- | ---------- |
+| v19.x   | ^0.29.x    |
+| v18.x   | ^0.28.x    |
+| v17.x   | ^0.26.x    |

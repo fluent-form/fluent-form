@@ -36,8 +36,8 @@
     "@ngify/core": "^2.0.0"
   },
   "peerDependencies": {
-    "@angular/forms": ">=19.0.0",
-    "@angular/cdk": ">=19.0.0",
-    "@angular/core": ">=19.0.0"
+    "@angular/forms": ">=21.0.0",
+    "@angular/cdk": ">=21.0.0",
+    "@angular/core": ">=21.0.0"
   }
 }

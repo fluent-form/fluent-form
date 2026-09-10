@@ -1,4 +1,4 @@
-import { Component, Signal, ViewChild } from '@angular/core';
+import { Component, signal, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { AnyObject } from '@ngify/core';
@@ -24,8 +24,8 @@ import { FluentFormRenderModule } from './module';
 class TestComponent {
   @ViewChild(FluentFormDirective, { static: true }) fluentFormDirective!: FluentFormDirective<AnyObject>;
   form!: FormGroup;
-  schema!: Signal<AbstractFormGroupSchema>;
-  model!: AnyObject;
+  readonly schema = signal<AbstractFormGroupSchema>(form([]));
+  readonly model = signal<AnyObject>({});
 }
 
 describe('FluentFormDirective', () => {
@@ -49,8 +49,8 @@ describe('FluentFormDirective', () => {
     expect(component.fluentFormDirective.onSubmit({} as SubmitEvent)).toBe(false);
   });
 
-  it('should be the expected model value', () => {
-    component.schema = form(() => {
+  it('should be the expected model value', async () => {
+    component.schema.set(form(() => {
       textField('ipt');
       fieldGroup('ipts').schemas(() => {
         textField('ipt2');
@@ -64,11 +64,11 @@ describe('FluentFormDirective', () => {
       array('array').schemas(() => {
         textField();
       });
-    });
-    component.model = {};
-    fixture.detectChanges();
+    })());
+    component.model.set({});
+    await fixture.whenStable();
 
-    expect(component.model).toEqual({
+    expect(component.model()).toEqual({
       ipt: null,
       ipt2: null,
       group: {
@@ -80,8 +80,8 @@ describe('FluentFormDirective', () => {
   });
 
   describe('模型应该能正确赋值表单', () => {
-    it('先设置 schema，后设置 model', () => {
-      component.schema = form(() => {
+    it('先设置 schema，后设置 model', async () => {
+      component.schema.set(form(() => {
         textField('ipt');
         fieldGroup('ipts').schemas(() => {
           textField('ipt2');
@@ -95,16 +95,16 @@ describe('FluentFormDirective', () => {
         array('array').schemas(() => {
           textField();
         });
-      });
-      component.model = {
+      })());
+      component.model.set({
         ipt: 'test',
         ipt2: 'test',
         group: { ipt: 'test', ipt2: 'test' },
         array: ['test']
-      };
-      fixture.detectChanges();
+      });
+      await fixture.whenStable();
 
-      expect(component.model).toEqual({
+      expect(component.model()).toEqual({
         ipt: 'test',
         ipt2: 'test',
         group: {
@@ -115,14 +115,14 @@ describe('FluentFormDirective', () => {
       });
     });
 
-    it('先设置 model，后设置 schema', () => {
-      component.model = {
+    it('先设置 model，后设置 schema', async () => {
+      component.model.set({
         ipt: 'test',
         ipt2: 'test',
         group: { ipt: 'test', ipt2: 'test' },
         array: ['test']
-      };
-      component.schema = form(() => {
+      });
+      component.schema.set(form(() => {
         textField('ipt');
         fieldGroup('ipts').schemas(() => {
           textField('ipt2');
@@ -136,8 +136,8 @@ describe('FluentFormDirective', () => {
         array('array').schemas(() => {
           textField();
         });
-      });
-      fixture.detectChanges();
+      })());
+      await fixture.whenStable();
 
       expect(component.form.value).toEqual({
         ipt: 'test',
@@ -150,8 +150,8 @@ describe('FluentFormDirective', () => {
       });
     });
 
-    it('多次设置 model', () => {
-      component.schema = form(() => {
+    it('多次设置 model', async () => {
+      component.schema.set(form(() => {
         textField('ipt');
         fieldGroup('ipts').schemas(() => {
           textField('ipt2');
@@ -165,9 +165,9 @@ describe('FluentFormDirective', () => {
         array('array').schemas(() => {
           textField();
         });
-      });
-      component.model = { ipt: 'test' };
-      fixture.detectChanges();
+      })());
+      component.model.set({ ipt: 'test' });
+      await fixture.whenStable();
 
       expect(component.form.value).toEqual({
         ipt: 'test',
@@ -179,8 +179,8 @@ describe('FluentFormDirective', () => {
         array: []
       });
 
-      component.model = { ipt: 'test change' };
-      fixture.detectChanges();
+      component.model.set({ ipt: 'test change' });
+      await fixture.whenStable();
 
       expect(component.form.value).toEqual({
         ipt: 'test change',
@@ -195,8 +195,8 @@ describe('FluentFormDirective', () => {
   });
 
   describe('表单应该能正确赋值模型', () => {
-    it('先设置 schema，后设置 model', () => {
-      component.schema = form(() => {
+    it('先设置 schema，后设置 model', async () => {
+      component.schema.set(form(() => {
         textField('ipt').defaultValue('test');
         fieldGroup('ipts').schemas(() => {
           textField('ipt2').defaultValue('test');
@@ -210,11 +210,11 @@ describe('FluentFormDirective', () => {
         array('array').schemas(() => {
           textField().defaultValue('test');
         });
-      });
-      component.model = {};
-      fixture.detectChanges();
+      })());
+      component.model.set({});
+      await fixture.whenStable();
 
-      expect(component.model).toEqual({
+      expect(component.model()).toEqual({
         ipt: 'test',
         ipt2: 'test',
         group: {
@@ -225,9 +225,9 @@ describe('FluentFormDirective', () => {
       });
     });
 
-    it('先设置 model，后设置 schema', () => {
-      component.model = {};
-      component.schema = form(() => {
+    it('先设置 model，后设置 schema', async () => {
+      component.model.set({});
+      component.schema.set(form(() => {
         textField('ipt').defaultValue('test');
         fieldGroup('ipts').schemas(() => {
           textField('ipt2').defaultValue('test');
@@ -241,10 +241,10 @@ describe('FluentFormDirective', () => {
         array('array').schemas(() => {
           textField().defaultValue('test');
         });
-      });
-      fixture.detectChanges();
+      })());
+      await fixture.whenStable();
 
-      expect(component.model).toEqual({
+      expect(component.model()).toEqual({
         ipt: 'test',
         ipt2: 'test',
         group: {
@@ -255,9 +255,9 @@ describe('FluentFormDirective', () => {
       });
     });
 
-    it('多次设置 schema', () => {
-      component.model = {};
-      component.schema = form(() => {
+    it('多次设置 schema', async () => {
+      component.model.set({});
+      component.schema.set(form(() => {
         textField('ipt').defaultValue('test');
         fieldGroup('ipts').schemas(() => {
           textField('ipt2');
@@ -271,10 +271,10 @@ describe('FluentFormDirective', () => {
         array('array').schemas(() => {
           textField();
         });
-      });
-      fixture.detectChanges();
+      })());
+      await fixture.whenStable();
 
-      expect(component.model).toEqual({
+      expect(component.model()).toEqual({
         ipt: 'test',
         ipt2: null,
         group: {
@@ -284,7 +284,7 @@ describe('FluentFormDirective', () => {
         array: []
       });
 
-      component.schema = form(() => {
+      component.schema.set(form(() => {
         textField('ipt').defaultValue('test change');
         fieldGroup('ipts').schemas(() => {
           textField('ipt2');
@@ -298,10 +298,10 @@ describe('FluentFormDirective', () => {
         array('array').schemas(() => {
           textField();
         });
-      });
-      fixture.detectChanges();
+      })());
+      await fixture.whenStable();
 
-      expect(component.model).toEqual({
+      expect(component.model()).toEqual({
         ipt: 'test',
         ipt2: null,
         group: {
@@ -313,8 +313,8 @@ describe('FluentFormDirective', () => {
     });
   });
 
-  it('should be the expected model value', () => {
-    component.schema = form(() => {
+  it('should be the expected model value', async () => {
+    component.schema.set(form(() => {
       textField('ipt');
       fieldGroup('ipts').schemas(() => {
         textField('ipt2');
@@ -328,11 +328,11 @@ describe('FluentFormDirective', () => {
       array('array').schemas(() => {
         textField();
       });
-    });
-    component.model = {};
-    fixture.detectChanges();
+    })());
+    component.model.set({});
+    await fixture.whenStable();
 
-    expect(component.model).toEqual({
+    expect(component.model()).toEqual({
       ipt: null,
       ipt2: null,
       group: {

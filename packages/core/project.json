@@ -25,24 +25,38 @@
     },
     "build:schematics": {
       "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "production",
+        "^production"
+      ],
+      "outputs": [
+        "{workspaceRoot}/dist/core/schematics"
+      ],
       "dependsOn": [
         "build"
       ],
       "options": {
         "commands": [
           "tsc -p packages/core/tsconfig.schematics.json",
-          "copyfiles packages/core/src/schematics/**/**/{*.json,*/files/**} dist/core/ --up=3"
+          "copyfiles \"packages/core/src/schematics/**/**/{*.json,*/files/**}\" dist/core/ --up=3"
         ],
         "parallel": false
       }
     },
     "test": {
-      "executor": "@nx/vite:test",
+      "executor": "@nx/angular:unit-test",
       "outputs": [
-        "{options.reportsDirectory}"
+        "{workspaceRoot}/coverage/core"
       ],
       "options": {
-        "reportsDirectory": "../../coverage/core"
+        "watch": false,
+        "coverage": true,
+        "coverageInclude": [
+          "packages/core/src/**/*"
+        ],
+        "tsConfig": "packages/core/tsconfig.spec.json",
+        "runner": "vitest"
       }
     },
     "lint": {

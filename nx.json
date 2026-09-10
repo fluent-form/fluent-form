@@ -5,7 +5,6 @@
     }
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "extends": "nx/presets/npm.json",
   "namedInputs": {
     "default": [
       "{projectRoot}/**/*",
@@ -15,9 +14,7 @@
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json",
-      "!{projectRoot}/src/test-setup.[jt]s",
-      "!{projectRoot}/.eslintrc.json",
-      "!{projectRoot}/eslint.config.js"
+      "!{projectRoot}/eslint.config.mjs"
     ],
     "sharedGlobals": []
   },
@@ -28,11 +25,11 @@
         "^build"
       ],
       "inputs": [
-        "default",
-        "^default"
+        "production",
+        "^production"
       ]
     },
-    "@nx/vite:test": {
+    "@nx/angular:unit-test": {
       "cache": true,
       "inputs": [
         "default",
@@ -43,9 +40,8 @@
       "cache": true,
       "inputs": [
         "default",
-        "{workspaceRoot}/.eslintrc.json",
-        "{workspaceRoot}/.eslintignore",
-        "{workspaceRoot}/eslint.config.js"
+        "^default",
+        "{workspaceRoot}/eslint.config.mjs"
       ]
     },
     "@angular/build:application": {
@@ -54,8 +50,25 @@
         "^build"
       ],
       "inputs": [
+        "production",
+        "^production"
+      ]
+    },
+    "@ng-doc/builder:application": {
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
+    },
+    "@angular/build:unit-test": {
+      "cache": true,
+      "inputs": [
         "default",
-        "^default"
+        "^production"
       ]
     },
     "nx-release-publish": {
@@ -67,16 +80,16 @@
   "generators": {
     "@nx/angular:library": {
       "linter": "eslint",
-      "unitTestRunner": "vitest"
+      "unitTestRunner": "vitest-angular"
     },
     "@nx/angular:component": {
       "style": "scss"
     },
     "@nx/angular:application": {
-      "e2eTestRunner": "none",
       "linter": "eslint",
       "style": "scss",
-      "unitTestRunner": "vitest"
+      "unitTestRunner": "vitest-angular",
+      "e2eTestRunner": "none"
     }
   },
   "release": {
@@ -94,5 +107,9 @@
       ]
     }
   },
-  "nxCloudId": "67871abc19cd324081465957"
+  "nxCloudId": "67871abc19cd324081465957",
+  "analytics": false,
+  "migrate": {
+    "agentic": false
+  }
 }

@@ -9,7 +9,8 @@
     "build": {
       "executor": "@ng-doc/builder:application",
       "outputs": [
-        "{options.outputPath}"
+        "{options.outputPath}",
+        "{workspaceRoot}/ng-doc/docs"
       ],
       "options": {
         "outputPath": "dist/docs",
@@ -100,17 +101,29 @@
         "buildTarget": "docs:build"
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
     "test": {
-      "executor": "@nx/vite:test",
+      "executor": "@nx/angular:unit-test",
+      "dependsOn": [
+        "build"
+      ],
       "outputs": [
-        "{options.reportsDirectory}"
+        "{workspaceRoot}/coverage/docs"
       ],
       "options": {
-        "reportsDirectory": "../../coverage/docs"
+        "watch": false,
+        "coverage": true,
+        "coverageInclude": [
+          "packages/docs/src/**/*.ts"
+        ],
+        "coverageExclude": [
+          "packages/docs/src/app/(pages|markdowns)/**"
+        ],
+        "tsConfig": "packages/docs/tsconfig.spec.json",
+        "runner": "vitest"
       }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
     }
   }
 }

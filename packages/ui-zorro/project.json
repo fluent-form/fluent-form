@@ -24,12 +24,18 @@
       "defaultConfiguration": "production"
     },
     "test": {
-      "executor": "@nx/vite:test",
+      "executor": "@nx/angular:unit-test",
       "outputs": [
-        "{options.reportsDirectory}"
+        "{workspaceRoot}/coverage/ui-zorro"
       ],
       "options": {
-        "reportsDirectory": "../../coverage/ui-zorro"
+        "watch": false,
+        "coverage": true,
+        "coverageInclude": [
+          "packages/ui-zorro/src/**/*"
+        ],
+        "tsConfig": "packages/ui-zorro/tsconfig.spec.json",
+        "runner": "vitest"
       }
     },
     "lint": {

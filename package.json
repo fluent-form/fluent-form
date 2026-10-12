@@ -43,7 +43,7 @@
     "@angular-devkit/core": "^21.0.0",
     "@angular-devkit/schematics": "^21.0.0",
     "@angular/build": "^21.0.0",
-    "@angular/cli": "^21.0.0",
+    "@angular/cli": "^21.2.26",
     "@angular/compiler-cli": "^21.0.0",
     "@commitlint/cli": "^19.0.0",
     "@commitlint/config-conventional": "^19.0.0",

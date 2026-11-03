@@ -18,7 +18,7 @@
         [style]="panelSchema.style | reactive: model : panelSchema : control | style"
         [nzHeader]="panelSchema.header | template"
         [nzActive]="panelSchema.active"
-        [nzShowArrow]="panelSchema.showArrow"
+        [nzShowArrow]="panelSchema.showArrow ?? true"
         [nzCollapsible]="panelSchema.collapsible | reactive: model : panelSchema : control">
         <fluent-row>
           <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">

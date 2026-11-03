@@ -17,17 +17,16 @@ export class CollapseAccordionExampleComponent {
 
     collapse().accordion(true).size('small').expandIconPlacement('end').col(12)
       .schemas(() => {
-        collapsePanel().header('General settings').active(true).showArrow(true).schemas(() => {
+        collapsePanel().header('General settings').active(true).schemas(() => {
           textField('title').label('Title').col(12);
         });
 
-        collapsePanel().header('Notifications').showArrow(true).schemas(() => {
+        collapsePanel().header('Notifications').schemas(() => {
           toggle('emailNotifications').label('Email notifications').col(12);
         });
 
         collapsePanel()
           .header('Advanced settings')
-          .showArrow(true)
           .collapsible(({ model }) => model.advancedEnabled ? 'header' : 'disabled')
           .schemas(() => {
             numberField('retryCount').label('Retry count').range({ min: 0 }).precision(0).col(12);

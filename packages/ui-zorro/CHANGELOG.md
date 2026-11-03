@@ -1,3 +1,13 @@
+## 0.31.1 (2026-11-03)
+
+### 🚀 Features
+
+- **ui-zorro/collapse:** add collapse and collapse panel widgets ([0ebf902b](https://github.com/fluent-form/fluent-form/commit/0ebf902b))
+
+### ❤️ Thank You
+
+- HyperLife1119 @HyperLife1119
+
 ## 0.31.0 (2026-09-14)
 
 This was a version bump only for ui-zorro to align it with other projects, there were no code changes.

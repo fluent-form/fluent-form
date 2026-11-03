@@ -22,3 +22,25 @@ import { useTabsWidget } from '@fluent-form/ui-zorro';
 ```
 
 {{ NgDocActions.demo("TabsFormExampleComponent") }}
+
+## Collapse
+
+折叠面板适合将较长的表单划分为多个可展开、收起的区域。通过结合使用 `collapse()` 和 `collapsePanel()`，您可以构建按主题分组的表单。
+
+```ts
+import { useCollapseWidget } from '@fluent-form/ui-zorro';
+```
+
+### Basic Usage
+
+使用 `header` 设置面板标题，使用 `active(true)` 让面板默认展开。默认情况下，多个面板可以同时展开，面板内的控件支持栅格布局。
+
+`collapse()` 和 `collapsePanel()` 仅用于组织表单的展示结构。需要在模型中创建嵌套对象时，可以在面板内使用 `group()`，如下例中的 `contact`。
+
+{{ NgDocActions.demo("CollapseFormExampleComponent") }}
+
+### Accordion
+
+设置 `accordion(true)` 后，同一时间只能展开一个面板。
+
+{{ NgDocActions.demo("CollapseAccordionExampleComponent") }}

@@ -8,6 +8,8 @@ import {
   CascaderControlSchema,
   CheckboxControlSchema,
   CheckboxGroupControlSchema,
+  CollapseComponentSchema,
+  CollapsePanelComponentSchema,
   ColorPickerControlSchema,
   DatePickerControlSchema,
   DateRangePickerControlSchema,
@@ -73,6 +75,7 @@ export function useAllWidgets() {
 
     useStepsWidget(),
     useTabsWidget(),
+    useCollapseWidget(),
 
     useFormGroupWidget(),
     useFormArrayWidget(),
@@ -367,6 +370,20 @@ export function useTabsWidget(): [FluentFormWidgetConfig<TabsComponentSchema>, F
     },
     {
       kind: 'tab',
+      type: SchemaType.ComponentContainer
+    }
+  ];
+}
+
+export function useCollapseWidget(): [FluentFormWidgetConfig<CollapseComponentSchema>, FluentFormWidgetConfig<CollapsePanelComponentSchema>] {
+  return [
+    {
+      kind: 'collapse',
+      type: SchemaType.ComponentContainer,
+      loadWidget: () => import('./collapse/collapse.widget')
+    },
+    {
+      kind: 'collapse-panel',
       type: SchemaType.ComponentContainer
     }
   ];

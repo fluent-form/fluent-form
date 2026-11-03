@@ -8,7 +8,8 @@ import {
   SingleSchemaKey
 } from '@fluent-form/core';
 import { NzCardComponent } from 'ng-zorro-antd/card';
-import { NzSizeDSType, NzSizeLDSType } from 'ng-zorro-antd/core/types';
+import { NzCollapseComponent, NzCollapsePanelComponent } from 'ng-zorro-antd/collapse';
+import { NzSizeDSType, NzSizeLDSType, NzSizeLMSType } from 'ng-zorro-antd/core/types';
 import { NzStatusType, NzStepComponent, NzStepsComponent } from 'ng-zorro-antd/steps';
 import type { NzTabComponent, NzTabPosition, NzTabsComponent, NzTabType } from 'ng-zorro-antd/tabs';
 import { Labelful } from './interfaces';
@@ -89,4 +90,30 @@ export interface CardComponentSchema<Key extends SingleSchemaKey = SingleSchemaK
   borderless?: boolean;
   hoverable?: boolean;
   size?: NzCardComponent['nzSize'];
+}
+
+export interface CollapseComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
+  extends AbstractComponentContainerSchema<Key>,
+  ComponentEventListenerHolder<NzCollapseComponent>,
+  ComponentEventObserverHolder<NzCollapseComponent>,
+  ComponentPropertyHolder<NzCollapseComponent> {
+  kind: 'collapse';
+  accordion?: boolean;
+  bordered?: boolean;
+  ghost?: boolean;
+  size?: NzSizeLMSType;
+  expandIconPlacement?: 'start' | 'end';
+  schemas: CollapsePanelComponentSchema[];
+}
+
+export interface CollapsePanelComponentSchema<Key extends SingleSchemaKey = SingleSchemaKey>
+  extends AbstractComponentContainerSchema<Key>,
+  ComponentEventListenerHolder<NzCollapsePanelComponent>,
+  ComponentEventObserverHolder<NzCollapsePanelComponent>,
+  ComponentPropertyHolder<NzCollapsePanelComponent> {
+  kind: 'collapse-panel';
+  header: string;
+  active?: boolean;
+  showArrow?: boolean;
+  collapsible?: MaybeSchemaReactiveFn<CollapsePanelComponentSchema<SingleSchemaKey>, NzCollapsePanelComponent['nzCollapsible']>;
 }

@@ -1,5 +1,13 @@
 import { SingleSchemaKey, UnstableBuilder, composeBuilder } from '@fluent-form/core';
-import { CardComponentSchema, StepComponentSchema, StepsComponentSchema, TabComponentSchema, TabsComponentSchema } from '../schemas';
+import {
+  CardComponentSchema,
+  CollapseComponentSchema,
+  CollapsePanelComponentSchema,
+  StepComponentSchema,
+  StepsComponentSchema,
+  TabComponentSchema,
+  TabsComponentSchema
+} from '../schemas';
 import { KindOrKey } from './helper';
 
 export function steps<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<StepsComponentSchema<Key>, KindOrKey> {
@@ -20,4 +28,14 @@ export function tab<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<Tab
 
 export function card<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<CardComponentSchema<Key>, KindOrKey> {
   return composeBuilder<CardComponentSchema<Key>>().kind('card').key(key);
+}
+
+export function collapse<Key extends SingleSchemaKey>(key?: Key): UnstableBuilder<CollapseComponentSchema<Key>, KindOrKey> {
+  return composeBuilder<CollapseComponentSchema<Key>>().kind('collapse').key(key);
+}
+
+export function collapsePanel<Key extends SingleSchemaKey>(
+  key?: Key
+): UnstableBuilder<CollapsePanelComponentSchema<Key>, KindOrKey> {
+  return composeBuilder<CollapsePanelComponentSchema<Key>>().kind('collapse-panel').key(key);
 }

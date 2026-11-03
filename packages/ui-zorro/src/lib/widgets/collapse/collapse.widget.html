@@ -1,0 +1,46 @@
+<ng-template let-control="control" let-schema="schema" let-model="model" [fluentContextGuard]="contextGuard">
+  <nz-collapse
+    #component
+    [fluentBinding]="{ component, schema, control, model }"
+    [class]="schema.class | reactive: model : schema : control | class"
+    [style]="schema.style | reactive: model : schema : control | style"
+    [nzSize]="schema.size ?? 'middle'"
+    [nzAccordion]="schema.accordion"
+    [nzBordered]="schema.bordered ?? true"
+    [nzGhost]="schema.ghost"
+    [nzExpandIconPosition]="schema.expandIconPlacement ?? 'start'"
+    [style.margin-bottom.px]="24">
+    @for (panelSchema of schema.schemas; track panelSchema) {
+      <nz-collapse-panel
+        #component
+        [fluentBinding]="{ component, schema, control, model }"
+        [class]="panelSchema.class | reactive: model : panelSchema : control | class"
+        [style]="panelSchema.style | reactive: model : panelSchema : control | style"
+        [nzHeader]="panelSchema.header | template"
+        [nzActive]="panelSchema.active"
+        [nzShowArrow]="panelSchema.showArrow"
+        [nzCollapsible]="panelSchema.collapsible | reactive: model : panelSchema : control">
+        <fluent-row>
+          <ng-template #formColTemplate let-schema="schema" let-control="control" let-model="model">
+            <fluent-col
+              [span]="schema.col | col: 'span'"
+              [flex]="schema.col | col: 'flex'"
+              [offset]="schema.col | col: 'offset'"
+              [hidden]="schema.hidden | reactive: model : schema : control">
+              <ng-container [fluentWidgetWrapperOutlet]="{ schema, control, model }" />
+            </fluent-col>
+          </ng-template>
+          @for (subschema of panelSchema.schemas; track subschema) {
+            <ng-container
+              [ngTemplateOutlet]="formColTemplate"
+              [ngTemplateOutletContext]="{
+                control: (subschema.key | control: control),
+                schema: subschema,
+                model: model
+              }" />
+          }
+        </fluent-row>
+      </nz-collapse-panel>
+    }
+  </nz-collapse>
+</ng-template>

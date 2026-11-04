@@ -114,7 +114,8 @@
           "packages/docs/src/**/*.ts"
         ],
         "coverageExclude": [
-          "packages/docs/src/app/(pages|markdowns)/**"
+          "packages/docs/src/app/(pages|markdowns)/**",
+          "packages/docs/src/**/index.ts"
         ],
         "tsConfig": "packages/docs/tsconfig.spec.json",
         "runner": "vitest"

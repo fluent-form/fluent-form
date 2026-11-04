@@ -32,7 +32,10 @@
         "watch": false,
         "coverage": true,
         "coverageInclude": [
-          "packages/ui-zorro/src/**/*"
+          "packages/ui-zorro/src/**/*.ts"
+        ],
+        "coverageExclude": [
+          "packages/ui-zorro/src/**/index.ts"
         ],
         "tsConfig": "packages/ui-zorro/tsconfig.spec.json",
         "runner": "vitest"

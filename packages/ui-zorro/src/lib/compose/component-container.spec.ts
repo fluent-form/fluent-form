@@ -1,5 +1,5 @@
 import { form } from '@fluent-form/core';
-import { card, step, steps, tab, tabs } from './component-container';
+import { card, collapse, collapsePanel, step, steps, tab, tabs } from './component-container';
 import { textField } from './control';
 
 describe('component-container', () => {
@@ -56,6 +56,28 @@ describe('component-container', () => {
       {
         kind: 'card',
         schemas: []
+      }
+    ]);
+  });
+
+  it('collapse', () => {
+    const schema = form(() => {
+      collapse().schemas(() => {
+        collapsePanel().header('header').schemas(() => {
+          textField('ipt');
+        });
+      });
+    });
+    expect(schema().schemas).toEqual([
+      {
+        kind: 'collapse',
+        schemas: [
+          {
+            kind: 'collapse-panel',
+            header: 'header',
+            schemas: [{ kind: 'text-field', key: 'ipt' }]
+          }
+        ]
       }
     ]);
   });

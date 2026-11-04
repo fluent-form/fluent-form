@@ -53,7 +53,10 @@
         "watch": false,
         "coverage": true,
         "coverageInclude": [
-          "packages/core/src/**/*"
+          "packages/core/src/**/*.ts"
+        ],
+        "coverageExclude": [
+          "packages/core/src/**/index.ts"
         ],
         "tsConfig": "packages/core/tsconfig.spec.json",
         "runner": "vitest"

@@ -37,7 +37,7 @@
     "vite-tsconfig-paths": "^6.1.1"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "~0.2100.0",
+    "@angular-devkit/architect": "~0.2203.0",
     "@angular-devkit/build-angular": "^21.0.0",
     "@angular-devkit/core": "^21.0.0",
     "@angular-devkit/schematics": "^21.0.0",

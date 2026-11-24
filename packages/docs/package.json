@@ -23,7 +23,7 @@
     "@angular/ssr": "^21.0.0",
     "@fluent-form/core": "0.0.0",
     "@fluent-form/ui-zorro": "0.0.0",
-    "@ng-doc/app": "~21.0.0",
+    "@ng-doc/app": "~22.2.1",
     "@ng-doc/builder": "~21.0.0",
     "@ng-doc/core": "~21.0.0",
     "@ng-doc/keywords-loaders": "~21.0.0",
